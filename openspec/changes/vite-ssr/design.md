@@ -1,0 +1,278 @@
+## Context
+
+Vite SSR commands are blocked today. Webpack SSR uses a low-level Express `renderCallback`, `@loadable` extraction, dual-port dev proxy, and CSP as `<meta http-equiv>`. Vite already has an internal `ssr` environment, but only for static prerender of `renderEntry` (string HTML → `transformIndexHtml` → `res.end`).
+
+This change introduces a **new Vite-only SSR product** selected by sku config `renderType`, not by `start-ssr` / `build-ssr`. sku owns the server, React document shell, streaming, bootstrap/assets (without `transformIndexHtml` on the SSR path), and CSP headers; React Router Data Mode provides routing, loaders/actions, and Suspense-friendly data.
+
+Reference architecture: [basic-streaming-app-example](https://github.com/jahredhope/basic-streaming-app-example) (full-document stream, `hydrateRoot(document)`, explicit bootstrap/assets/preamble). Research notes live in `ignore_ssr-research/` (local, not part of this change).
+
+## Goals / Non-Goals
+
+**Goals:**
+
+- Select SSR vs static via `renderType: 'server-side-rendered' | 'static-generated'`
+- High-level app export (routes + middleware) instead of hand-rolled HTML responses
+- Full-document React root with shell-first streaming and document-level hydration
+- Explicit asset/bootstrap story that replaces `transformIndexHtml` on the stream path
+- Shell-derived CSP as HTTP headers, with optional request-scoped nonces/hashes and optional Report-Only
+- `sku start` / `sku build` produce a runnable Vite SSR server when `renderType` is `'server-side-rendered'`
+- Per-route async chunks (RR `lazy` + Vite dynamic import) with a fixture that demonstrates distinct route chunks
+- Vocab/language async chunk registration for Vite SSR when `languages` is configured
+
+**Non-Goals:**
+
+- Implementing the new SSR mode on webpack (reject that config combination)
+- Changing webpack’s existing `start-ssr` / `build-ssr` path when `renderType` is unset or `'static-generated'`
+- React Router Framework Mode (`@react-router/dev` Vite plugin)
+- Preserving `renderCallback` / `flushHeadTags` / meta CSP for Vite SSR
+- RSC / Flight
+- Unifying static prerender onto the Document component in v1
+- Absolute / CDN `publicPath` for Vite SSR (relative public asset paths only in v1)
+
+## Decisions
+
+### 1. Mode selection via `renderType` (not `-ssr` commands)
+
+**Choice:** Add sku config:
+
+```ts
+renderType?: 'server-side-rendered' | 'static-generated';
+```
+
+- `'server-side-rendered'` + `bundler: 'vite'` → Vite SSR via `sku start` / `sku build`
+- `'static-generated'` (or unset, preserving today’s default) → existing static / SSG paths
+- `'server-side-rendered'` + `bundler: 'webpack'` → **error** (new SSR mode is Vite-only)
+- `sku start-ssr` / `sku build-ssr` when `renderType` is set → **error** (use unsuffixed commands; `-ssr` is not part of this mode)
+
+**Why:** Render mode belongs in config beside `bundler`, not in parallel CLI surface. Consumers already use `start` / `build` for Vite; SSR should not invent a second command pair.
+
+**Rejected:** Reusing webpack’s dual-port `start-ssr` / `build-ssr` UX for Vite SSR.
+
+**Legacy:** Webpack SSR without `renderType: 'server-side-rendered'` continues via `start-ssr` / `build-ssr` (out of scope to migrate).
+
+### 2. Data Mode, not Framework Mode
+
+**Choice:** sku implements SSR with React Router Data Mode (`createStaticHandler` / `createBrowserRouter` + `lazy` routes).
+
+**Why:** “Routing handled by sku, implemented by react-router” requires sku to own Vite plugins, the Node server, and CSP. Framework Mode’s Vite plugin would compete with sku’s bundler stack and hide the server/CSP surface.
+
+**Rejected:** Wrapping `@react-router/dev/vite` — faster feature parity, but sku would no longer own routing/server abstractions.
+
+### 3. Consumer interface: app module, not entrypoints
+
+**Choice:** Consumers export a `SkuApp` module via `appEntry` (default `src/app.tsx`):
+
+```ts
+export default {
+  routes: RouteObject[], // React Router Data Mode route tree (prefer lazy)
+  middleware?: RequestHandler | RequestHandler[], // Connect-compatible
+  document?: ComponentType<DocumentProps>, // optional override of sku default Document
+} satisfies SkuApp;
+```
+
+sku provides the HTTP server, Vite client+server builds, streaming render, Document assets, hydration bootstrap, and CSP. Consumers do **not** send HTML via `res.send` for the document response.
+
+**Rejected:** Porting `serverEntry` + `renderCallback` — keeps the low-level multipart model that fights streaming.
+
+### 4. Commands and deploy shape
+
+**Choice:** When `bundler: 'vite'` and `renderType: 'server-side-rendered'`, `sku start` runs a single-port server with Vite in `middlewareMode` + `appType: 'custom'`; `sku build` emits sibling `client/` and `server/` directories under the configured build target.
+
+**Production output layout:** Under the configured build target (e.g. `dist`), emit sibling directories:
+
+- `client/` — browser assets + Vite client manifest
+- `server/` — runnable Node server entry and SSR bundle
+
+Neither directory MUST be nested inside the other (not `server/client`, not `client/server`).
+
+**Rejected:** Dual-port webpack SSR UX for Vite; keeping `-ssr` commands as the Vite SSR entrypoint.
+
+### 5. Full-document streaming (not `#app`)
+
+**Choice:** React owns `<html>` / `<head>` / `<body>`. Server pipes `renderToPipeableStream` to the response; client uses `hydrateRoot(document, …)`. sku provides a default Document (assets → CSS + modulepreload links) with optional consumer override.
+
+**Defaults:**
+
+- Pipe on `onShellReady` (shell-first Suspense)
+- Optional buffer-all via `onAllReady` when a matched route sets `handle.waitForAll: true`
+- Abort in-flight render when the client disconnects
+- **React ≥ 19 required** for Vite SSR: doctype from `<html>` — do not double-emit
+
+**Rejected:** Keeping string `renderDocument` + `#app` hydrate for Vite SSR — blocks document-level hydration and head streaming.
+
+### 6. No `transformIndexHtml` on the SSR path
+
+**Choice:** Streaming SSR responses MUST NOT call `transformIndexHtml`. Reimplement Vite/plugin concerns explicitly:
+
+| Concern                 | Approach                                                                   |
+| ----------------------- | -------------------------------------------------------------------------- |
+| React Refresh preamble  | Client entry import `@vitejs/plugin-react/preamble` (sku wrapper)          |
+| Vite client + app entry | `bootstrapModules` (dev: Vite client + client entry; prod: manifest entry) |
+| CSS + modulepreloads    | Manifest / collector → Document props; serialize for hydration identity    |
+| Client / router handoff | Hashable `bootstrapScriptContent` (combine bodies where possible for CSP)  |
+| SSR CSS / telemetry     | Streaming-equivalent path **or** explicitly deferred in docs               |
+
+`index.html` (if any) is for client-entry discovery only — not an SSR template split on `<!--app-html-->`.
+
+Static Vite `sku start` may keep `transformIndexHtml` unchanged.
+
+### 7. Streaming and route chunks
+
+**Choice:** Default render path is `renderToPipeableStream` with headers set in `onShellReady`. Route modules use RR `lazy` + Vite dynamic import so each route is an async chunk. Deferred loader promises + Suspense/`Await` work without consumer stream plumbing.
+
+**Edge cases:**
+
+- Shell errors → error response before headers/body
+- After shell starts → document stream-error behavior; abort timeout configurable later
+- Post-shell inline scripts cannot be hash-scanned for CSP → nonces (passed into the stream)
+
+### 8. CSP: headers from shell, plus Report-Only
+
+**Choice:** Before piping the body, derive `script-src` (and related script allowances) from **shell HTML** (bootstrap scripts, known inline tags, configured extra hosts, sha256 of known bootstrap bodies, and a request nonce **only if requested** — see decision 12). Set:
+
+- `Content-Security-Policy` when enforcing CSP is enabled
+- optional `Content-Security-Policy-Report-Only` (may coexist with enforcing)
+
+Config direction (Vite SSR only): keep/extend `cspEnabled` / `cspExtraScriptSrcHosts`; add report-only enablement and extra hosts; expose a request-scoped nonce helper that is opt-in per response (see decision 12).
+
+**`publicPath` (Vite SSR):** Relative paths only (e.g. `/`, `/static/`). Document assets and CSP rely on `'self'`. Absolute `http(s):` / CDN `publicPath` is **out of scope** for Vite SSR — reject at config validation (or equivalent clear failure). Webpack SSR / static apps may keep existing absolute-`publicPath` behavior unchanged. Consumer `cspExtraScriptSrcHosts` remains for third-party scripts only.
+
+**Static serving:** Mount client assets under the relative `publicPath`. Do not implement CDN/absolute-URL static-mount special cases for Vite SSR.
+
+**Rejected:** Meta `http-equiv` injection — invalid once streaming starts; headers are the correct delivery.
+
+**Dev:** Loosen policy for Vite HMR (`unsafe-eval`, WS connect) in development only.
+
+### 9. Scope deferrals for v1
+
+- Multi-site / multi-environment combinatorial prerender: **out** (request-time context instead)
+- Static prerender sharing the same Document component: follow-up
+- Full migration guide from webpack SSR: not required (non-goal to backfill)
+- **SSR-CSS plugin (`vitePluginSsrCss`) and telemetry HTML inject:** deferred for Vite SSR. Those plugins rely on `transformIndexHtml`, which the streaming path intentionally skips. Static Vite keeps both. Vite SSR CSS in production comes from the client manifest → Document links; in development the Vite client injects CSS. Telemetry for Vite SSR is a follow-up.
+
+### 10. Hydration payload safety
+
+**Choice:** Bootstrap serialization (`window.__staticRouterHydrationData` / document assets) MUST be safe for production:
+
+- Run promise-scrubbing (`replacePromises` or equivalent) on **both** `loaderData` and `actionData` before `JSON.stringify`.
+- In production, serialized route `Error` objects MUST include message (and RouteErrorResponse fields) but MUST NOT include `Error.stack` (no server stack leak to the client). Dev may include stacks for debugging.
+
+### 11. Shared HTML render middleware (abort-before-write)
+
+**Choice:** Dev (`createDevSsrServer`) and production (`listen` / `createHtmlRenderMiddleware`) MUST share one HTML render middleware (or identical abort guards). After `render()` resolves, if the request abort signal has fired, do **not** set headers or `pipe` the body. Client disconnect aborts in-flight `renderToPipeableStream`. Avoid duplicated middleware that drifts (review found prod checked abort; dev did not).
+
+### 12. Request-scoped nonce API for Vite SSR (lazy, single value)
+
+**Choice:** Vite SSR uses **at most one** CSP nonce per HTML render/request, generated **only when explicitly requested**, and included in the CSP header **only if requested**.
+
+**How “requested” works (lazy):**
+
+- Start the request with no nonce.
+- Consumer code requests a nonce by calling `getCspNonce()` (loaders/actions) or an Express equivalent such as `req.getCspNonce()` (a read that mints; do not always assign `req.skuCspNonce` in middleware up front).
+- sku requests the same way only when it will attach a `nonce` to scripts that cannot be hashed (e.g. React stream scripts).
+- First request mints one value and remembers it; later calls return the same value.
+- After `render()` finishes and before setting CSP headers / `pipe`, include `'nonce-…'` in the policy **only if** a nonce was requested; otherwise emit CSP without a nonce allowance.
+
+**Why:** CSP best practice is one nonce reused for every nonce-bearing script on that response. Putting `'nonce-…'` in the header when nothing uses it widens the policy for no benefit. Static/webpack `createUnsafeNonce()` may be called multiple times and adds each value to the policy; Vite SSR intentionally does **not** offer that multi-nonce factory.
+
+**Rejected:** Always minting a nonce when CSP / report-only is enabled; always putting a nonce in the CSP header “just in case”; a Vite SSR helper that returns a new distinct nonce per call.
+
+### 13. Lazy-route `moduleId` / production preloads
+
+**Choice:** Auto-derive `handle.moduleId` for the idiomatic React Router pattern `lazy: () => import('…')` via a Vite SSR transform (same path-resolution idea as the loadable `preloadPlugin`: resolve the import relative to the file, sniff the real extension, emit a cwd-relative Vite client manifest key).
+
+**Conservative matcher (must not guess):**
+
+- Only object property `lazy` whose value is a function containing exactly one string-literal `import()`
+- Never modify the `lazy` function body — only ensure sibling `handle.moduleId`
+- Never overwrite an existing explicit `handle.moduleId`
+- Skip multi-import / granular `lazy: { … }` / indirect bindings (no injection)
+
+**Runtime unchanged:** After `query()`, walk `context.matches` and collect every matched route’s `handle.moduleId` (nested lazy ancestors included). Missing or unknown ids still warn in development; production miss = skipped preload only.
+
+**Rejected:** A separate `lazyRoute()` helper (opt-in API) as the primary path; ambient derive on the documented RR pattern is preferred. Manual `moduleId` remains as an escape hatch. Shipping silent miss in `resolveAssets` with no consumer signal.
+
+### 14. Vocab / language chunks (required)
+
+**Choice:** Vite SSR MUST support vocab language async chunks when `languages` is configured — not deferred.
+
+- **Build:** Keep `@vocab/vite` chunk splitting (`createVocabChunks` in the client/SSR build code-splitting groups), same as static Vite.
+- **Request path:** When a request has an active language, register that language’s chunk name (`getChunkName(language)` from `@vocab/vite/chunks`) into the Document asset / preload collector used for the streamed response — parity with static Vite `loadableCollector.register(getChunkName(...))` and webpack SSR `extractor.addChunk(getChunkName(language))`.
+- **Consumer surface:** Prefer sku-owned registration from request/route language context over requiring a webpack-style `addLanguageChunk` callback on the high-level app API. If consumers need an escape hatch, document it; do not block v1 on a low-level collector API.
+
+**Why:** Multi-language SEEK apps already depend on language-isolated translation chunks. Shipping Vite SSR without vocab chunk registration would force a second migration or broken translation loading.
+
+**Rejected:** Leaving languages/vocab chunk helpers as a post-v1 follow-up.
+
+### 15. Per-route chunk fixture (required)
+
+**Choice:** In addition to runtime support for RR `lazy` route modules as separate async chunks (decision 7), this change MUST include a fixture that **demonstrates** per-route chunking — at least two lazy route modules that resolve to distinct client chunks and participate in SSR + hydration (assertable via build output and/or network/modulepreload behavior).
+
+**Why:** Incidental lazy-route usage in the main streaming/CSP fixture is not enough to lock the product requirement; a dedicated demo prevents regressions where routes bundle together.
+
+**Rejected:** Treating “fixture mentions lazy routes” as sufficient proof of per-route chunking.
+
+## Risks / Trade-offs
+
+| Risk                                                                 | Mitigation                                                                               |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Vite SSR + RR Data Mode + document stream integration is non-trivial | Spike: handler → Document stream → hydrate → lazy route → preamble/HMR                   |
+| Hydration mismatch on assets/context                                 | Serialize exact asset list used in Document; same tree on client                         |
+| Missing preamble breaks HMR                                          | Enforce preamble in sku streaming client wrapper; e2e/dev smoke                          |
+| Shell-only CSP cannot hash late streamed scripts                     | Request a single nonce for React stream scripts when needed; hash known bootstrap bodies |
+| Absolute/`CDN` `publicPath` configured for Vite SSR                  | Config validation rejects with a clear error; docs state relative-only                   |
+| Server `Error.stack` leaked via hydration JSON                       | Strip stacks in production bootstrap serialization                                       |
+| Dev/prod abort middleware drift writes after disconnect              | Shared HTML middleware; abort-before-write                                               |
+| `actionData` Promises throw during bootstrap stringify               | Promise-scrub loader **and** action data                                                 |
+| Manual / derived `moduleId` wrong → missing or wrong preloads        | Conservative matcher (no guessing); never overwrite explicit `moduleId`; dev warn + docs |
+| Language chunk missing from Document assets                          | Register `getChunkName(language)` on the SSR request path (decision 14)                  |
+| Routes accidentally bundle into one chunk                            | Required per-route chunk fixture + assertions (decision 15)                              |
+| Consumers expect Framework Mode file conventions                     | Docs make Data Mode + sku app export explicit                                            |
+| Middleware writing the body early breaks CSP headers                 | sku owns the HTML response path; middleware must not commit the document body            |
+| Dual maintenance of webpack SSR vs Vite SSR                          | Explicit non-goal to unify; webpack path frozen for this change                          |
+| Consumers keep calling `-ssr` after setting `renderType`             | Clear config-time / command errors pointing to `sku start` / `sku build`                 |
+
+## Migration Plan
+
+- Opt-in: set `bundler: 'vite'`, `renderType: 'server-side-rendered'`, and provide the app module
+- Existing webpack SSR: leave `renderType` unset (or `'static-generated'`) and keep `start-ssr` / `build-ssr`
+- Static apps: optional explicit `renderType: 'static-generated'`; behavior unchanged
+- Streaming apps: replace string document/`#app` hydrate with Document + `hydrateRoot(document)`
+- Rollback: remove or change `renderType` / remove app module; webpack SSR unchanged
+
+## Open Questions
+
+_Resolved by viability spike (see Spike Outcomes below)._
+
+## Spike Outcomes
+
+Validated against [basic-streaming-app-example](https://github.com/jahredhope/basic-streaming-app-example) (Vite `middlewareMode` + `appType: 'custom'`, RR Data Mode `createStaticHandler` → `renderToPipeableStream` → `hydrateRoot(document)`, preamble import, shell CSP headers).
+
+### 1.1–1.3 Viability
+
+- **RR Data Mode + Document stream + document hydrate + lazy route:** Proven. Handler → `StaticRouterProvider` inside Document → pipe on `onShellReady`; client resolves lazy matches then `hydrateRoot(document, …)`.
+- **Shell CSP headers + nonce + hashable bootstrap:** Proven. Lazy request-scoped nonce for React stream scripts (include in CSP only if requested); sha256 of exact `bootstrapScriptContent` bodies; HTTP `Content-Security-Policy` set before `pipe(res)`. Dev adds `'unsafe-eval'` + `ws:`/`wss:` for HMR.
+- **No `transformIndexHtml`:** Proven. Dev `bootstrapModules`: `@vite/client` + client entry; client entry imports `@vitejs/plugin-react/preamble`; CSS/modulepreloads via Document assets (prod: manifest walk). HMR works without HTML transform.
+
+### 1.4 React version gate
+
+- **React 19:** Emits `<!DOCTYPE html>` when the root is `<html>` — do **not** double-emit a doctype string. Document hydrate is first-class.
+- **React 18:** Full-document `hydrateRoot(document)` is not a supported product path for this mode.
+- **Decision:** Vite SSR (`renderType: 'server-side-rendered'`) **requires React ≥ 19**. Sku’s workspace catalog already pins React 19; peer range remains `^18 || ^19` for static/webpack consumers. Validate/warn when enabling Vite SSR on React 18.
+
+### 1.5 Open-question resolutions
+
+| Question                | Decision                                                                                                                                                  |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| App module path         | New config `appEntry` (default `src/app.tsx`). Do not reuse `serverEntry` / `renderEntry` / `clientEntry` for the high-level app export.                  |
+| Omitted `renderType`    | Treat as today’s static behavior (equivalent to `'static-generated'`). Explicit `'static-generated'` is allowed but optional.                             |
+| Document ownership      | sku ships a **default Document** (assets → CSS + modulepreload). Optional consumer override via `SkuApp.document` (component), not a required root route. |
+| Middleware typing       | **Connect `RequestHandler`** (Vite `server.middlewares` / Express-compatible). Mount before sku’s HTML render path; must not commit the document body.    |
+| `onAllReady` buffering  | Opt-in via React Router route `handle.waitForAll: true` (deepest/any match). Default remains `onShellReady`.                                              |
+| Client/asset handoff    | `window.__SKU_DOCUMENT_ASSETS__` + combined hashable `bootstrapScriptContent` (assets + RR hydration payload).                                            |
+| Absolute `publicPath`   | **Not supported** for Vite SSR; relative only. CSP uses `'self'` for Document assets.                                                                     |
+| Hydration safety        | Scrub Promises on loader+action data; strip `Error.stack` in production (decision 10).                                                                    |
+| Request nonce           | At most one per render, only when requested; CSP `'nonce-…'` only if requested (decision 12); not webpack `createUnsafeNonce`.                            |
+| Lazy `moduleId`         | Auto-derive from idiomatic `lazy: () => import('…')` (decision 13); manual escape hatch; warn in dev on miss/unknown.                                     |
+| Vocab language chunks   | Required in v1: build splitting + request-path registration (decision 14).                                                                                |
+| Per-route chunk fixture | Required demo of ≥2 distinct lazy route chunks (decision 15).                                                                                             |

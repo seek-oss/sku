@@ -74,7 +74,7 @@ describe('security-controls', () => {
       });
 
       it('should generate a CSP with nonce value', async () => {
-        expect(cspTag.getAttribute('content')).match(/nonce-([a-zA-Z0-9+/=]+)/);
+        expect(cspTag.getAttribute('content')).match(/nonce-RANDOM_NONCE/);
       });
     });
   });

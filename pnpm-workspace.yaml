@@ -47,6 +47,7 @@ catalog:
   typescript: ~6.0.3
   vite: ^8.0.1
   vitest: ^4.1.0
+  webpack-dev-server: ^5.2.4
 
 configDependencies:
   pnpm-plugin-sku: 0.0.3+sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==

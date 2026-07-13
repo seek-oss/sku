@@ -172,18 +172,13 @@ describe('vite-ssr', () => {
       expect(cookieHeader).toContain('sku-vite-ssr=1');
     });
 
-    it('renders a lazy route', async ({ task }) => {
+    it('renders lazy routes', async ({ task }) => {
       skipCleanup(task.id);
-      const response = await fetch(`${url}/about`);
-      const html = await response.text();
-      expect(html).toContain('About');
-    });
+      const about = await fetch(`${url}/about`);
+      expect(await about.text()).toContain('About');
 
-    it('renders a second lazy route', async ({ task }) => {
-      skipCleanup(task.id);
-      const response = await fetch(`${url}/details`);
-      const html = await response.text();
-      expect(html).toContain('Details');
+      const details = await fetch(`${url}/details`);
+      expect(await details.text()).toContain('Details');
     });
 
     it('renders a translated route for a language param', async ({ task }) => {
@@ -343,7 +338,9 @@ describe('vite-ssr', () => {
       );
     });
 
-    it('modulepreloads the active language vocab chunk', async ({ task }) => {
+    it('modulepreloads the active language vocab chunk from the server entry', async ({
+      task,
+    }) => {
       skipCleanup(task.id);
       await waitFor(
         async () => {
@@ -358,37 +355,17 @@ describe('vite-ssr', () => {
       );
     });
 
-    it('prefers req.skuLanguage over the :language route param', async ({
+    it('serialises clientContext from the server entry into the bootstrap', async ({
       task,
     }) => {
       skipCleanup(task.id);
       await waitFor(
         async () => {
-          const response = await fetch('http://127.0.0.1:8201/en/hello', {
-            headers: { 'x-sku-language': 'fr' },
-          });
+          const response = await fetch('http://127.0.0.1:8201/');
           expect(response.ok).toBe(true);
           const html = await response.text();
-          expect(html).toMatch(/fr-translations[^"]*\.js/);
-          expect(html).not.toMatch(/en-translations[^"]*\.js/);
-        },
-        { timeout: 15000 },
-      );
-    });
-
-    it('soft-fails vocab preload for an unknown request language', async ({
-      task,
-    }) => {
-      skipCleanup(task.id);
-      await waitFor(
-        async () => {
-          const response = await fetch('http://127.0.0.1:8201/en/hello', {
-            headers: { 'x-sku-language': 'de' },
-          });
-          expect(response.ok).toBe(true);
-          const html = await response.text();
-          expect(html).not.toMatch(/en-translations[^"]*\.js/);
-          expect(html).not.toMatch(/fr-translations[^"]*\.js/);
+          expect(html).toContain('__SKU_CLIENT_CONTEXT__');
+          expect(html).toContain('"fromServer":true');
         },
         { timeout: 15000 },
       );

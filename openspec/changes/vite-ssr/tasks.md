@@ -87,6 +87,8 @@
 
 ## 11. App-owned language identification (request slot)
 
+> **Superseded by §15.** These tasks implemented the middleware `req.skuLanguage` / `:language` identity path. Vite SSR language identification is now **only** via server request entry `language` (plus sole-language fallback).
+
 - [x] 11.1 Add a documented Vite SSR request language slot (namespaced `req.skuLanguage` and/or ALS helper mirroring CSP nonce) that accepts a configured language **name**
 - [x] 11.2 Resolve active language in order: request slot → `:language` param → sole configured language; soft-fail (skip chunk registration) otherwise; validate against configured `languages` + `en-PSEUDO`; do **not** use `handle.language`
 - [x] 11.3 Prefer the request slot over `:language` when both are present (including composed locales like `th-TH` vs URL prefix `th`)
@@ -111,6 +113,22 @@
 ## 14. Document error page customization
 
 - [x] 14.1 Update `docs/docs/server-rendering.md` with a short Vite SSR section on customizing error pages: link to [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary), note that sku forwards `context.statusCode` (including `405` when no `action`), and include a minimal data-mode `ErrorBoundary` + `useRouteError` / `isRouteErrorResponse` example (root route recommended)
+
+## 15. Server/client request entries (AppWrapper, language, clientContext)
+
+- [x] 15.1 Add types + config for optional Vite SSR request entries (defaults e.g. `src/entry.server.tsx` / `src/entry.client.tsx`); closed return types: server `{ AppWrapper?, language?, clientContext? }`, client `{ AppWrapper? }`
+- [x] 15.2 Wire server entry before `query()`: apply `AppWrapper` around the static router, seed request-context language from `language`, serialise `clientContext` into the hydrate bootstrap (shell-time JSON only)
+- [x] 15.3 Wire client entry: pass deserialized `context` + forwarded `language`; apply client `AppWrapper` around the browser router
+- [x] 15.4 Remove Vite SSR language identity via `req.skuLanguage` and `:language` route param; keep `getSkuLanguage()` as a read API seeded from the server entry; resolve `language` → sole configured language → soft-fail
+- [x] 15.5 Update fixture + tests: server entry sets language / `AppWrapper` / `clientContext`; drop middleware-slot and `:language`-identity assertions; cover sole-language and soft-fail
+- [x] 15.6 Docs: document request entries and `AppWrapper` (providers only) in `server-rendering.md` / `vite.md` / `configuration.md`; replace request-slot language docs with server entry `language`
+
+## 16. Reuse clientEntry / serverEntry for Vite SSR request hooks
+
+- [x] 16.1 Remove `entryServer` / `entryClient` config, types, defaults, schema; wire Vite SSR request hooks through existing `serverEntry` / `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`)
+- [x] 16.2 Update Vite SSR plugin aliases / resolve / noops to use `paths.serverEntry` / `paths.clientEntry`
+- [x] 16.3 Fixture: rename request entries to `.ts` (`src/server.ts` / `src/client.ts`), keep providers in a separate module; set config paths if not using `.tsx` defaults; update tests
+- [x] 16.4 Docs: remove `entryServer` / `entryClient`; document mode-discriminated `serverEntry` / `clientEntry` for Vite SSR; fix stale `.js` defaults to `.tsx` and note `.ts` works (`configuration.md` / `server-rendering.md` / `vite.md`)
 
 ## Deferred (no tasks)
 

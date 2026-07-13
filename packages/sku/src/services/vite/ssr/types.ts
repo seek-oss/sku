@@ -1,3 +1,4 @@
+import type { ComponentType, ReactNode } from 'react';
 import type { RequestHandler } from 'express';
 import type {
   HydrationState,
@@ -22,6 +23,36 @@ export interface SkuApp {
   middleware?: RequestHandler | RequestHandler[];
 }
 
+/** JSON-serialisable shell seed for Vite SSR `clientContext`. */
+export type JsonValue =
+  string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+
+/** Provider wrapper around the router tree (not page layout / Document). */
+export type SkuSsrAppWrapper = ComponentType<{ children: ReactNode }>;
+
+/** Closed return bag from the optional Vite SSR server request entry. */
+export type SkuSsrServerEntryResult = {
+  AppWrapper?: SkuSsrAppWrapper;
+  /** Configured language name (or `en-PSEUDO`) for vocab chunk identity. */
+  language?: string;
+  /** Shell-time JSON seed serialised into the hydrate bootstrap. */
+  clientContext?: JsonValue;
+};
+
+export type SkuSsrServerEntry = (args: {
+  request: Request;
+}) => SkuSsrServerEntryResult | Promise<SkuSsrServerEntryResult>;
+
+/** Closed return bag from the optional Vite SSR client request entry. */
+export type SkuSsrClientEntryResult = {
+  AppWrapper?: SkuSsrAppWrapper;
+};
+
+export type SkuSsrClientEntry = (args: {
+  context: JsonValue | undefined;
+  language: string | undefined;
+}) => SkuSsrClientEntryResult;
+
 export interface RenderManifest {
   manifest: ClientManifest;
   base: string;
@@ -31,18 +62,13 @@ export interface RenderManifest {
 export interface RenderOptions {
   signal?: AbortSignal;
   nonce?: string;
-  /** Shared request context for this render (CSP nonce + language slot). */
+  /** Shared request context for this render (CSP nonce + language). */
   requestContextStore?: SsrRequestContextStore;
   /** @deprecated Use `requestContextStore`. */
   cspNonceStore?: SsrRequestContextStore;
   development?: boolean;
   /** Configured language names for vocab chunk registration. */
   languages?: string[];
-  /**
-   * App-owned request language slot (configured language name).
-   * Prefer Express `req.skuLanguage`; this seeds the same store when set.
-   */
-  requestLanguage?: string;
   onShellError?: (error: unknown) => void;
   onError?: (error: unknown) => void;
 }
@@ -72,6 +98,8 @@ export type SerializableHydrationState = Pick<
 declare global {
   interface Window {
     __SKU_DOCUMENT_ASSETS__?: DocumentAssets;
+    __SKU_CLIENT_CONTEXT__?: JsonValue;
+    __SKU_LANGUAGE__?: string;
     __staticRouterHydrationData?: HydrationState;
   }
 }
@@ -83,11 +111,5 @@ declare module 'express-serve-static-core' {
      * Only include `'nonce-…'` in CSP after this (or `getCspNonce()`) is called.
      */
     getCspNonce?: () => string;
-    /**
-     * Vite SSR: configured language **name** for vocab chunk registration
-     * (e.g. `th-TH`). Prefer this over `:language` route heuristics when
-     * locale is composed in middleware. Must match `languages` (or `en-PSEUDO`).
-     */
-    skuLanguage?: string;
   }
 }

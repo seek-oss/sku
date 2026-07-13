@@ -41,7 +41,7 @@ export default {
 
 sku owns the HTTP server, the React Document shell (not overridable — use React 19 metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers. Requires React 19+. Vite SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
 
-Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch). When `languages` is configured, sku registers the active vocab language chunk on the Document response — prefer `req.skuLanguage` (configured language name); `:language` / sole-language are convenience fallbacks.
+Optional `serverEntry` / `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) return a closed bag under Vite SSR: `AppWrapper` (providers only), `language`, and JSON `clientContext` on the server; `AppWrapper` on the client. Same keys as webpack/static — meaning is mode-discriminated. Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch). When `languages` is configured, sku registers the active vocab language chunk from the server entry `language` (sole-language fallback when only one language is set).
 
 See [Server rendering](./docs/server-rendering.md) and [CSP](./docs/csp.md) for details.
 

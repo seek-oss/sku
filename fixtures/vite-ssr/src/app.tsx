@@ -32,11 +32,6 @@ const routes: RouteObject[] = [
 ];
 
 const middleware: SkuApp['middleware'] = (req, res, next) => {
-  // Test helper: prefer `req.skuLanguage` (configured language name) over URL heuristics.
-  const skuLanguage = req.get('x-sku-language');
-  if (skuLanguage) {
-    req.skuLanguage = skuLanguage;
-  }
   if (req.path === '/api/health') {
     res.status(200).type('text/plain').send('ok');
     return;

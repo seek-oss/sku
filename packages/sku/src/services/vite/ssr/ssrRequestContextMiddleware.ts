@@ -7,21 +7,14 @@ const stores = new WeakMap<Request, SsrRequestContextStore>();
 /**
  * Lazily attaches request-scoped Vite SSR context before consumer middleware:
  * - `req.getCspNonce()` (mint-on-read)
- * - `req.skuLanguage` (configured language name for vocab chunk registration)
+ *
+ * Language identity is set by the server request entry, not Express.
  */
 export const createSsrRequestContextMiddleware =
   (): RequestHandler => (req, _res, next) => {
     const store = createSsrRequestContextStore();
     stores.set(req, store);
     req.getCspNonce = () => store.getCspNonce();
-    Object.defineProperty(req, 'skuLanguage', {
-      get: () => store.getLanguage(),
-      set: (value: string | undefined) => {
-        store.setLanguage(value);
-      },
-      enumerable: true,
-      configurable: true,
-    });
     next();
   };
 

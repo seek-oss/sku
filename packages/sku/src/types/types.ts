@@ -135,9 +135,13 @@ export interface SkuConfigBase {
   testRunner?: 'vitest' | 'jest';
 
   /**
-   * The client entry point to the app. The client entry is the file that executes your browser code.
+   * The client entry point to the app.
    *
-   * @default "./src/client.js"
+   * Under Vite SSR (`bundler: 'vite'` + `renderType: 'server-side-rendered'`), this is the
+   * optional client request hook (`onHydrate`) — not the static hydrate / webpack client bundle
+   * entry. When the file is missing, sku skips the hook. Path may be `.tsx`, `.ts`, or `.js`.
+   *
+   * @default "./src/client.tsx"
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=cliententry
    */
   clientEntry?: string;
@@ -502,9 +506,9 @@ export interface WebpackSkuConfig {
   /**
    * **Only for SSR apps**
    *
-   * The entry file for the server.
+   * The entry file for the server (`renderCallback` contract).
    *
-   * @default "./src/server.js"
+   * @default "./src/server.tsx"
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverentry
    */
   serverEntry?: string;
@@ -554,6 +558,18 @@ export interface ViteSkuConfig {
    * @default "./src/app.tsx"
    */
   appEntry?: string;
+
+  /**
+   * Vite SSR server request entry (`onRequest`). Optional — when the file is
+   * missing, sku skips the hook. Same config key as webpack SSR, but under
+   * Vite SSR the export is the closed request-hook bag (`AppWrapper`,
+   * `language`, `clientContext`), not `renderCallback`. Path may be `.tsx`,
+   * `.ts`, or `.js`.
+   *
+   * @default "./src/server.tsx"
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverentry
+   */
+  serverEntry?: string;
 
   /**
    * An array of cjs import paths that have both a default and named exports.

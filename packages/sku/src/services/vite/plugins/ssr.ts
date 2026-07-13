@@ -1,6 +1,13 @@
+import { existsSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import type { Plugin } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { makePluginName } from '../helpers/makePluginName.js';
+
+const require = createRequire(import.meta.url);
+
+const resolveOptionalEntry = (configuredPath: string, noopEntryId: string) =>
+  existsSync(configuredPath) ? configuredPath : require.resolve(noopEntryId);
 
 export const ssrPlugin = (skuContext: SkuContext): Plugin => ({
   name: makePluginName('ssr'),
@@ -8,6 +15,14 @@ export const ssrPlugin = (skuContext: SkuContext): Plugin => ({
     resolve: {
       alias: {
         '#sku-vite-ssr-app': skuContext.paths.appEntry,
+        '#sku-vite-ssr-server-entry': resolveOptionalEntry(
+          skuContext.paths.serverEntry,
+          '#entries/noop-ssr-server-entry',
+        ),
+        '#sku-vite-ssr-client-entry': resolveOptionalEntry(
+          skuContext.paths.clientEntry,
+          '#entries/noop-ssr-client-entry',
+        ),
       },
     },
     define: {

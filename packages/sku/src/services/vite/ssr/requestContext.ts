@@ -5,7 +5,7 @@ export type SsrRequestContextStore = {
   peekCspNonce: () => string | undefined;
   /** Active language name for vocab chunk registration, if set. */
   getLanguage: () => string | undefined;
-  /** Set the request language slot (configured language name). */
+  /** Seed language from the server request entry (configured language name). */
   setLanguage: (language: string | undefined) => void;
 };
 
@@ -49,9 +49,9 @@ export const peekCspNonce = (): string | undefined =>
   storage.getStore()?.peekCspNonce();
 
 /**
- * Returns the request language slot for the current Vite SSR request.
- * Prefer setting via Express `req.skuLanguage` in middleware; this helper
- * reads the same store from loaders/actions while sku is rendering.
+ * Returns the request language for the current Vite SSR request.
+ * Seeded by the server request entry `language` field before `query()`.
+ * Available in React Router loaders/actions while sku is rendering.
  * Returns `undefined` in the browser.
  */
 export const getSkuLanguage = (): string | undefined =>

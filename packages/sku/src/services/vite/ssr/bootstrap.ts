@@ -1,5 +1,9 @@
 import { isRouteErrorResponse, type StaticHandlerContext } from 'react-router';
-import type { DocumentAssets, SerializableHydrationState } from './types.js';
+import type {
+  DocumentAssets,
+  JsonValue,
+  SerializableHydrationState,
+} from './types.js';
 
 const escapeScriptValue = (value: unknown) =>
   JSON.stringify(value)
@@ -64,7 +68,15 @@ const serializeErrors = (
 export const buildBootstrapScriptContent = (
   assets: DocumentAssets,
   context: StaticHandlerContext,
-  { development = false }: { development?: boolean } = {},
+  {
+    development = false,
+    clientContext,
+    language,
+  }: {
+    development?: boolean;
+    clientContext?: JsonValue;
+    language?: string;
+  } = {},
 ) => {
   const hydrationData: SerializableHydrationState = {
     loaderData: replacePromises(
@@ -78,6 +90,8 @@ export const buildBootstrapScriptContent = (
 
   return [
     `window.__SKU_DOCUMENT_ASSETS__=${escapeScriptValue(assets)}`,
+    `window.__SKU_CLIENT_CONTEXT__=${escapeScriptValue(clientContext ?? null)}`,
+    `window.__SKU_LANGUAGE__=${escapeScriptValue(language ?? null)}`,
     `window.__staticRouterHydrationData=${escapeScriptValue(hydrationData)}`,
   ].join(';');
 };

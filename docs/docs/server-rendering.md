@@ -74,6 +74,55 @@ Put request middleware on `SkuApp.middleware` (not config `devServerMiddleware`)
 
 Do **not** use `sku start-ssr` / `sku build-ssr` when `renderType` is set.
 
+### Request entries (`serverEntry` / `clientEntry`)
+
+Optional separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition. Under Vite SSR these are closed request hooks — they do **not** own the HTML response (sku still streams Document + CSP) and are not webpack `renderCallback` / static hydrate.
+
+Prefer keeping providers in a separate module so the request entries themselves can be plain `.ts`.
+
+**Server entry** runs before React Router `query()` and may return only:
+
+- `AppWrapper` — a React component `ComponentType<{ children }>` for providers / request-scoped seed (**not** page layout or Document chrome)
+- `language` — configured language **name** (or `en-PSEUDO`) for vocab chunk identity
+- `clientContext` — JSON-serialisable shell seed (serialised at shell time only)
+
+**Client entry** receives `{ context, language }` (`context` is deserialized `clientContext`; `language` is forwarded from the server result) and may return only `AppWrapper`.
+
+sku renders `Document` → optional `AppWrapper` → router provider on server and client.
+
+```ts
+// src/server.ts
+import type { SkuSsrServerEntry } from 'sku';
+import { createAppWrapper } from './AppProviders.js';
+
+const onRequest: SkuSsrServerEntry = ({ request }) => {
+  const language = resolveLocaleFromRequest(request); // e.g. 'th-TH'
+  const clientContext = { theme: 'dark' };
+
+  return {
+    language,
+    clientContext,
+    AppWrapper: createAppWrapper({ language, clientContext }),
+  };
+};
+
+export default onRequest;
+```
+
+```ts
+// src/client.ts
+import type { SkuSsrClientEntry } from 'sku';
+import { createAppWrapper } from './AppProviders.js';
+
+const onHydrate: SkuSsrClientEntry = ({ context, language }) => ({
+  AppWrapper: createAppWrapper({ language, clientContext: context }),
+});
+
+export default onHydrate;
+```
+
+Share the same provider component on both sides so the tree matches for hydration. Values that change on SPA navigations must re-derive inside the provider (or a route layout); closing only over hydrate `context` will go stale.
+
 ### Lazy routes and `handle.moduleId`
 
 Prefer React Router’s idiomatic lazy form so each route is a separate async chunk (on server and client). Put that `lazy` on the page’s `route.ts` so sku can auto-derive `handle.moduleId` from a single string-literal `import()` during the Vite SSR transform:
@@ -110,50 +159,48 @@ When `languages` is configured, Vite SSR keeps `@vocab/vite` language chunk spli
 
 sku resolves the language from (in order):
 
-1. **Request language slot (preferred)** — set `req.skuLanguage` in Express middleware to a configured language **name** (e.g. `th-TH`), not necessarily a URL segment. Read the same value from loaders/actions with `getSkuLanguage()` from `sku`.
-2. a `:language` route param on a matched route when it matches a configured language name (convenience for demos)
-3. the sole configured language when only one language is set
+1. **Server request entry `language` (preferred / only app-owned path)** — return a configured language **name** (e.g. `th-TH`), not necessarily a URL segment. Loaders/actions may read it with `getSkuLanguage()` from `sku` after the server entry has run.
+2. the sole configured language when only one language is set
 
-If the language cannot be resolved (or the request slot is set to an unknown name), sku soft-fails: it skips vocab chunk registration and does not error the response.
+If the language cannot be resolved (or the server entry returns an unknown name), sku soft-fails: it skips vocab chunk registration and does not error the response.
 
-Prefer the request slot when locale is composed in middleware (e.g. site/region + language prefix → `th-TH`). Route heuristics are a convenience, not the product contract for multi-site apps.
+sku does **not** identify language from Express `req.skuLanguage`, a `:language` route param, or route `handle.language`. Compose locale in the server entry (middleware may still parse URLs for redirects, but must not set a parallel language slot).
 
-```tsx
-// src/app.tsx
-import type { SkuApp } from 'sku';
+```ts
+// src/server.ts
+import type { SkuSsrServerEntry } from 'sku';
 
-export default {
-  routes: [/* … */],
-  middleware: (req, _res, next) => {
-    // Must match a name from sku config `languages` (or `en-PSEUDO`)
-    req.skuLanguage = resolveLocaleFromRequest(req); // e.g. 'th-TH'
-    next();
-  },
-} satisfies SkuApp;
+const onRequest: SkuSsrServerEntry = ({ request }) => ({
+  // Must match a name from sku config `languages` (or `en-PSEUDO`)
+  language: resolveLocaleFromRequest(request), // e.g. 'th-TH'
+});
+
+export default onRequest;
 ```
 
-Wrap your UI in `VocabProvider` as usual (see [Multiple languages](./docs/multi-language.md)). Route-param example:
+Wrap your UI in `VocabProvider` via `AppWrapper` (see request entries above) or a layout. URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
+
+### Multiple paths per page / languages in path
+
+Some URL schemes serve the same page at more than one path — for example `/about` for a default language and `/fr/about` when the language is nested in the path.
+
+React Router Data Mode matches on the full path and does not let one route definition declare multiple paths. Define the page once, then register a separate route object for each path that should serve it:
 
 ```tsx
-// src/RootLayout.tsx
-import { VocabProvider } from '@vocab/react';
-import { Outlet, useParams } from 'react-router';
+// src/pages/page/route.ts
+import type { RouteObject } from 'react-router';
 
-export const RootLayout = () => {
-  const { language = 'en' } = useParams();
-  return (
-    <VocabProvider language={language}>
-      <Outlet />
-    </VocabProvider>
-  );
-};
+const route = {
+  lazy: () => import('./page.js'),
+} satisfies Omit<RouteObject, 'path'>;
 
-// src/pages/hello/route.ts
-export const helloRoute = {
-  path: ':language/hello',
-  lazy: () => import('./hello.js'),
-} satisfies RouteObject;
+export const aboutRoutes: RouteObject[] = [
+  { ...route, path: 'page' },
+  { ...route, path: 'fr/page' },
+];
 ```
+
+Be careful using dynamic params such as `:lang`. A dynamic segment would match unsupported prefixes and the server would respond on routes you do not intend to support; listing only supported prefixes means unknown ones fall through as not found.
 
 ### Error pages
 
@@ -230,8 +277,8 @@ First, you need to create a `sku.config.js` file, which will contain the followi
 
 ```ts
 export default {
-  clientEntry: 'src/client.js',
-  serverEntry: 'src/server/server.js',
+  clientEntry: 'src/client.tsx',
+  serverEntry: 'src/server/server.tsx',
   public: 'src/public',
   publicPath: '/',
   target: 'dist',
@@ -328,7 +375,7 @@ Last but not least, please note that commands for SSR are different to the ones 
 
 When using multiple languages the browser will download the language needed as required. However, this can lead to a delay in page load. To ensure translations are available immediately you need to tell sku what language you are rendering.
 
-**Vite SSR:** set `req.skuLanguage` in middleware to the configured language **name** (preferred), or rely on route heuristics (`:language` / sole-language) — see [Vite SSR → Vocab / language chunks](#vocab--language-chunks). You still wrap the tree in `VocabProvider`.
+**Vite SSR:** return `language` from the server request entry (configured language **name**), or rely on sole-language fallback — see [Vite SSR → Vocab / language chunks](#vocab--language-chunks). Wrap the tree in `VocabProvider` via `AppWrapper` (or a layout).
 
 **Webpack SSR:** call `addLanguageChunk` from your render params (this is not used for Vite SSR).
 

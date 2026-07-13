@@ -27,6 +27,26 @@ describe('buildBootstrapScriptContent', () => {
     expect(data.actionData).toEqual({ c: undefined, d: 'done' });
   });
 
+  it('serialises clientContext and language into the bootstrap', () => {
+    const script = buildBootstrapScriptContent(
+      { css: [], modulePreloads: [] },
+      {
+        loaderData: {},
+        actionData: null,
+        errors: null,
+      } as unknown as StaticHandlerContext,
+      {
+        clientContext: { theme: 'fixture' },
+        language: 'fr',
+      },
+    );
+
+    expect(script).toContain(
+      'window.__SKU_CLIENT_CONTEXT__={"theme":"fixture"}',
+    );
+    expect(script).toContain('window.__SKU_LANGUAGE__="fr"');
+  });
+
   it('omits Error.stack in production serialization', () => {
     const error = new Error('Boom');
     error.stack = 'Error: Boom\n    at loader';

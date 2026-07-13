@@ -52,6 +52,41 @@ Vite SSR apps MUST be declared through a sku app module that exports a React Rou
 - **THEN** they MUST provide a configured Vite SSR app module
 - **AND** they MUST NOT need a webpack-style `serverEntry` `renderCallback` to render HTML responses
 
+### Requirement: Optional server and client request entries
+
+Vite SSR MAY accept optional separate consumer server and client request-entry modules configured via the existing `serverEntry` and `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`). Sku MUST NOT introduce parallel `entryServer` / `entryClient` config keys for this purpose. Under Vite SSR these entries MUST NOT own the HTML response (sku still owns Document streaming and CSP); their Vite SSR contracts are the closed request-hook bags below, not webpack `renderCallback` / static hydrate.
+
+The server entry (`serverEntry`), when present, MUST run before React Router `query()` and MAY return only:
+
+- `AppWrapper` — a React component `ComponentType<{ children: ReactNode }>` used solely to wrap the router tree (providers / request-scoped seed, not page layout)
+- `language` — a configured language name (or `en-PSEUDO`) for vocab chunk identification
+- `clientContext` — a JSON-serialisable value serialised into the hydrate bootstrap at shell time
+
+The client entry (`clientEntry`), when present, receives `{ context, language }` where `context` is the deserialized `clientContext` and `language` is forwarded by sku from the server result, and MAY return only `AppWrapper`.
+
+Sku MUST render `Document` → optional `AppWrapper` → router provider on server and client.
+
+#### Scenario: Server entry wraps the router and sets language
+
+- **WHEN** a Vite SSR app provides a server request entry that returns `AppWrapper` and `language`
+- **THEN** sku invokes that entry before `query()`
+- **AND** sku wraps the static router tree with `AppWrapper`
+- **AND** sku uses `language` for vocab chunk identification (when `languages` is configured)
+
+#### Scenario: Client entry receives shell context and language
+
+- **WHEN** a Vite SSR app provides a server entry that returns `clientContext` and `language`
+- **AND** a client request entry is provided
+- **THEN** sku serialises `clientContext` into the hydrate bootstrap
+- **AND** sku invokes the client entry with deserialized `context` and the same `language`
+- **AND** when the client entry returns `AppWrapper`, sku wraps the browser router tree with it
+
+#### Scenario: Request entries are optional
+
+- **WHEN** a Vite SSR app omits server and client request entries
+- **THEN** sku still streams and hydrates the document using the app module routes
+- **AND** language resolution follows sole-language / soft-fail rules when `languages` is configured
+
 ### Requirement: sku owns request routing using React Router
 
 For Vite SSR apps, sku MUST match requests and render using React Router Data Mode based on the consumer route config.
@@ -124,34 +159,32 @@ Vite SSR apps MUST support loading route modules as separate async chunks on ser
 
 When `languages` is configured, Vite SSR apps MUST support vocab/language async chunks: language translations MUST be split into language chunks at build time, and the active language chunk MUST be registered for Document assets on the SSR response path (parity with static Vite `@vocab/vite` chunk helpers).
 
-Sku owns chunk **registration**. Language **identification** is app-owned via a documented request language slot (preferred), with `:language` and sole-language fallbacks. The active language value MUST be a configured language name (e.g. `th-TH`), not necessarily a URL path segment. Missing or unknown language MUST soft-fail (skip vocab chunk registration; do not error the response). Sku MUST NOT use route `handle.language` for identification.
+Sku owns chunk **registration**. Language **identification** is app-owned **only** via the server request entry `language` field (configured language name, e.g. `th-TH` — not necessarily a URL path segment). When that field is unset, sku MAY fall back to the sole configured language when exactly one language is set. Missing or unknown language MUST soft-fail (skip vocab chunk registration; do not error the response). Sku MUST NOT identify language from Express `req.skuLanguage`, a `:language` route param, or route `handle.language`. Sku MUST NOT expose an `addLanguageChunk` callback on the high-level app API. Loaders/actions MAY read the resolved language via `getSkuLanguage()` after the server entry has run.
 
 #### Scenario: Active language chunk is registered
 
 - **WHEN** a Vite SSR app has `languages` configured
-- **AND** a request is rendered for an active language
+- **AND** the server request entry returns a configured language name as `language`
 - **THEN** sku registers that language’s vocab chunk for the document assets / preloads used by the streamed response
 - **AND** the language chunk participates in client load for that response
 
-#### Scenario: Request language slot takes precedence
+#### Scenario: Server entry language is the app-owned identity path
 
 - **WHEN** a Vite SSR app has `languages` configured
-- **AND** consumer middleware sets the documented request language slot to a configured language name
+- **AND** the server request entry returns `language` set to a configured language name
 - **THEN** sku registers that language’s vocab chunk for the response
-- **AND** sku does not override it with a `:language` route-param fallback
+- **AND** sku does not use a `:language` route param or middleware language slot for identification
 
-#### Scenario: Fallbacks when the request slot is unset
+#### Scenario: Sole-language fallback when server entry omits language
 
-- **WHEN** a Vite SSR app has `languages` configured
-- **AND** the request language slot is unset
-- **AND** a matched route provides a `:language` param that matches a configured language name (or only one language is configured)
-- **THEN** sku uses that fallback to register the vocab chunk
+- **WHEN** a Vite SSR app has exactly one language configured
+- **AND** the server request entry is omitted or does not return `language`
+- **THEN** sku uses that sole configured language to register the vocab chunk
 
 #### Scenario: Soft-fail when language cannot be resolved
 
 - **WHEN** a Vite SSR app has multiple `languages` configured
-- **AND** the request language slot is unset
-- **AND** no matching `:language` param is available
+- **AND** the server request entry is omitted or does not return a known `language`
 - **THEN** sku does not register a vocab language chunk
 - **AND** the SSR response still succeeds
 

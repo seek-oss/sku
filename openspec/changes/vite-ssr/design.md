@@ -12,6 +12,7 @@ Reference architecture: [basic-streaming-app-example](https://github.com/jahredh
 
 - Select SSR vs static via `renderType: 'server-side-rendered' | 'static-generated'`
 - High-level app export (routes + middleware) instead of hand-rolled HTML responses
+- Optional separate server/client request entries for per-request `AppWrapper`, language identity, and serialisable `clientContext`
 - Full-document React root with shell-first streaming and document-level hydration
 - Explicit asset/bootstrap story that replaces `transformIndexHtml` on the stream path
 - Shell-derived CSP as HTTP headers, with optional request-scoped nonces/hashes and optional Report-Only
@@ -60,7 +61,7 @@ renderType?: 'server-side-rendered' | 'static-generated';
 
 **Rejected:** Wrapping `@react-router/dev/vite` — faster feature parity, but sku would no longer own routing/server abstractions.
 
-### 3. Consumer interface: app module, not entrypoints
+### 3. Consumer interface: SkuApp + optional request entries
 
 **Choice:** Consumers export a `SkuApp` module via `appEntry` (default `src/app.tsx`):
 
@@ -71,13 +72,17 @@ export default {
 } satisfies SkuApp;
 ```
 
+Optionally, consumers also provide **separate** server and client request-entry modules via the existing `serverEntry` / `clientEntry` config keys (defaults `src/server.tsx` / `src/client.tsx`). When `bundler: 'vite'` and `renderType: 'server-side-rendered'`, these paths mean the closed request-hook contracts in decision 16 — **not** webpack `renderCallback` / static hydrate — and MUST NOT own the HTML response. Separate files keep server-only code out of the client graph and make the SSR/client asymmetry explicit. Path extension is whatever the consumer configures (`.tsx` / `.ts` / `.js`); docs that still say `.js` are stale — code defaults are `.tsx`.
+
 sku provides the HTTP(S) server, Vite client+server builds, streaming render, Document assets, hydration bootstrap, and CSP. Consumers do **not** send HTML via `res.send` for the document response.
 
-**Middleware:** Vite SSR mounts **`SkuApp.middleware` only** (before Vite middlewares and the HTML render path). Config `devServerMiddleware` remains the static Vite / webpack path and MUST NOT be silently relied on for Vite SSR — document that consumers should move request middleware into `SkuApp.middleware`.
+**Middleware:** Vite SSR mounts **`SkuApp.middleware` only** (before Vite middlewares and the HTML render path). Config `devServerMiddleware` remains the static Vite / webpack path and MUST NOT be silently relied on for Vite SSR — document that consumers should move request middleware into `SkuApp.middleware`. Middleware remains for HTTP side effects (redirects, auth, cookies); render-scoped composition and language identity belong in the server request entry (decision 16), not Express mutation of a language slot.
 
-**Known limitation (v1):** App middleware is loaded once at dev-server start (not HMR’d). Route modules / `render` reload via `ssrLoadModule`; middleware edits require a restart.
+**Known limitation (v1):** App middleware is loaded once at dev-server start (not HMR’d). Route modules / `render` / request entries reload via `ssrLoadModule` where applicable; middleware edits require a restart.
 
-**Rejected:** Porting `serverEntry` + `renderCallback` — keeps the low-level multipart model that fights streaming.
+**Rejected:** Porting webpack’s `renderCallback` contract into Vite SSR — keeps the low-level multipart model that fights streaming. Reusing the `serverEntry` / `clientEntry` **keys** is fine; the Vite SSR **export shape** must stay the closed request-hook bag.
+
+**Rejected:** Putting request handlers on `SkuApp` itself — crowds the shared app module and blurs the server-only boundary.
 
 **Rejected:** `SkuApp.document` / consumer Document override — prefer conformity over configuration. sku owns the default Document (assets → CSS + modulepreload). Head/SEO metadata belongs in routes/layouts via React 19’s native `<title>` / `<meta>` / `<link>` hoisting, not a swappable shell (override is also a footgun: consumers must re-render asset links correctly). **Revisit later** if a real consumer need appears that React metadata and a sku-owned Document cannot cover (e.g. unavoidable `<html>` / `<body>` attributes sku does not yet own). Can always add an override API later without breaking the default.
 
@@ -215,20 +220,21 @@ Config direction (Vite SSR only): keep/extend `cspEnabled` / `cspExtraScriptSrcH
 Split two concerns that webpack conflated in `addLanguageChunk`:
 
 - **Registration (sku-owned):** When an active language is known for the request, register that language’s chunk name (`getChunkName(language)` from `@vocab/vite/chunks`) into the Document asset / preload collector used for the streamed response — parity with static Vite `loadableCollector.register(getChunkName(...))` and webpack SSR `extractor.addChunk(getChunkName(language))`. Do **not** expose a webpack-style `addLanguageChunk` collector callback on the high-level app API.
-- **Identification (app-owned):** The active language MUST be a configured language **name** (e.g. `th-TH`, `en-AU`) — the same value Vocab uses — not necessarily a URL path segment. SEEK (and many multi-site apps) compose locale from site/region + language prefix in middleware; sku MUST NOT encode that URL logic.
+- **Identification (app-owned):** The active language MUST be a configured language **name** (e.g. `th-TH`, `en-AU`) — the same value Vocab uses — not necessarily a URL path segment. SEEK (and many multi-site apps) compose locale from site/region + language prefix in the **server request entry**; sku MUST NOT encode that URL logic.
 
 **Resolution order** (first match wins; value MUST be in configured `languages` or `en-PSEUDO`):
 
-1. Documented request language slot set by consumer middleware (preferred) — e.g. namespaced `req.skuLanguage` and/or a small ALS helper mirroring the CSP nonce pattern
-2. `:language` route param when it matches a configured language name (open-source convenience; demos)
-3. Sole configured language when only one is set
-4. Otherwise skip vocab chunk registration (soft-fail — no error)
+1. `language` returned from the server request entry (decision 16) — **the only app-owned identification path** for Vite SSR
+2. Sole configured language when only one is set
+3. Otherwise skip vocab chunk registration (soft-fail — no error)
 
-**Out of scope for this decision:** default `VocabProvider` injection, SkuPlugin locale providers, baking SEEK locale composition into sku. The request slot is the seam those futures can read later; chunk registration only needs the opaque language name string.
+sku seeds the request-context language store from (1) so loaders/actions may **read** `getSkuLanguage()` during `query()`. There is **no** Express `req.skuLanguage` setter (or middleware language slot) for Vite SSR. Sku MUST NOT resolve language from a `:language` route param.
 
-**Why:** Multi-language SEEK apps already depend on language-isolated translation chunks, and their active language is typically a composed locale (`th-TH`), not the URL prefix (`th`). Shipping registration without an app-owned identification path would force wrong or missing preloads for the primary consumer. Soft-fail keeps wrong/missing identification from breaking the response.
+**Out of scope for this decision:** default `VocabProvider` injection, SkuPlugin locale providers, baking SEEK locale composition into sku. The server request entry `language` field is the seam those futures can read later; chunk registration only needs the opaque language name string.
 
-**Rejected:** Leaving languages/vocab chunk helpers as a post-v1 follow-up. Requiring `addLanguageChunk` on the app API. Encoding SEEK URL→locale composition inside sku. Treating `:language` as the product contract. Route `handle.language` as an identification path — apps that need a non-URL language should set the request language slot.
+**Why:** Multi-language SEEK apps already depend on language-isolated translation chunks, and their active language is typically a composed locale (`th-TH`), not the URL prefix (`th`). One identification path (server entry) keeps the public API simple. Soft-fail keeps wrong/missing identification from breaking the response.
+
+**Rejected:** Leaving languages/vocab chunk helpers as a post-v1 follow-up. Requiring `addLanguageChunk` on the app API. Encoding SEEK URL→locale composition inside sku. Treating `:language` as an identification path. Route `handle.language`. Middleware `req.skuLanguage` as a parallel identity API for Vite SSR.
 
 ### 15. Per-route chunk fixture (required)
 
@@ -238,33 +244,81 @@ Split two concerns that webpack conflated in `addLanguageChunk`:
 
 **Rejected:** Treating “fixture mentions lazy routes” as sufficient proof of per-route chunking.
 
+### 16. Server and client request entries
+
+**Choice:** Reuse the existing `serverEntry` / `clientEntry` config keys for optional Vite SSR request hooks. Defaults stay the shared sku defaults (`src/server.tsx` / `src/client.tsx`). Meaning is mode-discriminated: under `bundler: 'vite'` + `renderType: 'server-side-rendered'`, these paths are closed request hooks (below); under webpack SSR / static Vite they keep their existing contracts. Do **not** invent parallel `entryServer` / `entryClient` keys. sku-owned `vite-ssr-server` / `vite-ssr-client` shells import the configured paths when present (same virtual-resolve pattern as `#sku-vite-ssr-app`); missing files → noop.
+
+**Server entry** (`serverEntry`, default `src/server.tsx`):
+
+```ts
+export default function onRequest(args: {
+  request: Request; // Fetch API Request used for RR query
+}): {
+  AppWrapper?: ComponentType<{ children: ReactNode }>;
+  language?: string; // configured language name, or en-PSEUDO
+  clientContext?: JsonValue; // JSON-serialisable shell seed only
+};
+```
+
+**Client entry** (`clientEntry`, default `src/client.tsx`):
+
+```ts
+export default function onHydrate(args: {
+  context: JsonValue | undefined; // deserialized clientContext
+  language: string | undefined; // forwarded by sku from server result
+}): {
+  AppWrapper?: ComponentType<{ children: ReactNode }>;
+};
+```
+
+**Tree:** `Document` → `AppWrapper` (if any) → `StaticRouterProvider` / `RouterProvider`.
+
+**Contracts:**
+
+- **Closed return bag (v1):** only `AppWrapper`, `language`, and `clientContext` on the server; only `AppWrapper` on the client. Grow fields later; do not accept free-form callbacks (no `addLanguageChunk`).
+- **`AppWrapper`:** a React component (`ComponentType<{ children }>`) for providers / request-scoped seed — **not** page layout or document chrome. Prefer pulling providers from a separate module so request entries can be plain `.ts`. The handler itself is the per-request factory; do not nest a second factory.
+- **`language`:** sole app-owned vocab identity path (decision 14). Run the server entry **before** `query()` so the store is seeded for loaders and chunk registration.
+- **`clientContext`:** must be JSON-serialisable; serialized into the hydrate bootstrap at **shell time** only. Suspense/content resolved after shell MUST NOT be assumed present. Sku forwards `language` to the client entry **explicitly** (apps need not re-pack it into `clientContext`).
+- **Client `AppWrapper`:** hydrate wiring / seed. URL-derived values that change on SPA navigations must re-derive inside the provider (or a route layout); closing only over hydrate `context` will go stale.
+- **Fixture:** use `.ts` request entries (e.g. `src/server.ts` / `src/client.ts`) with providers imported from a separate module; set `serverEntry` / `clientEntry` when not using the `.tsx` defaults.
+
+**Why:** One path pair for “server/client entry”; `renderType` already selects the product mode, so parallel config keys only add vocabulary. The Vite SSR **contract** still differs from webpack `renderCallback` / static hydrate — docs must say so clearly. Path strings accept `.ts` / `.tsx` / `.js`; correct stale `.js` defaults in `configuration.md`.
+
+**Rejected:** Separate `entryServer` / `entryClient` config keys. Open-ended “arbitrary per-request code” without a closed return type. Returning `ReactNode` instead of a wrapper component. Placing these handlers on `SkuApp`. Webpack-style `provideClientContext` / `addLanguageChunk` as the primary API. Using request entries to set status/headers or send the document body.
+
 ## Risks / Trade-offs
 
-| Risk                                                                 | Mitigation                                                                                  |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Vite SSR + RR Data Mode + document stream integration is non-trivial | Spike: handler → Document stream → hydrate → lazy route → preamble/HMR                      |
-| Hydration mismatch on assets/context                                 | Serialize exact asset list used in Document; same tree on client                            |
-| Missing preamble breaks HMR                                          | Enforce preamble in sku streaming client wrapper; e2e/dev smoke                             |
-| Shell-only CSP cannot hash late streamed scripts                     | Request a single nonce for React stream scripts when needed; hash known bootstrap bodies    |
-| Absolute/`CDN` `publicPath` configured for Vite SSR                  | Config validation rejects with a clear error; docs state relative-only                      |
-| Server `Error.stack` leaked via hydration JSON                       | Strip stacks in production bootstrap serialization                                          |
-| Dev/prod abort middleware drift writes after disconnect              | Shared HTML middleware; abort-before-write                                                  |
-| `actionData` Promises throw during bootstrap stringify               | Promise-scrub loader **and** action data                                                    |
-| Manual / derived `moduleId` wrong → missing or wrong preloads        | Conservative matcher (no guessing); never overwrite explicit `moduleId`; dev warn + docs    |
-| Language chunk missing / wrong for composed locales                  | App sets request language slot; sku registers when known; soft-fail otherwise (decision 14) |
-| Routes accidentally bundle into one chunk                            | Required per-route chunk fixture + assertions (decision 15)                                 |
-| Consumers expect Framework Mode file conventions                     | Docs make Data Mode + sku app export explicit                                               |
-| Middleware writing the body early breaks CSP headers                 | sku owns the HTML response path; middleware must not commit the document body               |
-| Dual maintenance of webpack SSR vs Vite SSR                          | Explicit non-goal to unify; webpack path frozen for this change                             |
-| Consumers keep calling `-ssr` after setting `renderType`             | Clear config-time / command errors pointing to `sku start` / `sku build`                    |
-| Loader/action headers (e.g. Set-Cookie) dropped on HTML responses    | Forward `loaderHeaders` / `actionHeaders` before CSP/`Content-Type` (decision 11)           |
-| `httpsDevServer: true` with HTTP-only Vite SSR listener              | Shared `createServer` + HMR on the HTTPS server; URL printer stays truthful                 |
-| Consumers expect config `devServerMiddleware` on Vite SSR            | Document `SkuApp.middleware` as the Vite SSR path; static `devServerMiddleware` unchanged   |
-| Express→Fetch adapter loses array headers / consumed bodies          | Normalize headers; reconstruct body from `req.body` when the stream was already read        |
+| Risk                                                                 | Mitigation                                                                                      |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Vite SSR + RR Data Mode + document stream integration is non-trivial | Spike: handler → Document stream → hydrate → lazy route → preamble/HMR                          |
+| Hydration mismatch on assets/context                                 | Serialize exact asset list used in Document; same tree on client                                |
+| Missing preamble breaks HMR                                          | Enforce preamble in sku streaming client wrapper; e2e/dev smoke                                 |
+| Shell-only CSP cannot hash late streamed scripts                     | Request a single nonce for React stream scripts when needed; hash known bootstrap bodies        |
+| Absolute/`CDN` `publicPath` configured for Vite SSR                  | Config validation rejects with a clear error; docs state relative-only                          |
+| Server `Error.stack` leaked via hydration JSON                       | Strip stacks in production bootstrap serialization                                              |
+| Dev/prod abort middleware drift writes after disconnect              | Shared HTML middleware; abort-before-write                                                      |
+| `actionData` Promises throw during bootstrap stringify               | Promise-scrub loader **and** action data                                                        |
+| Manual / derived `moduleId` wrong → missing or wrong preloads        | Conservative matcher (no guessing); never overwrite explicit `moduleId`; dev warn + docs        |
+| Language chunk missing / wrong for composed locales                  | Server entry returns `language`; sku registers when known; soft-fail otherwise (decision 14/16) |
+| Routes accidentally bundle into one chunk                            | Required per-route chunk fixture + assertions (decision 15)                                     |
+| Consumers expect Framework Mode file conventions                     | Docs make Data Mode + sku app export explicit                                                   |
+| Middleware writing the body early breaks CSP headers                 | sku owns the HTML response path; middleware must not commit the document body                   |
+| Dual maintenance of webpack SSR vs Vite SSR                          | Explicit non-goal to unify; webpack path frozen for this change                                 |
+| Consumers keep calling `-ssr` after setting `renderType`             | Clear config-time / command errors pointing to `sku start` / `sku build`                        |
+| Loader/action headers (e.g. Set-Cookie) dropped on HTML responses    | Forward `loaderHeaders` / `actionHeaders` before CSP/`Content-Type` (decision 11)               |
+| `httpsDevServer: true` with HTTP-only Vite SSR listener              | Shared `createServer` + HMR on the HTTPS server; URL printer stays truthful                     |
+| Consumers expect config `devServerMiddleware` on Vite SSR            | Document `SkuApp.middleware` as the Vite SSR path; static `devServerMiddleware` unchanged       |
+| Express→Fetch adapter loses array headers / consumed bodies          | Normalize headers; reconstruct body from `req.body` when the stream was already read            |
+| Server/client `AppWrapper` trees diverge → hydration mismatch        | Shared provider component; docs: AppWrapper = providers only; same children tree                |
+| Client `AppWrapper` stale after SPA navigation                       | Docs: hydrate `context` is seed; URL-derived locale must re-derive on the client                |
+| `clientContext` assumes post-shell Suspense data                     | Contract: shell-time JSON only; forward `language` separately (decision 16)                     |
+| Locale parsed in middleware for redirects and again in server entry  | Acceptable; middleware must not set a parallel language slot                                    |
 
 ## Migration Plan
 
 - Opt-in: set `bundler: 'vite'`, `renderType: 'server-side-rendered'`, and provide the app module
+- Optional: provide `serverEntry` / `clientEntry` request hooks for `AppWrapper`, `language`, and `clientContext` (decision 16; same keys/defaults as today, Vite SSR contract)
+- Multi-language apps: return `language` from the server entry (do not use middleware `req.skuLanguage` or `:language` for vocab identity)
 - Existing webpack SSR: leave `renderType` unset (or `'static-generated'`) and keep `start-ssr` / `build-ssr`
 - Static apps: optional explicit `renderType: 'static-generated'`; behavior unchanged
 - Streaming apps: replace string document/`#app` hydrate with Document + `hydrateRoot(document)`
@@ -297,16 +351,17 @@ Validated against [basic-streaming-app-example](https://github.com/jahredhope/ba
 | Question                | Decision                                                                                                                                                                                                                  |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | App module path         | New config `appEntry` (default `src/app.tsx`). Do not reuse `serverEntry` / `renderEntry` / `clientEntry` for the high-level app export.                                                                                  |
+| Request entries         | Reuse `serverEntry` / `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`); Vite SSR closed request-hook contract (decision 16); not `SkuApp` fields; not webpack `renderCallback`. Fixture may use `.ts` paths.  |
 | Omitted `renderType`    | Treat as today’s static behavior (equivalent to `'static-generated'`). Explicit `'static-generated'` is allowed but optional.                                                                                             |
 | Document ownership      | sku ships and owns the **Document** (assets → CSS + modulepreload). No `SkuApp.document` override in v1; head/SEO via React 19 metadata in routes/layouts. Can add an override later if a consumer requires it.           |
 | Middleware typing       | **Connect `RequestHandler`** on **`SkuApp.middleware`** (Express-compatible). Mount before Vite middlewares + HTML render; must not commit the document body. Config `devServerMiddleware` is static Vite / webpack only. |
 | `httpsDevServer`        | **Required** for Vite SSR: single-port HTTPS + HMR when enabled (same cert story as other sku commands). Production server stays HTTP.                                                                                    |
 | Loader/action headers   | Forward `loaderHeaders` / `actionHeaders` on streamed document responses (decision 11).                                                                                                                                   |
 | `onAllReady` buffering  | Opt-in via React Router route `handle.waitForAll: true` (deepest/any match). Default remains `onShellReady`.                                                                                                              |
-| Client/asset handoff    | `window.__SKU_DOCUMENT_ASSETS__` + combined hashable `bootstrapScriptContent` (assets + RR hydration payload).                                                                                                            |
+| Client/asset handoff    | `window.__SKU_DOCUMENT_ASSETS__` + combined hashable `bootstrapScriptContent` (assets + RR hydration payload + serialised `clientContext` / language).                                                                    |
 | Absolute `publicPath`   | **Not supported** for Vite SSR; relative only. CSP uses `'self'` for Document assets.                                                                                                                                     |
 | Hydration safety        | Scrub Promises on loader+action data; strip `Error.stack` in production (decision 10).                                                                                                                                    |
 | Request nonce           | At most one per render, only when requested; CSP `'nonce-…'` only if requested (decision 12); not webpack `createUnsafeNonce`.                                                                                            |
 | Lazy `moduleId`         | Auto-derive from idiomatic `lazy: () => import('…')` (decision 13); manual escape hatch; warn in dev on miss/unknown.                                                                                                     |
-| Vocab language chunks   | Required in v1: build splitting + sku registration; app-owned identification via request language slot, then `:language` / sole-language fallbacks (decision 14).                                                         |
+| Vocab language chunks   | Required in v1: build splitting + sku registration; app-owned identification **only** via server entry `language`, then sole-language fallback (decision 14/16). No `:language` / `req.skuLanguage`.                      |
 | Per-route chunk fixture | Required demo of ≥2 distinct lazy route chunks (decision 15).                                                                                                                                                             |

@@ -2,6 +2,11 @@
   "name": "@sku-fixtures/vite-ssr",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "sku build --config sku.config.ts",
+    "start": "sku start --config sku.config.ts",
+    "start:prod": "node dist/server/server.js"
+  },
   "dependencies": {
     "@vocab/core": "^1.6.2",
     "@vocab/react": "^1.1.11",
@@ -9,11 +14,6 @@
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "^7.18.0"
-  },
-  "scripts": {
-    "start": "sku start --config sku.config.ts",
-    "build": "sku build --config sku.config.ts",
-    "start:prod": "node dist/server/server.js"
   },
   "devDependencies": {
     "@types/react": "catalog:",

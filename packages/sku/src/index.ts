@@ -4,7 +4,16 @@ export type {
   Server,
   SkuConfig,
 } from './types/types.js';
-export type { DocumentAssets, SkuApp } from './services/vite/ssr/types.js';
+export type {
+  DocumentAssets,
+  JsonValue,
+  SkuApp,
+  SkuSsrAppWrapper,
+  SkuSsrClientEntry,
+  SkuSsrClientEntryResult,
+  SkuSsrServerEntry,
+  SkuSsrServerEntryResult,
+} from './services/vite/ssr/types.js';
 export {
   getCspNonce,
   getSkuLanguage,

@@ -91,8 +91,8 @@ describe('lazy request-scoped CSP nonce', () => {
   });
 });
 
-describe('request language slot', () => {
-  it('reads the language set on the request context store', () => {
+describe('request language from server entry', () => {
+  it('reads the language seeded on the request context store', () => {
     const store = createSsrRequestContextStore();
     store.setLanguage('th-TH');
     expect(runWithSsrRequestContext(store, () => getSkuLanguage())).toBe(

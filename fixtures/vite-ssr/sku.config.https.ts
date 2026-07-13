@@ -4,6 +4,8 @@ export default {
   bundler: 'vite',
   renderType: 'server-side-rendered',
   appEntry: 'src/app.tsx',
+  serverEntry: 'src/server.ts',
+  clientEntry: 'src/client.ts',
   port: 8202,
   target: 'dist',
   httpsDevServer: true,

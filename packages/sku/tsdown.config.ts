@@ -27,6 +27,10 @@ export default defineConfig([
         'src/services/vite/entries/vite-ssr-client.tsx',
       'entries/vite-ssr-server':
         'src/services/vite/entries/vite-ssr-server.tsx',
+      'entries/noop-ssr-client-entry':
+        'src/services/vite/entries/noop-ssr-client-entry.ts',
+      'entries/noop-ssr-server-entry':
+        'src/services/vite/entries/noop-ssr-server-entry.ts',
       'jest/file-mock': 'src/config/jest/fileMock.ts',
       'jest-preset': 'src/config/jest/preset.ts',
       'jest/js-transform': 'src/config/jest/jsBabelTransform.ts',
@@ -50,6 +54,8 @@ export default defineConfig([
         '__sku_alias__webpackStats',
         'virtual:sku/polyfills',
         '#sku-vite-ssr-app',
+        '#sku-vite-ssr-server-entry',
+        '#sku-vite-ssr-client-entry',
         '@vanilla-extract/css/adapter',
       ],
     },

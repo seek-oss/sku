@@ -2,6 +2,7 @@ import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { fixViteVanillaExtractDepScanPlugin } from './esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { makePluginName } from '../helpers/makePluginName.js';
+import { existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -19,6 +20,18 @@ export const configPlugin = ({
   const isViteSsr =
     skuContext.bundler === 'vite' &&
     skuContext.renderType === 'server-side-rendered';
+
+  const viteSsrOptimizeEntries = [
+    skuContext.paths.appEntry,
+    ssrClientEntry,
+    ssrServerEntry,
+    ...(existsSync(skuContext.paths.serverEntry)
+      ? [skuContext.paths.serverEntry]
+      : []),
+    ...(existsSync(skuContext.paths.clientEntry)
+      ? [skuContext.paths.clientEntry]
+      : []),
+  ];
 
   return {
     name: makePluginName('config'),
@@ -40,7 +53,7 @@ export const configPlugin = ({
         // Reloads on cold-start cause issues with our Playwright tests, so we need to ensure they get optimized ahead of time.
         // If you see "REFUSED_CONNECTION" errors in Playwright tests it may be because entries are missing from here.
         entries: isViteSsr
-          ? [skuContext.paths.appEntry, ssrClientEntry, ssrServerEntry]
+          ? viteSsrOptimizeEntries
           : [
               skuContext.paths.clientEntry,
               skuContext.paths.serverEntry,

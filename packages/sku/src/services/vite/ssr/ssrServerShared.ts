@@ -183,7 +183,6 @@ export const createHtmlRenderMiddleware =
         assets,
         {
           requestContextStore,
-          requestLanguage: req.skuLanguage,
           signal: controller.signal,
           development,
           languages,

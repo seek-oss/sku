@@ -8,7 +8,7 @@
     "COMMENT": "echo "
   },
   "comments": {
-    "react": "A fake react dependency is inected during the test so we don't need to install the real react"
+    "react": "A fake react dependency is injected during the test so we don't need to install the real react"
   },
   "devDependencies": {
     "sku": "workspace:*"

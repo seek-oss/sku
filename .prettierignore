@@ -19,3 +19,4 @@ fixtures/*/eslint.config.mjs
 fixtures/*/.prettierrc
 fixtures/*/tsconfig.json
 *.hbs
+ignore_*/

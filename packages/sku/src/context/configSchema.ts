@@ -49,6 +49,14 @@ const routes = {
 };
 
 export default validator.compile({
+  renderType: {
+    type: 'enum',
+    values: ['server-side-rendered', 'static-generated'],
+    optional: true,
+  },
+  appEntry: {
+    type: 'string',
+  },
   clientEntry: {
     type: 'string',
   },
@@ -186,6 +194,15 @@ export default validator.compile({
   cspExtraScriptSrcHosts: {
     type: 'array',
     items: { type: 'string' },
+  },
+  cspReportOnlyEnabled: { type: 'boolean' },
+  cspReportOnlyExtraScriptSrcHosts: {
+    type: 'array',
+    items: { type: 'string' },
+  },
+  cspReportOnlyReportTo: {
+    type: 'string',
+    optional: true,
   },
   httpsDevServer: {
     type: 'boolean',

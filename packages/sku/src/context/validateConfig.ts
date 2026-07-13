@@ -59,6 +59,31 @@ export default (skuConfig: SkuConfig) => {
     );
   }
 
+  if (
+    skuConfig.renderType === 'server-side-rendered' &&
+    skuConfig.bundler !== 'vite'
+  ) {
+    errors.push(
+      `🚫 '${strong(
+        'renderType: server-side-rendered',
+      )}' is only supported with the Vite bundler.`,
+    );
+  }
+
+  if (
+    skuConfig.renderType === 'server-side-rendered' &&
+    skuConfig.bundler === 'vite' &&
+    skuConfig.publicPath &&
+    (/^https?:\/\//i.test(skuConfig.publicPath) ||
+      skuConfig.publicPath.startsWith('//'))
+  ) {
+    errors.push(
+      `🚫 Vite SSR requires a relative '${strong(
+        'publicPath',
+      )}' (e.g. '/' or '/static/'). Absolute http(s) / CDN publicPath is not supported.`,
+    );
+  }
+
   // Ensure defaultClientEntry is not configured as a route name
   skuConfig.routes?.forEach((skuRoute) => {
     if (typeof skuRoute !== 'string') {

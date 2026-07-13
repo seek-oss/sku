@@ -1,0 +1,11 @@
+# managed by sku
+**/*.vocab/index.ts
+.eslintcache
+.prettierrc
+coverage/
+dist/
+eslint.config.mjs
+pnpm-lock.yaml
+report/
+tsconfig.json
+# end managed by sku

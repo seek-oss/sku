@@ -9,13 +9,41 @@ Sku supports Vite as an alternate to the Webpack bundler since v15.
 
 ## Limitations
 
-Vite support is currently only available for [static applications (SSG)][SSG].
-This means that only [`sku start`] and [`sku build`] are supported.
-[`sku serve`] is also available as it is bundler agnostic.
+Vite support covers [static applications (SSG)][SSG] and opt-in [server-side rendering (SSR)][SSR].
+
+- Static apps use [`sku start`] and [`sku build`] as today.
+- Vite SSR apps set `bundler: 'vite'` and `renderType: 'server-side-rendered'`, then also use [`sku start`] / [`sku build`] (not `start-ssr` / `build-ssr`).
+- Webpack SSR continues to use [`sku start-ssr`] / [`sku build-ssr`] when `renderType` is unset.
 
 [`sku start`]: ./docs/CLI.md#start
 [`sku build`]: ./docs/CLI.md#build
 [`sku serve`]: ./docs/CLI.md#serve
+[`sku start-ssr`]: ./docs/CLI.md#start-ssr
+[`sku build-ssr`]: ./docs/CLI.md#build-ssr
+
+### Vite SSR
+
+Set `renderType: 'server-side-rendered'` and provide an `appEntry` (default `src/app.tsx`) that exports a `SkuApp`:
+
+```ts
+import type { SkuApp } from 'sku';
+import type { RouteObject } from 'react-router';
+
+const routes: RouteObject[] = [
+  /* React Router Data Mode routes (prefer lazy) */
+];
+
+export default {
+  routes,
+  middleware: (req, res, next) => next(),
+} satisfies SkuApp;
+```
+
+sku owns the HTTP server, the React Document shell (not overridable — use React 19 metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers. Requires React 19+. Vite SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
+
+Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch). When `languages` is configured, sku registers the active vocab language chunk on the Document response — prefer `req.skuLanguage` (configured language name); `:language` / sole-language are convenience fallbacks.
+
+See [Server rendering](./docs/server-rendering.md) and [CSP](./docs/csp.md) for details.
 
 ### Planned deprecation of library mode
 

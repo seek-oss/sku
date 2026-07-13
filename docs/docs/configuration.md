@@ -47,8 +47,31 @@ Default: `webpack`
 
 The bundler that sku uses to build the application.
 
-`vite` is currently only supported for static apps.
+Vite supports static or server-rendered apps via `renderType: 'server-side-rendered'`.
 See [Vite support](https://seek-oss.github.io/sku/#/./docs/vite) for details.
+
+## renderType
+
+Type: `'server-side-rendered' | 'static-generated'`
+
+Default: 'static-generated'
+
+Selects request-time SSR or static generation.
+
+- `'server-side-rendered'` requires `bundler: 'vite'`, React 19+, and an `appEntry` exporting a `SkuApp`. Use `sku start` / `sku build`.
+- `'static-generated'` (or omit) keeps the existing static rendering path.
+
+See [Server rendering](./docs/server-rendering.md).
+
+## appEntry
+
+Type: `string`
+
+Default: `./src/app.tsx`
+
+**Vite SSR only** (`renderType: 'server-side-rendered'`).
+
+Path to the module exporting a `SkuApp` (React Router routes + optional middleware).
 
 ## clientEntry
 
@@ -85,6 +108,32 @@ Type: `Array<string>`
 Default: `[]`
 
 Extra external hosts to allow in your `script-src` [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspEnabled` is set to `true`.
+
+## cspReportOnlyEnabled
+
+Type: `boolean`
+
+Default: `false`
+
+**Vite SSR only.** When `true`, sets a `Content-Security-Policy-Report-Only` header (can coexist with enforcing CSP).
+
+## cspReportOnlyExtraScriptSrcHosts
+
+Type: `Array<string>`
+
+Default: `[]`
+
+Extra hosts for the Report-Only `script-src` policy. Only relevant if `cspReportOnlyEnabled` is `true`.
+
+## cspReportOnlyReportTo
+
+Type: `string`
+
+Default: `undefined`
+
+**Vite SSR only.** CSP [`report-to`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to) group name token for the Report-Only policy. Only relevant if `cspReportOnlyEnabled` is `true`. When set, sku appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
+
+sku does not emit a `Reporting-Endpoints` (or legacy `Report-To`) header — define the matching endpoint group in your app or infrastructure.
 
 ## dangerouslySetESLintConfig
 
@@ -476,6 +525,8 @@ Type: `string`
 Default: `/`
 
 The URL all the static assets of the app are accessible under.
+
+For SSR (`renderType: 'server-side-rendered'`) the `publicPath` must be relative (e.g. `/` or `/static/`). Absolute `http(s)` / CDN URLs are not supported.
 
 ## renderEntry
 

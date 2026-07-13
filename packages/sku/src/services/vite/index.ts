@@ -12,21 +12,39 @@ import { getAppHosts } from '../../context/hosts.js';
 import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
 import allocatePort from '../../utils/allocatePort.js';
 import { serverUrls } from '@sku-private/utils';
+import { createDevSsrServer } from './ssr/createDevSsrServer.js';
+import exists from '../../utils/exists.js';
 
 export const viteService = {
   build: async (skuContext: SkuContext) => {
     const outDir = createOutDir(skuContext.paths.target);
+    const isViteSsr =
+      skuContext.bundler === 'vite' &&
+      skuContext.renderType === 'server-side-rendered';
+
+    if (isViteSsr) {
+      if (await exists(skuContext.paths.target)) {
+        await cleanTargetDirectory(skuContext.paths.target);
+      }
+    }
+
     const builder = await createBuilder(createConfig(skuContext));
 
     // builds all environments in the order they are defined in the config
     await builder.buildApp();
 
-    if (skuContext.routes) {
+    if (!isViteSsr && skuContext.routes) {
       await prerenderConcurrently(skuContext);
     }
-    await cleanTargetDirectory(outDir.ssg, true);
-    await cleanTargetDirectory(outDir.join('.vite'), true);
-    await copyPublicFiles(skuContext);
+    if (!isViteSsr) {
+      await cleanTargetDirectory(outDir.ssg, true);
+      await cleanTargetDirectory(outDir.join('.vite'), true);
+    }
+    await copyPublicFiles(
+      isViteSsr
+        ? { paths: { ...skuContext.paths, target: outDir.ssrClient } }
+        : skuContext,
+    );
   },
   start: async ({
     skuContext,
@@ -48,11 +66,21 @@ export const viteService = {
       },
     };
 
-    const server = await createServer(
-      createConfig(skuContextOverride, environment),
-    );
+    const isViteSsr =
+      skuContextOverride.bundler === 'vite' &&
+      skuContextOverride.renderType === 'server-side-rendered';
+    const viteServer = isViteSsr
+      ? (
+          await createDevSsrServer({
+            skuContext: skuContextOverride,
+            environment,
+          })
+        ).vite
+      : await createServer(createConfig(skuContextOverride, environment));
 
-    await server.listen(availablePort);
+    if (!isViteSsr) {
+      await viteServer.listen(availablePort);
+    }
 
     const hosts = getAppHosts(skuContextOverride);
 
@@ -70,6 +98,6 @@ export const viteService = {
       urls.print();
     }
 
-    server.bindCLIShortcuts({ print: true });
+    viteServer.bindCLIShortcuts({ print: true });
   },
 };

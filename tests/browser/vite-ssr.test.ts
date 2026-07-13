@@ -1,0 +1,363 @@
+import { describe, beforeAll, it, expect } from 'vitest';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {
+  scopeToFixture,
+  skipCleanup,
+  waitFor,
+} from '@sku-private/testing-library';
+
+const { sku, node, fixturePath } = scopeToFixture('vite-ssr');
+
+describe('vite-ssr', () => {
+  describe('config validation', () => {
+    it('rejects webpack + server-side-rendered', async () => {
+      const process = await sku('start', [
+        '--config=sku.config.webpack-ssr-error.ts',
+      ]);
+
+      expect(
+        await process.findByText('renderType: server-side-rendered'),
+      ).toBeInTheConsole();
+
+      await waitFor(() => {
+        expect(process.hasExit()).toMatchObject({ exitCode: 1 });
+      });
+    });
+
+    it('rejects start-ssr when renderType is set', async () => {
+      const process = await sku('start-ssr', [
+        '--config=sku.config.ssr-command-error.ts',
+      ]);
+
+      expect(
+        await process.findByError(
+          '`sku start-ssr` is not used with `renderType`. Use `sku start` instead.',
+        ),
+      ).toBeInTheConsole();
+
+      await waitFor(() => {
+        expect(process.hasExit()).toMatchObject({ exitCode: 1 });
+      });
+    });
+
+    it('rejects build-ssr when renderType is set', async () => {
+      const process = await sku('build-ssr', [
+        '--config=sku.config.ssr-command-error.ts',
+      ]);
+
+      expect(
+        await process.findByError(
+          '`sku build-ssr` is not used with `renderType`. Use `sku build` instead.',
+        ),
+      ).toBeInTheConsole();
+
+      await waitFor(() => {
+        expect(process.hasExit()).toMatchObject({ exitCode: 1 });
+      });
+    });
+
+    it('rejects absolute publicPath for Vite SSR', async () => {
+      const process = await sku('start', [
+        '--config=sku.config.absolute-public-path-error.ts',
+      ]);
+
+      expect(
+        await process.findByText('Vite SSR requires a relative'),
+      ).toBeInTheConsole();
+      expect(await process.findByText('publicPath')).toBeInTheConsole();
+
+      await waitFor(() => {
+        expect(process.hasExit()).toMatchObject({ exitCode: 1 });
+      });
+    });
+  });
+
+  describe('start', () => {
+    const url = 'http://127.0.0.1:8200';
+
+    beforeAll(async () => {
+      const start = await sku('start', ['--config=sku.config.ts']);
+      await start.findByText('Starting development server');
+    });
+
+    it('streams the document shell with CSP headers', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(url);
+      const html = await response.text();
+
+      expect(html).toContain('<!DOCTYPE html>');
+      expect(html).toContain('<html');
+      expect(html).toContain('Vite SSR Home');
+      expect(html).not.toContain('id="app"');
+      // Shell-first Suspense: fallback appears, then deferred content streams in.
+      expect(html).toContain('data-testid="fallback"');
+      expect(html).toContain('Deferred content ready');
+      // No transformIndexHtml: client entry is bootstrapped explicitly.
+      expect(html).toContain('vite-ssr-client');
+      expect(html).toContain('@vite/client');
+
+      const csp = response.headers.get('content-security-policy');
+      const cspReportOnly = response.headers.get(
+        'content-security-policy-report-only',
+      );
+      expect(csp).toBeTruthy();
+      expect(cspReportOnly).toBeTruthy();
+      expect(csp).toContain('https://cdn.example.com');
+      expect(cspReportOnly).toContain('https://report-only.example.com');
+      expect(cspReportOnly).toContain('report-to csp-endpoint');
+      expect(csp).not.toContain('report-to');
+      // sku mints a nonce when attaching it to React stream scripts.
+      expect(csp).toMatch(/'nonce-/);
+      expect(cspReportOnly).toMatch(/'nonce-/);
+    });
+
+    it('serves consumer middleware before HTML render', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/api/health`);
+      expect(await response.text()).toBe('ok');
+    });
+
+    it('exposes the request CSP nonce to middleware and loaders', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const nonceResponse = await fetch(`${url}/api/nonce`);
+      const middlewareNonce = await nonceResponse.text();
+      expect(middlewareNonce.length).toBeGreaterThan(8);
+
+      const page = await fetch(`${url}/nonce`);
+      const html = await page.text();
+      const csp = page.headers.get('content-security-policy') ?? '';
+      const nonces = [...csp.matchAll(/'nonce-([^']+)'/g)].map((m) => m[1]);
+      expect(nonces).toHaveLength(1);
+      const nonce = nonces[0];
+      expect(html).toContain('Nonce page');
+      // Loader serialized the same request nonce into hydration data.
+      expect(html).toContain(`"nonce":"${nonce}"`);
+      expect(csp).toContain(`'nonce-${nonce}'`);
+    });
+
+    it('renders a lazy route', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/about`);
+      const html = await response.text();
+      expect(html).toContain('About');
+    });
+
+    it('renders a second lazy route', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/details`);
+      const html = await response.text();
+      expect(html).toContain('Details');
+    });
+
+    it('renders a translated route for a language param', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/en/hello`);
+      const html = await response.text();
+      expect(html).toContain('Hello from Vite SSR');
+    });
+
+    it('forwards loader redirect Responses', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/redirect`, { redirect: 'manual' });
+      expect(response.status).toBeGreaterThanOrEqual(300);
+      expect(response.status).toBeLessThan(400);
+      expect(response.headers.get('location')).toBe('/about');
+    });
+
+    it('buffers until onAllReady when handle.waitForAll is set', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/buffered`);
+      const html = await response.text();
+      expect(html).toContain('Buffered page');
+      expect(html).toContain('Buffered content ready');
+      // Wait-for-all: Suspense fallback should not appear in the final HTML.
+      expect(html).not.toContain('data-testid="buffered-fallback"');
+    });
+  });
+
+  describe('build', () => {
+    beforeAll(async () => {
+      const build = await sku('build', ['--config=sku.config.ts']);
+      await build.findByText('Sku build complete');
+    });
+
+    it('emits sibling client/ and server/ under the build target', async () => {
+      const dist = fixturePath('dist');
+      const clientDir = path.join(dist, 'client');
+      const serverDir = path.join(dist, 'server');
+      const manifest = path.join(clientDir, '.vite', 'manifest.json');
+      const serverEntry = path.join(serverDir, 'server.js');
+
+      expect((await fs.stat(clientDir)).isDirectory()).toBe(true);
+      expect((await fs.stat(serverDir)).isDirectory()).toBe(true);
+      expect((await fs.stat(manifest)).isFile()).toBe(true);
+      expect((await fs.stat(serverEntry)).isFile()).toBe(true);
+
+      // Neither nested in the other; client assets are not at dist root.
+      const distEntries = await fs.readdir(dist);
+      expect(distEntries.sort()).toEqual(['client', 'server']);
+      expect(distEntries).not.toContain('.vite');
+    });
+
+    it('emits distinct client chunks for lazy routes', async () => {
+      const manifestPath = path.join(
+        fixturePath('dist'),
+        'client',
+        '.vite',
+        'manifest.json',
+      );
+      const manifest = JSON.parse(
+        await fs.readFile(manifestPath, 'utf8'),
+      ) as Record<string, { file: string; name?: string }>;
+
+      const about = manifest['src/pages/about/about.tsx'];
+      const details = manifest['src/pages/details/details.tsx'];
+      expect(about?.file).toBeTruthy();
+      expect(details?.file).toBeTruthy();
+      expect(about.file).not.toBe(details.file);
+    });
+
+    it('emits named vocab language chunks', async () => {
+      const manifestPath = path.join(
+        fixturePath('dist'),
+        'client',
+        '.vite',
+        'manifest.json',
+      );
+      const manifest = JSON.parse(
+        await fs.readFile(manifestPath, 'utf8'),
+      ) as Record<string, { file: string; name?: string }>;
+
+      const languageChunks = Object.values(manifest).filter(
+        (chunk) =>
+          chunk.name === 'en-translations' || chunk.name === 'fr-translations',
+      );
+      expect(languageChunks.map((chunk) => chunk.name).sort()).toEqual([
+        'en-translations',
+        'fr-translations',
+      ]);
+    });
+
+    it('produces a runnable production server', async ({ task }) => {
+      skipCleanup(task.id);
+      await node(['dist/server/server.js'], {
+        spawnOpts: {
+          env: { ...process.env, PORT: '8201' },
+        },
+      });
+
+      await waitFor(
+        async () => {
+          const response = await fetch('http://127.0.0.1:8201/');
+          expect(response.ok).toBe(true);
+          const html = await response.text();
+          expect(html).toContain('Vite SSR Home');
+          expect(html).toContain('<!DOCTYPE html>');
+          expect(response.headers.get('content-security-policy')).toBeTruthy();
+          const cspReportOnly = response.headers.get(
+            'content-security-policy-report-only',
+          );
+          expect(cspReportOnly).toContain('report-to csp-endpoint');
+        },
+        { timeout: 15000 },
+      );
+    });
+
+    it('emits modulepreload for auto-derived lazy route moduleIds', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      await waitFor(
+        async () => {
+          const response = await fetch('http://127.0.0.1:8201/about');
+          expect(response.ok).toBe(true);
+          const html = await response.text();
+          expect(html).toContain('rel="modulepreload"');
+          expect(html).toContain('About');
+        },
+        { timeout: 15000 },
+      );
+    });
+
+    it('modulepreloads the active language vocab chunk', async ({ task }) => {
+      skipCleanup(task.id);
+      await waitFor(
+        async () => {
+          const response = await fetch('http://127.0.0.1:8201/en/hello');
+          expect(response.ok).toBe(true);
+          const html = await response.text();
+          expect(html).toContain('Hello from Vite SSR');
+          expect(html).toContain('rel="modulepreload"');
+          expect(html).toMatch(/en-translations[^"]*\.js/);
+        },
+        { timeout: 15000 },
+      );
+    });
+
+    it('prefers req.skuLanguage over the :language route param', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      await waitFor(
+        async () => {
+          const response = await fetch('http://127.0.0.1:8201/en/hello', {
+            headers: { 'x-sku-language': 'fr' },
+          });
+          expect(response.ok).toBe(true);
+          const html = await response.text();
+          expect(html).toMatch(/fr-translations[^"]*\.js/);
+          expect(html).not.toMatch(/en-translations[^"]*\.js/);
+        },
+        { timeout: 15000 },
+      );
+    });
+
+    it('soft-fails vocab preload for an unknown request language', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      await waitFor(
+        async () => {
+          const response = await fetch('http://127.0.0.1:8201/en/hello', {
+            headers: { 'x-sku-language': 'de' },
+          });
+          expect(response.ok).toBe(true);
+          const html = await response.text();
+          expect(html).not.toMatch(/en-translations[^"]*\.js/);
+          expect(html).not.toMatch(/fr-translations[^"]*\.js/);
+        },
+        { timeout: 15000 },
+      );
+    });
+
+    it('omits Error.stack from production hydration payload', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      await waitFor(
+        async () => {
+          const response = await fetch('http://127.0.0.1:8201/boom');
+          const html = await response.text();
+          expect(html).toContain('__staticRouterHydrationData');
+          expect(html).toContain('Boom from loader');
+          const hydrationJson = html.match(
+            /__staticRouterHydrationData=(\{.*?\})\s*(?:;|<\/script>)/s,
+          )?.[1];
+          expect(hydrationJson).toBeTruthy();
+          const payload = JSON.parse(hydrationJson as string) as {
+            errors: Record<string, { message?: string; stack?: string }>;
+          };
+          const error = Object.values(payload.errors ?? {})[0];
+          expect(error?.message).toContain('Boom from loader');
+          expect(error).not.toHaveProperty('stack');
+        },
+        { timeout: 15000 },
+      );
+    });
+  });
+});

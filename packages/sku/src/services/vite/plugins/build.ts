@@ -7,6 +7,8 @@ import { makePluginName } from '../helpers/makePluginName.js';
 import { assetsInlineLimitBytes } from '../../bundlerConstants.js';
 
 const clientEntry = require.resolve('#entries/vite-client');
+const ssrClientEntry = require.resolve('#entries/vite-ssr-client');
+const ssrServerEntry = require.resolve('#entries/vite-ssr-server');
 
 export const buildPlugin = ({
   skuContext,
@@ -14,6 +16,9 @@ export const buildPlugin = ({
   skuContext: SkuContext;
 }): PluginOption => {
   const outDir = createOutDir(skuContext.paths.target);
+  const isViteSsr =
+    skuContext.bundler === 'vite' &&
+    skuContext.renderType === 'server-side-rendered';
 
   return {
     name: makePluginName('build'),
@@ -33,6 +38,7 @@ export const buildPlugin = ({
             codeSplitting: {
               groups: [
                 {
+                  // Vocab language chunks (`en-translations`, …) for static and Vite SSR builds
                   name: (id, ctx) => {
                     const languageChunkName = createVocabChunks(id, ctx);
                     if (languageChunkName) {
@@ -49,12 +55,12 @@ export const buildPlugin = ({
       environments: {
         client: {
           build: {
-            outDir: outDir.client,
+            outDir: isViteSsr ? outDir.ssrClient : outDir.client,
             manifest: true,
             sourcemap: skuContext.sourceMapsProd,
             rolldownOptions: {
               // this should be skuContext.paths.clientEntry in sku start-ssr or build-ssr mode
-              input: clientEntry,
+              input: isViteSsr ? ssrClientEntry : clientEntry,
             },
           },
         },
@@ -63,12 +69,12 @@ export const buildPlugin = ({
             // Sourcemaps are necessary to get useful stack traces for errors thrown during prerendering
             sourcemap: 'inline',
             ssr: true,
-            outDir: outDir.ssg,
+            outDir: isViteSsr ? outDir.ssr : outDir.ssg,
             rolldownOptions: {
               // this should be skuContext.paths.serverEntry in sku start-ssr or build-ssr mode
-              input: skuContext.paths.renderEntry,
+              input: isViteSsr ? ssrServerEntry : skuContext.paths.renderEntry,
               output: {
-                entryFileNames: renderEntryChunkName,
+                entryFileNames: isViteSsr ? 'server.js' : renderEntryChunkName,
               },
             },
           },

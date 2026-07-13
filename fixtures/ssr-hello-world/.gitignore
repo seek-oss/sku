@@ -3,7 +3,7 @@
 .prettierrc
 .ssl
 coverage/
-dist-build/
+dist-start/
 eslint.config.mjs
 report/
 tsconfig.json

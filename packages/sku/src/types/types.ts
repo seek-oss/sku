@@ -113,6 +113,12 @@ export type SkuLanguage = string | { name: string; extends?: string };
 
 export interface SkuConfigBase {
   /**
+   * Selects request-time SSR or the existing static generation behavior.
+   * Omit to preserve today's static / SSG default.
+   */
+  renderType?: 'server-side-rendered' | 'static-generated';
+
+  /**
    * The bundler that sku uses to build the application.
    *
    * `vite` is currently only supported for static apps.
@@ -163,6 +169,30 @@ export interface SkuConfigBase {
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=cspextrascriptsrchosts
    */
   cspExtraScriptSrcHosts?: string[];
+
+  /**
+   * Emit a report-only CSP header for Vite SSR responses.
+   *
+   * @default false
+   */
+  cspReportOnlyEnabled?: boolean;
+
+  /**
+   * Extra script hosts for the Vite SSR report-only policy.
+   *
+   * @default []
+   */
+  cspReportOnlyExtraScriptSrcHosts?: string[];
+
+  /**
+   * CSP `report-to` group name token for the Vite SSR Report-Only policy.
+   * Only relevant if {@link cspReportOnlyEnabled} is `true`. When set, sku
+   * appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
+   * Consumers (or infra) must define the matching `Reporting-Endpoints` group.
+   *
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=cspreportonlyreportto
+   */
+  cspReportOnlyReportTo?: string;
 
   /**
    * This function provides a way to modify sku's ESLint configuration.
@@ -518,6 +548,13 @@ export interface WebpackSkuConfig {
 }
 
 export interface ViteSkuConfig {
+  /**
+   * Vite SSR app module exporting a `SkuApp`.
+   *
+   * @default "./src/app.tsx"
+   */
+  appEntry?: string;
+
   /**
    * An array of cjs import paths that have both a default and named exports.
    * This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.

@@ -16,6 +16,7 @@ import { getCjsInteropDeps } from './cjsInteropDeps.js';
 import type { PackageJson } from 'type-fest';
 import { createJiti } from 'jiti';
 import { validatePathAliases } from './validatePathAliases.js';
+import semver from 'semver';
 
 const jiti = createJiti(import.meta.url);
 
@@ -177,6 +178,7 @@ export const createSkuContext = async ({
       ];
     },
     clientEntry: getPathFromCwd(skuConfig.clientEntry),
+    appEntry: getPathFromCwd(skuConfig.appEntry),
     renderEntry: getPathFromCwd(skuConfig.renderEntry),
     libraryEntry: skuConfig.libraryEntry
       ? getPathFromCwd(skuConfig.libraryEntry)
@@ -188,6 +190,23 @@ export const createSkuContext = async ({
     publicPath,
     setupTests: getSetupTests(skuConfig.setupTests),
   };
+
+  if (skuConfig.renderType === 'server-side-rendered') {
+    if (!existsSync(paths.appEntry)) {
+      throw new Error(
+        `${paths.appEntry} does not exist. Vite SSR apps must provide an 'appEntry'.`,
+      );
+    }
+
+    const reactPackage = requireFromCwd('react/package.json') as {
+      version: string;
+    };
+    if (semver.major(reactPackage.version) < 19) {
+      throw new Error(
+        `Vite SSR requires React 19 or newer. Found React ${reactPackage.version}.`,
+      );
+    }
+  }
 
   const hosts = skuConfig.hosts;
   const port = {
@@ -246,6 +265,7 @@ export const createSkuContext = async ({
 
   return {
     bundler: skuConfig.bundler,
+    renderType: skuConfig.renderType,
     testRunner: skuConfig.testRunner,
     configPath: appConfigPath,
     publicPath,
@@ -272,6 +292,10 @@ export const createSkuContext = async ({
     displayNamesProd,
     cspEnabled,
     cspExtraScriptSrcHosts,
+    cspReportOnlyEnabled: skuConfig.cspReportOnlyEnabled,
+    cspReportOnlyExtraScriptSrcHosts:
+      skuConfig.cspReportOnlyExtraScriptSrcHosts,
+    cspReportOnlyReportTo: skuConfig.cspReportOnlyReportTo,
     httpsDevServer,
     languages,
     initialPath,

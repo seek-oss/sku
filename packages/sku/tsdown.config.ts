@@ -23,6 +23,10 @@ export default defineConfig([
       'config/storybook': './src/config/storybook/config.ts',
       'entries/vite-client': 'src/services/vite/entries/vite-client.tsx',
       'entries/vite-render': 'src/services/vite/entries/vite-render.tsx',
+      'entries/vite-ssr-client':
+        'src/services/vite/entries/vite-ssr-client.tsx',
+      'entries/vite-ssr-server':
+        'src/services/vite/entries/vite-ssr-server.tsx',
       'jest/file-mock': 'src/config/jest/fileMock.ts',
       'jest-preset': 'src/config/jest/preset.ts',
       'jest/js-transform': 'src/config/jest/jsBabelTransform.ts',
@@ -45,6 +49,7 @@ export default defineConfig([
         '__sku_alias__serverEntry',
         '__sku_alias__webpackStats',
         'virtual:sku/polyfills',
+        '#sku-vite-ssr-app',
         '@vanilla-extract/css/adapter',
       ],
     },

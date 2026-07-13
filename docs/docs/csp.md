@@ -1,6 +1,9 @@
 # Content Security Policy (CSP)
 
-[CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app. For statically rendered apps, a `script-src` policy can be automatically generated for you. SSR apps have an extra step.
+[CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app.
+
+- **Static apps** and **Webpack SSR**: a `script-src` policy can be generated for you (meta / existing APIs).
+- **Vite SSR** (`renderType: 'server-side-rendered'`): CSP is delivered as **HTTP headers** (`Content-Security-Policy` and optional `Content-Security-Policy-Report-Only`), derived from the document shell plus nonces and hashes of bootstrap scripts. Meta `http-equiv` CSP is not used on the Vite SSR path.
 
 **This feature is not available to libraries**
 
@@ -8,14 +11,31 @@
 
 Set `cspEnabled: true` in your `sku.config.js`.
 
+For Vite SSR you can also enable Report-Only:
+
+```ts
+export default {
+  bundler: 'vite',
+  renderType: 'server-side-rendered',
+  cspEnabled: true,
+  cspExtraScriptSrcHosts: ['https://third-party.example.com'],
+  cspReportOnlyEnabled: true,
+  cspReportOnlyExtraScriptSrcHosts: ['https://report-only.example.com'],
+  cspReportOnlyReportTo: 'csp-endpoint',
+} satisfies SkuConfig;
+```
+
+When `cspReportOnlyReportTo` is set, sku includes `report-to <value>` on the Report-Only policy. You (or your infrastructure) must define the matching [`Reporting-Endpoints`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Reporting-Endpoints) group — sku does not emit that header.
+
 ### Extra Hosts
 
-If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraScriptSrcHosts` array in `sku.config.js`.
+If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraScriptSrcHosts` array in your `sku.config.js`.
+
+Vite SSR assumes a relative `publicPath` (e.g. `/` or `/static/`), so sku-owned Document assets are covered by `'self'`. Absolute `http(s)` / CDN `publicPath` is not supported for Vite SSR — use `cspExtraScriptSrcHosts` for third-party scripts only.
 
 ### Nonce Values
 
 [Nonce] values can be used to permit inline scripts that are generated client side.
-Nonce values are created by calling `createUnsafeNonce` during render.
 
 > The [Content Security Policy (CSP)] requires that scripts be declared ahead of time.
 > For inline scripts this is typically done automatically by calculating a hash of their content when they are created during the initial render.
@@ -25,6 +45,43 @@ Nonce values are created by calling `createUnsafeNonce` during render.
 
 **Warning:** Nonces are less safe than content hashes.
 Please consider if other options are available and whether the risks are acceptable for your use-case.
+
+#### Vite SSR
+
+Vite SSR uses **at most one** CSP nonce per HTML response, minted **only when explicitly requested**, and included in the CSP header **only if requested**.
+
+A nonce is requested by:
+
+- sku itself, when attaching a `nonce` to React stream scripts (post-shell inline scripts that cannot be pre-hashed)
+- Express middleware: `req.getCspNonce()` (mint-on-read; later calls return the same value)
+- React Router loaders/actions: `getCspNonce()` from `sku` (same store while sku is rendering)
+
+All of those share one value for the response. Known bootstrap script bodies are still allowed via sha256 hashes. If nothing requests a nonce (for example a response that never runs the HTML stream renderer), CSP is still emitted (hashes, `'self'`, configured hosts) **without** a `'nonce-…'` source.
+
+Do not use webpack’s `createUnsafeNonce` for Vite SSR — that API can create multiple distinct nonces per render. Vite SSR intentionally does not offer a multi-nonce factory.
+
+```tsx
+import { getCspNonce } from 'sku';
+import type { SkuApp } from 'sku';
+
+export default {
+  routes: [
+    {
+      path: '/',
+      loader: () => ({ nonce: getCspNonce() }),
+      // ...
+    },
+  ],
+  middleware: (req, res, next) => {
+    // Same nonce value as getCspNonce() / the CSP header for this request
+    // (sku also mints when attaching to React stream scripts during HTML render)
+    res.locals.cspNonce = req.getCspNonce?.();
+    next();
+  },
+} satisfies SkuApp;
+```
+
+#### Webpack SSR / static apps
 
 `createUnsafeNonce`: Generates a random nonce value and returns it for use by the client. The nonce value is added to the generated [Content Security Policy (CSP)] Tags.
 
@@ -63,9 +120,9 @@ export default ({ dynamicScriptNonce }) => {
 [nonce]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/nonce
 [Content Security Policy (CSP)]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
 
-### Extra SSR Setup
+### Extra SSR Setup (Webpack)
 
-As sku doesn't handle the returned HTML in SSR apps, any extra scripts (scripts not created by sku) must be registered.
+As sku doesn't handle the returned HTML in Webpack SSR apps, any extra scripts (scripts not created by sku) must be registered.
 
 In the `renderCallback` function, register all extra script tags (inline and external) via the `registerScript` function.
 

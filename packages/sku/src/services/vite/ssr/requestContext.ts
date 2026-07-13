@@ -1,6 +1,3 @@
-import { AsyncLocalStorage } from 'node:async_hooks';
-import { createCspNonce } from './csp.js';
-
 export type SsrRequestContextStore = {
   /** Mint at most one nonce for this request, then reuse it. */
   getCspNonce: () => string;
@@ -25,36 +22,17 @@ const noopStorage: ContextStorage = {
   run: (_context, fn) => fn(),
 };
 
+let storage: ContextStorage = noopStorage;
+
 /**
- * AsyncLocalStorage is Node-only. Route modules import helpers from `sku`
- * and are shared with the client bundle, so construction must tolerate the
- * browser (where Vite externalizes `node:async_hooks` to a non-constructor).
+ * Install AsyncLocalStorage-backed request context. Server-only — the shared
+ * `requestContext` module is imported by client route code via `getCspNonce`,
+ * so it must not statically import `node:async_hooks` (Vite's browser external
+ * throws on any export access).
  */
-const storage: ContextStorage =
-  typeof AsyncLocalStorage === 'function'
-    ? new AsyncLocalStorage<SsrRequestContextStore>()
-    : noopStorage;
-
-export const createSsrRequestContextStore = (
-  initialNonce?: string,
-): SsrRequestContextStore => {
-  let nonce = initialNonce;
-  let language: string | undefined;
-  return {
-    getCspNonce: () => {
-      nonce ??= createCspNonce();
-      return nonce;
-    },
-    peekCspNonce: () => nonce,
-    getLanguage: () => language,
-    setLanguage: (value) => {
-      language = value;
-    },
-  };
+export const installSsrRequestContextStorage = (next: ContextStorage): void => {
+  storage = next;
 };
-
-/** Alias used by existing CSP-focused call sites. */
-export const createSsrCspNonceStore = createSsrRequestContextStore;
 
 /**
  * Returns the per-request CSP nonce for the current Vite SSR request.

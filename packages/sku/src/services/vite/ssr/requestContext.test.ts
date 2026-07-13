@@ -1,45 +1,74 @@
 import { describe, expect, it, vi } from 'vitest';
 import { buildContentSecurityPolicy, buildCspHeaders } from './csp.js';
+import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
 import {
-  createSsrRequestContextStore,
   getCspNonce,
   getSkuLanguage,
   peekCspNonce,
   runWithSsrRequestContext,
+  type SsrRequestContextStore,
 } from './requestContext.js';
 
 describe('getCspNonce browser safety', () => {
-  it('does not throw when AsyncLocalStorage is not a constructor', async () => {
+  it('does not pull node:async_hooks into the shared requestContext module', async () => {
     vi.resetModules();
-    vi.doMock('node:async_hooks', () => ({
-      AsyncLocalStorage: undefined,
-    }));
+    vi.doMock('node:async_hooks', () => {
+      throw new Error('node:async_hooks must not load with requestContext');
+    });
 
-    const requestContext = await import('./requestContext.js');
+    await expect(import('./requestContext.js')).resolves.toBeTruthy();
 
-    expect(requestContext.getCspNonce()).toBeUndefined();
-    expect(requestContext.getSkuLanguage()).toBeUndefined();
-    expect(
-      requestContext.runWithSsrRequestContext(
-        requestContext.createSsrRequestContextStore('test-nonce'),
-        () => requestContext.getCspNonce(),
-      ),
-    ).toBeUndefined();
+    vi.doUnmock('node:async_hooks');
   });
 
-  it('propagates nonce via AsyncLocalStorage when available', async () => {
+  it('returns undefined without installed storage', async () => {
     vi.resetModules();
     vi.doUnmock('node:async_hooks');
 
     const requestContext = await import('./requestContext.js');
+    const store: SsrRequestContextStore = {
+      getCspNonce: () => 'test-nonce',
+      peekCspNonce: () => 'test-nonce',
+      getLanguage: () => undefined,
+      setLanguage: () => undefined,
+    };
+
+    expect(requestContext.getCspNonce()).toBeUndefined();
+    expect(requestContext.getSkuLanguage()).toBeUndefined();
+    // noop `run` ignores the store, so getters stay undefined (browser path).
+    expect(
+      requestContext.runWithSsrRequestContext(store, () =>
+        requestContext.getCspNonce(),
+      ),
+    ).toBeUndefined();
+  });
+
+  it('propagates nonce via AsyncLocalStorage when installed', async () => {
+    vi.resetModules();
+    vi.doUnmock('node:async_hooks');
+
+    await import('./installSsrRequestContextStorage.js');
+    const requestContext = await import('./requestContext.js');
+    const { createSsrRequestContextStore: createStore } =
+      await import('./createSsrRequestContextStore.js');
 
     expect(
-      requestContext.runWithSsrRequestContext(
-        requestContext.createSsrRequestContextStore('server-nonce'),
-        () => requestContext.getCspNonce(),
+      requestContext.runWithSsrRequestContext(createStore('server-nonce'), () =>
+        requestContext.getCspNonce(),
       ),
     ).toBe('server-nonce');
     expect(requestContext.getCspNonce()).toBeUndefined();
+  });
+
+  it('does not pull node:crypto into the shared requestContext module', async () => {
+    vi.resetModules();
+    vi.doMock('node:crypto', () => {
+      throw new Error('node:crypto must not load with requestContext');
+    });
+
+    await expect(import('./requestContext.js')).resolves.toBeTruthy();
+
+    vi.doUnmock('node:crypto');
   });
 });
 

@@ -1,10 +1,10 @@
-import { createServer as createHttpServer } from 'node:http';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import express from 'express';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { createConfig } from '../helpers/config/createConfig.js';
+import createServer from '../../../utils/createServer.js';
 import { createSsrRequestContextMiddleware } from './ssrRequestContextMiddleware.js';
 import {
   createHtmlRenderMiddleware,
@@ -26,12 +26,18 @@ export const createDevSsrServer = async ({
   const clientEntry = require.resolve('#entries/vite-ssr-client');
   const serverEntry = require.resolve('#entries/vite-ssr-server');
   const serverApp = express();
-  const httpServer = createHttpServer(serverApp);
+  // Shared with static/webpack: self-signed cert when httpsDevServer is true.
+  const httpServer = await createServer({
+    requestListener: serverApp,
+    httpsDevServer: skuContext.httpsDevServer,
+    hosts: skuContext.hosts,
+  });
   const vite = await createViteServer({
     ...createConfig(skuContext, environment),
     appType: 'custom',
     server: {
       middlewareMode: true,
+      // Keep HMR on the same listener (HTTP or HTTPS) sku owns.
       hmr: { server: httpServer },
     },
   });

@@ -1,7 +1,9 @@
 import {
-  createServer as createHttpServer,
   type Server as HttpServer,
+  createServer as createHttpServer,
+  type IncomingHttpHeaders,
 } from 'node:http';
+import type { Server as HttpsServer } from 'node:https';
 import express, {
   type Express,
   type Request,
@@ -13,7 +15,7 @@ import {
   createSsrRequestContextMiddleware,
   getRequestContextStore,
 } from './ssrRequestContextMiddleware.js';
-import { createSsrRequestContextStore } from './requestContext.js';
+import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
 import type {
   RenderAssets,
   RenderManifest,
@@ -21,6 +23,48 @@ import type {
   RenderResult,
   SkuApp,
 } from './types.js';
+
+const toFetchHeaders = (headers: IncomingHttpHeaders): Headers => {
+  const result = new Headers();
+  for (const [name, value] of Object.entries(headers)) {
+    if (value === undefined) {
+      continue;
+    }
+    if (Array.isArray(value)) {
+      for (const entry of value) {
+        result.append(name, entry);
+      }
+    } else {
+      result.append(name, value);
+    }
+  }
+  return result;
+};
+
+const getRequestBodyInit = (
+  req: Request,
+  method: string,
+): { body?: BodyInit; duplex?: 'half' } => {
+  if (method === 'GET' || method === 'HEAD') {
+    return {};
+  }
+
+  // Body-parser (or similar) already consumed the stream — rebuild from req.body.
+  if (req.readableEnded || (req as { complete?: boolean }).complete) {
+    if (req.body === undefined || req.body === null) {
+      return {};
+    }
+    if (Buffer.isBuffer(req.body) || typeof req.body === 'string') {
+      return { body: req.body };
+    }
+    if (typeof req.body === 'object') {
+      return { body: JSON.stringify(req.body) };
+    }
+    return { body: String(req.body) };
+  }
+
+  return { body: req as unknown as BodyInit, duplex: 'half' };
+};
 
 export type RenderFunction = (
   request: globalThis.Request,
@@ -49,7 +93,7 @@ export interface SsrServerOptions {
 
 export interface SsrServerResult {
   app: Express;
-  httpServer: HttpServer;
+  httpServer: HttpServer | HttpsServer;
 }
 
 export const mountConsumerMiddleware = (
@@ -68,13 +112,12 @@ export const createWebRequest = (
 ): globalThis.Request => {
   const origin = `${req.protocol}://${req.get('host') ?? 'localhost'}`;
   const method = req.method.toUpperCase();
+  const bodyInit = getRequestBodyInit(req, method);
   return new globalThis.Request(new URL(req.originalUrl, origin), {
     method,
-    headers: req.headers as HeadersInit,
+    headers: toFetchHeaders(req.headers),
     signal,
-    ...(method === 'GET' || method === 'HEAD'
-      ? {}
-      : { body: req as unknown as BodyInit, duplex: 'half' }),
+    ...bodyInit,
   } as RequestInit);
 };
 
@@ -82,7 +125,9 @@ export const sendResponse = async (
   response: globalThis.Response,
   res: Response,
 ) => {
-  response.headers.forEach((value, name) => res.setHeader(name, value));
+  response.headers.forEach((value, name) => {
+    res.append(name, value);
+  });
   res.status(response.status);
   if (response.body) {
     res.end(Buffer.from(await response.arrayBuffer()));
@@ -153,7 +198,9 @@ export const createHtmlRenderMiddleware =
       }
 
       const nonce = requestContextStore.peekCspNonce();
-      result.headers.forEach((value, name) => res.setHeader(name, value));
+      result.headers.forEach((value, name) => {
+        res.append(name, value);
+      });
       res.set({
         'Content-Type': 'text/html; charset=utf-8',
         ...buildCspHeaders({

@@ -6,6 +6,10 @@ export const RootLayout = () => {
 
   return (
     <VocabProvider language={language}>
+      <link
+        rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"
+      />
       <div>
         <nav>
           <Link to="/">Home</Link>

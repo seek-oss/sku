@@ -317,6 +317,8 @@ Path to a file in your project that exports a function that can receive the Expr
 
 This can be used to extend to the dev server middleware.
 
+For **Vite SSR** (`renderType: 'server-side-rendered'`), put request middleware on the app module (`SkuApp.middleware`) instead — config `devServerMiddleware` is the static Vite / webpack path.
+
 Example:
 
 ```js
@@ -389,6 +391,8 @@ Type: `boolean`
 Default: `false`
 
 Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
+
+Supported for static Vite, webpack, and Vite SSR (`renderType: 'server-side-rendered'`) via `sku start`.
 
 ## initialPath
 

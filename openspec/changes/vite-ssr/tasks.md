@@ -98,3 +98,16 @@
 - [x] 12.1 Remove `SkuApp.document` / `DocumentProps` from the public Vite SSR API; always use sku’s Document on server and client render paths
 - [x] 12.2 Update docs (`configuration.md`, `server-rendering.md`, `vite.md`, etc.) so they no longer describe an optional Document override
 - [x] 12.3 Ensure fixture and tests do not export or rely on a custom `document`; keep full-document hydrate coverage intact
+
+## 13. Post-review hardening (headers, HTTPS, adapter, tests)
+
+- [x] 13.1 Forward `context.loaderHeaders` / `context.actionHeaders` onto streamed HTML responses (append; preserve `Set-Cookie`); keep sku-owned `Content-Type` / CSP
+- [x] 13.2 Wire `httpsDevServer` for Vite SSR `createDevSsrServer` (shared `createServer` + HMR on the HTTPS listener; URL printer stays truthful)
+- [x] 13.3 Harden Express→Fetch `createWebRequest` (normalize array headers; reconstruct body when the request stream was already consumed)
+- [x] 13.4 Tests: loader `Set-Cookie` on HTML response; errored route non-2xx status; Playwright (or equivalent) document hydration smoke
+- [x] 13.5 Tests: Vite SSR `httpsDevServer: true` accepts HTTPS and returns a document
+- [x] 13.6 Docs: `SkuApp.middleware` vs config `devServerMiddleware` for Vite SSR; note `httpsDevServer` works for Vite SSR `sku start`
+
+## Deferred (no tasks)
+
+- Production listen / setup logging and a custom logger for setup behaviours (e.g. listen-on-port) — documented in `design.md` Open Questions / §9; no implementation in this change.

@@ -31,6 +31,7 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
 - Requiring static apps to migrate off `renderDocument` / `#app`
 - Absolute / CDN `publicPath` for Vite SSR apps (relative public asset paths only)
 - Exposing `SkuApp.document` / a consumer-swappable Document shell (sku-owned Document + React 19 head metadata instead; revisit only if required)
+- Production listen / setup logging parity with webpack SSR, or accepting a custom logger for setup events (deferred — see `design.md` Open Questions)
 
 ## Capabilities
 
@@ -52,6 +53,7 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
   - `vite.md` — Vite SSR via `renderType`, commands, app module, streaming/hydrate differences vs static; **React 19+ required**; vocab/language chunks (request language slot) + per-route chunking pattern; auto-derived `moduleId`
   - `csp.md` — Vite SSR header CSP; single request-scoped nonce only when requested; report-only; relative `publicPath` only
   - `configuration.md` — `renderType`, `appEntry`, CSP report-only options; Vite SSR `publicPath` constraint; **`renderType` docs note React 19+**
-- **Fixtures/tests:** Vite SSR fixture must demonstrate per-route async chunking; vocab language chunk registration covered when `languages` is used
+- **Fixtures/tests:** Vite SSR fixture must demonstrate per-route async chunking; vocab language chunk registration covered when `languages` is used; post-review coverage for loader/action headers, HTTPS `sku start`, document hydration, and errored-route status
 - **Release notes:** changeset MUST describe the public API, MUST state that **Vite SSR requires React 19+**, and MUST link/reference each of the docs above
 - **Breaking risk**: Opt-in via `renderType`; streaming apps use document hydrate (not string `renderDocument` / `#app`); Vite SSR does **not** support absolute/`CDN` `publicPath` (relative only); Vite SSR requires **React 19+**
+- **Also:** Vite SSR forwards RR loader/action headers on HTML responses; `httpsDevServer` is supported on the single-port Vite SSR dev server; Vite SSR middleware is `SkuApp.middleware` (not config `devServerMiddleware`)

@@ -1,8 +1,6 @@
 import type { Request, RequestHandler } from 'express';
-import {
-  createSsrRequestContextStore,
-  type SsrRequestContextStore,
-} from './requestContext.js';
+import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
+import type { SsrRequestContextStore } from './requestContext.js';
 
 const stores = new WeakMap<Request, SsrRequestContextStore>();
 

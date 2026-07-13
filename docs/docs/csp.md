@@ -58,6 +58,8 @@ A nonce is requested by:
 
 All of those share one value for the response. Known bootstrap script bodies are still allowed via sha256 hashes. If nothing requests a nonce (for example a response that never runs the HTML stream renderer), CSP is still emitted (hashes, `'self'`, configured hosts) **without** a `'nonce-…'` source.
 
+A `nonce` is not available in client code. The result of `getCspNonce` will be an empty string if called from the browser. This allows it to be safely used isomorphic rendering.
+
 Do not use webpack’s `createUnsafeNonce` for Vite SSR — that API can create multiple distinct nonces per render. Vite SSR intentionally does not offer a multi-nonce factory.
 
 ```tsx

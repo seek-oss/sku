@@ -80,6 +80,7 @@ Vite SSR apps MUST stream a React-owned HTML document (`<html>`, `<head>`, and `
 - **WHEN** the client hydrates a Vite SSR response
 - **THEN** hydration targets the document root
 - **AND** MUST NOT use `getElementById('app')` or `getElementById('root')` as the hydration root for this mode
+- **AND** a browser client successfully hydrates interactive UI from that response (not HTML-only assertion)
 
 #### Scenario: No HTML template injection shell
 
@@ -221,6 +222,27 @@ When React Router Data Mode returns a `Response` from `query` (for example a red
 - **THEN** sku sends that status and headers/body to the client
 - **AND** does not pipe a document HTML stream for that request
 
+### Requirement: Document responses forward loader and action headers
+
+When streaming an HTML document (not a short-circuit `Response` from `query`), sku MUST forward React Router `loaderHeaders` and `actionHeaders` from the static handler context onto the HTTP response (including multi-value headers such as `Set-Cookie`), in addition to sku-owned headers such as `Content-Type` and CSP.
+
+#### Scenario: Loader Set-Cookie on HTML response
+
+- **WHEN** a matched loader contributes response headers (for example via `data(..., { headers })` with `Set-Cookie`)
+- **AND** sku streams an HTML document for that request
+- **THEN** those loader headers are present on the HTTP response
+- **AND** sku still sets document `Content-Type` and CSP headers as configured
+
+### Requirement: Errored routes use the static handler status code
+
+When React Router records route errors on the static handler context, the streamed HTML response MUST use `context.statusCode` (for example `500` for an uncaught loader `Error`).
+
+#### Scenario: Loader throw yields non-success status
+
+- **WHEN** a matched loader throws an `Error` that React Router captures on the static handler context
+- **THEN** the HTML response status is the static handler `statusCode` (typically `500`)
+- **AND** the document still streams (error UI / hydration payload as applicable)
+
 ### Requirement: waitForAll buffers until onAllReady
 
 When a matched route sets `handle.waitForAll: true`, sku MUST wait for `onAllReady` before starting the HTML response body (instead of piping on `onShellReady`).
@@ -269,3 +291,35 @@ Vite SSR apps MUST use a relative `publicPath` for public assets. Absolute `http
 - **WHEN** a project enables Vite SSR (`bundler: 'vite'` and `renderType: 'server-side-rendered'`)
 - **AND** `publicPath` is an absolute `http(s)` URL
 - **THEN** sku fails with an error stating that Vite SSR requires a relative `publicPath`
+
+### Requirement: httpsDevServer works for Vite SSR development
+
+When `httpsDevServer` is enabled, Vite SSR `sku start` MUST serve the single-port development server over HTTPS with a self-signed certificate and keep HMR working. Advertised local URLs MUST use the `https` scheme. Production `node dist/server/server.js` is unaffected (HTTP).
+
+#### Scenario: httpsDevServer start
+
+- **WHEN** a Vite SSR app sets `httpsDevServer: true`
+- **AND** the user runs `sku start`
+- **THEN** the development server accepts HTTPS requests on the configured port
+- **AND** document responses succeed over HTTPS
+- **AND** printed local URLs use `https://`
+
+### Requirement: Vite SSR middleware is SkuApp.middleware
+
+Vite SSR MUST mount consumer middleware from the app module (`SkuApp.middleware`) before the HTML render path. Config `devServerMiddleware` MUST NOT be required for Vite SSR request middleware (that config remains for static Vite / webpack).
+
+#### Scenario: App middleware runs before HTML render
+
+- **WHEN** a Vite SSR app exports `middleware` on the app module
+- **THEN** that middleware handles matching requests before sku streams HTML
+- **AND** consumers are not required to set config `devServerMiddleware` for that behavior
+
+### Requirement: Production server does not require listen logging
+
+Vite SSR production (`node dist/server/server.js` or equivalent) MUST NOT be required to log successful listen / port advertisement. Dev `sku start` URL printing is unchanged. Whether sku later accepts a custom logger for setup behaviours (including listen-on-port) is deferred — see `design.md` Open Questions.
+
+#### Scenario: Production start without listen log
+
+- **WHEN** a Vite SSR production server starts and listens on its configured port
+- **THEN** sku is not required to emit a listen / port console message
+- **AND** webpack SSR’s `sku SSR server started on port` message is not a Vite SSR requirement

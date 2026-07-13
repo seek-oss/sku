@@ -57,11 +57,14 @@ export default {
 
 sku owns:
 
-- the HTTP server (dev: Vite `middlewareMode` + HMR on one port; prod: `node dist/server/server.js`)
+- the HTTP(S) server (dev: Vite `middlewareMode` + HMR on one port; prod: `node dist/server/server.js`)
 - the React Document shell (`<html>` / `<head>` / `<body>` with CSS + modulepreload links) — not overridable; use React 19 metadata in routes/layouts for head/SEO
 - full-document streaming with `renderToPipeableStream` (shell-first; set route `handle.waitForAll` to buffer until `onAllReady`)
 - document-level hydration (`hydrateRoot(document, …)`), not `#app`
 - CSP as HTTP headers when `cspEnabled` / `cspReportOnlyEnabled` are set
+- forwarding React Router loader/action headers (e.g. `Set-Cookie`) onto streamed HTML responses
+
+Put request middleware on `SkuApp.middleware` (not config `devServerMiddleware`). `httpsDevServer: true` is supported for Vite SSR `sku start`.
 
 Do **not** use `sku start-ssr` / `sku build-ssr` when `renderType` is set.
 

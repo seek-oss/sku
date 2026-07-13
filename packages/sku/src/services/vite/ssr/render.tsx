@@ -3,12 +3,13 @@ import {
   createStaticHandler,
   createStaticRouter,
   StaticRouterProvider,
+  type StaticHandlerContext,
 } from 'react-router';
 import { getChunkName } from '@vocab/vite/chunks';
 import Document from './Document.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
+import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
 import {
-  createSsrRequestContextStore,
   getCspNonce,
   getSkuLanguage,
   runWithSsrRequestContext,
@@ -27,6 +28,26 @@ import type {
   SkuApp,
   SkuRouteHandle,
 } from './types.js';
+
+/** Merge RR loader/action headers from all matches (append for Set-Cookie). */
+const collectRouteHeaders = (context: StaticHandlerContext): Headers => {
+  const headers = new Headers();
+  for (const { route } of context.matches) {
+    const routeId = route.id;
+    if (!routeId) {
+      continue;
+    }
+    const loaderHeaders = context.loaderHeaders[routeId];
+    const actionHeaders = context.actionHeaders[routeId];
+    loaderHeaders?.forEach((value, name) => {
+      headers.append(name, value);
+    });
+    actionHeaders?.forEach((value, name) => {
+      headers.append(name, value);
+    });
+  }
+  return headers;
+};
 
 const getModuleIds = (
   matches: Array<{
@@ -103,6 +124,7 @@ const renderDocument = async (
     context,
     { development },
   );
+  const routeHeaders = collectRouteHeaders(context);
   const waitForAll = context.matches.some(
     ({ route }) =>
       (route.handle as SkuRouteHandle | undefined)?.waitForAll === true,
@@ -134,7 +156,7 @@ const renderDocument = async (
           resolve({
             ...stream,
             statusCode: context.statusCode,
-            headers: new Headers(),
+            headers: routeHeaders,
             inlineScripts: [bootstrapScriptContent],
           });
         },
@@ -146,7 +168,7 @@ const renderDocument = async (
           resolve({
             ...stream,
             statusCode: context.statusCode,
-            headers: new Headers(),
+            headers: routeHeaders,
             inlineScripts: [bootstrapScriptContent],
           });
         },

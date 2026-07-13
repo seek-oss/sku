@@ -6,6 +6,7 @@ import {
   skipCleanup,
   waitFor,
 } from '@sku-private/testing-library';
+import { createPage } from '@sku-private/playwright';
 
 const { sku, node, fixturePath } = scopeToFixture('vite-ssr');
 
@@ -112,6 +113,24 @@ describe('vite-ssr', () => {
       expect(cspReportOnly).toMatch(/'nonce-/);
     });
 
+    it('hydrates the document in the browser', async ({ task }) => {
+      skipCleanup(task.id);
+      const page = await createPage();
+      const pageErrors: Error[] = [];
+      page.on('pageerror', (error) => pageErrors.push(error));
+
+      await page.goto(url, { waitUntil: 'networkidle' });
+      await page.getByTestId('deferred').waitFor({ state: 'visible' });
+      expect(await page.getByTestId('shell').textContent()).toBe(
+        'Vite SSR Home',
+      );
+      expect(await page.getByTestId('deferred').textContent()).toBe(
+        'Deferred content ready',
+      );
+      expect(pageErrors).toEqual([]);
+      await page.close();
+    });
+
     it('serves consumer middleware before HTML render', async ({ task }) => {
       skipCleanup(task.id);
       const response = await fetch(`${url}/api/health`);
@@ -136,6 +155,21 @@ describe('vite-ssr', () => {
       // Loader serialized the same request nonce into hydration data.
       expect(html).toContain(`"nonce":"${nonce}"`);
       expect(csp).toContain(`'nonce-${nonce}'`);
+    });
+
+    it('forwards loader Set-Cookie headers on HTML responses', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/set-cookie`);
+      expect(response.ok).toBe(true);
+      expect(await response.text()).toContain('Cookie page');
+      const setCookie = response.headers.getSetCookie?.() ?? [];
+      const cookieHeader =
+        setCookie.length > 0
+          ? setCookie.join('\n')
+          : (response.headers.get('set-cookie') ?? '');
+      expect(cookieHeader).toContain('sku-vite-ssr=1');
     });
 
     it('renders a lazy route', async ({ task }) => {
@@ -177,6 +211,31 @@ describe('vite-ssr', () => {
       expect(html).toContain('Buffered content ready');
       // Wait-for-all: Suspense fallback should not appear in the final HTML.
       expect(html).not.toContain('data-testid="buffered-fallback"');
+    });
+  });
+
+  describe('start with httpsDevServer', () => {
+    const url = 'https://127.0.0.1:8202';
+    let startOutput: Awaited<ReturnType<typeof sku>>;
+
+    beforeAll(async () => {
+      startOutput = await sku('start', ['--config=sku.config.https.ts']);
+    });
+
+    it('prints https URLs and serves document responses over HTTPS', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      await startOutput.findByText('Starting development server');
+      expect(await startOutput.findByText('https://')).toBeInTheConsole();
+
+      const page = await createPage();
+      await page.goto(url, { waitUntil: 'networkidle' });
+      await page.getByTestId('shell').waitFor({ state: 'visible' });
+      expect(await page.getByTestId('shell').textContent()).toBe(
+        'Vite SSR Home',
+      );
+      await page.close();
     });
   });
 
@@ -342,6 +401,7 @@ describe('vite-ssr', () => {
       await waitFor(
         async () => {
           const response = await fetch('http://127.0.0.1:8201/boom');
+          expect(response.status).toBe(500);
           const html = await response.text();
           expect(html).toContain('__staticRouterHydrationData');
           expect(html).toContain('Boom from loader');
@@ -355,6 +415,25 @@ describe('vite-ssr', () => {
           const error = Object.values(payload.errors ?? {})[0];
           expect(error?.message).toContain('Boom from loader');
           expect(error).not.toHaveProperty('stack');
+        },
+        { timeout: 15000 },
+      );
+    });
+
+    it('forwards loader Set-Cookie on production HTML responses', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      await waitFor(
+        async () => {
+          const response = await fetch('http://127.0.0.1:8201/set-cookie');
+          expect(response.ok).toBe(true);
+          const setCookie = response.headers.getSetCookie?.() ?? [];
+          const cookieHeader =
+            setCookie.length > 0
+              ? setCookie.join('\n')
+              : (response.headers.get('set-cookie') ?? '');
+          expect(cookieHeader).toContain('sku-vite-ssr=1');
         },
         { timeout: 15000 },
       );

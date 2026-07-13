@@ -11,3 +11,27 @@ yarn.lock
 .eslintcache
 yalc.lock
 .pnpm-store
+
+# AI Agents specific instructions are local-only for now. This may change in the future.
+.cursor/
+.claude/
+.continue/
+.windsurf/
+.gemini/
+
+# OpenSpec AI tool adapters are local-only
+.cursor/skills/openspec-*/
+.cursor/commands/opsx-*
+.claude/skills/openspec-*/
+.claude/commands/opsx/
+.github/skills/openspec-*/
+.github/prompts/opsx-*
+.codex/skills/openspec-*/
+.agent/skills/openspec-*/
+.agent/workflows/opsx-*
+.windsurf/skills/openspec-*/
+.windsurf/workflows/opsx-*
+.continue/skills/openspec-*/
+.continue/prompts/opsx-*
+.gemini/skills/openspec-*/
+.gemini/commands/opsx/

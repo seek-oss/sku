@@ -4,10 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "sku start"
+    "start": "sku start",
+    "COMMENT": "echo "
   },
-  "dependencies": {
-    "react": "18.3.1"
+  "comments": {
+    "react": "A fake react dependency is inected during the test so we don't need to install the real react"
   },
   "devDependencies": {
     "sku": "workspace:*"

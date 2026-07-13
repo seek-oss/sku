@@ -235,13 +235,20 @@ When streaming an HTML document (not a short-circuit `Response` from `query`), s
 
 ### Requirement: Errored routes use the static handler status code
 
-When React Router records route errors on the static handler context, the streamed HTML response MUST use `context.statusCode` (for example `500` for an uncaught loader `Error`).
+When React Router records route errors on the static handler context, the streamed HTML response MUST use `context.statusCode` (for example `500` for an uncaught loader `Error`, or `405` when a mutation is submitted to a route without an `action`). The HTML body MUST be the nearest route `ErrorBoundary` (or React Router’s default error UI when none is defined). sku MUST NOT provide a separate error-page API; consumer docs MUST point to React Router’s ErrorBoundary guidance for customizing content.
 
 #### Scenario: Loader throw yields non-success status
 
 - **WHEN** a matched loader throws an `Error` that React Router captures on the static handler context
 - **THEN** the HTML response status is the static handler `statusCode` (typically `500`)
 - **AND** the document still streams (error UI / hydration payload as applicable)
+
+#### Scenario: Method not allowed uses ErrorBoundary body
+
+- **WHEN** a mutation request matches a route that has no `action`
+- **THEN** React Router records a route error with status `405`
+- **AND** the HTML response status is `405`
+- **AND** the streamed body is the nearest `ErrorBoundary` (or React Router’s default error UI)
 
 ### Requirement: waitForAll buffers until onAllReady
 

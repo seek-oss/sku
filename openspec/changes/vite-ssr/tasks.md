@@ -108,6 +108,10 @@
 - [x] 13.5 Tests: Vite SSR `httpsDevServer: true` accepts HTTPS and returns a document
 - [x] 13.6 Docs: `SkuApp.middleware` vs config `devServerMiddleware` for Vite SSR; note `httpsDevServer` works for Vite SSR `sku start`
 
+## 14. Document error page customization
+
+- [x] 14.1 Update `docs/docs/server-rendering.md` with a short Vite SSR section on customizing error pages: link to [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary), note that sku forwards `context.statusCode` (including `405` when no `action`), and include a minimal data-mode `ErrorBoundary` + `useRouteError` / `isRouteErrorResponse` example (root route recommended)
+
 ## Deferred (no tasks)
 
 - Production listen / setup logging and a custom logger for setup behaviours (e.g. listen-on-port) — documented in `design.md` Open Questions / §9; no implementation in this change.

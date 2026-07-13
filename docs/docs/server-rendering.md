@@ -7,6 +7,12 @@ Sku supports two SSR models:
 
 ## Vite SSR
 
+### React Router Data Mode
+
+Vite SSR largely wraps [React Router Data Mode](https://reactrouter.com/start/modes#data). You declare a `RouteObject[]` tree from `appEntry`; sku owns the HTTP server, document shell, streaming, and hydration, and wires that route config into React Router on the server and in the browser. Loaders, actions, lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
+
+For information on how to use React Router to register routes, see [React Router Data Mode](https://reactrouter.com/start/data/routing).
+
 Requires React 19+. Configure:
 
 ```ts
@@ -147,6 +153,58 @@ export const helloRoute = {
   path: ':language/hello',
   lazy: () => import('./hello.js'),
 } satisfies RouteObject;
+```
+
+### Error pages
+
+Route errors (loader failures, thrown `data()`, `404`, and `405` when a mutation hits a route without an `action`) are React Router error responses. sku streams the document with `context.statusCode` and renders the nearest route `ErrorBoundary` (or React Router’s default error UI). Customize content with [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary).
+
+```tsx
+// src/RootLayout.tsx
+import { isRouteErrorResponse, Outlet, useRouteError } from 'react-router';
+
+export const RootLayout = () => <Outlet />;
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <main>
+        <h1>
+          {error.status} {error.statusText}
+        </h1>
+        <p>{typeof error.data === 'string' ? error.data : null}</p>
+      </main>
+    );
+  }
+
+  return (
+    <main>
+      <h1>Something went wrong</h1>
+    </main>
+  );
+}
+```
+
+```tsx
+// src/app.tsx — attach ErrorBoundary on the root route
+import type { SkuApp } from 'sku';
+import type { RouteObject } from 'react-router';
+
+import { ErrorBoundary, RootLayout } from './RootLayout.js';
+import { homeRoute } from './pages/home/route.js';
+
+const routes: RouteObject[] = [
+  {
+    path: '/',
+    Component: RootLayout,
+    ErrorBoundary,
+    children: [homeRoute],
+  },
+];
+
+export default { routes } satisfies SkuApp;
 ```
 
 ### Production

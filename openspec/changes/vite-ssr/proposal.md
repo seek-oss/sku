@@ -49,7 +49,7 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
 - **Public API**: `renderType` config; Vite SSR app module; request-scoped CSP nonce surface for Vite SSR (single value, only when requested); documented request language slot for Vite SSR vocab chunk identification; webpack SSR without the new renderType unchanged
 - **Deps**: `react-router` (Data Mode) as a sku-managed dependency for Vite SSR; Vite SSR requires **React 19+** (sku peer may remain `^18 || ^19` for static/webpack consumers); `@vocab/vite` language chunks remain required when `languages` is configured
 - **Docs (create/update in `docs/docs/`):**
-  - `server-rendering.md` — Vite SSR vs webpack SSR; high-level app API; document hydrate; **React 19+ required**; vocab chunks (request language slot + fallbacks) / lazy route chunks; auto-derived `moduleId` for idiomatic `lazy` imports
+  - `server-rendering.md` — Vite SSR vs webpack SSR; high-level app API; document hydrate; **React 19+ required**; vocab chunks (request language slot + fallbacks) / lazy route chunks; auto-derived `moduleId` for idiomatic `lazy` imports; customizing error pages via React Router `ErrorBoundary` (link to RR docs + short data-mode example)
   - `vite.md` — Vite SSR via `renderType`, commands, app module, streaming/hydrate differences vs static; **React 19+ required**; vocab/language chunks (request language slot) + per-route chunking pattern; auto-derived `moduleId`
   - `csp.md` — Vite SSR header CSP; single request-scoped nonce only when requested; report-only; relative `publicPath` only
   - `configuration.md` — `renderType`, `appEntry`, CSP report-only options; Vite SSR `publicPath` constraint; **`renderType` docs note React 19+**

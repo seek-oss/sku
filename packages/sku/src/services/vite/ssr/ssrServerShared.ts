@@ -54,8 +54,11 @@ const getRequestBodyInit = (
     if (req.body === undefined || req.body === null) {
       return {};
     }
-    if (Buffer.isBuffer(req.body) || typeof req.body === 'string') {
+    if (typeof req.body === 'string') {
       return { body: req.body };
+    }
+    if (Buffer.isBuffer(req.body)) {
+      return { body: new Uint8Array(req.body) };
     }
     if (typeof req.body === 'object') {
       return { body: JSON.stringify(req.body) };

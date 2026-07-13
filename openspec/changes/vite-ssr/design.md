@@ -56,6 +56,8 @@ renderType?: 'server-side-rendered' | 'static-generated';
 
 **Why:** “Routing handled by sku, implemented by react-router” requires sku to own Vite plugins, the Node server, and CSP. Framework Mode’s Vite plugin would compete with sku’s bundler stack and hide the server/CSP surface.
 
+**Error pages:** Route errors (including `404` / `405` / thrown `data()` / loader failures) are React Router `ErrorResponse`s on the static handler context. sku streams the document with `context.statusCode` and renders the nearest route `ErrorBoundary` (or RR’s default error UI). There is no sku-owned error-page API — document customization via React Router’s ErrorBoundary guidance (data-mode `ErrorBoundary` + `useRouteError` / `isRouteErrorResponse`), with a short example in `server-rendering.md`.
+
 **Rejected:** Wrapping `@react-router/dev/vite` — faster feature parity, but sku would no longer own routing/server abstractions.
 
 ### 3. Consumer interface: app module, not entrypoints

@@ -1,6 +1,6 @@
 import { test, expect } from 'vitest';
 import { scopeToFixture } from '@sku-private/testing-library';
-import { mkdir, rmdir, writeFile } from 'node:fs/promises';
+import { mkdir, rm, writeFile } from 'node:fs/promises';
 
 const { sku, fixturePath } = scopeToFixture('legacy-react');
 
@@ -22,5 +22,5 @@ test('Legacy React should warn', async () => {
     await skuProcess.findByText('React 18 or below detected'),
   ).toBeInTheConsole();
 
-  await rmdir(fixturePath('node_modules/react'), { recursive: true });
+  await rm(fixturePath('node_modules/react'), { recursive: true, force: true });
 });

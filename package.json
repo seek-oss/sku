@@ -10,6 +10,7 @@
     "lint:eslint": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' .",
     "lint:knip": "knip --dependencies",
     "lint:prettier": "prettier --cache --experimental-cli --list-different .",
+    "lint:openspec": "pnpm openspec:validate --all",
     "lint:tsc": "tsc",
     "lint:tsc:sku": "pnpm --filter 'sku' lint:tsc",
     "build": "tsdown",

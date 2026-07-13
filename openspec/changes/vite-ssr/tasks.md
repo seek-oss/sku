@@ -38,6 +38,7 @@
 - [ ] 5.1 Generate enforcing CSP from shell HTML + nonces/hashes as `Content-Security-Policy` headers
 - [ ] 5.2 Support Report-Only CSP (`Content-Security-Policy-Report-Only`), alone or alongside enforcing
 - [ ] 5.3 Ensure Vite SSR does not use meta `http-equiv` CSP delivery; leave static/webpack CSP behavior unchanged
+- [ ] 5.4 Support configurable `report-to` on Report-Only CSP via `cspReportOnlyReportTo`
 
 ## 6. Fixtures, docs, release
 
@@ -50,13 +51,50 @@
 - [ ] 6.7 Update plop/`@sku-lib/create` templates if applicable
 - [ ] 6.8 Add a changeset (release notes) for `renderType` / Vite SSR public API that **references each** of: `vite.md`, `server-rendering.md`, `csp.md`, `configuration.md`
 
-## 7. Post-review hardening (CSP, safety, tests)
+## 7. Vocab chunks and per-route chunk fixture (required)
 
-- [ ] 7.1 Remove Vite SSR absolute/`CDN` `publicPath` support added earlier (CSP origin injection, absolute static-mount special cases); reject absolute `publicPath` for Vite SSR with a clear error; keep relative mount + `'self'` CSP
-- [ ] 7.2 Strip `Error.stack` from hydration bootstrap serialization in production
-- [ ] 7.3 Apply promise-scrubbing to `actionData` as well as `loaderData`
-- [ ] 7.4 Unify dev HTML path on shared middleware / abort-before-write (match production)
-- [ ] 7.5 Expose per-request CSP nonce to middleware/loaders; update CSP docs so Vite SSR is not documented only via webpack `createUnsafeNonce`
-- [ ] 7.6 Warn in development on missing/unknown lazy-route `handle.moduleId`; document the v1 contract
-- [ ] 7.7 Tests: absolute `publicPath` rejected for Vite SSR; loader redirect `Response`; `handle.waitForAll`; errored route (no stack in prod payload); React < 19 gate; lazy-route modulepreload; client disconnect/abort
-- [ ] 7.8 Remove accidental fixture noise (`lint-format` junk file; unintended `.gitignore` / `.prettierignore` churn on unrelated fixtures)
+- [ ] 7.1 Register the active language vocab chunk on the Vite SSR Document asset path (`getChunkName(language)` / `@vocab/vite/chunks`), parity with static Vite and webpack SSR
+- [ ] 7.2 Confirm Vite SSR builds keep `@vocab/vite` `createVocabChunks` language splitting for client (and server as needed)
+- [ ] 7.3 Add or extend a fixture that **demonstrates** per-route async chunking (≥2 lazy routes → distinct client chunks; SSR + hydrate)
+- [ ] 7.4 Tests/assertions: language chunk registered/preloaded for a multi-language Vite SSR request; distinct per-route chunks from the demo fixture
+- [ ] 7.5 Docs: note Vite SSR vocab/language chunks and the per-route chunking fixture/pattern where relevant (`server-rendering.md` / `vite.md`)
+
+## 8. Post-review hardening (CSP, safety, tests)
+
+- [ ] 8.1 Remove Vite SSR absolute/`CDN` `publicPath` support added earlier (CSP origin injection, absolute static-mount special cases); reject absolute `publicPath` for Vite SSR with a clear error; keep relative mount + `'self'` CSP
+- [ ] 8.2 Strip `Error.stack` from hydration bootstrap serialization in production
+- [ ] 8.3 Apply promise-scrubbing to `actionData` as well as `loaderData`
+- [ ] 8.4 Unify dev HTML path on shared middleware / abort-before-write (match production)
+- [ ] 8.5 Expose per-request CSP nonce to middleware/loaders; update CSP docs so Vite SSR is not documented only via webpack `createUnsafeNonce`
+- [ ] 8.6 Warn in development on missing/unknown lazy-route `handle.moduleId`; document the v1 contract
+- [ ] 8.7 Tests: absolute `publicPath` rejected for Vite SSR; loader redirect `Response`; `handle.waitForAll`; errored route (no stack in prod payload); React < 19 gate; lazy-route modulepreload; client disconnect/abort
+- [ ] 8.8 Remove accidental fixture noise (`lint-format` junk file; unintended `.gitignore` / `.prettierignore` churn on unrelated fixtures)
+
+## 9. Auto-derive lazy-route moduleId (Option A)
+
+- [ ] 9.1 Vite SSR transform: inject `handle.moduleId` for `lazy: () => import('…')` (single string literal); reuse loadable path-resolution approach; SSR env; never overwrite explicit `moduleId`; never rewrite `lazy` body
+- [ ] 9.2 Skip non-idiomatic shapes (multi-import, granular `lazy` object, indirect bindings) without guessing
+- [ ] 9.3 Update `fixtures/vite-ssr` to drop hand-written `handle.moduleId` on idiomatic lazy routes; keep assertions that modulepreloads still emit
+- [ ] 9.4 Unit/transform tests for inject / skip / preserve-explicit cases
+- [ ] 9.5 Docs: prefer auto-derive; document escape hatch + skipped shapes; remove “auto-derive not in v1” wording
+
+## 10. Request-scoped nonce (lazy, single value)
+
+- [ ] 10.1 Stop always-minting a CSP nonce in Vite SSR request middleware; mint at most one value only when explicitly requested (`getCspNonce` / Express `req.getCspNonce()` or equivalent)
+- [ ] 10.2 Include `'nonce-…'` in CSP headers only if a nonce was requested for that response; sku requests only when attaching nonce to scripts
+- [ ] 10.3 Update `docs/docs/csp.md` for the single request-scoped nonce contract vs static/webpack multi-`createUnsafeNonce`
+- [ ] 10.4 Tests: CSP without nonce when never requested; same nonce reused when requested; header includes nonce only after request
+
+## 11. App-owned language identification (request slot)
+
+- [ ] 11.1 Add a documented Vite SSR request language slot (namespaced `req.skuLanguage` and/or ALS helper mirroring CSP nonce) that accepts a configured language **name**
+- [ ] 11.2 Resolve active language in order: request slot → `:language` param → sole configured language; soft-fail (skip chunk registration) otherwise; validate against configured `languages` + `en-PSEUDO`; do **not** use `handle.language`
+- [ ] 11.3 Prefer the request slot over `:language` when both are present (including composed locales like `th-TH` vs URL prefix `th`)
+- [ ] 11.4 Tests: middleware-set language registers the correct chunk; slot wins over `:language`; unknown/missing language soft-fails
+- [ ] 11.5 Docs: document the request language slot as the preferred identification path; keep `:language` / sole-language as convenience fallbacks; note value must match `languages` names (not URL segments); note `handle.language` is not used
+
+## 12. Remove consumer Document override
+
+- [ ] 12.1 Remove `SkuApp.document` / `DocumentProps` from the public Vite SSR API; always use sku’s Document on server and client render paths
+- [ ] 12.2 Update docs (`configuration.md`, `server-rendering.md`, `vite.md`, etc.) so they no longer describe an optional Document override
+- [ ] 12.3 Ensure fixture and tests do not export or rely on a custom `document`; keep full-document hydrate coverage intact

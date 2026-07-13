@@ -66,13 +66,14 @@ renderType?: 'server-side-rendered' | 'static-generated';
 export default {
   routes: RouteObject[], // React Router Data Mode route tree (prefer lazy)
   middleware?: RequestHandler | RequestHandler[], // Connect-compatible
-  document?: ComponentType<DocumentProps>, // optional override of sku default Document
 } satisfies SkuApp;
 ```
 
 sku provides the HTTP server, Vite client+server builds, streaming render, Document assets, hydration bootstrap, and CSP. Consumers do **not** send HTML via `res.send` for the document response.
 
 **Rejected:** Porting `serverEntry` + `renderCallback` — keeps the low-level multipart model that fights streaming.
+
+**Rejected:** `SkuApp.document` / consumer Document override — prefer conformity over configuration. sku owns the default Document (assets → CSS + modulepreload). Head/SEO metadata belongs in routes/layouts via React 19’s native `<title>` / `<meta>` / `<link>` hoisting, not a swappable shell (override is also a footgun: consumers must re-render asset links correctly). **Revisit later** if a real consumer need appears that React metadata and a sku-owned Document cannot cover (e.g. unavoidable `<html>` / `<body>` attributes sku does not yet own).
 
 ### 4. Commands and deploy shape
 
@@ -89,7 +90,7 @@ Neither directory MUST be nested inside the other (not `server/client`, not `cli
 
 ### 5. Full-document streaming (not `#app`)
 
-**Choice:** React owns `<html>` / `<head>` / `<body>`. Server pipes `renderToPipeableStream` to the response; client uses `hydrateRoot(document, …)`. sku provides a default Document (assets → CSS + modulepreload links) with optional consumer override.
+**Choice:** React owns `<html>` / `<head>` / `<body>`. Server pipes `renderToPipeableStream` to the response; client uses `hydrateRoot(document, …)`. sku ships and owns the Document (assets → CSS + modulepreload links); consumers do not override it (see rejected `SkuApp.document` under decision 3).
 
 **Defaults:**
 
@@ -131,9 +132,9 @@ Static Vite `sku start` may keep `transformIndexHtml` unchanged.
 **Choice:** Before piping the body, derive `script-src` (and related script allowances) from **shell HTML** (bootstrap scripts, known inline tags, configured extra hosts, sha256 of known bootstrap bodies, and a request nonce **only if requested** — see decision 12). Set:
 
 - `Content-Security-Policy` when enforcing CSP is enabled
-- optional `Content-Security-Policy-Report-Only` (may coexist with enforcing)
+- optional `Content-Security-Policy-Report-Only` (may coexist with enforcing), with optional configurable `report-to` via `cspReportOnlyReportTo` (CSP directive only; consumers supply `Reporting-Endpoints`)
 
-Config direction (Vite SSR only): keep/extend `cspEnabled` / `cspExtraScriptSrcHosts`; add report-only enablement and extra hosts; expose a request-scoped nonce helper that is opt-in per response (see decision 12).
+Config direction (Vite SSR only): keep/extend `cspEnabled` / `cspExtraScriptSrcHosts`; add report-only enablement, extra hosts, and `cspReportOnlyReportTo`; expose a request-scoped nonce helper that is opt-in per response (see decision 12).
 
 **`publicPath` (Vite SSR):** Relative paths only (e.g. `/`, `/static/`). Document assets and CSP rely on `'self'`. Absolute `http(s):` / CDN `publicPath` is **out of scope** for Vite SSR — reject at config validation (or equivalent clear failure). Webpack SSR / static apps may keep existing absolute-`publicPath` behavior unchanged. Consumer `cspExtraScriptSrcHosts` remains for third-party scripts only.
 
@@ -274,17 +275,17 @@ Validated against [basic-streaming-app-example](https://github.com/jahredhope/ba
 
 ### 1.5 Open-question resolutions
 
-| Question                | Decision                                                                                                                                                          |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| App module path         | New config `appEntry` (default `src/app.tsx`). Do not reuse `serverEntry` / `renderEntry` / `clientEntry` for the high-level app export.                          |
-| Omitted `renderType`    | Treat as today’s static behavior (equivalent to `'static-generated'`). Explicit `'static-generated'` is allowed but optional.                                     |
-| Document ownership      | sku ships a **default Document** (assets → CSS + modulepreload). Optional consumer override via `SkuApp.document` (component), not a required root route.         |
-| Middleware typing       | **Connect `RequestHandler`** (Vite `server.middlewares` / Express-compatible). Mount before sku’s HTML render path; must not commit the document body.            |
-| `onAllReady` buffering  | Opt-in via React Router route `handle.waitForAll: true` (deepest/any match). Default remains `onShellReady`.                                                      |
-| Client/asset handoff    | `window.__SKU_DOCUMENT_ASSETS__` + combined hashable `bootstrapScriptContent` (assets + RR hydration payload).                                                    |
-| Absolute `publicPath`   | **Not supported** for Vite SSR; relative only. CSP uses `'self'` for Document assets.                                                                             |
-| Hydration safety        | Scrub Promises on loader+action data; strip `Error.stack` in production (decision 10).                                                                            |
-| Request nonce           | At most one per render, only when requested; CSP `'nonce-…'` only if requested (decision 12); not webpack `createUnsafeNonce`.                                    |
-| Lazy `moduleId`         | Auto-derive from idiomatic `lazy: () => import('…')` (decision 13); manual escape hatch; warn in dev on miss/unknown.                                             |
-| Vocab language chunks   | Required in v1: build splitting + sku registration; app-owned identification via request language slot, then `:language` / sole-language fallbacks (decision 14). |
-| Per-route chunk fixture | Required demo of ≥2 distinct lazy route chunks (decision 15).                                                                                                     |
+| Question                | Decision                                                                                                                                                                                                        |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| App module path         | New config `appEntry` (default `src/app.tsx`). Do not reuse `serverEntry` / `renderEntry` / `clientEntry` for the high-level app export.                                                                        |
+| Omitted `renderType`    | Treat as today’s static behavior (equivalent to `'static-generated'`). Explicit `'static-generated'` is allowed but optional.                                                                                   |
+| Document ownership      | sku ships and owns the **Document** (assets → CSS + modulepreload). No `SkuApp.document` override in v1; head/SEO via React 19 metadata in routes/layouts. Can add an override later if a consumer requires it. |
+| Middleware typing       | **Connect `RequestHandler`** (Vite `server.middlewares` / Express-compatible). Mount before sku’s HTML render path; must not commit the document body.                                                          |
+| `onAllReady` buffering  | Opt-in via React Router route `handle.waitForAll: true` (deepest/any match). Default remains `onShellReady`.                                                                                                    |
+| Client/asset handoff    | `window.__SKU_DOCUMENT_ASSETS__` + combined hashable `bootstrapScriptContent` (assets + RR hydration payload).                                                                                                  |
+| Absolute `publicPath`   | **Not supported** for Vite SSR; relative only. CSP uses `'self'` for Document assets.                                                                                                                           |
+| Hydration safety        | Scrub Promises on loader+action data; strip `Error.stack` in production (decision 10).                                                                                                                          |
+| Request nonce           | At most one per render, only when requested; CSP `'nonce-…'` only if requested (decision 12); not webpack `createUnsafeNonce`.                                                                                  |
+| Lazy `moduleId`         | Auto-derive from idiomatic `lazy: () => import('…')` (decision 13); manual escape hatch; warn in dev on miss/unknown.                                                                                           |
+| Vocab language chunks   | Required in v1: build splitting + sku registration; app-owned identification via request language slot, then `:language` / sole-language fallbacks (decision 14).                                               |
+| Per-route chunk fixture | Required demo of ≥2 distinct lazy route chunks (decision 15).                                                                                                                                                   |

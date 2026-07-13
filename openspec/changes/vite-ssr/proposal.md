@@ -10,6 +10,7 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
 - `bundler: 'webpack'` + `renderType: 'server-side-rendered'` MUST error (new SSR mode is Vite-only).
 - High-level app export (React Router route config + middleware), not a port of webpack `serverEntry`/`renderCallback`.
 - sku owns request handling and a React document shell; stream with `renderToPipeableStream` (shell-first by default); hydrate at `document`, not `#app`.
+- **No consumer Document override** (`SkuApp.document` is not part of the API): sku owns the Document; head/SEO uses React 19 metadata in routes/layouts (conformity over configuration; can revisit if a consumer need appears).
 - Skip `transformIndexHtml` on SSR responses; supply Vite client / Refresh preamble / CSS / preloads via Document assets, `bootstrapModules`, and hashable bootstrap script content.
 - Auto-generate CSP from shell HTML as **HTTP headers**, with optional request-scoped nonces (and bootstrap hashes), plus optional **Report-Only**. Relative `publicPath` only (`'self'`); absolute/`CDN` `publicPath` is **not** supported for Vite SSR.
 - **Vite SSR `publicPath`:** relative paths only (e.g. `/` or `/static/`). Absolute `http(s):` / CDN `publicPath` MUST be rejected or unsupported for this mode (webpack SSR / static may keep existing absolute-path behavior).
@@ -29,6 +30,7 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
 - Library-mode SSR / React Server Components
 - Requiring static apps to migrate off `renderDocument` / `#app`
 - Absolute / CDN `publicPath` for Vite SSR apps (relative public asset paths only)
+- Exposing `SkuApp.document` / a consumer-swappable Document shell (sku-owned Document + React 19 head metadata instead; revisit only if required)
 
 ## Capabilities
 

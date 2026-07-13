@@ -197,12 +197,24 @@ Config direction (Vite SSR only): keep/extend `cspEnabled` / `cspExtraScriptSrcH
 **Choice:** Vite SSR MUST support vocab language async chunks when `languages` is configured — not deferred.
 
 - **Build:** Keep `@vocab/vite` chunk splitting (`createVocabChunks` in the client/SSR build code-splitting groups), same as static Vite.
-- **Request path:** When a request has an active language, register that language’s chunk name (`getChunkName(language)` from `@vocab/vite/chunks`) into the Document asset / preload collector used for the streamed response — parity with static Vite `loadableCollector.register(getChunkName(...))` and webpack SSR `extractor.addChunk(getChunkName(language))`.
-- **Consumer surface:** Prefer sku-owned registration from request/route language context over requiring a webpack-style `addLanguageChunk` callback on the high-level app API. If consumers need an escape hatch, document it; do not block v1 on a low-level collector API.
 
-**Why:** Multi-language SEEK apps already depend on language-isolated translation chunks. Shipping Vite SSR without vocab chunk registration would force a second migration or broken translation loading.
+Split two concerns that webpack conflated in `addLanguageChunk`:
 
-**Rejected:** Leaving languages/vocab chunk helpers as a post-v1 follow-up.
+- **Registration (sku-owned):** When an active language is known for the request, register that language’s chunk name (`getChunkName(language)` from `@vocab/vite/chunks`) into the Document asset / preload collector used for the streamed response — parity with static Vite `loadableCollector.register(getChunkName(...))` and webpack SSR `extractor.addChunk(getChunkName(language))`. Do **not** expose a webpack-style `addLanguageChunk` collector callback on the high-level app API.
+- **Identification (app-owned):** The active language MUST be a configured language **name** (e.g. `th-TH`, `en-AU`) — the same value Vocab uses — not necessarily a URL path segment. SEEK (and many multi-site apps) compose locale from site/region + language prefix in middleware; sku MUST NOT encode that URL logic.
+
+**Resolution order** (first match wins; value MUST be in configured `languages` or `en-PSEUDO`):
+
+1. Documented request language slot set by consumer middleware (preferred) — e.g. namespaced `req.skuLanguage` and/or a small ALS helper mirroring the CSP nonce pattern
+2. `:language` route param when it matches a configured language name (open-source convenience; demos)
+3. Sole configured language when only one is set
+4. Otherwise skip vocab chunk registration (soft-fail — no error)
+
+**Out of scope for this decision:** default `VocabProvider` injection, SkuPlugin locale providers, baking SEEK locale composition into sku. The request slot is the seam those futures can read later; chunk registration only needs the opaque language name string.
+
+**Why:** Multi-language SEEK apps already depend on language-isolated translation chunks, and their active language is typically a composed locale (`th-TH`), not the URL prefix (`th`). Shipping registration without an app-owned identification path would force wrong or missing preloads for the primary consumer. Soft-fail keeps wrong/missing identification from breaking the response.
+
+**Rejected:** Leaving languages/vocab chunk helpers as a post-v1 follow-up. Requiring `addLanguageChunk` on the app API. Encoding SEEK URL→locale composition inside sku. Treating `:language` as the product contract. Route `handle.language` as an identification path — apps that need a non-URL language should set the request language slot.
 
 ### 15. Per-route chunk fixture (required)
 
@@ -214,23 +226,23 @@ Config direction (Vite SSR only): keep/extend `cspEnabled` / `cspExtraScriptSrcH
 
 ## Risks / Trade-offs
 
-| Risk                                                                 | Mitigation                                                                               |
-| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Vite SSR + RR Data Mode + document stream integration is non-trivial | Spike: handler → Document stream → hydrate → lazy route → preamble/HMR                   |
-| Hydration mismatch on assets/context                                 | Serialize exact asset list used in Document; same tree on client                         |
-| Missing preamble breaks HMR                                          | Enforce preamble in sku streaming client wrapper; e2e/dev smoke                          |
-| Shell-only CSP cannot hash late streamed scripts                     | Request a single nonce for React stream scripts when needed; hash known bootstrap bodies |
-| Absolute/`CDN` `publicPath` configured for Vite SSR                  | Config validation rejects with a clear error; docs state relative-only                   |
-| Server `Error.stack` leaked via hydration JSON                       | Strip stacks in production bootstrap serialization                                       |
-| Dev/prod abort middleware drift writes after disconnect              | Shared HTML middleware; abort-before-write                                               |
-| `actionData` Promises throw during bootstrap stringify               | Promise-scrub loader **and** action data                                                 |
-| Manual / derived `moduleId` wrong → missing or wrong preloads        | Conservative matcher (no guessing); never overwrite explicit `moduleId`; dev warn + docs |
-| Language chunk missing from Document assets                          | Register `getChunkName(language)` on the SSR request path (decision 14)                  |
-| Routes accidentally bundle into one chunk                            | Required per-route chunk fixture + assertions (decision 15)                              |
-| Consumers expect Framework Mode file conventions                     | Docs make Data Mode + sku app export explicit                                            |
-| Middleware writing the body early breaks CSP headers                 | sku owns the HTML response path; middleware must not commit the document body            |
-| Dual maintenance of webpack SSR vs Vite SSR                          | Explicit non-goal to unify; webpack path frozen for this change                          |
-| Consumers keep calling `-ssr` after setting `renderType`             | Clear config-time / command errors pointing to `sku start` / `sku build`                 |
+| Risk                                                                 | Mitigation                                                                                  |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Vite SSR + RR Data Mode + document stream integration is non-trivial | Spike: handler → Document stream → hydrate → lazy route → preamble/HMR                      |
+| Hydration mismatch on assets/context                                 | Serialize exact asset list used in Document; same tree on client                            |
+| Missing preamble breaks HMR                                          | Enforce preamble in sku streaming client wrapper; e2e/dev smoke                             |
+| Shell-only CSP cannot hash late streamed scripts                     | Request a single nonce for React stream scripts when needed; hash known bootstrap bodies    |
+| Absolute/`CDN` `publicPath` configured for Vite SSR                  | Config validation rejects with a clear error; docs state relative-only                      |
+| Server `Error.stack` leaked via hydration JSON                       | Strip stacks in production bootstrap serialization                                          |
+| Dev/prod abort middleware drift writes after disconnect              | Shared HTML middleware; abort-before-write                                                  |
+| `actionData` Promises throw during bootstrap stringify               | Promise-scrub loader **and** action data                                                    |
+| Manual / derived `moduleId` wrong → missing or wrong preloads        | Conservative matcher (no guessing); never overwrite explicit `moduleId`; dev warn + docs    |
+| Language chunk missing / wrong for composed locales                  | App sets request language slot; sku registers when known; soft-fail otherwise (decision 14) |
+| Routes accidentally bundle into one chunk                            | Required per-route chunk fixture + assertions (decision 15)                                 |
+| Consumers expect Framework Mode file conventions                     | Docs make Data Mode + sku app export explicit                                               |
+| Middleware writing the body early breaks CSP headers                 | sku owns the HTML response path; middleware must not commit the document body               |
+| Dual maintenance of webpack SSR vs Vite SSR                          | Explicit non-goal to unify; webpack path frozen for this change                             |
+| Consumers keep calling `-ssr` after setting `renderType`             | Clear config-time / command errors pointing to `sku start` / `sku build`                    |
 
 ## Migration Plan
 
@@ -262,17 +274,17 @@ Validated against [basic-streaming-app-example](https://github.com/jahredhope/ba
 
 ### 1.5 Open-question resolutions
 
-| Question                | Decision                                                                                                                                                  |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| App module path         | New config `appEntry` (default `src/app.tsx`). Do not reuse `serverEntry` / `renderEntry` / `clientEntry` for the high-level app export.                  |
-| Omitted `renderType`    | Treat as today’s static behavior (equivalent to `'static-generated'`). Explicit `'static-generated'` is allowed but optional.                             |
-| Document ownership      | sku ships a **default Document** (assets → CSS + modulepreload). Optional consumer override via `SkuApp.document` (component), not a required root route. |
-| Middleware typing       | **Connect `RequestHandler`** (Vite `server.middlewares` / Express-compatible). Mount before sku’s HTML render path; must not commit the document body.    |
-| `onAllReady` buffering  | Opt-in via React Router route `handle.waitForAll: true` (deepest/any match). Default remains `onShellReady`.                                              |
-| Client/asset handoff    | `window.__SKU_DOCUMENT_ASSETS__` + combined hashable `bootstrapScriptContent` (assets + RR hydration payload).                                            |
-| Absolute `publicPath`   | **Not supported** for Vite SSR; relative only. CSP uses `'self'` for Document assets.                                                                     |
-| Hydration safety        | Scrub Promises on loader+action data; strip `Error.stack` in production (decision 10).                                                                    |
-| Request nonce           | At most one per render, only when requested; CSP `'nonce-…'` only if requested (decision 12); not webpack `createUnsafeNonce`.                            |
-| Lazy `moduleId`         | Auto-derive from idiomatic `lazy: () => import('…')` (decision 13); manual escape hatch; warn in dev on miss/unknown.                                     |
-| Vocab language chunks   | Required in v1: build splitting + request-path registration (decision 14).                                                                                |
-| Per-route chunk fixture | Required demo of ≥2 distinct lazy route chunks (decision 15).                                                                                             |
+| Question                | Decision                                                                                                                                                          |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| App module path         | New config `appEntry` (default `src/app.tsx`). Do not reuse `serverEntry` / `renderEntry` / `clientEntry` for the high-level app export.                          |
+| Omitted `renderType`    | Treat as today’s static behavior (equivalent to `'static-generated'`). Explicit `'static-generated'` is allowed but optional.                                     |
+| Document ownership      | sku ships a **default Document** (assets → CSS + modulepreload). Optional consumer override via `SkuApp.document` (component), not a required root route.         |
+| Middleware typing       | **Connect `RequestHandler`** (Vite `server.middlewares` / Express-compatible). Mount before sku’s HTML render path; must not commit the document body.            |
+| `onAllReady` buffering  | Opt-in via React Router route `handle.waitForAll: true` (deepest/any match). Default remains `onShellReady`.                                                      |
+| Client/asset handoff    | `window.__SKU_DOCUMENT_ASSETS__` + combined hashable `bootstrapScriptContent` (assets + RR hydration payload).                                                    |
+| Absolute `publicPath`   | **Not supported** for Vite SSR; relative only. CSP uses `'self'` for Document assets.                                                                             |
+| Hydration safety        | Scrub Promises on loader+action data; strip `Error.stack` in production (decision 10).                                                                            |
+| Request nonce           | At most one per render, only when requested; CSP `'nonce-…'` only if requested (decision 12); not webpack `createUnsafeNonce`.                                    |
+| Lazy `moduleId`         | Auto-derive from idiomatic `lazy: () => import('…')` (decision 13); manual escape hatch; warn in dev on miss/unknown.                                             |
+| Vocab language chunks   | Required in v1: build splitting + sku registration; app-owned identification via request language slot, then `:language` / sole-language fallbacks (decision 14). |
+| Per-route chunk fixture | Required demo of ≥2 distinct lazy route chunks (decision 15).                                                                                                     |

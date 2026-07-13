@@ -15,7 +15,7 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
 - **Vite SSR `publicPath`:** relative paths only (e.g. `/` or `/static/`). Absolute `http(s):` / CDN `publicPath` MUST be rejected or unsupported for this mode (webpack SSR / static may keep existing absolute-path behavior).
 - Production-safe hydration bootstrap (no `Error.stack` leak; promise-safe loader/action data) and a **single** request-scoped nonce helper for Vite SSR: mint only when explicitly requested, reuse that value everywhere, and put `'nonce-…'` in the CSP header only if requested (distinct from static/webpack `createUnsafeNonce`, which may create multiple nonces).
 - Vite SSR **requires React 19+**; sku MUST fail when enabling Vite SSR on an older React major.
-- **Vocab/language async chunking** for Vite SSR (parity with static Vite `@vocab/vite` chunk helpers): when `languages` is configured, the active language chunk MUST be registered for Document assets / SSR + client load.
+- **Vocab/language async chunking** for Vite SSR (parity with static Vite `@vocab/vite` chunk helpers): when `languages` is configured, the active language chunk MUST be registered for Document assets / SSR + client load. Sku owns registration; apps identify the active language (configured language **name**, e.g. `th-TH`) via a documented request language slot (preferred), with `:language` / sole-language fallbacks and soft-fail when unresolved (`handle.language` is not used).
 - A **fixture that demonstrates per-route async chunking** of routes (distinct lazy route modules → separate chunks on SSR + hydration), not only incidental lazy-route usage in the main fixture.
 - Auto-derive lazy-route `handle.moduleId` from idiomatic `lazy: () => import('…')` via a Vite SSR AST transform (manual `moduleId` remains as escape hatch; non-idiomatic lazy shapes are skipped with the existing dev warning).
 - Docs and release notes for the new public API (see Impact).
@@ -43,11 +43,11 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
 
 ## Impact
 
-- **Public API**: `renderType` config; Vite SSR app module; request-scoped CSP nonce surface for Vite SSR (single value, only when requested); webpack SSR without the new renderType unchanged
+- **Public API**: `renderType` config; Vite SSR app module; request-scoped CSP nonce surface for Vite SSR (single value, only when requested); documented request language slot for Vite SSR vocab chunk identification; webpack SSR without the new renderType unchanged
 - **Deps**: `react-router` (Data Mode) as a sku-managed dependency for Vite SSR; Vite SSR requires **React 19+** (sku peer may remain `^18 || ^19` for static/webpack consumers); `@vocab/vite` language chunks remain required when `languages` is configured
 - **Docs (create/update in `docs/docs/`):**
-  - `server-rendering.md` — Vite SSR vs webpack SSR; high-level app API; document hydrate; **React 19+ required**; vocab chunks / lazy route chunks; auto-derived `moduleId` for idiomatic `lazy` imports
-  - `vite.md` — Vite SSR via `renderType`, commands, app module, streaming/hydrate differences vs static; **React 19+ required**; vocab/language chunks + per-route chunking pattern; auto-derived `moduleId`
+  - `server-rendering.md` — Vite SSR vs webpack SSR; high-level app API; document hydrate; **React 19+ required**; vocab chunks (request language slot + fallbacks) / lazy route chunks; auto-derived `moduleId` for idiomatic `lazy` imports
+  - `vite.md` — Vite SSR via `renderType`, commands, app module, streaming/hydrate differences vs static; **React 19+ required**; vocab/language chunks (request language slot) + per-route chunking pattern; auto-derived `moduleId`
   - `csp.md` — Vite SSR header CSP; single request-scoped nonce only when requested; report-only; relative `publicPath` only
   - `configuration.md` — `renderType`, `appEntry`, CSP report-only options; Vite SSR `publicPath` constraint; **`renderType` docs note React 19+**
 - **Fixtures/tests:** Vite SSR fixture must demonstrate per-route async chunking; vocab language chunk registration covered when `languages` is used

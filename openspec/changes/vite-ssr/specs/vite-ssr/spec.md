@@ -123,12 +123,36 @@ Vite SSR apps MUST support loading route modules as separate async chunks on ser
 
 When `languages` is configured, Vite SSR apps MUST support vocab/language async chunks: language translations MUST be split into language chunks at build time, and the active language chunk MUST be registered for Document assets on the SSR response path (parity with static Vite `@vocab/vite` chunk helpers).
 
+Sku owns chunk **registration**. Language **identification** is app-owned via a documented request language slot (preferred), with `:language` and sole-language fallbacks. The active language value MUST be a configured language name (e.g. `th-TH`), not necessarily a URL path segment. Missing or unknown language MUST soft-fail (skip vocab chunk registration; do not error the response). Sku MUST NOT use route `handle.language` for identification.
+
 #### Scenario: Active language chunk is registered
 
 - **WHEN** a Vite SSR app has `languages` configured
 - **AND** a request is rendered for an active language
 - **THEN** sku registers that language’s vocab chunk for the document assets / preloads used by the streamed response
 - **AND** the language chunk participates in client load for that response
+
+#### Scenario: Request language slot takes precedence
+
+- **WHEN** a Vite SSR app has `languages` configured
+- **AND** consumer middleware sets the documented request language slot to a configured language name
+- **THEN** sku registers that language’s vocab chunk for the response
+- **AND** sku does not override it with a `:language` route-param fallback
+
+#### Scenario: Fallbacks when the request slot is unset
+
+- **WHEN** a Vite SSR app has `languages` configured
+- **AND** the request language slot is unset
+- **AND** a matched route provides a `:language` param that matches a configured language name (or only one language is configured)
+- **THEN** sku uses that fallback to register the vocab chunk
+
+#### Scenario: Soft-fail when language cannot be resolved
+
+- **WHEN** a Vite SSR app has multiple `languages` configured
+- **AND** the request language slot is unset
+- **AND** no matching `:language` param is available
+- **THEN** sku does not register a vocab language chunk
+- **AND** the SSR response still succeeds
 
 #### Scenario: Build splits vocab by language
 

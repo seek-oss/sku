@@ -60,9 +60,10 @@ sku MUST include `'nonce-…'` in the CSP header for that response only if a non
 - **THEN** consumers MUST NOT use webpack/static `createUnsafeNonce` as the Vite SSR API
 - **AND** sku MUST NOT expose a Vite SSR helper that returns a new distinct nonce on each call for the same response
 
-### Requirement: Report-Only CSP may coexist with an enforcing policy
+### Requirement: Report-Only CSP may coexist with an enforcing policy and MUST support report-to
 
 Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an enforcing CSP.
+When Report-Only CSP is enabled, consumers MUST be able to configure a `report-to` value, and sku MUST include that value in the Report-Only policy (via the CSP `report-to` directive) so violation reports have a destination.
 
 #### Scenario: Report-Only header alongside enforcing policy
 
@@ -73,6 +74,11 @@ Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an e
 
 - **WHEN** only Report-Only CSP is enabled
 - **THEN** the response includes `Content-Security-Policy-Report-Only` and does not require an enforcing `Content-Security-Policy` header
+
+#### Scenario: Configurable report-to on Report-Only policy
+
+- **WHEN** Report-Only CSP is enabled and a `report-to` value is configured
+- **THEN** the `Content-Security-Policy-Report-Only` header includes a `report-to` directive using that configured value
 
 ### Requirement: Vite SSR CSP assumes relative publicPath only
 

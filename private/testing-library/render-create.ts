@@ -1,6 +1,7 @@
 import { render, type RenderOptions } from 'cli-testing-library';
 import { makeFixturePathResolver } from './makeFixturePathResolver.ts';
 import { createRequire } from 'node:module';
+import path from 'node:path';
 
 const require = createRequire(import.meta.url);
 const createSkuBin = require.resolve('../../packages/create/bin.js');
@@ -16,7 +17,10 @@ export const scopeToFixture = (dir: string) => {
     ) =>
       render(createSkuBin, [projectName, ...args], {
         ...options,
-        cwd: fixturePath(options.cwd ?? ''),
+        cwd:
+          options.cwd && path.isAbsolute(options.cwd)
+            ? options.cwd
+            : fixturePath(options.cwd ?? ''),
       }),
     fixturePath,
   };

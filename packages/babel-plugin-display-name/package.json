@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@sku-private/tsdown": "workspace:*",
-    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-react": "^8.0.0",
     "@types/babel__core": "^7.20.5",
     "@types/babel__helper-plugin-utils": "^7.10.3"
   }

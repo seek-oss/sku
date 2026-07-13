@@ -3,6 +3,7 @@ import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 const babelPluginDisplayNameTests = 'packages/babel-plugin-display-name';
+const skuCreateTest = 'tests/node/sku-create.test.ts';
 
 export default defineConfig({
   resolve: {
@@ -32,7 +33,20 @@ export default defineConfig({
             `private/${defaultInclude}`,
             `tests/node/${defaultInclude}`,
           ],
-          exclude: [babelPluginDisplayNameTests],
+          exclude: [babelPluginDisplayNameTests, skuCreateTest],
+        },
+      },
+      // sku create runs pnpm install and must not overlap with other tests touching pnpm.
+      {
+        extends: true,
+        test: {
+          name: 'sku-create',
+          include: [skuCreateTest],
+          fileParallelism: false,
+          retry: 0,
+          sequence: {
+            groupOrder: 1,
+          },
         },
       },
       // Isolate babel-plugin-display-name tests as our snapshot serializers interfere with their

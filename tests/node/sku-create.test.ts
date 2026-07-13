@@ -250,7 +250,7 @@ function sanitizeSnapshot(content: string, workDir: string) {
 
 /**
  * When snapshot testing YAML files, we don't care about the specific versions.
- * This function replaces version patterns like "0.0.1+sha512-..." with "VERSION_IGNORED"
+ * This function replaces version patterns like "0.0.1+sha512-..." with "VERSION_IGNORED".
  */
 function stripYamlVersions(yamlContent: string): string {
   return yamlContent.replace(

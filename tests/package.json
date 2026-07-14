@@ -11,7 +11,7 @@
     "dedent": "^1.5.1",
     "jsonc-parser": "^3.0.0",
     "node-html-parser": "^7.0.1",
-    "webpack": "^5.52.0",
+    "webpack": "catalog:",
     "webpack-cli": "^6.0.0",
     "webpack-dev-server": "catalog:",
     "yaml": "^2.8.1"

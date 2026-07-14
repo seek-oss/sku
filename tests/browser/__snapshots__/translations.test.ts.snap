@@ -4,7 +4,7 @@ exports[`translations > bundler vite > should render en 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,57 +1,56 @@
+@@ -1,47 +1,46 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -15,11 +15,6 @@ exports[`translations > bundler vite > should render en 1`] = `
      <meta
        name="viewport"
        content="width=device-width, initial-scale=1"
-     >
-     <link
-       rel="modulepreload"
-       href="/rolldown-runtime.js"
-       crossorigin
      >
      <link
        rel="modulepreload"
@@ -53,11 +48,6 @@ exports[`translations > bundler vite > should render en 1`] = `
      </script>
      <script
        type="module"
-       src="/rolldown-runtime.js"
-     >
-     </script>
-     <script
-       type="module"
        src="/vite-client.js"
      >
      </script>
@@ -70,7 +60,7 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,57 +1,62 @@
+@@ -1,47 +1,46 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -84,11 +74,6 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
      >
      <link
        rel="modulepreload"
-       href="/rolldown-runtime.js"
-       crossorigin
-     >
-     <link
-       rel="modulepreload"
        href="/vite-client.js"
        crossorigin
      >
@@ -97,12 +82,6 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
        href="/en-translations.js"
        crossorigin
      >
-+    <link
-+      rel="modulepreload"
-+      as="script"
-+      crossorigin
-+      href="/en-PSEUDO-translations.js"
-+    >
    </head>
    <body>
      <div id="app">
@@ -125,11 +104,6 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
      </script>
      <script
        type="module"
-       src="/rolldown-runtime.js"
-     >
-     </script>
-     <script
-       type="module"
        src="/vite-client.js"
      >
      </script>
@@ -142,7 +116,7 @@ exports[`translations > bundler vite > should render fr 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,57 +1,56 @@
+@@ -1,47 +1,46 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -153,11 +127,6 @@ exports[`translations > bundler vite > should render fr 1`] = `
      <meta
        name="viewport"
        content="width=device-width, initial-scale=1"
-     >
-     <link
-       rel="modulepreload"
-       href="/rolldown-runtime.js"
-       crossorigin
      >
      <link
        rel="modulepreload"
@@ -191,11 +160,6 @@ exports[`translations > bundler vite > should render fr 1`] = `
      </script>
      <script
        type="module"
-       src="/rolldown-runtime.js"
-     >
-     </script>
-     <script
-       type="module"
        src="/vite-client.js"
      >
      </script>
@@ -208,7 +172,7 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,57 +1,56 @@
+@@ -1,47 +1,46 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -219,11 +183,6 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
      <meta
        name="viewport"
        content="width=device-width, initial-scale=1"
-     >
-     <link
-       rel="modulepreload"
-       href="/rolldown-runtime.js"
-       crossorigin
      >
      <link
        rel="modulepreload"
@@ -253,11 +212,6 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
      <script
        type="module"
        src="/en-translations.js"
-     >
-     </script>
-     <script
-       type="module"
-       src="/rolldown-runtime.js"
      >
      </script>
      <script

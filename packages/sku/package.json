@@ -145,7 +145,6 @@
     "postcss-loader": "^8.0.0",
     "prettier": "~3.9.0",
     "react-refresh": "^0.18.0",
-    "rolldown": "^1.0.0-rc.9",
     "rollup-plugin-visualizer": "^7.0.1",
     "selfsigned": "^3.0.1",
     "semver": "^7.7.4",
@@ -159,7 +158,7 @@
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plugin-cjs-interop": "^3.0.0",
-    "webpack": "^5.105.4",
+    "webpack": "catalog:",
     "webpack-bundle-analyzer": "^5.1.1",
     "webpack-dev-server": "catalog:",
     "webpack-merge": "^6.0.1",
@@ -186,6 +185,7 @@
     "fs-fixture": "^2.6.0",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "rolldown": "^1.1.5",
     "type-fest": "^5.0.0",
     "vitest": "catalog:"
   }

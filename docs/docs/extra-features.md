@@ -371,10 +371,7 @@ The second `if` block is removed, however the contents of the block are kept as 
 
 Supply a [`devServerMiddleware`] path in your sku config to extend the **development** server with local-only routes, mocks, or proxies.
 
-The file must default-export a function. What it receives depends on the bundler path:
-
-- **Webpack / Vite SSR / `sku serve`:** the Express app
-- **Static Vite:** Vite’s Connect middleware stack
+The file must export a function that will receive the express server:
 
 ```js
 export default (app) => {
@@ -384,7 +381,7 @@ export default (app) => {
 };
 ```
 
-For Vite SSR, this runs in `sku start` only (before server-entry `middleware`) and is never bundled into the production server. Production request handlers belong on the server entry’s named `middleware` export — see [Server rendering → Middleware](./docs/server-rendering.md#middleware) and [`devServerMiddleware`](./docs/configuration.md#devservermiddleware).
+This runs in `sku start` only and is never bundled into the production server. For **Vite SSR** production request handlers belong on the server entry’s named `middleware` export — see [Server rendering → Middleware](./docs/server-rendering.md#middleware) and [`devServerMiddleware`].
 
 [`devServerMiddleware`]: ./docs/configuration?id=devservermiddleware
 [express]: http://expressjs.com/

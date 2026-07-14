@@ -2,7 +2,7 @@
 
 This project is powered by [sku](https://github.com/seek-oss/sku), [braid](https://github.com/seek-oss/braid-design-system) and built with [React](https://facebook.github.io/react).
 
-It uses **Vite SSR** (`bundler: 'vite'` + `renderType: 'server-side-rendered'`): full-document streaming and `hydrateRoot(document)` — not static `#app` hydrate.
+It uses **Vite SSR**: full-document streaming and `hydrateRoot(document)` — not static `#app` hydrate.
 
 **Requires React 19+.** Use `sku start` / `sku build` (not `sku start-ssr` / `sku build-ssr`).
 

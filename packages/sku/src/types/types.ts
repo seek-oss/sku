@@ -137,10 +137,6 @@ export interface SkuConfigBase {
   /**
    * The client entry point to the app.
    *
-   * Under Vite SSR (`bundler: 'vite'` + `renderType: 'server-side-rendered'`), this is the
-   * required client request entry exporting named `onHydrate`. Path may be
-   * `.tsx`, `.ts`, or `.js`.
-   *
    * @default "./src/client.tsx"
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=cliententry
    */

@@ -1,9 +1,9 @@
 # Content Security Policy (CSP)
 
 [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app.
+For statically rendered apps, a `script-src` policy can be automatically generated for you. SSR apps have an extra step.
 
-- **Static apps** and **Webpack SSR**: a `script-src` policy can be generated for you (meta / existing APIs).
-- **Vite SSR** (`renderType: 'server-side-rendered'`): CSP is delivered as **HTTP headers** (`Content-Security-Policy` and optional `Content-Security-Policy-Report-Only`), derived from the document shell plus nonces and hashes of bootstrap scripts. Meta `http-equiv` CSP is not used on the Vite SSR path.
+- **Vite SSR**: CSP is delivered as **HTTP headers** (`Content-Security-Policy` and optional `Content-Security-Policy-Report-Only`), derived from the document shell plus nonces and hashes of bootstrap scripts. Meta `http-equiv` CSP is not used on the Vite SSR path.
 
 **This feature is not available to libraries**
 

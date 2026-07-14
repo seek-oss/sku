@@ -47,6 +47,9 @@ catalog:
   typescript: ~6.0.3
   vite: ^8.0.1
   vitest: ^4.1.0
+  webpack-dev-server: ^5.2.4
+  # 14/07/26: pinning until https://github.com/webpack/webpack/pull/21407 is released
+  webpack: 5.108.1
 
 configDependencies:
   pnpm-plugin-sku: 0.0.3+sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==

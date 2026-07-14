@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Update `path-to-regexp` dependency from `^6.3.0` to `8.4.2`
+`deps`: Update `path-to-regexp` dependency from `^6.3.0` to `8.4.2`
 
 **BREAKING CHANGE**:
 

@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Use async `jiti` API to load sku config
+`config`: Use async `jiti` API to load sku config
 
 **BREAKING CHANGE**:
 

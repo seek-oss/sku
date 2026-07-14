@@ -4,4 +4,4 @@
 'sku': patch
 ---
 
-Replace `debug` with `obug`
+`deps`: Replace `debug` with `obug`

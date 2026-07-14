@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Drop support for `vitest` versions below `4.1.0`
+`deps`: Drop support for `vitest` versions below `4.1.0`
 
 **BREAKING CHANGE**:
 

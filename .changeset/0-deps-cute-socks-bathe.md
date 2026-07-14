@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Update minimum supported Node.js version to [24.16.0]
+`deps`: Update minimum supported Node.js version to [24.16.0]
 
 **BREAKING CHANGE**:
 

@@ -2,7 +2,7 @@
 'sku': minor
 ---
 
-Update `prettier` dependency from `~3.8.0` to `~3.9.0`
+`deps`: Update `prettier` dependency from `~3.8.0` to `~3.9.0`
 
 This change may result in some code formatting changes. Please review [the Prettier 3.9.0 release notes].
 

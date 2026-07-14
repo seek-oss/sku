@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Drop support for Storybook v7, v8 and v9
+`storybook`: Drop support for Storybook v7, v8 and v9
 
 **BREAKING CHANGE**:
 

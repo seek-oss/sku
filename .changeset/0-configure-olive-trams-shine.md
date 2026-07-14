@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-TypeScript updated to version 6
+`configure`: TypeScript updated to version 6
 
 **BREAKING CHANGE**
 

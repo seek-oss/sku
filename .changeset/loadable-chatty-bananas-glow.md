@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Convert `sku/@loadable/component` entrypoint to JavaScript
+`loadable`: Convert `sku/@loadable/component` entrypoint to JavaScript
 
 **BREAKING CHANGE**:
 

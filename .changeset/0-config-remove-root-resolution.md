@@ -2,7 +2,9 @@
 'sku': major
 ---
 
-Remove `rootResolution` in favour of native subpath imports
+`config`: Remove `rootResolution` in favour of native subpath imports
+
+**BREAKING CHANGE**
 
 Node.js can now resolve path aliases natively via [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) declared in your `package.json` `imports` field. Subpath import specifiers must be prefixed with `#`, so root-resolution imports like `import x from 'src/foo'` become `import x from '#src/foo'`.
 

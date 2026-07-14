@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-SSR server now accessible via webpack dev server
+`start`: SSR server now accessible via webpack dev server
 
 When running `sku start` users would previously access the SSR server directly. Static assets would then be loaded from the webpack dev server on a separate host.
 

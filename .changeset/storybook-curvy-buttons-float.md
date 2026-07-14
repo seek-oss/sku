@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Publish Storybook config as ESM-only
+`storybook`: Publish Storybook config as ESM-only
 
 **BREAKING CHANGE**:
 

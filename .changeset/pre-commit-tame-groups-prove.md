@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-Remove `pre-commit` command
+`pre-commit`: Remove `pre-commit` command
 
 The `pre-commit` command saw very little use and bundled `lint-staged` (and its many transitive dependencies) into every `sku` install. Setting this up yourself is straightforward and gives you full control over which commands run before each commit.
 

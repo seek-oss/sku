@@ -161,12 +161,11 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => {
 
 ### Middleware
 
-Put request middleware on the server entry’s named `middleware` export (`SkuSsrMiddleware`: a Connect/Express-compatible handler or array). Empty array / passthrough is fine. Middleware is mounted **before** Vite middlewares and the HTML render path; it must not commit the document body.
+Vite SSR has **two middleware layers**. Pick based on whether the traffic should exist in production.
 
-Do **not** put Vite SSR app middleware on:
+#### Server-entry `middleware` (required; runs in start and production)
 
-- the routes entry
-- config `devServerMiddleware` (that remains for static-app proxy helpers — see [Dev Server Middleware](./docs/extra-features?id=devserver-middleware))
+Export Connect/Express-compatible handlers from the server entry as named `middleware` (`SkuSsrMiddleware`: a handler or array). Empty array / passthrough is fine. Sku mounts this **before** Vite middlewares and the HTML render path in both `sku start` and the production server. It must not commit the document body.
 
 ```tsx
 import type { SkuSsrMiddleware } from 'sku';
@@ -179,6 +178,42 @@ export const middleware: SkuSsrMiddleware = (req, res, next) => {
   next();
 };
 ```
+
+#### Config `devServerMiddleware` (optional; `sku start` only)
+
+Use config [`devServerMiddleware`](./docs/configuration.md#devservermiddleware) for **local mocks and proxies** that production never serves from the Node app (for example `/api` traffic that a reverse proxy handles in deployed environments). Sku mounts that file only in Vite SSR `sku start`, and **never** imports it into the production server bundle.
+
+In Vite SSR start, the function receives the Express app (same shape as webpack SSR / `extra-features` docs). Static Vite apps still receive Vite’s Connect instance — see [Vite → Dev server middleware](./docs/vite.md#dev-server-middleware).
+
+```ts
+// sku.config.ts
+import type { SkuConfig } from 'sku';
+
+export default {
+  bundler: 'vite',
+  renderType: 'server-side-rendered',
+  devServerMiddleware: './dev-middleware.js',
+} satisfies SkuConfig;
+```
+
+```js
+// dev-middleware.js
+export default (app) => {
+  app.get('/mock-api', (_req, res) => {
+    res.status(200).type('text/plain').send('ok');
+  });
+};
+```
+
+#### Mount order in `sku start`
+
+1. Request-context (sku; CSP nonce store, etc.)
+2. Config `devServerMiddleware` (optional)
+3. Server-entry `middleware`
+4. Vite middlewares (HMR / assets)
+5. HTML render
+
+Dev mocks mount **before** production middleware so they can intercept traffic that would never reach the app in production. Put anything that must ship in production on the server-entry export; keep stubs and local-only routes in `devServerMiddleware`.
 
 ### CSP
 
@@ -391,7 +426,10 @@ This guide covers the **sku** surface only (config, entries, providers, middlewa
 
 #### Middleware
 
-- Mount Connect/Express middleware on the server entry `middleware` export
+- Mount production Connect/Express middleware on the server entry `middleware` export (required; empty / passthrough OK)
+- Keep local-only mocks/proxies in optional config [`devServerMiddleware`](./docs/configuration.md#devservermiddleware) — mounted in `sku start` only, never in the production server bundle
+
+See [Middleware](#middleware) for the two-layer split and start mount order.
 
 #### CSP
 
@@ -444,8 +482,11 @@ Covers the **sku** migration surface only. Deploy/process/infra changes are out 
 
 #### Middleware
 
-- Keep using a middleware export, but on the Vite SSR **server entry** named `middleware` (same Connect style)
+- Keep using a middleware export, but on the Vite SSR **server entry** named `middleware` (same Connect style; required export, empty / passthrough OK)
+- Move local-only mocks/proxies that webpack put in `devServerMiddleware` (or only ran under `start-ssr`) to the same config key — Vite SSR still mounts it in `sku start` only and keeps it out of the production server
 - Webpack dual-port / proxy assumptions differ; Vite SSR is single-port in dev (`httpsDevServer` supported)
+
+See [Middleware](#middleware) for mount order.
 
 #### CSP
 

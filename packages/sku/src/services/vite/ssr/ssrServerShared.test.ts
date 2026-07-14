@@ -1,4 +1,5 @@
 import { EventEmitter } from 'node:events';
+import { Readable } from 'node:stream';
 import { describe, expect, it, vi } from 'vitest';
 import type { Request, Response } from 'express';
 import {
@@ -78,6 +79,63 @@ describe('createWebRequest', () => {
 
     const request = createWebRequest(req, new AbortController().signal);
     expect(await request.json()).toEqual({ hello: 'world' });
+  });
+
+  it('rebuilds urlencoded body from a parsed object', async () => {
+    const req = {
+      protocol: 'http',
+      originalUrl: '/submit',
+      method: 'POST',
+      get: () => 'localhost',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      readableEnded: true,
+      body: { message: 'hello', tags: ['a', 'b'] },
+    } as unknown as Request;
+
+    const request = createWebRequest(req, new AbortController().signal);
+    expect(request.headers.get('content-type')).toBe(
+      'application/x-www-form-urlencoded',
+    );
+    const formData = await request.formData();
+    expect(formData.get('message')).toBe('hello');
+    expect(formData.getAll('tags')).toEqual(['a', 'b']);
+  });
+
+  it('forwards an unread body when complete is true but readableEnded is false', async () => {
+    const payload = JSON.stringify({ hello: 'world' });
+    const stream = Readable.from([payload]);
+    // `complete` is set the way Node does after the message arrives; the stream
+    // is still unread (`readableEnded` remains false on a real Readable).
+    Object.defineProperty(stream, 'complete', { value: true });
+    Object.assign(stream, {
+      protocol: 'http',
+      originalUrl: '/submit',
+      method: 'POST',
+      get: () => 'localhost',
+      headers: { 'content-type': 'application/json' },
+    });
+    expect(stream.readableEnded).toBe(false);
+
+    const request = createWebRequest(
+      stream as unknown as Request,
+      new AbortController().signal,
+    );
+    expect(await request.json()).toEqual({ hello: 'world' });
+  });
+
+  it('passes through string bodies after the stream was consumed', async () => {
+    const req = {
+      protocol: 'http',
+      originalUrl: '/submit',
+      method: 'POST',
+      get: () => 'localhost',
+      headers: { 'content-type': 'text/plain' },
+      readableEnded: true,
+      body: 'raw-body',
+    } as unknown as Request;
+
+    const request = createWebRequest(req, new AbortController().signal);
+    expect(await request.text()).toBe('raw-body');
   });
 });
 

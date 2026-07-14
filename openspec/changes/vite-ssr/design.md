@@ -52,10 +52,13 @@ Reference: [basic-streaming-app-example](https://github.com/jahredhope/basic-str
 
 - `routesEntry` (default `src/routes.tsx`) → named `routes: RouteObject[]` (hard error if missing). No `SkuApp`.
 - Reuse `serverEntry` / `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`) with Vite SSR named-export contracts (decision 8). Hard error if files or exports missing — no sku noops.
-- Middleware: named `middleware` on the **server entry** only (required; empty array / passthrough OK). Config `devServerMiddleware` is static/webpack only. Middleware is loaded once at dev-server start (not HMR’d in v1).
+- Middleware (two layers):
+  - **Production:** named `middleware` on the **server entry** (required; empty array / passthrough OK). Mounted in both `sku start` and production. Loaded once at process start (not HMR’d in v1).
+  - **Dev-only:** optional config `devServerMiddleware` (same key as static/webpack). Mounted only in Vite SSR `sku start`, never imported into the production server graph — separate file / dependency chain for local mocks (e.g. `/api` traffic that production reverse-proxies away from the app).
+  - **Dev mount order:** request-context → `devServerMiddleware` → server-entry `middleware` → Vite middlewares → HTML render. Dev middleware first so mocks intercept traffic that would never reach the app in production.
 - Document: sku-owned; head/SEO via React 19 metadata. No consumer Document override in v1.
 
-**Rejected:** Porting `renderCallback`; optional entries / soft-skip; parallel `entryServer` / `entryClient`; middleware on the routes entry.
+**Rejected:** Porting `renderCallback`; optional entries / soft-skip; parallel `entryServer` / `entryClient`; middleware on the routes entry; second named export / same-file `devMiddleware` (weak isolation — same module graph).
 
 ### 4. Commands and deploy shape
 
@@ -140,17 +143,18 @@ export function onHydrate(args: {
 
 ## Risks / Trade-offs
 
-| Risk                                    | Mitigation                                                        |
-| --------------------------------------- | ----------------------------------------------------------------- |
-| Hydration mismatch on assets/context    | Serialize exact Document asset list; same tree on client          |
-| Shell-only CSP cannot hash late scripts | Lazy single nonce for stream scripts; hash known bootstrap bodies |
-| Absolute/`CDN` `publicPath`             | Config validation rejects; docs say relative-only                 |
-| Server stacks in hydrate JSON           | Strip `Error.stack` in production                                 |
-| Loader/action headers dropped           | Forward before CSP/`Content-Type`                                 |
-| Missing entries / named exports         | Hard error; no sku noops                                          |
-| Server/client `AppWrapper` diverge      | Shared providers; docs: providers only                            |
-| Create template drifts from contracts   | Minimal scaffold + create tests                                   |
-| Migration guide over-promises           | Requirements + limitations; sku-surface only                      |
+| Risk                                    | Mitigation                                                               |
+| --------------------------------------- | ------------------------------------------------------------------------ |
+| Hydration mismatch on assets/context    | Serialize exact Document asset list; same tree on client                 |
+| Shell-only CSP cannot hash late scripts | Lazy single nonce for stream scripts; hash known bootstrap bodies        |
+| Absolute/`CDN` `publicPath`             | Config validation rejects; docs say relative-only                        |
+| Server stacks in hydrate JSON           | Strip `Error.stack` in production                                        |
+| Loader/action headers dropped           | Forward before CSP/`Content-Type`                                        |
+| Missing entries / named exports         | Hard error; no sku noops                                                 |
+| Server/client `AppWrapper` diverge      | Shared providers; docs: providers only                                   |
+| Create template drifts from contracts   | Minimal scaffold + create tests                                          |
+| Migration guide over-promises           | Requirements + limitations; sku-surface only                             |
+| Mock / stub deps ship in prod server    | Keep mocks in `devServerMiddleware` only; never import from server entry |
 
 ## Migration Plan
 

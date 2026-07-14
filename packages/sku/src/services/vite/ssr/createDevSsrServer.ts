@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import express from 'express';
+import { createDebug } from 'obug';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { createConfig } from '../helpers/config/createConfig.js';
@@ -14,6 +15,7 @@ import {
 } from './ssrServerShared.js';
 import type { RenderAssets, SkuSsrMiddleware } from './types.js';
 
+const log = createDebug('sku:vite-ssr:dev-server');
 const require = createRequire(import.meta.url);
 
 export const createDevSsrServer = async ({
@@ -46,7 +48,23 @@ export const createDevSsrServer = async ({
     render: RenderFunction;
   };
 
+  // Mount order: request-context → optional config `devServerMiddleware` →
+  // server-entry `middleware` → Vite → HTML render. Dev mocks stay outside the
+  // production server graph (loaded only here, never from the SSR entry).
   serverApp.use(createSsrRequestContextMiddleware());
+  if (skuContext.paths.devServerMiddleware) {
+    log(
+      'Using dev server middleware at %s',
+      skuContext.paths.devServerMiddleware,
+    );
+    const devServerMiddleware = (
+      await import(skuContext.paths.devServerMiddleware)
+    ).default;
+    if (devServerMiddleware && typeof devServerMiddleware === 'function') {
+      devServerMiddleware(serverApp);
+      log('Dev server middleware loaded');
+    }
+  }
   mountConsumerMiddleware(serverModule.middleware, (middleware) =>
     serverApp.use(middleware),
   );

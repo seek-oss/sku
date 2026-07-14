@@ -3,6 +3,7 @@ import { getCspNonce } from 'sku';
 
 import { RootLayout } from './RootLayout.js';
 import { aboutRoutes } from './pages/about/route.js';
+import { actionRoute } from './pages/action/route.js';
 import { bufferedRoute } from './pages/buffered/route.js';
 import { cookieRoute } from './pages/cookie/route.js';
 import { detailsRoute } from './pages/details/route.js';
@@ -22,6 +23,7 @@ export const routes: RouteObject[] = [
       boomRoute,
       helloRoute,
       cookieRoute,
+      actionRoute,
       {
         path: 'nonce',
         loader: () => ({ nonce: getCspNonce() }),

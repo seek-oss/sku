@@ -315,13 +315,15 @@ export default {
 
 Type: `string`
 
-Path to a file in your project that exports a function that can receive the Express server.
+Path to a file that default-exports a function receiving the **dev server** instance. Use it to add local-only routes, mocks, or proxies during `sku start` / `sku start-ssr` / `sku serve` (where supported).
 
-This can be used to extend to the dev server middleware.
+**Vite SSR** (`bundler: 'vite'` + `renderType: 'server-side-rendered'`): the function receives the Express app. Sku mounts it in `sku start` **before** the server entry’s named `middleware`, and **never** imports the file into the production server. Put production middleware on the server entry export; keep mocks here. See [Server rendering → Middleware](./docs/server-rendering.md#middleware).
 
-For **Vite SSR** (`renderType: 'server-side-rendered'`), put request middleware on the server entry’s named `middleware` export instead — config `devServerMiddleware` is the static Vite / webpack path.
+**Static Vite**: the function receives Vite’s Connect `server.middlewares` instance (not Express). See [Vite → Dev server middleware](./docs/vite.md#dev-server-middleware).
 
-Example:
+**Webpack** (static / SSR / serve): the function receives the Express app.
+
+Example (Express-style — Vite SSR, webpack, serve):
 
 ```js
 export default (app) => {
@@ -574,7 +576,7 @@ Path may be `.tsx`, `.ts`, or `.js`.
 
 **Webpack SSR** (`sku start-ssr` / `sku build-ssr`): the server entry exporting a `renderCallback`.
 
-**Vite SSR** (`bundler: 'vite'` + `renderType: 'server-side-rendered'`): required server request entry exporting named `onRequest` and named `middleware`. Missing file or named export is a hard error (sku does not use `default`). `onRequest` may return `AppWrapper`, `language`, and JSON-serialisable `clientContext`. `middleware` is typed as `SkuSsrMiddleware` (Connect/Express-compatible handler or array; empty array / passthrough OK) and runs before HTML render. Same config key as webpack — not a parallel `entryServer` option; the Vite SSR export shape is not `renderCallback`. See [Server rendering](./docs/server-rendering.md#request-entries-serverentry--cliententry).
+**Vite SSR** (`bundler: 'vite'` + `renderType: 'server-side-rendered'`): required server request entry exporting named `onRequest` and named `middleware`. Missing file or named export is a hard error (sku does not use `default`). `onRequest` may return `AppWrapper`, `language`, and JSON-serialisable `clientContext`. `middleware` is typed as `SkuSsrMiddleware` (Connect/Express-compatible handler or array; empty array / passthrough OK) and runs before HTML render in both start and production. Optional local-only mocks use config [`devServerMiddleware`](#devservermiddleware) (start only). Same config key as webpack — not a parallel `entryServer` option; the Vite SSR export shape is not `renderCallback`. See [Server rendering → Middleware](./docs/server-rendering.md#middleware).
 
 ## serverPort
 

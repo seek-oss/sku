@@ -137,6 +137,15 @@ describe('vite-ssr', () => {
       expect(await response.text()).toBe('ok');
     });
 
+    it('serves config devServerMiddleware before server-entry middleware', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/mock-api`);
+      expect(response.ok).toBe(true);
+      expect(await response.text()).toBe('sku-vite-ssr-dev-mock');
+    });
+
     it('exposes the request CSP nonce to middleware and loaders', async ({
       task,
     }) => {
@@ -206,6 +215,47 @@ describe('vite-ssr', () => {
       expect(html).toContain('Buffered content ready');
       // Wait-for-all: Suspense fallback should not appear in the final HTML.
       expect(html).not.toContain('data-testid="buffered-fallback"');
+    });
+
+    it('runs JSON POST actions after async middleware', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/action`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ hello: 'world' }),
+      });
+      const html = await response.text();
+      expect(response.ok).toBe(true);
+      // Text nodes escape quotes; assert both the visible result and hydration payload.
+      expect(html).toContain('json:{&quot;hello&quot;:&quot;world&quot;}');
+      expect(html).toContain('"type":"json"');
+      expect(html).toContain('"hello":"world"');
+    });
+
+    it('runs urlencoded form POST actions', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/action`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+        body: 'message=from-form',
+      });
+      const html = await response.text();
+      expect(response.ok).toBe(true);
+      expect(html).toContain('form:from-form');
+    });
+
+    it('returns 405 when POSTing to a route without an action', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/set-cookie`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ noop: true }),
+      });
+      expect(response.status).toBe(405);
     });
   });
 
@@ -317,6 +367,31 @@ describe('vite-ssr', () => {
             'content-security-policy-report-only',
           );
           expect(cspReportOnly).toContain('report-to csp-endpoint');
+        },
+        { timeout: 15000 },
+      );
+    });
+
+    it('keeps config devServerMiddleware out of the production server', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const serverEntry = await fs.readFile(
+        path.join(fixturePath('dist'), 'server', 'server.js'),
+        'utf8',
+      );
+      expect(serverEntry).not.toContain('sku-vite-ssr-dev-mock');
+      expect(serverEntry).not.toContain('dev-middleware');
+
+      await waitFor(
+        async () => {
+          // Production still serves server-entry middleware…
+          const health = await fetch('http://127.0.0.1:8201/api/health');
+          expect(await health.text()).toBe('ok');
+          // …but not the start-only mock route.
+          const mock = await fetch('http://127.0.0.1:8201/mock-api');
+          expect(mock.status).not.toBe(200);
+          expect(await mock.text()).not.toContain('sku-vite-ssr-dev-mock');
         },
         { timeout: 15000 },
       );

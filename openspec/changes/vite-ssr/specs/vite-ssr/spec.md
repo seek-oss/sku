@@ -342,9 +342,11 @@ When `httpsDevServer` is enabled, Vite SSR `sku start` MUST serve over HTTPS wit
 - **AND** document responses succeed over HTTPS
 - **AND** printed local URLs use `https://`
 
-### Requirement: Vite SSR middleware is server-entry middleware
+### Requirement: Vite SSR production and dev middleware
 
-Vite SSR MUST mount consumer middleware from the server entry’s named `middleware` export before the HTML render path. The export is required (empty array or passthrough allowed). The routes entry MUST NOT declare middleware. Config `devServerMiddleware` MUST NOT be required for Vite SSR. Missing `middleware` MUST be a hard error.
+Vite SSR MUST mount the server entry’s named `middleware` export before the HTML render path in both development and production. The export is required (empty array or passthrough allowed). The routes entry MUST NOT declare middleware. Missing `middleware` MUST be a hard error.
+
+When config `devServerMiddleware` is set, Vite SSR `sku start` MUST mount that middleware before server-entry `middleware`, and MUST NOT import or bundle that file into the production server. `devServerMiddleware` MUST remain optional.
 
 #### Scenario: Server-entry middleware runs before HTML render
 
@@ -357,6 +359,12 @@ Vite SSR MUST mount consumer middleware from the server entry’s named `middlew
 - **WHEN** a Vite SSR server entry does not export named `middleware`
 - **THEN** sku fails with a hard error
 - **AND** sku does not soft-skip or substitute a noop middleware
+
+#### Scenario: Dev middleware mounts first and stays out of production
+
+- **WHEN** a Vite SSR app sets config `devServerMiddleware` and runs `sku start`
+- **THEN** that middleware handles matching requests before server-entry `middleware`
+- **AND** the production server build does not include that middleware module
 
 ### Requirement: Production server does not require listen logging
 
@@ -387,12 +395,13 @@ Vite SSR production MUST NOT be required to log successful listen / port adverti
 
 ### Requirement: Vite SSR product docs cover providers, middleware, CSP, and response headers
 
-The Vite SSR section of `docs/docs/server-rendering.md` (outside Migrating) MUST include distinct headers for app-level providers (`AppWrapper`), middleware, CSP, and response headers (including Cache-Control and forwarded loader/action headers).
+The Vite SSR section of `docs/docs/server-rendering.md` (outside Migrating) MUST include distinct headers for app-level providers (`AppWrapper`), middleware (server-entry production middleware and optional `devServerMiddleware` local mocks), CSP, and response headers (including Cache-Control and forwarded loader/action headers).
 
 #### Scenario: Primary Vite SSR docs have topic headers
 
 - **WHEN** a reader opens the Vite SSR section of `server-rendering.md` (not under Migrating)
 - **THEN** distinct headers cover AppWrapper/providers, middleware, CSP, and response headers
+- **AND** middleware docs distinguish server-entry `middleware` from optional config `devServerMiddleware`
 
 ### Requirement: Migrating sections in server-rendering docs
 

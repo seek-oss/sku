@@ -27,17 +27,25 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => {
   };
 };
 
-export const middleware: SkuSsrMiddleware = (req, res, next) => {
-  if (req.path === '/api/health') {
-    res.status(200).type('text/plain').send('ok');
-    return;
-  }
-  if (req.path === '/api/nonce') {
-    res
-      .status(200)
-      .type('text/plain')
-      .send(req.getCspNonce?.() ?? '');
-    return;
-  }
-  next();
-};
+export const middleware: SkuSsrMiddleware = [
+  // Yield so the request body can finish arriving before HTML render.
+  // Regression: must not treat IncomingMessage.complete as "body consumed".
+  async (_req, _res, next) => {
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    next();
+  },
+  (req, res, next) => {
+    if (req.path === '/api/health') {
+      res.status(200).type('text/plain').send('ok');
+      return;
+    }
+    if (req.path === '/api/nonce') {
+      res
+        .status(200)
+        .type('text/plain')
+        .send(req.getCspNonce?.() ?? '');
+      return;
+    }
+    next();
+  },
+];

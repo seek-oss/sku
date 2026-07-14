@@ -33,7 +33,7 @@ export const routes: RouteObject[] = [
 ];
 ```
 
-Required `serverEntry` (default `src/server.tsx`) must export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest`. Required `clientEntry` (default `src/client.tsx`) must export named `onHydrate`. Missing entry files or named exports are a hard error; do not use `default`.
+Required `serverEntry` (default `src/server.tsx`) must export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest`. Required `clientEntry` (default `src/client.tsx`) must export named `onHydrate`. Missing entry files or named exports are a hard error; do not use `default`. Optional config [`devServerMiddleware`](./docs/configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./docs/server-rendering.md#middleware).
 
 sku owns the HTTP server, the React Document shell (not overridable — use React 19 metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers. Requires React 19+. Vite SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
 
@@ -246,10 +246,9 @@ See the [supporting react suspense] documentation for more information.
 
 ### Dev server middleware
 
-The Vite dev server uses [`Connect`](https://github.com/senchalabs/connect) as its server framework, as opposed to `webpack` which uses [`Express`](https://expressjs.com/).
-As a result, the middleware API has changed - the middleware function now receives a `Connect.Server` instance that can be used to add middleware to the dev server.
+Config [`devServerMiddleware`](./docs/configuration.md#devservermiddleware) mounts a consumer module during `sku start` only.
 
-Middleware can be added to the dev server via the [`use`] method on the server instance:
+**Static Vite** uses [`Connect`](https://github.com/senchalabs/connect) as its server framework (webpack uses [`Express`](https://expressjs.com/)). The middleware function receives a `Connect.Server` instance:
 
 ```javascript
 // devMiddleware.js
@@ -266,6 +265,8 @@ export default function (server) {
   });
 }
 ```
+
+**Vite SSR** (`renderType: 'server-side-rendered'`) uses Express on the custom single-port server. The same config key receives the Express app, and is mounted **before** the server entry’s named `middleware` (then Vite, then HTML render). Production never loads this file — see [Server rendering → Middleware](./docs/server-rendering.md#middleware).
 
 ?> Currently only JavaScript middleware is supported.
 

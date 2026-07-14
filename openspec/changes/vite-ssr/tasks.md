@@ -14,7 +14,7 @@
 - [x] 2.3 Require named exports: `routes`, `onRequest`, `middleware`, `onHydrate` — hard error if file or export missing; no soft-skip / default / sku noops
 - [x] 2.4 Wire `onRequest` before `query()`: mount optional `AppWrapper` as pathless parent under the router; seed language; serialise shell-time `clientContext`
 - [x] 2.5 Wire `onHydrate` with deserialized `context` + forwarded `language`; mount client `AppWrapper` the same way
-- [x] 2.6 Mount server-entry `middleware` before HTML render (not routes entry; not config `devServerMiddleware`)
+- [x] 2.6 Mount server-entry `middleware` before HTML render (not routes entry). Keep `middleware` required (empty/passthrough OK)
 - [x] 2.7 Language identity only via server `onRequest` `language` → sole-language fallback → soft-fail; no `req.skuLanguage` / `:language` / `handle.language`
 
 ## 3. Core Vite SSR runtime
@@ -79,3 +79,10 @@
 ## Deferred (no tasks)
 
 - Production listen / setup logging and a custom logger for setup behaviours — see `design.md` Open Questions; not implemented in this change.
+
+## 11. Vite SSR `devServerMiddleware`
+
+- [x] 11.1 Mount config `devServerMiddleware` in Vite SSR `sku start` before server-entry `middleware` (request-context → dev → prod → Vite → HTML)
+- [x] 11.2 Ensure production server entry/build never imports `devServerMiddleware`
+- [x] 11.3 Fixture/test: mock route served by `devServerMiddleware` in start; absent from production server bundle / responses
+- [x] 11.4 Docs: reverse “don’t use for Vite SSR” guidance in `server-rendering.md` / `configuration.md`; document two-layer split + mount order; update Migrating Older SSR notes if needed

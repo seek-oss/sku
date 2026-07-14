@@ -11,4 +11,6 @@ export default {
   cspReportOnlyEnabled: true,
   cspReportOnlyExtraScriptSrcHosts: ['https://report-only.example.com'],
   cspReportOnlyReportTo: 'csp-endpoint',
+  // Local mocks only — mounted in `sku start`, never in the production server.
+  devServerMiddleware: './dev-middleware.js',
 } satisfies SkuConfig;

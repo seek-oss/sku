@@ -1,6 +1,7 @@
+import { VocabProvider } from '@vocab/react';
+import type { ReactNode } from 'react';
 import type { SkuSsrServerEntry } from 'sku';
-
-import { createAppWrapper, type ClientContext } from './AppProviders.js';
+import type { ClientContext } from './types';
 
 const resolveLanguage = (request: Request): 'en' | 'fr' => {
   const { pathname } = new URL(request.url);
@@ -21,9 +22,9 @@ const onRequest: SkuSsrServerEntry = ({ request }) => {
   return {
     language,
     clientContext,
-    AppWrapper: createAppWrapper({
-      language,
-    }),
+    AppWrapper: ({ children }: { children: ReactNode }) => (
+      <VocabProvider language={language}>{children}</VocabProvider>
+    ),
   };
 };
 

@@ -127,7 +127,7 @@
 
 - [x] 16.1 Remove `entryServer` / `entryClient` config, types, defaults, schema; wire Vite SSR request hooks through existing `serverEntry` / `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`)
 - [x] 16.2 Update Vite SSR plugin aliases / resolve / noops to use `paths.serverEntry` / `paths.clientEntry`
-- [x] 16.3 Fixture: rename request entries to `.ts` (`src/server.ts` / `src/client.ts`), keep providers in a separate module; set config paths if not using `.tsx` defaults; update tests
+- [x] 16.3 Fixture: use default request-entry paths (`src/server.tsx` / `src/client.tsx`); drop `serverEntry` / `clientEntry` overrides; update tests if paths changed
 - [x] 16.4 Docs: remove `entryServer` / `entryClient`; document mode-discriminated `serverEntry` / `clientEntry` for Vite SSR; fix stale `.js` defaults to `.tsx` and note `.ts` works (`configuration.md` / `server-rendering.md` / `vite.md`)
 
 ## Deferred (no tasks)

@@ -78,8 +78,6 @@ Do **not** use `sku start-ssr` / `sku build-ssr` when `renderType` is set.
 
 Optional separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition. Under Vite SSR these are closed request hooks — they do **not** own the HTML response (sku still streams Document + CSP) and are not webpack `renderCallback` / static hydrate.
 
-Prefer keeping providers in a separate module so the request entries themselves can be plain `.ts`.
-
 **Server entry** runs before React Router `query()` and may return only:
 
 - `AppWrapper` — a React component `ComponentType<{ children }>` for providers / request-scoped seed (**not** page layout or Document chrome)
@@ -90,10 +88,11 @@ Prefer keeping providers in a separate module so the request entries themselves 
 
 sku renders `Document` → optional `AppWrapper` → router provider on server and client.
 
-```ts
-// src/server.ts
+```tsx
+// src/server.tsx
+import { VocabProvider } from '@vocab/react';
+import type { ReactNode } from 'react';
 import type { SkuSsrServerEntry } from 'sku';
-import { createAppWrapper } from './AppProviders.js';
 
 const onRequest: SkuSsrServerEntry = ({ request }) => {
   const language = resolveLocaleFromRequest(request); // e.g. 'th-TH'
@@ -102,26 +101,31 @@ const onRequest: SkuSsrServerEntry = ({ request }) => {
   return {
     language,
     clientContext,
-    AppWrapper: createAppWrapper({ language, clientContext }),
+    AppWrapper: ({ children }: { children: ReactNode }) => (
+      <VocabProvider language={language}>{children}</VocabProvider>
+    ),
   };
 };
 
 export default onRequest;
 ```
 
-```ts
-// src/client.ts
+```tsx
+// src/client.tsx
+import { VocabProvider } from '@vocab/react';
+import type { ReactNode } from 'react';
 import type { SkuSsrClientEntry } from 'sku';
-import { createAppWrapper } from './AppProviders.js';
 
-const onHydrate: SkuSsrClientEntry = ({ context, language }) => ({
-  AppWrapper: createAppWrapper({ language, clientContext: context }),
+const onHydrate: SkuSsrClientEntry = ({ language }) => ({
+  AppWrapper: ({ children }: { children: ReactNode }) => (
+    <VocabProvider language={language ?? 'en'}>{children}</VocabProvider>
+  ),
 });
 
 export default onHydrate;
 ```
 
-Share the same provider component on both sides so the tree matches for hydration. Values that change on SPA navigations must re-derive inside the provider (or a route layout); closing only over hydrate `context` will go stale.
+Use the same providers on both sides so the tree matches for hydration. Values that change on SPA navigations must re-derive inside the provider (or a route layout); closing only over hydrate `context` will go stale.
 
 ### Lazy routes and `handle.moduleId`
 
@@ -166,8 +170,8 @@ If the language cannot be resolved (or the server entry returns an unknown name)
 
 sku does **not** identify language from Express `req.skuLanguage`, a `:language` route param, or route `handle.language`. Compose locale in the server entry (middleware may still parse URLs for redirects, but must not set a parallel language slot).
 
-```ts
-// src/server.ts
+```tsx
+// src/server.tsx
 import type { SkuSsrServerEntry } from 'sku';
 
 const onRequest: SkuSsrServerEntry = ({ request }) => ({

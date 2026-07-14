@@ -65,7 +65,7 @@
     "playwright": "^1.60.0",
     "prettier": "~3.9.0",
     "renovate-config-seek": "^0.4.0",
-    "tsdown": "^0.21.0",
+    "tsdown": "^0.22.0",
     "tsx": "^4.19.4",
     "typescript": "catalog:",
     "vitest": "catalog:"

@@ -412,6 +412,20 @@ The Vite SSR section of `docs/docs/server-rendering.md` (outside Migrating) MUST
 - **THEN** distinct headers cover AppWrapper/providers, middleware, CSP, and response headers
 - **AND** middleware docs distinguish server-entry `middleware` from optional config `devServerMiddleware`
 
+### Requirement: Vite SSR first release is documented as experimental
+
+The first release of Vite SSR MUST be documented as experimental: available for testing and **not for production**. Sku MUST NOT add a runtime gate or experimental config flag for this posture.
+
+#### Scenario: Docs warn experimental / not for production
+
+- **WHEN** a reader opens the Vite SSR product docs (`server-rendering.md` and related Vite SSR surfaces)
+- **THEN** a clear experimental / not-for-production warning is present near the start of the Vite SSR content
+
+#### Scenario: Release notes state experimental
+
+- **WHEN** the Vite SSR feature ships
+- **THEN** the changeset / release notes state that Vite SSR is experimental and not for production use
+
 ### Requirement: Migrating sections in server-rendering docs
 
 Sku MUST publish migration guidance as a **Migrating** heading in `docs/docs/server-rendering.md` with two self-contained subsections: **Migrate from Static App** and **Migrate from Older SSR App**. Sku MUST NOT place these under `docs/migration-guides/`. Each subsection MUST open with requirements (including React 19+) and limitations (sku surface only), and MUST include distinct headers covering config/commands, routes and request entries, AppWrapper, middleware, CSP, response headers, and Document/hydration. Guides MUST remain high-level (not file-by-file). `vite.md` MAY link to these subsections.

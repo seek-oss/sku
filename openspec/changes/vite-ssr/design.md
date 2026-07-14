@@ -17,6 +17,7 @@ Reference: [basic-streaming-app-example](https://github.com/jahredhope/basic-str
 - Shell-derived CSP as HTTP headers (lazy single nonce, optional Report-Only)
 - Per-route async chunks + vocab/language chunk registration
 - `@sku-lib/create` Vite SSR template + Migrating sections in `server-rendering.md`
+- Ship the first Vite SSR release as **experimental** (testing only; not for production), with docs warning and release notes
 
 **Non-Goals:**
 
@@ -140,20 +141,29 @@ export function onHydrate(args: { context: JsonValue | undefined }): {
 
 **Choice:** `## Migrating` with two self-contained subsections (**Migrate from Static App**, **Migrate from Older SSR App**). Requirements/limitations up front; topic headers for config, entries, AppWrapper, middleware, CSP, response headers, hydrate. Not under `docs/migration-guides/`. Primary product docs (outside Migrating) also cover those topics.
 
+### 17. Experimental first release
+
+**Choice:** The first public release of Vite SSR is **experimental**. It is available for evaluation and testing and is **not recommended for production**.
+
+- Product docs (`server-rendering.md`, and related Vite SSR surfaces such as create README / config docs as needed) MUST open with a clear experimental / not-for-production warning.
+- The changeset / release notes MUST state experimental status and the not-for-production guidance.
+- No runtime gate or “experimental” config flag in this change — communication only.
+
 ## Risks / Trade-offs
 
-| Risk                                    | Mitigation                                                               |
-| --------------------------------------- | ------------------------------------------------------------------------ |
-| Hydration mismatch on assets/context    | Serialize exact Document asset list; same tree on client                 |
-| Shell-only CSP cannot hash late scripts | Lazy single nonce for stream scripts; hash known bootstrap bodies        |
-| Absolute/`CDN` `publicPath`             | Config validation rejects; docs say relative-only                        |
-| Server stacks in hydrate JSON           | Strip `Error.stack` in production                                        |
-| Loader/action headers dropped           | Forward before CSP/`Content-Type`                                        |
-| Missing entries / named exports         | Hard error; no sku noops                                                 |
-| Server/client `AppWrapper` diverge      | Shared providers; docs: providers only                                   |
-| Create template drifts from contracts   | Minimal scaffold + create tests                                          |
-| Migration guide over-promises           | Requirements + limitations; sku-surface only                             |
-| Mock / stub deps ship in prod server    | Keep mocks in `devServerMiddleware` only; never import from server entry |
+| Risk                                    | Mitigation                                                                 |
+| --------------------------------------- | -------------------------------------------------------------------------- |
+| Hydration mismatch on assets/context    | Serialize exact Document asset list; same tree on client                   |
+| Shell-only CSP cannot hash late scripts | Lazy single nonce for stream scripts; hash known bootstrap bodies          |
+| Absolute/`CDN` `publicPath`             | Config validation rejects; docs say relative-only                          |
+| Server stacks in hydrate JSON           | Strip `Error.stack` in production                                          |
+| Loader/action headers dropped           | Forward before CSP/`Content-Type`                                          |
+| Missing entries / named exports         | Hard error; no sku noops                                                   |
+| Server/client `AppWrapper` diverge      | Shared providers; docs: providers only                                     |
+| Create template drifts from contracts   | Minimal scaffold + create tests                                            |
+| Migration guide over-promises           | Requirements + limitations; sku-surface only                               |
+| Mock / stub deps ship in prod server    | Keep mocks in `devServerMiddleware` only; never import from server entry   |
+| Teams run Vite SSR in production early  | Docs warning + changeset / release notes: experimental, not for production |
 
 ## Migration Plan
 

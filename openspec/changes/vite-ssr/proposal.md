@@ -11,6 +11,7 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
 - Vocab/language chunks via server entry `language`; auto-derive lazy-route `moduleId`; per-route chunk fixture.
 - **React 19+** required (documented; no runtime gate).
 - `@sku-lib/create` template `vite-ssr`; fleshed-out Vite SSR docs + Migrating sections in `server-rendering.md`.
+- Initial release is **experimental**: available for testing; **not for production**. Product docs MUST show a clear warning; the changeset / release notes MUST state the same.
 
 ### Non-goals
 
@@ -32,8 +33,8 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
 
 ## Impact
 
-- **Public API:** `renderType`; `routesEntry` + required `serverEntry` / `clientEntry` named exports; request-scoped CSP nonce (ALS); server `onRequest` `language` for Document vocab preload only (not ALS, not forwarded to `onHydrate` / no `getSkuLanguage` / no `__SKU_LANGUAGE__`); `onHydrate` receives `{ context }` only; create template `vite-ssr`; Vite SSR reuses config `devServerMiddleware` for optional local mocks
+- **Public API:** `renderType`; `routesEntry` + required `serverEntry` / `clientEntry` named exports; request-scoped CSP nonce (ALS); server `onRequest` `language` for Document vocab preload only; `onHydrate` receives `{ context }` only; create template `vite-ssr`; Vite SSR reuses config `devServerMiddleware` for optional local mocks
 - **Deps:** `react-router` (Data Mode) for Vite SSR; React 19+ prerequisite (peer may stay `^18 || ^19` for other modes)
-- **Docs:** `server-rendering.md` (product + Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs
+- **Docs:** `server-rendering.md` (product + Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs — with a clear experimental / not-for-production warning; changeset / release notes state the same
 - **Fixtures/tests:** Vite SSR fixture (streaming, CSP, entries, per-route chunks, vocab); create template tests
 - **Breaking risk:** Opt-in via `renderType`; document hydrate (not `#app`); relative `publicPath` only; React 19+; required named exports

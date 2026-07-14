@@ -3,7 +3,9 @@
 '@sku-lib/create': minor
 ---
 
-Add Vite SSR via `renderType: 'server-side-rendered'`
+Add experimental Vite SSR via `renderType: 'server-side-rendered'`
+
+**Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
 
 Full-document streaming for Server-Rendered Web Applications using Vite.
 

@@ -69,8 +69,10 @@
 - [x] 9.2 Flesh out primary Vite SSR section in `server-rendering.md` (providers/`AppWrapper`, two-layer middleware, CSP, response headers, error pages, create template)
 - [x] 9.3 Add `## Migrating` with **Migrate from Static App** and **Migrate from Older SSR App** (self-contained; requirements/limitations up front; topic headers); link from `vite.md`; not under `docs/migration-guides/`
 - [x] 9.4 Update create READMEs for the `vite-ssr` template
-- [x] 9.5 Changeset referencing the public API, React 19+, create template, Migrating sections, and the docs above
+- [x] 9.5 Changeset referencing the public API, React 19+, create template, Migrating sections, the docs above, and experimental / not-for-production status
 - [x] 9.6 Docs: `onHydrate` gets `{ context }` only; language is server Document preload only (no `getSkuLanguage` / `__SKU_LANGUAGE__`); client locale via re-derive / providers / optional `clientContext`
+- [x] 9.7 Add a clear experimental / not-for-production warning near the start of Vite SSR product docs (`server-rendering.md` and related surfaces as needed, e.g. create README / config)
+- [x] 9.8 Update the changeset / release notes to state Vite SSR is experimental and not for production use
 
 ## 10. `@sku-lib/create` Vite SSR template
 

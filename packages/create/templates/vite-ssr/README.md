@@ -4,6 +4,8 @@ This project is powered by [sku](https://github.com/seek-oss/sku), [braid](https
 
 It uses **Vite SSR**: full-document streaming and `hydrateRoot(document)` — not static `#app` hydrate.
 
+> **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet.
+
 **Requires React 19+.** Use `sku start` / `sku build` (not `sku start-ssr` / `sku build-ssr`).
 
 ## Getting Started

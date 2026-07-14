@@ -23,6 +23,8 @@ Vite support covers [static applications (SSG)][SSG] and opt-in [server-side ren
 
 ### Vite SSR
 
+> **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change. See [Server rendering](./docs/server-rendering.md).
+
 Set `renderType: 'server-side-rendered'` and provide a `routesEntry` (default `src/routes.tsx`) that exports named `routes`:
 
 ```ts

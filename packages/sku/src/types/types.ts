@@ -115,6 +115,8 @@ export interface SkuConfigBase {
   /**
    * Selects request-time SSR or the existing static generation behavior.
    * Omit to preserve today's static / SSG default.
+   *
+   * `'server-side-rendered'` (Vite SSR) is experimental and not for production use.
    */
   renderType?: 'server-side-rendered' | 'static-generated';
 

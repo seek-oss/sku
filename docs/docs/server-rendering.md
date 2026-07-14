@@ -2,6 +2,8 @@
 
 Sku’s server-side rendering is **Vite SSR**: a high-level API on `bundler: 'vite'` + `renderType: 'server-side-rendered'`, built on [React Router Data Mode](https://reactrouter.com/start/modes#data). Sku owns the HTTP server, Document shell, streaming, hydration, and CSP headers. Use `sku start` / `sku build` (same as static Vite). Requires **React 19+**.
 
+> **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+
 Scaffold with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or follow the sections below.
 
 Migrating from a static app or from the older webpack SSR API? See [Migrating](#migrating). Existing webpack SSR apps (`sku start-ssr` / `sku build-ssr` / `renderCallback`) remain supported for continuity — see [Older webpack SSR](#older-webpack-ssr-supported-for-continuity). New apps should not start on that path.

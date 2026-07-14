@@ -19,6 +19,3 @@ export const createSsrRequestContextStore = (
     },
   };
 };
-
-/** Alias used by existing CSP-focused call sites. */
-export const createSsrCspNonceStore = createSsrRequestContextStore;

@@ -16,7 +16,6 @@ import { getCjsInteropDeps } from './cjsInteropDeps.js';
 import type { PackageJson } from 'type-fest';
 import { createJiti } from 'jiti';
 import { validatePathAliases } from './validatePathAliases.js';
-import semver from 'semver';
 
 const jiti = createJiti(import.meta.url);
 
@@ -197,13 +196,14 @@ export const createSkuContext = async ({
         `${paths.routesEntry} does not exist. Vite SSR apps must provide a 'routesEntry'.`,
       );
     }
-
-    const reactPackage = requireFromCwd('react/package.json') as {
-      version: string;
-    };
-    if (semver.major(reactPackage.version) < 19) {
+    if (!existsSync(paths.serverEntry)) {
       throw new Error(
-        `Vite SSR requires React 19 or newer. Found React ${reactPackage.version}.`,
+        `${paths.serverEntry} does not exist. Vite SSR apps must provide a 'serverEntry' exporting named 'onRequest' and 'middleware'.`,
+      );
+    }
+    if (!existsSync(paths.clientEntry)) {
+      throw new Error(
+        `${paths.clientEntry} does not exist. Vite SSR apps must provide a 'clientEntry' exporting named 'onHydrate'.`,
       );
     }
   }

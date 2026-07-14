@@ -138,9 +138,8 @@ export interface SkuConfigBase {
    * The client entry point to the app.
    *
    * Under Vite SSR (`bundler: 'vite'` + `renderType: 'server-side-rendered'`), this is the
-   * optional client request entry exporting named `onHydrate` — not the static hydrate /
-   * webpack client bundle entry. When the file or named export is missing, sku soft-skips.
-   * Path may be `.tsx`, `.ts`, or `.js`.
+   * required client request entry exporting named `onHydrate`. Path may be
+   * `.tsx`, `.ts`, or `.js`.
    *
    * @default "./src/client.tsx"
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=cliententry
@@ -555,6 +554,7 @@ export interface WebpackSkuConfig {
 export interface ViteSkuConfig {
   /**
    * Vite SSR routes entry exporting a named `routes` (`RouteObject[]`).
+   * Required under Vite SSR — missing file or named `routes` export is a hard error.
    *
    * @default "./src/routes.tsx"
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=routesentry
@@ -562,11 +562,11 @@ export interface ViteSkuConfig {
   routesEntry?: string;
 
   /**
-   * Vite SSR server request entry. Optional — when the file is missing, sku
-   * soft-skips. Same config key as webpack SSR, but under Vite SSR export named
-   * `onRequest` (closed bag: `AppWrapper`, `language`, `clientContext`) and/or
-   * named `middleware` (Connect handlers) — not `renderCallback` or `default`.
-   * Path may be `.tsx`, `.ts`, or `.js`.
+   * Vite SSR server request entry. Required under Vite SSR — missing file or named
+   * export is a hard error. Same config key as webpack SSR, but under Vite SSR export named
+   * `onRequest` (closed object: `AppWrapper`, `language`, `clientContext`) and named
+   * `middleware` (Connect handlers; empty array / passthrough OK) — not `renderCallback`
+   * or `default`. Path may be `.tsx`, `.ts`, or `.js`.
    *
    * @default "./src/server.tsx"
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverentry

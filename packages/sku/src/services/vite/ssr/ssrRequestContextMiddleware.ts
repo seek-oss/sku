@@ -21,6 +21,3 @@ export const createSsrRequestContextMiddleware =
 export const getRequestContextStore = (
   req: Request,
 ): SsrRequestContextStore | undefined => stores.get(req);
-
-/** @deprecated Use `getRequestContextStore`. */
-export const getRequestCspNonceStore = getRequestContextStore;

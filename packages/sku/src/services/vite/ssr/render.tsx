@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import {
   createStaticHandler,
@@ -8,9 +7,6 @@ import {
   type StaticHandlerContext,
 } from 'react-router';
 import { getChunkName } from '@vocab/vite/chunks';
-// Resolved by sku's Vite SSR plugin to the consumer server request entry (or noop).
-// eslint-disable-next-line import-x/no-unresolved
-import * as serverEntry from '#sku-vite-ssr-server-entry';
 import Document from './Document.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
@@ -31,8 +27,9 @@ import type {
   RenderOptions,
   RenderResult,
   SkuRouteHandle,
-  SkuSsrAppWrapper,
+  SkuSsrOnRequest,
 } from './types.js';
+import { withAppWrapperLayout } from './withAppWrapperLayout.js';
 
 /** Merge RR loader/action headers from all matches (append for Set-Cookie). */
 const collectRouteHeaders = (context: StaticHandlerContext): Headers => {
@@ -84,34 +81,31 @@ const getModuleIds = (
   return moduleIds;
 };
 
-const wrapRouter = (
-  AppWrapper: SkuSsrAppWrapper | undefined,
-  children: ReactNode,
-) => (AppWrapper ? <AppWrapper>{children}</AppWrapper> : children);
-
 const renderDocument = async (
   routes: RouteObject[],
   request: Request,
   assets: RenderAssets,
+  onRequest: SkuSsrOnRequest,
   options: RenderOptions = {},
   renderManifest?: RenderManifest,
 ): Promise<RenderResult> => {
   const store =
-    options.requestContextStore ??
-    options.cspNonceStore ??
-    createSsrRequestContextStore(options.nonce);
+    options.requestContextStore ?? createSsrRequestContextStore(options.nonce);
 
   // Server entry runs before query() so loaders can read getSkuLanguage().
-  const requestEntry =
-    typeof serverEntry.onRequest === 'function'
-      ? await serverEntry.onRequest({ request })
-      : {};
+  const requestEntry = await onRequest({ request });
   if (requestEntry.language !== undefined) {
     store.setLanguage(requestEntry.language);
   }
 
+  const routesWithAppWrapper = withAppWrapperLayout(
+    routes,
+    requestEntry.AppWrapper,
+  );
   const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
-  const { query, dataRoutes } = createStaticHandler(routes, { basename });
+  const { query, dataRoutes } = createStaticHandler(routesWithAppWrapper, {
+    basename,
+  });
   const context = await query(request);
 
   if (context instanceof Response) {
@@ -164,14 +158,11 @@ const renderDocument = async (
     let ready = false;
     const stream = renderToPipeableStream(
       <Document assets={documentAssets}>
-        {wrapRouter(
-          requestEntry.AppWrapper,
-          <StaticRouterProvider
-            router={router}
-            context={context}
-            hydrate={false}
-          />,
-        )}
+        <StaticRouterProvider
+          router={router}
+          context={context}
+          hydrate={false}
+        />
       </Document>,
       {
         bootstrapModules: assets.bootstrapModules,
@@ -224,20 +215,20 @@ export const render = (
   routes: RouteObject[],
   request: Request,
   assets: RenderAssets,
+  onRequest: SkuSsrOnRequest,
   options: RenderOptions = {},
   renderManifest?: RenderManifest,
 ): Promise<RenderResult> => {
   // ALS must be established in this Vite-loaded module so consumer
   // helpers (also resolved via the SSR module graph) share the store.
   const store =
-    options.requestContextStore ??
-    options.cspNonceStore ??
-    createSsrRequestContextStore(options.nonce);
+    options.requestContextStore ?? createSsrRequestContextStore(options.nonce);
   return runWithSsrRequestContext(store, () =>
     renderDocument(
       routes,
       request,
       assets,
+      onRequest,
       { ...options, requestContextStore: store },
       renderManifest,
     ),

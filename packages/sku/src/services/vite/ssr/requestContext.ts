@@ -9,9 +9,6 @@ export type SsrRequestContextStore = {
   setLanguage: (language: string | undefined) => void;
 };
 
-/** @deprecated Use `SsrRequestContextStore`. Kept for call-site clarity during rename. */
-export type SsrCspNonceStore = SsrRequestContextStore;
-
 type ContextStorage = {
   getStore: () => SsrRequestContextStore | undefined;
   run: <T>(context: SsrRequestContextStore, fn: () => T) => T;

@@ -3,7 +3,7 @@
 - [x] 1.1 Spike Vite SSR + React Router Data Mode (`createStaticHandler` → Document `renderToPipeableStream` → `hydrateRoot(document)`) with one lazy route
 - [x] 1.2 Spike shell-derived CSP HTTP headers + request nonce + hashable bootstrap script body on the streamed response
 - [x] 1.3 Spike no-`transformIndexHtml` path: preamble import + `bootstrapModules` + Document assets; confirm HMR
-- [x] 1.4 Confirm React 18 vs 19 `hydrateRoot(document)` + `<html>` doctype behavior; record gate in `design.md` if React ≥ 19 required
+- [x] 1.4 Confirm React 18 vs 19 `hydrateRoot(document)` + `<html>` doctype behavior; record React ≥ 19 as documented prerequisite in `design.md` (no runtime version gate)
 - [x] 1.5 Record spike outcomes against open questions in `design.md` (app entry name, Document ownership, middleware typing, `onAllReady` API, omitted-`renderType` default)
 
 ## 2. Public API and config
@@ -116,14 +116,18 @@
 
 ## 15. Server/client request entries (AppWrapper, language, clientContext)
 
+> **Superseded in part by §18.** Entries and named exports are now **required** (hard error if missing). Return-object fields remain optional.
+
 - [x] 15.1 Add types + config for optional Vite SSR request entries (defaults e.g. `src/entry.server.tsx` / `src/entry.client.tsx`); closed return types: server `{ AppWrapper?, language?, clientContext? }`, client `{ AppWrapper? }`
-- [x] 15.2 Wire server entry before `query()`: apply `AppWrapper` around the static router, seed request-context language from `language`, serialise `clientContext` into the hydrate bootstrap (shell-time JSON only)
-- [x] 15.3 Wire client entry: pass deserialized `context` + forwarded `language`; apply client `AppWrapper` around the browser router
+- [x] 15.2 Wire server entry before `query()`: mount `AppWrapper` as a pathless parent layout under `StaticRouterProvider`, seed request-context language from `language`, serialise `clientContext` into the hydrate bootstrap (shell-time JSON only)
+- [x] 15.3 Wire client entry: pass deserialized `context` + forwarded `language`; mount client `AppWrapper` as a pathless parent layout under `RouterProvider`
 - [x] 15.4 Remove Vite SSR language identity via `req.skuLanguage` and `:language` route param; keep `getSkuLanguage()` as a read API seeded from the server entry; resolve `language` → sole configured language → soft-fail
 - [x] 15.5 Update fixture + tests: server entry sets language / `AppWrapper` / `clientContext`; drop middleware-slot and `:language`-identity assertions; cover sole-language and soft-fail
 - [x] 15.6 Docs: document request entries and `AppWrapper` (providers only) in `server-rendering.md` / `vite.md` / `configuration.md`; replace request-slot language docs with server entry `language`
 
 ## 16. Reuse clientEntry / serverEntry for Vite SSR request hooks
+
+> **Superseded in part by §18.** Noops for missing entry files are removed; entries are required.
 
 - [x] 16.1 Remove `entryServer` / `entryClient` config, types, defaults, schema; wire Vite SSR request hooks through existing `serverEntry` / `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`)
 - [x] 16.2 Update Vite SSR plugin aliases / resolve / noops to use `paths.serverEntry` / `paths.clientEntry`
@@ -132,12 +136,22 @@
 
 ## 17. Named exports, routes entry, middleware on server
 
+> **Superseded in part by §18.** Soft-skip for missing named exports is replaced by hard errors; `routes` / `onRequest` / `middleware` / `onHydrate` are all required.
+
 - [x] 17.1 Change Vite SSR request-entry contract to named exports: `onRequest` / `middleware` on server entry, `onHydrate` on client entry; soft-skip missing names; do not use `default`
 - [x] 17.2 Replace `appEntry` / `src/app.tsx` / `SkuApp` with `routesEntry` / `src/routes.tsx` exporting named `routes: RouteObject[]`; remove `SkuApp` from the public API
 - [x] 17.3 Mount consumer middleware from server-entry `middleware` in dev and production (not from the routes entry)
 - [x] 17.4 Update sku shells / noops / aliases to import named exports (`routes`, `onRequest`, `onHydrate`, `middleware`); rename virtual `#sku-vite-ssr-app` → `#sku-vite-ssr-routes` if present
 - [x] 17.5 Fixture: `src/routes.tsx` with named `routes`; named exports in `src/server.tsx` / `src/client.tsx`; move middleware onto the server entry; update tests
 - [x] 17.6 Docs: routes entry + named `routes`; named `onRequest` / `onHydrate` / `middleware`; no `SkuApp`; server-entry middleware vs config `devServerMiddleware` (`server-rendering.md` / `vite.md` / `configuration.md`)
+
+## 18. Require Vite SSR entries and named exports
+
+- [x] 18.1 Remove sku noop stubs for missing `serverEntry` / `clientEntry` / named exports; resolve entries as required modules
+- [x] 18.2 Hard-error when Vite SSR is missing `serverEntry` or `clientEntry` file, or when any required named export is absent (`routes`, `onRequest`, `middleware`, `onHydrate`); clear error naming the missing export; do not soft-skip or use `default`
+- [x] 18.3 Update types so Vite SSR request entries and named exports are required (return-object fields `AppWrapper` / `language` / `clientContext` stay optional; `middleware` may be empty array / passthrough)
+- [x] 18.4 Fixture + tests: ensure default entries export all required names; add coverage that missing file / missing named export fails hard
+- [x] 18.5 Docs: document required `serverEntry` / `clientEntry` and required named exports; remove optional / soft-skip / noop wording (`configuration.md` / `server-rendering.md` / `vite.md`)
 
 ## Deferred (no tasks)
 

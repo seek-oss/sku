@@ -58,7 +58,7 @@ Default: 'static-generated'
 
 Selects request-time SSR or static generation.
 
-- `'server-side-rendered'` requires `bundler: 'vite'`, React 19+, and a `routesEntry` exporting named `routes` (`RouteObject[]`). Use `sku start` / `sku build`.
+- `'server-side-rendered'` requires `bundler: 'vite'`, React 19+, a `routesEntry` exporting named `routes` (`RouteObject[]`), and required `serverEntry` / `clientEntry` with named `onRequest` / `middleware` / `onHydrate`. Use `sku start` / `sku build`.
 - `'static-generated'` (or omit) keeps the existing static rendering path.
 
 See [Server rendering](./docs/server-rendering.md).
@@ -71,7 +71,7 @@ Default: `./src/routes.tsx`
 
 **Vite SSR only** (`renderType: 'server-side-rendered'`).
 
-Path to the module exporting a named `routes` value (`RouteObject[]` for React Router Data Mode). There is no `SkuApp` wrapper type — export the route config directly.
+Path to the module exporting a named `routes` value (`RouteObject[]` for React Router Data Mode). Required for Vite SSR — missing file or named `routes` export is a hard error. There is no `SkuApp` wrapper type — export the route config directly.
 
 ## clientEntry
 
@@ -83,7 +83,7 @@ The client entry point to the app. Path may be `.tsx`, `.ts`, or `.js`.
 
 **Static / webpack:** the file that executes your browser code. Each `route` can also specify a client entry; if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
 
-**Vite SSR** (`bundler: 'vite'` + `renderType: 'server-side-rendered'`): optional client request entry exporting named `onHydrate`. Receives `{ context, language }` and may return `AppWrapper`. See [Server rendering](./docs/server-rendering.md#request-entries-serverentry--cliententry).
+**Vite SSR** (`bundler: 'vite'` + `renderType: 'server-side-rendered'`): required client request entry exporting named `onHydrate`. Receives `{ context, language }` and may return `AppWrapper`. Missing file or named export is a hard error. See [Server rendering](./docs/server-rendering.md#request-entries-serverentry--cliententry).
 
 ## compilePackages
 
@@ -574,7 +574,7 @@ Path may be `.tsx`, `.ts`, or `.js`.
 
 **Webpack SSR** (`sku start-ssr` / `sku build-ssr`): the server entry exporting a `renderCallback`.
 
-**Vite SSR** (`bundler: 'vite'` + `renderType: 'server-side-rendered'`): optional server request entry exporting named `onRequest` and/or named `middleware`. When the file or a named export is missing, sku soft-skips that export (does not use `default`). `onRequest` may return `AppWrapper`, `language`, and JSON-serialisable `clientContext`. `middleware` is typed as `SkuSsrMiddleware` (Connect/Express-compatible handler or array) and runs before HTML render. Same config key as webpack — not a parallel `entryServer` option; the Vite SSR export shape is not `renderCallback`. See [Server rendering](./docs/server-rendering.md#request-entries-serverentry--cliententry).
+**Vite SSR** (`bundler: 'vite'` + `renderType: 'server-side-rendered'`): required server request entry exporting named `onRequest` and named `middleware`. Missing file or named export is a hard error (sku does not use `default`). `onRequest` may return `AppWrapper`, `language`, and JSON-serialisable `clientContext`. `middleware` is typed as `SkuSsrMiddleware` (Connect/Express-compatible handler or array; empty array / passthrough OK) and runs before HTML render. Same config key as webpack — not a parallel `entryServer` option; the Vite SSR export shape is not `renderCallback`. See [Server rendering](./docs/server-rendering.md#request-entries-serverentry--cliententry).
 
 ## serverPort
 

@@ -53,52 +53,57 @@ Vite SSR apps MUST declare routes through a routes entry configured via `routesE
 - **AND** they MUST NOT need a webpack-style `serverEntry` `renderCallback` to render HTML responses
 - **AND** HTTP middleware MUST NOT be declared on the routes entry
 
-### Requirement: Optional server and client request entries
+### Requirement: Required server and client request entries
 
-Vite SSR MAY accept optional separate consumer server and client request-entry modules configured via the existing `serverEntry` and `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`). Sku MUST NOT introduce parallel `entryServer` / `entryClient` config keys for this purpose. Under Vite SSR these entries MUST NOT own the HTML response (sku still owns Document streaming and CSP); their Vite SSR contracts are the named exports below, not webpack `renderCallback` / static hydrate.
+Vite SSR MUST require separate consumer server and client request-entry modules configured via the existing `serverEntry` and `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`). Sku MUST NOT introduce parallel `entryServer` / `entryClient` config keys for this purpose. Under Vite SSR these entries MUST NOT own the HTML response (sku still owns Document streaming and CSP); their Vite SSR contracts are the named exports below, not webpack `renderCallback` / static hydrate. Missing entry files MUST be a hard error — sku MUST NOT supply noop stubs for absent files.
 
-Sku MUST consume **named exports only**. Missing named exports MUST soft-skip (treat as absent / noop). Sku MUST NOT fall back to a module’s `default` export for these hooks.
+Sku MUST consume **named exports only**. The following named exports MUST be present; missing any MUST be a hard error. Sku MUST NOT fall back to a module’s `default` export for these hooks, and MUST NOT soft-skip missing names:
 
-The server entry (`serverEntry`), when present, MAY export:
+- Routes entry (`routesEntry`): `routes`
+- Server entry (`serverEntry`): `onRequest`, `middleware`
+- Client entry (`clientEntry`): `onHydrate`
+
+The server entry (`serverEntry`) MUST export:
 
 - `onRequest` — invoked before React Router `query()`; MAY return only:
-  - `AppWrapper` — a React component `ComponentType<{ children: ReactNode }>` used solely to wrap the router tree (providers / request-scoped seed, not page layout)
+  - `AppWrapper` — a React component `ComponentType<{ children: ReactNode }>` for providers / request-scoped seed (**not** page layout). Sku MUST mount it **inside** the router as a pathless parent layout above the consumer `routes` so it MAY use React Router context/hooks (for example `useLocation`)
   - `language` — a configured language name (or `en-PSEUDO`) for vocab chunk identification
   - `clientContext` — a JSON-serialisable value serialised into the hydrate bootstrap at shell time
-- `middleware` — a Connect-compatible `RequestHandler` or array of handlers, mounted before the HTML render path
+- `middleware` — a Connect-compatible `RequestHandler` or array of handlers, mounted before the HTML render path (empty array or passthrough is allowed)
 
-The client entry (`clientEntry`), when present, MAY export:
+The client entry (`clientEntry`) MUST export:
 
 - `onHydrate` — receives `{ context, language }` where `context` is the deserialized `clientContext` and `language` is forwarded by sku from the server result, and MAY return only `AppWrapper`
 
-Sku MUST render `Document` → optional `AppWrapper` → router provider on server and client.
+Return-object fields on `onRequest` / `onHydrate` remain optional. Sku MUST render `Document` → router provider → optional sku pathless `AppWrapper` layout → consumer routes on server and client. When `AppWrapper` is omitted, sku MUST use the consumer `routes` without an injected parent.
 
-#### Scenario: Server entry wraps the router and sets language
+#### Scenario: Server entry wraps routes inside the router and sets language
 
-- **WHEN** a Vite SSR app provides a named `onRequest` export that returns `AppWrapper` and `language`
+- **WHEN** a Vite SSR app’s named `onRequest` export returns `AppWrapper` and `language`
 - **THEN** sku invokes that export before `query()`
-- **AND** sku wraps the static router tree with `AppWrapper`
+- **AND** sku mounts `AppWrapper` as a pathless parent layout under `StaticRouterProvider` above the consumer routes (not outside the router provider)
 - **AND** sku uses `language` for vocab chunk identification (when `languages` is configured)
 
 #### Scenario: Client entry receives shell context and language
 
-- **WHEN** a Vite SSR app provides a server `onRequest` that returns `clientContext` and `language`
-- **AND** a named `onHydrate` export is provided
+- **WHEN** a Vite SSR app’s server `onRequest` returns `clientContext` and `language`
 - **THEN** sku serialises `clientContext` into the hydrate bootstrap
 - **AND** sku invokes `onHydrate` with deserialized `context` and the same `language`
-- **AND** when `onHydrate` returns `AppWrapper`, sku wraps the browser router tree with it
+- **AND** when `onHydrate` returns `AppWrapper`, sku mounts it as a pathless parent layout under `RouterProvider` above the consumer routes
+- **AND** that `AppWrapper` MAY use React Router hooks during render
 
-#### Scenario: Request entries are optional
+#### Scenario: Missing request entry files hard-error
 
-- **WHEN** a Vite SSR app omits server and client request entries
-- **THEN** sku still streams and hydrates the document using the routes entry’s `routes`
-- **AND** language resolution follows sole-language / soft-fail rules when `languages` is configured
+- **WHEN** a Vite SSR app omits the configured `serverEntry` or `clientEntry` file
+- **THEN** sku fails with a hard error
+- **AND** sku does not fall back to a noop stub for the missing entry
 
-#### Scenario: Missing named exports soft-skip
+#### Scenario: Missing named exports hard-error
 
-- **WHEN** a server or client request-entry module is present but does not export the relevant named export (`onRequest`, `middleware`, or `onHydrate`)
-- **THEN** sku soft-skips that export (treats it as absent)
+- **WHEN** a routes, server, or client entry module does not export the required named export (`routes`, `onRequest`, `middleware`, or `onHydrate`)
+- **THEN** sku fails with a hard error stating which export is missing
 - **AND** sku does not use the module’s `default` export as a substitute
+- **AND** sku does not soft-skip the missing export
 
 ### Requirement: sku owns request routing using React Router
 
@@ -172,32 +177,32 @@ Vite SSR apps MUST support loading route modules as separate async chunks on ser
 
 When `languages` is configured, Vite SSR apps MUST support vocab/language async chunks: language translations MUST be split into language chunks at build time, and the active language chunk MUST be registered for Document assets on the SSR response path (parity with static Vite `@vocab/vite` chunk helpers).
 
-Sku owns chunk **registration**. Language **identification** is app-owned **only** via the server request entry `language` field (configured language name, e.g. `th-TH` — not necessarily a URL path segment). When that field is unset, sku MAY fall back to the sole configured language when exactly one language is set. Missing or unknown language MUST soft-fail (skip vocab chunk registration; do not error the response). Sku MUST NOT identify language from Express `req.skuLanguage`, a `:language` route param, or route `handle.language`. Sku MUST NOT expose an `addLanguageChunk` callback on the public Vite SSR API. Loaders/actions MAY read the resolved language via `getSkuLanguage()` after the server entry has run.
+Sku owns chunk **registration**. Language **identification** is app-owned **only** via the `language` field returned from server `onRequest` (configured language name, e.g. `th-TH` — not necessarily a URL path segment). When that field is unset, sku MAY fall back to the sole configured language when exactly one language is set. Missing or unknown language MUST soft-fail (skip vocab chunk registration; do not error the response). Sku MUST NOT identify language from Express `req.skuLanguage`, a `:language` route param, or route `handle.language`. Sku MUST NOT expose an `addLanguageChunk` callback on the public Vite SSR API. Loaders/actions MAY read the resolved language via `getSkuLanguage()` after `onRequest` has run.
 
 #### Scenario: Active language chunk is registered
 
 - **WHEN** a Vite SSR app has `languages` configured
-- **AND** the server request entry returns a configured language name as `language`
+- **AND** server `onRequest` returns a configured language name as `language`
 - **THEN** sku registers that language’s vocab chunk for the document assets / preloads used by the streamed response
 - **AND** the language chunk participates in client load for that response
 
 #### Scenario: Server entry language is the app-owned identity path
 
 - **WHEN** a Vite SSR app has `languages` configured
-- **AND** the server request entry returns `language` set to a configured language name
+- **AND** server `onRequest` returns `language` set to a configured language name
 - **THEN** sku registers that language’s vocab chunk for the response
 - **AND** sku does not use a `:language` route param or middleware language slot for identification
 
-#### Scenario: Sole-language fallback when server entry omits language
+#### Scenario: Sole-language fallback when onRequest omits language
 
 - **WHEN** a Vite SSR app has exactly one language configured
-- **AND** the server request entry is omitted or does not return `language`
+- **AND** server `onRequest` does not return `language`
 - **THEN** sku uses that sole configured language to register the vocab chunk
 
 #### Scenario: Soft-fail when language cannot be resolved
 
 - **WHEN** a Vite SSR app has multiple `languages` configured
-- **AND** the server request entry is omitted or does not return a known `language`
+- **AND** server `onRequest` does not return a known `language`
 - **THEN** sku does not register a vocab language chunk
 - **AND** the SSR response still succeeds
 
@@ -308,12 +313,13 @@ When a matched route sets `handle.waitForAll: true`, sku MUST wait for `onAllRea
 
 ### Requirement: React 19 is required for Vite SSR
 
-Vite SSR (`renderType: 'server-side-rendered'` with Vite) MUST require React 19 or newer.
+Vite SSR (`renderType: 'server-side-rendered'` with Vite) MUST document React 19 or newer as a prerequisite. Sku MUST NOT perform a dedicated runtime React major-version check when enabling Vite SSR.
 
-#### Scenario: React 18 rejected
+#### Scenario: Docs state React 19 prerequisite
 
-- **WHEN** a project enables Vite SSR and the installed React major version is less than 19
-- **THEN** sku fails with an error stating that Vite SSR requires React 19 or newer
+- **WHEN** a project enables Vite SSR
+- **THEN** sku documentation states that React 19 or newer is required
+- **AND** sku does not reject the config solely because the installed React major version is less than 19
 
 ### Requirement: Lazy-route moduleId is auto-derived for idiomatic lazy imports
 
@@ -359,7 +365,7 @@ When `httpsDevServer` is enabled, Vite SSR `sku start` MUST serve the single-por
 
 ### Requirement: Vite SSR middleware is server-entry middleware
 
-Vite SSR MUST mount consumer middleware from the server entry’s named `middleware` export before the HTML render path. The routes entry MUST NOT declare middleware. Config `devServerMiddleware` MUST NOT be required for Vite SSR request middleware (that config remains for static Vite / webpack). Missing `middleware` MUST soft-skip.
+Vite SSR MUST mount consumer middleware from the server entry’s named `middleware` export before the HTML render path. The export is required (empty array or passthrough is allowed). The routes entry MUST NOT declare middleware. Config `devServerMiddleware` MUST NOT be required for Vite SSR request middleware (that config remains for static Vite / webpack). Missing `middleware` MUST be a hard error.
 
 #### Scenario: Server-entry middleware runs before HTML render
 
@@ -367,6 +373,12 @@ Vite SSR MUST mount consumer middleware from the server entry’s named `middlew
 - **THEN** that middleware handles matching requests before sku streams HTML
 - **AND** consumers are not required to set config `devServerMiddleware` for that behavior
 - **AND** middleware is not read from the routes entry
+
+#### Scenario: Missing middleware export hard-error
+
+- **WHEN** a Vite SSR server entry does not export named `middleware`
+- **THEN** sku fails with a hard error
+- **AND** sku does not soft-skip or substitute a noop middleware
 
 ### Requirement: Production server does not require listen logging
 

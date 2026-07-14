@@ -13,7 +13,7 @@ export const startProductionSsrServer = async ({
   middleware,
   render,
 }: {
-  middleware?: SkuSsrMiddleware;
+  middleware: SkuSsrMiddleware;
   render: RenderFunction;
 }): Promise<SsrServerResult> => {
   const serverDirectory = path.dirname(fileURLToPath(import.meta.url));

@@ -33,11 +33,11 @@ export const routes: RouteObject[] = [
 ];
 ```
 
-Optional `serverEntry` (default `src/server.tsx`) may export named `middleware` (Connect/Express handlers) and/or named `onRequest`. Optional `clientEntry` (default `src/client.tsx`) may export named `onHydrate`. Missing named exports soft-skip; do not use `default`.
+Required `serverEntry` (default `src/server.tsx`) must export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest`. Required `clientEntry` (default `src/client.tsx`) must export named `onHydrate`. Missing entry files or named exports are a hard error; do not use `default`.
 
 sku owns the HTTP server, the React Document shell (not overridable — use React 19 metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers. Requires React 19+. Vite SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
 
-`onRequest` may return a closed bag under Vite SSR: `AppWrapper` (providers only), `language`, and JSON `clientContext`. `onHydrate` may return `AppWrapper`. Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch). When `languages` is configured, sku registers the active vocab language chunk from the server entry `language` (sole-language fallback when only one language is set).
+`onRequest` may return a closed object under Vite SSR: `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language`, and JSON `clientContext`. `onHydrate` may return `AppWrapper`. Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch). When `languages` is configured, sku registers the active vocab language chunk from the server entry `language` (sole-language fallback when only one language is set).
 
 See [Server rendering](./docs/server-rendering.md) and [CSP](./docs/csp.md) for details.
 

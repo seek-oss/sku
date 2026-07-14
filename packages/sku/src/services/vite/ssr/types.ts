@@ -24,7 +24,7 @@ export type JsonValue =
 /** Provider wrapper around the router tree (not page layout / Document). */
 export type SkuSsrAppWrapper = ComponentType<{ children: ReactNode }>;
 
-/** Closed return bag from the optional Vite SSR `onRequest` export. */
+/** Closed return object from the Vite SSR `onRequest` export. Fields are optional. */
 export type SkuSsrOnRequestResult = {
   AppWrapper?: SkuSsrAppWrapper;
   /** Configured language name (or `en-PSEUDO`) for vocab chunk identity. */
@@ -37,7 +37,7 @@ export type SkuSsrOnRequest = (args: {
   request: Request;
 }) => SkuSsrOnRequestResult | Promise<SkuSsrOnRequestResult>;
 
-/** Closed return bag from the optional Vite SSR `onHydrate` export. */
+/** Closed return object from the Vite SSR `onHydrate` export. Fields are optional. */
 export type SkuSsrOnHydrateResult = {
   AppWrapper?: SkuSsrAppWrapper;
 };
@@ -58,8 +58,6 @@ export interface RenderOptions {
   nonce?: string;
   /** Shared request context for this render (CSP nonce + language). */
   requestContextStore?: SsrRequestContextStore;
-  /** @deprecated Use `requestContextStore`. */
-  cspNonceStore?: SsrRequestContextStore;
   development?: boolean;
   /** Configured language names for vocab chunk registration. */
   languages?: string[];

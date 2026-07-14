@@ -42,7 +42,7 @@ export const createDevSsrServer = async ({
     },
   });
   const serverModule = (await vite.ssrLoadModule(serverEntry)) as {
-    middleware?: SkuSsrMiddleware;
+    middleware: SkuSsrMiddleware;
     render: RenderFunction;
   };
 

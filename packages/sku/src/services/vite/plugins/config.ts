@@ -2,7 +2,6 @@ import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { fixViteVanillaExtractDepScanPlugin } from './esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { makePluginName } from '../helpers/makePluginName.js';
-import { existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -23,14 +22,10 @@ export const configPlugin = ({
 
   const viteSsrOptimizeEntries = [
     skuContext.paths.routesEntry,
+    skuContext.paths.serverEntry,
+    skuContext.paths.clientEntry,
     ssrClientEntry,
     ssrServerEntry,
-    ...(existsSync(skuContext.paths.serverEntry)
-      ? [skuContext.paths.serverEntry]
-      : []),
-    ...(existsSync(skuContext.paths.clientEntry)
-      ? [skuContext.paths.clientEntry]
-      : []),
   ];
 
   return {

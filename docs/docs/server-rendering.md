@@ -69,26 +69,27 @@ Do **not** use `sku start-ssr` / `sku build-ssr` when `renderType` is set.
 
 ### Request entries (`serverEntry` / `clientEntry`)
 
-Optional separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition and server-only middleware. Under Vite SSR these use **named exports** — they do **not** own the HTML response (sku still streams Document + CSP) and are not webpack `renderCallback` / static hydrate. Missing named exports soft-skip; sku does not use `default`.
+Required separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition and server-only middleware. Under Vite SSR these use **named exports** — they do **not** own the HTML response (sku still streams Document + CSP) and are not webpack `renderCallback` / static hydrate. Missing entry files or any required named export is a **hard error**; sku does not use `default` or supply noop stubs.
 
-**Server entry** may export:
+**Server entry** must export:
 
 - `onRequest` — runs before React Router `query()` and may return only:
-  - `AppWrapper` — a React component `ComponentType<{ children }>` for providers / request-scoped seed (**not** page layout or Document chrome)
+  - `AppWrapper` — a React component `ComponentType<{ children }>` for providers / request-scoped seed (**not** page layout or Document chrome). Sku mounts it **inside** the router as a pathless parent layout so it may use React Router hooks (`useLocation`, etc.)
   - `language` — configured language **name** (or `en-PSEUDO`) for vocab chunk identity
   - `clientContext` — JSON-serialisable shell seed (serialised at shell time only)
-- `middleware` — `SkuSsrMiddleware` (Connect/Express-compatible handler or array), mounted before the HTML render path
+- `middleware` — `SkuSsrMiddleware` (Connect/Express-compatible handler or array; empty array / passthrough OK), mounted before the HTML render path
 
-**Client entry** may export:
+**Client entry** must export:
 
 - `onHydrate` — receives `{ context, language }` (`context` is deserialized `clientContext`; `language` is forwarded from the server result) and may return only `AppWrapper`
 
-sku renders `Document` → optional `AppWrapper` → router provider on server and client.
+sku renders `Document` → router provider → optional sku pathless `AppWrapper` layout → consumer routes on server and client. When `AppWrapper` is omitted, consumer routes are used as-is.
 
 ```tsx
 // src/server.tsx
 import { VocabProvider } from '@vocab/react';
 import type { ReactNode } from 'react';
+import { useLocation } from 'react-router';
 import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
 
 export const onRequest: SkuSsrOnRequest = ({ request }) => {
@@ -98,9 +99,14 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => {
   return {
     language,
     clientContext,
-    AppWrapper: ({ children }: { children: ReactNode }) => (
-      <VocabProvider language={language}>{children}</VocabProvider>
-    ),
+    // Mounted inside the router — may use React Router hooks.
+    AppWrapper: ({ children }: { children: ReactNode }) => {
+      const { pathname } = useLocation();
+      const activeLanguage = resolveLocaleFromPathname(pathname) ?? language;
+      return (
+        <VocabProvider language={activeLanguage}>{children}</VocabProvider>
+      );
+    },
   };
 };
 
@@ -111,16 +117,21 @@ export const middleware: SkuSsrMiddleware = (req, res, next) => next();
 // src/client.tsx
 import { VocabProvider } from '@vocab/react';
 import type { ReactNode } from 'react';
+import { useLocation } from 'react-router';
 import type { SkuSsrOnHydrate } from 'sku';
 
-export const onHydrate: SkuSsrOnHydrate = ({ language }) => ({
-  AppWrapper: ({ children }: { children: ReactNode }) => (
-    <VocabProvider language={language ?? 'en'}>{children}</VocabProvider>
-  ),
+export const onHydrate: SkuSsrOnHydrate = ({ context }) => ({
+  // Re-derive URL values here (or in a shared AppWrapper) so SPA navigations stay fresh.
+  // Hydrate `language` / `context` are seed only — do not close over them for URL-derived locale.
+  AppWrapper: ({ children }: { children: ReactNode }) => {
+    const { pathname } = useLocation();
+    const language = resolveLocaleFromPathname(pathname) ?? 'en';
+    return <VocabProvider language={language}>{children}</VocabProvider>;
+  },
 });
 ```
 
-Use the same providers on both sides so the tree matches for hydration. Values that change on SPA navigations must re-derive inside the provider (or a route layout); closing only over hydrate `context` will go stale.
+Use the same providers on both sides so the tree matches for hydration. Values that change on SPA navigations must re-derive via React Router hooks inside `AppWrapper` (or a route layout); closing only over hydrate `context` / `language` will go stale.
 
 ### Lazy routes and `handle.moduleId`
 

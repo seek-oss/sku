@@ -24,7 +24,7 @@
         "__sku_alias__renderEntry",
         "__sku_alias__serverEntry",
         "__sku_alias__webpackStats",
-        "#sku-vite-ssr-app",
+        "#sku-vite-ssr-routes",
         "#sku-vite-ssr-server-entry",
         "#sku-vite-ssr-client-entry",
       ],
@@ -184,9 +184,9 @@
     },
     "fixtures/vite-ssr": {
       "entry": [
-        "src/app.tsx",
-        "src/server.ts",
-        "src/client.ts",
+        "src/routes.tsx",
+        "src/server.tsx",
+        "src/client.tsx",
         "sku.config.*",
       ],
       "ignoreDependencies": ["@vocab/core", "@vocab/vite"],

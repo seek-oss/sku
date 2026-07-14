@@ -12,7 +12,7 @@ import {
   type RenderFunction,
   type SsrServerResult,
 } from './ssrServerShared.js';
-import type { RenderAssets, SkuApp } from './types.js';
+import type { RenderAssets, SkuSsrMiddleware } from './types.js';
 
 const require = createRequire(import.meta.url);
 
@@ -42,12 +42,12 @@ export const createDevSsrServer = async ({
     },
   });
   const serverModule = (await vite.ssrLoadModule(serverEntry)) as {
-    app: SkuApp;
+    middleware?: SkuSsrMiddleware;
     render: RenderFunction;
   };
 
   serverApp.use(createSsrRequestContextMiddleware());
-  mountConsumerMiddleware(serverModule.app.middleware, (middleware) =>
+  mountConsumerMiddleware(serverModule.middleware, (middleware) =>
     serverApp.use(middleware),
   );
   serverApp.use(vite.middlewares);

@@ -130,6 +130,15 @@
 - [x] 16.3 Fixture: use default request-entry paths (`src/server.tsx` / `src/client.tsx`); drop `serverEntry` / `clientEntry` overrides; update tests if paths changed
 - [x] 16.4 Docs: remove `entryServer` / `entryClient`; document mode-discriminated `serverEntry` / `clientEntry` for Vite SSR; fix stale `.js` defaults to `.tsx` and note `.ts` works (`configuration.md` / `server-rendering.md` / `vite.md`)
 
+## 17. Named exports, routes entry, middleware on server
+
+- [x] 17.1 Change Vite SSR request-entry contract to named exports: `onRequest` / `middleware` on server entry, `onHydrate` on client entry; soft-skip missing names; do not use `default`
+- [x] 17.2 Replace `appEntry` / `src/app.tsx` / `SkuApp` with `routesEntry` / `src/routes.tsx` exporting named `routes: RouteObject[]`; remove `SkuApp` from the public API
+- [x] 17.3 Mount consumer middleware from server-entry `middleware` in dev and production (not from the routes entry)
+- [x] 17.4 Update sku shells / noops / aliases to import named exports (`routes`, `onRequest`, `onHydrate`, `middleware`); rename virtual `#sku-vite-ssr-app` → `#sku-vite-ssr-routes` if present
+- [x] 17.5 Fixture: `src/routes.tsx` with named `routes`; named exports in `src/server.tsx` / `src/client.tsx`; move middleware onto the server entry; update tests
+- [x] 17.6 Docs: routes entry + named `routes`; named `onRequest` / `onHydrate` / `middleware`; no `SkuApp`; server-entry middleware vs config `devServerMiddleware` (`server-rendering.md` / `vite.md` / `configuration.md`)
+
 ## Deferred (no tasks)
 
 - Production listen / setup logging and a custom logger for setup behaviours (e.g. listen-on-port) — documented in `design.md` Open Questions / §9; no implementation in this change.

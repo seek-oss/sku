@@ -1,9 +1,9 @@
 import { VocabProvider } from '@vocab/react';
 import type { ReactNode } from 'react';
-import type { SkuSsrClientEntry } from 'sku';
-import type { ClientContext } from './types';
+import type { SkuSsrOnHydrate } from 'sku';
+import type { ClientContext } from './types.js';
 
-const onHydrate: SkuSsrClientEntry = ({ context, language }) => {
+export const onHydrate: SkuSsrOnHydrate = ({ context, language }) => {
   const clientContext = context as ClientContext;
 
   // We don't currently do anything with the context in this fixture, so just confirm it exists
@@ -17,5 +17,3 @@ const onHydrate: SkuSsrClientEntry = ({ context, language }) => {
     ),
   };
 };
-
-export default onHydrate;

@@ -1,6 +1,4 @@
-import type { SkuSsrClientEntry } from '../ssr/types.js';
+import type { SkuSsrOnHydrate } from '../ssr/types.js';
 
 /** Default when the consumer omits `clientEntry`. */
-const onHydrate: SkuSsrClientEntry = () => ({});
-
-export default onHydrate;
+export const onHydrate: SkuSsrOnHydrate = () => ({});

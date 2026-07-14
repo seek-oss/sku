@@ -21,7 +21,7 @@ import type {
   RenderManifest,
   RenderOptions,
   RenderResult,
-  SkuApp,
+  SkuSsrMiddleware,
 } from './types.js';
 
 const toFetchHeaders = (headers: IncomingHttpHeaders): Headers => {
@@ -79,7 +79,7 @@ export type RenderFunction = (
 export interface SsrServerOptions {
   port: number;
   base: string;
-  app: SkuApp;
+  middleware?: SkuSsrMiddleware;
   render: RenderFunction;
   assets: RenderAssets;
   manifest?: RenderManifest;
@@ -100,7 +100,7 @@ export interface SsrServerResult {
 }
 
 export const mountConsumerMiddleware = (
-  handler: SkuApp['middleware'],
+  handler: SkuSsrMiddleware | undefined,
   mount: (handler: RequestHandler) => void,
 ) => {
   const middlewareHandlers = [handler ?? []].flat();
@@ -237,7 +237,7 @@ export const listen = async (
   const httpServer = createHttpServer(serverApp);
 
   serverApp.use(createSsrRequestContextMiddleware());
-  mountConsumerMiddleware(options.app.middleware, (middleware) =>
+  mountConsumerMiddleware(options.middleware, (middleware) =>
     serverApp.use(middleware),
   );
   if (options.clientDirectory) {

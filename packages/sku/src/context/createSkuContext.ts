@@ -178,7 +178,7 @@ export const createSkuContext = async ({
       ];
     },
     clientEntry: getPathFromCwd(skuConfig.clientEntry),
-    appEntry: getPathFromCwd(skuConfig.appEntry),
+    routesEntry: getPathFromCwd(skuConfig.routesEntry),
     renderEntry: getPathFromCwd(skuConfig.renderEntry),
     libraryEntry: skuConfig.libraryEntry
       ? getPathFromCwd(skuConfig.libraryEntry)
@@ -192,9 +192,9 @@ export const createSkuContext = async ({
   };
 
   if (skuConfig.renderType === 'server-side-rendered') {
-    if (!existsSync(paths.appEntry)) {
+    if (!existsSync(paths.routesEntry)) {
       throw new Error(
-        `${paths.appEntry} does not exist. Vite SSR apps must provide an 'appEntry'.`,
+        `${paths.routesEntry} does not exist. Vite SSR apps must provide a 'routesEntry'.`,
       );
     }
 

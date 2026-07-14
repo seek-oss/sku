@@ -1,7 +1,7 @@
 import { VocabProvider } from '@vocab/react';
 import type { ReactNode } from 'react';
-import type { SkuSsrServerEntry } from 'sku';
-import type { ClientContext } from './types';
+import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
+import type { ClientContext } from './types.js';
 
 const resolveLanguage = (request: Request): 'en' | 'fr' => {
   const { pathname } = new URL(request.url);
@@ -12,7 +12,7 @@ const resolveLanguage = (request: Request): 'en' | 'fr' => {
   return 'en';
 };
 
-const onRequest: SkuSsrServerEntry = ({ request }) => {
+export const onRequest: SkuSsrOnRequest = ({ request }) => {
   const language = resolveLanguage(request);
 
   const clientContext: ClientContext = {
@@ -28,4 +28,17 @@ const onRequest: SkuSsrServerEntry = ({ request }) => {
   };
 };
 
-export default onRequest;
+export const middleware: SkuSsrMiddleware = (req, res, next) => {
+  if (req.path === '/api/health') {
+    res.status(200).type('text/plain').send('ok');
+    return;
+  }
+  if (req.path === '/api/nonce') {
+    res
+      .status(200)
+      .type('text/plain')
+      .send(req.getCspNonce?.() ?? '');
+    return;
+  }
+  next();
+};

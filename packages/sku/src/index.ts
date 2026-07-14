@@ -7,12 +7,12 @@ export type {
 export type {
   DocumentAssets,
   JsonValue,
-  SkuApp,
   SkuSsrAppWrapper,
-  SkuSsrClientEntry,
-  SkuSsrClientEntryResult,
-  SkuSsrServerEntry,
-  SkuSsrServerEntryResult,
+  SkuSsrMiddleware,
+  SkuSsrOnHydrate,
+  SkuSsrOnHydrateResult,
+  SkuSsrOnRequest,
+  SkuSsrOnRequestResult,
 } from './services/vite/ssr/types.js';
 export {
   getCspNonce,

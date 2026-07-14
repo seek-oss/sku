@@ -50,7 +50,7 @@ export default {
   skipPackageCompatibilityCompilation: [],
   externalizeNodeModules: false,
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [],
-  appEntry: 'src/app.tsx',
+  routesEntry: 'src/routes.tsx',
   pathAliases: {},
   dangerouslySetViteConfig: undefined,
   dangerouslySetVitestConfig: defaultDecorator,

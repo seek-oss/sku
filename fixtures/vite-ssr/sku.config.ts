@@ -3,7 +3,6 @@ import type { SkuConfig } from 'sku';
 export default {
   bundler: 'vite',
   renderType: 'server-side-rendered',
-  appEntry: 'src/app.tsx',
   port: 8200,
   target: 'dist',
   languages: ['en', 'fr'],

@@ -54,7 +54,7 @@ export default validator.compile({
     values: ['server-side-rendered', 'static-generated'],
     optional: true,
   },
-  appEntry: {
+  routesEntry: {
     type: 'string',
   },
   clientEntry: {

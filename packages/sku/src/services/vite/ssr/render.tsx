@@ -4,12 +4,13 @@ import {
   createStaticHandler,
   createStaticRouter,
   StaticRouterProvider,
+  type RouteObject,
   type StaticHandlerContext,
 } from 'react-router';
 import { getChunkName } from '@vocab/vite/chunks';
 // Resolved by sku's Vite SSR plugin to the consumer server request entry (or noop).
 // eslint-disable-next-line import-x/no-unresolved
-import onRequest from '#sku-vite-ssr-server-entry';
+import * as serverEntry from '#sku-vite-ssr-server-entry';
 import Document from './Document.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
@@ -29,7 +30,6 @@ import type {
   RenderManifest,
   RenderOptions,
   RenderResult,
-  SkuApp,
   SkuRouteHandle,
   SkuSsrAppWrapper,
 } from './types.js';
@@ -90,7 +90,7 @@ const wrapRouter = (
 ) => (AppWrapper ? <AppWrapper>{children}</AppWrapper> : children);
 
 const renderDocument = async (
-  app: SkuApp,
+  routes: RouteObject[],
   request: Request,
   assets: RenderAssets,
   options: RenderOptions = {},
@@ -102,13 +102,16 @@ const renderDocument = async (
     createSsrRequestContextStore(options.nonce);
 
   // Server entry runs before query() so loaders can read getSkuLanguage().
-  const requestEntry = await onRequest({ request });
+  const requestEntry =
+    typeof serverEntry.onRequest === 'function'
+      ? await serverEntry.onRequest({ request })
+      : {};
   if (requestEntry.language !== undefined) {
     store.setLanguage(requestEntry.language);
   }
 
   const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
-  const { query, dataRoutes } = createStaticHandler(app.routes, { basename });
+  const { query, dataRoutes } = createStaticHandler(routes, { basename });
   const context = await query(request);
 
   if (context instanceof Response) {
@@ -218,7 +221,7 @@ const renderDocument = async (
 };
 
 export const render = (
-  app: SkuApp,
+  routes: RouteObject[],
   request: Request,
   assets: RenderAssets,
   options: RenderOptions = {},
@@ -232,7 +235,7 @@ export const render = (
     createSsrRequestContextStore(options.nonce);
   return runWithSsrRequestContext(store, () =>
     renderDocument(
-      app,
+      routes,
       request,
       assets,
       { ...options, requestContextStore: store },

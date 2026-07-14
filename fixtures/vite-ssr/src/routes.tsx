@@ -1,5 +1,5 @@
 import type { RouteObject } from 'react-router';
-import { getCspNonce, type SkuApp } from 'sku';
+import { getCspNonce } from 'sku';
 
 import { RootLayout } from './RootLayout.js';
 import { aboutRoutes } from './pages/about/route.js';
@@ -10,7 +10,7 @@ import { boomRoute } from './pages/error/route.js';
 import { helloRoute } from './pages/hello/route.js';
 import { homeRoute } from './pages/home/route.js';
 
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
   {
     path: '/',
     Component: RootLayout,
@@ -30,23 +30,3 @@ const routes: RouteObject[] = [
     ],
   },
 ];
-
-const middleware: SkuApp['middleware'] = (req, res, next) => {
-  if (req.path === '/api/health') {
-    res.status(200).type('text/plain').send('ok');
-    return;
-  }
-  if (req.path === '/api/nonce') {
-    res
-      .status(200)
-      .type('text/plain')
-      .send(req.getCspNonce?.() ?? '');
-    return;
-  }
-  next();
-};
-
-export default {
-  routes,
-  middleware,
-} satisfies SkuApp;

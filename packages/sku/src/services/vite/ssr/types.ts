@@ -1,10 +1,6 @@
 import type { ComponentType, ReactNode } from 'react';
 import type { RequestHandler } from 'express';
-import type {
-  HydrationState,
-  RouteObject,
-  StaticHandlerContext,
-} from 'react-router';
+import type { HydrationState, StaticHandlerContext } from 'react-router';
 import type { PipeableStream } from 'react-dom/server';
 import type { ClientManifest, ManifestChunk } from './resolveAssets.js';
 import type { SsrRequestContextStore } from './requestContext.js';
@@ -18,10 +14,8 @@ export interface RenderAssets extends DocumentAssets {
   bootstrapModules: string[];
 }
 
-export interface SkuApp {
-  routes: RouteObject[];
-  middleware?: RequestHandler | RequestHandler[];
-}
+/** Connect-compatible middleware from the Vite SSR server entry. */
+export type SkuSsrMiddleware = RequestHandler | RequestHandler[];
 
 /** JSON-serialisable shell seed for Vite SSR `clientContext`. */
 export type JsonValue =
@@ -30,8 +24,8 @@ export type JsonValue =
 /** Provider wrapper around the router tree (not page layout / Document). */
 export type SkuSsrAppWrapper = ComponentType<{ children: ReactNode }>;
 
-/** Closed return bag from the optional Vite SSR server request entry. */
-export type SkuSsrServerEntryResult = {
+/** Closed return bag from the optional Vite SSR `onRequest` export. */
+export type SkuSsrOnRequestResult = {
   AppWrapper?: SkuSsrAppWrapper;
   /** Configured language name (or `en-PSEUDO`) for vocab chunk identity. */
   language?: string;
@@ -39,19 +33,19 @@ export type SkuSsrServerEntryResult = {
   clientContext?: JsonValue;
 };
 
-export type SkuSsrServerEntry = (args: {
+export type SkuSsrOnRequest = (args: {
   request: Request;
-}) => SkuSsrServerEntryResult | Promise<SkuSsrServerEntryResult>;
+}) => SkuSsrOnRequestResult | Promise<SkuSsrOnRequestResult>;
 
-/** Closed return bag from the optional Vite SSR client request entry. */
-export type SkuSsrClientEntryResult = {
+/** Closed return bag from the optional Vite SSR `onHydrate` export. */
+export type SkuSsrOnHydrateResult = {
   AppWrapper?: SkuSsrAppWrapper;
 };
 
-export type SkuSsrClientEntry = (args: {
+export type SkuSsrOnHydrate = (args: {
   context: JsonValue | undefined;
   language: string | undefined;
-}) => SkuSsrClientEntryResult;
+}) => SkuSsrOnHydrateResult;
 
 export interface RenderManifest {
   manifest: ClientManifest;

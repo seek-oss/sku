@@ -9,7 +9,7 @@ Sku supports two SSR models:
 
 ### React Router Data Mode
 
-Vite SSR largely wraps [React Router Data Mode](https://reactrouter.com/start/modes#data). You declare a `RouteObject[]` tree from `appEntry`; sku owns the HTTP server, document shell, streaming, and hydration, and wires that route config into React Router on the server and in the browser. Loaders, actions, lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
+Vite SSR largely wraps [React Router Data Mode](https://reactrouter.com/start/modes#data). You export a named `routes` (`RouteObject[]`) from `routesEntry`; sku owns the HTTP server, document shell, streaming, and hydration, and wires that route config into React Router on the server and in the browser. Loaders, actions, lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
 
 For information on how to use React Router to register routes, see [React Router Data Mode](https://reactrouter.com/start/data/routing).
 
@@ -21,13 +21,13 @@ import type { SkuConfig } from 'sku';
 export default {
   bundler: 'vite',
   renderType: 'server-side-rendered',
-  appEntry: 'src/app.tsx', // default
+  routesEntry: 'src/routes.tsx', // default
   publicPath: '/', // relative only — absolute / CDN URLs are rejected
   port: 3000,
 } satisfies SkuConfig;
 ```
 
-Export a `SkuApp` from `appEntry`. Prefer co-locating each page in its own directory with a `route.ts` (path / lazy / loaders / handle) and the page module (e.g. `home.tsx`). Compose those route modules into an explicit `routes` array:
+Export named `routes` from `routesEntry`. Prefer co-locating each page in its own directory with a `route.ts` (path / lazy / loaders / handle) and the page module (e.g. `home.tsx`). Compose those route modules into an explicit `routes` array:
 
 ```tsx
 // src/pages/home/route.ts
@@ -41,24 +41,17 @@ export const homeRoute = {
 ```
 
 ```tsx
-// src/app.tsx
-import type { SkuApp } from 'sku';
+// src/routes.tsx
 import type { RouteObject } from 'react-router';
 
 import { homeRoute } from './pages/home/route.js';
 
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
   {
     path: '/',
     children: [homeRoute],
   },
 ];
-
-export default {
-  routes,
-  // Optional Connect/Express-compatible middleware (runs before HTML render)
-  middleware: (req, res, next) => next(),
-} satisfies SkuApp;
 ```
 
 sku owns:
@@ -70,21 +63,25 @@ sku owns:
 - CSP as HTTP headers when `cspEnabled` / `cspReportOnlyEnabled` are set
 - forwarding React Router loader/action headers (e.g. `Set-Cookie`) onto streamed HTML responses
 
-Put request middleware on `SkuApp.middleware` (not config `devServerMiddleware`). `httpsDevServer: true` is supported for Vite SSR `sku start`.
+Put request middleware on the server entry’s named `middleware` export (not config `devServerMiddleware`, and not on the routes entry). `httpsDevServer: true` is supported for Vite SSR `sku start`.
 
 Do **not** use `sku start-ssr` / `sku build-ssr` when `renderType` is set.
 
 ### Request entries (`serverEntry` / `clientEntry`)
 
-Optional separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition. Under Vite SSR these are closed request hooks — they do **not** own the HTML response (sku still streams Document + CSP) and are not webpack `renderCallback` / static hydrate.
+Optional separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition and server-only middleware. Under Vite SSR these use **named exports** — they do **not** own the HTML response (sku still streams Document + CSP) and are not webpack `renderCallback` / static hydrate. Missing named exports soft-skip; sku does not use `default`.
 
-**Server entry** runs before React Router `query()` and may return only:
+**Server entry** may export:
 
-- `AppWrapper` — a React component `ComponentType<{ children }>` for providers / request-scoped seed (**not** page layout or Document chrome)
-- `language` — configured language **name** (or `en-PSEUDO`) for vocab chunk identity
-- `clientContext` — JSON-serialisable shell seed (serialised at shell time only)
+- `onRequest` — runs before React Router `query()` and may return only:
+  - `AppWrapper` — a React component `ComponentType<{ children }>` for providers / request-scoped seed (**not** page layout or Document chrome)
+  - `language` — configured language **name** (or `en-PSEUDO`) for vocab chunk identity
+  - `clientContext` — JSON-serialisable shell seed (serialised at shell time only)
+- `middleware` — `SkuSsrMiddleware` (Connect/Express-compatible handler or array), mounted before the HTML render path
 
-**Client entry** receives `{ context, language }` (`context` is deserialized `clientContext`; `language` is forwarded from the server result) and may return only `AppWrapper`.
+**Client entry** may export:
+
+- `onHydrate` — receives `{ context, language }` (`context` is deserialized `clientContext`; `language` is forwarded from the server result) and may return only `AppWrapper`
 
 sku renders `Document` → optional `AppWrapper` → router provider on server and client.
 
@@ -92,9 +89,9 @@ sku renders `Document` → optional `AppWrapper` → router provider on server a
 // src/server.tsx
 import { VocabProvider } from '@vocab/react';
 import type { ReactNode } from 'react';
-import type { SkuSsrServerEntry } from 'sku';
+import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
 
-const onRequest: SkuSsrServerEntry = ({ request }) => {
+export const onRequest: SkuSsrOnRequest = ({ request }) => {
   const language = resolveLocaleFromRequest(request); // e.g. 'th-TH'
   const clientContext = { theme: 'dark' };
 
@@ -107,22 +104,20 @@ const onRequest: SkuSsrServerEntry = ({ request }) => {
   };
 };
 
-export default onRequest;
+export const middleware: SkuSsrMiddleware = (req, res, next) => next();
 ```
 
 ```tsx
 // src/client.tsx
 import { VocabProvider } from '@vocab/react';
 import type { ReactNode } from 'react';
-import type { SkuSsrClientEntry } from 'sku';
+import type { SkuSsrOnHydrate } from 'sku';
 
-const onHydrate: SkuSsrClientEntry = ({ language }) => ({
+export const onHydrate: SkuSsrOnHydrate = ({ language }) => ({
   AppWrapper: ({ children }: { children: ReactNode }) => (
     <VocabProvider language={language ?? 'en'}>{children}</VocabProvider>
   ),
 });
-
-export default onHydrate;
 ```
 
 Use the same providers on both sides so the tree matches for hydration. Values that change on SPA navigations must re-derive inside the provider (or a route layout); closing only over hydrate `context` will go stale.
@@ -145,7 +140,7 @@ export const detailsRoute = {
 } satisfies RouteObject;
 ```
 
-Do **not** statically import those page modules into `appEntry` or `route.ts` — that eagerly bundles them and defeats per-route chunking. Import only the route configs. The `fixtures/vite-ssr` app demonstrates this pattern with distinct `about` and `details` chunks.
+Do **not** statically import those page modules into `routesEntry` or `route.ts` — that eagerly bundles them and defeats per-route chunking. Import only the route configs. The `fixtures/vite-ssr` app demonstrates this pattern with distinct `about` and `details` chunks.
 
 **Escape hatch:** set `handle.moduleId` explicitly to the Vite client manifest key (usually the source path, e.g. `src/pages/about/about.tsx`) when you need a custom key or a non-idiomatic `lazy` shape. An explicit value is never overwritten.
 
@@ -172,14 +167,12 @@ sku does **not** identify language from Express `req.skuLanguage`, a `:language`
 
 ```tsx
 // src/server.tsx
-import type { SkuSsrServerEntry } from 'sku';
+import type { SkuSsrOnRequest } from 'sku';
 
-const onRequest: SkuSsrServerEntry = ({ request }) => ({
+export const onRequest: SkuSsrOnRequest = ({ request }) => ({
   // Must match a name from sku config `languages` (or `en-PSEUDO`)
   language: resolveLocaleFromRequest(request), // e.g. 'th-TH'
 });
-
-export default onRequest;
 ```
 
 Wrap your UI in `VocabProvider` via `AppWrapper` (see request entries above) or a layout. URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
@@ -239,14 +232,13 @@ export function ErrorBoundary() {
 ```
 
 ```tsx
-// src/app.tsx — attach ErrorBoundary on the root route
-import type { SkuApp } from 'sku';
+// src/routes.tsx — attach ErrorBoundary on the root route
 import type { RouteObject } from 'react-router';
 
 import { ErrorBoundary, RootLayout } from './RootLayout.js';
 import { homeRoute } from './pages/home/route.js';
 
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
   {
     path: '/',
     Component: RootLayout,
@@ -254,8 +246,6 @@ const routes: RouteObject[] = [
     children: [homeRoute],
   },
 ];
-
-export default { routes } satisfies SkuApp;
 ```
 
 ### Production

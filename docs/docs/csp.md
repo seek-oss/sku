@@ -63,24 +63,24 @@ A `nonce` is not available in client code. The result of `getCspNonce` will be a
 Do not use webpack’s `createUnsafeNonce` for Vite SSR — that API can create multiple distinct nonces per render. Vite SSR intentionally does not offer a multi-nonce factory.
 
 ```tsx
-import { getCspNonce } from 'sku';
-import type { SkuApp } from 'sku';
+import { getCspNonce, type SkuSsrMiddleware } from 'sku';
+import type { RouteObject } from 'react-router';
 
-export default {
-  routes: [
-    {
-      path: '/',
-      loader: () => ({ nonce: getCspNonce() }),
-      // ...
-    },
-  ],
-  middleware: (req, res, next) => {
-    // Same nonce value as getCspNonce() / the CSP header for this request
-    // (sku also mints when attaching to React stream scripts during HTML render)
-    res.locals.cspNonce = req.getCspNonce?.();
-    next();
+export const routes: RouteObject[] = [
+  {
+    path: '/',
+    loader: () => ({ nonce: getCspNonce() }),
+    // ...
   },
-} satisfies SkuApp;
+];
+
+// src/server.tsx
+export const middleware: SkuSsrMiddleware = (req, res, next) => {
+  // Same nonce value as getCspNonce() / the CSP header for this request
+  // (sku also mints when attaching to React stream scripts during HTML render)
+  res.locals.cspNonce = req.getCspNonce?.();
+  next();
+};
 ```
 
 #### Webpack SSR / static apps

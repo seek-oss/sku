@@ -34,13 +34,13 @@ describe('Vite SSR React version gate', () => {
       `export default {
   bundler: 'vite',
   renderType: 'server-side-rendered',
-  appEntry: 'src/app.tsx',
+  routesEntry: 'src/routes.tsx',
 };
 `,
     );
     writeFileSync(
-      join(root, 'src', 'app.tsx'),
-      'export default { routes: [] };\n',
+      join(root, 'src', 'routes.tsx'),
+      'export const routes = [];\n',
     );
     writeFileSync(
       join(root, 'package.json'),

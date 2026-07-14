@@ -7,9 +7,7 @@
     "react-dom": "catalog:"
   },
   "scripts": {
-    "dev": "pnpm run start:asset-server & pnpm run storybook",
-    "start:asset-server": "http-server storybook-static -p 4232 --cors",
-    "storybook": "storybook dev --ci --exact-port --port 4233"
+    "start:asset-server": "http-server storybook-static -p 4232 --cors"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^10.5.0",

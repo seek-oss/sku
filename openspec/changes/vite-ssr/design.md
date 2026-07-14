@@ -19,11 +19,18 @@ Reference architecture: [basic-streaming-app-example](https://github.com/jahredh
 - `sku start` / `sku build` produce a runnable Vite SSR server when `renderType` is `'server-side-rendered'`
 - Per-route async chunks (RR `lazy` + Vite dynamic import) with a fixture that demonstrates distinct route chunks
 - Vocab/language async chunk registration for Vite SSR when `languages` is configured
+- Teams can generate a new Vite SSR sku app via `@sku-lib/create` (dedicated template)
+- High-level Migrating sections in `server-rendering.md` for static apps and older webpack SSR → Vite SSR (separate subsections; each self-contained and topic-complete)
 
 **Non-Goals:**
 
 - Implementing the new SSR mode on webpack (reject that config combination)
 - Changing webpack’s existing `start-ssr` / `build-ssr` path when `renderType` is unset or `'static-generated'`
+- A webpack-SSR `@sku-lib/create` template
+- Converting the existing static `vite` create template into SSR
+- Vite SSR migration pages under `docs/migration-guides/`
+- A single combined migration page that requires jumping between shared sections
+- An exhaustive file-by-file migration cookbook, or documenting infra / deploy / process changes
 - React Router Framework Mode (`@react-router/dev` Vite plugin)
 - Preserving `renderCallback` / `flushHeadTags` / meta CSP for Vite SSR
 - RSC / Flight
@@ -168,7 +175,6 @@ Config direction (Vite SSR only): keep/extend `cspEnabled` / `cspExtraScriptSrcH
 
 - Multi-site / multi-environment combinatorial prerender: **out** (request-time context instead)
 - Static prerender sharing the same Document component: follow-up
-- Full migration guide from webpack SSR: not required (non-goal to backfill)
 - **SSR-CSS plugin (`vitePluginSsrCss`) and telemetry HTML inject:** deferred for Vite SSR. Those plugins rely on `transformIndexHtml`, which the streaming path intentionally skips. Static Vite keeps both. Vite SSR CSS in production comes from the client manifest → Document links; in development the Vite client injects CSS. Telemetry for Vite SSR is a follow-up.
 - **Production listen / setup logging:** deferred. Webpack SSR logs `sku SSR server started on port …`; Vite SSR production (`node dist/server/server.js`) intentionally does not. Whether sku should accept a custom logger (or otherwise own setup logs such as “listening on port”) is an open product decision — do not hard-code a `console.log` parity gap-fill until that is clear.
 
@@ -307,6 +313,56 @@ When `AppWrapper` is omitted, sku uses the consumer `routes` as-is (no injected 
 
 **Rejected:** Optional request-entry files. Soft-skip / sku noop for missing named exports. Separate `entryServer` / `entryClient` config keys. Default-exported request hooks. Middleware on the routes entry. Open-ended “arbitrary per-request code” without a closed return type. Returning `ReactNode` instead of a wrapper component. Placing request handlers on the routes entry. Webpack-style `provideClientContext` / `addLanguageChunk` as the primary API. Using request entries to set status/headers or send the document body. Wrapping `AppWrapper` **outside** `RouterProvider` / `StaticRouterProvider` (providers cannot see React Router context). Killing `AppWrapper` in favour of providers-only-in-consumer-root-layout (loses clean server/client dep splitting and request-closure factory).
 
+### 17. `@sku-lib/create` Vite SSR template
+
+**Choice:** Add a third create template value `vite-ssr` (alongside existing `vite` and `webpack`). Expose it via `--template vite-ssr` and as an interactive CLI choice. Do **not** fold SSR into the static `vite` template via a secondary prompt.
+
+Scaffolded app MUST be a minimal runnable Vite SSR project:
+
+- `sku.config.ts`: `bundler: 'vite'`, `renderType: 'server-side-rendered'`, relative `publicPath` (e.g. `/`), default entry paths (`clientEntry` / `serverEntry` / `routesEntry` or omit to use defaults)
+- `src/routes.tsx` exporting named `routes` with at least one idiomatic lazy route (and a simple home page)
+- `src/server.tsx` exporting named `onRequest` and `middleware` (empty array / passthrough OK)
+- `src/client.tsx` exporting named `onHydrate`
+- React 19+ peer/deps consistent with other create templates’ React pinning for this mode
+- Starter README notes: `sku start` / `sku build`, React 19+, no `#app` hydrate
+
+**Why:** Teams should not hand-assemble the required entry contracts. A dedicated template keeps static Vite and Vite SSR onboarding distinct (different render type, entries, and hydrate model) and matches how create already separates bundler templates.
+
+**Rejected:** Prompting “SSR?” inside the static `vite` template (hides the product mode). Scaffolding webpack SSR via create (out of scope). Copying the full `fixtures/vite-ssr` surface (CSP demos, vocab, many routes) into the starter — keep the create template minimal; the fixture remains the comprehensive demo.
+
+### 18. Migrating sections in `server-rendering.md`
+
+**Choice:** Publish migration guidance as a **`## Migrating`** heading in `docs/docs/server-rendering.md` (where SSR readers already land), with **two self-contained `###` subsections**:
+
+- **Migrate from Static App** — static apps (webpack or Vite) → Vite SSR
+- **Migrate from Older SSR App** — webpack SSR (`start-ssr` / `build-ssr` / `renderCallback`) → Vite SSR
+
+Do **not** place these under `docs/migration-guides/` (version-oriented, poorly discoverable in the docs UI, and largely being removed).
+
+**Duplication is intentional.** Shared prerequisites MAY be restated in each subsection so a reader never has to jump mid-flow. Prefer clarity over DRY. `vite.md` may link to these subsections; the authoritative migration content lives in `server-rendering.md`.
+
+Each subsection is **high-level** (not an exhaustive inventory of every file) but **topic-complete for the sku surface**. Each opens with:
+
+1. **Requirements** — e.g. upgrade to **React 19+** before migrating; Vite SSR is Vite-only (`bundler: 'vite'` + `renderType: 'server-side-rendered'`)
+2. **Limitations** — covers the **sku** migration surface only; infrastructure, deployments, and process changes sit outside this guide’s scope
+
+Then distinct headers covering (at least):
+
+- Config and commands (`renderType`, relative `publicPath`, `sku start` / `sku build` vs old commands)
+- Routes entry and required request entries
+- App-level providers (`AppWrapper` via `onRequest` / `onHydrate`)
+- Middleware (server-entry `middleware` vs `devServerMiddleware` / webpack patterns)
+- CSP (HTTP headers, single request-scoped nonce; contrast meta / `createUnsafeNonce` where relevant)
+- Response headers (e.g. Cache-Control via loaders/actions; sku forwarding of loader/action headers such as `Set-Cookie`)
+- Hydration / Document model (`hydrateRoot(document)` vs `#app` / `renderDocument`)
+- Other mode-specific deltas as needed (e.g. leaving `renderCallback`, vocab language via server entry)
+
+**Why:** SSR readers already use `server-rendering.md`. Separate subsections optimise for the reader’s current product mode without a hard-to-find migration-guides shelf. Distinct topic headers make the guide scannable. The primary Vite SSR product docs (outside Migrating) MUST also carry those topic headers as the day-to-day reference — Migrating restates them from each starting-mode angle rather than being the only place they appear.
+
+**Rejected:** `docs/migration-guides/vite-ssr*.md`. One combined Path A / Path B page. A thin stub that only links out without covering CSP / headers / providers / middleware. Relying on Migrating alone for topic coverage of providers / middleware / CSP / headers. Documenting deploy/infra/process here. Factoring shared content into a third “common” section readers must visit first.
+
+## Risks / Trade-offs
+
 ## Risks / Trade-offs
 
 | Risk                                                                 | Mitigation                                                                                                     |
@@ -337,16 +393,24 @@ When `AppWrapper` is omitted, sku uses the consumer `routes` as-is (no injected 
 | Provider errors bypass consumer root ErrorBoundary                   | Document ordering: AppWrapper above consumer routes; keep provider render resilient                            |
 | `clientContext` assumes post-shell Suspense data                     | Contract: shell-time JSON only; forward `language` separately (decision 16)                                    |
 | Locale parsed in middleware for redirects and again in server entry  | Acceptable; middleware must not set a parallel language slot                                                   |
+| Create template drifts from required Vite SSR contracts              | Minimal scaffold mirrors defaults + required named exports; assert via create tests / smoke                    |
+| Teams pick static `vite` when they wanted SSR                        | Distinct `vite-ssr` CLI choice + docs; do not bury SSR under the static template                               |
+| Migration guide over-promises completeness                           | Requirements + limitations up front; high-level sku-only paths; link to product docs for API detail            |
+| Readers jump between shared migration sections                       | Two self-contained subsections; allow duplicated prerequisites rather than a shared hub                        |
+| Migration stubs omit CSP / headers / providers / middleware          | Require distinct topic headers in each Migrating subsection (decision 18)                                      |
 
 ## Migration Plan
 
 - Opt-in: set `bundler: 'vite'`, `renderType: 'server-side-rendered'`, and provide a routes entry exporting named `routes`
 - Required: provide `serverEntry` / `clientEntry` with named `onRequest` / `middleware` / `onHydrate` (decision 16; same keys/defaults as today, Vite SSR contract; hard error if missing)
+- **New apps:** prefer `pnpm dlx @sku-lib/create my-app --template vite-ssr` (or the interactive Vite SSR choice) instead of hand-wiring entries
+- **Existing static apps:** follow **Migrating → Migrate from Static App** in `docs/docs/server-rendering.md`
+- **Existing webpack SSR apps:** follow **Migrating → Migrate from Older SSR App** in `docs/docs/server-rendering.md`
 - Multi-language apps: return `language` from `onRequest` (do not use middleware `req.skuLanguage` or `:language` for vocab identity)
 - Existing webpack SSR: leave `renderType` unset (or `'static-generated'`) and keep `start-ssr` / `build-ssr`
 - Static apps: optional explicit `renderType: 'static-generated'`; behavior unchanged
 - Streaming apps: replace string document/`#app` hydrate with Document + `hydrateRoot(document)`
-- Rollback: remove or change `renderType` / remove routes entry; webpack SSR unchanged
+- Rollback: remove or change `renderType` / remove routes entry; webpack SSR unchanged; remove `vite-ssr` create template if needed
 
 ## Open Questions
 
@@ -372,20 +436,22 @@ Validated against [basic-streaming-app-example](https://github.com/jahredhope/ba
 
 ### 1.5 Open-question resolutions
 
-| Question                | Decision                                                                                                                                                                                                                                                                                                                                     |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Routes entry path       | Config `routesEntry` (default `src/routes.tsx`). Named export `routes: RouteObject[]` required (hard error if missing). No `SkuApp` type. Do not reuse `serverEntry` / `renderEntry` / `clientEntry` for the route config.                                                                                                                   |
-| Request entries         | Required `serverEntry` / `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`); Vite SSR named exports `onRequest` / `middleware` / `onHydrate` (decision 16); hard error if files or names missing — no soft-skip / sku noops; not routes-entry fields; not webpack `renderCallback`. Fixture uses the defaults (no path overrides). |
-| Omitted `renderType`    | Treat as today’s static behavior (equivalent to `'static-generated'`). Explicit `'static-generated'` is allowed but optional.                                                                                                                                                                                                                |
-| Document ownership      | sku ships and owns the **Document** (assets → CSS + modulepreload). No consumer Document override in v1; head/SEO via React 19 metadata in routes/layouts. Can add an override later if a consumer requires it.                                                                                                                              |
-| Middleware typing       | **Connect `RequestHandler`** as required named **`middleware`** on the **server entry** (Express-compatible; empty array / passthrough OK). Mount before Vite middlewares + HTML render; must not commit the document body. Not on the routes entry. Config `devServerMiddleware` is static Vite / webpack only.                             |
-| `httpsDevServer`        | **Required** for Vite SSR: single-port HTTPS + HMR when enabled (same cert story as other sku commands). Production server stays HTTP.                                                                                                                                                                                                       |
-| Loader/action headers   | Forward `loaderHeaders` / `actionHeaders` on streamed document responses (decision 11).                                                                                                                                                                                                                                                      |
-| `onAllReady` buffering  | Opt-in via React Router route `handle.waitForAll: true` (deepest/any match). Default remains `onShellReady`.                                                                                                                                                                                                                                 |
-| Client/asset handoff    | `window.__SKU_DOCUMENT_ASSETS__` + combined hashable `bootstrapScriptContent` (assets + RR hydration payload + serialised `clientContext` / language).                                                                                                                                                                                       |
-| Absolute `publicPath`   | **Not supported** for Vite SSR; relative only. CSP uses `'self'` for Document assets.                                                                                                                                                                                                                                                        |
-| Hydration safety        | Scrub Promises on loader+action data; strip `Error.stack` in production (decision 10).                                                                                                                                                                                                                                                       |
-| Request nonce           | At most one per render, only when requested; CSP `'nonce-…'` only if requested (decision 12); not webpack `createUnsafeNonce`.                                                                                                                                                                                                               |
-| Lazy `moduleId`         | Auto-derive from idiomatic `lazy: () => import('…')` (decision 13); manual escape hatch; warn in dev on miss/unknown.                                                                                                                                                                                                                        |
-| Vocab language chunks   | Required in v1: build splitting + sku registration; app-owned identification **only** via server entry `language`, then sole-language fallback (decision 14/16). No `:language` / `req.skuLanguage`.                                                                                                                                         |
-| Per-route chunk fixture | Required demo of ≥2 distinct lazy route chunks (decision 15).                                                                                                                                                                                                                                                                                |
+| Question                 | Decision                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Routes entry path        | Config `routesEntry` (default `src/routes.tsx`). Named export `routes: RouteObject[]` required (hard error if missing). No `SkuApp` type. Do not reuse `serverEntry` / `renderEntry` / `clientEntry` for the route config.                                                                                                                   |
+| Request entries          | Required `serverEntry` / `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`); Vite SSR named exports `onRequest` / `middleware` / `onHydrate` (decision 16); hard error if files or names missing — no soft-skip / sku noops; not routes-entry fields; not webpack `renderCallback`. Fixture uses the defaults (no path overrides). |
+| Omitted `renderType`     | Treat as today’s static behavior (equivalent to `'static-generated'`). Explicit `'static-generated'` is allowed but optional.                                                                                                                                                                                                                |
+| Document ownership       | sku ships and owns the **Document** (assets → CSS + modulepreload). No consumer Document override in v1; head/SEO via React 19 metadata in routes/layouts. Can add an override later if a consumer requires it.                                                                                                                              |
+| Middleware typing        | **Connect `RequestHandler`** as required named **`middleware`** on the **server entry** (Express-compatible; empty array / passthrough OK). Mount before Vite middlewares + HTML render; must not commit the document body. Not on the routes entry. Config `devServerMiddleware` is static Vite / webpack only.                             |
+| `httpsDevServer`         | **Required** for Vite SSR: single-port HTTPS + HMR when enabled (same cert story as other sku commands). Production server stays HTTP.                                                                                                                                                                                                       |
+| Loader/action headers    | Forward `loaderHeaders` / `actionHeaders` on streamed document responses (decision 11).                                                                                                                                                                                                                                                      |
+| `onAllReady` buffering   | Opt-in via React Router route `handle.waitForAll: true` (deepest/any match). Default remains `onShellReady`.                                                                                                                                                                                                                                 |
+| Client/asset handoff     | `window.__SKU_DOCUMENT_ASSETS__` + combined hashable `bootstrapScriptContent` (assets + RR hydration payload + serialised `clientContext` / language).                                                                                                                                                                                       |
+| Absolute `publicPath`    | **Not supported** for Vite SSR; relative only. CSP uses `'self'` for Document assets.                                                                                                                                                                                                                                                        |
+| Hydration safety         | Scrub Promises on loader+action data; strip `Error.stack` in production (decision 10).                                                                                                                                                                                                                                                       |
+| Request nonce            | At most one per render, only when requested; CSP `'nonce-…'` only if requested (decision 12); not webpack `createUnsafeNonce`.                                                                                                                                                                                                               |
+| Lazy `moduleId`          | Auto-derive from idiomatic `lazy: () => import('…')` (decision 13); manual escape hatch; warn in dev on miss/unknown.                                                                                                                                                                                                                        |
+| Vocab language chunks    | Required in v1: build splitting + sku registration; app-owned identification **only** via server entry `language`, then sole-language fallback (decision 14/16). No `:language` / `req.skuLanguage`.                                                                                                                                         |
+| Per-route chunk fixture  | Required demo of ≥2 distinct lazy route chunks (decision 15).                                                                                                                                                                                                                                                                                |
+| Create Vite SSR template | Dedicated `@sku-lib/create` template `vite-ssr` (decision 17); minimal runnable scaffold; static `vite` template unchanged.                                                                                                                                                                                                                  |
+| Migration guides         | `## Migrating` in `server-rendering.md` (decision 18): **Migrate from Static App** + **Migrate from Older SSR App**; requirements/limitations up front; distinct topic headers (CSP, Cache-Control/headers, AppWrapper, middleware, …); not under `docs/migration-guides/`.                                                                  |

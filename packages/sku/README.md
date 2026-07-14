@@ -33,6 +33,12 @@ $ cd my-app
 $ pnpm start
 ```
 
+Templates: `vite` (static), `vite-ssr` (server-rendered, React 19+), or `webpack`. Example:
+
+```sh
+$ pnpm dlx @sku-lib/create my-app --template vite-ssr
+```
+
 Or create in the current directory:
 
 ```sh

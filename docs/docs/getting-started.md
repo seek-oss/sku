@@ -8,6 +8,14 @@ $ cd my-app
 $ pnpm start
 ```
 
+For a SSR app:
+
+```bash
+$ pnpm dlx @sku-lib/create my-app --template=vite-ssr
+$ cd my-app
+$ pnpm start
+```
+
 Or create in the current directory:
 
 ```bash

@@ -1,12 +1,19 @@
 import { getAddCommand, isAtLeastPnpmV10 } from '@sku-private/utils';
 import { spawn } from 'node:child_process';
-import type { Template } from '../types/index.js';
+import { type Template, isViteBasedTemplate } from '../types/index.js';
 import { execAsync } from '../utils/execAsync.js';
 
 const DEPENDENCIES = [
   'braid-design-system@latest',
   'react@latest',
   'react-dom@latest',
+];
+
+/** Vite SSR requires React 19+ for document hydration. */
+const VITE_SSR_DEPENDENCIES = [
+  'braid-design-system@latest',
+  'react@^19',
+  'react-dom@^19',
 ];
 
 const COMMON_DEV_DEPENDENCIES = [
@@ -27,12 +34,13 @@ export const installDependencies = async (
     await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
   }
 
+  const deps = template === 'vite-ssr' ? VITE_SSR_DEPENDENCIES : DEPENDENCIES;
   const devDeps = [...COMMON_DEV_DEPENDENCIES];
-  if (template === 'vite') {
+  if (isViteBasedTemplate(template)) {
     devDeps.push(...VITE_DEV_DEPENDENCIES);
   }
 
-  await installPackages(projectPath, DEPENDENCIES, 'prod');
+  await installPackages(projectPath, deps, 'prod');
   await installPackages(projectPath, devDeps, 'dev');
 
   console.log('✅ Dependencies installed successfully');

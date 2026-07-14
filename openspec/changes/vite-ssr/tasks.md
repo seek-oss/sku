@@ -48,7 +48,7 @@
 - [x] 6.4 Update `docs/docs/server-rendering.md` for Vite SSR vs webpack SSR (high-level app API, document hydrate)
 - [x] 6.5 Update `docs/docs/csp.md` for Vite SSR header CSP, nonces, report-only, and relative-`publicPath`-only
 - [x] 6.6 Update `docs/docs/configuration.md` for `renderType`, `appEntry`, CSP report-only options, and Vite SSR relative-`publicPath` constraint
-- [x] 6.7 Update plop/`@sku-lib/create` templates if applicable
+- [x] 6.7 Update plop/`@sku-lib/create` templates if applicable _(superseded for Vite SSR scaffolding by §19 — static templates only were in scope here)_
 - [x] 6.8 Add a changeset (release notes) for `renderType` / Vite SSR public API that **references each** of: `vite.md`, `server-rendering.md`, `csp.md`, `configuration.md`
 
 ## 7. Vocab chunks and per-route chunk fixture (required)
@@ -152,6 +152,26 @@
 - [x] 18.3 Update types so Vite SSR request entries and named exports are required (return-object fields `AppWrapper` / `language` / `clientContext` stay optional; `middleware` may be empty array / passthrough)
 - [x] 18.4 Fixture + tests: ensure default entries export all required names; add coverage that missing file / missing named export fails hard
 - [x] 18.5 Docs: document required `serverEntry` / `clientEntry` and required named exports; remove optional / soft-skip / noop wording (`configuration.md` / `server-rendering.md` / `vite.md`)
+
+## 19. `@sku-lib/create` Vite SSR template
+
+- [x] 19.1 Add `vite-ssr` to `@sku-lib/create` `Template` type, CLI `--template`, and interactive choices (distinct from static `vite`)
+- [x] 19.2 Add `packages/create/templates/vite-ssr/` scaffold: `sku.config.ts` (`bundler: 'vite'`, `renderType: 'server-side-rendered'`, relative `publicPath`), `src/routes.tsx` (named `routes` + ≥1 idiomatic lazy route), `src/server.tsx` (`onRequest` + `middleware`), `src/client.tsx` (`onHydrate`); reuse base files only where compatible (no static `render.tsx` / `#app`)
+- [x] 19.3 Wire package.json / install / generators so the Vite SSR template gets React 19+ and Vitest like the static vite template where appropriate
+- [x] 19.4 Tests: create with `--template vite-ssr` emits the required config + named exports; static `vite` template still does not set `renderType: 'server-side-rendered'`
+- [x] 19.5 Docs + changeset: document `pnpm dlx @sku-lib/create my-app --template vite-ssr` in `server-rendering.md` / `vite.md` / create READMEs; note React 19+ and `sku start` / `sku build`
+
+## 20. Flesh out Vite SSR product docs in server-rendering.md
+
+- [x] 20.1 Expand the primary Vite SSR section of `docs/docs/server-rendering.md` (outside Migrating) with distinct headers for app-level providers (`AppWrapper`), middleware, CSP, and response headers (Cache-Control / forwarded loader-action headers such as `Set-Cookie`); keep `csp.md` / `configuration.md` as deeper references where useful
+- [x] 20.2 Cross-check related Vite SSR topics already present (routes entry, request entries, hydrate/Document, vocab, lazy `moduleId`, error pages, production layout) so the page is a coherent day-to-day reference, not only migration-oriented
+
+## 21. Migrating sections in server-rendering docs
+
+- [x] 21.1 Add `## Migrating` to `docs/docs/server-rendering.md` with **Migrate from Static App**: requirements (incl. React 19+) and limitations (sku-surface only; infra/deploy/process out of scope) up front; distinct headers for config/commands, routes + request entries, AppWrapper/providers, middleware, CSP, Cache-Control / forwarded response headers, and Document/hydration
+- [x] 21.2 Add **Migrate from Older SSR App** under the same Migrating heading: same structure (duplication with the static subsection is fine); cover webpack SSR → Vite SSR deltas (`renderCallback`, `-ssr` commands, meta CSP / `createUnsafeNonce`, etc.)
+- [x] 21.3 Link to both Migrating subsections from `vite.md` (and any other short pointers); do **not** add Vite SSR guides under `docs/migration-guides/`
+- [x] 21.4 Changeset / release notes: reference the fleshed-out Vite SSR product docs and Migrating sections in `server-rendering.md` alongside the Vite SSR public API docs
 
 ## Deferred (no tasks)
 

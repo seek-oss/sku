@@ -39,7 +39,13 @@ sku owns the HTTP server, the React Document shell (not overridable — use Reac
 
 `onRequest` may return a closed object under Vite SSR: `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language`, and JSON `clientContext`. `onHydrate` may return `AppWrapper`. Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch). When `languages` is configured, sku registers the active vocab language chunk from the server entry `language` (sole-language fallback when only one language is set).
 
-See [Server rendering](./docs/server-rendering.md) and [CSP](./docs/csp.md) for details.
+Scaffold a new app with:
+
+```sh
+pnpm dlx @sku-lib/create my-app --template vite-ssr
+```
+
+See [Server rendering](./docs/server-rendering.md) (including [Migrating from a static app](./docs/server-rendering.md#migrate-from-static-app) and [Migrating from an older SSR app](./docs/server-rendering.md#migrate-from-older-ssr-app)) and [CSP](./docs/csp.md) for details.
 
 ### Planned deprecation of library mode
 

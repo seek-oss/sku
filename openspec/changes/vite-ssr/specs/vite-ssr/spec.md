@@ -389,3 +389,59 @@ Vite SSR production (`node dist/server/server.js` or equivalent) MUST NOT be req
 - **WHEN** a Vite SSR production server starts and listens on its configured port
 - **THEN** sku is not required to emit a listen / port console message
 - **AND** webpack SSR’s `sku SSR server started on port` message is not a Vite SSR requirement
+
+### Requirement: Teams can scaffold a Vite SSR app via @sku-lib/create
+
+`@sku-lib/create` MUST offer a Vite SSR template (template id `vite-ssr`) that generates a new sku app configured for Vite SSR. The scaffold MUST include `bundler: 'vite'`, `renderType: 'server-side-rendered'`, a relative `publicPath`, and the required entry modules with named exports (`routes`, `onRequest`, `middleware`, `onHydrate`) at the default paths. The existing static `vite` and `webpack` templates MUST remain unchanged (static Vite MUST NOT become SSR by default).
+
+#### Scenario: Create with vite-ssr template
+
+- **WHEN** a user runs `@sku-lib/create` with `--template vite-ssr` (or selects the Vite SSR interactive choice)
+- **THEN** the generated project is a Vite SSR app (`bundler: 'vite'`, `renderType: 'server-side-rendered'`)
+- **AND** the project includes `src/routes.tsx`, `src/server.tsx`, and `src/client.tsx` (or equivalent defaults) with the required named exports
+- **AND** `sku start` can serve the scaffolded app without further entry-file setup
+
+#### Scenario: Static vite create template unchanged
+
+- **WHEN** a user creates a project with the existing `vite` template
+- **THEN** the project remains a static / SSG Vite app
+- **AND** it is not configured as `renderType: 'server-side-rendered'` by default
+
+### Requirement: Vite SSR product docs cover providers, middleware, CSP, and response headers
+
+The Vite SSR section of `docs/docs/server-rendering.md` (outside any Migrating heading) MUST include distinct headers that document app-level providers (`AppWrapper`), middleware, CSP, and response headers (including Cache-Control and sku forwarding of loader/action headers). These topics MUST NOT exist only under Migrating.
+
+#### Scenario: Primary Vite SSR docs have topic headers
+
+- **WHEN** a reader opens the Vite SSR section of `server-rendering.md` (not under Migrating)
+- **THEN** distinct headers cover AppWrapper/providers, middleware, CSP, and response headers (including Cache-Control / forwarded loader-action headers)
+
+### Requirement: Migrating sections in server-rendering docs
+
+Sku MUST publish migration guidance as a **Migrating** heading in `docs/docs/server-rendering.md` with two self-contained subsections:
+
+- **Migrate from Static App** — migrating from static apps (webpack or Vite) to Vite SSR
+- **Migrate from Older SSR App** — migrating from webpack SSR to Vite SSR
+
+Sku MUST NOT place these Vite SSR migration guides under `docs/migration-guides/`. Each subsection MUST be readable top to bottom (duplication of shared prerequisites between the two subsections is allowed and preferred over forcing readers to jump). Each subsection MUST open with **requirements** (including React 19+) and **limitations** (sku migration surface only; infrastructure, deployments, and process sit outside scope).
+
+Each subsection MUST include distinct headers that cover the sku migration surface, including at least: config and commands; routes and request entries; app-level providers (`AppWrapper`); middleware; CSP; response headers such as Cache-Control and forwarded loader/action headers; and the Document / hydration model. The guides MUST remain high-level — they MUST NOT attempt an exhaustive file-by-file inventory of every app-specific change. `vite.md` MAY link to these subsections.
+
+#### Scenario: Static migration subsection exists
+
+- **WHEN** a reader opens the Migrating section of `server-rendering.md`
+- **THEN** there is a **Migrate from Static App** subsection covering static (webpack or Vite) → Vite SSR
+- **AND** that subsection is readable without requiring the Older SSR App subsection
+
+#### Scenario: Older SSR migration subsection exists
+
+- **WHEN** a reader opens the Migrating section of `server-rendering.md`
+- **THEN** there is a **Migrate from Older SSR App** subsection covering webpack SSR → Vite SSR
+- **AND** that subsection is readable without requiring the Static App subsection
+
+#### Scenario: Requirements, limitations, and topic headers are present
+
+- **WHEN** a reader opens either Migrating subsection
+- **THEN** requirements are stated near the start (including React 19 or newer)
+- **AND** limitations are stated near the start (including that infrastructure, deployments, and process are out of scope)
+- **AND** distinct headers cover CSP, response headers (including Cache-Control), AppWrapper/providers, and middleware

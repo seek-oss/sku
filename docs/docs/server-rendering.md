@@ -1,11 +1,22 @@
 # Server rendering
 
-Sku supports two SSR models:
+Sku’s server-side rendering is **Vite SSR**: a high-level API on `bundler: 'vite'` + `renderType: 'server-side-rendered'`, built on [React Router Data Mode](https://reactrouter.com/start/modes#data). Sku owns the HTTP server, Document shell, streaming, hydration, and CSP headers. Use `sku start` / `sku build` (same as static Vite). Requires **React 19+**.
 
-1. **Vite SSR** (recommended for new apps) — `bundler: 'vite'` + `renderType: 'server-side-rendered'`, using `sku start` / `sku build`
-2. **Webpack SSR** (existing) — `sku start-ssr` / `sku build-ssr` with a low-level `serverEntry` `renderCallback`
+Scaffold with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or follow the sections below.
+
+Migrating from a static app or from the older webpack SSR API? See [Migrating](#migrating). Existing webpack SSR apps (`sku start-ssr` / `sku build-ssr` / `renderCallback`) remain supported for continuity — see [Older webpack SSR](#older-webpack-ssr-supported-for-continuity). New apps should not start on that path.
 
 ## Vite SSR
+
+### Scaffold a new app
+
+```sh
+pnpm dlx @sku-lib/create my-app --template vite-ssr
+cd my-app
+pnpm start
+```
+
+The `vite-ssr` template scaffolds `bundler: 'vite'`, `renderType: 'server-side-rendered'`, a relative `publicPath`, and the required named exports (`routes`, `onRequest`, `middleware`, `onHydrate`) at the default entry paths. Interactive create also offers **Vite SSR** as a distinct choice from static **Vite**.
 
 ### React Router Data Mode
 
@@ -13,7 +24,7 @@ Vite SSR largely wraps [React Router Data Mode](https://reactrouter.com/start/mo
 
 For information on how to use React Router to register routes, see [React Router Data Mode](https://reactrouter.com/start/data/routing).
 
-Requires React 19+. Configure:
+Configure:
 
 ```ts
 import type { SkuConfig } from 'sku';
@@ -60,46 +71,83 @@ sku owns:
 - the React Document shell (`<html>` / `<head>` / `<body>` with CSS + modulepreload links) — not overridable; use React 19 metadata in routes/layouts for head/SEO
 - full-document streaming with `renderToPipeableStream` (shell-first; set route `handle.waitForAll` to buffer until `onAllReady`)
 - document-level hydration (`hydrateRoot(document, …)`), not `#app`
-- CSP as HTTP headers when `cspEnabled` / `cspReportOnlyEnabled` are set
-- forwarding React Router loader/action headers (e.g. `Set-Cookie`) onto streamed HTML responses
+- CSP as HTTP headers when `cspEnabled` / `cspReportOnlyEnabled` are set (see [CSP](#csp))
+- forwarding React Router loader/action headers onto streamed HTML responses (see [Response headers](#response-headers))
 
-Put request middleware on the server entry’s named `middleware` export (not config `devServerMiddleware`, and not on the routes entry). `httpsDevServer: true` is supported for Vite SSR `sku start`.
-
-Do **not** use `sku start-ssr` / `sku build-ssr` when `renderType` is set.
+`httpsDevServer: true` is supported for Vite SSR `sku start`.
 
 ### Request entries (`serverEntry` / `clientEntry`)
 
-Required separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition and server-only middleware. Under Vite SSR these use **named exports** — they do **not** own the HTML response (sku still streams Document + CSP) and are not webpack `renderCallback` / static hydrate. Missing entry files or any required named export is a **hard error**; sku does not use `default` or supply noop stubs.
+Required separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition and server-only middleware. Under Vite SSR these use **named exports** — they do **not** own the HTML response (sku still streams Document + CSP) and are not a static `#app` hydrate entry. Missing entry files or any required named export is a **hard error**; sku does not use `default` or supply noop stubs.
 
 **Server entry** must export:
 
-- `onRequest` — runs before React Router `query()` and may return only:
-  - `AppWrapper` — a React component `ComponentType<{ children }>` for providers / request-scoped seed (**not** page layout or Document chrome). Sku mounts it **inside** the router as a pathless parent layout so it may use React Router hooks (`useLocation`, etc.)
-  - `language` — configured language **name** (or `en-PSEUDO`) for vocab chunk identity
-  - `clientContext` — JSON-serialisable shell seed (serialised at shell time only)
-- `middleware` — `SkuSsrMiddleware` (Connect/Express-compatible handler or array; empty array / passthrough OK), mounted before the HTML render path
+- `onRequest` — runs before React Router `query()`; may return `AppWrapper`, `language`, and/or `clientContext` (see [App-level providers](#app-level-providers-appwrapper))
+- `middleware` — Connect/Express handlers mounted before the HTML render path (see [Middleware](#middleware))
 
 **Client entry** must export:
 
-- `onHydrate` — receives `{ context, language }` (`context` is deserialized `clientContext`; `language` is forwarded from the server result) and may return only `AppWrapper`
-
-sku renders `Document` → router provider → optional sku pathless `AppWrapper` layout → consumer routes on server and client. When `AppWrapper` is omitted, consumer routes are used as-is.
+- `onHydrate` — receives `{ context, language }` and may return `AppWrapper`
 
 ```tsx
 // src/server.tsx
+import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
+
+import { Providers } from './App/Providers';
+
+export const onRequest: SkuSsrOnRequest = ({ request }) => ({
+  language: resolveLocaleFromRequest(request), // e.g. 'th-TH'
+  clientContext: { theme: 'dark' },
+  AppWrapper: Providers,
+});
+
+export const middleware: SkuSsrMiddleware = [];
+```
+
+```tsx
+// src/client.tsx
+import type { SkuSsrOnHydrate } from 'sku';
+
+import { Providers } from './App/Providers';
+
+export const onHydrate: SkuSsrOnHydrate = () => ({
+  AppWrapper: Providers,
+});
+```
+
+### App-level providers (`AppWrapper`)
+
+`AppWrapper` is a React component `ComponentType<{ children }>` for **providers / request-scoped seed only** — not page layout or Document chrome. Sku mounts it **inside** the router as a pathless parent layout so it may use React Router hooks (`useLocation`, `useParams`, etc.).
+
+Render tree:
+
+```
+Document
+  └── RouterProvider / StaticRouterProvider
+        └── sku pathless layout   ← AppWrapper (if returned) + Outlet
+              └── consumer routes
+```
+
+When `AppWrapper` is omitted, consumer routes are used as-is. Use the same providers on server and client so the tree matches for hydration. Values that change on SPA navigations must re-derive via React Router hooks inside `AppWrapper` (or a route layout); closing only over hydrate `context` / `language` will go stale.
+
+`onRequest` may also return:
+
+- `language` — configured language **name** (or `en-PSEUDO`) for vocab chunk identity
+- `clientContext` — JSON-serialisable shell seed (serialised at shell time only; forwarded to `onHydrate` as `context`)
+
+A consumer root `ErrorBoundary` does **not** catch errors thrown while rendering `AppWrapper` itself (the injected parent sits above consumer routes).
+
+```tsx
 import { VocabProvider } from '@vocab/react';
 import type { ReactNode } from 'react';
 import { useLocation } from 'react-router';
-import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
+import type { SkuSsrOnRequest } from 'sku';
 
 export const onRequest: SkuSsrOnRequest = ({ request }) => {
-  const language = resolveLocaleFromRequest(request); // e.g. 'th-TH'
-  const clientContext = { theme: 'dark' };
+  const language = resolveLocaleFromRequest(request);
 
   return {
     language,
-    clientContext,
-    // Mounted inside the router — may use React Router hooks.
     AppWrapper: ({ children }: { children: ReactNode }) => {
       const { pathname } = useLocation();
       const activeLanguage = resolveLocaleFromPathname(pathname) ?? language;
@@ -109,29 +157,62 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => {
     },
   };
 };
-
-export const middleware: SkuSsrMiddleware = (req, res, next) => next();
 ```
+
+### Middleware
+
+Put request middleware on the server entry’s named `middleware` export (`SkuSsrMiddleware`: a Connect/Express-compatible handler or array). Empty array / passthrough is fine. Middleware is mounted **before** Vite middlewares and the HTML render path; it must not commit the document body.
+
+Do **not** put Vite SSR app middleware on:
+
+- the routes entry
+- config `devServerMiddleware` (that remains for static-app proxy helpers — see [Dev Server Middleware](./docs/extra-features?id=devserver-middleware))
 
 ```tsx
-// src/client.tsx
-import { VocabProvider } from '@vocab/react';
-import type { ReactNode } from 'react';
-import { useLocation } from 'react-router';
-import type { SkuSsrOnHydrate } from 'sku';
+import type { SkuSsrMiddleware } from 'sku';
 
-export const onHydrate: SkuSsrOnHydrate = ({ context }) => ({
-  // Re-derive URL values here (or in a shared AppWrapper) so SPA navigations stay fresh.
-  // Hydrate `language` / `context` are seed only — do not close over them for URL-derived locale.
-  AppWrapper: ({ children }: { children: ReactNode }) => {
-    const { pathname } = useLocation();
-    const language = resolveLocaleFromPathname(pathname) ?? 'en';
-    return <VocabProvider language={language}>{children}</VocabProvider>;
-  },
-});
+export const middleware: SkuSsrMiddleware = (req, res, next) => {
+  if (req.path === '/api/health') {
+    res.status(200).type('text/plain').send('ok');
+    return;
+  }
+  next();
+};
 ```
 
-Use the same providers on both sides so the tree matches for hydration. Values that change on SPA navigations must re-derive via React Router hooks inside `AppWrapper` (or a route layout); closing only over hydrate `context` / `language` will go stale.
+### CSP
+
+When `cspEnabled` and/or `cspReportOnlyEnabled` are set, Vite SSR delivers CSP as **HTTP headers** (`Content-Security-Policy` / `Content-Security-Policy-Report-Only`) derived from the document shell plus nonces and hashes of bootstrap scripts. Meta `http-equiv` CSP is **not** used on the Vite SSR path.
+
+Vite SSR uses **at most one** request-scoped nonce per HTML response, minted only when explicitly requested (`getCspNonce()` from `sku`, or `req.getCspNonce()` in middleware).
+
+Relative `publicPath` only — see [CSP](./docs/csp.md) and [Configuration](./docs/configuration.md) for report-only options (`cspReportOnlyReportTo`, extra script hosts, etc.).
+
+### Response headers
+
+After React Router `query()`, when sku streams HTML (not a short-circuit `Response` such as a redirect), it forwards loader/action headers from the route context onto the Express response (including multi-value headers such as `Set-Cookie`), then applies sku-owned headers (`Content-Type`, CSP).
+
+Set caching and cookies from loaders/actions with React Router’s `data()` / header APIs, for example:
+
+```tsx
+import { data } from 'react-router';
+
+export async function loader() {
+  return data(
+    { ok: true },
+    {
+      headers: {
+        'Cache-Control': 'private, max-age=0',
+        'Set-Cookie': 'session=1; Path=/; HttpOnly',
+      },
+    },
+  );
+}
+```
+
+### Document hydration
+
+sku hydrates the **full document** with `hydrateRoot(document, …)` — there is no `#app` mount node and no consumer `renderDocument` / static `render.tsx` on this path. Prefer React 19 document metadata in routes/layouts for `<head>` / SEO. The Document shell itself is not overridable.
 
 ### Lazy routes and `handle.moduleId`
 
@@ -165,7 +246,7 @@ In development, sku warns when a lazy route still has no effective `moduleId` af
 
 ### Vocab / language chunks
 
-When `languages` is configured, Vite SSR keeps `@vocab/vite` language chunk splitting and registers the active language chunk (`en-translations`, …) on the Document asset path — same idea as static Vite and webpack SSR `addLanguageChunk`.
+When `languages` is configured, Vite SSR keeps `@vocab/vite` language chunk splitting and registers the active language chunk (`en-translations`, …) on the Document asset path (same idea as static Vite).
 
 sku resolves the language from (in order):
 
@@ -186,7 +267,7 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => ({
 });
 ```
 
-Wrap your UI in `VocabProvider` via `AppWrapper` (see request entries above) or a layout. URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
+Wrap your UI in `VocabProvider` via `AppWrapper` (see [App-level providers](#app-level-providers-appwrapper)) or a layout. URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
 
 ### Multiple paths per page / languages in path
 
@@ -274,11 +355,120 @@ node dist/server/server.js
 
 Deploy both `client/` and `server/` together. Client assets are served from `dist/client/` under the relative `publicPath`. Absolute / CDN `publicPath` is not supported for Vite SSR.
 
-## Webpack SSR
+## Migrating
 
-The default mode for sku is to statically render projects. However, Webpack Server-Side Rendering (SSR) can explicitly be turned on, both in development with hot module reloading for React, and in production.
+### Migrate from Static App
 
-First, you need to create a `sku.config.js` file, which will contain the following setup at minimum:
+High-level guide for moving a **static** sku app (webpack or Vite SSG) to Vite SSR. For day-to-day API detail, prefer the [Vite SSR](#vite-ssr) sections above.
+
+#### Requirements
+
+- Upgrade to **React 19+** before migrating (document hydration requires it)
+- Vite SSR is Vite-only: `bundler: 'vite'` + `renderType: 'server-side-rendered'`
+- Use a **relative** `publicPath` (e.g. `/`) — absolute / CDN URLs are not supported
+
+#### Limitations
+
+This guide covers the **sku** surface only (config, entries, providers, middleware, CSP, headers, hydration). Infrastructure, deployments, process managers, and reverse-proxy setup are out of scope.
+
+#### Config and commands
+
+- Set `bundler: 'vite'` and `renderType: 'server-side-rendered'`
+- Prefer scaffolding with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or mirror that config
+- Use `sku start` / `sku build` (same commands as static Vite) — do **not** introduce `start-ssr` / `build-ssr`
+- Drop static-only config such as `renderEntry` / `src/render.tsx` and environments-driven static HTML generation for the SSR path
+
+#### Routes and request entries
+
+- Replace the static page + `render.tsx` / `#app` client with a `routesEntry` exporting named `routes` (`RouteObject[]`)
+- Add required `serverEntry` / `clientEntry` with named `onRequest`, `middleware`, and `onHydrate` (hard error if missing)
+- Prefer idiomatic `lazy: () => import('./pages/…')` on route configs for per-route chunks
+
+#### App-level providers
+
+- Move app-wide providers (Braid, Vocab, etc.) into `AppWrapper` returned from `onRequest` / `onHydrate` — not into a static `renderApp` / `#app` tree alone
+- Keep server and client `AppWrapper` trees aligned for hydration; re-derive URL-scoped values with React Router hooks
+
+#### Middleware
+
+- Mount Connect/Express middleware on the server entry `middleware` export
+
+#### CSP
+
+- Enable `cspEnabled` / `cspReportOnlyEnabled` as needed — Vite SSR emits **HTTP header** CSP, not meta `http-equiv`
+- Use the single request-scoped nonce (`getCspNonce` / `req.getCspNonce`); do not carry over static/webpack multi-`createUnsafeNonce` patterns
+
+#### Response headers
+
+- Set `Cache-Control`, `Set-Cookie`, etc. from React Router loaders/actions; sku forwards those headers onto streamed HTML responses
+- Do not expect a consumer `renderDocument` / `res.send` HTML path
+
+#### Document / hydration
+
+- Replace `#app` `hydrateRoot` and `renderDocument` with sku’s full-document stream + `hydrateRoot(document)`
+- Use React 19 metadata in routes/layouts for head/SEO; the Document shell is not overridable
+
+### Migrate from Older SSR App
+
+High-level guide for moving from the older **webpack-based SSR** (`sku start-ssr` / `sku build-ssr` / `renderCallback`) to the new Vite-based SSR.
+
+The older SSR API was significantly lower-level and required apps to introduce a lot of their own bespoke behaviour. Because of this, migration will likely be dependent on your solution’s specifics.
+
+#### Requirements
+
+- Upgrade to **React 19+** before migrating
+- Switch to `bundler: 'vite'` + `renderType: 'server-side-rendered'`
+- Relative `publicPath` only
+
+#### Limitations
+
+Covers the **sku** migration surface only. Deploy/process/infra changes are out of scope beyond noting command and layout differences.
+
+#### Config and commands
+
+- Set `renderType: 'server-side-rendered'` and `bundler: 'vite'`
+- Replace `sku start-ssr` / `sku build-ssr` with `sku start` / `sku build`
+- Production becomes `node dist/server/server.js` (sibling `client/` + `server/` under the build target) — not webpack’s single `dist/server.js` layout
+- `renderType` set means `-ssr` commands are rejected
+
+#### Routes and request entries
+
+- Replace webpack `serverEntry` default export `{ renderCallback, middleware, onStart }` with Vite SSR named exports: routes entry `routes`, server `onRequest` + `middleware`, client `onHydrate`
+- Express `renderCallback` no longer owns HTML — sku streams Document; put providers in `AppWrapper`, data loading in React Router loaders/actions
+- Optional webpack `onStart` is not part of the Vite SSR request-entry contract
+
+#### App-level providers
+
+- Move `SkuProvider` / app providers from `renderCallback` into `AppWrapper` on `onRequest` / `onHydrate`
+- Vocab language identity moves from `addLanguageChunk` / path hacks to server entry `language` (see [Vocab / language chunks](#vocab--language-chunks))
+
+#### Middleware
+
+- Keep using a middleware export, but on the Vite SSR **server entry** named `middleware` (same Connect style)
+- Webpack dual-port / proxy assumptions differ; Vite SSR is single-port in dev (`httpsDevServer` supported)
+
+#### CSP
+
+- Leave meta `http-equiv` / multi-`createUnsafeNonce` webpack patterns behind
+- Use header CSP + the single request-scoped nonce APIs (`getCspNonce` / `req.getCspNonce`)
+
+#### Response headers
+
+- Prefer loader/action headers (`Set-Cookie`, `Cache-Control`, …) over manually setting headers on `res` inside `renderCallback` before `res.send`
+- sku forwards loader/action headers onto the streamed HTML response
+
+#### Document / hydration
+
+- Drop hand-rolled HTML templates / `getHeadTags` / `getBodyTags` document assembly for the Vite SSR path
+- Hydration is full-document (`hydrateRoot(document)`), not a partial mount inside markup you assembled in `renderCallback`
+
+## Older webpack SSR (supported for continuity)
+
+Previously, sku’s only SSR support was a low-level webpack API using `-ssr` commands (`sku start-ssr` / `sku build-ssr`) and a `serverEntry` default export with `renderCallback`. That path is **discouraged for new apps** — prefer [Vite SSR](#vite-ssr) above, or [migrate](#migrate-from-older-ssr-app).
+
+It remains **supported for existing webpack SSR apps** for continuity and will eventually be deprecated.
+
+Minimal config and server entry:
 
 ```ts
 export default {
@@ -292,15 +482,7 @@ export default {
 } satisfies SkuConfig;
 ```
 
-If you have an existing configuration, for example generated with `@sku-lib/create`, you will need to replace the `render` entry point by a `server` entry point, and add port info as documented above.
-
-Then, you need to create your `server` entry. Sku will automatically provide an [Express](https://expressjs.com/) server for the user. The entry point for SSR, `server`, is used to provide the following:
-
-- a render callback
-- optionally, any required middlewares, either one or an array
-- optionally, a callback to run after the server starts, which receives the Express application instance as a parameter
-
-This can be done as follows:
+Sku provides an [Express](https://expressjs.com/) server. The `serverEntry` default export may provide `renderCallback`, optional `middleware`, and optional `onStart`:
 
 ```tsx
 import template from './template';
@@ -326,13 +508,15 @@ export default (): Server => ({
 });
 ```
 
-## Multi-part response
+Commands (different from Vite SSR / static apps):
 
-If you need to return HTML at different times in the request you can use `flushHeadTags` to retrieve only the new head tags since the previous call.
+- `sku start-ssr` — development; uses both `port` and `serverPort`
+- `sku build-ssr` — production assets; run with `node ./dist/server.js` (listens on `serverPort`)
+- `sku test` — tests
 
-New head tags can be added during render, typically this is due to dynamic chunks being used during a render.
+### Multi-part response
 
-For example, you may want to send back an initial response before you are done rendering your response:
+To return HTML at different times in the request, use `flushHeadTags` for head tags added since the previous call (typically from dynamic chunks):
 
 ```tsx
 import { initialResponseTemplate, followupResponseTemplate } from './template';
@@ -370,23 +554,9 @@ export default (): Server => ({
 });
 ```
 
-Last but not least, please note that commands for SSR are different to the ones used normally:
+### Multi-language support
 
-- Use `sku start-ssr` to start your development environment. It uses both `port` and `serverPort` to spin up hot module reloading servers.
-- Use `sku build-ssr` to build your production assets. You can then run `node ./dist/server.js`. Your server will run at `http://localhost:xxxx`, where `xxxx` is `serverPort`.
-- Use `sku test` to test your application
-
-## Multi-language support
-
-When using multiple languages the browser will download the language needed as required. However, this can lead to a delay in page load. To ensure translations are available immediately you need to tell sku what language you are rendering.
-
-**Vite SSR:** return `language` from the server request entry (configured language **name**), or rely on sole-language fallback — see [Vite SSR → Vocab / language chunks](#vocab--language-chunks). Wrap the tree in `VocabProvider` via `AppWrapper` (or a layout).
-
-**Webpack SSR:** call `addLanguageChunk` from your render params (this is not used for Vite SSR).
-
-**Note:** Static rendering registers language chunks automatically.
-
-**Example:** Using `addLanguageChunk` to set the language during webpack server-render
+When using multiple languages the browser will download the language as needed, which can delay first paint. To ensure translations are available immediately, call `addLanguageChunk` from your render params (Vite SSR uses server-entry `language` instead — see [Vocab / language chunks](#vocab--language-chunks)):
 
 ```jsx
 export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
@@ -404,17 +574,15 @@ export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
 }
 ```
 
-## Development server entrypoint
+Static rendering registers language chunks automatically.
 
-When developing your application sku will start two services:
+### Development server entrypoint
 
-- A dev server responsible for serving static assets
-- An SSR service running your app's server code
+On the older webpack SSR path, `sku start-ssr` starts two services:
 
-The dev server acts as a single entrypoint for your development environment, proxying requests to your SSR service that don't match any other known routes.
-This simulates a typical production environment, where a reverse proxy directs asset, API or other requests to another service.
-It also avoids the need to complete Cross-Origin Resource Sharing (CORS) checks when making requests from the client.
+- A dev server for static assets
+- An SSR service running your app’s server code
 
-To include other requests, like typical API traffic, consider using [Dev Server Middleware] to proxy requests.
+The dev server is the single entrypoint and proxies non-asset requests to the SSR service (similar to a production reverse proxy, and avoiding CORS for client requests). Vite SSR uses a single port instead.
 
-[Dev Server Middleware]: ./docs/extra-features?id=devserver-middleware
+To proxy other traffic (for example APIs), use [Dev Server Middleware](./docs/extra-features?id=devserver-middleware).

@@ -4,7 +4,11 @@
   "workspaces": {
     ".": {
       // Used in the renovate config
-      "ignoreDependencies": ["renovate-config-seek"],
+      "ignoreDependencies": [
+        "renovate-config-seek",
+        "@sku-private/inject-changelog-preamble",
+      ],
+      "ignoreBinaries": ["inject-changelog-preamble"],
     },
     "packages/sku": {
       "ignoreDependencies": [

@@ -28,7 +28,7 @@
     "format": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --fix . && prettier --cache --experimental-cli --write . ",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
-    "version": "changeset version && pnpm install --lockfile-only"
+    "version": "changeset version && pnpm inject-changelog-preamble && pnpm install --lockfile-only"
   },
   "nano-staged": {
     "+(package.json|pnpm-lock.yaml)": [
@@ -55,6 +55,7 @@
     "@changesets/cli": "^2.27.0",
     "@changesets/get-github-info": "^0.8.0",
     "@fission-ai/openspec": "^1.6.0",
+    "@sku-private/inject-changelog-preamble": "workspace:*",
     "@sku-private/playwright": "workspace:*",
     "@sku-private/test-utils": "workspace:*",
     "@sku-private/testing-library": "workspace:*",
@@ -72,7 +73,7 @@
     "playwright": "^1.60.0",
     "prettier": "~3.9.0",
     "renovate-config-seek": "^0.4.0",
-    "tsdown": "^0.21.0",
+    "tsdown": "^0.22.0",
     "tsx": "^4.19.4",
     "typescript": "catalog:",
     "vitest": "catalog:"

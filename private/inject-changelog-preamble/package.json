@@ -1,0 +1,14 @@
+{
+  "name": "@sku-private/inject-changelog-preamble",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "sku-inject-changelog": "./src/inject.ts"
+  },
+  "dependencies": {
+    "@sku-private/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:"
+  }
+}

@@ -30,9 +30,9 @@ sku MUST generate the Vite SSR CSP from the rendered document shell (known scrip
 
 ### Requirement: Vite SSR uses at most one CSP nonce per render, only when requested
 
-For a Vite SSR HTML response, sku MUST generate at most one CSP nonce value for that render. A nonce MUST be created only when explicitly requested during that request (by consumer code or by sku when it will attach a `nonce` to scripts). When a nonce is requested, sku MUST reuse that same value everywhere for the response (CSP header, React stream scripts, and consumer APIs). sku MUST NOT provide a Vite SSR API that creates additional distinct nonces for the same response (unlike static/webpack `createUnsafeNonce`, which may be called multiple times).
+For a Vite SSR HTML response, sku MUST generate at most one CSP nonce, only when explicitly requested (by consumer code or by sku when attaching a `nonce` to scripts). When requested, sku MUST reuse that same value everywhere for the response. Sku MUST NOT provide a Vite SSR API that creates additional distinct nonces for the same response (unlike static/webpack `createUnsafeNonce`).
 
-sku MUST include `'nonce-…'` in the CSP header for that response only if a nonce was requested. If CSP is enabled but nothing requested a nonce, the CSP header MUST still be emitted without a nonce allowance (hashes, `'self'`, and configured hosts as applicable).
+sku MUST include `'nonce-…'` in the CSP header only if a nonce was requested. If CSP is enabled but nothing requested a nonce, the CSP header MUST still be emitted without a nonce allowance.
 
 #### Scenario: Nonce omitted from CSP when never requested
 
@@ -42,7 +42,7 @@ sku MUST include `'nonce-…'` in the CSP header for that response only if a non
 
 #### Scenario: Requested nonce appears once in CSP and is reused
 
-- **WHEN** a nonce is requested during a Vite SSR render (consumer API and/or sku for nonce-bearing scripts)
+- **WHEN** a nonce is requested during a Vite SSR render
 - **THEN** sku generates exactly one nonce for that request
 - **AND** the CSP header includes that nonce
 - **AND** every subsequent request for the nonce on that response returns the same value
@@ -62,8 +62,7 @@ sku MUST include `'nonce-…'` in the CSP header for that response only if a non
 
 ### Requirement: Report-Only CSP may coexist with an enforcing policy and MUST support report-to
 
-Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an enforcing CSP.
-When Report-Only CSP is enabled, consumers MUST be able to configure a `report-to` value, and sku MUST include that value in the Report-Only policy (via the CSP `report-to` directive) so violation reports have a destination.
+Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an enforcing CSP. When Report-Only is enabled, consumers MUST be able to configure a `report-to` value, and sku MUST include that value in the Report-Only policy.
 
 #### Scenario: Report-Only header alongside enforcing policy
 
@@ -82,12 +81,12 @@ When Report-Only CSP is enabled, consumers MUST be able to configure a `report-t
 
 ### Requirement: Vite SSR CSP assumes relative publicPath only
 
-Vite SSR CSP MUST assume a relative `publicPath` so Document assets are covered by `'self'`. Absolute `http(s)` / CDN `publicPath` is not supported for Vite SSR CSP generation. Consumer `cspExtraScriptSrcHosts` remains for additional third-party script hosts.
+Vite SSR CSP MUST assume a relative `publicPath` so Document assets are covered by `'self'`. Absolute `http(s)` / CDN `publicPath` is not supported. Consumer `cspExtraScriptSrcHosts` remains for third-party script hosts.
 
 #### Scenario: Relative publicPath with CSP enabled
 
 - **WHEN** CSP is enabled and `publicPath` is a relative path
-- **AND** sku streams an HTML document whose bootstrap modules and Document asset URLs use that relative path
+- **AND** sku streams an HTML document whose assets use that relative path
 - **THEN** the CSP header allows those assets via `'self'` (and nonces/hashes as applicable)
 - **AND** sku does not require an absolute/`CDN` origin allowance for sku-owned Document assets
 

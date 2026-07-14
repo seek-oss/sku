@@ -1,12 +1,19 @@
 import { spawn } from 'node:child_process';
 import { getRunCommand } from '@sku-private/utils';
 
+/**
+ * When set, run this sku binary for `format` instead of the project script.
+ * Used by monorepo tests to validate against unreleased behaviour.
+ */
+const skuBinOverride = process.env.SKU_CREATE_SKU_BIN;
+
 export const formatProject = async (projectPath: string): Promise<void> => {
   console.log('🎨 Formatting project...');
 
   return new Promise((resolve) => {
-    const formatCommand = getRunCommand('format');
-    const [command, ...args] = formatCommand.split(' ');
+    const [command, ...args] = skuBinOverride
+      ? [skuBinOverride, 'format']
+      : getRunCommand('format').split(' ');
 
     const child = spawn(command, args, {
       cwd: projectPath,

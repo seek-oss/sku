@@ -27,7 +27,7 @@ export type SkuSsrAppWrapper = ComponentType<{ children: ReactNode }>;
 /** Closed return object from the Vite SSR `onRequest` export. Fields are optional. */
 export type SkuSsrOnRequestResult = {
   AppWrapper?: SkuSsrAppWrapper;
-  /** Configured language name (or `en-PSEUDO`) for vocab chunk identity. */
+  /** Configured language name (or `en-PSEUDO`) for language chunk registration. */
   language?: string;
   /** Shell-time JSON seed serialised into the hydrate bootstrap. */
   clientContext?: JsonValue;
@@ -44,7 +44,6 @@ export type SkuSsrOnHydrateResult = {
 
 export type SkuSsrOnHydrate = (args: {
   context: JsonValue | undefined;
-  language: string | undefined;
 }) => SkuSsrOnHydrateResult;
 
 export interface RenderManifest {
@@ -56,7 +55,7 @@ export interface RenderManifest {
 export interface RenderOptions {
   signal?: AbortSignal;
   nonce?: string;
-  /** Shared request context for this render (CSP nonce + language). */
+  /** Shared request context for this render (CSP nonce). */
   requestContextStore?: SsrRequestContextStore;
   development?: boolean;
   /** Configured language names for vocab chunk registration. */
@@ -91,7 +90,6 @@ declare global {
   interface Window {
     __SKU_DOCUMENT_ASSETS__?: DocumentAssets;
     __SKU_CLIENT_CONTEXT__?: JsonValue;
-    __SKU_LANGUAGE__?: string;
     __staticRouterHydrationData?: HydrationState;
   }
 }

@@ -10,11 +10,7 @@ import { getChunkName } from '@vocab/vite/chunks';
 import Document from './Document.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
-import {
-  getCspNonce,
-  getSkuLanguage,
-  runWithSsrRequestContext,
-} from './requestContext.js';
+import { getCspNonce, runWithSsrRequestContext } from './requestContext.js';
 import {
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,
@@ -58,7 +54,12 @@ const getModuleIds = (
   {
     development,
     languages = [],
-  }: { development: boolean; languages?: string[] },
+    requestLanguage,
+  }: {
+    development: boolean;
+    languages?: string[];
+    requestLanguage?: string;
+  },
 ): string[] => {
   const moduleIds = matches.flatMap(({ route }) => {
     const moduleId = (route.handle as SkuRouteHandle | undefined)?.moduleId;
@@ -72,7 +73,7 @@ const getModuleIds = (
 
   const language = resolveRequestLanguage({
     languages,
-    requestLanguage: getSkuLanguage(),
+    requestLanguage,
   });
   if (language) {
     moduleIds.push(getChunkName(language));
@@ -89,14 +90,8 @@ const renderDocument = async (
   options: RenderOptions = {},
   renderManifest?: RenderManifest,
 ): Promise<RenderResult> => {
-  const store =
-    options.requestContextStore ?? createSsrRequestContextStore(options.nonce);
-
-  // Server entry runs before query() so loaders can read getSkuLanguage().
+  // Server entry runs before query(); language is a local for preload + bootstrap.
   const requestEntry = await onRequest({ request });
-  if (requestEntry.language !== undefined) {
-    store.setLanguage(requestEntry.language);
-  }
 
   const routesWithAppWrapper = withAppWrapperLayout(
     routes,
@@ -116,6 +111,7 @@ const renderDocument = async (
   const moduleIds = getModuleIds(context.matches, {
     development,
     languages: options.languages,
+    requestLanguage: requestEntry.language,
   });
   let documentAssets: DocumentAssets = {
     css: assets.css,
@@ -141,7 +137,6 @@ const renderDocument = async (
     {
       development,
       clientContext: requestEntry.clientContext,
-      language: requestEntry.language,
     },
   );
   const routeHeaders = collectRouteHeaders(context);

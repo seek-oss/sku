@@ -87,7 +87,7 @@ Required separate modules via the existing `serverEntry` / `clientEntry` keys (d
 
 **Client entry** must export:
 
-- `onHydrate` — receives `{ context, language }` and may return `AppWrapper`
+- `onHydrate` — receives `{ context }` (deserialized `clientContext`) and may return `AppWrapper`
 
 ```tsx
 // src/server.tsx
@@ -117,7 +117,7 @@ export const onHydrate: SkuSsrOnHydrate = () => ({
 
 ### App-level providers (`AppWrapper`)
 
-`AppWrapper` is a React component `ComponentType<{ children }>` for **providers / request-scoped seed only** — not page layout or Document chrome. Sku mounts it **inside** the router as a pathless parent layout so it may use React Router hooks (`useLocation`, `useParams`, etc.).
+`AppWrapper` is a React component `ComponentType<{ children }>` for **providers only**. Not page layout or HTML. sku mounts it **inside** the router as a pathless parent layout so it may use React Router hooks (`useLocation`, `useParams`, etc.).
 
 Render tree:
 
@@ -128,12 +128,14 @@ Document
               └── consumer routes
 ```
 
-When `AppWrapper` is omitted, consumer routes are used as-is. Use the same providers on server and client so the tree matches for hydration. Values that change on SPA navigations must re-derive via React Router hooks inside `AppWrapper` (or a route layout); closing only over hydrate `context` / `language` will go stale.
+This is your opportunity to define Providers that may differ in implementation, or have different dependencies between server and client. For example, an API client might use different methods to make requests so the same Provider may create a different client for each environment.
 
 `onRequest` may also return:
 
-- `language` — configured language **name** (or `en-PSEUDO`) for vocab chunk identity
-- `clientContext` — JSON-serialisable shell seed (serialised at shell time only; forwarded to `onHydrate` as `context`)
+- `language` — configured language **name** (or `en-PSEUDO`) for **server** Document vocab-chunk registration only
+- `clientContext` — JSON-serialisable context the server can provide to the client.
+
+**Warning:** clientContext is created and sent after shell-ready, and should not be used for sending data that may not be available until after the full document has rendered.
 
 A consumer root `ErrorBoundary` does **not** catch errors thrown while rendering `AppWrapper` itself (the injected parent sits above consumer routes).
 
@@ -281,16 +283,11 @@ In development, sku warns when a lazy route still has no effective `moduleId` af
 
 ### Vocab / language chunks
 
-When `languages` is configured, Vite SSR keeps `@vocab/vite` language chunk splitting and registers the active language chunk (`en-translations`, …) on the Document asset path (same idea as static Vite).
+When `languages` is configured, Vite SSR uses `@vocab/vite` language chunk splitting and registers the active language chunk (e.g. `en-translations`) to be loaded as part of the initial document.
 
-sku resolves the language from (in order):
+When there are multiple languages, sku resolves the language from the return of the `onRequest` method (server Document preload only — not forwarded to `onHydrate` / no `__SKU_LANGUAGE__`).
 
-1. **Server request entry `language` (preferred / only app-owned path)** — return a configured language **name** (e.g. `th-TH`), not necessarily a URL segment. Loaders/actions may read it with `getSkuLanguage()` from `sku` after the server entry has run.
-2. the sole configured language when only one language is set
-
-If the language cannot be resolved (or the server entry returns an unknown name), sku soft-fails: it skips vocab chunk registration and does not error the response.
-
-sku does **not** identify language from Express `req.skuLanguage`, a `:language` route param, or route `handle.language`. Compose locale in the server entry (middleware may still parse URLs for redirects, but must not set a parallel language slot).
+If the language cannot be resolved, no language chunk will be preloaded, likely resulting in a delay loading text.
 
 ```tsx
 // src/server.tsx
@@ -302,7 +299,7 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => ({
 });
 ```
 
-Wrap your UI in `VocabProvider` via `AppWrapper` (see [App-level providers](#app-level-providers-appwrapper)) or a layout. URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
+Wrap your UI in `VocabProvider` via `AppWrapper` (see [App-level providers](#app-level-providers-appwrapper)) or a layout. Client locale is app-owned: re-derive it the same way `onRequest` did (URL / cookies / headers), via React Router hooks inside `AppWrapper`, or optionally seed it through `clientContext`. URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
 
 ### Multiple paths per page / languages in path
 

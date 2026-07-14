@@ -63,7 +63,7 @@ Sku MUST consume **named exports only**. Missing any of the following MUST be a 
 - Server entry: `onRequest`, `middleware`
 - Client entry: `onHydrate`
 
-`onRequest` MAY return only `AppWrapper` (providers component, mounted **inside** the router as a pathless parent), `language` (configured language name or `en-PSEUDO`), and `clientContext` (JSON-serialisable, shell-time). `middleware` MUST be a Connect `RequestHandler` or array (empty / passthrough allowed). `onHydrate` receives `{ context, language }` and MAY return only `AppWrapper`. Return-object fields remain optional. When `AppWrapper` is omitted, sku MUST use consumer `routes` without an injected parent.
+`onRequest` MAY return only `AppWrapper` (providers component, mounted **inside** the router as a pathless parent), `language` (configured language name or `en-PSEUDO`, server Document vocab preload only), and `clientContext` (JSON-serialisable, shell-time). `middleware` MUST be a Connect `RequestHandler` or array (empty / passthrough allowed). `onHydrate` receives `{ context }` only (deserialized `clientContext`) and MAY return only `AppWrapper`. Sku MUST NOT forward `language` to the client bootstrap or `onHydrate`. Return-object fields remain optional. When `AppWrapper` is omitted, sku MUST use consumer `routes` without an injected parent.
 
 #### Scenario: Server entry wraps routes inside the router and sets language
 
@@ -72,11 +72,12 @@ Sku MUST consume **named exports only**. Missing any of the following MUST be a 
 - **AND** sku mounts `AppWrapper` as a pathless parent layout under `StaticRouterProvider` above the consumer routes
 - **AND** sku uses `language` for vocab chunk identification (when `languages` is configured)
 
-#### Scenario: Client entry receives shell context and language
+#### Scenario: Client entry receives shell context only
 
 - **WHEN** a Vite SSR app’s server `onRequest` returns `clientContext` and `language`
 - **THEN** sku serialises `clientContext` into the hydrate bootstrap
-- **AND** sku invokes `onHydrate` with deserialized `context` and the same `language`
+- **AND** sku invokes `onHydrate` with deserialized `context` only (no `language` argument)
+- **AND** sku does not emit `__SKU_LANGUAGE__` (or equivalent) in the bootstrap
 - **AND** when `onHydrate` returns `AppWrapper`, sku mounts it as a pathless parent layout under `RouterProvider`
 - **AND** that `AppWrapper` MAY use React Router hooks during render
 
@@ -163,7 +164,7 @@ Vite SSR apps MUST support loading route modules as separate async chunks on ser
 
 ### Requirement: Vocab language chunks are supported
 
-When `languages` is configured, Vite SSR MUST support vocab/language async chunks: build-time language splitting plus registration of the active language chunk on Document assets. Sku owns registration. Identification is app-owned **only** via server `onRequest` `language` → sole configured language → soft-fail. Sku MUST NOT identify language from `req.skuLanguage`, `:language`, or `handle.language`, and MUST NOT expose `addLanguageChunk`. Loaders/actions MAY read via `getSkuLanguage()` after `onRequest`.
+When `languages` is configured, Vite SSR MUST support vocab/language async chunks: build-time language splitting plus registration of the active language chunk on Document assets. Sku owns registration. Identification is app-owned **only** via server `onRequest` `language` → sole configured language → soft-fail. Sku MUST NOT identify language from `req.skuLanguage`, `:language`, or `handle.language`, and MUST NOT expose `addLanguageChunk`. Sku MUST treat language as a **server-local** value from `onRequest` for Document asset registration only, and MUST NOT store language in request-context / AsyncLocalStorage, forward it via hydrate bootstrap / `onHydrate`, or expose `getSkuLanguage()` / `__SKU_LANGUAGE__`. Request-context remains CSP-nonce-only. Client locale is app-owned (re-derive via providers / RR hooks, or optional `clientContext`).
 
 #### Scenario: Active language chunk is registered
 
@@ -189,6 +190,14 @@ When `languages` is configured, Vite SSR MUST support vocab/language async chunk
 
 - **WHEN** a Vite SSR app with `languages` configured is built
 - **THEN** vocab translations are emitted as separate language chunks via `@vocab/vite` chunk splitting
+
+#### Scenario: Language is server-local only
+
+- **WHEN** a Vite SSR app returns `language` from `onRequest`
+- **THEN** sku uses that value locally for vocab chunk registration on the Document
+- **AND** sku does not expose `getSkuLanguage()` or emit `__SKU_LANGUAGE__`
+- **AND** `onHydrate` is not passed `language`
+- **AND** request-context / AsyncLocalStorage does not carry language (CSP nonce only)
 
 ### Requirement: Dev and production use unified Vite SSR commands
 

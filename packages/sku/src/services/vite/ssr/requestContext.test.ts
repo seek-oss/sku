@@ -3,7 +3,6 @@ import { buildContentSecurityPolicy, buildCspHeaders } from './csp.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
 import {
   getCspNonce,
-  getSkuLanguage,
   peekCspNonce,
   runWithSsrRequestContext,
   type SsrRequestContextStore,
@@ -29,12 +28,9 @@ describe('getCspNonce browser safety', () => {
     const store: SsrRequestContextStore = {
       getCspNonce: () => 'test-nonce',
       peekCspNonce: () => 'test-nonce',
-      getLanguage: () => undefined,
-      setLanguage: () => undefined,
     };
 
     expect(requestContext.getCspNonce()).toBeUndefined();
-    expect(requestContext.getSkuLanguage()).toBeUndefined();
     // noop `run` ignores the store, so getters stay undefined (browser path).
     expect(
       requestContext.runWithSsrRequestContext(store, () =>
@@ -88,17 +84,6 @@ describe('lazy request-scoped CSP nonce', () => {
     expect(first).toBeTruthy();
     expect(second).toBe(first);
     expect(store.peekCspNonce()).toBe(first);
-  });
-});
-
-describe('request language from server entry', () => {
-  it('reads the language seeded on the request context store', () => {
-    const store = createSsrRequestContextStore();
-    store.setLanguage('th-TH');
-    expect(runWithSsrRequestContext(store, () => getSkuLanguage())).toBe(
-      'th-TH',
-    );
-    expect(getSkuLanguage()).toBeUndefined();
   });
 });
 

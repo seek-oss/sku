@@ -83,7 +83,7 @@ The client entry point to the app. Path may be `.tsx`, `.ts`, or `.js`.
 
 **Static / webpack:** the file that executes your browser code. Each `route` can also specify a client entry; if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
 
-**Vite SSR** (`bundler: 'vite'` + `renderType: 'server-side-rendered'`): required client request entry exporting named `onHydrate`. Receives `{ context, language }` and may return `AppWrapper`. Missing file or named export is a hard error. See [Server rendering](./docs/server-rendering.md#request-entries-serverentry--cliententry).
+**Vite SSR** the file that executes your browser code. See [Server rendering](./docs/server-rendering.md#request-entries-serverentry--cliententry).
 
 ## compilePackages
 

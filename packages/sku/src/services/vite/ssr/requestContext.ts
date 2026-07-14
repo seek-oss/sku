@@ -3,10 +3,6 @@ export type SsrRequestContextStore = {
   getCspNonce: () => string;
   /** Return the minted nonce if one was requested; otherwise `undefined`. */
   peekCspNonce: () => string | undefined;
-  /** Active language name for vocab chunk registration, if set. */
-  getLanguage: () => string | undefined;
-  /** Seed language from the server request entry (configured language name). */
-  setLanguage: (language: string | undefined) => void;
 };
 
 type ContextStorage = {
@@ -44,15 +40,6 @@ export const getCspNonce = (): string | undefined =>
 /** Returns the request nonce only if one was already requested. */
 export const peekCspNonce = (): string | undefined =>
   storage.getStore()?.peekCspNonce();
-
-/**
- * Returns the request language for the current Vite SSR request.
- * Seeded by the server request entry `language` field before `query()`.
- * Available in React Router loaders/actions while sku is rendering.
- * Returns `undefined` in the browser.
- */
-export const getSkuLanguage = (): string | undefined =>
-  storage.getStore()?.getLanguage();
 
 export const runWithSsrRequestContext = <T>(
   context: SsrRequestContextStore,

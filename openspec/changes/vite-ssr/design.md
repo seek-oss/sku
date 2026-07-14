@@ -97,25 +97,24 @@ export function onRequest(args: { request: Request }): {
 export const middleware: RequestHandler | RequestHandler[];
 
 // clientEntry
-export function onHydrate(args: {
-  context: JsonValue | undefined;
-  language: string | undefined;
-}): { AppWrapper?: ComponentType<{ children: ReactNode }> };
+export function onHydrate(args: { context: JsonValue | undefined }): {
+  AppWrapper?: ComponentType<{ children: ReactNode }>;
+};
 ```
 
 **Tree:** `Document` → router provider → optional sku pathless `AppWrapper` layout → consumer `routes`.
 
 - `AppWrapper` = providers only, mounted **inside** the router (may use RR hooks); stable route id on server/client.
-- `language` = sole app-owned vocab identity (decision 10); run `onRequest` before `query()`.
-- `clientContext` = shell-time JSON only; sku forwards `language` to `onHydrate` separately.
+- `language` = sole app-owned vocab identity for **server Document preload** (decision 10); run `onRequest` before `query()`; local param only — not ALS, not forwarded to the client.
+- `clientContext` = shell-time JSON only; forwarded to `onHydrate` as `context`. Client locale re-derives via RR hooks / providers (or optional `clientContext` if the app wants a one-shot seed).
 
 ### 9. Request-scoped nonce (lazy, single value)
 
-**Choice:** At most one CSP nonce per render, minted only when requested (`getCspNonce` / `req.getCspNonce()`). Include `'nonce-…'` in CSP only if requested. Distinct from static/webpack multi-`createUnsafeNonce`.
+**Choice:** At most one CSP nonce per render, minted only when requested (`getCspNonce` / `req.getCspNonce()`). Include `'nonce-…'` in CSP only if requested. Distinct from static/webpack multi-`createUnsafeNonce`. Request-context / AsyncLocalStorage holds **CSP nonce only** — not language (decision 10).
 
 ### 10. Vocab / language chunks
 
-**Choice:** When `languages` is configured, keep `@vocab/vite` splitting. Sku registers `getChunkName(language)` on Document assets. App identifies language **only** via server `onRequest` `language` → sole configured language → soft-fail. No `req.skuLanguage`, `:language`, `handle.language`, or `addLanguageChunk`. Loaders may read via `getSkuLanguage()` after `onRequest`.
+**Choice:** When `languages` is configured, keep `@vocab/vite` splitting. Sku registers `getChunkName(language)` on Document assets. App identifies language **only** via server `onRequest` `language` → sole configured language → soft-fail. No `req.skuLanguage`, `:language`, `handle.language`, or `addLanguageChunk`. Language is a **server-local parameter** after `onRequest` (pass into module-id / preload resolution only) — not request-context, not bootstrap, not `onHydrate`. Do **not** expose `getSkuLanguage()` or `__SKU_LANGUAGE__`. Client / loaders that need locale re-derive it the same way `onRequest` did (or via app providers / optional `clientContext`).
 
 ### 11. Lazy-route `moduleId`
 

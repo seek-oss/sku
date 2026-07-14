@@ -86,3 +86,17 @@
 - [x] 11.2 Ensure production server entry/build never imports `devServerMiddleware`
 - [x] 11.3 Fixture/test: mock route served by `devServerMiddleware` in start; absent from production server bundle / responses
 - [x] 11.4 Docs: reverse “don’t use for Vite SSR” guidance in `server-rendering.md` / `configuration.md`; document two-layer split + mount order; update Migrating Older SSR notes if needed
+
+## 12. Language off request-context
+
+- [x] 12.1 Remove language from SSR request-context store (`getLanguage` / `setLanguage`); keep ALS for CSP nonce only
+- [x] 12.2 Pass `onRequest` `language` as a local into module-id / vocab preload resolution (do not read language via ALS)
+- [x] 12.3 Remove public `getSkuLanguage` export; drop related tests
+- [x] 12.4 Update `server-rendering.md` (and any other docs) that tell loaders to use `getSkuLanguage()`
+
+## 13. Language not forwarded to client
+
+- [x] 13.1 Drop `__SKU_LANGUAGE__` from hydrate bootstrap; stop passing `language` into `onHydrate`
+- [x] 13.2 Narrow `SkuSsrOnHydrate` / client types to `{ context }` only; remove window language typing
+- [x] 13.3 Update docs (`server-rendering.md`, `configuration.md`, etc.): `onHydrate` gets `context` only; client locale via re-derive / providers / optional `clientContext`
+- [x] 13.4 Update bootstrap / hydrate tests and any create-template notes that mention hydrate `language`

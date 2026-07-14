@@ -71,11 +71,9 @@ export const buildBootstrapScriptContent = (
   {
     development = false,
     clientContext,
-    language,
   }: {
     development?: boolean;
     clientContext?: JsonValue;
-    language?: string;
   } = {},
 ) => {
   const hydrationData: SerializableHydrationState = {
@@ -91,7 +89,6 @@ export const buildBootstrapScriptContent = (
   return [
     `window.__SKU_DOCUMENT_ASSETS__=${escapeScriptValue(assets)}`,
     `window.__SKU_CLIENT_CONTEXT__=${escapeScriptValue(clientContext ?? null)}`,
-    `window.__SKU_LANGUAGE__=${escapeScriptValue(language ?? null)}`,
     `window.__staticRouterHydrationData=${escapeScriptValue(hydrationData)}`,
   ].join(';');
 };

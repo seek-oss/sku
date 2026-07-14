@@ -35,7 +35,6 @@ const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
 const hydrate = async () => {
   const { AppWrapper } = onHydrate({
     context: window.__SKU_CLIENT_CONTEXT__,
-    language: window.__SKU_LANGUAGE__,
   });
   const routesWithAppWrapper = withAppWrapperLayout(routes, AppWrapper);
 

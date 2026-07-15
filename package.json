@@ -22,7 +22,7 @@
     "build:docs": "pnpm --filter @sku-private/site build",
     "format": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --fix . && prettier --cache --experimental-cli --write . ",
     "release": "changeset publish",
-    "version": "changeset version && pnpm inject-changelog-preamble && pnpm install --lockfile-only"
+    "version": "changeset version && pnpm sku-inject-changelog && pnpm install --lockfile-only"
   },
   "nano-staged": {
     "+(package.json|pnpm-lock.yaml)": [

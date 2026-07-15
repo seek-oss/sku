@@ -44,7 +44,7 @@ export default function createCSPHandler({
       );
     }
 
-    const nonce = randomBytes(16).toString('hex');
+    const nonce = process.env.SKU_CSP_NONCE ?? randomBytes(16).toString('hex');
     nonces.add(nonce);
     return nonce;
   };

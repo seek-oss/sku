@@ -22,6 +22,9 @@ export default defineConfig({
     setupFiles: './vitest-setup.ts',
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
     testTimeout: TEST_TIMEOUT + 1000,
+    env: {
+      SKU_CSP_NONCE: 'RANDOM_NONCE',
+    },
     projects: [
       {
         extends: true,

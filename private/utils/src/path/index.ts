@@ -1,1 +1,1 @@
-export { toPosixPath } from './toPosixPath.js';
+export { toPosixPath } from './toPosixPath.ts';

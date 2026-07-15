@@ -2,8 +2,8 @@
   "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "noEmit": false,
-    "allowImportingTsExtensions": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "target": "ESNext",
     "module": "nodenext",
     "moduleResolution": "nodenext",

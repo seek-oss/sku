@@ -4,7 +4,7 @@ import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
 import semver from 'semver';
-import { caution, strong } from '../console/styles.js';
+import { caution, strong } from '../console/styles.ts';
 
 export type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
 

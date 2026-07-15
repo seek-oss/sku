@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { serverUrls } from './serverUrls.js';
+import { serverUrls } from './serverUrls.ts';
 
 describe('serverUrls.first()', () => {
   it('generates a http URL with host only', () => {

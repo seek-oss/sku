@@ -1,4 +1,4 @@
-import { strong, success } from './console/styles.js';
+import { strong, success } from './console/styles.ts';
 
 export const makeUrl = ({
   host,

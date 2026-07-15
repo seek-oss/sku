@@ -6,7 +6,7 @@ If `.changeset/.PREAMBLE.md` is missing then the CLI does nothing.
 
 > [!IMPORTANT]
 > The dot prefix on `.PREAMBLE.md` is intentional.
-> If the file is named `PREAMBLE.md`, the `changeset` CLI will try and validate it, resulting in an error like `Error: could not parse changeset - missing or invalid frontmatter.`
+> If the file is named `PREAMBLE.md`, the `changeset` CLI will try and validate it as if it were a real changeset, resulting in an error like `Error: could not parse changeset - missing or invalid frontmatter.`
 
 Based off [a similar script in skuba] but with a bit of extra logging and ✨colours✨.
 

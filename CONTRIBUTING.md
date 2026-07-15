@@ -14,7 +14,6 @@ We'd be happy to help out!
 1. (Optional) Fork the repo if you do not have write access
 1. Clone the repo
 1. Install the appropriate versions of `pnpm` and `node` as specified in `package.json` and `.nvmrc` respectively
-1. Run `pnpm install` (this also installs the OpenSpec CLI as a root dev dependency)
 
 ## Making Changes
 

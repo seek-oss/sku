@@ -107,6 +107,9 @@ importers:
       '@changesets/get-github-info':
         specifier: ^0.8.0
         version: 0.8.0
+      '@sku-private/inject-changelog-preamble':
+        specifier: workspace:*
+        version: link:private/inject-changelog-preamble
       '@sku-private/playwright':
         specifier: workspace:*
         version: link:private/playwright
@@ -1571,6 +1574,16 @@ importers:
       tsx:
         specifier: ^4.19.4
         version: 4.22.4
+
+  private/inject-changelog-preamble:
+    dependencies:
+      '@sku-private/utils':
+        specifier: workspace:*
+        version: link:../utils
+    devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.12.4
 
   private/playwright:
     devDependencies:

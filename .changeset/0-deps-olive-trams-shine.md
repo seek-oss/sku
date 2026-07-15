@@ -4,8 +4,6 @@
 
 `deps`: TypeScript updated to version 6
 
-**BREAKING CHANGE**
-
 sku now generates a TypeScript 6 compatible `tsconfig.json` for you, so most projects will not need changes. However, TypeScript 6 ships new defaults and deprecations that may affect your source code, dependencies, or any custom config. See the [TypeScript 6.0 announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/) or the [5.x to 6.0 migration guide](https://gist.github.com/privatenumber/3d2e80da28f84ee30b77d53e1693378f) for full details.
 
 Run `sku configure` to regenerate your `tsconfig.json`, then `sku lint` to surface anything below.

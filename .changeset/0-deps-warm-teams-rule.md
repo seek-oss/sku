@@ -4,8 +4,6 @@
 
 `deps`: Update `path-to-regexp` dependency from `^6.3.0` to `8.4.2`
 
-**BREAKING CHANGE**:
-
 This update spans two major versions. Please read the release notes for both [v7] and [v8]:
 
 The change most likely to impact `sku` consumers is the requirement that [wildcards] (`*`) now must specify a key name, just like [path parameters] (`:`). In most cases this should be a simple migration: `/home/*` -> `/home/*rest`.

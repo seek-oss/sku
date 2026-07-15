@@ -11,6 +11,24 @@ import { createPage } from '@sku-private/playwright';
 const { sku, node, fixturePath } = scopeToFixture('vite-ssr');
 
 describe('vite-ssr', () => {
+  describe('dual-entry routes pattern', () => {
+    it('uses createRoutes from a shared routes module on both entries', async () => {
+      const [routes, server, client] = await Promise.all([
+        fs.readFile(fixturePath('src/routes.tsx'), 'utf8'),
+        fs.readFile(fixturePath('src/server.tsx'), 'utf8'),
+        fs.readFile(fixturePath('src/client.tsx'), 'utf8'),
+      ]);
+
+      expect(routes).toContain('export function createRoutes');
+      expect(server).toContain('createRoutes');
+      expect(server).toContain('export const routes');
+      expect(client).toContain('createRoutes');
+      expect(client).toContain('export const routes');
+      expect(server).not.toContain('routesEntry');
+      expect(client).not.toContain('routesEntry');
+    });
+  });
+
   describe('config validation', () => {
     it('rejects webpack + server-side-rendered', async () => {
       const process = await sku('start', [

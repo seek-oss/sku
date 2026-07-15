@@ -21,7 +21,6 @@ export const configPlugin = ({
     skuContext.renderType === 'server-side-rendered';
 
   const viteSsrOptimizeEntries = [
-    skuContext.paths.routesEntry,
     skuContext.paths.serverEntry,
     skuContext.paths.clientEntry,
     ssrClientEntry,

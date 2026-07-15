@@ -4,7 +4,10 @@ import { useLocation } from 'react-router';
 import type { SkuSsrOnHydrate } from 'sku';
 
 import { resolveLanguageFromPathname } from './resolveLanguage.js';
+import { createRoutes } from './routes.js';
 import type { ClientContext } from './types.js';
+
+export const routes = createRoutes();
 
 export const onHydrate: SkuSsrOnHydrate = ({ context }) => {
   const clientContext = context as ClientContext;

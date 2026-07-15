@@ -4,7 +4,10 @@ import { useLocation } from 'react-router';
 import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
 
 import { resolveLanguageFromPathname } from './resolveLanguage.js';
+import { createRoutes } from './routes.js';
 import type { ClientContext } from './types.js';
+
+export const routes = createRoutes();
 
 export const onRequest: SkuSsrOnRequest = ({ request }) => {
   const language = resolveLanguageFromPathname(new URL(request.url).pathname);

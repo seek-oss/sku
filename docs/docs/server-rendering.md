@@ -22,7 +22,9 @@ The `vite-ssr` template scaffolds `bundler: 'vite'`, `renderType: 'server-side-r
 
 ### React Router Data Mode
 
-Vite SSR largely wraps [React Router Data Mode](https://reactrouter.com/start/modes#data). You export a named `routes` (`RouteObject[]`) from `routesEntry`; sku owns the HTTP server, document shell, streaming, and hydration, and wires that route config into React Router on the server and in the browser. Loaders, actions, lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
+Vite SSR largely wraps [React Router Data Mode](https://reactrouter.com/start/modes#data). You export a named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry`; sku owns the HTTP server, document shell, streaming, and hydration, and wires each side’s route config into React Router on the server and in the browser. Loaders, actions, lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
+
+Server and client route trees **must** stay hydration-compatible (same path / nesting / ids so server HTML matches hydrated HTML). Implementations on those trees (for example React Router route `middleware`, loaders, or component bodies) **may** diverge.
 
 For information on how to use React Router to register routes, see [React Router Data Mode](https://reactrouter.com/start/data/routing).
 
@@ -34,13 +36,14 @@ import type { SkuConfig } from 'sku';
 export default {
   bundler: 'vite',
   renderType: 'server-side-rendered',
-  routesEntry: 'src/routes.tsx', // default
   publicPath: '/', // relative only — absolute / CDN URLs are rejected
   port: 3000,
 } satisfies SkuConfig;
 ```
 
-Export named `routes` from `routesEntry`. Prefer co-locating each page in its own directory with a `route.ts` (path / lazy / loaders / handle) and the page module (e.g. `home.tsx`). Compose those route modules into an explicit `routes` array:
+### Routes
+
+Export named `routes` from **both** the server and client entries. These need to match in HTML and will likely only differ based on loaders or middleware.
 
 ```tsx
 // src/pages/home/route.ts
@@ -59,13 +62,35 @@ import type { RouteObject } from 'react-router';
 
 import { homeRoute } from './pages/home/route.js';
 
-export const routes: RouteObject[] = [
-  {
-    path: '/',
-    children: [homeRoute],
-  },
-];
+export function createRoutes(): RouteObject[] {
+  return [
+    {
+      path: '/',
+      children: [homeRoute],
+    },
+  ];
+}
 ```
+
+```tsx
+// src/server.tsx
+import { createRoutes } from './routes.js';
+
+export const routes = createRoutes();
+
+// … onRequest, middleware
+```
+
+```tsx
+// src/client.tsx
+import { createRoutes } from './routes.js';
+
+export const routes = createRoutes();
+
+// … onHydrate
+```
+
+Prefer co-locating each page in its own directory with a `route.ts` (path / lazy / loaders / handle) and the page module (e.g. `home.tsx`). Compose those route modules inside `createRoutes`.
 
 sku owns:
 
@@ -84,11 +109,13 @@ Required separate modules via the existing `serverEntry` / `clientEntry` keys (d
 
 **Server entry** must export:
 
+- `routes` — `RouteObject[]` (array required; empty array allowed)
 - `onRequest` — runs before React Router `query()`; may return `AppWrapper`, `language`, and/or `clientContext` (see [App-level providers](#app-level-providers-appwrapper))
-- `middleware` — Connect/Express handlers mounted before the HTML render path (see [Middleware](#middleware))
+- `middleware` — Connect/Express handlers mounted before the HTML render path (see [Middleware](#middleware)) — **not** the same as React Router route `middleware` on `RouteObject`s
 
 **Client entry** must export:
 
+- `routes` — `RouteObject[]` (hydration-compatible with the server tree; see [Routes](#routes))
 - `onHydrate` — receives `{ context }` (deserialized `clientContext`) and may return `AppWrapper`
 
 ```tsx
@@ -96,6 +123,9 @@ Required separate modules via the existing `serverEntry` / `clientEntry` keys (d
 import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
 
 import { Providers } from './App/Providers';
+import { createRoutes } from './routes';
+
+export const routes = createRoutes();
 
 export const onRequest: SkuSsrOnRequest = ({ request }) => ({
   language: resolveLocaleFromRequest(request), // e.g. 'th-TH'
@@ -111,6 +141,9 @@ export const middleware: SkuSsrMiddleware = [];
 import type { SkuSsrOnHydrate } from 'sku';
 
 import { Providers } from './App/Providers';
+import { createRoutes } from './routes';
+
+export const routes = createRoutes();
 
 export const onHydrate: SkuSsrOnHydrate = () => ({
   AppWrapper: Providers,
@@ -165,7 +198,7 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => {
 
 ### Middleware
 
-Vite SSR has **two middleware layers**. Pick based on whether the traffic should exist in production.
+Vite SSR has **two HTTP middleware layers**, plus optional React Router route `middleware` on your `routes` trees. Pick the HTTP layer based on whether the traffic should exist in production. Do not confuse Express/Connect handlers with React Router’s route `middleware` field.
 
 #### Server-entry `middleware` (required; runs in start and production)
 
@@ -219,6 +252,10 @@ export default (app) => {
 
 Dev mocks mount **before** production middleware so they can intercept traffic that would never reach the app in production. Put anything that must ship in production on the server-entry export; keep stubs and local-only routes in `devServerMiddleware`.
 
+#### React Router route `middleware` (on `routes`)
+
+React Router Data Mode also supports a `middleware` array on `RouteObject`s. That is **not** the same as server-entry Express/Connect `middleware`. Put route middleware on each entry’s `routes` (via `createRoutes(...)` options if they diverge). Keep path / nesting / ids hydration-compatible when server and client implementations differ.
+
 ### CSP
 
 When `cspEnabled` and/or `cspReportOnlyEnabled` are set, Vite SSR delivers CSP as **HTTP headers** (`Content-Security-Policy` / `Content-Security-Policy-Report-Only`) derived from the document shell plus nonces and hashes of bootstrap scripts. Meta `http-equiv` CSP is **not** used on the Vite SSR path.
@@ -271,7 +308,7 @@ export const detailsRoute = {
 } satisfies RouteObject;
 ```
 
-Do **not** statically import those page modules into `routesEntry` or `route.ts` — that eagerly bundles them and defeats per-route chunking. Import only the route configs. The `fixtures/vite-ssr` app demonstrates this pattern with distinct `about` and `details` chunks.
+Do **not** statically import those page modules into `createRoutes` / `route.ts` — that eagerly bundles them and defeats per-route chunking. Import only the route configs. The `fixtures/vite-ssr` app demonstrates this pattern with distinct `about` and `details` chunks.
 
 **Escape hatch:** set `handle.moduleId` explicitly to the Vite client manifest key (usually the source path, e.g. `src/pages/about/about.tsx`) when you need a custom key or a non-idiomatic `lazy` shape. An explicit value is never overwritten.
 
@@ -414,8 +451,9 @@ This guide covers the **sku** surface only (config, entries, providers, middlewa
 
 #### Routes and request entries
 
-- Replace the static page + `render.tsx` / `#app` client with a `routesEntry` exporting named `routes` (`RouteObject[]`)
-- Add required `serverEntry` / `clientEntry` with named `onRequest`, `middleware`, and `onHydrate` (hard error if missing)
+- Replace the static page + `render.tsx` / `#app` client with dual-entry named `routes` (`RouteObject[]`) on both `serverEntry` and `clientEntry` (prefer a shared `createRoutes(...)` factory)
+- Keep server and client route trees hydration-compatible (same path / nesting / ids); implementations may diverge
+- Add required named `onRequest`, `middleware`, and `onHydrate` (hard error if missing)
 - Prefer idiomatic `lazy: () => import('./pages/…')` on route configs for per-route chunks
 
 #### App-level providers
@@ -427,8 +465,9 @@ This guide covers the **sku** surface only (config, entries, providers, middlewa
 
 - Mount production Connect/Express middleware on the server entry `middleware` export (required; empty / passthrough OK)
 - Keep local-only mocks/proxies in optional config [`devServerMiddleware`](./docs/configuration.md#devservermiddleware) — mounted in `sku start` only, never in the production server bundle
+- React Router route `middleware` on `RouteObject`s is a separate layer — see [Middleware](#middleware)
 
-See [Middleware](#middleware) for the two-layer split and start mount order.
+See [Middleware](#middleware) for the two-layer HTTP split and start mount order.
 
 #### CSP
 
@@ -470,7 +509,8 @@ Covers the **sku** migration surface only. Deploy/process/infra changes are out 
 
 #### Routes and request entries
 
-- Replace webpack `serverEntry` default export `{ renderCallback, middleware, onStart }` with Vite SSR named exports: routes entry `routes`, server `onRequest` + `middleware`, client `onHydrate`
+- Replace webpack `serverEntry` default export `{ renderCallback, middleware, onStart }` with Vite SSR named exports: `routes` on **both** server and client entries, plus server `onRequest` + `middleware`, client `onHydrate`
+- Prefer a shared `createRoutes(...)` factory so server/client trees stay hydration-compatible
 - Express `renderCallback` no longer owns HTML — sku streams Document; put providers in `AppWrapper`, data loading in React Router loaders/actions
 - Optional webpack `onStart` is not part of the Vite SSR request-entry contract
 
@@ -483,6 +523,7 @@ Covers the **sku** migration surface only. Deploy/process/infra changes are out 
 
 - Keep using a middleware export, but on the Vite SSR **server entry** named `middleware` (same Connect style; required export, empty / passthrough OK)
 - Move local-only mocks/proxies that webpack put in `devServerMiddleware` (or only ran under `start-ssr`) to the same config key — Vite SSR still mounts it in `sku start` only and keeps it out of the production server
+- React Router route `middleware` on `RouteObject`s is separate from Express/Connect `middleware` — see [Middleware](#middleware)
 - Webpack dual-port / proxy assumptions differ; Vite SSR is single-port in dev (`httpsDevServer` supported)
 
 See [Middleware](#middleware) for mount order.

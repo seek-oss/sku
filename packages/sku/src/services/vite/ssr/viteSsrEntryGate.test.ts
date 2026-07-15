@@ -32,20 +32,21 @@ const writeMinimalViteSsrFiles = (root: string) => {
     `export default {
   bundler: 'vite',
   renderType: 'server-side-rendered',
-  routesEntry: 'src/routes.tsx',
 };
 `,
   );
-  writeFileSync(join(root, 'src', 'routes.tsx'), 'export const routes = [];\n');
   writeFileSync(
     join(root, 'src', 'server.tsx'),
-    `export const onRequest = () => ({});
+    `export const routes = [];
+export const onRequest = () => ({});
 export const middleware = [];
 `,
   );
   writeFileSync(
     join(root, 'src', 'client.tsx'),
-    'export const onHydrate = () => ({});\n',
+    `export const routes = [];
+export const onHydrate = () => ({});
+`,
   );
   writeFileSync(
     join(root, 'package.json'),
@@ -77,7 +78,7 @@ describe('Vite SSR required entry files', () => {
     await expect(
       createSkuContext({ configPath: 'sku.config.ts' }),
     ).rejects.toThrow(
-      /must provide a 'serverEntry' exporting named 'onRequest' and 'middleware'/,
+      /must provide a 'serverEntry' exporting named 'routes', 'onRequest', and 'middleware'/,
     );
   });
 
@@ -89,17 +90,7 @@ describe('Vite SSR required entry files', () => {
     await expect(
       createSkuContext({ configPath: 'sku.config.ts' }),
     ).rejects.toThrow(
-      /must provide a 'clientEntry' exporting named 'onHydrate'/,
+      /must provide a 'clientEntry' exporting named 'routes' and 'onHydrate'/,
     );
-  });
-
-  it('rejects a missing routesEntry file', async () => {
-    rmSync(join(root, 'src', 'routes.tsx'));
-    const { createSkuContext } =
-      await import('../../../context/createSkuContext.js');
-
-    await expect(
-      createSkuContext({ configPath: 'sku.config.ts' }),
-    ).rejects.toThrow(/must provide a 'routesEntry'/);
   });
 });

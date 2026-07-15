@@ -35,4 +35,45 @@ describe('requireNamedExport', () => {
       /Vite SSR clientEntry must export named 'onHydrate' as a function/,
     );
   });
+
+  it('returns routes when exported as an array (including empty)', () => {
+    expect(
+      requireNamedExport<unknown[]>({ routes: [] }, 'routes', 'serverEntry', {
+        kind: 'array',
+      }),
+    ).toEqual([]);
+  });
+
+  it('hard-errors when routes is missing on serverEntry', () => {
+    expect(() =>
+      requireNamedExport(
+        { onRequest: () => ({}), middleware: [] },
+        'routes',
+        'serverEntry',
+        { kind: 'array' },
+      ),
+    ).toThrow(
+      /Vite SSR serverEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
+    );
+  });
+
+  it('hard-errors when routes is missing on clientEntry', () => {
+    expect(() =>
+      requireNamedExport({ onHydrate: () => ({}) }, 'routes', 'clientEntry', {
+        kind: 'array',
+      }),
+    ).toThrow(
+      /Vite SSR clientEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
+    );
+  });
+
+  it('hard-errors when routes is not an array', () => {
+    expect(() =>
+      requireNamedExport({ routes: { path: '/' } }, 'routes', 'serverEntry', {
+        kind: 'array',
+      }),
+    ).toThrow(
+      /Vite SSR serverEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
+    );
+  });
 });

@@ -114,7 +114,6 @@ export type SkuLanguage = string | { name: string; extends?: string };
 export interface SkuConfigBase {
   /**
    * Selects request-time SSR or the existing static generation behavior.
-   * Omit to preserve today's static / SSG default.
    *
    * `'server-side-rendered'` (Vite SSR) is experimental and not for production use.
    */
@@ -418,6 +417,16 @@ export interface SkuConfigBase {
   routes?: readonly SkuRoute[];
 
   /**
+   * **Only for SSR apps**
+   *
+   * The entry file for the server.
+   *
+   * @default "./src/server.tsx"
+   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverentry
+   */
+  serverEntry?: string;
+
+  /**
    * Point to a JS file that will run before your tests to setup the testing environment.
    *
    * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=setuptests
@@ -504,16 +513,6 @@ export interface WebpackSkuConfig {
   /**
    * **Only for SSR apps**
    *
-   * The entry file for the server (`renderCallback` contract).
-   *
-   * @default "./src/server.tsx"
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverentry
-   */
-  serverEntry?: string;
-
-  /**
-   * **Only for SSR apps**
-   *
    * The port the server is hosted on when running `sku start-ssr`.
    *
    * @default 8181
@@ -550,27 +549,6 @@ export interface WebpackSkuConfig {
 }
 
 export interface ViteSkuConfig {
-  /**
-   * Vite SSR routes entry exporting a named `routes` (`RouteObject[]`).
-   * Required under Vite SSR — missing file or named `routes` export is a hard error.
-   *
-   * @default "./src/routes.tsx"
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=routesentry
-   */
-  routesEntry?: string;
-
-  /**
-   * Vite SSR server request entry. Required under Vite SSR — missing file or named
-   * export is a hard error. Same config key as webpack SSR, but under Vite SSR export named
-   * `onRequest` (closed object: `AppWrapper`, `language`, `clientContext`) and named
-   * `middleware` (Connect handlers; empty array / passthrough OK) — not `renderCallback`
-   * or `default`. Path may be `.tsx`, `.ts`, or `.js`.
-   *
-   * @default "./src/server.tsx"
-   * @link https://seek-oss.github.io/sku/#/./docs/configuration?id=serverentry
-   */
-  serverEntry?: string;
-
   /**
    * An array of cjs import paths that have both a default and named exports.
    * This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.

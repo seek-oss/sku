@@ -1,6 +1,3 @@
-// Resolved by sku's Vite SSR plugin to the consumer routes entry.
-// eslint-disable-next-line import-x/no-unresolved
-import * as routesEntry from '#sku-vite-ssr-routes';
 // Resolved by sku's Vite SSR plugin to the consumer server entry.
 // eslint-disable-next-line import-x/no-unresolved
 import * as serverEntry from '#sku-vite-ssr-server-entry';
@@ -16,9 +13,10 @@ import type {
 } from '../ssr/types.js';
 
 export const routes = requireNamedExport<RouteObject[]>(
-  routesEntry,
+  serverEntry,
   'routes',
-  'routesEntry',
+  'serverEntry',
+  { kind: 'array' },
 );
 
 export const onRequest = requireNamedExport<SkuSsrOnRequest>(

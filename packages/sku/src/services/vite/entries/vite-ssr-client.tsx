@@ -6,9 +6,6 @@ import {
   RouterProvider,
   type RouteObject,
 } from 'react-router';
-// Resolved by sku's Vite SSR plugin to the consumer routes entry.
-// eslint-disable-next-line import-x/no-unresolved
-import * as routesEntry from '#sku-vite-ssr-routes';
 // Resolved by sku's Vite SSR plugin to the consumer client request entry.
 // eslint-disable-next-line import-x/no-unresolved
 import * as clientEntry from '#sku-vite-ssr-client-entry';
@@ -18,9 +15,10 @@ import type { SkuSsrOnHydrate } from '../ssr/types.js';
 import { withAppWrapperLayout } from '../ssr/withAppWrapperLayout.js';
 
 const routes = requireNamedExport<RouteObject[]>(
-  routesEntry,
+  clientEntry,
   'routes',
-  'routesEntry',
+  'clientEntry',
+  { kind: 'array' },
 );
 
 const onHydrate = requireNamedExport<SkuSsrOnHydrate>(

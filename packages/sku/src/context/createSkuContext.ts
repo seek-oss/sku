@@ -177,7 +177,6 @@ export const createSkuContext = async ({
       ];
     },
     clientEntry: getPathFromCwd(skuConfig.clientEntry),
-    routesEntry: getPathFromCwd(skuConfig.routesEntry),
     renderEntry: getPathFromCwd(skuConfig.renderEntry),
     libraryEntry: skuConfig.libraryEntry
       ? getPathFromCwd(skuConfig.libraryEntry)
@@ -191,19 +190,14 @@ export const createSkuContext = async ({
   };
 
   if (skuConfig.renderType === 'server-side-rendered') {
-    if (!existsSync(paths.routesEntry)) {
-      throw new Error(
-        `${paths.routesEntry} does not exist. Vite SSR apps must provide a 'routesEntry'.`,
-      );
-    }
     if (!existsSync(paths.serverEntry)) {
       throw new Error(
-        `${paths.serverEntry} does not exist. Vite SSR apps must provide a 'serverEntry' exporting named 'onRequest' and 'middleware'.`,
+        `${paths.serverEntry} does not exist. Vite SSR apps must provide a 'serverEntry' exporting named 'routes', 'onRequest', and 'middleware'.`,
       );
     }
     if (!existsSync(paths.clientEntry)) {
       throw new Error(
-        `${paths.clientEntry} does not exist. Vite SSR apps must provide a 'clientEntry' exporting named 'onHydrate'.`,
+        `${paths.clientEntry} does not exist. Vite SSR apps must provide a 'clientEntry' exporting named 'routes' and 'onHydrate'.`,
       );
     }
   }

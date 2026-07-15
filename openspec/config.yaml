@@ -17,6 +17,7 @@ rules:
     - One intent in a sentence; keep under ~300 words
     - Include Non-goals; omit fluff and background the team already knows
     - State public API / breaking impact; note changeset and/or docs/docs if needed
+    - On update: fold new scope into a coherent current proposal; do not simply append new ideas
   specs:
     - Default to Lite: few requirements, only scenarios that catch real risk
     - One SHALL/MUST per requirement; observable behavior only — no code, APIs internals, or libraries
@@ -25,5 +26,6 @@ rules:
     - Put how/why in design.md or tasks.md, not in requirements
   design:
     - Skip unless architecture is non-obvious; keep short when present
+    - On update: integrate new decisions into the current design narrative;
   tasks:
     - Small checklist only; include plop, changeset, and docs when they apply

@@ -25,17 +25,25 @@ Vite support covers [static applications (SSG)][SSG] and opt-in [server-side ren
 
 > **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change. See [Server rendering](./docs/server-rendering.md).
 
-Set `renderType: 'server-side-rendered'` and provide a `routesEntry` (default `src/routes.tsx`) that exports named `routes`:
+Set `renderType: 'server-side-rendered'` and export named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`). Prefer a shared `createRoutes(...)` factory so the trees stay hydration-compatible:
 
 ```ts
+// src/routes.tsx
 import type { RouteObject } from 'react-router';
 
-export const routes: RouteObject[] = [
-  /* React Router Data Mode routes (prefer lazy) */
-];
+export function createRoutes(): RouteObject[] {
+  return [/* React Router Data Mode routes (prefer lazy) */];
+}
 ```
 
-Required `serverEntry` (default `src/server.tsx`) must export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest`. Required `clientEntry` (default `src/client.tsx`) must export named `onHydrate`. Missing entry files or named exports are a hard error; do not use `default`. Optional config [`devServerMiddleware`](./docs/configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./docs/server-rendering.md#middleware).
+```ts
+// src/server.tsx / src/client.tsx
+import { createRoutes } from './routes';
+
+export const routes = createRoutes();
+```
+
+Required `serverEntry` must also export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest`. Required `clientEntry` must also export named `onHydrate`. Missing entry files or named exports (including missing / non-array `routes`) are a hard error; do not use `default`. Optional config [`devServerMiddleware`](./docs/configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./docs/server-rendering.md#middleware).
 
 sku owns the HTTP server, the React Document shell (not overridable — use React 19 metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers. Requires React 19+. Vite SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
 

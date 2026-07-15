@@ -66,6 +66,7 @@ Do not use webpack’s `createUnsafeNonce` for Vite SSR — that API can create 
 import { getCspNonce, type SkuSsrMiddleware } from 'sku';
 import type { RouteObject } from 'react-router';
 
+// Export `routes` from serverEntry / clientEntry
 export const routes: RouteObject[] = [
   {
     path: '/',

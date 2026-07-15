@@ -7,7 +7,6 @@ export const ssrPlugin = (skuContext: SkuContext): Plugin => ({
   config: () => ({
     resolve: {
       alias: {
-        '#sku-vite-ssr-routes': skuContext.paths.routesEntry,
         '#sku-vite-ssr-server-entry': skuContext.paths.serverEntry,
         '#sku-vite-ssr-client-entry': skuContext.paths.clientEntry,
       },

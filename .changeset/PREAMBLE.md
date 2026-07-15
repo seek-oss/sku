@@ -1,0 +1,7 @@
+There are a lot of changes in this major release, however most consumers should only need to run the following to address the majority of issues:
+
+```sh
+pnpm dlx @sku-lib/codemod@ migrate-root-resolution . && sku format
+```
+
+It is still **strongly recommended** to read the entire release notes.

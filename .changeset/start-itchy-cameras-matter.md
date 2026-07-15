@@ -7,7 +7,7 @@
 When running `sku start`, users would previously access the SSR server directly. Static assets would then be loaded from the webpack dev server on a separate host.
 `sku start` will now proxy requests from the webpack dev server to the consumer's app (the SSR server), allowing the dev server to act as a single entrypoint.
 
-**BREAKING CHANGE**
+**BREAKING CHANGE**:
 
 When starting the dev server consumers may notice some changes:
 

@@ -6,6 +6,6 @@
 
 Both Webpack and Vite apps now use `lightningcss` for CSS minification.
 
-**BREAKING CHANGE**
+**BREAKING CHANGE**:
 
 The structure of minified CSS output by webpack apps has changed, though the resulting styles should be unaffected. We recommend testing a production build to confirm.

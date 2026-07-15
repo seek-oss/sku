@@ -4,7 +4,7 @@
 
 `deps`: Update minimum supported Node.js version to [24.16.0]
 
-**BREAKING CHANGE**
+**BREAKING CHANGE**:
 
 Node.js versions below v24.16.0 are no longer supported. Please upgrade to at least v24.16.0.
 

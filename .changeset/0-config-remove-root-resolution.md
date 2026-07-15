@@ -6,7 +6,7 @@
 
 Node.js can now resolve path aliases natively via [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json#imports`. `sku`'s [`pathAliases`](https://seek-oss.github.io/sku/#/./docs/configuration?id=pathaliases) option now uses this and works with both the `webpack` and `vite` bundlers.
 
-**BREAKING CHANGE**
+**BREAKING CHANGE**:
 
 `sku` generates `tsconfig.json#paths` from your `pathAliases` option and mirrors them into `package.json#imports` so aliases resolve natively at build time. Specifiers must use a `#` prefix, so `import x from 'src/foo'` becomes `import x from '#src/foo'`.
 

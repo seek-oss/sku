@@ -4,7 +4,7 @@
 - [API](./docs/api.md)
 - [FAQ](./docs/faq)
 - [Debugging](./docs/debugging.md)
-- **Alternate runners**
+- **Migration guides**
 - [Vite](./docs/vite.md)
 - [Vitest](./docs/vitest.md)
 - **Project types**

@@ -1,5 +1,5 @@
 ---
-'sku': major
+'sku': patch
 ---
 
 `vite`: Apply `dangerouslySetViteConfig` after internal sku config

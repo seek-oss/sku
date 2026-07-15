@@ -1,9 +1,7 @@
 ---
-'sku': major
+'sku': patch
 ---
 
-`loadable`: Convert `sku/@loadable/component` entrypoint to JavaScript
+`loadable`: Ship `sku/@loadable/component` as compiled JavaScript instead of TypeScript source
 
-**BREAKING CHANGE**:
-
-This entrypoint has historically been provided as a TypeScript file, but there is now no longer a reason to do so. This change should not affect any users, but out of an abundance of caution it is being treated as a breaking change.
+This entrypoint previously resolved to an uncompiled `.ts` file. It now resolves to a compiled `.mjs` file.

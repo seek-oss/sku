@@ -2,7 +2,7 @@
 'sku': major
 ---
 
-`deps`: Remove interop for very old versions of `@seek/sku-telemetry`
+`telemetry`: Remove interop for very old versions of `@seek/sku-telemetry`
 
 **BREAKING CHANGE**:
 

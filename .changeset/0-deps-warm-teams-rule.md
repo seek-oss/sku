@@ -6,10 +6,7 @@
 
 **BREAKING CHANGE**:
 
-This change includes two major versions. Please read the release notes for both versions:
-
-- [v7]
-- [v8]
+This update spans two major versions. Please read the release notes for both [v7] and [v8]:
 
 The change most likely to impact `sku` consumers is the requirement that [wildcards] (`*`) now must specify a key name, just like [path parameters] (`:`). In most cases this should be a simple migration: `/home/*` -> `/home/*rest`.
 

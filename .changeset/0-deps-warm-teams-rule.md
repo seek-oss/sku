@@ -4,7 +4,7 @@
 
 `deps`: Update `path-to-regexp` dependency from `^6.3.0` to `8.4.2`
 
-This update spans two major versions. Please read the release notes for both [v7] and [v8]:
+This update spans two major versions. Please read the release notes for both [v7] and [v8].
 
 **BREAKING CHANGE**:
 

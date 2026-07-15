@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { toPosixPath } from './toPosixPath.js';
+import { toPosixPath } from './toPosixPath.ts';
 
 describe('toPosixPath', () => {
   it('should leave a posix path as-is', () => {

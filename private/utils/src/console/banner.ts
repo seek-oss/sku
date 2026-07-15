@@ -1,6 +1,6 @@
 import wrap from 'wrap-ansi';
 import identString from 'indent-string';
-import { strong, critical, info, caution } from './styles.js';
+import { strong, critical, info, caution } from './styles.ts';
 
 const highlightMap = {
   info,

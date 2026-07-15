@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { afterEach, beforeEach, describe, it, expect, vi } from 'vitest';
 import createCSPHandler from './csp.js';
 
 describe('createCSPHandler', () => {
@@ -93,6 +93,10 @@ describe('createCSPHandler', () => {
   });
 
   describe('createUnsafeNonce', () => {
+    beforeEach(() => {
+      vi.stubEnv('SKU_CSP_NONCE', undefined);
+    });
+
     it('should form a valid nonce value', () => {
       const cspHandler = createCSPHandler();
 
@@ -117,6 +121,10 @@ describe('createCSPHandler', () => {
 
       const cspTag = cspHandler.createCSPTag();
       expect(cspTag).toContain(`nonce-${nonce}`);
+    });
+
+    afterEach(() => {
+      vi.unstubAllEnvs();
     });
   });
 });

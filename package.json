@@ -28,7 +28,7 @@
     "format": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --fix . && prettier --cache --experimental-cli --write . ",
     "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
     "release": "pnpm deploy-docs && changeset publish",
-    "version": "changeset version && pnpm inject-changelog-preamble && pnpm install --lockfile-only"
+    "version": "changeset version && pnpm sku-inject-changelog && pnpm install --lockfile-only"
   },
   "nano-staged": {
     "+(package.json|pnpm-lock.yaml)": [

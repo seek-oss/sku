@@ -13,9 +13,9 @@ Vite support is currently only available for [static applications (SSG)][SSG].
 This means that only [`sku start`] and [`sku build`] are supported.
 [`sku serve`] is also available as it is bundler agnostic.
 
-[`sku start`]: ./docs/CLI.md#start
-[`sku build`]: ./docs/CLI.md#build
-[`sku serve`]: ./docs/CLI.md#serve
+[`sku start`]: ./cli.md#start
+[`sku build`]: ./cli.md#build
+[`sku serve`]: ./cli.md#serve
 
 ### Planned deprecation of library mode
 
@@ -23,13 +23,14 @@ Building [libraries] with webpack is currently supported by `sku`.
 However, this feature is planned for deprecation and will not be supported with Vite.
 A migration guide for `sku` libraries will be provided in the future once the deprecation is finalised.
 
-[SSG]: ./docs/static-rendering.md
-[SSR]: ./docs/server-rendering.md
-[libraries]: ./docs/libraries.md
+[SSG]: ./static-rendering.md
+[SSR]: ./server-rendering.md
+[libraries]: ./libraries.md
 
 ## Prerequisites
 
-!> Before making any changes to your application, please ensure you have read this document in its entirety.
+> [!WARNING]
+> Before making any changes to your application, please ensure you have read this document in its entirety.
 
 There are two critical prerequisites for migrating to Vite:
 
@@ -50,11 +51,11 @@ Given [Jest's current limitations with ESM], it is highly likely that both these
 These features make it a great replacement for Jest in `sku` applications, especially given [Jest's current limitations with ESM].
 **Due to these limitations, it's likely that you'll need to migrate to Vitest at the same time as (or prior to) migrating to ESM.**
 
-See [sku's vitest documentation](./docs/vitest.md) for how to migrate to vitest.
+See [sku's vitest documentation](./vitest.md) for how to migrate to vitest.
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
-[test runner]: ./docs/configuration.md#testrunner
+[test runner]: ./configuration.md#testrunner
 [Vitest CLI]: https://vitest.dev/guide/cli.html
 [codemod]: https://codemod.com/registry/jest-vitest
 [Migrating from Jest to Vitest]: https://vitest.dev/guide/migration.html#jest
@@ -108,8 +109,8 @@ Common files that may need to be updated include:
 
 The following sections detail changes that may be required to migrate CJS code to ESM.
 
-[devServerMiddleware]: ./docs/configuration.md#devservermiddleware
-[polyfills]: ./docs/configuration.md#polyfills
+[devServerMiddleware]: ./configuration.md#devservermiddleware
+[polyfills]: ./configuration.md#polyfills
 
 #### ESM syntax
 
@@ -144,8 +145,9 @@ Typically, [ESM resolution dictates][explicit file extensions] that relative and
 
 However, Vite can resolve these imports for you, so it is only necessary to include file extensions in import paths within non-application code.
 
-?> By default, `sku` configures `allowImportingTsExtensions: true` in your `tsconfig.json` file.
-In situations where an explicit file extension is required, such as in a Node.js script, this setting allows you to import TypeScript files with a `.ts` extension instead of a `.js` extension, which can be a source of confusion for those new to ESM codebases.
+> [!TIP]
+> By default, `sku` configures `allowImportingTsExtensions: true` in your `tsconfig.json` file.
+> In situations where an explicit file extension is required, such as in a Node.js script, this setting allows you to import TypeScript files with a `.ts` extension instead of a `.js` extension, which can be a source of confusion for those new to ESM codebases.
 
 [ESM]: https://nodejs.org/api/esm.html
 [CommonJS]: https://nodejs.org/api/modules.html
@@ -169,9 +171,10 @@ Depending on your application, you may need no further changes to your codebase 
 
 Documented below is a list of differences between `sku` with `webpack` and `sku` with Vite.
 
-?> If you encounter issues during migration that aren't listed below, please reach out in [`#sku-support`] so we can update this document.
+> [!TIP]
+> If you encounter issues during migration that aren't listed below, please reach out in [`#sku-support`] so we can update this document.
 
-[bundler]: ./docs/configuration.md#bundler
+[bundler]: ./configuration.md#bundler
 [`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 
 ### Code splitting
@@ -210,9 +213,9 @@ export default () => (
 Note that in order to use `loadable` with a `fallback`, your application must use the `renderToStringAsync` API.
 See the [supporting react suspense] documentation for more information.
 
-[Code splitting]: ./docs/code-splitting.md
+[Code splitting]: ./code-splitting.md
 [suspense]: https://react.dev/reference/react/Suspense
-[supporting react suspense]: ./docs/static-rendering.md#supporting-react-suspense
+[supporting react suspense]: ./static-rendering.md#supporting-react-suspense
 
 ### Dev server middleware
 
@@ -237,7 +240,8 @@ export default function (server) {
 }
 ```
 
-?> Currently only JavaScript middleware is supported.
+> [!TIP]
+> Currently only JavaScript middleware is supported.
 
 [`use`]: https://github.com/senchalabs/connect#use-middleware
 
@@ -275,7 +279,7 @@ export default {
 } satisfies SkuConfig;
 ```
 
-[compilePackages]: ./docs/configuration.md#compilePackages
+[compilePackages]: ./configuration.md#compilepackages
 
 ### Vite client types
 
@@ -302,7 +306,8 @@ See [the importing image assets docs] for more info.
 Importing SVG files with no query parameters has different behaviour in webpack and Vite.
 SVG imports within your application will need to be updated in order to function correctly with Vite.
 
-?> Your application must be on at least [sku v15.13.0] in order to use the `raw`, `url` and `inline` query parameters described below.
+> [!TIP]
+> Your application must be on at least [sku v15.13.0] in order to use the `raw`, `url` and `inline` query parameters described below.
 
 The simplest way to migrate is to add the `raw` query parameter to all SVG imports in your codebase, which will import the raw SVG markup as a string in both webpack and Vite. This can be done automatically with the `svg-import-query-param` codemod:
 
@@ -333,5 +338,5 @@ Ensure changes made to libraries for the purpose of Vite compatibility are commu
 
 [sku v15.13.0]: https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md#15130
 [the vite docs]: https://vite.dev/guide/assets#importing-asset-as-url
-[the importing image assets docs]: ./docs/extra-features.md#importing-image-assets
+[the importing image assets docs]: ./extra-features.md#importing-image-assets
 [`data:` URLs]: https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data

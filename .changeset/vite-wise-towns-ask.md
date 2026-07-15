@@ -6,4 +6,4 @@
 
 Previously, the [`public`] configuration option was only supported in Webpack apps. It is now also supported in Vite apps.
 
-[`public`]: https://seek-oss.github.io/sku/#/./docs/configuration?id=public
+[`public`]: https://seek-oss.github.io/sku/docs/configuration#public

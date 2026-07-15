@@ -12,7 +12,7 @@ Run `sku configure` to regenerate your `tsconfig.json`, then `sku lint` to surfa
 
 #### Most likely to need attention
 
-- **Missing `@types` packages.** TypeScript no longer auto-loads every `@types/*` package. In sku, only `node` and `jest` (when using the Jest test runner) are included by default. If you see `Cannot find name`/`Cannot find type definition` errors for globals, add them via [`dangerouslySetTSConfig`](https://seek-oss.github.io/sku/#/./docs/configuration?id=dangerouslysettsconfig):
+- **Missing `@types` packages.** TypeScript no longer auto-loads every `@types/*` package. In sku, only `node` and `jest` (when using the Jest test runner) are included by default. If you see `Cannot find name`/`Cannot find type definition` errors for globals, add them via [`dangerouslySetTSConfig`](https://seek-oss.github.io/sku/docs/configuration#dangerouslysettsconfig):
 
   ```typescript
   dangerouslySetTSConfig: (config) => ({
@@ -26,7 +26,7 @@ Run `sku configure` to regenerate your `tsconfig.json`, then `sku lint` to surfa
 
 #### If you customize your tsconfig
 
-- **Remove `baseUrl`** — deprecated in TS 6, will be removed in TS 7. If you set `baseUrl` via `dangerouslySetTSConfig`, remove it. For import aliases, use the [`pathAliases`](https://seek-oss.github.io/sku/#/./docs/configuration?id=pathaliases) config option instead.
+- **Remove `baseUrl`** — deprecated in TS 6, will be removed in TS 7. If you set `baseUrl` via `dangerouslySetTSConfig`, remove it. For import aliases, use the [`pathAliases`](https://seek-oss.github.io/sku/docs/configuration#pathaliases) config option instead.
 - **Remove deprecated options** if you set any of these in `dangerouslySetTSConfig`: `downlevelIteration`, `outFile`, `alwaysStrict: false`, `esModuleInterop: false`, `allowSyntheticDefaultImports: false`, `moduleResolution: node`/`node10`/`classic`, `module: amd`/`umd`/`system`/`none`, `target: es3`/`es5`.
 
 #### Source code updates (less common)

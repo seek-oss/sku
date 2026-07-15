@@ -48,7 +48,7 @@ Default: `webpack`
 The bundler that sku uses to build the application.
 
 `vite` is currently only supported for static apps.
-See [Vite support](https://seek-oss.github.io/sku/#/./docs/vite) for details.
+See [Vite support](./vite) for details.
 
 ## clientEntry
 
@@ -76,7 +76,7 @@ Type: `boolean`
 
 Default: `false`
 
-Enable content security policy feature. See [`Content Security Policy`](./docs/csp.md) for more info.
+Enable content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
 
 ## cspExtraScriptSrcHosts
 
@@ -158,7 +158,7 @@ Type: `function`
 This function provides a way to modify sku's TypeScript configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Before customizing your TypeScript configuration, please reach out in [`#sku-support`]() to discuss your requirements and potential alternative solutions.
+Before customizing your TypeScript configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
 
 > Sku provides no guarantees that its TypeScript configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
@@ -302,7 +302,7 @@ Type: `Array<string>`
 
 Default: `[]`
 
-An array of environments the app supports. Apps should have one environment for local development plus one for each environment they're deployed to. Use this value to drive app config (e.g. `analyticsEnabled` or `apiEndpoint`). See [static-rendering](./docs/static-rendering.md) for more info.
+An array of environments the app supports. Apps should have one environment for local development plus one for each environment they're deployed to. Use this value to drive app config (e.g. `analyticsEnabled` or `apiEndpoint`). See [static-rendering](./static-rendering.md) for more info.
 
 ## externalizeNodeModules
 
@@ -321,7 +321,7 @@ Default: `[]`
 Sku ignores [a number of files and directories][default ignores] by default when running ESLint.
 This option allows you to add additional files and directories to be ignored.
 
-[default ignores]: ./docs/linting
+[default ignores]: ./linting
 
 ## hosts
 
@@ -330,8 +330,8 @@ Type: `Array<string>`
 Default: `['localhost']`
 
 An array of custom hosts the app can be served off when running `sku start` or `sku start-ssr`.
-Your [hosts file](<https://en.wikipedia.org/wiki/Hosts_(file)>) must be configured to point these hosts to `localhost`.
-This can be done automatically by running [`sudo sku setup-hosts`](./docs/cli.md?id=setup-hosts).
+Your [hosts file](https://en.wikipedia.org/wiki/Hosts_%28file%29) must be configured to point these hosts to `localhost`.
+This can be done automatically by running [`sudo sku setup-hosts`](./cli.md#setup-hosts).
 
 ## httpsDevServer
 
@@ -355,7 +355,7 @@ Type: `Array<string | { name: string, extends: string }>`
 
 The languages your application supports.
 
-See [Multi-language support](./docs/multi-language.md) for details.
+See [Multi-language support](./multi-language.md) for details.
 
 ## libraryEntry
 
@@ -485,7 +485,7 @@ Type: `string`
 
 Default: `./src/render.js`
 
-The render entry file to the app. This file should export the required functions for static rendering. See [static-rendering](./docs/static-rendering.md) for more info.
+The render entry file to the app. This file should export the required functions for static rendering. See [static-rendering](./static-rendering.md) for more info.
 
 ## routes
 
@@ -495,9 +495,9 @@ Type: `Array<string | {route: string, name: string, entry: string, languages: Ar
 
 Default: `['/']`
 
-An array of routes for the app. Each route must specify a name and a route corresponding to the path it is hosted under. Each route may also have a custom client entry, which can help with bundle splitting. See [static-rendering](./docs/static-rendering) for more info.
+An array of routes for the app. Each route must specify a name and a route corresponding to the path it is hosted under. Each route may also have a custom client entry, which can help with bundle splitting. See [static-rendering](./static-rendering) for more info.
 
-Can be used to limit the languages rendered for a specific route. Any listed language must exist in the [top level languages attribute](./docs/configuration?id=languages).
+Can be used to limit the languages rendered for a specific route. Any listed language must exist in the [top level languages attribute](#languages).
 
 Example:
 
@@ -547,17 +547,17 @@ An array of sites the app supports.
 These usually correspond to each domain the app is hosted under.
 
 Can be an array of site names, or objects with a site name and corresponding host.
-See [Multi site](./docs/multi-site#switching-site-by-host) for more info.
+See [Multi site](./multi-site#switching-site-by-host) for more info.
 
 **Static apps**
 
 Can be used to limit the languages rendered for a specific site.
-Any listed language must exist in the [top level languages attribute](./docs/configuration?id=languages).
+Any listed language must exist in the [top level languages attribute](#languages).
 
 **SSR apps**
 
 Only affects which hosts the development server responds to.
-For simplicitly, it's recommended to configure [`hosts`](./docs/configuration?id=hosts) instead.
+For simplicitly, it's recommended to configure [`hosts`](#hosts) instead.
 
 ## skipPackageCompatibilityCompilation
 

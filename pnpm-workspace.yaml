@@ -1,5 +1,5 @@
 packages:
-  - docs
+  - site
   - tests
   - fixtures/*
   - packages/*
@@ -8,7 +8,6 @@ packages:
 allowBuilds:
   '@swc/core': true
   core-js-pure: false
-  docsify: false
   esbuild: true
   unrs-resolver: true
 

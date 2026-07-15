@@ -105,7 +105,7 @@ import '@testing-library/jest-dom/vitest';
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
-[test runner]: ./docs/configuration.md#testrunner
+[test runner]: ./configuration.md#testrunner
 [Vitest CLI]: https://vitest.dev/guide/cli.html
 [codemod]: https://codemod.com/registry/jest-vitest
 [Migrating from Jest to Vitest]: https://vitest.dev/guide/migration.html#jest

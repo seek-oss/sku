@@ -23,7 +23,7 @@ Example:
 import { loadableReady } from 'sku/@loadable/component';
 ```
 
-[code splitting documentation]: ./docs/code-splitting.md
+[code splitting documentation]: ./code-splitting.md
 
 ## `sku/jest-preset`
 
@@ -41,7 +41,7 @@ module.exports = {
 ```
 
 [jest preset]: https://jestjs.io/docs/configuration#preset-string
-[testing documentation]: ./docs/testing.md
+[testing documentation]: ./testing.md
 
 ## `sku/config/eslint`
 
@@ -70,7 +70,7 @@ Example:
 import { babel, webpackFinal } from 'sku/config/storybook';
 ```
 
-[Storybook documentation]: ./docs/storybook.md
+[Storybook documentation]: ./storybook.md
 
 ## `sku/webpack-plugin`
 
@@ -83,4 +83,4 @@ Example:
 import { SkuWebpackPlugin } from 'sku/webpack-plugin';
 ```
 
-[custom builds documentation]: ./docs/custom-builds.md
+[custom builds documentation]: ./custom-builds.md

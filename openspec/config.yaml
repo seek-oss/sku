@@ -9,6 +9,7 @@ context: |
   - Complements Changesets and Docsify docs; does not replace them
   - Specs are delta-first by domain; do not backfill the whole codebase
   - Prefer Lite mode (short behavior-first specs); scale rigor only for high-risk work
+  - Invoke the CLI via `pnpm openspec` (not bare `openspec`)
   - AI tool adapters are local-only; never commit them
 
 rules:

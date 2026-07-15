@@ -5,6 +5,8 @@
     "target": "ESNext",
     "module": "nodenext",
     "moduleResolution": "nodenext",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "types": ["node"]
   },
   "include": ["./src/**/*"]

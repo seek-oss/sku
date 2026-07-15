@@ -1,4 +1,4 @@
-export { banner } from './banner.js';
+export { banner } from './banner.ts';
 export {
   accent,
   accentLight,
@@ -9,4 +9,4 @@ export {
   secondary,
   strong,
   success,
-} from './styles.js';
+} from './styles.ts';

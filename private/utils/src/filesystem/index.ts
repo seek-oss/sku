@@ -1,8 +1,8 @@
-export { isEmptyDir } from './isEmptyDir.js';
+export { isEmptyDir } from './isEmptyDir.ts';
 export {
   setCwd,
   cwd,
   getPathFromCwd,
   requireFromCwd,
   writeFileToCWD,
-} from './cwd.js';
+} from './cwd.ts';

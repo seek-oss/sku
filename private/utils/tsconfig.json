@@ -3,8 +3,8 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "noEmit": false,
-    "allowImportingTsExtensions": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "target": "ESNext",
     "module": "nodenext",
     "moduleResolution": "nodenext",

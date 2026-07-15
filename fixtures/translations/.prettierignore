@@ -4,6 +4,7 @@
 .prettierrc
 coverage/
 dist-ssr/
+dist/
 eslint.config.mjs
 pnpm-lock.yaml
 report/

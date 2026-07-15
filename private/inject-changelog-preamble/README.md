@@ -4,6 +4,10 @@ Injects the contents of `.changeset/.PREAMBLE.md` at the beginning of the latest
 Typically used to summarise or highlight specific changes.
 If `.changeset/.PREAMBLE.md` is missing then the CLI does nothing.
 
+> [!IMPORTANT]
+> The dot prefix on `.PREAMBLE.md` is intentional.
+> If the file is named `PREAMBLE.md`, the `changeset` CLI will try and validate it as if it were a real changeset, resulting in an error like `Error: could not parse changeset - missing or invalid frontmatter.`
+
 Based off [a similar script in skuba] but with a bit of extra logging and ✨colours✨.
 
 [a similar script in skuba]: https://github.com/seek-oss/skuba/blob/3134fa95252c81b016602ad93a20ba28ff1b9395/packages/changesets-changelog/src/inject.mjs

@@ -33,19 +33,43 @@ const convertToForwardSlashPaths = (pathStr: string) =>
 
 const addSep = (p: string) => `${p}${path.sep}`;
 
+/**
+ * Extra build target dirs to always include in managed ignore files.
+ * Used by monorepo tests so alternating configs (e.g. dist vs dist-ssr) do not churn .gitignore/.prettierignore.
+ * Example: SKU_IGNORE_TARGETS=dist,dist-ssr
+ */
+const getExtraIgnoreTargets = (): string[] => {
+  const raw = process.env.SKU_IGNORE_TARGETS;
+  if (!raw) {
+    return [];
+  }
+
+  return [
+    ...new Set(
+      raw
+        .split(',')
+        .map((target) => target.trim())
+        .filter(Boolean)
+        .map(addSep),
+    ),
+  ];
+};
+
 export default async (skuContext: SkuContext) => {
   const { paths, httpsDevServer, languages, hosts } = skuContext;
 
   validateSkuConfigFormat(paths.appSkuConfigPath);
 
-  // Ignore target directories
-  const webpackTargetDirectory = addSep(paths.relativeTarget);
+  // Ignore target directories (active config target + any SKU_IGNORE_TARGETS extras)
+  const targetDirectories = [
+    ...new Set([addSep(paths.relativeTarget), ...getExtraIgnoreTargets()]),
+  ];
 
   const gitIgnorePatterns = [
     // Ignore webpack bundle report output
     addSep(bundleReportFolder),
     addSep(coverageFolder),
-    webpackTargetDirectory,
+    ...targetDirectories,
   ];
 
   const eslintConfigFilename = 'eslint.config.mjs';

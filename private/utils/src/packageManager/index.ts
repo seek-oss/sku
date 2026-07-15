@@ -16,4 +16,4 @@ export {
   getPackageManagerInstallPage,
   type GetAddCommandOptions,
   type SupportedPackageManager,
-} from './packageManager.js';
+} from './packageManager.ts';

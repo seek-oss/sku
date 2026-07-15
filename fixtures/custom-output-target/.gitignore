@@ -3,6 +3,8 @@
 .prettierrc
 coverage/
 custom-output-directory/
+dist-ssr/
+dist/
 eslint.config.mjs
 report/
 tsconfig.json

@@ -1,6 +1,6 @@
 # Server rendering
 
-Sku’s server-side rendering is **Vite SSR**: a high-level API on `bundler: 'vite'` + `renderType: 'server-side-rendered'`, built on [React Router Data Mode](https://reactrouter.com/start/modes#data). Sku owns the HTTP server, Document shell, streaming, hydration, and CSP headers. Use `sku start` / `sku build` (same as static Vite). Requires **React 19+**.
+Sku’s server-side rendering is **Vite SSR**: a high-level API on `bundler: 'vite'` + `renderType: 'server-side-rendered'`, built on [React Router Data Mode](https://reactrouter.com/start/modes#data). Sku owns the HTTP server, Document shell, streaming, hydration, and CSP headers. Use `sku start` / `sku build` (same as static Vite).
 
 > **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
 
@@ -95,7 +95,7 @@ Prefer co-locating each page in its own directory with a `route.ts` (path / lazy
 sku owns:
 
 - the HTTP(S) server (dev: Vite `middlewareMode` + HMR on one port; prod: `node dist/server/server.js`)
-- the React Document shell (`<html>` / `<head>` / `<body>` with CSS + modulepreload links) — not overridable; use React 19 metadata in routes/layouts for head/SEO
+- the React Document shell (`<html>` / `<head>` / `<body>` with CSS + modulepreload links) — not overridable; use React document metadata in routes/layouts for head/SEO
 - full-document streaming with `renderToPipeableStream` (shell-first; set route `handle.waitForAll` to buffer until `onAllReady`)
 - document-level hydration (`hydrateRoot(document, …)`), not `#app`
 - CSP as HTTP headers when `cspEnabled` / `cspReportOnlyEnabled` are set (see [CSP](#csp))
@@ -288,7 +288,7 @@ export async function loader() {
 
 ### Document hydration
 
-sku hydrates the **full document** with `hydrateRoot(document, …)` — there is no `#app` mount node and no consumer `renderDocument` / static `render.tsx` on this path. Prefer React 19 document metadata in routes/layouts for `<head>` / SEO. The Document shell itself is not overridable.
+sku hydrates the **full document** with `hydrateRoot(document, …)` — there is no `#app` mount node and no consumer `renderDocument` / static `render.tsx` on this path. Prefer React document metadata in routes/layouts for `<head>` / SEO. The Document shell itself is not overridable.
 
 ### Lazy routes and `handle.moduleId`
 
@@ -434,7 +434,6 @@ High-level guide for moving a **static** sku app (webpack or Vite SSG) to Vite S
 
 #### Requirements
 
-- Upgrade to **React 19+** before migrating (document hydration requires it)
 - Vite SSR is Vite-only: `bundler: 'vite'` + `renderType: 'server-side-rendered'`
 - Use a **relative** `publicPath` (e.g. `/`) — absolute / CDN URLs are not supported
 
@@ -482,7 +481,7 @@ See [Middleware](#middleware) for the two-layer HTTP split and start mount order
 #### Document / hydration
 
 - Replace `#app` `hydrateRoot` and `renderDocument` with sku’s full-document stream + `hydrateRoot(document)`
-- Use React 19 metadata in routes/layouts for head/SEO; the Document shell is not overridable
+- Use React document metadata in routes/layouts for head/SEO; the Document shell is not overridable
 
 ### Migrate from Older SSR App
 
@@ -492,7 +491,6 @@ The older SSR API was significantly lower-level and required apps to introduce a
 
 #### Requirements
 
-- Upgrade to **React 19+** before migrating
 - Switch to `bundler: 'vite'` + `renderType: 'server-side-rendered'`
 - Relative `publicPath` only
 

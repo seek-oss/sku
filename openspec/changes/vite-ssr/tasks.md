@@ -27,7 +27,7 @@
 ## 4. Create, docs, release
 
 - [x] 4.1 `@sku-lib/create` `vite-ssr` template (`createRoutes` + dual `routes`); leave static `vite` unchanged
-- [x] 4.2 Docs: `server-rendering.md` (+ Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs; React 19+; experimental / not-for-production warning
+- [x] 4.2 Docs: `server-rendering.md` (+ Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs; experimental / not-for-production warning
 - [x] 4.3 Changeset marks Vite SSR experimental and not for production
 
 ## Deferred

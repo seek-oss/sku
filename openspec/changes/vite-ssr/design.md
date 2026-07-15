@@ -28,7 +28,7 @@ HTTP middleware (two layers; distinct from RR route `middleware`):
 - **Dev-only:** optional config `devServerMiddleware` — start only; never in the production server graph.
 - **Dev order:** request-context → `devServerMiddleware` → server-entry `middleware` → Vite → HTML.
 
-Document is sku-owned (React 19 metadata). No consumer Document override in v1.
+Document is sku-owned (React document metadata). No consumer Document override in v1.
 
 ### 4. Commands and deploy shape
 
@@ -36,7 +36,7 @@ Single-port Vite `middlewareMode` + `appType: 'custom'`. Build emits sibling `cl
 
 ### 5. Full-document streaming
 
-React owns `<html>`/`<head>`/`<body>`. Pipe on `onShellReady`; optional `handle.waitForAll` → `onAllReady`. Abort on disconnect. React ≥ 19. Client: `hydrateRoot(document, …)`.
+React owns `<html>`/`<head>`/`<body>`. Pipe on `onShellReady`; optional `handle.waitForAll` → `onAllReady`. Abort on disconnect. Client: `hydrateRoot(document, …)`.
 
 ### 6. No `transformIndexHtml` on the SSR path
 

@@ -58,7 +58,7 @@ Default: 'static-generated'
 
 Selects request-time SSR or static generation.
 
-- `'server-side-rendered'` requires `bundler: 'vite'`, React 19+, and required `serverEntry` / `clientEntry` each exporting named `routes` (`RouteObject[]`), plus server `onRequest` / `middleware` and client `onHydrate`. Use `sku start` / `sku build`. **Experimental — not for production** (available for testing; see [Server rendering](./docs/server-rendering.md)).
+- `'server-side-rendered'` requires `bundler: 'vite'` and required `serverEntry` / `clientEntry` each exporting named `routes` (`RouteObject[]`), plus server `onRequest` / `middleware` and client `onHydrate`. Use `sku start` / `sku build`. **Experimental — not for production** (available for testing; see [Server rendering](./docs/server-rendering.md)).
 - `'static-generated'` (or omit) keeps the existing static rendering path.
 
 See [Server rendering](./docs/server-rendering.md).

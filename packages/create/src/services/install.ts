@@ -9,13 +9,6 @@ const DEPENDENCIES = [
   'react-dom@latest',
 ];
 
-/** Vite SSR requires React 19+ for document hydration. */
-const VITE_SSR_DEPENDENCIES = [
-  'braid-design-system@latest',
-  'react@^19',
-  'react-dom@^19',
-];
-
 const COMMON_DEV_DEPENDENCIES = [
   '@vanilla-extract/css',
   'sku',
@@ -34,7 +27,7 @@ export const installDependencies = async (
     await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
   }
 
-  const deps = template === 'vite-ssr' ? VITE_SSR_DEPENDENCIES : DEPENDENCIES;
+  const deps = DEPENDENCIES;
   const devDeps = [...COMMON_DEV_DEPENDENCIES];
   if (isViteBasedTemplate(template)) {
     devDeps.push(...VITE_DEV_DEPENDENCIES);

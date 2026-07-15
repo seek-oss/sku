@@ -6,7 +6,7 @@ It uses **Vite SSR**: full-document streaming and `hydrateRoot(document)` — no
 
 > **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet.
 
-**Requires React 19+.** Use `sku start` / `sku build` (not `sku start-ssr` / `sku build-ssr`).
+Use `sku start` / `sku build` (not `sku start-ssr` / `sku build-ssr`).
 
 ## Getting Started
 

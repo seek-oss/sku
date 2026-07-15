@@ -258,18 +258,13 @@ When `httpsDevServer` is enabled, Vite SSR `sku start` MUST serve over HTTPS wit
 
 ### Requirement: Vite SSR first release is documented as experimental
 
-The first release MUST be documented as experimental (testing only; not for production) in product docs and the changeset. Docs MUST also state React 19+ as a prerequisite. Sku MUST NOT add a runtime experimental gate.
+The first release MUST be documented as experimental (testing only; not for production) in product docs and the changeset. Sku MUST NOT add a runtime experimental gate.
 
 #### Scenario: Docs warn experimental
 
 - **WHEN** a reader opens Vite SSR product docs
 - **THEN** an experimental / not-for-production warning is present near the start
 - **AND** the changeset states the same
-
-#### Scenario: Docs state React 19 prerequisite
-
-- **WHEN** a project enables Vite SSR
-- **THEN** sku documentation states that React 19 or newer is required
 
 ### Requirement: Product and Migrating docs cover Vite SSR topics
 

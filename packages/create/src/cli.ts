@@ -63,7 +63,7 @@ program
             title: 'Vite SSR',
             value: 'vite-ssr',
             description:
-              'Server-side rendered app with Vite (React 19+). Uses sku start / sku build.',
+              'Server-side rendered app with Vite. Uses sku start / sku build.',
           },
           {
             title: 'Webpack',

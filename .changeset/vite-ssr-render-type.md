@@ -11,8 +11,6 @@ Full-document streaming for Server-Rendered Web Applications using Vite.
 
 A new higher-level API allows you to return React Router routes directly, with first-class support for streaming using React Suspense, custom middleware and standard best-practices defaults out of the box.
 
-Vite SSR requires React 19+.
-
 Scaffold a new app with `@sku-lib/create`:
 
 ```sh

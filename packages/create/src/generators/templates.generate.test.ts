@@ -43,7 +43,6 @@ describe('generateTemplateFiles', () => {
     expect(await fixture.exists('src/pages/about/route.ts')).toBe(true);
 
     const readme = await fixture.readFile('README.md', 'utf8');
-    expect(readme).toContain('React 19+');
     expect(readme).toContain('sku start');
     expect(readme).toContain('hydrateRoot(document)');
 

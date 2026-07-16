@@ -33,6 +33,7 @@ export default defineConfig({
     search: {
       provider: 'local',
     },
+    outline: [2, 3],
     sidebar: {
       '/': [
         {

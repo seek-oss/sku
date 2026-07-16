@@ -13,8 +13,11 @@ export const defaultConfig = {
   minimumReleaseAge: 4320,
   minimumReleaseAgeExclude: [
     '@braid-design-system/*',
+    '@capsizecss/*',
     '@seek/*',
     '@sku-lib/*',
+    '@vanilla-extract/*',
+    '@vocab/*',
     'braid-design-system',
     'browserslist-config-seek',
     'eslint-config-seek',

@@ -19,7 +19,7 @@ To start a local development server and open a new browser tab:
 $ npm start
 ```
 
-Out of the box sku will start your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on http://localhost:8080. However there a few options you can pass `sku.config.js` if needed.
+Out of the box sku will start your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on `http://localhost:8080`. However there a few options you can pass `sku.config.js` if needed.
 
 ```js
 export default {
@@ -40,7 +40,7 @@ There are two main entry points for every sku app. The client entry, and the ren
 
 **Static render only**
 
-The render entry is in charge of returning a string of HTML that represents each of your apps routes, sites & environments. You can think of it as a server render that runs at build time. For more info on how to do this see [static rendering](./docs/static-rendering.md).
+The render entry is in charge of returning a string of HTML that represents each of your apps routes, sites & environments. You can think of it as a server render that runs at build time. For more info on how to do this see [static rendering](./static-rendering.md).
 
 ### Server
 
@@ -54,7 +54,7 @@ sku currently uses [`express`](https://expressjs.com/) as it's SSR web server.
 
 The client entry is the entrypoint for all your client side code (code that runs in the browser). This is where you'll want to hydrate your React application and configure any state management you may be using.
 
-> If you need pass information between render and client (e.g. Config values) see [`provideClientContext`](./docs/static-rendering#provideclientcontext)
+> If you need pass information between render and client (e.g. Config values) see [`provideClientContext`](./static-rendering#provideclientcontext)
 
 Example client entry
 

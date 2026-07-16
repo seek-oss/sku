@@ -16,4 +16,4 @@ When starting the dev server consumers may notice some changes:
 
 See [Development server entry] for more information.
 
-[Development server entry]: https://seek-oss.github.io/sku/#/./docs/server-rendering?id=development-server-entry
+[Development server entry]: https://seek-oss.github.io/sku/docs/server-rendering#development-server-entry

@@ -22,6 +22,8 @@ export default [
       'fixtures/**/*',
       '**/__testfixtures__/**',
       '**/@loadable/**/*',
+      'site/.vitepress/cache/',
+      'site/.vitepress/dist/',
     ],
   },
   ...seek,

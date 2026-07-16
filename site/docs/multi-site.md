@@ -1,10 +1,10 @@
 # Multi site (Theming)
 
-One of the features that makes sku unique, is it can handle a multi site/brand application out of the box using the [`sites`](./docs/configuration#sites) option.
+One of the features that makes sku unique, is it can handle a multi site/brand application out of the box using the [`sites`](./configuration#sites) option.
 
 ## Switching site by host
 
-By default, sku will render the first site in the [`sites`](./docs/configuration#sites) array when using `sku start`. However, if you want to be able to switch between sites without restarting the server, you can do so by setting a `host` for each site.
+By default, sku will render the first site in the [`sites`](./configuration#sites) array when using `sku start`. However, if you want to be able to switch between sites without restarting the server, you can do so by setting a `host` for each site.
 
 ```ts
 export default {
@@ -47,7 +47,7 @@ _**NOTE:** Currently this example is for static rendering projects only but SSR 
 
 ### Config
 
-Firstly, add a [`sites`](./docs/configuration#sites) option to your `sku.config.js`. This tells sku to render a version of your app for each site you specify.
+Firstly, add a [`sites`](./configuration#sites) option to your `sku.config.js`. This tells sku to render a version of your app for each site you specify.
 
 _**NOTE:** For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes), however, you could just as easily map the theme name from your site._
 
@@ -116,7 +116,7 @@ export default ({ site }: { site: string }) =>
 
 ### Loading the theme
 
-Now the site is available in our `App` component, we use `BraidLoadableProvider` (which uses [loadable-components](./docs/code-splitting) internally) to configure the specified theme.
+Now the site is available in our `App` component, we use `BraidLoadableProvider` (which uses [loadable-components](./code-splitting) internally) to configure the specified theme.
 
 ```tsx
 // App.tsx

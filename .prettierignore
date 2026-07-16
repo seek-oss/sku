@@ -19,3 +19,5 @@ fixtures/*/eslint.config.mjs
 fixtures/*/.prettierrc
 fixtures/*/tsconfig.json
 *.hbs
+site/.vitepress/cache/
+site/.vitepress/dist/

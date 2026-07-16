@@ -13,7 +13,7 @@ It provides a number of commands to help you develop, test and build your applic
 | `--help, -h`        | Show help output for the current command <br> `sku --help`                                                                   |
 | `--version, -v`     | Show the version of `sku` that is currently installed <br> `sku --version`                                                   |
 
-[environment]: ./docs/configuration.md#environments
+[environment]: ./configuration.md#environments
 [`start`]: #start
 [`serve`]: #serve
 
@@ -36,7 +36,7 @@ This command supports the following options:
 | `--strict-port`   | Will make sku throw an error if the given port is already in use.                                   | `false`     |
 | `--list-urls, -l` | Lists all dev server urls the app can be accessed on. If false, only displays the first found host. | `false`     |
 
-[static rendering]: ./docs/building-the-app.md#render
+[static rendering]: ./building-the-app.md#render
 
 ### `start-ssr`
 
@@ -53,7 +53,7 @@ This command supports the following options:
 | `--stats, -s`     | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only`        | `summary`   |
 | `--list-urls, -l` | Lists all dev server urls the app can be accessed on. If false, only displays the first found host. | `false`     |
 
-[server rendering]: ./docs/building-the-app.md#server
+[server rendering]: ./building-the-app.md#server
 
 ### `build`
 
@@ -69,7 +69,7 @@ This command supports the following options:
 | ------------- | -------------------------------------------------------------------------------------------- | ------------- |
 | `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `errors-only` |
 
-[static rendering]: ./docs/building-the-app.md#render
+[static rendering]: ./building-the-app.md#render
 
 ### `build-ssr`
 
@@ -85,7 +85,7 @@ This command supports the following options:
 | ------------- | -------------------------------------------------------------------------------------------- | ------------- |
 | `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `errors-only` |
 
-[server rendering]: ./docs/building-the-app.md#server
+[server rendering]: ./building-the-app.md#server
 
 ### `serve`
 
@@ -115,7 +115,7 @@ See the [testing documentation] for more information.
 sku test
 ```
 
-[testing documentation]: ./docs/testing.md
+[testing documentation]: ./testing.md
 
 ### `lint`
 
@@ -126,7 +126,7 @@ See the [linting/formatting documentation] for more information.
 sku lint
 ```
 
-[linting/formatting documentation]: ./docs/linting.md
+[linting/formatting documentation]: ./linting.md
 
 ### `format`
 
@@ -137,7 +137,7 @@ See the [linting/formatting documentation] for more information.
 sku format
 ```
 
-[linting/formatting documentation]: ./docs/linting.md
+[linting/formatting documentation]: ./linting.md
 
 ### `setup-hosts`
 
@@ -147,7 +147,7 @@ Update your hosts file to point any configured [`hosts`] to your local machine.
 sudo sku setup-hosts
 ```
 
-[`hosts`]: ./docs/configuration.md#hosts
+[`hosts`]: ./configuration.md#hosts
 
 ### `configure`
 
@@ -163,7 +163,7 @@ sku configure
 Translation-specific commands.
 These commands are only useful if your application is configured to be a [multi-language application].
 
-[multi-language application]: ./docs/multi-language.md
+[multi-language application]: ./multi-language.md
 
 ### `translations compile`
 
@@ -204,7 +204,7 @@ See the documentation on [phrase-specific features] for more information.
 sku translations pull
 ```
 
-[phrase-specific features]: ./docs/multi-language.md#phrase-specific-features
+[phrase-specific features]: ./multi-language.md#phrase-specific-features
 
 ### `translations validate`
 

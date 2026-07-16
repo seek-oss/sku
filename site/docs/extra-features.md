@@ -15,7 +15,8 @@ const HeroImage = () => <img src={heroImageUrl} alt="A hero image" />;
 All supported image types (except [SVG]) will be imported as strings you can pass to a `src` attribute.
 The imported string is typically a URL, however files smaller than 10,000 bytes will be inlined as a base64-encoded [`data:` URL].
 
-?> Browser support for `webp` and `avif` varies. To ensure compatibility across browsers, consider providing fallback image formats using the [`picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
+> [!TIP]
+> Browser support for `webp` and `avif` varies. To ensure compatibility across browsers, consider providing fallback image formats using the [`picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
 
 ```tsx
 import avifImageUrl from './image.avif';
@@ -39,7 +40,8 @@ If you want to use a currently unsupported format feel free to submit a PR or co
 
 ### SVGs
 
-?> Importing SVGs without query parameters is handled differently in webpack and Vite. See [bundler-specific behaviour] for more information.
+> [!TIP]
+> Importing SVGs without query parameters is handled differently in webpack and Vite. See [bundler-specific behaviour] for more information.
 
 SVGs are handled differently to other image formats.
 Imported SVGs are raw strings representing optimized (via [SVGO]) markup, not URLs.
@@ -53,8 +55,9 @@ const MySvgComponent = () => {
 };
 ```
 
-?> Importing optimized SVG markup from files is recommended over rendering SVG elements with React.
-SVG elements rendered by React are not optimized by sku.
+> [!TIP]
+> Importing optimized SVG markup from files is recommended over rendering SVG elements with React.
+> SVG elements rendered by React are not optimized by sku.
 
 Importing SVGs may not be possible in all use cases, such as when the SVG elements require user-configurable props.
 In those cases you can render SVG elements directly in React:
@@ -101,12 +104,12 @@ See [sku's Vite migration guide] for more details.
 
 [sku v15.13.0]: https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md#15130
 [the vite docs]: https://vite.dev/guide/assets#importing-asset-as-url
-[sku's Vite migration guide]: ./docs/vite#migrating-svg-imports
+[sku's Vite migration guide]: ./vite#migrating-svg-imports
 
 ## Source maps
 
 Source maps are enabled by default when running both `sku start` and `sku build`.
-If you want to disable source map generation for production builds, you can set [`sourceMapsProd`](./docs/configuration#sourcemapsprod) to `false`.
+If you want to disable source map generation for production builds, you can set [`sourceMapsProd`](./configuration#sourcemapsprod) to `false`.
 
 ## Compile packages
 
@@ -381,5 +384,5 @@ export default (app) => {
 };
 ```
 
-[`devServerMiddleware`]: ./docs/configuration?id=devservermiddleware
+[`devServerMiddleware`]: ./configuration#devservermiddleware
 [express]: http://expressjs.com/

@@ -1,0 +1,46 @@
+name: Deploy docs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-docs:
+    name: Build docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          cache: pnpm
+          node-version-file: package.json
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build docs
+        run: pnpm build:docs
+
+      - name: Upload docs artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/.vitepress/dist
+
+  deploy-docs:
+    name: Deploy docs
+    needs: build-docs
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -124,14 +124,18 @@ If this is your first time using changesets, please read the documentation avail
 
 ## Editing Documentation
 
-The documentation site is generated from markdown files in [the `docs` directory].
+The documentation site is generated from markdown files in [the `site` directory].
 To start a local development server for the documentation site, run the following script:
 
 ```sh
 pnpm start:docs
 ```
 
-[the `docs` directory]: ./docs/docs
+Docs are published to [GitHub Pages] via [GitHub Actions] when a package release is published, or manually by running the **Deploy docs** workflow from the Actions tab.
+
+[the `site` directory]: ./site/docs
+[GitHub Pages]: https://seek-oss.github.io/sku/
+[GitHub Actions]: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow
 
 ## Troubleshooting
 

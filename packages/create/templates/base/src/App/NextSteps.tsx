@@ -62,7 +62,7 @@ export function NextSteps({ environment }: NextStepsProps) {
 
                   <Text>
                     The{' '}
-                    <TextLink href="https://seek-oss.github.io/sku/#/">
+                    <TextLink href="https://seek-oss.github.io/sku/">
                       sku platform
                     </TextLink>{' '}
                     provides a number of tools to make development more

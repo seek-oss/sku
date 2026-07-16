@@ -11,3 +11,5 @@ yarn.lock
 .eslintcache
 yalc.lock
 .pnpm-store
+site/.vitepress/cache
+site/.vitepress/dist

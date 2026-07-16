@@ -67,7 +67,7 @@ export default {
 
 [Storybook configuration documentation]: https://storybook.js.org/docs/react/configure/overview
 [tsconfig include]: https://www.typescriptlang.org/tsconfig/#include
-[dangerouslySetTSConfig]: ./docs/configuration.md#dangerouslysettsconfig
+[dangerouslySetTSConfig]: ./configuration.md#dangerouslysettsconfig
 
 ## Developing and Building Your Storybook
 
@@ -94,8 +94,8 @@ This can be achieved via a package such as [`concurrently`], or if you are using
 
 Please read the [Storybook CLI documentation] for more information.
 
-[multi-language]: ./docs/multi-language
-[translations compile watch]: ./docs/cli?id=translations-compile
+[multi-language]: ./multi-language
+[translations compile watch]: ./cli#translations-compile
 [`concurrently`]: https://www.npmjs.com/package/concurrently
 [running multiple scripts]: https://pnpm.io/8.x/cli/run#running-multiple-scripts
 [Storybook CLI documentation]: https://storybook.js.org/docs/cli/
@@ -111,4 +111,4 @@ import devServerMiddleware from '../devServerMiddleware.js';
 export default devServerMiddleware;
 ```
 
-[devserver middleware]: ./docs/extra-features.md#devserver-middleware
+[devserver middleware]: ./extra-features.md#devserver-middleware

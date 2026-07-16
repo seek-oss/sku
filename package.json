@@ -18,10 +18,10 @@
     "test": "SKU_VITE_DISABLE_WATCH=true SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run",
     "test:update": "SKU_TELEMETRY=false SKU_DISABLE_CACHE=true OPEN_TAB=false vitest run -u",
     "setup-test-hosts": "tsx private/test-utils/setupTestHosts",
-    "start:docs": "pnpm run --filter @sku-private/docs start",
+    "start:docs": "pnpm --filter @sku-private/site start",
+    "build:docs": "pnpm --filter @sku-private/site build",
     "format": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --fix . && prettier --cache --experimental-cli --write . ",
-    "deploy-docs": "pnpm run --filter @sku-private/docs deploy",
-    "release": "pnpm deploy-docs && changeset publish",
+    "release": "changeset publish",
     "version": "changeset version && pnpm sku-inject-changelog && pnpm install --lockfile-only"
   },
   "nano-staged": {

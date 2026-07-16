@@ -4,7 +4,7 @@
 
 `config`: Remove `rootResolution` in favour of native subpath imports
 
-Node.js can now resolve path aliases natively via [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json#imports`. `sku`'s [`pathAliases`](https://seek-oss.github.io/sku/#/./docs/configuration?id=pathaliases) option now uses this and works with both the `webpack` and `vite` bundlers.
+Node.js can now resolve path aliases natively via [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json#imports`. `sku`'s [`pathAliases`](https://seek-oss.github.io/sku/docs/configuration#pathaliases) option now uses this and works with both the `webpack` and `vite` bundlers.
 
 **BREAKING CHANGE**:
 

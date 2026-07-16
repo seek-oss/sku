@@ -25,4 +25,4 @@ Running `sku format` will format all JavaScript and TypeScript files in your pro
 
 Files can be excluded from formatting by adding paths into the `.prettierignore` file.
 
-[`eslintIgnore`]: ./docs/configuration#eslintignore
+[`eslintIgnore`]: ./configuration#eslintignore

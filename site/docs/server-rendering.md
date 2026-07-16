@@ -139,4 +139,4 @@ It also avoids the need to complete Cross-Origin Resource Sharing (CORS) checks 
 
 To include other requests, like typical API traffic, consider using [Dev Server Middleware] to proxy requests.
 
-[Dev Server Middleware]: ./docs/extra-features?id=devserver-middleware
+[Dev Server Middleware]: ./extra-features#devserver-middleware

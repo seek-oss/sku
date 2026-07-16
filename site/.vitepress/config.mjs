@@ -52,6 +52,10 @@ export default defineConfig({
           items: [
             { text: 'Static Webpack → Vite', link: '/docs/vite' },
             { text: 'Jest → Vitest', link: '/docs/vitest' },
+            {
+              text: 'Previous sku versions',
+              link: '/docs/previous-sku-versions',
+            },
           ],
         },
         {

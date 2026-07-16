@@ -1,5 +1,11 @@
 # @sku-lib/create
 
+## 1.3.0
+
+### Minor Changes
+
+- Adds `pathAliases` entry for `#src/*` on creation ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
 ## 1.2.0
 
 ### Minor Changes

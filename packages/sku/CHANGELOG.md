@@ -1,5 +1,315 @@
 # sku
 
+## 16.0.0
+
+There are a lot of changes in this major release, however most consumers should only need to run the following to address the majority of issues:
+
+```sh
+pnpm dlx @sku-lib/codemod migrate-root-resolution . && pnpm sku format
+```
+
+It is still **strongly recommended** to read the entire release notes.
+
+### Major Changes
+
+- `config`: Remove `rootResolution` in favour of native subpath imports ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  Node.js can now resolve path aliases natively via [subpath imports](https://nodejs.org/api/packages.html#subpath-imports) in `package.json#imports`. `sku`'s [`pathAliases`](https://seek-oss.github.io/sku/docs/configuration#pathaliases) option now uses this and works with both the `webpack` and `vite` bundlers.
+
+  **BREAKING CHANGE**:
+
+  `sku` generates `tsconfig.json#paths` from your `pathAliases` option and mirrors them into `package.json#imports` so aliases resolve natively at build time. Specifiers must use a `#` prefix, so `import x from 'src/foo'` becomes `import x from '#src/foo'`.
+
+  `sku` takes ownership of the `package.json` `imports` field and keeps it in sync with `pathAliases`, so you no longer need to maintain `imports` by hand.
+
+  To migrate, run the `migrate-root-resolution` codemod to update your project. It rewrites `src/...` imports to `#src/...` and adds the matching `#src/*` entry to the `pathAliases` option in your sku config:
+
+  ```sh
+  pnpm dlx @sku-lib/codemod migrate-root-resolution .
+  ```
+
+  After running the codemod, your sku config will contain:
+
+  ```ts
+  export default {
+    pathAliases: {
+      '#src/*': './src/*',
+    },
+  } satisfies SkuConfig;
+  ```
+
+  **Note:** Any other custom aliases will need to be manually migrated by adding the alias to `pathAliases` and find-and-replacing the specifier in your codebase to add a `#` prefix.
+
+- `deps`: Update minimum supported Node.js version to [24.16.0] ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  Node.js versions below v24.16.0 are no longer supported. Please upgrade to at least v24.16.0.
+
+  [24.16.0]: https://nodejs.org/en/blog/release/v24.16.0
+
+- `deps`: TypeScript updated to version 6 ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  sku now generates a TypeScript 6 compatible `tsconfig.json` for you, so most projects will not need changes. However, TypeScript 6 ships new defaults and deprecations that may affect your source code, dependencies, or any custom config. See the [TypeScript 6.0 announcement](https://devblogs.microsoft.com/typescript/announcing-typescript-6-0/) or the [5.x to 6.0 migration guide](https://gist.github.com/privatenumber/3d2e80da28f84ee30b77d53e1693378f) for full details.
+
+  Run `sku configure` to regenerate your `tsconfig.json`, then `sku lint` to surface anything below.
+
+  #### Most likely to need attention
+  - **Missing `@types` packages.** TypeScript no longer auto-loads every `@types/*` package. In sku, only `node` and `jest` (when using the Jest test runner) are included by default. If you see `Cannot find name`/`Cannot find type definition` errors for globals, add them via [`dangerouslySetTSConfig`](https://seek-oss.github.io/sku/docs/configuration#dangerouslysettsconfig):
+
+    ```typescript
+    dangerouslySetTSConfig: (config) => ({
+      ...config,
+      compilerOptions: {
+        ...config.compilerOptions,
+        types: [...config.compilerOptions.types, 'cypress'],
+      },
+    }),
+    ```
+
+  #### If you customize your tsconfig
+  - **Remove `baseUrl`** — deprecated in TS 6, will be removed in TS 7. If you set `baseUrl` via `dangerouslySetTSConfig`, remove it. For import aliases, use the [`pathAliases`](https://seek-oss.github.io/sku/docs/configuration#pathaliases) config option instead.
+  - **Remove deprecated options** if you set any of these in `dangerouslySetTSConfig`: `downlevelIteration`, `outFile`, `alwaysStrict: false`, `esModuleInterop: false`, `allowSyntheticDefaultImports: false`, `moduleResolution: node`/`node10`/`classic`, `module: amd`/`umd`/`system`/`none`, `target: es3`/`es5`.
+
+  #### Source code updates (less common)
+  - **Import attributes:** replace `import x from './data.json' assert { type: 'json' }` with `with { type: 'json' }`.
+  - **Namespaces:** replace `module Foo { }` with `namespace Foo { }`.
+  - **CJS default imports:** replace `import * as x from 'cjs-pkg'` with `import x from 'cjs-pkg'` (interop is always on now).
+  - **Inference edge cases:** TS 6's improved method inference can change a few inferred types — add explicit annotations where needed.
+
+  #### Tooling & dependencies
+  - **Dependencies with legacy `.d.ts` syntax:** Old `module Foo { }` namespaces may need upgrading, forking, or patching.
+  - **Temporal polyfills:** If you used `@js-temporal/polyfill` or `temporal-polyfill`, they are now no longer type-compatible with the new built-in `Temporal` lib types.
+
+  > Tip: if deprecation errors come from options you set via `dangerouslySetTSConfig`, you can add `ignoreDeprecations: '6.0'` there to silence them temporarily. This will stop working in TypeScript 7.
+
+- `deps`: Update `path-to-regexp` dependency from `^6.3.0` to `8.4.2` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  This update spans two major versions. Please read the release notes for both [v7] and [v8].
+
+  **BREAKING CHANGE**:
+
+  The change most likely to impact `sku` consumers is the requirement that [wildcards] (`*`) now must specify a key name, just like [path parameters] (`:`). In most cases this should be a simple migration: `/home/*` -> `/home/*rest`.
+
+  It is _highly recommended_ to review all routes configured in your application and test navigation to these routes to ensure they still function as expected.
+
+  [v7]: https://github.com/pillarjs/path-to-regexp/releases/tag/v7.0.0
+  [v8]: https://github.com/pillarjs/path-to-regexp/releases/tag/v8.0.0
+  [wildcards]: https://github.com/pillarjs/path-to-regexp#wildcard
+  [path parameters]: https://github.com/pillarjs/path-to-regexp#parameters
+
+- `lint`: Skip the TypeScript check when file paths are provided ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  Previously, `sku lint <path>` ran ESLint and Prettier on the given paths but still ran TypeScript across the _entire project_. This is because TypeScript ignores your `tsconfig.json` when filenames are passed explicitly, so the check can't be scoped to a single path. This unexpected behaviour has now been removed.
+
+  **BREAKING CHANGE**:
+
+  `sku` now skips the TypeScript check entirely when a file path is provided. To replicate the previous behaviour, run `tsc` manually first:
+
+  ```diff
+  {
+    "scripts": {
+  -    "lint-path": "sku lint <path>"
+  +    "lint-path": "tsc && sku lint <path>"
+    }
+  }
+  ```
+
+- `storybook`: Drop support for Storybook v7, v8 and v9 ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  `sku`'s `@storybook/react-webpack5` peer dependency range no longer includes `^7.0.0 || ^8.0.0 || ^9.0.0`. `^10.0.0` is now the only supported version range. Consumers must upgrade `@storybook/react-wepback5` and any other Storybook-related dependencies to at least v10.
+
+  Please refer to the [Storybook v10 migration guide] for breaking changes as well as guidance on automatically upgrading your Storybook to v10.
+
+  [Storybook v10 migration guide]: https://storybook.js.org/docs/10/releases/migration-guide
+
+- `config`: Deprecate CommonJS `module.exports` format for sku configs ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  Sku config files must now be ESM syntax. If CommonJS is used, `sku` will display a banner and exit.
+
+  ```diff
+  -module.exports = {
+  +export default {
+    ...,
+  };
+  ```
+
+- `configure`: Remove automatic `.eslintignore` migration ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  Automatic `.eslintignore` migration was added in sku v14 as part of the migration to ESLint v9's flat config format. This automatic migration logic no longer serves a purpose for most sku consumers, so it has been removed.
+
+  **BREAKING CHANGE**:
+
+  Consumers upgrading from sku v13 or older should first migrate to v14 or v15 before attempting to migrate to v16.
+
+- `deps`: Drop support for `vitest` versions below `4.1.0` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  `sku` no longer supports `vitest` versions below `4.1.0`. Consumers that use `vitest` must upgrade their `vitest` dependency to `4.1.0` or later.
+
+- `format`: Throws if Prettier cannot complete formatting (invalid syntax, missing config, etc.) ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  Previously, `sku format` would silently fail if Prettier was unable to complete formatting due to invalid syntax, missing config, etc. This has now been changed to throw an error.
+
+- `init`: Remove `init` command ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  The `init` command was deprecated in v15.0.0 and is now removed.
+  To create a new `sku` project, use `@sku-lib/create`.
+
+- `lint|format`: Promote `package.json` key sorting lint rule from `warn` to `error` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  Unsorted keys in `package.json` will now be treated as errors. Running `sku format` will automatically fix this error.
+
+- `pre-commit`: Remove `pre-commit` command ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  The `pre-commit` command saw very little use and bundled `lint-staged` (and its many transitive dependencies) into every `sku` install. Setting this up yourself is straightforward and gives you full control over which commands run before each commit, so this feature has been removed.
+
+  Sku's pre-commit hook documentation has been updated to support projects wanting to continue using this feature. See the [pre-commit hook documentation](https://seek-oss.github.io/sku/docs/extra-features#pre-commit-hook) for a full migration guide.
+
+- `start-srr`: SSR server now accessible via webpack dev server ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  When running `sku start-ssr`, users would previously access the SSR server directly. Static assets would then be loaded from the webpack dev server on a separate host.
+  `sku start-ssr` will now proxy requests from the webpack dev server to the consumer's app (the SSR server), allowing the dev server to act as a single entrypoint.
+
+  **BREAKING CHANGE**:
+
+  When starting the dev server consumers may notice some changes:
+
+  - A new port used when opening the browser window
+  - Changes to the path used when loading assets
+
+  See [Development server entry] for more information.
+
+  [Development server entry]: https://seek-oss.github.io/sku/docs/server-rendering#development-server-entry
+
+- `storybook`: Publish Storybook config as ESM-only ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  The Storybook config available via the `sku/config/storybook` entrypoint is now published as ESM-only and requires a version of Storybook that supports ESM config. This change is coupled with dropping support for older Storybook versions, so a compatible (ESM-supporting) version is guaranteed as part of the required Storybook upgrade.
+
+- `telemetry`: Remove interop for very old versions of `@seek/sku-telemetry` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  `sku` is no longer compatible with `@seek/sku-telemetry` versions below v1.3.0. v1.3.0 was released almost 6 years ago so most consumers are unlikely to be affected.
+
+- `vite`: Align build output file names with webpack conventions ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  Chunk and asset file names generated by `vite` builds have been updated to more closely align with webpack naming conventions.
+
+  **BREAKING CHANGE**:
+
+  Relying on specific output file names is brittle and strongly discouraged — if you do, verify that any dependent systems still work as expected.
+
+- `webpack`: Remove deprecated default export from `sku/webpack-plugin` entrypoint ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  **BREAKING CHANGE**:
+
+  The named export `SkuWebpackPlugin` is now the only export provided by the `sku/webpack-plugin` entrypoint.
+
+  ```diff
+  -import SkuWebpackPlugin from 'sku/webpack-plugin';
+  +import { SkuWebpackPlugin } from 'sku/webpack-plugin';
+  ```
+
+- `webpack`: Replace `cssnano` with `lightningcss` for CSS minification ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  Both Webpack and Vite apps now use `lightningcss` for CSS minification.
+
+  **BREAKING CHANGE**:
+
+  The structure of minified CSS output by webpack apps has changed, though the resulting styles should be unaffected. We recommend testing a production build to confirm.
+
+### Minor Changes
+
+- `configure`: Display a warning banner when React 18 is detected ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  Sku fully supports React 19 and it is recommended for use. A warning banner will be displayed when React 18 is detected to encourage applications to upgrade.
+
+- `deps`: Update `prettier` dependency from `~3.8.0` to `~3.9.0` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  This change may result in some code formatting changes. Please review [the Prettier 3.9.0 release notes].
+
+  [the Prettier 3.9.0 release notes]: https://prettier.io/blog/2026/06/27/3.9.0
+
+- `lint`: Run all lint checks instead of bailing on the first failure ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  Previously, a single failing lint check would halt the entire process, so you'd only see errors from the first check to fail and would have to fix them before any other errors surfaced.
+
+  To surface everything at once, `sku` now runs all lint checks even when some fail. You'll see errors from every check in a single run, and the process still exits with a non-zero code if any errors are found.
+
+- `vite`: Enable support for configuring a public assets directory via the `public` option in sku config ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  Previously, the [`public`] configuration option was only supported in Webpack apps. It is now also supported in Vite apps.
+
+  [`public`]: https://seek-oss.github.io/sku/docs/configuration#public
+
+### Patch Changes
+
+- `config`: Use async `jiti` API to load sku config asynchronously ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Unpin `webpack-dev-server` dependency ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  [`webpack-dev-server@5.2.1`] changed dev server behaviour to be more secure when handling cross-origin requests. This resulted in CORS errors in sku SSR apps during local development. The `webpack-dev-server` dependency version was restricted to older versions in `sku@14.8.0` to temporarily mitigate this issue.
+
+  This issue has now been resolved, and the dependency has been unpinned. SSR consumers that were overriding `webpack-dev-server` to a specific version in their `package.json` should now be able to remove such restrictions.
+
+  [`webpack-dev-server@5.2.1`]: https://github.com/webpack/webpack-dev-server/releases/tag/v5.2.1
+  [`sku@14.8.0`]: https://github.com/seek-oss/sku/releases/tag/sku%4014.8.0
+
+- `deps`: Move `rolldown` to a dev dependency ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Replace `cross-spawn` with `tinyexec` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Replace `death` package with internal implementation ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Update `vite-plugin-cjs-interop` dependency from `^3.0.0` to `^4.0.3` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Replace `escape-string-regexp` dependency with native `RegExp.escape` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Replace `debug` with `obug` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Update `@vanilla-extract/vite-plugin` dependency to `^5.2.5` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Replace `find-up` with `empathic` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Replace `pretty-ms` dependency with native `Intl.DurationFormat` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Replace `open` with `tiny-open` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `deps`: Memoize route matching, replace `nano-memoize` dependency with `memoize` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+- `jest`: Convert internal file mock to ESM ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  The internal file mock used by sku to mock asset imports in Jest tests has been converted to ESM
+
+- `loadable`: Ship `sku/@loadable/component` as compiled JavaScript instead of TypeScript source ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  This entrypoint previously resolved to an uncompiled `.ts` file. It now resolves to a compiled `.mjs` file.
+
+- `vite`: Apply `dangerouslySetViteConfig` after internal sku config ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
+  Changes made in `dangerouslySetViteConfig` will now be applied after `sku`'s internal vite config. This ensures user-configured overrides are honored regardless of the order of `sku`'s internal vite plugins.
+
+- Updated dependencies [[`a5bd7bf`](https://github.com/seek-oss/sku/commit/a5bd7bffc3ec0e1b2a3a7cbcf07b32556860ab44)]:
+  - @sku-lib/vite@2.0.2
+
 ## 15.15.5
 
 ### Patch Changes

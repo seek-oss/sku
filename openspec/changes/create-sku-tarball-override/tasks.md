@@ -17,8 +17,7 @@
 - [x] 3.2 Pass `SKU_CREATE_STRICT=1` (or equivalent) for create integration runs
 - [x] 3.3 Thread env through `@sku-private/testing-library` create helper if needed
 - [x] 3.4 Remove `linkWorkspacePackages` / `packages: ['../../packages/*']` harness used only for local sku
-- [x] 3.5 Assert create fails under strict when format would fail (or equivalent coverage)
-- [x] 3.6 Update snapshots if package.json / outputs change under tarball install
+- [x] 3.5 Update snapshots if package.json / outputs change under tarball install
 
 ## 4. Release
 

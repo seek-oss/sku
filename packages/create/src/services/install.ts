@@ -28,6 +28,7 @@ export const installDependencies = async (
 
   const devDeps = [
     ...COMMON_DEV_DEPENDENCIES,
+    // Internal/test-only: install sku from a caller-supplied specifier (e.g. packed tarball).
     process.env.SKU_CREATE_SKU_SPECIFIER ?? 'sku',
   ];
   if (template === 'vite') {

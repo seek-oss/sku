@@ -102,6 +102,9 @@ exports[`sku-create vite > should create package.json 1`] = `
     "sku": "VERSION_IGNORED",
     "vitest": "VERSION_IGNORED",
   },
+  "imports": {
+    "#src/*": "./src/*",
+  },
   "name": "new-project",
   "packageManager": "pnpm@11.VERSION_IGNORED",
   "private": true,
@@ -131,8 +134,11 @@ ignorePatchFailures: false
 minimumReleaseAge: 4320 # 3 days
 minimumReleaseAgeExclude:
   - '@braid-design-system/*'
+  - '@capsizecss/*'
   - '@seek/*'
   - '@sku-lib/*'
+  - '@vanilla-extract/*'
+  - '@vocab/*'
   - braid-design-system
   - browserslist-config-seek
   - eslint-config-seek
@@ -483,6 +489,9 @@ exports[`sku-create webpack > should create package.json 1`] = `
     "@vanilla-extract/css": "VERSION_IGNORED",
     "sku": "VERSION_IGNORED",
   },
+  "imports": {
+    "#src/*": "./src/*",
+  },
   "name": "new-project",
   "packageManager": "pnpm@11.VERSION_IGNORED",
   "private": true,
@@ -511,8 +520,11 @@ ignorePatchFailures: false
 minimumReleaseAge: 4320 # 3 days
 minimumReleaseAgeExclude:
   - '@braid-design-system/*'
+  - '@capsizecss/*'
   - '@seek/*'
   - '@sku-lib/*'
+  - '@vanilla-extract/*'
+  - '@vocab/*'
   - braid-design-system
   - browserslist-config-seek
   - eslint-config-seek

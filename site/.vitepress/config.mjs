@@ -22,7 +22,10 @@ export default defineConfig({
       target: 'es2022',
     },
   },
-  head: [['link', { rel: 'icon', href: '/sku/favicon.ico' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/sku/favicon.ico' }],
+    ['script', { src: '/sku/docsify-redirect.js' }],
+  ],
   themeConfig: {
     logo: '/logo/logo.png',
     siteTitle: false,

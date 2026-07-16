@@ -1,5 +1,14 @@
 # pnpm-plugin-sku
 
+## 0.2.0
+
+### Minor Changes
+
+- Add the following scopes to `minimumReleaseAgeExclude`: ([#1657](https://github.com/seek-oss/sku/pull/1657))
+  - `@capsizecss/*`
+  - `@vanilla-extract/*`
+  - `@vocab/*`
+
 ## 0.1.0
 
 ### Minor Changes

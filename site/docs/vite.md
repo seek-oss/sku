@@ -240,7 +240,7 @@ export default function (server) {
 }
 ```
 
-> [!TIP]
+> [!NOTE]
 > Currently only JavaScript middleware is supported.
 
 [`use`]: https://github.com/senchalabs/connect#use-middleware
@@ -306,7 +306,7 @@ See [the importing image assets docs] for more info.
 Importing SVG files with no query parameters has different behaviour in webpack and Vite.
 SVG imports within your application will need to be updated in order to function correctly with Vite.
 
-> [!TIP]
+> [!IMPORTANT]
 > Your application must be on at least [sku v15.13.0] in order to use the `raw`, `url` and `inline` query parameters described below.
 
 The simplest way to migrate is to add the `raw` query parameter to all SVG imports in your codebase, which will import the raw SVG markup as a string in both webpack and Vite. This can be done automatically with the `svg-import-query-param` codemod:

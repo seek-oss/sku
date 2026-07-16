@@ -1,0 +1,28 @@
+schema: spec-driven
+
+# Injected into OpenSpec planning. Keep short — stack/layout live in CONTRIBUTING.md.
+context: |
+  sku is a SEEK front-end development toolkit.
+  See CONTRIBUTING.md for setup, testing, and docs.
+
+  OpenSpec:
+  - Complements Changesets and Docsify docs; does not replace them
+  - Specs are delta-first by domain; do not backfill the whole codebase
+  - Prefer Lite mode (short behavior-first specs); scale rigor only for high-risk work
+  - AI tool adapters are local-only; never commit them
+
+rules:
+  proposal:
+    - One intent in a sentence; keep under ~300 words
+    - Include Non-goals; omit fluff and background the team already knows
+    - State public API / breaking impact; note changeset and/or docs/docs if needed
+  specs:
+    - Default to Lite: few requirements, only scenarios that catch real risk
+    - One SHALL/MUST per requirement; observable behavior only — no code, APIs internals, or libraries
+    - Prefer ADDED/MODIFIED/REMOVED deltas; reuse existing domains
+    - Happy path plus the failure/edge cases that would hurt if missed — not exhaustive matrices
+    - Put how/why in design.md or tasks.md, not in requirements
+  design:
+    - Skip unless architecture is non-obvious; keep short when present
+  tasks:
+    - Small checklist only; include plop, changeset, and docs when they apply

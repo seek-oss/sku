@@ -11,7 +11,8 @@ const DEPENDENCIES = [
 
 const COMMON_DEV_DEPENDENCIES = [
   '@vanilla-extract/css',
-  'sku',
+  // Internal/test-only: install sku from a caller-supplied specifier (e.g. packed tarball).
+  process.env.SKU_CREATE_SKU_SPECIFIER ?? 'sku',
   '@types/react',
   '@types/react-dom',
 ];

@@ -1,10 +1,14 @@
 import { spawn } from 'node:child_process';
 import { getRunCommand } from '@sku-private/utils';
 
+const isStrict = () =>
+  // Internal/test-only: fail create when format cannot run or exits non-zero.
+  Boolean(process.env.SKU_CREATE_STRICT);
+
 export const formatProject = async (projectPath: string): Promise<void> => {
   console.log('🎨 Formatting project...');
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const formatCommand = getRunCommand('format');
     const [command, ...args] = formatCommand.split(' ');
 
@@ -16,17 +20,31 @@ export const formatProject = async (projectPath: string): Promise<void> => {
     child.on('close', (code) => {
       if (code === 0) {
         console.log('✅ Project formatted successfully');
-      } else if (code === 1) {
-        console.log('⚠️ Formatting completed with warnings');
-      } else {
-        console.warn(`⚠️ Formatting failed with exit code ${code}`);
+        resolve();
+        return;
       }
-      resolve();
+
+      if (!isStrict()) {
+        if (code === 1) {
+          console.log('⚠️ Formatting completed with warnings');
+        } else {
+          console.warn(`⚠️ Formatting failed with exit code ${code}`);
+        }
+        resolve();
+        return;
+      }
+
+      reject(new Error(`format failed with exit code ${code}`));
     });
 
     child.on('error', (error) => {
-      console.warn(`⚠️ Failed to run format command: ${error.message}`);
-      resolve();
+      if (!isStrict()) {
+        console.warn(`⚠️ Failed to run format command: ${error.message}`);
+        resolve();
+        return;
+      }
+
+      reject(error);
     });
   });
 };

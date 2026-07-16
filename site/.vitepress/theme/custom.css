@@ -18,7 +18,7 @@
     rgba(248, 248, 248, 0.9) 100%
   );
   --vp-home-hero-image-filter: blur(44px);
-  
+
   scrollbar-gutter: stable;
 }
 

@@ -28,10 +28,15 @@ vi.setConfig({
 const projectName = 'new-project';
 const projectDirectory = fixturePath(projectName);
 
-let pack: Awaited<ReturnType<typeof createSkuTarball>>;
+let pack: Awaited<ReturnType<typeof packSku>>;
 let createEnv: NodeJS.ProcessEnv;
 
-const createSkuTarball = async () => {
+/**
+ * Packs the local `packages/sku` workspace into a temporary `.tgz` so create
+ * tests can install sku via `SKU_CREATE_SKU_SPECIFIER` (`sku@file:…`) instead
+ * of the published registry package.
+ */
+const packSku = async () => {
   const packDestination = await fs.mkdtemp(
     path.join(os.tmpdir(), 'sku-create-pack-'),
   );
@@ -49,14 +54,13 @@ const createSkuTarball = async () => {
   }
 
   return {
-    packDestination,
     tarballPath: path.join(packDestination, tarball),
     remove: () => fs.rm(packDestination, { recursive: true, force: true }),
   };
 };
 
 beforeAll(async () => {
-  pack = await createSkuTarball();
+  pack = await packSku();
 
   createEnv = {
     SKU_CREATE_SKU_SPECIFIER: `sku@file:${pack.tarballPath}`,

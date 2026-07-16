@@ -69,7 +69,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  pack.remove();
+  await pack.remove();
 });
 
 describe('template flag', () => {

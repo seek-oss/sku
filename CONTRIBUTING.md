@@ -124,9 +124,9 @@ Specs and change folders under `openspec/` are the shared contract. Stored as pl
 
 OpenSpec is **not required** for changes, however if changing features that have existing specifications please try to update or at-least delete specifications that are no-longer accurate.
 
-**When OpenSpec might be useful** for public API changes, new CLI commands or codemods, architectural shifts, and other behavior that needs strong visibility of requirements.
+**When OpenSpec might be useful**: for public API changes, new CLI commands or codemods, architectural shifts, and other behavior that needs strong visibility of requirements.
 
-**When OpenSpec might not be useful** for typos, dependency bumps, Renovate PRs, and trivial one-file fixes.
+**When OpenSpec might not be useful**: for typos, dependency bumps, Renovate PRs, and trivial one-file fixes.
 
 ### Layout
 

@@ -216,7 +216,7 @@ describe.each(['webpack', 'vite', 'vite-ssr'])('sku-create %s', (template) => {
         'utf-8',
       );
 
-      expect(skuConfig).toContain("renderType: 'server-side-rendered'");
+      expect(skuConfig).toContain("buildType: 'ssr'");
       expect(routes).toContain('export function createRoutes');
       expect(server).toContain('export const routes');
       expect(server).toContain('createRoutes');
@@ -231,16 +231,13 @@ describe.each(['webpack', 'vite', 'vite-ssr'])('sku-create %s', (template) => {
     },
   );
 
-  it.runIf(template === 'vite')(
-    'should not set renderType server-side-rendered',
-    async () => {
-      const skuConfig = await fs.readFile(
-        fixturePath(projectName, 'sku.config.ts'),
-        'utf-8',
-      );
-      expect(skuConfig).not.toContain("renderType: 'server-side-rendered'");
-    },
-  );
+  it.runIf(template === 'vite')('should not set buildType ssr', async () => {
+    const skuConfig = await fs.readFile(
+      fixturePath(projectName, 'sku.config.ts'),
+      'utf-8',
+    );
+    expect(skuConfig).not.toContain("buildType: 'ssr'");
+  });
 
   it('should update the pnpm-workspace.yaml', async () => {
     const rootFile = await fs.readFile(

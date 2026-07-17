@@ -2,7 +2,7 @@
 
 This project is powered by [sku](https://github.com/seek-oss/sku), [braid](https://github.com/seek-oss/braid-design-system) and built with [React](https://facebook.github.io/react).
 
-It uses **Vite SSR**: full-document streaming and `hydrateRoot(document)` — not static `#app` hydrate.
+It uses **Vite SSR**: full-document streaming and `hydrateRoot(document)`.
 
 > **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet.
 

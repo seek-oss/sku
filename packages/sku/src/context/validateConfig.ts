@@ -59,19 +59,16 @@ export default (skuConfig: SkuConfig) => {
     );
   }
 
-  if (
-    skuConfig.renderType === 'server-side-rendered' &&
-    skuConfig.bundler !== 'vite'
-  ) {
+  if (skuConfig.buildType === 'ssr' && skuConfig.bundler !== 'vite') {
     errors.push(
       `🚫 '${strong(
-        'renderType: server-side-rendered',
+        'buildType: ssr',
       )}' is only supported with the Vite bundler.`,
     );
   }
 
   if (
-    skuConfig.renderType === 'server-side-rendered' &&
+    skuConfig.buildType === 'ssr' &&
     skuConfig.bundler === 'vite' &&
     skuConfig.publicPath &&
     (/^https?:\/\//i.test(skuConfig.publicPath) ||

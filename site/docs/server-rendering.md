@@ -1,6 +1,6 @@
 # Server rendering
 
-Sku’s server-side rendering is **Vite SSR**: a high-level API on `bundler: 'vite'` + `renderType: 'server-side-rendered'`, built on [React Router Data Mode](https://reactrouter.com/start/modes#data). Sku owns the HTTP server, Document shell, streaming, hydration, and CSP headers. Use `sku start` / `sku build` (same as static Vite).
+Sku’s server-side rendering is **Vite SSR**: a high-level API on `bundler: 'vite'` + `buildType: 'ssr'`, built on [React Router Data Mode](https://reactrouter.com/start/modes#data). Sku owns the HTTP server, Document shell, streaming, hydration, and CSP headers. Use `sku start` / `sku build` (same as static Vite).
 
 > **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
 
@@ -18,7 +18,7 @@ cd my-app
 pnpm start
 ```
 
-The `vite-ssr` template scaffolds `bundler: 'vite'`, `renderType: 'server-side-rendered'`, a relative `publicPath`, and the required named exports (`routes`, `onRequest`, `middleware`, `onHydrate`) at the default entry paths. Interactive create also offers **Vite SSR** as a distinct choice from static **Vite**.
+The `vite-ssr` template scaffolds `bundler: 'vite'`, `buildType: 'ssr'`, a relative `publicPath`, and the required named exports (`routes`, `onRequest`, `middleware`, `onHydrate`) at the default entry paths. Interactive create also offers **Vite SSR** as a distinct choice from static **Vite**.
 
 ### React Router Data Mode
 
@@ -35,7 +35,7 @@ import type { SkuConfig } from 'sku';
 
 export default {
   bundler: 'vite',
-  renderType: 'server-side-rendered',
+  buildType: 'ssr',
   publicPath: '/', // relative only — absolute / CDN URLs are rejected
   port: 3000,
 } satisfies SkuConfig;
@@ -228,7 +228,7 @@ import type { SkuConfig } from 'sku';
 
 export default {
   bundler: 'vite',
-  renderType: 'server-side-rendered',
+  buildType: 'ssr',
   devServerMiddleware: './dev-middleware.js',
 } satisfies SkuConfig;
 ```
@@ -434,7 +434,7 @@ High-level guide for moving a **static** sku app (webpack or Vite SSG) to Vite S
 
 #### Requirements
 
-- Vite SSR is Vite-only: `bundler: 'vite'` + `renderType: 'server-side-rendered'`
+- Vite SSR is Vite-only: `bundler: 'vite'` + `buildType: 'ssr'`
 - Use a **relative** `publicPath` (e.g. `/`) — absolute / CDN URLs are not supported
 
 #### Limitations
@@ -443,7 +443,7 @@ This guide covers the **sku** surface only (config, entries, providers, middlewa
 
 #### Config and commands
 
-- Set `bundler: 'vite'` and `renderType: 'server-side-rendered'`
+- Set `bundler: 'vite'` and `buildType: 'ssr'`
 - Prefer scaffolding with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or mirror that config
 - Use `sku start` / `sku build` (same commands as static Vite) — do **not** introduce `start-ssr` / `build-ssr`
 - Drop static-only config such as `renderEntry` / `src/render.tsx` and environments-driven static HTML generation for the SSR path
@@ -491,7 +491,7 @@ The older SSR API was significantly lower-level and required apps to introduce a
 
 #### Requirements
 
-- Switch to `bundler: 'vite'` + `renderType: 'server-side-rendered'`
+- Switch to `bundler: 'vite'` + `buildType: 'ssr'`
 - Relative `publicPath` only
 
 #### Limitations
@@ -500,10 +500,10 @@ Covers the **sku** migration surface only. Deploy/process/infra changes are out 
 
 #### Config and commands
 
-- Set `renderType: 'server-side-rendered'` and `bundler: 'vite'`
+- Set `buildType: 'ssr'` and `bundler: 'vite'`
 - Replace `sku start-ssr` / `sku build-ssr` with `sku start` / `sku build`
 - Production becomes `node dist/server/server.js` (sibling `client/` + `server/` under the build target) — not webpack’s single `dist/server.js` layout
-- `renderType` set means `-ssr` commands are rejected
+- `buildType` set means `-ssr` commands are rejected
 
 #### Routes and request entries
 

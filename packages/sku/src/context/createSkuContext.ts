@@ -189,19 +189,6 @@ export const createSkuContext = async ({
     setupTests: getSetupTests(skuConfig.setupTests),
   };
 
-  if (skuConfig.renderType === 'server-side-rendered') {
-    if (!existsSync(paths.serverEntry)) {
-      throw new Error(
-        `${paths.serverEntry} does not exist. Vite SSR apps must provide a 'serverEntry' exporting named 'routes', 'onRequest', and 'middleware'.`,
-      );
-    }
-    if (!existsSync(paths.clientEntry)) {
-      throw new Error(
-        `${paths.clientEntry} does not exist. Vite SSR apps must provide a 'clientEntry' exporting named 'routes' and 'onHydrate'.`,
-      );
-    }
-  }
-
   const hosts = skuConfig.hosts;
   const port = {
     client: portArg || skuConfig.port,
@@ -259,7 +246,7 @@ export const createSkuContext = async ({
 
   return {
     bundler: skuConfig.bundler,
-    renderType: skuConfig.renderType,
+    buildType: skuConfig.buildType,
     testRunner: skuConfig.testRunner,
     configPath: appConfigPath,
     publicPath,

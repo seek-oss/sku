@@ -24,8 +24,6 @@
         "__sku_alias__renderEntry",
         "__sku_alias__serverEntry",
         "__sku_alias__webpackStats",
-        "#sku-vite-ssr-server-entry",
-        "#sku-vite-ssr-client-entry",
       ],
     },
     "packages/babel-plugin-display-name": {

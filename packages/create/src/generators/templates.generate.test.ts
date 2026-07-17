@@ -15,7 +15,7 @@ describe('generateTemplateFiles', () => {
 
     const skuConfig = await fixture.readFile('sku.config.ts', 'utf8');
     expect(skuConfig).toContain("bundler: 'vite'");
-    expect(skuConfig).toContain("renderType: 'server-side-rendered'");
+    expect(skuConfig).toContain("buildType: 'ssr'");
     expect(skuConfig).toContain("publicPath: '/'");
     expect(skuConfig).not.toContain('renderEntry');
 
@@ -49,7 +49,7 @@ describe('generateTemplateFiles', () => {
     await fixture.rm();
   });
 
-  it('should not set renderType server-side-rendered on static vite template', async ({
+  it('should not set buildType ssr on static vite template', async ({
     expect,
   }) => {
     const fixture = await createFixture({});
@@ -61,7 +61,7 @@ describe('generateTemplateFiles', () => {
 
     const skuConfig = await fixture.readFile('sku.config.ts', 'utf8');
     expect(skuConfig).toContain("bundler: 'vite'");
-    expect(skuConfig).not.toContain("renderType: 'server-side-rendered'");
+    expect(skuConfig).not.toContain("buildType: 'ssr'");
     expect(skuConfig).toContain('renderEntry');
     expect(await fixture.exists('src/render.tsx')).toBe(true);
     expect(await fixture.exists('src/client.tsx')).toBe(true);

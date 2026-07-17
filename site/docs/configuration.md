@@ -47,19 +47,19 @@ Default: `webpack`
 
 The bundler that sku uses to build the application.
 
-Vite supports static or server-rendered apps via `renderType: 'server-side-rendered'`.
+Vite supports static or server-rendered apps via `buildType: 'ssr'`.
 See [Vite support](./vite) for details.
 
-## renderType
+## buildType
 
-Type: `'server-side-rendered' | 'static-generated'`
+Type: `'ssr' | 'static'`
 
-Default: 'static-generated'
+Default: 'static'
 
 Selects request-time SSR or static generation.
 
-- `'server-side-rendered'` requires `bundler: 'vite'` and required `serverEntry` / `clientEntry` each exporting named `routes` (`RouteObject[]`), plus server `onRequest` / `middleware` and client `onHydrate`. Use `sku start` / `sku build`. **Experimental — not for production** (available for testing; see [Server rendering](./server-rendering.md)).
-- `'static-generated'` (or omit) keeps the existing static rendering path.
+- `'ssr'` requires `bundler: 'vite'` and required `serverEntry` / `clientEntry` each exporting named `routes` (`RouteObject[]`), plus server `onRequest` / `middleware` and client `onHydrate`. Use `sku start` / `sku build`. **Experimental — not for production** (available for testing; see [Server rendering](./server-rendering.md)).
+- `'static'` (or omit) keeps the existing static rendering path.
 
 See [Server rendering](./server-rendering.md).
 
@@ -382,7 +382,7 @@ Default: `false`
 
 Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
 
-Supported for static Vite, webpack, and Vite SSR (`renderType: 'server-side-rendered'`) via `sku start`.
+Supported for static Vite, webpack, and Vite SSR (`buildType: 'ssr'`) via `sku start`.
 
 ## initialPath
 
@@ -520,7 +520,7 @@ Default: `/`
 
 The URL all the static assets of the app are accessible under.
 
-For SSR (`renderType: 'server-side-rendered'`) the `publicPath` must be relative (e.g. `/` or `/static/`). Absolute `http(s)` / CDN URLs are not supported.
+For SSR (`buildType: 'ssr'`) the `publicPath` must be relative (e.g. `/` or `/static/`). Absolute `http(s)` / CDN URLs are not supported.
 
 ## renderEntry
 

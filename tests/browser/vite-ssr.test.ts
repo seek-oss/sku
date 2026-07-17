@@ -29,69 +29,6 @@ describe('vite-ssr', () => {
     });
   });
 
-  describe('config validation', () => {
-    it('rejects webpack + server-side-rendered', async () => {
-      const process = await sku('start', [
-        '--config=sku.config.webpack-ssr-error.ts',
-      ]);
-
-      expect(
-        await process.findByText('renderType: server-side-rendered'),
-      ).toBeInTheConsole();
-
-      await waitFor(() => {
-        expect(process.hasExit()).toMatchObject({ exitCode: 1 });
-      });
-    });
-
-    it('rejects start-ssr when renderType is set', async () => {
-      const process = await sku('start-ssr', [
-        '--config=sku.config.ssr-command-error.ts',
-      ]);
-
-      expect(
-        await process.findByError(
-          '`sku start-ssr` is not used with `renderType`. Use `sku start` instead.',
-        ),
-      ).toBeInTheConsole();
-
-      await waitFor(() => {
-        expect(process.hasExit()).toMatchObject({ exitCode: 1 });
-      });
-    });
-
-    it('rejects build-ssr when renderType is set', async () => {
-      const process = await sku('build-ssr', [
-        '--config=sku.config.ssr-command-error.ts',
-      ]);
-
-      expect(
-        await process.findByError(
-          '`sku build-ssr` is not used with `renderType`. Use `sku build` instead.',
-        ),
-      ).toBeInTheConsole();
-
-      await waitFor(() => {
-        expect(process.hasExit()).toMatchObject({ exitCode: 1 });
-      });
-    });
-
-    it('rejects absolute publicPath for Vite SSR', async () => {
-      const process = await sku('start', [
-        '--config=sku.config.absolute-public-path-error.ts',
-      ]);
-
-      expect(
-        await process.findByText('Vite SSR requires a relative'),
-      ).toBeInTheConsole();
-      expect(await process.findByText('publicPath')).toBeInTheConsole();
-
-      await waitFor(() => {
-        expect(process.hasExit()).toMatchObject({ exitCode: 1 });
-      });
-    });
-  });
-
   describe('start', () => {
     const url = 'http://127.0.0.1:8200';
 

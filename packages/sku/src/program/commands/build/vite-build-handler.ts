@@ -28,8 +28,7 @@ export const viteBuildHandler = async ({
 
     await viteService.build(skuContext);
 
-    const buildType =
-      skuContext.renderType === 'server-side-rendered' ? 'ssr' : 'static';
+    const buildType = skuContext.buildType ?? 'static';
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {
       status: 'success',
@@ -39,8 +38,7 @@ export const viteBuildHandler = async ({
 
     console.log(success(`Sku build complete in ${formatMs(timeTaken)}`));
   } catch (error) {
-    const buildType =
-      skuContext.renderType === 'server-side-rendered' ? 'ssr' : 'static';
+    const buildType = skuContext.buildType ?? 'static';
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {
       status: 'failed',

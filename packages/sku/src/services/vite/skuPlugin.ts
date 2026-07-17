@@ -27,8 +27,7 @@ export const skuPlugin = ({
   environment?: string;
 }): PluginOption[] => {
   const isViteSsr =
-    skuContext.bundler === 'vite' &&
-    skuContext.renderType === 'server-side-rendered';
+    skuContext.bundler === 'vite' && skuContext.buildType === 'ssr';
 
   return [
     configPlugin({ skuContext }),

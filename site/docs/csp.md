@@ -16,7 +16,7 @@ For Vite SSR you can also enable Report-Only:
 ```ts
 export default {
   bundler: 'vite',
-  renderType: 'server-side-rendered',
+  buildType: 'ssr',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://third-party.example.com'],
   cspReportOnlyEnabled: true,

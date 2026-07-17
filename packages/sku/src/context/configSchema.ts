@@ -49,9 +49,9 @@ const routes = {
 };
 
 export default validator.compile({
-  renderType: {
+  buildType: {
     type: 'enum',
-    values: ['server-side-rendered', 'static-generated'],
+    values: ['ssr', 'static'],
     optional: true,
   },
   clientEntry: {

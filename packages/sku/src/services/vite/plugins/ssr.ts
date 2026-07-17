@@ -5,12 +5,6 @@ import { makePluginName } from '../helpers/makePluginName.js';
 export const ssrPlugin = (skuContext: SkuContext): Plugin => ({
   name: makePluginName('ssr'),
   config: () => ({
-    resolve: {
-      alias: {
-        '#sku-vite-ssr-server-entry': skuContext.paths.serverEntry,
-        '#sku-vite-ssr-client-entry': skuContext.paths.clientEntry,
-      },
-    },
     define: {
       'import.meta.env.SKU_SSR_PORT': JSON.stringify(
         String(skuContext.port.client),

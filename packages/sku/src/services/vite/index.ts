@@ -19,8 +19,7 @@ export const viteService = {
   build: async (skuContext: SkuContext) => {
     const outDir = createOutDir(skuContext.paths.target);
     const isViteSsr =
-      skuContext.bundler === 'vite' &&
-      skuContext.renderType === 'server-side-rendered';
+      skuContext.bundler === 'vite' && skuContext.buildType === 'ssr';
 
     if (isViteSsr) {
       if (await exists(skuContext.paths.target)) {
@@ -68,7 +67,7 @@ export const viteService = {
 
     const isViteSsr =
       skuContextOverride.bundler === 'vite' &&
-      skuContextOverride.renderType === 'server-side-rendered';
+      skuContextOverride.buildType === 'ssr';
     const viteServer = isViteSsr
       ? (
           await createDevSsrServer({

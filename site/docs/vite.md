@@ -12,8 +12,8 @@ Sku supports Vite as an alternate to the Webpack bundler since v15.
 Vite support covers [static applications (SSG)][SSG] and opt-in [server-side rendering (SSR)][SSR].
 
 - Static apps use [`sku start`] and [`sku build`] as today.
-- Vite SSR apps set `bundler: 'vite'` and `renderType: 'server-side-rendered'`, then also use [`sku start`] / [`sku build`] (not `start-ssr` / `build-ssr`).
-- Webpack SSR continues to use [`sku start-ssr`] / [`sku build-ssr`] when `renderType` is unset.
+- Vite SSR apps set `bundler: 'vite'` and `buildType: 'ssr'`, then also use [`sku start`] / [`sku build`] (not `start-ssr` / `build-ssr`).
+- Webpack SSR continues to use [`sku start-ssr`] / [`sku build-ssr`] when `buildType` is unset.
 
 [`sku start`]: ./cli.md#start
 [`sku build`]: ./cli.md#build
@@ -25,7 +25,7 @@ Vite support covers [static applications (SSG)][SSG] and opt-in [server-side ren
 
 > **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change. See [Server rendering](./server-rendering.md).
 
-Set `renderType: 'server-side-rendered'` and export named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`). Prefer a shared `createRoutes(...)` factory so the trees stay hydration-compatible:
+Set `buildType: 'ssr'` and export named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`). Prefer a shared `createRoutes(...)` factory so the trees stay hydration-compatible:
 
 ```ts
 // src/routes.tsx
@@ -279,7 +279,7 @@ export default function (server) {
 }
 ```
 
-**Vite SSR** (`renderType: 'server-side-rendered'`) uses Express on the custom single-port server. The same config key receives the Express app, and is mounted **before** the server entry’s named `middleware` (then Vite, then HTML render). Production never loads this file — see [Server rendering → Middleware](./server-rendering.md#middleware).
+**Vite SSR** (`buildType: 'ssr'`) uses Express on the custom single-port server. The same config key receives the Express app, and is mounted **before** the server entry’s named `middleware` (then Vite, then HTML render). Production never loads this file — see [Server rendering → Middleware](./server-rendering.md#middleware).
 
 > [!NOTE]
 > Currently only JavaScript middleware is supported.

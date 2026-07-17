@@ -27,9 +27,9 @@ export const buildSsrAction = async ({
   stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
-  if (skuContext.renderType) {
+  if (skuContext.buildType) {
     throw new Error(
-      '`sku build-ssr` is not used with `renderType`. Use `sku build` instead.',
+      '`sku build-ssr` is not used with `buildType`. Use `sku build` instead.',
     );
   }
 

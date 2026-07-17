@@ -6,7 +6,7 @@ const defaultDecorator = <T>(a: T) => a;
 
 export default {
   bundler: 'webpack',
-  renderType: undefined,
+  buildType: undefined,
   testRunner: 'jest',
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',

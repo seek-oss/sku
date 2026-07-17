@@ -17,8 +17,7 @@ export const buildPlugin = ({
 }): PluginOption => {
   const outDir = createOutDir(skuContext.paths.target);
   const isViteSsr =
-    skuContext.bundler === 'vite' &&
-    skuContext.renderType === 'server-side-rendered';
+    skuContext.bundler === 'vite' && skuContext.buildType === 'ssr';
 
   return {
     name: makePluginName('build'),

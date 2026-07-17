@@ -1,18 +1,18 @@
 ## Context
 
-Vite SSR commands are blocked today. Webpack SSR uses Express `renderCallback`, string HTML, and CSP meta tags. This change adds a **Vite-only SSR product** selected by `renderType`, with sku owning the server, Document shell, streaming, assets, and CSP headers, and React Router Data Mode owning routing/data.
+Vite SSR commands are blocked today. Webpack SSR uses Express `renderCallback`, string HTML, and CSP meta tags. This change adds a **Vite-only SSR product** selected by `buildType`, with sku owning the server, Document shell, streaming, assets, and CSP headers, and React Router Data Mode owning routing/data.
 
 ## Goals / Non-Goals
 
-**Goals:** Vite SSR via `renderType`; dual-entry `routes` + request-entry contracts; full-document streaming + document hydrate; shell CSP headers; per-route + vocab chunks; create template + Migrating docs; experimental first release.
+**Goals:** Vite SSR via `buildType`; dual-entry `routes` + request-entry contracts; full-document streaming + document hydrate; shell CSP headers; per-route + vocab chunks; create template + Migrating docs; experimental first release.
 
-**Non-Goals:** Webpack mode for this renderType; Framework Mode / RSC; absolute/`CDN` `publicPath`; consumer Document; runtime route-tree matching; production listen-logging parity.
+**Non-Goals:** Webpack mode for this buildType; Framework Mode / RSC; absolute/`CDN` `publicPath`; consumer Document; runtime route-tree matching; production listen-logging parity.
 
 ## Decisions
 
-### 1. Mode selection via `renderType`
+### 1. Mode selection via `buildType`
 
-`renderType?: 'server-side-rendered' | 'static-generated'`. With Vite → `sku start` / `sku build`. Webpack + this renderType → error. `-ssr` when `renderType` is set → error. Webpack SSR without renderType keeps `start-ssr` / `build-ssr`.
+`buildType?: 'ssr' | 'static'`. With Vite → `sku start` / `sku build`. Webpack + this buildType → error. `-ssr` when `buildType` is set → error. Webpack SSR without buildType keeps `start-ssr` / `build-ssr`.
 
 ### 2. Data Mode, not Framework Mode
 
@@ -20,7 +20,9 @@ Vite SSR commands are blocked today. Webpack SSR uses Express `renderCallback`, 
 
 ### 3. Dual-entry `routes` + request entries
 
-Reuse `serverEntry` / `clientEntry`. Both MUST export `routes: RouteObject[]`. Server: `onRequest`, `middleware`. Client: `onHydrate`. Hard errors if missing. Trees MUST stay hydration-compatible (path/nesting/ids); implementations MAY diverge. Docs/template recommend shared `createRoutes(...)` — not a sku API; no runtime checker.
+Reuse `serverEntry` / `clientEntry`. Both MUST export `routes: RouteObject[]`. Server: `onRequest`, `middleware`. Client: `onHydrate`. Hard errors if required named exports are missing (no early file-existence gate). Trees MUST stay hydration-compatible (path/nesting/ids); implementations MAY diverge. Docs/template recommend shared `createRoutes(...)` — not a sku API; no runtime checker.
+
+Vite SSR request-entry wrappers MUST resolve consumer entries via the same aliases as static Vite: `__sku_alias__serverEntry` / `__sku_alias__clientEntry`. Do **not** introduce SSR-only module ids such as `#sku-vite-ssr-server-entry` / `#sku-vite-ssr-client-entry` — those were an earlier parallel scheme with no remaining technical need once `configPlugin` already maps the `__sku_alias__*` ids for all Vite modes.
 
 HTTP middleware (two layers; distinct from RR route `middleware`):
 
@@ -101,13 +103,13 @@ Docs warning + changeset: available for testing, not for production. No runtime 
 | -------------------------------- | --------------------------------------------------- |
 | Dual `routes` hydration mismatch | Docs + template `createRoutes`; no runtime checker  |
 | Shell-only CSP / late scripts    | Lazy single nonce; hash known bootstrap bodies      |
-| Absolute/`CDN` `publicPath`      | Config rejects; relative-only docs                  |
+| Absolute/`CDN` `publicPath`      | Config rejects; relative-only docs; no browser e2e  |
 | Mock deps ship in prod           | `devServerMiddleware` only; never from server entry |
 | Early production use             | Experimental docs + changeset                       |
 
 ## Migration Plan
 
-Opt-in via `renderType` + Vite. New apps: `--template vite-ssr`. Existing: Migrating in `server-rendering.md`. Webpack SSR: leave `renderType` unset. Rollback: remove `renderType`.
+Opt-in via `buildType` + Vite. New apps: `--template vite-ssr`. Existing: Migrating in `server-rendering.md`. Webpack SSR: leave `buildType` unset. Rollback: remove `buildType`.
 
 ## Open Questions
 

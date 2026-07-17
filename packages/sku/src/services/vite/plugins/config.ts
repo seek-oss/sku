@@ -17,8 +17,7 @@ export const configPlugin = ({
   skuContext: SkuContext;
 }): PluginOption => {
   const isViteSsr =
-    skuContext.bundler === 'vite' &&
-    skuContext.renderType === 'server-side-rendered';
+    skuContext.bundler === 'vite' && skuContext.buildType === 'ssr';
 
   const viteSsrOptimizeEntries = [
     skuContext.paths.serverEntry,

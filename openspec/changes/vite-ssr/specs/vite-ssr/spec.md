@@ -1,36 +1,36 @@
 ## ADDED Requirements
 
-### Requirement: Vite SSR mode is selected via renderType
+### Requirement: Vite SSR mode is selected via buildType
 
-Vite SSR MUST be enabled with `bundler: 'vite'` and `renderType: 'server-side-rendered'`, using `sku start` / `sku build`. Omitting `renderType` or using `static-generated` MUST leave static / existing webpack-SSR behaviour unchanged.
+Vite SSR MUST be enabled with `bundler: 'vite'` and `buildType: 'ssr'`, using `sku start` / `sku build`. Omitting `buildType` or using `static` MUST leave static / existing webpack-SSR behaviour unchanged.
 
-#### Scenario: renderType enables Vite SSR
+#### Scenario: buildType enables Vite SSR
 
-- **WHEN** config sets `bundler: 'vite'` and `renderType: 'server-side-rendered'`
+- **WHEN** config sets `bundler: 'vite'` and `buildType: 'ssr'`
 - **AND** required server and client entries export named `routes`
 - **THEN** `sku start` and `sku build` treat the project as a Vite SSR app
 
-#### Scenario: static-generated remains static
+#### Scenario: static remains static
 
-- **WHEN** config sets `renderType: 'static-generated'` (or omits `renderType` with today’s static default)
+- **WHEN** config sets `buildType: 'static'` (or omits `buildType` with today’s static default)
 - **THEN** sku does not treat the project as a Vite SSR app
 
-### Requirement: Webpack is rejected for server-side-rendered mode
+### Requirement: Webpack is rejected for ssr mode
 
-`renderType: 'server-side-rendered'` MUST only be valid with the Vite bundler.
+`buildType: 'ssr'` MUST only be valid with the Vite bundler. This edge case MUST NOT require a dedicated browser e2e fixture.
 
-#### Scenario: webpack plus server-side-rendered errors
+#### Scenario: webpack plus ssr errors
 
-- **WHEN** config sets webpack and `renderType: 'server-side-rendered'`
-- **THEN** sku fails stating that mode is not supported with webpack
+- **WHEN** config sets webpack and `buildType: 'ssr'`
+- **THEN** config validation fails stating that mode is not supported with webpack
 
-### Requirement: Suffixed SSR commands error when renderType is set
+### Requirement: Suffixed SSR commands error when buildType is set
 
-When `renderType` is set, `sku start-ssr` and `sku build-ssr` MUST fail. Consumers MUST use `sku start` and `sku build`.
+When `buildType` is set, `sku start-ssr` and `sku build-ssr` MUST fail. Consumers MUST use `sku start` and `sku build`. This edge case MUST NOT require a dedicated browser e2e fixture.
 
-#### Scenario: -ssr commands error when renderType is set
+#### Scenario: -ssr commands error when buildType is set
 
-- **WHEN** `renderType` is set and the user runs `sku start-ssr` or `sku build-ssr`
+- **WHEN** `buildType` is set and the user runs `sku start-ssr` or `sku build-ssr`
 - **THEN** the command fails and points to `sku start` / `sku build`
 
 ### Requirement: Production build emits sibling client and server directories
@@ -60,7 +60,7 @@ Both `serverEntry` and `clientEntry` MUST export named `routes` as `RouteObject[
 
 ### Requirement: Required server and client request exports
 
-Server entry MUST export `onRequest` and `middleware`; client entry MUST export `onHydrate`. Missing entry files or named exports MUST hard-error (no default fallback, no noops).
+Server entry MUST export `onRequest` and `middleware`; client entry MUST export `onHydrate`. Missing named exports MUST hard-error (no default fallback, no noops). Sku MUST NOT specially gate on entry file existence; a missing file fails via normal module resolution.
 
 `onRequest` MAY return `AppWrapper`, `language` (server Document vocab only), and `clientContext`. `onHydrate` receives `{ context }` only and MAY return `AppWrapper`. Sku MUST NOT forward `language` to the client. When `AppWrapper` is returned, sku MUST mount it as a pathless parent under the router above that side’s `routes`.
 
@@ -224,12 +224,12 @@ When `languages` is configured, sku MUST register the active vocab chunk from se
 
 ### Requirement: Vite SSR publicPath is relative only
 
-Vite SSR apps MUST use a relative `publicPath`. Absolute `http(s)` / CDN `publicPath` MUST fail.
+Vite SSR apps MUST use a relative `publicPath`. Absolute `http(s)` / CDN `publicPath` MUST fail at config validation. This edge case MUST NOT require a dedicated browser e2e fixture (unit / config-path coverage is enough).
 
 #### Scenario: Absolute publicPath rejected
 
 - **WHEN** Vite SSR is enabled with an absolute `http(s)` `publicPath`
-- **THEN** sku fails stating that Vite SSR requires a relative `publicPath`
+- **THEN** config validation fails stating that Vite SSR requires a relative `publicPath`
 
 ### Requirement: httpsDevServer works for Vite SSR development
 
@@ -254,7 +254,7 @@ When `httpsDevServer` is enabled, Vite SSR `sku start` MUST serve over HTTPS wit
 #### Scenario: Static vite create template unchanged
 
 - **WHEN** a user creates a project with the existing `vite` template
-- **THEN** it is not configured as `renderType: 'server-side-rendered'` by default
+- **THEN** it is not configured as `buildType: 'ssr'` by default
 
 ### Requirement: Vite SSR first release is documented as experimental
 

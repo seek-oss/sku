@@ -115,9 +115,9 @@ export interface SkuConfigBase {
   /**
    * Selects request-time SSR or the existing static generation behavior.
    *
-   * `'server-side-rendered'` (Vite SSR) is experimental and not for production use.
+   * `'ssr'` (Vite SSR) is experimental and not for production use.
    */
-  renderType?: 'server-side-rendered' | 'static-generated';
+  buildType?: 'ssr' | 'static';
 
   /**
    * The bundler that sku uses to build the application.

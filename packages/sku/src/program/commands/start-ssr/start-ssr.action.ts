@@ -9,9 +9,9 @@ export const startSsrAction = async ({
   stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
-  if (skuContext.renderType) {
+  if (skuContext.buildType) {
     throw new Error(
-      '`sku start-ssr` is not used with `renderType`. Use `sku start` instead.',
+      '`sku start-ssr` is not used with `buildType`. Use `sku start` instead.',
     );
   }
 

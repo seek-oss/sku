@@ -6,9 +6,9 @@ import {
   RouterProvider,
   type RouteObject,
 } from 'react-router';
-// Resolved by sku's Vite SSR plugin to the consumer client request entry.
-// eslint-disable-next-line import-x/no-unresolved
-import * as clientEntry from '#sku-vite-ssr-client-entry';
+// Resolved by sku's Vite config plugin to the consumer client request entry.
+ 
+import * as clientEntry from '__sku_alias__clientEntry';
 import Document from '../ssr/Document.js';
 import { requireNamedExport } from '../ssr/requireNamedExport.js';
 import type { SkuSsrOnHydrate } from '../ssr/types.js';

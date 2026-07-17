@@ -49,8 +49,6 @@ export default defineConfig([
         '__sku_alias__serverEntry',
         '__sku_alias__webpackStats',
         'virtual:sku/polyfills',
-        '#sku-vite-ssr-server-entry',
-        '#sku-vite-ssr-client-entry',
         '@vanilla-extract/css/adapter',
       ],
     },

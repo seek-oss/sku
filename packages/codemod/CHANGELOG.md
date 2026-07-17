@@ -1,5 +1,18 @@
 # @sku-lib/codemod
 
+## 1.5.0
+
+### Minor Changes
+
+- Add `migrate-root-resolution` codemod ([#1602](https://github.com/seek-oss/sku/pull/1602))
+
+  Migrates projects away from `sku`'s `rootResolution` feature to native [subpath imports](https://nodejs.org/api/packages.html#subpath-imports).
+  The codemod rewrites `src/...` imports to `#src/...`, and adds a `{ pathAliases: { "#src/*": "./src/*" } }` entry to your sku config.
+
+### Patch Changes
+
+- `deps`: Replace `debug` with `obug` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
 ## 1.4.0
 
 ### Minor Changes

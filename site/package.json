@@ -1,0 +1,16 @@
+{
+  "name": "@sku-private/site",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Documentation site for sku",
+  "scripts": {
+    "start": "vitepress dev",
+    "build": "vitepress build"
+  },
+  "author": "SEEK",
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

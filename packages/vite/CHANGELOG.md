@@ -1,5 +1,11 @@
 # @sku-lib/vite
 
+## 2.0.2
+
+### Patch Changes
+
+- `deps`: Replace `debug` with `obug` ([#1651](https://github.com/seek-oss/sku/pull/1651))
+
 ## 2.0.1
 
 ### Patch Changes

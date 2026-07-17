@@ -134,8 +134,11 @@ ignorePatchFailures: false
 minimumReleaseAge: 4320 # 3 days
 minimumReleaseAgeExclude:
   - '@braid-design-system/*'
+  - '@capsizecss/*'
   - '@seek/*'
   - '@sku-lib/*'
+  - '@vanilla-extract/*'
+  - '@vocab/*'
   - braid-design-system
   - browserslist-config-seek
   - eslint-config-seek
@@ -235,7 +238,7 @@ export function NextSteps({ environment }: NextStepsProps) {
 
                   <Text>
                     The{' '}
-                    <TextLink href="https://seek-oss.github.io/sku/#/">
+                    <TextLink href="https://seek-oss.github.io/sku/">
                       sku platform
                     </TextLink>{' '}
                     provides a number of tools to make development more
@@ -914,8 +917,11 @@ ignorePatchFailures: false
 minimumReleaseAge: 4320 # 3 days
 minimumReleaseAgeExclude:
   - '@braid-design-system/*'
+  - '@capsizecss/*'
   - '@seek/*'
   - '@sku-lib/*'
+  - '@vanilla-extract/*'
+  - '@vocab/*'
   - braid-design-system
   - browserslist-config-seek
   - eslint-config-seek
@@ -1013,7 +1019,7 @@ export function NextSteps({ environment }: NextStepsProps) {
 
                   <Text>
                     The{' '}
-                    <TextLink href="https://seek-oss.github.io/sku/#/">
+                    <TextLink href="https://seek-oss.github.io/sku/">
                       sku platform
                     </TextLink>{' '}
                     provides a number of tools to make development more

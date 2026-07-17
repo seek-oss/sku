@@ -11,6 +11,8 @@ yarn.lock
 .eslintcache
 yalc.lock
 .pnpm-store
+site/.vitepress/cache
+site/.vitepress/dist
 
 # AI Agents specific instructions are local-only for now. This may change in the future.
 .cursor/

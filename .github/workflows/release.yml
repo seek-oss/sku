@@ -8,11 +8,13 @@ on:
 
 jobs:
   release:
-    name: Publish & Deploy docs
+    name: Publish
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       id-token: write
+    outputs:
+      published: ${{ steps.changesets.outputs.published }}
     env:
       CI: true
     timeout-minutes: 15
@@ -38,17 +40,40 @@ jobs:
       - name: Build Sku
         run: pnpm build
 
-      # Ensure npm 11.5.1 or later is installed
-      - name: Install latest npm
-        run: npm install -g npm@latest
-
       - name: Create Release Pull Request or Publish to npm
+        id: changesets
         uses: changesets/action@v1
         with:
           version: pnpm run version
           publish: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.SEEK_OSS_CI_GITHUB_TOKEN }}
+
+      - name: Build docs
+        if: steps.changesets.outputs.published == 'true'
+        run: pnpm build:docs
+
+      - name: Upload docs artifact
+        if: steps.changesets.outputs.published == 'true'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site/.vitepress/dist
+
+  deploy-docs:
+    name: Deploy docs
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   snapshot:
     name: Publish snapshot version
@@ -77,10 +102,6 @@ jobs:
 
       - name: Build Sku
         run: pnpm build
-
-      # Ensure npm 11.5.1 or later is installed
-      - name: Install latest npm
-        run: npm install -g npm@latest
 
       - name: Publish
         uses: seek-oss/changesets-snapshot@9063bfcb495100964ee0912c5bcb30c4c434c1b3 # v0.3.2

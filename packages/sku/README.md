@@ -1,7 +1,7 @@
 [![npm](https://img.shields.io/npm/v/sku.svg?style=flat-square)](https://www.npmjs.com/package/sku)
 
 <br />
-<img src="https://github.com/seek-oss/sku/raw/master/docs/logo/logo.png?raw=true" alt="sku" title="sku" width="147" height="79" />
+<img src="https://github.com/seek-oss/sku/raw/master/site/public/logo/logo.png?raw=true" alt="sku" title="sku" width="147" height="79" />
 <br />
 
 Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [Vanilla Extract](https://vanilla-extract.style/), [ESLint](http://eslint.org/), [Prettier](https://prettier.io/) and [Jest](https://facebook.github.io/jest/).

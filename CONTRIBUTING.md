@@ -182,6 +182,73 @@ For advanced configuration, you may directly modify `playwright/browser.ts`.
 Codemods are tested via the `sku-codemod` E2E test suite.
 Input and output files are defined inline in the test file.
 
+## OpenSpec for Spec-Driven Development
+
+We use [OpenSpec](https://github.com/Fission-AI/OpenSpec) where useful to define and drive specification heavy features.
+Specs and change folders under `openspec/` are the shared contract. Stored as plain Markdown in git. AI slash commands are optional.
+
+### When to use it
+
+OpenSpec is **not required** for changes, however if changing features that have existing specifications please try to update or at-least delete specifications that are no-longer accurate.
+
+**When OpenSpec might be useful**: for public API changes, new CLI commands or codemods, architectural shifts, and other behavior that needs strong visibility of requirements.
+
+**When OpenSpec might not be useful**: for typos, dependency bumps, Renovate PRs, and trivial one-file fixes.
+
+### Layout
+
+| Path                       | Role                                                                        |
+| -------------------------- | --------------------------------------------------------------------------- |
+| `openspec/specs/`          | Current behavior (source of truth), filled in over time by archived changes |
+| `openspec/changes/<name>/` | Active work: `proposal.md`, `design.md`, `tasks.md`, and delta specs        |
+| `openspec/config.yaml`     | Project context for planning                                                |
+
+OpenSpec complements Changesets (release notes) and Vitepress docs (consumer docs). It does not replace them.
+
+### CLI (everyone)
+
+The CLI comes from `pnpm install` — you don't need to install OpenSpec globally.
+
+```sh
+pnpm openspec:list
+pnpm openspec:validate
+pnpm openspec:view
+# or: pnpm exec openspec <command>
+```
+
+### With an AI coding assistant
+
+Adapters (Cursor, Claude Code, GitHub Copilot, etc.) are **local only** and must not be committed.
+
+One-time setup after clone (pick your client):
+
+```sh
+pnpm openspec init --tools cursor
+# or: claude, github-copilot, …
+
+# or: just call init for the full list
+pnpm openspec init
+```
+
+Then in your AI chat (syntax varies slightly by tool):
+
+```text
+/opsx:propose <what you want>
+# review openspec/changes/…
+/opsx:apply
+/opsx:archive
+```
+
+Refresh local adapters after OpenSpec CLI upgrades with the `update` command.
+
+### Without AI
+
+1. Create `openspec/changes/<change-name>/` with `proposal.md`, delta specs under `specs/`, and `tasks.md` (and `design.md` when useful).
+2. Implement against the task list.
+3. Run `pnpm exec openspec validate` (and archive with `pnpm exec openspec archive` when the change is done so deltas merge into `openspec/specs/`).
+
+PR reviewers care about the artifacts under `openspec/`, not which editor produced them. Prefer archiving completed OpenSpec changes when merging significant work.
+
 ## Publishing a New Version
 
 This repo uses [changesets] for publishing new versions.
@@ -191,14 +258,18 @@ If this is your first time using changesets, please read the documentation avail
 
 ## Editing Documentation
 
-The documentation site is generated from markdown files in [the `docs` directory].
+The documentation site is generated from markdown files in [the `site` directory].
 To start a local development server for the documentation site, run the following script:
 
 ```sh
 pnpm start:docs
 ```
 
-[the `docs` directory]: ./docs/docs
+Docs are published to [GitHub Pages] via [GitHub Actions] when a package release is published, or manually by running the **Deploy docs** workflow from the Actions tab.
+
+[the `site` directory]: ./site/docs
+[GitHub Pages]: https://seek-oss.github.io/sku/
+[GitHub Actions]: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-with-a-custom-github-actions-workflow
 
 ## Troubleshooting
 

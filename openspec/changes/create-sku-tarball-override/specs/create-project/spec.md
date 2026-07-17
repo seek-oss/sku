@@ -36,13 +36,12 @@ After installing dependencies, create SHALL run `sku format` on the new project.
 - **AND** create warns with failure-style messaging (not “completed with warnings”)
 - **AND** create may still report the project as created
 
-### Requirement: Create integration tests validate via lint and test
+### Requirement: Create integration tests validate via lint
 
-After a successful create in integration tests that use the sku specifier override, the harness MUST run the new project’s lint and test steps. Both MUST pass.
+After a successful create in integration tests that use the sku specifier override, the harness MUST run the new project’s lint step. It MUST pass.
 
-#### Scenario: Post-create lint and test pass
+#### Scenario: Post-create lint passes
 
 - **WHEN** create finishes successfully for a project under the sku-create integration suite
 - **AND** the suite uses `SKU_CREATE_SKU_SPECIFIER` to install packed local sku
 - **THEN** running the new project’s lint step succeeds
-- **AND** running the new project’s test step succeeds

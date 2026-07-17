@@ -7,7 +7,7 @@
 - Add an internal test-only env override (`SKU_CREATE_SKU_SPECIFIER`) so create installs `sku` using a caller-supplied dependency specifier (typically `sku@file:<absolute-path-to-.tgz>`) instead of the registry
 - Fix soft-mode format messaging: stop treating exit code `1` as “warnings”. After sku’s lint/format exit-code consolidation, failures consistently exit `1`, so create was mis-labelling real errors as warnings. Soft continue remains the production default
 - Update `sku-create` tests to `pnpm pack` local sku into a unique `os.tmpdir()` dir, pass the specifier override, and drop the workspace-linking harness for sku resolution
-- After create succeeds, assert the new project’s `lint` which pass (quality gate lives in the harness, not a create-time hard fail)
+- After create succeeds, assert the new project’s `lint` passes (quality gate lives in the harness, not a create-time hard fail)
 - Snapshot coverage of generated files remains; start/build smoke stays out of scope
 
 ## Non-goals

@@ -13,7 +13,7 @@
 - [x] 3.1 Pack local `packages/sku` once per suite into `fs.mkdtemp` under `os.tmpdir()` and pass `SKU_CREATE_SKU_SPECIFIER=sku@file:<abs-path>`
 - [x] 3.3 Thread specifier env through `@sku-private/testing-library` create helper if needed
 - [x] 3.4 Remove `linkWorkspacePackages` / `packages: ['../../packages/*']` harness used only for local sku
-- [x] 3.5 After successful create, run the new project’s lint; which must pass
+- [x] 3.5 After successful create, run the new project’s lint; it must pass
 - [x] 3.6 Update snapshots if package.json / outputs change under tarball install
 
 ## 4. Release

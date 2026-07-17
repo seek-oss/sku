@@ -143,7 +143,7 @@ OpenSpec complements Changesets (release notes) and Vitepress docs (consumer doc
 The CLI comes from `pnpm install` — you don't need to install OpenSpec globally.
 
 ```sh
-pnpm openspec list
+pnpm openspec:list
 pnpm openspec:validate
 pnpm openspec:view
 # or: pnpm exec openspec <command>

@@ -27,29 +27,22 @@ Create SHALL support an internal environment variable `SKU_CREATE_SKU_SPECIFIER`
 
 ### Requirement: Format is soft by default
 
-After installing dependencies, create SHALL run `sku format` on the new project. When `SKU_CREATE_STRICT` is unset, a non-zero format exit or inability to run format MUST NOT fail create: create MUST warn with failure-style messaging (MUST NOT describe exit code `1` as “warnings”) and MUST still be allowed to report the project as created.
+After installing dependencies, create SHALL run `sku format` on the new project. A non-zero format exit or inability to run format MUST NOT fail create: create MUST warn with failure-style messaging (MUST NOT describe exit code `1` as “warnings”) and MUST still be allowed to report the project as created.
 
-#### Scenario: Format failure does not fail create by default
+#### Scenario: Format failure does not fail create
 
 - **WHEN** `sku format` fails during create
-- **AND** `SKU_CREATE_STRICT` is unset
 - **THEN** create does not fail solely because of that format failure
 - **AND** create warns with failure-style messaging (not “completed with warnings”)
 - **AND** create may still report the project as created
 
-### Requirement: Strict mode fails create on soft failures
+### Requirement: Create integration tests validate via lint and test
 
-Create SHALL support an internal environment variable `SKU_CREATE_STRICT`. When set to a truthy value, soft failures in the create process (today: format non-zero exit or inability to run format) MUST fail create (non-zero exit / thrown error) and MUST NOT report the project as successfully created.
+After a successful create in integration tests that use the sku specifier override, the harness MUST run the new project’s lint and test steps. Both MUST pass.
 
-#### Scenario: Strict format failure fails create
+#### Scenario: Post-create lint and test pass
 
-- **WHEN** `SKU_CREATE_STRICT` is set
-- **AND** `sku format` fails during create (for example configure or lint/format error)
-- **THEN** create fails
-- **AND** create does not print a successful “created” completion for that run
-
-#### Scenario: Strict successful format allows completion
-
-- **WHEN** `SKU_CREATE_STRICT` is set
-- **AND** `sku format` completes successfully during create
-- **THEN** create may complete and report the project as created
+- **WHEN** create finishes successfully for a project under the sku-create integration suite
+- **AND** the suite uses `SKU_CREATE_SKU_SPECIFIER` to install packed local sku
+- **THEN** running the new project’s lint step succeeds
+- **AND** running the new project’s test step succeeds

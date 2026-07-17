@@ -4,7 +4,7 @@ Create’s happy path is: generate files → `pnpm add` deps (including unversio
 
 The fixture `linkWorkspacePackages` approach fails once create writes a nested `pnpm-workspace.yaml` (child becomes its own workspace root). Override must live in the **dependency specifier**, not workspace layout.
 
-Format is intentionally soft in production today (warn and continue). Tests still need format/configure failures to fail create without changing that default.
+Format is intentionally soft in production today (warn and continue). Create-time hard fail via `SKU_CREATE_STRICT` is out of scope — review feedback preferred proving the scaffold by running the new project’s lint and test after create instead.
 
 Soft-mode create previously treated format exit code `1` as “warnings” and other non-zero codes as failures — a leftover from when Prettier/ESLint-style tools used distinct exit codes. After sku’s lint/format exit-code consolidation (seek-oss/sku#1607), `sku format` exits `1` for failures, so create was mis-labelling real errors as warnings.
 
@@ -14,13 +14,15 @@ Soft-mode create previously treated format exit code `1` as “warnings” and o
 
 - Test-only way to install **this commit’s** sku via a dependency specifier override
 - Specifier used at install time comes from the env (typically `sku@file:<absolute-path-to-.tgz>`) so it survives nested workspaces
-- Opt-in strict mode so soft failures (today: format) fail create in tests, without changing production defaults
+- After create, harness runs the new project’s lint and test and both must pass
+- Soft format stays warn-and-continue; messaging for exit `1` is corrected
 - Simplify `sku-create` tests off the workspace-linking hack for sku resolution
 
 **Non-Goals:**
 
 - Public CLI for choosing sku
-- Changing production soft-vs-hard format behaviour (remain warn-and-continue unless strict; messaging for exit `1` is corrected)
+- `SKU_CREATE_STRICT` or any create-time hard fail on soft format failures
+- Changing production soft format behaviour (remain warn-and-continue)
 - Overriding braid/react/pnpm-plugin-sku
 - start/build smoke test
 - Skip-install / generate-only mode
@@ -43,7 +45,6 @@ const tgz = await packSku({ packDestination: packDir }); // absolute path to .tg
 await create(projectName, args, {
   env: {
     SKU_CREATE_SKU_SPECIFIER: `sku@file:${tgz}`,
-    SKU_CREATE_STRICT: '1',
   },
 });
 ```
@@ -54,28 +55,22 @@ Do **not** pack into `packages/sku` or the fixture tree — that dirties the wor
 
 **Why not `workspace:*` / `file:` to the package dir?** Nested project workspace yaml breaks workspace linking; directory `file:` is less like a real publish. Pack + `file:` tarball is the closest authentic install that still pins local sku.
 
-### 2. `SKU_CREATE_STRICT` turns soft failures into hard failures
+### 2. Quality gate is post-create lint + test (not create-time strict)
 
-Production create leaves format soft (warn + continue, still report created). That stays the default when `SKU_CREATE_STRICT` is unset.
+Do **not** add `SKU_CREATE_STRICT` or make format hard-fail in create for tests. Production soft behaviour stays the only create behaviour: any non-zero format exit is a failure-style warning, then create continues.
 
-When `SKU_CREATE_STRICT` is set (truthy, e.g. `1`), create treats soft failures as create failures. Today the only soft path is `formatProject` (non-zero exit or spawn error always `resolve()`s). Under strict, those reject so create does not print success.
+After a successful create, the harness runs the new project’s lint and test (via the project’s package scripts / sku commands as the scaffold defines them). Both MUST pass. That catches configure/lint/format/test breakage without changing create’s soft format contract.
 
 ```ts
-// format.ts (sketch)
-const strict = Boolean(process.env.SKU_CREATE_STRICT);
-child.on('close', (code) => {
-  if (code === 0) return resolve();
-  if (!strict) {
-    // any non-zero: failure-style warning, then continue (do not treat 1 as “warnings”)
-    return resolve();
-  }
-  reject(new Error(`format failed: ${code}`));
+// sku-create.test.ts (sketch)
+await create(projectName, args, {
+  env: { SKU_CREATE_SKU_SPECIFIER: `sku@file:${tgz}` },
 });
+await runProjectLint(projectDir); // must exit 0
+await runProjectTest(projectDir); // must exit 0
 ```
 
-Name is create-scoped (`SKU_CREATE_STRICT`), not a global sku-wide switch. Hook is reusable if create gains other soft paths later; install/templates already hard-fail today.
-
-Under soft mode (strict unset), any non-zero format exit MUST be reported as a failure-style warning (not “completed with warnings”), then create continues. Under strict, any non-zero rejects — including exit `1`.
+If create already implemented `SKU_CREATE_STRICT`, remove it from product code and tests — prefer the post-create gate only.
 
 ### 3. Test harness owns pack + env; drop linkWorkspacePackages for sku
 
@@ -86,16 +81,15 @@ const tgz = await packSku({ packDestination: packDir }); // once per suite
 await create(projectName, args, {
   env: {
     SKU_CREATE_SKU_SPECIFIER: `sku@file:${tgz}`,
-    SKU_CREATE_STRICT: '1',
   },
 });
 ```
 
 Remove `packages: ['../../packages/*']` + `linkWorkspacePackages` used only to force local sku. Keep other fixture setup only if still needed (e.g. catalog); otherwise delete it.
 
-### 4. Env vars are internal / undocumented for consumers
+### 4. Specifier env is internal / undocumented for consumers
 
-No public flags. Names should read as sku-repo / create testing (`SKU_CREATE_SKU_SPECIFIER`, `SKU_CREATE_STRICT`). Comment at the read sites; do not document in user-facing create docs.
+No public flags. Name should read as sku-repo / create testing (`SKU_CREATE_SKU_SPECIFIER`). Comment at the read site; do not document in user-facing create docs. Do not introduce `SKU_CREATE_STRICT`.
 
 ## Risks / Trade-offs
 
@@ -107,16 +101,16 @@ No public flags. Names should read as sku-repo / create testing (`SKU_CREATE_SKU
 | Parallel suites overwrite the same `.tgz` name  | `mkdtemp` per pack (not a fixed path under shared `tmpdir`)                       |
 | Absolute `file:` left in created `package.json` | Test-only; existing version-ignoring snapshots; optionally assert specifier shape |
 | Invalid / relative specifier from harness       | Harness responsibility: always pass an absolute `sku@file:…` path                 |
-| Tests forget `SKU_CREATE_STRICT`                | Set both envs in the create test helper / suite setup                             |
+| Format soft in create but scaffold still broken | Post-create lint + test must both pass                                            |
 | Other `@latest` deps still network-bound        | Accepted for this change; not the version-skew bug                                |
 
 ## Migration Plan
 
-1. Land specifier override + `SKU_CREATE_STRICT` (default unset = current soft format)
-2. Update sku-create tests to pack + both envs; remove workspace link hack
-3. No consumer-facing behaviour change when envs unset; changeset only if needed for the new internal hooks / incidental packaging — prefer none unless publish surface requires it
-4. Unset envs = previous create behaviour
+1. Land specifier override (default unset = unversioned `sku`)
+2. Keep format soft; fix exit-`1` messaging; remove `SKU_CREATE_STRICT` if present
+3. Update sku-create tests to pack + specifier env; after create, run lint + test; remove workspace link hack
+4. No consumer-facing behaviour change when env unset; changeset only if needed — prefer none unless publish surface requires it
 
 ## Open Questions
 
-(none — format exit `1` is a failure after #1607; soft mode warns-as-failure and continues; strict rejects)
+(none — quality gate is post-create lint + test; create format stays soft)

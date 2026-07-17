@@ -6,7 +6,12 @@ import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 
-import { configure } from '@sku-private/testing-library';
+import {
+  configure,
+  hasExpectedExitCode,
+  scopeToFixture as scopeToSkuFixture,
+  waitForExitCode,
+} from '@sku-private/testing-library';
 import { scopeToFixture } from '@sku-private/testing-library/create';
 import { normalizePackageManagerVersion } from '@sku-private/test-utils';
 
@@ -64,7 +69,6 @@ beforeAll(async () => {
 
   createEnv = {
     SKU_CREATE_SKU_SPECIFIER: `sku@file:${pack.tarballPath}`,
-    SKU_CREATE_STRICT: '1',
   };
 });
 
@@ -185,6 +189,13 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
 
     expect(stripYamlVersions(contents)).toMatchSnapshot();
+  });
+
+  it('should pass lint', async () => {
+    const { sku } = scopeToSkuFixture('sku-create/new-project');
+    const result = await sku('lint');
+    await waitForExitCode(result, 0);
+    expect(hasExpectedExitCode(result, 0)).toBe(true);
   });
 });
 

@@ -25,11 +25,7 @@ export const formatProject = async (projectPath: string): Promise<void> => {
       }
 
       if (!isStrict()) {
-        if (code === 1) {
-          console.log('⚠️ Formatting completed with warnings');
-        } else {
-          console.warn(`⚠️ Formatting failed with exit code ${code}`);
-        }
+        console.warn(`⚠️ Formatting failed with exit code ${code}`);
         resolve();
         return;
       }

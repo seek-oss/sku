@@ -6,6 +6,8 @@ The fixture `linkWorkspacePackages` approach fails once create writes a nested `
 
 Format is intentionally soft in production today (warn and continue). Tests still need format/configure failures to fail create without changing that default.
 
+Soft-mode create previously treated format exit code `1` as “warnings” and other non-zero codes as failures — a leftover from when Prettier/ESLint-style tools used distinct exit codes. After sku’s lint/format exit-code consolidation (seek-oss/sku#1607), `sku format` exits `1` for failures, so create was mis-labelling real errors as warnings.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -18,7 +20,7 @@ Format is intentionally soft in production today (warn and continue). Tests stil
 **Non-Goals:**
 
 - Public CLI for choosing sku
-- Changing production format behaviour (remain warn-and-continue unless strict)
+- Changing production soft-vs-hard format behaviour (remain warn-and-continue unless strict; messaging for exit `1` is corrected)
 - Overriding braid/react/pnpm-plugin-sku
 - start/build smoke test
 - Skip-install / generate-only mode
@@ -64,7 +66,7 @@ const strict = Boolean(process.env.SKU_CREATE_STRICT);
 child.on('close', (code) => {
   if (code === 0) return resolve();
   if (!strict) {
-    // existing warn-and-continue behaviour
+    // any non-zero: failure-style warning, then continue (do not treat 1 as “warnings”)
     return resolve();
   }
   reject(new Error(`format failed: ${code}`));
@@ -73,7 +75,7 @@ child.on('close', (code) => {
 
 Name is create-scoped (`SKU_CREATE_STRICT`), not a global sku-wide switch. Hook is reusable if create gains other soft paths later; install/templates already hard-fail today.
 
-Exact treatment of format exit code `1` (warnings vs errors) under strict should match what tests need to catch configure/format mistakes — prefer failing on any non-zero when strict.
+Under soft mode (strict unset), any non-zero format exit MUST be reported as a failure-style warning (not “completed with warnings”), then create continues. Under strict, any non-zero rejects — including exit `1`.
 
 ### 3. Test harness owns pack + env; drop linkWorkspacePackages for sku
 
@@ -117,4 +119,4 @@ No public flags. Names should read as sku-repo / create testing (`SKU_CREATE_SKU
 
 ## Open Questions
 
-- Under strict, confirm format exit `1` (prettier/eslint warnings) should fail create — likely yes for CI authenticity.
+(none — format exit `1` is a failure after #1607; soft mode warns-as-failure and continues; strict rejects)

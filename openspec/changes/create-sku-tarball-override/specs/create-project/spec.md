@@ -27,13 +27,14 @@ Create SHALL support an internal environment variable `SKU_CREATE_SKU_SPECIFIER`
 
 ### Requirement: Format is soft by default
 
-After installing dependencies, create SHALL run `sku format` on the new project. When `SKU_CREATE_STRICT` is unset, format failure or warnings MUST NOT fail create: create MAY warn and MUST still be allowed to report the project as created.
+After installing dependencies, create SHALL run `sku format` on the new project. When `SKU_CREATE_STRICT` is unset, a non-zero format exit or inability to run format MUST NOT fail create: create MUST warn with failure-style messaging (MUST NOT describe exit code `1` as “warnings”) and MUST still be allowed to report the project as created.
 
 #### Scenario: Format failure does not fail create by default
 
 - **WHEN** `sku format` fails during create
 - **AND** `SKU_CREATE_STRICT` is unset
 - **THEN** create does not fail solely because of that format failure
+- **AND** create warns with failure-style messaging (not “completed with warnings”)
 - **AND** create may still report the project as created
 
 ### Requirement: Strict mode fails create on soft failures

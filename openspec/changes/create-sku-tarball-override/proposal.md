@@ -6,13 +6,14 @@
 
 - Add an internal test-only env override (`SKU_CREATE_SKU_SPECIFIER`) so create installs `sku` using a caller-supplied dependency specifier (typically `sku@file:<absolute-path-to-.tgz>`) instead of the registry
 - Add an internal opt-in (`SKU_CREATE_STRICT`) so soft failures in create (today: format) fail the create run in tests, without changing production’s warn-and-continue default
+- Fix soft-mode format messaging: stop treating exit code `1` as “warnings”. After sku’s lint/format exit-code consolidation, failures consistently exit `1`, so create was mis-labelling real errors as warnings. Soft continue when strict is unset is unchanged
 - Update `sku-create` tests to `pnpm pack` local sku into a unique `os.tmpdir()` dir, pass both overrides, and drop the workspace-linking harness for sku resolution
 - Snapshot coverage of generated files remains; start/build smoke stays out of scope
 
 ## Non-goals
 
 - Public CLI flag for choosing a sku version
-- Changing production format behaviour when strict is unset
+- Changing production soft-vs-hard format behaviour when strict is unset (create still warns and continues; only the incorrect “warnings” vs “failed” messaging is corrected)
 - Overriding other deps (`braid`, `react`, `pnpm-plugin-sku`)
 - Generate-only / skip-install mode for cheaper runs
 - Full start/build smoke tests
@@ -31,6 +32,6 @@
 
 - **Code**: `packages/create` (`install.ts`, `format.ts`, possibly `createProject.ts`); `tests/node/sku-create.test.ts`; `@sku-private/testing-library` create helpers
 - **Public API**: No user-facing API change. Both env overrides are internal/test-only (undocumented for consumers)
-- **Breaking**: None when envs unset (including format still soft)
+- **Breaking**: None when envs unset (format still soft). Soft-path console wording for exit `1` changes from “warnings” to failure-style messaging
 - **Release**: Prefer no changeset unless packaging requires one; no intentional user-visible behaviour change
 - **Docs**: None required for users; brief comments near the env reads are enough

@@ -10,6 +10,7 @@
 - [x] 2.2 When `SKU_CREATE_STRICT` is set, reject on format non-zero exit or spawn error so create fails
 - [x] 2.3 Add a brief code comment that the env var is internal/test-only
 - [x] 2.4 Ensure `createProject` does not print success when format rejects under strict
+- [x] 2.5 Soft mode: stop treating format exit `1` as “warnings”; warn with failure-style messaging for any non-zero exit (still continue when strict unset)
 
 ## 3. sku-create test harness
 

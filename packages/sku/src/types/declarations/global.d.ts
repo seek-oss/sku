@@ -22,4 +22,8 @@ declare const __SKU_LIBRARY_FILE__: string;
 type SkuCSP = {
   enabled: boolean;
   extraHosts: string[];
+  /** Vite SSR Report-Only CSP (optional; unused by webpack SSR). */
+  reportOnlyEnabled?: boolean;
+  reportOnlyExtraHosts?: string[];
+  reportOnlyReportTo?: string;
 };

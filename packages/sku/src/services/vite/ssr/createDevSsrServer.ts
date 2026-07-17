@@ -25,7 +25,9 @@ export const createDevSsrServer = async ({
   skuContext: SkuContext;
   environment: string;
 }): Promise<SsrServerResult & { vite: ViteDevServer }> => {
-  const clientEntry = require.resolve('#entries/vite-ssr-client');
+  // Dev wrapper runs React Refresh preamble before dynamically loading the
+  // production client entry (tsdown can reorder static imports in the latter).
+  const clientEntry = require.resolve('#entries/vite-ssr-client.dev');
   const serverEntry = require.resolve('#entries/vite-ssr-server');
   const serverApp = express();
   // Shared with static/webpack: self-signed cert when httpsDevServer is true.
@@ -71,7 +73,6 @@ export const createDevSsrServer = async ({
   serverApp.use(vite.middlewares);
 
   const base = skuContext.publicPath;
-  const languages = (skuContext.languages ?? []).map(({ name }) => name);
   const assets: RenderAssets = {
     bootstrapModules: [
       path.posix.join(base, '@vite/client'),
@@ -92,7 +93,6 @@ export const createDevSsrServer = async ({
     createHtmlRenderMiddleware({
       render,
       assets,
-      languages,
       cspEnabled: skuContext.cspEnabled,
       cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
       cspReportOnlyEnabled: skuContext.cspReportOnlyEnabled,

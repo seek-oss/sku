@@ -1,5 +1,5 @@
 // Resolved by sku's Vite config plugin to the consumer server entry.
- 
+
 import * as serverEntry from '__sku_alias__serverEntry';
 import type { RouteObject } from 'react-router';
 import { requireNamedExport } from '../ssr/requireNamedExport.js';

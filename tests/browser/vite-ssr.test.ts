@@ -49,7 +49,7 @@ describe('vite-ssr', () => {
       // Shell-first Suspense: fallback appears, then deferred content streams in.
       expect(html).toContain('data-testid="fallback"');
       expect(html).toContain('Deferred content ready');
-      // No transformIndexHtml: client entry is bootstrapped explicitly.
+      // client entry is bootstrapped explicitly.
       expect(html).toContain('vite-ssr-client');
       expect(html).toContain('@vite/client');
 
@@ -444,6 +444,45 @@ describe('vite-ssr', () => {
         },
         { timeout: 15000 },
       );
+    });
+
+    it('preloads a lazy route chunk on nav link hover', async ({ task }) => {
+      skipCleanup(task.id);
+      const manifestPath = path.join(
+        fixturePath('dist'),
+        'client',
+        '.vite',
+        'manifest.json',
+      );
+      const manifest = JSON.parse(
+        await fs.readFile(manifestPath, 'utf8'),
+      ) as Record<string, { file: string }>;
+      const aboutChunk = manifest['src/pages/about/about.tsx']?.file;
+      expect(aboutChunk).toBeTruthy();
+
+      const page = await createPage();
+      const aboutRequests: string[] = [];
+      page.on('request', (request) => {
+        if (request.url().includes(aboutChunk)) {
+          aboutRequests.push(request.url());
+        }
+      });
+
+      await page.goto('http://127.0.0.1:8201/', { waitUntil: 'networkidle' });
+      await page.getByTestId('shell').waitFor({ state: 'visible' });
+      expect(aboutRequests).toEqual([]);
+
+      await page.getByTestId('nav-about').hover();
+      await waitFor(
+        () => {
+          expect(aboutRequests.length).toBeGreaterThan(0);
+        },
+        { timeout: 5000 },
+      );
+
+      await page.getByTestId('nav-about').click();
+      await page.getByTestId('about').waitFor({ state: 'visible' });
+      await page.close();
     });
   });
 });

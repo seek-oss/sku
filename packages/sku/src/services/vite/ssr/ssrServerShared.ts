@@ -130,7 +130,6 @@ export interface SsrServerOptions {
   assets: RenderAssets;
   manifest?: RenderManifest;
   clientDirectory?: string;
-  languages?: string[];
   cspEnabled: boolean;
   cspExtraScriptSrcHosts: string[];
   cspReportOnlyEnabled: boolean;
@@ -189,7 +188,6 @@ export const createHtmlRenderMiddleware =
     render,
     assets,
     manifest,
-    languages = [],
     cspEnabled,
     cspExtraScriptSrcHosts,
     cspReportOnlyEnabled,
@@ -202,7 +200,6 @@ export const createHtmlRenderMiddleware =
     | 'render'
     | 'assets'
     | 'manifest'
-    | 'languages'
     | 'cspEnabled'
     | 'cspExtraScriptSrcHosts'
     | 'cspReportOnlyEnabled'
@@ -230,7 +227,6 @@ export const createHtmlRenderMiddleware =
           requestContextStore,
           signal: controller.signal,
           development,
-          languages,
           onError: (error) => console.error(error),
         },
         manifest,
@@ -294,7 +290,6 @@ export const listen = async (
       render: options.render,
       assets: options.assets,
       manifest: options.manifest,
-      languages: options.languages,
       cspEnabled: options.cspEnabled,
       cspExtraScriptSrcHosts: options.cspExtraScriptSrcHosts,
       cspReportOnlyEnabled: options.cspReportOnlyEnabled,

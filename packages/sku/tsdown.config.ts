@@ -25,6 +25,8 @@ export default defineConfig([
       'entries/vite-render': 'src/services/vite/entries/vite-render.tsx',
       'entries/vite-ssr-client':
         'src/services/vite/entries/vite-ssr-client.tsx',
+      'entries/vite-ssr-client.dev':
+        'src/services/vite/entries/vite-ssr-client.dev.tsx',
       'entries/vite-ssr-server':
         'src/services/vite/entries/vite-ssr-server.tsx',
       'jest/file-mock': 'src/config/jest/fileMock.ts',

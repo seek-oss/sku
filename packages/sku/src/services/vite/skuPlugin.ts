@@ -1,20 +1,17 @@
 import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../context/createSkuContext.js';
 import { httpsDevServerPlugin } from './plugins/httpsDevServer.js';
-import { middlewarePlugin } from './plugins/middleware.js';
-import { vitePluginSsrCss } from './plugins/ssrCss/plugin.js';
 import { preloadPlugin } from './plugins/preloadPlugin/preloadPlugin.js';
 import { setNoExternalPlugin } from './plugins/setNoExternal.js';
 import { polyfillsPlugin } from './plugins/polyfills.js';
 import { dangerouslySetViteConfigPlugin } from './plugins/dangerouslySetViteConfig.js';
-import { telemetryPlugin } from './plugins/telemetry.js';
 import { configPlugin } from './plugins/config.js';
 import { buildPlugin } from './plugins/build.js';
 import { devServerPlugin } from './plugins/devServer.js';
 import { bundleAnalyzerPlugin } from './plugins/bundleAnalyzer.js';
 import { stripServerConfigPlugin } from './plugins/stripServerConfig.js';
-import { ssrPlugin } from './plugins/ssr.js';
-import { lazyRouteModuleIdPlugin } from './plugins/lazyRouteModuleId/lazyRouteModuleIdPlugin.js';
+import { ssrPlugins } from './plugins/ssr.js';
+import { staticPlugins } from './plugins/static.js';
 
 /**
  * All sku related functionality and customization as a vite plugin.
@@ -26,13 +23,12 @@ export const skuPlugin = ({
   skuContext: SkuContext;
   environment?: string;
 }): PluginOption[] => {
-  const isViteSsr =
-    skuContext.bundler === 'vite' && skuContext.buildType === 'ssr';
+  const isSsr = skuContext.buildType === 'ssr';
 
   return [
     configPlugin({ skuContext }),
-    isViteSsr && ssrPlugin(skuContext),
-    isViteSsr && lazyRouteModuleIdPlugin(),
+    // SSR pack sits early (defines / optimizeDeps / lazy routes)
+    ...(isSsr ? ssrPlugins(skuContext) : []),
     setNoExternalPlugin(skuContext),
     buildPlugin({ skuContext }),
     devServerPlugin({ skuContext }),
@@ -42,18 +38,9 @@ export const skuPlugin = ({
       convertFromWebpack: skuContext.convertLoadable,
     }),
     polyfillsPlugin(skuContext),
-    !isViteSsr &&
-      vitePluginSsrCss({
-        entries: [skuContext.paths.renderEntry],
-      }),
-    !isViteSsr &&
-      environment !== undefined &&
-      middlewarePlugin({ skuContext, environment }),
-    !isViteSsr &&
-      telemetryPlugin({
-        target: 'node',
-        type: 'static',
-      }),
+    // Static pack sits after polyfills so middleware / telemetry / ssrCss keep
+    // their previous position relative to shared serve plugins
+    ...(isSsr ? [] : staticPlugins({ skuContext, environment })),
     bundleAnalyzerPlugin(),
     dangerouslySetViteConfigPlugin(skuContext),
     // `stripServerConfigPlugin` must go after `dangerouslySetViteConfigPlugin`

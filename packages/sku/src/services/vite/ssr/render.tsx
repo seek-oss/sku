@@ -15,7 +15,6 @@ import {
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,
 } from './resolveAssets.js';
-import { resolveRequestLanguage } from './resolveLanguage.js';
 import type {
   DocumentAssets,
   RenderAssets,
@@ -53,11 +52,9 @@ const getModuleIds = (
   }>,
   {
     development,
-    languages = [],
     requestLanguage,
   }: {
     development: boolean;
-    languages?: string[];
     requestLanguage?: string;
   },
 ): string[] => {
@@ -71,12 +68,9 @@ const getModuleIds = (
     return moduleId ? [moduleId] : [];
   });
 
-  const language = resolveRequestLanguage({
-    languages,
-    requestLanguage,
-  });
-  if (language) {
-    moduleIds.push(getChunkName(language));
+  // Vocab chunk only when onRequest returns language — no allowlist / sole-language default.
+  if (requestLanguage) {
+    moduleIds.push(getChunkName(requestLanguage));
   }
 
   return moduleIds;
@@ -110,7 +104,6 @@ const renderDocument = async (
   const development = options.development ?? false;
   const moduleIds = getModuleIds(context.matches, {
     development,
-    languages: options.languages,
     requestLanguage: requestEntry.language,
   });
   let documentAssets: DocumentAssets = {

@@ -12,9 +12,11 @@
 - [x] 2.5 Abort-before-write; forward loader/action Responses and headers; `statusCode` + ErrorBoundary; `waitForAll`; `httpsDevServer`
 - [x] 2.6 Skip `transformIndexHtml` on SSR; manifest assets; auto `moduleId`; defer SSR-CSS / telemetry HTML inject
 - [x] 2.7 Shell CSP headers (enforcing and/or Report-Only); lazy single nonce only when requested; ALS holds nonce only
-- [x] 2.8 Vocab: register from `onRequest` `language` → sole language → soft-fail; no `addLanguageChunk` / client forward
+- [x] 2.8 Vocab: register only when `onRequest` returns `language`; no allowlist / sole-language default; no `addLanguageChunk` / client forward
 - [x] 2.9 Promise-scrub loader/action data; strip production `Error.stack`; harden Express→Fetch adapter (array headers; reconstruct body when stream consumed)
 - [x] 2.10 Align Vite SSR entry wrappers on `__sku_alias__serverEntry` / `__sku_alias__clientEntry` (drop `#sku-vite-ssr-*` aliases, ambient modules, and tsdown externals)
+- [x] 2.11 Align production defines with webpack: `__SKU_DEFAULT_SERVER_PORT__` + `__SKU_CSP__` object (incl. report-only fields); remove `import.meta.env.SKU_*` / `SKU_LANGUAGES`
+- [x] 2.12 Simplify language resolution: drop allowlist validation and sole-language fallback; register chunk only from `onRequest.language`
 
 ## 3. Fixtures and tests
 
@@ -23,8 +25,10 @@
 - [x] 3.3 Tests: redirects; `waitForAll`; errored-route status; loader `Set-Cookie`; HTTPS start; missing named-export hard errors; nonce request/reuse; abort-before-write
 - [x] 3.4 Tests: `devServerMiddleware` in `sku start`; absent from production server bundle / responses
 - [x] 3.5 Tests: `onHydrate` receives `context` only; no language in bootstrap / request-context; no public `getSkuLanguage`
-- [x] 3.6 Tests: language chunk registration / sole-language / soft-fail; auto `moduleId` preloads; missing / non-array `routes` hard-error
-- [x] 3.7 Do **not** add browser e2e fixtures for config edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`) — config/command validation is enough
+- [x] 3.6 Tests: language chunk from `onRequest.language` / omit → no chunk; auto `moduleId` preloads; missing / non-array `routes` hard-error
+- [x] 3.7 Do **not** add browser e2e for config edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`) — those cases were removed from the browser suite; config/command validation is enough
+- [x] 3.8 Update unit tests for simplified language resolution and webpack-aligned production defines
+- [x] 3.9 Fixture: intent preload via `PreloadingLink` + client `AppWrapper` routes context; production hover test for lazy chunk
 
 ## 4. Create, docs, release
 

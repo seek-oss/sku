@@ -209,22 +209,22 @@ For idiomatic `lazy: () => import('…')`, sku MUST auto-derive `handle.moduleId
 
 ### Requirement: Vocab language chunks are supported
 
-When `languages` is configured, sku MUST register the active vocab chunk from server `onRequest` `language` → sole configured language → soft-fail. Language MUST be server-local for Document registration only (no client forward, no `getSkuLanguage` / `__SKU_LANGUAGE__`).
+When `languages` is configured for build-time vocab splitting, sku MUST register a vocab language chunk on the Document only when server `onRequest` returns `language`. Language is optional: if omitted, sku MUST NOT register a language chunk. Sku MUST NOT validate the returned language against config and MUST NOT default to a sole configured language. Language MUST be server-local for Document registration only (no client forward, no `getSkuLanguage` / `__SKU_LANGUAGE__` / baked languages define).
 
 #### Scenario: Language chunk from onRequest
 
-- **WHEN** `languages` is configured and `onRequest` returns a known `language`
+- **WHEN** `onRequest` returns `language`
 - **THEN** sku registers that language’s vocab chunk on the Document
 - **AND** does not pass `language` to `onHydrate` or request-context
 
-#### Scenario: Soft-fail when language unresolved
+#### Scenario: No language means no language chunk
 
-- **WHEN** multiple languages are configured and `onRequest` omits a known `language`
-- **THEN** sku does not register a vocab chunk and the SSR response still succeeds
+- **WHEN** `onRequest` omits `language`
+- **THEN** sku does not register a vocab language chunk and the SSR response still succeeds
 
 ### Requirement: Vite SSR publicPath is relative only
 
-Vite SSR apps MUST use a relative `publicPath`. Absolute `http(s)` / CDN `publicPath` MUST fail at config validation. This edge case MUST NOT require a dedicated browser e2e fixture (unit / config-path coverage is enough).
+Vite SSR apps MUST use a relative `publicPath`. Absolute `http(s)` / CDN `publicPath` MUST fail at config validation. This edge case MUST NOT require a dedicated browser e2e fixture.
 
 #### Scenario: Absolute publicPath rejected
 

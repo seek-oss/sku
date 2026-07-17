@@ -1,4 +1,6 @@
-import { Outlet, Link } from 'react-router';
+import { Outlet } from 'react-router';
+
+import { PreloadingLink } from './PreloadingLink.js';
 
 export const RootLayout = () => (
   <>
@@ -8,11 +10,15 @@ export const RootLayout = () => (
     />
     <div>
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/details">Details</Link>
-        <Link to="/en/hello">Hello (en)</Link>
-        <Link to="/fr/hello">Hello (fr)</Link>
+        <PreloadingLink to="/">Home</PreloadingLink>
+        <PreloadingLink to="/about" data-testid="nav-about">
+          About
+        </PreloadingLink>
+        <PreloadingLink to="/details" data-testid="nav-details">
+          Details
+        </PreloadingLink>
+        <PreloadingLink to="/en/hello">Hello (en)</PreloadingLink>
+        <PreloadingLink to="/fr/hello">Hello (fr)</PreloadingLink>
       </nav>
       <Outlet />
     </div>

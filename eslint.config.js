@@ -48,6 +48,7 @@ export default [
         __SKU_CLIENT_PATH__: true,
         __SKU_PUBLIC_PATH__: true,
         __SKU_CSP__: true,
+        __SKU_DEFAULT_SERVER_PORT__: true,
         __SKU_DEV_HTTPS__: true,
         __SKU_DEV_MIDDLEWARE_ENABLED__: true,
         __SKU_DEV_MIDDLEWARE_PATH__: true,

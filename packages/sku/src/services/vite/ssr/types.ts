@@ -58,8 +58,6 @@ export interface RenderOptions {
   /** Shared request context for this render (CSP nonce). */
   requestContextStore?: SsrRequestContextStore;
   development?: boolean;
-  /** Configured language names for vocab chunk registration. */
-  languages?: string[];
   onShellError?: (error: unknown) => void;
   onError?: (error: unknown) => void;
 }

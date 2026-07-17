@@ -32,29 +32,20 @@ export const startProductionSsrServer = async ({
     modulePreloads: [],
   };
 
+  const csp = __SKU_CSP__;
+
   return listen({
-    port: Number(process.env.PORT) || Number(import.meta.env.SKU_SSR_PORT),
+    port: Number(process.env.PORT) || Number(__SKU_DEFAULT_SERVER_PORT__),
     base,
     middleware,
     render,
     assets,
     clientDirectory,
     manifest: { manifest, base, entry },
-    languages: JSON.parse(
-      String(import.meta.env.SKU_LANGUAGES ?? '[]'),
-    ) as string[],
-    cspEnabled: import.meta.env.SKU_CSP_ENABLED === 'true',
-    cspExtraScriptSrcHosts: JSON.parse(
-      String(import.meta.env.SKU_CSP_EXTRA_SCRIPT_SRC_HOSTS ?? '[]'),
-    ) as string[],
-    cspReportOnlyEnabled:
-      import.meta.env.SKU_CSP_REPORT_ONLY_ENABLED === 'true',
-    cspReportOnlyExtraScriptSrcHosts: JSON.parse(
-      String(
-        import.meta.env.SKU_CSP_REPORT_ONLY_EXTRA_SCRIPT_SRC_HOSTS ?? '[]',
-      ),
-    ) as string[],
-    cspReportOnlyReportTo:
-      String(import.meta.env.SKU_CSP_REPORT_ONLY_REPORT_TO ?? '') || undefined,
+    cspEnabled: csp.enabled,
+    cspExtraScriptSrcHosts: csp.extraHosts,
+    cspReportOnlyEnabled: csp.reportOnlyEnabled ?? false,
+    cspReportOnlyExtraScriptSrcHosts: csp.reportOnlyExtraHosts ?? [],
+    cspReportOnlyReportTo: csp.reportOnlyReportTo,
   });
 };

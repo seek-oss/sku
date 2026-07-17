@@ -1,4 +1,3 @@
-import '@vitejs/plugin-react/preamble';
 import { hydrateRoot } from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -7,7 +6,6 @@ import {
   type RouteObject,
 } from 'react-router';
 // Resolved by sku's Vite config plugin to the consumer client request entry.
- 
 import * as clientEntry from '__sku_alias__clientEntry';
 import Document from '../ssr/Document.js';
 import { requireNamedExport } from '../ssr/requireNamedExport.js';

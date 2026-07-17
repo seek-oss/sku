@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useLocation } from 'react-router';
 import type { SkuSsrOnHydrate } from 'sku';
 
+import { ClientRoutesContext } from './ClientRoutesContext.js';
 import { resolveLanguageFromPathname } from './resolveLanguage.js';
 import { createRoutes } from './routes.js';
 import type { ClientContext } from './types.js';
@@ -21,9 +22,11 @@ export const onHydrate: SkuSsrOnHydrate = ({ context }) => {
     AppWrapper: ({ children }: { children: ReactNode }) => {
       const { pathname } = useLocation();
       return (
-        <VocabProvider language={resolveLanguageFromPathname(pathname)}>
-          {children}
-        </VocabProvider>
+        <ClientRoutesContext.Provider value={routes}>
+          <VocabProvider language={resolveLanguageFromPathname(pathname)}>
+            {children}
+          </VocabProvider>
+        </ClientRoutesContext.Provider>
       );
     },
   };

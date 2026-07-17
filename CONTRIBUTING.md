@@ -124,9 +124,9 @@ Specs and change folders under `openspec/` are the shared contract. Stored as pl
 
 OpenSpec is **not required** for changes, however if changing features that have existing specifications please try to update or at-least delete specifications that are no-longer accurate.
 
-**When OpenSpec might be useful** for public API changes, new CLI commands or codemods, architectural shifts, and other behavior that needs strong visibility of requirements.
+**When OpenSpec might be useful**: for public API changes, new CLI commands or codemods, architectural shifts, and other behavior that needs strong visibility of requirements.
 
-**When OpenSpec might not be useful** for typos, dependency bumps, Renovate PRs, and trivial one-file fixes.
+**When OpenSpec might not be useful**: for typos, dependency bumps, Renovate PRs, and trivial one-file fixes.
 
 ### Layout
 
@@ -136,14 +136,14 @@ OpenSpec is **not required** for changes, however if changing features that have
 | `openspec/changes/<name>/` | Active work: `proposal.md`, `design.md`, `tasks.md`, and delta specs        |
 | `openspec/config.yaml`     | Project context for planning                                                |
 
-OpenSpec complements Changesets (release notes) and Docsify docs (consumer docs). It does not replace them.
+OpenSpec complements Changesets (release notes) and Vitepress docs (consumer docs). It does not replace them.
 
 ### CLI (everyone)
 
-The CLI comes from `pnpm install` — you do'nt need to install OpenSpec globally.
+The CLI comes from `pnpm install` — you don't need to install OpenSpec globally.
 
 ```sh
-pnpm openspec list
+pnpm openspec:list
 pnpm openspec:validate
 pnpm openspec:view
 # or: pnpm exec openspec <command>

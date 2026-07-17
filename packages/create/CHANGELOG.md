@@ -1,5 +1,12 @@
 # @sku-lib/create
 
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies [[`ad2a50d`](https://github.com/seek-oss/sku/commit/ad2a50d31f4ead5a196c5eb4a641382b8acafc31)]:
+  - pnpm-plugin-sku@0.2.0
+
 ## 1.3.0
 
 ### Minor Changes

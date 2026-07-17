@@ -136,7 +136,7 @@ OpenSpec is **not required** for changes, however if changing features that have
 | `openspec/changes/<name>/` | Active work: `proposal.md`, `design.md`, `tasks.md`, and delta specs        |
 | `openspec/config.yaml`     | Project context for planning                                                |
 
-OpenSpec complements Changesets (release notes) and Docsify docs (consumer docs). It does not replace them.
+OpenSpec complements Changesets (release notes) and Vitepress docs (consumer docs). It does not replace them.
 
 ### CLI (everyone)
 

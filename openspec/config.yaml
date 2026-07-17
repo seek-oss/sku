@@ -6,7 +6,7 @@ context: |
   See CONTRIBUTING.md for setup, testing, and docs.
 
   OpenSpec:
-  - Complements Changesets and Docsify docs; does not replace them
+  - Complements Changesets and Vitepress docs; does not replace them
   - Specs are delta-first by domain; do not backfill the whole codebase
   - Prefer Lite mode (short behavior-first specs); scale rigor only for high-risk work
   - Invoke the CLI via `pnpm openspec` (not bare `openspec`)

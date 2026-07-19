@@ -80,6 +80,7 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
   - Changeset marks experimental; accurate `bundler` JSDoc
 - **Fixtures/tests:**
   - Vite SSR fixture (streaming, CSP, entries, per-route chunks, vocab; relative `/static/...` `publicPath` with app routes outside that prefix)
+  - Translations fixture: Vite SSR adapters alongside existing static / webpack SSR coverage (`en` / `fr` / `en-PSEUDO`)
   - Create template tests (named `Component`)
   - Config edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + `serverPort`, Vite SSR + existing `public` directory) stay config/command validation only — no browser e2e for those
 - **Opt-in / adopt:**

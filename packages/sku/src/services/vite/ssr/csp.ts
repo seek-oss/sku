@@ -1,6 +1,7 @@
 import { createHash, randomBytes } from 'node:crypto';
 
-export const createCspNonce = () => randomBytes(16).toString('base64url');
+export const createCspNonce = () =>
+  process.env.SKU_CSP_NONCE ?? randomBytes(16).toString('base64url');
 
 const hashScript = (body: string) =>
   `'sha256-${createHash('sha256').update(body, 'utf8').digest('base64')}'`;

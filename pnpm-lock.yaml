@@ -76,6 +76,9 @@ catalogs:
     react-dom:
       specifier: ^19.1.0
       version: 19.2.7
+    react-router:
+      specifier: ^7.18.0
+      version: 7.18.0
     typescript:
       specifier: ~6.0.3
       version: 6.0.3
@@ -424,7 +427,7 @@ importers:
         specifier: 'catalog:'
         version: 19.2.7(react@19.2.7)
       react-router:
-        specifier: ^7.9.6
+        specifier: 'catalog:'
         version: 7.18.0(react-dom@19.2.7)(react@19.2.7)
     devDependencies:
       '@sku-lib/vite':
@@ -852,7 +855,7 @@ importers:
         specifier: 'catalog:'
         version: 19.2.7(react@19.2.7)
       react-router:
-        specifier: ^7.9.6
+        specifier: 'catalog:'
         version: 7.18.0(react-dom@19.2.7)(react@19.2.7)
     devDependencies:
       '@sku-private/test-utils':
@@ -904,6 +907,9 @@ importers:
       dedent:
         specifier: ^1.5.1
         version: 1.7.2(babel-plugin-macros@3.1.0)
+      react-router:
+        specifier: 'catalog:'
+        version: 7.18.0(react-dom@19.2.7)(react@19.2.7)
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
@@ -1007,7 +1013,7 @@ importers:
         specifier: 'catalog:'
         version: 19.2.7(react@19.2.7)
       react-router:
-        specifier: ^7.9.6
+        specifier: 'catalog:'
         version: 7.18.0(react-dom@19.2.7)(react@19.2.7)
     devDependencies:
       '@sku-lib/vite':
@@ -1085,7 +1091,7 @@ importers:
         specifier: 'catalog:'
         version: 19.2.7(react@19.2.7)
       react-router:
-        specifier: ^7.18.0
+        specifier: 'catalog:'
         version: 7.18.0(react-dom@19.2.7)(react@19.2.7)
     devDependencies:
       '@types/react':
@@ -1434,7 +1440,7 @@ importers:
         specifier: ^0.18.0
         version: 0.18.0
       react-router:
-        specifier: ^7.18.0
+        specifier: 'catalog:'
         version: 7.18.0(react-dom@19.2.7)(react@19.2.7)
       rollup-plugin-visualizer:
         specifier: ^7.0.1

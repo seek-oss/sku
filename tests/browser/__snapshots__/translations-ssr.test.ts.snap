@@ -260,3 +260,165 @@ exports[`ssr translations > should render fr 1`] = `
   </body>
 </html>
 `;
+
+exports[`vite ssr translations > should render en 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@vite/client"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+    >
+  </head>
+  <body>
+    <div>
+      Hello sku
+      Company name
+    </div>
+    <script
+      nonce="RANDOM_NONCE"
+      id="_R_"
+    >
+      window.__SKU_DOCUMENT_ASSETS__={"css":[],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+    <script
+      type="module"
+      src="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`vite ssr translations > should render en-PSEUDO 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@vite/client"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+    >
+  </head>
+  <body>
+    <div>
+      [Ḩẽẽẽƚƚööö šķǚǚǚ]
+      [Çööm̂ƥăăกี้ýý กี้ăăm̂ẽẽ]
+    </div>
+    <script
+      nonce="RANDOM_NONCE"
+      id="_R_"
+    >
+      window.__SKU_DOCUMENT_ASSETS__={"css":[],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+    <script
+      type="module"
+      src="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`vite ssr translations > should render fr 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@vite/client"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+    >
+  </head>
+  <body>
+    <div>
+      Bonjour sku
+      บริษัท
+    </div>
+    <script
+      nonce="RANDOM_NONCE"
+      id="_R_"
+    >
+      window.__SKU_DOCUMENT_ASSETS__={"css":[],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+    <script
+      type="module"
+      src="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+  </body>
+</html>
+`;

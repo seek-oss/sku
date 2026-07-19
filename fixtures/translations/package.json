@@ -5,10 +5,12 @@
   "scripts": {
     "build": "sku build",
     "build:vite": "sku build --config sku.config.vite.ts",
+    "build:vite-ssr": "sku build --config sku.config.vite-ssr.ts",
     "serve": "sku serve",
     "start": "sku start",
     "start:ssr": "sku start-ssr --config sku-ssr.config.ts",
-    "start:vite": "sku start --config sku.config.vite.ts"
+    "start:vite": "sku start --config sku.config.vite.ts",
+    "start:vite-ssr": "sku start --config sku.config.vite-ssr.ts"
   },
   "dependencies": {
     "@vocab/core": "^1.6.2",
@@ -23,6 +25,7 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "dedent": "^1.5.1",
+    "react-router": "catalog:",
     "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true

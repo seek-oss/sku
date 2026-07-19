@@ -53,6 +53,12 @@
 - [x] 6.3 Config/command validation test for existing `public` directory (no browser e2e)
 - [x] 6.4 Docs: discourage `public` for Vite SSR in product + `configuration.md`; Migrating calls out moving off the folder
 
+## 7. Translations fixture: Vite SSR coverage
+
+- [x] 7.1 Add Vite SSR adapters to `fixtures/translations` (shared `App` + vocab; dedicated `clientEntry`/`serverEntry`; `sku.config.vite-ssr.ts` with `bundler: 'vite'`, `buildType: 'ssr'`, relative `publicPath`, distinct `target`/`port`)
+- [x] 7.2 Cover the same SSR scenarios as webpack translations SSR: `en`, `fr`, and `en-PSEUDO` via `?pseudo=true` (app snapshots; kitchen-sink vocab plumbing stays as-is)
+- [x] 7.3 Add fixture scripts / `react-router` dep as needed so `pnpm fixture translations` can run the Vite SSR mode
+
 ## Deferred
 
 - Production listen / custom logger — design Open Questions

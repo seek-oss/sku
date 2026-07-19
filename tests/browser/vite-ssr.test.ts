@@ -49,13 +49,12 @@ describe('vite-ssr', () => {
       // Shell-first Suspense: fallback appears, then deferred content streams in.
       expect(html).toContain('data-testid="fallback"');
       expect(html).toContain('Deferred content ready');
-      // client entry is bootstrapped explicitly under publicPath
-      expect(html).toContain('/static/vite-ssr/');
+      // Start serves Vite bootstrap from `/` (ignores config publicPath).
+      expect(html).not.toContain('/static/vite-ssr/');
       expect(html).toContain('vite-ssr-client');
-      expect(html).toContain('@vite/client');
+      expect(html).toContain('/@vite/client');
 
-      // Vite serve base must match publicPath — otherwise these fall through to HTML.
-      const viteClient = await fetch(`${url}/static/vite-ssr/@vite/client`);
+      const viteClient = await fetch(`${url}/@vite/client`);
       expect(viteClient.ok).toBe(true);
       expect(viteClient.headers.get('content-type')).toMatch(/javascript/);
       expect(await viteClient.text()).not.toContain('<!DOCTYPE html>');
@@ -149,8 +148,9 @@ describe('vite-ssr', () => {
       expect(about.ok).toBe(true);
       const aboutHtml = await about.text();
       expect(aboutHtml).toContain('About');
-      // App routes are outside publicPath; assets still use /static/vite-ssr/.
-      expect(aboutHtml).toContain('/static/vite-ssr/');
+      // Start ignores publicPath; production still serves assets under it.
+      expect(aboutHtml).not.toContain('/static/vite-ssr/');
+      expect(aboutHtml).toContain('/@vite/client');
 
       const details = await fetch(`${url}/details`);
       expect(details.ok).toBe(true);

@@ -1,4 +1,3 @@
-import path from 'node:path';
 import { createRequire } from 'node:module';
 import express from 'express';
 import { createDebug } from 'obug';
@@ -72,12 +71,8 @@ export const createDevSsrServer = async ({
   );
   serverApp.use(vite.middlewares);
 
-  const publicPath = skuContext.publicPath;
   const assets: RenderAssets = {
-    bootstrapModules: [
-      path.posix.join(publicPath, '@vite/client'),
-      `${publicPath}@fs/${clientEntry}`,
-    ],
+    bootstrapModules: [`/@vite/client`, `/@fs/${clientEntry}`],
     css: [],
     modulePreloads: [],
   };

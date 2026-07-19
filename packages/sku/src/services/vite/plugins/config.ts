@@ -10,7 +10,6 @@ export const configPlugin = ({
 }): PluginOption => ({
   name: makePluginName('config'),
   config: () => ({
-    base: skuContext.publicPath,
     // SSR does not support the copied-as-is public assets folder.
     publicDir: skuContext.buildType === 'ssr' ? false : skuContext.paths.public,
     root: process.cwd(),

@@ -1,12 +1,18 @@
 # Server rendering
 
-Sku’s server-side rendering is **Vite SSR**: a high-level API on `bundler: 'vite'` + `buildType: 'ssr'`, built on [React Router Data Mode](https://reactrouter.com/start/modes#data). Sku owns the HTTP server, Document shell, streaming, hydration, and CSP headers. Use `sku start` / `sku build` (same as static Vite).
+Sku’s server-side rendering is **Vite SSR**: a high-level API on `bundler: 'vite'` + `buildType: 'ssr'`, built on [React Router Data Mode](https://reactrouter.com/start/modes#data).
+Sku owns the HTTP server, Document shell, streaming, hydration, and CSP headers.
+Use `sku start` / `sku build` (same as static Vite).
 
-> **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+> **Experimental — not for production.** Vite SSR is available for evaluation and testing.
+> Do not use it in production yet; the API and behaviour may change.
 
 Scaffold with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or follow the sections below.
 
-Migrating from a static app or from the older webpack SSR API? See [Migrating](#migrating). Existing webpack SSR apps (`sku start-ssr` / `sku build-ssr` / `renderCallback`) remain supported for continuity — see [Older webpack SSR](#older-webpack-ssr-supported-for-continuity). New apps should not start on that path.
+Migrating from a static app or from the older webpack SSR API?
+See [Migrating](#migrating).
+Existing webpack SSR apps (`sku start-ssr` / `sku build-ssr` / `renderCallback`) remain supported for continuity — see [Older webpack SSR](#older-webpack-ssr-supported-for-continuity).
+New apps should not start on that path.
 
 ## Vite SSR
 
@@ -18,13 +24,17 @@ cd my-app
 pnpm start
 ```
 
-The `vite-ssr` template scaffolds `bundler: 'vite'`, `buildType: 'ssr'`, a relative `publicPath`, and the required named exports (`routes`, `onRequest`, `middleware`, `onHydrate`) at the default entry paths. Interactive create also offers **Vite SSR** as a distinct choice from static **Vite**.
+The `vite-ssr` template scaffolds `bundler: 'vite'`, `buildType: 'ssr'`, a relative `publicPath`, and the required named exports (`routes`, `onRequest`, `middleware`, `onHydrate`) at the default entry paths.
+Interactive create also offers **Vite SSR** as a distinct choice from static **Vite**.
 
 ### React Router Data Mode
 
-Vite SSR largely wraps [React Router Data Mode](https://reactrouter.com/start/modes#data). You export a named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry`; sku owns the HTTP server, document shell, streaming, and hydration, and wires each side’s route config into React Router on the server and in the browser. Loaders, actions, lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
+Vite SSR largely wraps [React Router Data Mode](https://reactrouter.com/start/modes#data).
+You export a named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry`; sku owns the HTTP server, document shell, streaming, and hydration, and wires each side’s route config into React Router on the server and in the browser.
+Loaders, actions, lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
 
-Server and client route trees **must** stay hydration-compatible (same path / nesting / ids so server HTML matches hydrated HTML). Implementations on those trees (for example React Router route `middleware`, loaders, or component bodies) **may** diverge.
+Server and client route trees **must** stay hydration-compatible (same path / nesting / ids so server HTML matches hydrated HTML).
+Implementations on those trees (for example React Router route `middleware`, loaders, or component bodies) **may** diverge.
 
 For information on how to use React Router to register routes, see [React Router Data Mode](https://reactrouter.com/start/data/routing).
 
@@ -41,11 +51,14 @@ export default {
 } satisfies SkuConfig;
 ```
 
-Vite SSR does **not** support the config [`public`](./configuration.md#public) assets folder (files copied/served as-is without content hashing). If that directory exists (default path `public`), `sku start` / `sku build` hard-error. Import images and other assets from modules so they go through Vite’s hashed pipeline.
+Vite SSR does **not** support the config [`public`](./configuration.md#public) assets folder (files copied/served as-is without content hashing).
+If that directory exists (default path `public`), `sku start` / `sku build` hard-error.
+Import images and other assets from modules so they go through Vite’s hashed pipeline.
 
 ### Routes
 
-Export named `routes` from **both** the server and client entries. These need to match in HTML and will likely only differ based on loaders or middleware.
+Export named `routes` from **both** the server and client entries.
+These need to match in HTML and will likely only differ based on loaders or middleware.
 
 ```tsx
 // src/pages/home/route.ts
@@ -92,7 +105,8 @@ export const routes = createRoutes();
 // … onHydrate
 ```
 
-Prefer co-locating each page in its own directory with a `route.ts` (path / lazy / loaders / handle) and the page module (e.g. `home.tsx`). Compose those route modules inside `createRoutes`.
+Prefer co-locating each page in its own directory with a `route.ts` (path / lazy / loaders / handle) and the page module (e.g. `home.tsx`).
+Compose those route modules inside `createRoutes`.
 
 Lazy page modules MUST use React Router Data Mode’s named `Component` export (not `export default`) so they typecheck with `lazy: () => import('…')`:
 
@@ -116,7 +130,9 @@ sku owns:
 
 ### Request entries (`serverEntry` / `clientEntry`)
 
-Required separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition and server-only middleware. Under Vite SSR these use **named exports** — they do **not** own the HTML response (sku still streams Document + CSP) and are not a static `#app` hydrate entry. Missing entry files or any required named export is a **hard error**; sku does not use `default` or supply noop stubs.
+Required separate modules via the existing `serverEntry` / `clientEntry` keys (defaults `src/server.tsx` / `src/client.tsx`; path may be `.ts` / `.tsx` / `.js`) for per-request composition and server-only middleware.
+Under Vite SSR these use **named exports** — they do **not** own the HTML response (sku still streams Document + CSP) and are not a static `#app` hydrate entry.
+Missing entry files or any required named export is a **hard error**; sku does not use `default` or supply noop stubs.
 
 **Server entry** must export:
 
@@ -163,7 +179,9 @@ export const onHydrate: SkuSsrOnHydrate = () => ({
 
 ### App-level providers (`AppWrapper`)
 
-`AppWrapper` is a React component `ComponentType<{ children }>` for **providers only**. Not page layout or HTML. sku mounts it **inside** the router as a pathless parent layout so it may use React Router hooks (`useLocation`, `useParams`, etc.).
+`AppWrapper` is a React component `ComponentType<{ children }>` for **providers only**.
+Not page layout or HTML.
+sku mounts it **inside** the router as a pathless parent layout so it may use React Router hooks (`useLocation`, `useParams`, etc.).
 
 Render tree:
 
@@ -174,7 +192,8 @@ Document
               └── consumer routes
 ```
 
-This is your opportunity to define Providers that may differ in implementation, or have different dependencies between server and client. For example, an API client might use different methods to make requests so the same Provider may create a different client for each environment.
+This is your opportunity to define Providers that may differ in implementation, or have different dependencies between server and client.
+For example, an API client might use different methods to make requests so the same Provider may create a different client for each environment.
 
 `onRequest` may also return:
 
@@ -209,13 +228,19 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => {
 
 ### Middleware
 
-Vite SSR has **two HTTP middleware layers**, plus optional React Router route `middleware` on your `routes` trees. Pick the HTTP layer based on whether the traffic should exist in production. Do not confuse Express/Connect handlers with React Router’s route `middleware` field.
+Vite SSR has **two HTTP middleware layers**, plus optional React Router route `middleware` on your `routes` trees.
+Pick the HTTP layer based on whether the traffic should exist in production.
+Do not confuse Express/Connect handlers with React Router’s route `middleware` field.
 
 #### Server-entry `middleware` (required; runs in start and production)
 
-Export Connect/Express-compatible handlers from the server entry as named `middleware` (`SkuSsrMiddleware`: a handler or array). Empty array / passthrough is fine. Sku mounts this **before** Vite middlewares and the HTML render path in both `sku start` and the production server. It must not commit the document body.
+Export Connect/Express-compatible handlers from the server entry as named `middleware` (`SkuSsrMiddleware`: a handler or array).
+Empty array / passthrough is fine.
+Sku mounts this **before** Vite middlewares and the HTML render path in both `sku start` and the production server.
+It must not commit the document body.
 
-Vite SSR runs **Express 4**. Type `middleware` against Express 4 (`SkuSsrMiddleware` / `@types/express` major 4) — that matches the Express major sku depends on for the Vite SSR server.
+Vite SSR runs **Express 4**.
+Type `middleware` against Express 4 (`SkuSsrMiddleware` / `@types/express` major 4) — that matches the Express major sku depends on for the Vite SSR server.
 
 ```tsx
 import type { SkuSsrMiddleware } from 'sku';
@@ -231,9 +256,11 @@ export const middleware: SkuSsrMiddleware = (req, res, next) => {
 
 #### Config `devServerMiddleware` (optional; `sku start` only)
 
-Use config [`devServerMiddleware`](./configuration.md#devservermiddleware) for **local mocks and proxies** that production never serves from the Node app (for example `/api` traffic that a reverse proxy handles in deployed environments). Sku mounts that file only in Vite SSR `sku start`, and **never** imports it into the production server bundle.
+Use config [`devServerMiddleware`](./configuration.md#devservermiddleware) for **local mocks and proxies** that production never serves from the Node app (for example `/api` traffic that a reverse proxy handles in deployed environments).
+Sku mounts that file only in Vite SSR `sku start`, and **never** imports it into the production server bundle.
 
-In Vite SSR start, the function receives the Express app (same shape as webpack SSR / `extra-features` docs). Static Vite apps still receive Vite’s Connect instance — see [Vite → Dev server middleware](./vite.md#dev-server-middleware).
+In Vite SSR start, the function receives the Express app (same shape as webpack SSR / `extra-features` docs).
+Static Vite apps still receive Vite’s Connect instance — see [Vite → Dev server middleware](./vite.md#dev-server-middleware).
 
 ```ts
 // sku.config.ts
@@ -263,15 +290,20 @@ export default (app) => {
 4. Vite middlewares (HMR / assets)
 5. HTML render
 
-Dev mocks mount **before** production middleware so they can intercept traffic that would never reach the app in production. Put anything that must ship in production on the server-entry export; keep stubs and local-only routes in `devServerMiddleware`.
+Dev mocks mount **before** production middleware so they can intercept traffic that would never reach the app in production.
+Put anything that must ship in production on the server-entry export; keep stubs and local-only routes in `devServerMiddleware`.
 
 #### React Router route `middleware` (on `routes`)
 
-React Router Data Mode also supports a `middleware` array on `RouteObject`s. That is **not** the same as server-entry Express/Connect `middleware`. Put route middleware on each entry’s `routes` (via `createRoutes(...)` options if they diverge). Keep path / nesting / ids hydration-compatible when server and client implementations differ.
+React Router Data Mode also supports a `middleware` array on `RouteObject`s.
+That is **not** the same as server-entry Express/Connect `middleware`.
+Put route middleware on each entry’s `routes` (via `createRoutes(...)` options if they diverge).
+Keep path / nesting / ids hydration-compatible when server and client implementations differ.
 
 ### CSP
 
-When `cspEnabled` and/or `cspReportOnlyEnabled` are set, Vite SSR delivers CSP as **HTTP headers** (`Content-Security-Policy` / `Content-Security-Policy-Report-Only`) derived from the document shell plus nonces and hashes of bootstrap scripts. Meta `http-equiv` CSP is **not** used on the Vite SSR path.
+When `cspEnabled` and/or `cspReportOnlyEnabled` are set, Vite SSR delivers CSP as **HTTP headers** (`Content-Security-Policy` / `Content-Security-Policy-Report-Only`) derived from the document shell plus nonces and hashes of bootstrap scripts.
+Meta `http-equiv` CSP is **not** used on the Vite SSR path.
 
 Vite SSR uses **at most one** request-scoped nonce per HTML response, minted only when explicitly requested (`getCspNonce()` from `sku`, or `req.getCspNonce()` in middleware).
 
@@ -301,11 +333,14 @@ export async function loader() {
 
 ### Document hydration
 
-sku hydrates the **full document** with `hydrateRoot(document, …)` — there is no `#app` mount node and no consumer `renderDocument` / static `render.tsx` on this path. Prefer React document metadata in routes/layouts for `<head>` / SEO. The Document shell itself is not overridable.
+sku hydrates the **full document** with `hydrateRoot(document, …)` — there is no `#app` mount node and no consumer `renderDocument` / static `render.tsx` on this path.
+Prefer React document metadata in routes/layouts for `<head>` / SEO.
+The Document shell itself is not overridable.
 
 ### Lazy routes and `handle.moduleId`
 
-Prefer React Router’s idiomatic lazy form so each route is a separate async chunk (on server and client). Put that `lazy` on the page’s `route.ts` so sku can auto-derive `handle.moduleId` from a single string-literal `import()` during the Vite SSR transform:
+Prefer React Router’s idiomatic lazy form so each route is a separate async chunk (on server and client).
+Put that `lazy` on the page’s `route.ts` so sku can auto-derive `handle.moduleId` from a single string-literal `import()` during the Vite SSR transform:
 
 ```tsx
 // src/pages/about/route.ts
@@ -326,9 +361,12 @@ export const detailsRoute = {
 } satisfies RouteObject;
 ```
 
-Do **not** statically import those page modules into `createRoutes` / `route.ts` — that eagerly bundles them and defeats per-route chunking. Import only the route configs. The `fixtures/vite-ssr` app demonstrates this pattern with distinct `about` and `details` chunks.
+Do **not** statically import those page modules into `createRoutes` / `route.ts` — that eagerly bundles them and defeats per-route chunking.
+Import only the route configs.
+The `fixtures/vite-ssr` app demonstrates this pattern with distinct `about` and `details` chunks.
 
-**Escape hatch:** set `handle.moduleId` explicitly to the Vite client manifest key (usually the source path, e.g. `src/pages/about/about.tsx`) when you need a custom key or a non-idiomatic `lazy` shape. An explicit value is never overwritten.
+**Escape hatch:** set `handle.moduleId` explicitly to the Vite client manifest key (usually the source path, e.g. `src/pages/about/about.tsx`) when you need a custom key or a non-idiomatic `lazy` shape.
+An explicit value is never overwritten.
 
 sku does **not** guess for non-idiomatic shapes (no injection):
 
@@ -356,13 +394,16 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => ({
 });
 ```
 
-Wrap your UI in `VocabProvider` via `AppWrapper` (see [App-level providers](#app-level-providers-appwrapper)) or a layout. Client locale is app-owned: re-derive it the same way `onRequest` did (URL / cookies / headers), via React Router hooks inside `AppWrapper`, or optionally seed it through `clientContext`. URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
+Wrap your UI in `VocabProvider` via `AppWrapper` (see [App-level providers](#app-level-providers-appwrapper)) or a layout.
+Client locale is app-owned: re-derive it the same way `onRequest` did (URL / cookies / headers), via React Router hooks inside `AppWrapper`, or optionally seed it through `clientContext`.
+URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
 
 ### Multiple paths per page / languages in path
 
 Some URL schemes serve the same page at more than one path — for example `/about` for a default language and `/fr/about` when the language is nested in the path.
 
-React Router Data Mode matches on the full path and does not let one route definition declare multiple paths. Define the page once, then register a separate route object for each path that should serve it:
+React Router Data Mode matches on the full path and does not let one route definition declare multiple paths.
+Define the page once, then register a separate route object for each path that should serve it:
 
 ```tsx
 // src/pages/page/route.ts
@@ -378,11 +419,14 @@ export const aboutRoutes: RouteObject[] = [
 ];
 ```
 
-Be careful using dynamic params such as `:lang`. A dynamic segment would match unsupported prefixes and the server would respond on routes you do not intend to support; listing only supported prefixes means unknown ones fall through as not found.
+Be careful using dynamic params such as `:lang`.
+A dynamic segment would match unsupported prefixes and the server would respond on routes you do not intend to support; listing only supported prefixes means unknown ones fall through as not found.
 
 ### Error pages
 
-Route errors (loader failures, thrown `data()`, `404`, and `405` when a mutation hits a route without an `action`) are React Router error responses. sku streams the document with `context.statusCode` and renders the nearest route `ErrorBoundary` (or React Router’s default error UI). Customize content with [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary).
+Route errors (loader failures, thrown `data()`, `404`, and `405` when a mutation hits a route without an `action`) are React Router error responses.
+sku streams the document with `context.statusCode` and renders the nearest route `ErrorBoundary` (or React Router’s default error UI).
+Customize content with [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary).
 
 ```tsx
 // src/RootLayout.tsx
@@ -442,20 +486,28 @@ node dist/server/server.js
 # optional: PORT=8080 node dist/server/server.js
 ```
 
-Deploy both `client/` and `server/` together. Client assets are served from `dist/client/` under the relative `publicPath` (static asset prefix only — it is **not** React Router `basename`; app HTML routes stay at `/…`). Absolute / CDN `publicPath` is not supported for Vite SSR.
+Deploy both `client/` and `server/` together.
+Client assets are served from `dist/client/` under the relative `publicPath`.
+Absolute / CDN `publicPath` is not supported for Vite SSR.
+During `sku start`, the Vite module graph is served from `/` and config `publicPath` is ignored until production.
 
-Production listens on `process.env.PORT` when set, otherwise the config [`port`](./configuration.md#port) baked at build time (default `8080`). The same `port` is used for `sku start`. [`serverPort`](./configuration.md#serverport) is webpack-SSR-only and is rejected for Vite SSR.
+Production listens on `process.env.PORT` when set, otherwise the config [`port`](./configuration.md#port) baked at build time (default `8080`).
+The same `port` is used for `sku start`.
+[`serverPort`](./configuration.md#serverport) is webpack-SSR-only and is rejected for Vite SSR.
 
 ### CJS default-export interop
 
-Some CommonJS packages expose both a default and named exports. Under Vite SSR **`sku start`**, importing such a package as a React component can resolve to a **module namespace object** (`{ default: ActualComponent, … }`). React then fails with:
+Some CommonJS packages expose both a default and named exports.
+Under Vite SSR **`sku start`**, importing such a package as a React component can resolve to a **module namespace object** (`{ default: ActualComponent, … }`).
+React then fails with:
 
 ```
 Element type is invalid: expected a string … but got: object.
 You likely forgot to export your component … or you might have mixed up default and named imports.
 ```
 
-Production `sku build` may still succeed for the same import — the failure is often start-only. Extend [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) with the package name (sku already includes Apollo Client in its baked defaults; this change does **not** expand that list further):
+Production `sku build` may still succeed for the same import — the failure is often start-only.
+Extend [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) with the package name (sku already includes Apollo Client in its baked defaults; this change does **not** expand that list further):
 
 ```ts
 // sku.config.ts
@@ -478,7 +530,8 @@ Prefer upgrading to an ESM build or replacing the dependency when possible.
 
 ### Migrate from Static App
 
-High-level guide for moving a **static** sku app (webpack or Vite SSG) to Vite SSR. For day-to-day API detail, prefer the [Vite SSR](#vite-ssr) sections above.
+High-level guide for moving a **static** sku app (webpack or Vite SSG) to Vite SSR.
+For day-to-day API detail, prefer the [Vite SSR](#vite-ssr) sections above.
 
 #### Requirements
 
@@ -488,7 +541,8 @@ High-level guide for moving a **static** sku app (webpack or Vite SSG) to Vite S
 
 #### Limitations
 
-This guide covers the **sku** surface only (config, entries, providers, middleware, CSP, headers, hydration). Infrastructure, deployments, process managers, and reverse-proxy setup are out of scope.
+This guide covers the **sku** surface only (config, entries, providers, middleware, CSP, headers, hydration).
+Infrastructure, deployments, process managers, and reverse-proxy setup are out of scope.
 
 #### Config and commands
 
@@ -538,7 +592,8 @@ See [Middleware](#middleware) for the two-layer HTTP split and start mount order
 
 High-level guide for moving from the older **webpack-based SSR** (`sku start-ssr` / `sku build-ssr` / `renderCallback`) to the new Vite-based SSR.
 
-The older SSR API was significantly lower-level and required apps to introduce a lot of their own bespoke behaviour. Because of this, migration will likely be dependent on your solution’s specifics.
+The older SSR API was significantly lower-level and required apps to introduce a lot of their own bespoke behaviour.
+Because of this, migration will likely be dependent on your solution’s specifics.
 
 #### Requirements
 
@@ -548,7 +603,8 @@ The older SSR API was significantly lower-level and required apps to introduce a
 
 #### Limitations
 
-Covers the **sku** migration surface only. Deploy/process/infra changes are out of scope beyond noting command and layout differences.
+Covers the **sku** migration surface only.
+Deploy/process/infra changes are out of scope beyond noting command and layout differences.
 
 #### Config and commands
 
@@ -603,7 +659,8 @@ See [Middleware](#middleware) for mount order.
 
 ## Older webpack SSR (supported for continuity)
 
-Previously, sku’s only SSR support was a low-level webpack API using `-ssr` commands (`sku start-ssr` / `sku build-ssr`) and a `serverEntry` default export with `renderCallback`. That path is **discouraged for new apps** — prefer [Vite SSR](#vite-ssr) above, or [migrate](#migrate-from-older-ssr-app).
+Previously, sku’s only SSR support was a low-level webpack API using `-ssr` commands (`sku start-ssr` / `sku build-ssr`) and a `serverEntry` default export with `renderCallback`.
+That path is **discouraged for new apps** — prefer [Vite SSR](#vite-ssr) above, or [migrate](#migrate-from-older-ssr-app).
 
 It remains **supported for existing webpack SSR apps** for continuity and will eventually be deprecated.
 
@@ -621,7 +678,8 @@ export default {
 } satisfies SkuConfig;
 ```
 
-Sku provides an [Express](https://expressjs.com/) server. The `serverEntry` default export may provide `renderCallback`, optional `middleware`, and optional `onStart`:
+Sku provides an [Express](https://expressjs.com/) server.
+The `serverEntry` default export may provide `renderCallback`, optional `middleware`, and optional `onStart`:
 
 ```tsx
 import template from './template';
@@ -695,7 +753,8 @@ export default (): Server => ({
 
 ### Multi-language support
 
-When using multiple languages the browser will download the language as needed, which can delay first paint. To ensure translations are available immediately, call `addLanguageChunk` from your render params (Vite SSR uses server-entry `language` instead — see [Vocab / language chunks](#vocab--language-chunks)):
+When using multiple languages the browser will download the language as needed, which can delay first paint.
+To ensure translations are available immediately, call `addLanguageChunk` from your render params (Vite SSR uses server-entry `language` instead — see [Vocab / language chunks](#vocab--language-chunks)):
 
 ```jsx
 export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
@@ -722,6 +781,7 @@ On the older webpack SSR path, `sku start-ssr` starts two services:
 - A dev server for static assets
 - An SSR service running your app’s server code
 
-The dev server is the single entrypoint and proxies non-asset requests to the SSR service (similar to a production reverse proxy, and avoiding CORS for client requests). Vite SSR uses a single port instead.
+The dev server is the single entrypoint and proxies non-asset requests to the SSR service (similar to a production reverse proxy, and avoiding CORS for client requests).
+Vite SSR uses a single port instead.
 
 To proxy other traffic (for example APIs), use [Dev Server Middleware](./extra-features#devserver-middleware).

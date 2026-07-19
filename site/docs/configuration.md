@@ -526,6 +526,8 @@ The URL all the static assets of the app are accessible under.
 
 For SSR (`buildType: 'ssr'`) the `publicPath` must be relative (e.g. `/` or `/static/`). Absolute `http(s)` / CDN URLs are not supported.
 
+For SSR, `publicPath` applies to `sku build` / production. `sku start` serves the Vite module graph from `/`.
+
 ## renderEntry
 
 Type: `string`

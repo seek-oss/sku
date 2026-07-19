@@ -278,7 +278,11 @@ Absolute `http(s)` / CDN `publicPath` MUST fail at config validation.
 
 `publicPath` MUST configure the static asset prefix only (webpack-aligned `__SKU_PUBLIC_PATH__`).
 
-Vite `config.base` is an implementation detail and MUST be set to that prefix for both `sku build` and `sku start`.
+For `sku build` / production, Vite `config.base` is an implementation detail and MUST be set to that prefix so emitted client URLs match.
+The production server MUST serve client assets under `publicPath`.
+
+For `sku start`, sku MUST ignore config `publicPath` and serve the Vite module graph from `/` (bootstrap at `/@vite/client`, etc.).
+Sku MUST NOT set Vite `config.base` to `publicPath` during start.
 
 Sku MUST NOT pass `publicPath` as the React Router `basename`, and MUST NOT treat Vite’s `import.meta.env.BASE_URL` as a product API.
 
@@ -289,7 +293,7 @@ Sku MUST NOT expose a first-class router-basename config option.
 Absolute/CDN rejection MUST NOT require a dedicated browser e2e fixture.
 
 The decoupled asset-prefix case MUST be covered by a fixture or equivalent test
-(including that start-served document assets under `publicPath` are JavaScript, not HTML fallthrough).
+(production document assets under `publicPath`; start bootstrap from `/`).
 
 #### Scenario: Absolute publicPath rejected
 
@@ -301,13 +305,14 @@ The decoupled asset-prefix case MUST be covered by a fixture or equivalent test
 - **WHEN** a Vite SSR app sets a relative `publicPath` such as `/static/my-app`
 - **AND** the browser requests an app route that does not start with that `publicPath`
 - **THEN** sku streams HTML for that route (not a basename mismatch 404)
-- **AND** document assets are served under that `publicPath`
+- **AND** in production, document assets are served under that `publicPath`
 
-#### Scenario: sku start serves publicPath assets as modules
+#### Scenario: sku start serves Vite bootstrap from root
 
 - **WHEN** a Vite SSR app sets a relative `publicPath` such as `/static/my-app` and runs `sku start`
-- **AND** the document references bootstrap modules under that `publicPath` (e.g. `@vite/client`)
-- **THEN** those URLs are served as JavaScript by Vite (not HTML / React Router 404 fallthrough)
+- **THEN** the document references bootstrap modules under `/` (e.g. `/@vite/client`)
+- **AND** those URLs are served as JavaScript by Vite (not HTML / React Router 404 fallthrough)
+- **AND** the document does not require assets under that `publicPath` for hydration
 
 ### Requirement: Vite SSR rejects the public assets folder
 

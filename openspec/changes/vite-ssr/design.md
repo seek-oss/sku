@@ -130,7 +130,11 @@ Migrating docs must call this out (drop `serverPort`; map old `serverPort` → `
 
 `publicPath` is sku’s asset prefix — the public URL path for static assets (webpack parity via `__SKU_PUBLIC_PATH__`).
 
-Vite receives it as `config.base` for **both** `sku build` and `sku start` so emitted / injected client URLs match what Vite middleware owns.
+**Production / `sku build`:** Vite `config.base` is set to `publicPath` so emitted client URLs match. The production server mounts `express.static` at that prefix.
+HTML injects assets under `publicPath`.
+
+**`sku start`:** Ignore config `publicPath` and serve the Vite module graph from `/` (webpack SSR start parity). Bootstrap scripts are `/@vite/client` and `/@fs/…` — not under `publicPath`
+Documents stay on app routes outside any asset prefix either way.
 
 Sku MUST NOT treat Vite’s built-in `import.meta.env.BASE_URL` as a product concept or pass it (or `publicPath`) as React Router `basename`.
 
@@ -138,15 +142,11 @@ Basename stays unset (effectively `/`).
 
 Path-prefixed SPA basenames are a discouraged pattern and MUST NOT become a first-class sku config.
 
-Relative `publicPath` values like `/static/my-app` MUST work with app HTML served on routes outside that prefix.
+Relative `publicPath` values like `/static/my-app` MUST work in production with app HTML served on routes outside that prefix.
 
-Cover with a fixture or equivalent test.
+Cover with a fixture or equivalent test (production asset prefix; start bootstrap at `/`).
 
-**Regression:** If `base` is build-only while start still injects `bootstrapModules` under `publicPath`, Vite middleware (default `base: '/'`) misses those requests and they fall through to the HTML renderer (often RR 404 HTML as `text/html`).
-
-Fix by setting `config.base` for serve + build.
-
-Do **not** force start bootstrap URLs to `/` (webpack start behaviour) — keep start asset URLs under `publicPath`.
+Do **not** set Vite `config.base` to `publicPath` for `sku start` — that conflates Vite’s app-root with sku’s asset prefix and breaks static SPA start when shared.
 
 ### 4b. No config `public` assets folder for Vite SSR
 
@@ -325,17 +325,17 @@ Align Express `@types` with the Express major used by the Vite SSR server runtim
 
 ## Risks / Trade-offs
 
-| Risk                                | Mitigation                                                                                                    |
-| ----------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Dual `routes` hydration mismatch    | Docs + template `createRoutes`; no runtime checker                                                            |
-| Shell-only CSP / late scripts       | Lazy single nonce; hash known bootstrap bodies                                                                |
-| Absolute/`CDN` `publicPath`         | Config rejects; relative-only docs; no browser e2e for this edge case                                         |
-| `publicPath` coupled to basename    | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets          |
-| Start assets 404 under `publicPath` | Set Vite `config.base` for serve + build (not `apply: 'build'` only); keep start bootstrap under `publicPath` |
-| Unhashed `public` folder assets     | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs   |
-| CJS “got: object” on `sku start`    | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                               |
-| Mock deps ship in prod              | `devServerMiddleware` only; never from server entry                                                           |
-| Early production use                | Experimental docs + changeset                                                                                 |
+| Risk                             | Mitigation                                                                                                  |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Dual `routes` hydration mismatch | Docs + template `createRoutes`; no runtime checker                                                          |
+| Shell-only CSP / late scripts    | Lazy single nonce; hash known bootstrap bodies                                                              |
+| Absolute/`CDN` `publicPath`      | Config rejects; relative-only docs; no browser e2e for this edge case                                       |
+| `publicPath` coupled to basename | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets        |
+| Start vs prod asset URLs         | Start: Vite graph at `/`; build/prod: `base` + static mount under `publicPath` (webpack start parity)       |
+| Unhashed `public` folder assets  | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs |
+| CJS “got: object” on `sku start` | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                             |
+| Mock deps ship in prod           | `devServerMiddleware` only; never from server entry                                                         |
+| Early production use             | Experimental docs + changeset                                                                               |
 
 ## Migration Plan
 

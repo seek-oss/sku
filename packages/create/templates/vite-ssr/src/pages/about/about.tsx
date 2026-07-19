@@ -1,7 +1,7 @@
 import { Box, Heading, Text, Strong, Stack } from 'braid-design-system';
 import { Link } from 'react-router';
 
-export default function About() {
+export function Component() {
   return (
     <Box padding="xlarge">
       <Stack space="large">
@@ -9,7 +9,9 @@ export default function About() {
         <Text>
           This is a lazy-loaded route in your Vite SSR starter. Prefer idiomatic{' '}
           <Strong>lazy: () =&gt; import(&apos;./…&apos;)</Strong> so sku can
-          auto-derive modulepreloads in production.
+          auto-derive modulepreloads in production. Export a named{' '}
+          <Strong>Component</Strong> (not <Strong>default</Strong>) from the
+          page module.
         </Text>
         <Text>
           <Link to="/">Back home</Link>

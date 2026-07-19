@@ -19,6 +19,5 @@ fixtures/*/eslint.config.mjs
 fixtures/*/.prettierrc
 fixtures/*/tsconfig.json
 *.hbs
-ignore_*/
 site/.vitepress/cache/
 site/.vitepress/dist/

@@ -25,9 +25,9 @@ export const startProductionSsrServer = async ({
     ),
   ) as ClientManifest;
   const entry = findEntryChunk(manifest);
-  const base = import.meta.env.BASE_URL;
+  const publicPath = __SKU_PUBLIC_PATH__;
   const assets: RenderAssets = {
-    bootstrapModules: [path.posix.join(base, entry.file)],
+    bootstrapModules: [path.posix.join(publicPath, entry.file)],
     css: [],
     modulePreloads: [],
   };
@@ -36,12 +36,12 @@ export const startProductionSsrServer = async ({
 
   return listen({
     port: Number(process.env.PORT) || Number(__SKU_DEFAULT_SERVER_PORT__),
-    base,
+    publicPath,
     middleware,
     render,
     assets,
     clientDirectory,
-    manifest: { manifest, base, entry },
+    manifest: { manifest, publicPath, entry },
     cspEnabled: csp.enabled,
     cspExtraScriptSrcHosts: csp.extraHosts,
     cspReportOnlyEnabled: csp.reportOnlyEnabled ?? false,

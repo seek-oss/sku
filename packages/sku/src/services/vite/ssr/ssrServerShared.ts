@@ -124,7 +124,7 @@ export type RenderFunction = (
 
 export interface SsrServerOptions {
   port: number;
-  base: string;
+  publicPath: string;
   middleware: SkuSsrMiddleware;
   render: RenderFunction;
   assets: RenderAssets;
@@ -282,7 +282,7 @@ export const listen = async (
     serverApp.use(middleware),
   );
   if (options.clientDirectory) {
-    serverApp.use(options.base, express.static(options.clientDirectory));
+    serverApp.use(options.publicPath, express.static(options.clientDirectory));
   }
 
   serverApp.use(

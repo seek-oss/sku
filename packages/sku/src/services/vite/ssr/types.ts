@@ -48,7 +48,7 @@ export type SkuSsrOnHydrate = (args: {
 
 export interface RenderManifest {
   manifest: ClientManifest;
-  base: string;
+  publicPath: string;
   entry: ManifestChunk;
 }
 

@@ -1,5 +1,5 @@
 import { App } from '../../App/App';
 
-export default function Home() {
+export function Component() {
   return <App />;
 }

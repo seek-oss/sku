@@ -320,6 +320,8 @@ export default {
 } satisfies SkuConfig;
 ```
 
+For Vite SSR specifically, a related failure mode is React “Element type is invalid … got: object” under `sku start` when a CJS default export resolves as a module namespace. Prefer [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) for that case — see [Server rendering → CJS default-export interop](./server-rendering.md#cjs-default-export-interop).
+
 [compilePackages]: ./configuration.md#compilepackages
 
 ### Vite client types

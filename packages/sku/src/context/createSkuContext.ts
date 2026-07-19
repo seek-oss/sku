@@ -86,7 +86,7 @@ export const createSkuContext = async ({
     ...appSkuConfig,
   } satisfies SkuConfig;
 
-  validateConfig(skuConfig);
+  validateConfig(skuConfig, appSkuConfig);
 
   validatePathAliases(skuConfig.pathAliases);
 

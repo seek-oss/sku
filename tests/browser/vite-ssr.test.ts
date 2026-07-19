@@ -49,7 +49,8 @@ describe('vite-ssr', () => {
       // Shell-first Suspense: fallback appears, then deferred content streams in.
       expect(html).toContain('data-testid="fallback"');
       expect(html).toContain('Deferred content ready');
-      // client entry is bootstrapped explicitly.
+      // client entry is bootstrapped explicitly under publicPath
+      expect(html).toContain('/static/vite-ssr/');
       expect(html).toContain('vite-ssr-client');
       expect(html).toContain('@vite/client');
 
@@ -139,9 +140,14 @@ describe('vite-ssr', () => {
     it('renders lazy routes', async ({ task }) => {
       skipCleanup(task.id);
       const about = await fetch(`${url}/about`);
-      expect(await about.text()).toContain('About');
+      expect(about.ok).toBe(true);
+      const aboutHtml = await about.text();
+      expect(aboutHtml).toContain('About');
+      // App routes are outside publicPath; assets still use /static/vite-ssr/.
+      expect(aboutHtml).toContain('/static/vite-ssr/');
 
       const details = await fetch(`${url}/details`);
+      expect(details.ok).toBe(true);
       expect(await details.text()).toContain('Details');
     });
 
@@ -317,6 +323,7 @@ describe('vite-ssr', () => {
           const html = await response.text();
           expect(html).toContain('Vite SSR Home');
           expect(html).toContain('<!DOCTYPE html>');
+          expect(html).toContain('/static/vite-ssr/');
           expect(response.headers.get('content-security-policy')).toBeTruthy();
           const cspReportOnly = response.headers.get(
             'content-security-policy-report-only',

@@ -19,7 +19,7 @@ const exitWithErrors = async (errors: string[]) => {
   process.exit(1);
 };
 
-export default (skuConfig: SkuConfig) => {
+export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
   const errors = [];
 
   // Validate extra keys
@@ -78,6 +78,19 @@ export default (skuConfig: SkuConfig) => {
       `🚫 Vite SSR requires a relative '${strong(
         'publicPath',
       )}' (e.g. '/' or '/static/'). Absolute http(s) / CDN publicPath is not supported.`,
+    );
+  }
+
+  // Check the consumer file (pre-defaults merge): defaults always include serverPort.
+  if (
+    skuConfig.buildType === 'ssr' &&
+    skuConfig.bundler === 'vite' &&
+    Object.prototype.hasOwnProperty.call(appSkuConfig, 'serverPort')
+  ) {
+    errors.push(
+      `🚫 Vite SSR does not support '${strong(
+        'serverPort',
+      )}'. Use '${strong('port')}' for both \`sku start\` and the production default listen port (overridable via \`PORT\`).`,
     );
   }
 

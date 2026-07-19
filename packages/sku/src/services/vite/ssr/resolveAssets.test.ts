@@ -27,7 +27,7 @@ describe('resolveAssets', () => {
   it('resolves modulepreloads for known moduleIds', () => {
     const assets = resolveAssets({
       manifest,
-      base: '/assets/',
+      publicPath: '/assets/',
       entry: manifest['src/entry.tsx'],
       moduleIds: ['src/pages/about.tsx'],
     });
@@ -44,7 +44,7 @@ describe('resolveAssets', () => {
           name: 'en-translations',
         },
       },
-      base: '/',
+      publicPath: '/',
       entry: manifest['src/entry.tsx'],
       moduleIds: ['en-translations'],
     });
@@ -57,7 +57,7 @@ describe('resolveAssets', () => {
 
     resolveAssets({
       manifest,
-      base: '/',
+      publicPath: '/',
       entry: manifest['src/entry.tsx'],
       moduleIds: ['src/pages/missing.tsx'],
       development: true,
@@ -73,7 +73,7 @@ describe('resolveAssets', () => {
 
     resolveAssets({
       manifest,
-      base: '/',
+      publicPath: '/',
       entry: manifest['src/entry.tsx'],
       moduleIds: ['src/pages/missing.tsx'],
       development: false,

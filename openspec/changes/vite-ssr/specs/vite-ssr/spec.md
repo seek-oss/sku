@@ -222,14 +222,36 @@ When `languages` is configured for build-time vocab splitting, sku MUST register
 - **WHEN** `onRequest` omits `language`
 - **THEN** sku does not register a vocab language chunk and the SSR response still succeeds
 
-### Requirement: Vite SSR publicPath is relative only
+### Requirement: Vite SSR publicPath is relative only and is the static asset prefix only
 
-Vite SSR apps MUST use a relative `publicPath`. Absolute `http(s)` / CDN `publicPath` MUST fail at config validation. This edge case MUST NOT require a dedicated browser e2e fixture.
+Vite SSR apps MUST use a relative `publicPath`. Absolute `http(s)` / CDN `publicPath` MUST fail at config validation. `publicPath` MUST configure the static asset prefix only (webpack-aligned `__SKU_PUBLIC_PATH__`; Vite `config.base` is an implementation detail for emitting asset URLs). Sku MUST NOT pass `publicPath` as the React Router `basename`, and MUST NOT treat Vite’s `import.meta.env.BASE_URL` as a product API. Router basename MUST remain unset (effectively `/`). Sku MUST NOT expose a first-class router-basename config option. Absolute/`CDN` rejection MUST NOT require a dedicated browser e2e fixture; the decoupled asset-prefix case MUST be covered by a fixture or equivalent test.
 
 #### Scenario: Absolute publicPath rejected
 
 - **WHEN** Vite SSR is enabled with an absolute `http(s)` `publicPath`
 - **THEN** config validation fails stating that Vite SSR requires a relative `publicPath`
+
+#### Scenario: publicPath does not become React Router basename
+
+- **WHEN** a Vite SSR app sets a relative `publicPath` such as `/static/my-app`
+- **AND** the browser requests an app route that does not start with that `publicPath`
+- **THEN** sku streams HTML for that route (not a basename mismatch 404)
+- **AND** document assets are served under that `publicPath`
+
+### Requirement: Vite SSR uses a single port
+
+Vite SSR MUST use config `port` for `sku start` and as the baked production default listen port (`__SKU_DEFAULT_SERVER_PORT__`). `process.env.PORT` MUST still override the baked default at runtime. Providing `serverPort` with Vite SSR MUST fail config validation (`serverPort` remains webpack-SSR-only). Vite SSR config types MUST NOT accept `serverPort`.
+
+#### Scenario: port bakes the production default listen port
+
+- **WHEN** a Vite SSR app sets `port` and runs `sku build`
+- **THEN** the production server’s baked default listen port is that `port` value
+- **AND** `process.env.PORT` still overrides it when set
+
+#### Scenario: serverPort is rejected for Vite SSR
+
+- **WHEN** a Vite SSR app sets `serverPort`
+- **THEN** config validation fails stating that Vite SSR uses `port` only
 
 ### Requirement: httpsDevServer works for Vite SSR development
 
@@ -243,18 +265,47 @@ When `httpsDevServer` is enabled, Vite SSR `sku start` MUST serve over HTTPS wit
 
 ### Requirement: Teams can scaffold a Vite SSR app via create
 
-`@sku-lib/create` MUST offer a `vite-ssr` template with required config/exports and a shared `createRoutes` scaffold. The static `vite` template MUST remain unchanged.
+`@sku-lib/create` MUST offer a `vite-ssr` template with required config/exports and a shared `createRoutes` scaffold. Lazy route page modules in the template MUST use the React Router Data Mode named `Component` export (not `export default`). The static `vite` template MUST remain unchanged.
 
 #### Scenario: Create vite-ssr template
 
 - **WHEN** a user runs `@sku-lib/create --template vite-ssr`
 - **THEN** the project is Vite SSR with dual `routes` / `createRoutes`
+- **AND** lazy page modules export named `Component`
 - **AND** can `sku start` without further entry setup
 
 #### Scenario: Static vite create template unchanged
 
 - **WHEN** a user creates a project with the existing `vite` template
 - **THEN** it is not configured as `buildType: 'ssr'` by default
+
+### Requirement: CJS default-export interop is documented
+
+Vite SSR product / Migrating docs MUST explain that some CommonJS packages resolve to a module namespace object under `sku start` SSR (React “Element type is invalid … got: object”), that production build may still succeed, and that consumers extend `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` (sku MUST NOT expand baked-in interop defaults beyond existing Apollo behaviour for this change). Sku MUST NOT rewrite or wrap React render errors at runtime for this case — documentation is sufficient.
+
+#### Scenario: Docs cover CJS interop for Vite SSR start
+
+- **WHEN** a reader opens Vite SSR product or Migrating docs
+- **THEN** docs describe the start-vs-build CJS interop failure mode
+- **AND** document `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` with common open-source offender examples
+
+### Requirement: Config types describe Vite SSR accurately
+
+`SkuConfig` bundler JSDoc (and generated config docs derived from it) MUST NOT claim that `vite` is only supported for static apps while `buildType: 'ssr'` exists.
+
+#### Scenario: Bundler JSDoc allows Vite SSR
+
+- **WHEN** a reader inspects `bundler` JSDoc on `SkuConfig`
+- **THEN** it reflects that Vite supports static and experimental SSR via `buildType`
+
+### Requirement: Express typing for Vite SSR middleware is aligned and documented
+
+Sku MUST align `@types` for Express with the Express major used by the Vite SSR server runtime, and Migrating / product docs MUST state which Express major consumers should target when typing `middleware` / `SkuSsrMiddleware`.
+
+#### Scenario: Docs state supported Express major
+
+- **WHEN** a reader opens Vite SSR middleware or Migrating docs
+- **THEN** the supported Express major is stated
 
 ### Requirement: Vite SSR first release is documented as experimental
 
@@ -268,7 +319,7 @@ The first release MUST be documented as experimental (testing only; not for prod
 
 ### Requirement: Product and Migrating docs cover Vite SSR topics
 
-`server-rendering.md` MUST cover dual-entry `routes`, AppWrapper, middleware layers, CSP, and response headers, and MUST include Migrating subsections for Static App and Older SSR App (not under `docs/migration-guides/`).
+`server-rendering.md` MUST cover dual-entry `routes`, AppWrapper, middleware layers, CSP, and response headers, and MUST include Migrating subsections for Static App and Older SSR App (not under `docs/migration-guides/`). Migrating docs MUST also cover: named `Component` (not default export) for lazy routes; webpack dual-port (`port` + `serverPort`) vs Vite SSR single `port` (`serverPort` rejected; production still honours `PORT`); production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout; CJS interop for `sku start`; and Express typing alignment.
 
 #### Scenario: Primary Vite SSR docs have topic coverage
 
@@ -279,3 +330,9 @@ The first release MUST be documented as experimental (testing only; not for prod
 
 - **WHEN** a reader opens the Migrating section of `server-rendering.md`
 - **THEN** there are self-contained **Migrate from Static App** and **Migrate from Older SSR App** subsections
+
+#### Scenario: Migrating covers port model and deploy layout
+
+- **WHEN** a reader opens **Migrate from Older SSR App**
+- **THEN** docs explain webpack dual-port → Vite SSR single `port` (drop `serverPort`; `PORT` still overrides production)
+- **AND** docs state the production server entry is `dist/server/server.js` with sibling `client/` and `server/` directories

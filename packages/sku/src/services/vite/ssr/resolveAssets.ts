@@ -13,8 +13,8 @@ export interface ManifestChunk {
 
 export type ClientManifest = Record<string, ManifestChunk>;
 
-const joinBase = (base: string, file: string) =>
-  `${base.endsWith('/') ? base : `${base}/`}${file}`;
+const joinPublicPath = (publicPath: string, file: string) =>
+  `${publicPath.endsWith('/') ? publicPath : `${publicPath}/`}${file}`;
 
 /** Source-path shaped ids (cwd-relative), not vocab chunk names like `en-translations`. */
 const isPathLikeModuleId = (moduleId: string) =>
@@ -63,13 +63,13 @@ export const findManifestChunk = (
 
 export const resolveAssets = ({
   manifest,
-  base,
+  publicPath,
   entry,
   moduleIds = [],
   development = false,
 }: {
   manifest: ClientManifest;
-  base: string;
+  publicPath: string;
   entry: ManifestChunk;
   moduleIds?: string[];
   development?: boolean;
@@ -93,16 +93,16 @@ export const resolveAssets = ({
     }
 
     if (chunk.file.endsWith('.css')) {
-      css.add(joinBase(base, chunk.file));
+      css.add(joinPublicPath(publicPath, chunk.file));
     } else if (chunk.file !== entry.file) {
-      modulePreloads.add(joinBase(base, chunk.file));
+      modulePreloads.add(joinPublicPath(publicPath, chunk.file));
     }
 
-    chunk.css?.forEach((file) => css.add(joinBase(base, file)));
+    chunk.css?.forEach((file) => css.add(joinPublicPath(publicPath, file)));
     chunk.imports?.forEach(visit);
   };
 
-  entry.css?.forEach((file) => css.add(joinBase(base, file)));
+  entry.css?.forEach((file) => css.add(joinPublicPath(publicPath, file)));
   entry.imports?.forEach(visit);
   moduleIds.forEach(visit);
 

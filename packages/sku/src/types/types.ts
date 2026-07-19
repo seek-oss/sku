@@ -122,7 +122,7 @@ export interface SkuConfigBase {
   /**
    * The bundler that sku uses to build the application.
    *
-   * `vite` is currently only supported for static apps.
+   * Vite supports static apps and experimental SSR via `buildType: 'ssr'`.
    *
    * @default "webpack"
    */
@@ -373,6 +373,9 @@ export interface SkuConfigBase {
   /**
    * The port the app is hosted on when running `sku start`.
    *
+   * For Vite SSR (`buildType: 'ssr'`), this is also the baked production default
+   * listen port (`__SKU_DEFAULT_SERVER_PORT__`), overridable via `process.env.PORT`.
+   *
    * @default 8080
    * @link https://seek-oss.github.io/sku/docs/configuration#port
    */
@@ -511,9 +514,12 @@ export interface SkuConfigBase {
 
 export interface WebpackSkuConfig {
   /**
-   * **Only for SSR apps**
+   * **Webpack SSR only** (`sku start-ssr` / `sku build-ssr`)
    *
-   * The port the server is hosted on when running `sku start-ssr`.
+   * The port the server is hosted on when running `sku start-ssr`, and the
+   * default listen port for the webpack production server.
+   *
+   * Not valid for Vite SSR (`buildType: 'ssr'`) — use {@link SkuConfigBase.port}.
    *
    * @default 8181
    * @link https://seek-oss.github.io/sku/docs/configuration#serverport

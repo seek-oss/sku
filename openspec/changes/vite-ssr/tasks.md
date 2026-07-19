@@ -36,6 +36,15 @@
 - [x] 4.2 Docs: `server-rendering.md` (+ Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs; experimental / not-for-production warning
 - [x] 4.3 Changeset marks Vite SSR experimental and not for production
 
+## 5. Migration spike follow-ups
+
+- [x] 5.1 Stop treating `publicPath` as React Router basename; bake `__SKU_PUBLIC_PATH__` (not Vite `BASE_URL`); fixture for relative `/static/...` assets with app routes outside that prefix
+- [x] 5.2 Vite SSR single-port: bake `__SKU_DEFAULT_SERVER_PORT__` from `port`; reject / untype `serverPort`; docs + Migrating
+- [x] 5.3 Align create `vite-ssr` template lazy pages to named `Component`; update Migrating examples (no default export)
+- [x] 5.4 Document CJS interop for Vite SSR `sku start` + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` (docs only; no runtime error rewrite; no new baked-in interop defaults)
+- [x] 5.5 Fix `bundler` JSDoc (Vite not static-only); align Express `@types` with Vite SSR runtime and document supported Express major
+- [x] 5.6 Migrating docs: webpack dual-port → Vite SSR single `port` (drop `serverPort`; `PORT` overrides), `dist/server/server.js` + sibling `client/` / `server/` layout
+
 ## Deferred
 
 - Production listen / custom logger — design Open Questions

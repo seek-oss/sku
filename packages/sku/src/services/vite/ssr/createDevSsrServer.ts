@@ -72,11 +72,11 @@ export const createDevSsrServer = async ({
   );
   serverApp.use(vite.middlewares);
 
-  const base = skuContext.publicPath;
+  const publicPath = skuContext.publicPath;
   const assets: RenderAssets = {
     bootstrapModules: [
-      path.posix.join(base, '@vite/client'),
-      `${base}@fs/${clientEntry}`,
+      path.posix.join(publicPath, '@vite/client'),
+      `${publicPath}@fs/${clientEntry}`,
     ],
     css: [],
     modulePreloads: [],

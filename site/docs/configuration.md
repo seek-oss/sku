@@ -504,6 +504,8 @@ Default: `8080`
 
 The port the app is hosted on when running `sku start`.
 
+**Vite SSR** (`buildType: 'ssr'`): also the baked production default listen port (`node dist/server/server.js`). Override at runtime with `PORT`. Vite SSR does not use [`serverPort`](#serverport).
+
 ## public
 
 Type: `string`
@@ -570,11 +572,15 @@ Type: `number`
 
 Bundler: `webpack`
 
-**Only for SSR apps**
+**Webpack SSR only**
 
 Default: `8181`
 
-The port the server is hosted on when running `sku start-ssr`.
+The port the server is hosted on when running `sku start-ssr`, and the default listen port for the webpack production server.
+
+**Not valid for Vite SSR** (`bundler: 'vite'` + `buildType: 'ssr'`). Vite SSR is single-port — use [`port`](#port) (and `PORT` at runtime). Providing `serverPort` with Vite SSR fails config validation.
+
+See [Server rendering](./server-rendering.md#production) and [Migrate from Older SSR App](./server-rendering.md#migrate-from-older-ssr-app).
 
 ## setupTests
 
@@ -723,5 +729,7 @@ _This is an experimental option that may change or be removed without notice._
 An array of cjs import paths that have both a default and named exports.
 
 This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+
+For Vite SSR, packages that resolve to a module namespace object under `sku start` (React error “Element type is invalid … got: object”) often need an entry here — see [Server rendering → CJS default-export interop](./server-rendering.md#cjs-default-export-interop). Sku already includes Apollo Client in its baked defaults; do not rely on sku expanding that list for other offenders.
 
 See https://github.com/cyco130/vite-plugin-cjs-interop for more information.

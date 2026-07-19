@@ -91,10 +91,7 @@ const renderDocument = async (
     routes,
     requestEntry.AppWrapper,
   );
-  const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
-  const { query, dataRoutes } = createStaticHandler(routesWithAppWrapper, {
-    basename,
-  });
+  const { query, dataRoutes } = createStaticHandler(routesWithAppWrapper);
   const context = await query(request);
 
   if (context instanceof Response) {
@@ -113,7 +110,7 @@ const renderDocument = async (
   if (renderManifest) {
     documentAssets = resolveAssets({
       manifest: renderManifest.manifest,
-      base: renderManifest.base,
+      publicPath: renderManifest.publicPath,
       entry: renderManifest.entry,
       moduleIds,
       development,

@@ -41,6 +41,7 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
           __SKU_DEFAULT_SERVER_PORT__: JSON.stringify(
             String(skuContext.port.client),
           ),
+          __SKU_PUBLIC_PATH__: JSON.stringify(skuContext.publicPath),
           __SKU_CSP__: JSON.stringify({
             enabled: skuContext.cspEnabled,
             extraHosts: skuContext.cspExtraScriptSrcHosts,

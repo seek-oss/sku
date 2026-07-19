@@ -36,8 +36,8 @@ import type { SkuConfig } from 'sku';
 export default {
   bundler: 'vite',
   buildType: 'ssr',
-  publicPath: '/', // relative only — absolute / CDN URLs are rejected
-  port: 3000,
+  publicPath: '/', // relative only — static asset prefix
+  port: 3000, // sku start + production default (overridable via PORT)
 } satisfies SkuConfig;
 ```
 
@@ -91,6 +91,15 @@ export const routes = createRoutes();
 ```
 
 Prefer co-locating each page in its own directory with a `route.ts` (path / lazy / loaders / handle) and the page module (e.g. `home.tsx`). Compose those route modules inside `createRoutes`.
+
+Lazy page modules MUST use React Router Data Mode’s named `Component` export (not `export default`) so they typecheck with `lazy: () => import('…')`:
+
+```tsx
+// src/pages/home/home.tsx
+export function Component() {
+  return <h1>Home</h1>;
+}
+```
 
 sku owns:
 
@@ -204,6 +213,8 @@ Vite SSR has **two HTTP middleware layers**, plus optional React Router route `m
 
 Export Connect/Express-compatible handlers from the server entry as named `middleware` (`SkuSsrMiddleware`: a handler or array). Empty array / passthrough is fine. Sku mounts this **before** Vite middlewares and the HTML render path in both `sku start` and the production server. It must not commit the document body.
 
+Vite SSR runs **Express 4**. Type `middleware` against Express 4 (`SkuSsrMiddleware` / `@types/express` major 4) — that matches the Express major sku depends on for the Vite SSR server.
+
 ```tsx
 import type { SkuSsrMiddleware } from 'sku';
 
@@ -300,6 +311,11 @@ export const aboutRoute = {
   path: 'about',
   lazy: () => import('./about.js'),
 } satisfies RouteObject;
+
+// src/pages/about/about.tsx — named Component (not default export)
+export function Component() {
+  return <main>About</main>;
+}
 
 // src/pages/details/route.ts
 export const detailsRoute = {
@@ -424,7 +440,37 @@ node dist/server/server.js
 # optional: PORT=8080 node dist/server/server.js
 ```
 
-Deploy both `client/` and `server/` together. Client assets are served from `dist/client/` under the relative `publicPath`. Absolute / CDN `publicPath` is not supported for Vite SSR.
+Deploy both `client/` and `server/` together. Client assets are served from `dist/client/` under the relative `publicPath` (static asset prefix only — it is **not** React Router `basename`; app HTML routes stay at `/…`). Absolute / CDN `publicPath` is not supported for Vite SSR.
+
+Production listens on `process.env.PORT` when set, otherwise the config [`port`](./configuration.md#port) baked at build time (default `8080`). The same `port` is used for `sku start`. [`serverPort`](./configuration.md#serverport) is webpack-SSR-only and is rejected for Vite SSR.
+
+### CJS default-export interop
+
+Some CommonJS packages expose both a default and named exports. Under Vite SSR **`sku start`**, importing such a package as a React component can resolve to a **module namespace object** (`{ default: ActualComponent, … }`). React then fails with:
+
+```
+Element type is invalid: expected a string … but got: object.
+You likely forgot to export your component … or you might have mixed up default and named imports.
+```
+
+Production `sku build` may still succeed for the same import — the failure is often start-only. Extend [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) with the package name (sku already includes Apollo Client in its baked defaults; this change does **not** expand that list further):
+
+```ts
+// sku.config.ts
+import type { SkuConfig } from 'sku';
+
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [
+    // Examples of open-source offenders teams hit in the wild:
+    'react-helmet-async',
+    'some-legacy-cjs-ui-kit',
+  ],
+} satisfies SkuConfig;
+```
+
+Prefer upgrading to an ESM build or replacing the dependency when possible.
 
 ## Migrating
 
@@ -454,6 +500,7 @@ This guide covers the **sku** surface only (config, entries, providers, middlewa
 - Keep server and client route trees hydration-compatible (same path / nesting / ids); implementations may diverge
 - Add required named `onRequest`, `middleware`, and `onHydrate` (hard error if missing)
 - Prefer idiomatic `lazy: () => import('./pages/…')` on route configs for per-route chunks
+- Lazy page modules must export named `Component` (not `export default`) for React Router Data Mode
 
 #### App-level providers
 
@@ -502,13 +549,16 @@ Covers the **sku** migration surface only. Deploy/process/infra changes are out 
 
 - Set `buildType: 'ssr'` and `bundler: 'vite'`
 - Replace `sku start-ssr` / `sku build-ssr` with `sku start` / `sku build`
-- Production becomes `node dist/server/server.js` (sibling `client/` + `server/` under the build target) — not webpack’s single `dist/server.js` layout
+- **Ports:** webpack SSR used dual ports (`port` for assets + `serverPort` for the Node app). Vite SSR is **single-port**: use [`port`](./configuration.md#port) for `sku start` and the baked production default (`PORT` still overrides at runtime). Drop `serverPort` — providing it with Vite SSR fails validation. If you previously listened on `serverPort` in production, set that value as `port` (or keep using `PORT` in deploy).
+- **Deploy layout:** production entry is `node dist/server/server.js` with sibling `client/` + `server/` under the build target — not webpack’s single `dist/server.js` layout
 - `buildType` set means `-ssr` commands are rejected
+- Type server-entry `middleware` for **Express 4** (`SkuSsrMiddleware` / `@types/express` major 4)
 
 #### Routes and request entries
 
 - Replace webpack `serverEntry` default export `{ renderCallback, middleware, onStart }` with Vite SSR named exports: `routes` on **both** server and client entries, plus server `onRequest` + `middleware`, client `onHydrate`
 - Prefer a shared `createRoutes(...)` factory so server/client trees stay hydration-compatible
+- Lazy page modules must export named `Component` (not `export default`)
 - Express `renderCallback` no longer owns HTML — sku streams Document; put providers in `AppWrapper`, data loading in React Router loaders/actions
 - Optional webpack `onStart` is not part of the Vite SSR request-entry contract
 
@@ -522,9 +572,13 @@ Covers the **sku** migration surface only. Deploy/process/infra changes are out 
 - Keep using a middleware export, but on the Vite SSR **server entry** named `middleware` (same Connect style; required export, empty / passthrough OK)
 - Move local-only mocks/proxies that webpack put in `devServerMiddleware` (or only ran under `start-ssr`) to the same config key — Vite SSR still mounts it in `sku start` only and keeps it out of the production server
 - React Router route `middleware` on `RouteObject`s is separate from Express/Connect `middleware` — see [Middleware](#middleware)
-- Webpack dual-port / proxy assumptions differ; Vite SSR is single-port in dev (`httpsDevServer` supported)
+- Webpack dual-port / proxy assumptions differ; Vite SSR is single-port (`port` only; `httpsDevServer` supported). Revisit auth redirects and proxy targets that assumed a separate asset origin on `port`
 
 See [Middleware](#middleware) for mount order.
+
+#### CJS interop
+
+- If `sku start` fails with React “Element type is invalid … got: object” for a CJS package that still builds in production, extend [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) — see [CJS default-export interop](#cjs-default-export-interop)
 
 #### CSP
 

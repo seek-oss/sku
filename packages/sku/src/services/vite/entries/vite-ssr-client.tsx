@@ -26,18 +26,16 @@ const onHydrate = requireNamedExport<SkuSsrOnHydrate>(
   { kind: 'function' },
 );
 
-const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
-
 const hydrate = async () => {
   const { AppWrapper } = onHydrate({
     context: window.__SKU_CLIENT_CONTEXT__,
   });
   const routesWithAppWrapper = withAppWrapperLayout(routes, AppWrapper);
 
+  // publicPath is the static asset prefix only — never React Router basename.
   const lazyMatches = matchRoutes(
     routesWithAppWrapper,
     window.location,
-    basename,
   )?.filter(({ route }) => route.lazy);
 
   await Promise.all(
@@ -51,7 +49,6 @@ const hydrate = async () => {
   );
 
   const router = createBrowserRouter(routesWithAppWrapper, {
-    basename,
     hydrationData: window.__staticRouterHydrationData,
   });
 

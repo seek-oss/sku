@@ -59,8 +59,16 @@
 - [x] 7.2 Cover the same SSR scenarios as webpack translations SSR: `en`, `fr`, and `en-PSEUDO` via `?pseudo=true` (app snapshots; kitchen-sink vocab plumbing stays as-is)
 - [x] 7.3 Add fixture scripts / `react-router` dep as needed so `pnpm fixture translations` can run the Vite SSR mode
 
+## 8. Pre-release Express 5 + React Router 8
+
+- [x] 8.1 Upgrade Vite SSR Express runtime and `@types` from 4 → 5; fix any Express 5 API breakage in sku server / adapters
+- [x] 8.2 Upgrade catalog + Vite SSR fixtures/template `react-router` from 7 → 8; align peer baselines sku owns if required; fix Data Mode API breakage
+- [x] 8.3 Docs + Migrating: state Express 5 and React Router 8; note that future Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
+- [x] 8.4 Changeset: call out Express 5 + React Router 8 for Vite SSR and the breaking-major policy for later upgrades
+
 ## Deferred
 
 - Production listen / custom logger — design Open Questions
 - Runtime dual-`routes` validation — Non-Goals (docs only)
 - Vite SSR support for config `public` / unhashed public assets — Non-Goals until definitive need
+- Express / React Router majors beyond 5 / 8 — later releases; may be breaking per design §19–20

@@ -29,11 +29,14 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
 - Vocab/language chunks only when server `onRequest` returns `language` (optional; no allowlist / sole-language default).
   - Auto-derive lazy-route `moduleId`; per-route chunk fixture.
 - `@sku-lib/create` template `vite-ssr` with named `Component` on lazy pages.
-  - Product + Migrating docs in `server-rendering.md` (single-port, deploy layout, CJS interop, Express typing, named `Component`, move off `public`).
+  - Product + Migrating docs in `server-rendering.md` (single-port, deploy layout, CJS interop, Express 5, React Router 8, named `Component`, move off `public`).
 - CJS interop: document start-vs-build failure mode + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`.
   - **No** expanded baked-in interop defaults beyond Apollo; no runtime error rewriting.
 - Config JSDoc must not claim Vite is static-only.
-  - Express `@types` aligned with Vite SSR runtime major.
+- Vite SSR ships on **Express 5** and **React Router 8** before release.
+  - Align Express `@types` with Express 5; document Express 5 for middleware typing.
+  - Document React Router 8 for Data Mode / route typing consumers rely on.
+  - **BREAKING** (policy for later releases): bumping the Express or React Router major that Vite SSR integrates may be a breaking change — consumer `middleware` / `devServerMiddleware` mount into sku’s Express app, and consumer routes/entries use React Router Data Mode APIs.
 - Vite SSR MUST NOT support config `public` (copied-as-is public assets folder).
   - Hard-error if that directory exists on `sku start` / `sku build`.
   - Docs discourage the pattern and point to importing assets instead; Migrating covers moving off it.
@@ -73,10 +76,11 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
   - `onHydrate({ context })`
   - Create template `vite-ssr`
   - Reused `devServerMiddleware`
-- **Deps:** `react-router` (Data Mode)
+- **Deps:** `react-router` 8 (Data Mode); Express 5 (Vite SSR server runtime + `@types`)
 - **Docs / release:**
   - `server-rendering.md` (product + Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs
-  - Topics: dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express major, Express vs RR middleware, experimental warning, move off config `public` / public assets folder (import assets instead)
+  - Topics: dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express 5, React Router 8, Express vs RR middleware, experimental warning, move off config `public` / public assets folder (import assets instead)
+  - Future Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
   - Changeset marks experimental; accurate `bundler` JSDoc
 - **Fixtures/tests:**
   - Vite SSR fixture (streaming, CSP, entries, per-route chunks, vocab; relative `/static/...` `publicPath` with app routes outside that prefix)

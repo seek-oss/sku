@@ -24,7 +24,8 @@ Post-spike:
 - Single-port (`port` only; reject `serverPort`)
 - Named `Component` in template/docs
 - CJS interop docs
-- Accurate config JSDoc / Express typing docs
+- Accurate config JSDoc / Express 5 + React Router 8 typing docs
+- Ship Express 5 and React Router 8 before release; treat later majors as potentially breaking
 
 **Non-Goals:**
 
@@ -298,7 +299,8 @@ Migrating MUST cover:
 - webpack dual-port → Vite SSR single `port` (reject `serverPort`; `PORT` still overrides prod)
 - `dist/server/server.js` + sibling `client/`/`server/`
 - CJS interop for `sku start`
-- Express major / `@types` alignment
+- Express 5 / `@types` alignment
+- React Router 8 for Data Mode / route typing
 - move off config `public` / public assets folder (import assets instead)
 
 ### 17. Experimental first release
@@ -317,11 +319,31 @@ Document the start-vs-build failure mode (“Element type is invalid … got: ob
 
 Do **not** rewrite or wrap React render errors at runtime — docs are enough.
 
-### 19. Config JSDoc + Express typing
+### 19. Config JSDoc + Express / React Router majors
 
 Update `SkuConfig` `bundler` JSDoc so it no longer claims Vite is static-only.
 
-Align Express `@types` with the Express major used by the Vite SSR server runtime; document that major for middleware typing.
+Vite SSR currently depends on Express 4 and React Router 7.
+
+Before release, migrate the Vite SSR server runtime (and `@types`) to **Express 5**, and migrate the Vite SSR `react-router` dependency (catalog + fixtures/template) to **React Router 8**.
+
+Document Express 5 for middleware typing (`middleware` / `SkuSsrMiddleware`) and React Router 8 for Data Mode / route typing consumers rely on.
+
+Align any React Router 8 peer baselines sku already owns (Node / React / Vite) where the catalog or engines need a bump; do not expand sku’s supported React range solely for packages that still support React 18 unless required by the upgrade.
+
+**Breaking-change policy (later releases):** bumping the Express or React Router major that Vite SSR integrates may be a breaking change.
+
+Consumer `middleware` / `devServerMiddleware` mount into sku’s Express app, and consumer routes/entries use React Router Data Mode APIs (`routes`, `lazy` + named `Component`, loaders/actions, etc.).
+
+Minor/patch upgrades within the documented major remain non-breaking when APIs stay compatible.
+
+### 20. Express and React Router as product-integrated majors
+
+Sku owns the Express app that mounts consumer middleware and the React Router Data Mode wiring for Vite SSR.
+
+Those packages are not opaque transitive deps — their majors are part of the Vite SSR product contract.
+
+Keep majors pinned in docs and release notes; call out major bumps in changesets as potentially breaking for Vite SSR consumers.
 
 ## Risks / Trade-offs
 
@@ -336,6 +358,8 @@ Align Express `@types` with the Express major used by the Vite SSR server runtim
 | CJS “got: object” on `sku start` | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                             |
 | Mock deps ship in prod           | `devServerMiddleware` only; never from server entry                                                         |
 | Early production use             | Experimental docs + changeset                                                                               |
+| Express / RR major drift         | Ship Express 5 + RR 8 before release; docs + changeset mark later major bumps as potentially breaking       |
+| RR 8 peer baselines              | Align catalog/engines with RR 8 minimums sku already can meet; document consumer React/Node expectations    |
 
 ## Migration Plan
 
@@ -343,7 +367,7 @@ Opt-in via `buildType` + Vite.
 
 New apps: `--template vite-ssr` (named `Component`).
 
-Existing: Migrating in `server-rendering.md` (ports, deploy layout, CJS, Express, `Component`, move off `public`).
+Existing: Migrating in `server-rendering.md` (ports, deploy layout, CJS, Express 5, React Router 8, `Component`, move off `public`).
 
 Webpack SSR: leave `buildType` unset.
 

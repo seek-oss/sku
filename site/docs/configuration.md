@@ -568,7 +568,9 @@ Path may be `.tsx`, `.ts`, or `.js`.
 
 **Webpack SSR** (`sku start-ssr` / `sku build-ssr`): the server entry exporting a `renderCallback`.
 
-**Vite SSR**: required server request entry exporting named `routes` (`RouteObject[]`), `onRequest`, and `middleware`. Missing file or named export is a hard error (sku does not use `default`). `onRequest` may return `AppWrapper`, `language`, and JSON-serialisable `clientContext`. `middleware` is typed as `SkuSsrMiddleware` (Connect/Express-compatible handler or array; empty array / passthrough OK) and runs before HTML render in both start and production. Optional local-only mocks use config [`devServerMiddleware`](#devservermiddleware) (start only). Same config key as webpack — not a parallel `entryServer` option; the Vite SSR export shape is not `renderCallback`. See [Server rendering](./server-rendering.md#request-entries-serverentry--cliententry).
+**Vite SSR**: (`buildType: 'ssr'`) the server entry exporting a `routes` (`RouteObject[]`), `onRequest`, and `middleware`.
+
+See [Server rendering](./server-rendering.md#request-entries-serverentry--cliententry).
 
 ## serverPort
 

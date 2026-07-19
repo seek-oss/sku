@@ -418,16 +418,51 @@ Sku MUST NOT rewrite or wrap React render errors at runtime for this case — do
 - **WHEN** a reader inspects `bundler` JSDoc on `SkuConfig`
 - **THEN** it reflects that Vite supports static and experimental SSR via `buildType`
 
-### Requirement: Express typing for Vite SSR middleware is aligned and documented
+### Requirement: Vite SSR ships on Express 5 with aligned typing
 
-Sku MUST align `@types` for Express with the Express major used by the Vite SSR server runtime.
+Before release, the Vite SSR server runtime MUST use Express 5.
 
-Migrating / product docs MUST state which Express major consumers should target when typing `middleware` / `SkuSsrMiddleware`.
+Sku MUST align `@types` for Express with Express 5.
 
-#### Scenario: Docs state supported Express major
+Migrating / product docs MUST state that consumers should target Express 5 when typing `middleware` / `SkuSsrMiddleware`.
+
+#### Scenario: Runtime and types use Express 5
+
+- **WHEN** a Vite SSR app runs `sku start` or the production server
+- **THEN** sku’s server depends on Express 5
+- **AND** published Express typings used for Vite SSR middleware align with Express 5
+
+#### Scenario: Docs state Express 5
 
 - **WHEN** a reader opens Vite SSR middleware or Migrating docs
-- **THEN** the supported Express major is stated
+- **THEN** docs state that Express 5 is the supported major for middleware typing
+
+### Requirement: Vite SSR ships on React Router 8
+
+Before release, Vite SSR MUST depend on React Router 8 (sku dependency / catalog and Vite SSR fixtures/template).
+
+Migrating / product docs MUST state that consumers should target React Router 8 for Data Mode / route typing used with Vite SSR entries.
+
+#### Scenario: Dependency is React Router 8
+
+- **WHEN** a Vite SSR app resolves `react-router` through sku
+- **THEN** the resolved major is React Router 8
+
+#### Scenario: Docs state React Router 8
+
+- **WHEN** a reader opens Vite SSR product or Migrating docs
+- **THEN** docs state that React Router 8 is the supported major for Data Mode / route typing
+
+### Requirement: Express and React Router major upgrades may be breaking
+
+Product docs and release notes for Vite SSR MUST state that bumping the Express or React Router major integrated by Vite SSR may be a breaking change.
+
+Consumer `middleware` / `devServerMiddleware` mount into sku’s Express app, and consumer routes/entries use React Router Data Mode APIs.
+
+#### Scenario: Docs warn major upgrades may break
+
+- **WHEN** a reader opens Vite SSR product docs covering middleware or React Router / routes
+- **THEN** docs state that Express and React Router major upgrades may be breaking for Vite SSR consumers
 
 ### Requirement: Vite SSR first release is documented as experimental
 
@@ -451,7 +486,9 @@ Migrating docs MUST also cover:
 - webpack dual-port (`port` + `serverPort`) vs Vite SSR single `port` (`serverPort` rejected; production still honours `PORT`)
 - production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
 - CJS interop for `sku start`
-- Express typing alignment
+- Express 5 typing alignment
+- React Router 8 for Data Mode / route typing
+- that Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
 - moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
 
 #### Scenario: Primary Vite SSR docs have topic coverage

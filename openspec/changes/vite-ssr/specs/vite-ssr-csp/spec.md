@@ -16,7 +16,9 @@ When CSP is enabled for a Vite SSR app, sku MUST set Content Security Policy via
 
 ### Requirement: CSP is derived from shell HTML plus dynamic values
 
-sku MUST generate the Vite SSR CSP from the rendered document shell (known script tags and origins) and MUST allow dynamic values such as nonces and hashes of known bootstrap script bodies.
+sku MUST generate the Vite SSR CSP from the rendered document shell (known script tags and origins).
+
+Sku MUST allow dynamic values such as nonces and hashes of known bootstrap script bodies.
 
 #### Scenario: Shell scripts are allowed
 
@@ -30,9 +32,15 @@ sku MUST generate the Vite SSR CSP from the rendered document shell (known scrip
 
 ### Requirement: Vite SSR uses at most one CSP nonce per render, only when requested
 
-For a Vite SSR HTML response, sku MUST generate at most one CSP nonce, only when explicitly requested (by consumer code or by sku when attaching a `nonce` to scripts). When requested, sku MUST reuse that same value everywhere for the response. Sku MUST NOT provide a Vite SSR API that creates additional distinct nonces for the same response (unlike static/webpack `createUnsafeNonce`).
+For a Vite SSR HTML response, sku MUST generate at most one CSP nonce, only when explicitly requested (by consumer code or by sku when attaching a `nonce` to scripts).
 
-sku MUST include `'nonce-…'` in the CSP header only if a nonce was requested. If CSP is enabled but nothing requested a nonce, the CSP header MUST still be emitted without a nonce allowance.
+When requested, sku MUST reuse that same value everywhere for the response.
+
+Sku MUST NOT provide a Vite SSR API that creates additional distinct nonces for the same response (unlike static/webpack `createUnsafeNonce`).
+
+Sku MUST include `'nonce-…'` in the CSP header only if a nonce was requested.
+
+If CSP is enabled but nothing requested a nonce, the CSP header MUST still be emitted without a nonce allowance.
 
 #### Scenario: Nonce omitted from CSP when never requested
 
@@ -62,7 +70,9 @@ sku MUST include `'nonce-…'` in the CSP header only if a nonce was requested. 
 
 ### Requirement: Report-Only CSP may coexist with an enforcing policy and MUST support report-to
 
-Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an enforcing CSP. When Report-Only is enabled, consumers MUST be able to configure a `report-to` value, and sku MUST include that value in the Report-Only policy.
+Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an enforcing CSP.
+
+When Report-Only is enabled, consumers MUST be able to configure a `report-to` value, and sku MUST include that value in the Report-Only policy.
 
 #### Scenario: Report-Only header alongside enforcing policy
 
@@ -81,7 +91,11 @@ Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an e
 
 ### Requirement: Vite SSR CSP assumes relative publicPath only
 
-Vite SSR CSP MUST assume a relative `publicPath` so Document assets are covered by `'self'`. Absolute `http(s)` / CDN `publicPath` is not supported. Consumer `cspExtraScriptSrcHosts` remains for third-party script hosts.
+Vite SSR CSP MUST assume a relative `publicPath` so Document assets are covered by `'self'`.
+
+Absolute `http(s)` / CDN `publicPath` is not supported.
+
+Consumer `cspExtraScriptSrcHosts` remains for third-party script hosts.
 
 #### Scenario: Relative publicPath with CSP enabled
 
@@ -92,7 +106,9 @@ Vite SSR CSP MUST assume a relative `publicPath` so Document assets are covered 
 
 ### Requirement: Webpack SSR and static CSP behavior are unchanged
 
-This capability MUST NOT change CSP delivery for webpack SSR apps or static apps. Static and webpack apps MAY continue to allow multiple `createUnsafeNonce` calls per render.
+This capability MUST NOT change CSP delivery for webpack SSR apps or static apps.
+
+Static and webpack apps MAY continue to allow multiple `createUnsafeNonce` calls per render.
 
 #### Scenario: Static app CSP unchanged
 

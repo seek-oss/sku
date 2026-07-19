@@ -44,6 +44,7 @@
 - [x] 5.4 Document CJS interop for Vite SSR `sku start` + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` (docs only; no runtime error rewrite; no new baked-in interop defaults)
 - [x] 5.5 Fix `bundler` JSDoc (Vite not static-only); align Express `@types` with Vite SSR runtime and document supported Express major
 - [x] 5.6 Migrating docs: webpack dual-port → Vite SSR single `port` (drop `serverPort`; `PORT` overrides), `dist/server/server.js` + sibling `client/` / `server/` layout
+- [x] 5.7 Set Vite `config.base` to `publicPath` for serve as well as build (not `apply: 'build'` only) so `sku start` bootstrap URLs under `publicPath` hit Vite middleware; keep start asset URLs under `publicPath` (do not force `/`); strengthen start fixture/assert assets are JS
 
 ## Deferred
 

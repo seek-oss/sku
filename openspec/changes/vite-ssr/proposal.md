@@ -1,18 +1,42 @@
 ## Why
 
-Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + string document + `#app` hydrate cannot stream Suspense HTML or let React own `<html>`/`<head>`/`<body>`. We need a Vite-only SSR mode with React Router Data Mode, full-document streaming, and modern CSP headers — shipped **experimental** (not for production).
+Vite SSR is disabled today.
+
+Webpack SSR’s low-level `renderCallback` + string document + `#app` hydrate cannot stream Suspense HTML or let React own `<html>`/`<head>`/`<body>`.
+
+We need a Vite-only SSR mode with React Router Data Mode, full-document streaming, and modern CSP headers — shipped **experimental** (not for production).
 
 ## What Changes
 
-- Vite-only SSR via `buildType: 'ssr' | 'static'`. `sku start` / `sku build` run the lifecycle; `-ssr` commands and webpack + this buildType **error**.
-- Required `serverEntry` / `clientEntry` named exports: both export `routes: RouteObject[]`; server also `onRequest` + `middleware`; client also `onHydrate` (hard error if required named export missing). Sku owns Document/HTML. Optional `AppWrapper` from `onRequest` / `onHydrate`. Production HTTP middleware = server-entry `middleware`; optional config `devServerMiddleware` for local mocks only. Dual `routes` must stay hydration-compatible (docs/template recommend `createRoutes`; no runtime checker).
-- Full-document stream (`renderToPipeableStream`); hydrate at `document`. No `transformIndexHtml` on SSR responses. Relative `publicPath` only — **asset base only**; MUST NOT become React Router `basename` (no first-class basename config).
-- Shell-derived CSP as HTTP headers; lazy single request-scoped nonce; optional Report-Only. Production bakes CSP/port via webpack-aligned defines (`__SKU_CSP__`, `__SKU_DEFAULT_SERVER_PORT__` from `port`) — no sidecar, no parallel `SKU_*` env knobs. Vite SSR is single-port: only `port` (plus runtime `PORT`); `serverPort` is rejected.
-- Vocab/language chunks only when server `onRequest` returns `language` (optional; no allowlist / sole-language default); auto-derive lazy-route `moduleId`; per-route chunk fixture.
-- `@sku-lib/create` template `vite-ssr` with named `Component` on lazy pages; product + Migrating docs in `server-rendering.md` (single-port, deploy layout, CJS interop, Express typing, named `Component`).
-- CJS interop: document start-vs-build failure mode + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` — **no** expanded baked-in interop defaults beyond Apollo; no runtime error rewriting.
-- Config JSDoc must not claim Vite is static-only; Express `@types` aligned with Vite SSR runtime major.
-- Initial release is **experimental**: docs MUST warn not-for-production; changeset / release notes MUST state the same.
+- Vite-only SSR via `buildType: 'ssr' | 'static'`.
+  - `sku start` / `sku build` run the lifecycle.
+  - `-ssr` commands and webpack + this buildType **error**.
+- Required `serverEntry` / `clientEntry` named exports:
+  - both export `routes: RouteObject[]`
+  - server also `onRequest` + `middleware`
+  - client also `onHydrate` (hard error if required named export missing)
+  - Sku owns Document/HTML
+  - Optional `AppWrapper` from `onRequest` / `onHydrate`
+  - Production HTTP middleware = server-entry `middleware`
+  - Optional config `devServerMiddleware` for local mocks only
+  - Dual `routes` must stay hydration-compatible (docs/template recommend `createRoutes`; no runtime checker)
+- Full-document stream (`renderToPipeableStream`); hydrate at `document`.
+  - No `transformIndexHtml` on SSR responses.
+  - Relative `publicPath` only — **asset base only**; MUST NOT become React Router `basename` (no first-class basename config).
+- Shell-derived CSP as HTTP headers; lazy single request-scoped nonce; optional Report-Only.
+  - Production bakes CSP/port via webpack-aligned defines (`__SKU_CSP__`, `__SKU_DEFAULT_SERVER_PORT__` from `port`) — no sidecar, no parallel `SKU_*` env knobs.
+  - Vite SSR is single-port: only `port` (plus runtime `PORT`); `serverPort` is rejected.
+- Vocab/language chunks only when server `onRequest` returns `language` (optional; no allowlist / sole-language default).
+  - Auto-derive lazy-route `moduleId`; per-route chunk fixture.
+- `@sku-lib/create` template `vite-ssr` with named `Component` on lazy pages.
+  - Product + Migrating docs in `server-rendering.md` (single-port, deploy layout, CJS interop, Express typing, named `Component`).
+- CJS interop: document start-vs-build failure mode + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`.
+  - **No** expanded baked-in interop defaults beyond Apollo; no runtime error rewriting.
+- Config JSDoc must not claim Vite is static-only.
+  - Express `@types` aligned with Vite SSR runtime major.
+- Initial release is **experimental**:
+  - Docs MUST warn not-for-production.
+  - Changeset / release notes MUST state the same.
 
 ### Non-goals
 
@@ -36,8 +60,28 @@ Vite SSR is disabled today, and webpack SSR’s low-level `renderCallback` + str
 
 ## Impact
 
-- **Public API:** `buildType`; single `port` for Vite SSR (start + baked prod default; reject `serverPort`); required entry named exports; ALS CSP nonce; server `language` for Document vocab only; `onHydrate({ context })`; create template `vite-ssr`; reused `devServerMiddleware`
+- **Public API:**
+  - `buildType`
+  - Single `port` for Vite SSR (start + baked prod default; reject `serverPort`)
+  - Required entry named exports
+  - ALS CSP nonce
+  - Server `language` for Document vocab only
+  - `onHydrate({ context })`
+  - Create template `vite-ssr`
+  - Reused `devServerMiddleware`
 - **Deps:** `react-router` (Data Mode)
-- **Docs / release:** `server-rendering.md` (product + Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs — dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express major, Express vs RR middleware, experimental warning; changeset marks experimental; accurate `bundler` JSDoc
-- **Fixtures/tests:** Vite SSR fixture (streaming, CSP, entries, per-route chunks, vocab; relative `/static/...` `publicPath` with app routes outside that prefix); create template tests (named `Component`). Config edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + `serverPort`) stay config/command validation only — no browser e2e coverage for those
-- **Opt-in / adopt:** via `buildType`; document hydrate (not `#app`); relative asset-only `publicPath`; required named exports; shared `__sku_alias__*` entry aliases with static Vite; production defines aligned with webpack SSR naming/shape where they overlap (`port` → `__SKU_DEFAULT_SERVER_PORT__`)
+- **Docs / release:**
+  - `server-rendering.md` (product + Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs
+  - Topics: dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express major, Express vs RR middleware, experimental warning
+  - Changeset marks experimental; accurate `bundler` JSDoc
+- **Fixtures/tests:**
+  - Vite SSR fixture (streaming, CSP, entries, per-route chunks, vocab; relative `/static/...` `publicPath` with app routes outside that prefix)
+  - Create template tests (named `Component`)
+  - Config edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + `serverPort`) stay config/command validation only — no browser e2e for those
+- **Opt-in / adopt:**
+  - Via `buildType`
+  - Document hydrate (not `#app`)
+  - Relative asset-only `publicPath`
+  - Required named exports
+  - Shared `__sku_alias__*` entry aliases with static Vite
+  - Production defines aligned with webpack SSR naming/shape where they overlap (`port` → `__SKU_DEFAULT_SERVER_PORT__`)

@@ -10,6 +10,7 @@ export const configPlugin = ({
 }): PluginOption => ({
   name: makePluginName('config'),
   config: () => ({
+    base: skuContext.publicPath,
     publicDir: skuContext.paths.public,
     root: process.cwd(),
     resolve: {

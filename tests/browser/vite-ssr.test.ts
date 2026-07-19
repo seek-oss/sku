@@ -54,6 +54,12 @@ describe('vite-ssr', () => {
       expect(html).toContain('vite-ssr-client');
       expect(html).toContain('@vite/client');
 
+      // Vite serve base must match publicPath — otherwise these fall through to HTML.
+      const viteClient = await fetch(`${url}/static/vite-ssr/@vite/client`);
+      expect(viteClient.ok).toBe(true);
+      expect(viteClient.headers.get('content-type')).toMatch(/javascript/);
+      expect(await viteClient.text()).not.toContain('<!DOCTYPE html>');
+
       const csp = response.headers.get('content-security-policy');
       const cspReportOnly = response.headers.get(
         'content-security-policy-report-only',

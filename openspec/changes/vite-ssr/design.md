@@ -37,6 +37,7 @@ Post-spike:
 - Consumer Document
 - Runtime route-tree matching
 - Production listen-logging parity
+- Supporting the config `public` assets folder for Vite SSR (until a definitive need)
 
 ## Decisions
 
@@ -146,6 +147,29 @@ Cover with a fixture or equivalent test.
 Fix by setting `config.base` for serve + build.
 
 Do **not** force start bootstrap URLs to `/` (webpack start behaviour) — keep start asset URLs under `publicPath`.
+
+### 4b. No config `public` assets folder for Vite SSR
+
+Config `public` designates a folder of files copied/served as-is (unhashed).
+
+That pattern often bypasses content hashing / cache-safe URLs and is used to avoid production-ready asset serving.
+
+Until there is a definitive need, Vite SSR MUST NOT support it.
+
+Config always has a `public` path (default `'public'`), so the signal is directory existence — not whether the option is set.
+
+On `sku start` / `sku build` for Vite SSR: if `paths.public` exists on disk, hard-error with guidance to import assets from scripts instead (Vite hashed pipeline).
+
+Implementation MUST also disable the copy/serve path for this mode:
+
+- Do **not** set Vite `publicDir` to `paths.public` (use `false` / unset for SSR).
+- Do **not** call `copyPublicFiles` after the Vite SSR build.
+
+Static Vite and webpack keep today’s `public` behaviour.
+
+Docs MUST discourage the pattern for Vite SSR and note importing images/assets in modules as the alternative.
+
+Migrating MUST call out moving off `public` when adopting Vite SSR.
 
 ### 5. Full-document streaming
 
@@ -275,6 +299,7 @@ Migrating MUST cover:
 - `dist/server/server.js` + sibling `client/`/`server/`
 - CJS interop for `sku start`
 - Express major / `@types` alignment
+- move off config `public` / public assets folder (import assets instead)
 
 ### 17. Experimental first release
 
@@ -307,6 +332,7 @@ Align Express `@types` with the Express major used by the Vite SSR server runtim
 | Absolute/`CDN` `publicPath`         | Config rejects; relative-only docs; no browser e2e for this edge case                                         |
 | `publicPath` coupled to basename    | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets          |
 | Start assets 404 under `publicPath` | Set Vite `config.base` for serve + build (not `apply: 'build'` only); keep start bootstrap under `publicPath` |
+| Unhashed `public` folder assets     | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs   |
 | CJS “got: object” on `sku start`    | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                               |
 | Mock deps ship in prod              | `devServerMiddleware` only; never from server entry                                                           |
 | Early production use                | Experimental docs + changeset                                                                                 |
@@ -317,7 +343,7 @@ Opt-in via `buildType` + Vite.
 
 New apps: `--template vite-ssr` (named `Component`).
 
-Existing: Migrating in `server-rendering.md` (ports, deploy layout, CJS, Express, `Component`).
+Existing: Migrating in `server-rendering.md` (ports, deploy layout, CJS, Express, `Component`, move off `public`).
 
 Webpack SSR: leave `buildType` unset.
 

@@ -26,7 +26,7 @@
 - [x] 3.4 Tests: `devServerMiddleware` in `sku start`; absent from production server bundle / responses
 - [x] 3.5 Tests: `onHydrate` receives `context` only; no language in bootstrap / request-context; no public `getSkuLanguage`
 - [x] 3.6 Tests: language chunk from `onRequest.language` / omit → no chunk; auto `moduleId` preloads; missing / non-array `routes` hard-error
-- [x] 3.7 Do **not** add browser e2e for config edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`) — those cases were removed from the browser suite; config/command validation is enough
+- [x] 3.7 Do **not** add browser e2e for config edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + existing `public` directory) — those cases were removed from the browser suite; config/command validation is enough
 - [x] 3.8 Update unit tests for simplified language resolution and webpack-aligned production defines
 - [x] 3.9 Fixture: intent preload via `PreloadingLink` + client `AppWrapper` routes context; production hover test for lazy chunk
 
@@ -46,7 +46,15 @@
 - [x] 5.6 Migrating docs: webpack dual-port → Vite SSR single `port` (drop `serverPort`; `PORT` overrides), `dist/server/server.js` + sibling `client/` / `server/` layout
 - [x] 5.7 Set Vite `config.base` to `publicPath` for serve as well as build (not `apply: 'build'` only) so `sku start` bootstrap URLs under `publicPath` hit Vite middleware; keep start asset URLs under `publicPath` (do not force `/`); strengthen start fixture/assert assets are JS
 
+## 6. Reject public assets folder for Vite SSR
+
+- [x] 6.1 Hard-error on Vite SSR `sku start` / `sku build` when configured `public` directory exists; message advises importing assets instead
+- [x] 6.2 Disable Vite `publicDir` and `copyPublicFiles` for Vite SSR (static Vite / webpack unchanged)
+- [x] 6.3 Config/command validation test for existing `public` directory (no browser e2e)
+- [x] 6.4 Docs: discourage `public` for Vite SSR in product + `configuration.md`; Migrating calls out moving off the folder
+
 ## Deferred
 
 - Production listen / custom logger — design Open Questions
 - Runtime dual-`routes` validation — Non-Goals (docs only)
+- Vite SSR support for config `public` / unhashed public assets — Non-Goals until definitive need

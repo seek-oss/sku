@@ -29,11 +29,14 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
 - Vocab/language chunks only when server `onRequest` returns `language` (optional; no allowlist / sole-language default).
   - Auto-derive lazy-route `moduleId`; per-route chunk fixture.
 - `@sku-lib/create` template `vite-ssr` with named `Component` on lazy pages.
-  - Product + Migrating docs in `server-rendering.md` (single-port, deploy layout, CJS interop, Express typing, named `Component`).
+  - Product + Migrating docs in `server-rendering.md` (single-port, deploy layout, CJS interop, Express typing, named `Component`, move off `public`).
 - CJS interop: document start-vs-build failure mode + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`.
   - **No** expanded baked-in interop defaults beyond Apollo; no runtime error rewriting.
 - Config JSDoc must not claim Vite is static-only.
   - Express `@types` aligned with Vite SSR runtime major.
+- Vite SSR MUST NOT support config `public` (copied-as-is public assets folder).
+  - Hard-error if that directory exists on `sku start` / `sku build`.
+  - Docs discourage the pattern and point to importing assets instead; Migrating covers moving off it.
 - Initial release is **experimental**:
   - Docs MUST warn not-for-production.
   - Changeset / release notes MUST state the same.
@@ -46,6 +49,7 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
 - Vite SSR `serverPort` (webpack-only dual-port leftover)
 - Expanding sku’s default CJS interop dependency list beyond Apollo
 - Production listen-logging parity; runtime validation that server/client route trees match
+- Supporting (or soft-deprecating without hard error) the `public` assets folder for Vite SSR until there is a definitive need
 
 ## Capabilities
 
@@ -72,16 +76,17 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
 - **Deps:** `react-router` (Data Mode)
 - **Docs / release:**
   - `server-rendering.md` (product + Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs
-  - Topics: dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express major, Express vs RR middleware, experimental warning
+  - Topics: dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express major, Express vs RR middleware, experimental warning, move off config `public` / public assets folder (import assets instead)
   - Changeset marks experimental; accurate `bundler` JSDoc
 - **Fixtures/tests:**
   - Vite SSR fixture (streaming, CSP, entries, per-route chunks, vocab; relative `/static/...` `publicPath` with app routes outside that prefix)
   - Create template tests (named `Component`)
-  - Config edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + `serverPort`) stay config/command validation only — no browser e2e for those
+  - Config edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + `serverPort`, Vite SSR + existing `public` directory) stay config/command validation only — no browser e2e for those
 - **Opt-in / adopt:**
   - Via `buildType`
   - Document hydrate (not `#app`)
   - Relative asset-only `publicPath`
+  - No `public` assets folder (directory must not exist)
   - Required named exports
   - Shared `__sku_alias__*` entry aliases with static Vite
   - Production defines aligned with webpack SSR naming/shape where they overlap (`port` → `__SKU_DEFAULT_SERVER_PORT__`)

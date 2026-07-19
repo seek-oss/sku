@@ -41,6 +41,8 @@ export default {
 } satisfies SkuConfig;
 ```
 
+Vite SSR does **not** support the config [`public`](./configuration.md#public) assets folder (files copied/served as-is without content hashing). If that directory exists (default path `public`), `sku start` / `sku build` hard-error. Import images and other assets from modules so they go through Vite’s hashed pipeline.
+
 ### Routes
 
 Export named `routes` from **both** the server and client entries. These need to match in HTML and will likely only differ based on loaders or middleware.
@@ -482,6 +484,7 @@ High-level guide for moving a **static** sku app (webpack or Vite SSG) to Vite S
 
 - Vite SSR is Vite-only: `bundler: 'vite'` + `buildType: 'ssr'`
 - Use a **relative** `publicPath` (e.g. `/`) — absolute / CDN URLs are not supported
+- Move off the config [`public`](./configuration.md#public) assets folder before adopting Vite SSR — if that directory exists, `sku start` / `sku build` fail. Import assets from modules instead
 
 #### Limitations
 
@@ -493,6 +496,7 @@ This guide covers the **sku** surface only (config, entries, providers, middlewa
 - Prefer scaffolding with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or mirror that config
 - Use `sku start` / `sku build` (same commands as static Vite) — do **not** introduce `start-ssr` / `build-ssr`
 - Drop static-only config such as `renderEntry` / `src/render.tsx` and environments-driven static HTML generation for the SSR path
+- Remove or empty the [`public`](./configuration.md#public) assets folder and import those files from modules (Vite SSR does not copy/serve that folder)
 
 #### Routes and request entries
 
@@ -540,6 +544,7 @@ The older SSR API was significantly lower-level and required apps to introduce a
 
 - Switch to `bundler: 'vite'` + `buildType: 'ssr'`
 - Relative `publicPath` only
+- Move off the config [`public`](./configuration.md#public) assets folder — Vite SSR hard-errors if that directory exists; import assets from modules instead
 
 #### Limitations
 
@@ -553,6 +558,7 @@ Covers the **sku** migration surface only. Deploy/process/infra changes are out 
 - **Deploy layout:** production entry is `node dist/server/server.js` with sibling `client/` + `server/` under the build target — not webpack’s single `dist/server.js` layout
 - `buildType` set means `-ssr` commands are rejected
 - Type server-entry `middleware` for **Express 4** (`SkuSsrMiddleware` / `@types/express` major 4)
+- Drop the [`public`](./configuration.md#public) assets folder (and any `public: '…'` path that still exists on disk); import those assets from modules
 
 #### Routes and request entries
 

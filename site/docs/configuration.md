@@ -514,6 +514,8 @@ Default: `public`
 
 A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
 
+**Not supported for Vite SSR** (`bundler: 'vite'` + `buildType: 'ssr'`). If this directory exists on disk, `sku start` / `sku build` fail. Import assets from modules instead so they go through Vite’s hashed pipeline. Static Vite and webpack apps keep this behaviour.
+
 ## publicPath
 
 Type: `string`

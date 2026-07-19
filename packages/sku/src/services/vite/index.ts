@@ -52,9 +52,6 @@ export const viteService = {
       const builder = await createBuilder(createConfig(skuContext));
       await builder.buildApp();
 
-      await copyPublicFiles({
-        paths: { ...skuContext.paths, target: outDir.ssrClient },
-      });
       return;
     }
 

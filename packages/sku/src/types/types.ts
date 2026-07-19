@@ -384,6 +384,9 @@ export interface SkuConfigBase {
   /**
    * A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
    *
+   * Not supported for Vite SSR (`buildType: 'ssr'`): if this directory exists on disk,
+   * `sku start` / `sku build` fail. Import assets from modules instead.
+   *
    * @default 'public'
    * @link https://seek-oss.github.io/sku/docs/configuration#public
    */

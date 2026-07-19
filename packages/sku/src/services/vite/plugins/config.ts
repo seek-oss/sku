@@ -11,7 +11,8 @@ export const configPlugin = ({
   name: makePluginName('config'),
   config: () => ({
     base: skuContext.publicPath,
-    publicDir: skuContext.paths.public,
+    // SSR does not support the copied-as-is public assets folder.
+    publicDir: skuContext.buildType === 'ssr' ? false : skuContext.paths.public,
     root: process.cwd(),
     resolve: {
       alias: {

@@ -1,5 +1,6 @@
 import browserslist from 'browserslist';
 import { closest } from 'fastest-levenshtein';
+import { existsSync } from 'node:fs';
 
 import configSchema from './configSchema.js';
 import defaultSkuConfig from './defaultSkuConfig.js';
@@ -8,10 +9,11 @@ import type { SkuConfig } from '../types/types.js';
 import { hasErrorMessage } from '../utils/error-guards.js';
 import type { ValidationError } from 'fastest-validator';
 import { caution, critical, strong } from '@sku-private/utils/console';
+import { getPathFromCwd } from '@sku-private/utils';
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 
-const exitWithErrors = async (errors: string[]) => {
+const exitWithErrors = (errors: string[]) => {
   console.log(strong(critical('Errors in sku config:')));
   errors.forEach((e) => {
     console.log(caution(e));
@@ -91,6 +93,22 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
       `🚫 Vite SSR does not support '${strong(
         'serverPort',
       )}'. Use '${strong('port')}' for both \`sku start\` and the production default listen port (overridable via \`PORT\`).`,
+    );
+  }
+
+  // Config always has a `public` path (default `'public'`); existence on disk is the signal.
+  if (
+    skuConfig.buildType === 'ssr' &&
+    skuConfig.bundler === 'vite' &&
+    skuConfig.public &&
+    existsSync(getPathFromCwd(skuConfig.public))
+  ) {
+    errors.push(
+      `🚫 Vite SSR does not support the '${strong(
+        'public',
+      )}' assets folder ('${strong(
+        skuConfig.public,
+      )}'). Import assets from modules instead so they go through the optimisation pipeline.`,
     );
   }
 

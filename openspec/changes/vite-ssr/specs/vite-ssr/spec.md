@@ -309,6 +309,34 @@ The decoupled asset-prefix case MUST be covered by a fixture or equivalent test
 - **AND** the document references bootstrap modules under that `publicPath` (e.g. `@vite/client`)
 - **THEN** those URLs are served as JavaScript by Vite (not HTML / React Router 404 fallthrough)
 
+### Requirement: Vite SSR rejects the public assets folder
+
+Vite SSR MUST NOT support config `public` (the folder of files copied/served as-is without content hashing).
+
+Config always includes a `public` path (default `'public'`).
+
+The rejection signal is that `paths.public` exists on disk — not merely that the option is set.
+
+When that directory exists, `sku start` and `sku build` MUST hard-error and guide consumers to import assets from modules instead.
+
+Vite SSR MUST NOT set Vite `publicDir` to that folder and MUST NOT copy public files into the build output.
+
+This edge case MUST NOT require a dedicated browser e2e fixture.
+
+Static Vite and webpack apps MAY keep existing `public` behaviour.
+
+#### Scenario: Existing public directory rejected for Vite SSR
+
+- **WHEN** Vite SSR is enabled and the configured `public` directory exists on disk
+- **THEN** `sku start` / `sku build` fail with a hard error
+- **AND** the error advises importing assets from scripts/modules instead of using the public assets folder
+
+#### Scenario: Vite SSR does not copy or serve publicDir assets
+
+- **WHEN** a Vite SSR app runs without an existing `public` directory
+- **THEN** sku does not enable Vite `publicDir` for that folder
+- **AND** does not copy public assets into the client build output
+
 ### Requirement: Vite SSR uses a single port
 
 Vite SSR MUST use config `port` for `sku start` and as the baked production default listen port (`__SKU_DEFAULT_SERVER_PORT__`).
@@ -419,6 +447,7 @@ Migrating docs MUST also cover:
 - production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
 - CJS interop for `sku start`
 - Express typing alignment
+- moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
 
 #### Scenario: Primary Vite SSR docs have topic coverage
 
@@ -435,3 +464,10 @@ Migrating docs MUST also cover:
 - **WHEN** a reader opens **Migrate from Older SSR App**
 - **THEN** docs explain webpack dual-port → Vite SSR single `port` (drop `serverPort`; `PORT` still overrides production)
 - **AND** docs state the production server entry is `dist/server/server.js` with sibling `client/` and `server/` directories
+
+#### Scenario: Docs discourage public assets folder for Vite SSR
+
+- **WHEN** a reader opens Vite SSR product or Migrating docs (and `configuration.md` for `public`)
+- **THEN** docs state that Vite SSR does not support the public assets folder
+- **AND** recommend importing assets from modules instead
+- **AND** Migrating notes that existing `public` folder usage must be moved off before adopting Vite SSR

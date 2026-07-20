@@ -11,21 +11,17 @@ For statically rendered apps, a `script-src` policy can be automatically generat
 
 Set `cspEnabled: true` in your `sku.config.js`.
 
-For Vite SSR you can also enable Report-Only:
+### Delivery
 
-```ts
-export default {
-  bundler: 'vite',
-  buildType: 'ssr',
-  cspEnabled: true,
-  cspExtraScriptSrcHosts: ['https://third-party.example.com'],
-  cspReportOnlyEnabled: true,
-  cspReportOnlyExtraScriptSrcHosts: ['https://report-only.example.com'],
-  cspReportOnlyReportTo: 'csp-endpoint',
-} satisfies SkuConfig;
-```
+The `cspDelivery` option controls how the CSP is delivered and can be set to one of two values:
 
-When `cspReportOnlyReportTo` is set, sku includes `report-to <value>` on the Report-Only policy. You (or your infrastructure) must define the matching [`Reporting-Endpoints`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Reporting-Endpoints) group — sku does not emit that header.
+- `tag`: The CSP will be embedded directly in the rendered HTML content via a `<meta http-equiv="Content-Security-Policy" …>` tag.
+  No further action will be required to enable the CSP.
+  This is the default behaviour if no `cspDelivery` option is specified.
+- `header`: The CSP will be written to a JSON file alongside the rendered HTML content (e.g. `index.html.json`) in the `metadata.csp` property, and no `<meta http-equiv="Content-Security-Policy" …>` tag will be generated.
+  Extra steps will be required at deployment and/or request time to ensure the value of this property is returned as a `Content-Security-Policy` header in the response for the rendered HTML content.
+
+The `cspDelivery` option is only available when using Vite.
 
 ### Extra Hosts
 
@@ -169,3 +165,33 @@ const renderCallback: Server['renderCallback'] = (
     </html>`);
 };
 ```
+
+### Report-only Content Security Policy
+
+A "report-only" Content Security Policy can be enabled by setting `cspReportOnlyEnabled: true` in your `sku.config.js`.
+This will cause a [`Content-Security-Policy-Report-Only`] header to be generated.
+
+By default the report-only CSP will have the same content as the standard CSP, including the same [extra hosts](#extra-hosts).
+This can be changed by setting the `cspReportOnlyExtraScriptSrcHosts` array in `sku.config.js` to contain the script URLs for the report-only CSP.
+
+Unlike the standard CSP, a report-only CSP can only be delivered via an HTTP header and not via a `<meta http-equiv>` tag.
+As such there is no explicit [delivery option](#delivery) for a report-only CSP and the behaviour matches that of `header` CSP delivery, with the policy being written to the `metadata.cspReportOnly` property.
+As a consequence, and like the delivery option itself, a report-only CSP is only available when using Vite.
+
+**Vite SSR:** report-only is delivered as a real `Content-Security-Policy-Report-Only` HTTP response header (not `metadata.cspReportOnly`). You can also set `cspReportOnlyReportTo` to append a [`report-to`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to) group name token. You (or your infrastructure) must define the matching [`Reporting-Endpoints`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Reporting-Endpoints) group — sku does not emit that header.
+
+```ts
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  cspEnabled: true,
+  cspExtraScriptSrcHosts: ['https://third-party.example.com'],
+  cspReportOnlyEnabled: true,
+  cspReportOnlyExtraScriptSrcHosts: ['https://report-only.example.com'],
+  cspReportOnlyReportTo: 'csp-endpoint',
+} satisfies SkuConfig;
+```
+
+A report-only CSP can be enabled or disabled independently of the standard CSP, and vice versa.
+
+[`Content-Security-Policy-Report-Only`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy-Report-Only

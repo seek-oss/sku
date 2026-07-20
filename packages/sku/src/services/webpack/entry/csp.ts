@@ -12,24 +12,31 @@ const hashScriptContents = (scriptContents: BinaryLike) =>
 
 interface CreateCSPHandlerOptions {
   extraHosts?: string[];
+  reportOnlyExtraHosts?: string[];
   isDevelopment?: boolean;
 }
 
 export type CSPHandler = {
   registerScript: (script: string) => void;
+  createCSP: () => string;
   createCSPTag: () => string;
+  createReportOnlyCSP: () => string;
   createUnsafeNonce: () => string;
+  processHtml: (html: string) => HTMLElement;
+  updateHtml: (root: HTMLElement) => string;
   handleHtml: (html: string) => string;
 };
 
 export default function createCSPHandler({
   extraHosts = [],
+  reportOnlyExtraHosts = [],
   isDevelopment = false,
 }: CreateCSPHandlerOptions = {}): CSPHandler {
-  let tagReturned = false;
-  const hosts = new Set();
-  const shas = new Set();
-  const nonces = new Set();
+  let cspCreated = false;
+  const hosts = new Set<string>();
+  const reportOnlyHosts = new Set<string>();
+  const shas = new Set<string>();
+  const nonces = new Set<string>();
 
   const addScriptContents = (contents: BinaryLike | undefined) => {
     if (contents) {
@@ -38,7 +45,7 @@ export default function createCSPHandler({
   };
 
   const createUnsafeNonce = () => {
-    if (tagReturned) {
+    if (cspCreated) {
       throw new Error(
         `Unable to add nonce. Content Security Policy already sent. Try adding nonces before calling flushHeadTags.`,
       );
@@ -57,13 +64,23 @@ export default function createCSPHandler({
     }
   };
 
+  const addReportOnlyScriptUrl = (src: string) => {
+    const { origin } = new URL(src, defaultBaseName);
+
+    if (origin !== defaultBaseName) {
+      reportOnlyHosts.add(origin);
+    }
+  };
+
   extraHosts.forEach((host) => addScriptUrl(host));
+  reportOnlyExtraHosts.forEach((host) => addReportOnlyScriptUrl(host));
 
   const processScriptNode = (scriptNode: HTMLElement) => {
     const src = scriptNode.getAttribute('src');
 
     if (src) {
       addScriptUrl(src);
+      addReportOnlyScriptUrl(src);
       return;
     }
 
@@ -74,7 +91,7 @@ export default function createCSPHandler({
   };
 
   const registerScript: RenderCallbackParams['registerScript'] = (script) => {
-    if (tagReturned) {
+    if (cspCreated) {
       throw new Error(
         `Unable to register script. Content Security Policy already sent. Try registering scripts before calling flushHeadTags. Script: ${script.substr(
           0,
@@ -90,8 +107,8 @@ export default function createCSPHandler({
     parse(script).querySelectorAll('script').forEach(processScriptNode);
   };
 
-  const createCSPTag = () => {
-    tagReturned = true;
+  const createCSPForHosts = (set: Set<string>) => {
+    cspCreated = true;
 
     const inlineCspShas = [];
 
@@ -108,7 +125,7 @@ export default function createCSPHandler({
     const scriptSrcPolicy = [
       'script-src',
       `'self'`,
-      ...hosts.values(),
+      ...set.values(),
       ...inlineCspShas,
       ...inlineCspNonces,
     ];
@@ -117,19 +134,24 @@ export default function createCSPHandler({
       scriptSrcPolicy.push(`'unsafe-eval'`);
     }
 
-    return `<meta http-equiv="Content-Security-Policy" content="${scriptSrcPolicy.join(
-      ' ',
-    )};">`;
+    return `${scriptSrcPolicy.join(' ')};`;
   };
 
-  const handleHtml = (html: string) => {
+  const createCSP = () => createCSPForHosts(hosts);
+
+  const createCSPTag = () =>
+    `<meta http-equiv="Content-Security-Policy" content="${createCSP()}">`;
+
+  const createReportOnlyCSP = () => createCSPForHosts(reportOnlyHosts);
+
+  const processHtml = (html: string) => {
     const root = parse(html, {
       comment: true,
     });
 
     if (!root) {
       throw new Error(
-        `Unable to parse HTML in order to create CSP tag. Check the following output of renderDocument for invalid HTML.\n${
+        `Unable to parse HTML in order to create CSP. Check the following output of renderDocument for invalid HTML.\n${
           html.length > 250 ? `${html.substring(0, 200)}...` : html
         }`,
       );
@@ -137,8 +159,14 @@ export default function createCSPHandler({
 
     root.querySelectorAll('script').forEach(processScriptNode);
 
+    return root;
+  };
+
+  const updateHtml = (root: HTMLElement) => {
     const headElement = root.querySelector('head');
     if (!headElement) {
+      const html = root.toString();
+
       throw new Error(
         `Unable to find 'head' element in HTML in order to create CSP tag. Check the following output of renderDocument for invalid HTML.\n${
           html.length > 250 ? `${html.substring(0, 200)}...` : html
@@ -151,10 +179,16 @@ export default function createCSPHandler({
     return root.toString();
   };
 
+  const handleHtml = (html: string) => updateHtml(processHtml(html));
+
   return {
     registerScript,
+    createCSP,
     createCSPTag,
+    createReportOnlyCSP,
     createUnsafeNonce,
+    processHtml,
+    updateHtml,
     handleHtml,
   };
 }

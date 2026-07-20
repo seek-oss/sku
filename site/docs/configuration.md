@@ -93,6 +93,16 @@ Default: `false`
 
 Enable content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
 
+## cspDelivery
+
+Type: `'tag' | 'header'`
+
+Default: `'tag'`
+
+Bundler: `vite`
+
+The way the content security policy is delivered. Only relevant if `cspEnabled` is set to `true`.
+
 ## cspExtraScriptSrcHosts
 
 Type: `Array<string>`
@@ -105,17 +115,23 @@ Extra external hosts to allow in your `script-src` [content security policy](htt
 
 Type: `boolean`
 
+**Unavailable for libraries**
+
 Default: `false`
 
-**Vite SSR only.** When `true`, sets a `Content-Security-Policy-Report-Only` header (can coexist with enforcing CSP).
+Bundler: `vite`
+
+Enable report-only content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
 
 ## cspReportOnlyExtraScriptSrcHosts
 
 Type: `Array<string>`
 
-Default: `[]`
+Default: `cspExtraScriptSrcHosts`
 
-Extra hosts for the Report-Only `script-src` policy. Only relevant if `cspReportOnlyEnabled` is `true`.
+Bundler: `vite`
+
+Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspReportOnlyEnabled` is set to `true`.
 
 ## cspReportOnlyReportTo
 

@@ -172,30 +172,6 @@ export interface SkuConfigBase {
   cspExtraScriptSrcHosts?: string[];
 
   /**
-   * Emit a report-only CSP header for Vite SSR responses.
-   *
-   * @default false
-   */
-  cspReportOnlyEnabled?: boolean;
-
-  /**
-   * Extra script hosts for the Vite SSR report-only policy.
-   *
-   * @default []
-   */
-  cspReportOnlyExtraScriptSrcHosts?: string[];
-
-  /**
-   * CSP `report-to` group name token for the Vite SSR Report-Only policy.
-   * Only relevant if {@link cspReportOnlyEnabled} is `true`. When set, sku
-   * appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
-   * Consumers (or infra) must define the matching `Reporting-Endpoints` group.
-   *
-   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyreportto
-   */
-  cspReportOnlyReportTo?: string;
-
-  /**
    * This function provides a way to modify sku's ESLint configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *
@@ -578,6 +554,42 @@ export interface ViteSkuConfig {
    * @default: []
    */
   vitePlugins?: PluginOption[];
+
+  /**
+   * The way the content security policy is delivered. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   *
+   * @default 'tag'
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspdelivery
+   */
+  cspDelivery?: 'tag' | 'header';
+
+  /**
+   * **Unavailable for libraries**
+   *
+   * Enable report-only content security policy feature. More info at https://seek-oss.github.io/sku/docs/csp
+   *
+   * @default false
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyenabled
+   */
+  cspReportOnlyEnabled?: boolean;
+
+  /**
+   * Extra external hosts to allow in your `script-src` report-only content security policy. Only relevant if {@link cspReportOnlyEnabled} is set to `true`.
+   *
+   * @default {@link SkuConfigBase#cspExtraScriptSrcHosts}
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyextrascriptsrchosts
+   */
+  cspReportOnlyExtraScriptSrcHosts?: string[];
+
+  /**
+   * CSP `report-to` group name token for the Vite SSR Report-Only policy.
+   * Only relevant if {@link cspReportOnlyEnabled} is `true`. When set, sku
+   * appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
+   * Consumers (or infra) must define the matching `Reporting-Endpoints` group.
+   *
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyreportto
+   */
+  cspReportOnlyReportTo?: string;
 
   /**
    * This function provides a way to modify sku's Vite configuration.

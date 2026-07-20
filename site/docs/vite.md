@@ -119,15 +119,14 @@ Migrating to ESM involves two steps:
 
 Declaring your package as an ES module involves adding `"type": "module"` to your `package.json` file:
 
-```diff
+```json
 {
   "name": "my-sku-app",
-+ "type": "module",
+  "type": "module", // [!code ++]
   "scripts": {
     "start": "sku start",
     "build": "sku build"
-  },
-  ...
+  }
 }
 ```
 
@@ -163,24 +162,24 @@ However, if you _do_ need to convert some code to ESM, the primary change will b
 
 In ESM, modules are imported using the `import` keyword and exported using the `export` keyword:
 
-```diff
+```ts
 // named imports
--const { foo } = require('foo');
-+import { foo } from 'foo';
+const { foo } = require('foo'); // [!code --]
+import { foo } from 'foo'; // [!code ++]
 
 // default imports
--const express = require('express');
-+import express from 'express';
+const express = require('express'); // [!code --]
+import express from 'express'; // [!code ++]
 
 // named exports
--const SOME_CONSTANT = 'some value';
--module.exports = { SOME_CONSTANT };
-+export const SOME_CONSTANT = 'some value';
+const SOME_CONSTANT = 'some value'; // [!code --];
+module.exports = { SOME_CONSTANT }; // [!code --];
+export const SOME_CONSTANT = 'some value'; // [!code ++]
 
 // default exports
 const ANOTHER_CONSTANT = '123';
--module.exports = ANOTHER_CONSTANT;
-+export default ANOTHER_CONSTANT;
+module.exports = ANOTHER_CONSTANT; // [!code --]
+export default ANOTHER_CONSTANT; // [!code ++]
 ```
 
 #### Import path file extensions
@@ -364,18 +363,19 @@ pnpm dlx @sku-lib/codemod svg-import-query-param .
 
 If you were manually constructing [`data:` URLs] from the imported SVG markup, you can instead use the `url` or `inline` query parameters to import the SVG as a URL or data URL respectively, removing the need to construct a data URL yourself:
 
-```diff
+```ts
 import { style } from '@vanilla-extract/css';
--import iconMarkup from './icon.svg?raw';
+import iconMarkup from './icon.svg?raw'; // [!code --]
 
 // URL of the SVG file
-+import iconUrl from './icon.svg?url';
+import iconUrl from './icon.svg?url'; // [!code ++]
+
 // or SVG data URL
-+import iconUrl from './icon.svg?inline';
+import iconUrl from './icon.svg?inline'; // [!code ++]
 
 export const svgBackground = style({
--  backgroundImage: `url("data:image/svg+xml;base64,${Buffer.from(iconMarkup).toString('base64')}")`,
-+  backgroundImage: `url("${iconUrl}")`,
+  backgroundImage: `url("data:image/svg+xml;base64,${Buffer.from(iconMarkup).toString('base64')}")`, // [!code --]
+  backgroundImage: `url("${iconUrl}")`, // [!code ++]
 });
 ```
 

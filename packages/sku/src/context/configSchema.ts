@@ -188,6 +188,7 @@ export default validator.compile({
     type: 'boolean',
   },
   cspEnabled: { type: 'boolean' },
+  cspDelivery: { type: 'enum', values: ['tag', 'header'] },
   cspExtraScriptSrcHosts: {
     type: 'array',
     items: { type: 'string' },
@@ -196,6 +197,7 @@ export default validator.compile({
   cspReportOnlyExtraScriptSrcHosts: {
     type: 'array',
     items: { type: 'string' },
+    optional: true,
   },
   cspReportOnlyReportTo: {
     type: 'string',

@@ -204,7 +204,7 @@ export const render = (
   options: RenderOptions = {},
   renderManifest?: RenderManifest,
 ): Promise<RenderResult> => {
-  // ALS must be established in this Vite-loaded module so consumer
+  // Async Local Storage must be established in this Vite-loaded module so consumer
   // helpers (also resolved via the SSR module graph) share the store.
   const store =
     options.requestContextStore ?? createSsrRequestContextStore(options.nonce);

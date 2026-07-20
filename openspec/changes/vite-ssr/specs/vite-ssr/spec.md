@@ -432,7 +432,7 @@ Sku MUST NOT rewrite or wrap React render errors at runtime for this case — do
 
 ### Requirement: Vite SSR ships on Express 5 with aligned typing
 
-Before release, the Vite SSR server runtime MUST use Express 5.
+The Vite SSR server runtime MUST use Express 5.
 
 Sku MUST align `@types` for Express with Express 5.
 
@@ -451,7 +451,7 @@ Migrating / product docs MUST state that consumers should target Express 5 when 
 
 ### Requirement: Vite SSR ships on React Router 8
 
-Before release, Vite SSR MUST depend on React Router 8 (sku dependency / catalog and Vite SSR fixtures/template).
+Vite SSR MUST depend on React Router 8 (sku dependency / catalog and Vite SSR fixtures/template).
 
 Migrating / product docs MUST state that consumers should target React Router 8 for Data Mode / route typing used with Vite SSR entries.
 
@@ -538,7 +538,7 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 - **AND** recommend importing assets from modules instead
 - **AND** Migrating notes that existing `public` folder usage must be moved off before adopting Vite SSR
 
-#### Scenario: Migrating covers trial-migration follow-ups
+#### Scenario: Migrating covers Older SSR adoption topics
 
 - **WHEN** a reader opens **Migrate from Older SSR App**
 - **THEN** docs remind readers to keep server-only loader modules off the client route graph

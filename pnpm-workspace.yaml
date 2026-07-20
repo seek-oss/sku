@@ -6,6 +6,8 @@ packages:
   - private/*
 
 allowBuilds:
+  # Postinstall only prints an optional completions tip; dist/ ships in the package.
+  '@fission-ai/openspec': false
   '@swc/core': true
   core-js-pure: false
   esbuild: true

@@ -32,6 +32,10 @@ export default defineConfig({
     socialLinks: [{ icon: 'github', link: 'https://github.com/seek-oss/sku' }],
     search: {
       provider: 'local',
+      options: {
+        // Enable Detailed View by default
+        detailedView: true,
+      },
     },
     outline: [2, 3],
     sidebar: {

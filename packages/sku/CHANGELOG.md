@@ -8,6 +8,8 @@ There are a lot of changes in this major release, however most consumers should 
 pnpm dlx @sku-lib/codemod migrate-root-resolution . && pnpm sku format
 ```
 
+You will also need to update any `@sku-lib/*` packages to the latest version.
+
 It is still **strongly recommended** to read the entire release notes.
 
 ### Major Changes

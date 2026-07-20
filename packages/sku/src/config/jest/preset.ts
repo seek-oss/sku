@@ -5,7 +5,13 @@ import type { Config } from 'jest';
 const { paths, jestDecorator } = await getSkuContext();
 
 const slash = '[/\\\\]'; // Cross-platform path delimiter regex
-const compilePackagesRegex = (await paths.compilePackages())
+// ESM packages that Jest must transform (default is to ignore all of node_modules).
+// react-router v8+ is ESM-only; cookie-es is its runtime dependency.
+const packagesToTransformRegex = [
+  ...(await paths.compilePackages()),
+  'react-router',
+  'cookie-es',
+]
   .map((pkg) => `.*${RegExp.escape(pkg)}`)
   .join('|');
 
@@ -29,9 +35,9 @@ export default jestDecorator({
     '\\.[cm]?jsx?$': fileURLToPath(import.meta.resolve('#jest/js-transform')),
   },
   transformIgnorePatterns: [
-    // Allow 'compilePackages' code to be transformed in tests by overriding
-    // the default, which normally excludes everything in node_modules.
-    `node_modules${slash}(?!(${compilePackagesRegex}))`,
+    // Transform compilePackages and known ESM-only deps; ignore the rest of
+    // node_modules (Jest's default).
+    `node_modules${slash}(?!(${packagesToTransformRegex}))`,
   ],
   watchPlugins: [
     fileURLToPath(import.meta.resolve('jest-watch-typeahead/filename')),

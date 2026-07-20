@@ -17,15 +17,13 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Per-route + vocab chunks
 - Create template + Migrating docs
 - Experimental first release
-
-Post-spike:
-
-- Decouple asset `publicPath` from RR basename
 - Single-port (`port` only; reject `serverPort`)
-- Named `Component` in template/docs
+- Named `Component` in Lacy loaded pages in template/docs
 - CJS interop docs
 - Accurate config JSDoc / Express 5 + React Router 8 typing docs
 - Ship Express 5 and React Router 8 before release; treat later majors as potentially breaking
+- Migration guides for server-only loaders, Braid reset order, server/client-only providers, Jest→Vitest prerequisite, `#` pathAliases
+- Sku-owned `@vocab/vite` resolve via Vite `resolve.alias` when language chunks are active (no consumer direct dep)
 
 **Non-Goals:**
 
@@ -39,6 +37,9 @@ Post-spike:
 - Runtime route-tree matching
 - Production listen-logging parity
 - Supporting the config `public` assets folder for Vite SSR (until a definitive need)
+- Automatic `*.server.ts` client strip
+- Auto-injecting Braid reset into sku’s Vite SSR server entry
+- A new Jest→Vitest codemod beyond existing tooling/docs
 
 ## Decisions
 
@@ -233,6 +234,26 @@ ALS holds **CSP nonce only**.
 
 When `languages` is set: `@vocab/vite` splitting at build time.
 
+**Resolve ownership:** `@vocab/vite` is a sku dependency. Consumers MUST NOT need a direct `@vocab/vite` dep for resolve to succeed.
+
+When the vocab plugin / `languages` is active, sku’s shared Vite config (`packages/sku/src/services/vite/plugins/config.ts`) MUST:
+
+1. Resolve `@vocab/vite` from **sku’s** install tree (`createRequire(import.meta.url)`), not the app’s `node_modules`.
+2. Pin bare imports onto that copy via `resolve.alias`:
+   - `@vocab/vite/runtime` → absolute file from `require.resolve('@vocab/vite/runtime')` (prefer the export file, not only the package name — more reliable under Rolldown/Vite).
+   - Do **not** alias the `@vocab/vite` package root — that breaks subpath imports such as `@vocab/vite/chunks` (sku’s own SSR render imports it).
+3. Apply aliases in the **shared** Vite config (covers both client and SSR builds today).
+
+That forces injected imports (including ones `@vocab/vite` injects into `.vocab` files) onto sku’s copy — one instance, aligned with the plugin sku loaded.
+
+**Shared packages:** The alias is project-wide. It also covers bare `@vocab/vite/runtime` from shared React packages (e.g. Header/Footer with `.vocab`) when those modules are in the Vite graph — the usual sku path via `compilePackages` (SSR `noExternal`). Vocab’s compile ignore already skips only `node_modules/sku/**` and `node_modules/vocab/**`, so dependency `.vocab` folders remain discoverable; sku separately compiles configured `compilePackages` roots because Vocab’s own compile ignores `node_modules`.
+
+Out of scope / does not help: packages left as true SSR externals where Node resolves `@vocab/vite/runtime` at runtime outside Vite (uncommon for sku shared UI).
+
+If a consumer also installs `@vocab/vite`, the alias still prefers sku’s copy.
+
+Do **not** enable these aliases when vocab / `languages` is inactive (avoid resolving unused).
+
 At render time, register `getChunkName(language)` on Document assets **only** when `onRequest` returns `language`.
 
 Language is optional — if omitted, sku does not register a language chunk.
@@ -302,6 +323,11 @@ Migrating MUST cover:
 - Express 5 / `@types` alignment
 - React Router 8 for Data Mode / route typing
 - move off config `public` / public assets folder (import assets instead)
+- server-only loaders vs client route graph (+ explicit `moduleId` when needed)
+- Braid reset-before-Braid on `sku start` (Braid apps; no sku auto-inject)
+- client-only / `onHydrate`-only providers for `window`-touching libraries
+- Jest → Vitest prerequisite (link existing docs / codemod)
+- `#` pathAliases / migrate-root-resolution for bare `src/…`
 
 ### 17. Experimental first release
 
@@ -345,21 +371,83 @@ Those packages are not opaque transitive deps — their majors are part of the V
 
 Keep majors pinned in docs and release notes; call out major bumps in changesets as potentially breaking for Vite SSR consumers.
 
+### 21. Trial-migration Migrating follow-ups (docs-led)
+
+Second trial migration surfaced bundling / evaluation-order / prerequisite gaps that belong in Migrating (Older SSR) — not new runtime APIs.
+
+**Server-only loaders vs client route graph**
+
+If a route factory (or shared module) is imported by both entries, dynamic imports inside it (e.g. `import('./loadHomeData')`) can pull server-only modules into the client build.
+
+Reminder in Migrating: keep server-only loader modules on the server tree only (e.g. separate `routes.server.tsx` / `*.server.ts` pages).
+
+When the lazy factory is no longer a bare `() => import('./home')`, set `handle.moduleId` explicitly so modulepreload still works.
+
+Do **not** ship an automatic `*.server.ts` client strip in this change — convention + docs only.
+
+**Braid reset evaluation order (`sku start`)**
+
+On `sku start`, Vite’s SSR module graph can evaluate a loader → page → Braid before `App.tsx`’s `import 'braid-design-system/reset'`, throwing “Braid components imported before reset.”
+
+Production build may succeed with a different order.
+
+Migrating / product docs: apps that use Braid must ensure reset runs before any Braid-touching server module (e.g. top of `serverEntry` and any early-imported loader that pulls Braid).
+
+Do **not** auto-inject Braid reset into sku’s Vite SSR server entry — Braid is optional per app.
+
+**Client-only providers during Document SSR**
+
+Providers that construct against `window` (e.g. analytics SDKs) throw during full-document SSR.
+
+Webpack SSR often only mounted those on `#app` client hydrate.
+
+Reminder: keep such providers out of the SSR tree — client-only wrappers (`useEffect` mount) or `onHydrate`-only `AppWrapper` when loader data is available.
+
+**Jest → Vitest prerequisite**
+
+Vite SSR apps are expected to use `testRunner: 'vitest'`.
+
+Migrating MUST call this out as a prerequisite PR and point at existing Vitest docs / `@sku-lib/codemod jest-to-vitest` / checklist (mock shapes, RTL, platform singletons).
+
+No new Jest→Vitest codemod in this change.
+
+**`@vocab/vite` resolve (sku-owned alias)**
+
+With Vocab language chunks, bare `@vocab/vite/runtime` in transformed consumer modules may fail when Vite/Rolldown resolves from the app’s `node_modules` and the package is only nested under sku.
+
+**Solution:** sku resolves `@vocab/vite` from its own install and forces every bare `@vocab/vite…` import onto that path via Vite `resolve.alias` (see §10) — app source and shared `compilePackages` `.vocab` alike. Consumers no longer need a direct dep for resolve to succeed.
+
+Once proven, Migrating / Vocab docs MUST **drop** “install `@vocab/vite` yourself” guidance.
+
+**Path aliases: bare `src/…` → `#src/…`**
+
+Webpack `baseUrl: '.'` allowed `import 'src/…'`.
+
+Vite SSR `pathAliases` require `#` subpath imports.
+
+Migrating MUST point at `pathAliases` + the existing `migrate-root-resolution` codemod / changelog guidance.
+
 ## Risks / Trade-offs
 
-| Risk                             | Mitigation                                                                                                  |
-| -------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Dual `routes` hydration mismatch | Docs + template `createRoutes`; no runtime checker                                                          |
-| Shell-only CSP / late scripts    | Lazy single nonce; hash known bootstrap bodies                                                              |
-| Absolute/`CDN` `publicPath`      | Config rejects; relative-only docs; no browser e2e for this edge case                                       |
-| `publicPath` coupled to basename | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets        |
-| Start vs prod asset URLs         | Start: Vite graph at `/`; build/prod: `base` + static mount under `publicPath` (webpack start parity)       |
-| Unhashed `public` folder assets  | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs |
-| CJS “got: object” on `sku start` | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                             |
-| Mock deps ship in prod           | `devServerMiddleware` only; never from server entry                                                         |
-| Early production use             | Experimental docs + changeset                                                                               |
-| Express / RR major drift         | Ship Express 5 + RR 8 before release; docs + changeset mark later major bumps as potentially breaking       |
-| RR 8 peer baselines              | Align catalog/engines with RR 8 minimums sku already can meet; document consumer React/Node expectations    |
+| Risk                               | Mitigation                                                                                                  |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Dual `routes` hydration mismatch   | Docs + template `createRoutes`; no runtime checker                                                          |
+| Shell-only CSP / late scripts      | Lazy single nonce; hash known bootstrap bodies                                                              |
+| Absolute/`CDN` `publicPath`        | Config rejects; relative-only docs; no browser e2e for this edge case                                       |
+| `publicPath` coupled to basename   | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets        |
+| Start vs prod asset URLs           | Start: Vite graph at `/`; build/prod: `base` + static mount under `publicPath` (webpack start parity)       |
+| Unhashed `public` folder assets    | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs |
+| CJS “got: object” on `sku start`   | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                             |
+| Mock deps ship in prod             | `devServerMiddleware` only; never from server entry                                                         |
+| Early production use               | Experimental docs + changeset                                                                               |
+| Express / RR major drift           | Ship Express 5 + RR 8 before release; docs + changeset mark later major bumps as potentially breaking       |
+| RR 8 peer baselines                | Align catalog/engines with RR 8 minimums sku already can meet; document consumer React/Node expectations    |
+| Server loaders leak to client      | Migrating reminder: split server-only modules; explicit `moduleId` when lazy is non-idiomatic               |
+| Braid reset before Braid on start  | Docs: reset early on server graph; no sku auto-inject                                                       |
+| `window` providers in Document SSR | Migrating reminder: client-only / `onHydrate`-only wrappers                                                 |
+| Jest apps on Vite SSR              | Migrating: Vitest prerequisite; link existing vitest docs / codemod                                         |
+| Nested `@vocab/vite/runtime`       | Sku `createRequire` + `resolve.alias`; validate translations Vite SSR without consumer pin                  |
+| Bare `src/` imports under Vite     | Migrating: `#` `pathAliases` + migrate-root-resolution                                                      |
 
 ## Migration Plan
 
@@ -367,7 +455,7 @@ Opt-in via `buildType` + Vite.
 
 New apps: `--template vite-ssr` (named `Component`).
 
-Existing: Migrating in `server-rendering.md` (ports, deploy layout, CJS, Express 5, React Router 8, `Component`, move off `public`).
+Existing: Migrating in `server-rendering.md` (ports, deploy layout, CJS, Express 5, React Router 8, `Component`, move off `public`, server-only loaders, Braid reset order, client-only providers, Jest→Vitest, `#` pathAliases). Vocab language chunks: no consumer `@vocab/vite` pin once sku alias is proven.
 
 Webpack SSR: leave `buildType` unset.
 

@@ -16,7 +16,6 @@
   "dependencies": {
     "@vocab/core": "^1.6.2",
     "@vocab/react": "^1.1.11",
-    "@vocab/vite": "catalog:",
     "@vocab/webpack": "^1.2.9",
     "react": "catalog:",
     "react-dom": "catalog:"

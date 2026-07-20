@@ -6,6 +6,7 @@ dist/
 dist-build/
 dist-ssr/
 dist-start/
+dist-vite-ssr/
 storybook-static/
 yarn.lock
 .eslintcache

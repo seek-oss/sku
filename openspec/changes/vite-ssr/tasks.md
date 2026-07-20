@@ -66,9 +66,26 @@
 - [x] 8.3 Docs + Migrating: state Express 5 and React Router 8; note that future Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
 - [x] 8.4 Changeset: call out Express 5 + React Router 8 for Vite SSR and the breaking-major policy for later upgrades
 
+## 9. Trial-migration Migrating docs follow-ups
+
+- [x] 9.1 Migrating (Older SSR): remind readers to keep server-only loader modules off the client-imported route graph; note split trees and explicit `handle.moduleId` when lazy factories are non-idiomatic
+- [x] 9.2 Migrating / product: for Braid apps, document reset-before-Braid on `sku start` (start evaluation order can differ from production); do not auto-inject reset into sku’s server entry
+- [x] 9.3 Migrating: remind readers that providers touching `window` must not run in the Document SSR tree (client-only / `onHydrate`-only wrappers)
+- [x] 9.4 Migrating: call out Jest → Vitest as a Vite SSR prerequisite; link existing Vitest docs / `@sku-lib/codemod jest-to-vitest` (no new codemod)
+- [x] 9.5 Migrating / Vocab: drop “install `@vocab/vite` yourself” once sku-owned alias is proven (see §10; supersedes prior direct-dep docs)
+- [x] 9.6 Migrating: point bare `src/…` / webpack `baseUrl` imports at `#` `pathAliases` and migrate-root-resolution guidance
+
+## 10. Sku-owned `@vocab/vite` resolve
+
+- [x] 10.1 When vocab / `languages` is active: resolve `@vocab/vite/runtime` from sku via `createRequire(import.meta.url)` and alias it to the export file in shared Vite `resolve.alias` (`packages/sku/src/services/vite/plugins/config.ts`); do not alias the `@vocab/vite` package root
+- [x] 10.2 Validate Vite SSR with vocab (e.g. translations fixture) **without** a consumer direct `@vocab/vite` dependency
+- [x] 10.3 Drop “install `@vocab/vite` yourself” from product + Migrating docs in `server-rendering.md` (completes 9.5)
+
 ## Deferred
 
 - Production listen / custom logger — design Open Questions
 - Runtime dual-`routes` validation — Non-Goals (docs only)
 - Vite SSR support for config `public` / unhashed public assets — Non-Goals until definitive need
 - Express / React Router majors beyond 5 / 8 — later releases; may be breaking per design §19–20
+- Automatic `*.server.ts` client strip — Non-Goals (docs / convention only)
+- Auto-inject Braid reset into sku Vite SSR server entry — Non-Goals (Braid optional; docs only)

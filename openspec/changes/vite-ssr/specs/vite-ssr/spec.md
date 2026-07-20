@@ -259,6 +259,12 @@ Sku MUST NOT validate the returned language against config and MUST NOT default 
 
 Language MUST be server-local for Document registration only (no client forward, no `getSkuLanguage` / `__SKU_LANGUAGE__` / baked languages define).
 
+When vocab / `languages` is active, sku MUST resolve `@vocab/vite` from sku’s install tree and MUST alias bare `@vocab/vite/runtime` (prefer the export file) onto that copy in the shared Vite `resolve.alias` (client and SSR).
+
+Sku MUST NOT alias the `@vocab/vite` package root (breaks subpath imports such as `@vocab/vite/chunks`).
+
+Consumers MUST NOT need a direct `@vocab/vite` dependency for those bare imports to resolve.
+
 #### Scenario: Language chunk from onRequest
 
 - **WHEN** `onRequest` returns `language`
@@ -269,6 +275,12 @@ Language MUST be server-local for Document registration only (no client forward,
 
 - **WHEN** `onRequest` omits `language`
 - **THEN** sku does not register a vocab language chunk and the SSR response still succeeds
+
+#### Scenario: Vocab runtime resolves from sku without consumer direct dep
+
+- **WHEN** `languages` is set and a consumer module (including `@vocab/vite`-injected `.vocab` output) imports `@vocab/vite/runtime`
+- **AND** the app does not declare a direct `@vocab/vite` dependency
+- **THEN** Vite resolves that specifier to sku’s installed `@vocab/vite` via `resolve.alias`
 
 ### Requirement: Vite SSR publicPath is relative only and is the static asset prefix only
 
@@ -490,6 +502,13 @@ Migrating docs MUST also cover:
 - React Router 8 for Data Mode / route typing
 - that Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
 - moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
+- keeping server-only loader modules out of the client-imported route graph (split trees; set `handle.moduleId` when lazy factories are non-idiomatic)
+- for Braid apps: reset must run before any Braid-touching server module on `sku start` (start evaluation order can differ from production build)
+- providers that touch `window` must not run in the Document SSR tree (prefer client-only wrappers or `onHydrate`-only providers)
+- Jest → Vitest as a Vite SSR prerequisite (point at existing Vitest docs / `@sku-lib/codemod jest-to-vitest`)
+- path aliases: bare `src/…` / webpack `baseUrl` → `#src/…` via `pathAliases` (point at existing migrate-root-resolution guidance)
+
+Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/runtime` resolves (sku owns that pin via Vite alias).
 
 #### Scenario: Primary Vite SSR docs have topic coverage
 
@@ -513,3 +532,13 @@ Migrating docs MUST also cover:
 - **THEN** docs state that Vite SSR does not support the public assets folder
 - **AND** recommend importing assets from modules instead
 - **AND** Migrating notes that existing `public` folder usage must be moved off before adopting Vite SSR
+
+#### Scenario: Migrating covers trial-migration follow-ups
+
+- **WHEN** a reader opens **Migrate from Older SSR App**
+- **THEN** docs remind readers to keep server-only loader modules off the client route graph
+- **AND** docs note Braid reset-before-Braid on `sku start` for Braid apps
+- **AND** docs note that `window`-touching providers must not run in the SSR tree
+- **AND** docs treat Jest → Vitest as a Vite SSR prerequisite and point at existing Vitest guidance
+- **AND** docs do not require a direct `@vocab/vite` dependency solely for `@vocab/vite/runtime` resolve
+- **AND** docs point bare `src/…` imports at `#` `pathAliases` / migrate-root-resolution

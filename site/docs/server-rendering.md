@@ -201,6 +201,13 @@ Document
 This is your opportunity to define Providers that may differ in implementation, or have different dependencies between server and client.
 For example, an API client might use different methods to make requests so the same Provider may create a different client for each environment.
 
+**Braid apps:** import `braid-design-system/reset` before any module that touches Braid on the **server** graph (for example at the top of `serverEntry`, and any early-imported loader/page that pulls Braid).
+On `sku start`, Vite’s SSR evaluation order can differ from production and may throw “Braid components imported before reset” if reset only lives in a later-imported client/App module.
+Sku does **not** auto-inject Braid reset into the Vite SSR server entry — Braid is optional per app.
+
+**Browser-only providers:** do not mount providers that construct against `window` (analytics SDKs, etc.) in the routes render tree.
+Prefer injecting server or client specific clients through Providers in the `AppWrapper`.
+
 `onRequest` may also return:
 
 - `language` — configured language **name** (or `en-PSEUDO`) for **server** Document vocab-chunk registration only
@@ -388,6 +395,8 @@ In development, sku warns when a lazy route still has no effective `moduleId` af
 ### Vocab / language chunks
 
 When `languages` is configured, Vite SSR uses `@vocab/vite` language chunk splitting and registers the active language chunk (e.g. `en-translations`) to be loaded as part of the initial document.
+
+Sku resolves `@vocab/vite` from its own install and aliases bare `@vocab/vite…` imports (including those injected into app and `compilePackages` `.vocab` files) onto that copy — consumers do **not** need a direct `@vocab/vite` dependency for resolve.
 
 When there are multiple languages, sku resolves the language from the return of the `onRequest` method (server Document preload only — not forwarded to `onHydrate` / no `__SKU_LANGUAGE__`).
 
@@ -609,6 +618,8 @@ Because of this, migration will likely be dependent on your solution’s specifi
 - Switch to `bundler: 'vite'` + `buildType: 'ssr'`
 - Relative `publicPath` only
 - Move off the config [`public`](./configuration.md#public) assets folder — Vite SSR hard-errors if that directory exists; import assets from modules instead
+- **Tests:** treat Jest → [Vitest](./vitest.md) as a Vite SSR prerequisite (`testRunner: 'vitest'`). Prefer a separate PR; use [`@sku-lib/codemod jest-to-vitest`](./vitest.md#migrating-to-vitest) plus the Vitest checklist there (mock shapes, RTL, platform singletons). No additional Jest→Vitest codemod ships with this mode.
+- **Imports:** webpack `baseUrl: '.'` / bare `src/…` imports are not Vite SSR path aliases — use `#` subpath imports via [`pathAliases`](./configuration.md#pathaliases). Run `pnpm dlx @sku-lib/codemod migrate-root-resolution .` (see the [sku changelog](https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md) guidance for `rootResolution` → `#src/…`)
 
 #### Limitations
 
@@ -633,11 +644,14 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 - Lazy page modules must export named `Component` (not `export default`)
 - Express `renderCallback` no longer owns HTML — sku streams Document; put providers in `AppWrapper`, data loading in React Router loaders/actions
 - Optional webpack `onStart` is not part of the Vite SSR request-entry contract
+- **Server-only loaders:** keep server-only modules (DB clients, secrets, `*.server.ts` helpers) off anything the **client** entry imports in its route graph. If a shared factory is imported by both entries, a nested `import('./loadHomeData')` can pull server-only code into the client build. Prefer separate server/client route trees (or server-only pages) for those loaders — sku does **not** auto-strip `*.server.ts` from the client. When the lazy factory is no longer a bare `() => import('./home')`, set [`handle.moduleId`](#lazy-routes-and-handlemoduleid) explicitly so production modulepreloads still work
 
 #### App-level providers
 
 - Move `SkuProvider` / app providers from `renderCallback` into `AppWrapper` on `onRequest` / `onHydrate`
 - Vocab language identity moves from `addLanguageChunk` / path hacks to server entry `language` (see [Vocab / language chunks](#vocab--language-chunks))
+- **Braid:** ensure `braid-design-system/reset` runs before any Braid-touching **server** module on `sku start` (evaluation order can differ from production). Sku does not auto-inject reset — see [App-level providers](#app-level-providers-appwrapper)
+- **`window` providers:** keep analytics / other `window`-constructing providers out of the Document SSR tree — client-only wrappers or `onHydrate`-only `AppWrapper` (see [App-level providers](#app-level-providers-appwrapper))
 
 #### Middleware
 

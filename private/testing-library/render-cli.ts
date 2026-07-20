@@ -9,7 +9,7 @@ const require = createRequire(import.meta.url);
  * (e.g. target dist vs dist-ssr) so tests do not churn .gitignore/.prettierignore.
  */
 const skuTestEnv = {
-  SKU_IGNORE_TARGETS: 'dist,dist-ssr',
+  SKU_IGNORE_TARGETS: 'dist,dist-ssr,dist-vite-ssr,dist-build,dist-start',
 };
 
 type SkuCommand =

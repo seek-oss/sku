@@ -30,6 +30,13 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
   - Auto-derive lazy-route `moduleId`; per-route chunk fixture.
 - `@sku-lib/create` template `vite-ssr` with named `Component` on lazy pages.
   - Product + Migrating docs in `server-rendering.md` (single-port, deploy layout, CJS interop, Express 5, React Router 8, named `Component`, move off `public`).
+- Trial-migration Migrating docs follow-ups (Older SSR):
+  - Reminder: Keep server-only modules out of common render code. Server/client specific content should be accessed through AppWrapper injected Provider context.
+  - Braid: reset must run before any Braid-touching server module on `sku start` (evaluation order can differ from production build); no auto-inject of Braid reset into sku’s server entry (Braid is optional)
+  - Reminder: providers that touch `window` must not run in the SSR tree (client-only / `onHydrate`-only wrappers)
+  - Jest → Vitest is a Vite SSR prerequisite; Migrating points at existing Vitest docs / checklist (no new Jest→Vitest codemod in this change)
+  - Vocab on Vite SSR: sku resolves `@vocab/vite` from its install and aliases bare `@vocab/vite…` imports (including injected `.vocab` imports) onto that path; drop “install `@vocab/vite` yourself” docs once proven
+  - Path aliases: webpack `baseUrl` / bare `src/…` → `#src/…` via `pathAliases` (point at existing migrate-root-resolution guidance)
 - CJS interop: document start-vs-build failure mode + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`.
   - **No** expanded baked-in interop defaults beyond Apollo; no runtime error rewriting.
 - Config JSDoc must not claim Vite is static-only.
@@ -53,6 +60,9 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
 - Expanding sku’s default CJS interop dependency list beyond Apollo
 - Production listen-logging parity; runtime validation that server/client route trees match
 - Supporting (or soft-deprecating without hard error) the `public` assets folder for Vite SSR until there is a definitive need
+- Automatic client bundler strip for `*.server.ts` (docs / consumer convention only)
+- Auto-injecting `braid-design-system/reset` into sku’s Vite SSR server entry
+- A new Jest→Vitest codemod beyond what `@sku-lib/codemod` / Vitest docs already cover
 
 ## Capabilities
 
@@ -79,7 +89,7 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
 - **Deps:** `react-router` 8 (Data Mode); Express 5 (Vite SSR server runtime + `@types`)
 - **Docs / release:**
   - `server-rendering.md` (product + Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs
-  - Topics: dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express 5, React Router 8, Express vs RR middleware, experimental warning, move off config `public` / public assets folder (import assets instead)
+  - Topics: dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express 5, React Router 8, Express vs RR middleware, experimental warning, move off config `public` / public assets folder (import assets instead), server-only loaders vs client route graph, Braid reset-before-Braid on start, client-only providers in Document SSR, Jest→Vitest prerequisite, sku-owned `@vocab/vite` resolve/alias for language chunks (no consumer pin), `#` pathAliases
   - Future Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
   - Changeset marks experimental; accurate `bundler` JSDoc
 - **Fixtures/tests:**

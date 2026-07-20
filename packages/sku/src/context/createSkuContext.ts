@@ -287,6 +287,8 @@ export const createSkuContext = async ({
     defaultClientEntry,
     serveCjsInteropDependencies,
     buildCjsInteropDependencies,
+    /** Explicit `compilePackages` from sku config (not defaults / auto-detected). */
+    configuredCompilePackages: skuConfig.compilePackages ?? [],
   };
 };
 

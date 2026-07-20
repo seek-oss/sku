@@ -1,7 +1,18 @@
+import { createRequire } from 'node:module';
 import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { fixViteVanillaExtractDepScanPlugin } from './esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { makePluginName } from '../helpers/makePluginName.js';
+
+const require = createRequire(import.meta.url);
+
+const getVocabViteAliases = (): Record<string, string> =>
+  // Resolve against sku’s dependency tree, not the app’s — force injected
+  // `@vocab/vite/runtime` imports (including from `.vocab` / compilePackages) onto sku’s copy.
+  // Prefer the export file only; do not alias the package root (breaks `@vocab/vite/chunks` via exports).
+  ({
+    '@vocab/vite/runtime': require.resolve('@vocab/vite/runtime'),
+  });
 
 export const configPlugin = ({
   skuContext,
@@ -18,6 +29,7 @@ export const configPlugin = ({
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
         __sku_alias__serverEntry: skuContext.paths.serverEntry,
         __sku_alias__renderEntry: skuContext.paths.renderEntry,
+        ...(skuContext.languages ? getVocabViteAliases() : {}),
       },
     },
     define: {

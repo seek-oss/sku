@@ -503,6 +503,8 @@ Migrating docs MUST also cover:
 - that Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
 - moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
 - keeping server-only loader modules out of the client-imported route graph (split trees; set `handle.moduleId` when lazy factories are non-idiomatic)
+- prefer render-time React data loading via `AppWrapper` + Suspense / shared clients; use loaders for avoiding heavily-nested waterfalls, document redirects, or response headers — not as the default for page content
+- that Express `req` / middleware-attached state is **not** bridged into React Router loaders
 - for Braid apps: reset must run before any Braid-touching server module on `sku start` (start evaluation order can differ from production build)
 - providers that touch `window` must not run in the Document SSR tree (prefer client-only wrappers or `onHydrate`-only providers)
 - Jest → Vitest as a Vite SSR prerequisite (point at existing Vitest docs / `@sku-lib/codemod jest-to-vitest`)
@@ -514,6 +516,9 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 
 - **WHEN** a reader opens the Vite SSR section of `server-rendering.md`
 - **THEN** docs cover AppWrapper, routes, middleware, CSP, and response headers
+- **AND** docs steer page content toward render-time data loading via `AppWrapper` (not loaders as the default)
+- **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, or response headers
+- **AND** docs state that Express request state is not bridged into loaders
 
 #### Scenario: Migrating subsections exist
 
@@ -537,6 +542,7 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 
 - **WHEN** a reader opens **Migrate from Older SSR App**
 - **THEN** docs remind readers to keep server-only loader modules off the client route graph
+- **AND** docs steer away from Express `req` → loader coupling for page content
 - **AND** docs note Braid reset-before-Braid on `sku start` for Braid apps
 - **AND** docs note that `window`-touching providers must not run in the SSR tree
 - **AND** docs treat Jest → Vitest as a Vite SSR prerequisite and point at existing Vitest guidance

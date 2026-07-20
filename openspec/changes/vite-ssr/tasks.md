@@ -81,6 +81,12 @@
 - [x] 10.2 Validate Vite SSR with vocab (e.g. translations fixture) **without** a consumer direct `@vocab/vite` dependency
 - [x] 10.3 Drop “install `@vocab/vite` yourself” from product + Migrating docs in `server-rendering.md` (completes 9.5)
 
+## 11. Data-loading docs steer
+
+- [x] 11.1 Product docs (`server-rendering.md`): prefer render-time data loading via `AppWrapper` + Suspense / shared clients; loaders opt-in for waterfalls, document redirects, or response headers
+- [x] 11.2 Product + Migrating: state Express `req` is not bridged into loaders; apps that need that stay on webpack SSR and raise with sku-support
+- [x] 11.3 Rebalance Migrating / older wording that implied loaders are the default for page content (keep loader header + redirect docs accurate)
+
 ## Deferred
 
 - Production listen / custom logger — design Open Questions
@@ -89,3 +95,4 @@
 - Express / React Router majors beyond 5 / 8 — later releases; may be breaking per design §19–20
 - Automatic `*.server.ts` client strip — Non-Goals (docs / convention only)
 - Auto-inject Braid reset into sku Vite SSR server entry — Non-Goals (Braid optional; docs only)
+- Express `req` → loader bridge / RR `requestContext` seeding — Non-Goals this change; design §22 / Open Questions

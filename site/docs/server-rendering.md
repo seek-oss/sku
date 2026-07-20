@@ -31,7 +31,8 @@ Interactive create also offers **Vite SSR** as a distinct choice from static **V
 
 Vite SSR largely wraps [React Router Data Mode](https://reactrouter.com/start/modes#data).
 You export a named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry`; sku owns the HTTP server, document shell, streaming, and hydration, and wires each side’s route config into React Router on the server and in the browser.
-Loaders, actions, lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
+Lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
+For page content, prefer [render-time data loading](#data-loading) via `AppWrapper` + Suspense; use loaders when you need waterfalls, document redirects, or response headers.
 
 Vite SSR depends on **React Router 8**.
 Type routes and Data Mode APIs against that major (the same major sku depends on).
@@ -206,7 +207,7 @@ On `sku start`, Vite’s SSR evaluation order can differ from production and may
 Sku does **not** auto-inject Braid reset into the Vite SSR server entry — Braid is optional per app.
 
 **Browser-only providers:** do not mount providers that construct against `window` (analytics SDKs, etc.) in the routes render tree.
-Prefer injecting server or client specific clients through Providers in the `AppWrapper`.
+Prefer injecting server- or client-specific clients through providers in the `AppWrapper`. See [data loading](#data-loading).
 
 `onRequest` may also return:
 
@@ -238,6 +239,26 @@ export const onRequest: SkuSsrOnRequest = ({ request }) => {
   };
 };
 ```
+
+### Data loading
+
+Prefer **render-time** data loading in React for page content:
+
+1. Inject an env-specific API / clients via `AppWrapper` from `onRequest` / `onHydrate`.
+2. Fetch in the React tree with Suspense (for example `useQuery`) so the same components work on SSR and client navigations.
+
+That keeps shared UI portable without per-app loader wiring and fits streaming Document + isomorphic backends.
+
+Reach for React Router **loaders** when you need to:
+
+- start work before the suspending subtree renders (avoid a deeply nested waterfall), or
+- issue a real **document** `redirect()` or response headers (`Cache-Control`, `Set-Cookie`, …) — see [Response headers](#response-headers)
+
+[\<Navigate /\>](https://reactrouter.com/api/components/Navigate) and [useNavigate()](https://reactrouter.com/api/hooks/useNavigate) are browser controls and will **not** create a document HTTP redirect. Use a loader `redirect()` when the response must be a real redirect.
+
+Loaders receive a Fetch `Request`, **not** Express `req`.
+
+**Migration Consideration:** Apps that need a complex server-side only loader experience should reach out through support channels to discuss their use-case
 
 ### Middleware
 
@@ -329,7 +350,8 @@ Relative `publicPath` only — see [CSP](./csp.md) and [Configuration](./configu
 
 After React Router `query()`, when sku streams HTML (not a short-circuit `Response` such as a redirect), it forwards loader/action headers from the route context onto the Express response (including multi-value headers such as `Set-Cookie`), then applies sku-owned headers (`Content-Type`, CSP).
 
-Set caching and cookies from loaders/actions with React Router’s `data()` / header APIs, for example:
+Prefer [render-time data loading](#data-loading) for page content.
+Use loaders/actions when you need document redirects or response headers — set caching and cookies with React Router’s `data()` / header APIs, for example:
 
 ```tsx
 import { data } from 'react-router';
@@ -582,6 +604,13 @@ Infrastructure, deployments, process managers, and reverse-proxy setup are out o
 
 - Move app-wide providers (Braid, Vocab, etc.) into `AppWrapper` returned from `onRequest` / `onHydrate` — not into a static `renderApp` / `#app` tree alone
 - Keep server and client `AppWrapper` trees aligned for hydration; re-derive URL-scoped values with React Router hooks
+- Inject env-specific API / Experience clients via `AppWrapper` for [render-time data loading](#data-loading)
+
+#### Data loading
+
+- Prefer render-time fetching in React (`AppWrapper` + Suspense / shared clients) for page content — see [Data loading](#data-loading)
+- Use React Router loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, or set response headers
+- Loaders receive a Fetch `Request`, not Express `req` — sku does not bridge Express middleware state into loaders
 
 #### Middleware
 
@@ -598,7 +627,7 @@ See [Middleware](#middleware) for the two-layer HTTP split and start mount order
 
 #### Response headers
 
-- Set `Cache-Control`, `Set-Cookie`, etc. from React Router loaders/actions; sku forwards those headers onto streamed HTML responses
+- When you need `Cache-Control`, `Set-Cookie`, etc. on the document response, set them from React Router loaders/actions; sku forwards those headers onto streamed HTML responses
 - Do not expect a consumer `renderDocument` / `res.send` HTML path
 
 #### Document / hydration
@@ -642,16 +671,24 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 - Replace webpack `serverEntry` default export `{ renderCallback, middleware, onStart }` with Vite SSR named exports: `routes` on **both** server and client entries, plus server `onRequest` + `middleware`, client `onHydrate`
 - Prefer a shared `createRoutes(...)` factory so server/client trees stay hydration-compatible
 - Lazy page modules must export named `Component` (not `export default`)
-- Express `renderCallback` no longer owns HTML — sku streams Document; put providers in `AppWrapper`, data loading in React Router loaders/actions
+- Express `renderCallback` no longer owns HTML — sku streams Document; put providers in `AppWrapper`
 - Optional webpack `onStart` is not part of the Vite SSR request-entry contract
-- **Server-only loaders:** keep server-only modules (DB clients, secrets, `*.server.ts` helpers) off anything the **client** entry imports in its route graph. If a shared factory is imported by both entries, a nested `import('./loadHomeData')` can pull server-only code into the client build. Prefer separate server/client route trees (or server-only pages) for those loaders — sku does **not** auto-strip `*.server.ts` from the client. When the lazy factory is no longer a bare `() => import('./home')`, set [`handle.moduleId`](#lazy-routes-and-handlemoduleid) explicitly so production modulepreloads still work
+- **Server-only modules:** Server-only content should be imported in serverEntry and passed through to your app via AppWrapper Providers. Avoid server-side only implementations being imported outside serverEntry, shared code will be loaded by the client and available for public access.
+- When the lazy factory is no longer a bare `() => import('./home')`, set [`handle.moduleId`](#lazy-routes-and-handlemoduleid) explicitly so production modulepreloads still work.
 
 #### App-level providers
 
 - Move `SkuProvider` / app providers from `renderCallback` into `AppWrapper` on `onRequest` / `onHydrate`
+- Inject env-specific API / Experience clients via `AppWrapper` for [render-time data loading](#data-loading) (prefer this over loaders for page content)
 - Vocab language identity moves from `addLanguageChunk` / path hacks to server entry `language` (see [Vocab / language chunks](#vocab--language-chunks))
 - **Braid:** ensure `braid-design-system/reset` runs before any Braid-touching **server** module on `sku start` (evaluation order can differ from production). Sku does not auto-inject reset — see [App-level providers](#app-level-providers-appwrapper)
 - **`window` providers:** keep analytics / other `window`-constructing providers out of the Document SSR tree — client-only wrappers or `onHydrate`-only `AppWrapper` (see [App-level providers](#app-level-providers-appwrapper))
+
+#### Data loading
+
+- Prefer render-time fetching in React (`AppWrapper` + Suspense / shared clients) for page content — not React Router loaders as the default — see [Data loading](#data-loading)
+- Use loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, or set response headers
+- Loaders receive a Fetch `Request`, **not** Express `req`. Sku does **not** bridge Express middleware-attached state into loaders. If your app depends on that coupling for page data, stay on webpack SSR for now and raise with sku-support
 
 #### Middleware
 
@@ -673,7 +710,7 @@ See [Middleware](#middleware) for mount order.
 
 #### Response headers
 
-- Prefer loader/action headers (`Set-Cookie`, `Cache-Control`, …) over manually setting headers on `res` inside `renderCallback` before `res.send`
+- When you need `Set-Cookie`, `Cache-Control`, etc. on the document response, use loader/action headers
 - sku forwards loader/action headers onto the streamed HTML response
 
 #### Document / hydration

@@ -32,6 +32,8 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
   - Product + Migrating docs in `server-rendering.md` (single-port, deploy layout, CJS interop, Express 5, React Router 8, named `Component`, move off `public`).
 - Trial-migration Migrating docs follow-ups (Older SSR):
   - Reminder: Keep server-only modules out of common render code. Server/client specific content should be accessed through AppWrapper injected Provider context.
+  - Prefer render-time React data loading (AppWrapper + Suspense / shared clients); use loaders for waterfalls, document redirects, or response headers — not as the default for page content
+  - Do **not** bridge Express `req` / middleware-attached state into React Router loaders; apps that need that stay on webpack SSR and raise with sku-support
   - Braid: reset must run before any Braid-touching server module on `sku start` (evaluation order can differ from production build); no auto-inject of Braid reset into sku’s server entry (Braid is optional)
   - Reminder: providers that touch `window` must not run in the SSR tree (client-only / `onHydrate`-only wrappers)
   - Jest → Vitest is a Vite SSR prerequisite; Migrating points at existing Vitest docs / checklist (no new Jest→Vitest codemod in this change)
@@ -63,6 +65,8 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
 - Automatic client bundler strip for `*.server.ts` (docs / consumer convention only)
 - Auto-injecting `braid-design-system/reset` into sku’s Vite SSR server entry
 - A new Jest→Vitest codemod beyond what `@sku-lib/codemod` / Vitest docs already cover
+- Bridging Express `req` (or middleware-attached state) into React Router loaders
+- Shipping RR `requestContext` / `getLoadContext` seeding (deferred)
 
 ## Capabilities
 
@@ -89,7 +93,7 @@ We need a Vite-only SSR mode with React Router Data Mode, full-document streamin
 - **Deps:** `react-router` 8 (Data Mode); Express 5 (Vite SSR server runtime + `@types`)
 - **Docs / release:**
   - `server-rendering.md` (product + Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs
-  - Topics: dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express 5, React Router 8, Express vs RR middleware, experimental warning, move off config `public` / public assets folder (import assets instead), server-only loaders vs client route graph, Braid reset-before-Braid on start, client-only providers in Document SSR, Jest→Vitest prerequisite, sku-owned `@vocab/vite` resolve/alias for language chunks (no consumer pin), `#` pathAliases
+  - Topics: dual `routes` / `createRoutes`, named `Component`, single-port/`PORT`, deploy layout, CJS interop, Express 5, React Router 8, Express vs RR middleware, experimental warning, move off config `public` / public assets folder (import assets instead), prefer render-time data loading (AppWrapper + Suspense); loaders for waterfalls / document redirects / headers; no Express→loader bridge, server-only loaders vs client route graph, Braid reset-before-Braid on start, client-only providers in Document SSR, Jest→Vitest prerequisite, sku-owned `@vocab/vite` resolve/alias for language chunks (no consumer pin), `#` pathAliases
   - Future Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
   - Changeset marks experimental; accurate `bundler` JSDoc
 - **Fixtures/tests:**

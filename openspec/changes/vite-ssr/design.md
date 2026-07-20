@@ -24,6 +24,7 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Ship Express 5 and React Router 8 before release; treat later majors as potentially breaking
 - Migration guides for server-only loaders, Braid reset order, server/client-only providers, Jest→Vitest prerequisite, `#` pathAliases
 - Sku-owned `@vocab/vite` resolve via Vite `resolve.alias` when language chunks are active (no consumer direct dep)
+- Docs steer: prefer render-time React data loading; loaders as opt-in; no Express→loader bridge
 
 **Non-Goals:**
 
@@ -40,6 +41,9 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Automatic `*.server.ts` client strip
 - Auto-injecting Braid reset into sku’s Vite SSR server entry
 - A new Jest→Vitest codemod beyond existing tooling/docs
+- Bridging Express `req` (or middleware-attached state) into React Router loaders (`getLoadContext` / ALS bag / similar)
+- Treating RR loaders as the default teaching path for page content
+- Shipping RR `requestContext` / `getLoadContext` seeding in this change (deferred unless demand remains)
 
 ## Decisions
 
@@ -324,6 +328,8 @@ Migrating MUST cover:
 - React Router 8 for Data Mode / route typing
 - move off config `public` / public assets folder (import assets instead)
 - server-only loaders vs client route graph (+ explicit `moduleId` when needed)
+- prefer render-time data loading via `AppWrapper`; loaders for waterfalls / document redirects / headers
+- no Express `req` → loader bridge (stay on webpack SSR / raise with sku-support if needed)
 - Braid reset-before-Braid on `sku start` (Braid apps; no sku auto-inject)
 - client-only / `onHydrate`-only providers for `window`-touching libraries
 - Jest → Vitest prerequisite (link existing docs / codemod)
@@ -385,6 +391,8 @@ When the lazy factory is no longer a bare `() => import('./home')`, set `handle.
 
 Do **not** ship an automatic `*.server.ts` client strip in this change — convention + docs only.
 
+Prefer not to rely on server-only loaders for page content — see §22 (render-time data loading).
+
 **Braid reset evaluation order (`sku start`)**
 
 On `sku start`, Vite’s SSR module graph can evaluate a loader → page → Braid before `App.tsx`’s `import 'braid-design-system/reset'`, throwing “Braid components imported before reset.”
@@ -427,6 +435,32 @@ Vite SSR `pathAliases` require `#` subpath imports.
 
 Migrating MUST point at `pathAliases` + the existing `migrate-root-resolution` codemod / changelog guidance.
 
+### 22. Data loading guidance (docs-led)
+
+Prefer **render-time** data loading in React for page content:
+
+- Inject an env-specific API / Experience client via `AppWrapper` (`onRequest` / `onHydrate`).
+- Fetch in the React tree with Suspense (e.g. `useQuery`) so the same components work on SSR and client navigations.
+
+Rationale: portable shared UI without per-app loader wiring; aligns with streaming Document and isomorphic backends.
+
+Reach for React Router **loaders** when you need to:
+
+- start work before the suspending subtree renders (waterfall / parallelisation), or
+- issue a real **document** `redirect()` / response headers (`Cache-Control`, `Set-Cookie`, …).
+
+`<Navigate />` on static initial render is a no-op — it is not a document HTTP redirect.
+
+Loaders receive a Fetch `Request`, not Express `req`.
+
+Sku MUST NOT bridge Express middleware state into loaders in this change (`getLoadContext`, general ALS bag, or passing `req`).
+
+Apps that need a rich Express bag to load page data should stay on webpack SSR for now and raise the use-case with sku-support.
+
+**Deferred (not this change):** optional RR `requestContext` / `getLoadContext` seeded from Fetch / `onRequest` as advanced isomorphic DI for loaders — only if real demand remains after the preferred path.
+
+Product + Migrating docs MUST encode this hierarchy and rebalance any wording that implied loaders are the default for content.
+
 ## Risks / Trade-offs
 
 | Risk                               | Mitigation                                                                                                  |
@@ -448,6 +482,8 @@ Migrating MUST point at `pathAliases` + the existing `migrate-root-resolution` c
 | Jest apps on Vite SSR              | Migrating: Vitest prerequisite; link existing vitest docs / codemod                                         |
 | Nested `@vocab/vite/runtime`       | Sku `createRequire` + `resolve.alias`; validate translations Vite SSR without consumer pin                  |
 | Bare `src/` imports under Vite     | Migrating: `#` `pathAliases` + migrate-root-resolution                                                      |
+| Express `req` → loader pressure    | Docs: prefer AppWrapper + Suspense; no Express→loader bridge; webpack SSR + sku-support if blocked          |
+| Server-only loaders as default     | Docs steer render-time content loading; loaders for waterfalls / document redirects / headers only          |
 
 ## Migration Plan
 
@@ -455,7 +491,7 @@ Opt-in via `buildType` + Vite.
 
 New apps: `--template vite-ssr` (named `Component`).
 
-Existing: Migrating in `server-rendering.md` (ports, deploy layout, CJS, Express 5, React Router 8, `Component`, move off `public`, server-only loaders, Braid reset order, client-only providers, Jest→Vitest, `#` pathAliases). Vocab language chunks: no consumer `@vocab/vite` pin once sku alias is proven.
+Existing: Migrating in `server-rendering.md` (ports, deploy layout, CJS, Express 5, React Router 8, `Component`, move off `public`, data-loading steer, server-only loaders, Braid reset order, client-only providers, Jest→Vitest, `#` pathAliases). Vocab language chunks: no consumer `@vocab/vite` pin once sku alias is proven.
 
 Webpack SSR: leave `buildType` unset.
 
@@ -464,3 +500,4 @@ Rollback: remove `buildType`.
 ## Open Questions
 
 - **Custom logger for setup behaviours?** Until decided, production Vite SSR does not add listen logging.
+- **RR `requestContext` / `getLoadContext` later?** Deferred per §22 — revisit only if isomorphic AppWrapper + Suspense does not cover real loader DI demand.

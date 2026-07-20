@@ -12,6 +12,3 @@ pnpm-lock.yaml
 report/
 tsconfig.json
 # end managed by sku
-
-# Temporary directories created by lint-format integration tests
-fs-fixture-*/

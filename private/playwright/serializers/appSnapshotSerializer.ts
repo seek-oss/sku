@@ -4,7 +4,10 @@ import { type AppSnapshot, isAppSnapshot } from '../appSnapshot.ts';
 import { formatHtml } from '../formatHtml.ts';
 import { sanitizeString } from '../sanitizeString.ts';
 
-const snapshotHeaders = new Set(['content-security-policy']);
+const snapshotHeaders = new Set([
+  'content-security-policy',
+  'content-security-policy-report-only',
+]);
 
 const emptyDiff = `===================================================================
 --- sourceHtml

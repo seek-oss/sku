@@ -185,6 +185,104 @@ content-security-policy: script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9
 \\ No newline at end of file
 `;
 
+exports[`security-controls > bundler vite > csp-report-only > start > should start an app with security controls 1`] = `
+content-security-policy-report-only: script-src 'self' https://some-report-only-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=' 'nonce-RANDOM_NONCE';
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,72 +1,86 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta
+       http-equiv="Content-Security-Policy"
+       content="script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=' 'nonce-RANDOM_NONCE';"
+     >
+     <script type="module">
+       import { injectIntoGlobalHook } from "/@react-refresh";
+ injectIntoGlobalHook(window);
+ window.$RefreshReg$ = () => {};
+ window.$RefreshSig$ = () => (type) => type;
+     </script>
+     <script
+       type="module"
+       src="/@vite/client"
+     >
+     </script>
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=0.js"
+     >
+     </script>
+     <script
+       type="module"
+-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
++      src="/@id/__x00__/index.html?html-proxy&amp;index=1.js"
+     >
+     </script>
+     <link
+       rel="stylesheet"
+       href="/@id/__x00__virtual:ssr-css.css"
+       data-ssr-css
+     >
+     <script type="module">
+       import { createHotContext } from "/@vite/client";
+               const hot = createHotContext("/__clear_ssr_css");
+               hot.on("vite:afterUpdate", () => {
+                 document
+                   .querySelectorAll("[data-ssr-css]")
+                   .forEach(node => node.remove());
+               });
+     </script>
++    <style
++      type="text/css"
++      data-vite-dev-id="{cwd}/fixtures/security-controls/src/styles.css.js.vanilla.css"
++    >
++      .styles_root__14y9ssh0 {
++  display: flex;
++}
++.styles_root__14y9ssh0 .styles_nested__14y9ssh1 {
++  font-size: 32px;
++}
++    </style>
+   </head>
+   <body>
+     <div id="app">
+       <div class="styles_root__14y9ssh0">
+         <div class="styles_nested__14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       type="module"
+       src="{cwd}/packages/sku/dist/entries/vite-client.mjs"
+     >
+     </script>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
++    <script nonce>
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
 exports[`security-controls > bundler vite > start > should start an app with security controls 1`] = `
 ===================================================================
 --- sourceHtml

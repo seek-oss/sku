@@ -132,6 +132,63 @@ describe('security-controls', () => {
         });
       });
     });
+
+    describe.runIf(bundler === 'vite')('csp-report-only', () => {
+      describe('start', async () => {
+        const port = await getPort();
+        const url = `http://localhost:${port}`;
+
+        beforeAll(async () => {
+          const start = await sku('start', [
+            '--config=sku.config.vite.csp-report-only.ts',
+            '--strict-port',
+            `--port=${port}`,
+          ]);
+          await start.findByText('Starting development server');
+        });
+
+        it('should start an app with security controls', async () => {
+          const app = await getAppSnapshot({
+            url,
+          });
+          expect(app).toMatchSnapshot();
+        });
+      });
+
+      describe('build', async () => {
+        let cspHeader: string;
+
+        beforeAll(async () => {
+          const build = await sku('build', [
+            '--config=sku.config.vite.csp-report-only.ts',
+          ]);
+          await build.findByText('Sku build complete');
+
+          const indexJsonPath = fixturePath('dist/index.html.json');
+          const content = await readFile(indexJsonPath, 'utf-8');
+          const data = JSON.parse(content);
+          const metadata = data.metadata?.cspReportOnly ?? null;
+
+          if (!metadata) {
+            throw new Error('Unable to select report-only CSP metadata');
+          }
+
+          cspHeader = metadata;
+        });
+
+        it('should generate a report-only CSP header', async () => {
+          expect(cspHeader).not.toBeNull();
+        });
+
+        it('should include the extra hosts in the report-only CSP', async () => {
+          expect(cspHeader).toContain('https://some-report-only-cdn.com');
+        });
+
+        it('should generate a report-only CSP with nonce value', async () => {
+          expect(cspHeader).match(/nonce-RANDOM_NONCE/);
+        });
+      });
+    });
   });
 
   describe('build-ssr', async () => {

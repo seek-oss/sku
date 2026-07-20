@@ -12,6 +12,7 @@ const hashScriptContents = (scriptContents: BinaryLike) =>
 
 interface CreateCSPHandlerOptions {
   extraHosts?: string[];
+  reportOnlyExtraHosts?: string[];
   isDevelopment?: boolean;
 }
 
@@ -19,6 +20,7 @@ export type CSPHandler = {
   registerScript: (script: string) => void;
   createCSP: () => string;
   createCSPTag: () => string;
+  createReportOnlyCSP: () => string;
   createUnsafeNonce: () => string;
   processHtml: (html: string) => HTMLElement;
   updateHtml: (root: HTMLElement) => string;
@@ -27,12 +29,14 @@ export type CSPHandler = {
 
 export default function createCSPHandler({
   extraHosts = [],
+  reportOnlyExtraHosts = [],
   isDevelopment = false,
 }: CreateCSPHandlerOptions = {}): CSPHandler {
   let cspCreated = false;
-  const hosts = new Set();
-  const shas = new Set();
-  const nonces = new Set();
+  const hosts = new Set<string>();
+  const reportOnlyHosts = new Set<string>();
+  const shas = new Set<string>();
+  const nonces = new Set<string>();
 
   const addScriptContents = (contents: BinaryLike | undefined) => {
     if (contents) {
@@ -60,13 +64,23 @@ export default function createCSPHandler({
     }
   };
 
+  const addReportOnlyScriptUrl = (src: string) => {
+    const { origin } = new URL(src, defaultBaseName);
+
+    if (origin !== defaultBaseName) {
+      reportOnlyHosts.add(origin);
+    }
+  };
+
   extraHosts.forEach((host) => addScriptUrl(host));
+  reportOnlyExtraHosts.forEach((host) => addReportOnlyScriptUrl(host));
 
   const processScriptNode = (scriptNode: HTMLElement) => {
     const src = scriptNode.getAttribute('src');
 
     if (src) {
       addScriptUrl(src);
+      addReportOnlyScriptUrl(src);
       return;
     }
 
@@ -93,7 +107,7 @@ export default function createCSPHandler({
     parse(script).querySelectorAll('script').forEach(processScriptNode);
   };
 
-  const createCSP = () => {
+  const createCSPForHosts = (set: Set<string>) => {
     cspCreated = true;
 
     const inlineCspShas = [];
@@ -111,7 +125,7 @@ export default function createCSPHandler({
     const scriptSrcPolicy = [
       'script-src',
       `'self'`,
-      ...hosts.values(),
+      ...set.values(),
       ...inlineCspShas,
       ...inlineCspNonces,
     ];
@@ -123,8 +137,12 @@ export default function createCSPHandler({
     return `${scriptSrcPolicy.join(' ')};`;
   };
 
+  const createCSP = () => createCSPForHosts(hosts);
+
   const createCSPTag = () =>
     `<meta http-equiv="Content-Security-Policy" content="${createCSP()}">`;
+
+  const createReportOnlyCSP = () => createCSPForHosts(reportOnlyHosts);
 
   const processHtml = (html: string) => {
     const root = parse(html, {
@@ -167,6 +185,7 @@ export default function createCSPHandler({
     registerScript,
     createCSP,
     createCSPTag,
+    createReportOnlyCSP,
     createUnsafeNonce,
     processHtml,
     updateHtml,

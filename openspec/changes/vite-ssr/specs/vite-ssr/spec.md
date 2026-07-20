@@ -453,21 +453,29 @@ Migrating / product docs MUST state that consumers should target Express 4 when 
 - **THEN** docs state that Express 4 is the supported major for middleware typing
 - **AND** docs do not require Express 5 for Vite SSR
 
-### Requirement: Vite SSR ships on React Router 8
+### Requirement: Vite SSR ships on React Router 8 (optional peer)
 
-Vite SSR MUST depend on React Router 8 (sku dependency / catalog and Vite SSR fixtures/template).
+Vite SSR MUST target React Router 8 via an **optional peerDependency** `react-router: ^8` (not a hard sku dependency).
 
-Migrating / product docs MUST state that consumers should target React Router 8 for Data Mode / route typing used with Vite SSR entries.
+Vite SSR fixtures and the create template MUST install React Router 8.
 
-#### Scenario: Dependency is React Router 8
+Webpack / static apps MUST NOT be forced onto React Router 8 by this change.
 
-- **WHEN** a Vite SSR app resolves `react-router` through sku
-- **THEN** the resolved major is React Router 8
+Sku MUST NOT add Jest transforms for `react-router` / `cookie-es` / `import.meta` in this change. Vite SSR requires Vitest; React Router 8 + Jest is out of scope.
 
-#### Scenario: Docs state React Router 8
+Migrating / product docs MUST state that Vite SSR consumers should install and target React Router 8 for Data Mode / route typing.
+
+#### Scenario: Optional peer is React Router 8
+
+- **WHEN** a Vite SSR app installs `react-router` to satisfy sku’s peer
+- **THEN** the supported major is React Router 8
+- **AND** sku does not hard-depend on `react-router` in a way that hoists RR 8 into non–Vite-SSR apps
+
+#### Scenario: Docs state React Router 8 peer
 
 - **WHEN** a reader opens Vite SSR product or Migrating docs
 - **THEN** docs state that React Router 8 is the supported major for Data Mode / route typing
+- **AND** docs state consumers must install `react-router` (optional peer)
 
 ### Requirement: Express and React Router major upgrades may be breaking
 
@@ -505,8 +513,9 @@ Migrating docs MUST also cover:
 - production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
 - CJS interop for `sku start`
 - Express 4 typing alignment (shared with webpack SSR; no Express 5 in this change)
-- React Router 8 for Data Mode / route typing
+- React Router 8 as optional peerDependency for Data Mode / route typing (template/fixtures install it)
 - that Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
+- that this change does not ship Jest transforms for React Router 8
 - moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
 - keeping server-only loader modules out of the client-imported route graph (split trees; set `handle.moduleId` when lazy factories are non-idiomatic)
 - prefer render-time React data loading via `AppWrapper` + Suspense / shared clients; use loaders for avoiding heavily-nested waterfalls, document redirects, or response headers — not as the default for page content

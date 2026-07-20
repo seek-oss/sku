@@ -66,10 +66,13 @@ It ships **experimental** (not for production).
 - **No** expanded baked-in interop defaults beyond Apollo.
 - No runtime error rewriting for CJS interop.
 - Config JSDoc must not claim Vite is static-only.
-- Vite SSR ships on **Express 4** (same sku `express` / `@types` major as webpack SSR) and **React Router 8**.
+- Vite SSR ships on **Express 4** (same sku `express` / `@types` major as webpack SSR) and **React Router 8** (optional peerDependency `^8`).
 - Do **not** upgrade Express 4 → 5 in this change — that would break webpack SSR and other shared Express surfaces.
 - Document Express 4 for middleware typing (`middleware` / `SkuSsrMiddleware`).
 - Document React Router 8 for Data Mode / route typing.
+- `react-router` is an **optional peerDependency** `^8` (not a hard sku dependency).
+- Vite SSR template/fixtures install React Router 8; webpack/static apps are unaffected.
+- This change MUST NOT ship Jest transforms for `react-router` / `cookie-es` / `import.meta` (Vite SSR requires Vitest; RR8+Jest for webpack is out of scope).
 - **BREAKING** (policy for later releases): bumping the Express or React Router major that Vite SSR integrates may be a breaking change.
 - Consumer middleware mounts into sku’s Express app.
 - Consumer routes/entries use React Router Data Mode APIs.
@@ -101,6 +104,8 @@ It ships **experimental** (not for production).
 - Bridging Express `req` (or middleware-attached state) into React Router loaders.
 - Shipping RR `requestContext` / `getLoadContext` seeding (deferred).
 - Upgrading sku’s shared Express dependency from 4 → 5 (deferred; would break webpack SSR).
+- Shipping Jest support for React Router 8 (transforms / ESM interop).
+- Forcing webpack fixtures or non–Vite-SSR apps onto React Router 8.
 
 ## Capabilities
 
@@ -125,7 +130,7 @@ It ships **experimental** (not for production).
   - Create template `vite-ssr`
   - Reused `devServerMiddleware`
 - **Deps:**
-  - `react-router` 8 (Data Mode)
+  - `react-router` 8 as optional peerDependency `^8` (Data Mode; required for Vite SSR consumers)
   - Express 4 (shared sku server runtime + `@types`; same major as webpack SSR — no 4 → 5 bump)
 - **Docs / release:**
   - `server-rendering.md` (product + Migrating)

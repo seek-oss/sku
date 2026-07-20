@@ -9,6 +9,8 @@ const DEPENDENCIES = [
   'react-dom@latest',
 ];
 
+const VITE_SSR_DEPENDENCIES = ['react-router@^8'];
+
 const COMMON_DEV_DEPENDENCIES = [
   '@vanilla-extract/css',
   'sku',
@@ -27,7 +29,10 @@ export const installDependencies = async (
     await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
   }
 
-  const deps = DEPENDENCIES;
+  const deps = [...DEPENDENCIES];
+  if (template === 'vite-ssr') {
+    deps.push(...VITE_SSR_DEPENDENCIES);
+  }
   const devDeps = [...COMMON_DEV_DEPENDENCIES];
   if (isViteBasedTemplate(template)) {
     devDeps.push(...VITE_DEV_DEPENDENCIES);

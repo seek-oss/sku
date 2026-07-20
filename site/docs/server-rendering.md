@@ -34,8 +34,9 @@ You export a named `routes` (`RouteObject[]`) from **both** `serverEntry` and `c
 Lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
 For page content, prefer [render-time data loading](#data-loading) via `AppWrapper` + Suspense; use loaders when you need waterfalls, document redirects, or response headers.
 
-Vite SSR depends on **React Router 8**.
-Type routes and Data Mode APIs against that major (the same major sku depends on).
+Vite SSR requires **React Router 8** as an optional peer dependency (`react-router@^8`).
+Install it in the app; type routes and Data Mode APIs against that major.
+The `@sku-lib/create` `vite-ssr` template installs it for you.
 
 Server and client route trees **must** stay hydration-compatible (same path / nesting / ids so server HTML matches hydrated HTML).
 Implementations on those trees (for example React Router route `middleware`, loaders, or component bodies) **may** diverge.
@@ -662,7 +663,7 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 - **Deploy layout:** production entry is `node dist/server/server.js` with sibling `client/` + `server/` under the build target — not webpack’s single `dist/server.js` layout
 - `buildType` set means `-ssr` commands are rejected
 - Type server-entry `middleware` for **Express 4** (`SkuSsrMiddleware` / `@types/express` major 4)
-- Type routes / Data Mode APIs for **React Router 8** (the major sku depends on for Vite SSR)
+- Type routes / Data Mode APIs for **React Router 8** (optional peer `react-router@^8`; install it in the app)
 - Drop the [`public`](./configuration.md#public) assets folder (and any `public: '…'` path that still exists on disk); import those assets from modules
 
 #### Routes and request entries

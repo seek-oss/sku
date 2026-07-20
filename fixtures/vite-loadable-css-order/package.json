@@ -10,7 +10,7 @@
     "braid-design-system": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "react-router": "catalog:",
+    "react-router": "^7.9.6",
     "@sku-private/react-lib-with-loadable": "workspace:*"
   },
   "devDependencies": {

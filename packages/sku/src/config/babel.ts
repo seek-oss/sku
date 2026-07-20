@@ -1,6 +1,5 @@
 import { createRequire } from 'node:module';
 import type { PluginItem } from '@babel/core';
-import transformImportMetaForJest from './babel/transformImportMetaForJest.js';
 
 const require = createRequire(import.meta.url);
 
@@ -47,18 +46,13 @@ export default ({
   }
 
   if (isJest) {
-    plugins.push(
-      // ESM packages (e.g. react-router v8) may use `import.meta`, which is
-      // invalid once babel-jest emits CommonJS for Jest to evaluate.
-      transformImportMetaForJest,
-      [
-        require.resolve('babel-plugin-transform-remove-imports'),
-        {
-          test: /\.css$/,
-          remove: 'effects',
-        },
-      ],
-    );
+    plugins.push([
+      require.resolve('babel-plugin-transform-remove-imports'),
+      {
+        test: /\.css$/,
+        remove: 'effects',
+      },
+    ]);
   } else {
     plugins.push(require.resolve('@loadable/babel-plugin'));
   }

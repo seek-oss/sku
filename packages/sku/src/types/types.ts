@@ -113,7 +113,7 @@ export type SkuLanguage = string | { name: string; extends?: string };
 
 export interface SkuConfigBase {
   /**
-   * Selects request-time SSR or the existing static generation behavior.
+   * Selects request-time SSR or the static generation behavior.
    *
    * `'ssr'` (Vite SSR) is experimental and not for production use.
    */

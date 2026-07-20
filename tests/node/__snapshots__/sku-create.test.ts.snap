@@ -496,6 +496,7 @@ exports[`sku-create vite-ssr > should create package.json 1`] = `
     "braid-design-system": "VERSION_IGNORED",
     "react": "VERSION_IGNORED",
     "react-dom": "VERSION_IGNORED",
+    "react-router": "VERSION_IGNORED",
   },
   "devDependencies": {
     "@types/react": "VERSION_IGNORED",

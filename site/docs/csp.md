@@ -13,7 +13,7 @@ Set `cspEnabled: true` in your `sku.config.js`.
 
 ### Delivery
 
-The `cspDelivery` option controls how the CSP is delivered and can be set to one of two values:
+For **static apps**, the `cspDelivery` option controls how the enforcing CSP is delivered and can be set to one of two values:
 
 - `tag`: The CSP will be embedded directly in the rendered HTML content via a `<meta http-equiv="Content-Security-Policy" …>` tag.
   No further action will be required to enable the CSP.
@@ -21,7 +21,7 @@ The `cspDelivery` option controls how the CSP is delivered and can be set to one
 - `header`: The CSP will be written to a JSON file alongside the rendered HTML content (e.g. `index.html.json`) in the `metadata.csp` property, and no `<meta http-equiv="Content-Security-Policy" …>` tag will be generated.
   Extra steps will be required at deployment and/or request time to ensure the value of this property is returned as a `Content-Security-Policy` header in the response for the rendered HTML content.
 
-The `cspDelivery` option is only available when using Vite.
+`cspDelivery` applies to **static Vite** only (`buildType` unset / `'static'`). Vite SSR always emits real HTTP CSP headers and ignores `cspDelivery`.
 
 ### Extra Hosts
 

@@ -420,9 +420,8 @@ When `languages` is configured, Vite SSR uses `@vocab/vite` language chunk split
 
 Sku resolves `@vocab/vite` from its own install and aliases bare `@vocab/vite…` imports (including those injected into app and `compilePackages` `.vocab` files) onto that copy — consumers do **not** need a direct `@vocab/vite` dependency for resolve.
 
-When there are multiple languages, sku resolves the language from the return of the `onRequest` method (server Document preload only — not forwarded to `onHydrate` / no `__SKU_LANGUAGE__`).
-
-If the language cannot be resolved, no language chunk will be preloaded, likely resulting in a delay loading text.
+Sku registers a language chunk **only** when `onRequest` returns `language` (server Document preload only).
+If `language` is omitted, no language chunk is preloaded, which can delay loading text.
 
 ```tsx
 // src/server.tsx

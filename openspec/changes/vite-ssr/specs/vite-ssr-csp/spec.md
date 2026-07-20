@@ -104,18 +104,27 @@ Consumer `cspExtraScriptSrcHosts` remains for third-party script hosts.
 - **THEN** the CSP header allows those assets via `'self'` (and nonces/hashes as applicable)
 - **AND** sku does not require an absolute/`CDN` origin allowance for sku-owned Document assets
 
-### Requirement: Webpack SSR and static CSP behavior are unchanged
+### Requirement: Webpack SSR and static CSP behavior are unchanged by this capability
 
-This capability MUST NOT change CSP delivery for webpack SSR apps or static apps.
+This Vite SSR CSP capability MUST NOT change CSP delivery for webpack SSR apps or static apps.
+
+Static Vite may independently support `cspDelivery` (`tag` / `header` metadata) and Report-Only via the static HTML CSP path; those options MUST NOT control Vite SSR CSP (Vite SSR always uses HTTP headers and its own Report-Only / `report-to` config).
 
 Static and webpack apps MAY continue to allow multiple `createUnsafeNonce` calls per render.
 
-#### Scenario: Static app CSP unchanged
+#### Scenario: Static app CSP unchanged by Vite SSR path
 
 - **WHEN** a static app has CSP enabled
-- **THEN** its existing CSP behavior remains as today
+- **THEN** its existing static CSP behavior remains as for that app mode (meta tag and/or metadata / start headers as configured)
+- **AND** Vite SSR does not rewrite that static delivery model
 
 #### Scenario: Static multi-nonce API unchanged
 
 - **WHEN** a static or webpack render calls `createUnsafeNonce` more than once
 - **THEN** existing multi-nonce behavior remains as today
+
+#### Scenario: cspDelivery does not apply to Vite SSR
+
+- **WHEN** a Vite SSR app sets `cspDelivery`
+- **THEN** sku ignores that option for Vite SSR responses
+- **AND** CSP is still delivered as HTTP headers (not meta `http-equiv`)

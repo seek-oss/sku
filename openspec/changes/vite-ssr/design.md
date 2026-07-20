@@ -198,6 +198,8 @@ Relative `publicPath` only (asset base; still covered by `'self'`).
 
 No meta `http-equiv`.
 
+**Coexistence with static Vite CSP (merged from master):** Static Vite now has `cspDelivery: 'tag' | 'header'` (meta vs `metadata.csp` JSON) and Report-Only via `createCSPHandler` → `metadata.cspReportOnly` / start-time headers. That path is separate from Vite SSR. Vite SSR keeps its own `buildCspHeaders` (real response headers, lazy single nonce, `cspReportOnlyReportTo`). Do not route Vite SSR through `cspDelivery` or the static HTML CSP handler.
+
 ### 11. Request-entry shapes
 
 ```ts

@@ -556,7 +556,9 @@ export interface ViteSkuConfig {
   vitePlugins?: PluginOption[];
 
   /**
-   * The way the content security policy is delivered. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   * The way the enforcing content security policy is delivered for **static Vite** apps.
+   * Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   * Ignored for Vite SSR (`buildType: 'ssr'`), which always uses HTTP CSP headers.
    *
    * @default 'tag'
    * @link https://seek-oss.github.io/sku/docs/configuration#cspdelivery

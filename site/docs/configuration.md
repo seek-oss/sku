@@ -101,6 +101,8 @@ Default: `'tag'`
 
 Bundler: `vite`
 
+**Only for static apps**
+
 The way the content security policy is delivered. Only relevant if `cspEnabled` is set to `true`.
 
 ## cspExtraScriptSrcHosts
@@ -139,7 +141,9 @@ Type: `string`
 
 Default: `undefined`
 
-**Vite SSR only.** CSP [`report-to`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to) group name token for the Report-Only policy. Only relevant if `cspReportOnlyEnabled` is `true`. When set, sku appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
+Build Type: `ssr`
+
+CSP [`report-to`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to) group name token for the Report-Only policy. Only relevant if `cspReportOnlyEnabled` is `true`. When set, sku appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
 
 sku does not emit a `Reporting-Endpoints` (or legacy `Report-To`) header — define the matching endpoint group in your app or infrastructure.
 

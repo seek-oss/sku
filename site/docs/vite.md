@@ -23,9 +23,13 @@ Vite support covers [static applications (SSG)][SSG] and opt-in [server-side ren
 
 ### Vite SSR
 
-> **Experimental — not for production.** Vite SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change. See [Server rendering](./server-rendering.md).
+> **Experimental — not for production.**
+> Vite SSR is available for evaluation and testing.
+> Do not use it in production yet; the API and behaviour may change.
+> See [Server rendering](./server-rendering.md).
 
-Set `buildType: 'ssr'` and export named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`). Prefer a shared `createRoutes(...)` factory so the trees stay hydration-compatible:
+Set `buildType: 'ssr'` and export named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`).
+Prefer a shared `createRoutes(...)` factory so the trees stay hydration-compatible:
 
 ```ts
 // src/routes.tsx
@@ -43,15 +47,22 @@ import { createRoutes } from './routes';
 export const routes = createRoutes();
 ```
 
-Required `serverEntry` must also export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest`. Required `clientEntry` must also export named `onHydrate`. Missing entry files or named exports (including missing / non-array `routes`) are a hard error; do not use `default`. Optional config [`devServerMiddleware`](./configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./server-rendering.md#middleware).
+Required `serverEntry` must also export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest`.
+Required `clientEntry` must also export named `onHydrate`.
+Missing entry files or named exports (including missing / non-array `routes`) are a hard error; do not use `default`.
+Optional config [`devServerMiddleware`](./configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./server-rendering.md#middleware).
 
 Vite SSR ships on **Express 5** and **React Router 8**.
 Type `middleware` / `SkuSsrMiddleware` and Data Mode routes against those majors.
 Future Express or React Router **major** upgrades in sku may be breaking for Vite SSR consumers (middleware mounts into sku’s Express app; routes use React Router Data Mode APIs) — see [Server rendering](./server-rendering.md).
 
-sku owns the HTTP server, the React Document shell (not overridable — use React document metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers. Vite SSR requires a relative `publicPath` (absolute / CDN URLs are rejected). The config [`public`](./configuration.md#public) assets folder is not supported — if that directory exists, `sku start` / `sku build` fail; import assets from modules instead.
+sku owns the HTTP server, the React Document shell (not overridable — use React document metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers.
+Vite SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
+The config [`public`](./configuration.md#public) assets folder is not supported — if that directory exists, `sku start` / `sku build` fail; import assets from modules instead.
 
-`onRequest` may return a closed object under Vite SSR: `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language` (server Document vocab preload only — not forwarded to `onHydrate`), and JSON `clientContext`. `onHydrate` receives `{ context }` only and may return `AppWrapper`. Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch). When `languages` is configured, sku registers the active vocab language chunk from the server entry `language` (sole-language fallback when only one language is set). Client locale re-derives via providers / React Router hooks (or optional `clientContext`).
+`onRequest` may return a closed object under Vite SSR: `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language` (server Document vocab preload only), and JSON `clientContext`.
+`onHydrate` receives `{ context }` only and may return `AppWrapper`.
+Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch).
 
 Scaffold a new app with:
 
@@ -264,7 +275,8 @@ See the [supporting react suspense] documentation for more information.
 
 Config [`devServerMiddleware`](./configuration.md#devservermiddleware) mounts a consumer module during `sku start` only.
 
-**Static Vite** uses [`Connect`](https://github.com/senchalabs/connect) as its server framework (webpack uses [`Express`](https://expressjs.com/)). The middleware function receives a `Connect.Server` instance:
+**Static Vite** uses [`Connect`](https://github.com/senchalabs/connect) as its server framework (webpack uses [`Express`](https://expressjs.com/)).
+The middleware function receives a `Connect.Server` instance:
 
 ```javascript
 // devMiddleware.js
@@ -282,7 +294,9 @@ export default function (server) {
 }
 ```
 
-**Vite SSR** (`buildType: 'ssr'`) uses Express on the custom single-port server. The same config key receives the Express app, and is mounted **before** the server entry’s named `middleware` (then Vite, then HTML render). Production never loads this file — see [Server rendering → Middleware](./server-rendering.md#middleware).
+**Vite SSR** (`buildType: 'ssr'`) uses Express on the custom single-port server.
+The same config key receives the Express app, and is mounted **before** the server entry’s named `middleware` (then Vite, then HTML render).
+Production never loads this file — see [Server rendering → Middleware](./server-rendering.md#middleware).
 
 > [!NOTE]
 > Currently only JavaScript middleware is supported.
@@ -323,7 +337,8 @@ export default {
 } satisfies SkuConfig;
 ```
 
-For Vite SSR specifically, a related failure mode is React “Element type is invalid … got: object” under `sku start` when a CJS default export resolves as a module namespace. Prefer [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) for that case — see [Server rendering → CJS default-export interop](./server-rendering.md#cjs-default-export-interop).
+For Vite SSR specifically, a related failure mode is React “Element type is invalid … got: object” under `sku start` when a CJS default export resolves as a module namespace.
+Prefer [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) for that case — see [Server rendering → CJS default-export interop](./server-rendering.md#cjs-default-export-interop).
 
 [compilePackages]: ./configuration.md#compilepackages
 
@@ -355,7 +370,8 @@ SVG imports within your application will need to be updated in order to function
 > [!IMPORTANT]
 > Your application must be on at least [sku v15.13.0] in order to use the `raw`, `url` and `inline` query parameters described below.
 
-The simplest way to migrate is to add the `raw` query parameter to all SVG imports in your codebase, which will import the raw SVG markup as a string in both webpack and Vite. This can be done automatically with the `svg-import-query-param` codemod:
+The simplest way to migrate is to add the `raw` query parameter to all SVG imports in your codebase, which will import the raw SVG markup as a string in both webpack and Vite.
+This can be done automatically with the `svg-import-query-param` codemod:
 
 ```sh
 pnpm dlx @sku-lib/codemod svg-import-query-param .

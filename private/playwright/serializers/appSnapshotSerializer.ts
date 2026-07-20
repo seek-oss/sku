@@ -1,7 +1,10 @@
 import type { SnapshotSerializer } from 'vitest';
 import { createTwoFilesPatch } from 'diff';
+import { type AppSnapshot, isAppSnapshot } from '../appSnapshot.ts';
 import { formatHtml } from '../formatHtml.ts';
 import { sanitizeString } from '../sanitizeString.ts';
+
+const snapshotHeaders = new Set(['content-security-policy']);
 
 const emptyDiff = `===================================================================
 --- sourceHtml
@@ -12,7 +15,7 @@ const emptyDiff = `=============================================================
  * post-hydration HTML
  */
 export const appSnapshotSerializer: SnapshotSerializer = {
-  serialize: ({ sourceHtml, clientRenderContent }) => {
+  serialize: ({ headers, sourceHtml, clientRenderContent }: AppSnapshot) => {
     const formattedSourceHtml = formatHtml(sourceHtml);
     const formattedClientHtml = formatHtml(clientRenderContent);
 
@@ -27,15 +30,19 @@ export const appSnapshotSerializer: SnapshotSerializer = {
     ).trim();
 
     // If there is no difference between the source and client html then we can just return the source html
-    return sanitizeString(
+    const snapshot = sanitizeString(
       htmlDiff === emptyDiff
         ? [emptyDiff, formattedSourceHtml].join('\n')
         : htmlDiff,
     );
+
+    const preamble = Object.entries(headers)
+      .filter(([key]) => snapshotHeaders.has(key))
+      .map(([key, value]) => `${key}: ${value}`)
+      .join('\n');
+
+    return preamble ? [preamble, snapshot].join('\n') : snapshot;
   },
 
-  test: (val) =>
-    val &&
-    val.hasOwnProperty('clientRenderContent') &&
-    val.hasOwnProperty('sourceHtml'),
+  test: isAppSnapshot,
 };

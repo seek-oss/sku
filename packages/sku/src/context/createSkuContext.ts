@@ -213,6 +213,7 @@ export const createSkuContext = async ({
   const sourceMapsProd = Boolean(skuConfig.sourceMapsProd);
   const displayNamesProd = Boolean(skuConfig.displayNamesProd);
   const cspEnabled = skuConfig.cspEnabled;
+  const cspDelivery = skuConfig.cspDelivery;
   const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
   const httpsDevServer = skuConfig.httpsDevServer;
   const languages = normalizedLanguages;
@@ -271,6 +272,7 @@ export const createSkuContext = async ({
     sourceMapsProd,
     displayNamesProd,
     cspEnabled,
+    cspDelivery,
     cspExtraScriptSrcHosts,
     httpsDevServer,
     languages,

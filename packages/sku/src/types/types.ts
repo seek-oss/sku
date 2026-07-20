@@ -540,6 +540,14 @@ export interface ViteSkuConfig {
   vitePlugins?: PluginOption[];
 
   /**
+   * The way the content security policy is delivered. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   *
+   * @default 'tag'
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspdelivery
+   */
+  cspDelivery?: 'tag' | 'header';
+
+  /**
    * This function provides a way to modify sku's Vite configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *

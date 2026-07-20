@@ -4,8 +4,6 @@ import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 const createSkuBin = require.resolve('../../packages/create/bin.js');
-/** Local sku so create's format step understands unreleased config keys. */
-const skuBin = require.resolve('../../packages/sku/bin/bin.js');
 
 export const scopeToFixture = (dir: string) => {
   const fixturePath = makeFixturePathResolver(`fixtures/${dir}/package.json`);
@@ -24,7 +22,6 @@ export const scopeToFixture = (dir: string) => {
           env: {
             ...process.env,
             ...options.spawnOpts?.env,
-            SKU_CREATE_SKU_BIN: skuBin,
           },
         },
       }),

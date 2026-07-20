@@ -1759,9 +1759,6 @@ importers:
       webpack-dev-server:
         specifier: 'catalog:'
         version: 5.2.4(tslib@2.8.1)(webpack-cli@6.0.1)(webpack@5.108.1)
-      yaml:
-        specifier: ^2.8.1
-        version: 2.9.0
 
 packages:
 

@@ -51,7 +51,7 @@ It ships **experimental** (not for production).
 - `@sku-lib/create` template `vite-ssr` with named `Component` on lazy pages.
 - Product + Migrating docs in `server-rendering.md`.
 - Migrating covers single-port and deploy layout.
-- Migrating covers CJS interop, Express 5, React Router 8, named `Component`, and moving off `public`.
+- Migrating covers CJS interop, Express 4 (shared sku major), React Router 8, named `Component`, and moving off `public`.
 - Prefer AppWrapper + Suspense for page content.
 - Keep server-only modules off the client route graph.
 - Use loaders for waterfalls, document redirects, or response headers.
@@ -66,13 +66,14 @@ It ships **experimental** (not for production).
 - **No** expanded baked-in interop defaults beyond Apollo.
 - No runtime error rewriting for CJS interop.
 - Config JSDoc must not claim Vite is static-only.
-- Vite SSR ships on **Express 5** and **React Router 8**.
-- Align Express `@types` with Express 5.
-- Document Express 5 for middleware typing.
+- Vite SSR ships on **Express 4** (same sku `express` / `@types` major as webpack SSR) and **React Router 8**.
+- Do **not** upgrade Express 4 → 5 in this change — that would break webpack SSR and other shared Express surfaces.
+- Document Express 4 for middleware typing (`middleware` / `SkuSsrMiddleware`).
 - Document React Router 8 for Data Mode / route typing.
 - **BREAKING** (policy for later releases): bumping the Express or React Router major that Vite SSR integrates may be a breaking change.
 - Consumer middleware mounts into sku’s Express app.
 - Consumer routes/entries use React Router Data Mode APIs.
+- Express 5 is deferred to a later sku-wide breaking change.
 - Vite SSR MUST NOT support config `public` (copied-as-is public assets folder).
 - Hard-error if that directory exists on `sku start` / `sku build`.
 - Docs discourage the pattern and point to importing assets instead.
@@ -99,6 +100,7 @@ It ships **experimental** (not for production).
 - A new Jest→Vitest codemod beyond what `@sku-lib/codemod` / Vitest docs already cover.
 - Bridging Express `req` (or middleware-attached state) into React Router loaders.
 - Shipping RR `requestContext` / `getLoadContext` seeding (deferred).
+- Upgrading sku’s shared Express dependency from 4 → 5 (deferred; would break webpack SSR).
 
 ## Capabilities
 
@@ -124,13 +126,14 @@ It ships **experimental** (not for production).
   - Reused `devServerMiddleware`
 - **Deps:**
   - `react-router` 8 (Data Mode)
-  - Express 5 (Vite SSR server runtime + `@types`)
+  - Express 4 (shared sku server runtime + `@types`; same major as webpack SSR — no 4 → 5 bump)
 - **Docs / release:**
   - `server-rendering.md` (product + Migrating)
   - `vite.md`, `csp.md`, `configuration.md`, create READMEs
   - Experimental warning
   - Changeset
   - Future Express / React Router majors may be breaking
+  - Express 5 deferred to a later sku-wide breaking change
 - **Fixtures/tests:**
   - Vite SSR fixture (streaming, CSP, entries, per-route chunks, vocab, relative `/static/...` `publicPath`)
   - Translations fixture Vite SSR adapters (`en` / `fr` / `en-PSEUDO`)

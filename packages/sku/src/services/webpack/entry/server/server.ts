@@ -46,8 +46,7 @@ if (middleware) {
   app.use(middleware);
 }
 
-// Express 5 path-to-regexp: named splat (matches `/` and nested paths).
-app.get('/{*splat}', (...args) => {
+app.get('*', (...args) => {
   let cspHandler;
 
   if (csp.enabled) {

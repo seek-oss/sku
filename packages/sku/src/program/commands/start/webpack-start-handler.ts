@@ -116,7 +116,6 @@ export const webpackStartHandler = async ({
         devServerMiddleware(app);
       }
 
-      // webpack-dev-server still types middleware against Express 4; sku runtime uses Express 5.
       middlewares.push(((req, res, next) => {
         const matchingSiteName =
           getSiteForHost(req.hostname, undefined, sites) || '';
@@ -165,7 +164,7 @@ export const webpackStartHandler = async ({
               }),
             );
           });
-      }) as RequestHandler as unknown as (typeof middlewares)[number]);
+      }) as RequestHandler);
 
       return middlewares;
     },

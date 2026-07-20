@@ -273,8 +273,8 @@ Empty array / passthrough is fine.
 Sku mounts this **before** Vite middlewares and the HTML render path in both `sku start` and the production server.
 It must not commit the document body.
 
-Vite SSR runs **Express 5**.
-Type `middleware` against Express 5 (`SkuSsrMiddleware` / `@types/express` major 5) — that matches the Express major sku depends on for the Vite SSR server.
+Vite SSR runs **Express 4**.
+Type `middleware` against Express 4 (`SkuSsrMiddleware` / `@types/express` major 4). This matches the Express major sku depends on for Vite and Webpack SSR server.
 
 Because consumer `middleware` / `devServerMiddleware` mount into sku’s Express app, a future Express **major** upgrade in sku may be a breaking change for Vite SSR apps.
 Minor/patch upgrades within the documented major stay non-breaking when APIs remain compatible.
@@ -661,7 +661,7 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 - **Ports:** webpack SSR used dual ports (`port` for assets + `serverPort` for the Node app). Vite SSR is **single-port**: use [`port`](./configuration.md#port) for `sku start` and the baked production default (`PORT` still overrides at runtime). Drop `serverPort` — providing it with Vite SSR fails validation. If you previously listened on `serverPort` in production, set that value as `port` (or keep using `PORT` in deploy).
 - **Deploy layout:** production entry is `node dist/server/server.js` with sibling `client/` + `server/` under the build target — not webpack’s single `dist/server.js` layout
 - `buildType` set means `-ssr` commands are rejected
-- Type server-entry `middleware` for **Express 5** (`SkuSsrMiddleware` / `@types/express` major 5)
+- Type server-entry `middleware` for **Express 4** (`SkuSsrMiddleware` / `@types/express` major 4)
 - Type routes / Data Mode APIs for **React Router 8** (the major sku depends on for Vite SSR)
 - Drop the [`public`](./configuration.md#public) assets folder (and any `public: '…'` path that still exists on disk); import those assets from modules
 

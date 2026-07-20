@@ -52,7 +52,7 @@ Required `clientEntry` must also export named `onHydrate`.
 Missing entry files or named exports (including missing / non-array `routes`) are a hard error; do not use `default`.
 Optional config [`devServerMiddleware`](./configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./server-rendering.md#middleware).
 
-Vite SSR ships on **Express 5** and **React Router 8**.
+Vite SSR ships on **Express 4** (same as webpack SSR) and **React Router 8**.
 Type `middleware` / `SkuSsrMiddleware` and Data Mode routes against those majors.
 Future Express or React Router **major** upgrades in sku may be breaking for Vite SSR consumers (middleware mounts into sku’s Express app; routes use React Router Data Mode APIs) — see [Server rendering](./server-rendering.md).
 

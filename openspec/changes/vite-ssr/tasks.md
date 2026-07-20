@@ -58,12 +58,12 @@
 - [x] 7.5 Prefer render-time data loading via `AppWrapper` + Suspense; loaders opt-in for waterfalls / document redirects / headers; no Express `req` → loader bridge
 - [x] 7.6 Migrating: server-only loaders vs client route graph (+ explicit `moduleId` when needed); Braid reset-before-Braid on `sku start`; client-only / `onHydrate`-only providers for `window`; Jest → Vitest prerequisite; `#` pathAliases / migrate-root-resolution
 - [x] 7.7 Drop “install `@vocab/vite` yourself” from product + Migrating once sku-owned alias is in place
-- [x] 7.8 Document Express 5 and React Router 8; note future major upgrades may be breaking (middleware + Data Mode)
-- [x] 7.9 Changeset: experimental / not-for-production; Express 5 + React Router 8; breaking-major policy for later upgrades
+- [x] 7.8 Document Express 4 (shared sku major) and React Router 8; note future major upgrades may be breaking (middleware + Data Mode); do not document Express 5 for this release
+- [x] 7.9 Changeset: experimental / not-for-production; React Router 8; Express stays on 4; breaking-major policy for later upgrades; no Express 5 bump
 
-## 8. Express 5 + React Router 8
+## 8. Express 4 (keep) + React Router 8
 
-- [x] 8.1 Upgrade Vite SSR Express runtime and `@types` from 4 → 5; fix Express 5 API breakage in sku server / adapters
+- [x] 8.1 Revert any Express / `@types` 4 → 5 bump and Express 5-only API fixes in shared sku servers (webpack SSR path splat, type casts, etc.) so Express remains 4
 - [x] 8.2 Upgrade catalog + Vite SSR fixtures/template `react-router` from 7 → 8; align peer baselines if required; fix Data Mode API breakage
 
 ## Deferred
@@ -71,7 +71,8 @@
 - Production listen / custom logger — design Open Questions
 - Runtime dual-`routes` validation — Non-Goals (docs only)
 - Vite SSR support for config `public` / unhashed public assets — Non-Goals until definitive need
-- Express / React Router majors beyond 5 / 8 — later releases; may be breaking
+- Express 5 (sku-wide; webpack SSR + Vite SSR + `sku serve`) — later breaking change
+- React Router majors beyond 8 — later releases; may be breaking
 - Automatic `*.server.ts` client strip — Non-Goals (docs / convention only)
 - Auto-inject Braid reset into sku Vite SSR server entry — Non-Goals (Braid optional; docs only)
 - Express `req` → loader bridge / RR `requestContext` seeding — Non-Goals this change

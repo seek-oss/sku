@@ -19,7 +19,10 @@ export type Job = {
 export type SharedWorkerData = {
   publicPath: string;
   cspEnabled: boolean;
+  cspDelivery: 'tag' | 'header';
   cspExtraScriptSrcHosts: string[];
+  cspReportOnlyEnabled: boolean;
+  cspReportOnlyExtraScriptSrcHosts: string[];
   targetPath: string;
   manifest: Manifest;
 };
@@ -102,7 +105,11 @@ export const prerenderConcurrently = async (skuContext: SkuContext) => {
   const sharedWorkerData = {
     publicPath: skuContext.publicPath,
     cspEnabled: skuContext.cspEnabled,
+    cspDelivery: skuContext.cspDelivery,
     cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
+    cspReportOnlyEnabled: skuContext.cspReportOnlyEnabled,
+    cspReportOnlyExtraScriptSrcHosts:
+      skuContext.cspReportOnlyExtraScriptSrcHosts,
     targetPath,
     manifest: JSON.parse(rawManifest) as Manifest,
   };

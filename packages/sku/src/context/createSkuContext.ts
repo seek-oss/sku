@@ -213,7 +213,11 @@ export const createSkuContext = async ({
   const sourceMapsProd = Boolean(skuConfig.sourceMapsProd);
   const displayNamesProd = Boolean(skuConfig.displayNamesProd);
   const cspEnabled = skuConfig.cspEnabled;
+  const cspDelivery = skuConfig.cspDelivery;
   const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
+  const cspReportOnlyEnabled = skuConfig.cspReportOnlyEnabled;
+  const cspReportOnlyExtraScriptSrcHosts =
+    skuConfig.cspReportOnlyExtraScriptSrcHosts ?? cspExtraScriptSrcHosts;
   const httpsDevServer = skuConfig.httpsDevServer;
   const languages = normalizedLanguages;
   const skipPackageCompatibilityCompilation =
@@ -271,7 +275,10 @@ export const createSkuContext = async ({
     sourceMapsProd,
     displayNamesProd,
     cspEnabled,
+    cspDelivery,
     cspExtraScriptSrcHosts,
+    cspReportOnlyEnabled,
+    cspReportOnlyExtraScriptSrcHosts,
     httpsDevServer,
     languages,
     initialPath,

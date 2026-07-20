@@ -78,6 +78,16 @@ Default: `false`
 
 Enable content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
 
+## cspDelivery
+
+Type: `'tag' | 'header'`
+
+Default: `'tag'`
+
+Bundler: `vite`
+
+The way the content security policy is delivered. Only relevant if `cspEnabled` is set to `true`.
+
 ## cspExtraScriptSrcHosts
 
 Type: `Array<string>`
@@ -85,6 +95,28 @@ Type: `Array<string>`
 Default: `[]`
 
 Extra external hosts to allow in your `script-src` [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspEnabled` is set to `true`.
+
+## cspReportOnlyEnabled
+
+Type: `boolean`
+
+**Unavailable for libraries**
+
+Default: `false`
+
+Bundler: `vite`
+
+Enable report-only content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
+
+## cspReportOnlyExtraScriptSrcHosts
+
+Type: `Array<string>`
+
+Default: `cspExtraScriptSrcHosts`
+
+Bundler: `vite`
+
+Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspReportOnlyEnabled` is set to `true`.
 
 ## dangerouslySetESLintConfig
 

@@ -540,6 +540,32 @@ export interface ViteSkuConfig {
   vitePlugins?: PluginOption[];
 
   /**
+   * The way the content security policy is delivered. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   *
+   * @default 'tag'
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspdelivery
+   */
+  cspDelivery?: 'tag' | 'header';
+
+  /**
+   * **Unavailable for libraries**
+   *
+   * Enable report-only content security policy feature. More info at https://seek-oss.github.io/sku/docs/csp
+   *
+   * @default false
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyenabled
+   */
+  cspReportOnlyEnabled?: boolean;
+
+  /**
+   * Extra external hosts to allow in your `script-src` report-only content security policy. Only relevant if {@link cspReportOnlyEnabled} is set to `true`.
+   *
+   * @default {@link SkuConfigBase#cspExtraScriptSrcHosts}
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyextrascriptsrchosts
+   */
+  cspReportOnlyExtraScriptSrcHosts?: string[];
+
+  /**
    * This function provides a way to modify sku's Vite configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *

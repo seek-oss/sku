@@ -142,7 +142,9 @@ export default [
     settings: {
       'import-x/resolver': {
         typescript: {
-          project: '**/*/tsconfig.json',
+          tsconfig: {
+            configFile: 'tsconfig.eslint.json',
+          },
         },
       },
     },

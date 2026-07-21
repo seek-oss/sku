@@ -1,0 +1,17 @@
+{
+  // Used only by the eslint import resolver.
+  // When adding a new package, add it here too. Fixtures are excluded.
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.json" },
+    { "path": "./packages/sku/tsconfig.json" },
+    { "path": "./packages/codemod/tsconfig.json" },
+    { "path": "./packages/create/tsconfig.json" },
+    { "path": "./packages/vite/tsconfig.json" },
+    { "path": "./packages/pnpm-plugin/tsconfig.json" },
+    { "path": "./packages/babel-plugin-display-name/tsconfig.json" },
+    { "path": "./private/utils/tsconfig.json" },
+    { "path": "./private/inject-changelog-preamble/tsconfig.json" },
+    { "path": "./private/react-lib-with-loadable/tsconfig.json" }
+  ]
+}

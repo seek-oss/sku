@@ -7,7 +7,6 @@ export default {
   setupTests: 'src/setupTests.js',
   languages: ['en', 'fr'],
   initialPath: '/en',
-  target: 'dist-ssr',
   port: 8313,
   serverPort: 8314,
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),

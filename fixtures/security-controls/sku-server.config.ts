@@ -19,5 +19,4 @@ export default {
 
     return config;
   },
-  target: 'dist-ssr',
 };

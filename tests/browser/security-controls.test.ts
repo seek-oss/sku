@@ -202,15 +202,13 @@ describe('security-controls', () => {
     });
 
     it('should start a server with content-security-policies', async () => {
-      await node(['dist-ssr/server.cjs', `--port=${port}`]);
+      await node(['dist/server.cjs', `--port=${port}`]);
       const assetServer = await exec('pnpm', [
         'run',
         'serve:assets',
         `--port=${assetPort}`,
       ]);
-      expect(
-        await assetServer.findByText('serving dist-ssr'),
-      ).toBeInTheConsole();
+      expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 
       const app = await getAppSnapshot({ url });
 

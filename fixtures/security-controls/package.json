@@ -4,12 +4,12 @@
   "type": "module",
   "scripts": {
     "build": "sku build",
-    "build:vite": "sku build --config sku.config.vite.ts",
     "build:ssr": "sku build-ssr --config sku-server.config.ts",
+    "build:vite": "sku build --config sku.config.vite.ts",
+    "serve:assets": "http-server dist --cors",
     "start": "sku start",
-    "serve:assets": "http-server dist-ssr --cors",
-    "start-ssr:vite": "sku start-ssr --config sku-server.config.ts",
-    "start:vite": "sku start --config sku.config.vite.ts"
+    "start:vite": "sku start --config sku.config.vite.ts",
+    "start-ssr:vite": "sku start-ssr --config sku-server.config.ts"
   },
   "dependencies": {
     "react": "catalog:",
@@ -19,8 +19,8 @@
     "@sku-private/test-utils": "workspace:*",
     "@vanilla-extract/css": "^1.0.0",
     "dedent": "^1.5.1",
-    "sku": "workspace:*",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "sku": "workspace:*"
   },
   "skuSkipValidatePeerDeps": true
 }

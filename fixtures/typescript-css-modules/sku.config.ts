@@ -8,6 +8,5 @@ export default {
   port: 8204,
   publicPath: '/static/typescript',
   setupTests: 'src/setupTests.ts',
-  target: 'dist',
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 } satisfies SkuConfig;

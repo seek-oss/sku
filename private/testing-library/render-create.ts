@@ -18,6 +18,13 @@ export const scopeToFixture = (dir: string) => {
       renderWithEnvironment(createSkuBin, [projectName, ...args], {
         ...options,
         cwd: fixturePath(options.cwd ?? ''),
+        spawnOpts: {
+          ...options.spawnOpts,
+          env: {
+            ...process.env,
+            ...options.spawnOpts?.env,
+          },
+        },
       }),
     fixturePath,
   };

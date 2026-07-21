@@ -11,7 +11,6 @@ const DEPENDENCIES = [
 
 const COMMON_DEV_DEPENDENCIES = [
   '@vanilla-extract/css',
-  'sku',
   '@types/react',
   '@types/react-dom',
 ];
@@ -27,7 +26,11 @@ export const installDependencies = async (
     await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
   }
 
-  const devDeps = [...COMMON_DEV_DEPENDENCIES];
+  const devDeps = [
+    ...COMMON_DEV_DEPENDENCIES,
+    // Internal/test-only: install sku from a caller-supplied specifier (e.g. packed tarball).
+    process.env.SKU_CREATE_SKU_SPECIFIER ?? 'sku',
+  ];
   if (template === 'vite') {
     devDeps.push(...VITE_DEV_DEPENDENCIES);
   }

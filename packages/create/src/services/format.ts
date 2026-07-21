@@ -16,8 +16,6 @@ export const formatProject = async (projectPath: string): Promise<void> => {
     child.on('close', (code) => {
       if (code === 0) {
         console.log('✅ Project formatted successfully');
-      } else if (code === 1) {
-        console.log('⚠️ Formatting completed with warnings');
       } else {
         console.warn(`⚠️ Formatting failed with exit code ${code}`);
       }

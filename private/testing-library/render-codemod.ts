@@ -1,9 +1,10 @@
-import { render, type RenderOptions } from 'cli-testing-library';
+import type { RenderOptions } from 'cli-testing-library';
 import { createRequire } from 'node:module';
 import fs from 'node:fs/promises';
 import { describe, it, expect } from 'vitest';
 import { createFixture } from 'fs-fixture';
 import type { CodemodName } from '../../packages/codemod/src/utils/constants.js';
+import { renderWithEnvironment } from './utils.ts';
 
 const require = createRequire(import.meta.url);
 const codemodBin = require.resolve('../../packages/codemod/bin.js');
@@ -12,7 +13,7 @@ const renderCodemod = async (
   command: CodemodName,
   args: string[] = [],
   options: Partial<RenderOptions> = {},
-) => render(codemodBin, [command, ...args], options);
+) => renderWithEnvironment(codemodBin, [command, ...args], options);
 
 export const scopeToFixture = (dir: string) => ({
   codemod: (

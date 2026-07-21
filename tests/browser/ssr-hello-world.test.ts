@@ -71,19 +71,17 @@ describe('ssr-hello-world', () => {
 
     describe('default port', () => {
       it('should generate a production server based on config', async () => {
-        await node(['dist-build/server.cjs']);
+        await node(['dist/server.cjs']);
 
         const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
-        expect(
-          await assetServer.findByText('serving dist-build'),
-        ).toBeInTheConsole();
+        expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 
         const snapshot = await getAppSnapshot({ url });
         expect(snapshot).toMatchSnapshot();
       });
 
       it("should invoke the provided 'onStart' callback", async () => {
-        const server = await node(['dist-build/server.cjs']);
+        const server = await node(['dist/server.cjs']);
         expect(
           await server.findByText('Server ran the onStart callback'),
         ).toBeInTheConsole();
@@ -94,35 +92,29 @@ describe('ssr-hello-world', () => {
       const customPort = '7654';
       const customPortUrl = `http://localhost:${customPort}`;
 
-      const server = await node([
-        'dist-build/server.cjs',
-        '--port',
-        customPort,
-      ]);
+      const server = await node(['dist/server.cjs', '--port', customPort]);
       expect(
         await server.findByText(`Server started on port ${customPort}`),
       ).toBeInTheConsole();
 
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
-      expect(
-        await assetServer.findByText('serving dist-build'),
-      ).toBeInTheConsole();
+      expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 
       const snapshot = await getAppSnapshot({ url: customPortUrl });
       expect(snapshot).toMatchSnapshot();
     });
 
     it('should copy all public assets to the target folder', async () => {
-      const files = await fs.readdir(fixturePath('dist-build'));
+      const files = await fs.readdir(fixturePath('dist'));
       expect(files).toContain('logo.png');
       expect(files).toContain('logo2.png');
       expect(files).toContain('foo');
 
-      const fooFiles = await fs.readdir(fixturePath('dist-build/foo'));
+      const fooFiles = await fs.readdir(fixturePath('dist/foo'));
       expect(fooFiles).toContain('logo.png');
       expect(fooFiles).toContain('bar');
 
-      const barFiles = await fs.readdir(fixturePath('dist-build/foo/bar'));
+      const barFiles = await fs.readdir(fixturePath('dist/foo/bar'));
       expect(barFiles).toContain('logo.png');
     });
   });

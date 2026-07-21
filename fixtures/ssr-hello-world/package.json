@@ -10,7 +10,7 @@
   "scripts": {
     "start": "sku start-ssr --config=sku-start.config.ts",
     "build": "sku build-ssr --config=sku-build.config.ts",
-    "start:asset-server": "http-server dist-build -p 4000 --cors"
+    "start:asset-server": "http-server dist -p 4000 --cors"
   },
   "devDependencies": {
     "@types/react": "catalog:",

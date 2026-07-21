@@ -1,6 +1,7 @@
-import { render, waitFor, type RenderOptions } from 'cli-testing-library';
+import { waitFor, type RenderOptions } from 'cli-testing-library';
 import { createRequire } from 'node:module';
 import { makeFixturePathResolver } from './makeFixturePathResolver.ts';
+import { renderWithEnvironment } from './utils.ts';
 
 const require = createRequire(import.meta.url);
 
@@ -39,13 +40,12 @@ export const scopeToFixture = (fixtureFolder: string) => {
       args: string[] = [],
       options: Partial<RenderOptions> = {},
     ) =>
-      render(skuBin, [command, ...args], {
+      renderWithEnvironment(skuBin, [command, ...args], {
         ...options,
         cwd: fixturePath(options.cwd ?? ''),
         spawnOpts: {
           ...options.spawnOpts,
           env: {
-            ...process.env,
             ...skuTestEnv,
             ...options.spawnOpts?.env,
           },
@@ -56,7 +56,7 @@ export const scopeToFixture = (fixtureFolder: string) => {
      * Runs a `node` command scoped to the fixture folder.
      */
     node: (args: string[] = [], options: Partial<RenderOptions> = {}) =>
-      render('node', args, {
+      renderWithEnvironment('node', args, {
         ...options,
         cwd: fixturePath(options.cwd ?? ''),
       }),
@@ -68,7 +68,7 @@ export const scopeToFixture = (fixtureFolder: string) => {
       args: string[] = [],
       options: Partial<RenderOptions> = {},
     ) =>
-      render(command, args, {
+      renderWithEnvironment(command, args, {
         ...options,
         cwd: fixturePath(options.cwd ?? ''),
       }),

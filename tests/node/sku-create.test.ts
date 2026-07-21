@@ -1,11 +1,21 @@
 import { describe, beforeAll, afterAll, it, expect, vi } from 'vitest';
-import { parseDocument, Document } from 'yaml';
 
 import fs from 'node:fs/promises';
-import { configure } from '@sku-private/testing-library';
-import { scopeToFixture } from '@sku-private/testing-library/create';
+import os from 'node:os';
 import path from 'node:path';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+
+import {
+  configure,
+  hasExpectedExitCode,
+  scopeToFixture as scopeToSkuFixture,
+  waitForExitCode,
+} from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library/create';
 import { normalizePackageManagerVersion } from '@sku-private/test-utils';
+
+const execFileAsync = promisify(execFile);
 
 const { create, fixturePath } = scopeToFixture('sku-create');
 
@@ -20,34 +30,57 @@ vi.setConfig({
   testTimeout: timeout + 1000,
 });
 
-/**
- * Creates a new workspace yaml with some values copied from the root workspace yaml.
- * This allows us to use the same catalog as the root workspace.
- */
-const createWorkspace = async () => {
-  // Get the root pnpm-workspace.yaml
-  const rootFile = await fs.readFile(
-    path.resolve(__dirname, '../../pnpm-workspace.yaml'),
-    'utf8',
-  );
-  const rootYaml = parseDocument(rootFile);
-  const catalog = rootYaml.get('catalog');
-
-  // Create a new workspace yaml and add the needed fields
-  const newWorkspaceYaml = new Document();
-  newWorkspaceYaml.set('catalog', catalog);
-  newWorkspaceYaml.set('packages', ['../../packages/*']);
-  newWorkspaceYaml.set('linkWorkspacePackages', true);
-
-  return newWorkspaceYaml.toString();
-};
-
 const projectName = 'new-project';
 const projectDirectory = fixturePath(projectName);
 
+let pack: Awaited<ReturnType<typeof packSku>>;
+let createEnv: NodeJS.ProcessEnv;
+
+/**
+ * Packs the local `packages/sku` workspace into a temporary `.tgz` so create
+ * tests can install sku via `SKU_CREATE_SKU_SPECIFIER` (`sku@file:…`) instead
+ * of the published registry package.
+ */
+const packSku = async () => {
+  const packDestination = await fs.mkdtemp(
+    path.join(os.tmpdir(), 'sku-create-pack-'),
+  );
+  const skuPackageDir = path.resolve(__dirname, '../../packages/sku');
+
+  await execFileAsync('pnpm', ['pack', '--pack-destination', packDestination], {
+    cwd: skuPackageDir,
+  });
+
+  const packedFiles = await fs.readdir(packDestination);
+  const tarball = packedFiles.find((file) => file.endsWith('.tgz'));
+
+  if (!tarball) {
+    throw new Error('Expected sku pack to produce a .tgz file');
+  }
+
+  return {
+    tarballPath: path.join(packDestination, tarball),
+    remove: () => fs.rm(packDestination, { recursive: true, force: true }),
+  };
+};
+
+beforeAll(async () => {
+  pack = await packSku();
+
+  createEnv = {
+    SKU_CREATE_SKU_SPECIFIER: `sku@file:${pack.tarballPath}`,
+  };
+});
+
+afterAll(async () => {
+  await pack.remove();
+});
+
 describe('template flag', () => {
   it('should create a webpack project', async () => {
-    const result = await create(projectName, ['--template', 'webpack']);
+    const result = await create(projectName, ['--template', 'webpack'], {
+      spawnOpts: { env: createEnv },
+    });
     expect(
       await result.findByText(
         `Creating new sku project: ${projectName} with webpack template`,
@@ -56,7 +89,9 @@ describe('template flag', () => {
   });
 
   it('should create a vite project', async () => {
-    const result = await create(projectName, ['--template', 'vite']);
+    const result = await create(projectName, ['--template', 'vite'], {
+      spawnOpts: { env: createEnv },
+    });
     expect(
       await result.findByText(
         `Creating new sku project: ${projectName} with vite template`,
@@ -68,10 +103,6 @@ describe('template flag', () => {
 describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
-
-    const workspace = await createWorkspace();
-
-    await fs.writeFile(fixturePath('pnpm-workspace.yaml'), workspace);
   });
 
   afterAll(async () => {
@@ -82,7 +113,9 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
   it.runIf(template === 'webpack')(
     'should create a webpack project',
     async () => {
-      const result = await create(projectName);
+      const result = await create(projectName, [], {
+        spawnOpts: { env: createEnv },
+      });
       expect(
         await result.findByText(
           'Which template would you like to use?',
@@ -108,7 +141,9 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
   );
 
   it.runIf(template === 'vite')('should create a vite project', async () => {
-    const result = await create(projectName);
+    const result = await create(projectName, [], {
+      spawnOpts: { env: createEnv },
+    });
     expect(
       await result.findByText(
         'Which template would you like to use?',
@@ -156,18 +191,11 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
     expect(stripYamlVersions(contents)).toMatchSnapshot();
   });
 
-  it('should update the pnpm-workspace.yaml', async () => {
-    const rootFile = await fs.readFile(
-      path.resolve(fixturePath('pnpm-workspace.yaml')),
-      'utf8',
-    );
-    const workspace = parseDocument(rootFile);
-    // Delete the fields that we don't care about
-    workspace.delete('catalog');
-    workspace.delete('packages');
-    workspace.delete('linkWorkspacePackages');
-
-    expect(stripYamlVersions(workspace.toString())).toMatchSnapshot();
+  it('should pass lint', async () => {
+    const { sku } = scopeToSkuFixture('sku-create/new-project');
+    const result = await sku('lint');
+    await waitForExitCode(result, 0);
+    expect(hasExpectedExitCode(result, 0)).toBe(true);
   });
 });
 
@@ -201,9 +229,10 @@ function replaceDependencyVersions(packageJson: Record<string, any>) {
  * This function strips version numbers from YAML content.
  */
 function stripYamlVersions(yamlContent: string): string {
-  // Replace version patterns like "0.0.1+sha512-..." with "VERSION_IGNORED"
-  return yamlContent.replace(
-    /(?<!minimumReleaseAge):\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
-    ': VERSION_IGNORED',
-  );
+  return yamlContent
+    .replace(
+      /(?<!minimumReleaseAge):\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
+      ': VERSION_IGNORED',
+    )
+    .replace(/sku@file:\s*.+/g, 'sku@file: VERSION_IGNORED');
 }

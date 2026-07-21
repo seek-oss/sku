@@ -1,4 +1,25 @@
-import { waitFor, type RenderResult } from 'cli-testing-library';
+import {
+  render,
+  type RenderOptions,
+  type RenderResult,
+  waitFor,
+} from 'cli-testing-library';
+
+export const renderWithEnvironment = (
+  command: string,
+  args: string[] = [],
+  opts: Partial<RenderOptions> = {},
+): Promise<RenderResult> =>
+  render(command, args, {
+    ...opts,
+    spawnOpts: {
+      ...opts.spawnOpts,
+      env: {
+        ...process.env,
+        ...opts.spawnOpts?.env,
+      },
+    },
+  });
 
 export const waitForExitCode = async (
   process: RenderResult,

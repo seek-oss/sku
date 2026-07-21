@@ -1,12 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`sku-create > should update the pnpm-workspace.yaml 1`] = `
-"
-configDependencies:
-  pnpm-plugin-sku: VERSION_IGNORED
-"
-`;
-
 exports[`sku-create vite > should create .gitignore 1`] = `
 "node_modules
 npm-debug.log
@@ -126,6 +119,7 @@ exports[`sku-create vite > should create pnpm-workspace.yaml 1`] = `
   core-js-pure: false
   esbuild: true
   sku: true
+  sku@file: VERSION_IGNORED
   unrs-resolver: true
 blockExoticSubdeps: true
 configDependencies:
@@ -390,11 +384,6 @@ export function NextSteps({ environment }: NextStepsProps) {
 "
 `;
 
-exports[`sku-create vite > should update the pnpm-workspace.yaml 1`] = `
-"{}
-"
-`;
-
 exports[`sku-create webpack > should create .gitignore 1`] = `
 "node_modules
 npm-debug.log
@@ -512,6 +501,7 @@ exports[`sku-create webpack > should create pnpm-workspace.yaml 1`] = `
   core-js-pure: false
   esbuild: true
   sku: true
+  sku@file: VERSION_IGNORED
   unrs-resolver: true
 blockExoticSubdeps: true
 configDependencies:
@@ -771,10 +761,5 @@ export function NextSteps({ environment }: NextStepsProps) {
     </Box>
   );
 }
-"
-`;
-
-exports[`sku-create webpack > should update the pnpm-workspace.yaml 1`] = `
-"{}
 "
 `;

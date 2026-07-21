@@ -52,8 +52,14 @@ describe('configure', () => {
       await copyToApp('src/App.tsx', appFolder);
       await copyToApp('package.json', appFolder);
 
+      // Assert user-facing ignore output, not the fixture-harness SKU_IGNORE_TARGETS list.
       configure = await sku('configure', [], {
         cwd: './App',
+        spawnOpts: {
+          env: {
+            SKU_IGNORE_TARGETS: '',
+          },
+        },
       });
 
       await waitForExitCode(configure, 0);
@@ -111,8 +117,14 @@ describe('configure', () => {
       await copyToApp('package.json', appFolderTS);
       await copyToApp('sku.config.ts', appFolderTS);
 
+      // Assert user-facing ignore output, not the fixture-harness SKU_IGNORE_TARGETS list.
       configure = await sku('configure', [], {
         cwd: './TSApp',
+        spawnOpts: {
+          env: {
+            SKU_IGNORE_TARGETS: '',
+          },
+        },
       });
 
       await waitForExitCode(configure, 0);

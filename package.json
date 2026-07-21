@@ -26,6 +26,7 @@
     "setup-test-hosts": "tsx private/test-utils/setupTestHosts",
     "start:docs": "pnpm --filter @sku-private/site start",
     "build:docs": "pnpm --filter @sku-private/site build",
+    "serve:docs": "pnpm --filter @sku-private/site serve",
     "format": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' --fix . && prettier --cache --experimental-cli --write . ",
     "release": "changeset publish",
     "version": "changeset version && pnpm sku-inject-changelog && pnpm install --lockfile-only"

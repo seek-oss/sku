@@ -6,7 +6,8 @@
   "description": "Documentation site for sku",
   "scripts": {
     "start": "vitepress dev",
-    "build": "vitepress build"
+    "build": "vitepress build",
+    "serve": "vitepress preview"
   },
   "author": "SEEK",
   "license": "MIT",

@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'development') {
           <App site={site} />,
         );
 
-      See https://seek-oss.github.io/sku/docs/building-the-app#client for more info.
+      See https://seek-oss.github.io/sku/building-the-app#client for more info.
   `);
   }
 }

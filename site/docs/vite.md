@@ -1,7 +1,6 @@
 # Vite
 
 [Vite]: https://vite.dev/
-[`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 
 [Vite] describes itself as "a blazing fast frontend build tool powering the next generation of web applications".
 It has on demand file serving over native ESM and lightning fast hot module reloading.
@@ -171,10 +170,9 @@ Depending on your application, you may need no further changes to your codebase 
 Documented below is a list of differences between `sku` with `webpack` and `sku` with Vite.
 
 > [!TIP]
-> If you encounter issues during migration that aren't listed below, please reach out in [`#sku-support`] so we can update this document.
+> If you encounter issues during migration that aren't listed below, please reach out via the [support page](/support) so we can update this document.
 
 [bundler]: ./configuration.md#bundler
-[`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
 
 ### Code splitting
 

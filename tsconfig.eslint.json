@@ -1,5 +1,5 @@
 {
-  // Used only by the eslint import resolver.
+  // Used only by the eslint import resolver to speed up linting.
   // When adding a new package, add it here too. Fixtures are excluded.
   "files": [],
   "references": [

@@ -514,7 +514,7 @@ exports[`sku-create vite-ssr > should create package.json 1`] = `
 
 exports[`sku-create vite-ssr > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
-  "@swc/core": true
+  '@swc/core': true
   core-js-pure: false
   esbuild: true
   sku: true
@@ -526,12 +526,12 @@ configDependencies:
 ignorePatchFailures: false
 minimumReleaseAge: 4320 # 3 days
 minimumReleaseAgeExclude:
-  - "@braid-design-system/*"
-  - "@capsizecss/*"
-  - "@seek/*"
-  - "@sku-lib/*"
-  - "@vanilla-extract/*"
-  - "@vocab/*"
+  - '@braid-design-system/*'
+  - '@capsizecss/*'
+  - '@seek/*'
+  - '@sku-lib/*'
+  - '@vanilla-extract/*'
+  - '@vocab/*'
   - braid-design-system
   - browserslist-config-seek
   - eslint-config-seek

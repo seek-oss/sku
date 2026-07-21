@@ -39,6 +39,7 @@ describe('generateTemplateFiles', () => {
     expect(client).not.toContain('routesEntry');
 
     expect(await fixture.exists('src/render.tsx')).toBe(false);
+    expect(await fixture.exists('src/vite-env.d.ts')).toBe(true);
     expect(await fixture.exists('src/pages/home/route.ts')).toBe(true);
     expect(await fixture.exists('src/pages/about/route.ts')).toBe(true);
 

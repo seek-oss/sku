@@ -170,9 +170,10 @@ Depending on your application, you may need no further changes to your codebase 
 Documented below is a list of differences between `sku` with `webpack` and `sku` with Vite.
 
 > [!TIP]
-> If you encounter issues during migration that aren't listed below, please reach out via the [support page](/support) so we can update this document.
+> If you encounter issues during migration that aren't listed below, please reach out via the [support page] so we can update this document.
 
 [bundler]: ./configuration.md#bundler
+[support page]: /support
 
 ### Code splitting
 

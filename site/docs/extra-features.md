@@ -32,10 +32,11 @@ const ImageWithFallbacks = () => (
 );
 ```
 
-If you want to use a currently unsupported format feel free to submit a PR or contact [support](/support).
+If you want to use a currently unsupported format feel free to submit a PR or contact [support].
 
 [SVG]: #SVGs
 [`data:` URL]: https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data
+[support]: /support
 
 ### SVGs
 

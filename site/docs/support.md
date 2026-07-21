@@ -15,7 +15,8 @@ That includes:
 - Something feels awkward, confusing, or just not ideal
 - You are thinking of using unsupported behaviour, or to bypassing restrictions
 
-**If you work at SEEK**, please reach out in the [#sku-support](https://seekchat.slack.com/channels/sku-support) Slack channel.
+**If you work at SEEK**, please reach out in the [#sku-support] Slack channel.
 
 [Vite]: https://vitejs.dev/
 [Remix]: https://remix.run/
+[#sku-support]: https://seekchat.slack.com/channels/sku-support

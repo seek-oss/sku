@@ -6,8 +6,10 @@ Don't post anything or commit any code that isn't ready for the entire world to 
 Avoid making specific reference to internal processes or features under development.
 While a lot of this information is probably harmless, it's better to be safe than sorry.
 
-If you work at SEEK and run into issues along the way, or even if you find some of these steps confusing or intimidating, please reach out via the [support page](https://seek-oss.github.io/sku/support).
+If you work at SEEK and run into issues along the way, or even if you find some of these steps confusing or intimidating, please reach out via the [support page].
 We'd be happy to help out!
+
+[support page]: https://seek-oss.github.io/sku/support
 
 ## Setup
 

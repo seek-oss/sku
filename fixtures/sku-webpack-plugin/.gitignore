@@ -1,5 +1,5 @@
 # this fixture doesn't use sku's CLI, and doesn't need these files either
-# these should never be committed 
+# these should never be committed
 .eslintignore
 .prettierignore
 
@@ -7,7 +7,6 @@
 .eslintcache
 .prettierrc
 coverage/
-dist-ssr/
 dist/
 eslint.config.js
 report/

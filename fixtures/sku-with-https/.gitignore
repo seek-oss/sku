@@ -3,10 +3,6 @@
 .prettierrc
 .ssl
 coverage/
-dist-build/
-dist-ssr/
-dist-start/
-dist-vite-ssr/
 dist/
 eslint.config.mjs
 report/

@@ -1,5 +1,266 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`ssr translations > should render en 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/5.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+    <link
+      data-chunk="en-translations"
+      rel="preload"
+      as="script"
+      href="/en-translations.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello sku
+        Company name
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      [1]
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":["en-translations"]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/5.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="en-translations"
+      src="/en-translations.js"
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`ssr translations > should render en-PSEUDO 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/5.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+    <link
+      data-chunk="en-PSEUDO-translations"
+      rel="preload"
+      as="script"
+      href="/en-PSEUDO-translations.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        [Ḩẽẽẽƚƚööö šķǚǚǚ]
+        [Çööm̂ƥăăกี้ýý กี้ăăm̂ẽẽ]
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      [0]
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":["en-PSEUDO-translations"]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/5.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="en-PSEUDO-translations"
+      src="/en-PSEUDO-translations.js"
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`ssr translations > should render fr 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      hello-world
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/runtime.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/5.js"
+    >
+    <link
+      data-chunk="main"
+      rel="preload"
+      as="script"
+      href="/main.js"
+    >
+    <link
+      data-chunk="fr-translations"
+      rel="preload"
+      as="script"
+      href="/fr-translations.js"
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Bonjour sku
+        บริษัท
+      </div>
+    </div>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS__"
+      type="application/json"
+    >
+      [2]
+    </script>
+    <script
+      id="__LOADABLE_REQUIRED_CHUNKS___ext"
+      type="application/json"
+    >
+      {"namedChunks":["fr-translations"]}
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/runtime.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/5.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="main"
+      src="/main.js"
+    >
+    </script>
+    <script
+      async
+      data-chunk="fr-translations"
+      src="/fr-translations.js"
+    >
+    </script>
+  </body>
+</html>
+`;
+
 exports[`translations > bundler vite > should render en 1`] = `
 ===================================================================
 --- sourceHtml
@@ -593,6 +854,182 @@ exports[`translations > bundler webpack > should support query parameters 1`] = 
       async
       data-chunk="en-translations"
       src="/en-translations.chunk.js"
+    >
+    </script>
+  </body>
+</html>
+`;
+exports[`vite ssr translations > should render en 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@vite/client"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+    >
+    <link
+      rel="stylesheet"
+      href="/@id/__x00__virtual:ssr-css.css"
+      data-ssr-css="true"
+    >
+  </head>
+  <body>
+    <div>
+      Hello sku
+      Company name
+    </div>
+    <script
+      nonce="RANDOM_NONCE"
+      id="_R_"
+    >
+      window.__SKU_DOCUMENT_ASSETS__={"css":["/@id/__x00__virtual:ssr-css.css"],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+    <script
+      type="module"
+      src="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`vite ssr translations > should render en-PSEUDO 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@vite/client"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+    >
+    <link
+      rel="stylesheet"
+      href="/@id/__x00__virtual:ssr-css.css"
+      data-ssr-css="true"
+    >
+  </head>
+  <body>
+    <div>
+      [Ḩẽẽẽƚƚööö šķǚǚǚ]
+      [Çööm̂ƥăăกี้ýý กี้ăăm̂ẽẽ]
+    </div>
+    <script
+      nonce="RANDOM_NONCE"
+      id="_R_"
+    >
+      window.__SKU_DOCUMENT_ASSETS__={"css":["/@id/__x00__virtual:ssr-css.css"],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+    <script
+      type="module"
+      src="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+  </body>
+</html>
+`;
+
+exports[`vite ssr translations > should render fr 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@vite/client"
+    >
+    <link
+      rel="modulepreload"
+      fetchpriority="low"
+      nonce="RANDOM_NONCE"
+      href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+    >
+    <link
+      rel="stylesheet"
+      href="/@id/__x00__virtual:ssr-css.css"
+      data-ssr-css="true"
+    >
+  </head>
+  <body>
+    <div>
+      Bonjour sku
+      บริษัท
+    </div>
+    <script
+      nonce="RANDOM_NONCE"
+      id="_R_"
+    >
+      window.__SKU_DOCUMENT_ASSETS__={"css":["/@id/__x00__virtual:ssr-css.css"],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
+    </script>
+    <script
+      type="module"
+      src="/@vite/client"
+      nonce="RANDOM_NONCE"
+      async
+    >
+    </script>
+    <script
+      type="module"
+      src="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      nonce="RANDOM_NONCE"
+      async
     >
     </script>
   </body>

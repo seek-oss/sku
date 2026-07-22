@@ -5,6 +5,8 @@ import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { createConfig } from '../helpers/config/createConfig.js';
 import createServer from '../../../utils/createServer.js';
+import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
+import { SSR_CSS_VIRTUAL_HREF } from '../plugins/ssrCss/constants.js';
 import { createSsrRequestContextMiddleware } from './ssrRequestContextMiddleware.js';
 import {
   createHtmlRenderMiddleware,
@@ -73,7 +75,8 @@ export const createDevSsrServer = async ({
 
   const assets: RenderAssets = {
     bootstrapModules: [`/@vite/client`, `/@fs/${clientEntry}`],
-    css: [],
+    // Start-only virtual stylesheet (production uses client-manifest CSS).
+    css: [SSR_CSS_VIRTUAL_HREF],
     modulePreloads: [],
   };
 
@@ -105,6 +108,14 @@ export const createDevSsrServer = async ({
     httpServer.once('error', reject);
     httpServer.listen(skuContext.port.client, resolve);
   });
+
+  // Parity with static middlewarePlugin.configureServer: mark when ready to load.
+  if (
+    metricsMeasurers.initialPageLoad.isInitialPageLoad &&
+    metricsMeasurers.initialPageLoad.openTab
+  ) {
+    metricsMeasurers.initialPageLoad.mark();
+  }
 
   return { app: serverApp, httpServer, vite };
 };

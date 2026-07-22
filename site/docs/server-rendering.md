@@ -63,6 +63,9 @@ Vite SSR does **not** support the config [`public`](./configuration.md#public) a
 If that directory exists (default path `public`), `sku start` / `sku build` hard-error.
 Import images and other assets from modules so they go through Vite’s hashed pipeline.
 
+Vite SSR does **not** support [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) — providing it fails config validation.
+Raise exceptional Vite customisation needs in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) with your use-case.
+
 ### Routes
 
 Export named `routes` from **both** the server and client entries.
@@ -578,6 +581,7 @@ For day-to-day API detail, prefer the [Vite SSR](#vite-ssr) sections above.
 - Vite SSR is Vite-only: `bundler: 'vite'` + `buildType: 'ssr'`
 - Use a **relative** `publicPath` (e.g. `/`) — absolute / CDN URLs are not supported
 - Move off the config [`public`](./configuration.md#public) assets folder before adopting Vite SSR — if that directory exists, `sku start` / `sku build` fail. Import assets from modules instead
+- Drop [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) — unsupported for Vite SSR (hard-error when set); raise use-cases in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU)
 
 #### Limitations
 
@@ -591,6 +595,7 @@ Infrastructure, deployments, process managers, and reverse-proxy setup are out o
 - Use `sku start` / `sku build` (same commands as static Vite) — do **not** introduce `start-ssr` / `build-ssr`
 - Drop static-only config such as `renderEntry` / `src/render.tsx` and environments-driven static HTML generation for the SSR path
 - Remove or empty the [`public`](./configuration.md#public) assets folder and import those files from modules (Vite SSR does not copy/serve that folder)
+- Remove [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) (hard-error for Vite SSR; raise exceptional needs in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU))
 
 #### Routes and request entries
 
@@ -647,6 +652,7 @@ Because of this, migration will likely be dependent on your solution’s specifi
 - Switch to `bundler: 'vite'` + `buildType: 'ssr'`
 - Relative `publicPath` only
 - Move off the config [`public`](./configuration.md#public) assets folder — Vite SSR hard-errors if that directory exists; import assets from modules instead
+- Drop [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) — unsupported for Vite SSR (hard-error when set); raise use-cases in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU)
 - **Tests:** treat Jest → [Vitest](./vitest.md) as a Vite SSR prerequisite (`testRunner: 'vitest'`). Prefer a separate PR; use [`@sku-lib/codemod jest-to-vitest`](./vitest.md#migrating-to-vitest) plus the Vitest checklist there (mock shapes, RTL, platform singletons). No additional Jest→Vitest codemod ships with this mode.
 - **Imports:** webpack `baseUrl: '.'` / bare `src/…` imports are not Vite SSR path aliases — use `#` subpath imports via [`pathAliases`](./configuration.md#pathaliases). Run `pnpm dlx @sku-lib/codemod migrate-root-resolution .` (see the [sku changelog](https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md) guidance for `rootResolution` → `#src/…`)
 
@@ -665,6 +671,7 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 - Type server-entry `middleware` for **Express 4** (`SkuSsrMiddleware` / `@types/express` major 4)
 - Type routes / Data Mode APIs for **React Router 8** (optional peer `react-router@^8`; install it in the app)
 - Drop the [`public`](./configuration.md#public) assets folder (and any `public: '…'` path that still exists on disk); import those assets from modules
+- Remove [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) (hard-error for Vite SSR; raise exceptional needs in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU))
 
 #### Routes and request entries
 

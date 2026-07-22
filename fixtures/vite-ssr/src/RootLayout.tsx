@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router';
 
 import { PreloadingLink } from './PreloadingLink.js';
+import * as styles from './layout.css';
 
 export const RootLayout = () => (
   <>
@@ -8,7 +9,7 @@ export const RootLayout = () => (
       rel="icon"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"
     />
-    <div>
+    <div className={styles.root}>
       <nav>
         <PreloadingLink to="/">Home</PreloadingLink>
         <PreloadingLink to="/about" data-testid="nav-about">

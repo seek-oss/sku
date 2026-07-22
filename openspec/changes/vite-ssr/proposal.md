@@ -29,7 +29,10 @@ It ships **experimental** (not for production).
   - Docs/template recommend `createRoutes`; no runtime checker.
 - Full-document stream (`renderToPipeableStream`).
 - Hydrate at `document`.
+- Vite SSR browser client imports `virtual:sku/polyfills` (config `polyfills` parity with static Vite / webpack SSR).
 - No `transformIndexHtml` on SSR responses.
+- Vite SSR `sku start` mounts SSR-CSS: virtual stylesheet via Document `assets.css`
+- Vite SSR `sku start` telemetry parity with static (`start.initial` / `start.rebuild`); client scripts via client entry / bootstrap; mark `initialPageLoad` when the SSR dev server is ready.
 - Relative `publicPath` only — **asset base only**.
 - `publicPath` MUST NOT become React Router `basename`.
 - No first-class router-basename config.
@@ -83,6 +86,7 @@ It ships **experimental** (not for production).
 - Initial release is **experimental**.
 - Docs MUST warn not-for-production.
 - Changeset / release notes MUST state the same.
+- Vite SSR MUST NOT support `dangerouslySetViteConfig`.
 
 ### Non-goals
 
@@ -106,6 +110,8 @@ It ships **experimental** (not for production).
 - Upgrading sku’s shared Express dependency from 4 → 5 (deferred; would break webpack SSR).
 - Shipping Jest support for React Router 8 (transforms / ESM interop).
 - Forcing webpack fixtures or non–Vite-SSR apps onto React Router 8.
+- Supporting `@sku-lib/vite/loadable` Collector / `preloadPlugin` module-id preloading as a Vite SSR Document asset source (static Vite / prerender only; Vite SSR uses React Router `lazy` + `handle.moduleId`).
+- Supporting `dangerouslySetViteConfig` for Vite SSR.
 
 ## Capabilities
 
@@ -149,6 +155,7 @@ It ships **experimental** (not for production).
   - Document hydrate (not `#app`)
   - Relative asset-only `publicPath`
   - No `public` assets folder
+  - No `dangerouslySetViteConfig`
   - Required named exports
   - Shared `__sku_alias__*` entry aliases
   - Production defines aligned with webpack SSR naming where they overlap

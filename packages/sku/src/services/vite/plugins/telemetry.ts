@@ -4,43 +4,58 @@ import { createDebug } from 'obug';
 import provider from '../../telemetry/index.js';
 import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
 import { makePluginName } from '../helpers/makePluginName.js';
+import {
+  SKU_INITIAL_PAGE_LOAD_EVENT,
+  SKU_VITE_HMR_EVENT,
+} from './telemetryEvents.js';
 
 type ViteHmrTimePayload = { durationInMs: number; timestamp: number };
 
 const log = createDebug('sku:metrics');
-const customHmrEvent = 'sku:vite-hmr' as const;
-const initialPageLoadEvent = 'sku:initialPageLoad' as const;
 
 type TelemetryOptions = {
   target: string;
   type: string;
+  /**
+   * When false, skip transformIndexHtml script injection (Vite SSR delivers
+   * clients via the browser client entry instead). Default true for static.
+   */
+  injectHtml?: boolean;
 };
 
-export const telemetryPlugin = ({ target, type }: TelemetryOptions): Plugin => {
+export const telemetryPlugin = ({
+  target,
+  type,
+  injectHtml = true,
+}: TelemetryOptions): Plugin => {
   const hmrUpdateTimestamps = new Set<number>();
 
   return {
     apply: 'serve',
     name: makePluginName('telemetry'),
-    transformIndexHtml: {
-      order: 'pre',
-      handler: () => [
-        {
-          tag: 'script',
-          attrs: {
-            type: 'module',
+    ...(injectHtml
+      ? {
+          transformIndexHtml: {
+            order: 'pre' as const,
+            handler: () => [
+              {
+                tag: 'script',
+                attrs: {
+                  type: 'module',
+                },
+                children: skuPageLoadTelemetryClient,
+                injectTo: 'head' as const,
+              },
+              {
+                tag: 'script',
+                attrs: { type: 'module' },
+                children: skuHmrTelemetryClient,
+                injectTo: 'head' as const,
+              },
+            ],
           },
-          children: skuPageLoadTelemetryClient,
-          injectTo: 'head',
-        },
-        {
-          tag: 'script',
-          attrs: { type: 'module' },
-          children: skuHmrTelemetryClient,
-          injectTo: 'head',
-        },
-      ],
-    },
+        }
+      : {}),
     handleHotUpdate: {
       order: 'pre',
       handler: (ctx) => {
@@ -49,12 +64,12 @@ export const telemetryPlugin = ({ target, type }: TelemetryOptions): Plugin => {
     },
     configureServer(server) {
       server.ws.on(
-        initialPageLoadEvent,
+        SKU_INITIAL_PAGE_LOAD_EVENT,
         handleInitialPageLoadEvent({ target, type }),
       );
 
       server.ws.on(
-        customHmrEvent,
+        SKU_VITE_HMR_EVENT,
         handleCustomHmrEvent(hmrUpdateTimestamps, {
           target,
           type,
@@ -66,11 +81,12 @@ export const telemetryPlugin = ({ target, type }: TelemetryOptions): Plugin => {
 
 /**
  * This client script is used to measure the initial page load time.
+ * Static Vite injects it via transformIndexHtml; Vite SSR imports telemetryClients.
  */
 const skuPageLoadTelemetryClient = js /* js */ `
   addEventListener("load", () => {
     if (import.meta.hot) {
-      import.meta.hot.send('${initialPageLoadEvent}');
+      import.meta.hot.send('${SKU_INITIAL_PAGE_LOAD_EVENT}');
     }
   })
 `;
@@ -93,6 +109,7 @@ const handleInitialPageLoadEvent = (tags: Record<string, string>) => () => {
 
 /**
  * This client script is used to measure the HMR time.
+ * Static Vite injects it via transformIndexHtml; Vite SSR imports telemetryClients.
  */
 const skuHmrTelemetryClient = js /* js */ `
   if (import.meta.hot) {
@@ -104,7 +121,7 @@ const skuHmrTelemetryClient = js /* js */ `
       const result = performance.measure("hmr-time", "vite-hmr");
       const timestamp = ctx.updates[0].timestamp;
 
-      import.meta.hot.send('${customHmrEvent}', { durationInMs: result.duration, timestamp });
+      import.meta.hot.send('${SKU_VITE_HMR_EVENT}', { durationInMs: result.duration, timestamp });
     })
   }
 `;

@@ -119,6 +119,24 @@ Default pipe is `onShellReady`.
 - **WHEN** the client hydrates a Vite SSR response
 - **THEN** hydration targets the document root (not `#app` / `#root`)
 
+### Requirement: Vite SSR client loads config polyfills
+
+Sku’s Vite SSR browser client entry MUST import `virtual:sku/polyfills` before hydrate / consumer client-entry code, so config `polyfills` are included in the client graph (parity with static Vite and webpack SSR client entries).
+
+`polyfillsPlugin` MAY remain on the shared Vite plugin graph. Polyfills MUST NOT be loaded into the Node server entry solely for this requirement.
+
+#### Scenario: Configured polyfills load on the Vite SSR client
+
+- **WHEN** a Vite SSR app configures non-empty `polyfills`
+- **AND** the browser loads the Vite SSR client entry
+- **THEN** those polyfill modules are imported before hydrate / consumer client-entry code
+
+#### Scenario: Empty polyfills remain a no-op
+
+- **WHEN** a Vite SSR app uses the default empty `polyfills` array
+- **THEN** the client entry still imports `virtual:sku/polyfills`
+- **AND** that virtual module contributes no polyfill imports
+
 ### Requirement: Streaming SSR responses do not use transformIndexHtml
 
 Vite SSR document responses MUST NOT call `transformIndexHtml`.
@@ -128,6 +146,54 @@ Vite SSR document responses MUST NOT call `transformIndexHtml`.
 - **WHEN** a Vite SSR document response is generated
 - **THEN** the body is the React render stream
 - **AND** `transformIndexHtml` is not invoked for that response
+
+### Requirement: Vite SSR start injects collected SSR CSS via Document assets
+
+On Vite SSR `sku start`, sku MUST mount `vitePluginSsrCss` (or equivalent) so CSS reachable from the SSR module graph is available as the virtual stylesheet used by static Vite start.
+
+Sku MUST include that virtual stylesheet URL in Document `assets.css` so the streamed document emits a stylesheet `<link>` without calling `transformIndexHtml`.
+
+Sku MUST provide HMR cleanup for that start-only stylesheet via the browser client entry and/or `bootstrapModules` (not via `transformIndexHtml`).
+
+Production Vite SSR MUST obtain CSS from the client manifest → Document path and MUST NOT depend on this start-only virtual stylesheet for production responses.
+
+#### Scenario: sku start document includes virtual SSR CSS link
+
+- **WHEN** a Vite SSR app that imports CSS runs `sku start`
+- **AND** a document response is streamed
+- **THEN** the document includes a stylesheet link for the SSR-CSS virtual module
+- **AND** `transformIndexHtml` is not invoked for that response
+
+#### Scenario: Production CSS does not use the start-only virtual stylesheet
+
+- **WHEN** a Vite SSR app runs `sku build` / production
+- **THEN** document CSS links come from the client manifest
+- **AND** the start-only SSR-CSS virtual stylesheet is not required for those responses
+
+### Requirement: Vite SSR start emits page-load and HMR telemetry
+
+On Vite SSR `sku start`, sku MUST mount serve-only telemetry comparable to static Vite start, including Vite WS handlers for page-load and HMR timing.
+
+Sku MUST deliver the page-load and HMR client scripts via the Vite SSR browser client entry and/or `bootstrapModules` (not via `transformIndexHtml`, and not as new Document inline scripts solely for telemetry).
+
+Sku MUST mark `initialPageLoad` when the SSR dev server is ready (parity with static start), and MUST emit `start.initial` and `start.rebuild` metrics with Vite SSR-identifying tags (e.g. `type: 'ssr'`).
+
+#### Scenario: Initial page-load telemetry on Vite SSR start
+
+- **WHEN** a Vite SSR app runs `sku start` with tab open enabled
+- **AND** the browser completes the initial document load with HMR connected
+- **THEN** sku emits `start.initial` telemetry tagged for Vite SSR
+
+#### Scenario: HMR rebuild telemetry on Vite SSR start
+
+- **WHEN** a Vite SSR app runs `sku start`
+- **AND** an HMR update completes in the browser
+- **THEN** sku emits `start.rebuild` telemetry tagged for Vite SSR
+
+#### Scenario: Telemetry clients are not injected via transformIndexHtml
+
+- **WHEN** a Vite SSR document response is generated during `sku start`
+- **THEN** telemetry client scripts are not delivered through `transformIndexHtml`
 
 ### Requirement: waitForAll buffers until onAllReady
 
@@ -249,6 +315,24 @@ In development, a missing or unknown `moduleId` MUST produce a warning.
 - **WHEN** a lazy route already sets `handle.moduleId`
 - **THEN** sku does not overwrite it
 
+### Requirement: Vite SSR Document preloads use route moduleIds only
+
+Production Vite SSR Document CSS and `modulepreload` links MUST come from matched-route `handle.moduleId` values (and optional vocab language chunks) resolved against the Vite client manifest.
+
+Vite SSR MUST NOT register Document preloads from `@sku-lib/vite/loadable` (Collector / `LoadableProvider` / `preloadPlugin` module-id injection).
+
+That loadable path remains for static Vite / prerender only.
+
+#### Scenario: Route moduleId drives Document assets
+
+- **WHEN** a matched Vite SSR route has `handle.moduleId` present in the client manifest
+- **THEN** production Document assets include that chunk’s CSS and/or modulepreload as applicable
+
+#### Scenario: Loadable does not feed Vite SSR Document preloads
+
+- **WHEN** a Vite SSR app renders a `@sku-lib/vite/loadable` component whose module id is registered only via the loadable collector
+- **THEN** sku does not add Document CSS or modulepreload links for that module id from the collector path
+
 ### Requirement: Vocab language chunks are supported
 
 When `languages` is configured for build-time vocab splitting, sku MUST register a vocab language chunk on the Document only when server `onRequest` returns `language`.
@@ -353,6 +437,34 @@ Static Vite and webpack apps MAY keep existing `public` behaviour.
 - **WHEN** a Vite SSR app runs without an existing `public` directory
 - **THEN** sku does not enable Vite `publicDir` for that folder
 - **AND** does not copy public assets into the client build output
+
+### Requirement: Vite SSR rejects dangerouslySetViteConfig
+
+Vite SSR MUST NOT support `dangerouslySetViteConfig`.
+
+Sku opens escape hatches only for known best-practice needs.
+
+When that option is set, config validation MUST hard-error and point consumers to sku-support channels with their use-case.
+
+Sku MUST NOT apply the `dangerouslySetViteConfig` decorator plugin on the Vite SSR plugin graph.
+
+Static Vite MAY keep existing `dangerouslySetViteConfig` behaviour.
+
+This edge case MUST NOT require a dedicated browser e2e fixture.
+
+Product / Migrating / `configuration.md` docs MUST state that the option is unsupported for Vite SSR and that exceptional Vite customisation needs should go through support first.
+
+#### Scenario: dangerouslySetViteConfig rejected for Vite SSR
+
+- **WHEN** a Vite SSR app sets `dangerouslySetViteConfig`
+- **THEN** config validation fails
+- **AND** the error points consumers to sku-support channels
+
+#### Scenario: Docs state dangerouslySetViteConfig unsupported for Vite SSR
+
+- **WHEN** a reader opens Vite SSR product, Migrating, or `configuration.md` docs for `dangerouslySetViteConfig`
+- **THEN** docs state that Vite SSR does not support the option
+- **AND** docs direct exceptional Vite customisation use-cases to sku-support
 
 ### Requirement: Vite SSR uses a single port
 
@@ -517,6 +629,7 @@ Migrating docs MUST also cover:
 - that Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
 - that this change does not ship Jest transforms for React Router 8
 - moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
+- that `dangerouslySetViteConfig` is unsupported for Vite SSR (hard-error when set; raise use-cases via sku-support)
 - keeping server-only loader modules out of the client-imported route graph (split trees; set `handle.moduleId` when lazy factories are non-idiomatic)
 - prefer render-time React data loading via `AppWrapper` + Suspense / shared clients; use loaders for avoiding heavily-nested waterfalls, document redirects, or response headers — not as the default for page content
 - that Express `req` / middleware-attached state is **not** bridged into React Router loaders
@@ -552,6 +665,12 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 - **THEN** docs state that Vite SSR does not support the public assets folder
 - **AND** recommend importing assets from modules instead
 - **AND** Migrating notes that existing `public` folder usage must be moved off before adopting Vite SSR
+
+#### Scenario: Docs discourage dangerouslySetViteConfig for Vite SSR
+
+- **WHEN** a reader opens Vite SSR product or Migrating docs (and `configuration.md` for `dangerouslySetViteConfig`)
+- **THEN** docs state that Vite SSR does not support `dangerouslySetViteConfig`
+- **AND** docs direct exceptional Vite customisation use-cases to sku-support
 
 #### Scenario: Migrating covers Older SSR adoption topics
 

@@ -1,3 +1,4 @@
+import 'virtual:sku/polyfills';
 import { hydrateRoot } from 'react-dom/client';
 import {
   createBrowserRouter,

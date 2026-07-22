@@ -1,5 +1,7 @@
 import { Suspense, use, cache } from 'react';
 
+import * as styles from './home.css';
+
 const getDeferredMessage = cache(
   () =>
     new Promise<string>((resolve) => {
@@ -15,7 +17,9 @@ const DeferredMessage = () => {
 export function Component() {
   return (
     <main>
-      <h1 data-testid="shell">Vite SSR Home</h1>
+      <h1 className={styles.shell} data-testid="shell">
+        Vite SSR Home
+      </h1>
       <Suspense fallback={<p data-testid="fallback">Loading…</p>}>
         <DeferredMessage />
       </Suspense>

@@ -1,4 +1,3 @@
-import { makeStableViteHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 export default {
@@ -10,5 +9,4 @@ export default {
   publicPath: '/static/translations/',
   target: 'dist-vite-ssr',
   port: 8315,
-  dangerouslySetViteConfig: makeStableViteHashes,
 } satisfies SkuConfig;

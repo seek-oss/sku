@@ -112,6 +112,22 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
     );
   }
 
+  // Check the consumer file (pre-defaults merge): defaults set dangerouslySetViteConfig to undefined.
+  if (
+    skuConfig.buildType === 'ssr' &&
+    skuConfig.bundler === 'vite' &&
+    Object.prototype.hasOwnProperty.call(
+      appSkuConfig,
+      'dangerouslySetViteConfig',
+    )
+  ) {
+    errors.push(
+      `🚫 Vite SSR does not support '${strong(
+        'dangerouslySetViteConfig',
+      )}'. Raise exceptional Vite customisation needs in #sku-support with your use-case.`,
+    );
+  }
+
   // Ensure defaultClientEntry is not configured as a route name
   skuConfig.routes?.forEach((skuRoute) => {
     if (typeof skuRoute !== 'string') {

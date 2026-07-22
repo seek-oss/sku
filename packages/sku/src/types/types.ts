@@ -597,6 +597,9 @@ export interface ViteSkuConfig {
    * This function provides a way to modify sku's Vite configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *
+   * Not supported for Vite SSR (`buildType: 'ssr'`): providing this option fails config validation.
+   * Raise exceptional customisation needs in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) with your use-case.
+   *
    * Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
    *
    * As sku creates two Vite configs (`client` & `render`), this function will actually run twice.

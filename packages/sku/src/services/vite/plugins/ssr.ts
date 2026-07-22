@@ -3,6 +3,8 @@ import type { SkuContext } from '../../../context/createSkuContext.js';
 import { createOutDir } from '../helpers/bundleConfig.js';
 import { makePluginName } from '../helpers/makePluginName.js';
 import { lazyRouteModuleIdPlugin } from './lazyRouteModuleId/lazyRouteModuleIdPlugin.js';
+import { vitePluginSsrCss } from './ssrCss/plugin.js';
+import { telemetryPlugin } from './telemetry.js';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -79,5 +81,15 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
       }),
     },
     lazyRouteModuleIdPlugin(),
+    // Serve-only: Document `assets.css` + client entry own injection.
+    vitePluginSsrCss({
+      entries: [skuContext.paths.serverEntry, ssrServerEntry],
+      injectHtml: false,
+    }),
+    telemetryPlugin({
+      target: 'node',
+      type: 'ssr',
+      injectHtml: false,
+    }),
   ];
 };

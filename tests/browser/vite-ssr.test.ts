@@ -74,6 +74,85 @@ describe('vite-ssr', () => {
       expect(cspReportOnly).toMatch(/'nonce-/);
     });
 
+    it('includes the SSR-CSS virtual stylesheet without transformIndexHtml', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const response = await fetch(url);
+      const html = await response.text();
+
+      // Document assets.css emits the virtual stylesheet (not transformIndexHtml).
+      expect(html).toContain('/@id/__x00__virtual:ssr-css.css');
+      expect(html).toContain('data-ssr-css');
+      // transformIndexHtml artifacts from static Vite must not appear inline.
+      expect(html).not.toContain('__clear_ssr_css');
+      expect(html).not.toContain('sku:initialPageLoad');
+      expect(html).not.toContain('sku:vite-hmr');
+
+      const ssrCss = await fetch(`${url}/@id/__x00__virtual:ssr-css.css`);
+      expect(ssrCss.ok).toBe(true);
+      // Eager layout Vanilla Extract CSS is reachable from the SSR module graph.
+      expect(await ssrCss.text()).toContain('sku-vite-ssr-layout');
+    });
+
+    it('wires start telemetry clients via the browser client entry', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const response = await fetch(url);
+      const html = await response.text();
+
+      // Client entry path is in bootstrapModules (not transformIndexHtml scripts).
+      const clientEntryMatch = html.match(
+        /\/@fs\/[^"']+vite-ssr-client\.dev[^"']*/,
+      );
+      const clientEntryPath = clientEntryMatch?.[0];
+      expect(clientEntryPath).toBeTruthy();
+      if (!clientEntryPath) {
+        throw new Error('Expected client entry path in HTML');
+      }
+
+      const clientEntry = await fetch(`${url}${clientEntryPath}`);
+      expect(clientEntry.ok).toBe(true);
+      const clientSource = await clientEntry.text();
+
+      // Dev entry imports telemetryClients + SSR-CSS HMR cleanup.
+      expect(clientSource).toMatch(/telemetryClients/);
+      expect(clientSource).toContain('data-ssr-css');
+
+      // Resolved telemetry module sends WS events via shared event constants.
+      const telemetryModuleMatch = clientSource.match(
+        /(?:from|import)\s*["']([^"']*telemetryClients[^"']*)["']/,
+      );
+      const telemetryModulePath = telemetryModuleMatch?.[1];
+      expect(telemetryModulePath).toBeTruthy();
+      if (!telemetryModulePath) {
+        throw new Error('Expected telemetryClients import in client entry');
+      }
+
+      const telemetryUrl = telemetryModulePath.startsWith('/')
+        ? `${url}${telemetryModulePath}`
+        : new URL(telemetryModulePath, `${url}${clientEntryPath}`).href;
+      const telemetrySource = await fetch(telemetryUrl).then((r) => r.text());
+      expect(telemetrySource).toContain('SKU_INITIAL_PAGE_LOAD_EVENT');
+      expect(telemetrySource).toContain('SKU_VITE_HMR_EVENT');
+
+      const eventsModuleMatch = telemetrySource.match(
+        /(?:from|import)\s*["']([^"']*telemetryEvents[^"']*)["']/,
+      );
+      const eventsModulePath = eventsModuleMatch?.[1];
+      expect(eventsModulePath).toBeTruthy();
+      if (!eventsModulePath) {
+        throw new Error('Expected telemetryEvents import in telemetry module');
+      }
+      const eventsUrl = eventsModulePath.startsWith('/')
+        ? `${url}${eventsModulePath}`
+        : new URL(eventsModulePath, telemetryUrl).href;
+      const eventsSource = await fetch(eventsUrl).then((r) => r.text());
+      expect(eventsSource).toContain('sku:initialPageLoad');
+      expect(eventsSource).toContain('sku:vite-hmr');
+    });
+
     it('hydrates the document in the browser', async ({ task }) => {
       skipCleanup(task.id);
       const page = await createPage();

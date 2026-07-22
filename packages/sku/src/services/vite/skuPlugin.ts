@@ -27,22 +27,34 @@ export const skuPlugin = ({
 
   return [
     configPlugin({ skuContext }),
+
     // SSR pack sits early (defines / optimizeDeps / lazy routes)
-    ...(isSsr ? ssrPlugins(skuContext) : []),
+    isSsr && ssrPlugins(skuContext),
+
     setNoExternalPlugin(skuContext),
+
     buildPlugin({ skuContext }),
+
     devServerPlugin({ skuContext }),
+
     httpsDevServerPlugin(skuContext),
-    preloadPlugin({
-      // Convert loadable import from webpack to vite. Can be put behind a flag.
-      convertFromWebpack: skuContext.convertLoadable,
-    }),
+
+    !isSsr &&
+      preloadPlugin({
+        // Convert loadable import from webpack to vite. Can be put behind a flag.
+        convertFromWebpack: skuContext.convertLoadable,
+      }),
+
     polyfillsPlugin(skuContext),
+
     // Static pack sits after polyfills so middleware / telemetry / ssrCss keep
     // their previous position relative to shared serve plugins
-    ...(isSsr ? [] : staticPlugins({ skuContext, environment })),
+    !isSsr && staticPlugins({ skuContext, environment }),
+
     bundleAnalyzerPlugin(),
-    dangerouslySetViteConfigPlugin(skuContext),
+
+    !isSsr && dangerouslySetViteConfigPlugin(skuContext),
+
     // `stripServerConfigPlugin` must go after `dangerouslySetViteConfigPlugin`
     stripServerConfigPlugin({
       // We can't trust vite to apply this only to its definition of `build` because the VE compiler

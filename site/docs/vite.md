@@ -59,6 +59,7 @@ Future Express or React Router **major** upgrades in sku may be breaking for Vit
 sku owns the HTTP server, the React Document shell (not overridable — use React document metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers.
 Vite SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
 The config [`public`](./configuration.md#public) assets folder is not supported — if that directory exists, `sku start` / `sku build` fail; import assets from modules instead.
+[`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) is not supported. Raise exceptional customisation needs in [`#sku-support`].
 
 `onRequest` may return a closed object under Vite SSR: `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language` (server Document vocab preload only), and JSON `clientContext`.
 `onHydrate` receives `{ context }` only and may return `AppWrapper`.

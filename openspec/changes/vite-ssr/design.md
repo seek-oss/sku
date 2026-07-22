@@ -26,6 +26,9 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - No Jest transforms for React Router 8 in this change (Vite SSR requires Vitest)
 - Docs steer: prefer render-time React data loading; loaders as opt-in; no Express→loader bridge
 - Migrating guidance for server-only loaders, Braid reset order, client-only providers, Jest→Vitest, `#` pathAliases
+- Config `polyfills` on the Vite SSR browser client (parity with static Vite / webpack SSR)
+- Vite SSR `sku start` SSR-CSS (virtual stylesheet via Document assets; no `transformIndexHtml`)
+- Vite SSR `sku start` telemetry parity (`start.initial` / `start.rebuild`; no `transformIndexHtml`)
 
 **Non-Goals:**
 
@@ -47,6 +50,8 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Forcing webpack fixtures or non–Vite-SSR apps onto React Router 8
 - Treating RR loaders as the default teaching path for page content
 - Shipping RR `requestContext` / `getLoadContext` seeding in this change (deferred unless demand remains)
+- Supporting `@sku-lib/vite/loadable` (Collector / `LoadableProvider` / `preloadPlugin` module-id injection) as a Vite SSR document-preload source
+- Supporting `dangerouslySetViteConfig` for Vite SSR (static Vite unchanged)
 
 ## Decisions
 
@@ -106,6 +111,12 @@ Vite SSR request-entry wrappers resolve consumer entries via the same aliases as
 Note: tsdown/rolldown reorders static imports by specifier shape — `#…` sorted after `@vitejs/plugin-react/preamble` while `__…` sorted before it, so using `#` entry ids can surface the fragile “preamble must run before consumer JSX” Refresh ordering issue in the published client entry.
 
 Mitigate with a start-only `#entries/vite-ssr-client.dev` that imports the preamble then dynamically loads the production client entry; production builds keep using `#entries/vite-ssr-client` with no preamble.
+
+**Config `polyfills` (browser client):** Sku’s Vite SSR client entry (`vite-ssr-client.tsx`, including the start-only `.dev` wrapper’s production client load) MUST import `virtual:sku/polyfills` before hydrate / consumer client-entry code — same virtual module as static `vite-client.tsx`.
+
+`polyfillsPlugin` remains on the shared Vite plugin graph; it is not static-only. Without that import the plugin is inert for SSR.
+
+Polyfills apply to the **browser** client graph only. Do not load them into the Node server entry.
 
 HTTP middleware (two layers; distinct from RR route `middleware`):
 
@@ -176,7 +187,23 @@ Docs MUST discourage the pattern for Vite SSR and note importing images/assets i
 
 Migrating MUST call out moving off `public` when adopting Vite SSR.
 
-### 8. Full-document streaming
+### 8. No `dangerouslySetViteConfig` for Vite SSR
+
+`dangerouslySetViteConfig` is a raw Vite escape hatch.
+
+Sku opens escape hatches only for known best-practice needs.
+
+As a new API without legacy to support, Vite SSR does not support this option.
+
+When it is set with Vite SSR, config validation MUST hard-error and point consumers to sku-support channels with their use-case.
+
+Static Vite keeps today’s behaviour.
+
+Do not apply the decorator plugin on the Vite SSR plugin graph (redundant once validation rejects, but keeps the SSR path explicit).
+
+Docs (`configuration.md` + Vite SSR product / Migrating) MUST state that the option is unsupported for Vite SSR and that exceptional Vite customisation needs should go through support first.
+
+### 9. Full-document streaming
 
 React owns `<html>`/`<head>`/`<body>`.
 
@@ -186,13 +213,47 @@ Abort on disconnect.
 
 Client: `hydrateRoot(document, …)`.
 
-### 9. No `transformIndexHtml` on the SSR path
+### 10. No `transformIndexHtml` on the SSR path
 
 Preamble via client entry; Vite client + app via `bootstrapModules`; CSS/modulepreloads via manifest → Document; handoff via hashable `bootstrapScriptContent`.
 
-SSR-CSS plugin and telemetry HTML inject deferred for Vite SSR.
+Static Vite injects serve-only HTML (SSR-CSS link, telemetry clients) through `transformIndexHtml`.
 
-### 10. CSP: headers from shell
+Vite SSR MUST NOT call `transformIndexHtml` on document responses.
+
+Serve-only concerns that still apply to Vite SSR `sku start` (SSR-CSS, telemetry) MUST inject via Document assets and/or the browser client entry / `bootstrapModules` instead — see Decisions 10a and 10b.
+
+Production CSS remains client-manifest → Document (unchanged).
+
+### 10a. SSR-CSS on Vite SSR `sku start`
+
+`vitePluginSsrCss` collects CSS reachable from configured entries into `virtual:ssr-css.css` and (on static Vite) injects a `<link>` plus HMR cleanup via `transformIndexHtml`.
+
+For Vite SSR `sku start`:
+
+- Mount `vitePluginSsrCss` on the SSR plugin graph with entries that reach CSS in the SSR module graph (consumer `serverEntry` and/or sku’s Vite SSR server entry — not static’s `renderEntry`).
+- Put the virtual stylesheet URL into Document `assets.css` so the existing Document `<link rel="stylesheet">` path emits it (no HTML transform).
+- Move the HMR cleanup that removes stale `[data-ssr-css]` links onto a client-entry / bootstrap-module path (same “no transformIndexHtml” rule).
+- Mark the Document link so cleanup can still target it (`data-ssr-css` or equivalent).
+
+Production Vite SSR MUST NOT rely on this plugin — CSS comes from the client manifest.
+
+Goal: avoid an unstyled flash on `sku start` until the client graph loads styles.
+
+### 10b. Telemetry on Vite SSR `sku start`
+
+`telemetryPlugin` is serve-only (`apply: 'serve'`). On static Vite it injects page-load + HMR client scripts via `transformIndexHtml` and wires Vite WS handlers / `handleHotUpdate`.
+
+For Vite SSR `sku start`:
+
+- Mount `telemetryPlugin` on the SSR plugin graph with tags such as `type: 'ssr'` (parity with static’s `type: 'static'`).
+- Deliver the page-load and HMR client scripts via the Vite SSR browser client entry and/or a serve-only module in `bootstrapModules` — not via `transformIndexHtml`, and not as new Document inline scripts (CSP already tracks `bootstrapScriptContent`).
+- Mark `initialPageLoad` when the SSR dev server is ready (static does this in `middlewarePlugin.configureServer`). `skuStart.mark()` in `viteStartHandler` already covers both modes.
+- Keep WS handlers + `handleHotUpdate` behaviour once the plugin is on the middleware-mode server.
+
+Emit the same metrics as static start: `start.initial` and `start.rebuild`.
+
+### 11. CSP: headers from shell
 
 Derive `script-src` before `pipe`.
 
@@ -204,7 +265,7 @@ No meta `http-equiv`.
 
 **Coexistence with static Vite CSP (merged from master):** Static Vite now has `cspDelivery: 'tag' | 'header'` (meta vs `metadata.csp` JSON) and Report-Only via `createCSPHandler` → `metadata.cspReportOnly` / start-time headers. That path is separate from Vite SSR. Vite SSR keeps its own `buildCspHeaders` (real response headers, lazy single nonce, `cspReportOnlyReportTo`). Do not route Vite SSR through `cspDelivery` or the static HTML CSP handler.
 
-### 11. Request-entry shapes
+### 12. Request-entry shapes
 
 ```ts
 // serverEntry
@@ -229,13 +290,13 @@ Tree: `Document` → router → optional pathless `AppWrapper` → entry `routes
 
 `clientContext` → hydrate `context`.
 
-### 12. Request-scoped nonce (lazy, single value)
+### 13. Request-scoped nonce (lazy, single value)
 
 At most one CSP nonce per render, minted only when requested.
 
 Async Local Storage holds **CSP nonce only**.
 
-### 13. Vocab / language chunks
+### 14. Vocab / language chunks
 
 When `languages` is set: `@vocab/vite` splitting at build time.
 
@@ -269,7 +330,7 @@ No `getSkuLanguage` / `__SKU_LANGUAGE__` / baked `SKU_LANGUAGES` define.
 
 Migrating / Vocab docs MUST **not** tell consumers to install `@vocab/vite` solely so `@vocab/vite/runtime` resolves.
 
-### 14. Production runtime defines (webpack-aligned)
+### 15. Production runtime defines (webpack-aligned)
 
 Production `server.js` has no live `skuContext`.
 
@@ -281,13 +342,23 @@ Bake the values it needs with webpack-style defines (no sidecar JSON):
 
 Dev continues to pass these from live `skuContext` (no defines required on the start path).
 
-### 15. Lazy-route `moduleId`
+### 16. Lazy-route `moduleId` (Vite SSR preload source)
 
 Auto-derive for idiomatic `lazy: () => import('…')`.
 
 Never overwrite explicit; skip non-idiomatic; warn in dev on miss.
 
-### 16. Intent module preload (fixture pattern, not a sku API)
+Vite SSR Document CSS / `modulepreload` links come **only** from matched-route `handle.moduleId` values (plus optional vocab language chunks) resolved against the Vite client manifest.
+
+`@sku-lib/vite/loadable` remains the static / prerender code-splitting and preload API (`createPreRenderedHtml` + Collector / `LoadableProvider` + `preloadPlugin` third-arg `moduleId` injection).
+
+Vite SSR does **not** wire that collector into the streamed Document.
+
+Rationale: React Router Data Mode already owns route-level splitting via `lazy`. A second loadable-based preload channel would duplicate the API, leave Document assets out of sync with “I used loadable,” and complicate Migrating from webpack SSR (which already requires a route-model rewrite).
+
+Nested component splits inside a route are not first-class Document preloads in v1; consumers can still use client-side lazy loading without sku injecting those chunks into the initial HTML.
+
+### 17. Intent module preload (fixture pattern, not a sku API)
 
 Document `modulepreload` covers the _matched_ route.
 
@@ -301,19 +372,19 @@ Loader-data prefetch is out of scope for this demo.
 
 Sku does **not** ship a public PreloadingLink API.
 
-### 17. Shared HTML middleware + loader/action headers
+### 18. Shared HTML middleware + loader/action headers
 
 Dev/prod share abort-before-write.
 
 On streamed HTML, forward `loaderHeaders` / `actionHeaders` (append; preserve `Set-Cookie`), then sku `Content-Type` / CSP.
 
-### 18. Hydration payload safety
+### 19. Hydration payload safety
 
 Promise-scrub `loaderData` / `actionData`.
 
 Production route errors omit `Error.stack`.
 
-### 19. Create template + Migrating docs
+### 20. Create template + Migrating docs
 
 Template `vite-ssr` with `createRoutes` scaffold.
 
@@ -330,6 +401,7 @@ Migrating MUST cover:
 - Express 4 typing (shared sku major; no Express 5 in this change)
 - React Router 8 as optional peerDependency `^8` for Data Mode / route typing (Vite SSR template/fixtures install it)
 - move off config `public` / public assets folder (import assets instead)
+- that `dangerouslySetViteConfig` is unsupported (hard-error; raise use-cases via sku-support)
 - server-only loaders vs client route graph (+ explicit `moduleId` when needed)
 - prefer render-time data loading via `AppWrapper`; loaders for waterfalls / document redirects / headers
 - no Express `req` → loader bridge (stay on webpack SSR / raise with sku-support if needed)
@@ -385,7 +457,7 @@ Vite SSR `pathAliases` require `#` subpath imports.
 
 Migrating MUST point at `pathAliases` + the existing `migrate-root-resolution` codemod / changelog guidance.
 
-### 20. Data loading guidance (docs-led)
+### 21. Data loading guidance (docs-led)
 
 Prefer **render-time** data loading in React for page content:
 
@@ -411,13 +483,13 @@ Apps that need a rich Express bag to load page data should stay on webpack SSR f
 
 Product + Migrating docs MUST encode this hierarchy and rebalance any wording that implied loaders are the default for content.
 
-### 21. Experimental first release
+### 22. Experimental first release
 
 Docs warning + changeset: available for testing, not for production.
 
 No runtime experimental gate.
 
-### 22. CJS default-export interop (docs only)
+### 23. CJS default-export interop (docs only)
 
 Keep existing `vite-plugin-cjs-interop` + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` and Apollo-only baked defaults.
 
@@ -427,7 +499,7 @@ Document the start-vs-build failure mode (“Element type is invalid … got: ob
 
 Do **not** rewrite or wrap React render errors at runtime — docs are enough.
 
-### 23. Express 4 (shared) + React Router 8 (optional peer)
+### 24. Express 4 (shared) + React Router 8 (optional peer)
 
 Vite SSR mounts consumer middleware into sku’s **shared** Express app — the same `express` / `@types/express` dependency webpack SSR and `sku serve` use.
 
@@ -463,28 +535,31 @@ Minor/patch upgrades within the documented major remain non-breaking when APIs s
 
 ## Risks / Trade-offs
 
-| Risk                               | Mitigation                                                                                                                                          |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Dual `routes` hydration mismatch   | Docs + template `createRoutes`; no runtime checker                                                                                                  |
-| Shell-only CSP / late scripts      | Lazy single nonce; hash known bootstrap bodies                                                                                                      |
-| Absolute/`CDN` `publicPath`        | Config rejects; relative-only docs; no browser e2e for this edge case                                                                               |
-| `publicPath` coupled to basename   | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets                                                |
-| Start vs prod asset URLs           | Start: Vite graph at `/`; build/prod: `base` + static mount under `publicPath` (webpack start parity)                                               |
-| Unhashed `public` folder assets    | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs                                         |
-| CJS “got: object” on `sku start`   | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                                                                     |
-| Mock deps ship in prod             | `devServerMiddleware` only; never from server entry                                                                                                 |
-| Early production use               | Experimental docs + changeset                                                                                                                       |
-| Express / RR major drift           | Keep shared Express on 4; RR 8 optional peer for Vite SSR only; docs + changeset mark later major bumps as potentially breaking; Express 5 deferred |
-| RR 8 peer baselines                | Optional peer `^8`; align engines with RR 8 minimums sku already can meet; document consumer React/Node expectations; template installs RR 8        |
-| Jest + RR 8 (webpack)              | Out of scope: no Jest transforms in this change; Vite SSR requires Vitest; do not force webpack fixtures onto RR 8                                  |
-| Server loaders leak to client      | Migrating: split server-only modules; explicit `moduleId` when lazy is non-idiomatic                                                                |
-| Braid reset before Braid on start  | Docs: reset early on server graph; no sku auto-inject                                                                                               |
-| `window` providers in Document SSR | Migrating: client-only / `onHydrate`-only wrappers                                                                                                  |
-| Jest apps on Vite SSR              | Migrating: Vitest prerequisite; link existing vitest docs / codemod                                                                                 |
-| Nested `@vocab/vite/runtime`       | Sku `createRequire` + `resolve.alias`; validate translations Vite SSR without consumer pin                                                          |
-| Bare `src/` imports under Vite     | Migrating: `#` `pathAliases` + migrate-root-resolution                                                                                              |
-| Express `req` → loader pressure    | Docs: prefer AppWrapper + Suspense; no Express→loader bridge; webpack SSR + sku-support if blocked                                                  |
-| Server-only loaders as default     | Docs steer render-time content loading; loaders for waterfalls / document redirects / headers only                                                  |
+| Risk                                | Mitigation                                                                                                                                          |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dual `routes` hydration mismatch    | Docs + template `createRoutes`; no runtime checker                                                                                                  |
+| Shell-only CSP / late scripts       | Lazy single nonce; hash known bootstrap bodies                                                                                                      |
+| Absolute/`CDN` `publicPath`         | Config rejects; relative-only docs; no browser e2e for this edge case                                                                               |
+| `publicPath` coupled to basename    | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets                                                |
+| Start vs prod asset URLs            | Start: Vite graph at `/`; build/prod: `base` + static mount under `publicPath` (webpack start parity)                                               |
+| Unhashed `public` folder assets     | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs                                         |
+| `dangerouslySetViteConfig` on SSR   | Hard-error when set; omit decorator plugin on SSR graph; docs + sku-support for use-cases                                                           |
+| CJS “got: object” on `sku start`    | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                                                                     |
+| Mock deps ship in prod              | `devServerMiddleware` only; never from server entry                                                                                                 |
+| Early production use                | Experimental docs + changeset                                                                                                                       |
+| Express / RR major drift            | Keep shared Express on 4; RR 8 optional peer for Vite SSR only; docs + changeset mark later major bumps as potentially breaking; Express 5 deferred |
+| RR 8 peer baselines                 | Optional peer `^8`; align engines with RR 8 minimums sku already can meet; document consumer React/Node expectations; template installs RR 8        |
+| Jest + RR 8 (webpack)               | Out of scope: no Jest transforms in this change; Vite SSR requires Vitest; do not force webpack fixtures onto RR 8                                  |
+| Server loaders leak to client       | Migrating: split server-only modules; explicit `moduleId` when lazy is non-idiomatic                                                                |
+| Braid reset before Braid on start   | Docs: reset early on server graph; no sku auto-inject                                                                                               |
+| `window` providers in Document SSR  | Migrating: client-only / `onHydrate`-only wrappers                                                                                                  |
+| Jest apps on Vite SSR               | Migrating: Vitest prerequisite; link existing vitest docs / codemod                                                                                 |
+| Nested `@vocab/vite/runtime`        | Sku `createRequire` + `resolve.alias`; validate translations Vite SSR without consumer pin                                                          |
+| Bare `src/` imports under Vite      | Migrating: `#` `pathAliases` + migrate-root-resolution                                                                                              |
+| Express `req` → loader pressure     | Docs: prefer AppWrapper + Suspense; no Express→loader bridge; webpack SSR + sku-support if blocked                                                  |
+| Server-only loaders as default      | Docs steer render-time content loading; loaders for waterfalls / document redirects / headers only                                                  |
+| Start FOUC without SSR-CSS          | Document `assets.css` gets virtual stylesheet on `sku start`; production stays on manifest CSS                                                      |
+| Telemetry missing on Vite SSR start | Mount `telemetryPlugin` on SSR graph; client scripts via client entry / bootstrap; mark `initialPageLoad` on ready                                  |
 
 ## Migration Plan
 

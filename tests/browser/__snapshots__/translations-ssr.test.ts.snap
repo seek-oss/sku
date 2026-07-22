@@ -285,6 +285,11 @@ exports[`vite ssr translations > should render en 1`] = `
       nonce="RANDOM_NONCE"
       href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
     >
+    <link
+      rel="stylesheet"
+      href="/@id/__x00__virtual:ssr-css.css"
+      data-ssr-css="true"
+    >
   </head>
   <body>
     <div>
@@ -295,7 +300,7 @@ exports[`vite ssr translations > should render en 1`] = `
       nonce="RANDOM_NONCE"
       id="_R_"
     >
-      window.__SKU_DOCUMENT_ASSETS__={"css":[],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
+      window.__SKU_DOCUMENT_ASSETS__={"css":["/@id/__x00__virtual:ssr-css.css"],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
     </script>
     <script
       type="module"
@@ -339,6 +344,11 @@ exports[`vite ssr translations > should render en-PSEUDO 1`] = `
       nonce="RANDOM_NONCE"
       href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
     >
+    <link
+      rel="stylesheet"
+      href="/@id/__x00__virtual:ssr-css.css"
+      data-ssr-css="true"
+    >
   </head>
   <body>
     <div>
@@ -349,7 +359,7 @@ exports[`vite ssr translations > should render en-PSEUDO 1`] = `
       nonce="RANDOM_NONCE"
       id="_R_"
     >
-      window.__SKU_DOCUMENT_ASSETS__={"css":[],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
+      window.__SKU_DOCUMENT_ASSETS__={"css":["/@id/__x00__virtual:ssr-css.css"],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
     </script>
     <script
       type="module"
@@ -393,6 +403,11 @@ exports[`vite ssr translations > should render fr 1`] = `
       nonce="RANDOM_NONCE"
       href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
     >
+    <link
+      rel="stylesheet"
+      href="/@id/__x00__virtual:ssr-css.css"
+      data-ssr-css="true"
+    >
   </head>
   <body>
     <div>
@@ -403,7 +418,7 @@ exports[`vite ssr translations > should render fr 1`] = `
       nonce="RANDOM_NONCE"
       id="_R_"
     >
-      window.__SKU_DOCUMENT_ASSETS__={"css":[],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
+      window.__SKU_DOCUMENT_ASSETS__={"css":["/@id/__x00__virtual:ssr-css.css"],"modulePreloads":[]};window.__SKU_CLIENT_CONTEXT__=null;window.__staticRouterHydrationData={"loaderData":{},"actionData":null,"errors":null}
     </script>
     <script
       type="module"

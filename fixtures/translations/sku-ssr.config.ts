@@ -7,7 +7,7 @@ export default {
   setupTests: 'src/setupTests.js',
   languages: ['en', 'fr'],
   initialPath: '/en',
-  port: 8313,
+  port: 8310,
   serverPort: 8314,
   dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
 } satisfies SkuConfig;

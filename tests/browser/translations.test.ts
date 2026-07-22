@@ -57,7 +57,7 @@ describe('translations', () => {
 });
 
 describe('ssr translations', () => {
-  const backendUrl = `http://localhost:8314`;
+  const backendUrl = `http://localhost:8310`;
 
   beforeAll(async () => {
     const distDir = fixturePath('dist');

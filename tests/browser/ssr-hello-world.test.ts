@@ -11,6 +11,9 @@ import {
 
 const { sku, fixturePath, node, exec } = scopeToFixture('ssr-hello-world');
 
+const DEV_SERVER_PORT = 8001;
+const NODE_SERVER_PORT = 8100;
+
 // Probe whether a TCP port is accepting connections.
 // Used instead of `fetch` so it's agnostic to https/http.
 const isPortListening = (port: number) =>
@@ -29,7 +32,7 @@ const isPortListening = (port: number) =>
 
 describe('ssr-hello-world', () => {
   describe('start', () => {
-    const url = `https://localhost:8101`;
+    const url = `https://localhost:${DEV_SERVER_PORT}`;
 
     beforeAll(async () => {
       const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
@@ -62,7 +65,7 @@ describe('ssr-hello-world', () => {
   });
 
   describe('build', () => {
-    const url = `http://localhost:8001`;
+    const url = `http://localhost:${DEV_SERVER_PORT}`;
 
     beforeAll(async () => {
       const build = await sku('build-ssr', ['--config=sku-build.config.ts']);
@@ -124,9 +127,6 @@ describe.each(['SIGINT', 'SIGTERM', 'SIGQUIT'] as const)(
   'start-ssr teardown on %s',
   (signal) => {
     it('kills the SSR server worker and frees the port', async () => {
-      const nodeServerPort = 8100;
-      const devServerPort = 8101;
-
       // Spawn detached so we can signal the whole process group below. The
       // command runs via a shell that doesn't forward signals to sku on Linux.
       const start = await sku('start-ssr', ['--config=sku-start.config.ts'], {
@@ -134,8 +134,8 @@ describe.each(['SIGINT', 'SIGTERM', 'SIGQUIT'] as const)(
       });
       await start.findByText('Server started');
 
-      expect(await isPortListening(nodeServerPort)).toBe(true);
-      expect(await isPortListening(devServerPort)).toBe(true);
+      expect(await isPortListening(NODE_SERVER_PORT)).toBe(true);
+      expect(await isPortListening(DEV_SERVER_PORT)).toBe(true);
 
       const { pid } = start.process;
       if (!pid) {
@@ -145,8 +145,8 @@ describe.each(['SIGINT', 'SIGTERM', 'SIGQUIT'] as const)(
       process.kill(-pid, signal);
 
       await waitFor(async () => {
-        expect(await isPortListening(nodeServerPort)).toBe(false);
-        expect(await isPortListening(devServerPort)).toBe(false);
+        expect(await isPortListening(NODE_SERVER_PORT)).toBe(false);
+        expect(await isPortListening(DEV_SERVER_PORT)).toBe(false);
       });
 
       await waitFor(() => expect(start.hasExit()).not.toBeNull());

@@ -98,9 +98,10 @@ export default async (skuContext: SkuContext) => {
 
   // Generate self-signed certificate and ignore
   const selfSignedCertificateDirName = '.ssl';
+  // no reason to ever commit the certificate so we can always ignore it
+  gitIgnorePatterns.push(selfSignedCertificateDirName);
   if (httpsDevServer) {
     await getCertificate(selfSignedCertificateDirName, hosts);
-    gitIgnorePatterns.push(selfSignedCertificateDirName);
   } else {
     await rm(getPathFromCwd(selfSignedCertificateDirName), {
       recursive: true,

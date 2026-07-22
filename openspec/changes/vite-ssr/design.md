@@ -29,6 +29,7 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Config `polyfills` on the Vite SSR browser client (parity with static Vite / webpack SSR)
 - Vite SSR `sku start` SSR-CSS (virtual stylesheet via Document assets; no `transformIndexHtml`)
 - Vite SSR `sku start` telemetry parity (`start.initial` / `start.rebuild`; no `transformIndexHtml`)
+- Vite SSR `hosts` as the sole list for HTTPS SANs and host-file checks (not `sites[].host`)
 
 **Non-Goals:**
 
@@ -52,6 +53,8 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Shipping RR `requestContext` / `getLoadContext` seeding in this change (deferred unless demand remains)
 - Supporting `@sku-lib/vite/loadable` (Collector / `LoadableProvider` / `preloadPlugin` module-id injection) as a Vite SSR document-preload source
 - Supporting `dangerouslySetViteConfig` for Vite SSR (static Vite unchanged)
+- Changing webpack / static `getAppHosts` behavior (`sites[].host` ∪ `hosts`) outside Vite SSR
+- Standardizing or rewriting consumer `hosts` values (e.g. forcing `.localhost`)
 
 ## Decisions
 
@@ -133,6 +136,20 @@ Single-port Vite `middlewareMode` + `appType: 'custom'` for `sku start` (listen 
 Build emits sibling `client/` and `server/`; production entry is `dist/server/server.js`.
 
 `httpsDevServer` → HTTPS + HMR in start; production remains HTTP.
+
+**`hosts` for Vite SSR listen / HTTPS / host-file (not `sites[].host`):**
+
+Top-level `hosts` is the sole source of hostnames for Vite SSR `sku start` HTTPS certificate names and missing-host / `setup-hosts` checks.
+
+Do not union `sites[].host` into that list for Vite SSR.
+
+`sites[].host` often names production domains; `hosts` is where consumers list local/dev names.
+
+Accept consumer `hosts` strings as-is — no rewrite or standardized suffix.
+
+Webpack / static may keep `getAppHosts` (`hosts` ∪ `sites[].host`); that is out of scope for this Vite SSR decision.
+
+Document `hosts` for Vite SSR as: dev-server hostnames for allowlist/listen, HTTPS, and `setup-hosts`.
 
 Webpack SSR’s dual-port mental model (`port` for assets + `serverPort` for the Node app) does **not** apply.
 

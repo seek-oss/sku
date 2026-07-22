@@ -87,10 +87,13 @@ It ships **experimental** (not for production).
 - Docs MUST warn not-for-production.
 - Changeset / release notes MUST state the same.
 - Vite SSR MUST NOT support `dangerouslySetViteConfig`.
+- Vite SSR `sku start` uses top-level `hosts` only for HTTPS certificate names and missing-host / `setup-hosts` checks.
 
 ### Non-goals
 
 - Webpack SSR backfill or updating Webpack-SSR create template.
+- Changing webpack / static host merging (`getAppHosts` / `sites[].host` ∪ `hosts`) outside Vite SSR.
+- Standardizing `hosts` hostname conventions (consumers choose values).
 - Converting the static `vite` create template.
 - Full infra/deploy product guides (Keep sku's existing scope).
 - React Router Framework Mode or React Server Components (RSC).
@@ -129,6 +132,7 @@ It ships **experimental** (not for production).
 - **Public API:**
   - `buildType`
   - Single `port` (`serverPort` not supported)
+  - Vite SSR `hosts` for HTTPS / host-file checks (not inferred from `sites`)
   - Required entry named exports
   - ALS CSP nonce
   - Server `language` for Document vocab only

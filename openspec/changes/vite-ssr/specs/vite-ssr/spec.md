@@ -491,6 +491,8 @@ Vite SSR config types MUST NOT accept `serverPort`.
 
 When `httpsDevServer` is enabled, Vite SSR `sku start` MUST serve over HTTPS with working HMR.
 
+Certificate hostnames MUST come from the top-level `hosts` config only (see below).
+
 Production remains HTTP.
 
 #### Scenario: httpsDevServer start
@@ -498,6 +500,32 @@ Production remains HTTP.
 - **WHEN** `httpsDevServer: true` and the user runs `sku start`
 - **THEN** document responses succeed over HTTPS
 - **AND** local URLs use `https://`
+
+### Requirement: Vite SSR uses `hosts` for HTTPS and host-file setup
+
+For Vite SSR `sku start`, the top-level `hosts` config MUST be the sole source of hostnames for:
+
+- self-signed HTTPS certificate names when `httpsDevServer` is enabled
+- `setup-hosts` / missing-host warnings for that start path
+
+Vite SSR MUST NOT derive those hostnames from `sites[].host`.
+
+#### Scenario: HTTPS certificate uses hosts only
+
+- **WHEN** a Vite SSR app sets `httpsDevServer: true`, `hosts: ['dev.example.test']`, and `sites` includes a site whose `host` is `www.prod.example`
+- **THEN** the development certificate covers `dev.example.test`
+- **AND** the certificate does not cover `www.prod.example` solely because it appears on `sites`
+
+#### Scenario: Missing-host checks use hosts only
+
+- **WHEN** a Vite SSR app sets `hosts: ['dev.example.test']` and `sites` includes a site whose `host` is not in `hosts`
+- **THEN** missing-host warnings / `setup-hosts` suggestions for Vite SSR `sku start` concern only entries from `hosts`
+- **AND** do not require the site `host` to be present in `/etc/hosts`
+
+#### Scenario: hosts values accepted as-is
+
+- **WHEN** a Vite SSR consumer sets `hosts` to arbitrary hostname strings
+- **THEN** Vite SSR uses those exact strings for HTTPS and host-file checks
 
 ### Requirement: Teams can scaffold a Vite SSR app via create
 

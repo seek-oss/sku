@@ -15,6 +15,7 @@
 - [x] 2.3 Mount server-entry `middleware` (start + prod); optional `devServerMiddleware` start-only before it
 - [x] 2.4 `sku start` / `sku build`: middlewareMode, sibling `client/` + `server/`, Document stream, document hydrate
 - [x] 2.5 Abort-before-write; forward loader/action Responses and headers; `statusCode` + ErrorBoundary; `waitForAll`; `httpsDevServer`
+- [ ] 2.12 Vite SSR `sku start`: HTTPS cert + missing-host / `setup-hosts` checks use top-level `hosts` only (do not union `sites[].host`); leave webpack/static `getAppHosts` unchanged
 - [x] 2.6 Skip `transformIndexHtml` on SSR; manifest assets; auto `moduleId`
 - [x] 2.10 Mount `vitePluginSsrCss` on the Vite SSR serve graph with SSR module-graph entries; put the virtual stylesheet URL in Document `assets.css` on `sku start`; move HMR cleanup off `transformIndexHtml` (client entry / bootstrap); mark the Document link for cleanup
 - [x] 2.11 Mount `telemetryPlugin` on the Vite SSR serve graph with `type: 'ssr'`; deliver page-load + HMR clients via client entry / bootstrap (not `transformIndexHtml`); mark `initialPageLoad` when the SSR dev server is ready
@@ -43,6 +44,7 @@
 - [x] 5.12 Assert Vite SSR `sku start` document includes the SSR-CSS virtual stylesheet link (and does not call `transformIndexHtml`)
 - [x] 5.13 Assert Vite SSR `sku start` emits `start.initial` / `start.rebuild` telemetry (or equivalent smoke covering client script + WS wiring)
 - [x] 5.3 Tests: redirects; `waitForAll`; errored-route status; loader `Set-Cookie`; HTTPS start; missing named-export hard errors; nonce request/reuse; abort-before-write
+- [ ] 5.14 Test: Vite SSR HTTPS / missing-host path uses `hosts` only (site `host` not required for cert or `/etc/hosts` warnings)
 - [x] 5.4 Tests: `devServerMiddleware` in `sku start`; absent from production server bundle / responses
 - [x] 5.5 Tests: `onHydrate` receives `context` only; no language in bootstrap / request-context; no public `getSkuLanguage`
 - [x] 5.6 Tests: language chunk from `onRequest.language` / omit → no chunk; auto `moduleId` preloads; missing / non-array `routes` hard-error
@@ -60,6 +62,7 @@
 ## 7. Docs and release
 
 - [x] 7.1 Docs: `server-rendering.md` (+ Migrating), `vite.md`, `csp.md`, `configuration.md`, create READMEs; experimental / not-for-production warning
+- [ ] 7.11 Docs: for Vite SSR, label `hosts` as consumer-provided dev-server hostnames for listen/allowlist, HTTPS, and `setup-hosts` (not inferred from `sites[].host`; values accepted as-is)
 - [x] 7.2 Migrating: webpack dual-port → Vite SSR single `port`; `dist/server/server.js` + sibling `client/` / `server/` layout
 - [x] 7.3 Document CJS interop for Vite SSR `sku start` + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` (docs only; no runtime error rewrite; no new baked-in defaults)
 - [x] 7.4 Discourage `public` for Vite SSR in product + `configuration.md`; Migrating calls out moving off the folder

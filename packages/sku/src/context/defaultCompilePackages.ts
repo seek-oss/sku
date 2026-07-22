@@ -113,7 +113,7 @@ const emptyResult: CompilePackagesResult = { names: [], paths: [] };
 const handleError = (e: unknown): CompilePackagesResult => {
   console.log(
     critical(
-      'Warning: Failed to detect compile packages. Contact #sku-support.',
+      'Warning: Failed to detect compile packages. See https://seek-oss.github.io/sku/support.',
     ),
   );
   console.error(e);

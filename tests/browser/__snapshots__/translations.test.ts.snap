@@ -859,6 +859,7 @@ exports[`translations > bundler webpack > should support query parameters 1`] = 
   </body>
 </html>
 `;
+
 exports[`vite ssr translations > should render en 1`] = `
 ===================================================================
 --- sourceHtml

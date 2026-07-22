@@ -392,6 +392,7 @@ npm-debug.log
 # managed by sku
 .eslintcache
 .prettierrc
+.ssl
 coverage/
 dist/
 eslint.config.mjs

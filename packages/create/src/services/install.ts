@@ -1,6 +1,6 @@
 import { getAddCommand, isAtLeastPnpmV10 } from '@sku-private/utils';
 import { spawn } from 'node:child_process';
-import type { Template } from '../types/index.js';
+import { type Template, isViteBasedTemplate } from '../types/index.js';
 import { execAsync } from '../utils/execAsync.js';
 
 const DEPENDENCIES = [
@@ -8,6 +8,8 @@ const DEPENDENCIES = [
   'react@latest',
   'react-dom@latest',
 ];
+
+const VITE_SSR_DEPENDENCIES = ['react-router@^8'];
 
 const COMMON_DEV_DEPENDENCIES = [
   '@vanilla-extract/css',
@@ -26,16 +28,20 @@ export const installDependencies = async (
     await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
   }
 
+  const deps = [...DEPENDENCIES];
+  if (template === 'vite-ssr') {
+    deps.push(...VITE_SSR_DEPENDENCIES);
+  }
   const devDeps = [
     ...COMMON_DEV_DEPENDENCIES,
     // Internal/test-only: install sku from a caller-supplied specifier (e.g. packed tarball).
     process.env.SKU_CREATE_SKU_SPECIFIER ?? 'sku',
   ];
-  if (template === 'vite') {
+  if (isViteBasedTemplate(template)) {
     devDeps.push(...VITE_DEV_DEPENDENCIES);
   }
 
-  await installPackages(projectPath, DEPENDENCIES, 'prod');
+  await installPackages(projectPath, deps, 'prod');
   await installPackages(projectPath, devDeps, 'dev');
 
   console.log('✅ Dependencies installed successfully');

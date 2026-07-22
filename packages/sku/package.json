@@ -57,6 +57,7 @@
     "@types/react": "^18.0.0 || ^19.0.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
+    "react-router": "^8",
     "vitest": "^4.1.0"
   },
   "peerDependenciesMeta": {
@@ -64,6 +65,9 @@
       "optional": true
     },
     "react-dom": {
+      "optional": true
+    },
+    "react-router": {
       "optional": true
     },
     "vitest": {
@@ -92,6 +96,7 @@
     "@sku-lib/vite": "workspace:^",
     "@swc/core": "^1.6.13",
     "@types/express": "^4.17.11",
+    "@types/express-serve-static-core": "^4.19.8",
     "@types/jest": "^30.0.0",
     "@types/loadable__component": "^5.13.1",
     "@types/loadable__server": "^5.12.10",
@@ -185,6 +190,7 @@
     "fs-fixture": "^2.6.0",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "react-router": "catalog:",
     "rolldown": "^1.1.5",
     "type-fest": "^5.0.0",
     "vitest": "catalog:"

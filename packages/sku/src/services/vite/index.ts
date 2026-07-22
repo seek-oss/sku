@@ -1,32 +1,17 @@
-import { createServer, createBuilder } from 'vite';
-
 import type { SkuContext } from '../../context/createSkuContext.js';
 
-import { createConfig } from './helpers/config/createConfig.js';
-import {
-  cleanTargetDirectory,
-  copyPublicFiles,
-} from '../../utils/buildFileUtils.js';
-import { createOutDir } from './helpers/bundleConfig.js';
-import { getAppHosts } from '../../context/hosts.js';
-import { prerenderConcurrently } from './helpers/prerender/prerenderConcurrently.js';
-import allocatePort from '../../utils/allocatePort.js';
-import { serverUrls } from '@sku-private/utils';
+import { buildSsr } from './ssr/build.js';
+import { startSsr } from './ssr/start.js';
+import { buildStatic } from './static/build.js';
+import { startStatic } from './static/start.js';
 
 export const viteService = {
   build: async (skuContext: SkuContext) => {
-    const outDir = createOutDir(skuContext.paths.target);
-    const builder = await createBuilder(createConfig(skuContext));
-
-    // builds all environments in the order they are defined in the config
-    await builder.buildApp();
-
-    if (skuContext.routes) {
-      await prerenderConcurrently(skuContext);
+    if (skuContext.buildType === 'ssr') {
+      return buildSsr(skuContext);
     }
-    await cleanTargetDirectory(outDir.ssg, true);
-    await cleanTargetDirectory(outDir.join('.vite'), true);
-    await copyPublicFiles(skuContext);
+
+    return buildStatic(skuContext);
   },
   start: async ({
     skuContext,
@@ -35,41 +20,10 @@ export const viteService = {
     skuContext: SkuContext;
     environment: string;
   }) => {
-    const availablePort = await allocatePort({
-      port: skuContext.port.client,
-      strictPort: skuContext.port.strictPort,
-    });
-
-    const skuContextOverride = {
-      ...skuContext,
-      port: {
-        ...skuContext.port,
-        client: availablePort,
-      },
-    };
-
-    const server = await createServer(
-      createConfig(skuContextOverride, environment),
-    );
-
-    await server.listen(availablePort);
-
-    const hosts = getAppHosts(skuContextOverride);
-
-    console.log('Starting development server...');
-    const urls = serverUrls({
-      hosts,
-      port: availablePort,
-      initialPath: skuContextOverride.initialPath,
-      https: skuContext.httpsDevServer,
-    });
-
-    if (skuContextOverride.listUrls) {
-      urls.printAll();
-    } else {
-      urls.print();
+    if (skuContext.buildType === 'ssr') {
+      return startSsr({ skuContext, environment });
     }
 
-    server.bindCLIShortcuts({ print: true });
+    return startStatic({ skuContext, environment });
   },
 };

@@ -43,8 +43,9 @@ catalog:
   jiti: ^2.4.2
   nano-staged: ^1.0.2
   obug: ^2.1.3
-  react: ^19.1.0
-  react-dom: ^19.1.0
+  react: ^19.2.7
+  react-dom: ^19.2.7
+  react-router: '^8.2.0'
   typescript: ~6.0.3
   vite: ^8.0.1
   vitest: ^4.1.0

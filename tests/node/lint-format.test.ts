@@ -45,13 +45,14 @@ describe('lint-format', () => {
       let lint: RenderResult;
 
       beforeAll(async () => {
-        const fixture = await createSrcFixture({
+        await using fixture = await createSrcFixture({
           'passing.ts': passingFile,
         });
         lint = await sku('lint');
 
         await waitForExitCode(lint, 0);
-        fixture.rm();
+        // Keep the disposable alive until lint has finished reading the files.
+        return fixture.path;
       });
 
       it('should run every linter', async () => {
@@ -79,7 +80,7 @@ describe('lint-format', () => {
       let lint: RenderResult;
 
       beforeAll(async () => {
-        const fixture = await createSrcFixture({
+        await using fixture = await createSrcFixture({
           'typeError.ts': typeErrorFile,
           'prettierError.js': prettierErrorFile,
           'esLintError.test.ts': esLintErrorFile,
@@ -88,7 +89,8 @@ describe('lint-format', () => {
         lint = await sku('lint');
 
         await waitForExitCode(lint, 1);
-        fixture.rm();
+        // Keep the disposable alive until lint has finished reading the files.
+        return fixture.path;
       });
 
       it('should run every linter before failing', async () => {
@@ -274,7 +276,8 @@ describe('lint-format', () => {
         lint = await sku('lint', ['--config', 'sku.config.vitest.ts']);
 
         await waitForExitCode(lint, 1);
-        fixture.rm();
+        // Keep the disposable alive until lint has finished reading the files.
+        return fixture.path;
       });
 
       it('should use vitest lint rules', async () => {

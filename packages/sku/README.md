@@ -33,6 +33,12 @@ $ cd my-app
 $ pnpm start
 ```
 
+Templates: `vite` (static), `vite-ssr` (server-rendered). Example:
+
+```sh
+$ pnpm dlx @sku-lib/create my-app --template vite
+```
+
 Or create in the current directory:
 
 ```sh

@@ -9,6 +9,8 @@ context: |
   - Complements Changesets and Vitepress docs; does not replace them
   - Specs are delta-first by domain; do not backfill the whole codebase
   - Prefer Lite mode (short behavior-first specs); scale rigor only for high-risk work
+  - Break prose into short sentences or paragraphs across all OpenSpec docs
+    (proposal, design, specs, tasks); avoid dense single-line MUST / decision stacks
   - Invoke the CLI via `pnpm openspec` (not bare `openspec`)
   - AI tool adapters are local-only; never commit them
 
@@ -18,14 +20,18 @@ rules:
     - Include Non-goals; omit fluff and background the team already knows
     - State public API / breaking impact; note changeset and/or docs/docs if needed
     - On update: fold new scope into a coherent current proposal; do not simply append new ideas
+    - Short sentences or paragraphs; avoid dense single-line stacks
   specs:
     - Default to Lite: few requirements, only scenarios that catch real risk
     - One SHALL/MUST per requirement; observable behavior only — no code, APIs internals, or libraries
+    - Short sentences or paragraphs in requirement prose; avoid dense single-line MUST stacks
     - Prefer ADDED/MODIFIED/REMOVED deltas; reuse existing domains
     - Happy path plus the failure/edge cases that would hurt if missed — not exhaustive matrices
     - Put how/why in design.md or tasks.md, not in requirements
   design:
     - Skip unless architecture is non-obvious; keep short when present
-    - On update: integrate new decisions into the current design narrative;
+    - On update: integrate new decisions into the current design narrative
+    - Short sentences or paragraphs in decisions; avoid dense single-line stacks
   tasks:
     - Small checklist only; include plop, changeset, and docs when they apply
+    - Keep task items readable; one concern per checklist item where practical

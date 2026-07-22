@@ -28,19 +28,21 @@ export const viteBuildHandler = async ({
 
     await viteService.build(skuContext);
 
+    const buildType = skuContext.buildType ?? 'static';
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {
       status: 'success',
-      type: 'static',
+      type: buildType,
       csp: cspEnabled,
     });
 
     console.log(success(`Sku build complete in ${formatMs(timeTaken)}`));
   } catch (error) {
+    const buildType = skuContext.buildType ?? 'static';
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {
       status: 'failed',
-      type: 'static',
+      type: buildType,
       csp: cspEnabled,
     });
 

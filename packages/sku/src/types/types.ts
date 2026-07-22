@@ -113,9 +113,16 @@ export type SkuLanguage = string | { name: string; extends?: string };
 
 export interface SkuConfigBase {
   /**
+   * Selects request-time SSR or the static generation behavior.
+   *
+   * `'ssr'` (Vite SSR) is experimental and not for production use.
+   */
+  buildType?: 'ssr' | 'static';
+
+  /**
    * The bundler that sku uses to build the application.
    *
-   * `vite` is currently only supported for static apps.
+   * Vite supports static apps and experimental SSR via `buildType: 'ssr'`.
    *
    * @default "webpack"
    */
@@ -129,9 +136,9 @@ export interface SkuConfigBase {
   testRunner?: 'vitest' | 'jest';
 
   /**
-   * The client entry point to the app. The client entry is the file that executes your browser code.
+   * The client entry point to the app.
    *
-   * @default "./src/client.js"
+   * @default "./src/client.tsx"
    * @link https://seek-oss.github.io/sku/configuration#cliententry
    */
   clientEntry?: string;
@@ -342,6 +349,9 @@ export interface SkuConfigBase {
   /**
    * The port the app is hosted on when running `sku start`.
    *
+   * For Vite SSR (`buildType: 'ssr'`), this is also the baked production default
+   * listen port (`__SKU_DEFAULT_SERVER_PORT__`), overridable via `process.env.PORT`.
+   *
    * @default 8080
    * @link https://seek-oss.github.io/sku/configuration#port
    */
@@ -349,6 +359,9 @@ export interface SkuConfigBase {
 
   /**
    * A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
+   *
+   * Not supported for Vite SSR (`buildType: 'ssr'`): if this directory exists on disk,
+   * `sku start` / `sku build` fail. Import assets from modules instead.
    *
    * @default 'public'
    * @link https://seek-oss.github.io/sku/configuration#public
@@ -384,6 +397,16 @@ export interface SkuConfigBase {
    * @link https://seek-oss.github.io/sku/configuration#routes
    */
   routes?: readonly SkuRoute[];
+
+  /**
+   * **Only for SSR apps**
+   *
+   * The entry file for the server.
+   *
+   * @default "./src/server.tsx"
+   * @link https://seek-oss.github.io/sku/configuration#serverentry
+   */
+  serverEntry?: string;
 
   /**
    * Point to a JS file that will run before your tests to setup the testing environment.
@@ -470,19 +493,12 @@ export interface SkuConfigBase {
 
 export interface WebpackSkuConfig {
   /**
-   * **Only for SSR apps**
+   * **Webpack SSR only** (`sku start-ssr` / `sku build-ssr`)
    *
-   * The entry file for the server.
+   * The port the server is hosted on when running `sku start-ssr`, and the
+   * default listen port for the webpack production server.
    *
-   * @default "./src/server.js"
-   * @link https://seek-oss.github.io/sku/configuration#serverentry
-   */
-  serverEntry?: string;
-
-  /**
-   * **Only for SSR apps**
-   *
-   * The port the server is hosted on when running `sku start-ssr`.
+   * Not valid for Vite SSR (`buildType: 'ssr'`) — use {@link SkuConfigBase.port}.
    *
    * @default 8181
    * @link https://seek-oss.github.io/sku/configuration#serverport
@@ -540,7 +556,9 @@ export interface ViteSkuConfig {
   vitePlugins?: PluginOption[];
 
   /**
-   * The way the content security policy is delivered. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   * The way the enforcing content security policy is delivered for **static Vite** apps.
+   * Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   * Ignored for Vite SSR (`buildType: 'ssr'`), which always uses HTTP CSP headers.
    *
    * @default 'tag'
    * @link https://seek-oss.github.io/sku/configuration#cspdelivery
@@ -566,8 +584,21 @@ export interface ViteSkuConfig {
   cspReportOnlyExtraScriptSrcHosts?: string[];
 
   /**
+   * CSP `report-to` group name token for the Vite SSR Report-Only policy.
+   * Only relevant if {@link cspReportOnlyEnabled} is `true`. When set, sku
+   * appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
+   * Consumers (or infra) must define the matching `Reporting-Endpoints` group.
+   *
+   * @link https://seek-oss.github.io/sku/configuration#cspreportonlyreportto
+   */
+  cspReportOnlyReportTo?: string;
+
+  /**
    * This function provides a way to modify sku's Vite configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+   *
+   * Not supported for Vite SSR (`buildType: 'ssr'`): providing this option fails config validation.
+   * Raise exceptional customisation needs via the [support page](https://seek-oss.github.io/sku/support) with your use-case.
    *
    * Before customizing your Vite configuration, please reach out via the [support page](https://seek-oss.github.io/sku/support) to discuss your requirements and potential alternative solutions.
    *

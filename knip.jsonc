@@ -16,6 +16,8 @@
         "jest-environment-jsdom",
         // Optional peer dep
         "@storybook/react-webpack5",
+        // Needed so `declare module 'express-serve-static-core'` resolves under pnpm
+        "@types/express-serve-static-core",
       ],
       "ignoreUnresolved": [
         "__sku_alias__clientEntry",
@@ -141,7 +143,8 @@
         "src/client.tsx",
         "src/ssr-client.tsx",
         "src/render.tsx",
-        "src/render.tsx",
+        "src/vite-ssr/client.tsx",
+        "src/vite-ssr/server.tsx",
         "sku.config.*",
       ],
       "ignoreDependencies": [
@@ -176,6 +179,10 @@
     },
     "fixtures/vite-render-error": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/vite-ssr": {
+      "entry": ["src/server.tsx", "src/client.tsx", "sku.config.*"],
+      "ignoreDependencies": ["@vocab/core", "@vocab/vite"],
     },
   },
 }

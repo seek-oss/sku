@@ -86,7 +86,7 @@ export const createSkuContext = async ({
     ...appSkuConfig,
   } satisfies SkuConfig;
 
-  validateConfig(skuConfig);
+  validateConfig(skuConfig, appSkuConfig);
 
   validatePathAliases(skuConfig.pathAliases);
 
@@ -250,6 +250,7 @@ export const createSkuContext = async ({
 
   return {
     bundler: skuConfig.bundler,
+    buildType: skuConfig.buildType,
     testRunner: skuConfig.testRunner,
     configPath: appConfigPath,
     publicPath,
@@ -279,6 +280,7 @@ export const createSkuContext = async ({
     cspExtraScriptSrcHosts,
     cspReportOnlyEnabled,
     cspReportOnlyExtraScriptSrcHosts,
+    cspReportOnlyReportTo: skuConfig.cspReportOnlyReportTo,
     httpsDevServer,
     languages,
     initialPath,
@@ -289,6 +291,8 @@ export const createSkuContext = async ({
     defaultClientEntry,
     serveCjsInteropDependencies,
     buildCjsInteropDependencies,
+    /** Explicit `compilePackages` from sku config (not defaults / auto-detected). */
+    configuredCompilePackages: skuConfig.compilePackages ?? [],
   };
 };
 

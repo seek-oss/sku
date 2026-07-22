@@ -67,6 +67,39 @@ describe('generatePackageJson', () => {
     await fixture.rm();
   });
 
+  it('should generate package.json for vite-ssr template', async ({
+    expect,
+  }) => {
+    const fixture = await createFixture({});
+
+    await generatePackageJson(fixture.path, {
+      projectName: 'my-vite-ssr-app',
+      template: 'vite-ssr',
+      packageManager: 'npm',
+    });
+
+    const packageJsonContent = await fixture.readFile('package.json', 'utf8');
+
+    expect(packageJsonContent).toMatchInlineSnapshot(`
+      "{
+        "name": "my-vite-ssr-app",
+        "version": "1.0.0",
+        "private": true,
+        "type": "module",
+        "scripts": {
+          "start": "sku start",
+          "build": "sku build",
+          "test": "sku test --run",
+          "format": "sku format",
+          "lint": "sku lint"
+        }
+      }
+      "
+    `);
+
+    await fixture.rm();
+  });
+
   it('should handle scoped package names', async ({ expect }) => {
     const fixture = await createFixture({});
 

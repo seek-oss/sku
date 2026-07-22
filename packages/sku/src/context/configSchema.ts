@@ -49,6 +49,11 @@ const routes = {
 };
 
 export default validator.compile({
+  buildType: {
+    type: 'enum',
+    values: ['ssr', 'static'],
+    optional: true,
+  },
   clientEntry: {
     type: 'string',
   },
@@ -192,6 +197,10 @@ export default validator.compile({
   cspReportOnlyExtraScriptSrcHosts: {
     type: 'array',
     items: { type: 'string' },
+    optional: true,
+  },
+  cspReportOnlyReportTo: {
+    type: 'string',
     optional: true,
   },
   httpsDevServer: {

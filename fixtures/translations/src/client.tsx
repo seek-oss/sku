@@ -1,8 +1,8 @@
-import { hydrateRoot } from 'react-dom/client';
 import { VocabProvider } from '@vocab/react';
+import { hydrateRoot } from 'react-dom/client';
 
-import type { RenderContext } from './types';
 import App from './App';
+import type { RenderContext } from './types';
 
 export default ({ language: skuLanguage }: RenderContext) => {
   const Client = () => {

@@ -32,7 +32,4 @@ export default {
       chunkFilename: '[id].css',
     }),
   ],
-  devServer: {
-    port: 9876,
-  },
 };

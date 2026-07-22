@@ -6,9 +6,10 @@
 # managed by sku
 .eslintcache
 .prettierrc
+.ssl
 coverage/
 dist/
-eslint.config.js
+eslint.config.mjs
 report/
 tsconfig.json
 # end managed by sku

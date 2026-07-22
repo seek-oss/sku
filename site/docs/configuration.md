@@ -47,18 +47,33 @@ Default: `webpack`
 
 The bundler that sku uses to build the application.
 
-`vite` is currently only supported for static apps.
+Vite supports static or server-rendered apps via `buildType: 'ssr'`.
 See [Vite support](./vite) for details.
+
+## buildType
+
+Type: `'ssr' | 'static'`
+
+Default: 'static'
+
+Selects request-time SSR or static generation.
+
+- `'ssr'` for SSR applications. **Experimental — not for production** (see [Server rendering](./ssr/)).
+- `'static'` for Static applications.
+
+See [Server rendering](./ssr/).
 
 ## clientEntry
 
 Type: `string`
 
-Default: `./src/client.js`
+Default: `./src/client.tsx`
 
-The client entry point to the app. The client entry is the file that executes your browser code.
+The client entry point to the app. Path may be `.tsx`, `.ts`, or `.js`.
 
-Each `route` can also specify a client entry, if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
+**Static / Webpack:** the file that executes your browser code. Each `route` can also specify a client entry; if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
+
+**SSR:** required client entry exporting named `routes` (`RouteObject[]`) and `onHydrate`. Missing file or named export is a hard error. Prefer a shared `createRoutes(...)` factory with the server entry so trees stay hydration-compatible. See [Request entries](./ssr/entries.md).
 
 ## compilePackages
 
@@ -78,13 +93,11 @@ Default: `false`
 
 Enable content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
 
-## cspDelivery
+## cspDelivery <Badge type="info" text="Vite Static only" />
 
 Type: `'tag' | 'header'`
 
 Default: `'tag'`
-
-Bundler: `vite`
 
 The way the content security policy is delivered. Only relevant if `cspEnabled` is set to `true`.
 
@@ -108,15 +121,23 @@ Bundler: `vite`
 
 Enable report-only content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
 
-## cspReportOnlyExtraScriptSrcHosts
+## cspReportOnlyExtraScriptSrcHosts <Badge type="info" text="Vite only" />
 
 Type: `Array<string>`
 
 Default: `cspExtraScriptSrcHosts`
 
-Bundler: `vite`
-
 Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspReportOnlyEnabled` is set to `true`.
+
+## cspReportOnlyReportTo <Badge type="info" text="SSR only" />
+
+Type: `string`
+
+Default: `undefined`
+
+CSP [`report-to`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to) group name token for the Report-Only policy. Only relevant if `cspReportOnlyEnabled` is `true`. When set, sku appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
+
+sku does not emit a `Reporting-Endpoints` (or legacy `Report-To`) header — define the matching endpoint group in your app or infrastructure.
 
 ## dangerouslySetESLintConfig
 
@@ -207,14 +228,14 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## dangerouslySetViteConfig
+## dangerouslySetViteConfig <Badge type="info" text="Vite only" />
 
 Type: `function`
 
-Bundler: `vite`
-
 This function provides a way to modify sku's Vite configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+
+**Not supported for SSR** (`buildType: 'ssr'`). Providing `dangerouslySetViteConfig` with SSR fails config validation. Raise exceptional customisation needs via the [support page] with your use-case.
 
 Before customizing your Vite configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
@@ -264,11 +285,9 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## dangerouslySetWebpackConfig
+## dangerouslySetWebpackConfig <Badge type="info" text="Webpack only" />
 
 Type: `function`
-
-Bundler: `webpack`
 
 This function provides a way to modify sku's Webpack configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
@@ -326,9 +345,7 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## environments
-
-**Only for static apps**
+## environments <Badge type="info" text="Static only" />
 
 Type: `Array<string>`
 
@@ -373,6 +390,8 @@ Default: `false`
 
 Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
 
+Supported for Static, webpack, and SSR (`buildType: 'ssr'`) via `sku start`.
+
 ## initialPath
 
 Type: `string`
@@ -389,11 +408,9 @@ The languages your application supports.
 
 See [Multi-language support](./multi-language.md) for details.
 
-## libraryEntry
+## libraryEntry <Badge type="info" text="Library-mode only" />
 
 Type: `string`
-
-**Only for libraries**
 
 The entry file for the library. If set, sku will assume the project is a library. Must export its API from this file.
 
@@ -405,19 +422,15 @@ export default () => {
 };
 ```
 
-## libraryName
+## libraryName <Badge type="info" text="Library-mode only" />
 
 Type: `string`
-
-**Only for libraries**
 
 The global name of the library. Will be added to the `window` object under `window[libraryName]`.
 
-## libraryFile
+## libraryFile <Badge type="info" text="Library-mode only" />
 
 Type: `string`
-
-**Only for libraries**
 
 The file name of the library. The main bundle of the library will be output to `dist/${libraryFile}.js` - note that the
 `.js` extension will be added automatically and should not be included in the configuration option itself.
@@ -493,6 +506,8 @@ Default: `8080`
 
 The port the app is hosted on when running `sku start`.
 
+**SSR** (`buildType: 'ssr'`): also the baked production default listen port (`node dist/server/server.js`). Override at runtime with `PORT`. SSR does not use [`serverPort`](#serverport).
+
 ## public
 
 Type: `string`
@@ -500,6 +515,8 @@ Type: `string`
 Default: `public`
 
 A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
+
+**Not supported for Vite SSR**
 
 ## publicPath
 
@@ -509,21 +526,21 @@ Default: `/`
 
 The URL all the static assets of the app are accessible under.
 
-## renderEntry
+For SSR (`buildType: 'ssr'`) the `publicPath` must be relative (e.g. `/` or `/static/`). Absolute `http(s)` / CDN URLs are not supported.
+
+For SSR, `publicPath` applies to `sku build` / production. `sku start` serves the Vite module graph from `/`.
+
+## renderEntry <Badge type="info" text="Library and Static only" />
 
 Type: `string`
-
-**Only for static apps and libraries**
 
 Default: `./src/render.js`
 
 The render entry file to the app. This file should export the required functions for static rendering. See [static-rendering](./static-rendering.md) for more info.
 
-## routes
+## routes <Badge type="info" text="Static only" />
 
 Type: `Array<string | {route: string, name: string, entry: string, languages: Array<string>}>`
-
-**Only for static apps**
 
 Default: `['/']`
 
@@ -539,29 +556,25 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## serverEntry
+## serverEntry <Badge type="info" text="SSR only" />
 
 Type: `string`
 
-Bundler: `webpack`
+Default: `./src/server.tsx`
 
-**Only for SSR apps**
+Path may be `.tsx`, `.ts`, or `.js`.
 
-Default: `./src/server.js`
+See [Request entries](./ssr/entries.md).
 
-The entry file for the server.
-
-## serverPort
+## serverPort <Badge type="info" text="Webpack SSR only" />
 
 Type: `number`
 
 Bundler: `webpack`
 
-**Only for SSR apps**
-
 Default: `8181`
 
-The port the server is hosted on when running `sku start-ssr`.
+The port the server is hosted on when running `sku start-ssr`, and the default listen port for the webpack production server.
 
 ## setupTests
 
@@ -675,11 +688,9 @@ Default: `jest`
 
 The test runner that sku uses to run the tests.
 
-## transformOutputPath
+## transformOutputPath <Badge type="info" text="Static only" />
 
 Type: `function`
-
-**Only for static apps**
 
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
@@ -697,18 +708,18 @@ Bundler: `vite`
 
 Provides a way to add additional Vite plugins to the Vite config.
 
-## \_\_UNSAFE_EXPERIMENTAL\_\_cjsInteropDependencies
+## \_\_UNSAFE_EXPERIMENTAL\_\_cjsInteropDependencies <Badge type="info" text="Vite only" />
 
 Type: `string[]`
 
 Default: `[]`
-
-Bundler: `vite`
 
 _This is an experimental option that may change or be removed without notice._
 
 An array of cjs import paths that have both a default and named exports.
 
 This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+
+For SSR, packages that resolve to a module namespace object under `sku start` (React error “Element type is invalid … got: object”) often need an entry here — see [Server rendering → CJS default-export interop](./ssr/troubleshooting.md#cjs-default-export-interop). Sku already includes Apollo Client in its baked defaults; do not rely on sku expanding that list for other offenders.
 
 See https://github.com/cyco130/vite-plugin-cjs-interop for more information.

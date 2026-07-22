@@ -1,13 +1,18 @@
+import { createRequire } from 'node:module';
 import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { fixViteVanillaExtractDepScanPlugin } from './esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import { makePluginName } from '../helpers/makePluginName.js';
-import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 
-const renderEntry = require.resolve('#entries/vite-render');
-const clientEntry = require.resolve('#entries/vite-client');
+const getVocabViteAliases = (): Record<string, string> =>
+  // Resolve against sku’s dependency tree, not the app’s — force injected
+  // `@vocab/vite/runtime` imports (including from `.vocab` / compilePackages) onto sku’s copy.
+  // Prefer the export file only; do not alias the package root (breaks `@vocab/vite/chunks` via exports).
+  ({
+    '@vocab/vite/runtime': require.resolve('@vocab/vite/runtime'),
+  });
 
 export const configPlugin = ({
   skuContext,
@@ -16,29 +21,21 @@ export const configPlugin = ({
 }): PluginOption => ({
   name: makePluginName('config'),
   config: () => ({
-    publicDir: skuContext.paths.public,
+    // SSR does not support the copied-as-is public assets folder.
+    publicDir: skuContext.buildType === 'ssr' ? false : skuContext.paths.public,
     root: process.cwd(),
     resolve: {
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
         __sku_alias__serverEntry: skuContext.paths.serverEntry,
         __sku_alias__renderEntry: skuContext.paths.renderEntry,
+        ...(skuContext.languages ? getVocabViteAliases() : {}),
       },
     },
     define: {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
     optimizeDeps: {
-      // crawl all the entries to  ensure they get optimized ahead of time. This helps prevent reloads on cold-start.
-      // Reloads on cold-start cause issues with our Playwright tests, so we need to ensure they get optimized ahead of time.
-      // If you see "REFUSED_CONNECTION" errors in Playwright tests it may be because entries are missing from here.
-      entries: [
-        skuContext.paths.clientEntry,
-        skuContext.paths.serverEntry,
-        skuContext.paths.renderEntry,
-        renderEntry,
-        clientEntry,
-      ],
       rolldownOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },

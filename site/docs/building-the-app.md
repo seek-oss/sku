@@ -7,8 +7,8 @@ You should have the following scripts in your `package.json`.
 ```json
 {
   "scripts": {
-    "start": "sku start" // or `sku start-ssr` for SSR projects
-    "build": "sku build" // or `sku build-ssr` for SSR projects
+    "start": "sku start",
+    "build": "sku build"
   }
 }
 ```

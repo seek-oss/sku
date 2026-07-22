@@ -87,3 +87,36 @@ describe('ssr translations', () => {
     expect(app).toMatchSnapshot();
   });
 });
+
+// Runs after webpack SSR in this file so both long-lived servers are not started concurrently.
+describe('vite ssr translations', () => {
+  const viteSsrUrl = `http://localhost:8315`;
+
+  beforeAll(async () => {
+    const distDir = fixturePath('dist');
+    await rm(distDir, { recursive: true, force: true });
+
+    const start = await sku('start', ['--config=sku.config.vite-ssr.ts']);
+    await start.findByText('Starting development server');
+  });
+
+  it('should render en', async ({ task }) => {
+    skipCleanup(task.id);
+    const app = await getAppSnapshot({ url: `${viteSsrUrl}/en` });
+    expect(app).toMatchSnapshot();
+  });
+
+  it('should render fr', async ({ task }) => {
+    skipCleanup(task.id);
+    const app = await getAppSnapshot({ url: `${viteSsrUrl}/fr` });
+    expect(app).toMatchSnapshot();
+  });
+
+  it('should render en-PSEUDO', async ({ task }) => {
+    skipCleanup(task.id);
+    const app = await getAppSnapshot({
+      url: `${viteSsrUrl}/en?pseudo=true`,
+    });
+    expect(app).toMatchSnapshot();
+  });
+});

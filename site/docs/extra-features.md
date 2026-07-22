@@ -372,7 +372,7 @@ The second `if` block is removed, however the contents of the block are kept as 
 
 ## DevServer Middleware
 
-Supply a [`devServerMiddleware`] path in your sku config to access the internal dev [Express] server.
+Supply a [`devServerMiddleware`] path in your sku config to extend the **development** server with local-only routes, mocks, or proxies.
 
 The file must export a function that will receive the express server:
 
@@ -383,6 +383,8 @@ export default (app) => {
   });
 };
 ```
+
+This runs in `sku start` only and is never bundled into the production server. For **SSR** production request handlers belong on the server entry’s named `middleware` export — see [Server rendering → Middleware](./ssr/middleware.md) and [`devServerMiddleware`].
 
 [`devServerMiddleware`]: ./configuration#devservermiddleware
 [express]: http://expressjs.com/

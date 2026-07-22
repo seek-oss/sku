@@ -1,5 +1,30 @@
 # sku
 
+## 16.1.0
+
+### Minor Changes
+
+- `csp`: Add support for report-only Content Security Policy. ([#1631](https://github.com/seek-oss/sku/pull/1631))
+
+  Two new configuration options, `cspReportOnlyEnabled` and `cspReportOnlyExtraScriptSrcHosts`, allow the generation of a "report-only" CSP delivered via the `Content-Security-Policy-Report-Only` header.
+
+  See the [Content Security Policy](https://seek-oss.github.io/sku/docs/csp#report-only-content-security-policy) section of the sku docs for more details.
+
+- `csp`: Add `cspDelivery` config option. ([#1630](https://github.com/seek-oss/sku/pull/1630))
+
+  A new configuration option, `cspDelivery`, allows control of how the Content Security Policy is delivered and can be set to one of two values:
+
+  - `tag`: The CSP is embedded directly in the rendered HTML content via a `<meta http-equiv="Content-Security-Policy" …>` tag. This is the default and matches the previous behaviour.
+  - `header`: The CSP is written to a JSON metadata file alongside the rendered HTML content. This metadata can be used at deployment and/or request time to include a `Content-Security-Policy` header in the response for the rendered HTML content.
+
+  See the [Content Security Policy](https://seek-oss.github.io/sku/docs/csp#delivery) section of the sku docs for more details.
+
+### Patch Changes
+
+- `configure`: Always add `.ssl` to `.gitignore` ([#1668](https://github.com/seek-oss/sku/pull/1668))
+
+  sku now always adds `.ssl` to `.gitignore`, rather than only when `httpsDevServer` is enabled.
+
 ## 16.0.0
 
 There are a lot of changes in this major release, however most consumers should only need to run the following to address the majority of issues:

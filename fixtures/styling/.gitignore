@@ -3,8 +3,8 @@ storybook-static/
 # managed by sku
 .eslintcache
 .prettierrc
+.ssl
 coverage/
-dist-ssr/
 dist/
 eslint.config.mjs
 report/

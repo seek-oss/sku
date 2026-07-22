@@ -5,14 +5,6 @@ import { renderWithEnvironment } from './utils.ts';
 
 const require = createRequire(import.meta.url);
 
-/**
- * Keep managed ignore sections stable across dual-config fixtures
- * (e.g. target dist vs dist-ssr) so tests do not churn .gitignore/.prettierignore.
- */
-const skuTestEnv = {
-  SKU_IGNORE_TARGETS: 'dist,dist-ssr',
-};
-
 type SkuCommand =
   | 'serve'
   | 'start'
@@ -46,7 +38,6 @@ export const scopeToFixture = (fixtureFolder: string) => {
         spawnOpts: {
           ...options.spawnOpts,
           env: {
-            ...skuTestEnv,
             ...options.spawnOpts?.env,
           },
         },

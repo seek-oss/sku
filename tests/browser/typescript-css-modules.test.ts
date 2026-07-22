@@ -9,7 +9,6 @@ const { sku, fixturePath, node, exec } = scopeToFixture(
 );
 
 const distDir = fixturePath('dist');
-const distSsrDir = fixturePath('dist-ssr');
 
 describe('typescript-css-modules', () => {
   describe('build', async () => {
@@ -50,26 +49,20 @@ describe('typescript-css-modules', () => {
 
     afterAll(async () => {
       // Clean up dist dir to prevent pollution of linted files in lint test
-      await rm(distSsrDir, { recursive: true, force: true });
+      await rm(distDir, { recursive: true, force: true });
     });
 
     it('should create valid app', async () => {
-      await node(['dist-ssr/server.cjs']);
+      await node(['dist/server.cjs']);
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
-      expect(
-        await assetServer.findByText('serving dist-ssr'),
-      ).toBeInTheConsole();
+      expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 
       const app = await getAppSnapshot({ url: backendUrl });
       expect(app).toMatchSnapshot();
     });
 
     it('should generate the expected files', async () => {
-      const files = await dirContentsToObject(distSsrDir, [
-        '.cjs',
-        '.js',
-        '.css',
-      ]);
+      const files = await dirContentsToObject(distDir, ['.cjs', '.js', '.css']);
       expect(files).toMatchSnapshot();
     });
   });

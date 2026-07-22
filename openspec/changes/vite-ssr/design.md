@@ -390,7 +390,7 @@ Template `vite-ssr` with `createRoutes` scaffold.
 
 Lazy page modules MUST use React Router Data Mode named `export function Component` (not `export default`) so they typecheck with `lazy: () => import('…')`.
 
-`## Migrating` in `server-rendering.md` (Static App + Older SSR App); not under `docs/migration-guides/`.
+Migrating docs cover Static App and Older / Webpack SSR App; not under `docs/migration-guides/`.
 
 Migrating MUST cover:
 
@@ -567,7 +567,7 @@ Opt-in via `buildType` + Vite.
 
 New apps: `--template vite-ssr` (named `Component`).
 
-Existing: Migrating in `server-rendering.md` (ports, deploy layout, CJS, Express 4, React Router 8 optional peer, `Component`, move off `public`, data-loading steer, server-only loaders, Braid reset order, client-only providers, Jest→Vitest, `#` pathAliases, sku-owned `@vocab/vite`).
+Existing: Migrating docs (ports, deploy layout, CJS, Express 4, React Router 8 optional peer, `Component`, move off `public`, data-loading steer, server-only loaders, Braid reset order, client-only providers, Jest→Vitest, `#` pathAliases, sku-owned `@vocab/vite`).
 
 Webpack SSR: leave `buildType` unset.
 

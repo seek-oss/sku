@@ -11,7 +11,7 @@ Sku supports Vite as an alternate to the Webpack bundler since v15.
 Vite support covers [static applications (SSG)][SSG] and opt-in [server-side rendering (SSR)][SSR].
 
 - Static apps use [`sku start`] and [`sku build`] as today.
-- Vite SSR apps set `bundler: 'vite'` and `buildType: 'ssr'`, then also use [`sku start`] / [`sku build`] (not `start-ssr` / `build-ssr`).
+- SSR apps set `bundler: 'vite'` and `buildType: 'ssr'`, then also use [`sku start`] / [`sku build`] (not `start-ssr` / `build-ssr`).
 - Webpack SSR continues to use [`sku start-ssr`] / [`sku build-ssr`] when `buildType` is unset.
 
 [`sku start`]: ./cli.md#start
@@ -20,12 +20,12 @@ Vite support covers [static applications (SSG)][SSG] and opt-in [server-side ren
 [`sku start-ssr`]: ./cli.md#start-ssr
 [`sku build-ssr`]: ./cli.md#build-ssr
 
-### Vite SSR
+### SSR <Badge type="tip" text="SSR" /> <Badge type="warning" text="experimental" />
 
 > **Experimental — not for production.**
-> Vite SSR is available for evaluation and testing.
+> SSR is available for evaluation and testing.
 > Do not use it in production yet; the API and behaviour may change.
-> See [Server rendering](./server-rendering.md).
+> See [Server rendering](./ssr/).
 
 Set `buildType: 'ssr'` and export named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`).
 Prefer a shared `createRoutes(...)` factory so the trees stay hydration-compatible:
@@ -49,18 +49,18 @@ export const routes = createRoutes();
 Required `serverEntry` must also export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest`.
 Required `clientEntry` must also export named `onHydrate`.
 Missing entry files or named exports (including missing / non-array `routes`) are a hard error; do not use `default`.
-Optional config [`devServerMiddleware`](./configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./server-rendering.md#middleware).
+Optional config [`devServerMiddleware`](./configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./ssr/middleware.md).
 
-Vite SSR ships on **Express 4** (same as webpack SSR) and **React Router 8** (optional peer `react-router@^8`; install it in the app — the create `vite-ssr` template does this).
+SSR ships on **Express 4** (same as Webpack SSR) and **React Router 8** (optional peer `react-router@^8`; install it in the app — the create `vite-ssr` template does this).
 Type `middleware` / `SkuSsrMiddleware` and Data Mode routes against those majors.
-Future Express or React Router **major** upgrades in sku may be breaking for Vite SSR consumers (middleware mounts into sku’s Express app; routes use React Router Data Mode APIs) — see [Server rendering](./server-rendering.md).
+Future Express or React Router **major** upgrades in sku may be breaking for SSR consumers (middleware mounts into sku’s Express app; routes use React Router Data Mode APIs) — see [Server rendering](./ssr/).
 
 sku owns the HTTP server, the React Document shell (not overridable — use React document metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers.
-Vite SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
+SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
 The config [`public`](./configuration.md#public) assets folder is not supported — if that directory exists, `sku start` / `sku build` fail; import assets from modules instead.
-[`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) is not supported. Raise exceptional customisation needs in [`#sku-support`].
+[`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) is not supported. Raise exceptional customisation needs via the [support page].
 
-`onRequest` may return a closed object under Vite SSR: `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language` (server Document vocab preload only), and JSON `clientContext`.
+`onRequest` may return a closed object under SSR: `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language` (server Document vocab preload only), and JSON `clientContext`.
 `onHydrate` receives `{ context }` only and may return `AppWrapper`.
 Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch).
 
@@ -70,7 +70,7 @@ Scaffold a new app with:
 pnpm dlx @sku-lib/create my-app --template vite-ssr
 ```
 
-See [Server rendering](./server-rendering.md) (including [Migrating from a static app](./server-rendering.md#migrate-from-static-app) and [Migrating from an older SSR app](./server-rendering.md#migrate-from-older-ssr-app)) and [CSP](./csp.md) for details.
+See [Server rendering](./ssr/) (including [Migrating from a static app](./ssr/migrate-from-static-app.md) and [Migrating from Webpack SSR](./ssr/migrate-from-webpack-ssr.md)) and [CSP](./csp.md) for details.
 
 ### Planned deprecation of library mode
 
@@ -79,7 +79,7 @@ However, this feature is planned for deprecation and will not be supported with 
 A migration guide for `sku` libraries will be provided in the future once the deprecation is finalised.
 
 [SSG]: ./static-rendering.md
-[SSR]: ./server-rendering.md
+[SSR]: ./ssr/
 [libraries]: ./libraries.md
 
 ## Prerequisites
@@ -294,9 +294,9 @@ export default function (server) {
 }
 ```
 
-**Vite SSR** (`buildType: 'ssr'`) uses Express on the custom single-port server.
+**SSR** (`buildType: 'ssr'`) uses Express on the custom single-port server.
 The same config key receives the Express app, and is mounted **before** the server entry’s named `middleware` (then Vite, then HTML render).
-Production never loads this file — see [Server rendering → Middleware](./server-rendering.md#middleware).
+Production never loads this file — see [Server rendering → Middleware](./ssr/middleware.md).
 
 > [!NOTE]
 > Currently only JavaScript middleware is supported.
@@ -337,8 +337,8 @@ export default {
 } satisfies SkuConfig;
 ```
 
-For Vite SSR specifically, a related failure mode is React “Element type is invalid … got: object” under `sku start` when a CJS default export resolves as a module namespace.
-Prefer [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) for that case — see [Server rendering → CJS default-export interop](./server-rendering.md#cjs-default-export-interop).
+For SSR specifically, a related failure mode is React “Element type is invalid … got: object” under `sku start` when a CJS default export resolves as a module namespace.
+Prefer [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) for that case — see [Server rendering → CJS default-export interop](./ssr/troubleshooting.md#cjs-default-export-interop).
 
 [compilePackages]: ./configuration.md#compilepackages
 

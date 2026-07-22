@@ -384,7 +384,7 @@ export default (app) => {
 };
 ```
 
-This runs in `sku start` only and is never bundled into the production server. For **Vite SSR** production request handlers belong on the server entry’s named `middleware` export — see [Server rendering → Middleware](./server-rendering.md#middleware) and [`devServerMiddleware`].
+This runs in `sku start` only and is never bundled into the production server. For **SSR** production request handlers belong on the server entry’s named `middleware` export — see [Server rendering → Middleware](./ssr/middleware.md) and [`devServerMiddleware`].
 
 [`devServerMiddleware`]: ./configuration#devservermiddleware
 [express]: http://expressjs.com/

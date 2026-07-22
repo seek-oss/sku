@@ -3,7 +3,9 @@
 [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app.
 For statically rendered apps, a `script-src` policy can be automatically generated for you. SSR apps have an extra step.
 
-- **Vite SSR**: CSP is delivered as **HTTP headers** (`Content-Security-Policy` and optional `Content-Security-Policy-Report-Only`), derived from the document shell plus nonces and hashes of bootstrap scripts. Meta `http-equiv` CSP is not used on the Vite SSR path.
+Badges mark solution-specific behaviour: <Badge type="tip" text="Static" />, <Badge type="tip" text="SSR" />, <Badge type="info" text="Webpack SSR" />. See [Solution types](./ssr/#solution-types).
+
+- **SSR** <Badge type="tip" text="SSR" />: CSP is delivered as **HTTP headers** (`Content-Security-Policy` and optional `Content-Security-Policy-Report-Only`), derived from the document shell plus nonces and hashes of bootstrap scripts. Meta `http-equiv` CSP is not used on the SSR path. See [Server rendering → CSP](./ssr/csp.md).
 
 **This feature is not available to libraries**
 
@@ -21,13 +23,13 @@ For **static apps**, the `cspDelivery` option controls how the enforcing CSP is 
 - `header`: The CSP will be written to a JSON file alongside the rendered HTML content (e.g. `index.html.json`) in the `metadata.csp` property, and no `<meta http-equiv="Content-Security-Policy" …>` tag will be generated.
   Extra steps will be required at deployment and/or request time to ensure the value of this property is returned as a `Content-Security-Policy` header in the response for the rendered HTML content.
 
-`cspDelivery` applies to **static Vite** only (`buildType` unset / `'static'`). Vite SSR always emits real HTTP CSP headers and ignores `cspDelivery`.
+`cspDelivery` applies to **Static** only (`buildType` unset / `'static'`). SSR always emits real HTTP CSP headers and ignores `cspDelivery`.
 
 ### Extra Hosts
 
 If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraScriptSrcHosts` array in your `sku.config.js`.
 
-Vite SSR assumes a relative `publicPath` (e.g. `/` or `/static/`), so sku-owned Document assets are covered by `'self'`. Absolute `http(s)` / CDN `publicPath` is not supported for Vite SSR — use `cspExtraScriptSrcHosts` for third-party scripts only.
+SSR assumes a relative `publicPath` (e.g. `/` or `/static/`), so sku-owned Document assets are covered by `'self'`. Absolute `http(s)` / CDN `publicPath` is not supported for SSR — use `cspExtraScriptSrcHosts` for third-party scripts only.
 
 ### Nonce Values
 
@@ -42,9 +44,9 @@ Vite SSR assumes a relative `publicPath` (e.g. `/` or `/static/`), so sku-owned 
 **Warning:** Nonces are less safe than content hashes.
 Please consider if other options are available and whether the risks are acceptable for your use-case.
 
-#### Vite SSR
+#### SSR <Badge type="tip" text="SSR" /> <Badge type="warning" text="experimental" />
 
-Vite SSR uses **at most one** CSP nonce per HTML response, minted **only when explicitly requested**, and included in the CSP header **only if requested**.
+SSR uses **at most one** CSP nonce per HTML response, minted **only when explicitly requested**, and included in the CSP header **only if requested**.
 
 A nonce is requested by:
 
@@ -56,7 +58,7 @@ All of those share one value for the response. Known bootstrap script bodies are
 
 A `nonce` is not available in client code. The result of `getCspNonce` will be an empty string if called from the browser. This allows it to be safely used isomorphic rendering.
 
-Do not use webpack’s `createUnsafeNonce` for Vite SSR — that API can create multiple distinct nonces per render. Vite SSR intentionally does not offer a multi-nonce factory.
+Do not use webpack’s `createUnsafeNonce` for SSR — that API can create multiple distinct nonces per render. SSR intentionally does not offer a multi-nonce factory.
 
 ```tsx
 import { getCspNonce, type SkuSsrMiddleware } from 'sku';
@@ -80,7 +82,7 @@ export const middleware: SkuSsrMiddleware = (req, res, next) => {
 };
 ```
 
-#### Webpack SSR / static apps
+#### Webpack SSR / static apps <Badge type="info" text="Webpack SSR" />
 
 `createUnsafeNonce`: Generates a random nonce value and returns it for use by the client. The nonce value is added to the generated [Content Security Policy (CSP)] Tags.
 
@@ -178,7 +180,7 @@ Unlike the standard CSP, a report-only CSP can only be delivered via an HTTP hea
 As such there is no explicit [delivery option](#delivery) for a report-only CSP and the behaviour matches that of `header` CSP delivery, with the policy being written to the `metadata.cspReportOnly` property.
 As a consequence, and like the delivery option itself, a report-only CSP is only available when using Vite.
 
-**Vite SSR:** report-only is delivered as a real `Content-Security-Policy-Report-Only` HTTP response header (not `metadata.cspReportOnly`). You can also set `cspReportOnlyReportTo` to append a [`report-to`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to) group name token. You (or your infrastructure) must define the matching [`Reporting-Endpoints`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Reporting-Endpoints) group — sku does not emit that header.
+**SSR:** report-only is delivered as a real `Content-Security-Policy-Report-Only` HTTP response header (not `metadata.cspReportOnly`). You can also set `cspReportOnlyReportTo` to append a [`report-to`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to) group name token. You (or your infrastructure) must define the matching [`Reporting-Endpoints`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Reporting-Endpoints) group — sku does not emit that header.
 
 ```ts
 export default {

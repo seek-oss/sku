@@ -616,7 +616,7 @@ Sku MUST NOT add a runtime experimental gate.
 
 ### Requirement: Product and Migrating docs cover Vite SSR topics
 
-`server-rendering.md` MUST cover dual-entry `routes`, AppWrapper, middleware layers, CSP, and response headers, and MUST include Migrating subsections for Static App and Older SSR App (not under `docs/migration-guides/`).
+Vite SSR product docs MUST cover dual-entry `routes`, AppWrapper, middleware layers, CSP, and response headers, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
 
 Migrating docs MUST also cover:
 
@@ -642,20 +642,20 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 
 #### Scenario: Primary Vite SSR docs have topic coverage
 
-- **WHEN** a reader opens the Vite SSR section of `server-rendering.md`
+- **WHEN** a reader opens Vite SSR product docs
 - **THEN** docs cover AppWrapper, routes, middleware, CSP, and response headers
 - **AND** docs steer page content toward render-time data loading via `AppWrapper` (not loaders as the default)
 - **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, or response headers
 - **AND** docs state that Express request state is not bridged into loaders
 
-#### Scenario: Migrating subsections exist
+#### Scenario: Migrating docs exist
 
-- **WHEN** a reader opens the Migrating section of `server-rendering.md`
-- **THEN** there are self-contained **Migrate from Static App** and **Migrate from Older SSR App** subsections
+- **WHEN** a reader opens Vite SSR Migrating docs
+- **THEN** there are self-contained **Migrate from Static App** and **Migrate from Older / Webpack SSR App** docs
 
 #### Scenario: Migrating covers port model and deploy layout
 
-- **WHEN** a reader opens **Migrate from Older SSR App**
+- **WHEN** a reader opens **Migrate from Older / Webpack SSR App** docs
 - **THEN** docs explain webpack dual-port → Vite SSR single `port` (drop `serverPort`; `PORT` still overrides production)
 - **AND** docs state the production server entry is `dist/server/server.js` with sibling `client/` and `server/` directories
 
@@ -674,7 +674,7 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 
 #### Scenario: Migrating covers Older SSR adoption topics
 
-- **WHEN** a reader opens **Migrate from Older SSR App**
+- **WHEN** a reader opens **Migrate from Older / Webpack SSR App** docs
 - **THEN** docs remind readers to keep server-only loader modules off the client route graph
 - **AND** docs steer away from Express `req` → loader coupling for page content
 - **AND** docs note Braid reset-before-Braid on `sku start` for Braid apps

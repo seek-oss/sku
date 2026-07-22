@@ -52,7 +52,7 @@ It ships **experimental** (not for production).
 - Sku aliases bare `@vocab/vite…` imports (including injected `.vocab` imports).
 - Consumers do not need a direct `@vocab/vite` dep.
 - `@sku-lib/create` template `vite-ssr` with named `Component` on lazy pages.
-- Product + Migrating docs in `server-rendering.md`.
+- Product + Migrating docs for Vite SSR.
 - Migrating covers single-port and deploy layout.
 - Migrating covers CJS interop, Express 4 (shared sku major), React Router 8, named `Component`, and moving off `public`.
 - Prefer AppWrapper + Suspense for page content.
@@ -139,7 +139,7 @@ It ships **experimental** (not for production).
   - `react-router` 8 as optional peerDependency `^8` (Data Mode; required for Vite SSR consumers)
   - Express 4 (shared sku server runtime + `@types`; same major as webpack SSR — no 4 → 5 bump)
 - **Docs / release:**
-  - `server-rendering.md` (product + Migrating)
+  - Product + Migrating docs
   - `vite.md`, `csp.md`, `configuration.md`, create READMEs
   - Experimental warning
   - Changeset

@@ -17,13 +17,12 @@ import type { Template } from '../types/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-/** Base files incompatible with Vite SSR (static render / #app hydrate). */
+/** Base files incompatible with SSR (static render / #app hydrate). */
 const BASE_FILES_SKIPPED_FOR_VITE_SSR = new Set([
   'src/render.tsx',
   'src/client.tsx',
   'src/types.ts',
   'src/App/App.tsx',
-  'README.md',
 ]);
 
 /** Resolve `templates/` from dist (`../templates`) or src (`../../templates`). */

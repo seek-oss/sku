@@ -44,7 +44,7 @@ export default defineConfig({
     sidebar: {
       '/': [
         {
-          text: 'Guides',
+          text: 'Essentials',
           items: [
             { text: 'Getting started', link: '/getting-started' },
             { text: 'Configuration', link: '/configuration' },
@@ -54,22 +54,44 @@ export default defineConfig({
             { text: 'Debugging', link: '/debugging' },
           ],
         },
+
         {
-          text: 'Migration guides',
+          text: 'Server rendering',
+          collapsed: true,
           items: [
-            { text: 'Static Webpack → Vite', link: '/vite' },
-            { text: 'Jest → Vitest', link: '/vitest' },
+            { text: 'Getting started', link: '/ssr/' },
+            { text: 'Request entries', link: '/ssr/entries' },
+            { text: 'Routing', link: '/ssr/routing' },
+            { text: 'App Wrapper / Providers', link: '/ssr/providers' },
+            { text: 'Data loading', link: '/ssr/data-loading' },
             {
-              text: 'Previous sku versions',
-              link: '/previous-sku-versions',
+              text: 'Multi-language / Localisation',
+              link: '/ssr/multi-language',
+            },
+            { text: 'Error pages', link: '/ssr/error-pages' },
+            { text: 'Middleware', link: '/ssr/middleware' },
+            { text: 'Content Security Policy', link: '/ssr/csp' },
+            {
+              text: 'Deploy to production',
+              link: '/ssr/deploy-to-production',
+            },
+            { text: 'Webpack SSR', link: '/ssr/webpack-ssr' },
+            { text: 'Troubleshooting', link: '/ssr/troubleshooting' },
+            {
+              text: 'Migrate from Static App',
+              link: '/ssr/migrate-from-static-app',
+            },
+            {
+              text: 'Migrate from Webpack SSR',
+              link: '/ssr/migrate-from-webpack-ssr',
             },
           ],
         },
         {
-          text: 'Project types',
+          text: 'Other project types',
+          collapsed: false,
           items: [
             { text: 'Static rendering', link: '/static-rendering' },
-            { text: 'Server rendering', link: '/server-rendering' },
             { text: 'Libraries', link: '/libraries' },
             { text: 'Custom builds', link: '/custom-builds' },
           ],
@@ -96,6 +118,17 @@ export default defineConfig({
           items: [
             { text: 'Testing', link: '/testing' },
             { text: 'Linting/formatting', link: '/linting' },
+          ],
+        },
+        {
+          text: 'Migration guides',
+          items: [
+            { text: 'Static Webpack → Vite', link: '/vite' },
+            { text: 'Jest → Vitest', link: '/vitest' },
+            {
+              text: 'Previous sku versions',
+              link: '/previous-sku-versions',
+            },
           ],
         },
       ],

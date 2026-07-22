@@ -1,5 +1,20 @@
 # Static rendering
 
+Create a new Static app and start a local development environment:
+
+```bash
+$ pnpm dlx @sku-lib/create my-app --template=vite
+$ cd my-app
+$ pnpm start
+```
+
+Or create in the current directory:
+
+```bash
+$ pnpm dlx @sku-lib/create . --template=vite
+$ pnpm start
+```
+
 Client-side apps all suffer the same performance pitfall of not being able to show any content until the JavaScript is downloaded, parsed and run. The user sees a blank white screen until this has all occurred, which is often followed by a loading indicator while data is fetched from the network. To improve perceived performance, sku renders all the static content (everything not requiring an API call) of your app at build time. We refer to this as static rendering.
 
 ## Configuration

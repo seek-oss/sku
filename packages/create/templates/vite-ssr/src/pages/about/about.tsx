@@ -7,7 +7,7 @@ export function Component() {
       <Stack space="large">
         <Heading level="2">About</Heading>
         <Text>
-          This is a lazy-loaded route in your Vite SSR starter. Prefer idiomatic{' '}
+          This is a lazy-loaded route in your SSR starter. Prefer idiomatic{' '}
           <Strong>lazy: () =&gt; import(&apos;./…&apos;)</Strong> so sku can
           auto-derive modulepreloads in production. Export a named{' '}
           <Strong>Component</Strong> (not <Strong>default</Strong>) from the

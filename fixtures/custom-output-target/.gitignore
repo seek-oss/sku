@@ -1,6 +1,7 @@
 # managed by sku
 .eslintcache
 .prettierrc
+.ssl
 coverage/
 custom-output-directory/
 eslint.config.mjs

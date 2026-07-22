@@ -4,6 +4,7 @@
 **/*.vocab/index.ts
 .eslintcache
 .prettierrc
+.ssl
 coverage/
 dist/
 eslint.config.mjs

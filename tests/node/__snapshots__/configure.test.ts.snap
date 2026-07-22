@@ -4,6 +4,7 @@ exports[`configure > javascript app > should generate .gitignore 1`] = `
 [
   ".eslintcache",
   ".prettierrc",
+  ".ssl",
   "coverage/",
   "dist/",
   "eslint.config.mjs",
@@ -29,6 +30,7 @@ exports[`configure > typescript app > should generate .gitignore 1`] = `
 [
   ".eslintcache",
   ".prettierrc",
+  ".ssl",
   "coverage/",
   "eslint.config.mjs",
   "foo/bar/",

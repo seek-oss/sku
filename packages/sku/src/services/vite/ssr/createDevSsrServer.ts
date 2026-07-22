@@ -3,6 +3,7 @@ import express from 'express';
 import { createDebug } from 'obug';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
+import { getAppHosts } from '../../../context/hosts.js';
 import { createConfig } from '../helpers/config/createConfig.js';
 import createServer from '../../../utils/createServer.js';
 import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
@@ -31,11 +32,11 @@ export const createDevSsrServer = async ({
   const clientEntry = require.resolve('#entries/vite-ssr-client.dev');
   const serverEntry = require.resolve('#entries/vite-ssr-server');
   const serverApp = express();
-  // Shared with static/webpack: self-signed cert when httpsDevServer is true.
+  // Shared getAppHosts (`hosts` ∪ `sites[].host`) — same as static Vite / webpack.
   const httpServer = await createServer({
     requestListener: serverApp,
     httpsDevServer: skuContext.httpsDevServer,
-    hosts: skuContext.hosts,
+    hosts: getAppHosts(skuContext),
   });
   const vite = await createViteServer({
     ...createConfig(skuContext, environment),

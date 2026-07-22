@@ -7,6 +7,6 @@ export default {
   serverEntry: 'src/vite-ssr/server.tsx',
   languages: ['en', 'fr'],
   publicPath: '/static/translations/',
-  target: 'dist-vite-ssr',
+  target: 'dist',
   port: 8315,
 } satisfies SkuConfig;

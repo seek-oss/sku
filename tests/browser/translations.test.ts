@@ -93,6 +93,9 @@ describe('vite ssr translations', () => {
   const viteSsrUrl = `http://localhost:8315`;
 
   beforeAll(async () => {
+    const distDir = fixturePath('dist');
+    await rm(distDir, { recursive: true, force: true });
+
     const start = await sku('start', ['--config=sku.config.vite-ssr.ts']);
     await start.findByText('Starting development server');
   });

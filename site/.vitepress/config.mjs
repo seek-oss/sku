@@ -5,9 +5,12 @@ export default defineConfig({
   description:
     'Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest',
   base: '/sku/',
+  srcDir: 'docs',
   cleanUrls: true,
   appearance: false,
   vite: {
+    // Vite root is srcDir (`docs/`); keep serving assets from site/public.
+    publicDir: '../public',
     // esbuild 0.28+ cannot downlevel destructuring for VitePress's default
     // browser targets (e.g. safari14); raise the floor for the docs site only.
     esbuild: {
@@ -24,7 +27,7 @@ export default defineConfig({
   },
   head: [
     ['link', { rel: 'icon', href: '/sku/favicon.ico' }],
-    ['script', { src: '/sku/docsify-redirect.js' }],
+    ['script', { src: '/sku/redirects.js' }],
   ],
   themeConfig: {
     logo: '/logo/logo.png',
@@ -43,56 +46,56 @@ export default defineConfig({
         {
           text: 'Guides',
           items: [
-            { text: 'Getting started', link: '/docs/getting-started' },
-            { text: 'Configuration', link: '/docs/configuration' },
-            { text: 'CLI', link: '/docs/cli' },
-            { text: 'API', link: '/docs/api' },
-            { text: 'FAQ', link: '/docs/faq' },
-            { text: 'Debugging', link: '/docs/debugging' },
+            { text: 'Getting started', link: '/getting-started' },
+            { text: 'Configuration', link: '/configuration' },
+            { text: 'CLI', link: '/cli' },
+            { text: 'API', link: '/api' },
+            { text: 'Support', link: '/support' },
+            { text: 'Debugging', link: '/debugging' },
           ],
         },
         {
           text: 'Migration guides',
           items: [
-            { text: 'Static Webpack → Vite', link: '/docs/vite' },
-            { text: 'Jest → Vitest', link: '/docs/vitest' },
+            { text: 'Static Webpack → Vite', link: '/vite' },
+            { text: 'Jest → Vitest', link: '/vitest' },
             {
               text: 'Previous sku versions',
-              link: '/docs/previous-sku-versions',
+              link: '/previous-sku-versions',
             },
           ],
         },
         {
           text: 'Project types',
           items: [
-            { text: 'Static rendering', link: '/docs/static-rendering' },
-            { text: 'Server rendering', link: '/docs/server-rendering' },
-            { text: 'Libraries', link: '/docs/libraries' },
-            { text: 'Custom builds', link: '/docs/custom-builds' },
+            { text: 'Static rendering', link: '/static-rendering' },
+            { text: 'Server rendering', link: '/server-rendering' },
+            { text: 'Libraries', link: '/libraries' },
+            { text: 'Custom builds', link: '/custom-builds' },
           ],
         },
         {
           text: 'Development',
           items: [
-            { text: 'Building the app', link: '/docs/building-the-app' },
-            { text: 'Compilation', link: '/docs/compilation' },
-            { text: 'Styling', link: '/docs/styling' },
-            { text: 'Code splitting', link: '/docs/code-splitting' },
-            { text: 'Multi-site (Theming)', link: '/docs/multi-site' },
-            { text: 'Content Security Policy', link: '/docs/csp' },
-            { text: 'Multiple languages', link: '/docs/multi-language' },
-            { text: 'Extra features', link: '/docs/extra-features' },
+            { text: 'Building the app', link: '/building-the-app' },
+            { text: 'Compilation', link: '/compilation' },
+            { text: 'Styling', link: '/styling' },
+            { text: 'Code splitting', link: '/code-splitting' },
+            { text: 'Multi-site (Theming)', link: '/multi-site' },
+            { text: 'Content Security Policy', link: '/csp' },
+            { text: 'Multiple languages', link: '/multi-language' },
+            { text: 'Extra features', link: '/extra-features' },
           ],
         },
         {
           text: 'Design',
-          items: [{ text: 'Storybook', link: '/docs/storybook' }],
+          items: [{ text: 'Storybook', link: '/storybook' }],
         },
         {
           text: 'Quality',
           items: [
-            { text: 'Testing', link: '/docs/testing' },
-            { text: 'Linting/formatting', link: '/docs/linting' },
+            { text: 'Testing', link: '/testing' },
+            { text: 'Linting/formatting', link: '/linting' },
           ],
         },
       ],

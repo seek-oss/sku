@@ -139,7 +139,7 @@ export interface SkuConfigBase {
    * The client entry point to the app.
    *
    * @default "./src/client.tsx"
-   * @link https://seek-oss.github.io/sku/docs/configuration#cliententry
+   * @link https://seek-oss.github.io/sku/configuration#cliententry
    */
   clientEntry?: string;
 
@@ -149,17 +149,17 @@ export interface SkuConfigBase {
    * Ideally, this setting should only be used for internally controlled packages.
    *
    * @default "[]"
-   * @link https://seek-oss.github.io/sku/docs/configuration#compilepackages
+   * @link https://seek-oss.github.io/sku/configuration#compilepackages
    */
   compilePackages?: string[];
 
   /**
    * **Unavailable for libraries**
    *
-   * Enable content security policy feature. More info at https://seek-oss.github.io/sku/docs/csp
+   * Enable content security policy feature. More info at https://seek-oss.github.io/sku/csp
    *
    * @default false
-   * @link https://seek-oss.github.io/sku/docs/configuration#cspenabled
+   * @link https://seek-oss.github.io/sku/configuration#cspenabled
    */
   cspEnabled?: boolean;
 
@@ -167,7 +167,7 @@ export interface SkuConfigBase {
    * Extra external hosts to allow in your `script-src` content security policy. Only relevant if {@link cspEnabled} is set to `true`.
    *
    * @default []
-   * @link https://seek-oss.github.io/sku/docs/configuration#cspextrascriptsrchosts
+   * @link https://seek-oss.github.io/sku/configuration#cspextrascriptsrchosts
    */
   cspExtraScriptSrcHosts?: string[];
 
@@ -175,7 +175,7 @@ export interface SkuConfigBase {
    * This function provides a way to modify sku's ESLint configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *
-   * Before customizing your ESLint configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   * Before customizing your ESLint configuration, please reach out via the [support page](https://seek-oss.github.io/sku/support) to discuss your requirements and potential alternative solutions.
    *
    * ESLint rules help to maintain code quality and consistency.
    * Some rules even prevent potential bugs in your code, e.g. React rules.
@@ -186,7 +186,7 @@ export interface SkuConfigBase {
    * Sku provides no guarantees that its ESLint configuration will remain compatible with any customizations made within this function.
    * It is the responsibility of the user to ensure that their customizations are compatible with sku.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#dangerouslyseteslintconfig
+   * @link https://seek-oss.github.io/sku/configuration#dangerouslyseteslintconfig
    */
   dangerouslySetESLintConfig?: (
     skuESLintConfig: Linter.Config[],
@@ -196,12 +196,12 @@ export interface SkuConfigBase {
    * This function provides a way to modify sku's Jest configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *
-   * Before customizing your Jest configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   * Before customizing your Jest configuration, please reach out via the [support page](https://seek-oss.github.io/sku/support) to discuss your requirements and potential alternative solutions.
    *
    * Sku provides no guarantees that its Jest configuration will remain compatible with any customizations made within this function.
    * It is the responsibility of the user to ensure that their customizations are compatible with sku.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#dangerouslysetjestconfig
+   * @link https://seek-oss.github.io/sku/configuration#dangerouslysetjestconfig
    */
   dangerouslySetJestConfig?: (skuJestConfig: any) => any;
 
@@ -209,12 +209,12 @@ export interface SkuConfigBase {
    * This function provides a way to modify sku's TypeScript configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *
-   * Before customizing your TypeScript configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   * Before customizing your TypeScript configuration, please reach out via the [support page](https://seek-oss.github.io/sku/support) to discuss your requirements and potential alternative solutions.
    *
    * Sku provides no guarantees that its TypeScript configuration will remain compatible with any customizations made within this function.
    * It is the responsibility of the user to ensure that their customizations are compatible with sku.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#dangerouslysettsconfig
+   * @link https://seek-oss.github.io/sku/configuration#dangerouslysettsconfig
    */
   dangerouslySetTSConfig?: (skuTSConfig: any) => any;
 
@@ -222,9 +222,9 @@ export interface SkuConfigBase {
    * This function provides a way to modify sku's Vitest configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *
-   * Before customizing your Vitest configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   * Before customizing your Vitest configuration, please reach out via the [support page](https://seek-oss.github.io/sku/support) to discuss your requirements and potential alternative solutions.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#dangerouslysetvitestconfig
+   * @link https://seek-oss.github.io/sku/configuration#dangerouslysetvitestconfig
    */
   dangerouslySetVitestConfig?: (config: TestUserConfig) => TestUserConfig;
 
@@ -232,7 +232,7 @@ export interface SkuConfigBase {
    * Path to a file in your project that exports a function that can receive the Express server.
    * This can be used to extend to the dev server middleware.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#devservermiddleware
+   * @link https://seek-oss.github.io/sku/configuration#devservermiddleware
    */
   devServerMiddleware?: string;
 
@@ -241,7 +241,7 @@ export interface SkuConfigBase {
    * This setting is designed for usage on sites that generate React code snippets, e.g. Braid.
    *
    * @default false
-   * @link https://seek-oss.github.io/sku/docs/configuration#displaynamesprod
+   * @link https://seek-oss.github.io/sku/configuration#displaynamesprod
    */
   displayNamesProd?: boolean;
 
@@ -252,7 +252,7 @@ export interface SkuConfigBase {
    * Apps should have one environment for local development plus one for each environment they’re deployed to.
    *
    * @default []
-   * @link https://seek-oss.github.io/sku/docs/configuration#environments
+   * @link https://seek-oss.github.io/sku/configuration#environments
    */
   environments?: readonly string[];
 
@@ -261,7 +261,7 @@ export interface SkuConfigBase {
    * See [the ESLint documentation](https://eslint.org/docs/latest/use/configure/ignore#ignoring-files) for more information.
    *
    * @default []
-   * @link https://seek-oss.github.io/sku/docs/configuration#eslintIgnore
+   * @link https://seek-oss.github.io/sku/configuration#eslintIgnore
    */
   eslintIgnore?: readonly string[];
 
@@ -270,7 +270,7 @@ export interface SkuConfigBase {
    * Setting this option to `true` will instead externalize all node_modules, excluding `compilePackages`.
    *
    * @default false
-   * @link https://seek-oss.github.io/sku/docs/configuration#externalizenodemodules
+   * @link https://seek-oss.github.io/sku/configuration#externalizenodemodules
    */
   externalizeNodeModules?: boolean;
 
@@ -279,7 +279,7 @@ export interface SkuConfigBase {
    * You must have configured your hosts file to point to localhost as well.
    *
    * @default ['localhost']
-   * @link https://seek-oss.github.io/sku/docs/configuration#hosts
+   * @link https://seek-oss.github.io/sku/configuration#hosts
    */
   hosts?: readonly string[];
 
@@ -288,7 +288,7 @@ export interface SkuConfigBase {
    * This is useful when testing authentication flows that require access to `window.crypto`.
    *
    * @default false
-   * @link https://seek-oss.github.io/sku/docs/configuration#httpsdevserver
+   * @link https://seek-oss.github.io/sku/configuration#httpsdevserver
    */
   httpsDevServer?: boolean;
 
@@ -297,14 +297,14 @@ export interface SkuConfigBase {
    * It will default to the first `route` in the {@link routes} array.
    *
    * @default routes[0].route
-   * @link https://seek-oss.github.io/sku/docs/configuration#initialpath
+   * @link https://seek-oss.github.io/sku/configuration#initialpath
    */
   initialPath?: string;
 
   /**
    * The languages your application supports.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#languages
+   * @link https://seek-oss.github.io/sku/configuration#languages
    */
   languages?: readonly SkuLanguage[];
 
@@ -313,7 +313,7 @@ export interface SkuConfigBase {
    *
    * The entry file for the library. If set, sku will assume the project is a library. Must export its API from this file.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#libraryentry
+   * @link https://seek-oss.github.io/sku/configuration#libraryentry
    */
   libraryEntry?: string;
 
@@ -322,7 +322,7 @@ export interface SkuConfigBase {
    *
    * The global name of the library. Will be added to the `window` object under `window[libraryName]`.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#libraryname
+   * @link https://seek-oss.github.io/sku/configuration#libraryname
    */
   libraryName?: string;
 
@@ -334,7 +334,7 @@ export interface SkuConfigBase {
    *
    * If `libraryFile` is not specified then `libraryName` will be used instead.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#libraryfile
+   * @link https://seek-oss.github.io/sku/configuration#libraryfile
    */
   libraryFile?: string;
 
@@ -342,7 +342,7 @@ export interface SkuConfigBase {
    * An array of polyfills to be included into all client entry points.
    *
    * @default []
-   * @link https://seek-oss.github.io/sku/docs/configuration#polyfills
+   * @link https://seek-oss.github.io/sku/configuration#polyfills
    */
   polyfills?: string[];
 
@@ -353,7 +353,7 @@ export interface SkuConfigBase {
    * listen port (`__SKU_DEFAULT_SERVER_PORT__`), overridable via `process.env.PORT`.
    *
    * @default 8080
-   * @link https://seek-oss.github.io/sku/docs/configuration#port
+   * @link https://seek-oss.github.io/sku/configuration#port
    */
   port?: number;
 
@@ -364,7 +364,7 @@ export interface SkuConfigBase {
    * `sku start` / `sku build` fail. Import assets from modules instead.
    *
    * @default 'public'
-   * @link https://seek-oss.github.io/sku/docs/configuration#public
+   * @link https://seek-oss.github.io/sku/configuration#public
    */
   public?: string;
 
@@ -372,7 +372,7 @@ export interface SkuConfigBase {
    * The URL all the static assets of the app are accessible under.
    *
    * @default '/'
-   * @link https://seek-oss.github.io/sku/docs/configuration#publicpath
+   * @link https://seek-oss.github.io/sku/configuration#publicpath
    */
   publicPath?: string;
 
@@ -382,7 +382,7 @@ export interface SkuConfigBase {
    * The render entry file to the app. This file should export the required functions for static rendering.
    *
    * @default "./src/render.js"
-   * @link https://seek-oss.github.io/sku/docs/configuration#renderentry
+   * @link https://seek-oss.github.io/sku/configuration#renderentry
    */
   renderEntry?: string;
 
@@ -394,7 +394,7 @@ export interface SkuConfigBase {
    * Can be used to limit the languages rendered for a specific route. Any listed language must exist in the top level languages attribute.
    *
    * @default ['/']
-   * @link https://seek-oss.github.io/sku/docs/configuration#routes
+   * @link https://seek-oss.github.io/sku/configuration#routes
    */
   routes?: readonly SkuRoute[];
 
@@ -404,14 +404,14 @@ export interface SkuConfigBase {
    * The entry file for the server.
    *
    * @default "./src/server.tsx"
-   * @link https://seek-oss.github.io/sku/docs/configuration#serverentry
+   * @link https://seek-oss.github.io/sku/configuration#serverentry
    */
   serverEntry?: string;
 
   /**
    * Point to a JS file that will run before your tests to setup the testing environment.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#setuptests
+   * @link https://seek-oss.github.io/sku/configuration#setuptests
    */
   setupTests?: string | string[];
 
@@ -421,7 +421,7 @@ export interface SkuConfigBase {
    * An array of sites the app supports. These usually correspond to each domain the app is hosted under.
    *
    * @default []
-   * @link https://seek-oss.github.io/sku/docs/configuration#sites
+   * @link https://seek-oss.github.io/sku/configuration#sites
    */
   sites?: readonly SkuSite[];
 
@@ -433,7 +433,7 @@ export interface SkuConfigBase {
    * The `skipPackageCompatibilityCompilation` option allows you to pass a list of trusted packages to skip this behaviour.
    *
    * @default []
-   * @link https://seek-oss.github.io/sku/docs/configuration#skippackagecompatibilitycompilation
+   * @link https://seek-oss.github.io/sku/configuration#skippackagecompatibilitycompilation
    */
   skipPackageCompatibilityCompilation?: string[];
 
@@ -442,7 +442,7 @@ export interface SkuConfigBase {
    * To disable source maps for production builds, set this option to `false`.
    *
    * @default true
-   * @link https://seek-oss.github.io/sku/docs/configuration#sourcemapsprod
+   * @link https://seek-oss.github.io/sku/configuration#sourcemapsprod
    */
   sourceMapsProd?: boolean;
 
@@ -450,7 +450,7 @@ export interface SkuConfigBase {
    * The `browserslist` query describing the apps browser support policy.
    *
    * @default browserslist-config-seek
-   * @link https://seek-oss.github.io/sku/docs/configuration#supportedbrowsers
+   * @link https://seek-oss.github.io/sku/configuration#supportedbrowsers
    */
   supportedBrowsers?: string[];
 
@@ -458,7 +458,7 @@ export interface SkuConfigBase {
    * The directory to build your assets into when running `sku build` or `sku build-ssr`.
    *
    * @default 'dist'
-   * @link https://seek-oss.github.io/sku/docs/configuration#target
+   * @link https://seek-oss.github.io/sku/configuration#target
    */
   target?: string;
 
@@ -467,9 +467,9 @@ export interface SkuConfigBase {
    *
    * This function returns the output path within {@link target} for each rendered page. Generally, this value should be sufficient.
    *
-   * If you think you need to modify this setting, please reach out to the `sku-support` group first to discuss.
+   * If you think you need to modify this setting, please reach out via the [support page](https://seek-oss.github.io/sku/support) first to discuss.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#transformoutputpath
+   * @link https://seek-oss.github.io/sku/configuration#transformoutputpath
    */
   transformOutputPath?: TransformOutputPathFunction;
 
@@ -501,7 +501,7 @@ export interface WebpackSkuConfig {
    * Not valid for Vite SSR (`buildType: 'ssr'`) — use {@link SkuConfigBase.port}.
    *
    * @default 8181
-   * @link https://seek-oss.github.io/sku/docs/configuration#serverport
+   * @link https://seek-oss.github.io/sku/configuration#serverport
    */
   serverPort?: number;
 
@@ -512,7 +512,7 @@ export interface WebpackSkuConfig {
    * Use this option if your source code needs to be arranged differently.
    *
    * @default ['./src']
-   * @link https://seek-oss.github.io/sku/docs/configuration#srcpaths
+   * @link https://seek-oss.github.io/sku/configuration#srcpaths
    */
   srcPaths?: string[];
 
@@ -520,7 +520,7 @@ export interface WebpackSkuConfig {
    * This function provides a way to modify sku's Webpack configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *
-   * Before customizing your Webpack configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   * Before customizing your Webpack configuration, please reach out via the [support page](https://seek-oss.github.io/sku/support) to discuss your requirements and potential alternative solutions.
    *
    * As sku creates two webpack configs (`client` & `server|render`), this function will actually run twice.
    * If you only need to modify one of these configs, then you can check `config.name` within.
@@ -528,7 +528,7 @@ export interface WebpackSkuConfig {
    * Sku provides no guarantees that its Webpack configuration will remain compatible with any customizations made within this function.
    * It is the responsibility of the user to ensure that their customizations are compatible with sku.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#dangerouslysetwebpackconfig
+   * @link https://seek-oss.github.io/sku/configuration#dangerouslysetwebpackconfig
    */
   dangerouslySetWebpackConfig?: (skuWebpackConfig: any) => any;
 }
@@ -561,17 +561,17 @@ export interface ViteSkuConfig {
    * Ignored for Vite SSR (`buildType: 'ssr'`), which always uses HTTP CSP headers.
    *
    * @default 'tag'
-   * @link https://seek-oss.github.io/sku/docs/configuration#cspdelivery
+   * @link https://seek-oss.github.io/sku/configuration#cspdelivery
    */
   cspDelivery?: 'tag' | 'header';
 
   /**
    * **Unavailable for libraries**
    *
-   * Enable report-only content security policy feature. More info at https://seek-oss.github.io/sku/docs/csp
+   * Enable report-only content security policy feature. More info at https://seek-oss.github.io/sku/csp
    *
    * @default false
-   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyenabled
+   * @link https://seek-oss.github.io/sku/configuration#cspreportonlyenabled
    */
   cspReportOnlyEnabled?: boolean;
 
@@ -579,7 +579,7 @@ export interface ViteSkuConfig {
    * Extra external hosts to allow in your `script-src` report-only content security policy. Only relevant if {@link cspReportOnlyEnabled} is set to `true`.
    *
    * @default {@link SkuConfigBase#cspExtraScriptSrcHosts}
-   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyextrascriptsrchosts
+   * @link https://seek-oss.github.io/sku/configuration#cspreportonlyextrascriptsrchosts
    */
   cspReportOnlyExtraScriptSrcHosts?: string[];
 
@@ -589,7 +589,7 @@ export interface ViteSkuConfig {
    * appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
    * Consumers (or infra) must define the matching `Reporting-Endpoints` group.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyreportto
+   * @link https://seek-oss.github.io/sku/configuration#cspreportonlyreportto
    */
   cspReportOnlyReportTo?: string;
 
@@ -598,9 +598,9 @@ export interface ViteSkuConfig {
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
    *
    * Not supported for Vite SSR (`buildType: 'ssr'`): providing this option fails config validation.
-   * Raise exceptional customisation needs in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) with your use-case.
+   * Raise exceptional customisation needs via the [support page](https://seek-oss.github.io/sku/support) with your use-case.
    *
-   * Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+   * Before customizing your Vite configuration, please reach out via the [support page](https://seek-oss.github.io/sku/support) to discuss your requirements and potential alternative solutions.
    *
    * As sku creates two Vite configs (`client` & `render`), this function will actually run twice.
    * If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
@@ -610,7 +610,7 @@ export interface ViteSkuConfig {
    * Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
    * It is the responsibility of the user to ensure that their customizations are compatible with sku.
    *
-   * @link https://seek-oss.github.io/sku/docs/configuration#dangerouslysetviteconfig
+   * @link https://seek-oss.github.io/sku/configuration#dangerouslysetviteconfig
    */
   dangerouslySetViteConfig?: Plugin['config'];
 }

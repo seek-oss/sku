@@ -40,7 +40,7 @@ export const resolveAppSkuConfigPath = ({
     );
     console.error();
     console.error(
-      `See ${link('https://seek-oss.github.io/sku/docs/configuration')} for configuration help.`,
+      `See ${link('https://seek-oss.github.io/sku/configuration')} for configuration help.`,
     );
     debug('Custom sku config file does not exist:', resolvedCustomConfigPath);
     process.exit(1);

@@ -13,7 +13,7 @@ That includes:
 - You've hit a bug or unexpected behaviour
 - You have a new use case that might need a sku change
 - Something feels awkward, confusing, or just not ideal
-- You are thinking of using unsupported behaviour, or to bypassing restrictions
+- You are thinking of using unsupported behaviour, or bypassing restrictions
 
 **If you work at SEEK**, please reach out in the [#sku-support] Slack channel.
 

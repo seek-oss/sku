@@ -33,6 +33,9 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 **Non-Goals:**
 
 - Webpack mode for this buildType
+- Webpack SSR backfill or updating the Webpack-SSR create template
+- Converting the static `vite` create template
+- Full infra/deploy product guides (keep sku’s existing docs scope)
 - Framework Mode / RSC
 - Absolute/`CDN` `publicPath`
 - First-class router-basename config
@@ -50,6 +53,7 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Forcing webpack fixtures or non–Vite-SSR apps onto React Router 8
 - Treating RR loaders as the default teaching path for page content
 - Shipping RR `requestContext` / `getLoadContext` seeding in this change (deferred unless demand remains)
+- Upgrading sku’s shared Express dependency from 4 → 5 (deferred; would break webpack SSR)
 - Supporting `@sku-lib/vite/loadable` (Collector / `LoadableProvider` / `preloadPlugin` module-id injection) as a Vite SSR document-preload source
 - Supporting `dangerouslySetViteConfig` for Vite SSR (static Vite unchanged)
 

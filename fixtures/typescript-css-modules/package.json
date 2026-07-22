@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start:asset-server": "http-server dist-ssr -p 4003 --cors"
+    "build-ssr": "sku build-ssr --config sku-ssr.config.ts",
+    "serve-ssr": "node dist/server.cjs",
+    "start:asset-server": "http-server dist -p 4003 --cors"
   },
   "dependencies": {
     "react": "catalog:",

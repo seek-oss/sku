@@ -9,8 +9,11 @@ import {
 // Resolved by sku's Vite config plugin to the consumer client request entry.
 import * as clientEntry from '__sku_alias__clientEntry';
 import Document from '../ssr/Document.js';
-import { requireNamedExport } from '../ssr/requireNamedExport.js';
-import type { SkuSsrOnHydrate } from '../ssr/types.js';
+import {
+  optionalNamedFunctionExport,
+  requireNamedExport,
+} from '../ssr/requireNamedExport.js';
+import type { SkuSsrClientGetContext, SkuSsrOnHydrate } from '../ssr/types.js';
 import { withAppWrapperLayout } from '../ssr/withAppWrapperLayout.js';
 
 const routes = requireNamedExport<RouteObject[]>(
@@ -27,9 +30,15 @@ const onHydrate = requireNamedExport<SkuSsrOnHydrate>(
   { kind: 'function' },
 );
 
+const getContext = optionalNamedFunctionExport<SkuSsrClientGetContext>(
+  clientEntry,
+  'getContext',
+);
+
 const hydrate = async () => {
+  const clientContext = window.__SKU_CLIENT_CONTEXT__;
   const { AppWrapper } = onHydrate({
-    context: window.__SKU_CLIENT_CONTEXT__,
+    context: clientContext,
   });
   const routesWithAppWrapper = withAppWrapperLayout(routes, AppWrapper);
 
@@ -51,6 +60,12 @@ const hydrate = async () => {
 
   const router = createBrowserRouter(routesWithAppWrapper, {
     hydrationData: window.__staticRouterHydrationData,
+    // RR native getContext is zero-arg; wrap to inject hydrate clientContext.
+    ...(getContext
+      ? {
+          getContext: () => getContext({ clientContext }),
+        }
+      : {}),
   });
 
   hydrateRoot(

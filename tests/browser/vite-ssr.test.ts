@@ -177,6 +177,55 @@ describe('vite-ssr', () => {
       expect(await response.text()).toBe('ok');
     });
 
+    it('projects middleware-attached state into onRequest AppWrapper', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const apiUser = await fetch(`${url}/api/user`);
+      expect(await apiUser.text()).toBe('fixture-user');
+
+      const response = await fetch(url);
+      const html = await response.text();
+      expect(html).toContain('data-testid="app-wrapper-user-id"');
+      expect(html).toContain('fixture-user');
+      expect(html).toContain('"userId":"fixture-user"');
+    });
+
+    it('seeds loader context from server getContext on document SSR', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const response = await fetch(`${url}/context-user`);
+      const html = await response.text();
+      expect(response.ok).toBe(true);
+      expect(html).toContain('data-testid="context-user-id"');
+      expect(html).toContain('fixture-user');
+    });
+
+    it('re-seeds loader context from client getContext after client navigation', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const page = await createPage();
+      const pageErrors: Error[] = [];
+      page.on('pageerror', (error) => pageErrors.push(error));
+
+      // Start on a different location than the context-user route.
+      await page.goto(url, { waitUntil: 'networkidle' });
+      await page.getByTestId('shell').waitFor({ state: 'visible' });
+      expect(await page.getByTestId('app-wrapper-user-id').textContent()).toBe(
+        'fixture-user',
+      );
+
+      await page.getByTestId('nav-context-user').click();
+      await page.getByTestId('context-user-page').waitFor({ state: 'visible' });
+      expect(await page.getByTestId('context-user-id').textContent()).toBe(
+        'fixture-user',
+      );
+      expect(pageErrors).toEqual([]);
+      await page.close();
+    });
+
     it('serves config devServerMiddleware before server-entry middleware', async ({
       task,
     }) => {
@@ -488,6 +537,7 @@ describe('vite-ssr', () => {
           const html = await response.text();
           expect(html).toContain('__SKU_CLIENT_CONTEXT__');
           expect(html).toContain('"fromServer":true');
+          expect(html).toContain('"userId":"fixture-user"');
         },
         { timeout: 15000 },
       );

@@ -1,4 +1,5 @@
 import { renderToPipeableStream } from 'react-dom/server';
+import type { Request as ExpressRequest } from 'express';
 import {
   createStaticHandler,
   createStaticRouter,
@@ -23,6 +24,7 @@ import type {
   RenderResult,
   SkuRouteHandle,
   SkuSsrOnRequest,
+  SkuSsrServerGetContext,
 } from './types.js';
 import { withAppWrapperLayout } from './withAppWrapperLayout.js';
 
@@ -79,20 +81,28 @@ const getModuleIds = (
 const renderDocument = async (
   routes: RouteObject[],
   request: Request,
+  req: ExpressRequest,
   assets: RenderAssets,
   onRequest: SkuSsrOnRequest,
   options: RenderOptions = {},
   renderManifest?: RenderManifest,
+  getContext?: SkuSsrServerGetContext,
 ): Promise<RenderResult> => {
   // Server entry runs before query(); language is a local for preload + bootstrap.
-  const requestEntry = await onRequest({ request });
+  const requestEntry = await onRequest({ req });
 
   const routesWithAppWrapper = withAppWrapperLayout(
     routes,
     requestEntry.AppWrapper,
   );
   const { query, dataRoutes } = createStaticHandler(routesWithAppWrapper);
-  const context = await query(request);
+  const requestContext = getContext
+    ? await getContext({ request, req })
+    : undefined;
+  const context = await query(
+    request,
+    requestContext ? { requestContext } : undefined,
+  );
 
   if (context instanceof Response) {
     return { response: context };
@@ -199,10 +209,12 @@ const renderDocument = async (
 export const render = (
   routes: RouteObject[],
   request: Request,
+  req: ExpressRequest,
   assets: RenderAssets,
   onRequest: SkuSsrOnRequest,
   options: RenderOptions = {},
   renderManifest?: RenderManifest,
+  getContext?: SkuSsrServerGetContext,
 ): Promise<RenderResult> => {
   // Async Local Storage must be established in this Vite-loaded module so consumer
   // helpers (also resolved via the SSR module graph) share the store.
@@ -212,10 +224,12 @@ export const render = (
     renderDocument(
       routes,
       request,
+      req,
       assets,
       onRequest,
       { ...options, requestContextStore: store },
       renderManifest,
+      getContext,
     ),
   );
 };

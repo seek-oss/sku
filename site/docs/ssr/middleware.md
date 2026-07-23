@@ -17,10 +17,16 @@ Type `middleware` against Express 4 (`SkuSsrMiddleware` / `@types/express` major
 Because consumer `middleware` / `devServerMiddleware` mount into sku’s Express app, a future Express **major** upgrade in sku may be a breaking change for SSR apps.
 Minor/patch upgrades within the documented major stay non-breaking when APIs remain compatible.
 
+Attach isomorphic-capable values on `req` for [`onRequest`](./entries.md#onrequest) / optional server [`getContext`](./entries.md#getcontext-optional) (e.g. `req.user`).
+Augment Express `Request` for those fields — see [Typing middleware-attached fields](./entries.md#typing-middleware-attached-fields-on-req).
+
+Do **not** put raw Express `req` into React Router context — project values via dual-entry [`getContext`](./data-loading.md#router-context-getcontext).
+
 ```tsx
 import type { SkuSsrMiddleware } from 'sku';
 
 export const middleware: SkuSsrMiddleware = (req, res, next) => {
+  req.user = { id: '…' }; // after Express Request module augmentation
   if (req.path === '/api/health') {
     res.status(200).type('text/plain').send('ok');
     return;

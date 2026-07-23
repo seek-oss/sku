@@ -1,6 +1,10 @@
 import type { ComponentType, ReactNode } from 'react';
-import type { RequestHandler } from 'express';
-import type { HydrationState, StaticHandlerContext } from 'react-router';
+import type { Request as ExpressRequest, RequestHandler } from 'express';
+import type {
+  HydrationState,
+  RouterContextProvider,
+  StaticHandlerContext,
+} from 'react-router';
 import type { PipeableStream } from 'react-dom/server';
 import type { ClientManifest, ManifestChunk } from './resolveAssets.js';
 import type { SsrRequestContextStore } from './requestContext.js';
@@ -34,8 +38,20 @@ export type SkuSsrOnRequestResult = {
 };
 
 export type SkuSsrOnRequest = (args: {
-  request: Request;
+  /** Express request after consumer middleware (not Fetch `Request`). */
+  req: ExpressRequest;
 }) => SkuSsrOnRequestResult | Promise<SkuSsrOnRequestResult>;
+
+/**
+ * Optional server-entry `getContext` — seeds React Router `requestContext` for
+ * document `query()` / loaders. Separate from `onRequest` (React providers).
+ */
+export type SkuSsrServerGetContext = (args: {
+  /** Fetch `Request` — same shape as `query()` / loaders. */
+  request: Request;
+  /** Express request after consumer middleware. */
+  req: ExpressRequest;
+}) => RouterContextProvider | Promise<RouterContextProvider>;
 
 /** Closed return object from the Vite SSR `onHydrate` export. Fields are optional. */
 export type SkuSsrOnHydrateResult = {
@@ -45,6 +61,14 @@ export type SkuSsrOnHydrateResult = {
 export type SkuSsrOnHydrate = (args: {
   context: JsonValue | undefined;
 }) => SkuSsrOnHydrateResult;
+
+/**
+ * Optional client-entry `getContext` — passed to `createBrowserRouter({ getContext })`
+ * (sku wraps RR’s zero-arg API and injects hydrate `clientContext`).
+ */
+export type SkuSsrClientGetContext = (args: {
+  clientContext?: JsonValue;
+}) => RouterContextProvider;
 
 export interface RenderManifest {
   manifest: ClientManifest;

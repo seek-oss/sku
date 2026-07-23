@@ -6,7 +6,7 @@ You export a named `routes` (`RouteObject[]`) from **both** `serverEntry` and `c
 
 Lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
 
-For page content, prefer [render-time data loading](./data-loading.md) via `AppWrapper` + Suspense; use loaders when you need waterfalls, document redirects, or response headers.
+For page content, prefer [render-time data loading](./data-loading.md) via `AppWrapper` + Suspense; use loaders when you need waterfalls, document redirects, response headers, or optional dual-entry [`getContext`](./data-loading.md#router-context-getcontext).
 
 SSR requires **React Router** to be installed within your app.
 

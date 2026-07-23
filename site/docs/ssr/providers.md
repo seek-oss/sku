@@ -40,8 +40,8 @@ import type { ReactNode } from 'react';
 import { useLocation } from 'react-router';
 import type { SkuSsrOnRequest } from 'sku';
 
-export const onRequest: SkuSsrOnRequest = ({ request }) => {
-  const language = resolveLocaleFromRequest(request);
+export const onRequest: SkuSsrOnRequest = ({ req }) => {
+  const language = resolveLocaleFromPath(req.path);
 
   return {
     language,

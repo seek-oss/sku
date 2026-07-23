@@ -76,6 +76,10 @@ Missing named exports MUST hard-error (no default fallback, no noops).
 
 Sku MUST NOT specially gate on entry file existence; a missing file fails via normal module resolution.
 
+`onRequest` MUST receive `{ req }` where `req` is the Express request after consumer middleware.
+
+Sku MUST NOT pass Fetch `Request` into `onRequest` (Fetch stays on `query()` and optional server `getContext`).
+
 `onRequest` MAY return `AppWrapper`, `language` (server Document vocab only), and `clientContext`.
 
 `onHydrate` receives `{ context }` only and MAY return `AppWrapper`.
@@ -84,11 +88,48 @@ Sku MUST NOT forward `language` to the client.
 
 When `AppWrapper` is returned, sku MUST mount it as a pathless parent under the router above that side’s `routes`.
 
+Server and client entries MAY optionally export `getContext` as a **separate named export** (not folded into `onRequest` / `onHydrate`).
+
+When the server entry exports `getContext`, sku MUST call it with `{ request, req }` before `query()` and pass the returned `RouterContextProvider` as `requestContext` to `query()`.
+
+When the client entry exports `getContext`, sku MUST pass it to `createBrowserRouter({ getContext })` (wrapping RR’s zero-arg API if sku injects `clientContext`).
+
+Omitting either `getContext` MUST preserve today’s empty/default context behaviour.
+
+Sku MUST NOT make Express `req` the loader `request` argument (`query()` continues to use Fetch `Request` only).
+
+Sku MUST NOT pass `res` into `onRequest` or `getContext`.
+
 #### Scenario: onRequest and onHydrate wiring
 
 - **WHEN** a Vite SSR app handles a document request
-- **THEN** sku invokes `onRequest` before `query()`
+- **THEN** sku invokes `onRequest` with Express `req` only (no Fetch `Request`) before `query()`
 - **AND** invokes `onHydrate` with deserialized `context` only (no `language`)
+
+#### Scenario: onRequest can read middleware-attached Express state
+
+- **WHEN** consumer Express middleware attaches fields on `req` (e.g. `req.user`, `req.log`)
+- **AND** `onRequest` runs for that document request
+- **THEN** `onRequest` can read those fields from `req` to build `AppWrapper` / `language` / `clientContext`
+
+#### Scenario: Optional server getContext seeds query requestContext
+
+- **WHEN** the server entry exports `getContext`
+- **AND** a document request is handled
+- **THEN** sku calls server `getContext({ request, req })` before `query()`
+- **AND** passes the result as `requestContext` to `query()`
+
+#### Scenario: Optional client getContext seeds createBrowserRouter
+
+- **WHEN** the client entry exports `getContext`
+- **AND** the browser router is created
+- **THEN** sku passes that function to `createBrowserRouter({ getContext })`
+
+#### Scenario: Omitting getContext keeps default behaviour
+
+- **WHEN** an entry omits `getContext`
+- **THEN** sku does not require it
+- **AND** React Router uses today’s empty/default context behaviour
 
 #### Scenario: AppWrapper mounts inside the router
 
@@ -616,7 +657,7 @@ Sku MUST NOT add a runtime experimental gate.
 
 ### Requirement: Product and Migrating docs cover Vite SSR topics
 
-Vite SSR product docs MUST cover dual-entry `routes`, AppWrapper, middleware layers, CSP, and response headers, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
+Vite SSR product docs MUST cover dual-entry `routes`, AppWrapper, middleware layers, CSP, response headers, data-loading hierarchy, and optional dual-entry `getContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
 
 Migrating docs MUST also cover:
 
@@ -631,8 +672,14 @@ Migrating docs MUST also cover:
 - moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
 - that `dangerouslySetViteConfig` is unsupported for Vite SSR (hard-error when set; raise use-cases via sku-support)
 - keeping server-only loader modules out of the client-imported route graph (split trees; set `handle.moduleId` when lazy factories are non-idiomatic)
-- prefer render-time React data loading via `AppWrapper` + Suspense / shared clients; use loaders for avoiding heavily-nested waterfalls, document redirects, or response headers — not as the default for page content
-- that Express `req` / middleware-attached state is **not** bridged into React Router loaders
+- prefer render-time React data loading via `AppWrapper` + Suspense / shared clients; use loaders for avoiding heavily-nested waterfalls, document redirects, response headers, or opt-in `getContext` DI — not as the default for page content
+- that loader `request` stays Fetch; Express `req` is available to `onRequest` (`{ req }` only) and optional server `getContext`, not as the loader `request` argument
+- that `onRequest` does not receive Fetch `Request` (experimental BREAKING vs prior `{ request }` shape)
+- optional dual-entry `getContext` (Data Mode vs Framework Mode; server seeds from middleware bag + Fetch `request`; client seeds from browser-visible state; same `createContext` keys; different construction; cadence: once per document `query` vs every client nav/fetcher)
+- how to type Express `req` fields appended by middleware (module augmentation of `express-serve-static-core` `Request`, shared by `middleware` / `onRequest` / server `getContext`; same pattern as sku’s `getCspNonce`)
+- relation of Express `middleware` vs RR route `middleware` vs entry `getContext`, and of `onRequest`/`onHydrate` (React providers) vs `getContext` (loader/action DI)
+- a **red warning** that apps MUST NOT put Express `req` (or other non-isomorphic platform objects) into `RouterContextProvider` — project values both sides can supply
+- a client-navigation example where context is re-seeded without Express for a location different from the initial SSR location
 - for Braid apps: reset must run before any Braid-touching server module on `sku start` (start evaluation order can differ from production build)
 - providers that touch `window` must not run in the Document SSR tree (prefer client-only wrappers or `onHydrate`-only providers)
 - Jest → Vitest as a Vite SSR prerequisite (point at existing Vitest docs / `@sku-lib/codemod jest-to-vitest`)
@@ -645,8 +692,11 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 - **WHEN** a reader opens Vite SSR product docs
 - **THEN** docs cover AppWrapper, routes, middleware, CSP, and response headers
 - **AND** docs steer page content toward render-time data loading via `AppWrapper` (not loaders as the default)
-- **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, or response headers
-- **AND** docs state that Express request state is not bridged into loaders
+- **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getContext` DI
+- **AND** docs document optional dual-entry `getContext` and Data Mode vs Framework Mode seeding
+- **AND** docs show how to type middleware-appended Express `req` fields via `express-serve-static-core` module augmentation
+- **AND** docs include a red warning against putting Express `req` into `RouterContextProvider`
+- **AND** docs include a client-navigation example where context works for a non-initial location without Express
 
 #### Scenario: Migrating docs exist
 
@@ -676,7 +726,8 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 
 - **WHEN** a reader opens **Migrate from Older / Webpack SSR App** docs
 - **THEN** docs remind readers to keep server-only loader modules off the client route graph
-- **AND** docs steer away from Express `req` → loader coupling for page content
+- **AND** docs steer away from putting raw Express `req` into loaders or `RouterContextProvider` for page content
+- **AND** docs point at dual-entry `getContext` for projecting isomorphic values when loader DI is needed
 - **AND** docs note Braid reset-before-Braid on `sku start` for Braid apps
 - **AND** docs note that `window`-touching providers must not run in the SSR tree
 - **AND** docs treat Jest → Vitest as a Vite SSR prerequisite and point at existing Vitest guidance

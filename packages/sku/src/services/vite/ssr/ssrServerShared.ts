@@ -117,6 +117,7 @@ const getRequestBodyInit = (
 
 export type RenderFunction = (
   request: globalThis.Request,
+  req: Request,
   assets: RenderAssets,
   options?: RenderOptions,
   manifest?: RenderManifest,
@@ -222,6 +223,7 @@ export const createHtmlRenderMiddleware =
         getRequestContextStore(req) ?? createSsrRequestContextStore();
       const result = await render(
         createWebRequest(req, controller.signal),
+        req,
         assets,
         {
           requestContextStore,

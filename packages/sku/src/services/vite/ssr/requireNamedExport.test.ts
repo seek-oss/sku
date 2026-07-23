@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { requireNamedExport } from './requireNamedExport.js';
+import {
+  optionalNamedFunctionExport,
+  requireNamedExport,
+} from './requireNamedExport.js';
 
 describe('requireNamedExport', () => {
   it('returns the named export when present', () => {
@@ -75,5 +78,26 @@ describe('requireNamedExport', () => {
     ).toThrow(
       /Vite SSR serverEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
     );
+  });
+});
+
+describe('optionalNamedFunctionExport', () => {
+  it('returns the function when present', () => {
+    const getContext = () => ({});
+    expect(optionalNamedFunctionExport({ getContext }, 'getContext')).toBe(
+      getContext,
+    );
+  });
+
+  it('returns undefined when omitted (default RR context behaviour)', () => {
+    expect(
+      optionalNamedFunctionExport({ onRequest: () => ({}) }, 'getContext'),
+    ).toBeUndefined();
+  });
+
+  it('returns undefined when the export is not a function', () => {
+    expect(
+      optionalNamedFunctionExport({ getContext: 'nope' }, 'getContext'),
+    ).toBeUndefined();
   });
 });

@@ -11,9 +11,9 @@ If `language` is omitted, no language chunk is preloaded, which can delay loadin
 // src/server.tsx
 import type { SkuSsrOnRequest } from 'sku';
 
-export const onRequest: SkuSsrOnRequest = ({ request }) => ({
+export const onRequest: SkuSsrOnRequest = ({ req }) => ({
   // Must match a name from sku config `languages` (or `en-PSEUDO`)
-  language: resolveLocaleFromRequest(request), // e.g. 'th-TH'
+  language: resolveLocaleFromPath(req.path), // e.g. 'th-TH'
 });
 ```
 

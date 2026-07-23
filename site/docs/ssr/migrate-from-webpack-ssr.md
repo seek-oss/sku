@@ -52,8 +52,10 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 ## Data loading
 
 - Prefer render-time fetching in React (`AppWrapper` + Suspense / shared clients) for page content — not React Router loaders as the default — see [Data loading](./data-loading.md)
-- Use loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, or set response headers
-- Loaders receive a Fetch `Request`, **not** Express `req`. Sku does **not** bridge Express middleware-attached state into loaders. If your app depends on that coupling for page data, stay on Webpack SSR for now and raise with sku-support
+- Use loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, set response headers, or opt-in dual-entry [`getContext`](./data-loading.md#router-context-getcontext) DI
+- Loaders receive a Fetch `Request`, **not** Express `req`. Express `req` is available to [`onRequest({ req })`](./entries.md#onrequest) and optional server `getContext` — not as the loader `request` argument
+- **Do not** put raw Express `req` into `RouterContextProvider` — project isomorphic values via dual-entry `getContext` (see the [red warning](./data-loading.md#router-context-getcontext))
+- Type middleware-appended `req` fields with Express `Request` module augmentation — see [Request entries](./entries.md#typing-middleware-attached-fields-on-req)
 
 ## Middleware
 

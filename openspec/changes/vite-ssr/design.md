@@ -24,7 +24,9 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Ship React Router 8 as an **optional peerDependency** `^8` (Vite SSR only; no hard sku dep)
 - Keep shared Express dep on 4 (no 4 → 5 bump)
 - No Jest transforms for React Router 8 in this change (Vite SSR requires Vitest)
-- Docs steer: prefer render-time React data loading; loaders as opt-in; no Express→loader bridge
+- Express `req` available to `onRequest` for AppWrapper / shell DI from middleware-attached state
+- Optional dual-entry `getContext` → RR `RouterContextProvider` for loader/action DI on document SSR and client navigations
+- Docs steer: prefer render-time React data loading via AppWrapper + Suspense; loaders as opt-in; document `getContext` as opt-in; red warning against putting Express `req` (or other non-isomorphic objects) into router context
 - Migrating guidance for server-only loaders, Braid reset order, client-only providers, Jest→Vitest, `#` pathAliases
 - Config `polyfills` on the Vite SSR browser client (parity with static Vite / webpack SSR)
 - Vite SSR `sku start` SSR-CSS (virtual stylesheet via Document assets; no `transformIndexHtml`)
@@ -48,11 +50,15 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Automatic `*.server.ts` client strip
 - Auto-injecting Braid reset into sku’s Vite SSR server entry
 - A new Jest→Vitest codemod beyond existing tooling/docs
-- Bridging Express `req` (or middleware-attached state) into React Router loaders
+- Making Express `req` the loader `request` argument (stays Fetch `Request`)
+- Treating Framework Mode server-only `getLoadContext(req, res)` as sufficient for sku Data Mode
+- Requiring `getContext` (optional; omit → today’s empty/default behaviour)
+- Passing Fetch `Request` into `onRequest` (Express `req` only; Fetch stays on `query` / server `getContext`)
+- Passing `res` into `onRequest` / `getContext` in v1 (loaders/sku already own response headers)
+- Treating raw Express `req` (or other non-isomorphic platform objects) in `RouterContextProvider` as a supported pattern
 - Shipping Jest support for React Router 8 (transforms / ESM interop)
 - Forcing webpack fixtures or non–Vite-SSR apps onto React Router 8
 - Treating RR loaders as the default teaching path for page content
-- Shipping RR `requestContext` / `getLoadContext` seeding in this change (deferred unless demand remains)
 - Upgrading sku’s shared Express dependency from 4 → 5 (deferred; would break webpack SSR)
 - Supporting `@sku-lib/vite/loadable` (Collector / `LoadableProvider` / `preloadPlugin` module-id injection) as a Vite SSR document-preload source
 - Supporting `dangerouslySetViteConfig` for Vite SSR (static Vite unchanged)
@@ -100,11 +106,13 @@ Reuse `serverEntry` / `clientEntry`.
 
 Both MUST export `routes: RouteObject[]`.
 
-Server: `onRequest`, `middleware`.
+Server: `onRequest`, `middleware`; optional `getContext`.
 
-Client: `onHydrate`.
+Client: `onHydrate`; optional `getContext`.
 
 Hard errors if required named exports are missing (no early file-existence gate).
+
+Optional `getContext` is a **separate named export** on each entry — not folded into `onRequest` / `onHydrate`. Client `getContext` must be a stable function called on every client navigation/fetcher by `createBrowserRouter`; returning a one-shot provider from `onHydrate` is the wrong cadence.
 
 Trees MUST stay hydration-compatible (path/nesting/ids); implementations MAY diverge.
 
@@ -274,18 +282,28 @@ No meta `http-equiv`.
 ```ts
 // serverEntry
 export const routes: RouteObject[];
-export function onRequest(args: { request: Request }): {
+export function onRequest(args: {
+  req: Express.Request; // after consumer middleware
+}): {
   AppWrapper?: ComponentType<{ children: ReactNode }>;
   language?: string;
   clientContext?: JsonValue;
 };
 export const middleware: RequestHandler | RequestHandler[];
+export function getContext?(args: {
+  request: Request; // Fetch — same shape as query()/loaders
+  req: Express.Request;
+}): RouterContextProvider | Promise<RouterContextProvider>;
 
 // clientEntry
 export const routes: RouteObject[];
 export function onHydrate(args: { context: JsonValue | undefined }): {
   AppWrapper?: ComponentType<{ children: ReactNode }>;
 };
+export function getContext?(
+  // optional sku wrapper if injecting clientContext; RR native getContext is zero-arg
+  args?: { clientContext?: JsonValue },
+): RouterContextProvider;
 ```
 
 Tree: `Document` → router → optional pathless `AppWrapper` → entry `routes`.
@@ -293,6 +311,38 @@ Tree: `Document` → router → optional pathless `AppWrapper` → entry `routes
 `language` is server-local for Document vocab preload only (not Async Local Storage, not `onHydrate`).
 
 `clientContext` → hydrate `context`.
+
+**`onRequest({ req })` only:** Thread Express `req` from `createHtmlRenderMiddleware` / the render path into `onRequest`. Do **not** pass Fetch `Request` into `onRequest` — shell DI needs the middleware bag; URL/path/headers are available on Express `req`. `query()` continues to use Fetch `Request` only. Soft risks: Express types on the public API (already true for `middleware`), asymmetry with `onHydrate`, temptation to ask for `res` next — document **`req` only, not `res`**. **BREAKING** vs the prior experimental `onRequest({ request })` shape (update fixture/template/docs).
+
+**Typing middleware-attached fields on `req`:** `SkuSsrOnRequest` / server `getContext` use Express’s `Request`. Middleware-appended values (`req.user`, `req.log`, …) are not on the stock type. Product docs MUST show consumers how to augment Express (same approach sku uses for `getCspNonce`):
+
+```ts
+// e.g. src/types/express.d.ts (ensure included by tsconfig)
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: { id: string };
+    log?: { info: (msg: string) => void };
+  }
+}
+```
+
+Then `onRequest` / server `getContext` can read `req.user` / `req.log` with type-checking. Document that augmentation applies across `middleware`, `onRequest`, and server `getContext` (one shared Express `Request` type).
+
+**Optional dual-entry `getContext`:** Same typed keys (`createContext` + `RouterContextProvider`); different construction per environment. Server `getContext` keeps both Fetch `request` and Express `req` because it seeds loader/action DI next to `query(request)`.
+
+- Server: sku calls before `query()` and passes the result as `requestContext`.
+- Client: sku passes to `createBrowserRouter({ getContext })`. RR’s native `getContext` is zero-arg; if sku injects `clientContext`, wrap RR’s API.
+- Omit either export → today’s empty/default behaviour (backward compatible).
+
+```ts
+import { createContext, RouterContextProvider } from 'react-router';
+export const userContext = createContext<User | null>(null);
+// server getContext: ctx.set(userContext, req.user ?? null)
+// client getContext: ctx.set(userContext, readSessionUser() /* different source */)
+// loader: context.get(userContext)
+```
+
+`onRequest` / `onHydrate` (React providers) and `getContext` (loader/action DI) compose; apps may only need one.
 
 ### 13. Request-scoped nonce (lazy, single value)
 
@@ -407,8 +457,9 @@ Migrating MUST cover:
 - move off config `public` / public assets folder (import assets instead)
 - that `dangerouslySetViteConfig` is unsupported (hard-error; raise use-cases via sku-support)
 - server-only loaders vs client route graph (+ explicit `moduleId` when needed)
-- prefer render-time data loading via `AppWrapper`; loaders for waterfalls / document redirects / headers
-- no Express `req` → loader bridge (stay on webpack SSR / raise with sku-support if needed)
+- prefer render-time data loading via `AppWrapper`; loaders for waterfalls / document redirects / headers / opt-in `getContext` DI
+- optional dual-entry `getContext` patterns (Data Mode vs Framework Mode); red warning against putting Express `req` in `RouterContextProvider`
+- Express `Request` module augmentation for middleware-appended fields (`express-serve-static-core`; shared by `middleware` / `onRequest` / server `getContext`)
 - Braid reset-before-Braid on `sku start` (Braid apps; no sku auto-inject)
 - client-only / `onHydrate`-only providers for `window`-touching libraries
 - Jest → Vitest prerequisite (link existing docs / codemod)
@@ -473,17 +524,35 @@ Rationale: portable shared UI without per-app loader wiring; aligns with streami
 Reach for React Router **loaders** when you need to:
 
 - start work before the suspending subtree renders (waterfall / parallelisation), or
-- issue a real **document** `redirect()` / response headers (`Cache-Control`, `Set-Cookie`, …).
+- issue a real **document** `redirect()` / response headers (`Cache-Control`, `Set-Cookie`, …), or
+- advanced DI via optional dual-entry `getContext` (same `createContext` keys on both sides).
 
 `<Navigate />` on static initial render is a no-op — it is not a document HTTP redirect.
 
-Loaders receive a Fetch `Request`, not Express `req`.
+Loaders receive a Fetch `Request`, not Express `req`. Sku does **not** make Express `req` the loader `request` argument.
 
-Sku MUST NOT bridge Express middleware state into loaders in this change (`getLoadContext`, general Async Local Storage bag, or passing `req`).
+#### Data Mode vs Framework Mode `getLoadContext`
 
-Apps that need a rich Express bag to load page data should stay on webpack SSR for now and raise the use-case with sku-support.
+Sku is **Data Mode**, not Framework Mode:
 
-**Deferred (not this change):** optional RR `requestContext` / `getLoadContext` seeded from Fetch / `onRequest` as advanced isomorphic DI for loaders — only if real demand remains after the preferred path.
+|                    | Framework Mode                     | Sku Data Mode                                                              |
+| ------------------ | ---------------------------------- | -------------------------------------------------------------------------- |
+| Server seed        | Adapter `getLoadContext(req, res)` | Entry `getContext({ request, req })` into `query(..., { requestContext })` |
+| Client nav loaders | Often still server (`.data`)       | Browser via `createBrowserRouter`                                          |
+| Client seed        | Needed for client-only paths       | Needed for **every** client nav if context DI is used                      |
+
+Copying **only** Framework’s server-half adapter into sku leaves client-nav loaders without context. If loader context is offered at all, prefer dual entry.
+
+Document clearly:
+
+- Server seeds from Express middleware bag + Fetch `request`; client seeds from browser-visible state (`clientContext`, cookies, memory, etc.).
+- Cadence: server once per document `query`; client every nav/fetcher.
+- Relation to Express `middleware` vs RR route `middleware` vs entry `getContext`.
+- Relation to `onRequest`/`onHydrate` (React providers) vs `getContext` (loader/action DI) — they compose.
+
+**Red warning (MUST ship in product docs):** never put Express `req` (or other non-isomorphic platform objects) into `RouterContextProvider`. Project **values** / isomorphic-capable dependencies that both server and client `getContext` can supply. Raw `req` is `undefined` on client navs and becomes a landmine.
+
+**Required docs example:** client `getContext` (or a loader using context) loading data for a **different location than the initial SSR location** — after client navigation — showing the client seed must work without Express and must not assume document-SSR-only state (e.g. user/logger from `req` on server; re-derived on client; navigate; loader still gets context).
 
 Product + Migrating docs MUST encode this hierarchy and rebalance any wording that implied loaders are the default for content.
 
@@ -521,6 +590,8 @@ Sku MUST NOT ship Jest transforms for `react-router` / `cookie-es` / `import.met
 
 Document Express 4 for middleware typing (`middleware` / `SkuSsrMiddleware`) and React Router 8 for Data Mode / route typing consumers rely on.
 
+Document Express `Request` module augmentation (`express-serve-static-core`) so middleware-appended fields type-check in `middleware`, `onRequest`, and server `getContext` — same pattern as sku’s `getCspNonce` augmentation.
+
 Align any React Router 8 peer baselines sku already owns (Node / React / Vite) where the catalog or engines need a bump; do not expand sku’s supported React range solely for packages that still support React 18 unless required by the upgrade.
 
 Sku owns the Express app that mounts consumer middleware and the React Router Data Mode wiring for Vite SSR.
@@ -539,31 +610,33 @@ Minor/patch upgrades within the documented major remain non-breaking when APIs s
 
 ## Risks / Trade-offs
 
-| Risk                                | Mitigation                                                                                                                                          |
-| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Dual `routes` hydration mismatch    | Docs + template `createRoutes`; no runtime checker                                                                                                  |
-| Shell-only CSP / late scripts       | Lazy single nonce; hash known bootstrap bodies                                                                                                      |
-| Absolute/`CDN` `publicPath`         | Config rejects; relative-only docs; no browser e2e for this edge case                                                                               |
-| `publicPath` coupled to basename    | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets                                                |
-| Start vs prod asset URLs            | Start: Vite graph at `/`; build/prod: `base` + static mount under `publicPath` (webpack start parity)                                               |
-| Unhashed `public` folder assets     | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs                                         |
-| `dangerouslySetViteConfig` on SSR   | Hard-error when set; omit decorator plugin on SSR graph; docs + sku-support for use-cases                                                           |
-| CJS “got: object” on `sku start`    | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                                                                     |
-| Mock deps ship in prod              | `devServerMiddleware` only; never from server entry                                                                                                 |
-| Early production use                | Experimental docs + changeset                                                                                                                       |
-| Express / RR major drift            | Keep shared Express on 4; RR 8 optional peer for Vite SSR only; docs + changeset mark later major bumps as potentially breaking; Express 5 deferred |
-| RR 8 peer baselines                 | Optional peer `^8`; align engines with RR 8 minimums sku already can meet; document consumer React/Node expectations; template installs RR 8        |
-| Jest + RR 8 (webpack)               | Out of scope: no Jest transforms in this change; Vite SSR requires Vitest; do not force webpack fixtures onto RR 8                                  |
-| Server loaders leak to client       | Migrating: split server-only modules; explicit `moduleId` when lazy is non-idiomatic                                                                |
-| Braid reset before Braid on start   | Docs: reset early on server graph; no sku auto-inject                                                                                               |
-| `window` providers in Document SSR  | Migrating: client-only / `onHydrate`-only wrappers                                                                                                  |
-| Jest apps on Vite SSR               | Migrating: Vitest prerequisite; link existing vitest docs / codemod                                                                                 |
-| Nested `@vocab/vite/runtime`        | Sku `createRequire` + `resolve.alias`; validate translations Vite SSR without consumer pin                                                          |
-| Bare `src/` imports under Vite      | Migrating: `#` `pathAliases` + migrate-root-resolution                                                                                              |
-| Express `req` → loader pressure     | Docs: prefer AppWrapper + Suspense; no Express→loader bridge; webpack SSR + sku-support if blocked                                                  |
-| Server-only loaders as default      | Docs steer render-time content loading; loaders for waterfalls / document redirects / headers only                                                  |
-| Start FOUC without SSR-CSS          | Document `assets.css` gets virtual stylesheet on `sku start`; production stays on manifest CSS                                                      |
-| Telemetry missing on Vite SSR start | Mount `telemetryPlugin` on SSR graph; client scripts via client entry / bootstrap; mark `initialPageLoad` on ready                                  |
+| Risk                                 | Mitigation                                                                                                                                          |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dual `routes` hydration mismatch     | Docs + template `createRoutes`; no runtime checker                                                                                                  |
+| Shell-only CSP / late scripts        | Lazy single nonce; hash known bootstrap bodies                                                                                                      |
+| Absolute/`CDN` `publicPath`          | Config rejects; relative-only docs; no browser e2e for this edge case                                                                               |
+| `publicPath` coupled to basename     | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets                                                |
+| Start vs prod asset URLs             | Start: Vite graph at `/`; build/prod: `base` + static mount under `publicPath` (webpack start parity)                                               |
+| Unhashed `public` folder assets      | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs                                         |
+| `dangerouslySetViteConfig` on SSR    | Hard-error when set; omit decorator plugin on SSR graph; docs + sku-support for use-cases                                                           |
+| CJS “got: object” on `sku start`     | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                                                                     |
+| Mock deps ship in prod               | `devServerMiddleware` only; never from server entry                                                                                                 |
+| Early production use                 | Experimental docs + changeset                                                                                                                       |
+| Express / RR major drift             | Keep shared Express on 4; RR 8 optional peer for Vite SSR only; docs + changeset mark later major bumps as potentially breaking; Express 5 deferred |
+| RR 8 peer baselines                  | Optional peer `^8`; align engines with RR 8 minimums sku already can meet; document consumer React/Node expectations; template installs RR 8        |
+| Jest + RR 8 (webpack)                | Out of scope: no Jest transforms in this change; Vite SSR requires Vitest; do not force webpack fixtures onto RR 8                                  |
+| Server loaders leak to client        | Migrating: split server-only modules; explicit `moduleId` when lazy is non-idiomatic                                                                |
+| Braid reset before Braid on start    | Docs: reset early on server graph; no sku auto-inject                                                                                               |
+| `window` providers in Document SSR   | Migrating: client-only / `onHydrate`-only wrappers                                                                                                  |
+| Jest apps on Vite SSR                | Migrating: Vitest prerequisite; link existing vitest docs / codemod                                                                                 |
+| Nested `@vocab/vite/runtime`         | Sku `createRequire` + `resolve.alias`; validate translations Vite SSR without consumer pin                                                          |
+| Bare `src/` imports under Vite       | Migrating: `#` `pathAliases` + migrate-root-resolution                                                                                              |
+| `onRequest` Fetch→Express args swap  | Experimental BREAKING: `onRequest({ req })` only; update fixture/template/docs; Fetch stays on `query` / server `getContext`                        |
+| Express `req` stuffed into context   | Red warning: project values via dual `getContext`; never put raw `req` in `RouterContextProvider`                                                   |
+| Framework-only `getLoadContext` copy | Dual entry required for Data Mode client navs; server-only API is a non-goal                                                                        |
+| Server-only loaders as default       | Docs steer render-time content loading; loaders for waterfalls / document redirects / headers / opt-in getContext DI only                           |
+| Start FOUC without SSR-CSS           | Document `assets.css` gets virtual stylesheet on `sku start`; production stays on manifest CSS                                                      |
+| Telemetry missing on Vite SSR start  | Mount `telemetryPlugin` on SSR graph; client scripts via client entry / bootstrap; mark `initialPageLoad` on ready                                  |
 
 ## Migration Plan
 
@@ -571,7 +644,7 @@ Opt-in via `buildType` + Vite.
 
 New apps: `--template vite-ssr` (named `Component`).
 
-Existing: Migrating docs (ports, deploy layout, CJS, Express 4, React Router 8 optional peer, `Component`, move off `public`, data-loading steer, server-only loaders, Braid reset order, client-only providers, Jest→Vitest, `#` pathAliases, sku-owned `@vocab/vite`).
+Existing: Migrating docs (ports, deploy layout, CJS, Express 4, React Router 8 optional peer, `Component`, move off `public`, data-loading hierarchy + getContext + red warning, server-only loaders, Braid reset order, client-only providers, Jest→Vitest, `#` pathAliases, sku-owned `@vocab/vite`).
 
 Webpack SSR: leave `buildType` unset.
 
@@ -580,4 +653,5 @@ Rollback: remove `buildType`.
 ## Open Questions
 
 - **Custom logger for setup behaviours?** Until decided, production Vite SSR does not add listen logging.
-- **RR `requestContext` / `getLoadContext` later?** Deferred per data-loading guidance — revisit only if isomorphic AppWrapper + Suspense does not cover real loader DI demand.
+- **Exact public name/types for Express `req` on `onRequest` / server `getContext`?** Prefer `req: Express.Request` aligned with `middleware`; confirm when wiring types. `onRequest` is Express-only; server `getContext` still takes `{ request, req }`.
+- **Does client `getContext` receive `{ clientContext }` or stay zero-arg?** RR native is zero-arg; sku may wrap if injecting `clientContext` — decide at apply time without changing the dual-export shape.

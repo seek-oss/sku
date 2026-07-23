@@ -8,8 +8,8 @@ import { createRoutes } from './routes.js';
 
 export const routes = createRoutes();
 
-export const onRequest: SkuSsrOnRequest = ({ request }) => {
-  const url = new URL(request.url);
+export const onRequest: SkuSsrOnRequest = ({ req }) => {
+  const url = new URL(req.originalUrl, 'http://localhost');
   const language = resolveLanguage(url.pathname, url.search);
 
   return {

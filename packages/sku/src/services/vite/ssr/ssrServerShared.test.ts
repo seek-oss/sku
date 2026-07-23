@@ -5,6 +5,7 @@ import type { Request, Response } from 'express';
 import {
   createHtmlRenderMiddleware,
   createWebRequest,
+  type RenderFunction,
 } from './ssrServerShared.js';
 import type { RenderResult } from './types.js';
 
@@ -256,5 +257,46 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
       'sku-vite-ssr=1; Path=/',
     );
     expect(res.status).toHaveBeenCalledWith(200);
+  });
+
+  it('threads Express req into render (onRequest receives req only)', async () => {
+    const render = vi.fn<RenderFunction>(async () => ({
+      pipe: vi.fn(),
+      abort: vi.fn(),
+      statusCode: 200,
+      headers: new Headers(),
+      inlineScripts: [],
+    }));
+
+    const middleware = createHtmlRenderMiddleware({
+      render,
+      assets: { bootstrapModules: [], css: [], modulePreloads: [] },
+      cspEnabled: false,
+      cspExtraScriptSrcHosts: [],
+      cspReportOnlyEnabled: false,
+      cspReportOnlyExtraScriptSrcHosts: [],
+      development: true,
+    });
+
+    const req = {
+      protocol: 'http',
+      originalUrl: '/about?x=1',
+      method: 'GET',
+      path: '/about',
+      get: () => 'localhost',
+      headers: {},
+      skuUserId: 'from-middleware',
+    } as unknown as Request;
+    const res = createMockRes();
+
+    await middleware(req, res, vi.fn());
+
+    expect(render).toHaveBeenCalledTimes(1);
+    const [fetchRequest, expressReq] = render.mock.calls[0];
+    expect(fetchRequest).toBeInstanceOf(globalThis.Request);
+    expect(expressReq).toBe(req);
+    expect(expressReq).toHaveProperty('skuUserId', 'from-middleware');
+    // Fetch Request is separate from Express req — not passed as the same object.
+    expect(fetchRequest).not.toBe(expressReq);
   });
 });

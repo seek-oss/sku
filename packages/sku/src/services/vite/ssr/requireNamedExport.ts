@@ -37,3 +37,17 @@ export const requireNamedExport = <T>(
 
   return value as T;
 };
+
+/**
+ * Optional Vite SSR entry export (e.g. dual-entry `getContext`).
+ * Missing / non-function → `undefined` (default RR context behaviour).
+ */
+export const optionalNamedFunctionExport = <
+  T extends (...args: never[]) => unknown,
+>(
+  moduleExports: object,
+  name: string,
+): T | undefined => {
+  const value = (moduleExports as Record<string, unknown>)[name];
+  return typeof value === 'function' ? (value as T) : undefined;
+};

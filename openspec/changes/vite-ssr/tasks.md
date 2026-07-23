@@ -70,6 +70,17 @@
 - [x] 7.8 Document Express 4 (shared sku major) and React Router 8 as optional peer; note future major upgrades may be breaking (middleware + Data Mode); do not document Express 5 for this release
 - [x] 7.9 Changeset: experimental / not-for-production; React Router 8 optional peer; Express stays on 4; breaking-major policy for later upgrades; no Express 5 bump; no Jest RR8 transforms
 
+## 8. Express↔render DI (`onRequest` req + dual `getContext`)
+
+- [x] 8.1 Types: change `SkuSsrOnRequest` to `{ req }` (Express only; drop Fetch `request`); add optional server/client `getContext` export types
+- [x] 8.2 Thread Express `req` into `onRequest` only (`createHtmlRenderMiddleware` / render path); do not pass Fetch `Request` into `onRequest`; `query()` stays Fetch-only
+- [x] 8.3 Wire optional server `getContext({ request, req })` → `query(..., { requestContext })`
+- [x] 8.4 Wire optional client `getContext` → `createBrowserRouter({ getContext })` (wrap if injecting `clientContext`)
+- [x] 8.5 Fixture/template: migrate `onRequest` to `{ req }`; middleware-attached state → AppWrapper; dual `getContext` with client nav to a non-initial location
+- [x] 8.6 Tests: `onRequest` receives `req` only; server/client `getContext` wiring; omit optional → default behaviour
+- [x] 8.7 Docs: `entries.md` / `data-loading.md` / `middleware.md` (+ migrate / routing cross-links) — hierarchy, Data Mode vs Framework Mode, `onRequest({ req })` only, Express `Request` module augmentation for middleware-appended fields (`user` / `log` example), red warning against `req` in context, client-nav ≠ initial SSR example
+- [x] 8.8 Changeset: experimental BREAKING `onRequest` args (`{ request }` → `{ req }`) + optional `getContext` if needed
+
 ## Deferred
 
 - Production listen / custom logger — design Open Questions
@@ -80,5 +91,8 @@
 - Jest support for React Router 8 (webpack) — out of scope for this change
 - Automatic `*.server.ts` client strip — Non-Goals (docs / convention only)
 - Auto-inject Braid reset into sku Vite SSR server entry — Non-Goals (Braid optional; docs only)
-- Express `req` → loader bridge / RR `requestContext` seeding — Non-Goals this change
+- Raw Express `req` in `RouterContextProvider` — Non-Goals (red-warn in docs; project values via dual `getContext`)
+- Framework Mode server-only `getLoadContext(req, res)` as sole API — Non-Goals (Data Mode dual entry instead)
+- Passing `res` into `onRequest` / `getContext` — Non-Goals v1
+- Passing Fetch `Request` into `onRequest` — Non-Goals (`{ req }` only)
 - `@sku-lib/vite/loadable` Document preloads for Vite SSR — Non-Goals (static / prerender only; optionally gate `preloadPlugin` to static later)

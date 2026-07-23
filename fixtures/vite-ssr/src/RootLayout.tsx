@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router';
 
 import { PreloadingLink } from './PreloadingLink.js';
+
 import * as styles from './layout.css';
 
 export const RootLayout = () => (
@@ -17,6 +18,9 @@ export const RootLayout = () => (
         </PreloadingLink>
         <PreloadingLink to="/details" data-testid="nav-details">
           Details
+        </PreloadingLink>
+        <PreloadingLink to="/context-user" data-testid="nav-context-user">
+          Context user
         </PreloadingLink>
         <PreloadingLink to="/en/hello">Hello (en)</PreloadingLink>
         <PreloadingLink to="/fr/hello">Hello (fr)</PreloadingLink>

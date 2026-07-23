@@ -41,8 +41,9 @@ Infrastructure, deployments, process managers, and reverse-proxy setup are out o
 ## Data loading
 
 - Prefer render-time fetching in React (`AppWrapper` + Suspense / shared clients) for page content — see [Data loading](./data-loading.md)
-- Use React Router loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, or set response headers
-- Loaders receive a Fetch `Request`, not Express `req` — sku does not bridge Express middleware state into loaders
+- Use React Router loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, set response headers, or opt-in dual-entry [`getContext`](./data-loading.md#router-context-getcontext) DI
+- `onRequest` receives Express `{ req }` only (not Fetch `Request`) — see [Request entries](./entries.md#onrequest)
+- Loaders receive a Fetch `Request`, not Express `req` — use dual-entry `getContext` to project isomorphic values for loader DI; never put raw `req` in `RouterContextProvider`
 
 ## Middleware
 

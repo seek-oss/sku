@@ -9,7 +9,7 @@ jobs:
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
-      - uses: fkirc/skip-duplicate-actions@v5
+      - uses: fkirc/skip-duplicate-actions@b974a9395958c231af965b70070979a577efa578 # v5.3.2
         id: skip_check
         with:
           concurrent_skipping: same_content_newer

@@ -6,7 +6,6 @@ storybook-static/
 .eslintcache
 .prettierrc
 coverage/
-dist-ssr/
 dist/
 eslint.config.mjs
 report/

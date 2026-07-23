@@ -8,7 +8,7 @@ export default {
   clientEntry: 'src/serverClient.jsx',
   serverEntry: 'src/server.jsx',
   renderEntry: 'src/render.jsx',
-  port: 8119,
+  port: 9843,
   serverPort: 8120,
   httpsDevServer: true,
   devServerMiddleware: './dev-middleware.cjs',

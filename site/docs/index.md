@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: Get started
-      link: /docs/getting-started
+      link: /getting-started
     - theme: alt
       text: View on GitHub
       link: https://github.com/seek-oss/sku

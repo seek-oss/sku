@@ -3,8 +3,6 @@
 .prettierrc
 coverage/
 custom-output-directory/
-dist-ssr/
-dist/
 eslint.config.mjs
 pnpm-lock.yaml
 report/

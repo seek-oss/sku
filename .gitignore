@@ -3,9 +3,6 @@ node_modules/
 package-lock.json
 .idea
 dist/
-dist-build/
-dist-ssr/
-dist-start/
 storybook-static/
 yarn.lock
 .eslintcache

@@ -125,7 +125,7 @@ Type: `function`
 This function provides a way to modify sku's ESLint configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Before customizing your ESLint configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
+Before customizing your ESLint configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
 ESLint rules help to maintain code quality and consistency.
 Some rules even prevent potential bugs in your code, e.g. React rules.
@@ -165,7 +165,7 @@ It should only be used in exceptional circumstances where a solution cannot be a
 
 Make sure [`setupTests`] definitely doesn’t cover your needs before using.
 
-Before customizing your Jest configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
+Before customizing your Jest configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
 > Sku provides no guarantees that its Jest configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
@@ -190,7 +190,7 @@ Type: `function`
 This function provides a way to modify sku's TypeScript configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Before customizing your TypeScript configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
+Before customizing your TypeScript configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
 > Sku provides no guarantees that its TypeScript configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
@@ -216,7 +216,7 @@ Bundler: `vite`
 This function provides a way to modify sku's Vite configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Before customizing your Vite configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+Before customizing your Vite configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
 As sku creates two Vite configs (`client` & `render`), this function will actually run twice.
 If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
@@ -248,7 +248,7 @@ Type: `function`
 This function provides a way to modify sku's Vitest configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Before customizing your Vitest configuration, please reach out in [#sku-support](https://seek.enterprise.slack.com/archives/CDL5VP5NU) to discuss your requirements and potential alternative solutions.
+Before customizing your Vitest configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
 > Sku provides no guarantees that its Vitest configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
@@ -273,7 +273,7 @@ Bundler: `webpack`
 This function provides a way to modify sku's Webpack configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-Before customizing your Webpack configuration, please reach out in [`#sku-support`] to discuss your requirements and potential alternative solutions.
+Before customizing your Webpack configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
 As sku creates two webpack configs (`client` & `server|render`), this function will actually run twice.
 If you only need to modify one of these configs, then you can check `config.name`.
@@ -683,9 +683,9 @@ Type: `function`
 
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
-This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out in [`#sku-support`] first to discuss.
+This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out via the [support page] first to discuss.
 
-[`#sku-support`]: https://seek.enterprise.slack.com/archives/CDL5VP5NU
+[support page]: /support
 
 ## vitePlugins
 

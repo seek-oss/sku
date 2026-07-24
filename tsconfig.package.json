@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/node24/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "emitDeclarationOnly": true,
+    // Composite mode must emit declarations somewhere.
+    // Placing them them in each package's own node_modules to keep directories clean.
+    "outDir": "${configDir}/node_modules/.cache/tsc",
+    "tsBuildInfoFile": "${configDir}/node_modules/.cache/tsc/.tsbuildinfo",
+    "target": "ESNext",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true
+  }
+}

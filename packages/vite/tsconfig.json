@@ -1,20 +1,11 @@
 {
-  "extends": "@tsconfig/node24/tsconfig.json",
+  "extends": "../../tsconfig.package.json",
   "compilerOptions": {
-    "rootDir": "./src",
-    "target": "ESNext",
+    "rootDir": ".",
     "allowJs": true,
     "jsx": "react-jsx",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "declaration": true,
     "types": ["node"],
     "lib": ["ESNext", "DOM"]
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["./src/**/*", "./tsdown.config.ts"]
 }

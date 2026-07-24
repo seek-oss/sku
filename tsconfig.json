@@ -6,17 +6,25 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "noEmit": true,
-    // Output incremental build info to node_modules
-    "outDir": "node_modules/.cache/typescript",
+    // Output incremental build info to a centralized cache.
+    "outDir": "node_modules/.cache/tsc/root",
     "incremental": true,
     "resolveJsonModule": true
   },
+  // The "**/*" catch-all includes everything not owned by a referenced project.
   "include": ["**/*", "eslint.config.js", "types.d.ts"],
   "exclude": [
     "node_modules",
     "fixtures",
-    "packages/sku",
-    "packages/codemod",
-    "packages/create"
+    // exclude any reference projects so we don't type-check them twice
+    "packages"
+  ],
+  "references": [
+    { "path": "./packages/sku" },
+    { "path": "./packages/codemod" },
+    { "path": "./packages/create" },
+    { "path": "./packages/vite" },
+    { "path": "./packages/pnpm-plugin" },
+    { "path": "./packages/babel-plugin-display-name" }
   ]
 }

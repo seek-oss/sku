@@ -11,19 +11,13 @@
     "incremental": true,
     "resolveJsonModule": true
   },
+  // The "**/*" catch-all includes everything not owned by a referenced project.
   "include": ["**/*", "eslint.config.js", "types.d.ts"],
   "exclude": [
     "node_modules",
     "fixtures",
-    "packages/sku",
-    "packages/codemod",
-    "packages/create",
-    "packages/vite",
-    "packages/pnpm-plugin",
-    "packages/babel-plugin-display-name",
-    "private/utils",
-    "private/inject-changelog-preamble",
-    "private/react-lib-with-loadable"
+    // exclude any reference projects so we don't type-check them twice
+    "packages"
   ],
   "references": [
     { "path": "./packages/sku" },
@@ -31,9 +25,6 @@
     { "path": "./packages/create" },
     { "path": "./packages/vite" },
     { "path": "./packages/pnpm-plugin" },
-    { "path": "./packages/babel-plugin-display-name" },
-    { "path": "./private/utils" },
-    { "path": "./private/inject-changelog-preamble" },
-    { "path": "./private/react-lib-with-loadable" }
+    { "path": "./packages/babel-plugin-display-name" }
   ]
 }

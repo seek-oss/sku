@@ -2,7 +2,6 @@
 node_modules
 coverage/
 dist/
-.tsc/
 dist-build/
 storybook-static/
 custom-output-directory/

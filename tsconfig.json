@@ -6,8 +6,8 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "noEmit": true,
-    // Output incremental build info to node_modules
-    "outDir": "node_modules/.cache/typescript",
+    // Output incremental build info to a centralized cache.
+    "outDir": "node_modules/.cache/tsc/root",
     "incremental": true,
     "resolveJsonModule": true
   },

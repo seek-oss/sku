@@ -13,7 +13,6 @@ export default [
       '**/node_modules',
       '**/coverage/',
       '**/dist/',
-      '**/.tsc/',
       '**/dist-build/',
       '**/dist-start/',
       '**/storybook-static/',

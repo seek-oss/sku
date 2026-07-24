@@ -1,13 +1,9 @@
 {
-  "extends": "@tsconfig/node24/tsconfig.json",
+  "extends": "../../tsconfig.package.json",
   "compilerOptions": {
     "rootDir": "./src",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "target": "ESNext",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
     "jsx": "react-jsx"
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*"],
+  "references": [{ "path": "../../packages/vite" }]
 }

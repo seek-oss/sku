@@ -1,14 +1,12 @@
 {
-  "extends": "@tsconfig/node24/tsconfig.json",
+  "extends": "../../tsconfig.package.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "target": "ESNext",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "resolveJsonModule": true
+    "rootDir": "."
   },
-  "include": ["./src/**/*", "./tsdown.config.ts"],
-  "exclude": ["./templates"]
+  "include": ["./src/**/*", "./tsdown.config.ts", "./package.json"],
+  "exclude": ["./templates"],
+  "references": [
+    { "path": "../../private/utils" },
+    { "path": "../pnpm-plugin" }
+  ]
 }

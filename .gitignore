@@ -3,6 +3,8 @@ node_modules/
 package-lock.json
 .idea
 dist/
+.tsc/
+*.tsbuildinfo
 storybook-static/
 yarn.lock
 .eslintcache

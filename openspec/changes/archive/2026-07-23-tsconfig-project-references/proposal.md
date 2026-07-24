@@ -26,5 +26,5 @@ This is internal tooling only. It changes how fast and how incrementally typeche
 
 - Affected code: tsconfig files across the repo and the typecheck script.
 - No change to published build output.
-- Typecheck times should drop for incremental runs; a from-scratch run isn't expected to get faster.
+- Typecheck times should drop for incremental runs; a from-scratch run isn't expected to get faster. Before and after timings will confirm that.
 - Higher risk than the eslint-only change, since making packages part of a reference graph can surface typecheck errors that were previously hidden. See `design.md` for details.

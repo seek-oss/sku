@@ -1,0 +1,13 @@
+{
+  "extends": "@tsconfig/node24/tsconfig.json",
+  "compilerOptions": {
+    // Implies declaration + incremental.
+    "composite": true,
+    "emitDeclarationOnly": true,
+    // To use composite mode we need to output types still.
+    "outDir": "${configDir}/.tsc",
+    "target": "ESNext",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true
+  }
+}

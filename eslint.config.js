@@ -13,6 +13,7 @@ export default [
       '**/node_modules',
       '**/coverage/',
       '**/dist/',
+      '**/.tsc/',
       '**/dist-build/',
       '**/dist-start/',
       '**/storybook-static/',
@@ -143,7 +144,7 @@ export default [
       'import-x/resolver': {
         typescript: {
           tsconfig: {
-            configFile: 'tsconfig.eslint.json',
+            configFile: 'tsconfig.json',
           },
         },
       },

@@ -11,6 +11,7 @@ Of the 9 packages, `packages/sku`, `packages/vite`, and `packages/pnpm-plugin` h
 - Make `lint:tsc` incremental via `tsc --build`, so unrelated packages are skipped when only one package changes.
 - Give every source package `composite: true` and an explicit `rootDir`.
 - Prefer a single root references config shared by `lint:tsc` and the eslint import resolver when that is workable, including by deleting or renaming `tsconfig.eslint.json` if consolidation is cleaner than keeping a parallel file.
+- Capture before and after timings for `lint:tsc`, covering a from-scratch run and an incremental run after a single-package change, so the speedup is measured rather than assumed.
 - Keep `tsdown` build output unchanged; these settings are `tsc`-only.
 
 **Non-Goals:**
@@ -44,6 +45,4 @@ Once the root `tsconfig.json` has real `references`, point the eslint resolver a
 
 ## Open Questions
 
-- Whether the root `tsconfig.json` can be the eslint resolver's `configFile` directly, or whether a renamed thin wrapper is still needed for eslint-only options.
-- Whether `lint:tsc:sku` should be replaced by `tsc --build packages/sku` or removed once the root `--build` covers it.
-- Whether `tsconfig.build.json` files also need `composite: true`, or whether it should be confined to the typecheck-only `tsconfig.json`.
+- Whether the root `tsconfig.json` should become solution-style (`files: []` + `references` only), with root-level files moved to a separate project.

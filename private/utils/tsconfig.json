@@ -1,15 +1,8 @@
 {
-  "extends": "@tsconfig/node24/tsconfig.json",
+  "extends": "../../tsconfig.package.json",
   "compilerOptions": {
-    "outDir": "./dist",
     "rootDir": "./src",
-    "noEmit": true,
-    "allowImportingTsExtensions": true,
-    "target": "ESNext",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "resolveJsonModule": true,
-    "declaration": true
+    "types": ["node"]
   },
   "include": ["./src/**/*"]
 }

@@ -13,6 +13,5 @@
     "./tsdown.config.ts",
     "./package.json"
   ],
-  "exclude": ["**/@loadable"],
-  "references": [{ "path": "../vite" }, { "path": "../../private/utils" }]
+  "exclude": ["**/@loadable"]
 }

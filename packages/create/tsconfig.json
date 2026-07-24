@@ -4,9 +4,5 @@
     "rootDir": "."
   },
   "include": ["./src/**/*", "./tsdown.config.ts", "./package.json"],
-  "exclude": ["./templates"],
-  "references": [
-    { "path": "../../private/utils" },
-    { "path": "../pnpm-plugin" }
-  ]
+  "exclude": ["./templates"]
 }

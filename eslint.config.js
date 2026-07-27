@@ -58,13 +58,11 @@ export default [
 
     settings: {
       react: {
-        version: '18.3.1',
+        version: '19.1.0',
       },
 
       'import-x/resolver': {
-        node: {
-          moduleDirectory: ['node_modules'],
-        },
+        node: true,
         typescript: true,
       },
     },
@@ -95,6 +93,14 @@ export default [
                 'Please dynamically import action modules to keep the CLI fast.',
             },
           ],
+          paths: [
+            {
+              name: 'node:util',
+              importNames: ['styleText'],
+              message:
+                "Please use sku's semantic console styling utils from `@sku-private/utils/console` instead.",
+            },
+          ],
         },
       ],
 
@@ -118,33 +124,6 @@ export default [
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
       'n/prefer-node-protocol': ['error'],
-    },
-  },
-  {
-    ignores: ['private/utils/src/console/styles.ts'],
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          paths: [
-            {
-              name: 'node:util',
-              importNames: ['styleText'],
-              message:
-                "Please use sku's semantic console styling utils from `@sku-private/utils/console` instead.",
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    settings: {
-      'import-x/resolver': {
-        typescript: {
-          project: '**/*/tsconfig.json',
-        },
-      },
     },
   },
   {

@@ -1,3 +1,8 @@
+/**
+ * We have a custom eslint rule that prevents using `styleText` in favour of these custom functions.
+ * Ignoring the rule here to allow us create these functions.
+ */
+// eslint-disable-next-line no-restricted-imports
 import { styleText } from 'node:util';
 
 export const accent = (s: string) => styleText('blue', s);

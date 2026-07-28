@@ -1,5 +1,5 @@
 import { beforeEach, afterEach, describe, it } from 'vitest';
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library';
 import { unlink, writeFile } from 'node:fs/promises';
 
 const { sku, fixturePath } = scopeToFixture('config-path');
@@ -17,9 +17,7 @@ describe('config-paths', () => {
       ),
     ).toBeInTheConsole();
 
-    await waitFor(() => {
-      expect(cli.hasExit()).toMatchObject({ exitCode: 1 });
-    });
+    await expect(cli).toMatchExitCode(1);
   });
 
   describe.each(['ts', 'js', 'mjs'])(

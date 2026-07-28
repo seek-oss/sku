@@ -2,11 +2,7 @@ import { describe, beforeAll, it, expect } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import * as jsonc from 'jsonc-parser';
 
-import {
-  scopeToFixture,
-  waitFor,
-  waitForExitCode,
-} from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library';
 import { getPort } from '@sku-private/test-utils';
 import { createPage } from '@sku-private/playwright';
 
@@ -19,7 +15,7 @@ describe('pathAliases', () => {
     beforeAll(async () => {
       const configure = await sku('configure', ['--config=sku.config.vite.ts']);
 
-      await waitForExitCode(configure, 0);
+      await expect(configure).toMatchExitCode(0);
 
       const tsconfigPath = fixturePath('tsconfig.json');
       const tsconfigContents = await readFile(tsconfigPath, 'utf-8');
@@ -51,9 +47,7 @@ describe('pathAliases', () => {
         '--config=sku.config.bad-node-modules.ts',
       ]);
 
-      await waitFor(() => {
-        expect(configure.hasExit()).toMatchObject({ exitCode: 1 });
-      });
+      await expect(configure).toMatchExitCode(1);
 
       expect(
         configure.getByText(
@@ -67,9 +61,7 @@ describe('pathAliases', () => {
         '--config=sku.config.bad-wrong-import.ts',
       ]);
 
-      await waitFor(() => {
-        expect(configure.hasExit()).toMatchObject({ exitCode: 1 });
-      });
+      await expect(configure).toMatchExitCode(1);
 
       expect(
         configure.getByText(

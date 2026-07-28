@@ -8,7 +8,6 @@ import {
   type BundlerValues,
   scopeToFixture,
   skipCleanup,
-  waitFor,
 } from '@sku-private/testing-library';
 
 const { sku, fixturePath } = scopeToFixture('sku-with-https');
@@ -131,8 +130,6 @@ describe('sku-with-https', () => {
         `Error: ${invalidMiddlewarePath} does not exist. Please create the file or remove 'devServerMiddleware' from your sku config.`,
       ),
     ).toBeInTheConsole();
-    await waitFor(() => {
-      expect(start.hasExit()).toMatchObject({ exitCode: 1 });
-    });
+    await expect(start).toMatchExitCode(1);
   });
 });

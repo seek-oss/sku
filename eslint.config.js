@@ -133,5 +133,9 @@ export default [
         browser: true,
       },
     },
+    rules: {
+      // `toMatchExitCode` is frequently asserted from `beforeAll`/`beforeEach` hooks when testing `sku start` functionality.
+      'vitest/no-standalone-expect': 'off',
+    },
   },
 ];

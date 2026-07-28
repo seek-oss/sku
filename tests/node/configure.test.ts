@@ -1,4 +1,4 @@
-import { describe, beforeAll, afterAll, it } from 'vitest';
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
@@ -6,10 +6,8 @@ import * as jsonc from 'jsonc-parser';
 import prettierConfig from '../../packages/sku/dist/config/prettier.mjs';
 
 import {
-  waitForExitCode,
   type RenderResult,
   scopeToFixture,
-  waitFor,
 } from '@sku-private/testing-library';
 
 const readFileContents = async (appDir: string, fileName: string) => {
@@ -56,19 +54,19 @@ describe('configure', () => {
         cwd: './App',
       });
 
-      await waitForExitCode(configure, 0);
+      await expect(configure).toMatchExitCode(0);
     });
 
     afterAll(async () => {
       await removeAppDir(appFolder);
     });
 
-    it('should generate a prettier config', async ({ expect }) => {
+    it('should generate a prettier config', async () => {
       const prettierRc = await readJsonC(appFolder, '.prettierrc');
       expect(prettierRc).toEqual(prettierConfig);
     });
 
-    it('should generate a eslint config', async ({ expect }) => {
+    it('should generate a eslint config', async () => {
       const eslintConfig = await readFileContents(
         appFolder,
         'eslint.config.mjs',
@@ -84,17 +82,15 @@ describe('configure', () => {
 
     it.for(['.prettierignore', '.gitignore'])(
       'should generate %s',
-      async (ignore, { expect }) => {
+      async (ignore) => {
         const ignoreContents = await readIgnore(appFolder, ignore);
 
         expect(ignoreContents).toMatchSnapshot();
       },
     );
 
-    it('should not show any warnings in the console', async ({ expect }) => {
-      await waitFor(() => {
-        expect(configure.hasExit()).toMatchObject({ exitCode: 0 });
-      });
+    it('should not show any warnings in the console', async () => {
+      await expect(configure).toMatchExitCode(0);
 
       expect(configure.getStdallStr()).toMatchInlineSnapshot(``);
     });
@@ -115,20 +111,20 @@ describe('configure', () => {
         cwd: './TSApp',
       });
 
-      await waitForExitCode(configure, 0);
+      await expect(configure).toMatchExitCode(0);
     });
 
     afterAll(async () => {
       await removeAppDir(appFolderTS);
     });
 
-    it('should generate a prettier config', async ({ expect }) => {
+    it('should generate a prettier config', async () => {
       const prettierRc = await readJsonC(appFolderTS, '.prettierrc');
 
       expect(prettierRc).toEqual(prettierConfig);
     });
 
-    it('should generate an eslint config', async ({ expect }) => {
+    it('should generate an eslint config', async () => {
       const eslintConfig = await readFileContents(
         appFolderTS,
         'eslint.config.mjs',
@@ -142,7 +138,7 @@ describe('configure', () => {
       `);
     });
 
-    it('should generate tsconfig config', async ({ expect }) => {
+    it('should generate tsconfig config', async () => {
       const tsconfigContents = await readJsonC(appFolderTS, 'tsconfig.json');
 
       expect(Object.keys(tsconfigContents).sort()).toEqual(['compilerOptions']);
@@ -150,17 +146,15 @@ describe('configure', () => {
 
     it.for(['.prettierignore', '.gitignore'])(
       'should generate %s',
-      async (ignore, { expect }) => {
+      async (ignore) => {
         const ignoreContents = await readIgnore(appFolderTS, ignore);
 
         expect(ignoreContents).toMatchSnapshot();
       },
     );
 
-    it('should not show any warnings in the console', async ({ expect }) => {
-      await waitFor(() => {
-        expect(configure.hasExit()).toMatchObject({ exitCode: 0 });
-      });
+    it('should not show any warnings in the console', async () => {
+      await expect(configure).toMatchExitCode(0);
 
       expect(configure.getStdallStr()).toMatchInlineSnapshot(``);
     });

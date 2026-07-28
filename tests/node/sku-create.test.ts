@@ -8,9 +8,7 @@ import { promisify } from 'node:util';
 
 import {
   configure,
-  hasExpectedExitCode,
   scopeToFixture as scopeToSkuFixture,
-  waitForExitCode,
 } from '@sku-private/testing-library';
 import { scopeToFixture } from '@sku-private/testing-library/create';
 import { normalizePackageManagerVersion } from '@sku-private/test-utils';
@@ -194,8 +192,7 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
   it('should pass lint', async () => {
     const { sku } = scopeToSkuFixture('sku-create/new-project');
     const result = await sku('lint');
-    await waitForExitCode(result, 0);
-    expect(hasExpectedExitCode(result, 0)).toBe(true);
+    await expect(result).toMatchExitCode(0);
   });
 });
 

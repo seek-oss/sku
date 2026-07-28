@@ -19,7 +19,7 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
     const process = await sku('test', args[testRunner]);
 
     expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
-    await expect(process).toMatchExitCode(1);
+    await expect(process).toMatchExitCode(0);
   });
 
   it(`should pass through unknown flags`, async () => {

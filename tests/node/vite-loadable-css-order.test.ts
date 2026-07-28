@@ -3,7 +3,7 @@ import path from 'node:path';
 import { describe, it, expect } from 'vitest';
 import { parse } from 'node-html-parser';
 
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library';
 import { dirContentsToObject } from '@sku-private/test-utils';
 
 const { sku, fixturePath } = scopeToFixture('vite-loadable-css-order');
@@ -18,9 +18,7 @@ describe('vite loadable CSS ordering', () => {
   it("should emit CSS for a chunk's dependencies (reset) before the emitting its own CSS (rest)", async () => {
     const build = await sku('build');
 
-    await waitFor(() => {
-      expect(build.hasExit()).toMatchObject({ exitCode: 0 });
-    });
+    await expect(build).toMatchExitCode(0);
     expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
     const distFiles = await dirContentsToObject(fixturePath('dist'), [

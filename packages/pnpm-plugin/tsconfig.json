@@ -1,17 +1,9 @@
 {
-  "extends": "@tsconfig/node24/tsconfig.json",
+  "extends": "../../tsconfig.package.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "allowSyntheticDefaultImports": true,
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "declaration": true,
+    "rootDir": ".",
     "lib": ["ESNext"]
   },
-  "include": ["src/**/*"],
+  "include": ["./src/**/*", "./tsdown.config.ts"],
   "exclude": ["pnpmfile.cjs", "pnpmfile.mjs"]
 }

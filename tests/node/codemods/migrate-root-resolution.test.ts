@@ -3,7 +3,7 @@ import {
   runCodemodTests,
   scopeToFixture,
 } from '@sku-private/testing-library/codemod';
-import { createFixture, waitFor } from '@sku-private/testing-library';
+import { createFixture } from '@sku-private/testing-library';
 import { it, expect } from 'vitest';
 
 runCodemodTests('migrate-root-resolution', [
@@ -193,9 +193,7 @@ it('should fail on unsupported file', async () => {
 
   const cli = await codemod('migrate-root-resolution', ['.']);
 
-  await waitFor(() => {
-    expect(cli.hasExit()).toMatchObject({ exitCode: 1 });
-  });
+  await expect(cli).toMatchExitCode(1);
 
   expect(
     await cli.findByError('Unsupported sku config shape:'),

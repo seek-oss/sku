@@ -27,10 +27,10 @@ const steps: Transform[] = [
  *
  * Individual steps are also exported as standalone codemods for granular use.
  */
-export const transform: Transform = async (source) => {
+export const transform: Transform = async (source, filePath) => {
   let current = source;
   for (const step of steps) {
-    const next = await step(current);
+    const next = await step(current, filePath);
     if (next !== null) {
       current = next;
     }

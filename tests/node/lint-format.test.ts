@@ -5,9 +5,6 @@ import {
   createFixture,
   scopeToFixture,
   type RenderResult,
-  waitForExitCode,
-  hasExpectedExitCode,
-  waitFor,
 } from '@sku-private/testing-library';
 
 const { sku, fixturePath } = scopeToFixture('lint-format');
@@ -50,7 +47,7 @@ describe('lint-format', () => {
         });
         lint = await sku('lint');
 
-        await waitForExitCode(lint, 0);
+        await expect(lint).toMatchExitCode(0);
         fixture.rm();
       });
 
@@ -66,8 +63,8 @@ describe('lint-format', () => {
         ).toBeInTheConsole();
       });
 
-      it('should exit with a zero exit code', () => {
-        expect(hasExpectedExitCode(lint, 0)).toBe(true);
+      it('should exit with a zero exit code', async () => {
+        await expect(lint).toMatchExitCode(0);
       });
 
       it('should report that linting is complete', async () => {
@@ -87,7 +84,7 @@ describe('lint-format', () => {
 
         lint = await sku('lint');
 
-        await waitForExitCode(lint, 1);
+        await expect(lint).toMatchExitCode(1);
         fixture.rm();
       });
 
@@ -103,8 +100,8 @@ describe('lint-format', () => {
         ).toBeInTheConsole();
       });
 
-      it('should exit with a non-zero exit code', () => {
-        expect(hasExpectedExitCode(lint, 1)).toBe(true);
+      it('should exit with a non-zero exit code', async () => {
+        await expect(lint).toMatchExitCode(1);
       });
 
       it('should report that linting failed', async () => {
@@ -160,7 +157,7 @@ describe('lint-format', () => {
 
         lint = await sku('lint', [target]);
 
-        await waitForExitCode(lint, 1);
+        await expect(lint).toMatchExitCode(1);
       });
 
       it('should skip the TypeScript check', async () => {
@@ -195,7 +192,7 @@ describe('lint-format', () => {
       beforeAll(async () => {
         lint = await sku('lint', ['does-not-exist.js']);
 
-        await waitForExitCode(lint, 1);
+        await expect(lint).toMatchExitCode(1);
       });
 
       it('should skip the TypeScript check', async () => {
@@ -235,7 +232,7 @@ describe('lint-format', () => {
           relativePathFromFixture(fixture, 'brokenSyntax.js'),
         ]);
 
-        await waitForExitCode(lint, 1);
+        await expect(lint).toMatchExitCode(1);
       });
 
       it('should skip the TypeScript check', async () => {
@@ -273,7 +270,7 @@ describe('lint-format', () => {
 
         lint = await sku('lint', ['--config', 'sku.config.vitest.ts']);
 
-        await waitForExitCode(lint, 1);
+        await expect(lint).toMatchExitCode(1);
         fixture.rm();
       });
 
@@ -343,9 +340,7 @@ describe('lint-format', () => {
 
       const format = await sku('format');
 
-      await waitFor(() => {
-        expect(format.hasExit()).toMatchObject({ exitCode: 0 });
-      });
+      await expect(format).toMatchExitCode(0);
 
       for (const fileName of Object.keys(filesToFormat)) {
         const result = await fixture.readFile(fileName, { encoding: 'utf-8' });

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('vite-render-error');
 
@@ -21,9 +21,7 @@ describe('vite render error', () => {
   it('should emit an error with the route name and stack trace when a route fails to render', async () => {
     const build = await sku('build');
 
-    await waitFor(() => {
-      expect(build.hasExit()).toMatchObject({ exitCode: 1 });
-    });
+    await expect(build).toMatchExitCode(1);
 
     const stderr = aggregateStdErr(build.stderrArr);
 
@@ -46,9 +44,7 @@ describe('vite render error', () => {
   it('should emit an error with a stack trace when the render entrypoint throws an error', async () => {
     const build = await sku('build', ['--config', 'sku.config.renderError.ts']);
 
-    await waitFor(() => {
-      expect(build.hasExit()).toMatchObject({ exitCode: 1 });
-    });
+    await expect(build).toMatchExitCode(1);
 
     const stderr = aggregateStdErr(build.stderrArr);
 

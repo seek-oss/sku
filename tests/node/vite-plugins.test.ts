@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('vite-plugins');
 
@@ -8,9 +8,7 @@ describe('vitePlugins', () => {
   it('should run custom Vite plugins during build', async () => {
     const build = await sku('build');
 
-    await waitFor(() => {
-      expect(build.hasExit()).toMatchObject({ exitCode: 0 });
-    });
+    await expect(build).toMatchExitCode(0);
 
     expect(
       await build.findByText('build started with vite plugin'),

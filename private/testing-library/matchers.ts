@@ -4,8 +4,8 @@ import { expect } from 'vitest';
 declare module 'vitest' {
   interface Matchers {
     /**
-     * Waits for the command to exit, then asserts that it exited with the given
-     * code. Includes the command's output in the failure message.
+     * Waits for the command to exit, then asserts that it exited with the given code.
+     * Includes the command's output in the failure message.
      * @example await expect(command).toMatchExitCode(0)
      */
     toMatchExitCode: (exitCode: number) => Promise<void>;

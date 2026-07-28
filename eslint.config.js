@@ -134,8 +134,7 @@ export default [
       },
     },
     rules: {
-      // `toMatchExitCode` waits for a command to exit, so it is frequently
-      // asserted from `beforeAll`/`beforeEach` hooks rather than a test body.
+      // `toMatchExitCode` is frequently asserted from `beforeAll`/`beforeEach` hooks when testing `sku start` functionality.
       'vitest/no-standalone-expect': 'off',
     },
   },

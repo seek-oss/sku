@@ -133,5 +133,10 @@ export default [
         browser: true,
       },
     },
+    rules: {
+      // `toMatchExitCode` waits for a command to exit, so it is frequently
+      // asserted from `beforeAll`/`beforeEach` hooks rather than a test body.
+      'vitest/no-standalone-expect': 'off',
+    },
   },
 ];

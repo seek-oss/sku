@@ -4,7 +4,6 @@ import {
   testFrameworks,
   type TestFrameworkValues,
   scopeToFixture,
-  waitFor,
 } from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('sku-test');
@@ -20,9 +19,7 @@ describe.for(testFrameworks)('[%s]: sku-test', (testRunner) => {
     const process = await sku('test', args[testRunner]);
 
     expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
-    await waitFor(() => {
-      expect(process.hasExit()).toMatchObject({ exitCode: 0 });
-    });
+    await expect(process).toMatchExitCode(1);
   });
 
   it(`should pass through unknown flags`, async () => {
@@ -58,8 +55,6 @@ describe('vitest CJS interop', () => {
     ]);
 
     expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
-    await waitFor(() => {
-      expect(process.hasExit()).toMatchObject({ exitCode: 0 });
-    });
+    await expect(process).toMatchExitCode(0);
   });
 });

@@ -8,6 +8,7 @@ import {
 } from '@sku-private/playwright';
 import { cleanup, configure } from '@sku-private/testing-library';
 import 'cli-testing-library/vitest';
+import '@sku-private/testing-library/matchers';
 
 configure();
 

@@ -2,7 +2,7 @@ import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import { rm } from 'node:fs/promises';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library';
 
 const { sku, fixturePath, node, exec } = scopeToFixture(
   'typescript-css-modules',
@@ -97,11 +97,7 @@ describe('typescript-css-modules', () => {
 
       const lint = await sku('lint');
       expect(await lint.findByText('Linting complete')).toBeInTheConsole();
-      await waitFor(() => {
-        expect(lint.hasExit()).toMatchObject({
-          exitCode: 0,
-        });
-      });
+      await expect(lint).toMatchExitCode(0);
     });
   });
 });

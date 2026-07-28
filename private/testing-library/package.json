@@ -6,7 +6,8 @@
   "exports": {
     ".": "./index.ts",
     "./codemod": "./render-codemod.ts",
-    "./create": "./render-create.ts"
+    "./create": "./render-create.ts",
+    "./matchers": "./matchers.ts"
   },
   "devDependencies": {
     "cli-testing-library": "^3.0.1",

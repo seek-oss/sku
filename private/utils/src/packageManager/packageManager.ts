@@ -69,6 +69,46 @@ const getFallbackPackageManager = (): SupportedPackageManager => {
   return fallback;
 };
 
+const resolveDetectedPackageManager = () => {
+  const projectPackageManager = getProjectPackageManager();
+  const runningPackageManager = getRunningPackageManager();
+
+  const name =
+    projectPackageManager?.name ??
+    runningPackageManager?.name ??
+    getFallbackPackageManager(); // some edge cases might use this fallback, but unlikely
+
+  if (!isSupportedPackageManager(name)) {
+    throw new Error(
+      `Unsupported package manager: ${name}. Supported package managers are: ${supportedPackageManagers.join(
+        ', ',
+      )}`,
+    );
+  }
+
+  const isRunningResolvedPackageManager = runningPackageManager?.name === name;
+
+  if (
+    projectPackageManager &&
+    runningPackageManager &&
+    !isRunningResolvedPackageManager
+  ) {
+    console.warn(
+      caution(
+        `Package manager mismatch: sku was run with ${strong(runningPackageManager.name)}, but this project uses ${strong(name)}`,
+      ),
+    );
+  }
+
+  // The running version is the most accurate source of the version, so we use it if it's available.
+  const version =
+    (isRunningResolvedPackageManager ? runningPackageManager.version : null) ??
+    projectPackageManager?.version ??
+    null;
+
+  return { name, version };
+};
+
 /**
  * Get the package manager and root directory of the project.
  */
@@ -78,50 +118,12 @@ const resolvePackageManager = () => {
   // No lockfile can be found during `@sku-lib/create`.
   const rootDir = lockfilePath ? dirname(lockfilePath) : null;
 
-  const projectPackageManager = getProjectPackageManager();
-  const runningPackageManager = getRunningPackageManager();
-
-  // The project is the source of truth.
-  // Fall back to the running package manager if no project is detected.
-  const packageManager =
-    projectPackageManager?.name ??
-    runningPackageManager?.name ??
-    getFallbackPackageManager();
-
-  if (!isSupportedPackageManager(packageManager)) {
-    throw new Error(
-      `Unsupported package manager: ${packageManager}. Supported package managers are: ${supportedPackageManagers.join(
-        ', ',
-      )}`,
-    );
-  }
-
-  const isRunningResolvedPackageManager =
-    runningPackageManager?.name === packageManager;
-
-  if (
-    projectPackageManager &&
-    runningPackageManager &&
-    !isRunningResolvedPackageManager
-  ) {
-    console.warn(
-      caution(
-        `Package manager mismatch: sku was run with ${strong(runningPackageManager.name)}, but this project uses ${strong(packageManager)}`,
-      ),
-    );
-  }
-
-  // A running package manager's version is only meaningful when it is the
-  // package manager we resolved to.
-  const packageManagerVersion =
-    (isRunningResolvedPackageManager ? runningPackageManager.version : null) ??
-    projectPackageManager?.version ??
-    null;
+  const { name, version } = resolveDetectedPackageManager();
 
   return {
-    packageManager,
+    packageManager: name,
     rootDir,
-    packageManagerVersion,
+    packageManagerVersion: version,
   };
 };
 

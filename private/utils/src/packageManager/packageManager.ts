@@ -1,49 +1,24 @@
 import * as find from 'empathic/find';
-import path, { dirname } from 'node:path';
+import { dirname } from 'node:path';
 import type { Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
 import { INSTALL_PAGE } from 'package-manager-detector/constants';
+import { detectSync, getUserAgent } from 'package-manager-detector/detect';
 import semver from 'semver';
 import { caution, strong } from '../console/styles.ts';
 
 export type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
 
-const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
+const supportedPackageManagers: SupportedPackageManager[] = [
+  'yarn',
+  'pnpm',
+  'npm',
+];
 
-const validatePackageManager = (packageManager: string) => {
-  if (!supportedPackageManagers.includes(packageManager)) {
-    throw new Error(
-      `Unsupported package manager: ${packageManager}. Supported package managers are: ${supportedPackageManagers.join(
-        ', ',
-      )}`,
-    );
-  }
-
-  return packageManager as SupportedPackageManager;
-};
-
-const getPackageManagerFromUserAgent = () => {
-  const userAgent = process.env.npm_config_user_agent || '';
-
-  // Default to 'npm'
-  let packageManager = 'npm';
-
-  let version = null;
-  if (userAgent) {
-    // User agents typically look like `pnpm/9.12.1 npm/? node/v20.17.0 linux x64`
-    version = userAgent.split(' ')?.[0].split('/')?.[1];
-  }
-
-  if (userAgent.includes('yarn')) {
-    packageManager = 'yarn';
-  }
-
-  if (userAgent.includes('pnpm')) {
-    packageManager = 'pnpm';
-  }
-
-  return { packageManager, version };
-};
+const isSupportedPackageManager = (
+  packageManager: string | null | undefined,
+): packageManager is SupportedPackageManager =>
+  supportedPackageManagers.includes(packageManager as SupportedPackageManager);
 
 // lockfiles should be ordered by priority, highest priority first.
 const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
@@ -53,33 +28,100 @@ const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
 };
 
 /**
+ * The package manager that invoked the current process, if any.
+ * This is unset when sku is run without a package manager, e.g. `./node_modules/.bin/sku`.
+ */
+const getRunningPackageManager = () => {
+  const name = getUserAgent();
+
+  if (!name) {
+    return null;
+  }
+
+  // User agents typically look like `pnpm/9.12.1 npm/? node/v20.17.0 linux x64`
+  const version =
+    process.env.npm_config_user_agent?.split(' ')[0].split('/')[1] || null;
+
+  return { name, version };
+};
+
+/**
+ * The project's package manager, resolved from its `packageManager` field or lockfile.
+ * This is unset when there is no project to detect, e.g. during `@sku-lib/create`.
+ */
+const getProjectPackageManager = () => {
+  const detected = detectSync();
+
+  if (!detected) {
+    return null;
+  }
+
+  const { name, version = null } = detected;
+
+  return { name, version };
+};
+
+const getFallbackPackageManager = (): SupportedPackageManager => {
+  const fallback = 'npm';
+  console.warn(
+    caution(`No package manager detected, assuming ${strong(fallback)}`),
+  );
+  return fallback;
+};
+
+/**
  * Get the package manager and root directory of the project.
- * If the project does not have a root directory, `rootDir` will be `null`.
  */
 const resolvePackageManager = () => {
-  const userAgentPackageManager = getPackageManagerFromUserAgent();
-  const packageManager = validatePackageManager(
-    userAgentPackageManager.packageManager,
-  );
+  const lockfilePath = find.any(Object.values(lockfileByPackageManager));
 
-  const expectedLockfile = lockfileByPackageManager[packageManager];
-  const lockFilePath = find.any(Object.values(lockfileByPackageManager));
+  // No lockfile can be found during `@sku-lib/create`.
+  const rootDir = lockfilePath ? dirname(lockfilePath) : null;
 
-  if (lockFilePath && !lockFilePath.includes(expectedLockfile)) {
+  const projectPackageManager = getProjectPackageManager();
+  const runningPackageManager = getRunningPackageManager();
+
+  // The project is the source of truth.
+  // Fall back to the running package manager if no project is detected.
+  const packageManager =
+    projectPackageManager?.name ??
+    runningPackageManager?.name ??
+    getFallbackPackageManager();
+
+  if (!isSupportedPackageManager(packageManager)) {
+    throw new Error(
+      `Unsupported package manager: ${packageManager}. Supported package managers are: ${supportedPackageManagers.join(
+        ', ',
+      )}`,
+    );
+  }
+
+  const isRunningResolvedPackageManager =
+    runningPackageManager?.name === packageManager;
+
+  if (
+    projectPackageManager &&
+    runningPackageManager &&
+    !isRunningResolvedPackageManager
+  ) {
     console.warn(
       caution(
-        `Lockfile mismatch: ${strong(path.basename(lockFilePath))} is not a valid lockfile for ${strong(packageManager)}`,
+        `Package manager mismatch: sku was run with ${strong(runningPackageManager.name)}, but this project uses ${strong(packageManager)}`,
       ),
     );
   }
 
-  // No root found (occurs during `@sku-lib/create`), `rootDir` will be `null`
-  const rootDir = lockFilePath ? dirname(lockFilePath) : null;
+  // A running package manager's version is only meaningful when it is the
+  // package manager we resolved to.
+  const packageManagerVersion =
+    (isRunningResolvedPackageManager ? runningPackageManager.version : null) ??
+    projectPackageManager?.version ??
+    null;
 
   return {
     packageManager,
     rootDir,
-    packageManagerVersion: userAgentPackageManager.version,
+    packageManagerVersion,
   };
 };
 

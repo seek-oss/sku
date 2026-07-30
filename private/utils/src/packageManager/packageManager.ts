@@ -1,9 +1,9 @@
 import * as find from 'empathic/find';
 import { dirname } from 'node:path';
-import type { Command } from 'package-manager-detector';
+import type { Agent, Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
-import { INSTALL_PAGE } from 'package-manager-detector/constants';
-import { detectSync, getUserAgent } from 'package-manager-detector/detect';
+import { AGENTS, INSTALL_PAGE } from 'package-manager-detector/constants';
+import { detectSync } from 'package-manager-detector/detect';
 import semver from 'semver';
 import { caution, strong } from '../console/styles.ts';
 
@@ -32,15 +32,18 @@ const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
  * This is unset when sku is run without a package manager, e.g. `./node_modules/.bin/sku`.
  */
 const getRunningPackageManager = () => {
-  const name = getUserAgent();
-
-  if (!name) {
+  const userAgent = process.env.npm_config_user_agent;
+  if (!userAgent) {
     return null;
   }
 
   // User agents typically look like `pnpm/9.12.1 npm/? node/v20.17.0 linux x64`
-  const version =
-    process.env.npm_config_user_agent?.split(' ')[0].split('/')[1] || null;
+  const [agentPart] = userAgent.split(' ');
+  const [name, version] = agentPart.split('/');
+
+  if (!AGENTS.includes(name as Agent)) {
+    return null;
+  }
 
   return { name, version };
 };

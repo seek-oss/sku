@@ -191,6 +191,211 @@ describe('security-controls', () => {
         });
       });
     });
+
+    describe.runIf(bundler === 'vite')('csp-report-to', () => {
+      describe('endpoint', () => {
+        describe('start', async () => {
+          const port = await getPort();
+          const url = `http://localhost:${port}`;
+
+          beforeAll(async () => {
+            const start = await sku('start', [
+              '--config=sku.config.vite.csp-report-to.endpoint.ts',
+              '--strict-port',
+              `--port=${port}`,
+            ]);
+            await start.findByText('Starting development server');
+          });
+
+          it('should start an app with security controls', async () => {
+            const app = await getAppSnapshot({
+              url,
+            });
+            expect(app).toMatchSnapshot();
+          });
+        });
+
+        describe('build', () => {
+          let cspHeader: string;
+          let cspReportOnlyHeader: string;
+          let reportingEndpointsHeader: string;
+
+          beforeAll(async () => {
+            const build = await sku('build', [
+              '--config=sku.config.vite.csp-report-to.endpoint.ts',
+            ]);
+            await build.findByText('Sku build complete');
+
+            const indexJsonPath = fixturePath('dist/index.html.json');
+            const content = await readFile(indexJsonPath, 'utf-8');
+            const data = JSON.parse(content);
+
+            cspHeader = data.metadata.csp;
+            cspReportOnlyHeader = data.metadata.cspReportOnly;
+            reportingEndpointsHeader = data.metadata.reportingEndpoints ?? null;
+          });
+
+          it('should generate a CSP with a report-to directive', () => {
+            expect(cspHeader).toContain('report-to some-reporting-endpoint');
+          });
+
+          it('should generate a report-only CSP with a report-to directive', () => {
+            expect(cspReportOnlyHeader).toContain(
+              'report-to some-report-only-reporting-endpoint',
+            );
+          });
+
+          it('should not generate a reporting-endpoints header', () => {
+            expect(reportingEndpointsHeader).toBeNull();
+          });
+        });
+      });
+
+      describe('url', () => {
+        describe('start', async () => {
+          const port = await getPort();
+          const url = `http://localhost:${port}`;
+
+          beforeAll(async () => {
+            const start = await sku('start', [
+              '--config=sku.config.vite.csp-report-to.url.ts',
+              '--strict-port',
+              `--port=${port}`,
+            ]);
+            await start.findByText('Starting development server');
+          });
+
+          it('should start an app with security controls', async () => {
+            const app = await getAppSnapshot({
+              url,
+            });
+            expect(app).toMatchSnapshot();
+          });
+        });
+
+        describe('build', () => {
+          const reportToRegExp = /report-to (?<endpoint>endpoint-[0-9a-f]{8})/;
+
+          let cspHeader: string;
+          let cspReportOnlyHeader: string;
+          let reportingEndpointsHeader: string;
+
+          beforeAll(async () => {
+            const build = await sku('build', [
+              '--config=sku.config.vite.csp-report-to.url.ts',
+            ]);
+            await build.findByText('Sku build complete');
+
+            const indexJsonPath = fixturePath('dist/index.html.json');
+            const content = await readFile(indexJsonPath, 'utf-8');
+            const data = JSON.parse(content);
+
+            cspHeader = data.metadata.csp;
+            cspReportOnlyHeader = data.metadata.cspReportOnly;
+            reportingEndpointsHeader = data.metadata.reportingEndpoints ?? null;
+          });
+
+          it('should generate a CSP with a report-to directive', () => {
+            expect(cspHeader).toMatch(reportToRegExp);
+          });
+
+          it('should generate a report-only CSP with a report-to directive', () => {
+            expect(cspReportOnlyHeader).toMatch(reportToRegExp);
+          });
+
+          it('should generate a reporting-endpoints header', () => {
+            expect(reportingEndpointsHeader).not.toBeNull();
+          });
+
+          it('should include the CSP report-to endpoint in the reporting-endpoints header', () => {
+            const { endpoint } = cspHeader.match(reportToRegExp)?.groups ?? {};
+
+            expect(reportingEndpointsHeader).toContain(
+              `${endpoint}="https://some-reporting-url.com"`,
+            );
+          });
+
+          it('should include the report-only CSP report-to endpoint in the reporting-endpoints header', () => {
+            const { endpoint } =
+              cspReportOnlyHeader.match(reportToRegExp)?.groups ?? {};
+
+            expect(reportingEndpointsHeader).toContain(
+              `${endpoint}="https://some-report-only-reporting-url.com"`,
+            );
+          });
+        });
+      });
+
+      describe('tuple', () => {
+        describe('start', async () => {
+          const port = await getPort();
+          const url = `http://localhost:${port}`;
+
+          beforeAll(async () => {
+            const start = await sku('start', [
+              '--config=sku.config.vite.csp-report-to.tuple.ts',
+              '--strict-port',
+              `--port=${port}`,
+            ]);
+            await start.findByText('Starting development server');
+          });
+
+          it('should start an app with security controls', async () => {
+            const app = await getAppSnapshot({
+              url,
+            });
+            expect(app).toMatchSnapshot();
+          });
+        });
+
+        describe('build', () => {
+          let cspHeader: string;
+          let cspReportOnlyHeader: string;
+          let reportingEndpointsHeader: string;
+
+          beforeAll(async () => {
+            const build = await sku('build', [
+              '--config=sku.config.vite.csp-report-to.tuple.ts',
+            ]);
+            await build.findByText('Sku build complete');
+
+            const indexJsonPath = fixturePath('dist/index.html.json');
+            const content = await readFile(indexJsonPath, 'utf-8');
+            const data = JSON.parse(content);
+
+            cspHeader = data.metadata.csp;
+            cspReportOnlyHeader = data.metadata.cspReportOnly;
+            reportingEndpointsHeader = data.metadata.reportingEndpoints ?? null;
+          });
+
+          it('should generate a CSP with a report-to directive', () => {
+            expect(cspHeader).toContain('report-to some-reporting-endpoint');
+          });
+
+          it('should generate a report-only CSP with a report-to directive', () => {
+            expect(cspReportOnlyHeader).toContain(
+              'report-to some-report-only-reporting-endpoint',
+            );
+          });
+
+          it('should generate a reporting-endpoints header', () => {
+            expect(reportingEndpointsHeader).not.toBeNull();
+          });
+
+          it('should include the CSP report-to endpoint in the reporting-endpoints header', () => {
+            expect(reportingEndpointsHeader).toContain(
+              'some-reporting-endpoint="https://some-reporting-url.com"',
+            );
+          });
+
+          it('should include the report-only CSP report-to endpoint in the reporting-endpoints header', () => {
+            expect(reportingEndpointsHeader).toContain(
+              'some-report-only-reporting-endpoint="https://some-report-only-reporting-url.com"',
+            );
+          });
+        });
+      });
+    });
   });
 
   describe('build-ssr', async () => {

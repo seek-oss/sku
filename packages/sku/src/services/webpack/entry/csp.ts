@@ -2,6 +2,7 @@ import { createHash, randomBytes, type BinaryLike } from 'node:crypto';
 import { parse, valid, type HTMLElement } from 'node-html-parser';
 import { URL } from 'node:url';
 import type { RenderCallbackParams } from '../../../types/types.js';
+import type { ReportingEndpoint } from '../../../utils/csp.js';
 
 const scriptTypeIgnoreList = ['application/json', 'application/ld+json'];
 
@@ -12,7 +13,9 @@ const hashScriptContents = (scriptContents: BinaryLike) =>
 
 interface CreateCSPHandlerOptions {
   extraHosts?: string[];
+  reportTo?: ReportingEndpoint;
   reportOnlyExtraHosts?: string[];
+  reportOnlyReportTo?: ReportingEndpoint;
   isDevelopment?: boolean;
 }
 
@@ -29,7 +32,9 @@ export type CSPHandler = {
 
 export default function createCSPHandler({
   extraHosts = [],
+  reportTo,
   reportOnlyExtraHosts = [],
+  reportOnlyReportTo,
   isDevelopment = false,
 }: CreateCSPHandlerOptions = {}): CSPHandler {
   let cspCreated = false;
@@ -107,7 +112,10 @@ export default function createCSPHandler({
     parse(script).querySelectorAll('script').forEach(processScriptNode);
   };
 
-  const createCSPForHosts = (set: Set<string>) => {
+  const createCSPForHosts = (
+    set: Set<string>,
+    reportingEndpoint: ReportingEndpoint | undefined,
+  ) => {
     cspCreated = true;
 
     const inlineCspShas = [];
@@ -134,15 +142,22 @@ export default function createCSPHandler({
       scriptSrcPolicy.push(`'unsafe-eval'`);
     }
 
-    return `${scriptSrcPolicy.join(' ')};`;
+    const csp = [scriptSrcPolicy.join(' ')];
+
+    if (reportingEndpoint) {
+      csp.push(`report-to ${reportingEndpoint.endpoint}`);
+    }
+
+    return `${csp.join('; ')};`;
   };
 
-  const createCSP = () => createCSPForHosts(hosts);
+  const createCSP = () => createCSPForHosts(hosts, reportTo);
 
   const createCSPTag = () =>
     `<meta http-equiv="Content-Security-Policy" content="${createCSP()}">`;
 
-  const createReportOnlyCSP = () => createCSPForHosts(reportOnlyHosts);
+  const createReportOnlyCSP = () =>
+    createCSPForHosts(reportOnlyHosts, reportOnlyReportTo);
 
   const processHtml = (html: string) => {
     const root = parse(html, {

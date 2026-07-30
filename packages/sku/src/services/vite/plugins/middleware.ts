@@ -3,6 +3,10 @@ import type { Plugin } from 'vite';
 import type { OutgoingHttpHeaders } from 'node:http';
 import { createRequire } from 'node:module';
 import type { ViteRenderFunction } from '../../../types/types.js';
+import {
+  type ReportingEndpoint,
+  stringifyReportingEndpoints,
+} from '../../../utils/csp.js';
 import { getMatchingRoute } from '../../../utils/routeMatcher.js';
 import { createDebug } from 'obug';
 import {
@@ -108,18 +112,27 @@ export const middlewarePlugin = ({
 
         if (skuContext.cspEnabled || skuContext.cspReportOnlyEnabled) {
           cspHandler = createCSPHandler({
-            extraHosts: skuContext.cspEnabled
-              ? [
-                  skuContext.paths.publicPath,
-                  ...skuContext.cspExtraScriptSrcHosts,
-                ]
-              : undefined,
-            reportOnlyExtraHosts: skuContext.cspReportOnlyEnabled
-              ? [
-                  skuContext.paths.publicPath,
-                  ...skuContext.cspReportOnlyExtraScriptSrcHosts,
-                ]
-              : undefined,
+            ...(skuContext.cspEnabled
+              ? {
+                  extraHosts: [
+                    skuContext.paths.publicPath,
+                    ...skuContext.cspExtraScriptSrcHosts,
+                  ],
+                  reportTo:
+                    skuContext.cspDelivery === 'header'
+                      ? skuContext.cspReportTo
+                      : undefined,
+                }
+              : null),
+            ...(skuContext.cspReportOnlyEnabled
+              ? {
+                  reportOnlyExtraHosts: [
+                    skuContext.paths.publicPath,
+                    ...skuContext.cspReportOnlyExtraScriptSrcHosts,
+                  ],
+                  reportOnlyReportTo: skuContext.cspReportOnlyReportTo,
+                }
+              : null),
             isDevelopment: process.env.NODE_ENV === 'development',
           });
         }
@@ -144,18 +157,32 @@ export const middlewarePlugin = ({
 
           if (cspHandler) {
             const root = cspHandler.processHtml(html);
+            const reportingEndpoints: ReportingEndpoint[] = [];
 
             if (skuContext.cspEnabled) {
               if (skuContext.cspDelivery === 'tag') {
                 html = cspHandler.updateHtml(root);
               } else if (skuContext.cspDelivery === 'header') {
                 headers['content-security-policy'] = cspHandler.createCSP();
+
+                if (skuContext.cspReportTo?.url) {
+                  reportingEndpoints.push(skuContext.cspReportTo);
+                }
               }
             }
 
             if (skuContext.cspReportOnlyEnabled) {
               headers['content-security-policy-report-only'] =
                 cspHandler.createReportOnlyCSP();
+
+              if (skuContext.cspReportOnlyReportTo?.url) {
+                reportingEndpoints.push(skuContext.cspReportOnlyReportTo);
+              }
+            }
+
+            if (reportingEndpoints.length) {
+              headers['reporting-endpoints'] =
+                stringifyReportingEndpoints(reportingEndpoints);
             }
           }
 

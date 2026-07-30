@@ -7,25 +7,23 @@ import { detectSync } from 'package-manager-detector/detect';
 import semver from 'semver';
 import { caution, strong } from '../console/styles.ts';
 
-export type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
+// lockfiles should be ordered by priority, highest priority first.
+const lockfileByPackageManager = {
+  pnpm: 'pnpm-lock.yaml',
+  yarn: 'yarn.lock',
+  npm: 'package-lock.json',
+} as const satisfies Record<string, string>;
 
-const supportedPackageManagers: SupportedPackageManager[] = [
-  'yarn',
-  'pnpm',
-  'npm',
-];
+export type SupportedPackageManager = keyof typeof lockfileByPackageManager;
+
+const supportedPackageManagers = Object.keys(
+  lockfileByPackageManager,
+) as SupportedPackageManager[];
 
 const isSupportedPackageManager = (
   packageManager: string | null | undefined,
 ): packageManager is SupportedPackageManager =>
   supportedPackageManagers.includes(packageManager as SupportedPackageManager);
-
-// lockfiles should be ordered by priority, highest priority first.
-const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
-  pnpm: 'pnpm-lock.yaml',
-  yarn: 'yarn.lock',
-  npm: 'package-lock.json',
-};
 
 /**
  * The package manager that invoked the current process, if any.

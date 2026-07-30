@@ -156,7 +156,7 @@ describe('security-controls', () => {
       });
 
       describe('build', async () => {
-        let cspHeader: string;
+        let cspReportOnlyHeader: string;
 
         beforeAll(async () => {
           const build = await sku('build', [
@@ -173,19 +173,21 @@ describe('security-controls', () => {
             throw new Error('Unable to select report-only CSP metadata');
           }
 
-          cspHeader = metadata;
+          cspReportOnlyHeader = metadata;
         });
 
         it('should generate a report-only CSP header', async () => {
-          expect(cspHeader).not.toBeNull();
+          expect(cspReportOnlyHeader).not.toBeNull();
         });
 
         it('should include the extra hosts in the report-only CSP', async () => {
-          expect(cspHeader).toContain('https://some-report-only-cdn.com');
+          expect(cspReportOnlyHeader).toContain(
+            'https://some-report-only-cdn.com',
+          );
         });
 
         it('should generate a report-only CSP with nonce value', async () => {
-          expect(cspHeader).match(/nonce-RANDOM_NONCE/);
+          expect(cspReportOnlyHeader).match(/nonce-RANDOM_NONCE/);
         });
       });
     });

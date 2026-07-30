@@ -3,6 +3,7 @@ import { Worker } from 'node:worker_threads';
 import os from 'node:os';
 import { getBuildRoutes } from '../../../webpack/config/plugins/createHtmlRenderPlugin.js';
 import type { SkuContext } from '../../../../context/createSkuContext.js';
+import type { ReportingEndpoint } from '../../../../utils/csp.js';
 import type { Manifest } from 'vite';
 import { readFile } from 'node:fs/promises';
 import { success } from '@sku-private/utils/console';
@@ -21,8 +22,10 @@ export type SharedWorkerData = {
   cspEnabled: boolean;
   cspDelivery: 'tag' | 'header';
   cspExtraScriptSrcHosts: string[];
+  cspReportTo: ReportingEndpoint | undefined;
   cspReportOnlyEnabled: boolean;
   cspReportOnlyExtraScriptSrcHosts: string[];
+  cspReportOnlyReportTo: ReportingEndpoint | undefined;
   targetPath: string;
   manifest: Manifest;
 };
@@ -107,9 +110,11 @@ export const prerenderConcurrently = async (skuContext: SkuContext) => {
     cspEnabled: skuContext.cspEnabled,
     cspDelivery: skuContext.cspDelivery,
     cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
+    cspReportTo: skuContext.cspReportTo,
     cspReportOnlyEnabled: skuContext.cspReportOnlyEnabled,
     cspReportOnlyExtraScriptSrcHosts:
       skuContext.cspReportOnlyExtraScriptSrcHosts,
+    cspReportOnlyReportTo: skuContext.cspReportOnlyReportTo,
     targetPath,
     manifest: JSON.parse(rawManifest) as Manifest,
   };

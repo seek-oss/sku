@@ -191,7 +191,7 @@ To utilize the `babel-loader` cache in CI, cache the `node_modules/.cache/babel-
 
 ::: code-group
 
-```yaml
+```yaml [.buildkite/pipeline.yaml]
 steps:
   - label: 'Build sku app'
     command: 'pnpm exec sku build'
@@ -210,7 +210,7 @@ steps:
           compression: tgz
 ```
 
-```yaml
+```yaml [.github/workflows/build.yaml]
 # Add this step before the step that runs `sku build`
 - name: Cache babel-loader
   id: cache-babel-loader

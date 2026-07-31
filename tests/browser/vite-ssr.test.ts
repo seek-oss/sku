@@ -11,21 +11,18 @@ import { createPage } from '@sku-private/playwright';
 const { sku, node, fixturePath } = scopeToFixture('vite-ssr');
 
 describe('vite-ssr', () => {
-  describe('dual-entry routes pattern', () => {
-    it('uses createRoutes from a shared routes module on both entries', async () => {
-      const [routes, server, client] = await Promise.all([
+  describe('routesEntry flat routes + sites pattern', () => {
+    it('exports flat routes with optional sites from routesEntry only', async () => {
+      const [routes, server] = await Promise.all([
         fs.readFile(fixturePath('src/routes.tsx'), 'utf8'),
         fs.readFile(fixturePath('src/server.tsx'), 'utf8'),
-        fs.readFile(fixturePath('src/client.tsx'), 'utf8'),
+        fs.readFile(fixturePath('sku.config.ts'), 'utf8'),
       ]);
 
-      expect(routes).toContain('export function createRoutes');
-      expect(server).toContain('createRoutes');
-      expect(server).toContain('export const routes');
-      expect(client).toContain('createRoutes');
-      expect(client).toContain('export const routes');
-      expect(server).not.toContain('routesEntry');
-      expect(client).not.toContain('routesEntry');
+      expect(routes).toContain('export const routes');
+      expect(routes).toContain("sites: ['au']");
+      expect(routes).toContain("sites: ['nz']");
+      expect(server).toContain('site');
     });
   });
 
@@ -72,6 +69,30 @@ describe('vite-ssr', () => {
       // sku mints a nonce when attaching it to React stream scripts.
       expect(csp).toMatch(/'nonce-/);
       expect(cspReportOnly).toMatch(/'nonce-/);
+    });
+
+    it('selects site-scoped routes from onRequest.site', async ({ task }) => {
+      skipCleanup(task.id);
+
+      const auOnly = await fetch(`${url}/au-only`);
+      expect(auOnly.ok).toBe(true);
+      expect(await auOnly.text()).toContain('data-testid="au-only-page"');
+
+      // Config sites[].host alone must not select the tree — without x-sku-site,
+      // onRequest returns au even though sku.config lists nz hosts for local-dev.
+      const foreignOnAu = await fetch(`${url}/nz-only`);
+      const foreignHtml = await foreignOnAu.text();
+      expect(foreignHtml).not.toContain('data-testid="nz-only-page"');
+      expect(foreignHtml).not.toContain('NZ only');
+
+      const nzOnly = await fetch(`${url}/nz-only`, {
+        headers: { 'x-sku-site': 'nz' },
+      });
+      expect(nzOnly.ok).toBe(true);
+      const nzHtml = await nzOnly.text();
+      expect(nzHtml).toContain('data-testid="nz-only-page"');
+      expect(nzHtml).toContain('__SKU_SITE__="nz"');
+      expect(nzHtml).not.toContain('data-testid="au-only-page"');
     });
 
     it('includes the SSR-CSS virtual stylesheet without transformIndexHtml', async ({
@@ -538,6 +559,8 @@ describe('vite-ssr', () => {
           expect(html).toContain('__SKU_CLIENT_CONTEXT__');
           expect(html).toContain('"fromServer":true');
           expect(html).toContain('"userId":"fixture-user"');
+          expect(html).toContain('__SKU_SITE__');
+          expect(html).toContain('"au"');
         },
         { timeout: 15000 },
       );

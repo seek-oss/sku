@@ -40,8 +40,9 @@ describe('validateConfig — Vite SSR public assets folder', () => {
           bundler: 'vite',
           buildType: 'ssr',
           public: 'public',
+          sites: ['default'],
         },
-        { bundler: 'vite', buildType: 'ssr' },
+        { bundler: 'vite', buildType: 'ssr', sites: ['default'] },
       ),
     ).toThrow('process.exit: 1');
 
@@ -64,8 +65,9 @@ describe('validateConfig — Vite SSR public assets folder', () => {
           bundler: 'vite',
           buildType: 'ssr',
           public: 'public',
+          sites: ['default'],
         },
-        { bundler: 'vite', buildType: 'ssr' },
+        { bundler: 'vite', buildType: 'ssr', sites: ['default'] },
       ),
     ).not.toThrow();
 
@@ -119,11 +121,13 @@ describe('validateConfig — Vite SSR dangerouslySetViteConfig', () => {
           ...defaultSkuConfig,
           bundler: 'vite',
           buildType: 'ssr',
+          sites: ['default'],
           dangerouslySetViteConfig: () => ({}),
         },
         {
           bundler: 'vite',
           buildType: 'ssr',
+          sites: ['default'],
           dangerouslySetViteConfig: () => ({}),
         },
       ),
@@ -143,8 +147,9 @@ describe('validateConfig — Vite SSR dangerouslySetViteConfig', () => {
           ...defaultSkuConfig,
           bundler: 'vite',
           buildType: 'ssr',
+          sites: ['default'],
         },
-        { bundler: 'vite', buildType: 'ssr' },
+        { bundler: 'vite', buildType: 'ssr', sites: ['default'] },
       ),
     ).not.toThrow();
 
@@ -165,6 +170,73 @@ describe('validateConfig — Vite SSR dangerouslySetViteConfig', () => {
           buildType: 'static',
           dangerouslySetViteConfig: () => ({}),
         },
+      ),
+    ).not.toThrow();
+
+    expect(exitSpy).not.toHaveBeenCalled();
+  });
+});
+
+describe('validateConfig — Vite SSR sites', () => {
+  let exitSpy: ReturnType<typeof vi.spyOn>;
+  let logSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    exitSpy = vi.spyOn(process, 'exit').mockImplementation((code) => {
+      throw new Error(`process.exit: ${code}`);
+    });
+    logSpy = vi.spyOn(globalThis.console, 'log').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('hard-errors when sites is empty', () => {
+    expect(() =>
+      validateConfig(
+        {
+          ...defaultSkuConfig,
+          bundler: 'vite',
+          buildType: 'ssr',
+          sites: [],
+        },
+        { bundler: 'vite', buildType: 'ssr' },
+      ),
+    ).toThrow('process.exit: 1');
+
+    expect(exitSpy).toHaveBeenCalledWith(1);
+    const logged = logSpy.mock.calls.join('\n');
+    expect(logged).toContain('Vite SSR requires a non-empty');
+    expect(logged).toContain('sites');
+  });
+
+  it('does not error when sites has at least one name', () => {
+    expect(() =>
+      validateConfig(
+        {
+          ...defaultSkuConfig,
+          bundler: 'vite',
+          buildType: 'ssr',
+          sites: ['default'],
+        },
+        { bundler: 'vite', buildType: 'ssr', sites: ['default'] },
+      ),
+    ).not.toThrow();
+
+    expect(exitSpy).not.toHaveBeenCalled();
+  });
+
+  it('does not error for static Vite when sites is empty', () => {
+    expect(() =>
+      validateConfig(
+        {
+          ...defaultSkuConfig,
+          bundler: 'vite',
+          buildType: 'static',
+          sites: [],
+        },
+        { bundler: 'vite', buildType: 'static' },
       ),
     ).not.toThrow();
 

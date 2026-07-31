@@ -409,6 +409,18 @@ export interface SkuConfigBase {
   serverEntry?: string;
 
   /**
+   * **Only for SSR** (`buildType: 'ssr'`)
+   *
+   * Module that exports named `routes` (`SkuSsrRouteObject[]`) for both
+   * the server and client graphs. Optional `sites` on routes declares
+   * multi-site membership; apps select the tree via `onRequest.site`.
+   *
+   * @default "./src/routes.tsx"
+   * @link https://seek-oss.github.io/sku/configuration#routesentry
+   */
+  routesEntry?: string;
+
+  /**
    * Point to a JS file that will run before your tests to setup the testing environment.
    *
    * @link https://seek-oss.github.io/sku/configuration#setuptests
@@ -416,9 +428,11 @@ export interface SkuConfigBase {
   setupTests?: string | string[];
 
   /**
-   * **Only for static apps**
-   *
    * An array of sites the app supports. These usually correspond to each domain the app is hosted under.
+   *
+   * **Vite SSR:** required and non-empty (≥1 site name). Sku pre-builds a route tree per site name
+   * from [`routesEntry`](https://seek-oss.github.io/sku/configuration#routesentry); apps select via `onRequest.site`.
+   * `sites[].host` remains local-dev listen / setup-hosts only.
    *
    * @default []
    * @link https://seek-oss.github.io/sku/configuration#sites

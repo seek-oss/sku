@@ -1,16 +1,14 @@
 # Request entries
 
-sku SSR uses two primary entries:
+sku SSR uses three entry modules:
 
-[serverEntry](#server-entry) (default: `src/server.tsx`) — entrypoint for server-side code.
+[serverEntry](#server-entry) (default: `src/server.tsx`) — entrypoint for server-side request lifecycle.
 
-[clientEntry](#client-entry) (default: `src/client.tsx`) — entrypoint for client-side code.
+[clientEntry](#client-entry) (default: `src/client.tsx`) — entrypoint for client-side request lifecycle.
+
+[routesEntry](#routes-entry) (default: `src/routes.tsx`) — entrypoint for route definitions.
 
 ## Server Entry
-
-### Routes
-
-Your React Router routes, see [routing](./routing.md).
 
 ### onRequest
 
@@ -22,6 +20,7 @@ Fetch `Request` stays on React Router `query()` / loaders and optional server [`
 
 **Returns**
 
+- `site` — **required** configured site name (must appear in non-empty config [`sites`](../configuration.md#sites)); selects the pre-built site route tree (see [Routing → Multi-site](./routing.md#multi-site-path-sets))
 - `AppWrapper` - see [App Wrapper / Providers](./providers.md)
 - `language` — name of language file translations to be pre-loaded on the client
 - `clientContext` — serialisable content to be made available to the client
@@ -51,11 +50,10 @@ That augmentation is shared by `middleware`, `onRequest`, and server `getContext
 import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
 
 import { Providers } from './App/Providers';
-import { createRoutes } from './routes';
-
-export const routes = createRoutes();
+import { site } from './routes';
 
 export const onRequest: SkuSsrOnRequest = ({ req }) => ({
+  site,
   language: resolveLocaleFromPath(req.path), // e.g. 'th-TH'
   clientContext: {
     theme: 'dark',
@@ -108,10 +106,6 @@ Raw `req` is `undefined` on client navigations and becomes a landmine for loader
 
 ## Client Entry
 
-### Routes
-
-Your React Router routes — must be hydration-compatible with the server tree. See [routing](./routing.md).
-
 ### onHydrate
 
 Called on the client before hydration. Receives `{ context }` (deserialized `clientContext` from `onRequest`).
@@ -120,6 +114,8 @@ Called on the client before hydration. Receives `{ context }` (deserialized `cli
 
 - `AppWrapper` — see [App Wrapper / Providers](./providers.md)
 
+Sku reads hydrated `site` from the bootstrap (not an `onHydrate` argument) to select the same pre-built site tree as SSR. See [routing](./routing.md).
+
 ### Example
 
 ```tsx
@@ -127,9 +123,6 @@ Called on the client before hydration. Receives `{ context }` (deserialized `cli
 import type { SkuSsrOnHydrate } from 'sku';
 
 import { Providers } from './App/Providers';
-import { createRoutes } from './routes';
-
-export const routes = createRoutes();
 
 export const onHydrate: SkuSsrOnHydrate = () => ({
   AppWrapper: Providers,
@@ -161,3 +154,34 @@ export const getContext: SkuSsrClientGetContext = ({ clientContext }) => {
 
 `onRequest` / `onHydrate` (React providers) and `getContext` (loader/action DI) compose — apps may only need one.
 See [Data loading](./data-loading.md).
+
+## Routes Entry
+
+### routes
+
+Named export of a React Router route tree (`SkuSsrRouteObject[]`).
+
+A SkuSsrRouteObject is a https://reactrouter.com/start/data/route-object with an extra property:
+
+- `sites` (Optional) — When set, limits the route to only those sites.
+
+See [Routing](./routing.md).
+
+```tsx
+// src/routes.tsx
+import type { SkuSsrRouteObject } from 'sku';
+
+import { homeRoute } from './pages/home/route.js';
+
+export const routes: SkuSsrRouteObject[] = [
+  {
+    path: '/',
+    children: [
+      {
+        index: true,
+        lazy: () => import('./home.js'),
+      },
+    ],
+  },
+];
+```

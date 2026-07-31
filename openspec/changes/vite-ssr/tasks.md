@@ -54,7 +54,7 @@
 
 ## 6. Create template
 
-- [x] 6.1 `@sku-lib/create` `vite-ssr` template (`createRoutes` + dual `routes`); leave static `vite` unchanged
+- [x] 6.1 `@sku-lib/create` `vite-ssr` template (dual `routes` scaffold); leave static `vite` unchanged
 - [x] 6.2 Lazy pages use named `Component` (not default export); Migrating examples match
 
 ## 7. Docs and release
@@ -81,10 +81,34 @@
 - [x] 8.7 Docs: `entries.md` / `data-loading.md` / `middleware.md` (+ migrate / routing cross-links) — hierarchy, Data Mode vs Framework Mode, `onRequest({ req })` only, Express `Request` module augmentation for middleware-appended fields (`user` / `log` example), red warning against `req` in context, client-nav ≠ initial SSR example
 - [x] 8.8 Changeset: experimental BREAKING `onRequest` args (`{ request }` → `{ req }`) + optional `getContext` if needed
 
+## 9. `routesEntry` + site-scoped routes via optional `sites`
+
+- [x] 9.1 Config: add `routesEntry` (default `src/routes.tsx`); resolve path on sku context; alias `__sku_alias__routesEntry` into both Vite SSR graphs; document in `configuration.md`
+- [x] 9.2 Types: export `SkuSsrRouteObject = RouteObject & { sites?: string[] }`; require named `routes` on `routesEntry`; hard-error missing/non-array `routes`; require `onRequest` return field `site`
+- [x] 9.3 Runtime: load `routes` from `routesEntry` only (sku wrappers); drop dual-entry `routes` require from client/server entries
+- [x] 9.4 Pre-build: for each config site name, filter `routes` by `sites` membership (omit ⇒ all sites; no parent→child inheritance); strip `sites` before RR; bake site-name list for production client if needed
+- [x] 9.4a Config: Vite SSR requires non-empty `sites` (≥1 site name); hard-error when empty; drop empty-`sites` soft path in site-name resolution
+- [x] 9.5 Server: take `site` from `onRequest`; select pre-built tree for `createStaticHandler`; fail closed (missing/invalid/unknown site); do not derive site from config hosts
+- [x] 9.6 Client: read hydrated `site` from bootstrap for `createBrowserRouter` (same site as SSR; not `onHydrate` arg)
+- [x] 9.7 Fixture + translations + create template: set `routesEntry`; export `routes` from routes module only; remove `routes` / `routesBySite` re-exports from client/server entries; ≥2 sites; shared routes omit `sites`; site-only routes set `sites`; `onRequest` returns site from request; assert foreign-site path does not match; single-site template returns its sole site
+- [x] 9.7a Template + any single-site fixtures/docs: declare non-empty config `sites`; `onRequest` returns a configured site name (not an invented sole-site placeholder)
+- [x] 9.8 Tests: missing/invalid `routes` on `routesEntry`; missing/invalid/unknown `site` fail closed; omit `sites` ⇒ all sites; explicit `sites` filters; no inheritance; config hosts alone do not select the tree
+- [x] 9.8a Tests: empty config `sites` hard-errors for Vite SSR
+- [x] 9.9 Docs: routing / entries / index / migrate / vite — `routesEntry` + flat `routes` + optional `sites` + `onRequest.site`; multi-site product story (not `routesBySite` / dual-entry re-exports / language param / union+allowlist / sku host matching)
+- [x] 9.9a Docs: Vite SSR requires non-empty config `sites`; template/examples use a real configured site name; drop empty-`sites` soft-path wording
+- [x] 9.10 Changeset: note `routesEntry` + flat `routes` + optional `sites` + required `onRequest.site` (in-progress API; replaces dual-entry `routes` / rejected `routesBySite`)
+
 ## Deferred
 
 - Production listen / custom logger — design Open Questions
-- Runtime dual-`routes` validation — Non-Goals (docs only)
+- Dual-entry `routes` re-exports / env-split route modules as a product feature — Non-Goals (`routesEntry` is one truth)
+- Runtime dual-`routes` / server↔client tree equality validation — Non-Goals (unnecessary with `routesEntry`)
+- Union tree + site allowlist as documented multi-site product story — Non-Goals
+- `routesBySite` map export — Non-Goals (trialled and rejected; replaced by flat `routes` + `sites`)
+- Parent→child inheritance of `sites` — Non-Goals (explicit annotation required)
+- Overloading config `routes` (prerender path lists) as the Vite SSR RouteObject entry — Non-Goals (`routesEntry` instead)
+- Sku-owned site resolution from config `hosts` / `sites[].host` — Non-Goals (apps return `onRequest.site`)
+- Sku-owned per-site path expansion / per-site JS bundles / routes returned from `onRequest` — Non-Goals
 - Vite SSR support for config `public` / unhashed public assets — Non-Goals until definitive need
 - Express 5 (sku-wide; webpack SSR + Vite SSR + `sku serve`) — later breaking change
 - React Router majors beyond 8 — later releases; may be breaking
@@ -92,7 +116,7 @@
 - Automatic `*.server.ts` client strip — Non-Goals (docs / convention only)
 - Auto-inject Braid reset into sku Vite SSR server entry — Non-Goals (Braid optional; docs only)
 - Raw Express `req` in `RouterContextProvider` — Non-Goals (red-warn in docs; project values via dual `getContext`)
-- Framework Mode server-only `getLoadContext(req, res)` as sole API — Non-Goals (Data Mode dual entry instead)
+- Framework Mode server-only `getLoadContext(req, res)` as sole API — Non-Goals (Data Mode dual request entry instead)
 - Passing `res` into `onRequest` / `getContext` — Non-Goals v1
 - Passing Fetch `Request` into `onRequest` — Non-Goals (`{ req }` only)
 - `@sku-lib/vite/loadable` Document preloads for Vite SSR — Non-Goals (static / prerender only; optionally gate `preloadPlugin` to static later)

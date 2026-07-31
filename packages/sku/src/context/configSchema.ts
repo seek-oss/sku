@@ -63,6 +63,9 @@ export default validator.compile({
   serverEntry: {
     type: 'string',
   },
+  routesEntry: {
+    type: 'string',
+  },
   libraryEntry: {
     type: 'string',
     optional: true,

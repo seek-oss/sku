@@ -1,5 +1,4 @@
-import type { RouteObject } from 'react-router';
-import { getCspNonce } from 'sku';
+import { type SkuSsrRouteObject, getCspNonce } from 'sku';
 
 import { RootLayout } from './RootLayout.js';
 import { aboutRoutes } from './pages/about/route.js';
@@ -12,27 +11,41 @@ import { boomRoute } from './pages/error/route.js';
 import { helloRoute } from './pages/hello/route.js';
 import { homeRoute } from './pages/home/route.js';
 
-export function createRoutes(): RouteObject[] {
-  return [
-    {
-      path: '/',
-      Component: RootLayout,
-      children: [
-        homeRoute,
-        ...aboutRoutes,
-        detailsRoute,
-        bufferedRoute,
-        boomRoute,
-        helloRoute,
-        cookieRoute,
-        actionRoute,
-        contextRoute,
-        {
-          path: 'nonce',
-          loader: () => ({ nonce: getCspNonce() }),
-          Component: () => <main data-testid="nonce-page">Nonce page</main>,
-        },
-      ],
-    },
-  ];
-}
+export type FixtureSite = 'au' | 'nz';
+
+/**
+ * Flat `routesEntry` routes. Shared routes omit `sites` (every config site).
+ * Site-only routes set `sites` explicitly — no parent→child inheritance.
+ */
+export const routes: SkuSsrRouteObject[] = [
+  {
+    path: '/',
+    Component: RootLayout,
+    children: [
+      homeRoute,
+      ...aboutRoutes,
+      detailsRoute,
+      bufferedRoute,
+      boomRoute,
+      helloRoute,
+      cookieRoute,
+      actionRoute,
+      contextRoute,
+      {
+        path: 'nonce',
+        loader: () => ({ nonce: getCspNonce() }),
+        Component: () => <main data-testid="nonce-page">Nonce page</main>,
+      },
+      {
+        path: 'au-only',
+        sites: ['au'],
+        Component: () => <main data-testid="au-only-page">AU only</main>,
+      },
+      {
+        path: 'nz-only',
+        sites: ['nz'],
+        Component: () => <main data-testid="nz-only-page">NZ only</main>,
+      },
+    ],
+  },
+];

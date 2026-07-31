@@ -22,6 +22,7 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 ## Config and commands
 
 - Set `buildType: 'ssr'` and `bundler: 'vite'`
+- Declare non-empty config [`sites`](../configuration.md#sites) (≥1 site name); return a configured site name from `onRequest`
 - Replace `sku start-ssr` / `sku build-ssr` with `sku start` / `sku build`
 - **Ports:** Webpack SSR used dual ports (`port` for assets + `serverPort` for the Node app). SSR is **single-port**: use [`port`](../configuration.md#port) for `sku start` and the baked production default (`PORT` still overrides at runtime). Drop `serverPort` — providing it with SSR fails validation. If you previously listened on `serverPort` in production, set that value as `port` (or keep using `PORT` in deploy).
 - **Deploy layout:** production entry is `node dist/server/server.js` with sibling `client/` + `server/` under the build target — not webpack’s single `dist/server.js` layout
@@ -33,8 +34,9 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 
 ## Routes and request entries
 
-- Replace webpack `serverEntry` default export `{ renderCallback, middleware, onStart }` with SSR named exports: `routes` on **both** server and client entries, plus server `onRequest` + `middleware`, client `onHydrate`
-- Prefer a shared `createRoutes(...)` factory so server/client trees stay hydration-compatible
+- Replace webpack `serverEntry` default export `{ renderCallback, middleware, onStart }` with SSR request-entry named exports: server `onRequest` (must return `site`) + `middleware`, client `onHydrate`
+- Use optional `sites` for membership when paths differ by site
+- Multi-site path sets use `routesEntry` + `routes` + optional `sites` + `onRequest.site` (not optional language path params, union tree + allowlist, `routesBySite` maps, dual-entry `routes` re-exports, or sku config host matching) — see [Routing](./routing.md#multi-site-path-sets)
 - Lazy page modules must export named `Component` (not `export default`)
 - Express `renderCallback` no longer owns HTML — sku streams Document; put providers in `AppWrapper`
 - Optional webpack `onStart` is not part of the SSR request-entry contract

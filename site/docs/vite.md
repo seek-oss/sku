@@ -27,28 +27,49 @@ Vite support covers [static applications (SSG)][SSG] and opt-in [server-side ren
 > Do not use it in production yet; the API and behaviour may change.
 > See [Server rendering](./ssr/).
 
-Set `buildType: 'ssr'` and export named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry` (defaults `src/server.tsx` / `src/client.tsx`).
-Prefer a shared `createRoutes(...)` factory so the trees stay hydration-compatible:
+Set `buildType: 'ssr'`, declare non-empty config [`sites`](./configuration.md#sites) (≥1 site name), point [`routesEntry`](./configuration.md#routesentry) at a module that exports named flat `routes` (`SkuSsrRouteObject[]`; default `src/routes.tsx`), and use `serverEntry` / `clientEntry` for request lifecycle only (defaults `src/server.tsx` / `src/client.tsx`).
+`onRequest` must return a configured `site` so sku can select the pre-built site route tree (optional `sites` on routes declares membership):
 
 ```ts
-// src/routes.tsx
-import type { RouteObject } from 'react-router';
-
-export function createRoutes(): RouteObject[] {
-  return [/* React Router Data Mode routes (prefer lazy) */];
-}
+// sku.config.ts
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  sites: ['default'],
+  // …
+};
 ```
 
 ```ts
-// src/server.tsx / src/client.tsx
-import { createRoutes } from './routes';
+// src/routes.tsx (config routesEntry)
+import type { SkuSsrRouteObject } from 'sku';
 
-export const routes = createRoutes();
+export const site = 'default' as const; // must match a config site name
+
+export const routes: SkuSsrRouteObject[] = [
+  /* React Router Data Mode routes (prefer lazy); omit sites for single-site */
+];
 ```
 
-Required `serverEntry` must also export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest`.
-Required `clientEntry` must also export named `onHydrate`.
-Missing entry files or named exports (including missing / non-array `routes`) are a hard error; do not use `default`.
+```ts
+// src/server.tsx — no routes re-export
+export const onRequest = () => ({
+  site: 'default',
+  // …
+});
+export const middleware = [];
+```
+
+```ts
+// src/client.tsx — no routes re-export
+export const onHydrate = () => ({
+  // …
+});
+```
+
+Required `serverEntry` must export named `middleware` (Connect/Express handlers; empty array / passthrough OK) and named `onRequest` (must return `site`).
+Required `clientEntry` must export named `onHydrate`.
+Missing entry files or named exports (including missing / non-array `routes` on `routesEntry`, or a `routesBySite` export) are a hard error; do not use `default`.
 Optional config [`devServerMiddleware`](./configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./ssr/middleware.md).
 
 SSR ships on **Express 4** (same as Webpack SSR) and **React Router 8** (optional peer `react-router@^8`; install it in the app — the create `vite-ssr` template does this).
@@ -60,7 +81,7 @@ SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
 The config [`public`](./configuration.md#public) assets folder is not supported — if that directory exists, `sku start` / `sku build` fail; import assets from modules instead.
 [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) is not supported. Raise exceptional customisation needs via the [support page].
 
-`onRequest` may return a closed object under SSR: `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language` (server Document vocab preload only), and JSON `clientContext`.
+`onRequest` returns a closed object under SSR: required `site`, plus optional `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language` (server Document vocab preload only), and JSON `clientContext`.
 `onHydrate` receives `{ context }` only and may return `AppWrapper`.
 Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch).
 

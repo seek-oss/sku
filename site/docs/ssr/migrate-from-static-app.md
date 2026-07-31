@@ -26,9 +26,9 @@ Infrastructure, deployments, process managers, and reverse-proxy setup are out o
 
 ## Routes and request entries
 
-- Replace the static page + `render.tsx` / `#app` client with dual-entry named `routes` (`RouteObject[]`) on both `serverEntry` and `clientEntry` (prefer a shared `createRoutes(...)` factory)
-- Keep server and client route trees hydration-compatible (same path / nesting / ids); implementations may diverge
-- Add required named `onRequest`, `middleware`, and `onHydrate` (hard error if missing)
+- Replace the static page + `render.tsx` / `#app` client with config [`routesEntry`](../configuration.md#routesentry) exporting named `routes` (`SkuSsrRouteObject[]`; optional `sites` for multi-site)
+- Return required `site` from `onRequest` (must be a configured config `sites` name; single-site apps declare e.g. `sites: ['default']` and return that name)
+- Add required named `onRequest`, `middleware`, and `onHydrate` on the request entries (hard error if missing) — do **not** re-export `routes` from `serverEntry` / `clientEntry`
 - Prefer idiomatic `lazy: () => import('./pages/…')` on route configs for per-route chunks
 - Lazy page modules must export named `Component` (not `export default`) for React Router Data Mode
 

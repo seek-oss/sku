@@ -4,7 +4,8 @@ Server-Side Rendering creates an isomorphic React application that runs code on 
 
 sku provides a high-level API built on [React Router Data Mode](https://reactrouter.com/start/modes#data).
 
-Sku handles the HTTP server, Document shell, streaming, hydration, and CSP headers. You handle the specific page content and data.
+sku handles the HTTP server, Document shell, streaming, hydration, and CSP headers.
+Your app handle the specific page content and data.
 
 Where possible, we hope to internalise common application solutions within sku, if you are looking to add an application level feature consider reaching out to [support](../support.md) to see if it can be added directly to sku.
 
@@ -44,7 +45,7 @@ pnpm start
 
 ## Configuring an SSR app
 
-The `vite-ssr` template scaffolds `bundler: 'vite'`, `buildType: 'ssr'`, a relative `publicPath`, and the required named exports (`routes`, `onRequest`, `middleware`, `onHydrate`) at the default entry paths.
+The `vite-ssr` template scaffolds `bundler: 'vite'`, `buildType: 'ssr'`, non-empty config [`sites`](../configuration.md#sites), a relative `publicPath`, [`routesEntry`](../configuration.md#routesentry) with `routes`, and the required request-entry named exports (`onRequest` with a configured `site`, `middleware`, `onHydrate`) at the default paths.
 Interactive create also offers **SSR** as a distinct choice from **Static**.
 
 See [Configuration](../configuration.md) for all options.
@@ -57,6 +58,7 @@ import type { SkuConfig } from 'sku';
 export default {
   bundler: 'vite',
   buildType: 'ssr',
+  sites: ['default'],
   publicPath: '/',
   port: 3000,
 } satisfies SkuConfig;

@@ -128,6 +128,19 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
     );
   }
 
+  // Defaults merge always provides `sites: []`; Vite SSR requires ≥1 configured site name.
+  if (
+    skuConfig.buildType === 'ssr' &&
+    skuConfig.bundler === 'vite' &&
+    (!skuConfig.sites || skuConfig.sites.length === 0)
+  ) {
+    errors.push(
+      `🚫 Vite SSR requires a non-empty '${strong(
+        'sites',
+      )}' array (≥1 site name).`,
+    );
+  }
+
   // Ensure defaultClientEntry is not configured as a route name
   skuConfig.routes?.forEach((skuRoute) => {
     if (typeof skuRoute !== 'string') {

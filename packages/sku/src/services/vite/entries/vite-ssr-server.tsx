@@ -1,10 +1,12 @@
-// Resolved by sku's Vite config plugin to the consumer server entry.
+// Resolved by sku's Vite config plugin to the consumer server / routes entries.
 
 import type { Request as ExpressRequest } from 'express';
+import * as routesEntry from '__sku_alias__routesEntry';
 import * as serverEntry from '__sku_alias__serverEntry';
-import type { RouteObject } from 'react-router';
+import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import {
   optionalNamedFunctionExport,
+  rejectRoutesBySiteExport,
   requireNamedExport,
 } from '../ssr/requireNamedExport.js';
 import { render as renderApp } from '../ssr/render.js';
@@ -14,15 +16,20 @@ import type {
   RenderOptions,
   SkuSsrMiddleware,
   SkuSsrOnRequest,
+  SkuSsrRouteObject,
   SkuSsrServerGetContext,
 } from '../ssr/types.js';
 
-export const routes = requireNamedExport<RouteObject[]>(
-  serverEntry,
+rejectRoutesBySiteExport(routesEntry, 'routesEntry');
+
+const routes = requireNamedExport<SkuSsrRouteObject[]>(
+  routesEntry,
   'routes',
-  'serverEntry',
-  { kind: 'array' },
+  'routesEntry',
+  { kind: 'routes' },
 );
+
+const siteRouteTrees = buildSiteRouteTrees(routes, __SKU_SITES__);
 
 export const onRequest = requireNamedExport<SkuSsrOnRequest>(
   serverEntry,
@@ -50,7 +57,7 @@ export const render = (
   manifest?: RenderManifest,
 ) =>
   renderApp(
-    routes,
+    siteRouteTrees,
     request,
     req,
     assets,

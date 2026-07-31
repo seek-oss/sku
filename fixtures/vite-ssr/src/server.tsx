@@ -8,13 +8,12 @@ import type {
 } from 'sku';
 
 import { resolveLanguageFromPathname } from './resolveLanguage.js';
-import { createRoutes } from './routes.js';
+import { resolveSiteFromRequest } from './resolveSite.js';
 import type { ClientContext } from './types.js';
 import { SkuUserIdReactContext, userIdContext } from './userIdContext.js';
 
-export const routes = createRoutes();
-
 export const onRequest: SkuSsrOnRequest = ({ req }) => {
+  const site = resolveSiteFromRequest(req);
   const language = resolveLanguageFromPathname(req.path);
   const userId = req.skuUserId ?? null;
 
@@ -24,6 +23,7 @@ export const onRequest: SkuSsrOnRequest = ({ req }) => {
   };
 
   return {
+    site,
     language,
     clientContext,
     AppWrapper: ({ children }: { children: ReactNode }) => {

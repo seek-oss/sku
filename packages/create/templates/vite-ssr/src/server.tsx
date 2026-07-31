@@ -1,11 +1,10 @@
 import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
 
 import { Providers } from './App/Providers';
-import { createRoutes } from './routes';
-
-export const routes = createRoutes();
+import { site } from './routes';
 
 export const onRequest: SkuSsrOnRequest = () => ({
+  site,
   AppWrapper: Providers,
 });
 

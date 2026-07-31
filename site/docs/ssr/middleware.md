@@ -1,6 +1,6 @@
 # Middleware
 
-SSR has **two HTTP middleware layers**, plus optional React Router route `middleware` on your `routes` trees.
+SSR has **two HTTP middleware layers**, plus optional React Router route `middleware` on your `routesEntry` `routes`.
 Pick the HTTP layer based on whether the traffic should exist in production.
 Do not confuse Express/Connect handlers with React Router’s route `middleware` field — see [Routing](./routing.md#react-router-route-middleware).
 

@@ -2,7 +2,13 @@
 
 SSR uses [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing.
 
-You export a named `routes` (`RouteObject[]`) from **both** `serverEntry` and `clientEntry`; sku owns the HTTP server, document shell, streaming, and hydration, and wires each side’s route config into React Router on the server and in the browser.
+You export a named `routes` (`SkuSsrRouteObject[]`) from config [`routesEntry`](../configuration.md#routesentry) (default `src/routes.tsx`); sku owns the HTTP server, document shell, streaming, and hydration, and wires the **selected site’s** route tree into React Router on the server and in the browser.
+
+`SkuSsrRouteObject` is a sku type helper: React Router’s `RouteObject` plus optional `sites?: string[]` membership. Import route primitives from `react-router`; import `SkuSsrRouteObject` from `sku` when you need the `sites` field.
+
+`onRequest` **must** return `site: string`. Config [`sites`](../configuration.md#sites) must be non-empty (≥1 site name) — empty `sites` is a hard error. Sku pre-builds a route tree per config site name from your flat `routes` (filtering by optional `sites`), selects the tree for that `site`, serialises `site` into the hydrate bootstrap, and uses the same tree for the client router. Missing / non-string `site`, or a `site` that is not a config site name, fails closed (hard error).
+
+Exporting `routesBySite` is a hard error — use flat `routes` with optional `sites` instead.
 
 Lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
 
@@ -10,18 +16,25 @@ For page content, prefer [render-time data loading](./data-loading.md) via `AppW
 
 SSR requires **React Router** to be installed within your app.
 
-Server and client route trees **must** stay hydration-compatible (same path / nesting / ids so server HTML matches hydrated HTML).
-Implementations on those trees (for example React Router route `middleware`, loaders, or component bodies) **may** diverge.
+Because `routesEntry` is one module in both graphs, server and client use the same route tree for a given site (hydration-compatible by construction).
+Implementations on those trees (for example React Router route `middleware`, loaders, or component bodies) stay isomorphic unless you intentionally keep server-only modules off the client-imported graph.
 
 Because consumer routes/entries use React Router Data Mode APIs that sku wires in, a future React Router **major** upgrade in sku may be a breaking change for SSR apps.
 Minor/patch upgrades within the documented major stay non-breaking when APIs remain compatible.
 
 For information on how to use React Router to register routes, see [React Router Data Mode](https://reactrouter.com/start/data/routing).
 
-## Routes
+## How to define your routes
 
-Export named `routes` from **both** the [server and client entries](./entries.md).
-These need to match in HTML and will likely only differ based on loaders or middleware.
+Export a `routes` array (`SkuSsrRouteObject[]`) from [`routesEntry`](../configuration.md#routesentry).
+
+Provide an optional `sites` param to limit which sites a route displays on.
+
+### Lazy loading — Loading only content required for a given page
+
+Routes should typically be defined using React Router's [lazy factory](https://reactrouter.com/start/data/route-object#lazy).
+
+The import should
 
 ```tsx
 // src/pages/home/route.ts
@@ -35,41 +48,41 @@ export const homeRoute = {
 ```
 
 ```tsx
-// src/routes.tsx
-import type { RouteObject } from 'react-router';
+// src/routes.tsx (config routesEntry)
+import type { SkuSsrRouteObject } from 'sku';
 
 import { homeRoute } from './pages/home/route.js';
 
-export function createRoutes(): RouteObject[] {
-  return [
-    {
-      path: '/',
-      children: [homeRoute],
-    },
-  ];
-}
+// Must match a name from config `sites` (e.g. sites: ['default']).
+export const site = 'default' as const;
+
+export const routes: SkuSsrRouteObject[] = [
+  {
+    path: '/',
+    children: [homeRoute],
+  },
+];
 ```
 
 ```tsx
-// src/server.tsx
-import { createRoutes } from './routes.js';
+// src/server.tsx — request entry only
+import { site } from './routes.js';
 
-export const routes = createRoutes();
+export const onRequest = () => ({
+  site,
+  // … AppWrapper, language, clientContext
+});
 
-// … onRequest, middleware
+// … middleware
 ```
 
 ```tsx
-// src/client.tsx
-import { createRoutes } from './routes.js';
-
-export const routes = createRoutes();
-
-// … onHydrate
+// src/client.tsx — request entry only
+// … onHydrate (no routes re-export)
 ```
 
 Prefer co-locating each page in its own directory with a `route.ts` (path / lazy / loaders / handle) and the page module (e.g. `home.tsx`).
-Compose those route modules inside `createRoutes`.
+Compose those route modules in the `routesEntry` `routes` array.
 
 Lazy page modules MUST use React Router Data Mode’s named `Component` export (not `export default`) so they typecheck with `lazy: () => import('…')`:
 
@@ -82,14 +95,52 @@ export function Component() {
 
 sku owns:
 
-- the HTTP(S) server (dev: Vite `middlewareMode` + HMR on one port; prod: `node dist/server/server.js`)
+- the HTTP server (dev: Vite `middlewareMode` + HMR on one port; prod: `node dist/server/server.js`)
 - the React Document shell (`<html>` / `<head>` / `<body>` with CSS + modulepreload links) — not overridable; use React document metadata in routes/layouts for head/SEO
 - full-document streaming with `renderToPipeableStream` (shell-first; set route `handle.waitForAll` to buffer until `onAllReady`)
 - document-level hydration (`hydrateRoot(document, …)`), not `#app`
 - CSP as HTTP headers when `cspEnabled` / `cspReportOnlyEnabled` are set (see [CSP](./csp.md))
 - forwarding React Router loader/action headers onto streamed HTML responses (see [Response headers](./data-loading.md#response-headers))
+- pre-building per-site trees from config site names + optional route `sites` membership
 
 `httpsDevServer: true` is supported for SSR `sku start`.
+
+## Multi-site path sets
+
+Multi-site apps often need **different React Router path sets** per site (for example site-only pages). A single unfiltered `RouteObject[]` either over-matches unsupported paths or registers foreign paths on every host.
+
+**App-owned:** resolve `site` in `onRequest` (from Express `req`, headers, app config, etc.) and declare membership with optional `sites` on routes. When **path shape** differs by site (e.g. `/jobs` vs `/emploi`), keep using factories for those path strings — membership still belongs on the route via `sites`.
+
+**Sku-owned:** filter flat `routes` into a pre-built tree per config site name (omit `sites` ⇒ every site; present ⇒ only listed names; no parent→child inheritance), strip `sites` before React Router, select by `onRequest.site`, serialise `site` for hydrate, and use that same site on the client. Sku does **not** derive site from config [`hosts`](../configuration.md) / `sites[].host` for route-tree selection — those remain local-dev listen / setup-hosts only.
+
+```tsx
+// src/routes.tsx
+import type { SkuSsrRouteObject } from 'sku';
+
+export const routes: SkuSsrRouteObject[] = [
+  {
+    path: '/',
+    children: [
+      homeRoute,
+      aboutRoute,
+      { path: 'au-only', sites: ['au'] /* … */ },
+      { path: 'nz-only', sites: ['nz'] /* … */ },
+    ],
+  },
+];
+```
+
+```tsx
+// src/server.tsx — app owns site resolution
+export const onRequest = ({ req }) => ({
+  site: resolveSiteFromRequest(req), // e.g. from Host, header, or middleware state
+  AppWrapper: Providers,
+});
+```
+
+Do **not** rely on optional language path params, a union tree + site allowlist, `routesBySite` maps, dual-entry `routes` re-exports, or sku host matching as the multi-site product story — use [`routesEntry`](../configuration.md#routesentry) + flat `routes` + optional `sites` + `onRequest.site`.
+
+Serving the same page at multiple **language** prefixes within one site is covered under [Multi-language](./multi-language.md#multiple-paths-per-page--languages-in-path).
 
 ## Lazy routes and `handle.moduleId`
 
@@ -115,7 +166,7 @@ export const detailsRoute = {
 } satisfies RouteObject;
 ```
 
-Do **not** statically import those page modules into `createRoutes` / `route.ts` — that eagerly bundles them and defeats per-route chunking.
+Do **not** statically import those page modules into `routes` / `route.ts` — that eagerly bundles them and defeats per-route chunking.
 Import only the route configs.
 The `fixtures/vite-ssr` app demonstrates this pattern with distinct `about` and `details` chunks.
 
@@ -134,7 +185,4 @@ In development, sku warns when a lazy route still has no effective `moduleId` af
 
 React Router Data Mode also supports a `middleware` array on `RouteObject`s.
 That is **not** the same as server-entry Express/Connect `middleware` — see [Middleware](./middleware.md).
-Put route middleware on each entry’s `routes` (via `createRoutes(...)` options if they diverge).
-Keep path / nesting / ids hydration-compatible when server and client implementations differ.
-
-Serving the same page at multiple language prefixes is covered under [Multi-language](./multi-language.md#multiple-paths-per-page--languages-in-path).
+Put route middleware on `routesEntry` `routes` (and use optional `sites` when a middleware-bearing route is site-specific).

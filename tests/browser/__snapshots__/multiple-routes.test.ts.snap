@@ -605,7 +605,7 @@ exports[`multiple-routes > bundler: vite > start > should render home page corre
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,80 +1,88 @@
+@@ -1,80 +1,80 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -668,14 +668,6 @@ exports[`multiple-routes > bundler: vite > start > should render home page corre
                    .forEach(node => node.remove());
                });
      </script>
-+    <style
-+      type="text/css"
-+      data-vite-dev-id="{cwd}/fixtures/multiple-routes/src/handlers/Home.css.js.vanilla.css"
-+    >
-+      .Home_root__ms22la0 {
-+  color: red;
-+}
-+    </style>
    </head>
    <body>
      <div id="app">

@@ -7,6 +7,7 @@ export default {
   port: 8200,
   target: 'dist',
   languages: ['en', 'fr'],
+  sites: ['au', 'nz'],
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://cdn.example.com'],
   cspReportOnlyEnabled: true,

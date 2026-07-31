@@ -28,6 +28,7 @@ export const configPlugin = ({
       alias: {
         __sku_alias__clientEntry: skuContext.paths.clientEntry,
         __sku_alias__serverEntry: skuContext.paths.serverEntry,
+        __sku_alias__routesEntry: skuContext.paths.routesEntry,
         __sku_alias__renderEntry: skuContext.paths.renderEntry,
         ...(skuContext.languages ? getVocabViteAliases() : {}),
       },

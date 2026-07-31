@@ -11,6 +11,7 @@ export default {
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   serverEntry: 'src/server.tsx',
+  routesEntry: 'src/routes.tsx',
   libraryEntry: undefined,
   routes: [],
   sites: [],

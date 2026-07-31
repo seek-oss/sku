@@ -2,6 +2,7 @@ import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { createOutDir } from '../helpers/bundleConfig.js';
 import { makePluginName } from '../helpers/makePluginName.js';
+import { resolveConfigSiteNames } from '../ssr/resolveConfigSiteNames.js';
 import { lazyRouteModuleIdPlugin } from './lazyRouteModuleId/lazyRouteModuleIdPlugin.js';
 import { vitePluginSsrCss } from './ssrCss/plugin.js';
 import { telemetryPlugin } from './telemetry.js';
@@ -15,17 +16,23 @@ const ssrServerEntry = require.resolve('#entries/vite-ssr-server');
 
 export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
   const outDir = createOutDir(skuContext.paths.target);
+  const siteNames = resolveConfigSiteNames(skuContext.sites);
 
   return [
     {
       name: makePluginName('ssr'),
       config: () => ({
+        // Bake for start + build so server/client pre-build identical site trees.
+        define: {
+          __SKU_SITES__: JSON.stringify(siteNames),
+        },
         optimizeDeps: {
           // Crawl all entries so they get optimized ahead of time. Reloads on
           // cold-start cause issues with Playwright tests ("REFUSED_CONNECTION").
           entries: [
             skuContext.paths.serverEntry,
             skuContext.paths.clientEntry,
+            skuContext.paths.routesEntry,
             ssrClientDevEntry,
             ssrServerEntry,
           ],
@@ -83,7 +90,11 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
     lazyRouteModuleIdPlugin(),
     // Serve-only: Document `assets.css` + client entry own injection.
     vitePluginSsrCss({
-      entries: [skuContext.paths.serverEntry, ssrServerEntry],
+      entries: [
+        skuContext.paths.serverEntry,
+        skuContext.paths.routesEntry,
+        ssrServerEntry,
+      ],
       injectHtml: false,
     }),
     telemetryPlugin({

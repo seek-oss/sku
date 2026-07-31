@@ -1,12 +1,10 @@
-import type { RouteObject } from 'react-router';
+import type { SkuSsrRouteObject } from 'sku';
 
 import App from '../App.js';
 
-export function createRoutes(): RouteObject[] {
-  return [
-    {
-      path: '*',
-      Component: App,
-    },
-  ];
-}
+export const routes: SkuSsrRouteObject[] = [
+  {
+    path: '*',
+    Component: App,
+  },
+];

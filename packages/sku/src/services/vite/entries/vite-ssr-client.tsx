@@ -1,27 +1,34 @@
 import 'virtual:sku/polyfills';
 import { hydrateRoot } from 'react-dom/client';
-import {
-  createBrowserRouter,
-  matchRoutes,
-  RouterProvider,
-  type RouteObject,
-} from 'react-router';
-// Resolved by sku's Vite config plugin to the consumer client request entry.
+import { createBrowserRouter, matchRoutes, RouterProvider } from 'react-router';
+// Resolved by sku's Vite config plugin to the consumer client / routes entries.
 import * as clientEntry from '__sku_alias__clientEntry';
+import * as routesEntry from '__sku_alias__routesEntry';
 import Document from '../ssr/Document.js';
+import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import {
   optionalNamedFunctionExport,
+  rejectRoutesBySiteExport,
   requireNamedExport,
 } from '../ssr/requireNamedExport.js';
-import type { SkuSsrClientGetContext, SkuSsrOnHydrate } from '../ssr/types.js';
+import { selectSiteRoutes } from '../ssr/selectSiteRoutes.js';
+import type {
+  SkuSsrClientGetContext,
+  SkuSsrOnHydrate,
+  SkuSsrRouteObject,
+} from '../ssr/types.js';
 import { withAppWrapperLayout } from '../ssr/withAppWrapperLayout.js';
 
-const routes = requireNamedExport<RouteObject[]>(
-  clientEntry,
+rejectRoutesBySiteExport(routesEntry, 'routesEntry');
+
+const routes = requireNamedExport<SkuSsrRouteObject[]>(
+  routesEntry,
   'routes',
-  'clientEntry',
-  { kind: 'array' },
+  'routesEntry',
+  { kind: 'routes' },
 );
+
+const siteRouteTrees = buildSiteRouteTrees(routes, __SKU_SITES__);
 
 const onHydrate = requireNamedExport<SkuSsrOnHydrate>(
   clientEntry,
@@ -36,11 +43,17 @@ const getContext = optionalNamedFunctionExport<SkuSsrClientGetContext>(
 );
 
 const hydrate = async () => {
+  const site = window.__SKU_SITE__;
+  const siteRoutes = selectSiteRoutes(
+    siteRouteTrees,
+    site,
+    'hydrate bootstrap',
+  );
   const clientContext = window.__SKU_CLIENT_CONTEXT__;
   const { AppWrapper } = onHydrate({
     context: clientContext,
   });
-  const routesWithAppWrapper = withAppWrapperLayout(routes, AppWrapper);
+  const routesWithAppWrapper = withAppWrapperLayout(siteRoutes, AppWrapper);
 
   // publicPath is the static asset prefix only — never React Router basename.
   const lazyMatches = matchRoutes(

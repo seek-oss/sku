@@ -51,22 +51,114 @@ This edge case MUST NOT require a dedicated browser e2e fixture.
 - **THEN** sku produces sibling `client/` and `server/` under the build target
 - **AND** neither directory is nested inside the other
 
-### Requirement: Server and client entries both export routes
+### Requirement: routesEntry exports flat routes
 
-Both `serverEntry` and `clientEntry` MUST export named `routes` as `RouteObject[]` (empty array allowed; missing or non-array MUST hard-error).
+Config MUST support `routesEntry` (default `src/routes.tsx`) for Vite SSR.
 
-Server and client trees MUST stay hydration-compatible; sku MUST NOT runtime-validate that match.
+Sku MUST resolve `routesEntry` into both the server and client graphs via `__sku_alias__routesEntry`.
 
-#### Scenario: Both entries export routes
+`routesEntry` MUST export named `routes` as `SkuSsrRouteObject[]` (flat array).
+
+`SkuSsrRouteObject` MUST be a sku type helper `RouteObject & { sites?: string[] }` (not a wrapped React Router re-export).
+
+Missing or non-array `routes` on `routesEntry` MUST hard-error.
+
+Sku MUST load `routes` from `routesEntry` only.
+
+Config `routes` (static prerender path lists) MUST NOT be used as the Vite SSR `RouteObject` entry.
+
+#### Scenario: routesEntry supplies routes for both graphs
 
 - **WHEN** a Vite SSR app is started or built
-- **THEN** sku uses server `routes` for document / `query` and client `routes` for hydrate
+- **AND** `routesEntry` exports `routes`
+- **THEN** sku pre-builds per-site trees from that array for document / `query` (server) and hydrate (client)
 
-#### Scenario: Missing or non-array routes hard-error
+#### Scenario: Missing or invalid routes hard-error
 
-- **WHEN** a server or client entry omits named `routes` or exports a non-array `routes` value
+- **WHEN** `routesEntry` omits named `routes`, or exports a non-array value
 - **THEN** sku fails with a hard error naming the entry/export
 - **AND** does not use `default` or soft-skip
+
+### Requirement: Optional sites membership and onRequest.site select site-scoped route tree
+
+Optional `sites?: string[]` on a `SkuSsrRouteObject` declares membership:
+
+- Omit / undefined ⇒ the route is included for **every** config site
+- Present ⇒ the route is included **only** for those site names (exact match against config site names)
+
+Sku MUST NOT inherit `sites` from parent routes to children.
+Site-specific routes MUST set `sites` explicitly.
+
+Sku MUST pre-build per-site trees from config site names + `routesEntry` `routes` at init (not per request), strip `sites` before React Router APIs, and select the pre-built tree for `onRequest.site`.
+
+Vite SSR MUST require a non-empty config `sites` array (≥1 site name). Empty `sites` MUST hard-error at config/init.
+
+`onRequest` MUST return `site: string`.
+
+Sku MUST serialize that `site` into the hydrate bootstrap and select the same pre-built tree for client `createBrowserRouter`.
+
+Sku MUST NOT derive site from config `hosts` / `sites[].host` for route-tree selection (those remain local-dev listen / setup-hosts only).
+
+Missing or non-string `onRequest.site`, or a `site` that is not a config site name / has no pre-built tree, MUST fail closed (hard error).
+
+Apps own site resolution (from Express `req`, headers, app config, etc.) and per-site path _shape_ when paths differ by site.
+
+Config `sites[].routes` (static prerender path lists) MUST NOT drive Vite SSR `RouteObject` trees.
+
+`site` MUST NOT be passed into `onHydrate` args (`onHydrate` stays `{ context }` only).
+
+#### Scenario: Empty config sites hard-errors
+
+- **WHEN** a Vite SSR app has an empty config `sites` array
+- **THEN** sku fails with a hard error at config/init
+
+#### Scenario: Route without sites is on every site
+
+- **WHEN** a route omits `sites`
+- **AND** config defines multiple sites
+- **THEN** that route is present in every pre-built site tree
+
+#### Scenario: Route with sites is membership-filtered
+
+- **WHEN** a route sets `sites: ['au']`
+- **AND** config defines sites `au` and `nz`
+- **THEN** the route is present only in the `au` pre-built tree
+
+#### Scenario: No sites inheritance from parent
+
+- **WHEN** a parent route sets `sites: ['au']`
+- **AND** a child omits `sites`
+- **THEN** sku does not copy the parent’s `sites` onto the child
+- **AND** structural exclusion still applies (if the parent is absent for a site, its subtree is absent)
+
+#### Scenario: onRequest site selects the tree
+
+- **WHEN** `onRequest` returns `site`
+- **AND** that name is a config site with a pre-built tree
+- **THEN** sku uses that site’s tree for the server handler
+- **AND** hydrates the client router with the same site’s tree
+
+#### Scenario: Missing onRequest site fails closed
+
+- **WHEN** `onRequest` omits `site` or returns a non-string value
+- **THEN** sku fails closed with a hard error
+
+#### Scenario: Unknown site fails closed
+
+- **WHEN** `onRequest` returns a `site` that is not a config site name
+- **THEN** sku fails closed with a hard error
+
+#### Scenario: Foreign-site paths are not registered
+
+- **WHEN** a route is membership-filtered out of site A’s tree
+- **AND** `onRequest` returns site A
+- **THEN** React Router does not match that path on site A’s tree
+
+#### Scenario: Config hosts do not select the tree
+
+- **WHEN** config defines `sites[].host` values
+- **THEN** sku still requires `onRequest.site` for tree selection
+- **AND** does not choose the tree from the request `Host` header alone
 
 ### Requirement: Required server and client request exports
 
@@ -80,13 +172,13 @@ Sku MUST NOT specially gate on entry file existence; a missing file fails via no
 
 Sku MUST NOT pass Fetch `Request` into `onRequest` (Fetch stays on `query()` and optional server `getContext`).
 
-`onRequest` MAY return `AppWrapper`, `language` (server Document vocab only), and `clientContext`.
+`onRequest` MUST return `site` and MAY also return `AppWrapper`, `language` (server Document vocab only), and `clientContext`.
 
 `onHydrate` receives `{ context }` only and MAY return `AppWrapper`.
 
 Sku MUST NOT forward `language` to the client.
 
-When `AppWrapper` is returned, sku MUST mount it as a pathless parent under the router above that side’s `routes`.
+When `AppWrapper` is returned, sku MUST mount it as a pathless parent under the router above the selected site’s routes.
 
 Server and client entries MAY optionally export `getContext` as a **separate named export** (not folded into `onRequest` / `onHydrate`).
 
@@ -110,7 +202,7 @@ Sku MUST NOT pass `res` into `onRequest` or `getContext`.
 
 - **WHEN** consumer Express middleware attaches fields on `req` (e.g. `req.user`, `req.log`)
 - **AND** `onRequest` runs for that document request
-- **THEN** `onRequest` can read those fields from `req` to build `AppWrapper` / `language` / `clientContext`
+- **THEN** `onRequest` can read those fields from `req` to build `site` / `AppWrapper` / `language` / `clientContext`
 
 #### Scenario: Optional server getContext seeds query requestContext
 
@@ -134,7 +226,7 @@ Sku MUST NOT pass `res` into `onRequest` or `getContext`.
 #### Scenario: AppWrapper mounts inside the router
 
 - **WHEN** `onRequest` or `onHydrate` returns `AppWrapper`
-- **THEN** sku mounts it as a pathless parent under the router above that side’s `routes`
+- **THEN** sku mounts it as a pathless parent under the router above the selected site’s routes
 
 #### Scenario: Missing named exports hard-error
 
@@ -542,7 +634,7 @@ Production remains HTTP.
 
 ### Requirement: Teams can scaffold a Vite SSR app via create
 
-`@sku-lib/create` MUST offer a `vite-ssr` template with required config/exports and a shared `createRoutes` scaffold.
+`@sku-lib/create` MUST offer a `vite-ssr` template with non-empty config `sites`, `routesEntry` configured, a flat `routes` scaffold (optional route-level `sites` only when membership differs), and request-entry exports (`onRequest` returning a configured site name / `middleware` / `onHydrate` — no `routes` re-export).
 
 Lazy route page modules in the template MUST use the React Router Data Mode named `Component` export (not `export default`).
 
@@ -551,7 +643,9 @@ The static `vite` template MUST remain unchanged.
 #### Scenario: Create vite-ssr template
 
 - **WHEN** a user runs `@sku-lib/create --template vite-ssr`
-- **THEN** the project is Vite SSR with dual `routes` / `createRoutes`
+- **THEN** the project is Vite SSR with non-empty config `sites` and `routesEntry` exporting flat `routes`
+- **AND** `onRequest` returns a configured site name
+- **AND** request entries do not re-export `routes`
 - **AND** lazy page modules export named `Component`
 - **AND** can `sku start` without further entry setup
 
@@ -657,11 +751,13 @@ Sku MUST NOT add a runtime experimental gate.
 
 ### Requirement: Product and Migrating docs cover Vite SSR topics
 
-Vite SSR product docs MUST cover dual-entry `routes`, AppWrapper, middleware layers, CSP, response headers, data-loading hierarchy, and optional dual-entry `getContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
+Vite SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, required `onRequest.site` tree selection, AppWrapper, middleware layers, CSP, response headers, data-loading hierarchy, and optional dual-entry `getContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
 
 Migrating docs MUST also cover:
 
 - named `Component` (not default export) for lazy routes
+- `routesEntry` + flat `routes` + optional `sites` + required `onRequest.site` (fail closed on missing site / unknown site)
+- multi-site membership via `sites` on routes (not `routesBySite` maps, dual-entry `routes` re-exports, optional language path params, union tree + allowlist, or sku host matching as the product story)
 - webpack dual-port (`port` + `serverPort`) vs Vite SSR single `port` (`serverPort` rejected; production still honours `PORT`)
 - production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
 - CJS interop for `sku start`
@@ -690,7 +786,7 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 #### Scenario: Primary Vite SSR docs have topic coverage
 
 - **WHEN** a reader opens Vite SSR product docs
-- **THEN** docs cover AppWrapper, routes, middleware, CSP, and response headers
+- **THEN** docs cover `routesEntry`, AppWrapper, flat `routes`, optional `sites`, `onRequest.site`, middleware, CSP, and response headers
 - **AND** docs steer page content toward render-time data loading via `AppWrapper` (not loaders as the default)
 - **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getContext` DI
 - **AND** docs document optional dual-entry `getContext` and Data Mode vs Framework Mode seeding

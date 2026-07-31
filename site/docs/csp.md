@@ -64,14 +64,12 @@ Do not use webpack’s `createUnsafeNonce` for SSR — that API can create multi
 import { getCspNonce, type SkuSsrMiddleware } from 'sku';
 import type { RouteObject } from 'react-router';
 
-// Export `routes` from serverEntry / clientEntry
-export const routes: RouteObject[] = [
-  {
-    path: '/',
-    loader: () => ({ nonce: getCspNonce() }),
-    // ...
-  },
-];
+// Inside routesEntry `routes`
+const homeRoute = {
+  path: '/',
+  loader: () => ({ nonce: getCspNonce() }),
+  // ...
+} satisfies RouteObject;
 
 // src/server.tsx
 export const middleware: SkuSsrMiddleware = (req, res, next) => {

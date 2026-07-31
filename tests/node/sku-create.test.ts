@@ -256,13 +256,12 @@ describe.each(['webpack', 'vite', 'vite-ssr'])('sku-create %s', (template) => {
       );
 
       expect(skuConfig).toContain("buildType: 'ssr'");
-      expect(routes).toContain('export function createRoutes');
-      expect(server).toContain('export const routes');
-      expect(server).toContain('createRoutes');
+      expect(skuConfig).toContain("sites: ['default']");
+      expect(routes).toContain('export const routes');
+      expect(routes).toContain("export const site = 'default'");
+      expect(server).toContain('site');
       expect(server).toContain('export const onRequest');
       expect(server).toContain('export const middleware');
-      expect(client).toContain('export const routes');
-      expect(client).toContain('createRoutes');
       expect(client).toContain('export const onHydrate');
       await expect(
         fs.access(fixturePath(projectName, 'src/render.tsx')),

@@ -5,11 +5,9 @@ import type { SkuSsrClientGetContext, SkuSsrOnHydrate } from 'sku';
 
 import { ClientRoutesContext } from './ClientRoutesContext.js';
 import { resolveLanguageFromPathname } from './resolveLanguage.js';
-import { createRoutes } from './routes.js';
+import { routes } from './routes.js';
 import type { ClientContext } from './types.js';
 import { SkuUserIdReactContext, userIdContext } from './userIdContext.js';
-
-export const routes = createRoutes();
 
 export const onHydrate: SkuSsrOnHydrate = ({ context }) => {
   const clientContext = context as ClientContext;

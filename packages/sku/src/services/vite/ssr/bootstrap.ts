@@ -71,10 +71,12 @@ export const buildBootstrapScriptContent = (
   {
     development = false,
     clientContext,
+    site,
   }: {
     development?: boolean;
     clientContext?: JsonValue;
-  } = {},
+    site: string;
+  },
 ) => {
   const hydrationData: SerializableHydrationState = {
     loaderData: replacePromises(
@@ -89,6 +91,7 @@ export const buildBootstrapScriptContent = (
   return [
     `window.__SKU_DOCUMENT_ASSETS__=${escapeScriptValue(assets)}`,
     `window.__SKU_CLIENT_CONTEXT__=${escapeScriptValue(clientContext ?? null)}`,
+    `window.__SKU_SITE__=${escapeScriptValue(site)}`,
     `window.__staticRouterHydrationData=${escapeScriptValue(hydrationData)}`,
   ].join(';');
 };

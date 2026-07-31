@@ -11,6 +11,12 @@ const parseHydrationData = (script: string) => {
   };
 };
 
+const emptyContext = {
+  loaderData: {},
+  actionData: null,
+  errors: null,
+} as unknown as StaticHandlerContext;
+
 describe('buildBootstrapScriptContent', () => {
   it('scrubs Promises from loaderData and actionData', () => {
     const script = buildBootstrapScriptContent(
@@ -20,6 +26,7 @@ describe('buildBootstrapScriptContent', () => {
         actionData: { c: Promise.resolve('y'), d: 'done' },
         errors: null,
       } as unknown as StaticHandlerContext,
+      { site: 'au' },
     );
 
     const data = parseHydrationData(script);
@@ -27,22 +34,20 @@ describe('buildBootstrapScriptContent', () => {
     expect(data.actionData).toEqual({ c: undefined, d: 'done' });
   });
 
-  it('serialises clientContext into the bootstrap', () => {
+  it('serialises clientContext and site into the bootstrap', () => {
     const script = buildBootstrapScriptContent(
       { css: [], modulePreloads: [] },
-      {
-        loaderData: {},
-        actionData: null,
-        errors: null,
-      } as unknown as StaticHandlerContext,
+      emptyContext,
       {
         clientContext: { theme: 'fixture' },
+        site: 'nz',
       },
     );
 
     expect(script).toContain(
       'window.__SKU_CLIENT_CONTEXT__={"theme":"fixture"}',
     );
+    expect(script).toContain('window.__SKU_SITE__="nz"');
   });
 
   it('omits Error.stack in production serialization', () => {
@@ -56,7 +61,7 @@ describe('buildBootstrapScriptContent', () => {
         actionData: null,
         errors: { '0': error },
       } as unknown as StaticHandlerContext,
-      { development: false },
+      { development: false, site: 'au' },
     );
 
     const data = parseHydrationData(script);
@@ -75,7 +80,7 @@ describe('buildBootstrapScriptContent', () => {
         actionData: null,
         errors: { '0': error },
       } as unknown as StaticHandlerContext,
-      { development: true },
+      { development: true, site: 'au' },
     );
 
     const data = parseHydrationData(script);

@@ -6,7 +6,7 @@ export const requireNamedExport = <T>(
   moduleExports: object,
   name: string,
   entryLabel: string,
-  options?: { kind?: 'function' | 'defined' | 'array' },
+  options?: { kind?: 'function' | 'defined' | 'routes' },
 ): T => {
   const value = (moduleExports as Record<string, unknown>)[name];
   const kind = options?.kind ?? 'defined';
@@ -20,7 +20,7 @@ export const requireNamedExport = <T>(
     return value as T;
   }
 
-  if (kind === 'array') {
+  if (kind === 'routes') {
     if (!Array.isArray(value)) {
       throw new Error(
         `Vite SSR ${entryLabel} must export named '${name}' as an array. Missing or non-array '${name}' export.`,
@@ -36,6 +36,23 @@ export const requireNamedExport = <T>(
   }
 
   return value as T;
+};
+
+/**
+ * `routesBySite` is rejected — use flat `routes` + optional `sites` on `routesEntry`.
+ */
+export const rejectRoutesBySiteExport = (
+  moduleExports: object,
+  entryLabel: string,
+): void => {
+  if (
+    Object.prototype.hasOwnProperty.call(moduleExports, 'routesBySite') &&
+    (moduleExports as Record<string, unknown>).routesBySite !== undefined
+  ) {
+    throw new Error(
+      `Vite SSR ${entryLabel} must not export named 'routesBySite'. Export flat 'routes' with optional 'sites' membership on routesEntry instead.`,
+    );
+  }
 };
 
 /**

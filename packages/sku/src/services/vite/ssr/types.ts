@@ -2,6 +2,7 @@ import type { ComponentType, ReactNode } from 'react';
 import type { Request as ExpressRequest, RequestHandler } from 'express';
 import type {
   HydrationState,
+  RouteObject,
   RouterContextProvider,
   StaticHandlerContext,
 } from 'react-router';
@@ -28,8 +29,25 @@ export type JsonValue =
 /** Provider wrapper around the router tree (not page layout / Document). */
 export type SkuSsrAppWrapper = ComponentType<{ children: ReactNode }>;
 
-/** Closed return object from the Vite SSR `onRequest` export. Fields are optional. */
+/**
+ * Route object for `routesEntry`: React Router `RouteObject` plus optional
+ * `sites` membership. Omit `sites` ⇒ route is on every config site; present ⇒
+ * only those names. Sku type helper only — not a wrapped RR re-export.
+ * `children` are also `SkuSsrRouteObject` so nested routes may set `sites`
+ * (no parent→child inheritance — each route declares membership explicitly).
+ */
+export type SkuSsrRouteObject = Omit<RouteObject, 'children'> & {
+  sites?: string[];
+  children?: SkuSsrRouteObject[];
+};
+
+/**
+ * Closed return object from the Vite SSR `onRequest` export.
+ * `site` is required; other fields are optional.
+ */
 export type SkuSsrOnRequestResult = {
+  /** App-owned site name — selects the pre-built site route tree (required). */
+  site: string;
   AppWrapper?: SkuSsrAppWrapper;
   /** Configured language name (or `en-PSEUDO`) for language chunk registration. */
   language?: string;
@@ -112,6 +130,8 @@ declare global {
   interface Window {
     __SKU_DOCUMENT_ASSETS__?: DocumentAssets;
     __SKU_CLIENT_CONTEXT__?: JsonValue;
+    /** Hydrated `onRequest.site` — selects the same pre-built client site tree. */
+    __SKU_SITE__?: string;
     __staticRouterHydrationData?: HydrationState;
   }
 }

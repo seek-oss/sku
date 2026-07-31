@@ -34,12 +34,12 @@ export function ErrorBoundary() {
 
 ```tsx
 // src/routes.tsx — attach ErrorBoundary on the root route
-import type { RouteObject } from 'react-router';
+import type { SkuSsrRouteObject } from 'sku';
 
 import { ErrorBoundary, RootLayout } from './RootLayout.js';
 import { homeRoute } from './pages/home/route.js';
 
-export const routes: RouteObject[] = [
+export const routes: SkuSsrRouteObject[] = [
   {
     path: '/',
     Component: RootLayout,

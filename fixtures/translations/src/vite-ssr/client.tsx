@@ -4,9 +4,6 @@ import { useLocation } from 'react-router';
 import type { SkuSsrOnHydrate } from 'sku';
 
 import { resolveLanguage } from './resolveLanguage.js';
-import { createRoutes } from './routes.js';
-
-export const routes = createRoutes();
 
 export const onHydrate: SkuSsrOnHydrate = () => ({
   AppWrapper: ({ children }: { children: ReactNode }) => {

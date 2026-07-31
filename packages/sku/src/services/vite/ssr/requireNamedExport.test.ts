@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   optionalNamedFunctionExport,
+  rejectRoutesBySiteExport,
   requireNamedExport,
 } from './requireNamedExport.js';
 
@@ -39,44 +40,44 @@ describe('requireNamedExport', () => {
     );
   });
 
-  it('returns routes when exported as an array (including empty)', () => {
+  it('returns routes when exported as an array', () => {
+    const routes = [{ path: '/' }];
     expect(
-      requireNamedExport<unknown[]>({ routes: [] }, 'routes', 'serverEntry', {
-        kind: 'array',
+      requireNamedExport<unknown[]>({ routes }, 'routes', 'routesEntry', {
+        kind: 'routes',
       }),
-    ).toEqual([]);
+    ).toBe(routes);
   });
 
-  it('hard-errors when routes is missing on serverEntry', () => {
+  it('hard-errors when routes is missing on routesEntry', () => {
     expect(() =>
-      requireNamedExport(
-        { onRequest: () => ({}), middleware: [] },
-        'routes',
-        'serverEntry',
-        { kind: 'array' },
-      ),
+      requireNamedExport({}, 'routes', 'routesEntry', { kind: 'routes' }),
     ).toThrow(
-      /Vite SSR serverEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
-    );
-  });
-
-  it('hard-errors when routes is missing on clientEntry', () => {
-    expect(() =>
-      requireNamedExport({ onHydrate: () => ({}) }, 'routes', 'clientEntry', {
-        kind: 'array',
-      }),
-    ).toThrow(
-      /Vite SSR clientEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
+      /Vite SSR routesEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
     );
   });
 
   it('hard-errors when routes is not an array', () => {
     expect(() =>
-      requireNamedExport({ routes: { path: '/' } }, 'routes', 'serverEntry', {
-        kind: 'array',
+      requireNamedExport({ routes: { au: [] } }, 'routes', 'routesEntry', {
+        kind: 'routes',
       }),
+    ).toThrow(/Vite SSR routesEntry must export named 'routes' as an array/);
+  });
+});
+
+describe('rejectRoutesBySiteExport', () => {
+  it('allows routesEntry without a routesBySite export', () => {
+    expect(() =>
+      rejectRoutesBySiteExport({ routes: [] }, 'routesEntry'),
+    ).not.toThrow();
+  });
+
+  it('hard-errors when routesBySite is exported on routesEntry', () => {
+    expect(() =>
+      rejectRoutesBySiteExport({ routesBySite: { au: [] } }, 'routesEntry'),
     ).toThrow(
-      /Vite SSR serverEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
+      /Vite SSR routesEntry must not export named 'routesBySite'\. Export flat 'routes' with optional 'sites' membership on routesEntry instead\./,
     );
   });
 });

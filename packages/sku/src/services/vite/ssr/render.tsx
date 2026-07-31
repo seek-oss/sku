@@ -16,6 +16,7 @@ import {
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,
 } from './resolveAssets.js';
+import { selectSiteRoutes } from './selectSiteRoutes.js';
 import type {
   DocumentAssets,
   RenderAssets,
@@ -79,7 +80,7 @@ const getModuleIds = (
 };
 
 const renderDocument = async (
-  routes: RouteObject[],
+  siteRouteTrees: Record<string, RouteObject[]>,
   request: Request,
   req: ExpressRequest,
   assets: RenderAssets,
@@ -88,12 +89,17 @@ const renderDocument = async (
   renderManifest?: RenderManifest,
   getContext?: SkuSsrServerGetContext,
 ): Promise<RenderResult> => {
-  // Server entry runs before query(); language is a local for preload + bootstrap.
-  const requestEntry = await onRequest({ req });
+  // Server entry runs before query(); site selects the tree; language is local for preload.
+  const onRequestResult = await onRequest({ req });
+  const routes = selectSiteRoutes(
+    siteRouteTrees,
+    onRequestResult.site,
+    'onRequest',
+  );
 
   const routesWithAppWrapper = withAppWrapperLayout(
     routes,
-    requestEntry.AppWrapper,
+    onRequestResult.AppWrapper,
   );
   const { query, dataRoutes } = createStaticHandler(routesWithAppWrapper);
   const requestContext = getContext
@@ -111,7 +117,7 @@ const renderDocument = async (
   const development = options.development ?? false;
   const moduleIds = getModuleIds(context.matches, {
     development,
-    requestLanguage: requestEntry.language,
+    requestLanguage: onRequestResult.language,
   });
   let documentAssets: DocumentAssets = {
     css: assets.css,
@@ -136,7 +142,8 @@ const renderDocument = async (
     context,
     {
       development,
-      clientContext: requestEntry.clientContext,
+      clientContext: onRequestResult.clientContext,
+      site: onRequestResult.site,
     },
   );
   const routeHeaders = collectRouteHeaders(context);
@@ -207,7 +214,7 @@ const renderDocument = async (
 };
 
 export const render = (
-  routes: RouteObject[],
+  siteRouteTrees: Record<string, RouteObject[]>,
   request: Request,
   req: ExpressRequest,
   assets: RenderAssets,
@@ -222,7 +229,7 @@ export const render = (
     options.requestContextStore ?? createSsrRequestContextStore(options.nonce);
   return runWithSsrRequestContext(store, () =>
     renderDocument(
-      routes,
+      siteRouteTrees,
       request,
       req,
       assets,

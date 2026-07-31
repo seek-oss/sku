@@ -1,16 +1,18 @@
-import type { RouteObject } from 'react-router';
+import type { SkuSsrRouteObject } from 'sku';
 
 import { aboutRoute } from './pages/about/route';
 import { homeRoute } from './pages/home/route';
 
+/** Sole configured site name — return from `onRequest` (must match config `sites`). */
+export const site = 'default' as const;
+
 /**
- * Shared route tree factory. Import from both `server.tsx` and `client.tsx`
+ * Flat `routesEntry` routes. Single-site apps omit `sites` on every route.
+ * Sku loads this module via config `routesEntry` (default `src/routes.tsx`).
  */
-export function createRoutes(): RouteObject[] {
-  return [
-    {
-      path: '/',
-      children: [homeRoute, aboutRoute],
-    },
-  ];
-}
+export const routes: SkuSsrRouteObject[] = [
+  {
+    path: '/',
+    children: [homeRoute, aboutRoute],
+  },
+];

@@ -1,24 +1,58 @@
-# [Storybook](https://storybook.js.org/)
+# Storybook
 
-This page will guide you through the process of setting up Storybook in your project.
+This page will guide you through the process of setting up [Storybook] in your project.
 The configuration outlined on this page should work for most projects, but you may customize it further to suit your needs.
+
+[Storybook]: https://storybook.js.org/
 
 ## Installing Storybook Dependencies
 
-To set up Storybook, you will need to install the following dev dependencies:
+Install the appropriate dependencies for your configured [`bundler`]:
 
-```sh
+::: code-group
+
+```sh [Vite]
+pnpm install -D storybook @storybook/react @storybook/react-vite
+```
+
+```sh [Webpack]
 pnpm install -D storybook @storybook/react @storybook/react-webpack5 @storybook/addon-webpack5-compiler-babel
 ```
+
+:::
+
+[`bundler`]: ./configuration#bundler
 
 ## Configuring Storybook
 
 Storybook can be configured by creating specially-named files inside a `.storybook` folder within your repo.
 Take a look at the [Storybook configuration documentation] for all the ways to customize Storybook.
 
+> [!IMPORTANT]
+> We strongly recommend using the `babel` + `webpackFinal`/`viteFinal` configurations provided by `sku`.
+> These configurations are tested as part of `sku`'s integration tests in order to ensure they function correctly.
+> While you are free to use alternative configurations, we cannot provide any guarantees that Storybook will work correctly in such cases.
+
 Here's an example of a minimal, sku-compatible Storybook configuration:
 
-```ts
+::: code-group
+
+```ts [Vite]
+// .storybook/main.ts
+import { viteFinal } from 'sku/config/storybook';
+import type { StorybookConfig } from '@storybook/react-vite';
+
+export default {
+  stories: ['../src/**/*.stories.tsx'],
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
+  viteFinal,
+} satisfies StorybookConfig;
+```
+
+```ts [Webpack]
 // .storybook/main.ts
 import { babel, webpackFinal } from 'sku/config/storybook';
 import type { StorybookConfig } from '@storybook/react-webpack5';
@@ -41,11 +75,11 @@ export default {
 } satisfies StorybookConfig;
 ```
 
-> We strongly recommend using the `babel` and `webpackFinal` configurations provided by `sku`.
-> These configurations and are tested as part of `sku`'s integration tests in order to ensure they function correctly.
-> While you are free to use alternative configurations, we cannot provide any guarantees that Storybook will work correctly in such cases.
+:::
 
-If you want to typecheck the files within the `.storybook` directory, you will need to add them to your [`tsconfig.json`'s `include`][tsconfig include] field.
+### Type-checking the `.storybook` directory
+
+If you want to type-check the files within the `.storybook` directory, you will need to add them to your [`tsconfig.json`'s `include`][tsconfig include] field.
 This is necessary because the implicit default value of `include` is `['**/*']` which does not include any directories prefixed with `.`, such as `.storybook`.
 
 This can be done via [`sku`'s `dangerouslySetTSConfig` configuration option][dangerouslySetTSConfig]:

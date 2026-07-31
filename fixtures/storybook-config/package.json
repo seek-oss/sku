@@ -1,17 +1,20 @@
 {
   "name": "@sku-fixtures/storybook-config",
   "private": true,
+  "type": "module",
   "dependencies": {
     "braid-design-system": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
   "scripts": {
-    "start:asset-server": "http-server storybook-static -p 4232 --cors"
+    "start:asset-server": "http-server storybook-static -p 4232 --cors",
+    "start:asset-server:vite": "http-server storybook-static-vite -p 4233 --cors"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^10.5.0",
     "@storybook/addon-webpack5-compiler-babel": "^4.0.1",
+    "@storybook/react-vite": "^10.5.0",
     "@storybook/react-webpack5": "^10.5.0",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

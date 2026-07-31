@@ -21,9 +21,10 @@ Fetch `Request` stays on React Router `query()` / loaders and optional server [`
 **Returns**
 
 - `site` — **required** configured site name (must appear in non-empty config [`sites`](../configuration.md#sites)); selects the pre-built site route tree (see [Routing → Multi-site](./routing.md#multi-site-path-sets))
-- `AppWrapper` - see [App Wrapper / Providers](./providers.md)
 - `language` — name of language file translations to be pre-loaded on the client
 - `clientContext` — serialisable content to be made available to the client
+
+Providers are **not** returned from here — export [`Providers`](#providers-optional) separately.
 
 ### Typing middleware-attached fields on `req`
 
@@ -49,7 +50,6 @@ That augmentation is shared by `middleware`, `onRequest`, and server `getContext
 // src/server.tsx
 import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
 
-import { Providers } from './App/Providers';
 import { site } from './routes';
 
 export const onRequest: SkuSsrOnRequest = ({ req }) => ({
@@ -59,8 +59,9 @@ export const onRequest: SkuSsrOnRequest = ({ req }) => ({
     theme: 'dark',
     userId: req.user?.id ?? null,
   },
-  AppWrapper: Providers,
 });
+
+export { Providers } from './App/Providers';
 
 export const middleware: SkuSsrMiddleware = [];
 ```
@@ -70,6 +71,17 @@ export const middleware: SkuSsrMiddleware = [];
 Production middleware. Connect/Express handlers mounted before the HTML render path. See [Middleware](./middleware.md).
 
 For React Router middleware see [Routing](./routing.md).
+
+### Providers (optional)
+
+Optional **separate** named export (not returned from `onRequest`) holding your React providers.
+Sku reads it once at module init and renders it **outside** the router — `Document` → `Providers` → router — passing `{ children, site, clientContext }`.
+
+Because it is outside the router it cannot use React Router hooks, and because it never wraps the route tree each site's `createStaticHandler` is built once instead of per request.
+
+Omit the export → sku renders the router directly.
+
+Router-aware wrapping belongs in your own root layout route in `routesEntry`. See [Providers](./providers.md).
 
 ### getContext (optional)
 
@@ -108,11 +120,9 @@ Raw `req` is `undefined` on client navigations and becomes a landmine for loader
 
 ### onHydrate
 
-Called on the client before hydration. Receives `{ context }` (deserialized `clientContext` from `onRequest`).
+Called on the client before hydration. Receives `{ clientContext }` (the deserialized `clientContext` from `onRequest`).
 
-**Returns**
-
-- `AppWrapper` — see [App Wrapper / Providers](./providers.md)
+Returns nothing — it is for hydrate-time side effects only. Sku passes the same `clientContext` to [`Providers`](#providers-optional-1) as a prop, so there is no need to stash it in module state.
 
 Sku reads hydrated `site` from the bootstrap (not an `onHydrate` argument) to select the same pre-built site tree as SSR. See [routing](./routing.md).
 
@@ -122,12 +132,17 @@ Sku reads hydrated `site` from the bootstrap (not an `onHydrate` argument) to se
 // src/client.tsx
 import type { SkuSsrOnHydrate } from 'sku';
 
-import { Providers } from './App/Providers';
+export const onHydrate: SkuSsrOnHydrate = () => {};
 
-export const onHydrate: SkuSsrOnHydrate = () => ({
-  AppWrapper: Providers,
-});
+export { Providers } from './App/Providers';
 ```
+
+### Providers (optional)
+
+Same contract as the server entry: a named export read once at module init and rendered outside the router with `{ children, site, clientContext }`.
+
+The client providers **may differ from the server's** — export them only from the client entry for providers that construct against `window` and must not run during Document SSR.
+Because the two may differ, they must render identical DOM; prefer context-only providers.
 
 ### getContext (optional)
 
@@ -152,8 +167,10 @@ export const getContext: SkuSsrClientGetContext = ({ clientContext }) => {
 };
 ```
 
-`onRequest` / `onHydrate` (React providers) and `getContext` (loader/action DI) compose — apps may only need one.
-See [Data loading](./data-loading.md).
+`Providers` (React dependencies, outside the router), your root layout route (router-aware wrapping), and `getContext` (loader/action DI) are three separate channels that compose — apps may only need one.
+Note React Router 8 has no component-level hook for router context, so values needed by components belong in `Providers` or the root layout, not `getContext`.
+`onRequest` / `onHydrate` cover site, language, `clientContext`, and hydrate side effects only.
+See [Providers](./providers.md) and [Data loading](./data-loading.md).
 
 ## Routes Entry
 
@@ -175,7 +192,8 @@ import { homeRoute } from './pages/home/route.js';
 
 export const routes: SkuSsrRouteObject[] = [
   {
-    path: '/',
+    // Pathless root layout — your place for router-aware wrapping
+    Component: RootLayout,
     children: [
       {
         index: true,
@@ -185,3 +203,19 @@ export const routes: SkuSsrRouteObject[] = [
   },
 ];
 ```
+
+## `sku/ssr` helpers
+
+The `sku/ssr` subpath is browser-safe and stays off the main `sku` entry (so webpack / static apps never pull the optional `react-router` peer).
+
+- [`usePreloadRoute`](./routing.md#intent-preloading-with-usepreloadroute) — warm lazy route chunks on intent (hover / focus / touch)
+- [`useInsertHtml`](#useinserthtml) — queue React nodes into the SSR response stream for app-owned streaming data transports
+
+### `useInsertHtml`
+
+Returns `(callback: () => ReactNode) => void`.
+During document SSR, sku renders queued nodes to markup and writes them into the response so they run before hydration: the first batch is inserted before `</head>`, then further injections are written before each subsequent React chunk (with a final flush at stream end).
+Off the SSR path (browser graph, development `Providers` markup probe) it is a silent no-op and never throws.
+
+Use it to wire transports such as Apollo’s `buildManualDataTransport` — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
+Injected script bodies are not known when CSP headers are derived from the shell, so they must carry the [CSP nonce](./csp.md) (for example Apollo `extraScriptProps={{ nonce: getCspNonce() }}` on the server entry).

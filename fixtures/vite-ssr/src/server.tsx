@@ -1,9 +1,8 @@
-import { VocabProvider } from '@vocab/react';
-import type { ReactNode } from 'react';
-import { RouterContextProvider, useLocation } from 'react-router';
+import { RouterContextProvider } from 'react-router';
 import type {
   SkuSsrMiddleware,
   SkuSsrOnRequest,
+  SkuSsrProviders,
   SkuSsrServerGetContext,
 } from 'sku';
 
@@ -15,29 +14,31 @@ import { SkuUserIdReactContext, userIdContext } from './userIdContext.js';
 export const onRequest: SkuSsrOnRequest = ({ req }) => {
   const site = resolveSiteFromRequest(req);
   const language = resolveLanguageFromPathname(req.path);
-  const userId = req.skuUserId ?? null;
 
   const clientContext: ClientContext = {
     fromServer: true,
-    userId,
+    userId: req.skuUserId ?? null,
   };
 
   return {
     site,
     language,
     clientContext,
-    AppWrapper: ({ children }: { children: ReactNode }) => {
-      const { pathname } = useLocation();
-      return (
-        <SkuUserIdReactContext.Provider value={userId}>
-          <VocabProvider language={resolveLanguageFromPathname(pathname)}>
-            {children}
-          </VocabProvider>
-        </SkuUserIdReactContext.Provider>
-      );
-    },
   };
 };
+
+/**
+ * Rendered outside the router, so request state arrives as props rather than
+ * from React Router hooks or a server-only Async Local Storage helper.
+ */
+export const Providers: SkuSsrProviders<ClientContext> = ({
+  children,
+  clientContext,
+}) => (
+  <SkuUserIdReactContext.Provider value={clientContext?.userId ?? null}>
+    {children}
+  </SkuUserIdReactContext.Provider>
+);
 
 export const getContext: SkuSsrServerGetContext = ({ req }) => {
   const ctx = new RouterContextProvider();

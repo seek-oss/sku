@@ -29,6 +29,9 @@ export const filterRoutesForSite = (
 
 /**
  * Pre-build a site → route tree map from config site names + `routesEntry` routes.
+ * Sku never wraps the tree — `Providers` render outside the router and any
+ * router-aware wrapping is the app's own root layout route — so this runs once at
+ * module init and nothing here touches the per-request path.
  */
 export const buildSiteRouteTrees = (
   routes: SkuSsrRouteObject[],

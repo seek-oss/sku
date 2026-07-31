@@ -63,14 +63,22 @@ describe('filterRoutesForSite', () => {
 });
 
 describe('buildSiteRouteTrees', () => {
+  const routes: SkuSsrRouteObject[] = [
+    { path: '/shared' },
+    { path: '/au-only', sites: ['au'] },
+  ];
+
   it('pre-builds a tree per config site name', () => {
-    const routes: SkuSsrRouteObject[] = [
-      { path: '/shared' },
-      { path: '/au-only', sites: ['au'] },
-    ];
     expect(buildSiteRouteTrees(routes, ['au', 'nz'])).toEqual({
       au: [{ path: '/shared' }, { path: '/au-only' }],
       nz: [{ path: '/shared' }],
     });
+  });
+
+  it('never wraps a site tree — providers render outside the router', () => {
+    const trees = buildSiteRouteTrees(routes, ['au', 'nz']);
+
+    expect(trees.au.map(({ path }) => path)).toEqual(['/shared', '/au-only']);
+    expect(trees.nz.map(({ path }) => path)).toEqual(['/shared']);
   });
 });

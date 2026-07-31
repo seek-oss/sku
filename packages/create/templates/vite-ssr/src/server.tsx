@@ -1,11 +1,12 @@
 import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
 
-import { Providers } from './App/Providers';
 import { site } from './routes';
 
 export const onRequest: SkuSsrOnRequest = () => ({
   site,
-  AppWrapper: Providers,
 });
+
+// Rendered outside the router, between the Document and the router provider.
+export { Providers } from './App/Providers';
 
 export const middleware: SkuSsrMiddleware = [];

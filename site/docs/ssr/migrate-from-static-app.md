@@ -34,13 +34,15 @@ Infrastructure, deployments, process managers, and reverse-proxy setup are out o
 
 ## App-level providers
 
-- Move app-wide providers (Braid, Vocab, etc.) into `AppWrapper` returned from `onRequest` / `onHydrate` — not into a static `renderApp` / `#app` tree alone
-- Keep server and client `AppWrapper` trees aligned for hydration; re-derive URL-scoped values with React Router hooks
-- Inject env-specific API / Experience clients via `AppWrapper` for [render-time data loading](./data-loading.md)
+- Move app-wide dependencies (Braid, API clients, etc.) into a named `Providers` export on `serverEntry` / `clientEntry` — not into a static `renderApp` / `#app` tree alone
+- `Providers` render **outside** the router, so they cannot use React Router hooks. Router-aware wrapping (Vocab keyed on the URL, page chrome) belongs in your own root layout route in `routesEntry` — see [Providers](./providers.md)
+- Request-scoped values arrive as `Providers` props (`site`, `clientContext`), or via [`getContext`](./data-loading.md#router-context-getcontext) for loader/action DI — no ALS helpers or module-level state needed
+- Server and client `Providers` may differ, so they must render identical DOM; prefer context-only providers (sku warns in development when they emit markup)
+- Inject env-specific API / Experience clients via `Providers` for [render-time data loading](./data-loading.md)
 
 ## Data loading
 
-- Prefer render-time fetching in React (`AppWrapper` + Suspense / shared clients) for page content — see [Data loading](./data-loading.md)
+- Prefer render-time fetching in React (named `Providers` export + Suspense / shared clients) for page content — see [Data loading](./data-loading.md)
 - Use React Router loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, set response headers, or opt-in dual-entry [`getContext`](./data-loading.md#router-context-getcontext) DI
 - `onRequest` receives Express `{ req }` only (not Fetch `Request`) — see [Request entries](./entries.md#onrequest)
 - Loaders receive a Fetch `Request`, not Express `req` — use dual-entry `getContext` to project isomorphic values for loader DI; never put raw `req` in `RouterContextProvider`

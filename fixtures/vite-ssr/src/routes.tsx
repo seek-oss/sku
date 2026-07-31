@@ -10,16 +10,18 @@ import { detailsRoute } from './pages/details/route.js';
 import { boomRoute } from './pages/error/route.js';
 import { helloRoute } from './pages/hello/route.js';
 import { homeRoute } from './pages/home/route.js';
+import { nzOnlyRoute } from './pages/nz-only/route.js';
 
 export type FixtureSite = 'au' | 'nz';
 
 /**
  * Flat `routesEntry` routes. Shared routes omit `sites` (every config site).
  * Site-only routes set `sites` explicitly — no parent→child inheritance.
+ * The root layout is pathless so it reads as a layout and keeps wrapping any
+ * root-level sibling added later; children join against `/` either way.
  */
 export const routes: SkuSsrRouteObject[] = [
   {
-    path: '/',
     Component: RootLayout,
     children: [
       homeRoute,
@@ -41,11 +43,7 @@ export const routes: SkuSsrRouteObject[] = [
         sites: ['au'],
         Component: () => <main data-testid="au-only-page">AU only</main>,
       },
-      {
-        path: 'nz-only',
-        sites: ['nz'],
-        Component: () => <main data-testid="nz-only-page">NZ only</main>,
-      },
+      nzOnlyRoute,
     ],
   },
 ];

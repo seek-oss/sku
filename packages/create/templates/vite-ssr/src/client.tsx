@@ -1,7 +1,6 @@
 import type { SkuSsrOnHydrate } from 'sku';
 
-import { Providers } from './App/Providers';
+export const onHydrate: SkuSsrOnHydrate = () => {};
 
-export const onHydrate: SkuSsrOnHydrate = () => ({
-  AppWrapper: Providers,
-});
+// Rendered outside the router; may differ from the server (e.g. `window`-only SDKs).
+export { Providers } from './App/Providers';

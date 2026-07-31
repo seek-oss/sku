@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  optionalNamedComponentExport,
   optionalNamedFunctionExport,
   rejectRoutesBySiteExport,
   requireNamedExport,
@@ -99,6 +100,34 @@ describe('optionalNamedFunctionExport', () => {
   it('returns undefined when the export is not a function', () => {
     expect(
       optionalNamedFunctionExport({ getContext: 'nope' }, 'getContext'),
+    ).toBeUndefined();
+  });
+});
+
+describe('optionalNamedComponentExport', () => {
+  it('returns the component when present', () => {
+    const Providers = () => null;
+    expect(optionalNamedComponentExport({ Providers }, 'Providers')).toBe(
+      Providers,
+    );
+  });
+
+  it('returns wrapped components exported as objects', () => {
+    const Providers = { $$typeof: Symbol.for('react.memo') };
+    expect(optionalNamedComponentExport({ Providers }, 'Providers')).toBe(
+      Providers,
+    );
+  });
+
+  it('returns undefined when omitted (router rendered directly)', () => {
+    expect(
+      optionalNamedComponentExport({ onHydrate: () => {} }, 'Providers'),
+    ).toBeUndefined();
+  });
+
+  it('returns undefined when the export is not a component', () => {
+    expect(
+      optionalNamedComponentExport({ Providers: 'nope' }, 'Providers'),
     ).toBeUndefined();
   });
 });

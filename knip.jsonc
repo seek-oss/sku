@@ -139,6 +139,13 @@
     "fixtures/suspense": {
       "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
     },
+    "fixtures/stream-insert-html": {
+      "entry": ["src/server.tsx", "src/client.tsx", "sku.config.*"],
+      "ignoreDependencies": [
+        // Peer of @apollo/client / @apollo/client-react-streaming
+        "rxjs",
+      ],
+    },
     "fixtures/translations": {
       "entry": [
         "src/client.tsx",
@@ -149,8 +156,7 @@
         "sku.config.*",
       ],
       "ignoreDependencies": [
-        // Used by their respective bundlers
-        "@vocab/vite",
+        // Used by webpack bundler path
         "@vocab/webpack",
         // Used in translation files, but these aren't generated on CI during linting so knip
         // doesn't see the usage
@@ -183,7 +189,7 @@
     },
     "fixtures/vite-ssr": {
       "entry": ["src/server.tsx", "src/client.tsx", "sku.config.*"],
-      "ignoreDependencies": ["@vocab/core", "@vocab/vite"],
+      "ignoreDependencies": ["@vocab/core"],
     },
   },
 }

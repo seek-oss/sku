@@ -3,8 +3,10 @@
 import type { Request as ExpressRequest } from 'express';
 import * as routesEntry from '__sku_alias__routesEntry';
 import * as serverEntry from '__sku_alias__serverEntry';
+import { buildSiteStaticHandlers } from '../ssr/buildSiteStaticHandlers.js';
 import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import {
+  optionalNamedComponentExport,
   optionalNamedFunctionExport,
   rejectRoutesBySiteExport,
   requireNamedExport,
@@ -16,6 +18,7 @@ import type {
   RenderOptions,
   SkuSsrMiddleware,
   SkuSsrOnRequest,
+  SkuSsrProviders,
   SkuSsrRouteObject,
   SkuSsrServerGetContext,
 } from '../ssr/types.js';
@@ -29,7 +32,16 @@ const routes = requireNamedExport<SkuSsrRouteObject[]>(
   { kind: 'routes' },
 );
 
-const siteRouteTrees = buildSiteRouteTrees(routes, __SKU_SITES__);
+// Providers render outside the router, so the tree — and each site's handler —
+// is built once here rather than per request.
+const Providers = optionalNamedComponentExport<SkuSsrProviders>(
+  serverEntry,
+  'Providers',
+);
+
+const siteStaticHandlers = buildSiteStaticHandlers(
+  buildSiteRouteTrees(routes, __SKU_SITES__),
+);
 
 export const onRequest = requireNamedExport<SkuSsrOnRequest>(
   serverEntry,
@@ -56,16 +68,17 @@ export const render = (
   options?: RenderOptions,
   manifest?: RenderManifest,
 ) =>
-  renderApp(
-    siteRouteTrees,
+  renderApp({
+    siteStaticHandlers,
     request,
     req,
     assets,
     onRequest,
     options,
-    manifest,
+    renderManifest: manifest,
     getContext,
-  );
+    Providers,
+  });
 
 if (import.meta.env.PROD) {
   const { startProductionSsrServer } =

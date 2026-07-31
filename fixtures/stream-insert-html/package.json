@@ -1,0 +1,25 @@
+{
+  "name": "@sku-fixtures/stream-insert-html",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "sku build --config sku.config.ts",
+    "start": "sku start --config sku.config.ts",
+    "start:prod": "node dist/server/server.js"
+  },
+  "dependencies": {
+    "@apollo/client": "^4.1.6",
+    "@apollo/client-react-streaming": "^0.14.5",
+    "graphql": "^16.11.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

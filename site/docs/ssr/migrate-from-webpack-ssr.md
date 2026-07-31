@@ -38,26 +38,29 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 - Use optional `sites` for membership when paths differ by site
 - Multi-site path sets use `routesEntry` + `routes` + optional `sites` + `onRequest.site` (not optional language path params, union tree + allowlist, `routesBySite` maps, dual-entry `routes` re-exports, or sku config host matching) — see [Routing](./routing.md#multi-site-path-sets)
 - Lazy page modules must export named `Component` (not `export default`)
-- Express `renderCallback` no longer owns HTML — sku streams Document; put providers in `AppWrapper`
+- Express `renderCallback` no longer owns HTML — sku streams Document; put providers in the named `Providers` export
 - Optional webpack `onStart` is not part of the SSR request-entry contract
-- **Server-only modules:** Server-only content should be imported in serverEntry and passed through to your app via AppWrapper Providers. Avoid server-side only implementations being imported outside serverEntry, shared code will be loaded by the client and available for public access.
+- **Server-only modules:** Server-only content should be imported in serverEntry and passed through to your app via the server entry's `Providers`. Avoid server-side only implementations being imported outside serverEntry, shared code will be loaded by the client and available for public access.
 - When the lazy factory is no longer a bare `() => import('./home')`, set [`handle.moduleId`](./routing.md#lazy-routes-and-handlemoduleid) explicitly so production modulepreloads still work.
 
 ## App-level providers
 
-- Move `SkuProvider` / app providers from `renderCallback` into `AppWrapper` on `onRequest` / `onHydrate`
-- Inject env-specific API / Experience clients via `AppWrapper` for [render-time data loading](./data-loading.md) (prefer this over loaders for page content)
-- Vocab language identity moves from `addLanguageChunk` / path hacks to server entry `language` (see [Multi-language](./multi-language.md))
-- **Braid:** ensure `braid-design-system/reset` runs before any Braid-touching **server** module on `sku start` (evaluation order can differ from production). Sku does not auto-inject reset — see [App Wrapper / Providers](./providers.md)
-- **`window` providers:** keep analytics / other `window`-constructing providers out of the Document SSR tree — client-only wrappers or `onHydrate`-only `AppWrapper` (see [App Wrapper / Providers](./providers.md))
+- Move `SkuProvider` / app providers from `renderCallback` into a named `Providers` export on `serverEntry` / `clientEntry`
+- `Providers` render **outside** the router, so they cannot use React Router hooks. Router-aware wrapping moves into your own root layout route in `routesEntry` — see [Providers](./providers.md)
+- Request-scoped values arrive as `Providers` props (`site`, `clientContext`) or via [`getContext`](./data-loading.md#router-context-getcontext); server and client `Providers` may differ, so they must render identical DOM (sku warns in development when they emit markup)
+- Inject env-specific API / Experience clients via `Providers` for [render-time data loading](./data-loading.md) (prefer this over loaders for page content)
+- Vocab language identity moves from `addLanguageChunk` / path hacks to server entry `language` (see [Multi-language](./multi-language.md)); the `VocabProvider` itself goes in your root layout route so it tracks client navigation
+- **Braid:** ensure `braid-design-system/reset` runs before any Braid-touching **server** module on `sku start` (evaluation order can differ from production). Sku does not auto-inject reset — see [Providers](./providers.md)
+- **`window` providers:** keep analytics / other `window`-constructing providers out of the Document SSR tree — client-only wrappers, or export `Providers` from the client entry only (see [Providers](./providers.md))
 
 ## Data loading
 
-- Prefer render-time fetching in React (`AppWrapper` + Suspense / shared clients) for page content — not React Router loaders as the default — see [Data loading](./data-loading.md)
+- Prefer render-time fetching in React (named `Providers` export + Suspense / shared clients) for page content — not React Router loaders as the default — see [Data loading](./data-loading.md)
 - Use loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, set response headers, or opt-in dual-entry [`getContext`](./data-loading.md#router-context-getcontext) DI
 - Loaders receive a Fetch `Request`, **not** Express `req`. Express `req` is available to [`onRequest({ req })`](./entries.md#onrequest) and optional server `getContext` — not as the loader `request` argument
 - **Do not** put raw Express `req` into `RouterContextProvider` — project isomorphic values via dual-entry `getContext` (see the [red warning](./data-loading.md#router-context-getcontext))
 - Type middleware-appended `req` fields with Express `Request` module augmentation — see [Request entries](./entries.md#typing-middleware-attached-fields-on-req)
+- **Apollo:** drop two-pass `getDataFromTree` — replace it with a streaming transport over [`useInsertHtml`](./entries.md#useinserthtml) mounted as dual-entry `Providers`, with the CSP nonce on injected scripts (`extraScriptProps`). Loader-transported query refs are unsupported — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration)
 
 ## Middleware
 

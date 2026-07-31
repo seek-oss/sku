@@ -11,7 +11,7 @@
 ## 2. Entries and runtime
 
 - [x] 2.1 Require dual-entry `routes` + `onRequest` / `middleware` / `onHydrate` (hard errors on missing named exports; no noops; no early file-existence gate)
-- [x] 2.2 Wire `AppWrapper`, server-local `language`, `clientContext` → `onHydrate({ context })`
+- [x] 2.2 Wire server-local `language` and `clientContext` → `onHydrate({ clientContext })` (provider wiring lives in §10)
 - [x] 2.3 Mount server-entry `middleware` (start + prod); optional `devServerMiddleware` start-only before it
 - [x] 2.4 `sku start` / `sku build`: middlewareMode, sibling `client/` + `server/`, Document stream, document hydrate
 - [x] 2.5 Abort-before-write; forward loader/action Responses and headers; `statusCode` + ErrorBoundary; `waitForAll`; `httpsDevServer`
@@ -21,6 +21,7 @@
 - [x] 2.7 Resolve consumer entries via shared `__sku_alias__serverEntry` / `__sku_alias__clientEntry` (same aliases as static Vite)
 - [x] 2.8 Promise-scrub loader/action data; strip production `Error.stack`; harden Express→Fetch adapter (array headers; reconstruct body when stream consumed)
 - [x] 2.9 Import `virtual:sku/polyfills` at the top of the Vite SSR browser client entry (`vite-ssr-client.tsx`; covered by the start-only `.dev` dynamic load of that entry) so config `polyfills` load before hydrate — parity with static `vite-client.tsx` / webpack SSR client; do not load into the Node server entry
+- [x] 2.12 Register the selected site route tree from the client entry; export `usePreloadRoute` from a new `sku/ssr` subpath (both `lazy` shapes; no-op when unregistered + dev warning on client invoke)
 
 ## 3. Assets and publicPath
 
@@ -44,9 +45,9 @@
 - [x] 5.13 Assert Vite SSR `sku start` emits `start.initial` / `start.rebuild` telemetry (or equivalent smoke covering client script + WS wiring)
 - [x] 5.3 Tests: redirects; `waitForAll`; errored-route status; loader `Set-Cookie`; HTTPS start; missing named-export hard errors; nonce request/reuse; abort-before-write
 - [x] 5.4 Tests: `devServerMiddleware` in `sku start`; absent from production server bundle / responses
-- [x] 5.5 Tests: `onHydrate` receives `context` only; no language in bootstrap / request-context; no public `getSkuLanguage`
+- [x] 5.5 Tests: `onHydrate` receives `clientContext` only; no language in bootstrap / request-context; no public `getSkuLanguage`
 - [x] 5.6 Tests: language chunk from `onRequest.language` / omit → no chunk; auto `moduleId` preloads; missing / non-array `routes` hard-error
-- [x] 5.7 Fixture: intent preload via `PreloadingLink` + client `AppWrapper` routes context; production hover test for lazy chunk
+- [x] 5.7 Fixture: `PreloadingLink` built on `usePreloadRoute` (drop app-side routes context); production hover test for lazy chunk; assert a foreign-site path does not warm
 - [x] 5.8 Unit tests for simplified language resolution and webpack-aligned production defines
 - [x] 5.9 Config/command validation only for edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + `serverPort`, existing `public` directory, Vite SSR + `dangerouslySetViteConfig`) — no browser e2e
 - [x] 5.11 Test: Vite SSR + `dangerouslySetViteConfig` hard-errors at config validation
@@ -64,10 +65,11 @@
 - [x] 7.3 Document CJS interop for Vite SSR `sku start` + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` (docs only; no runtime error rewrite; no new baked-in defaults)
 - [x] 7.4 Discourage `public` for Vite SSR in product + `configuration.md`; Migrating calls out moving off the folder
 - [x] 7.10 Document that Vite SSR does not support `dangerouslySetViteConfig` (hard-error; raise use-cases via sku-support) in `configuration.md` + product / Migrating
-- [x] 7.5 Prefer render-time data loading via `AppWrapper` + Suspense; loaders opt-in for waterfalls / document redirects / headers; no Express `req` → loader bridge
-- [x] 7.6 Migrating: server-only loaders vs client route graph (+ explicit `moduleId` when needed); Braid reset-before-Braid on `sku start`; client-only / `onHydrate`-only providers for `window`; Jest → Vitest prerequisite; `#` pathAliases / migrate-root-resolution
+- [x] 7.5 Prefer render-time data loading via Suspense with clients injected from `Providers`; loaders opt-in for waterfalls / document redirects / headers; no Express `req` → loader bridge
+- [x] 7.6 Migrating: server-only loaders vs client route graph (+ explicit `moduleId` when needed); Braid reset-before-Braid on `sku start`; client-only / client-entry-only `Providers` for `window`; Jest → Vitest prerequisite; `#` pathAliases / migrate-root-resolution
 - [x] 7.7 Drop “install `@vocab/vite` yourself” from product + Migrating once sku-owned alias is in place
 - [x] 7.8 Document Express 4 (shared sku major) and React Router 8 as optional peer; note future major upgrades may be breaking (middleware + Data Mode); do not document Express 5 for this release
+- [x] 7.11 Docs: `routing.md` intent preloading with `usePreloadRoute`; note Data Mode has no `<Link prefetch>`
 - [x] 7.9 Changeset: experimental / not-for-production; React Router 8 optional peer; Express stays on 4; breaking-major policy for later upgrades; no Express 5 bump; no Jest RR8 transforms
 
 ## 8. Express↔render DI (`onRequest` req + dual `getContext`)
@@ -76,7 +78,7 @@
 - [x] 8.2 Thread Express `req` into `onRequest` only (`createHtmlRenderMiddleware` / render path); do not pass Fetch `Request` into `onRequest`; `query()` stays Fetch-only
 - [x] 8.3 Wire optional server `getContext({ request, req })` → `query(..., { requestContext })`
 - [x] 8.4 Wire optional client `getContext` → `createBrowserRouter({ getContext })` (wrap if injecting `clientContext`)
-- [x] 8.5 Fixture/template: migrate `onRequest` to `{ req }`; middleware-attached state → AppWrapper; dual `getContext` with client nav to a non-initial location
+- [x] 8.5 Fixture/template: migrate `onRequest` to `{ req }`; middleware-attached state → `clientContext` / `getContext` (see 10.5); dual `getContext` with client nav to a non-initial location
 - [x] 8.6 Tests: `onRequest` receives `req` only; server/client `getContext` wiring; omit optional → default behaviour
 - [x] 8.7 Docs: `entries.md` / `data-loading.md` / `middleware.md` (+ migrate / routing cross-links) — hierarchy, Data Mode vs Framework Mode, `onRequest({ req })` only, Express `Request` module augmentation for middleware-appended fields (`user` / `log` example), red warning against `req` in context, client-nav ≠ initial SSR example
 - [x] 8.8 Changeset: experimental BREAKING `onRequest` args (`{ request }` → `{ req }`) + optional `getContext` if needed
@@ -98,17 +100,69 @@
 - [x] 9.9a Docs: Vite SSR requires non-empty config `sites`; template/examples use a real configured site name; drop empty-`sites` soft-path wording
 - [x] 9.10 Changeset: note `routesEntry` + flat `routes` + optional `sites` + required `onRequest.site` (in-progress API; replaces dual-entry `routes` / rejected `routesBySite`)
 
+## 10. `Providers` outside the router + init-time static handler
+
+Supersedes the earlier tree-mounted `AppWrapper`: router-aware wrapping becomes an app-owned root layout route, and sku's entry export moves outside the router.
+
+- [x] 10.3 Server: build `createStaticHandler` per site at init; per request select that handler and call only `query()` / `createStaticRouter`
+- [x] 10.1 Types: replace `SkuSsrAppWrapper` with `SkuSsrProviders` / `SkuSsrProvidersProps<Context>` (`children` + `site` + `clientContext`); rename `onHydrate` args to `{ clientContext }`; keep provider components out of the `onRequest` / `onHydrate` return types
+- [x] 10.2 Delete `withAppWrapperLayout.tsx` and `SKU_APP_WRAPPER_ROUTE_ID`; sku no longer wraps the route tree for providers
+- [x] 10.3a Server: render optional `Providers` between `Document` and `StaticRouterProvider` in `render.tsx`, passing `site` + `clientContext`; assert `render.tsx` no longer imports `createStaticHandler`
+- [x] 10.4 Client: render optional `Providers` between `Document` and `RouterProvider` with the same props from the hydrate bootstrap
+- [x] 10.4a Dev-only warning when an entry's `Providers` renders hydration-relevant markup (providers are expected to be context-only)
+- [x] 10.5 Fixtures + translations + create template: export named `Providers`; move `VocabProvider` / `useLocation` language resolution into the app's root layout route; delete the fixture's `requestUserId.ts` ALS helper and the client's module-level `hydratedUserId`
+- [x] 10.5a Create template + fixtures: scaffold the app-owned root layout as a **pathless** route (no `path: '/'`) so it reads as a layout and keeps wrapping any future root-level sibling; child paths stay relative
+- [x] 10.6 Tests: `Providers` render outside the router with `site` + `clientContext` on both sides; omitted ⇒ router rendered directly; route tree unwrapped; handler created once per site; dev DOM warning fires
+- [x] 10.7 Docs: `entries.md` / `index.md` / `routing.md` / migrate — `Providers` vs root layout route vs `getContext` (which channel for which consumer, noting RR 8 has no component-level router-context hook), no-DOM rule, where request-scoped values go
+- [x] 10.8 Changeset: experimental BREAKING — provider export moves out of `onRequest` / `onHydrate` and out of the route tree; `AppWrapper` → `Providers`; `onHydrate({ context })` → `onHydrate({ clientContext })`
+
+## 11. Streaming data transports (`useInsertHtml`) + Apollo
+
+Opens the one seam apps cannot reach themselves (Decision 21a). Sku stays transport-agnostic; the fixture proves Apollo.
+
+- [x] 11.1 Runtime: render-scoped injection queue + React context in a single module shared by `render` and `sku/ssr`; provide it outermost in `render.tsx` (around `Document`) so route code and `Providers` can both reach it
+- [x] 11.2 Runtime: `useInsertHtml()` exported from `sku/ssr`; silent no-op with no injection context (client graph, dev `Providers` probe); never throws
+- [x] 11.3 Server: Node transform on the response pipe that renders queued nodes to markup and writes them before the next React chunk, flushing the remainder at stream end; works for `onShellReady` and `waitForAll`
+- [x] 11.4 Fixture `stream-insert-html`: Apollo Client 4 + `@apollo/client-react-streaming` `buildManualDataTransport({ useInsertHtml })`, provider as dual-entry `Providers`, GraphQL endpoint served from server-entry `middleware`, `extraScriptProps={{ nonce: getCspNonce() }}` on the server entry only
+- [x] 11.5 Fixture: a route that queries during SSR and a route that queries only after hydration (client navigation), so cache reuse and fresh fetches are separately observable
+- [x] 11.6 Tests: injected markup lands before hydration; no-op off the SSR path (browser + `Providers` probe) without throwing; nonce present in `script-src`; injection survives `waitForAll`
+- [x] 11.7 E2E: server-run query data unchanged after hydration with no refetch; post-hydration query fetches; passes on both `sku start` and production build (guards the `browser` / `node` condition builds)
+- [x] 11.8 Docs: `data-loading.md` Apollo streaming walkthrough (transport module, `Providers`, nonce, cache reuse); `entries.md` / `csp.md` cross-links; migrate — drop two-pass `getDataFromTree`; state loader-transported query refs are unsupported and why
+- [x] 11.9 Changeset: `useInsertHtml` on `sku/ssr`; sku ships no Apollo dependency or config
+
+## 12. Flatten request-entry getters
+
+Replace `onRequest` with sync named getters; make `middleware` / `onHydrate` optional.
+
+- [ ] 12.1 Types: drop `SkuSsrOnRequest` / `SkuSsrOnRequestResult`; add `SkuSsrGetSite` / `SkuSsrGetLanguage` / `SkuSsrGetClientContext` (sync, `{ req }` only)
+- [ ] 12.2 Server entry: optional getter + middleware reads; init-time `getSite` required when `__SKU_SITES__.length > 1`
+- [ ] 12.3 Client entry: optional `onHydrate`
+- [ ] 12.4 `render.tsx`: call getters before `query()`; sole config site when `getSite` omitted; validate when present
+- [ ] 12.5 Production / start servers: tolerate absent `middleware`
+- [ ] 12.6 Fixtures + translations: migrate off `onRequest` to getters
+- [ ] 12.7 Create template: realistic `middleware` + `Providers` + `onHydrate`; single-site omits `getSite`
+- [ ] 12.8 Tests: single-site no `getSite`; multi-site missing `getSite` init error; unknown site per-request; omit `onHydrate`; omit `middleware`
+- [ ] 12.9 Docs: entries / providers / multi-language / routing / data-loading + migrate — getters, optional middleware/onHydrate, sync/pure recommendation
+- [ ] 12.10 Changeset: note getters replace `onRequest`; `middleware` / `onHydrate` optional (experimental API)
+
 ## Deferred
 
 - Production listen / custom logger — design Open Questions
+- Provider component returned from request-entry exports — Non-Goals (forced `createStaticHandler` onto the hot path)
+- Sku mounting providers inside the route tree as a pathless layout — Non-Goals (router-aware wrapping is the app's root layout route)
+- Consumer-authored Async Local Storage as the documented route to request state in providers — Non-Goals (`Providers` props instead)
 - Dual-entry `routes` re-exports / env-split route modules as a product feature — Non-Goals (`routesEntry` is one truth)
 - Runtime dual-`routes` / server↔client tree equality validation — Non-Goals (unnecessary with `routesEntry`)
 - Union tree + site allowlist as documented multi-site product story — Non-Goals
 - `routesBySite` map export — Non-Goals (trialled and rejected; replaced by flat `routes` + `sites`)
 - Parent→child inheritance of `sites` — Non-Goals (explicit annotation required)
 - Overloading config `routes` (prerender path lists) as the Vite SSR RouteObject entry — Non-Goals (`routesEntry` instead)
-- Sku-owned site resolution from config `hosts` / `sites[].host` — Non-Goals (apps return `onRequest.site`)
-- Sku-owned per-site path expansion / per-site JS bundles / routes returned from `onRequest` — Non-Goals
+- Sku-owned site resolution from config `hosts` / `sites[].host` — Non-Goals (apps export `getSite`)
+- Sku reading site / language / clientContext from a conventional `req` field; sku push API (`setRequestContext`) — Non-Goals (libs re-export sku-shaped getters)
+- Combined site + language + clientContext return bag / resolver — Non-Goals (separate named getters)
+- Async request-entry getters — Non-Goals (sync/pure; libs may memoise on `req`)
+- Tolerating a missing `serverEntry` / `clientEntry` file — Non-Goals (omit unused named exports instead)
+- Sku-owned per-site path expansion / per-site JS bundles / routes returned from getters — Non-Goals
 - Vite SSR support for config `public` / unhashed public assets — Non-Goals until definitive need
 - Express 5 (sku-wide; webpack SSR + Vite SSR + `sku serve`) — later breaking change
 - React Router majors beyond 8 — later releases; may be breaking
@@ -117,6 +171,10 @@
 - Auto-inject Braid reset into sku Vite SSR server entry — Non-Goals (Braid optional; docs only)
 - Raw Express `req` in `RouterContextProvider` — Non-Goals (red-warn in docs; project values via dual `getContext`)
 - Framework Mode server-only `getLoadContext(req, res)` as sole API — Non-Goals (Data Mode dual request entry instead)
-- Passing `res` into `onRequest` / `getContext` — Non-Goals v1
-- Passing Fetch `Request` into `onRequest` — Non-Goals (`{ req }` only)
+- Passing `res` into getters / `getContext` — Non-Goals v1
+- Passing Fetch `Request` into getters — Non-Goals (`{ req }` only)
 - `@sku-lib/vite/loadable` Document preloads for Vite SSR — Non-Goals (static / prerender only; optionally gate `preloadPlugin` to static later)
+- Sku-owned Apollo dependency / provider / config — Non-Goals (`useInsertHtml` seam only)
+- `@apollo/client-integration-react-router` loader transport (`apolloLoader` / `preloadQuery` query refs in loader data) — Non-Goals (alpha, RR7 peer, needs streaming loader data)
+- Streaming (turbo-stream) loader-data serialization — Non-Goals (would pull sku toward Framework Mode)
+- Two-pass `getDataFromTree` SSR — Non-Goals (incompatible with streaming)

@@ -1,5 +1,4 @@
-import { useLoaderData } from 'react-router';
-import type { LoaderFunctionArgs } from 'react-router';
+import { useLoaderData, type LoaderFunctionArgs } from 'react-router';
 
 import { userIdContext } from '../../userIdContext.js';
 

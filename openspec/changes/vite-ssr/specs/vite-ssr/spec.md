@@ -79,7 +79,7 @@ Config `routes` (static prerender path lists) MUST NOT be used as the Vite SSR `
 - **THEN** sku fails with a hard error naming the entry/export
 - **AND** does not use `default` or soft-skip
 
-### Requirement: Optional sites membership and onRequest.site select site-scoped route tree
+### Requirement: Optional sites membership and getSite select site-scoped route tree
 
 Optional `sites?: string[]` on a `SkuSsrRouteObject` declares membership:
 
@@ -89,23 +89,29 @@ Optional `sites?: string[]` on a `SkuSsrRouteObject` declares membership:
 Sku MUST NOT inherit `sites` from parent routes to children.
 Site-specific routes MUST set `sites` explicitly.
 
-Sku MUST pre-build per-site trees from config site names + `routesEntry` `routes` at init (not per request), strip `sites` before React Router APIs, and select the pre-built tree for `onRequest.site`.
+Sku MUST pre-build per-site trees from config site names + `routesEntry` `routes` at init (not per request), strip `sites` before React Router APIs, and select the pre-built tree for the resolved `site`.
+
+Sku MUST create each site’s React Router static handler once at init and MUST NOT call `createStaticHandler` on the per-request path — per request sku only selects the pre-built handler and calls `query()` / `createStaticRouter`.
+
+Sku MUST NOT wrap or otherwise modify the route tree to mount consumer providers (provider mounting happens outside the router — see the request-exports requirement).
 
 Vite SSR MUST require a non-empty config `sites` array (≥1 site name). Empty `sites` MUST hard-error at config/init.
 
-`onRequest` MUST return `site: string`.
+**Resolve `site`:**
+
+- One configured site ⇒ when `getSite` is omitted, sku MUST use that sole config site name; when `getSite` is exported, sku MUST call it and validate the return.
+- Multiple configured sites ⇒ missing `getSite` export MUST hard-error at init (naming the export; same class as missing `routes` on `routesEntry`).
+- Non-string `site` from `getSite`, or a `site` that is not a config site name / has no pre-built tree, MUST fail closed per request (hard error).
 
 Sku MUST serialize that `site` into the hydrate bootstrap and select the same pre-built tree for client `createBrowserRouter`.
 
 Sku MUST NOT derive site from config `hosts` / `sites[].host` for route-tree selection (those remain local-dev listen / setup-hosts only).
 
-Missing or non-string `onRequest.site`, or a `site` that is not a config site name / has no pre-built tree, MUST fail closed (hard error).
-
-Apps own site resolution (from Express `req`, headers, app config, etc.) and per-site path _shape_ when paths differ by site.
+Apps own site resolution (from Express `req`, headers, app config, etc.) via sync `getSite({ req })` and per-site path _shape_ when paths differ by site.
 
 Config `sites[].routes` (static prerender path lists) MUST NOT drive Vite SSR `RouteObject` trees.
 
-`site` MUST NOT be passed into `onHydrate` args (`onHydrate` stays `{ context }` only).
+`site` MUST NOT be passed into `onHydrate` args (`onHydrate` stays `{ clientContext }` only when exported).
 
 #### Scenario: Empty config sites hard-errors
 
@@ -131,56 +137,94 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Vite SSR `R
 - **THEN** sku does not copy the parent’s `sites` onto the child
 - **AND** structural exclusion still applies (if the parent is absent for a site, its subtree is absent)
 
-#### Scenario: onRequest site selects the tree
+#### Scenario: Single configured site without getSite uses that site
 
-- **WHEN** `onRequest` returns `site`
+- **WHEN** config defines exactly one site
+- **AND** the server entry omits `getSite`
+- **THEN** sku uses that sole config site name for the server handler and hydrate bootstrap
+
+#### Scenario: getSite selects the tree
+
+- **WHEN** `getSite` returns `site`
 - **AND** that name is a config site with a pre-built tree
 - **THEN** sku uses that site’s tree for the server handler
 - **AND** hydrates the client router with the same site’s tree
 
-#### Scenario: Missing onRequest site fails closed
+#### Scenario: Static handler is built once per site
 
-- **WHEN** `onRequest` omits `site` or returns a non-string value
-- **THEN** sku fails closed with a hard error
+- **WHEN** a Vite SSR app serves multiple document requests for the same site
+- **THEN** sku reuses the static handler built for that site at init
+- **AND** does not call `createStaticHandler` on the request path
+
+#### Scenario: Multi-site missing getSite hard-errors at init
+
+- **WHEN** config defines more than one site
+- **AND** the server entry omits `getSite`
+- **THEN** sku fails with a hard error at init naming the `getSite` export
+
+#### Scenario: Non-string getSite fails closed
+
+- **WHEN** `getSite` returns a non-string value
+- **THEN** sku fails closed with a hard error for that request
 
 #### Scenario: Unknown site fails closed
 
-- **WHEN** `onRequest` returns a `site` that is not a config site name
-- **THEN** sku fails closed with a hard error
+- **WHEN** `getSite` returns a `site` that is not a config site name
+- **THEN** sku fails closed with a hard error for that request
 
 #### Scenario: Foreign-site paths are not registered
 
 - **WHEN** a route is membership-filtered out of site A’s tree
-- **AND** `onRequest` returns site A
+- **AND** the resolved `site` is A
 - **THEN** React Router does not match that path on site A’s tree
 
 #### Scenario: Config hosts do not select the tree
 
 - **WHEN** config defines `sites[].host` values
-- **THEN** sku still requires `onRequest.site` for tree selection
+- **THEN** sku still resolves `site` via `getSite` (or the sole config site)
 - **AND** does not choose the tree from the request `Host` header alone
 
-### Requirement: Required server and client request exports
+### Requirement: Optional server and client request exports
 
-Server entry MUST export `onRequest` and `middleware`; client entry MUST export `onHydrate`.
+Server entry MAY export sync named getters `getSite`, `getLanguage`, and `getClientContext`; optional `middleware`, `Providers`, and `getContext`.
 
-Missing named exports MUST hard-error (no default fallback, no noops).
+Client entry MAY export optional `onHydrate`, `Providers`, and `getContext`.
+
+`getSite` is required **only** when config `sites` has more than one entry (init hard-error when missing — see the site-selection requirement).
+All other listed exports are optional.
 
 Sku MUST NOT specially gate on entry file existence; a missing file fails via normal module resolution.
 
-`onRequest` MUST receive `{ req }` where `req` is the Express request after consumer middleware.
+Each getter MUST receive `{ req }` where `req` is the Express request after consumer middleware.
+Getters MUST be synchronous.
+Sku MUST NOT pass Fetch `Request` or `res` into getters (Fetch stays on `query()` and optional server `getContext`).
 
-Sku MUST NOT pass Fetch `Request` into `onRequest` (Fetch stays on `query()` and optional server `getContext`).
+Sku MUST call `getSite` (when present or required), `getLanguage`, and `getClientContext` **before** `query()` so `site` / `clientContext` are available to `Providers` and the hydrate bootstrap.
 
-`onRequest` MUST return `site` and MAY also return `AppWrapper`, `language` (server Document vocab only), and `clientContext`.
-
-`onHydrate` receives `{ context }` only and MAY return `AppWrapper`.
-
+When `getLanguage` is omitted or returns `undefined`, sku MUST NOT register a vocab language chunk.
+When `getClientContext` is omitted, `clientContext` is `undefined`.
 Sku MUST NOT forward `language` to the client.
 
-When `AppWrapper` is returned, sku MUST mount it as a pathless parent under the router above the selected site’s routes.
+When the client entry exports `onHydrate`, sku MUST invoke it with `{ clientContext }` only — the same value from `getClientContext` that sku passes to `Providers`.
+Omitting `onHydrate` MUST mean no hydrate side effects (not an error).
 
-Server and client entries MAY optionally export `getContext` as a **separate named export** (not folded into `onRequest` / `onHydrate`).
+Omitting `middleware` MUST mean no consumer middleware layer (not an error).
+
+Server and client entries MAY optionally export `Providers` as a **separate named export**.
+
+`Providers` MUST be rendered **outside** the router — `Document` → `Providers` → router — so it MUST NOT be mounted as a route and MUST NOT be able to use React Router hooks.
+
+Sku MUST pass `site` and the request `clientContext` to `Providers` as props, and MUST pass the same values on server and client for a given document.
+
+Server and client `Providers` MAY differ (env-scoped dependencies), and either MAY be omitted; omitting one MUST leave sku rendering the router directly.
+
+Sku MUST warn in development when an entry’s `Providers` renders hydration-relevant markup (providers are expected to be context-only).
+
+Router-aware wrapping is **not** a sku concern: apps express it as their own root layout route in `routesEntry`.
+
+Request-entry exports MUST NOT return a provider component from getters or `onHydrate`.
+
+Server and client entries MAY optionally export `getContext` as a **separate named export**.
 
 When the server entry exports `getContext`, sku MUST call it with `{ request, req }` before `query()` and pass the returned `RouterContextProvider` as `requestContext` to `query()`.
 
@@ -190,19 +234,35 @@ Omitting either `getContext` MUST preserve today’s empty/default context behav
 
 Sku MUST NOT make Express `req` the loader `request` argument (`query()` continues to use Fetch `Request` only).
 
-Sku MUST NOT pass `res` into `onRequest` or `getContext`.
+Sku MUST NOT pass `res` into getters or `getContext`.
 
-#### Scenario: onRequest and onHydrate wiring
+#### Scenario: Getters run before query
 
 - **WHEN** a Vite SSR app handles a document request
-- **THEN** sku invokes `onRequest` with Express `req` only (no Fetch `Request`) before `query()`
-- **AND** invokes `onHydrate` with deserialized `context` only (no `language`)
+- **THEN** sku invokes present getters with Express `req` only (no Fetch `Request`) before `query()`
+- **AND** uses their values for site selection, vocab preload, `Providers` props, and the hydrate bootstrap
 
-#### Scenario: onRequest can read middleware-attached Express state
+#### Scenario: Getters can read middleware-attached Express state
 
 - **WHEN** consumer Express middleware attaches fields on `req` (e.g. `req.user`, `req.log`)
-- **AND** `onRequest` runs for that document request
-- **THEN** `onRequest` can read those fields from `req` to build `site` / `AppWrapper` / `language` / `clientContext`
+- **AND** getters run for that document request
+- **THEN** getters can read those fields from `req` to build `site` / `language` / `clientContext`
+
+#### Scenario: Omitting middleware is not an error
+
+- **WHEN** the server entry omits `middleware`
+- **THEN** sku does not require it
+- **AND** mounts no consumer middleware layer
+
+#### Scenario: Omitting onHydrate hydrates successfully
+
+- **WHEN** the client entry omits `onHydrate`
+- **THEN** sku hydrates the document without calling a hydrate callback
+
+#### Scenario: Optional onHydrate receives clientContext only
+
+- **WHEN** the client entry exports `onHydrate`
+- **THEN** sku invokes it with deserialized `clientContext` only (no `language`)
 
 #### Scenario: Optional server getContext seeds query requestContext
 
@@ -223,16 +283,29 @@ Sku MUST NOT pass `res` into `onRequest` or `getContext`.
 - **THEN** sku does not require it
 - **AND** React Router uses today’s empty/default context behaviour
 
-#### Scenario: AppWrapper mounts inside the router
+#### Scenario: Providers render outside the router
 
-- **WHEN** `onRequest` or `onHydrate` returns `AppWrapper`
-- **THEN** sku mounts it as a pathless parent under the router above the selected site’s routes
+- **WHEN** the server or client entry exports named `Providers`
+- **THEN** sku renders it between `Document` and the router provider
+- **AND** the route tree is unchanged
 
-#### Scenario: Missing named exports hard-error
+#### Scenario: Providers receive request values as props
 
-- **WHEN** an entry omits a required named export (`onRequest`, `middleware`, or `onHydrate`)
-- **THEN** sku fails with a hard error naming the export
-- **AND** does not use `default` or soft-skip
+- **WHEN** sku renders an entry’s `Providers` for a document
+- **THEN** it passes `site` and that request’s `clientContext`
+- **AND** the client receives the same values at hydrate
+
+#### Scenario: Omitting Providers renders the router directly
+
+- **WHEN** an entry omits `Providers`
+- **THEN** sku does not require it
+- **AND** renders the router without a wrapper
+
+#### Scenario: Router-aware wrapping is an app route
+
+- **WHEN** an app needs wrapping that uses React Router hooks or loader data
+- **THEN** it declares its own root layout route in `routesEntry`
+- **AND** sku provides no API for that case
 
 ### Requirement: Full-document streaming and document hydration
 
@@ -251,6 +324,60 @@ Default pipe is `onShellReady`.
 
 - **WHEN** the client hydrates a Vite SSR response
 - **THEN** hydration targets the document root (not `#app` / `#root`)
+
+### Requirement: Apps can insert HTML into the response stream
+
+Streaming data transports must inject serialized state into the response between React's stream chunks so it executes before hydration. Sku owns the render call and the response pipe, so sku MUST provide that seam.
+
+Sku MUST export `useInsertHtml()` from the browser-safe `sku/ssr` subpath, returning a function that accepts `() => ReactNode`.
+
+During document SSR, sku MUST render queued nodes to markup and write them into the response before the next React chunk, flushing any remainder at stream end.
+
+Where no sku SSR render surrounds it, the returned function MUST be a silent no-op and MUST NOT throw.
+
+Sku MUST NOT ship a dependency on, or configuration for, any specific data-transport or GraphQL client.
+
+#### Scenario: Injected nodes reach the browser before hydration
+
+- **WHEN** a component calls the function returned by `useInsertHtml` during document SSR
+- **THEN** sku writes that markup into the response ahead of the next React chunk
+- **AND** it appears before the client hydrates
+
+#### Scenario: Injected scripts can carry the CSP nonce
+
+- **WHEN** an app injects a `<script>` carrying the nonce from `getCspNonce()`
+- **THEN** the response `script-src` includes that `'nonce-…'`
+- **AND** the script is not required to be hashable at header-derivation time
+
+#### Scenario: No-op off the SSR path
+
+- **WHEN** `useInsertHtml` is called in the browser, or while sku probes an entry's `Providers` for markup in development
+- **THEN** the returned function does nothing and does not throw
+
+#### Scenario: Injection survives waitForAll
+
+- **WHEN** a matched route sets `handle.waitForAll` and the app injects nodes
+- **THEN** the buffered document still contains the injected markup in stream order
+
+### Requirement: Apollo streaming hydration is proven by a fixture
+
+A fixture MUST demonstrate Apollo Client streaming hydration on Vite SSR, using an app-owned transport built on `useInsertHtml` and mounted as dual-entry `Providers`.
+
+#### Scenario: Server-run queries hydrate from the transported cache
+
+- **WHEN** a page runs a query during document SSR and the browser hydrates
+- **THEN** the rendered data survives hydration unchanged
+- **AND** the browser does not refetch that query
+
+#### Scenario: Queries issued after hydration still fetch
+
+- **WHEN** the app issues a new query after hydration (for example on client navigation)
+- **THEN** that query fetches from the GraphQL endpoint normally
+
+#### Scenario: Transport provider renders no markup
+
+- **WHEN** sku probes the fixture's `Providers` in development
+- **THEN** no hydration-relevant-markup warning is emitted
 
 ### Requirement: Vite SSR client loads config polyfills
 
@@ -396,14 +523,20 @@ Sku MUST omit `Error.stack` from production hydration error payloads.
 
 ### Requirement: Server-entry middleware runs before HTML render
 
-Sku MUST mount the server entry’s Express/Connect `middleware` before the HTML render path in start and production.
+When the server entry exports Express/Connect `middleware`, sku MUST mount it before the HTML render path in start and production.
 
-The export is required (empty array or passthrough allowed).
+Omitting `middleware` MUST NOT be an error.
 
 #### Scenario: Server-entry middleware before HTML
 
 - **WHEN** the server entry exports `middleware`
 - **THEN** it handles matching requests before sku streams HTML
+
+#### Scenario: Omitting server-entry middleware
+
+- **WHEN** the server entry omits `middleware`
+- **THEN** sku mounts no consumer middleware layer
+- **AND** HTML render still succeeds
 
 ### Requirement: Dev middleware mounts first and stays out of production
 
@@ -466,11 +599,38 @@ That loadable path remains for static Vite / prerender only.
 - **WHEN** a Vite SSR app renders a `@sku-lib/vite/loadable` component whose module id is registered only via the loadable collector
 - **THEN** sku does not add Document CSS or modulepreload links for that module id from the collector path
 
+### Requirement: Intent route preloading is a sku API
+
+Sku MUST expose a `usePreloadRoute(to)` hook returning a zero-argument function that warms the lazy modules for `to`.
+
+Matching MUST run against the current site's filtered route tree.
+
+The returned function MUST NOT throw or reject when warming fails.
+
+When no route tree is registered, the returned function MUST be a no-op.
+
+Sku MUST NOT expose the route tree itself as a public API.
+
+#### Scenario: Intent warms the destination chunk
+
+- **WHEN** the returned function is invoked for a lazy destination route that is not yet loaded
+- **THEN** sku requests that route’s client chunk before navigation
+
+#### Scenario: Foreign-site path is not warmed
+
+- **WHEN** the returned function is invoked for a path outside the current site’s tree
+- **THEN** sku requests no chunk
+
+#### Scenario: Server render is inert
+
+- **WHEN** a component calls `usePreloadRoute` during document SSR
+- **THEN** rendering succeeds and no preloading occurs
+
 ### Requirement: Vocab language chunks are supported
 
-When `languages` is configured for build-time vocab splitting, sku MUST register a vocab language chunk on the Document only when server `onRequest` returns `language`.
+When `languages` is configured for build-time vocab splitting, sku MUST register a vocab language chunk on the Document only when server `getLanguage` returns `language`.
 
-Language is optional: if omitted, sku MUST NOT register a language chunk.
+Language is optional: if `getLanguage` is omitted or returns `undefined`, sku MUST NOT register a language chunk.
 
 Sku MUST NOT validate the returned language against config and MUST NOT default to a sole configured language.
 
@@ -482,15 +642,15 @@ Sku MUST NOT alias the `@vocab/vite` package root (breaks subpath imports such a
 
 Consumers MUST NOT need a direct `@vocab/vite` dependency for those bare imports to resolve.
 
-#### Scenario: Language chunk from onRequest
+#### Scenario: Language chunk from getLanguage
 
-- **WHEN** `onRequest` returns `language`
+- **WHEN** `getLanguage` returns `language`
 - **THEN** sku registers that language’s vocab chunk on the Document
 - **AND** does not pass `language` to `onHydrate` or request-context
 
 #### Scenario: No language means no language chunk
 
-- **WHEN** `onRequest` omits `language`
+- **WHEN** `getLanguage` is omitted or returns `undefined`
 - **THEN** sku does not register a vocab language chunk and the SSR response still succeeds
 
 #### Scenario: Vocab runtime resolves from sku without consumer direct dep
@@ -634,7 +794,10 @@ Production remains HTTP.
 
 ### Requirement: Teams can scaffold a Vite SSR app via create
 
-`@sku-lib/create` MUST offer a `vite-ssr` template with non-empty config `sites`, `routesEntry` configured, a flat `routes` scaffold (optional route-level `sites` only when membership differs), and request-entry exports (`onRequest` returning a configured site name / `middleware` / `onHydrate` — no `routes` re-export).
+`@sku-lib/create` MUST offer a `vite-ssr` template with non-empty config `sites` (typically one site), `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout route (optional route-level `sites` only when membership differs), and realistic request-entry exports (`middleware`, `Providers`, `onHydrate` — no `routes` re-export).
+
+A single-site template MUST omit `getSite` (sku uses the sole config site name).
+Multi-site examples MUST export `getSite`.
 
 Lazy route page modules in the template MUST use the React Router Data Mode named `Component` export (not `export default`).
 
@@ -644,7 +807,9 @@ The static `vite` template MUST remain unchanged.
 
 - **WHEN** a user runs `@sku-lib/create --template vite-ssr`
 - **THEN** the project is Vite SSR with non-empty config `sites` and `routesEntry` exporting flat `routes`
-- **AND** `onRequest` returns a configured site name
+- **AND** the server entry exports `middleware` and `Providers`
+- **AND** the client entry exports `onHydrate` and `Providers`
+- **AND** a single-site template omits `getSite`
 - **AND** request entries do not re-export `routes`
 - **AND** lazy page modules export named `Component`
 - **AND** can `sku start` without further entry setup
@@ -751,12 +916,13 @@ Sku MUST NOT add a runtime experimental gate.
 
 ### Requirement: Product and Migrating docs cover Vite SSR topics
 
-Vite SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, required `onRequest.site` tree selection, AppWrapper, middleware layers, CSP, response headers, data-loading hierarchy, and optional dual-entry `getContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
+Vite SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole config site when omitted on single-site), sync named getters (`getSite` / `getLanguage` / `getClientContext`), optional `middleware` / `onHydrate`, named `Providers` vs the app-owned root layout route, middleware layers, CSP, response headers, data-loading hierarchy, and optional dual-entry `getContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
 
 Migrating docs MUST also cover:
 
 - named `Component` (not default export) for lazy routes
-- `routesEntry` + flat `routes` + optional `sites` + required `onRequest.site` (fail closed on missing site / unknown site)
+- `routesEntry` + flat `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole config site when omitted on single-site)
+- named sync getters (`getSite` / `getLanguage` / `getClientContext`) instead of an `onRequest` return bag; optional `middleware` / `onHydrate`
 - multi-site membership via `sites` on routes (not `routesBySite` maps, dual-entry `routes` re-exports, optional language path params, union tree + allowlist, or sku host matching as the product story)
 - webpack dual-port (`port` + `serverPort`) vs Vite SSR single `port` (`serverPort` rejected; production still honours `PORT`)
 - production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
@@ -768,16 +934,21 @@ Migrating docs MUST also cover:
 - moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
 - that `dangerouslySetViteConfig` is unsupported for Vite SSR (hard-error when set; raise use-cases via sku-support)
 - keeping server-only loader modules out of the client-imported route graph (split trees; set `handle.moduleId` when lazy factories are non-idiomatic)
-- prefer render-time React data loading via `AppWrapper` + Suspense / shared clients; use loaders for avoiding heavily-nested waterfalls, document redirects, response headers, or opt-in `getContext` DI — not as the default for page content
-- that loader `request` stays Fetch; Express `req` is available to `onRequest` (`{ req }` only) and optional server `getContext`, not as the loader `request` argument
-- that `onRequest` does not receive Fetch `Request` (experimental BREAKING vs prior `{ request }` shape)
+- prefer render-time React data loading via Suspense with clients injected from `Providers`; use loaders for avoiding heavily-nested waterfalls, document redirects, response headers, or opt-in `getContext` DI — not as the default for page content
+- Apollo streaming hydration end to end: an app-owned transport over `useInsertHtml`, the provider as dual-entry `Providers`, the CSP nonce on injected scripts, and that Apollo apps must drop two-pass `getDataFromTree`
+- that loader-transported query refs (`@apollo/client-integration-react-router`'s `apolloLoader` / `preloadQuery`) are not supported, because sku's hydration bootstrap is JSON and promise-scrubbed
+- that loader `request` stays Fetch; Express `req` is available to getters (`{ req }` only) and optional server `getContext`, not as the loader `request` argument
+- that getters do not receive Fetch `Request` or `res`, and MUST stay synchronous / pure (libs may memoise on `req`)
 - optional dual-entry `getContext` (Data Mode vs Framework Mode; server seeds from middleware bag + Fetch `request`; client seeds from browser-visible state; same `createContext` keys; different construction; cadence: once per document `query` vs every client nav/fetcher)
-- how to type Express `req` fields appended by middleware (module augmentation of `express-serve-static-core` `Request`, shared by `middleware` / `onRequest` / server `getContext`; same pattern as sku’s `getCspNonce`)
-- relation of Express `middleware` vs RR route `middleware` vs entry `getContext`, and of `onRequest`/`onHydrate` (React providers) vs `getContext` (loader/action DI)
+- how to type Express `req` fields appended by middleware (module augmentation of `express-serve-static-core` `Request`, shared by `middleware` / getters / server `getContext`; same pattern as sku’s `getCspNonce`)
+- relation of Express `middleware` vs RR route `middleware` vs entry `getContext`, and of named `Providers` (component dependencies, outside the router) vs the app’s root layout route (router-aware wrapping) vs `getContext` (loader/action DI) — getters / optional `onHydrate` cover site / language / `clientContext` / hydrate side effects only
+- that `Providers` is a named export on `serverEntry` / `clientEntry` rendered outside the router, never returned from getters / `onHydrate` and never mounted as a route; request-scoped values arrive as `site` / `clientContext` props
+- that wrapping which needs React Router hooks or loader data belongs in the app’s own root layout route in `routesEntry`, not in `Providers`
+- that server and client `Providers` must render identical DOM (prefer context-only providers), since the two may differ
 - a **red warning** that apps MUST NOT put Express `req` (or other non-isomorphic platform objects) into `RouterContextProvider` — project values both sides can supply
 - a client-navigation example where context is re-seeded without Express for a location different from the initial SSR location
 - for Braid apps: reset must run before any Braid-touching server module on `sku start` (start evaluation order can differ from production build)
-- providers that touch `window` must not run in the Document SSR tree (prefer client-only wrappers or `onHydrate`-only providers)
+- providers that touch `window` must not run in the Document SSR tree (prefer client-only wrappers or client-entry-only `Providers`)
 - Jest → Vitest as a Vite SSR prerequisite (point at existing Vitest docs / `@sku-lib/codemod jest-to-vitest`)
 - path aliases: bare `src/…` / webpack `baseUrl` → `#src/…` via `pathAliases` (point at existing migrate-root-resolution guidance)
 
@@ -786,13 +957,14 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 #### Scenario: Primary Vite SSR docs have topic coverage
 
 - **WHEN** a reader opens Vite SSR product docs
-- **THEN** docs cover `routesEntry`, AppWrapper, flat `routes`, optional `sites`, `onRequest.site`, middleware, CSP, and response headers
-- **AND** docs steer page content toward render-time data loading via `AppWrapper` (not loaders as the default)
+- **THEN** docs cover `routesEntry`, `Providers`, the app-owned root layout route, flat `routes`, optional `sites`, `getSite`, named getters, optional `middleware` / `onHydrate`, CSP, and response headers
+- **AND** docs steer page content toward render-time data loading with dependencies from `Providers` (not loaders as the default)
 - **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getContext` DI
 - **AND** docs document optional dual-entry `getContext` and Data Mode vs Framework Mode seeding
 - **AND** docs show how to type middleware-appended Express `req` fields via `express-serve-static-core` module augmentation
 - **AND** docs include a red warning against putting Express `req` into `RouterContextProvider`
 - **AND** docs include a client-navigation example where context works for a non-initial location without Express
+- **AND** docs show a complete Apollo streaming setup with `useInsertHtml`, the nonce on injected scripts, and why loader-transported query refs are unsupported
 
 #### Scenario: Migrating docs exist
 

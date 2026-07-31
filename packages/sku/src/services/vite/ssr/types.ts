@@ -26,8 +26,27 @@ export type SkuSsrMiddleware = RequestHandler | RequestHandler[];
 export type JsonValue =
   string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
-/** Provider wrapper around the router tree (not page layout / Document). */
-export type SkuSsrAppWrapper = ComponentType<{ children: ReactNode }>;
+/**
+ * Props sku passes to an entry's optional named `Providers` export.
+ * `site` and `clientContext` are the same values on server and client for a
+ * given document, so both sides render identically.
+ */
+export type SkuSsrProvidersProps<Context extends JsonValue = JsonValue> = {
+  children: ReactNode;
+  /** `onRequest.site` — the site whose pre-built route tree is rendered. */
+  site: string;
+  /** The request's `onRequest.clientContext` seed (undefined when omitted). */
+  clientContext: Context | undefined;
+};
+
+/**
+ * Optional named `Providers` export on `serverEntry` / `clientEntry`: dependency
+ * injection rendered *outside* the router (`Document` → `Providers` → router),
+ * so it must not use React Router hooks and must not render DOM.
+ * Router-aware wrapping belongs in the app's own root layout route.
+ */
+export type SkuSsrProviders<Context extends JsonValue = JsonValue> =
+  ComponentType<SkuSsrProvidersProps<Context>>;
 
 /**
  * Route object for `routesEntry`: React Router `RouteObject` plus optional
@@ -48,7 +67,6 @@ export type SkuSsrRouteObject = Omit<RouteObject, 'children'> & {
 export type SkuSsrOnRequestResult = {
   /** App-owned site name — selects the pre-built site route tree (required). */
   site: string;
-  AppWrapper?: SkuSsrAppWrapper;
   /** Configured language name (or `en-PSEUDO`) for language chunk registration. */
   language?: string;
   /** Shell-time JSON seed serialised into the hydrate bootstrap. */
@@ -71,14 +89,10 @@ export type SkuSsrServerGetContext = (args: {
   req: ExpressRequest;
 }) => RouterContextProvider | Promise<RouterContextProvider>;
 
-/** Closed return object from the Vite SSR `onHydrate` export. Fields are optional. */
-export type SkuSsrOnHydrateResult = {
-  AppWrapper?: SkuSsrAppWrapper;
-};
-
+/** Hydrate side effects only — providers come from the named `Providers` export. */
 export type SkuSsrOnHydrate = (args: {
-  context: JsonValue | undefined;
-}) => SkuSsrOnHydrateResult;
+  clientContext: JsonValue | undefined;
+}) => void;
 
 /**
  * Optional client-entry `getContext` — passed to `createBrowserRouter({ getContext })`

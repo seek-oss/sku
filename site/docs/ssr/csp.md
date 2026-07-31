@@ -20,3 +20,6 @@ Request a nonce only when you need it for inline scripts or third-party tags tha
 - `req.getCspNonce()` in server-entry [middleware](./middleware.md)
 
 At most one nonce is minted per HTML response.
+
+Streaming data transports that inject `<script>` tags via [`useInsertHtml`](./entries.md#useinserthtml) (for example Apollo’s manual data transport) must put that nonce on the injected scripts — their bodies are not known when headers are derived from the shell, so they cannot be hashed.
+Pass `extraScriptProps={{ nonce: getCspNonce() }}` on the **server** entry’s provider only; see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).

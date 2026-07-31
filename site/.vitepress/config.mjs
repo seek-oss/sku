@@ -62,7 +62,7 @@ export default defineConfig({
             { text: 'Getting started', link: '/ssr/' },
             { text: 'Request entries', link: '/ssr/entries' },
             { text: 'Routing', link: '/ssr/routing' },
-            { text: 'App Wrapper / Providers', link: '/ssr/providers' },
+            { text: 'Providers', link: '/ssr/providers' },
             { text: 'Data loading', link: '/ssr/data-loading' },
             {
               text: 'Multi-language / Localisation',

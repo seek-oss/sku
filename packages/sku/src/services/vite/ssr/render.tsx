@@ -1,22 +1,24 @@
-import { renderToPipeableStream } from 'react-dom/server';
+import { renderToPipeableStream, type PipeableStream } from 'react-dom/server';
 import type { Request as ExpressRequest } from 'express';
 import {
-  createStaticHandler,
   createStaticRouter,
   StaticRouterProvider,
-  type RouteObject,
+  type StaticHandler,
   type StaticHandlerContext,
 } from 'react-router';
 import { getChunkName } from '@vocab/vite/chunks';
 import Document from './Document.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
+import { createInsertHtmlTransform } from './createInsertHtmlTransform.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
+import { createInsertHtmlQueue, InsertHtmlProvider } from './insertHtml.js';
 import { getCspNonce, runWithSsrRequestContext } from './requestContext.js';
 import {
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,
 } from './resolveAssets.js';
-import { selectSiteRoutes } from './selectSiteRoutes.js';
+import { selectForSite } from './selectForSite.js';
+import { warnIfServerProvidersRenderMarkup } from './warnIfServerProvidersRenderMarkup.js';
 import type {
   DocumentAssets,
   RenderAssets,
@@ -25,9 +27,21 @@ import type {
   RenderResult,
   SkuRouteHandle,
   SkuSsrOnRequest,
+  SkuSsrProviders,
   SkuSsrServerGetContext,
 } from './types.js';
-import { withAppWrapperLayout } from './withAppWrapperLayout.js';
+
+const wrapPipeWithInsertHtml = (
+  pipe: PipeableStream['pipe'],
+  queue: ReturnType<typeof createInsertHtmlQueue>,
+): PipeableStream['pipe'] => {
+  const wrappedPipe: PipeableStream['pipe'] = (destination) => {
+    const transform = createInsertHtmlTransform(queue);
+    pipe(transform);
+    return transform.pipe(destination);
+  };
+  return wrappedPipe;
+};
 
 /** Merge RR loader/action headers from all matches (append for Set-Cookie). */
 const collectRouteHeaders = (context: StaticHandlerContext): Headers => {
@@ -79,29 +93,41 @@ const getModuleIds = (
   return moduleIds;
 };
 
-const renderDocument = async (
-  siteRouteTrees: Record<string, RouteObject[]>,
-  request: Request,
-  req: ExpressRequest,
-  assets: RenderAssets,
-  onRequest: SkuSsrOnRequest,
-  options: RenderOptions = {},
-  renderManifest?: RenderManifest,
-  getContext?: SkuSsrServerGetContext,
-): Promise<RenderResult> => {
-  // Server entry runs before query(); site selects the tree; language is local for preload.
+export interface RenderArgs {
+  siteStaticHandlers: Record<string, StaticHandler>;
+  request: Request;
+  req: ExpressRequest;
+  assets: RenderAssets;
+  onRequest: SkuSsrOnRequest;
+  options?: RenderOptions;
+  renderManifest?: RenderManifest;
+  getContext?: SkuSsrServerGetContext;
+  /** Optional server-entry providers, rendered outside the router. */
+  Providers?: SkuSsrProviders;
+}
+
+/** Probe once per process rather than on every development request. */
+let providersProbed = false;
+
+const renderDocument = async ({
+  siteStaticHandlers,
+  request,
+  req,
+  assets,
+  onRequest,
+  options = {},
+  renderManifest,
+  getContext,
+  Providers,
+}: RenderArgs): Promise<RenderResult> => {
+  // Server entry runs before query(); site selects the handler; language is local for preload.
   const onRequestResult = await onRequest({ req });
-  const routes = selectSiteRoutes(
-    siteRouteTrees,
+  const { query, dataRoutes } = selectForSite(
+    siteStaticHandlers,
     onRequestResult.site,
     'onRequest',
   );
 
-  const routesWithAppWrapper = withAppWrapperLayout(
-    routes,
-    onRequestResult.AppWrapper,
-  );
-  const { query, dataRoutes } = createStaticHandler(routesWithAppWrapper);
   const requestContext = getContext
     ? await getContext({ request, req })
     : undefined;
@@ -156,16 +182,36 @@ const renderDocument = async (
   // Consumers may already have requested the same value via getCspNonce / req.getCspNonce.
   const nonce = getCspNonce() ?? options.nonce;
 
+  const providerProps = {
+    site: onRequestResult.site,
+    clientContext: onRequestResult.clientContext,
+  };
+
+  if (development && Providers && !providersProbed) {
+    providersProbed = true;
+    warnIfServerProvidersRenderMarkup(Providers, providerProps);
+  }
+
+  const routerElement = (
+    <StaticRouterProvider router={router} context={context} hydrate={false} />
+  );
+
+  // Render-scoped: provider wraps Document so Providers and route code both reach it;
+  // the matching transform flushes queued nodes before each React chunk.
+  const insertHtmlQueue = createInsertHtmlQueue();
+
   return new Promise((resolve, reject) => {
     let ready = false;
     const stream = renderToPipeableStream(
-      <Document assets={documentAssets}>
-        <StaticRouterProvider
-          router={router}
-          context={context}
-          hydrate={false}
-        />
-      </Document>,
+      <InsertHtmlProvider insertHtml={insertHtmlQueue.insertHtml}>
+        <Document assets={documentAssets}>
+          {Providers ? (
+            <Providers {...providerProps}>{routerElement}</Providers>
+          ) : (
+            routerElement
+          )}
+        </Document>
+      </InsertHtmlProvider>,
       {
         bootstrapModules: assets.bootstrapModules,
         bootstrapScriptContent,
@@ -176,7 +222,11 @@ const renderDocument = async (
           }
           ready = true;
           resolve({
-            ...stream,
+            pipe: wrapPipeWithInsertHtml(
+              stream.pipe.bind(stream),
+              insertHtmlQueue,
+            ),
+            abort: stream.abort.bind(stream),
             statusCode: context.statusCode,
             headers: routeHeaders,
             inlineScripts: [bootstrapScriptContent],
@@ -188,7 +238,11 @@ const renderDocument = async (
           }
           ready = true;
           resolve({
-            ...stream,
+            pipe: wrapPipeWithInsertHtml(
+              stream.pipe.bind(stream),
+              insertHtmlQueue,
+            ),
+            abort: stream.abort.bind(stream),
             statusCode: context.statusCode,
             headers: routeHeaders,
             inlineScripts: [bootstrapScriptContent],
@@ -213,30 +267,18 @@ const renderDocument = async (
   });
 };
 
-export const render = (
-  siteRouteTrees: Record<string, RouteObject[]>,
-  request: Request,
-  req: ExpressRequest,
-  assets: RenderAssets,
-  onRequest: SkuSsrOnRequest,
-  options: RenderOptions = {},
-  renderManifest?: RenderManifest,
-  getContext?: SkuSsrServerGetContext,
-): Promise<RenderResult> => {
+export const render = ({
+  options = {},
+  ...args
+}: RenderArgs): Promise<RenderResult> => {
   // Async Local Storage must be established in this Vite-loaded module so consumer
   // helpers (also resolved via the SSR module graph) share the store.
   const store =
     options.requestContextStore ?? createSsrRequestContextStore(options.nonce);
   return runWithSsrRequestContext(store, () =>
-    renderDocument(
-      siteRouteTrees,
-      request,
-      req,
-      assets,
-      onRequest,
-      { ...options, requestContextStore: store },
-      renderManifest,
-      getContext,
-    ),
+    renderDocument({
+      ...args,
+      options: { ...options, requestContextStore: store },
+    }),
   );
 };

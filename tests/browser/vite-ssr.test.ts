@@ -13,15 +13,16 @@ const { sku, node, fixturePath } = scopeToFixture('vite-ssr');
 describe('vite-ssr', () => {
   describe('routesEntry flat routes + sites pattern', () => {
     it('exports flat routes with optional sites from routesEntry only', async () => {
-      const [routes, server] = await Promise.all([
+      const [routes, nzOnlyRoute, server] = await Promise.all([
         fs.readFile(fixturePath('src/routes.tsx'), 'utf8'),
+        fs.readFile(fixturePath('src/pages/nz-only/route.ts'), 'utf8'),
         fs.readFile(fixturePath('src/server.tsx'), 'utf8'),
         fs.readFile(fixturePath('sku.config.ts'), 'utf8'),
       ]);
 
       expect(routes).toContain('export const routes');
       expect(routes).toContain("sites: ['au']");
-      expect(routes).toContain("sites: ['nz']");
+      expect(nzOnlyRoute).toContain("sites: ['nz']");
       expect(server).toContain('site');
     });
   });
@@ -198,7 +199,7 @@ describe('vite-ssr', () => {
       expect(await response.text()).toBe('ok');
     });
 
-    it('projects middleware-attached state into onRequest AppWrapper', async ({
+    it('projects middleware-attached state into the named server Providers', async ({
       task,
     }) => {
       skipCleanup(task.id);
@@ -207,9 +208,34 @@ describe('vite-ssr', () => {
 
       const response = await fetch(url);
       const html = await response.text();
-      expect(html).toContain('data-testid="app-wrapper-user-id"');
+      expect(html).toContain('data-testid="providers-user-id"');
       expect(html).toContain('fixture-user');
       expect(html).toContain('"userId":"fixture-user"');
+    });
+
+    it('keeps the named client Providers mounted across client navigations', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const page = await createPage();
+      const pageErrors: Error[] = [];
+      page.on('pageerror', (error) => pageErrors.push(error));
+
+      await page.goto(url, { waitUntil: 'networkidle' });
+      expect(await page.getByTestId('providers-user-id').textContent()).toBe(
+        'fixture-user',
+      );
+
+      // Providers render outside the router, so they stay mounted across
+      // navigations rather than being rebuilt per request.
+      await page.getByTestId('nav-about').click();
+      await page.getByTestId('about').waitFor({ state: 'visible' });
+      await page.goBack();
+      expect(await page.getByTestId('providers-user-id').textContent()).toBe(
+        'fixture-user',
+      );
+      expect(pageErrors).toEqual([]);
+      await page.close();
     });
 
     it('seeds loader context from server getContext on document SSR', async ({
@@ -234,7 +260,7 @@ describe('vite-ssr', () => {
       // Start on a different location than the context-user route.
       await page.goto(url, { waitUntil: 'networkidle' });
       await page.getByTestId('shell').waitFor({ state: 'visible' });
-      expect(await page.getByTestId('app-wrapper-user-id').textContent()).toBe(
+      expect(await page.getByTestId('providers-user-id').textContent()).toBe(
         'fixture-user',
       );
 
@@ -623,13 +649,19 @@ describe('vite-ssr', () => {
         await fs.readFile(manifestPath, 'utf8'),
       ) as Record<string, { file: string }>;
       const aboutChunk = manifest['src/pages/about/about.tsx']?.file;
+      const nzOnlyChunk = manifest['src/pages/nz-only/nz-only.tsx']?.file;
       expect(aboutChunk).toBeTruthy();
+      expect(nzOnlyChunk).toBeTruthy();
 
       const page = await createPage();
       const aboutRequests: string[] = [];
+      const nzOnlyRequests: string[] = [];
       page.on('request', (request) => {
         if (request.url().includes(aboutChunk)) {
           aboutRequests.push(request.url());
+        }
+        if (request.url().includes(nzOnlyChunk)) {
+          nzOnlyRequests.push(request.url());
         }
       });
 
@@ -644,6 +676,12 @@ describe('vite-ssr', () => {
         },
         { timeout: 5000 },
       );
+
+      // `/nz-only` is absent from the AU tree, so intent preloading never
+      // matches it — even though the link renders on every site.
+      await page.getByTestId('nav-nz-only').hover();
+      await page.waitForTimeout(500);
+      expect(nzOnlyRequests).toEqual([]);
 
       await page.getByTestId('nav-about').click();
       await page.getByTestId('about').waitFor({ state: 'visible' });

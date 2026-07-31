@@ -24,7 +24,7 @@ export function Component() {
       <h1 className={styles.shell} data-testid="shell">
         Vite SSR Home
       </h1>
-      <p data-testid="app-wrapper-user-id">{userId ?? 'missing'}</p>
+      <p data-testid="providers-user-id">{userId ?? 'missing'}</p>
       <Suspense fallback={<p data-testid="fallback">Loading…</p>}>
         <DeferredMessage />
       </Suspense>

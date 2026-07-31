@@ -2,12 +2,16 @@ import 'braid-design-system/reset';
 
 import { BraidProvider } from 'braid-design-system';
 import seekJobs from 'braid-design-system/themes/seekJobs';
-import { StrictMode, type ReactNode } from 'react';
+import { StrictMode } from 'react';
+import type { SkuSsrProviders } from 'sku';
 
-export function Providers({ children }: { children: ReactNode }) {
-  return (
-    <StrictMode>
-      <BraidProvider theme={seekJobs}>{children}</BraidProvider>
-    </StrictMode>
-  );
-}
+/**
+ * Rendered outside the router, so React Router hooks are unavailable here and
+ * providers must stay context-only. Wrapping that needs the router (or loader
+ * data) belongs in the root layout route in `src/routes.tsx`.
+ */
+export const Providers: SkuSsrProviders = ({ children }) => (
+  <StrictMode>
+    <BraidProvider theme={seekJobs}>{children}</BraidProvider>
+  </StrictMode>
+);

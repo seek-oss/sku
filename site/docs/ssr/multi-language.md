@@ -17,8 +17,9 @@ export const onRequest: SkuSsrOnRequest = ({ req }) => ({
 });
 ```
 
-Wrap your UI in `VocabProvider` via `AppWrapper` (see [App Wrapper / Providers](./providers.md)) or a layout.
-Client locale is app-owned: re-derive it the same way `onRequest` did (URL / cookies / headers), via React Router hooks inside `AppWrapper`, or optionally seed it through `clientContext`.
+Wrap your UI in `VocabProvider` from your app's root layout route (see [Providers](./providers.md)).
+Locale is router-aware — it must track client navigation — so it belongs in a route rather than the entries' `Providers`, which render outside the router.
+Client locale is app-owned: re-derive it the same way `onRequest` did (URL / cookies / headers) with React Router hooks inside the layout, or seed it through `clientContext`.
 URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
 
 For general Vocab setup (`languages` config, `.vocab` folders, translation workflow), see [Multiple languages](../multi-language.md).

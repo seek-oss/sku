@@ -81,8 +81,10 @@ SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
 The config [`public`](./configuration.md#public) assets folder is not supported — if that directory exists, `sku start` / `sku build` fail; import assets from modules instead.
 [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) is not supported. Raise exceptional customisation needs via the [support page].
 
-`onRequest` returns a closed object under SSR: required `site`, plus optional `AppWrapper` (providers only; mounted inside the router as a pathless layout so it may use React Router hooks), `language` (server Document vocab preload only), and JSON `clientContext`.
-`onHydrate` receives `{ context }` only and may return `AppWrapper`.
+`onRequest` returns a closed object under SSR: required `site`, plus optional `language` (server Document vocab preload only) and JSON `clientContext`.
+`onHydrate` receives `{ clientContext }` only and returns nothing.
+Providers come from an optional named `Providers` export on each entry, rendered outside the router with `{ children, site, clientContext }` — not from `onRequest` / `onHydrate` return values.
+Wrapping that needs React Router hooks is the app's own root layout route.
 Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch).
 
 Scaffold a new app with:

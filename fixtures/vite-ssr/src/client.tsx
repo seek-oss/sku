@@ -1,39 +1,27 @@
-import { VocabProvider } from '@vocab/react';
-import type { ReactNode } from 'react';
-import { RouterContextProvider, useLocation } from 'react-router';
-import type { SkuSsrClientGetContext, SkuSsrOnHydrate } from 'sku';
+import { RouterContextProvider } from 'react-router';
+import type {
+  SkuSsrClientGetContext,
+  SkuSsrOnHydrate,
+  SkuSsrProviders,
+} from 'sku';
 
-import { ClientRoutesContext } from './ClientRoutesContext.js';
-import { resolveLanguageFromPathname } from './resolveLanguage.js';
-import { routes } from './routes.js';
 import type { ClientContext } from './types.js';
 import { SkuUserIdReactContext, userIdContext } from './userIdContext.js';
 
-export const onHydrate: SkuSsrOnHydrate = ({ context }) => {
-  const clientContext = context as ClientContext;
-
-  // We don't currently do anything with the context in this fixture, so just confirm it exists
-  if (!clientContext.fromServer) {
+export const onHydrate: SkuSsrOnHydrate = ({ clientContext }) => {
+  if (!(clientContext as ClientContext).fromServer) {
     throw new Error('Missing client context');
   }
-
-  const userId = clientContext.userId ?? null;
-
-  return {
-    AppWrapper: ({ children }: { children: ReactNode }) => {
-      const { pathname } = useLocation();
-      return (
-        <ClientRoutesContext.Provider value={routes}>
-          <SkuUserIdReactContext.Provider value={userId}>
-            <VocabProvider language={resolveLanguageFromPathname(pathname)}>
-              {children}
-            </VocabProvider>
-          </SkuUserIdReactContext.Provider>
-        </ClientRoutesContext.Provider>
-      );
-    },
-  };
 };
+
+export const Providers: SkuSsrProviders<ClientContext> = ({
+  children,
+  clientContext,
+}) => (
+  <SkuUserIdReactContext.Provider value={clientContext?.userId ?? null}>
+    {children}
+  </SkuUserIdReactContext.Provider>
+);
 
 export const getContext: SkuSsrClientGetContext = ({ clientContext }) => {
   const ctx = new RouterContextProvider();

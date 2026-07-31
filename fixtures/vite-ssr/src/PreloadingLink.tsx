@@ -1,24 +1,5 @@
-import { useContext } from 'react';
-import {
-  Link,
-  matchRoutes,
-  useHref,
-  type LinkProps,
-  type RouteObject,
-} from 'react-router';
-
-import { ClientRoutesContext } from './ClientRoutesContext.js';
-
-function preloadLazyMatches(routes: RouteObject[], pathname: string) {
-  const matches = matchRoutes(routes, pathname) ?? [];
-  for (const { route } of matches) {
-    if (typeof route.lazy === 'function') {
-      // Dynamic import is cached by the module graph — navigation's later
-      // lazy() call resolves from cache.
-      route.lazy();
-    }
-  }
-}
+import { Link, type LinkProps } from 'react-router';
+import { usePreloadRoute } from 'sku/ssr';
 
 /**
  * On hover / focus / touch, warms lazy route modules for the destination.
@@ -30,29 +11,21 @@ export function PreloadingLink({
   onTouchStart,
   ...rest
 }: LinkProps) {
-  const routes = useContext(ClientRoutesContext);
-  const href = useHref(to);
-
-  const warm = () => {
-    if (!routes) {
-      return;
-    }
-    preloadLazyMatches(routes, href);
-  };
+  const preload = usePreloadRoute(to);
 
   return (
     <Link
       to={to}
       onFocus={(event) => {
-        warm();
+        preload();
         onFocus?.(event);
       }}
       onMouseEnter={(event) => {
-        warm();
+        preload();
         onMouseEnter?.(event);
       }}
       onTouchStart={(event) => {
-        warm();
+        preload();
         onTouchStart?.(event);
       }}
       {...rest}

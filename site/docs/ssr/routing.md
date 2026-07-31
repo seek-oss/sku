@@ -12,7 +12,9 @@ Exporting `routesBySite` is a hard error — use flat `routes` with optional `si
 
 Lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
 
-For page content, prefer [render-time data loading](./data-loading.md) via `AppWrapper` + Suspense; use loaders when you need waterfalls, document redirects, response headers, or optional dual-entry [`getContext`](./data-loading.md#router-context-getcontext).
+For page content, prefer [render-time data loading](./data-loading.md) via the named [`Providers`](./providers.md) export + Suspense; use loaders when you need waterfalls, document redirects, response headers, or optional dual-entry [`getContext`](./data-loading.md#router-context-getcontext).
+
+Sku never wraps your route tree. Wrapping that needs React Router hooks or loader data is your own **pathless** root layout route — see [Providers](./providers.md#router-aware-wrapping-is-a-route-not-a-provider).
 
 SSR requires **React Router** to be installed within your app.
 
@@ -58,7 +60,8 @@ export const site = 'default' as const;
 
 export const routes: SkuSsrRouteObject[] = [
   {
-    path: '/',
+    // Pathless root layout — your place for router-aware wrapping
+    Component: RootLayout,
     children: [homeRoute],
   },
 ];
@@ -70,7 +73,7 @@ import { site } from './routes.js';
 
 export const onRequest = () => ({
   site,
-  // … AppWrapper, language, clientContext
+  // … language, clientContext
 });
 
 // … middleware
@@ -111,7 +114,7 @@ Multi-site apps often need **different React Router path sets** per site (for ex
 
 **App-owned:** resolve `site` in `onRequest` (from Express `req`, headers, app config, etc.) and declare membership with optional `sites` on routes. When **path shape** differs by site (e.g. `/jobs` vs `/emploi`), keep using factories for those path strings — membership still belongs on the route via `sites`.
 
-**Sku-owned:** filter flat `routes` into a pre-built tree per config site name (omit `sites` ⇒ every site; present ⇒ only listed names; no parent→child inheritance), strip `sites` before React Router, select by `onRequest.site`, serialise `site` for hydrate, and use that same site on the client. Sku does **not** derive site from config [`hosts`](../configuration.md) / `sites[].host` for route-tree selection — those remain local-dev listen / setup-hosts only.
+**Sku-owned:** filter flat `routes` into a pre-built tree per config site name (omit `sites` ⇒ every site; present ⇒ only listed names; no parent→child inheritance), strip `sites` before React Router, create each site's `createStaticHandler` once at init, select by `onRequest.site`, serialise `site` for hydrate, and use that same site on the client. Sku does **not** derive site from config [`hosts`](../configuration.md) / `sites[].host` for route-tree selection — those remain local-dev listen / setup-hosts only.
 
 ```tsx
 // src/routes.tsx
@@ -119,7 +122,7 @@ import type { SkuSsrRouteObject } from 'sku';
 
 export const routes: SkuSsrRouteObject[] = [
   {
-    path: '/',
+    Component: RootLayout,
     children: [
       homeRoute,
       aboutRoute,
@@ -134,7 +137,6 @@ export const routes: SkuSsrRouteObject[] = [
 // src/server.tsx — app owns site resolution
 export const onRequest = ({ req }) => ({
   site: resolveSiteFromRequest(req), // e.g. from Host, header, or middleware state
-  AppWrapper: Providers,
 });
 ```
 
@@ -180,6 +182,43 @@ sku does **not** guess for non-idiomatic shapes (no injection):
 - indirect bindings (`lazy: loadAbout`)
 
 In development, sku warns when a lazy route still has no effective `moduleId` after transform, or when a provided `moduleId` is not found in the client manifest.
+
+## Intent preloading with `usePreloadRoute`
+
+The document `modulepreload` links cover the route that was **matched** for this request. Warming the chunks for the route a user is _about_ to visit is a separate concern, and React Router Data Mode has no `<Link prefetch>` — that is Framework Mode only.
+
+sku exposes `usePreloadRoute` for this, because sku owns the site-filtered route tree the warm-up has to match against:
+
+```tsx
+import { Link, type LinkProps } from 'react-router';
+import { usePreloadRoute } from 'sku/ssr';
+
+export function PreloadingLink({ to, ...rest }: LinkProps) {
+  const preload = usePreloadRoute(to);
+
+  return (
+    <Link
+      to={to}
+      onMouseEnter={preload}
+      onFocus={preload}
+      onTouchStart={preload}
+      {...rest}
+    />
+  );
+}
+```
+
+`usePreloadRoute(to)` resolves `to` with `useHref` at render and returns a zero-argument function. Calling it matches `to` against the current site's tree and invokes `lazy()` for each matched route, in both of React Router's lazy shapes (a function, or an object of per-property lazy functions). The module graph caches those imports, so navigation's own `lazy()` call resolves from cache.
+
+It is fire-and-forget: a failed warm-up never throws or rejects, and the real navigation reports the error instead.
+
+Matching runs against the **site-filtered** tree, so a link to a path that belongs to another site warms nothing. Outside SSR apps — and during server render — no tree is registered and the returned function is a no-op (sku warns in development if you invoke it on the client without one).
+
+The hook lives on the `sku/ssr` subpath so the main `sku` entry never pulls in the optional `react-router` peer for webpack or static Vite apps.
+
+sku does not expose the route tree itself. Owning the match keeps every app from re-implementing the same `matchRoutes` + `lazy()` loop against an easy-to-get-wrong unfiltered tree.
+
+Loader data is not prefetched — only route modules.
 
 ## React Router route `middleware`
 

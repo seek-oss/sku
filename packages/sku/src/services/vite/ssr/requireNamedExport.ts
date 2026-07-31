@@ -68,3 +68,19 @@ export const optionalNamedFunctionExport = <
   const value = (moduleExports as Record<string, unknown>)[name];
   return typeof value === 'function' ? (value as T) : undefined;
 };
+
+/**
+ * Optional Vite SSR entry component export (e.g. dual-entry `Providers`).
+ * Objects are accepted alongside functions so wrapped components
+ * (`memo`, `forwardRef`, …) still mount. Missing → `undefined` (no wrapper).
+ */
+export const optionalNamedComponentExport = <T>(
+  moduleExports: object,
+  name: string,
+): T | undefined => {
+  const value = (moduleExports as Record<string, unknown>)[name];
+  return typeof value === 'function' ||
+    (typeof value === 'object' && value !== null)
+    ? (value as T)
+    : undefined;
+};

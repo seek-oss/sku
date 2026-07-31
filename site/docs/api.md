@@ -47,6 +47,7 @@ module.exports = {
 
 Exports `sku`'s custom eslint config based on [`eslint-config-seek`].
 
+> [!NOTE]
 > Sku configures eslint for you, so you shouldn't need to use this directly
 
 Example:

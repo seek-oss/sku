@@ -5,7 +5,7 @@
 The `@vanilla-extract/css` package is not available out of the box so it needs to be installed.
 
 ```sh
-$ yarn add @vanilla-extract/css
+$ pnpm install @vanilla-extract/css
 ```
 
 Now you can create `.css.ts` files in your project.
@@ -59,4 +59,5 @@ export const MyComponent = () => {
 };
 ```
 
-_**NOTE:** This should only be used when importing CSS dependencies from a third-party package in `node_modules`. If you are writing custom CSS, please see the [Vanilla Extract](#vanilla-extract) section above._
+> [!NOTE]
+> This should only be used when importing CSS dependencies from a third-party package in `node_modules`. If you are writing custom CSS, please see the [Vanilla Extract](#vanilla-extract) section above.

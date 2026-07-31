@@ -140,7 +140,8 @@ Any `node_modules` marked as a `compilePackage` will be compiled through webpack
 
 Since sku injects its own code into your bundle in development mode, it's important for polyfills that modify the global environment to be loaded before all other code. To address this, the `polyfills` option allows you to provide an array of modules to import before any other code is executed.
 
-_**NOTE:** Polyfills are only loaded in a browser context. This feature can't be used to modify the global environment in Node._
+> [!NOTE]
+> Polyfills are only loaded in a browser context. This feature can't be used to modify the global environment in Node.
 
 ```ts
 export default {
@@ -162,6 +163,7 @@ This cache stores generated webpack modules and chunks.
 It is only emitted during local development.
 Its purpose is to reduce the time it takes to start the local development server.
 
+> [!NOTE]
 > This cache is stored in `node_modules/.cache/webpack` and can be safely deleted at any time.
 
 [webpack filesystem cache]: https://webpack.js.org/configuration/cache/#cachetype
@@ -174,21 +176,22 @@ Its purpose is to speed up transpilation of TypeScript/JavaScript code.
 This can benefit both local development (when the webpack cache is invalidated) and production builds.
 For applications with a large number of source files and/or dependencies, this cache can significantly reduce build times.
 
+> [!NOTE]
 > This cache is stored in `node_modules/.cache/babel-loader` and can be safely deleted at any time.
 
 [`babel-loader` cache]: https://github.com/babel/babel-loader?tab=readme-ov-file#options
 
 ### Utilizing the `babel-loader` cache in CI
 
-#### Buildkite
+To utilize the `babel-loader` cache in CI, cache the `node_modules/.cache/babel-loader` directory using your CI provider's cache mechanism — for example the Buildkite [cache plugin] or the GitHub Actions [cache action].
 
-To utilize the `babel-loader` cache in Buildkite, you can use the [cache plugin] to cache the `node_modules/.cache/babel-loader` directory.
-
-> The example below stores the cache in an S3 bucket.
+> [!TIP]
+> The Buildkite example below stores the cache in an S3 bucket.
 > It is recommended to add a [lifecycle configuration] to your bucket in order to automatically delete old cache files.
 
+::: code-group
+
 ```yaml
-# .buildkite/pipeline.yaml
 steps:
   - label: 'Build sku app'
     command: 'pnpm exec sku build'
@@ -207,15 +210,7 @@ steps:
           compression: tgz
 ```
 
-[cache plugin]: https://github.com/buildkite-plugins/cache-buildkite-plugin
-[lifecycle configuration]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfiguration.html
-
-#### GitHub actions
-
-To utilize the `babel-loader` cache in GitHub actions, you can use the [cache action] to cache the `node_modules/.cache/babel-loader` directory.
-
 ```yaml
-# .github/workflows/deploy-site.yaml
 # Add this step before the step that runs `sku build`
 - name: Cache babel-loader
   id: cache-babel-loader
@@ -225,6 +220,10 @@ To utilize the `babel-loader` cache in GitHub actions, you can use the [cache ac
     key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 ```
 
+:::
+
+[cache plugin]: https://github.com/buildkite-plugins/cache-buildkite-plugin
+[lifecycle configuration]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-lifecycleconfiguration.html
 [cache action]: https://github.com/actions/cache
 
 ## Bundle analysis
@@ -234,6 +233,7 @@ A report is generated in the `/report` directory when `sku build` is run.
 
 ## Pre-commit hook
 
+> [!NOTE]
 > The `sku pre-commit` command was removed in v16. It saw very little use and bundled `lint-staged` (and its many transitive dependencies) into every `sku` install. Setting this up yourself is straightforward and gives you full control over which commands run before each commit.
 
 To speed up the feedback loop on linting and formatting errors, you can run `sku format` and `sku lint` against staged files before they're committed. We recommend pairing [nano-staged] (a tiny, zero-dependency alternative to `lint-staged`) with [husky].
@@ -275,9 +275,11 @@ For more details, see the [nano-staged] and [husky] documentation.
 By default, sku will remove assertions in your production builds with [`babel-plugin-unassert`].
 This allows you to perform more expensive checks during development without worrying about the perfomance impacts on users.
 
-For example, given the following code:
+For example:
 
-```tsx
+::: code-group
+
+```tsx [Source]
 import React from 'react';
 import assert from 'assert';
 
@@ -288,13 +290,13 @@ export const Rating = ({ rating }: { rating: number }) => {
 };
 ```
 
-In production, sku would transform the code above into code roughly equivalent to:
-
-```js
+```js [Production]
 import React from 'react';
 
 export const Rating = ({ rating }) => <div>...</div>;
 ```
+
+:::
 
 [`babel-plugin-unassert`]: https://github.com/unassert-js/babel-plugin-unassert
 
@@ -324,9 +326,11 @@ During the `build` and `build-ssr` commands, `process.env.NODE_ENV` is replaced 
 
 Combined with dead code elimination during minification, this allows you to write environment-specific code that is removed in production.
 
-For example, consider the following code:
+For example:
 
-```js
+::: code-group
+
+```js [Source]
 import someDevOnlyFunction from './some-dev-only-function';
 import someProdOnlyFunction from './some-prod-only-function';
 
@@ -339,9 +343,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 ```
 
-In development this code would be transformed into:
-
-```js
+```js [Development]
 import someDevOnlyFunction from './some-dev-only-function';
 import someProdOnlyFunction from './some-prod-only-function';
 
@@ -354,17 +356,17 @@ if ('development' === 'production') {
 }
 ```
 
-Note that both `if` statements are still present in the code, but clearly only `someDevOnlyFunction` will be called.
-
-However, in production, the code would be transformed into:
-
-```js
+```js [Production]
 import someProdOnlyFunction from './some-prod-only-function';
 
 someProdOnlyFunction();
 ```
 
-The first `if` block is removed entirely as its condition is always `false`.
+:::
+
+In development, both `if` statements are still present, but clearly only `someDevOnlyFunction` will be called.
+
+In production, the first `if` block is removed entirely as its condition is always `false`.
 This allows the `someDevOnlyFunction` import to be removed as well.
 The second `if` block is removed, however the contents of the block are kept as its condition is always `true`.
 

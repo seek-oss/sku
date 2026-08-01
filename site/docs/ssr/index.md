@@ -45,8 +45,8 @@ pnpm start
 
 ## Configuring an SSR app
 
-The `vite-ssr` template scaffolds `bundler: 'vite'`, `buildType: 'ssr'`, non-empty config [`sites`](../configuration.md#sites), a relative `publicPath`, [`routesEntry`](../configuration.md#routesentry) with `routes`, and the required request-entry named exports (`onRequest` with a configured `site`, `middleware`, `onHydrate`) at the default paths.
-It also exports a named [`Providers`](./providers.md) from each request entry for app-wide dependencies, and scaffolds a pathless root layout route in `routes.tsx` for router-aware wrapping.
+The `vite-ssr` template scaffolds `bundler: 'vite'`, `buildType: 'ssr'`, non-empty config [`sites`](../configuration.md#sites), a relative `publicPath`, [`routesEntry`](../configuration.md#routesentry) with `routes`, and realistic default-exported request-entry objects (`defineServerEntry` / `defineClientEntry`, `middleware`, optional `onHydrate`; single-site omits `getSite`) at the default paths.
+It also scaffolds [`createSkuSsrContexts`](./providers.md) and a pathless root layout route in `routes.tsx` for isomorphic provider mounts.
 Interactive create also offers **SSR** as a distinct choice from **Static**.
 
 See [Configuration](../configuration.md) for all options.

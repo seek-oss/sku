@@ -1,15 +1,13 @@
-import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
+import { defineServerEntry } from 'sku/ssr';
 
 import { resolveLanguage } from './resolveLanguage.js';
 
-// No `Providers` export — language wrapping is the app's root layout route.
-export const onRequest: SkuSsrOnRequest = ({ req }) => {
-  const url = new URL(req.originalUrl, 'http://localhost');
+// Single-site: omit `getSite` — sku uses the sole config site name.
+const server = defineServerEntry({
+  getLanguage({ req }) {
+    const url = new URL(req.originalUrl, 'http://localhost');
+    return resolveLanguage(url.pathname, url.search);
+  },
+});
 
-  return {
-    site: 'default',
-    language: resolveLanguage(url.pathname, url.search),
-  };
-};
-
-export const middleware: SkuSsrMiddleware = [];
+export default server;

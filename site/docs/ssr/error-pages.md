@@ -49,4 +49,4 @@ export const routes: SkuSsrRouteObject[] = [
 ];
 ```
 
-A consumer root `ErrorBoundary` does **not** catch errors thrown while rendering `Providers` — those render above the router entirely. See [Providers](./providers.md).
+A consumer root `ErrorBoundary` does **not** catch errors thrown while rendering above the router (including `SkuSsrProvider`). See [Providers](./providers.md).

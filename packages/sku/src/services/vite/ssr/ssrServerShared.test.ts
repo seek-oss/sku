@@ -259,7 +259,7 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
     expect(res.status).toHaveBeenCalledWith(200);
   });
 
-  it('threads Express req into render (onRequest receives req only)', async () => {
+  it('threads Express req into render (getters receive req only)', async () => {
     const render = vi.fn<RenderFunction>(async () => ({
       pipe: vi.fn(),
       abort: vi.fn(),

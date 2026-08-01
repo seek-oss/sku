@@ -1,12 +1,16 @@
-import type { SkuSsrMiddleware, SkuSsrOnRequest } from 'sku';
+import { defineServerEntry } from 'sku/ssr';
 
-import { site } from './routes';
-
-export const onRequest: SkuSsrOnRequest = () => ({
-  site,
+/** Realistic production middleware — health check before HTML render. */
+const server = defineServerEntry({
+  middleware: [
+    (req, res, next) => {
+      if (req.path === '/api/health') {
+        res.status(200).type('text/plain').send('ok');
+        return;
+      }
+      next();
+    },
+  ],
 });
 
-// Rendered outside the router, between the Document and the router provider.
-export { Providers } from './App/Providers';
-
-export const middleware: SkuSsrMiddleware = [];
+export default server;

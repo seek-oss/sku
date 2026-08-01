@@ -73,7 +73,7 @@ The client entry point to the app. Path may be `.tsx`, `.ts`, or `.js`.
 
 **Static / Webpack:** the file that executes your browser code. Each `route` can also specify a client entry; if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
 
-**SSR:** required client entry exporting named `onHydrate` (and optional `getContext`). Routes live on [`routesEntry`](#routesentry), not here. Missing file or named export is a hard error. See [Request entries](./ssr/entries.md).
+**SSR:** required client entry exporting named `onHydrate` (and optional `getRouterContext`). Routes live on [`routesEntry`](#routesentry), not here. Missing file or named export is a hard error. See [Request entries](./ssr/entries.md).
 
 ## compilePackages
 
@@ -564,7 +564,8 @@ Default: `./src/server.tsx`
 
 Path may be `.tsx`, `.ts`, or `.js`.
 
-Required named exports: `onRequest` (must return `site`), `middleware`. Optional: `getContext`.
+Optional named exports: sync getters (`getSite` / `getLanguage` / `getClientContext`), `middleware`, `Providers`, `getRouterContext`.
+`getSite` is required only when config [`sites`](#sites) has more than one entry.
 Routes live on [`routesEntry`](#routesentry), not here.
 
 See [Request entries](./ssr/entries.md).
@@ -579,7 +580,7 @@ Path may be `.tsx`, `.ts`, or `.js`.
 
 Module that exports named flat `routes` (`SkuSsrRouteObject[]`) for **both** the server and client graphs.
 Optional `sites?: string[]` on a route declares multi-site membership (omit ⇒ every config site).
-Sku pre-builds per-site trees and selects by `onRequest.site`.
+Sku pre-builds per-site trees and selects by `getSite` (required when >1 site; sole config site when omitted on single-site).
 
 Do **not** overload config [`routes`](#routes) (static prerender path lists) for this — that remains a separate concept.
 
@@ -622,7 +623,7 @@ Any listed language must exist in the [top level languages attribute](#languages
 
 Vite SSR requires a non-empty `sites` array (≥1 site name). Empty `sites` is a hard error.
 `sites[].host` / top-level [`hosts`](#hosts) remain local-dev listen / setup-hosts only — they do **not** select the Vite SSR route tree.
-Vite SSR uses config **site names** to pre-build trees from [`routesEntry`](#routesentry) flat `routes` (optional `sites` membership); apps return `onRequest.site` to select the tree (must be a configured site name).
+Vite SSR uses config **site names** to pre-build trees from [`routesEntry`](#routesentry) flat `routes` (optional `sites` membership); apps export sync `getSite({ req })` to select the tree when config has more than one site (sole config site when omitted on single-site; must be a configured site name).
 See [Routing → Multi-site](./ssr/routing.md#multi-site-path-sets).
 
 ## skipPackageCompatibilityCompilation

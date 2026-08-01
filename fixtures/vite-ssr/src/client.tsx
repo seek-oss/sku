@@ -1,32 +1,22 @@
 import { RouterContextProvider } from 'react-router';
-import type {
-  SkuSsrClientGetContext,
-  SkuSsrOnHydrate,
-  SkuSsrProviders,
-} from 'sku';
+import { defineClientEntry as defineClientEntryFromServer } from 'sku/ssr';
 
-import type { ClientContext } from './types.js';
-import { SkuUserIdReactContext, userIdContext } from './userIdContext.js';
+import type server from './server.js';
+import { userIdContext } from './userIdContext.js';
 
-export const onHydrate: SkuSsrOnHydrate = ({ clientContext }) => {
-  if (!(clientContext as ClientContext).fromServer) {
-    throw new Error('Missing client context');
-  }
-};
+const defineClientEntry = defineClientEntryFromServer<typeof server>();
 
-export const Providers: SkuSsrProviders<ClientContext> = ({
-  children,
-  clientContext,
-}) => (
-  <SkuUserIdReactContext.Provider value={clientContext?.userId ?? null}>
-    {children}
-  </SkuUserIdReactContext.Provider>
-);
+const client = defineClientEntry({
+  onHydrate({ clientContext }) {
+    if (!clientContext?.fromServer) {
+      throw new Error('Missing client context');
+    }
+  },
+  getRouterContext({ clientContext }) {
+    const ctx = new RouterContextProvider();
+    ctx.set(userIdContext, clientContext?.userId ?? null);
+    return ctx;
+  },
+});
 
-export const getContext: SkuSsrClientGetContext = ({ clientContext }) => {
-  const ctx = new RouterContextProvider();
-  // Re-derive from browser-visible seed (clientContext) — no Express on client navs.
-  const userId = (clientContext as ClientContext | undefined)?.userId ?? null;
-  ctx.set(userIdContext, userId);
-  return ctx;
-};
+export default client;

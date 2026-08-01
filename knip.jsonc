@@ -188,8 +188,17 @@
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },
     "fixtures/vite-ssr": {
-      "entry": ["src/server.tsx", "src/client.tsx", "sku.config.*"],
-      "ignoreDependencies": ["@vocab/core"],
+      "entry": [
+        "src/server.tsx",
+        "src/client.tsx",
+        "src/routes.tsx",
+        "sku.config.*",
+      ],
+      "ignoreDependencies": [
+        "@vocab/core",
+        // Needed so `declare module 'express-serve-static-core'` resolves under pnpm
+        "@types/express-serve-static-core",
+      ],
     },
   },
 }

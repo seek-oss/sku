@@ -9,7 +9,8 @@ Omitting `buildType` or using `static` MUST leave static / existing webpack-SSR 
 #### Scenario: buildType enables Vite SSR
 
 - **WHEN** config sets `bundler: 'vite'` and `buildType: 'ssr'`
-- **AND** required server and client entries export named `routes`
+- **AND** `routesEntry` exports named `routes`
+- **AND** `serverEntry` / `clientEntry` each default-export an entry object
 - **THEN** `sku start` and `sku build` treat the project as a Vite SSR app
 
 #### Scenario: static remains static
@@ -99,8 +100,8 @@ Vite SSR MUST require a non-empty config `sites` array (≥1 site name). Empty `
 
 **Resolve `site`:**
 
-- One configured site ⇒ when `getSite` is omitted, sku MUST use that sole config site name; when `getSite` is exported, sku MUST call it and validate the return.
-- Multiple configured sites ⇒ missing `getSite` export MUST hard-error at init (naming the export; same class as missing `routes` on `routesEntry`).
+- One configured site ⇒ when `getSite` is omitted, sku MUST use that sole config site name; when `getSite` is present on the server entry object, sku MUST call it and validate the return.
+- Multiple configured sites ⇒ missing `getSite` property MUST hard-error at init (naming the property; same class as missing `routes` on `routesEntry`).
 - Non-string `site` from `getSite`, or a `site` that is not a config site name / has no pre-built tree, MUST fail closed per request (hard error).
 
 Sku MUST serialize that `site` into the hydrate bootstrap and select the same pre-built tree for client `createBrowserRouter`.
@@ -160,7 +161,7 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Vite SSR `R
 
 - **WHEN** config defines more than one site
 - **AND** the server entry omits `getSite`
-- **THEN** sku fails with a hard error at init naming the `getSite` export
+- **THEN** sku fails with a hard error at init naming the `getSite` property
 
 #### Scenario: Non-string getSite fails closed
 
@@ -186,67 +187,92 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Vite SSR `R
 
 ### Requirement: Optional server and client request exports
 
-Server entry MAY export sync named getters `getSite`, `getLanguage`, and `getClientContext`; optional `middleware`, `Providers`, and `getContext`.
+`serverEntry` / `clientEntry` MUST each **`export default`** one object.
+Sku MUST read that default export and call optional properties on it.
 
-Client entry MAY export optional `onHydrate`, `Providers`, and `getContext`.
+Sku MUST export `defineServerEntry` / `defineClientEntry` from `sku/ssr` as zero-runtime identity helpers that infer types from getter returns and type later sibling args (`NoInfer` on input positions).
+`defineServerEntry` MUST infer `Site` from `getSite`, `Language` from `getLanguage`, `ClientContext` from `getClientContext`, and `ReactContext` from `getReactContext`, and MUST type later sibling `site` args as that `Site`.
+`defineClientEntry` MUST accept an optional `ServerEntry` type argument (`defineClientEntry<typeof server>`).
+When that argument is provided, it MUST extract `Site` from the server entry’s `getSite` return (`string` when omitted) and `ClientContext` from `getClientContext` (`undefined` when omitted), reuse the same extractors as `createSkuSsrContexts`, and MUST type client sibling `site` / `clientContext` args (including `onHydrate`) from those extracted types.
+`defineClientEntry` MUST still infer `ReactContext` from the client entry’s own `getReactContext` return.
+When the `ServerEntry` type argument is omitted, `ClientContext` MUST be `undefined` and client `site` args MUST be `string`.
+Sku MUST also export structural types `SkuSsrServerEntry` / `SkuSsrClientEntry` (the shapes behind those helpers).
+
+Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`; optional `middleware` and `getRouterContext`.
+
+Client entry object MAY include optional `onHydrate`, `getReactContext`, and `getRouterContext`.
 
 `getSite` is required **only** when config `sites` has more than one entry (init hard-error when missing — see the site-selection requirement).
-All other listed exports are optional.
+All other listed properties are optional.
 
 Sku MUST NOT specially gate on entry file existence; a missing file fails via normal module resolution.
 
-Each getter MUST receive `{ req }` where `req` is the Express request after consumer middleware.
-Getters MUST be synchronous.
-Sku MUST NOT pass Fetch `Request` or `res` into getters (Fetch stays on `query()` and optional server `getContext`).
+Sku MUST call getters in this order before `query()`: `getSite` (when present or required) → `getLanguage` → `getClientContext` → `getReactContext` → optional server `getRouterContext`.
 
-Sku MUST call `getSite` (when present or required), `getLanguage`, and `getClientContext` **before** `query()` so `site` / `clientContext` are available to `Providers` and the hydrate bootstrap.
+Later getters MUST receive already-resolved sibling values so apps can project without re-deriving:
+
+- `getSite` / `getLanguage` / `getClientContext` receive `{ req }` only (Express after consumer middleware)
+- Server `getReactContext` receives `{ req, site, clientContext }`
+- Client `getReactContext` receives `{ site, clientContext }` from the hydrate bootstrap
+- Server `getRouterContext` receives `{ request, req, site, clientContext, reactContext }`
+- Client `getRouterContext` receives `{ site, clientContext, reactContext }`
+
+Getters other than optional `getRouterContext` MUST be synchronous.
+Sku MUST NOT pass `res` into getters or `getRouterContext`.
+Sku MUST NOT pass Fetch `Request` into `getSite` / `getLanguage` / `getClientContext` (Fetch stays on `query()` and optional server `getRouterContext`).
 
 When `getLanguage` is omitted or returns `undefined`, sku MUST NOT register a vocab language chunk.
 When `getClientContext` is omitted, `clientContext` is `undefined`.
+When `getReactContext` is omitted, `reactContext` is `undefined`.
 Sku MUST NOT forward `language` to the client.
+Sku MUST NOT serialise `reactContext` into the hydrate bootstrap.
 
-When the client entry exports `onHydrate`, sku MUST invoke it with `{ clientContext }` only — the same value from `getClientContext` that sku passes to `Providers`.
+When the client entry includes `onHydrate`, sku MUST invoke it with `{ clientContext }` only — the same value from `getClientContext`.
 Omitting `onHydrate` MUST mean no hydrate side effects (not an error).
 
 Omitting `middleware` MUST mean no consumer middleware layer (not an error).
 
-Server and client entries MAY optionally export `Providers` as a **separate named export**.
+Sku MUST always render `SkuSsrProvider` outside the router — `Document` → `SkuSsrProvider` → router — with `site`, `clientContext`, and `reactContext` for that document.
 
-`Providers` MUST be rendered **outside** the router — `Document` → `Providers` → router — so it MUST NOT be mounted as a route and MUST NOT be able to use React Router hooks.
+Sku MUST export `createSkuSsrContexts<typeof server, typeof client>()` from `sku/ssr` so apps can obtain typed `useSite` / `useClientContext` / `useReactContext` bound to that provider.
+`createSkuSsrContexts` MUST extract `Site` from the server entry’s `getSite` return (`string` when `getSite` is omitted), `ClientContext` from `getClientContext`, and `ReactContext` from both entries’ `getReactContext` returns (union when they differ).
+`useSite()` MUST return that `Site` type.
+`createSkuSsrContexts` MUST NOT extract a language React hook from `getLanguage` in this change.
+Apps MUST NOT be required to declare hand-written `ClientContext` / `ReactContext` / site aliases.
+`createSkuSsrContexts` MUST NOT ship per-property `defineGet*` helpers.
 
-Sku MUST pass `site` and the request `clientContext` to `Providers` as props, and MUST pass the same values on server and client for a given document.
+Sku MUST NOT support an app-authored dual-entry `Providers` / `SkuSsrProvidersProps` export in this change.
 
-Server and client `Providers` MAY differ (env-scoped dependencies), and either MAY be omitted; omitting one MUST leave sku rendering the router directly.
+Router-aware wrapping and isomorphic provider mounts (e.g. Apollo reading `useReactContext()`) are **not** a sku concern: apps express them as their own root layout route in `routesEntry`.
 
-Sku MUST warn in development when an entry’s `Providers` renders hydration-relevant markup (providers are expected to be context-only).
+Request-entry getters / `onHydrate` MUST NOT return a provider component.
 
-Router-aware wrapping is **not** a sku concern: apps express it as their own root layout route in `routesEntry`.
+When the server entry includes `getRouterContext`, sku MUST call it before `query()` with the sibling args above and pass the returned `RouterContextProvider` as `requestContext` to `query()`.
 
-Request-entry exports MUST NOT return a provider component from getters or `onHydrate`.
+When the client entry includes `getRouterContext`, sku MUST map it into `createBrowserRouter({ getContext })`, wrapping RR’s zero-arg API to pass `{ site, clientContext, reactContext }`.
 
-Server and client entries MAY optionally export `getContext` as a **separate named export**.
-
-When the server entry exports `getContext`, sku MUST call it with `{ request, req }` before `query()` and pass the returned `RouterContextProvider` as `requestContext` to `query()`.
-
-When the client entry exports `getContext`, sku MUST pass it to `createBrowserRouter({ getContext })` (wrapping RR’s zero-arg API if sku injects `clientContext`).
-
-Omitting either `getContext` MUST preserve today’s empty/default context behaviour.
+Omitting either `getRouterContext` MUST preserve today’s empty/default context behaviour.
 
 Sku MUST NOT make Express `req` the loader `request` argument (`query()` continues to use Fetch `Request` only).
 
-Sku MUST NOT pass `res` into getters or `getContext`.
+#### Scenario: Default export is the request-entry contract
 
-#### Scenario: Getters run before query
+- **WHEN** sku loads `serverEntry` or `clientEntry`
+- **THEN** it uses the module’s default export as the entry object
+- **AND** calls optional getter / middleware / hydrate properties on that object
+
+#### Scenario: Getters run before query with sibling projection
 
 - **WHEN** a Vite SSR app handles a document request
-- **THEN** sku invokes present getters with Express `req` only (no Fetch `Request`) before `query()`
-- **AND** uses their values for site selection, vocab preload, `Providers` props, and the hydrate bootstrap
+- **THEN** sku invokes present getters in order before `query()`
+- **AND** later getters receive already-resolved `site` / `clientContext` / `reactContext`
+- **AND** sku uses those values for site selection, vocab preload, `SkuSsrProvider`, and the hydrate bootstrap (`clientContext` + `site` only)
 
 #### Scenario: Getters can read middleware-attached Express state
 
 - **WHEN** consumer Express middleware attaches fields on `req` (e.g. `req.user`, `req.log`)
 - **AND** getters run for that document request
-- **THEN** getters can read those fields from `req` to build `site` / `language` / `clientContext`
+- **THEN** getters that receive `req` can read those fields to build `site` / `language` / `clientContext` / `reactContext`
 
 #### Scenario: Omitting middleware is not an error
 
@@ -261,51 +287,88 @@ Sku MUST NOT pass `res` into getters or `getContext`.
 
 #### Scenario: Optional onHydrate receives clientContext only
 
-- **WHEN** the client entry exports `onHydrate`
-- **THEN** sku invokes it with deserialized `clientContext` only (no `language`)
+- **WHEN** the client entry includes `onHydrate`
+- **THEN** sku invokes it with deserialized `clientContext` only (no `language`, no `reactContext`)
 
-#### Scenario: Optional server getContext seeds query requestContext
+#### Scenario: Optional getReactContext seeds SkuSsrProvider
 
-- **WHEN** the server entry exports `getContext`
+- **WHEN** an entry includes `getReactContext`
+- **THEN** sku calls it with the sibling args for that environment
+- **AND** passes the result to `SkuSsrProvider` as `reactContext`
+- **AND** does not serialise it into the hydrate bootstrap
+
+#### Scenario: Optional server getRouterContext seeds query requestContext
+
+- **WHEN** the server entry includes `getRouterContext`
 - **AND** a document request is handled
-- **THEN** sku calls server `getContext({ request, req })` before `query()`
+- **THEN** sku calls server `getRouterContext` with `{ request, req, site, clientContext, reactContext }` before `query()`
 - **AND** passes the result as `requestContext` to `query()`
 
-#### Scenario: Optional client getContext seeds createBrowserRouter
+#### Scenario: Optional client getRouterContext seeds createBrowserRouter
 
-- **WHEN** the client entry exports `getContext`
+- **WHEN** the client entry includes `getRouterContext`
 - **AND** the browser router is created
-- **THEN** sku passes that function to `createBrowserRouter({ getContext })`
+- **THEN** sku maps that function into `createBrowserRouter({ getContext })`
+- **AND** each call receives `{ site, clientContext, reactContext }`
 
-#### Scenario: Omitting getContext keeps default behaviour
+#### Scenario: Omitting getRouterContext keeps default behaviour
 
-- **WHEN** an entry omits `getContext`
+- **WHEN** an entry omits `getRouterContext`
 - **THEN** sku does not require it
 - **AND** React Router uses today’s empty/default context behaviour
 
-#### Scenario: Providers render outside the router
+#### Scenario: SkuSsrProvider always wraps the router
 
-- **WHEN** the server or client entry exports named `Providers`
-- **THEN** sku renders it between `Document` and the router provider
+- **WHEN** sku renders a Vite SSR document (server or client)
+- **THEN** it renders `SkuSsrProvider` between `Document` and the router provider
 - **AND** the route tree is unchanged
+- **AND** apps can read `site` / `clientContext` / `reactContext` via `createSkuSsrContexts` hooks
 
-#### Scenario: Providers receive request values as props
+#### Scenario: Omitting getClientContext and getReactContext is not an error
 
-- **WHEN** sku renders an entry’s `Providers` for a document
-- **THEN** it passes `site` and that request’s `clientContext`
-- **AND** the client receives the same values at hydrate
-
-#### Scenario: Omitting Providers renders the router directly
-
-- **WHEN** an entry omits `Providers`
-- **THEN** sku does not require it
-- **AND** renders the router without a wrapper
+- **WHEN** an entry omits `getClientContext` and/or `getReactContext`
+- **THEN** sku does not require them
+- **AND** the corresponding provider values are `undefined`
 
 #### Scenario: Router-aware wrapping is an app route
 
-- **WHEN** an app needs wrapping that uses React Router hooks or loader data
+- **WHEN** an app needs wrapping that uses React Router hooks, loader data, or isomorphic provider mounts from `useReactContext`
 - **THEN** it declares its own root layout route in `routesEntry`
-- **AND** sku provides no API for that case
+- **AND** sku provides no dual-entry component export for that case
+
+#### Scenario: Entry type params type sibling getter args
+
+- **WHEN** an app wraps its server default export in `defineServerEntry`
+- **THEN** later server getters’ sibling args are typed from earlier getters’ return types
+- **AND** `createSkuSsrContexts<typeof server, typeof client>()` exposes matching hook return types without hand-written context aliases
+
+#### Scenario: defineClientEntry types from ServerEntry
+
+- **WHEN** an app wraps its client default export in `defineClientEntry<typeof server>`
+- **AND** the server entry’s `getClientContext` returns a narrowed shape (e.g. `{ fromServer: true; userId: string | null }`)
+- **AND** `getSite` returns a narrowed site union (e.g. `'au' | 'nz'`)
+- **THEN** `onHydrate` / client `getReactContext` / client `getRouterContext` receive `clientContext` typed as that shape
+- **AND** client sibling `site` args are typed as that site union
+- **AND** client `ReactContext` is still inferred from the client’s own `getReactContext` return
+
+#### Scenario: Omitting ServerEntry on defineClientEntry
+
+- **WHEN** an app calls `defineClientEntry` without a `ServerEntry` type argument
+- **THEN** `clientContext` args are typed as `undefined`
+- **AND** client `site` args are typed as `string`
+
+#### Scenario: useSite typed from getSite return
+
+- **WHEN** `getSite` returns a narrowed site union (e.g. `'au' | 'nz'`) without a widening `SkuSsrGetSite` annotation
+- **AND** the app uses `createSkuSsrContexts<typeof server, typeof client>()`
+- **THEN** `useSite()` is typed as that union
+- **AND** later server sibling getters receive `site` typed as that union
+- **AND** `defineClientEntry<typeof server>` client sibling `site` args are typed as that union
+
+#### Scenario: Omitting getSite leaves useSite as string
+
+- **WHEN** the server entry omits `getSite` (single-site)
+- **THEN** `useSite()` is typed as `string`
 
 ### Requirement: Full-document streaming and document hydration
 
@@ -351,7 +414,7 @@ Sku MUST NOT ship a dependency on, or configuration for, any specific data-trans
 
 #### Scenario: No-op off the SSR path
 
-- **WHEN** `useInsertHtml` is called in the browser, or while sku probes an entry's `Providers` for markup in development
+- **WHEN** `useInsertHtml` is called in the browser
 - **THEN** the returned function does nothing and does not throw
 
 #### Scenario: Injection survives waitForAll
@@ -361,7 +424,7 @@ Sku MUST NOT ship a dependency on, or configuration for, any specific data-trans
 
 ### Requirement: Apollo streaming hydration is proven by a fixture
 
-A fixture MUST demonstrate Apollo Client streaming hydration on Vite SSR, using an app-owned transport built on `useInsertHtml` and mounted as dual-entry `Providers`.
+A fixture MUST demonstrate Apollo Client streaming hydration on Vite SSR, using an app-owned transport built on `useInsertHtml`, dual-entry `getReactContext` for `makeClient` / server `extraScriptProps`, and an isomorphic Apollo provider mounted in the app’s root layout via `useReactContext()`.
 
 #### Scenario: Server-run queries hydrate from the transported cache
 
@@ -373,11 +436,6 @@ A fixture MUST demonstrate Apollo Client streaming hydration on Vite SSR, using 
 
 - **WHEN** the app issues a new query after hydration (for example on client navigation)
 - **THEN** that query fetches from the GraphQL endpoint normally
-
-#### Scenario: Transport provider renders no markup
-
-- **WHEN** sku probes the fixture's `Providers` in development
-- **THEN** no hydration-relevant-markup warning is emitted
 
 ### Requirement: Vite SSR client loads config polyfills
 
@@ -523,13 +581,13 @@ Sku MUST omit `Error.stack` from production hydration error payloads.
 
 ### Requirement: Server-entry middleware runs before HTML render
 
-When the server entry exports Express/Connect `middleware`, sku MUST mount it before the HTML render path in start and production.
+When the server entry includes Express/Connect `middleware`, sku MUST mount it before the HTML render path in start and production.
 
 Omitting `middleware` MUST NOT be an error.
 
 #### Scenario: Server-entry middleware before HTML
 
-- **WHEN** the server entry exports `middleware`
+- **WHEN** the server entry includes `middleware`
 - **THEN** it handles matching requests before sku streams HTML
 
 #### Scenario: Omitting server-entry middleware
@@ -794,7 +852,7 @@ Production remains HTTP.
 
 ### Requirement: Teams can scaffold a Vite SSR app via create
 
-`@sku-lib/create` MUST offer a `vite-ssr` template with non-empty config `sites` (typically one site), `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout route (optional route-level `sites` only when membership differs), and realistic request-entry exports (`middleware`, `Providers`, `onHydrate` — no `routes` re-export).
+`@sku-lib/create` MUST offer a `vite-ssr` template with non-empty config `sites` (typically one site), `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout route (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuSsrContexts<typeof server, typeof client>` wiring, and realistic default-exported request-entry objects (`middleware`, optional context getters, `onHydrate` — no `routes` re-export, no `Providers`).
 
 A single-site template MUST omit `getSite` (sku uses the sole config site name).
 Multi-site examples MUST export `getSite`.
@@ -807,8 +865,9 @@ The static `vite` template MUST remain unchanged.
 
 - **WHEN** a user runs `@sku-lib/create --template vite-ssr`
 - **THEN** the project is Vite SSR with non-empty config `sites` and `routesEntry` exporting flat `routes`
-- **AND** the server entry exports `middleware` and `Providers`
-- **AND** the client entry exports `onHydrate` and `Providers`
+- **AND** the server entry exports `middleware` (and may export context getters)
+- **AND** the client entry exports `onHydrate` (and may export context getters)
+- **AND** the template wires `createSkuSsrContexts` and has no `Providers` export
 - **AND** a single-site template omits `getSite`
 - **AND** request entries do not re-export `routes`
 - **AND** lazy page modules export named `Component`
@@ -916,13 +975,15 @@ Sku MUST NOT add a runtime experimental gate.
 
 ### Requirement: Product and Migrating docs cover Vite SSR topics
 
-Vite SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole config site when omitted on single-site), sync named getters (`getSite` / `getLanguage` / `getClientContext`), optional `middleware` / `onHydrate`, named `Providers` vs the app-owned root layout route, middleware layers, CSP, response headers, data-loading hierarchy, and optional dual-entry `getContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
+Vite SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole config site when omitted on single-site), default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) and sibling projection, always-on `SkuSsrProvider` + `createSkuSsrContexts<typeof server, typeof client>()`, optional `middleware` / `onHydrate`, the three value channels vs the app-owned root layout route, middleware layers, CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
+
+Docs MUST diagram the three value channels with a Markdown table (and MAY use a nested list). Docs MUST NOT require Mermaid or a VitePress Mermaid plugin for this coverage.
 
 Migrating docs MUST also cover:
 
 - named `Component` (not default export) for lazy routes
 - `routesEntry` + flat `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole config site when omitted on single-site)
-- named sync getters (`getSite` / `getLanguage` / `getClientContext`) instead of an `onRequest` return bag; optional `middleware` / `onHydrate`
+- default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` instead of an `onRequest` value return bag; optional `middleware` / `onHydrate`
 - multi-site membership via `sites` on routes (not `routesBySite` maps, dual-entry `routes` re-exports, optional language path params, union tree + allowlist, or sku host matching as the product story)
 - webpack dual-port (`port` + `serverPort`) vs Vite SSR single `port` (`serverPort` rejected; production still honours `PORT`)
 - production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
@@ -934,21 +995,19 @@ Migrating docs MUST also cover:
 - moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
 - that `dangerouslySetViteConfig` is unsupported for Vite SSR (hard-error when set; raise use-cases via sku-support)
 - keeping server-only loader modules out of the client-imported route graph (split trees; set `handle.moduleId` when lazy factories are non-idiomatic)
-- prefer render-time React data loading via Suspense with clients injected from `Providers`; use loaders for avoiding heavily-nested waterfalls, document redirects, response headers, or opt-in `getContext` DI — not as the default for page content
-- Apollo streaming hydration end to end: an app-owned transport over `useInsertHtml`, the provider as dual-entry `Providers`, the CSP nonce on injected scripts, and that Apollo apps must drop two-pass `getDataFromTree`
+- prefer render-time React data loading via Suspense with clients from `useReactContext` / `useClientContext`; use loaders for avoiding heavily-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext` — not as the default for page content
+- Apollo streaming hydration end to end: an app-owned transport over `useInsertHtml`, dual-entry `getReactContext` for `makeClient` / server nonce `extraScriptProps`, isomorphic provider in the root layout via `useReactContext()`, and that Apollo apps must drop two-pass `getDataFromTree`
 - that loader-transported query refs (`@apollo/client-integration-react-router`'s `apolloLoader` / `preloadQuery`) are not supported, because sku's hydration bootstrap is JSON and promise-scrubbed
-- that loader `request` stays Fetch; Express `req` is available to getters (`{ req }` only) and optional server `getContext`, not as the loader `request` argument
-- that getters do not receive Fetch `Request` or `res`, and MUST stay synchronous / pure (libs may memoise on `req`)
-- optional dual-entry `getContext` (Data Mode vs Framework Mode; server seeds from middleware bag + Fetch `request`; client seeds from browser-visible state; same `createContext` keys; different construction; cadence: once per document `query` vs every client nav/fetcher)
-- how to type Express `req` fields appended by middleware (module augmentation of `express-serve-static-core` `Request`, shared by `middleware` / getters / server `getContext`; same pattern as sku’s `getCspNonce`)
-- relation of Express `middleware` vs RR route `middleware` vs entry `getContext`, and of named `Providers` (component dependencies, outside the router) vs the app’s root layout route (router-aware wrapping) vs `getContext` (loader/action DI) — getters / optional `onHydrate` cover site / language / `clientContext` / hydrate side effects only
-- that `Providers` is a named export on `serverEntry` / `clientEntry` rendered outside the router, never returned from getters / `onHydrate` and never mounted as a route; request-scoped values arrive as `site` / `clientContext` props
-- that wrapping which needs React Router hooks or loader data belongs in the app’s own root layout route in `routesEntry`, not in `Providers`
-- that server and client `Providers` must render identical DOM (prefer context-only providers), since the two may differ
+- that loader `request` stays Fetch; Express `req` is available where designed on getters / server `getRouterContext`, not as the loader `request` argument
+- that early getters do not receive Fetch `Request` or `res`, and MUST stay synchronous / pure (libs may memoise on `req`); later getters receive sibling values
+- optional dual-entry `getRouterContext` (Data Mode vs Framework Mode; server seeds from middleware bag + Fetch `request` + siblings; client seeds from browser-visible state + siblings; same `createContext` keys; different construction; cadence: once per document `query` vs every client nav/fetcher)
+- how to type Express `req` fields appended by middleware (module augmentation of `express-serve-static-core` `Request`, shared by `middleware` / getters / server `getRouterContext`; same pattern as sku’s `getCspNonce`)
+- relation of Express `middleware` vs RR route `middleware` vs entry `getRouterContext`, and of `getClientContext` / `getReactContext` / `SkuSsrProvider` hooks vs the app’s root layout route vs `getRouterContext` (loader/action context)
+- that wrapping which needs React Router hooks or loader data belongs in the app’s own root layout route in `routesEntry`
 - a **red warning** that apps MUST NOT put Express `req` (or other non-isomorphic platform objects) into `RouterContextProvider` — project values both sides can supply
 - a client-navigation example where context is re-seeded without Express for a location different from the initial SSR location
 - for Braid apps: reset must run before any Braid-touching server module on `sku start` (start evaluation order can differ from production build)
-- providers that touch `window` must not run in the Document SSR tree (prefer client-only wrappers or client-entry-only `Providers`)
+- libraries that touch `window` must not run in the Document SSR tree (prefer client `getReactContext` + root-layout / `useEffect` consumers)
 - Jest → Vitest as a Vite SSR prerequisite (point at existing Vitest docs / `@sku-lib/codemod jest-to-vitest`)
 - path aliases: bare `src/…` / webpack `baseUrl` → `#src/…` via `pathAliases` (point at existing migrate-root-resolution guidance)
 
@@ -957,14 +1016,14 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 #### Scenario: Primary Vite SSR docs have topic coverage
 
 - **WHEN** a reader opens Vite SSR product docs
-- **THEN** docs cover `routesEntry`, `Providers`, the app-owned root layout route, flat `routes`, optional `sites`, `getSite`, named getters, optional `middleware` / `onHydrate`, CSP, and response headers
-- **AND** docs steer page content toward render-time data loading with dependencies from `Providers` (not loaders as the default)
-- **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getContext` DI
-- **AND** docs document optional dual-entry `getContext` and Data Mode vs Framework Mode seeding
+- **THEN** docs cover `routesEntry`, `SkuSsrProvider` / `createSkuSsrContexts`, the three value channels, the app-owned root layout route, flat `routes`, optional `sites`, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onHydrate`, CSP, and response headers
+- **AND** docs steer page content toward render-time data loading with clients from `useReactContext` / `useClientContext` (not loaders as the default)
+- **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext`
+- **AND** docs document optional dual-entry `getRouterContext` and Data Mode vs Framework Mode seeding
 - **AND** docs show how to type middleware-appended Express `req` fields via `express-serve-static-core` module augmentation
 - **AND** docs include a red warning against putting Express `req` into `RouterContextProvider`
 - **AND** docs include a client-navigation example where context works for a non-initial location without Express
-- **AND** docs show a complete Apollo streaming setup with `useInsertHtml`, the nonce on injected scripts, and why loader-transported query refs are unsupported
+- **AND** docs show a complete Apollo streaming setup with `useInsertHtml`, `getReactContext` + root-layout provider, the nonce on injected scripts, and why loader-transported query refs are unsupported
 
 #### Scenario: Migrating docs exist
 
@@ -995,7 +1054,7 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 - **WHEN** a reader opens **Migrate from Older / Webpack SSR App** docs
 - **THEN** docs remind readers to keep server-only loader modules off the client route graph
 - **AND** docs steer away from putting raw Express `req` into loaders or `RouterContextProvider` for page content
-- **AND** docs point at dual-entry `getContext` for projecting isomorphic values when loader DI is needed
+- **AND** docs point at dual-entry `getRouterContext` for projecting isomorphic values when loader context is needed
 - **AND** docs note Braid reset-before-Braid on `sku start` for Braid apps
 - **AND** docs note that `window`-touching providers must not run in the SSR tree
 - **AND** docs treat Jest → Vitest as a Vite SSR prerequisite and point at existing Vitest guidance

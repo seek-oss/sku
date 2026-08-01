@@ -6,9 +6,11 @@ import * as serverEntry from '__sku_alias__serverEntry';
 import { buildSiteStaticHandlers } from '../ssr/buildSiteStaticHandlers.js';
 import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import {
-  optionalNamedComponentExport,
-  optionalNamedFunctionExport,
+  optionalEntryFunction,
+  optionalEntryValue,
+  optionalOrRequiredEntryFunction,
   rejectRoutesBySiteExport,
+  requireDefaultEntry,
   requireNamedExport,
 } from '../ssr/requireNamedExport.js';
 import { render as renderApp } from '../ssr/render.js';
@@ -16,11 +18,14 @@ import type {
   RenderAssets,
   RenderManifest,
   RenderOptions,
+  SkuSsrGetClientContext,
+  SkuSsrGetLanguage,
+  SkuSsrGetSite,
   SkuSsrMiddleware,
-  SkuSsrOnRequest,
-  SkuSsrProviders,
+  SkuSsrServerEntry,
+  SkuSsrServerGetReactContext,
+  SkuSsrServerGetRouterContext,
   SkuSsrRouteObject,
-  SkuSsrServerGetContext,
 } from '../ssr/types.js';
 
 rejectRoutesBySiteExport(routesEntry, 'routesEntry');
@@ -32,33 +37,44 @@ const routes = requireNamedExport<SkuSsrRouteObject[]>(
   { kind: 'routes' },
 );
 
-// Providers render outside the router, so the tree — and each site's handler —
-// is built once here rather than per request.
-const Providers = optionalNamedComponentExport<SkuSsrProviders>(
+const entry = requireDefaultEntry<SkuSsrServerEntry>(
   serverEntry,
-  'Providers',
+  'serverEntry',
 );
 
+// Route tree — and each site's handler — is built once here rather than per request.
 const siteStaticHandlers = buildSiteStaticHandlers(
   buildSiteRouteTrees(routes, __SKU_SITES__),
 );
 
-export const onRequest = requireNamedExport<SkuSsrOnRequest>(
-  serverEntry,
-  'onRequest',
+// getSite required only when config has more than one site.
+const getSite = optionalOrRequiredEntryFunction<SkuSsrGetSite>(
+  entry,
+  'getSite',
   'serverEntry',
-  { kind: 'function' },
+  __SKU_SITES__.length > 1,
+);
+const getLanguage = optionalEntryFunction<SkuSsrGetLanguage>(
+  entry,
+  'getLanguage',
+);
+const getClientContext = optionalEntryFunction<SkuSsrGetClientContext>(
+  entry,
+  'getClientContext',
+);
+const getReactContext = optionalEntryFunction<SkuSsrServerGetReactContext>(
+  entry,
+  'getReactContext',
 );
 
-export const middleware = requireNamedExport<SkuSsrMiddleware>(
-  serverEntry,
+export const middleware = optionalEntryValue<SkuSsrMiddleware>(
+  entry,
   'middleware',
-  'serverEntry',
 );
 
-const getContext = optionalNamedFunctionExport<SkuSsrServerGetContext>(
-  serverEntry,
-  'getContext',
+const getRouterContext = optionalEntryFunction<SkuSsrServerGetRouterContext>(
+  entry,
+  'getRouterContext',
 );
 
 export const render = (
@@ -73,11 +89,13 @@ export const render = (
     request,
     req,
     assets,
-    onRequest,
+    getSite,
+    getLanguage,
+    getClientContext,
+    getReactContext,
     options,
     renderManifest: manifest,
-    getContext,
-    Providers,
+    getRouterContext,
   });
 
 if (import.meta.env.PROD) {

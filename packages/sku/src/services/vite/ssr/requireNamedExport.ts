@@ -56,7 +56,7 @@ export const rejectRoutesBySiteExport = (
 };
 
 /**
- * Optional Vite SSR entry export (e.g. dual-entry `getContext`).
+ * Optional Vite SSR entry export (e.g. dual-entry `getRouterContext`).
  * Missing / non-function → `undefined` (default RR context behaviour).
  */
 export const optionalNamedFunctionExport = <
@@ -70,17 +70,97 @@ export const optionalNamedFunctionExport = <
 };
 
 /**
- * Optional Vite SSR entry component export (e.g. dual-entry `Providers`).
- * Objects are accepted alongside functions so wrapped components
- * (`memo`, `forwardRef`, …) still mount. Missing → `undefined` (no wrapper).
+ * Optional when `required` is false; hard-error (naming the export) when true.
+ * Used for `getSite` — required only when config has more than one site.
  */
-export const optionalNamedComponentExport = <T>(
+export const optionalOrRequiredFunctionExport = <
+  T extends (...args: never[]) => unknown,
+>(
+  moduleExports: object,
+  name: string,
+  entryLabel: string,
+  required: boolean,
+): T | undefined => {
+  if (required) {
+    return requireNamedExport<T>(moduleExports, name, entryLabel, {
+      kind: 'function',
+    });
+  }
+  return optionalNamedFunctionExport<T>(moduleExports, name);
+};
+
+/**
+ * Optional Vite SSR entry value export (e.g. `middleware`).
+ * Missing / `undefined` → `undefined` (no consumer middleware layer).
+ */
+export const optionalNamedExport = <T>(
   moduleExports: object,
   name: string,
 ): T | undefined => {
   const value = (moduleExports as Record<string, unknown>)[name];
-  return typeof value === 'function' ||
-    (typeof value === 'object' && value !== null)
-    ? (value as T)
-    : undefined;
+  return value === undefined ? undefined : (value as T);
+};
+
+/**
+ * Vite SSR request entries `export default` one object (`defineServerEntry` /
+ * `defineClientEntry`). Missing / non-object → hard error.
+ */
+export const requireDefaultEntry = <T extends object>(
+  moduleExports: object,
+  entryLabel: string,
+): T => {
+  const value = (moduleExports as { default?: unknown }).default;
+  if (value === undefined || value === null || typeof value !== 'object') {
+    throw new Error(
+      `Vite SSR ${entryLabel} must export default an object (via defineServerEntry / defineClientEntry). Missing or invalid default export.`,
+    );
+  }
+  return value as T;
+};
+
+/**
+ * Read an optional function property from a default-exported entry object.
+ */
+export const optionalEntryFunction = <T extends (...args: never[]) => unknown>(
+  entry: object,
+  name: string,
+): T | undefined => {
+  const value = (entry as Record<string, unknown>)[name];
+  return typeof value === 'function' ? (value as T) : undefined;
+};
+
+/**
+ * Optional when `required` is false; hard-error when true (property on the
+ * default-exported entry object — e.g. `getSite` for multi-site).
+ */
+export const optionalOrRequiredEntryFunction = <
+  T extends (...args: never[]) => unknown,
+>(
+  entry: object,
+  name: string,
+  entryLabel: string,
+  required: boolean,
+): T | undefined => {
+  if (required) {
+    const value = (entry as Record<string, unknown>)[name];
+    if (typeof value !== 'function') {
+      throw new Error(
+        `Vite SSR ${entryLabel} must include '${name}' as a function on its default export. Missing or invalid '${name}'.`,
+      );
+    }
+    return value as T;
+  }
+  return optionalEntryFunction<T>(entry, name);
+};
+
+/**
+ * Optional non-function property on a default-exported entry object
+ * (e.g. `middleware`).
+ */
+export const optionalEntryValue = <T>(
+  entry: object,
+  name: string,
+): T | undefined => {
+  const value = (entry as Record<string, unknown>)[name];
+  return value === undefined ? undefined : (value as T);
 };

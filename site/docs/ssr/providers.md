@@ -1,84 +1,121 @@
-# Providers
+# Providers and request context
 
-`Providers` is an **optional named export** on `serverEntry` and/or `clientEntry`, for **dependency injection only** — not page layout or HTML.
-
-Sku renders it **outside** the router, between the Document and the router provider:
+Sku always mounts **`SkuSsrProvider`** outside the router:
 
 ```
 Document
-  └── Providers            ← optional, from serverEntry / clientEntry
-        └── RouterProvider / StaticRouterProvider
-              └── your routes, whose root layout route is yours
+  └── SkuSsrProvider   ← always (site, clientContext, reactContext)
+        └── Router
+              └── root layout route   ← Vocab, Apollo wrap, chrome
+                    └── pages
 ```
 
-Because it sits outside the router, `Providers` **cannot use React Router hooks** (`useLocation`, `useParams`, loader data). Wrapping that needs them is your app's own [root layout route](#router-aware-wrapping-is-a-route-not-a-provider).
+Apps do **not** export a dual-entry `Providers` component.
+Request-scoped values reach React through typed hooks from [`createSkuSsrContexts`](#typed-hooks-createskussrcontexts); isomorphic wrapping that needs the router lives in your [root layout route](#router-aware-wrapping-is-a-route).
 
-This is your opportunity to define providers whose implementation or dependencies differ between server and client.
-For example, an API client might make requests differently in each environment, so the same provider constructs a different client per side.
+## Three value channels
 
-Omit the export and sku renders the router directly.
+| Channel                      | Entry getter       | React / RR consumer        | Same on server & client?           | Serialised?             |
+| ---------------------------- | ------------------ | -------------------------- | ---------------------------------- | ----------------------- |
+| Wire / isomorphic React seed | `getClientContext` | `useClientContext()`       | Yes (by construction)              | Yes → hydrate bootstrap |
+| Env-differing React values   | `getReactContext`  | `useReactContext()`        | **May differ**                     | No                      |
+| Loader / action context      | `getRouterContext` | `context.get()` in loaders | Same keys; construction may differ | No                      |
+
+React Router 8 has no component-level hook for router context, so values needed by components belong in `useClientContext` / `useReactContext` or the root layout — not `getRouterContext`.
+
+## Typed hooks (`createSkuSsrContexts`)
+
+Pass `typeof` your default-exported entry objects — no hand-written `Site` / `ClientContext` / `ReactContext` aliases required:
+
+```tsx
+// src/App/ssrContext.ts
+import type server from '../server';
+import type client from '../client';
+import { createSkuSsrContexts } from 'sku/ssr';
+
+export const { useSite, useClientContext, useReactContext } =
+  createSkuSsrContexts<typeof server, typeof client>();
+```
+
+- `useSite()` — typed as the return of server `getSite` (or `string` when `getSite` is omitted / sole config site)
+- `useClientContext()` — serialisable seed from `getClientContext` (`undefined` when omitted)
+- `useReactContext()` — env-differing bag from dual-entry `getReactContext` (union of both returns; `undefined` when omitted)
+
+Language from `getLanguage` is inferred on the server entry object only — there is no `useLanguage` hook in v1 (Document vocab preload).
+
+`createSkuSsrContexts` is a typed facade over the same React context module sku’s render uses (`sku/ssr`, unbundled).
+
+## Entry objects (`defineServerEntry` / `defineClientEntry`)
+
+Each request entry **`export default`** one object via a zero-runtime identity helper so TypeScript can infer sibling types.
+
+`defineServerEntry` infers **Site** (`S`) from `getSite`, **Language** (`L`) from `getLanguage`, **ClientContext** (`C`) from `getClientContext`, and **ReactContext** (`R`) from `getReactContext`.
+Later server getters receive `site` typed as that `Site` union.
+
+`defineClientEntry` cannot infer `ClientContext` / `Site` from the client object alone — those values only appear as **callback inputs**. Pass **`defineClientEntry<typeof server>()({ … })`** so the helper extracts them the same way [`createSkuSsrContexts`](#typed-hooks-createskussrcontexts) does, and still infers `ReactContext` from client `getReactContext`.
+(The extra `()` is required — TypeScript cannot partially infer type parameters.)
+Omit the type argument and call `defineClientEntry({ … })` directly ⇒ `clientContext` is `undefined` and `site` is `string`.
+
+**Do not annotate getters with the loose public aliases** (`SkuSsrGetSite` / `SkuSsrGetLanguage` / …) — those widen returns to `string` and defeat literal inference. Prefer letting `defineServerEntry` infer, or narrow inside the getter body.
 
 ```tsx
 // src/server.tsx
-import type { SkuSsrProviders } from 'sku';
+import { defineServerEntry, getCspNonce } from 'sku/ssr';
 
-export { Providers } from './App/Providers';
-
-// …or define it inline
-export const Providers: SkuSsrProviders = ({ children }) => (
-  <ThemeProvider>{children}</ThemeProvider>
-);
+const server = defineServerEntry({
+  // Narrow here — do not annotate as SkuSsrGetSite (widens to string)
+  getSite({ req }) {
+    return req.get('x-site') === 'nz' ? 'nz' : 'au';
+  },
+  getLanguage({ req }) {
+    return req.path.startsWith('/fr') ? 'fr' : 'en';
+  },
+  getClientContext({ req }) {
+    return { userId: req.user?.id ?? null };
+  },
+  getReactContext({ site, clientContext }) {
+    // site inferred as 'au' | 'nz'
+    return {
+      makeClient: serverMakeClient,
+      extraScriptProps: { nonce: getCspNonce() },
+    };
+  },
+  getRouterContext({ clientContext }) {
+    const ctx = new RouterContextProvider();
+    ctx.set(userIdContext, clientContext?.userId ?? null);
+    return ctx;
+  },
+});
+export default server;
 ```
-
-## Props
-
-Sku passes the request values you need so `Providers` never has to reach for request state:
-
-- `children` — the router
-- `site` — the `site` returned from `onRequest`
-- `clientContext` — that request's `clientContext` seed (`undefined` when `onRequest` omits it)
-
-The server and the client receive the **same values** for a given document, so both sides render identically.
 
 ```tsx
 // src/client.tsx
-import type { SkuSsrProviders } from 'sku';
+import { defineClientEntry } from 'sku/ssr';
 
-type ClientContext = { userId: string | null };
+import type server from './server';
 
-export const Providers: SkuSsrProviders<ClientContext> = ({
-  children,
-  site,
-  clientContext,
-}) => (
-  <SiteContext.Provider value={site}>
-    <UserContext.Provider value={clientContext?.userId ?? null}>
-      {children}
-    </UserContext.Provider>
-  </SiteContext.Provider>
-);
+const client = defineClientEntry<typeof server>()({
+  getReactContext() {
+    return { makeClient: clientMakeClient };
+  },
+  getRouterContext({ clientContext }) {
+    // clientContext typed from server getClientContext
+    const ctx = new RouterContextProvider();
+    ctx.set(userIdContext, clientContext?.userId ?? null);
+    return ctx;
+  },
+});
+export default client;
 ```
 
-Type the export with `SkuSsrProviders<Context>` (or the props alone with `SkuSsrProvidersProps<Context>`) to get a typed `clientContext`.
+Later getters receive already-resolved sibling values (`site`, `clientContext`, `reactContext`) so you project instead of re-deriving.
+See [Request entries](./entries.md).
 
-## Why it is a named export, not a return value
+## Router-aware wrapping is a route
 
-`Providers` is read once when the entry module is first evaluated, and it is never returned from `onRequest` / `onHydrate`.
-
-Returning a component per request would create a new component type on every request, remounting your provider subtree.
-Keeping it out of the router also means sku never rebuilds the route tree: each site's React Router `createStaticHandler` is created once at init instead of on the request hot path.
-This mirrors React Router Framework Mode, which wraps outside the router in `entry.server.tsx` / `entry.client.tsx` and creates its handler at boot.
-
-## Providers must not render DOM
-
-Server and client `Providers` may differ, so any markup they emit is a hydration hazard. Prefer context-only providers.
-
-Sku warns in development when an entry's `Providers` renders hydration-relevant markup.
-
-## Router-aware wrapping is a route, not a provider
-
-Wrapping that needs React Router hooks or loader data belongs in your own root layout route in `routesEntry` — plain React Router, no sku API.
-Prefer a **pathless** layout route over `path: '/'`: matching is identical, it reads as a layout rather than a URL, and it keeps wrapping any root-level sibling you add later.
+Wrapping that needs React Router hooks or loader data belongs in your own root layout route in `routesEntry` — plain React Router + sku hooks.
+Prefer a **pathless** layout route over `path: '/'`.
 
 ```tsx
 // src/routes.tsx
@@ -86,12 +123,17 @@ import { VocabProvider } from '@vocab/react';
 import { Outlet, useLocation } from 'react-router';
 import type { SkuSsrRouteObject } from 'sku';
 
+import { useReactContext } from './App/ssrContext';
+
 const RootLayout = () => {
   const { pathname } = useLocation();
+  const { makeClient, extraScriptProps } = useReactContext() ?? {};
   return (
-    <VocabProvider language={resolveLocaleFromPathname(pathname)}>
-      <Outlet />
-    </VocabProvider>
+    <ApolloProvider makeClient={makeClient} extraScriptProps={extraScriptProps}>
+      <VocabProvider language={resolveLocaleFromPathname(pathname)}>
+        <Outlet />
+      </VocabProvider>
+    </ApolloProvider>
   );
 };
 
@@ -103,23 +145,23 @@ export const routes: SkuSsrRouteObject[] = [
 ];
 ```
 
-A provider that is both client-only _and_ router-aware splits in two: the dependency goes in the client `Providers`, and a small router-aware consumer component goes in the root layout.
+Env-specific **values** (`makeClient`, window SDKs) come from dual-entry `getReactContext`.
+Isomorphic **provider components** mount in the root layout and read those values with `useReactContext()`.
 
 ## Where request-scoped values go
 
-- **`Providers` props** — `site` and the `clientContext` seed, identical on both sides.
-- **Re-derive in the route tree** — read the URL with React Router hooks in your root layout. Best for anything that must track client navigation, such as locale. `clientContext` is a page-load seed and does not change across client navigations.
-- **[`getContext`](./data-loading.md#router-context-getcontext)** — for loader / action DI rather than React providers.
+- **`useSite` / `useClientContext` / `useReactContext`** — page-load seeds on `SkuSsrProvider`
+- **Re-derive in the route tree** — URL / loader data in the root layout for anything that must track client navigation (e.g. locale). `clientContext` and `reactContext` do not change across client navigations
+- **[`getRouterContext`](./data-loading.md#router-context-getroutercontext)** — loader / action DI only
 
-Do not reach for consumer-authored Async Local Storage or module-level mutable state set by `onHydrate` — the props above cover it.
+Do not reach for consumer-authored Async Local Storage or module-level mutable state set by `onHydrate`.
 
 ## Notes
 
-**Braid apps:** import `braid-design-system/reset` before any module that touches Braid on the **server** graph (for example at the top of `serverEntry`, and any early-imported loader/page that pulls Braid).
-On `sku start`, Vite’s SSR evaluation order can differ from production and may throw “Braid components imported before reset” if reset only lives in a later-imported client/App module.
-Sku does **not** auto-inject Braid reset into the SSR server entry — Braid is optional per app.
+**Braid apps:** import `braid-design-system/reset` before any module that touches Braid on the **server** graph (for example at the top of the root layout that mounts `BraidProvider`).
+On `sku start`, Vite’s SSR evaluation order can differ from production.
+Sku does **not** auto-inject Braid reset — Braid is optional per app.
 
-**Browser-only providers:** do not construct against `window` in the Document SSR tree (analytics SDKs, etc.).
-Export `Providers` from the **client** entry only for those, and inject server- or client-specific clients the same way. See [data loading](./data-loading.md).
+**Browser-only libraries:** put construction in **client** `getReactContext` (server returns `undefined` / omits the field). Consume from the root layout or a small `useEffect` wrapper via `useReactContext()`. See [data loading](./data-loading.md).
 
-A consumer root `ErrorBoundary` does **not** catch errors thrown while rendering `Providers` — it sits above the router entirely. See [Error pages](./error-pages.md).
+A consumer root `ErrorBoundary` does **not** catch errors thrown while rendering above the router (including `SkuSsrProvider`). See [Error pages](./error-pages.md).

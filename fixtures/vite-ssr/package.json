@@ -15,6 +15,7 @@
     "react-router": "catalog:"
   },
   "devDependencies": {
+    "@types/express-serve-static-core": "4.19.8",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vanilla-extract/css": "^1.0.0",

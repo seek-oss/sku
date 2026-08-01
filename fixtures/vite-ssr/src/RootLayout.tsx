@@ -2,19 +2,20 @@ import { VocabProvider } from '@vocab/react';
 import { Outlet, useLocation } from 'react-router';
 
 import { PreloadingLink } from './PreloadingLink.js';
-import { resolveLanguageFromPathname } from './resolveLanguage.js';
+import { languageFromPath } from './config.js';
 
 import * as styles from './layout.css';
 
 /**
- * App-owned pathless layout route: router-aware wrapping lives here, not in the
- * entries' `Providers`, so language tracks client navigation.
+ * App-owned pathless layout route: router-aware wrapping lives here so
+ * language tracks client navigation. Request seeds come from SkuSsrProvider.
  */
 export const RootLayout = () => {
   const { pathname } = useLocation();
+  const language = languageFromPath(pathname);
 
   return (
-    <VocabProvider language={resolveLanguageFromPathname(pathname)}>
+    <VocabProvider language={language}>
       <link
         rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"
@@ -32,7 +33,7 @@ export const RootLayout = () => {
             Context user
           </PreloadingLink>
           {/* Rendered on every site so hovering it on AU proves a foreign-site
-              path is never warmed. */}
+            path is never warmed. */}
           <PreloadingLink to="/nz-only" data-testid="nav-nz-only">
             NZ only
           </PreloadingLink>

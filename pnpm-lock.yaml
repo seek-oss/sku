@@ -1122,6 +1122,9 @@ importers:
         specifier: 'catalog:'
         version: 8.2.0(react-dom@19.2.7)(react@19.2.7)
     devDependencies:
+      '@types/express-serve-static-core':
+        specifier: 4.19.8
+        version: 4.19.8
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.17

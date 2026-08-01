@@ -22,7 +22,7 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 ## Config and commands
 
 - Set `buildType: 'ssr'` and `bundler: 'vite'`
-- Declare non-empty config [`sites`](../configuration.md#sites) (≥1 site name); return a configured site name from `onRequest`
+- Declare non-empty config [`sites`](../configuration.md#sites) (≥1 site name); export sync `getSite` when more than one site (omit on single-site)
 - Replace `sku start-ssr` / `sku build-ssr` with `sku start` / `sku build`
 - **Ports:** Webpack SSR used dual ports (`port` for assets + `serverPort` for the Node app). SSR is **single-port**: use [`port`](../configuration.md#port) for `sku start` and the baked production default (`PORT` still overrides at runtime). Drop `serverPort` — providing it with SSR fails validation. If you previously listened on `serverPort` in production, set that value as `port` (or keep using `PORT` in deploy).
 - **Deploy layout:** production entry is `node dist/server/server.js` with sibling `client/` + `server/` under the build target — not webpack’s single `dist/server.js` layout
@@ -34,37 +34,37 @@ Deploy/process/infra changes are out of scope beyond noting command and layout d
 
 ## Routes and request entries
 
-- Replace webpack `serverEntry` default export `{ renderCallback, middleware, onStart }` with SSR request-entry named exports: server `onRequest` (must return `site`) + `middleware`, client `onHydrate`
+- Replace webpack `serverEntry` default export `{ renderCallback, middleware, onStart }` with SSR default-exported entry objects via `defineServerEntry` / `defineClientEntry`: sync getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`), optional `middleware`, optional client `onHydrate`
 - Use optional `sites` for membership when paths differ by site
-- Multi-site path sets use `routesEntry` + `routes` + optional `sites` + `onRequest.site` (not optional language path params, union tree + allowlist, `routesBySite` maps, dual-entry `routes` re-exports, or sku config host matching) — see [Routing](./routing.md#multi-site-path-sets)
+- Multi-site path sets use `routesEntry` + `routes` + optional `sites` + `getSite` (not optional language path params, union tree + allowlist, `routesBySite` maps, dual-entry `routes` re-exports, or sku config host matching) — see [Routing](./routing.md#multi-site-path-sets)
 - Lazy page modules must export named `Component` (not `export default`)
-- Express `renderCallback` no longer owns HTML — sku streams Document; put providers in the named `Providers` export
+- Express `renderCallback` no longer owns HTML — sku streams Document; put isomorphic wrapping in the root layout and env-differing values in `getReactContext`
 - Optional webpack `onStart` is not part of the SSR request-entry contract
-- **Server-only modules:** Server-only content should be imported in serverEntry and passed through to your app via the server entry's `Providers`. Avoid server-side only implementations being imported outside serverEntry, shared code will be loaded by the client and available for public access.
+- **Server-only modules:** import server-only construction in `serverEntry` `getReactContext` (or server-only helpers) and consume via `useReactContext()` in the root layout. Avoid server-side only implementations being imported outside serverEntry — shared code will be loaded by the client and available for public access.
 - When the lazy factory is no longer a bare `() => import('./home')`, set [`handle.moduleId`](./routing.md#lazy-routes-and-handlemoduleid) explicitly so production modulepreloads still work.
 
 ## App-level providers
 
-- Move `SkuProvider` / app providers from `renderCallback` into a named `Providers` export on `serverEntry` / `clientEntry`
-- `Providers` render **outside** the router, so they cannot use React Router hooks. Router-aware wrapping moves into your own root layout route in `routesEntry` — see [Providers](./providers.md)
-- Request-scoped values arrive as `Providers` props (`site`, `clientContext`) or via [`getContext`](./data-loading.md#router-context-getcontext); server and client `Providers` may differ, so they must render identical DOM (sku warns in development when they emit markup)
-- Inject env-specific API / Experience clients via `Providers` for [render-time data loading](./data-loading.md) (prefer this over loaders for page content)
-- Vocab language identity moves from `addLanguageChunk` / path hacks to server entry `language` (see [Multi-language](./multi-language.md)); the `VocabProvider` itself goes in your root layout route so it tracks client navigation
+- Wire [`createSkuSsrContexts`](./providers.md) — sku always mounts `SkuSsrProvider`; there is no app `Providers` export
+- Router-aware wrapping moves into your own root layout route in `routesEntry` — see [Providers](./providers.md)
+- Request-scoped values arrive via sku hooks (`useSite` / `useClientContext` / `useReactContext`) or [`getRouterContext`](./data-loading.md#router-context-getroutercontext)
+- Inject env-specific API / Experience clients via dual-entry `getReactContext` for [render-time data loading](./data-loading.md) (prefer this over loaders for page content)
+- Vocab language identity moves from `addLanguageChunk` / path hacks to server entry `getLanguage` (see [Multi-language](./multi-language.md)); the `VocabProvider` itself goes in your root layout route so it tracks client navigation
 - **Braid:** ensure `braid-design-system/reset` runs before any Braid-touching **server** module on `sku start` (evaluation order can differ from production). Sku does not auto-inject reset — see [Providers](./providers.md)
-- **`window` providers:** keep analytics / other `window`-constructing providers out of the Document SSR tree — client-only wrappers, or export `Providers` from the client entry only (see [Providers](./providers.md))
+- **`window` libraries:** put construction in client `getReactContext` and consume from the root layout / `useEffect` — see [Providers](./providers.md)
 
 ## Data loading
 
-- Prefer render-time fetching in React (named `Providers` export + Suspense / shared clients) for page content — not React Router loaders as the default — see [Data loading](./data-loading.md)
-- Use loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, set response headers, or opt-in dual-entry [`getContext`](./data-loading.md#router-context-getcontext) DI
-- Loaders receive a Fetch `Request`, **not** Express `req`. Express `req` is available to [`onRequest({ req })`](./entries.md#onrequest) and optional server `getContext` — not as the loader `request` argument
-- **Do not** put raw Express `req` into `RouterContextProvider` — project isomorphic values via dual-entry `getContext` (see the [red warning](./data-loading.md#router-context-getcontext))
+- Prefer render-time fetching in React (`getReactContext` + root-layout providers + Suspense) for page content — not React Router loaders as the default — see [Data loading](./data-loading.md)
+- Use loaders when you need to avoid a deeply nested waterfall, issue a document `redirect()`, set response headers, or opt-in dual-entry [`getRouterContext`](./data-loading.md#router-context-getroutercontext) DI
+- Loaders receive a Fetch `Request`, **not** Express `req`. Express `req` is available to [entry getters](./entries.md) and optional server `getRouterContext` — not as the loader `request` argument
+- **Do not** put raw Express `req` into `RouterContextProvider` — project isomorphic values via dual-entry `getRouterContext` (see the [red warning](./data-loading.md#router-context-getroutercontext))
 - Type middleware-appended `req` fields with Express `Request` module augmentation — see [Request entries](./entries.md#typing-middleware-attached-fields-on-req)
-- **Apollo:** drop two-pass `getDataFromTree` — replace it with a streaming transport over [`useInsertHtml`](./entries.md#useinserthtml) mounted as dual-entry `Providers`, with the CSP nonce on injected scripts (`extraScriptProps`). Loader-transported query refs are unsupported — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration)
+- **Apollo:** drop two-pass `getDataFromTree` — replace it with a streaming transport over [`useInsertHtml`](./entries.md#useinserthtml), dual-entry `getReactContext` for `makeClient` / server nonce `extraScriptProps`, and an isomorphic provider in the root layout via `useReactContext()`. Loader-transported query refs are unsupported — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration)
 
 ## Middleware
 
-- Keep using a middleware export, but on the SSR **server entry** named `middleware` (same Connect style; required export, empty / passthrough OK)
+- Keep using a middleware export, but on the SSR **server entry** named `middleware` (same Connect style; optional — omit for no consumer middleware layer)
 - Move local-only mocks/proxies that webpack put in `devServerMiddleware` (or only ran under `start-ssr`) to the same config key — SSR still mounts it in `sku start` only and keeps it out of the production server
 - React Router route `middleware` on `RouteObject`s is separate from Express/Connect `middleware` — see [Middleware](./middleware.md)
 - Webpack dual-port / proxy assumptions differ; SSR is single-port (`port` only; `httpsDevServer` supported). Revisit auth redirects and proxy targets that assumed a separate asset origin on `port`

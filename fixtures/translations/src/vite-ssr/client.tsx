@@ -1,4 +1,7 @@
-import type { SkuSsrOnHydrate } from 'sku';
+import { defineClientEntry } from 'sku/ssr';
 
-// No `Providers` export — language wrapping is the app's root layout route.
-export const onHydrate: SkuSsrOnHydrate = () => {};
+import type server from './server.js';
+
+const client = defineClientEntry<typeof server>()({});
+
+export default client;

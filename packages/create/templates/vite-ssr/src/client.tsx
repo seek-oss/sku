@@ -1,6 +1,10 @@
-import type { SkuSsrOnHydrate } from 'sku';
+import { defineClientEntry } from 'sku/ssr';
 
-export const onHydrate: SkuSsrOnHydrate = () => {};
+import type server from './server';
 
-// Rendered outside the router; may differ from the server (e.g. `window`-only SDKs).
-export { Providers } from './App/Providers';
+/** Optional hydrate-time side effects (e.g. analytics). Receives `{ clientContext }`. */
+const client = defineClientEntry<typeof server>()({
+  onHydrate() {},
+});
+
+export default client;

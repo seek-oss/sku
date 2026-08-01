@@ -4,22 +4,25 @@ When `languages` is configured, SSR uses `@vocab/vite` language chunk splitting 
 
 Sku resolves `@vocab/vite` from its own install and aliases bare `@vocab/vite…` imports (including those injected into app and `compilePackages` `.vocab` files) onto that copy — consumers do **not** need a direct `@vocab/vite` dependency for resolve.
 
-Sku registers a language chunk **only** when `onRequest` returns `language` (server Document preload only).
-If `language` is omitted, no language chunk is preloaded, which can delay loading text.
+Sku registers a language chunk **only** when `getLanguage` returns `language` (server Document preload only).
+If `getLanguage` is omitted or returns `undefined`, no language chunk is preloaded, which can delay loading text.
 
 ```tsx
 // src/server.tsx
-import type { SkuSsrOnRequest } from 'sku';
+import { defineServerEntry } from 'sku/ssr';
 
-export const onRequest: SkuSsrOnRequest = ({ req }) => ({
-  // Must match a name from sku config `languages` (or `en-PSEUDO`)
-  language: resolveLocaleFromPath(req.path), // e.g. 'th-TH'
+const server = defineServerEntry({
+  getLanguage({ req }) {
+    // Must match a name from sku config `languages` (or `en-PSEUDO`)
+    return resolveLocaleFromPath(req.path); // e.g. 'th-TH'
+  },
 });
+export default server;
 ```
 
 Wrap your UI in `VocabProvider` from your app's root layout route (see [Providers](./providers.md)).
-Locale is router-aware — it must track client navigation — so it belongs in a route rather than the entries' `Providers`, which render outside the router.
-Client locale is app-owned: re-derive it the same way `onRequest` did (URL / cookies / headers) with React Router hooks inside the layout, or seed it through `clientContext`.
+Locale is router-aware — it must track client navigation — so it belongs in a route rather than entry getters, which seed page-load values only.
+Client locale is app-owned: re-derive it the same way `getLanguage` did (URL / cookies / headers) with React Router hooks inside the layout, or seed it through `clientContext`.
 URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
 
 For general Vocab setup (`languages` config, `.vocab` folders, translation workflow), see [Multiple languages](../multi-language.md).

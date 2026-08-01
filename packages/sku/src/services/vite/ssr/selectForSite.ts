@@ -1,4 +1,4 @@
-type SiteSource = 'onRequest' | 'hydrate bootstrap';
+type SiteSource = 'getSite' | 'config sites' | 'hydrate bootstrap';
 
 /** Narrow an incoming `site` to a usable name, failing closed when it is not. */
 export function assertSiteName(

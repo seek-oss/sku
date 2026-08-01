@@ -18,7 +18,7 @@ import {
   warnUnknownModuleIdsWithoutManifest,
 } from './resolveAssets.js';
 import { selectForSite } from './selectForSite.js';
-import { warnIfServerProvidersRenderMarkup } from './warnIfServerProvidersRenderMarkup.js';
+import { SkuSsrProvider } from './skuSsrContext.js';
 import type {
   DocumentAssets,
   RenderAssets,
@@ -26,9 +26,11 @@ import type {
   RenderOptions,
   RenderResult,
   SkuRouteHandle,
-  SkuSsrOnRequest,
-  SkuSsrProviders,
-  SkuSsrServerGetContext,
+  SkuSsrGetClientContext,
+  SkuSsrGetLanguage,
+  SkuSsrGetSite,
+  SkuSsrServerGetReactContext,
+  SkuSsrServerGetRouterContext,
 } from './types.js';
 
 const wrapPipeWithInsertHtml = (
@@ -85,7 +87,7 @@ const getModuleIds = (
     return moduleId ? [moduleId] : [];
   });
 
-  // Vocab chunk only when onRequest returns language — no allowlist / sole-language default.
+  // Vocab chunk only when getLanguage returns language — no allowlist / sole-language default.
   if (requestLanguage) {
     moduleIds.push(getChunkName(requestLanguage));
   }
@@ -98,38 +100,49 @@ export interface RenderArgs {
   request: Request;
   req: ExpressRequest;
   assets: RenderAssets;
-  onRequest: SkuSsrOnRequest;
+  /** Required when config has >1 site; omit on single-site ⇒ sole config site. */
+  getSite?: SkuSsrGetSite;
+  getLanguage?: SkuSsrGetLanguage;
+  getClientContext?: SkuSsrGetClientContext;
+  getReactContext?: SkuSsrServerGetReactContext;
   options?: RenderOptions;
   renderManifest?: RenderManifest;
-  getContext?: SkuSsrServerGetContext;
-  /** Optional server-entry providers, rendered outside the router. */
-  Providers?: SkuSsrProviders;
+  getRouterContext?: SkuSsrServerGetRouterContext;
 }
-
-/** Probe once per process rather than on every development request. */
-let providersProbed = false;
 
 const renderDocument = async ({
   siteStaticHandlers,
   request,
   req,
   assets,
-  onRequest,
+  getSite,
+  getLanguage,
+  getClientContext,
+  getReactContext,
   options = {},
   renderManifest,
-  getContext,
-  Providers,
+  getRouterContext,
 }: RenderArgs): Promise<RenderResult> => {
-  // Server entry runs before query(); site selects the handler; language is local for preload.
-  const onRequestResult = await onRequest({ req });
+  // Call order before query(): site → language → clientContext → reactContext → routerContext.
+  const site = getSite ? getSite({ req }) : Object.keys(siteStaticHandlers)[0];
+  const language = getLanguage?.({ req });
+  const clientContext = getClientContext?.({ req });
+  const reactContext = getReactContext?.({ req, site, clientContext });
+
   const { query, dataRoutes } = selectForSite(
     siteStaticHandlers,
-    onRequestResult.site,
-    'onRequest',
+    site,
+    getSite ? 'getSite' : 'config sites',
   );
 
-  const requestContext = getContext
-    ? await getContext({ request, req })
+  const requestContext = getRouterContext
+    ? await getRouterContext({
+        request,
+        req,
+        site,
+        clientContext,
+        reactContext,
+      })
     : undefined;
   const context = await query(
     request,
@@ -143,7 +156,7 @@ const renderDocument = async ({
   const development = options.development ?? false;
   const moduleIds = getModuleIds(context.matches, {
     development,
-    requestLanguage: onRequestResult.language,
+    requestLanguage: language,
   });
   let documentAssets: DocumentAssets = {
     css: assets.css,
@@ -168,8 +181,8 @@ const renderDocument = async ({
     context,
     {
       development,
-      clientContext: onRequestResult.clientContext,
-      site: onRequestResult.site,
+      clientContext,
+      site,
     },
   );
   const routeHeaders = collectRouteHeaders(context);
@@ -182,21 +195,11 @@ const renderDocument = async ({
   // Consumers may already have requested the same value via getCspNonce / req.getCspNonce.
   const nonce = getCspNonce() ?? options.nonce;
 
-  const providerProps = {
-    site: onRequestResult.site,
-    clientContext: onRequestResult.clientContext,
-  };
-
-  if (development && Providers && !providersProbed) {
-    providersProbed = true;
-    warnIfServerProvidersRenderMarkup(Providers, providerProps);
-  }
-
   const routerElement = (
     <StaticRouterProvider router={router} context={context} hydrate={false} />
   );
 
-  // Render-scoped: provider wraps Document so Providers and route code both reach it;
+  // Render-scoped: provider wraps Document so route code can reach it;
   // the matching transform flushes queued nodes before each React chunk.
   const insertHtmlQueue = createInsertHtmlQueue();
 
@@ -205,11 +208,13 @@ const renderDocument = async ({
     const stream = renderToPipeableStream(
       <InsertHtmlProvider insertHtml={insertHtmlQueue.insertHtml}>
         <Document assets={documentAssets}>
-          {Providers ? (
-            <Providers {...providerProps}>{routerElement}</Providers>
-          ) : (
-            routerElement
-          )}
+          <SkuSsrProvider
+            site={site}
+            clientContext={clientContext}
+            reactContext={reactContext}
+          >
+            {routerElement}
+          </SkuSsrProvider>
         </Document>
       </InsertHtmlProvider>,
       {

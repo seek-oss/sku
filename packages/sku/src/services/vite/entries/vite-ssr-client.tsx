@@ -8,17 +8,18 @@ import Document from '../ssr/Document.js';
 import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import { registerSiteRouteTree } from '../ssr/preloadRoute.js';
 import {
-  optionalNamedComponentExport,
-  optionalNamedFunctionExport,
+  optionalEntryFunction,
   rejectRoutesBySiteExport,
+  requireDefaultEntry,
   requireNamedExport,
 } from '../ssr/requireNamedExport.js';
 import { assertSiteName, selectForSite } from '../ssr/selectForSite.js';
-import { warnIfClientProvidersRenderMarkup } from '../ssr/warnIfClientProvidersRenderMarkup.js';
+import { SkuSsrProvider } from '../ssr/skuSsrContext.js';
 import type {
-  SkuSsrClientGetContext,
+  SkuSsrClientEntry,
+  SkuSsrClientGetReactContext,
+  SkuSsrClientGetRouterContext,
   SkuSsrOnHydrate,
-  SkuSsrProviders,
   SkuSsrRouteObject,
 } from '../ssr/types.js';
 
@@ -31,24 +32,23 @@ const routes = requireNamedExport<SkuSsrRouteObject[]>(
   { kind: 'routes' },
 );
 
-// The client entry MAY export different providers to the server (e.g. window-only SDKs).
-const Providers = optionalNamedComponentExport<SkuSsrProviders>(
+const entry = requireDefaultEntry<SkuSsrClientEntry>(
   clientEntry,
-  'Providers',
+  'clientEntry',
 );
 
 const siteRouteTrees = buildSiteRouteTrees(routes, __SKU_SITES__);
 
-const onHydrate = requireNamedExport<SkuSsrOnHydrate>(
-  clientEntry,
-  'onHydrate',
-  'clientEntry',
-  { kind: 'function' },
+const onHydrate = optionalEntryFunction<SkuSsrOnHydrate>(entry, 'onHydrate');
+
+const getReactContext = optionalEntryFunction<SkuSsrClientGetReactContext>(
+  entry,
+  'getReactContext',
 );
 
-const getContext = optionalNamedFunctionExport<SkuSsrClientGetContext>(
-  clientEntry,
-  'getContext',
+const getRouterContext = optionalEntryFunction<SkuSsrClientGetRouterContext>(
+  entry,
+  'getRouterContext',
 );
 
 const hydrate = async () => {
@@ -58,7 +58,9 @@ const hydrate = async () => {
   // `usePreloadRoute` matches against the same tree the router navigates.
   registerSiteRouteTree(siteRoutes);
   const clientContext = window.__SKU_CLIENT_CONTEXT__;
-  onHydrate({ clientContext });
+  onHydrate?.({ clientContext });
+
+  const reactContext = getReactContext?.({ site, clientContext });
 
   // publicPath is the static asset prefix only — never React Router basename.
   const lazyMatches = matchRoutes(siteRoutes, window.location)?.filter(
@@ -77,20 +79,15 @@ const hydrate = async () => {
 
   const router = createBrowserRouter(siteRoutes, {
     hydrationData: window.__staticRouterHydrationData,
-    // RR native getContext is zero-arg; wrap to inject hydrate clientContext.
-    ...(getContext
+    // RR native getContext is zero-arg; wrap sku getRouterContext to inject
+    // hydrate sibling values.
+    ...(getRouterContext
       ? {
-          getContext: () => getContext({ clientContext }),
+          getContext: () =>
+            getRouterContext({ site, clientContext, reactContext }),
         }
       : {}),
   });
-
-  // Same props the server passed its own Providers for this document.
-  const providerProps = { site, clientContext };
-
-  if (import.meta.env.DEV && Providers) {
-    warnIfClientProvidersRenderMarkup(Providers, providerProps);
-  }
 
   const routerElement = <RouterProvider router={router} />;
 
@@ -104,11 +101,13 @@ const hydrate = async () => {
         }
       }
     >
-      {Providers ? (
-        <Providers {...providerProps}>{routerElement}</Providers>
-      ) : (
-        routerElement
-      )}
+      <SkuSsrProvider
+        site={site}
+        clientContext={clientContext}
+        reactContext={reactContext}
+      >
+        {routerElement}
+      </SkuSsrProvider>
     </Document>,
   );
 };

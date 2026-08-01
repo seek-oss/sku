@@ -6,15 +6,15 @@ You export a named `routes` (`SkuSsrRouteObject[]`) from config [`routesEntry`](
 
 `SkuSsrRouteObject` is a sku type helper: React Router’s `RouteObject` plus optional `sites?: string[]` membership. Import route primitives from `react-router`; import `SkuSsrRouteObject` from `sku` when you need the `sites` field.
 
-`onRequest` **must** return `site: string`. Config [`sites`](../configuration.md#sites) must be non-empty (≥1 site name) — empty `sites` is a hard error. Sku pre-builds a route tree per config site name from your flat `routes` (filtering by optional `sites`), selects the tree for that `site`, serialises `site` into the hydrate bootstrap, and uses the same tree for the client router. Missing / non-string `site`, or a `site` that is not a config site name, fails closed (hard error).
+Export sync `getSite({ req })` when config has more than one site (required at init); on single-site apps omit it and sku uses the sole config site name. Config [`sites`](../configuration.md#sites) must be non-empty (≥1 site name) — empty `sites` is a hard error. Sku pre-builds a route tree per config site name from your flat `routes` (filtering by optional `sites`), selects the tree for that `site`, serialises `site` into the hydrate bootstrap, and uses the same tree for the client router. Missing / non-string `site`, or a `site` that is not a config site name, fails closed (hard error).
 
 Exporting `routesBySite` is a hard error — use flat `routes` with optional `sites` instead.
 
 Lazy routes, nested layouts, and error boundaries are standard Data Mode APIs.
 
-For page content, prefer [render-time data loading](./data-loading.md) via the named [`Providers`](./providers.md) export + Suspense; use loaders when you need waterfalls, document redirects, response headers, or optional dual-entry [`getContext`](./data-loading.md#router-context-getcontext).
+For page content, prefer [render-time data loading](./data-loading.md) via [`getReactContext`](./providers.md) / root-layout providers + Suspense; use loaders when you need waterfalls, document redirects, response headers, or optional dual-entry [`getRouterContext`](./data-loading.md#router-context-getroutercontext).
 
-Sku never wraps your route tree. Wrapping that needs React Router hooks or loader data is your own **pathless** root layout route — see [Providers](./providers.md#router-aware-wrapping-is-a-route-not-a-provider).
+Sku never wraps your route tree. Wrapping that needs React Router hooks or loader data is your own **pathless** root layout route — see [Providers](./providers.md#router-aware-wrapping-is-a-route).
 
 SSR requires **React Router** to be installed within your app.
 
@@ -55,9 +55,6 @@ import type { SkuSsrRouteObject } from 'sku';
 
 import { homeRoute } from './pages/home/route.js';
 
-// Must match a name from config `sites` (e.g. sites: ['default']).
-export const site = 'default' as const;
-
 export const routes: SkuSsrRouteObject[] = [
   {
     // Pathless root layout — your place for router-aware wrapping
@@ -69,19 +66,16 @@ export const routes: SkuSsrRouteObject[] = [
 
 ```tsx
 // src/server.tsx — request entry only
-import { site } from './routes.js';
+// Single-site: omit getSite — sku uses the sole config site name.
+// Multi-site: export getSite({ req }) => string
+export const getLanguage = ({ req }) => resolveLocaleFromPath(req.path);
 
-export const onRequest = () => ({
-  site,
-  // … language, clientContext
-});
-
-// … middleware
+// … optional middleware
 ```
 
 ```tsx
 // src/client.tsx — request entry only
-// … onHydrate (no routes re-export)
+// … optional onHydrate (no routes re-export)
 ```
 
 Prefer co-locating each page in its own directory with a `route.ts` (path / lazy / loaders / handle) and the page module (e.g. `home.tsx`).
@@ -112,9 +106,9 @@ sku owns:
 
 Multi-site apps often need **different React Router path sets** per site (for example site-only pages). A single unfiltered `RouteObject[]` either over-matches unsupported paths or registers foreign paths on every host.
 
-**App-owned:** resolve `site` in `onRequest` (from Express `req`, headers, app config, etc.) and declare membership with optional `sites` on routes. When **path shape** differs by site (e.g. `/jobs` vs `/emploi`), keep using factories for those path strings — membership still belongs on the route via `sites`.
+**App-owned:** resolve `site` via sync `getSite({ req })` (from Express `req`, headers, app config, etc.) and declare membership with optional `sites` on routes. When **path shape** differs by site (e.g. `/jobs` vs `/emploi`), keep using factories for those path strings — membership still belongs on the route via `sites`.
 
-**Sku-owned:** filter flat `routes` into a pre-built tree per config site name (omit `sites` ⇒ every site; present ⇒ only listed names; no parent→child inheritance), strip `sites` before React Router, create each site's `createStaticHandler` once at init, select by `onRequest.site`, serialise `site` for hydrate, and use that same site on the client. Sku does **not** derive site from config [`hosts`](../configuration.md) / `sites[].host` for route-tree selection — those remain local-dev listen / setup-hosts only.
+**Sku-owned:** filter flat `routes` into a pre-built tree per config site name (omit `sites` ⇒ every site; present ⇒ only listed names; no parent→child inheritance), strip `sites` before React Router, create each site's `createStaticHandler` once at init, select by `getSite` (or the sole config site), serialise `site` for hydrate, and use that same site on the client. Sku does **not** derive site from config [`hosts`](../configuration.md) / `sites[].host` for route-tree selection — those remain local-dev listen / setup-hosts only.
 
 ```tsx
 // src/routes.tsx
@@ -135,12 +129,10 @@ export const routes: SkuSsrRouteObject[] = [
 
 ```tsx
 // src/server.tsx — app owns site resolution
-export const onRequest = ({ req }) => ({
-  site: resolveSiteFromRequest(req), // e.g. from Host, header, or middleware state
-});
+export const getSite = ({ req }) => resolveSiteFromRequest(req); // e.g. from Host, header, or middleware state
 ```
 
-Do **not** rely on optional language path params, a union tree + site allowlist, `routesBySite` maps, dual-entry `routes` re-exports, or sku host matching as the multi-site product story — use [`routesEntry`](../configuration.md#routesentry) + flat `routes` + optional `sites` + `onRequest.site`.
+Do **not** rely on optional language path params, a union tree + site allowlist, `routesBySite` maps, dual-entry `routes` re-exports, or sku host matching as the multi-site product story — use [`routesEntry`](../configuration.md#routesentry) + flat `routes` + optional `sites` + `getSite`.
 
 Serving the same page at multiple **language** prefixes within one site is covered under [Multi-language](./multi-language.md#multiple-paths-per-page--languages-in-path).
 

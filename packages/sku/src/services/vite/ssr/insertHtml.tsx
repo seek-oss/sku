@@ -39,14 +39,14 @@ export const InsertHtmlProvider = ({
 );
 
 const noopInsertHtml: InsertHtml = () => {
-  // Silent no-op off the SSR path (browser graph, Providers markup probe).
+  // Silent no-op off the SSR path (browser graph).
 };
 
 /**
  * Returns a function that queues React nodes for injection into the SSR
  * response stream between React chunks. Off the SSR path it is a silent no-op
- * and never throws — required so the development `Providers` markup probe and
- * the client graph can call transports that wire this hook at module scope.
+ * and never throws — required so the client graph can call transports that
+ * wire this hook at module scope.
  */
 export const useInsertHtml = (): InsertHtml =>
   useContext(InsertHtmlContext) ?? noopInsertHtml;

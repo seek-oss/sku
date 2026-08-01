@@ -413,7 +413,8 @@ export interface SkuConfigBase {
    *
    * Module that exports named `routes` (`SkuSsrRouteObject[]`) for both
    * the server and client graphs. Optional `sites` on routes declares
-   * multi-site membership; apps select the tree via `onRequest.site`.
+   * multi-site membership; apps select the tree via `getSite` (required when
+   * config has more than one site; sole config site when omitted on single-site).
    *
    * @default "./src/routes.tsx"
    * @link https://seek-oss.github.io/sku/configuration#routesentry
@@ -431,7 +432,8 @@ export interface SkuConfigBase {
    * An array of sites the app supports. These usually correspond to each domain the app is hosted under.
    *
    * **Vite SSR:** required and non-empty (≥1 site name). Sku pre-builds a route tree per site name
-   * from [`routesEntry`](https://seek-oss.github.io/sku/configuration#routesentry); apps select via `onRequest.site`.
+   * from [`routesEntry`](https://seek-oss.github.io/sku/configuration#routesentry); apps select via `getSite`
+   * (required when >1 site; sole config site when omitted on single-site).
    * `sites[].host` remains local-dev listen / setup-hosts only.
    *
    * @default []

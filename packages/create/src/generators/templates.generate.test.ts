@@ -20,19 +20,28 @@ describe('generateTemplateFiles', () => {
 
     const routes = await fixture.readFile('src/routes.tsx', 'utf8');
     expect(routes).toContain('export const routes');
-    expect(routes).toContain("export const site = 'default'");
+    expect(routes).not.toContain('export const site');
     expect(routes).not.toContain('routesBySite');
 
     const server = await fixture.readFile('src/server.tsx', 'utf8');
     expect(server).not.toContain('export { routes }');
-    expect(server).toContain('export const onRequest');
-    expect(server).toContain('export const middleware');
-    expect(server).toContain('site');
+    expect(server).not.toContain('export const onRequest');
+    expect(server).not.toMatch(/export (const|function) getSite/);
+    expect(server).toContain('defineServerEntry');
+    expect(server).toContain('middleware');
+    expect(server).toContain('/api/health');
+    expect(server).not.toContain('Providers');
 
     const client = await fixture.readFile('src/client.tsx', 'utf8');
     expect(client).not.toContain('export { routes }');
-    expect(client).toContain('export const onHydrate');
+    expect(client).toContain('defineClientEntry');
+    expect(client).toContain('typeof server');
+    expect(client).toContain("import type server from './server'");
+    expect(client).toContain('onHydrate');
+    expect(client).not.toContain('Providers');
 
+    expect(await fixture.exists('src/App/ssrContext.ts')).toBe(true);
+    expect(await fixture.exists('src/App/Providers.tsx')).toBe(false);
     expect(await fixture.exists('src/render.tsx')).toBe(false);
     expect(await fixture.exists('src/vite-env.d.ts')).toBe(true);
     expect(await fixture.exists('src/pages/home/route.ts')).toBe(true);

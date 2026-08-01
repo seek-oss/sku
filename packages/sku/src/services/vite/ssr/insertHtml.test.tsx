@@ -7,14 +7,13 @@ import {
   InsertHtmlProvider,
   useInsertHtml,
 } from './insertHtml.js';
-import { PROVIDERS_PROBE_SENTINEL } from './providersMarkupWarning.js';
 
 const Probe = ({ onReady }: { onReady: (insert: () => void) => void }) => {
   const insertHtml = useInsertHtml();
   onReady(() => {
     insertHtml(() => <script data-testid="injected" />);
   });
-  return <span>{PROVIDERS_PROBE_SENTINEL}</span>;
+  return <span>probe</span>;
 };
 
 describe('useInsertHtml', () => {
@@ -55,16 +54,14 @@ describe('useInsertHtml', () => {
     }).not.toThrow();
   });
 
-  it('does not throw when Providers are probed without a render context', () => {
-    const Providers = ({ children }: { children: ReactNode }) => {
+  it('does not throw when called from a component outside the SSR path', () => {
+    const Wrapper = ({ children }: { children: ReactNode }) => {
       const insertHtml = useInsertHtml();
       insertHtml(() => <script>should-not-run</script>);
       return children;
     };
 
-    expect(() =>
-      renderToStaticMarkup(<Providers>{PROVIDERS_PROBE_SENTINEL}</Providers>),
-    ).not.toThrow();
+    expect(() => renderToStaticMarkup(<Wrapper>child</Wrapper>)).not.toThrow();
   });
 
   it('accepts further inserts after the queue is drained', () => {

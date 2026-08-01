@@ -14,22 +14,19 @@ const assets: RenderAssets = {
   bootstrapModules: ['/client.js'],
 };
 
-const onRequest = () => ({ site: 'au' });
+const getSite = () => 'au';
 
 const renderToHtml = async ({
   routes,
-  Providers,
 }: {
   routes: Parameters<typeof buildSiteStaticHandlers>[0]['au'];
-  Providers?: Parameters<typeof render>[0]['Providers'];
 }) => {
   const result = await render({
     siteStaticHandlers: buildSiteStaticHandlers({ au: routes }),
     request: new Request('http://localhost/'),
     req: { path: '/' } as ExpressRequest,
     assets,
-    onRequest,
-    Providers,
+    getSite,
   });
 
   if ('response' in result) {
@@ -145,7 +142,7 @@ describe('insertHtml stream injection', () => {
       request: new Request('http://localhost/'),
       req: { path: '/' } as ExpressRequest,
       assets,
-      onRequest,
+      getSite,
       options: { requestContextStore: store },
     });
 

@@ -126,7 +126,7 @@ export type RenderFunction = (
 export interface SsrServerOptions {
   port: number;
   publicPath: string;
-  middleware: SkuSsrMiddleware;
+  middleware?: SkuSsrMiddleware;
   render: RenderFunction;
   assets: RenderAssets;
   manifest?: RenderManifest;
@@ -146,9 +146,12 @@ export interface SsrServerResult {
 }
 
 export const mountConsumerMiddleware = (
-  handler: SkuSsrMiddleware,
+  handler: SkuSsrMiddleware | undefined,
   mount: (handler: RequestHandler) => void,
 ) => {
+  if (handler == null) {
+    return;
+  }
   for (const middleware of [handler].flat()) {
     mount(middleware);
   }

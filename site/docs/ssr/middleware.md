@@ -4,10 +4,10 @@ SSR has **two HTTP middleware layers**, plus optional React Router route `middle
 Pick the HTTP layer based on whether the traffic should exist in production.
 Do not confuse Express/Connect handlers with React Router’s route `middleware` field — see [Routing](./routing.md#react-router-route-middleware).
 
-#### Server-entry `middleware` (required; runs in start and production)
+#### Server-entry `middleware` (optional; runs in start and production)
 
 Export Connect/Express-compatible handlers from the server entry as named `middleware` (`SkuSsrMiddleware`: a handler or array).
-Empty array / passthrough is fine.
+Omit the export ⇒ no consumer middleware layer (not an error).
 Sku mounts this **before** Vite middlewares and the HTML render path in both `sku start` and the production server.
 It must not commit the document body.
 
@@ -17,10 +17,10 @@ Type `middleware` against Express 4 (`SkuSsrMiddleware` / `@types/express` major
 Because consumer `middleware` / `devServerMiddleware` mount into sku’s Express app, a future Express **major** upgrade in sku may be a breaking change for SSR apps.
 Minor/patch upgrades within the documented major stay non-breaking when APIs remain compatible.
 
-Attach isomorphic-capable values on `req` for [`onRequest`](./entries.md#onrequest) / optional server [`getContext`](./entries.md#getcontext-optional) (e.g. `req.user`).
+Attach isomorphic-capable values on `req` for [named getters](./entries.md) / optional server [`getRouterContext`](./entries.md#getroutercontext-optional) (e.g. `req.user`).
 Augment Express `Request` for those fields — see [Typing middleware-attached fields](./entries.md#typing-middleware-attached-fields-on-req).
 
-Do **not** put raw Express `req` into React Router context — project values via dual-entry [`getContext`](./data-loading.md#router-context-getcontext).
+Do **not** put raw Express `req` into React Router context — project values via dual-entry [`getRouterContext`](./data-loading.md#router-context-getroutercontext).
 
 ```tsx
 import type { SkuSsrMiddleware } from 'sku';

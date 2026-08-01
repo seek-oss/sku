@@ -23,7 +23,7 @@ describe('vite-ssr', () => {
       expect(routes).toContain('export const routes');
       expect(routes).toContain("sites: ['au']");
       expect(nzOnlyRoute).toContain("sites: ['nz']");
-      expect(server).toContain('site');
+      expect(server).toContain('getSite');
     });
   });
 
@@ -72,7 +72,7 @@ describe('vite-ssr', () => {
       expect(cspReportOnly).toMatch(/'nonce-/);
     });
 
-    it('selects site-scoped routes from onRequest.site', async ({ task }) => {
+    it('selects site-scoped routes from getSite', async ({ task }) => {
       skipCleanup(task.id);
 
       const auOnly = await fetch(`${url}/au-only`);
@@ -80,7 +80,7 @@ describe('vite-ssr', () => {
       expect(await auOnly.text()).toContain('data-testid="au-only-page"');
 
       // Config sites[].host alone must not select the tree — without x-sku-site,
-      // onRequest returns au even though sku.config lists nz hosts for local-dev.
+      // getSite returns au even though sku.config lists nz hosts for local-dev.
       const foreignOnAu = await fetch(`${url}/nz-only`);
       const foreignHtml = await foreignOnAu.text();
       expect(foreignHtml).not.toContain('data-testid="nz-only-page"');
@@ -199,7 +199,7 @@ describe('vite-ssr', () => {
       expect(await response.text()).toBe('ok');
     });
 
-    it('projects middleware-attached state into the named server Providers', async ({
+    it('projects middleware-attached state into SkuSsrProvider via getClientContext', async ({
       task,
     }) => {
       skipCleanup(task.id);
@@ -213,7 +213,7 @@ describe('vite-ssr', () => {
       expect(html).toContain('"userId":"fixture-user"');
     });
 
-    it('keeps the named client Providers mounted across client navigations', async ({
+    it('keeps SkuSsrProvider values mounted across client navigations', async ({
       task,
     }) => {
       skipCleanup(task.id);
@@ -226,7 +226,7 @@ describe('vite-ssr', () => {
         'fixture-user',
       );
 
-      // Providers render outside the router, so they stay mounted across
+      // SkuSsrProvider sits outside the router, so seeds stay mounted across
       // navigations rather than being rebuilt per request.
       await page.getByTestId('nav-about').click();
       await page.getByTestId('about').waitFor({ state: 'visible' });
@@ -238,7 +238,7 @@ describe('vite-ssr', () => {
       await page.close();
     });
 
-    it('seeds loader context from server getContext on document SSR', async ({
+    it('seeds loader context from server getRouterContext on document SSR', async ({
       task,
     }) => {
       skipCleanup(task.id);
@@ -249,7 +249,7 @@ describe('vite-ssr', () => {
       expect(html).toContain('fixture-user');
     });
 
-    it('re-seeds loader context from client getContext after client navigation', async ({
+    it('re-seeds loader context from client getRouterContext after client navigation', async ({
       task,
     }) => {
       skipCleanup(task.id);

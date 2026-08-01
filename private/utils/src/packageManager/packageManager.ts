@@ -1,85 +1,130 @@
 import * as find from 'empathic/find';
-import path, { dirname } from 'node:path';
-import type { Command } from 'package-manager-detector';
+import { dirname } from 'node:path';
+import type { Agent, Command } from 'package-manager-detector';
 import { resolveCommand } from 'package-manager-detector/commands';
-import { INSTALL_PAGE } from 'package-manager-detector/constants';
+import { AGENTS, INSTALL_PAGE } from 'package-manager-detector/constants';
+import { detectSync } from 'package-manager-detector/detect';
 import semver from 'semver';
 import { caution, strong } from '../console/styles.ts';
 
-export type SupportedPackageManager = 'yarn' | 'pnpm' | 'npm';
+// lockfiles should be ordered by priority, highest priority first.
+const lockfileByPackageManager = {
+  pnpm: 'pnpm-lock.yaml',
+  yarn: 'yarn.lock',
+  npm: 'package-lock.json',
+} as const satisfies Record<string, string>;
 
-const supportedPackageManagers = ['yarn', 'pnpm', 'npm'];
+export type SupportedPackageManager = keyof typeof lockfileByPackageManager;
 
-const validatePackageManager = (packageManager: string) => {
-  if (!supportedPackageManagers.includes(packageManager)) {
+const supportedPackageManagers = Object.keys(
+  lockfileByPackageManager,
+) as SupportedPackageManager[];
+
+const isSupportedPackageManager = (
+  packageManager: string | null | undefined,
+): packageManager is SupportedPackageManager =>
+  supportedPackageManagers.includes(packageManager as SupportedPackageManager);
+
+/**
+ * The package manager that invoked the current process, if any.
+ * This is unset when sku is run without a package manager, e.g. `./node_modules/.bin/sku`.
+ */
+const getRunningPackageManager = () => {
+  const userAgent = process.env.npm_config_user_agent;
+  if (!userAgent) {
+    return null;
+  }
+
+  // User agents typically look like `pnpm/9.12.1 npm/? node/v20.17.0 linux x64`
+  const [agentPart] = userAgent.split(' ');
+  const [name, version] = agentPart.split('/');
+
+  if (!AGENTS.includes(name as Agent)) {
+    return null;
+  }
+
+  return { name, version };
+};
+
+/**
+ * The project's package manager, resolved from its `packageManager` field or lockfile.
+ * This is unset when there is no project to detect, e.g. during `@sku-lib/create`.
+ */
+const getProjectPackageManager = () => {
+  const detected = detectSync();
+
+  if (!detected) {
+    return null;
+  }
+
+  const { name, version = null } = detected;
+
+  return { name, version };
+};
+
+const getFallbackPackageManager = (): SupportedPackageManager => {
+  const fallback = 'npm';
+  console.warn(
+    caution(`No package manager detected, assuming ${strong(fallback)}`),
+  );
+  return fallback;
+};
+
+const resolveDetectedPackageManager = () => {
+  const projectPackageManager = getProjectPackageManager();
+  const runningPackageManager = getRunningPackageManager();
+
+  const name =
+    projectPackageManager?.name ??
+    runningPackageManager?.name ??
+    getFallbackPackageManager(); // some edge cases might use this fallback, but unlikely
+
+  if (!isSupportedPackageManager(name)) {
     throw new Error(
-      `Unsupported package manager: ${packageManager}. Supported package managers are: ${supportedPackageManagers.join(
+      `Unsupported package manager: ${name}. Supported package managers are: ${supportedPackageManagers.join(
         ', ',
       )}`,
     );
   }
 
-  return packageManager as SupportedPackageManager;
-};
+  const isRunningResolvedPackageManager = runningPackageManager?.name === name;
 
-const getPackageManagerFromUserAgent = () => {
-  const userAgent = process.env.npm_config_user_agent || '';
-
-  // Default to 'npm'
-  let packageManager = 'npm';
-
-  let version = null;
-  if (userAgent) {
-    // User agents typically look like `pnpm/9.12.1 npm/? node/v20.17.0 linux x64`
-    version = userAgent.split(' ')?.[0].split('/')?.[1];
-  }
-
-  if (userAgent.includes('yarn')) {
-    packageManager = 'yarn';
-  }
-
-  if (userAgent.includes('pnpm')) {
-    packageManager = 'pnpm';
-  }
-
-  return { packageManager, version };
-};
-
-// lockfiles should be ordered by priority, highest priority first.
-const lockfileByPackageManager: Record<SupportedPackageManager, string> = {
-  pnpm: 'pnpm-lock.yaml',
-  yarn: 'yarn.lock',
-  npm: 'package-lock.json',
-};
-
-/**
- * Get the package manager and root directory of the project.
- * If the project does not have a root directory, `rootDir` will be `null`.
- */
-const resolvePackageManager = () => {
-  const userAgentPackageManager = getPackageManagerFromUserAgent();
-  const packageManager = validatePackageManager(
-    userAgentPackageManager.packageManager,
-  );
-
-  const expectedLockfile = lockfileByPackageManager[packageManager];
-  const lockFilePath = find.any(Object.values(lockfileByPackageManager));
-
-  if (lockFilePath && !lockFilePath.includes(expectedLockfile)) {
+  if (
+    projectPackageManager &&
+    runningPackageManager &&
+    !isRunningResolvedPackageManager
+  ) {
     console.warn(
       caution(
-        `Lockfile mismatch: ${strong(path.basename(lockFilePath))} is not a valid lockfile for ${strong(packageManager)}`,
+        `Package manager mismatch: sku was run with ${strong(runningPackageManager.name)}, but this project uses ${strong(name)}`,
       ),
     );
   }
 
-  // No root found (occurs during `@sku-lib/create`), `rootDir` will be `null`
-  const rootDir = lockFilePath ? dirname(lockFilePath) : null;
+  // The running version is the most accurate source of the version, so we use it if it's available.
+  const version =
+    (isRunningResolvedPackageManager ? runningPackageManager.version : null) ??
+    projectPackageManager?.version ??
+    null;
+
+  return { name, version };
+};
+
+/**
+ * Get the package manager and root directory of the project.
+ */
+const resolvePackageManager = () => {
+  const lockfilePath = find.any(Object.values(lockfileByPackageManager));
+
+  // No lockfile can be found during `@sku-lib/create`.
+  const rootDir = lockfilePath ? dirname(lockfilePath) : null;
+
+  const { name, version } = resolveDetectedPackageManager();
 
   return {
-    packageManager,
+    packageManager: name,
     rootDir,
-    packageManagerVersion: userAgentPackageManager.version,
+    packageManagerVersion: version,
   };
 };
 

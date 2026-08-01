@@ -1,11 +1,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
-import {
-  hasExpectedExitCode,
-  scopeToFixture,
-  waitFor,
-} from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library';
 
 const { exec, fixturePath } = scopeToFixture('sku-webpack-plugin');
 
@@ -46,16 +42,7 @@ describe('sku-webpack-plugin', () => {
           },
         },
       );
-      await waitFor(
-        () => {
-          if (!hasExpectedExitCode(build, 0, false)) {
-            throw new Error(
-              `Expected webpack to exit with code 0 but got ${build.hasExit()?.exitCode}`,
-            );
-          }
-        },
-        { timeout: 60_000 },
-      );
+      await expect(build).toMatchExitCode(0);
     }, 60_000);
 
     it('should create valid app', async () => {

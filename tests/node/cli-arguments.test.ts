@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { scopeToFixture, waitFor } from '@sku-private/testing-library';
+import { scopeToFixture } from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('cli-arguments');
 
@@ -12,9 +12,7 @@ describe('cli-arguments', () => {
       await process.findByError("error: unknown option '--foo'"),
     ).toBeInTheConsole();
 
-    await waitFor(() => {
-      expect(process.hasExit()).toMatchObject({ exitCode: 1 });
-    });
+    await expect(process).toMatchExitCode(1);
   });
 
   it('should throw an error if excess arguments are provided', async () => {
@@ -26,8 +24,6 @@ describe('cli-arguments', () => {
       ),
     ).toBeInTheConsole();
 
-    await waitFor(() => {
-      expect(process.hasExit()).toMatchObject({ exitCode: 1 });
-    });
+    await expect(process).toMatchExitCode(1);
   });
 });

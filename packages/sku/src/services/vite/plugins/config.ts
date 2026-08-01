@@ -6,6 +6,20 @@ import { makePluginName } from '../helpers/makePluginName.js';
 
 const require = createRequire(import.meta.url);
 
+/**
+ * Specifiers Vite must not clone into `.vite/deps`. Keeps app `sku/ssr` imports
+ * and sku’s own Vite SSR runtime on the same module instances (provider context,
+ * insert-html queue, preload registry, CSP nonce storage).
+ */
+export const SKU_VITE_OPTIMIZE_DEPS_EXCLUDE = ['sku', 'sku/ssr'] as const;
+
+export const getViteOptimizeDepsExclude = (
+  skipPackageCompatibilityCompilation: string[],
+): string[] => [
+  ...SKU_VITE_OPTIMIZE_DEPS_EXCLUDE,
+  ...skipPackageCompatibilityCompilation,
+];
+
 const getVocabViteAliases = (): Record<string, string> =>
   // Resolve against sku’s dependency tree, not the app’s — force injected
   // `@vocab/vite/runtime` imports (including from `.vocab` / compilePackages) onto sku’s copy.
@@ -40,7 +54,9 @@ export const configPlugin = ({
       rolldownOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
-      exclude: skuContext.skipPackageCompatibilityCompilation,
+      exclude: getViteOptimizeDepsExclude(
+        skuContext.skipPackageCompatibilityCompilation,
+      ),
     },
     ssr: {
       external: ['serialize-javascript', '@sku-lib/vite'],

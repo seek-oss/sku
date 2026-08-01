@@ -154,7 +154,7 @@ Replace `onRequest` with sync getters; make `middleware` / `onHydrate` optional.
 Replaces app-authored dual-entry `Providers`. Request entries are one default-exported object via `defineServerEntry` / `defineClientEntry` (not per-getter named exports).
 
 - [x] 13.1 Types: drop `SkuSsrProviders` / `SkuSsrProvidersProps`; add `SkuSsrServerEntry` / `SkuSsrClientEntry`; export `defineServerEntry` / `defineClientEntry` (zero-runtime, `NoInfer` sibling typing); extend runtime `getRouterContext` args with `site` / `clientContext` / `reactContext`; export `createSkuSsrContexts<typeof server, typeof client>()` from `sku/ssr`
-- [x] 13.2 Runtime: load `serverEntry` / `clientEntry` via **default export** object; call optional properties; always-on `SkuSsrProvider` in `render.tsx` / client entry (`site` + `clientContext` + `reactContext`); shared context module with `createSkuSsrContexts` (`unbundle: true`)
+- [x] 13.2 Runtime: load `serverEntry` / `clientEntry` via **default export** object; call optional properties; always-on `SkuSsrProvider` in `render.tsx` / client entry (`site` + `clientContext` + `reactContext`); shared context module with `createSkuSsrContexts` (`unbundle: true` — published-install identity completed in §19 / Decision 26)
 - [x] 13.3 Runtime: call order `getSite` → `getLanguage` → `getClientContext` → `getReactContext` → `getRouterContext` → `query()`; pass sibling values; do not serialise `reactContext`
 - [x] 13.4 Runtime: remove optional `Providers` mount, markup-probe warnings, and related tests
 - [x] 13.5 `createSkuSsrContexts<typeof server, typeof client>()`: extract `ClientContext` / `ReactContext` from entry typeofs; typed `useSite` / `useClientContext` / `useReactContext`; no per-property `defineGet*`; no required hand-written context aliases
@@ -215,6 +215,22 @@ Reverses the §9.4a / 9.7a / 9.8a / 9.9a hard-error for empty Vite SSR `sites`. 
 - [x] 18.4 Tests: empty config `sites` soft-defaults to `'default'` (no hard-error); sole-name / `getSite` omit still works; multi-site unchanged
 - [x] 18.5 Docs: `configuration.md` / routing / migrate — Vite SSR `sites` optional; empty soft-defaults to `'default'`; `getSite` still required only when >1 site; drop “SSR requires at least one site” wording
 - [x] 18.6 Changeset: note empty config `sites` soft-defaults to `'default'` for Vite SSR (experimental API; do **not** label as breaking)
+
+## 19. Consolidate `sku/ssr` + `optimizeDeps.exclude`
+
+Fixes published-install dual React context / shared-module identity (Decision 26). Fixtures hid the bug via `workspace:*` skipping dep prebundling; `unbundle: true` alone is not enough.
+
+- [x] 19.1 Re-export `@internal` runtime symbols from `sku/ssr` (`SkuSsrProvider`, `InsertHtmlProvider`, `createInsertHtmlQueue`, `registerSiteRouteTree`, `runWithSsrRequestContext`); update identity comments on the four shared modules + `ssr.ts`
+- [x] 19.2 Flip sku runtime call sites to `'sku/ssr'`: `vite-ssr-client.tsx` (`SkuSsrProvider`, `registerSiteRouteTree`), `render.tsx` (`SkuSsrProvider`, insert-html providers/queue, `runWithSsrRequestContext`); leave type-only / Node middleware / unit-test relative imports alone
+- [x] 19.3 Shared Vite config plugin: `optimizeDeps.exclude` includes `'sku'`, `'sku/ssr'`, and `skipPackageCompatibilityCompilation`; extract `SKU_VITE_OPTIMIZE_DEPS_EXCLUDE` for plugin + test
+- [x] 19.4 Node assert: `optimizeDeps.exclude` always includes `'sku'` and `'sku/ssr'`; keep existing `tests/browser/vite-ssr.test.ts` green (self-import / dual-context regression under workspace link); skip new tarball `sku start` e2e this pass
+- [x] 19.5 Validate: `pnpm format` → `pnpm build` → `pnpm lint` → scoped tests (new assert + vite-ssr browser)
+
+## 20. Create template layout cleanup
+
+- [x] 20.1 Flatten vite-ssr template: `src/RootLayout.tsx` + `src/ssrContext.ts`; remove `src/App/`; skip base `NextSteps*` for SSR scaffolds
+- [x] 20.2 Home page inlines welcome content and demos `useSite()` (no `import.meta.env`); link to about route
+- [x] 20.3 Update create generate test + design/spec create-template wording
 
 ## Deferred
 

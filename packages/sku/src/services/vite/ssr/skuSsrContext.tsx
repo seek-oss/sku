@@ -8,8 +8,10 @@ import type {
 
 /**
  * Render-scoped bag for Vite SSR: always mounted by sku outside the router.
- * Shared by `render` / the client entry and consumer hooks via the unbundled
- * module graph (`sku/ssr`) — same identity mechanism as `useInsertHtml`.
+ * App hooks (`createSkuSsrContexts`) and sku runtime (`SkuSsrProvider`) MUST
+ * share one module instance via `sku/ssr`. `unbundle: true` keeps one physical
+ * dist module; Vite `optimizeDeps.exclude` for `'sku'` / `'sku/ssr'` stops
+ * published installs cloning into `.vite/deps`. Same class as `useInsertHtml`.
  */
 type SkuSsrContextValue = {
   site: string;

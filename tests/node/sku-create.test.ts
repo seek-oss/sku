@@ -225,7 +225,7 @@ describe.each(['webpack', 'vite', 'vite-ssr'])('sku-create %s', (template) => {
     'eslint.config.mjs',
     'README.md',
     '.prettierignore',
-    'src/App/NextSteps.tsx',
+    ...(template === 'vite-ssr' ? [] : ['src/App/NextSteps.tsx']),
     'pnpm-workspace.yaml',
   ])('should create %s', async (file) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
@@ -265,10 +265,10 @@ describe.each(['webpack', 'vite', 'vite-ssr'])('sku-create %s', (template) => {
       expect(client).toContain("import type server from './server'");
       expect(client).toContain('onHydrate');
       await expect(
-        fs.access(fixturePath(projectName, 'src/App/ssrContext.ts')),
+        fs.access(fixturePath(projectName, 'src/ssrContext.ts')),
       ).resolves.toBeUndefined();
       await expect(
-        fs.access(fixturePath(projectName, 'src/App/Providers.tsx')),
+        fs.access(fixturePath(projectName, 'src/App')),
       ).rejects.toThrow();
       await expect(
         fs.access(fixturePath(projectName, 'src/render.tsx')),

@@ -31,11 +31,17 @@ describe('generateTemplateFiles', () => {
     expect(client).toContain('onHydrate');
     expect(client).not.toContain('Providers');
 
-    expect(await fixture.exists('src/App/ssrContext.ts')).toBe(true);
+    expect(await fixture.exists('src/ssrContext.ts')).toBe(true);
+    expect(await fixture.exists('src/RootLayout.tsx')).toBe(true);
+    expect(await fixture.exists('src/App')).toBe(false);
     expect(await fixture.exists('src/App/Providers.tsx')).toBe(false);
     expect(await fixture.exists('src/render.tsx')).toBe(false);
     expect(await fixture.exists('src/vite-env.d.ts')).toBe(true);
     expect(await fixture.exists('src/pages/home/route.ts')).toBe(true);
+
+    const home = await fixture.readFile('src/pages/home/home.tsx', 'utf8');
+    expect(home).toContain('useSite');
+    expect(home).not.toContain('import.meta.env');
 
     expect(await fixture.exists('README.md')).toBe(true);
 

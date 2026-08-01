@@ -5,9 +5,10 @@ let warnedWithoutRouteTree = false;
 
 /**
  * Sku's Vite SSR client entry registers the selected site's filtered tree so
- * `usePreloadRoute` matches the same routes the router navigates. Module
- * identity holds because sku is built unbundled — `dist/ssr.mjs` and
- * `dist/entries/vite-ssr-client.mjs` share this module instance.
+ * `usePreloadRoute` matches the same routes the router navigates. App hooks and
+ * sku runtime MUST share one module instance via `sku/ssr`. `unbundle: true`
+ * keeps one physical dist module; Vite `optimizeDeps.exclude` for `'sku'` /
+ * `'sku/ssr'` stops published installs cloning into `.vite/deps`.
  */
 export const registerSiteRouteTree = (routes: RouteObject[]): void => {
   siteRouteTree = routes;

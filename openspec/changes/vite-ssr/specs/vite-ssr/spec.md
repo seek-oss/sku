@@ -380,6 +380,29 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **WHEN** the server entry omits `getSite` (single-site)
 - **THEN** `useSite()` is typed as `string`
 
+### Requirement: Shared SSR modules keep one identity under Vite
+
+App code that imports shared SSR state from `sku/ssr` (hooks from `createSkuSsrContexts`, `useInsertHtml`, `usePreloadRoute`, CSP nonce helpers) and sku’s own Vite SSR runtime (`SkuSsrProvider`, insert-html queue/provider, preload registry, request-context runner) MUST observe the **same** module instances.
+
+Sku MUST:
+
+1. Prefer the public `sku/ssr` specifier for sku runtime call sites that touch that shared state (re-export `@internal` symbols as needed), and
+2. Exclude `'sku'` and `'sku/ssr'` from Vite `optimizeDeps` in the shared Vite config plugin so published installs are not cloned into `.vite/deps`.
+
+tsdown `unbundle: true` alone MUST NOT be treated as sufficient for published-package identity.
+
+Sku MUST NOT require consumers to inject their own Vite `optimizeDeps` config for this identity.
+
+#### Scenario: Hooks read values from SkuSsrProvider
+
+- **WHEN** an app uses `createSkuSsrContexts` hooks under sku’s always-on `SkuSsrProvider`
+- **THEN** the hooks receive the provider values for that document (no dual-context “must be used within SkuSsrProvider” failure solely from Vite prebundling `sku/ssr`)
+
+#### Scenario: optimizeDeps excludes sku and sku/ssr
+
+- **WHEN** sku builds the shared Vite config used by Vite SSR (and static Vite)
+- **THEN** `optimizeDeps.exclude` includes `'sku'` and `'sku/ssr'`
+
 ### Requirement: Full-document streaming and document hydration
 
 Vite SSR MUST stream a React-owned HTML document.
@@ -951,7 +974,7 @@ Production remains HTTP.
 
 ### Requirement: Teams can scaffold a Vite SSR app via create
 
-`@sku-lib/create` MUST offer a `vite-ssr` template that MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config`, `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout route (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuSsrContexts<typeof server, typeof client>` wiring, and realistic default-exported request-entry objects (`middleware`, optional `onListen` / context getters, `onHydrate` — no `routes` re-export, no `Providers`).
+`@sku-lib/create` MUST offer a `vite-ssr` template that MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config`, `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout at `src/RootLayout.tsx` (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuSsrContexts<typeof server, typeof client>` wiring in `src/ssrContext.ts`, a home page that calls `useSite()`, and realistic default-exported request-entry objects (`middleware`, optional `onListen` / context getters, `onHydrate` — no `routes` re-export, no `Providers`, no `src/App/` shell).
 
 A template with zero or one resolved site MUST omit `getSite` (sku uses the sole resolved site name).
 Multi-site examples MUST declare ≥2 config sites and export `getSite`.
@@ -967,7 +990,9 @@ The static `vite` template MUST remain unchanged.
 - **AND** config `sites` may be omitted (soft-default `'default'`) or declare real site names
 - **AND** the server entry exports `middleware` (and may export `onListen` / context getters)
 - **AND** the client entry exports `onHydrate` (and may export context getters)
-- **AND** the template wires `createSkuSsrContexts` and has no `Providers` export
+- **AND** the template wires `createSkuSsrContexts` in `src/ssrContext.ts` and has no `Providers` export
+- **AND** the template has `src/RootLayout.tsx` and no `src/App/` directory
+- **AND** the home page calls `useSite()` (and does not use `import.meta.env` for site/environment demo)
 - **AND** a 0–1 site template omits `getSite`
 - **AND** request entries do not re-export `routes`
 - **AND** lazy page modules export named `Component`

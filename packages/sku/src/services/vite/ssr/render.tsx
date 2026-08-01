@@ -7,18 +7,22 @@ import {
   type StaticHandlerContext,
 } from 'react-router';
 import { getChunkName } from '@vocab/vite/chunks';
+import {
+  createInsertHtmlQueue,
+  InsertHtmlProvider,
+  runWithSsrRequestContext,
+  SkuSsrProvider,
+} from 'sku/ssr';
 import Document from './Document.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
 import { createInsertHtmlTransform } from './createInsertHtmlTransform.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
-import { createInsertHtmlQueue, InsertHtmlProvider } from './insertHtml.js';
-import { getCspNonce, runWithSsrRequestContext } from './requestContext.js';
+import { getCspNonce } from './requestContext.js';
 import {
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,
 } from './resolveAssets.js';
 import { selectForSite } from './selectForSite.js';
-import { SkuSsrProvider } from './skuSsrContext.js';
 import type {
   DocumentAssets,
   RenderAssets,

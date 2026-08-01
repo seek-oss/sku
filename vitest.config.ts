@@ -1,12 +1,21 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defaultExclude, defineConfig } from 'vitest/config';
 import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 const babelPluginDisplayNameTests = 'packages/babel-plugin-display-name';
+const repoRoot = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   resolve: {
     tsconfigPaths: true,
+    // Unit tests import SSR helpers relatively from source; sku runtime imports
+    // the same modules via `sku/ssr`. Without this alias Vitest resolves the
+    // package export to dist and splits React context / ALS identity.
+    alias: {
+      'sku/ssr': path.join(repoRoot, 'packages/sku/src/ssr.ts'),
+    },
   },
   server: {
     watch: {

@@ -4,9 +4,9 @@ import { createBrowserRouter, matchRoutes, RouterProvider } from 'react-router';
 // Resolved by sku's Vite config plugin to the consumer client / routes entries.
 import * as clientEntry from '__sku_alias__clientEntry';
 import * as routesEntry from '__sku_alias__routesEntry';
+import { registerSiteRouteTree, SkuSsrProvider } from 'sku/ssr';
 import Document from '../ssr/Document.js';
 import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
-import { registerSiteRouteTree } from '../ssr/preloadRoute.js';
 import {
   optionalEntryFunction,
   rejectRoutesBySiteExport,
@@ -14,7 +14,6 @@ import {
   requireNamedExport,
 } from '../ssr/requireNamedExport.js';
 import { assertSiteName, selectForSite } from '../ssr/selectForSite.js';
-import { SkuSsrProvider } from '../ssr/skuSsrContext.js';
 import type {
   SkuSsrClientEntry,
   SkuSsrClientGetReactContext,

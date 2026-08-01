@@ -1,6 +1,6 @@
 import { Suspense, use, cache } from 'react';
 
-import { useClientContext } from '../../ssrContext.js';
+import { useClientContext, useSite } from '../../ssrContext.js';
 
 import * as styles from './home.css';
 
@@ -18,11 +18,12 @@ const DeferredMessage = () => {
 
 export function Component() {
   const clientContext = useClientContext();
+  const site = useSite();
 
   return (
     <main>
       <h1 className={styles.shell} data-testid="shell">
-        Vite SSR Home
+        Vite SSR Home - {site}
       </h1>
       <p data-testid="providers-user-id">
         {clientContext?.userId ?? 'missing'}

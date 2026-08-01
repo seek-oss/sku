@@ -1,5 +1,5 @@
-import type server from '../server';
-import type client from '../client';
+import type server from './server';
+import type client from './client';
 import { createSkuSsrContexts } from 'sku/ssr';
 
 /**

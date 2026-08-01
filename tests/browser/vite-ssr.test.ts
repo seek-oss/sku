@@ -184,7 +184,7 @@ describe('vite-ssr', () => {
       await page.goto(url, { waitUntil: 'networkidle' });
       await page.getByTestId('deferred').waitFor({ state: 'visible' });
       expect(await page.getByTestId('shell').textContent()).toBe(
-        'Vite SSR Home',
+        'Vite SSR Home - au',
       );
       expect(await page.getByTestId('deferred').textContent()).toBe(
         'Deferred content ready',
@@ -420,7 +420,7 @@ describe('vite-ssr', () => {
       await page.goto(url, { waitUntil: 'networkidle' });
       await page.getByTestId('shell').waitFor({ state: 'visible' });
       expect(await page.getByTestId('shell').textContent()).toBe(
-        'Vite SSR Home',
+        'Vite SSR Home - au',
       );
       await page.close();
     });

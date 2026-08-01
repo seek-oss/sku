@@ -14,6 +14,7 @@ export type {
   SkuSsrGetSite,
   SkuSsrMiddleware,
   SkuSsrOnHydrate,
+  SkuSsrOnListen,
   SkuSsrRouteObject,
   SkuSsrServerEntry,
   SkuSsrServerGetReactContext,

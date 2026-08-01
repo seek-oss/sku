@@ -337,6 +337,28 @@ Default: `false`
 
 Adds static `displayName` properties to React components in production. This setting is designed for usage on sites that generate React code snippets, e.g. [Braid](https://seek-oss.github.io/braid-design-system/).
 
+## expressTrustProxy <Badge type="info" text="SSR only" />
+
+Type: `boolean`
+
+Default: `false`
+
+Bundler: `vite` · `buildType: 'ssr'`
+
+When `true`, sku sets Express `app.set('trust proxy', 1)` (hop count **`1`**, not Express boolean `true`) before listen — the common Melways / single reverse-proxy case.
+
+Omit or `false` leaves Express’s default (`false`). This is opt-in via config (not a silent sku default). The create `vite-ssr` template sets `expressTrustProxy: true`.
+
+For any other trust-proxy value (`false`, `2`, an IP list, …), override in server-entry [`onListen`](./ssr/entries.md#onlisten) via `app.set('trust proxy', …)`.
+
+```ts
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  expressTrustProxy: true,
+} satisfies SkuConfig;
+```
+
 Example:
 
 ```ts

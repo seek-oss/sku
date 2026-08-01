@@ -12,10 +12,15 @@ import { createSsrRequestContextMiddleware } from './ssrRequestContextMiddleware
 import {
   createHtmlRenderMiddleware,
   mountConsumerMiddleware,
+  resolveBoundPort,
   type RenderFunction,
   type SsrServerResult,
 } from './ssrServerShared.js';
-import type { RenderAssets, SkuSsrMiddleware } from './types.js';
+import type {
+  RenderAssets,
+  SkuSsrMiddleware,
+  SkuSsrOnListen,
+} from './types.js';
 
 const log = createDebug('sku:vite-ssr:dev-server');
 const require = createRequire(import.meta.url);
@@ -32,6 +37,12 @@ export const createDevSsrServer = async ({
   const clientEntry = require.resolve('#entries/vite-ssr-client.dev');
   const serverEntry = require.resolve('#entries/vite-ssr-server');
   const serverApp = express();
+
+  if (skuContext.expressTrustProxy) {
+    // Hop count 1 (not boolean true) — safer single-hop Melways/proxy case.
+    serverApp.set('trust proxy', 1);
+  }
+
   // Shared getAppHosts (`hosts` ∪ `sites[].host`) — same as static Vite / webpack.
   const httpServer = await createServer({
     requestListener: serverApp,
@@ -49,12 +60,14 @@ export const createDevSsrServer = async ({
   });
   const serverModule = (await vite.ssrLoadModule(serverEntry)) as {
     middleware?: SkuSsrMiddleware;
+    onListen?: SkuSsrOnListen;
     render: RenderFunction;
   };
 
   // Mount order: request-context → optional config `devServerMiddleware` →
   // server-entry `middleware` → Vite → HTML render. Dev mocks stay outside the
   // production server graph (loaded only here, never from the SSR entry).
+  // Start does not mount express.static under publicPath (Vite owns assets).
   serverApp.use(createSsrRequestContextMiddleware());
   if (skuContext.paths.devServerMiddleware) {
     log(
@@ -105,10 +118,32 @@ export const createDevSsrServer = async ({
     }),
   );
 
+  const listenPort = skuContext.port.client;
   await new Promise<void>((resolve, reject) => {
     httpServer.once('error', reject);
-    httpServer.listen(skuContext.port.client, resolve);
+    httpServer.listen(listenPort, resolve);
   });
+
+  // Call once from the initial server entry — do not re-fire on HMR reload.
+  if (serverModule.onListen) {
+    try {
+      await serverModule.onListen({
+        app: serverApp,
+        httpServer,
+        port: resolveBoundPort(httpServer, listenPort),
+      });
+    } catch (error) {
+      await Promise.all([
+        vite.close(),
+        new Promise<void>((resolve, reject) => {
+          httpServer.close((closeError) =>
+            closeError ? reject(closeError) : resolve(),
+          );
+        }),
+      ]);
+      throw error;
+    }
+  }
 
   // Parity with static middlewarePlugin.configureServer: mark when ready to load.
   if (

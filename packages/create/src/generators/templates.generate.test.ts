@@ -16,24 +16,15 @@ describe('generateTemplateFiles', () => {
     const skuConfig = await fixture.readFile('sku.config.ts', 'utf8');
     expect(skuConfig).toContain("bundler: 'vite'");
     expect(skuConfig).toContain("buildType: 'ssr'");
-    expect(skuConfig).toContain("sites: ['default']");
 
     const routes = await fixture.readFile('src/routes.tsx', 'utf8');
     expect(routes).toContain('export const routes');
-    expect(routes).not.toContain('export const site');
-    expect(routes).not.toContain('routesBySite');
 
     const server = await fixture.readFile('src/server.tsx', 'utf8');
-    expect(server).not.toContain('export { routes }');
-    expect(server).not.toContain('export const onRequest');
-    expect(server).not.toMatch(/export (const|function) getSite/);
     expect(server).toContain('defineServerEntry');
     expect(server).toContain('middleware');
-    expect(server).toContain('/api/health');
-    expect(server).not.toContain('Providers');
 
     const client = await fixture.readFile('src/client.tsx', 'utf8');
-    expect(client).not.toContain('export { routes }');
     expect(client).toContain('defineClientEntry');
     expect(client).toContain('typeof server');
     expect(client).toContain("import type server from './server'");

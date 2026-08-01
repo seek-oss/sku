@@ -6,6 +6,7 @@ const skuConfig = {
   publicPath: '/',
   // Vite SSR requires ≥1 configured site name; single-site apps omit `getSite`.
   sites: ['default'],
+  expressTrustProxy: true,
   testRunner: 'vitest',
   pathAliases: {
     '#src/*': './src/*',

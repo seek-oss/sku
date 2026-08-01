@@ -16,6 +16,8 @@ declare const __SKU_SITES__: string[];
 
 declare const __SKU_CSP__: SkuCSP;
 
+declare const __SKU_EXPRESS_TRUST_PROXY__: boolean;
+
 declare const __SKU_DEV_MIDDLEWARE_PATH__: string;
 declare const __SKU_DEV_MIDDLEWARE_ENABLED__: boolean;
 declare const __SKU_DEV_HTTPS__: boolean;

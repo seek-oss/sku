@@ -58,6 +58,9 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
             reportOnlyExtraHosts: skuContext.cspReportOnlyExtraScriptSrcHosts,
             reportOnlyReportTo: skuContext.cspReportOnlyReportTo,
           }),
+          __SKU_EXPRESS_TRUST_PROXY__: JSON.stringify(
+            Boolean(skuContext.expressTrustProxy),
+          ),
         },
         environments: {
           client: {

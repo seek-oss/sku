@@ -2,7 +2,7 @@ import type { Request as ExpressRequest } from 'express';
 import type { RouterContextProvider } from 'react-router';
 
 import type { ClientContextOf, SiteOf } from './entryTypeExtractors.js';
-import type { JsonValue, SkuSsrMiddleware } from './types.js';
+import type { JsonValue, SkuSsrMiddleware, SkuSsrOnListen } from './types.js';
 
 export type ServerEntryBody<
   Site extends string = string,
@@ -32,6 +32,11 @@ export type ServerEntryBody<
   }) => RouterContextProvider | Promise<RouterContextProvider>;
   /** Express middleware run before SSR for each request. */
   middleware?: SkuSsrMiddleware;
+  /**
+   * Called once after middleware + HTML are mounted and `listen` succeeds
+   * (start + production). Not re-fired on server-entry HMR.
+   */
+  onListen?: SkuSsrOnListen;
 };
 
 /**

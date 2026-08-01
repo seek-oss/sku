@@ -206,6 +206,10 @@ export default validator.compile({
     type: 'string',
     optional: true,
   },
+  expressTrustProxy: {
+    type: 'boolean',
+    optional: true,
+  },
   httpsDevServer: {
     type: 'boolean',
   },

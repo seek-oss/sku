@@ -8,7 +8,7 @@ import { Outlet } from 'react-router';
 /**
  * Your app's root layout route. Mount isomorphic providers here (Braid, Vocab,
  * Apollo via `useReactContext()`, …). Env-differing *values* come from dual-entry
- * `getReactContext`; serialisable seeds from `getClientContext` / `useClientContext`.
+ * `getReactContext`; serialisable content from `getClientContext` / `useClientContext`.
  */
 export const RootLayout = () => (
   <StrictMode>

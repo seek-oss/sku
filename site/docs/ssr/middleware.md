@@ -62,6 +62,16 @@ export default (app) => {
 };
 ```
 
+## Mount order in production
+
+1. Request-context (sku; CSP nonce store, etc.)
+2. `express.static` for client assets under [`publicPath`](../configuration.md#publicpath)
+3. Server-entry `middleware` (optional)
+4. HTML render
+
+Static mounts **before** server-entry middleware so catch-all or Melways-style handlers cannot eat hashed client assets under `publicPath`.
+App routes outside that prefix still reach middleware and HTML as usual.
+
 ## Mount order in `sku start`
 
 1. Request-context (sku; CSP nonce store, etc.)
@@ -71,4 +81,5 @@ export default (app) => {
 5. HTML render
 
 Dev mocks mount before production middleware so they can intercept traffic that would never reach the app in production.
+`sku start` does not mount `express.static` under `publicPath` — Vite serves the module graph from `/`.
 Put anything that must ship in production on the server-entry export; keep stubs and local-only routes in `devServerMiddleware`.

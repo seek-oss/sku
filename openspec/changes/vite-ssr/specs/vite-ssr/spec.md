@@ -198,7 +198,7 @@ When that argument is provided, it MUST extract `Site` from the server entry’s
 When the `ServerEntry` type argument is omitted, `ClientContext` MUST be `undefined` and client `site` args MUST be `string`.
 Sku MUST also export structural types `SkuSsrServerEntry` / `SkuSsrClientEntry` (the shapes behind those helpers).
 
-Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`; optional `middleware` and `getRouterContext`.
+Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`; optional `middleware`, `onListen`, and `getRouterContext`.
 
 Client entry object MAY include optional `onHydrate`, `getReactContext`, and `getRouterContext`.
 
@@ -231,6 +231,8 @@ When the client entry includes `onHydrate`, sku MUST invoke it with `{ clientCon
 Omitting `onHydrate` MUST mean no hydrate side effects (not an error).
 
 Omitting `middleware` MUST mean no consumer middleware layer (not an error).
+
+Omitting `onListen` MUST mean no post-listen callback (not an error). See the `onListen` requirement for call timing.
 
 Sku MUST always render `SkuSsrProvider` outside the router — `Document` → `SkuSsrProvider` → router — with `site`, `clientContext`, and `reactContext` for that document.
 
@@ -279,6 +281,12 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **WHEN** the server entry omits `middleware`
 - **THEN** sku does not require it
 - **AND** mounts no consumer middleware layer
+
+#### Scenario: Omitting onListen is not an error
+
+- **WHEN** the server entry omits `onListen`
+- **THEN** sku does not require it
+- **AND** listen and document serving still succeed
 
 #### Scenario: Omitting onHydrate hydrates successfully
 
@@ -587,6 +595,78 @@ When `clientContext` is omitted or `undefined`, the hydrate bootstrap MUST assig
 - **THEN** the bootstrap emits `window.__SKU_CLIENT_CONTEXT__=undefined`
 - **AND** SSR and hydrate `SkuSsrProvider` both receive `undefined` (not `null`)
 
+### Requirement: Server-entry onListen runs after successful listen
+
+When the server entry includes optional `onListen`, sku MUST call it once after middleware + HTML pipeline are mounted **and** `listen` has succeeded — in both `sku start` and production.
+
+```ts
+onListen?: (args: {
+  app: Express;
+  httpServer: http.Server | https.Server;
+  port: number;
+}) => void | Promise<void>;
+```
+
+Sku MUST pass `{ app, httpServer, port }` where `port` is the bound listen port.
+
+If `onListen` returns a promise, sku MUST await it.
+If the callback throws or the promise rejects, startup MUST fail.
+
+Sku MUST call `onListen` **once** (not on every server-entry HMR reload in start).
+
+Sku MUST NOT provide an `onBeforeListen` hook.
+Sku MUST NOT add sku-owned listen logging by default (apps MAY log in `onListen`).
+
+Omitting `onListen` MUST NOT be an error.
+
+#### Scenario: onListen receives app, httpServer, and bound port
+
+- **WHEN** the server entry includes `onListen`
+- **AND** the server has successfully listened
+- **THEN** sku invokes `onListen` once with `{ app, httpServer, port }`
+- **AND** `port` is the bound listen port
+
+#### Scenario: onListen failure fails startup
+
+- **WHEN** `onListen` throws or returns a rejected promise
+- **THEN** startup fails
+
+#### Scenario: onListen is not re-invoked on server-entry HMR
+
+- **WHEN** `sku start` reloads the server entry via HMR after the initial successful listen
+- **THEN** sku does not call `onListen` again for that process
+
+### Requirement: expressTrustProxy opts into Express trust proxy hop count 1
+
+Vite SSR MUST support optional config `expressTrustProxy` as a boolean.
+
+When `expressTrustProxy` is `true`, sku MUST set `app.set('trust proxy', 1)` (hop count `1`, not Express boolean `true`).
+
+When `expressTrustProxy` is omitted or `false`, sku MUST leave Express’s default (`false`) — it MUST NOT enable trust proxy magically.
+
+`expressTrustProxy` MUST NOT be a silent sku default; it is opt-in via config.
+
+The create `vite-ssr` template MUST set `expressTrustProxy: true` in `sku.config`.
+
+Apps that need any other trust-proxy value (`false`, `2`, IP list, etc.) MUST override in `onListen` via `app.set('trust proxy', …)`.
+
+#### Scenario: expressTrustProxy true sets hop count 1
+
+- **WHEN** a Vite SSR app sets `expressTrustProxy: true`
+- **AND** the Express app is created for start or production
+- **THEN** `app.get('trust proxy')` is `1`
+
+#### Scenario: omitted expressTrustProxy leaves Express default
+
+- **WHEN** a Vite SSR app omits `expressTrustProxy` (or sets `false`)
+- **THEN** sku does not enable trust proxy
+- **AND** Express keeps its default (`false`)
+
+#### Scenario: Create template opts into expressTrustProxy
+
+- **WHEN** a user scaffolds with the `vite-ssr` create template
+- **THEN** the generated `sku.config` sets `expressTrustProxy: true`
+
 ### Requirement: Server-entry middleware runs before HTML render
 
 When the server entry includes Express/Connect `middleware`, sku MUST mount it before the HTML render path in start and production.
@@ -736,6 +816,8 @@ Absolute `http(s)` / CDN `publicPath` MUST fail at config validation.
 For `sku build` / production, Vite `config.base` is an implementation detail and MUST be set to that prefix so emitted client URLs match.
 The production server MUST serve client assets under `publicPath`.
 
+In production, sku MUST mount `express.static` for `publicPath` **before** server-entry `middleware`, so existing client assets are served even when that middleware would otherwise handle (or return for) the same path.
+
 For `sku start`, sku MUST ignore config `publicPath` and serve the Vite module graph from `/` (bootstrap at `/@vite/client`, etc.).
 Sku MUST NOT set Vite `config.base` to `publicPath` during start.
 
@@ -761,6 +843,13 @@ The decoupled asset-prefix case MUST be covered by a fixture or equivalent test
 - **AND** the browser requests an app route that does not start with that `publicPath`
 - **THEN** sku streams HTML for that route (not a basename mismatch 404)
 - **AND** in production, document assets are served under that `publicPath`
+
+#### Scenario: Production static assets before server-entry middleware
+
+- **WHEN** a Vite SSR production server has server-entry `middleware` that handles every request without calling `next`
+- **AND** a client asset exists under `publicPath`
+- **THEN** that asset is still served from the static mount
+- **AND** the middleware does not handle that asset request
 
 #### Scenario: sku start serves Vite bootstrap from root
 
@@ -860,7 +949,7 @@ Production remains HTTP.
 
 ### Requirement: Teams can scaffold a Vite SSR app via create
 
-`@sku-lib/create` MUST offer a `vite-ssr` template with non-empty config `sites` (typically one site), `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout route (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuSsrContexts<typeof server, typeof client>` wiring, and realistic default-exported request-entry objects (`middleware`, optional context getters, `onHydrate` — no `routes` re-export, no `Providers`).
+`@sku-lib/create` MUST offer a `vite-ssr` template with non-empty config `sites` (typically one site), `expressTrustProxy: true` in `sku.config`, `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout route (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuSsrContexts<typeof server, typeof client>` wiring, and realistic default-exported request-entry objects (`middleware`, optional `onListen` / context getters, `onHydrate` — no `routes` re-export, no `Providers`).
 
 A single-site template MUST omit `getSite` (sku uses the sole config site name).
 Multi-site examples MUST export `getSite`.
@@ -872,8 +961,8 @@ The static `vite` template MUST remain unchanged.
 #### Scenario: Create vite-ssr template
 
 - **WHEN** a user runs `@sku-lib/create --template vite-ssr`
-- **THEN** the project is Vite SSR with non-empty config `sites` and `routesEntry` exporting flat `routes`
-- **AND** the server entry exports `middleware` (and may export context getters)
+- **THEN** the project is Vite SSR with non-empty config `sites`, `expressTrustProxy: true`, and `routesEntry` exporting flat `routes`
+- **AND** the server entry exports `middleware` (and may export `onListen` / context getters)
 - **AND** the client entry exports `onHydrate` (and may export context getters)
 - **AND** the template wires `createSkuSsrContexts` and has no `Providers` export
 - **AND** a single-site template omits `getSite`
@@ -983,7 +1072,7 @@ Sku MUST NOT add a runtime experimental gate.
 
 ### Requirement: Product and Migrating docs cover Vite SSR topics
 
-Vite SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole config site when omitted on single-site), default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) and sibling projection, always-on `SkuSsrProvider` + `createSkuSsrContexts<typeof server, typeof client>()`, optional `middleware` / `onHydrate`, the three value channels vs the app-owned root layout route, middleware layers, CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
+Vite SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole config site when omitted on single-site), default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) and sibling projection, always-on `SkuSsrProvider` + `createSkuSsrContexts<typeof server, typeof client>()`, optional `middleware` / `onListen` / `onHydrate`, config `expressTrustProxy`, the three value channels vs the app-owned root layout route, middleware layers (including production mount order: request-context → `express.static(publicPath)` → server-entry `middleware` → HTML, and the existing `sku start` order), CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
 
 Docs MUST diagram the three value channels with a Markdown table (and MAY use a nested list). Docs MUST NOT require Mermaid or a VitePress Mermaid plugin for this coverage.
 
@@ -991,10 +1080,12 @@ Migrating docs MUST also cover:
 
 - named `Component` (not default export) for lazy routes
 - `routesEntry` + flat `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole config site when omitted on single-site)
-- default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` instead of an `onRequest` value return bag; optional `middleware` / `onHydrate`
+- default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` instead of an `onRequest` value return bag; optional `middleware` / `onListen` / `onHydrate`
+- webpack `onStart` → server-entry `onListen({ app, httpServer, port })`; trust proxy via config `expressTrustProxy` (not `onStart`); other trust-proxy values via `onListen`
 - multi-site membership via `sites` on routes (not `routesBySite` maps, dual-entry `routes` re-exports, optional language path params, union tree + allowlist, or sku host matching as the product story)
 - webpack dual-port (`port` + `serverPort`) vs Vite SSR single `port` (`serverPort` rejected; production still honours `PORT`)
 - production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
+- that Vite SSR production serves `client/` under `publicPath` **before** server-entry `middleware` (webpack SSR production often did not mount Node static)
 - CJS interop for `sku start`
 - Express 4 typing alignment (shared with webpack SSR; no Express 5 in this change)
 - React Router 8 as optional peerDependency for Data Mode / route typing (template/fixtures install it)
@@ -1024,7 +1115,7 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 #### Scenario: Primary Vite SSR docs have topic coverage
 
 - **WHEN** a reader opens Vite SSR product docs
-- **THEN** docs cover `routesEntry`, `SkuSsrProvider` / `createSkuSsrContexts`, the three value channels, the app-owned root layout route, flat `routes`, optional `sites`, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onHydrate`, CSP, and response headers
+- **THEN** docs cover `routesEntry`, `SkuSsrProvider` / `createSkuSsrContexts`, the three value channels, the app-owned root layout route, flat `routes`, optional `sites`, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onListen` / `onHydrate`, `expressTrustProxy`, CSP, and response headers
 - **AND** docs steer page content toward render-time data loading with clients from `useReactContext` / `useClientContext` (not loaders as the default)
 - **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext`
 - **AND** docs document optional dual-entry `getRouterContext` and Data Mode vs Framework Mode seeding
@@ -1043,6 +1134,14 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 - **WHEN** a reader opens **Migrate from Older / Webpack SSR App** docs
 - **THEN** docs explain webpack dual-port → Vite SSR single `port` (drop `serverPort`; `PORT` still overrides production)
 - **AND** docs state the production server entry is `dist/server/server.js` with sibling `client/` and `server/` directories
+- **AND** docs note that production serves assets under `publicPath` before server-entry middleware
+
+#### Scenario: Migrating covers onStart and trust proxy
+
+- **WHEN** a reader opens **Migrate from Older / Webpack SSR App** docs
+- **THEN** docs map webpack `onStart` to server-entry `onListen({ app, httpServer, port })`
+- **AND** docs state trust proxy is opt-in via config `expressTrustProxy` (sets hop count `1`), not via `onStart`
+- **AND** docs note other trust-proxy values are set in `onListen`
 
 #### Scenario: Docs discourage public assets folder for Vite SSR
 

@@ -282,6 +282,7 @@ export const createSkuContext = async ({
     cspReportOnlyEnabled,
     cspReportOnlyExtraScriptSrcHosts,
     cspReportOnlyReportTo: skuConfig.cspReportOnlyReportTo,
+    expressTrustProxy: Boolean(skuConfig.expressTrustProxy),
     httpsDevServer,
     languages,
     initialPath,

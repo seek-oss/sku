@@ -1,4 +1,10 @@
-import type { Request as ExpressRequest, RequestHandler } from 'express';
+import type {
+  Request as ExpressRequest,
+  RequestHandler,
+  Express,
+} from 'express';
+import type { Server as HttpServer } from 'node:http';
+import type { Server as HttpsServer } from 'node:https';
 import type {
   HydrationState,
   RouteObject,
@@ -20,6 +26,16 @@ export interface RenderAssets extends DocumentAssets {
 
 /** Connect-compatible middleware from the Vite SSR server entry. */
 export type SkuSsrMiddleware = RequestHandler | RequestHandler[];
+
+/**
+ * Optional server-entry post-listen hook — same window as webpack SSR `onStart`.
+ * Called once after middleware + HTML are mounted and `listen` succeeds.
+ */
+export type SkuSsrOnListen = (args: {
+  app: Express;
+  httpServer: HttpServer | HttpsServer;
+  port: number;
+}) => void | Promise<void>;
 
 /** JSON-serialisable shell seed for Vite SSR `clientContext`. */
 export type JsonValue =
@@ -130,6 +146,7 @@ export type SkuSsrServerEntry<
   getClientContext?: (args: { req: ExpressRequest }) => C;
   getReactContext?: SkuSsrServerGetReactContext<C, R>;
   middleware?: SkuSsrMiddleware;
+  onListen?: SkuSsrOnListen;
   getRouterContext?: SkuSsrServerGetRouterContext<C, R>;
 };
 

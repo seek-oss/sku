@@ -22,6 +22,7 @@ import type {
   SkuSsrGetLanguage,
   SkuSsrGetSite,
   SkuSsrMiddleware,
+  SkuSsrOnListen,
   SkuSsrServerEntry,
   SkuSsrServerGetReactContext,
   SkuSsrServerGetRouterContext,
@@ -72,6 +73,11 @@ export const middleware = optionalEntryValue<SkuSsrMiddleware>(
   'middleware',
 );
 
+export const onListen = optionalEntryFunction<SkuSsrOnListen>(
+  entry,
+  'onListen',
+);
+
 const getRouterContext = optionalEntryFunction<SkuSsrServerGetRouterContext>(
   entry,
   'getRouterContext',
@@ -101,5 +107,5 @@ export const render = (
 if (import.meta.env.PROD) {
   const { startProductionSsrServer } =
     await import('../ssr/startProductionSsrServer.js');
-  await startProductionSsrServer({ middleware, render });
+  await startProductionSsrServer({ middleware, onListen, render });
 }

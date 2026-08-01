@@ -25,7 +25,7 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Ship React Router 8 as an **optional peerDependency** `^8` (Vite SSR only; no hard sku dep)
 - Keep shared Express dep on 4 (no 4 → 5 bump)
 - No Jest transforms for React Router 8 in this change (Vite SSR requires Vitest)
-- Request entries `export default` one object via `defineServerEntry` / `defineClientEntry` (zero-runtime inference helpers); optional sync getters on that object (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) receive Express `{ req }` where needed; optional `middleware` / `onHydrate` / `getRouterContext`
+- Request entries `export default` one object via `defineServerEntry` / `defineClientEntry` (zero-runtime inference helpers); optional sync getters on that object (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) receive Express `{ req }` where needed; optional `middleware` / `onListen` / `onHydrate` / `getRouterContext`
 - Always-on sku `SkuSsrProvider` outside the router (`site` + serialised `clientContext` + env `reactContext`); typed hooks via `createSkuSsrContexts<typeof server, typeof client>()` on `sku/ssr`; route tree never wrapped by sku, so `createStaticHandler` is pre-built per site
 - Three value channels: `getClientContext` (serialised isomorphic React seed), dual-entry `getReactContext` (values that may differ on server vs client, e.g. `apiClient` / `makeClient`), dual-entry `getRouterContext` (values for React Router loaders/actions) — later getters receive already-resolved sibling values; `defineServerEntry` infers `Site` / `Language` / `ClientContext` / `ReactContext` from getter returns (`NoInfer` on sibling inputs); `defineClientEntry<typeof server>` extracts `Site` / `ClientContext` from the server entry (client callbacks cannot infer those — they only appear as inputs) and infers `ReactContext` from client `getReactContext`; hooks take types from `typeof` the entry objects (`useSite` from `getSite`)
 - Router-aware, isomorphic wrapping (Vocab, Apollo provider mount, page chrome) expressed as the app’s own root layout route in `routesEntry` (plain React Router; reads sku hooks)
@@ -35,6 +35,8 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Config `polyfills` on the Vite SSR browser client (parity with static Vite / webpack SSR)
 - Vite SSR `sku start` SSR-CSS (virtual stylesheet via Document assets; no `transformIndexHtml`)
 - Vite SSR `sku start` telemetry parity (`start.initial` / `start.rebuild`; no `transformIndexHtml`)
+- Optional server-entry `onListen` (post-`listen` lifecycle; same window as webpack `onStart`)
+- Opt-in config `expressTrustProxy` (boolean → Express `'trust proxy'` hop count `1`); create template sets `true`
 
 **Non-Goals:**
 
@@ -68,7 +70,9 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Union route tree + site allowlist middleware as the documented multi-site product story (filter-after-match); sku pre-filters membership before RR sees the tree
 - Parent→child inheritance of `sites` (site-specific routes MUST set `sites` explicitly; friction is intentional)
 - Overloading config `routes` (static prerender path lists) as the Vite SSR `RouteObject` entry — use `routesEntry` instead
-- Production listen-logging parity
+- Sku-owned listen logging by default (apps log in `onListen` if they want)
+- An `onBeforeListen` server-entry hook (process-wide setup before bind stays at module top-level)
+- Soft-defaulting Express `trust proxy` for Vite SSR without config (opt-in via `expressTrustProxy`; other values via `onListen`)
 - Supporting the config `public` assets folder for Vite SSR (until a definitive need)
 - Automatic `*.server.ts` client strip
 - Auto-injecting Braid reset into sku’s Vite SSR server entry
@@ -77,6 +81,7 @@ This change adds a **Vite-only SSR product** selected by `buildType`, with sku o
 - Treating Framework Mode server-only `getLoadContext(req, res)` as sufficient for sku Data Mode
 - Requiring `getClientContext` / `getReactContext` / `getRouterContext` (all optional; omit → `undefined` / empty defaults)
 - Requiring `middleware` (optional; omit → no consumer middleware layer)
+- Requiring `onListen` (optional; omit → no post-listen callback)
 - Requiring `onHydrate` (optional; omit → no hydrate side effects)
 - Requiring `getSite` when config has a single site (sku uses the sole config name; if exported, still call + validate)
 - Passing Fetch `Request` into `getSite` / `getLanguage` / `getClientContext` (Express `req` only; Fetch stays on `query` / server `getRouterContext`; `getReactContext` / `getRouterContext` receive sibling values as designed)
@@ -154,7 +159,7 @@ Config `routes` (static prerender path lists) remains unrelated — do not overl
 `serverEntry` / `clientEntry` each **`export default`** one object from `defineServerEntry` / `defineClientEntry` (structural types `SkuSsrServerEntry` / `SkuSsrClientEntry`).
 Sku reads that default export and calls optional properties.
 
-Server object: optional sync `getSite` / `getLanguage` / `getClientContext` / `getReactContext`; optional `middleware`, `getRouterContext`.
+Server object: optional sync `getSite` / `getLanguage` / `getClientContext` / `getReactContext`; optional `middleware`, `onListen`, `getRouterContext`.
 
 Client object: optional `onHydrate`; optional `getReactContext`, `getRouterContext`.
 
@@ -189,6 +194,7 @@ HTTP middleware (two layers; distinct from RR route `middleware`):
 
 - **Production:** optional server-entry Express/Connect `middleware`. Omit ⇒ no consumer middleware layer (not an error). Mounted in start and production when present.
 - **Dev-only:** optional config `devServerMiddleware` — start only; never in the production server graph.
+- **Production order:** request-context → `express.static(publicPath)` → server-entry `middleware` (if any) → HTML.
 - **Dev order:** request-context → `devServerMiddleware` → server-entry `middleware` (if any) → Vite → HTML.
 
 Document is sku-owned (React document metadata). No consumer Document override in v1.
@@ -276,7 +282,17 @@ Migrating docs must call this out (drop `serverPort`; map old `serverPort` → `
 
 `publicPath` is sku’s asset prefix — the public URL path for static assets (webpack parity via `__SKU_PUBLIC_PATH__`).
 
-**Production / `sku build`:** Vite `config.base` is set to `publicPath` so emitted client URLs match. The production server mounts `express.static` at that prefix. HTML injects assets under `publicPath`.
+**Production / `sku build`:** Vite `config.base` is set to `publicPath` so emitted client URLs match. The production server mounts `express.static` at that prefix **before** server-entry `middleware`. HTML injects assets under `publicPath`.
+
+Sku owns hashed client assets under relative `publicPath` and serves `client/` from the Node process.
+Webpack SSR production often never mounted Node static (CDN / reverse proxy / absolute `publicPath`), so catch-all middleware did not compete with sku-served assets.
+Vite SSR requires relative `publicPath` and does mount `express.static`, so middleware-before-static is a footgun: Melways-style / returning middleware never reaches the static mount.
+
+Product answer: static under `publicPath` wins over consumer middleware.
+Do **not** treat `unlessStatic('/static/…')` (or equivalent) as the sku fix — migrants should not reinvent that for every catch-all stack.
+Apps that intentionally intercept paths under `publicPath` are rare and own that routing (e.g. platform proxy), not sku’s default mount order.
+
+**Start order is unchanged** for this decision (`… → middleware → Vite → HTML`).
 
 **`sku start`:** Ignore config `publicPath` and serve the Vite module graph from `/` (webpack SSR start parity). Bootstrap scripts are `/@vite/client` and `/@fs/…` — not under `publicPath`. Documents stay on app routes outside any asset prefix either way.
 
@@ -415,6 +431,11 @@ export default defineServerEntry({
     clientContext: /* NoInfer<ClientContext> */ | undefined;
   }): /* inferred ReactContext */; // MAY be non-JSON (apiClient, makeClient, …)
   middleware?: RequestHandler | RequestHandler[];
+  onListen?(args: {
+    app: Express;
+    httpServer: http.Server | https.Server;
+    port: number;
+  }): void | Promise<void>;
   getRouterContext?(args: {
     request: Request; // Fetch — same shape as query()/loaders
     req: Express.Request;
@@ -499,6 +520,7 @@ Omitted/`undefined` MUST serialise as JS `undefined` in the bootstrap (not JSON 
 `reactContext` from dual-entry `getReactContext` → `useReactContext` (MAY differ per environment; not serialised).
 
 Omit `middleware` ⇒ no consumer middleware layer.
+Omit `onListen` ⇒ no post-listen callback (see Decision 25).
 Omit `onHydrate` ⇒ no hydrate side effects.
 
 ### 12a. Always-on SkuSsrProvider; three value channels; root layout for wrapping
@@ -783,7 +805,7 @@ Production route errors omit `Error.stack`.
 
 ### 20. Create template + Migrating docs
 
-Template `vite-ssr` with non-empty config `sites` (typically one site), `routesEntry` + flat `routes` scaffold (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry` + `createSkuSsrContexts<typeof …>` + optional `getClientContext` / `getReactContext` / `onHydrate` properties.
+Template `vite-ssr` with non-empty config `sites` (typically one site), `expressTrustProxy: true` in `sku.config` (visible Melways/SEEK-shaped trust proxy — see Decision 25), `routesEntry` + flat `routes` scaffold (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry` + `createSkuSsrContexts<typeof …>` + optional `getClientContext` / `getReactContext` / `onHydrate` properties.
 Single-site template omits `getSite` (sku uses the sole config name); multi-site examples include `getSite` on the server entry object.
 Request entries do not re-export `routes`.
 The template’s `routesEntry` scaffolds an app-owned root layout route so router-aware wrapping (and Apollo-style provider mounts) have an idiomatic home.
@@ -810,7 +832,8 @@ Migrating MUST cover:
 - three value channels (`getClientContext` / `getReactContext` / `getRouterContext`) + always-on `SkuSsrProvider` + `createSkuSsrContexts<typeof server, typeof client>()`, vs router-aware wrapping in the app’s own root layout route
 - optional dual-entry `getRouterContext` patterns (Data Mode vs Framework Mode); red warning against putting Express `req` in `RouterContextProvider`
 - Express `Request` module augmentation for middleware-appended fields (`express-serve-static-core`; shared by `middleware` / getters / server `getRouterContext`)
-- default-exported request-entry objects via `defineServerEntry` / `defineClientEntry` replacing `onRequest`; optional `middleware` / `onHydrate` properties
+- default-exported request-entry objects via `defineServerEntry` / `defineClientEntry` replacing `onRequest`; optional `middleware` / `onListen` / `onHydrate` properties
+- webpack `onStart` → server-entry `onListen({ app, httpServer, port })` (bound port; `httpServer` for keep-alive timeouts); trust proxy via config `expressTrustProxy` (not `onStart`)
 - Braid reset-before-Braid on `sku start` (Braid apps; no sku auto-inject)
 - client-only / `window`-touching libraries via client `getReactContext` (omit or return stubs on server) + root-layout / `useEffect` consumers — not a dual-entry component export
 - Jest → Vitest prerequisite (link existing docs / codemod)
@@ -1035,6 +1058,76 @@ Minor/patch upgrades within the documented major remain non-breaking when APIs s
 
 **Deferred:** Express 5 as a separate sku-wide breaking change (webpack SSR + Vite SSR + `sku serve` together). Jest support for React Router 8 (if ever needed for webpack) is a separate concern.
 
+### 25. Server-entry `onListen` + config `expressTrustProxy`
+
+Webpack SSR’s `onStart({ app })` was the post-listen hook for server setup (logging, timeouts, Express knobs).
+Migration spikes (CBS was the only app still on webpack `onStart`) showed the real gaps were:
+
+1. Express `trust proxy` behind Melways / reverse proxies
+2. `httpServer.keepAliveTimeout` (webpack only passed `app`, so timeouts never applied)
+3. Readiness logging with the **bound** port
+
+**`onListen` (server entry):**
+
+```ts
+onListen?: (args: {
+  app: Express;
+  httpServer: http.Server | https.Server;
+  port: number;
+}) => void | Promise<void>;
+```
+
+Sku calls `onListen` once after middleware + HTML pipeline are mounted **and** `listen` has succeeded — same window as webpack `onStart`, in both `sku start` and production.
+
+- Await the callback if it returns a promise; failure MUST fail startup.
+- Call **once** (not on every server-entry HMR reload in start).
+- Do **not** add `onBeforeListen` — process-wide setup before bind stays at module top-level.
+- Do **not** add sku-owned listen logging by default — apps log in `onListen` if they want.
+
+Wire the call from shared production `listen` and `createDevSsrServer` (start).
+
+**`expressTrustProxy` (sku config):**
+
+- Type: optional boolean named `expressTrustProxy` (Vite SSR).
+- When `true`, sku sets `app.set('trust proxy', 1)` (hop count **`1`**, despite the boolean name — safer single-hop than Express boolean `true`).
+- When omitted / `false`: leave Express default (`false`) — **not** magically on.
+- **Not** a silent sku default — opt-in via config.
+- Create template MUST set `expressTrustProxy: true` so new apps get SEEK/Melways-shaped behaviour visibly in config.
+- Any other trust-proxy value (`false`, `2`, IP list, …) → override in `onListen` via `app.set('trust proxy', …)`.
+
+Rejected alternatives:
+
+| Approach                                  | Why not                                                                                  |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Invisible sku default for `trust proxy`   | Hides Melways behaviour; hard to discover; rejected in favour of named config + template |
+| Express `app.set('trust proxy', true)`    | Boolean `true` trusts all hops; hop count `1` is the common SEEK case                    |
+| `onBeforeListen` hook                     | Module top-level already covers process-wide setup before bind                           |
+| Sku-owned listen logging                  | Apps own logging; `onListen` + bound `port` is enough                                    |
+| Pass only `app` (webpack `onStart` shape) | Blocks `httpServer.keepAliveTimeout`; migrants need the server handle                    |
+
+Example:
+
+```ts
+// sku.config.ts
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  expressTrustProxy: true, // → app.set('trust proxy', 1)
+} satisfies SkuConfig;
+
+// server entry
+defineServerEntry({
+  onListen({ app, httpServer, port }) {
+    httpServer.keepAliveTimeout = 20_000;
+    logger.info({ port }, 'App has started');
+    // rare: app.set('trust proxy', 2) or false
+  },
+  // …middleware / getters
+});
+```
+
+Docs: `entries.md` (`onListen`), `configuration.md` (`expressTrustProxy` → sets hop count `1`), migrate-from-webpack (`onStart` → `onListen` bag; trust proxy via config not `onStart`).
+
 ## Risks / Trade-offs
 
 | Risk                                          | Mitigation                                                                                                                                                                    |
@@ -1048,6 +1141,7 @@ Minor/patch upgrades within the documented major remain non-breaking when APIs s
 | Absolute/`CDN` `publicPath`                   | Config rejects; relative-only docs; no browser e2e for this edge case                                                                                                         |
 | `publicPath` coupled to basename              | Never pass `publicPath` as RR basename; bake `__SKU_PUBLIC_PATH__`; fixture for `/static/...` assets                                                                          |
 | Start vs prod asset URLs                      | Start: Vite graph at `/`; build/prod: `base` + static mount under `publicPath` (webpack start parity)                                                                         |
+| Catch-all middleware eats `publicPath` assets | Production: mount `express.static(publicPath)` before server-entry middleware; middleware + migrate docs state the order                                                      |
 | Unhashed `public` folder assets               | Hard-error if `paths.public` exists; disable `publicDir` / `copyPublicFiles` for Vite SSR; Migrating + docs                                                                   |
 | `dangerouslySetViteConfig` on SSR             | Hard-error when set; omit decorator plugin on SSR graph; docs + sku-support for use-cases                                                                                     |
 | CJS “got: object” on `sku start`              | Docs; consumer extends interop list (no new defaults; no runtime error rewrite)                                                                                               |
@@ -1076,14 +1170,16 @@ Minor/patch upgrades within the documented major remain non-breaking when APIs s
 | Wrong transport build resolved                | Apollo ships separate `browser` / `node` condition builds and asserts on mismatch; fixture exercises both `sku start` and production                                          |
 | Injection lost under `waitForAll`             | Buffer to `onAllReady` and write injected nodes in stream order; covered by tests                                                                                             |
 | Transport module duplicated in graph          | `useInsertHtml` context lives in one module resolved by both sku's render and `sku/ssr` (`unbundle: true`), as with `getCspNonce` / preload registry                          |
+| Trust proxy off unless configured             | Opt-in `expressTrustProxy`; template sets `true`; other values via `onListen`                                                                                                 |
+| `onListen` re-fired on server-entry HMR       | Call once after successful listen; do not re-invoke on every start HMR reload of the server entry                                                                             |
 
 ## Migration Plan
 
 Opt-in via `buildType` + Vite.
 
-New apps: `--template vite-ssr` (named `Component`).
+New apps: `--template vite-ssr` (named `Component`; `expressTrustProxy: true` in config).
 
-Existing: Migrating docs (ports, deploy layout, CJS, Express 4, React Router 8 optional peer, `Component`, `routesEntry` + flat `routes` + optional `sites` + `getSite`, `defineServerEntry` / `defineClientEntry` replacing `onRequest`, optional `middleware` / `onHydrate`, `createSkuSsrContexts<typeof …>` + three value channels + root layout wrapping, move off `public`, data-loading hierarchy + getRouterContext + red warning, Apollo streaming transport via `useInsertHtml` + root-layout provider instead of `getDataFromTree`, server-only loaders, Braid reset order, client-only libraries via `getReactContext`, Jest→Vitest, `#` pathAliases, sku-owned `@vocab/vite`).
+Existing: Migrating docs (ports, deploy layout, CJS, Express 4, React Router 8 optional peer, `Component`, `routesEntry` + flat `routes` + optional `sites` + `getSite`, `defineServerEntry` / `defineClientEntry` replacing `onRequest`, optional `middleware` / `onListen` / `onHydrate`, webpack `onStart` → `onListen` + `expressTrustProxy`, `createSkuSsrContexts<typeof …>` + three value channels + root layout wrapping, move off `public`, data-loading hierarchy + getRouterContext + red warning, Apollo streaming transport via `useInsertHtml` + root-layout provider instead of `getDataFromTree`, server-only loaders, Braid reset order, client-only libraries via `getReactContext`, Jest→Vitest, `#` pathAliases, sku-owned `@vocab/vite`).
 
 Webpack SSR: leave `buildType` unset.
 
@@ -1091,5 +1187,4 @@ Rollback: remove `buildType`.
 
 ## Open Questions
 
-- **Custom logger for setup behaviours?** Until decided, production Vite SSR does not add listen logging.
 - **Docs diagram format for the three channels?** Prefer a Markdown table (and optional nested list) in product docs. VitePress has no built-in Mermaid; the site does not ship `vitepress-plugin-mermaid` today. Adding Mermaid is optional polish later — do not block docs on it.

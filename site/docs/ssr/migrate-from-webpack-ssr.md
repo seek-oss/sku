@@ -28,7 +28,8 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 - Put routes in [`routesEntry`](../configuration.md#routesentry) with flat `routes` and optional `sites` — see [Routing](./routing.md)
 - Lazy page modules must export named `Component` (not `export default`)
 - sku streams the Document — put isomorphic wrapping in the root layout and env-differing values in `getReactContext`
-- Optional webpack `onStart` is not part of the SSR entry contract
+- Map webpack `onStart({ app })` to server-entry [`onListen({ app, httpServer, port })`](./entries.md#onlisten) (bound port + `httpServer` for keep-alive timeouts)
+- Trust proxy is opt-in via config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (sets hop count `1`), not via `onStart` / `onListen`. Other trust-proxy values → `app.set('trust proxy', …)` in `onListen`
 - Keep server-only construction in server `getReactContext` (or server-only helpers) and consume via `useReactContext()`
 
 ## App-level providers
@@ -44,6 +45,7 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 - Do not put raw Express `req` into `RouterContextProvider`
 - **Apollo:** replace `getDataFromTree` with streaming transport over [`useInsertHtml`](./entries.md#useinserthtml) — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration)
 - Keep production handlers on server-entry `middleware`; keep local mocks in `devServerMiddleware` — see [Middleware](./middleware.md)
+- Production serves `client/` under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware, so catch-all / Melways-style middleware cannot eat hashed assets
 
 ## CSP and hydration
 

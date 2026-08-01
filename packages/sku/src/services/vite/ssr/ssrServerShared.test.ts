@@ -1,10 +1,14 @@
 import { EventEmitter } from 'node:events';
 import { Readable } from 'node:stream';
-import { describe, expect, it, vi } from 'vitest';
+import { mkdtemp, writeFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Request, Response } from 'express';
 import {
   createHtmlRenderMiddleware,
   createWebRequest,
+  listen,
   type RenderFunction,
 } from './ssrServerShared.js';
 import type { RenderResult } from './types.js';
@@ -45,6 +49,18 @@ const createMockRes = (): Response => {
     return res;
   });
   return res as Response;
+};
+
+const baseListenOptions = {
+  publicPath: '/static/',
+  render: (async () => {
+    throw new Error('render should not run in these tests');
+  }) as RenderFunction,
+  assets: { bootstrapModules: [], css: [], modulePreloads: [] },
+  cspEnabled: false,
+  cspExtraScriptSrcHosts: [] as string[],
+  cspReportOnlyEnabled: false,
+  cspReportOnlyExtraScriptSrcHosts: [] as string[],
 };
 
 describe('createWebRequest', () => {
@@ -298,5 +314,129 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
     expect(expressReq).toHaveProperty('skuUserId', 'from-middleware');
     // Fetch Request is separate from Express req — not passed as the same object.
     expect(fetchRequest).not.toBe(expressReq);
+  });
+});
+
+describe('listen', () => {
+  const servers: Array<{
+    httpServer: { close: (callback?: (err?: Error) => void) => void };
+  }> = [];
+  let clientDirectory: string | undefined;
+
+  afterEach(async () => {
+    for (const { httpServer } of servers.splice(0)) {
+      await new Promise<void>((resolve, reject) => {
+        httpServer.close((err) => (err ? reject(err) : resolve()));
+      });
+    }
+    if (clientDirectory) {
+      await rm(clientDirectory, { recursive: true, force: true });
+      clientDirectory = undefined;
+    }
+  });
+
+  it('serves client assets under publicPath before catch-all middleware', async () => {
+    clientDirectory = await mkdtemp(path.join(tmpdir(), 'sku-ssr-static-'));
+    await writeFile(
+      path.join(clientDirectory, 'app.js'),
+      'console.log("asset")',
+    );
+
+    const result = await listen({
+      ...baseListenOptions,
+      port: 0,
+      clientDirectory,
+      middleware: (_req, res) => {
+        res.status(418).type('text/plain').send('middleware-handled');
+      },
+    });
+    servers.push(result);
+
+    const { port } = result.httpServer.address() as { port: number };
+    const asset = await fetch(`http://127.0.0.1:${port}/static/app.js`);
+    expect(asset.status).toBe(200);
+    expect(await asset.text()).toBe('console.log("asset")');
+
+    const other = await fetch(`http://127.0.0.1:${port}/not-an-asset`);
+    expect(other.status).toBe(418);
+    expect(await other.text()).toBe('middleware-handled');
+  });
+
+  it('calls onListen once with app, httpServer, and bound port', async () => {
+    const onListen = vi.fn();
+    const result = await listen({
+      ...baseListenOptions,
+      port: 0,
+      onListen,
+      middleware: (_req, res) => {
+        res.status(200).end();
+      },
+    });
+    servers.push(result);
+
+    const { port } = result.httpServer.address() as { port: number };
+    expect(onListen).toHaveBeenCalledTimes(1);
+    expect(onListen).toHaveBeenCalledWith({
+      app: result.app,
+      httpServer: result.httpServer,
+      port,
+    });
+  });
+
+  it('rejects startup when onListen throws', async () => {
+    await expect(
+      listen({
+        ...baseListenOptions,
+        port: 0,
+        onListen: () => {
+          throw new Error('onListen failed');
+        },
+        middleware: (_req, res) => {
+          res.status(200).end();
+        },
+      }),
+    ).rejects.toThrow('onListen failed');
+  });
+
+  it('rejects startup when onListen returns a rejected promise', async () => {
+    await expect(
+      listen({
+        ...baseListenOptions,
+        port: 0,
+        onListen: async () => {
+          throw new Error('onListen rejected');
+        },
+        middleware: (_req, res) => {
+          res.status(200).end();
+        },
+      }),
+    ).rejects.toThrow('onListen rejected');
+  });
+
+  it('sets trust proxy hop count 1 when expressTrustProxy is true', async () => {
+    const result = await listen({
+      ...baseListenOptions,
+      port: 0,
+      expressTrustProxy: true,
+      middleware: (_req, res) => {
+        res.status(200).end();
+      },
+    });
+    servers.push(result);
+
+    expect(result.app.get('trust proxy')).toBe(1);
+  });
+
+  it('leaves Express trust proxy default when expressTrustProxy is omitted', async () => {
+    const result = await listen({
+      ...baseListenOptions,
+      port: 0,
+      middleware: (_req, res) => {
+        res.status(200).end();
+      },
+    });
+    servers.push(result);
+
+    expect(result.app.get('trust proxy')).toBe(false);
   });
 });

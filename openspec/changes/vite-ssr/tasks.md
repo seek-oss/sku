@@ -185,9 +185,28 @@ Fold-in: client callbacks cannot infer `ClientContext` / `Site` (inputs only) �
 - [x] 15.4 Type-level / unit coverage: narrowed server `getClientContext` / `getSite` → typed client callbacks; omit `ServerEntry` ⇒ `undefined` / `string`
 - [x] 15.5 Changeset: note `defineClientEntry<typeof server>` types `ClientContext` / `Site` from the server entry (experimental API; do **not** label as breaking)
 
+## 16. Production static before middleware
+
+Catch-all / Melways-style server-entry middleware must not eat hashed client assets under `publicPath`.
+
+- [x] 16.1 Production `listen`: mount `express.static(publicPath)` after request-context and **before** server-entry `middleware` (start order unchanged)
+- [x] 16.2 Test: catch-all / returning middleware does not prevent serving an existing client asset under `publicPath`
+- [x] 16.3 Docs: `middleware.md` production mount order; migrate-from-webpack note that Vite SSR serves `client/` under `publicPath` before middleware
+
+## 17. Server-entry `onListen` + config `expressTrustProxy`
+
+Post-listen lifecycle (webpack `onStart` window) and opt-in Melways-shaped trust proxy.
+
+- [x] 17.1 Types: add optional `onListen` on `SkuSsrServerEntry` / `defineServerEntry` (`{ app, httpServer, port }` → `void | Promise<void>`)
+- [x] 17.2 Config: add optional boolean `expressTrustProxy` (Vite SSR schema/validation/JSDoc); when `true`, set `app.set('trust proxy', 1)` before listen; omit/false → Express default
+- [x] 17.3 Runtime: call `onListen` once after middleware + HTML mounted and `listen` succeeds (shared production `listen` + `createDevSsrServer`); await promise; failure fails startup; do not re-call on server-entry HMR
+- [x] 17.4 Create template: set `expressTrustProxy: true` in `sku.config`
+- [x] 17.5 Tests: `onListen` receives `{ app, httpServer, port }`; `expressTrustProxy: true` → `trust proxy === 1`; omit → default; failure rejects startup
+- [x] 17.6 Docs: `entries.md` (`onListen`); `configuration.md` (`expressTrustProxy` → hop count `1`); migrate-from-webpack (`onStart` → `onListen` bag; trust proxy via config)
+- [x] 17.7 Changeset: note `onListen` + `expressTrustProxy` (experimental API; do **not** label as breaking)
+
 ## Deferred
 
-- Production listen / custom logger — design Open Questions
 - Optional compose slot above the router (app `Providers`-like) — deferred until root-layout + `getReactContext` prove insufficient
 - Public `useInitialLanguage` / language-in-React-context hook — deferred (analytics); `getLanguage` stays Document vocab preload only (return type still inferred on the server entry)
 - Generic `SkuSsrRouteObject<Site>` — follow-on; client-entry `Site` / `ClientContext` via `defineClientEntry<typeof server>` is §15; components also use `useSite()`
@@ -209,6 +228,8 @@ Fold-in: client callbacks cannot infer `ClientContext` / `Site` (inputs only) �
 - Tolerating a missing `serverEntry` / `clientEntry` file — Non-Goals (omit unused properties on the default export instead)
 - Sku-owned per-site path expansion / per-site JS bundles / routes returned from getters — Non-Goals
 - Vite SSR support for config `public` / unhashed public assets — Non-Goals until definitive need
+- Sku-owned listen logging by default / `onBeforeListen` — Non-Goals (apps log in `onListen`; top-level for pre-bind setup)
+- Soft-defaulting Express `trust proxy` without config — Non-Goals (opt-in `expressTrustProxy`; other values via `onListen`)
 - Express 5 (sku-wide; webpack SSR + Vite SSR + `sku serve`) — later change
 - React Router majors beyond 8 — later releases
 - Jest support for React Router 8 (webpack) — out of scope for this change

@@ -89,6 +89,35 @@ See [Middleware](./middleware.md).
 middleware?: SkuSsrMiddleware;
 ```
 
+### onListen
+
+Called once after middleware + HTML are mounted and `listen` succeeds (both `sku start` and production).
+Use it for keep-alive timeouts, readiness logging with the bound port, or rare Express knobs.
+Not re-fired on server-entry HMR.
+Omit if you do not need a post-listen hook.
+
+For Melways-shaped `trust proxy`, prefer config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (hop count `1`).
+Override other trust-proxy values here via `app.set('trust proxy', …)`.
+
+```ts
+onListen?: (args: {
+  app: Express;
+  httpServer: http.Server | https.Server;
+  port: number;
+}) => void | Promise<void>;
+```
+
+```tsx
+defineServerEntry({
+  onListen({ app, httpServer, port }) {
+    httpServer.keepAliveTimeout = 20_000;
+    console.log(`listening on ${port}`);
+    // rare: app.set('trust proxy', 2)
+  },
+  // …
+});
+```
+
 ### getRouterContext
 
 Seeds React Router’s `RouterContextProvider` for loader/action DI.

@@ -46,6 +46,7 @@ export default {
   cspReportOnlyEnabled: false,
   cspReportOnlyExtraScriptSrcHosts: undefined,
   cspReportOnlyReportTo: undefined,
+  expressTrustProxy: false,
   httpsDevServer: false,
   devServerMiddleware: undefined,
   languages: undefined,

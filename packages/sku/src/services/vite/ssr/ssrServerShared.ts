@@ -22,6 +22,7 @@ import type {
   RenderOptions,
   RenderResult,
   SkuSsrMiddleware,
+  SkuSsrOnListen,
 } from './types.js';
 
 const toFetchHeaders = (headers: IncomingHttpHeaders): Headers => {
@@ -127,6 +128,10 @@ export interface SsrServerOptions {
   port: number;
   publicPath: string;
   middleware?: SkuSsrMiddleware;
+  /** Called once after middleware + HTML are mounted and `listen` succeeds. */
+  onListen?: SkuSsrOnListen;
+  /** When true, sets Express `trust proxy` hop count to `1`. */
+  expressTrustProxy?: boolean;
   render: RenderFunction;
   assets: RenderAssets;
   manifest?: RenderManifest;
@@ -139,6 +144,18 @@ export interface SsrServerOptions {
   development?: boolean;
   onRenderError?: (error: Error) => void;
 }
+
+/** Bound listen port from `httpServer.address()`, else the configured fallback. */
+export const resolveBoundPort = (
+  httpServer: HttpServer | HttpsServer,
+  fallbackPort: number,
+): number => {
+  const address = httpServer.address();
+  if (typeof address === 'object' && address !== null) {
+    return address.port;
+  }
+  return fallbackPort;
+};
 
 export interface SsrServerResult {
   app: Express;
@@ -282,13 +299,21 @@ export const listen = async (
   const serverApp = express();
   const httpServer = createHttpServer(serverApp);
 
+  if (options.expressTrustProxy) {
+    // Hop count 1 (not boolean true) — safer single-hop Melways/proxy case.
+    serverApp.set('trust proxy', 1);
+  }
+
+  // Production order: request-context → express.static(publicPath) →
+  // server-entry middleware → HTML. Static before middleware so catch-all /
+  // Melways-style handlers cannot eat hashed client assets.
   serverApp.use(createSsrRequestContextMiddleware());
-  mountConsumerMiddleware(options.middleware, (middleware) =>
-    serverApp.use(middleware),
-  );
   if (options.clientDirectory) {
     serverApp.use(options.publicPath, express.static(options.clientDirectory));
   }
+  mountConsumerMiddleware(options.middleware, (middleware) =>
+    serverApp.use(middleware),
+  );
 
   serverApp.use(
     createHtmlRenderMiddleware({
@@ -310,6 +335,23 @@ export const listen = async (
     httpServer.once('error', reject);
     httpServer.listen(options.port, resolve);
   });
+
+  if (options.onListen) {
+    try {
+      await options.onListen({
+        app: serverApp,
+        httpServer,
+        port: resolveBoundPort(httpServer, options.port),
+      });
+    } catch (error) {
+      await new Promise<void>((resolve, reject) => {
+        httpServer.close((closeError) =>
+          closeError ? reject(closeError) : resolve(),
+        );
+      });
+      throw error;
+    }
+  }
 
   return { app: serverApp, httpServer };
 };

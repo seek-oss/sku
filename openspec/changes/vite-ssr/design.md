@@ -494,6 +494,7 @@ It is **not** an `onHydrate` argument.
 Its return type is still inferred as `L` on the server entry object for typed entry surfaces; it does not reach `SkuSsrProvider` or `createSkuSsrContexts`.
 
 `clientContext` from `getClientContext` → hydrate bootstrap + `useClientContext` (same value on both sides).
+Omitted/`undefined` MUST serialise as JS `undefined` in the bootstrap (not JSON `null`); an explicit `null` return stays `null`.
 
 `reactContext` from dual-entry `getReactContext` → `useReactContext` (MAY differ per environment; not serialised).
 

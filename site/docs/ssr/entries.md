@@ -14,6 +14,8 @@ Sku reads that default export and calls optional properties.
 
 ## Server Entry
 
+**Always** wrap the default export with [`defineServerEntry`](./providers.md#entry-objects-defineserverentry--definecliententry) from `sku/ssr`. It is a zero-runtime identity helper that creates a TypeScript inference scope so getter returns type later sibling args (and client `Site` / `ClientContext` via `defineClientEntry<typeof server>`).
+
 Sync getters on the default-exported object run on every document request **after** consumer Express middleware and **before** `query()`.
 
 **Call order:** `getSite` → `getLanguage` → `getClientContext` → `getReactContext` → optional `getRouterContext` → `query()`.
@@ -22,60 +24,99 @@ Early getters (`getSite` / `getLanguage` / `getClientContext`) receive **`{ req 
 Prefer keeping them pure and simple; libraries that parse once can memoise on `req`.
 
 Later getters receive already-resolved sibling values so you can project instead of re-deriving.
-Fetch `Request` stays on React Router `query()` / loaders and optional server [`getRouterContext`](#getroutercontext-optional).
+Fetch `Request` stays on React Router `query()` / loaders and optional server [`getRouterContext`](#getroutercontext).
 
 ### getSite
 
-App-owned site name that selects the pre-built site route tree (must appear in non-empty config [`sites`](../configuration.md#sites)).
+Resolves the active site name for this request.
+
+```ts
+getSite?: (args: { req: ExpressRequest }) => Site;
+```
 
 - **Required** when config has more than one site (hard error at init if missing)
-- **Optional** on single-site apps — sku uses the sole config site name when omitted
-- When present, sku still calls it and validates the return (fail closed on non-string / unknown site)
 
-`defineServerEntry` infers the return as **Site** (`S`) and types later sibling `site` args (and [`useSite()`](./providers.md#typed-hooks-createskussrcontexts)) as that union.
-Narrow inside the getter (e.g. `return host === 'nz' ? 'nz' : 'au'`) — do **not** annotate as [`SkuSsrGetSite`](./providers.md) (widens to `string`).
+Use [`useSite()`](./providers.md#typed-hooks-createskussrcontexts) to access within the application.
 
 See [Routing → Multi-site](./routing.md#multi-site-path-sets).
 
 ### getLanguage
 
-Optional. Name of language file translations to preload on the Document.
-Omit or return `undefined` ⇒ no vocab language chunk. Server-local only — not forwarded to the client.
-`defineServerEntry` infers the return as **Language** (`L`) on the entry object; there is no `useLanguage` React hook in v1.
-Do **not** annotate as `SkuSsrGetLanguage` if you want literal inference (it widens to `string | undefined`).
+Resolves the language for Document vocab chunk registration.
+
+```ts
+getLanguage?: (args: { req: ExpressRequest }) => Language;
+```
+
+Use [`useLanguage()`](./providers.md#typed-hooks-createskussrcontexts) to access within the application.
+
 See [Multi-language](./multi-language.md).
 
 ### getClientContext
 
-Optional. Serialisable JSON seed for the hydrate bootstrap and always-on [`SkuSsrProvider`](./providers.md) (`useClientContext()`).
-Omit ⇒ `clientContext` is `undefined`.
+JSON serialisable content sent to the client and passed to React and Router context.
+
+```ts
+getClientContext?: (args: { req: ExpressRequest }) => ClientContext;
+```
 
 ### getReactContext
 
-Optional. Values that **may differ** on server vs client (e.g. `makeClient`, `apiClient`, window SDK handles).
-Not serialised — reaches React via `useReactContext()`.
-
-Server receives `{ req, site, clientContext }` — `site` is typed as the inferred Site from `getSite`.
-
-### Typing middleware-attached fields on `req`
-
-Getters and server `getRouterContext` use Express’s `Request`.
-Fields you append in middleware (`req.user`, `req.log`, …) are not on the stock type.
-Augment Express the same way sku does for `getCspNonce`.
-
-Install `@types/express-serve-static-core` as a direct dependency (pnpm does not expose sku’s copy for module augmentation), then:
+Server-specific values for React via `useReactContext` (e.g. API clients).
 
 ```ts
-// e.g. src/types/express.d.ts (ensure included by tsconfig)
-declare module 'express-serve-static-core' {
-  interface Request {
-    user?: { id: string };
-    log?: { info: (msg: string) => void };
-  }
-}
+getReactContext?: (args: {
+  req: ExpressRequest;
+  site: Site;
+  clientContext: ClientContext | undefined;
+}) => ReactContext;
 ```
 
-That augmentation is shared by `middleware`, the getters, and server `getRouterContext`.
+### middleware
+
+Express middleware run before SSR for each request.
+
+```ts
+middleware?: SkuSsrMiddleware;
+```
+
+Connect/Express handlers mounted before the HTML render path.
+Omit ⇒ no consumer middleware layer (not an error).
+See [Middleware](./middleware.md).
+
+For React Router middleware see [Routing](./routing.md).
+
+### getRouterContext
+
+Server-specific values for Router context (loaders, actions and middleware).
+
+```ts
+getRouterContext?: (args: {
+  request: Request;
+  req: ExpressRequest;
+  site: Site;
+  clientContext: ClientContext | undefined;
+  reactContext: ReactContext | undefined;
+}) => RouterContextProvider | Promise<RouterContextProvider>;
+```
+
+Seeds React Router’s `RouterContextProvider` for **loader/action DI** on document SSR.
+
+Sku calls `getRouterContext({ request, req, site, clientContext, reactContext })` before `query()` and passes the result as `requestContext`.
+
+- `request` — Fetch `Request` (same shape as loaders)
+- `req` — Express request after consumer middleware
+- `site` / `clientContext` / `reactContext` — already-resolved siblings
+
+Omit ⇒ today’s empty/default React Router context behaviour.
+
+Prefer projecting **isomorphic values** both server and client can supply.
+See [Data loading → Router context (`getRouterContext`)](./data-loading.md#router-context-getroutercontext).
+
+:::warning Never put Express `req` in `RouterContextProvider`
+Project values / isomorphic-capable dependencies that **both** server and client `getRouterContext` can supply.
+Raw `req` is `undefined` on client navigations and becomes a landmine for loaders that assume it exists.
+:::
 
 ### Example
 
@@ -122,39 +163,20 @@ const server = defineServerEntry({
 export default server;
 ```
 
-### middleware (optional)
-
-Production middleware. Connect/Express handlers mounted before the HTML render path.
-Omit ⇒ no consumer middleware layer (not an error).
-See [Middleware](./middleware.md).
-
-For React Router middleware see [Routing](./routing.md).
-
-### getRouterContext (optional)
-
-Seeds React Router’s `RouterContextProvider` for **loader/action DI** on document SSR.
-
-Sku calls `getRouterContext({ request, req, site, clientContext, reactContext })` before `query()` and passes the result as `requestContext`.
-
-- `request` — Fetch `Request` (same shape as loaders)
-- `req` — Express request after consumer middleware
-- `site` / `clientContext` / `reactContext` — already-resolved siblings
-
-Omit ⇒ today’s empty/default React Router context behaviour.
-
-Prefer projecting **isomorphic values** both server and client can supply.
-See [Data loading → Router context (`getRouterContext`)](./data-loading.md#router-context-getroutercontext).
-
-:::warning Never put Express `req` in `RouterContextProvider`
-Project values / isomorphic-capable dependencies that **both** server and client `getRouterContext` can supply.
-Raw `req` is `undefined` on client navigations and becomes a landmine for loaders that assume it exists.
-:::
-
 ## Client Entry
 
-### onHydrate (optional)
+**Always** wrap the default export with [`defineClientEntry`](./providers.md#entry-objects-defineserverentry--definecliententry) from `sku/ssr`. Prefer `defineClientEntry<typeof server>()({ … })` so client callbacks get typed `Site` / `ClientContext` from the server entry — see [Providers](./providers.md#entry-objects-defineserverentry--definecliententry).
 
-Called on the client before hydration when present.
+### onHydrate
+
+Side effects to run before client React hydrate.
+
+```ts
+onHydrate?: (args: {
+  clientContext: ClientContext | undefined;
+}) => void;
+```
+
 Receives `{ clientContext }` (the deserialized seed from `getClientContext`).
 
 Returns nothing — hydrate-time side effects only. Request values reach React via [`SkuSsrProvider`](./providers.md), so there is no need to stash them in module state.
@@ -163,7 +185,16 @@ Omit ⇒ no hydrate side effects (not an error).
 
 Sku reads hydrated `site` from the bootstrap (not an `onHydrate` argument) to select the same pre-built site tree as SSR. See [routing](./routing.md).
 
-### getReactContext (optional)
+### getReactContext
+
+Client-specific values for React via `useReactContext` (e.g. API clients).
+
+```ts
+getReactContext?: (args: {
+  site: Site;
+  clientContext: ClientContext | undefined;
+}) => ReactContext;
+```
 
 Same channel as the server: env-differing React values for `useReactContext()`.
 Receives `{ site, clientContext }` from the hydrate bootstrap (no Express).
@@ -191,7 +222,17 @@ const client = defineClientEntry<typeof server>()({
 export default client;
 ```
 
-### getRouterContext (optional)
+### getRouterContext
+
+Client-specific values for Router context (loaders, actions and middleware).
+
+```ts
+getRouterContext?: (args: {
+  site: Site;
+  clientContext: ClientContext | undefined;
+  reactContext: ReactContext | undefined;
+}) => RouterContextProvider;
+```
 
 Sku maps your `getRouterContext` into React Router’s native `createBrowserRouter({ getContext })`, wrapping the zero-arg API so your export receives `{ site, clientContext, reactContext }`.
 
@@ -204,7 +245,11 @@ See [Providers](./providers.md) and [Data loading](./data-loading.md).
 
 ### routes
 
-Named export of a React Router route tree (`SkuSsrRouteObject[]`).
+Named export of a React Router route tree.
+
+```ts
+export const routes: SkuSsrRouteObject[];
+```
 
 A SkuSsrRouteObject is a https://reactrouter.com/start/data/route-object with an extra property:
 
@@ -249,4 +294,25 @@ During document SSR, sku renders queued nodes to markup and writes them into the
 Off the SSR path (browser graph) it is a silent no-op and never throws.
 
 Use it to wire transports such as Apollo’s `buildManualDataTransport` — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
-Injected script bodies are not known when CSP headers are derived from the shell, so they must carry the [CSP nonce](./csp.md) (for example Apollo `extraScriptProps={{ nonce: getCspNonce() }}` from server `getReactContext`).
+
+Injected script bodies are not known when CSP headers are derived from the shell, so they must carry the [CSP nonce](./csp.md).
+
+## Typing middleware-attached fields on `req`
+
+Getters and server `getRouterContext` use Express’s `Request`.
+Fields you append in middleware (`req.user`, `req.log`, …) are not on the stock type.
+Augment Express the same way sku does for `getCspNonce`.
+
+Install `@types/express-serve-static-core` as a direct dependency (pnpm does not expose sku’s copy for module augmentation), then:
+
+```ts
+// e.g. src/types/express.d.ts (ensure included by tsconfig)
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: { id: string };
+    log?: { info: (msg: string) => void };
+  }
+}
+```
+
+That augmentation is shared by `middleware`, the getters, and server `getRouterContext`.

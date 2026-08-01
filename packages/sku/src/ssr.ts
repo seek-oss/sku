@@ -6,6 +6,7 @@ export {
   defineClientEntry,
   defineServerEntry,
 } from './services/vite/ssr/defineEntry.js';
+export type { ServerEntryBody } from './services/vite/ssr/defineEntry.js';
 export { createSkuSsrContexts } from './services/vite/ssr/skuSsrContext.js';
 export type {
   JsonValue,

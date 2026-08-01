@@ -3,10 +3,7 @@ import type { RequestHandler } from 'express';
 import {
   optionalEntryFunction,
   optionalEntryValue,
-  optionalNamedExport,
-  optionalNamedFunctionExport,
   optionalOrRequiredEntryFunction,
-  optionalOrRequiredFunctionExport,
   rejectRoutesBySiteExport,
   requireDefaultEntry,
   requireNamedExport,
@@ -142,69 +139,6 @@ describe('optionalEntryValue', () => {
 
   it('returns undefined when middleware is omitted', () => {
     expect(optionalEntryValue({}, 'middleware')).toBeUndefined();
-  });
-});
-
-describe('optionalNamedFunctionExport', () => {
-  it('returns the function when present', () => {
-    const getRouterContext = () => ({});
-    expect(
-      optionalNamedFunctionExport({ getRouterContext }, 'getRouterContext'),
-    ).toBe(getRouterContext);
-  });
-
-  it('returns undefined when omitted (default RR context behaviour)', () => {
-    expect(
-      optionalNamedFunctionExport({ getSite: () => 'au' }, 'getRouterContext'),
-    ).toBeUndefined();
-  });
-
-  it('returns undefined when the export is not a function', () => {
-    expect(
-      optionalNamedFunctionExport(
-        { getRouterContext: 'nope' },
-        'getRouterContext',
-      ),
-    ).toBeUndefined();
-  });
-});
-
-describe('optionalOrRequiredFunctionExport', () => {
-  it('requires getSite when multi-site', () => {
-    expect(() =>
-      optionalOrRequiredFunctionExport({}, 'getSite', 'serverEntry', true),
-    ).toThrow(
-      /Vite SSR serverEntry must export named 'getSite' as a function\. Missing or invalid 'getSite' export\./,
-    );
-  });
-
-  it('allows omitting getSite on single-site', () => {
-    expect(
-      optionalOrRequiredFunctionExport({}, 'getSite', 'serverEntry', false),
-    ).toBeUndefined();
-  });
-
-  it('returns getSite when present on single-site', () => {
-    const getSite = () => 'au';
-    expect(
-      optionalOrRequiredFunctionExport(
-        { getSite },
-        'getSite',
-        'serverEntry',
-        false,
-      ),
-    ).toBe(getSite);
-  });
-});
-
-describe('optionalNamedExport', () => {
-  it('returns middleware when present', () => {
-    const middleware: RequestHandler[] = [];
-    expect(optionalNamedExport({ middleware }, 'middleware')).toBe(middleware);
-  });
-
-  it('returns undefined when middleware is omitted', () => {
-    expect(optionalNamedExport({}, 'middleware')).toBeUndefined();
   });
 });
 

@@ -17,7 +17,7 @@ Reach for React Router **loaders** when you need to:
 [\<Navigate /\>](https://reactrouter.com/api/components/Navigate) and [useNavigate()](https://reactrouter.com/api/hooks/useNavigate) are browser controls and will **not** create a document HTTP redirect. Use a loader `redirect()` when the response must be a real redirect.
 
 Loaders receive a Fetch `Request`, **not** Express `req`.
-Express `req` is available to [entry getters](./entries.md) (`getSite` / `getLanguage` / `getClientContext` / server `getReactContext`) and optional server [`getRouterContext`](./entries.md#getroutercontext-optional) — not as the loader `request` argument.
+Express `req` is available to [entry getters](./entries.md) (`getSite` / `getLanguage` / `getClientContext` / server `getReactContext`) and optional server [`getRouterContext`](./entries.md#getroutercontext) — not as the loader `request` argument.
 
 **Migration Consideration:** Apps that need a complex server-side only loader experience should reach out through support channels to discuss their use-case
 
@@ -84,7 +84,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
 
 After hydrate on `/`, a client navigation to `/profile` still gets context from client `getRouterContext` — not from Express.
 
-See [Request entries](./entries.md#getroutercontext-optional) for export shapes and [Middleware](./middleware.md) for Express mount order.
+See [Request entries](./entries.md#getroutercontext) for export shapes and [Middleware](./middleware.md) for Express mount order.
 
 ## Response headers
 

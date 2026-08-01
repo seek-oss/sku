@@ -4,6 +4,36 @@ import type { RouterContextProvider } from 'react-router';
 import type { ClientContextOf, SiteOf } from './entryTypeExtractors.js';
 import type { JsonValue, SkuSsrMiddleware } from './types.js';
 
+export type ServerEntryBody<
+  Site extends string = string,
+  Language extends string | undefined = string | undefined,
+  ClientContext extends JsonValue | undefined = undefined,
+  ReactContext = undefined,
+> = {
+  /** Resolves the active site name for this request */
+  getSite?: (args: { req: ExpressRequest }) => Site;
+  /** Resolves the language for Document vocab chunk registration. */
+  getLanguage?: (args: { req: ExpressRequest }) => Language;
+  /** JSON seed serialised to the client and passed to React and Router context. */
+  getClientContext?: (args: { req: ExpressRequest }) => ClientContext;
+  /** Server-specific values for React via `useReactContext` (e.g. API clients). */
+  getReactContext?: (args: {
+    req: ExpressRequest;
+    site: NoInfer<Site>;
+    clientContext: NoInfer<ClientContext> | undefined;
+  }) => ReactContext;
+  /** Server-specific values for Router Router context (loaders, actions and middleware) */
+  getRouterContext?: (args: {
+    request: Request;
+    req: ExpressRequest;
+    site: NoInfer<Site>;
+    clientContext: NoInfer<ClientContext> | undefined;
+    reactContext: NoInfer<ReactContext> | undefined;
+  }) => RouterContextProvider | Promise<RouterContextProvider>;
+  /** Express middleware run before SSR for each request. */
+  middleware?: SkuSsrMiddleware;
+};
+
 /**
  * Zero-runtime identity helper — creates a TypeScript inference scope so
  * getter returns type later sibling args.
@@ -13,35 +43,23 @@ export function defineServerEntry<
   Language extends string | undefined = string | undefined,
   ClientContext extends JsonValue | undefined = undefined,
   ReactContext = undefined,
->(entry: {
-  getSite?: (args: { req: ExpressRequest }) => Site;
-  getLanguage?: (args: { req: ExpressRequest }) => Language;
-  getClientContext?: (args: { req: ExpressRequest }) => ClientContext;
-  getReactContext?: (args: {
-    req: ExpressRequest;
-    site: NoInfer<Site>;
-    clientContext: NoInfer<ClientContext> | undefined;
-  }) => ReactContext;
-  middleware?: SkuSsrMiddleware;
-  getRouterContext?: (args: {
-    request: Request;
-    req: ExpressRequest;
-    site: NoInfer<Site>;
-    clientContext: NoInfer<ClientContext> | undefined;
-    reactContext: NoInfer<ReactContext> | undefined;
-  }) => RouterContextProvider | Promise<RouterContextProvider>;
-}) {
+>(
+  entry: ServerEntryBody<Site, Language, ClientContext, ReactContext>,
+): ServerEntryBody<Site, Language, ClientContext, ReactContext> {
   return entry;
 }
 
 type ClientEntryBody<ServerEntry, ReactContext> = {
+  /** Side effects to run before client React hydrate. */
   onHydrate?: (args: {
     clientContext: ClientContextOf<ServerEntry> | undefined;
   }) => void;
+  /** Client-specific values for React via `useReactContext` (e.g. API clients). */
   getReactContext?: (args: {
     site: SiteOf<ServerEntry>;
     clientContext: NoInfer<ClientContextOf<ServerEntry>> | undefined;
   }) => ReactContext;
+  /** Client-specific values for Router Router context (loaders, actions and middleware) */
   getRouterContext?: (args: {
     site: SiteOf<ServerEntry>;
     clientContext: NoInfer<ClientContextOf<ServerEntry>> | undefined;
@@ -55,17 +73,6 @@ type NoServerEntry = { readonly [noServerEntryBrand]?: never };
 
 /**
  * Zero-runtime identity helper for the Vite SSR client entry object.
- *
- * Pass `typeof` the server entry so `Site` / `ClientContext` match
- * `getSite` / `getClientContext` (client callbacks cannot infer those —
- * they only appear as inputs). Still infers `ReactContext` from client
- * `getReactContext`.
- *
- * TypeScript cannot partially infer type parameters, so binding a server
- * entry is curried: `defineClientEntry<typeof server>()({ … })`.
- * Omit the type argument and call directly —
- * `defineClientEntry({ … })` — for `site: string` and
- * `clientContext: undefined`.
  */
 export function defineClientEntry<ServerEntry>(): <ReactContext = undefined>(
   entry: ClientEntryBody<ServerEntry, ReactContext>,

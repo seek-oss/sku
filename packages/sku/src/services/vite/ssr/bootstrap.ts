@@ -90,7 +90,12 @@ export const buildBootstrapScriptContent = (
 
   return [
     `window.__SKU_DOCUMENT_ASSETS__=${escapeScriptValue(assets)}`,
-    `window.__SKU_CLIENT_CONTEXT__=${escapeScriptValue(clientContext ?? null)}`,
+    // Preserve omitted/`undefined` vs intentional `null` (JSON.stringify(undefined) is unusable).
+    `window.__SKU_CLIENT_CONTEXT__=${
+      clientContext === undefined
+        ? 'undefined'
+        : escapeScriptValue(clientContext)
+    }`,
     `window.__SKU_SITE__=${escapeScriptValue(site)}`,
     `window.__staticRouterHydrationData=${escapeScriptValue(hydrationData)}`,
   ].join(';');

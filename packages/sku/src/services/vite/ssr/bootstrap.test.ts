@@ -50,6 +50,27 @@ describe('buildBootstrapScriptContent', () => {
     expect(script).toContain('window.__SKU_SITE__="nz"');
   });
 
+  it('emits JS undefined when clientContext is omitted', () => {
+    const script = buildBootstrapScriptContent(
+      { css: [], modulePreloads: [] },
+      emptyContext,
+      { site: 'au' },
+    );
+
+    expect(script).toContain('window.__SKU_CLIENT_CONTEXT__=undefined');
+    expect(script).not.toContain('window.__SKU_CLIENT_CONTEXT__=null');
+  });
+
+  it('preserves intentional null clientContext', () => {
+    const script = buildBootstrapScriptContent(
+      { css: [], modulePreloads: [] },
+      emptyContext,
+      { clientContext: null, site: 'au' },
+    );
+
+    expect(script).toContain('window.__SKU_CLIENT_CONTEXT__=null');
+  });
+
   it('omits Error.stack in production serialization', () => {
     const error = new Error('Boom');
     error.stack = 'Error: Boom\n    at loader';

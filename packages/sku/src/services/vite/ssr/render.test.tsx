@@ -99,6 +99,8 @@ describe('render', () => {
     expect(html).toContain('>au<');
     expect(html).toContain('>no user<');
     expect(html).toContain('>no api<');
+    expect(html).toContain('window.__SKU_CLIENT_CONTEXT__=undefined');
+    expect(html).not.toContain('window.__SKU_CLIENT_CONTEXT__=null');
   });
 
   it('projects sibling values into getRouterContext before query()', async () => {

@@ -222,7 +222,7 @@ Sku MUST NOT pass `res` into getters or `getRouterContext`.
 Sku MUST NOT pass Fetch `Request` into `getSite` / `getLanguage` / `getClientContext` (Fetch stays on `query()` and optional server `getRouterContext`).
 
 When `getLanguage` is omitted or returns `undefined`, sku MUST NOT register a vocab language chunk.
-When `getClientContext` is omitted, `clientContext` is `undefined`.
+When `getClientContext` is omitted or returns `undefined`, `clientContext` is `undefined` on both SSR and hydrate — the bootstrap MUST emit JS `undefined` (not JSON `null`). An explicit `null` return MUST serialise as JSON `null`.
 When `getReactContext` is omitted, `reactContext` is `undefined`.
 Sku MUST NOT forward `language` to the client.
 Sku MUST NOT serialise `reactContext` into the hydrate bootstrap.
@@ -569,6 +569,8 @@ Sku MUST scrub Promises from loader/action data before bootstrap stringify.
 
 Sku MUST omit `Error.stack` from production hydration error payloads.
 
+When `clientContext` is omitted or `undefined`, the hydrate bootstrap MUST assign `window.__SKU_CLIENT_CONTEXT__=undefined` (JS `undefined`, not JSON `null`) so SSR and hydrate agree with the typed omit contract. An explicit `null` `clientContext` MUST still serialise as JSON `null`.
+
 #### Scenario: Promises do not break serialization
 
 - **WHEN** loader or action data contains Promises at serialize time
@@ -578,6 +580,12 @@ Sku MUST omit `Error.stack` from production hydration error payloads.
 
 - **WHEN** a route error is serialized into the hydration bootstrap in production
 - **THEN** the payload MUST NOT include `Error.stack`
+
+#### Scenario: Omitted clientContext stays undefined across hydrate
+
+- **WHEN** `getClientContext` is omitted or returns `undefined`
+- **THEN** the bootstrap emits `window.__SKU_CLIENT_CONTEXT__=undefined`
+- **AND** SSR and hydrate `SkuSsrProvider` both receive `undefined` (not `null`)
 
 ### Requirement: Server-entry middleware runs before HTML render
 

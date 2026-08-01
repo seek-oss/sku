@@ -1,10 +1,14 @@
 # Middleware
 
-SSR has **two HTTP middleware layers**, plus optional React Router route `middleware` on your `routesEntry` `routes`.
-Pick the HTTP layer based on whether the traffic should exist in production.
-Do not confuse Express/Connect handlers with React Router’s route `middleware` field — see [Routing](./routing.md#react-router-route-middleware).
+SSR has **three middleware layers**:
 
-#### Server-entry `middleware` (optional; runs in start and production)
+1. Express HTTP [`middleware`](#server-entry-middleware) — Always runs. Useful for gathering context about a request before render.
+2. Express HTTP [`devServerMiddleware`](#config-devservermiddleware-optional-sku-start-only) — Dev server only. Useful for mock APIs and recreating production-like environments.
+3. React Router [middleware](./routing.md#react-router-route-middleware) — Useful for content specific behaviour shared across client/server behaviour.
+
+#### Server-entry `middleware` <Badge type="info" text="Optional" />
+
+Runs in start and production.
 
 Export Connect/Express-compatible handlers from the server entry as named `middleware` (`SkuSsrMiddleware`: a handler or array).
 Omit the export ⇒ no consumer middleware layer (not an error).
@@ -17,7 +21,7 @@ Type `middleware` against Express 4 (`SkuSsrMiddleware` / `@types/express` major
 Because consumer `middleware` / `devServerMiddleware` mount into sku’s Express app, a future Express **major** upgrade in sku may be a breaking change for SSR apps.
 Minor/patch upgrades within the documented major stay non-breaking when APIs remain compatible.
 
-Attach isomorphic-capable values on `req` for [named getters](./entries.md) / optional server [`getRouterContext`](./entries.md#getroutercontext-optional) (e.g. `req.user`).
+Attach isomorphic-capable values on `req` for [named getters](./entries.md) / optional server [`getRouterContext`](./entries.md#getroutercontext) (e.g. `req.user`).
 Augment Express `Request` for those fields — see [Typing middleware-attached fields](./entries.md#typing-middleware-attached-fields-on-req).
 
 Do **not** put raw Express `req` into React Router context — project values via dual-entry [`getRouterContext`](./data-loading.md#router-context-getroutercontext).

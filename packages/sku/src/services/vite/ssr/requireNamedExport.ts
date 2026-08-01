@@ -56,52 +56,6 @@ export const rejectRoutesBySiteExport = (
 };
 
 /**
- * Optional Vite SSR entry export (e.g. dual-entry `getRouterContext`).
- * Missing / non-function → `undefined` (default RR context behaviour).
- */
-export const optionalNamedFunctionExport = <
-  T extends (...args: never[]) => unknown,
->(
-  moduleExports: object,
-  name: string,
-): T | undefined => {
-  const value = (moduleExports as Record<string, unknown>)[name];
-  return typeof value === 'function' ? (value as T) : undefined;
-};
-
-/**
- * Optional when `required` is false; hard-error (naming the export) when true.
- * Used for `getSite` — required only when config has more than one site.
- */
-export const optionalOrRequiredFunctionExport = <
-  T extends (...args: never[]) => unknown,
->(
-  moduleExports: object,
-  name: string,
-  entryLabel: string,
-  required: boolean,
-): T | undefined => {
-  if (required) {
-    return requireNamedExport<T>(moduleExports, name, entryLabel, {
-      kind: 'function',
-    });
-  }
-  return optionalNamedFunctionExport<T>(moduleExports, name);
-};
-
-/**
- * Optional Vite SSR entry value export (e.g. `middleware`).
- * Missing / `undefined` → `undefined` (no consumer middleware layer).
- */
-export const optionalNamedExport = <T>(
-  moduleExports: object,
-  name: string,
-): T | undefined => {
-  const value = (moduleExports as Record<string, unknown>)[name];
-  return value === undefined ? undefined : (value as T);
-};
-
-/**
  * Vite SSR request entries `export default` one object (`defineServerEntry` /
  * `defineClientEntry`). Missing / non-object → hard error.
  */

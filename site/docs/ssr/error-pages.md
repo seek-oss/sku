@@ -1,8 +1,9 @@
 # Error pages
 
-Route errors (loader failures, thrown `data()`, `404`, and `405` when a mutation hits a route without an `action`) are React Router error responses.
-sku streams the document with `context.statusCode` and renders the nearest route `ErrorBoundary` (or React Router’s default error UI).
-Customize content with [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary).
+Route errors (loader failures, thrown `data()`, `404`, and `405` when a mutation hits a route without an `action`) render the nearest route `ErrorBoundary`.
+sku streams the document with the matching status code.
+
+Customize with [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary):
 
 ```tsx
 // src/RootLayout.tsx
@@ -33,15 +34,14 @@ export function ErrorBoundary() {
 ```
 
 ```tsx
-// src/routes.tsx — attach ErrorBoundary on the root route
+// src/routes.tsx
 import type { SkuSsrRouteObject } from 'sku';
 
-import { ErrorBoundary, RootLayout } from './RootLayout.js';
-import { homeRoute } from './pages/home/route.js';
+import { ErrorBoundary, RootLayout } from './RootLayout';
+import { homeRoute } from './pages/home/route';
 
 export const routes: SkuSsrRouteObject[] = [
   {
-    path: '/',
     Component: RootLayout,
     ErrorBoundary,
     children: [homeRoute],
@@ -49,4 +49,4 @@ export const routes: SkuSsrRouteObject[] = [
 ];
 ```
 
-A consumer root `ErrorBoundary` does **not** catch errors thrown while rendering above the router (including `SkuSsrProvider`). See [Providers](./providers.md).
+A root route `ErrorBoundary` does not catch errors thrown above the router (including `SkuSsrProvider`). See [Providers](./providers.md).

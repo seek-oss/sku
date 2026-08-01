@@ -25,10 +25,8 @@ Vite support covers [static applications (SSG)][SSG] and opt-in [server-side ren
 > **Experimental — not for production.**
 > SSR is available for evaluation and testing.
 > Do not use it in production yet; the API and behaviour may change.
-> See [Server rendering](./ssr/).
 
-Set `buildType: 'ssr'`, declare non-empty config [`sites`](./configuration.md#sites) (≥1 site name), point [`routesEntry`](./configuration.md#routesentry) at a module that exports named flat `routes` (`SkuSsrRouteObject[]`; default `src/routes.tsx`), and use `serverEntry` / `clientEntry` for request lifecycle only (defaults `src/server.tsx` / `src/client.tsx`).
-Export sync `getSite({ req })` when config has more than one site; on single-site apps omit it and sku uses the sole config site name (optional `sites` on routes declares membership):
+Set `bundler: 'vite'` and `buildType: 'ssr'`, then use [`sku start`] / [`sku build`] (not `start-ssr` / `build-ssr`).
 
 ```ts
 // sku.config.ts
@@ -36,69 +34,15 @@ export default {
   bundler: 'vite',
   buildType: 'ssr',
   sites: ['default'],
+  publicPath: '/',
   // …
 };
 ```
 
-```ts
-// src/routes.tsx (config routesEntry)
-import type { SkuSsrRouteObject } from 'sku';
+SSR requires a relative `publicPath`.
+The config [`public`](./configuration.md#public) assets folder and [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) are not supported.
 
-export const routes: SkuSsrRouteObject[] = [
-  /* React Router Data Mode routes (prefer lazy); omit sites for single-site */
-];
-```
-
-```ts
-// src/server.tsx — no routes re-export; single-site omits getSite
-export const getLanguage = ({ req }) => resolveLocaleFromPath(req.path);
-export const middleware = [
-  (req, res, next) => {
-    if (req.path === '/api/health') {
-      res.status(200).type('text/plain').send('ok');
-      return;
-    }
-    next();
-  },
-];
-```
-
-```ts
-// src/client.tsx — no routes re-export; onHydrate is optional
-export const onHydrate = () => {
-  // …
-};
-```
-
-Optional `serverEntry` exports: sync getters (`getSite` / `getLanguage` / `getClientContext`), `middleware`, `Providers`, `getRouterContext`.
-`getSite` is required only when config has more than one site.
-Optional `clientEntry` exports: `onHydrate`, `Providers`, `getRouterContext`.
-Missing entry files or a missing / non-array `routes` on `routesEntry` (or a `routesBySite` export) are a hard error; do not use `default`.
-Optional config [`devServerMiddleware`](./configuration.md#devservermiddleware) mounts local-only mocks in `sku start` before server-entry `middleware` and is never imported into the production server — see [Server rendering → Middleware](./ssr/middleware.md).
-
-SSR ships on **Express 4** (same as Webpack SSR) and **React Router 8** (optional peer `react-router@^8`; install it in the app — the create `vite-ssr` template does this).
-Type `middleware` / `SkuSsrMiddleware` and Data Mode routes against those majors.
-Future Express or React Router **major** upgrades in sku may be breaking for SSR consumers (middleware mounts into sku’s Express app; routes use React Router Data Mode APIs) — see [Server rendering](./ssr/).
-
-sku owns the HTTP server, the React Document shell (not overridable — use React document metadata in routes/layouts for head/SEO), full-document streaming (`renderToPipeableStream`), document hydration, and CSP HTTP headers.
-SSR requires a relative `publicPath` (absolute / CDN URLs are rejected).
-The config [`public`](./configuration.md#public) assets folder is not supported — if that directory exists, `sku start` / `sku build` fail; import assets from modules instead.
-[`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) is not supported. Raise exceptional customisation needs via the [support page].
-
-Sync named getters (`getSite` / `getLanguage` / `getClientContext`) receive Express `{ req }` only.
-`getLanguage` is server Document vocab preload only; `getClientContext` is the JSON hydrate seed.
-Optional `onHydrate` receives `{ clientContext }` only and returns nothing.
-Providers come from an optional named `Providers` export on each entry, rendered outside the router with `{ children, site, clientContext }`.
-Wrapping that needs React Router hooks is the app's own root layout route.
-Prefer React Router `lazy: () => import('./pages/…')` so routes become separate async chunks; sku auto-derives `handle.moduleId` for production `modulepreload`s (set it explicitly only as an escape hatch).
-
-Scaffold a new app with:
-
-```sh
-pnpm dlx @sku-lib/create my-app --template vite-ssr
-```
-
-See [Server rendering](./ssr/) (including [Migrating from a static app](./ssr/migrate-from-static-app.md) and [Migrating from Webpack SSR](./ssr/migrate-from-webpack-ssr.md)) and [CSP](./csp.md) for details.
+Scaffold with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or see [Server rendering](./ssr/) for entries, routing, providers, middleware, CSP, and migration guides.
 
 ### Planned deprecation of library mode
 

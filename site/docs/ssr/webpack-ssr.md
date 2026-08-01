@@ -5,9 +5,11 @@ This page describes sku’s **older method for server-side rendering** using Web
 For modern server-side rendering with Vite, see [Getting Started](./).
 :::
 
-Webpack ssr uses low-level webpack API and custom `-ssr` commands (`sku start-ssr` / `sku build-ssr`). You supply `serverEntry` that has a default export with `renderCallback`.
+Webpack SSR uses a low-level API and custom `-ssr` commands (`sku start-ssr` / `sku build-ssr`).
+You supply a `serverEntry` whose default export includes `renderCallback`.
 
-That path is **discouraged for new apps**, if you have an existing Webpack SSR app check out [migrating from Webpack SSR](./migrate-from-webpack-ssr.md).
+This path is discouraged for new apps.
+Existing Webpack SSR apps should follow [Migrate from Webpack SSR](./migrate-from-webpack-ssr.md).
 
 Minimal config and server entry:
 

@@ -3,7 +3,7 @@
 ## CJS default-export interop
 
 Some CommonJS packages expose both a default and named exports.
-Under SSR **`sku start`**, importing such a package as a React component can resolve to a **module namespace object** (`{ default: ActualComponent, … }`).
+Under SSR `sku start`, importing such a package as a React component can resolve to a module namespace object (`{ default: ActualComponent, … }`).
 React then fails with:
 
 ```
@@ -12,7 +12,8 @@ You likely forgot to export your component … or you might have mixed up defaul
 ```
 
 Production `sku build` may still succeed for the same import — the failure is often start-only.
-Extend [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](../configuration.md#__unsafe_experimental__cjsinteropdependencies) with the package name (sku already includes Apollo Client in its baked defaults; this change does **not** expand that list further):
+
+Add the package name to [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](../configuration.md#__unsafe_experimental__cjsinteropdependencies) (sku already includes Apollo Client in its defaults):
 
 ```ts
 // sku.config.ts
@@ -22,7 +23,6 @@ export default {
   bundler: 'vite',
   buildType: 'ssr',
   __UNSAFE_EXPERIMENTAL__cjsInteropDependencies: [
-    // Examples of open-source offenders teams hit in the wild:
     'react-helmet-async',
     'some-legacy-cjs-ui-kit',
   ],

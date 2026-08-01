@@ -1,11 +1,8 @@
 # Multi-language / Localisation
 
-When `languages` is configured, SSR uses `@vocab/vite` language chunk splitting and registers the active language chunk (e.g. `en-translations`) to be loaded as part of the initial document.
+When `languages` is configured, SSR registers the active language chunk (for example `en-translations`) on the initial document so text is available without a delayed download.
 
-Sku resolves `@vocab/vite` from its own install and aliases bare `@vocab/vite…` imports (including those injected into app and `compilePackages` `.vocab` files) onto that copy — consumers do **not** need a direct `@vocab/vite` dependency for resolve.
-
-Sku registers a language chunk **only** when `getLanguage` returns `language` (server Document preload only).
-If `getLanguage` is omitted or returns `undefined`, no language chunk is preloaded, which can delay loading text.
+Export `getLanguage` from the server entry so it returns a name from config `languages` (or `en-PSEUDO`):
 
 ```tsx
 // src/server.tsx
@@ -13,33 +10,32 @@ import { defineServerEntry } from 'sku/ssr';
 
 const server = defineServerEntry({
   getLanguage({ req }) {
-    // Must match a name from sku config `languages` (or `en-PSEUDO`)
     return resolveLocaleFromPath(req.path); // e.g. 'th-TH'
   },
 });
 export default server;
 ```
 
-Wrap your UI in `VocabProvider` from your app's root layout route (see [Providers](./providers.md)).
-Locale is router-aware — it must track client navigation — so it belongs in a route rather than entry getters, which seed page-load values only.
-Client locale is app-owned: re-derive it the same way `getLanguage` did (URL / cookies / headers) with React Router hooks inside the layout, or seed it through `clientContext`.
-URL path segments like `/en/hello` are fine for routing — identify vocab language in the server entry from that URL (or cookies/headers), not by relying on sku to read `:language`.
+If `getLanguage` is omitted, no language chunk is preloaded and text may load later.
 
-For general Vocab setup (`languages` config, `.vocab` folders, translation workflow), see [Multiple languages](../multi-language.md).
+Wrap your UI in `VocabProvider` in the [root layout](./providers.md#root-layout-for-providers).
+Locale must track client navigation, so re-derive it the same way in the layout (URL / cookies) with React Router hooks — or seed it through `clientContext`.
+
+For Vocab setup (`languages` config, `.vocab` folders, translation workflow), see [Multiple languages](../multi-language.md).
 
 ## Multiple paths per page / languages in path
 
 Some URL schemes serve the same page at more than one path — for example `/about` for a default language and `/fr/about` when the language is nested in the path.
 
-React Router Data Mode matches on the full path and does not let one route definition declare multiple paths.
-Define the page once, then register a separate route object for each path that should serve it:
+React Router matches on the full path and does not let one route declare multiple paths.
+Define the page once, then register a separate route object for each path:
 
 ```tsx
 // src/pages/page/route.ts
 import type { RouteObject } from 'react-router';
 
 const route = {
-  lazy: () => import('./page.js'),
+  lazy: () => import('./page'),
 } satisfies Omit<RouteObject, 'path'>;
 
 export const aboutRoutes: RouteObject[] = [
@@ -48,5 +44,4 @@ export const aboutRoutes: RouteObject[] = [
 ];
 ```
 
-Be careful using dynamic params such as `:lang`.
-A dynamic segment would match unsupported prefixes and the server would respond on routes you do not intend to support; listing only supported prefixes means unknown ones fall through as not found.
+Prefer listing supported prefixes over a dynamic `:lang` segment — a dynamic segment would also match unsupported prefixes.

@@ -3,7 +3,7 @@
 [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app.
 For statically rendered apps, a `script-src` policy can be automatically generated for you. SSR apps have an extra step.
 
-Badges mark solution-specific behaviour: <Badge type="tip" text="Static" />, <Badge type="tip" text="SSR" />, <Badge type="info" text="Webpack SSR" />. See [Solution types](./ssr/#solution-types).
+Badges mark solution-specific behaviour: <Badge type="tip" text="Static" />, <Badge type="tip" text="SSR" />, <Badge type="info" text="Webpack SSR" />. See [Server rendering](./ssr/).
 
 - **SSR** <Badge type="tip" text="SSR" />: CSP is delivered as **HTTP headers** (`Content-Security-Policy` and optional `Content-Security-Policy-Report-Only`), derived from the document shell plus nonces and hashes of bootstrap scripts. Meta `http-equiv` CSP is not used on the SSR path. See [Server rendering → CSP](./ssr/csp.md).
 
@@ -61,7 +61,8 @@ A `nonce` is not available in client code. The result of `getCspNonce` will be a
 Do not use webpack’s `createUnsafeNonce` for SSR — that API can create multiple distinct nonces per render. SSR intentionally does not offer a multi-nonce factory.
 
 ```tsx
-import { getCspNonce, type SkuSsrMiddleware } from 'sku';
+import { getCspNonce } from 'sku';
+import { defineServerEntry } from 'sku/ssr';
 import type { RouteObject } from 'react-router';
 
 // Inside routesEntry `routes`
@@ -72,12 +73,16 @@ const homeRoute = {
 } satisfies RouteObject;
 
 // src/server.tsx
-export const middleware: SkuSsrMiddleware = (req, res, next) => {
-  // Same nonce value as getCspNonce() / the CSP header for this request
-  // (sku also mints when attaching to React stream scripts during HTML render)
-  res.locals.cspNonce = req.getCspNonce?.();
-  next();
-};
+const server = defineServerEntry({
+  middleware: [
+    (req, res, next) => {
+      // Same nonce value as getCspNonce() / the CSP header for this request
+      res.locals.cspNonce = req.getCspNonce?.();
+      next();
+    },
+  ],
+});
+export default server;
 ```
 
 #### Webpack SSR / static apps <Badge type="info" text="Webpack SSR" />

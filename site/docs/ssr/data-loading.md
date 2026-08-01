@@ -2,58 +2,40 @@
 
 Prefer **render-time** data loading in React for page content:
 
-1. Inject env-specific clients via dual-entry [`getReactContext`](./providers.md) (serialisable seeds via `getClientContext`) — see [Providers](./providers.md).
-2. Mount isomorphic providers in your **root layout** and read values with `useReactContext()` / `useClientContext()`.
+1. Pass env-specific clients via dual-entry [`getReactContext`](./providers.md) (and serialisable seeds via `getClientContext`).
+2. Mount isomorphic providers in your [root layout](./providers.md#root-layout-for-providers) and read values with `useReactContext()` / `useClientContext()`.
 3. Fetch in the React tree with Suspense (for example `useQuery`) so the same components work on SSR and client navigations.
 
-That keeps shared UI portable without per-app loader wiring and fits streaming Document + isomorphic backends.
+That keeps shared UI portable without per-app loader wiring.
+
+## When to use loaders
 
 Reach for React Router **loaders** when you need to:
 
 - start work before the suspending subtree renders (avoid a deeply nested waterfall), or
-- issue a real **document** `redirect()` or response headers (`Cache-Control`, `Set-Cookie`, …) — see [Response headers](#response-headers), or
-- advanced DI via optional dual-entry [`getRouterContext`](#router-context-getroutercontext)
+- issue a real document `redirect()` or response headers (`Cache-Control`, `Set-Cookie`, …), or
+- inject values into loaders via optional dual-entry [`getRouterContext`](#router-context)
 
-[\<Navigate /\>](https://reactrouter.com/api/components/Navigate) and [useNavigate()](https://reactrouter.com/api/hooks/useNavigate) are browser controls and will **not** create a document HTTP redirect. Use a loader `redirect()` when the response must be a real redirect.
+[`<Navigate />`](https://reactrouter.com/api/components/Navigate) and [`useNavigate()`](https://reactrouter.com/api/hooks/useNavigate) are browser controls and will **not** create a document HTTP redirect.
+Use a loader `redirect()` when the response must be a real redirect.
 
-Loaders receive a Fetch `Request`, **not** Express `req`.
-Express `req` is available to [entry getters](./entries.md) (`getSite` / `getLanguage` / `getClientContext` / server `getReactContext`) and optional server [`getRouterContext`](./entries.md#getroutercontext) — not as the loader `request` argument.
+Loaders receive a Fetch `Request`, not Express `req`.
+Express `req` is available to [entry getters](./entries.md) and optional server `getRouterContext`.
 
-**Migration Consideration:** Apps that need a complex server-side only loader experience should reach out through support channels to discuss their use-case
+Need a complex server-only loader experience? Reach out via [support](../support.md) to discuss the use case.
 
-## Router context (`getRouterContext`)
+## Router context
 
-Optional dual-entry `getRouterContext` seeds React Router’s `RouterContextProvider` for loader/action DI:
+Optional dual-entry `getRouterContext` seeds React Router’s `RouterContextProvider` for loader/action DI.
 
-|                    | Framework Mode                     | Sku Data Mode                                                                                                       |
-| ------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Server seed        | Adapter `getLoadContext(req, res)` | Entry `getRouterContext({ request, req, site, clientContext, reactContext })` into `query(..., { requestContext })` |
-| Client nav loaders | Often still server (`.data`)       | Browser via `createBrowserRouter`                                                                                   |
-| Client seed        | Needed for client-only paths       | Needed for **every** client nav if context DI is used                                                               |
-
-Sku is **Data Mode**. Copying only Framework Mode’s server-half adapter leaves client-nav loaders without context.
-If loader context is offered at all, include `getRouterContext` on **both** entry objects with the same `createContext` keys and different construction per environment.
-
-- **Server:** once per document `query` — seed from Express middleware bag + Fetch `request` + sibling values
-- **Client:** every navigation / fetcher — seed from browser-visible state (`clientContext`, cookies, memory, …)
-- Relation to Express [`middleware`](./middleware.md) vs RR route `middleware` vs entry `getRouterContext`: HTTP middleware attaches platform state; `getRouterContext` projects isomorphic values into the router; route `middleware` runs inside RR
-- Relation to [`SkuSsrProvider` hooks](./providers.md) (`getClientContext` / `getReactContext`) vs the root layout route (router-aware wrapping) vs `getRouterContext` (loader/action DI) — they compose
-
-:::warning Never put Express `req` in `RouterContextProvider`
-Never put Express `req` (or other non-isomorphic platform objects) into router context.
-Project **values** both sides can supply. Raw `req` is missing on client navigations.
-:::
-
-### Client navigation ≠ initial SSR location
-
-Server `getRouterContext` runs for the document request; client `getRouterContext` must work for **any** later location without Express.
+If you use it, define it on **both** server and client entries with the same `createContext` keys — client navigations have no Express request:
 
 ```tsx
 // Shared key
 import { createContext, RouterContextProvider } from 'react-router';
 export const userIdContext = createContext<string | null>(null);
 
-// serverEntry — project from getClientContext sibling
+// server entry — project from getClientContext
 const server = defineServerEntry({
   getClientContext({ req }) {
     return { userId: req.user?.id ?? null };
@@ -65,9 +47,7 @@ const server = defineServerEntry({
   },
 });
 
-// clientEntry — same projection from hydrate seed
-import type server from './server';
-
+// client entry — same projection from hydrate seed
 const client = defineClientEntry<typeof server>()({
   getRouterContext({ clientContext }) {
     const ctx = new RouterContextProvider();
@@ -76,22 +56,25 @@ const client = defineClientEntry<typeof server>()({
   },
 });
 
-// loader — works on document SSR and after client nav to a different route
+// loader — works on document SSR and after client navigation
 export async function loader({ context }: LoaderFunctionArgs) {
   return { userId: context.get(userIdContext) };
 }
 ```
 
-After hydrate on `/`, a client navigation to `/profile` still gets context from client `getRouterContext` — not from Express.
+:::warning Never put Express `req` in `RouterContextProvider`
+Project values both sides can supply.
+Raw `req` is missing on client navigations.
+:::
 
-See [Request entries](./entries.md#getroutercontext) for export shapes and [Middleware](./middleware.md) for Express mount order.
+Export shapes: [Request entries](./entries.md#getroutercontext).
+Express middleware for attaching values to `req`: [Middleware](./middleware.md).
 
 ## Response headers
 
-After React Router `query()`, when sku streams HTML (not a short-circuit `Response` such as a redirect), it forwards loader/action headers from the route context onto the Express response (including multi-value headers such as `Set-Cookie`), then applies sku-owned headers (`Content-Type`, CSP).
+When sku streams HTML (not a short-circuit redirect), it forwards loader/action headers onto the Express response, then applies sku-owned headers (`Content-Type`, CSP).
 
-Prefer render-time data loading (above) for page content.
-Use loaders/actions when you need document redirects or response headers — set caching and cookies with React Router’s `data()` / header APIs, for example:
+Set caching and cookies with React Router’s `data()` / header APIs:
 
 ```tsx
 import { data } from 'react-router';
@@ -112,10 +95,10 @@ export async function loader() {
 ## Apollo streaming hydration
 
 When a client cache must survive the stream (Apollo Client), pair render-time queries with a streaming data transport over [`useInsertHtml`](./entries.md#useinserthtml) from `sku/ssr`.
-Sku owns the injection seam; your app owns the client and transport — sku ships **no** Apollo dependency or config.
+sku owns the injection seam; your app owns the client and transport — sku ships no Apollo dependency.
 
 ```tsx
-// src/ApolloProvider.tsx — transport only (isomorphic; both graphs import it)
+// src/ApolloProvider.tsx — transport only (isomorphic)
 import { WrapApolloProvider } from '@apollo/client-react-streaming';
 import { buildManualDataTransport } from '@apollo/client-react-streaming/manual-transport';
 import { useInsertHtml } from 'sku/ssr';
@@ -125,12 +108,12 @@ export const ApolloProvider = WrapApolloProvider(
 );
 ```
 
-Supply a **different** `makeClient` from each entry’s `getReactContext` (do not share one `makeClient` with `typeof window`).
-On the **server** entry only, pass the CSP nonce onto injected scripts (bodies are unhashable after the shell — see [CSP](./csp.md)).
-Mount the isomorphic Apollo provider in the **root layout** via `useReactContext()`:
+Supply a **different** `makeClient` from each entry’s `getReactContext`.
+On the **server** entry only, pass the CSP nonce onto injected scripts (see [CSP](./csp.md)).
+Mount the isomorphic Apollo provider in the root layout via `useReactContext()`:
 
 ```tsx
-// serverEntry
+// server entry
 import { getCspNonce } from 'sku';
 import { defineServerEntry } from 'sku/ssr';
 
@@ -140,7 +123,7 @@ const server = defineServerEntry({
       makeClient: () =>
         new ApolloClient({
           cache: new InMemoryCache(),
-          link: serverLink, // e.g. in-process schema / gateway
+          link: serverLink,
         }),
       extraScriptProps: { nonce: getCspNonce() },
     };
@@ -148,16 +131,14 @@ const server = defineServerEntry({
 });
 export default server;
 
-// clientEntry — different makeClient; omit extraScriptProps
-import type server from './server';
-
+// client entry — different makeClient; omit extraScriptProps
 const client = defineClientEntry<typeof server>()({
   getReactContext() {
     return {
       makeClient: () =>
         new ApolloClient({
           cache: new InMemoryCache(),
-          link: httpLink, // e.g. HttpLink to your GraphQL endpoint
+          link: httpLink,
         }),
     };
   },
@@ -185,9 +166,8 @@ export const RootLayout = () => {
 };
 ```
 
-Queries that run during document SSR (for example `useSuspenseQuery`) are serialized into the stream and populate the browser cache on hydrate — they must **not** refetch.
+Queries that run during document SSR (for example `useSuspenseQuery`) are serialized into the stream and populate the browser cache on hydrate — they must not refetch.
 Queries issued after hydration (client navigation) still fetch normally.
 
-**Unsupported:** loader-transported Apollo query refs (`apolloLoader` / `preloadQuery` from `@apollo/client-integration-react-router`).
-Sku serializes loader data as JSON and promise-scrubs it, so those refs cannot survive hydration without streaming loader data — use render-time queries under the transport instead.
-Drop two-pass `getDataFromTree` — it is incompatible with streaming Document SSR.
+Loader-transported Apollo query refs (`apolloLoader` / `preloadQuery`) are unsupported — use render-time queries under the transport instead.
+Drop two-pass `getDataFromTree`; it is incompatible with streaming Document SSR.

@@ -431,7 +431,7 @@ export default defineServerEntry({
     site: /* NoInfer<Site> */;
     clientContext: /* NoInfer<ClientContext> */ | undefined;
   }): /* inferred ReactContext */; // MAY be non-JSON (apiClient, makeClient, …)
-  middleware?: RequestHandler | RequestHandler[];
+  middleware?: RequestHandler[];
   onListen?(args: {
     app: Express;
     httpServer: http.Server | https.Server;

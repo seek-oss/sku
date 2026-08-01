@@ -16,7 +16,31 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 
 ## Config and commands
 
-- Replace `sku start-ssr` / `sku build-ssr` with `sku start` / `sku build`
+Replace Webpack SSR scripts and dual-port config with Vite SSR’s single-port shape:
+
+```json
+{
+  "scripts": {
+    "start": "sku start-ssr", // [!code --]
+    "start": "sku start", // [!code ++]
+    "build": "sku build-ssr", // [!code --]
+    "build": "sku build" // [!code ++]
+  }
+}
+```
+
+```ts
+import type { SkuConfig } from 'sku';
+
+export default {
+  bundler: 'vite', // [!code ++]
+  buildType: 'ssr', // [!code ++]
+  publicPath: '/',
+  port: 3000,
+  serverPort: 8001, // [!code --]
+} satisfies SkuConfig;
+```
+
 - Export `getSite` when more than one site
 - **Ports:** Webpack SSR used dual ports (`port` + `serverPort`). SSR is single-port — use [`port`](../configuration.md#port) (or `PORT` at runtime). Drop `serverPort`
 - **Deploy layout:** `node dist/server/server.js` with sibling `client/` + `server/` — not webpack’s single `dist/server.js`
@@ -42,10 +66,14 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 ## Data loading and middleware
 
 - Prefer [render-time data loading](./data-loading.md) for page content; use loaders for redirects, headers, or waterfalls
-- Do not put raw Express `req` into `RouterContextProvider`
 - **Apollo:** replace `getDataFromTree` with streaming transport over [`useInsertHtml`](./entries.md#useinserthtml) — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration)
 - Keep production handlers on server-entry `middleware`; keep local mocks in `devServerMiddleware` — see [Middleware](./middleware.md)
 - Production serves `client/` under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware, so catch-all / Melways-style middleware cannot eat hashed assets
+
+:::danger Never put Express `req` in `RouterContextProvider`
+Project values both sides can supply.
+Raw `req` is missing on client navigations — see [Data loading → Router context](./data-loading.md#router-context).
+:::
 
 ## CSP and hydration
 

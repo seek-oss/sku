@@ -50,17 +50,21 @@ export default server;
 
 **Env-differing values** (API clients, server-only links) — set `getReactContext` on **both** entries and read with `useReactContext()`:
 
-```tsx
-// server entry
+::: code-group
+
+```tsx [server.tsx]
 getReactContext() {
   return { makeClient: serverMakeClient };
 }
+```
 
-// client entry
+```tsx [client.tsx]
 getReactContext() {
   return { makeClient: clientMakeClient };
 }
 ```
+
+:::
 
 `clientContext` and `reactContext` are set for the page load and do not change across client navigations.
 Anything that must track navigation (for example locale from the URL) belongs in the route tree.

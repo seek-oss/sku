@@ -86,7 +86,7 @@ Express middleware run before SSR for each request.
 See [Middleware](./middleware.md).
 
 ```ts
-middleware?: SkuSsrMiddleware;
+middleware?: RequestHandler[];
 ```
 
 ### onListen

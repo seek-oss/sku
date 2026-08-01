@@ -34,8 +34,16 @@ If you use it, define it on **both** server and client entries with the same `cr
 // Shared key
 import { createContext, RouterContextProvider } from 'react-router';
 export const userIdContext = createContext<string | null>(null);
+```
 
-// server entry — project from getClientContext
+::: code-group
+
+```tsx [server.tsx]
+import { defineServerEntry } from 'sku/ssr';
+
+import { userIdContext } from './userIdContext';
+
+// Project from getClientContext
 const server = defineServerEntry({
   getClientContext({ req }) {
     return { userId: req.user?.id ?? null };
@@ -46,8 +54,16 @@ const server = defineServerEntry({
     return ctx;
   },
 });
+export default server;
+```
 
-// client entry — same projection from hydrate seed
+```tsx [client.tsx]
+import { defineClientEntry } from 'sku/ssr';
+
+import type server from './server';
+import { userIdContext } from './userIdContext';
+
+// Same projection from hydrate seed
 const client = defineClientEntry<typeof server>()({
   getRouterContext({ clientContext }) {
     const ctx = new RouterContextProvider();
@@ -55,7 +71,12 @@ const client = defineClientEntry<typeof server>()({
     return ctx;
   },
 });
+export default client;
+```
 
+:::
+
+```tsx
 // loader — works on document SSR and after client navigation
 export async function loader({ context }: LoaderFunctionArgs) {
   return { userId: context.get(userIdContext) };
@@ -104,7 +125,7 @@ import { buildManualDataTransport } from '@apollo/client-react-streaming/manual-
 import { useInsertHtml } from 'sku/ssr';
 
 export const ApolloProvider = WrapApolloProvider(
-  buildManualDataTransport({ useInsertHtml }),
+  buildManualDataTransport({ useInsertHtml }), // [!code highlight]
 );
 ```
 
@@ -112,8 +133,9 @@ Supply a **different** `makeClient` from each entry’s `getReactContext`.
 On the **server** entry only, pass the CSP nonce onto injected scripts (see [CSP](./csp.md)).
 Mount the isomorphic Apollo provider in the root layout via `useReactContext()`:
 
-```tsx
-// server entry
+::: code-group
+
+```tsx [server.tsx]
 import { getCspNonce } from 'sku';
 import { defineServerEntry } from 'sku/ssr';
 
@@ -125,13 +147,19 @@ const server = defineServerEntry({
           cache: new InMemoryCache(),
           link: serverLink,
         }),
-      extraScriptProps: { nonce: getCspNonce() },
+      extraScriptProps: { nonce: getCspNonce() }, // [!code highlight]
     };
   },
 });
 export default server;
+```
 
-// client entry — different makeClient; omit extraScriptProps
+```tsx [client.tsx]
+import { defineClientEntry } from 'sku/ssr';
+
+import type server from './server';
+
+// Different makeClient; omit extraScriptProps
 const client = defineClientEntry<typeof server>()({
   getReactContext() {
     return {
@@ -144,7 +172,11 @@ const client = defineClientEntry<typeof server>()({
   },
 });
 export default client;
+```
 
+:::
+
+```tsx
 // root layout
 import { useReactContext } from './ssrContext';
 import { ApolloProvider } from './ApolloProvider';

@@ -25,7 +25,7 @@ export interface RenderAssets extends DocumentAssets {
 }
 
 /** Connect-compatible middleware from the Vite SSR server entry. */
-export type SkuSsrMiddleware = RequestHandler | RequestHandler[];
+export type SkuSsrMiddleware = RequestHandler[];
 
 /**
  * Optional server-entry post-listen hook — same window as webpack SSR `onStart`.

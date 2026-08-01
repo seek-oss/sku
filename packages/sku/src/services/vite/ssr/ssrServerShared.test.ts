@@ -346,9 +346,11 @@ describe('listen', () => {
       ...baseListenOptions,
       port: 0,
       clientDirectory,
-      middleware: (_req, res) => {
-        res.status(418).type('text/plain').send('middleware-handled');
-      },
+      middleware: [
+        (_req, res) => {
+          res.status(418).type('text/plain').send('middleware-handled');
+        },
+      ],
     });
     servers.push(result);
 
@@ -368,9 +370,11 @@ describe('listen', () => {
       ...baseListenOptions,
       port: 0,
       onListen,
-      middleware: (_req, res) => {
-        res.status(200).end();
-      },
+      middleware: [
+        (_req, res) => {
+          res.status(200).end();
+        },
+      ],
     });
     servers.push(result);
 
@@ -391,9 +395,11 @@ describe('listen', () => {
         onListen: () => {
           throw new Error('onListen failed');
         },
-        middleware: (_req, res) => {
-          res.status(200).end();
-        },
+        middleware: [
+          (_req, res) => {
+            res.status(200).end();
+          },
+        ],
       }),
     ).rejects.toThrow('onListen failed');
   });
@@ -406,9 +412,11 @@ describe('listen', () => {
         onListen: async () => {
           throw new Error('onListen rejected');
         },
-        middleware: (_req, res) => {
-          res.status(200).end();
-        },
+        middleware: [
+          (_req, res) => {
+            res.status(200).end();
+          },
+        ],
       }),
     ).rejects.toThrow('onListen rejected');
   });
@@ -418,9 +426,11 @@ describe('listen', () => {
       ...baseListenOptions,
       port: 0,
       expressTrustProxy: true,
-      middleware: (_req, res) => {
-        res.status(200).end();
-      },
+      middleware: [
+        (_req, res) => {
+          res.status(200).end();
+        },
+      ],
     });
     servers.push(result);
 
@@ -431,9 +441,11 @@ describe('listen', () => {
     const result = await listen({
       ...baseListenOptions,
       port: 0,
-      middleware: (_req, res) => {
-        res.status(200).end();
-      },
+      middleware: [
+        (_req, res) => {
+          res.status(200).end();
+        },
+      ],
     });
     servers.push(result);
 

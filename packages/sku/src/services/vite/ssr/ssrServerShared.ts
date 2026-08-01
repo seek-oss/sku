@@ -163,13 +163,13 @@ export interface SsrServerResult {
 }
 
 export const mountConsumerMiddleware = (
-  handler: SkuSsrMiddleware | undefined,
+  handlers: SkuSsrMiddleware | undefined,
   mount: (handler: RequestHandler) => void,
 ) => {
-  if (handler == null) {
+  if (handlers == null) {
     return;
   }
-  for (const middleware of [handler].flat()) {
+  for (const middleware of handlers) {
     mount(middleware);
   }
 };

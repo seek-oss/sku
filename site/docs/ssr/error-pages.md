@@ -5,11 +5,26 @@ sku streams the document with the matching status code.
 
 Customize with [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary):
 
-```tsx
-// src/RootLayout.tsx
-import { isRouteErrorResponse, Outlet, useRouteError } from 'react-router';
+::: code-group
 
-export const RootLayout = () => <Outlet />;
+```tsx [routes.tsx]
+import type { SkuSsrRouteObject } from 'sku';
+
+import { RootLayout } from './RootLayout';
+import { ErrorBoundary } from './ErrorBoundary'; // [!code highlight]
+import { homeRoute } from './pages/home/route';
+
+export const routes: SkuSsrRouteObject[] = [
+  {
+    Component: RootLayout,
+    ErrorBoundary, // [!code highlight]
+    children: [homeRoute],
+  },
+];
+```
+
+```tsx [ErrorBoundary.tsx]
+import { isRouteErrorResponse, Outlet, useRouteError } from 'react-router';
 
 export function ErrorBoundary() {
   const error = useRouteError();
@@ -33,20 +48,6 @@ export function ErrorBoundary() {
 }
 ```
 
-```tsx
-// src/routes.tsx
-import type { SkuSsrRouteObject } from 'sku';
-
-import { ErrorBoundary, RootLayout } from './RootLayout';
-import { homeRoute } from './pages/home/route';
-
-export const routes: SkuSsrRouteObject[] = [
-  {
-    Component: RootLayout,
-    ErrorBoundary,
-    children: [homeRoute],
-  },
-];
-```
+:::
 
 A root route `ErrorBoundary` does not catch errors thrown above the router (including `SkuSsrProvider`). See [Providers](./providers.md).

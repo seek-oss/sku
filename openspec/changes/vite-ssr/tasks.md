@@ -205,6 +205,17 @@ Post-listen lifecycle (webpack `onStart` window) and opt-in Melways-shaped trust
 - [x] 17.6 Docs: `entries.md` (`onListen`); `configuration.md` (`expressTrustProxy` → hop count `1`); migrate-from-webpack (`onStart` → `onListen` bag; trust proxy via config)
 - [x] 17.7 Changeset: note `onListen` + `expressTrustProxy` (experimental API; do **not** label as breaking)
 
+## 18. Optional empty config `sites` (soft-default `'default'`)
+
+Reverses the §9.4a / 9.7a / 9.8a / 9.9a hard-error for empty Vite SSR `sites`. Empty/omitted soft-defaults to synthetic `'default'` so apps without multi-site needs can omit `sites`; `getSite` stays required only when config has >1 site.
+
+- [x] 18.1 Config: drop Vite SSR empty-`sites` hard-error in `validateConfig`; empty/omitted remains valid (default `[]`)
+- [x] 18.2 Runtime: `resolveConfigSiteNames` soft-defaults empty `sites` to `['default']` (no throw); keep >1 site ⇒ `getSite` required; 0–1 ⇒ optional sole resolved name
+- [x] 18.3 Create template: omit config `sites` (rely on soft-default); keep omitting `getSite`
+- [x] 18.4 Tests: empty config `sites` soft-defaults to `'default'` (no hard-error); sole-name / `getSite` omit still works; multi-site unchanged
+- [x] 18.5 Docs: `configuration.md` / routing / migrate — Vite SSR `sites` optional; empty soft-defaults to `'default'`; `getSite` still required only when >1 site; drop “SSR requires at least one site” wording
+- [x] 18.6 Changeset: note empty config `sites` soft-defaults to `'default'` for Vite SSR (experimental API; do **not** label as breaking)
+
 ## Deferred
 
 - Optional compose slot above the router (app `Providers`-like) — deferred until root-layout + `getReactContext` prove insufficient

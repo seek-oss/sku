@@ -179,20 +179,19 @@ describe('validateConfig — Vite SSR dangerouslySetViteConfig', () => {
 
 describe('validateConfig — Vite SSR sites', () => {
   let exitSpy: ReturnType<typeof vi.spyOn>;
-  let logSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
     exitSpy = vi.spyOn(process, 'exit').mockImplementation((code) => {
       throw new Error(`process.exit: ${code}`);
     });
-    logSpy = vi.spyOn(globalThis.console, 'log').mockImplementation(() => {});
+    vi.spyOn(globalThis.console, 'log').mockImplementation(() => {});
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
   });
 
-  it('hard-errors when sites is empty', () => {
+  it('does not error when sites is empty (soft-defaults at runtime)', () => {
     expect(() =>
       validateConfig(
         {
@@ -203,12 +202,9 @@ describe('validateConfig — Vite SSR sites', () => {
         },
         { bundler: 'vite', buildType: 'ssr' },
       ),
-    ).toThrow('process.exit: 1');
+    ).not.toThrow();
 
-    expect(exitSpy).toHaveBeenCalledWith(1);
-    const logged = logSpy.mock.calls.join('\n');
-    expect(logged).toContain('Vite SSR requires a non-empty');
-    expect(logged).toContain('sites');
+    expect(exitSpy).not.toHaveBeenCalled();
   });
 
   it('does not error when sites has at least one name', () => {

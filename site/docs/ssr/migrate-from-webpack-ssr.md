@@ -17,7 +17,7 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 ## Config and commands
 
 - Replace `sku start-ssr` / `sku build-ssr` with `sku start` / `sku build`
-- Declare non-empty config [`sites`](../configuration.md#sites); export `getSite` when more than one site
+- Export `getSite` when more than one site
 - **Ports:** Webpack SSR used dual ports (`port` + `serverPort`). SSR is single-port — use [`port`](../configuration.md#port) (or `PORT` at runtime). Drop `serverPort`
 - **Deploy layout:** `node dist/server/server.js` with sibling `client/` + `server/` — not webpack’s single `dist/server.js`
 - Type server-entry `middleware` for Express 4; install React Router 8 in the app

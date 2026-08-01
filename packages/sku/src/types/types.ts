@@ -431,9 +431,10 @@ export interface SkuConfigBase {
   /**
    * An array of sites the app supports. These usually correspond to each domain the app is hosted under.
    *
-   * **Vite SSR:** required and non-empty (≥1 site name). Sku pre-builds a route tree per site name
-   * from [`routesEntry`](https://seek-oss.github.io/sku/configuration#routesentry); apps select via `getSite`
-   * (required when >1 site; sole config site when omitted on single-site).
+   * **Vite SSR:** optional. Empty or omitted soft-defaults to a single synthetic site name `'default'`.
+   * Sku pre-builds a route tree per resolved site name from
+   * [`routesEntry`](https://seek-oss.github.io/sku/configuration#routesentry); apps select via `getSite`
+   * (required when >1 site; sole resolved name when omitted on 0–1 site).
    * `sites[].host` remains local-dev listen / setup-hosts only.
    *
    * @default []

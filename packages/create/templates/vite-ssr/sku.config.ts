@@ -4,8 +4,6 @@ const skuConfig = {
   bundler: 'vite',
   buildType: 'ssr',
   publicPath: '/',
-  // Vite SSR requires ≥1 configured site name; single-site apps omit `getSite`.
-  sites: ['default'],
   expressTrustProxy: true,
   testRunner: 'vitest',
   pathAliases: {

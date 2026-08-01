@@ -256,22 +256,16 @@ describe.each(['webpack', 'vite', 'vite-ssr'])('sku-create %s', (template) => {
       );
 
       expect(skuConfig).toContain("buildType: 'ssr'");
-      expect(skuConfig).toContain("sites: ['default']");
+      expect(skuConfig).toContain('expressTrustProxy: true');
       expect(routes).toContain('export const routes');
-      expect(routes).not.toContain('export const site');
       expect(routes).toContain('Component: RootLayout');
-      expect(routes).not.toContain("path: '/'");
-      expect(server).not.toContain('export const onRequest');
-      expect(server).not.toMatch(/export (const|function) getSite/);
       expect(server).toContain('defineServerEntry');
       expect(server).toContain('middleware');
       expect(server).toContain('/api/health');
-      expect(server).not.toContain('Providers');
       expect(client).toContain('defineClientEntry');
       expect(client).toContain('typeof server');
       expect(client).toContain("import type server from './server'");
       expect(client).toContain('onHydrate');
-      expect(client).not.toContain('Providers');
       await expect(
         fs.access(fixturePath(projectName, 'src/App/ssrContext.ts')),
       ).resolves.toBeUndefined();

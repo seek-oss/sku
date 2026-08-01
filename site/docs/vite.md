@@ -33,13 +33,13 @@ Set `bundler: 'vite'` and `buildType: 'ssr'`, then use [`sku start`] / [`sku bui
 export default {
   bundler: 'vite',
   buildType: 'ssr',
-  sites: ['default'],
   publicPath: '/',
   // …
 };
 ```
 
 SSR requires a relative `publicPath`.
+Config [`sites`](./configuration.md#sites) is optional (empty/omitted soft-defaults to `'default'`).
 The config [`public`](./configuration.md#public) assets folder and [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) are not supported.
 
 Scaffold with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or see [Server rendering](./ssr/) for entries, routing, providers, middleware, CSP, and migration guides.

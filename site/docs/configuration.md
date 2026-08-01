@@ -641,10 +641,6 @@ See [Multi site](./multi-site#switching-site-by-host) for more info.
 Can be used to limit the languages rendered for a specific site.
 Any listed language must exist in the [top level languages attribute](#languages).
 
-**SSR apps**
-
-SSR requires at least one site name in `sites` (for example `sites: ['default']`).
-Export `getSite` from the server entry when there is more than one site; omit it on single-site apps.
 `sites[].host` / [`hosts`](#hosts) are for local-dev listen / setup-hosts only — they do not select the route tree.
 See [Routing → Multi-site](./ssr/routing.md#multi-site-routes).
 

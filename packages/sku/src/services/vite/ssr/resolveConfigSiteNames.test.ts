@@ -9,9 +9,7 @@ describe('resolveConfigSiteNames', () => {
     ]);
   });
 
-  it('hard-errors when config sites is empty', () => {
-    expect(() => resolveConfigSiteNames([])).toThrow(
-      /Vite SSR requires a non-empty config 'sites' array/,
-    );
+  it('soft-defaults empty config sites to default', () => {
+    expect(resolveConfigSiteNames([])).toEqual(['default']);
   });
 });

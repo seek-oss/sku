@@ -84,25 +84,26 @@ Config `routes` (static prerender path lists) MUST NOT be used as the Vite SSR `
 
 Optional `sites?: string[]` on a `SkuSsrRouteObject` declares membership:
 
-- Omit / undefined ⇒ the route is included for **every** config site
-- Present ⇒ the route is included **only** for those site names (exact match against config site names)
+- Omit / undefined ⇒ the route is included for **every** resolved site
+- Present ⇒ the route is included **only** for those site names (exact match against resolved site names)
 
 Sku MUST NOT inherit `sites` from parent routes to children.
 Site-specific routes MUST set `sites` explicitly.
 
-Sku MUST pre-build per-site trees from config site names + `routesEntry` `routes` at init (not per request), strip `sites` before React Router APIs, and select the pre-built tree for the resolved `site`.
+Sku MUST pre-build per-site trees from resolved site names + `routesEntry` `routes` at init (not per request), strip `sites` before React Router APIs, and select the pre-built tree for the resolved `site`.
 
 Sku MUST create each site’s React Router static handler once at init and MUST NOT call `createStaticHandler` on the per-request path — per request sku only selects the pre-built handler and calls `query()` / `createStaticRouter`.
 
 Sku MUST NOT wrap or otherwise modify the route tree to mount consumer providers (provider mounting happens outside the router — see the request-exports requirement).
 
-Vite SSR MUST require a non-empty config `sites` array (≥1 site name). Empty `sites` MUST hard-error at config/init.
+Vite SSR MUST NOT require a non-empty config `sites` array.
+Empty or omitted `sites` MUST soft-default to a single synthetic site name `'default'` for pre-build + allowlist.
 
 **Resolve `site`:**
 
-- One configured site ⇒ when `getSite` is omitted, sku MUST use that sole config site name; when `getSite` is present on the server entry object, sku MUST call it and validate the return.
+- Zero configured sites (soft-default `'default'`) or one configured site ⇒ when `getSite` is omitted, sku MUST use that sole resolved site name; when `getSite` is present on the server entry object, sku MUST call it and validate the return against the resolved name list.
 - Multiple configured sites ⇒ missing `getSite` property MUST hard-error at init (naming the property; same class as missing `routes` on `routesEntry`).
-- Non-string `site` from `getSite`, or a `site` that is not a config site name / has no pre-built tree, MUST fail closed per request (hard error).
+- Non-string `site` from `getSite`, or a `site` that is not a resolved site name / has no pre-built tree, MUST fail closed per request (hard error).
 
 Sku MUST serialize that `site` into the hydrate bootstrap and select the same pre-built tree for client `createBrowserRouter`.
 
@@ -114,10 +115,11 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Vite SSR `R
 
 `site` MUST NOT be passed into `onHydrate` args (`onHydrate` stays `{ clientContext }` only when exported).
 
-#### Scenario: Empty config sites hard-errors
+#### Scenario: Empty config sites soft-defaults
 
-- **WHEN** a Vite SSR app has an empty config `sites` array
-- **THEN** sku fails with a hard error at config/init
+- **WHEN** a Vite SSR app has an empty or omitted config `sites` array
+- **THEN** sku soft-defaults to the synthetic site name `'default'` for the pre-built tree and allowlist
+- **AND** does not hard-error at config/init for empty `sites`
 
 #### Scenario: Route without sites is on every site
 
@@ -138,16 +140,16 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Vite SSR `R
 - **THEN** sku does not copy the parent’s `sites` onto the child
 - **AND** structural exclusion still applies (if the parent is absent for a site, its subtree is absent)
 
-#### Scenario: Single configured site without getSite uses that site
+#### Scenario: Zero or one site without getSite uses that site
 
-- **WHEN** config defines exactly one site
+- **WHEN** config defines zero sites (soft-default `'default'`) or exactly one site
 - **AND** the server entry omits `getSite`
-- **THEN** sku uses that sole config site name for the server handler and hydrate bootstrap
+- **THEN** sku uses that sole resolved site name for the server handler and hydrate bootstrap
 
 #### Scenario: getSite selects the tree
 
 - **WHEN** `getSite` returns `site`
-- **AND** that name is a config site with a pre-built tree
+- **AND** that name is a resolved site with a pre-built tree
 - **THEN** sku uses that site’s tree for the server handler
 - **AND** hydrates the client router with the same site’s tree
 
@@ -170,7 +172,7 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Vite SSR `R
 
 #### Scenario: Unknown site fails closed
 
-- **WHEN** `getSite` returns a `site` that is not a config site name
+- **WHEN** `getSite` returns a `site` that is not a resolved site name
 - **THEN** sku fails closed with a hard error for that request
 
 #### Scenario: Foreign-site paths are not registered
@@ -182,7 +184,7 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Vite SSR `R
 #### Scenario: Config hosts do not select the tree
 
 - **WHEN** config defines `sites[].host` values
-- **THEN** sku still resolves `site` via `getSite` (or the sole config site)
+- **THEN** sku still resolves `site` via `getSite` (or the sole resolved site)
 - **AND** does not choose the tree from the request `Host` header alone
 
 ### Requirement: Optional server and client request exports
@@ -949,10 +951,10 @@ Production remains HTTP.
 
 ### Requirement: Teams can scaffold a Vite SSR app via create
 
-`@sku-lib/create` MUST offer a `vite-ssr` template with non-empty config `sites` (typically one site), `expressTrustProxy: true` in `sku.config`, `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout route (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuSsrContexts<typeof server, typeof client>` wiring, and realistic default-exported request-entry objects (`middleware`, optional `onListen` / context getters, `onHydrate` — no `routes` re-export, no `Providers`).
+`@sku-lib/create` MUST offer a `vite-ssr` template that MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config`, `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout route (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuSsrContexts<typeof server, typeof client>` wiring, and realistic default-exported request-entry objects (`middleware`, optional `onListen` / context getters, `onHydrate` — no `routes` re-export, no `Providers`).
 
-A single-site template MUST omit `getSite` (sku uses the sole config site name).
-Multi-site examples MUST export `getSite`.
+A template with zero or one resolved site MUST omit `getSite` (sku uses the sole resolved site name).
+Multi-site examples MUST declare ≥2 config sites and export `getSite`.
 
 Lazy route page modules in the template MUST use the React Router Data Mode named `Component` export (not `export default`).
 
@@ -961,11 +963,12 @@ The static `vite` template MUST remain unchanged.
 #### Scenario: Create vite-ssr template
 
 - **WHEN** a user runs `@sku-lib/create --template vite-ssr`
-- **THEN** the project is Vite SSR with non-empty config `sites`, `expressTrustProxy: true`, and `routesEntry` exporting flat `routes`
+- **THEN** the project is Vite SSR with `expressTrustProxy: true` and `routesEntry` exporting flat `routes`
+- **AND** config `sites` may be omitted (soft-default `'default'`) or declare real site names
 - **AND** the server entry exports `middleware` (and may export `onListen` / context getters)
 - **AND** the client entry exports `onHydrate` (and may export context getters)
 - **AND** the template wires `createSkuSsrContexts` and has no `Providers` export
-- **AND** a single-site template omits `getSite`
+- **AND** a 0–1 site template omits `getSite`
 - **AND** request entries do not re-export `routes`
 - **AND** lazy page modules export named `Component`
 - **AND** can `sku start` without further entry setup
@@ -1072,14 +1075,14 @@ Sku MUST NOT add a runtime experimental gate.
 
 ### Requirement: Product and Migrating docs cover Vite SSR topics
 
-Vite SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole config site when omitted on single-site), default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) and sibling projection, always-on `SkuSsrProvider` + `createSkuSsrContexts<typeof server, typeof client>()`, optional `middleware` / `onListen` / `onHydrate`, config `expressTrustProxy`, the three value channels vs the app-owned root layout route, middleware layers (including production mount order: request-context → `express.static(publicPath)` → server-entry `middleware` → HTML, and the existing `sku start` order), CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
+Vite SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site), default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) and sibling projection, always-on `SkuSsrProvider` + `createSkuSsrContexts<typeof server, typeof client>()`, optional `middleware` / `onListen` / `onHydrate`, config `expressTrustProxy`, the three value channels vs the app-owned root layout route, middleware layers (including production mount order: request-context → `express.static(publicPath)` → server-entry `middleware` → HTML, and the existing `sku start` order), CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
 
 Docs MUST diagram the three value channels with a Markdown table (and MAY use a nested list). Docs MUST NOT require Mermaid or a VitePress Mermaid plugin for this coverage.
 
 Migrating docs MUST also cover:
 
 - named `Component` (not default export) for lazy routes
-- `routesEntry` + flat `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole config site when omitted on single-site)
+- `routesEntry` + flat `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
 - default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` instead of an `onRequest` value return bag; optional `middleware` / `onListen` / `onHydrate`
 - webpack `onStart` → server-entry `onListen({ app, httpServer, port })`; trust proxy via config `expressTrustProxy` (not `onStart`); other trust-proxy values via `onListen`
 - multi-site membership via `sites` on routes (not `routesBySite` maps, dual-entry `routes` re-exports, optional language path params, union tree + allowlist, or sku host matching as the product story)

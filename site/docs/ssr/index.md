@@ -53,7 +53,6 @@ import type { SkuConfig } from 'sku';
 export default {
   bundler: 'vite',
   buildType: 'ssr',
-  sites: ['default'],
   publicPath: '/',
   port: 3000,
 } satisfies SkuConfig;

@@ -208,8 +208,9 @@ export default () => (
 );
 ```
 
-Note that in order to use `loadable` with a `fallback`, your application must use the `renderToStringAsync` API.
-See the [supporting react suspense] documentation for more information.
+> [!NOTE]
+> In order to use `loadable` with a `fallback`, your application must use the `renderToStringAsync` API.
+> See the [supporting react suspense] documentation for more information.
 
 [Code splitting]: ./code-splitting.md
 [suspense]: https://react.dev/reference/react/Suspense
@@ -265,7 +266,7 @@ Failing those solutions, `sku` provides a [`compilePackages`][compilePackages] o
 This may affect build time, but allows Vite to handle certain CJS dependencies without throwing the error above.
 _Use this option as a last resort_:
 
-```typescript
+```ts
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
@@ -283,7 +284,7 @@ export default {
 
 If you require [types for Vite's client-side APIs], such as [`import.meta.glob`], or types for [imported image assets], create a `.d.ts` file in your codebase:
 
-```typescript
+```ts
 // src/vite-env.d.ts
 
 // eslint-disable-next-line spaced-comment

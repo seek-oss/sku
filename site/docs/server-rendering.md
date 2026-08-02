@@ -67,7 +67,7 @@ export default (): Server => ({
   renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
     res.status(200);
     // Call `flushHeadTags` early to retrieve whatever tags are available.
-    res.write(initialResponseTemplate({ headTags: flushHeadTags() }));
+    res.write(initialResponseTemplate({ headTags: flushHeadTags() })); // [!code highlight]
     await Promise.resolve();
 
     const app = renderToString(
@@ -79,7 +79,7 @@ export default (): Server => ({
     res.write(
       // Call `flushHeadTags` again just in case new tags are available.
       followupResponseTemplate({
-        headTags: flushHeadTags(),
+        headTags: flushHeadTags(), // [!code highlight]
         bodyTags: getBodyTags(),
         app,
       }),
@@ -104,7 +104,8 @@ Last but not least, please note that commands for SSR are different to the ones 
 
 When using multiple languages the browser will download the language needed as required. However, this can lead to a delay in page load. To ensure translations are available immediately you need to tell sku what language you are rendering.
 
-**Note:** This is handled automatically for static-rendering and is only required for server-side rendering.
+> [!NOTE]
+> This is handled automatically for static-rendering and is only required for server-side rendering.
 
 To add the language to the initial render call `addLanguageChunk` from your render params.
 
@@ -113,7 +114,7 @@ To add the language to the initial render call `addLanguageChunk` from your rend
 ```jsx
 export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
   const language = getLanguageFromPath(appPath);
-  addLanguageChunk(language);
+  addLanguageChunk(language); // [!code highlight]
   return renderToString(
     <SkuProvider>
       <StaticRouter location={appPath}>

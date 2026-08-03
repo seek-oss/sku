@@ -54,6 +54,7 @@ sku currently uses [`express`](https://expressjs.com/) as it's SSR web server.
 
 The client entry is the entrypoint for all your client side code (code that runs in the browser). This is where you'll want to hydrate your React application and configure any state management you may be using.
 
+> [!NOTE]
 > If you need pass information between render and client (e.g. Config values) see [`provideClientContext`](./static-rendering#provideclientcontext)
 
 Example client entry

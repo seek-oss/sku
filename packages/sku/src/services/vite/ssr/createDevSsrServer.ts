@@ -107,6 +107,7 @@ export const createDevSsrServer = async ({
       assets,
       cspEnabled: skuContext.cspEnabled,
       cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
+      cspReportTo: skuContext.cspReportTo,
       cspReportOnlyEnabled: skuContext.cspReportOnlyEnabled,
       cspReportOnlyExtraScriptSrcHosts:
         skuContext.cspReportOnlyExtraScriptSrcHosts,

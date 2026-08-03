@@ -43,6 +43,7 @@ export default {
   cspEnabled: false,
   cspDelivery: 'tag',
   cspExtraScriptSrcHosts: [],
+  cspReportTo: undefined,
   cspReportOnlyEnabled: false,
   cspReportOnlyExtraScriptSrcHosts: undefined,
   cspReportOnlyReportTo: undefined,

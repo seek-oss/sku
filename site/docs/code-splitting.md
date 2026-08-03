@@ -25,16 +25,16 @@ If sku encounters an async component (`loadable-component`) during render, it wi
 
 The most common use case for code splitting is splitting out each top level route component in your app. The following is an example of how to do this with [`react-router`](https://reacttraining.com/react-router/) but the concepts should apply to any routing solution.
 
-```js
-// sku.config.js
+::: code-group
+
+```js [sku.config.ts]
 export default {
   routes: ['/', '/details'],
   publicPath: 'https://somecdn.com',
 };
 ```
 
-```tsx
-// render.tsx
+```tsx [render.tsx]
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
@@ -71,8 +71,7 @@ export default {
 } satisfies Render;
 ```
 
-```tsx
-// client.tsx
+```tsx [client.tsx]
 import React from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
@@ -89,14 +88,13 @@ export default () => {
 };
 ```
 
-```tsx
-// App.tsx
+```tsx [App.tsx]
 import React, { Fragment } from 'react';
 import { Routes, Route } from 'react-router';
 import loadable from 'sku/@loadable/component';
 
-const Home = loadable(() => import('./handlers/Home'));
-const Details = loadable(() => import('./handlers/Details'));
+const Home = loadable(() => import('./handlers/Home')); // [!code highlight]
+const Details = loadable(() => import('./handlers/Details')); // [!code highlight]
 
 export default ({ site }: { site: string }) => (
   <Routes>
@@ -105,3 +103,5 @@ export default ({ site }: { site: string }) => (
   </Routes>
 );
 ```
+
+:::

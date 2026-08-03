@@ -71,7 +71,7 @@ export default (): Server => ({
   renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
     res.status(200);
     // Call `flushHeadTags` early to retrieve whatever tags are available.
-    res.write(initialResponseTemplate({ headTags: flushHeadTags() }));
+    res.write(initialResponseTemplate({ headTags: flushHeadTags() })); // [!code highlight]
     await Promise.resolve();
 
     const app = renderToString(
@@ -83,7 +83,7 @@ export default (): Server => ({
     res.write(
       // Call `flushHeadTags` again just in case new tags are available.
       followupResponseTemplate({
-        headTags: flushHeadTags(),
+        headTags: flushHeadTags(), // [!code highlight]
         bodyTags: getBodyTags(),
         app,
       }),
@@ -106,7 +106,7 @@ To ensure translations are available immediately, call `addLanguageChunk` from y
 ```jsx
 export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
   const language = getLanguageFromPath(appPath);
-  addLanguageChunk(language);
+  addLanguageChunk(language); // [!code highlight]
   return renderToString(
     <SkuProvider>
       <StaticRouter location={appPath}>

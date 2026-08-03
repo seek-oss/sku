@@ -24,7 +24,8 @@ vi.setConfig({
 });
 
 function getLocalUrl(site: string, port: number) {
-  const host = site === 'jobStreet' ? 'dev.jobstreet.com' : 'dev.seek.com.au';
+  const host =
+    site === 'jobStreet' ? 'jobstreet.com.localhost' : 'au.seek.com.localhost';
 
   return `http://${host}:${port}`;
 }

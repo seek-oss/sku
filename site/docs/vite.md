@@ -236,8 +236,9 @@ export default () => (
 );
 ```
 
-Note that in order to use `loadable` with a `fallback`, your application must use the `renderToStringAsync` API.
-See the [supporting react suspense] documentation for more information.
+> [!NOTE]
+> In order to use `loadable` with a `fallback`, your application must use the `renderToStringAsync` API.
+> See the [supporting react suspense] documentation for more information.
 
 [Code splitting]: ./code-splitting.md
 [suspense]: https://react.dev/reference/react/Suspense
@@ -297,7 +298,7 @@ Failing those solutions, `sku` provides a [`compilePackages`][compilePackages] o
 This may affect build time, but allows Vite to handle certain CJS dependencies without throwing the error above.
 _Use this option as a last resort_:
 
-```typescript
+```ts
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
@@ -318,7 +319,7 @@ Prefer [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__un
 
 If you require [types for Vite's client-side APIs], such as [`import.meta.glob`], or types for [imported image assets], create a `.d.ts` file in your codebase:
 
-```typescript
+```ts
 // src/vite-env.d.ts
 
 // eslint-disable-next-line spaced-comment
@@ -371,7 +372,13 @@ Similar changes will need to be made in any libraries you consume that import SV
 Consumers of these libraries may see inconsistent results when importing SVG files, depending on the query parameters used by the library and the version of `sku` they are using.
 Ensure changes made to libraries for the purpose of Vite compatibility are communicated clearly in the release notes.
 
+### Storybook
+
+If your repo uses `sku`'s Storybook config (via the [`sku/config/storybook`] entrypoint), it's recommended to convert your Storybook to use Vite instead of webpack.
+See [sku's Storybook documentation] for more information.
+
 [sku v15.13.0]: https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md#15130
 [the vite docs]: https://vite.dev/guide/assets#importing-asset-as-url
 [the importing image assets docs]: ./extra-features.md#importing-image-assets
 [`data:` URLs]: https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data
+[sku's Storybook documentation]: ./api#sku-config-storybook

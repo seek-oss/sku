@@ -26,6 +26,7 @@ If you need to specify a different config file you can do so with the `--config`
 $ sku start --config sku.custom.config.ts
 ```
 
+> [!NOTE]
 > When using the `--config` parameter, the specified file must exist. Sku will exit with an error if the file cannot be found.
 > Config files can use either TypeScript or JavaScript.
 
@@ -41,7 +42,7 @@ Config files can use either TypeScript or JavaScript.
 
 ## bundler
 
-Type: `webpack | vite`
+Type: `'webpack' | 'vite'`
 
 Default: `webpack`
 
@@ -109,6 +110,16 @@ Default: `[]`
 
 Extra external hosts to allow in your `script-src` [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspEnabled` is set to `true`.
 
+## cspReportTo
+
+Type: `string | [string, string]`
+
+Bundler: `vite`
+
+Where to report content security policy violations. Only relevant if `cspEnabled` is set to `true` and `cspDelivery` is set to `'header'`.
+
+Vite SSR (`buildType: 'ssr'`) ignores `cspDelivery` and always uses HTTP headers, so this applies whenever `cspEnabled` is `true`.
+
 ## cspReportOnlyEnabled
 
 Type: `boolean`
@@ -129,19 +140,19 @@ Default: `cspExtraScriptSrcHosts`
 
 Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspReportOnlyEnabled` is set to `true`.
 
-## cspReportOnlyReportTo <Badge type="info" text="SSR only" />
+## cspReportOnlyReportTo
 
-Type: `string`
+Type: `string | [string, string]`
 
-Default: `undefined`
+Default: `cspReportTo`
 
-CSP [`report-to`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-to) group name token for the Report-Only policy. Only relevant if `cspReportOnlyEnabled` is `true`. When set, sku appends `report-to <value>` to `Content-Security-Policy-Report-Only`.
+Bundler: `vite`
 
-sku does not emit a `Reporting-Endpoints` (or legacy `Report-To`) header — define the matching endpoint group in your app or infrastructure.
+Where to report report-only content security policy violations. Only relevant if `cspReportOnlyEnabled` is set to `true`.
 
 ## dangerouslySetESLintConfig
 
-Type: `function`
+Type: `(skuESLintConfig: Linter.Config[]) => Linter.Config[]`
 
 This function provides a way to modify sku's ESLint configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
@@ -154,6 +165,7 @@ Rather than disabling a rule purely because it causes frequent errors, consider 
 
 If you believe other consumers would benefit from the addition/removal/modificaton of a rule, consider contributing the change to [`eslint-config-seek`](https://github.com/seek-oss/eslint-config-seek).
 
+> [!WARNING]
 > Sku provides no guarantees that its ESLint configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -188,6 +200,7 @@ Make sure [`setupTests`] definitely doesn’t cover your needs before using.
 
 Before customizing your Jest configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
+> [!WARNING]
 > Sku provides no guarantees that its Jest configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -213,6 +226,7 @@ It should only be used in exceptional circumstances where a solution cannot be a
 
 Before customizing your TypeScript configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
+> [!WARNING]
 > Sku provides no guarantees that its TypeScript configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -244,6 +258,7 @@ If you only need to modify one of these configs, then you can check `env.mode` f
 
 This function can return a partial config object that will be deeply merged into existing config (recommended), or directly mutate the config (if the default merging cannot achieve the desired result).
 
+> [!WARNING]
 > Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -271,6 +286,7 @@ It should only be used in exceptional circumstances where a solution cannot be a
 
 Before customizing your Vitest configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
+> [!WARNING]
 > Sku provides no guarantees that its Vitest configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -297,6 +313,7 @@ Before customizing your Webpack configuration, please reach out via the [support
 As sku creates two webpack configs (`client` & `server|render`), this function will actually run twice.
 If you only need to modify one of these configs, then you can check `config.name`.
 
+> [!WARNING]
 > Sku provides no guarantees that its Webpack configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -401,8 +418,10 @@ Type: `Array<string>`
 Default: `['localhost']`
 
 An array of custom hosts the app can be served off when running `sku start` or `sku start-ssr`.
-Your [hosts file](https://en.wikipedia.org/wiki/Hosts_%28file%29) must be configured to point these hosts to `localhost`.
-This can be done automatically by running [`sudo sku setup-hosts`](./cli.md#setup-hosts).
+
+We recommend hostnames ending in `.localhost` (for example `au.seek.com.localhost`). These usually resolve to your machine automatically, and sku will not warn when they are missing from your [hosts file](https://en.wikipedia.org/wiki/Hosts_%28file%29). Exact `localhost` is also exempt from that warning.
+
+For other custom hosts, your hosts file must point them to `localhost`. This can be done automatically by running [`sudo sku setup-hosts`](./cli.md#setup-hosts). `setup-hosts` will still write `.localhost` entries if you choose to run it.
 
 ## httpsDevServer
 
@@ -410,7 +429,7 @@ Type: `boolean`
 
 Default: `false`
 
-Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
+Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`, and remains available for Safari and similar environments that still need a secure context over HTTPS even when using `*.localhost` hostnames.
 
 Supported for Static, webpack, and SSR (`buildType: 'ssr'`) via `sku start`.
 
@@ -477,13 +496,11 @@ Subpath import specifiers must be prefixed with `#`.
 
 **Example:**
 
-`sku.config.ts`:
-
 ```typescript
 export default {
   pathAliases: {
-    '#components/*': './src/components/*',
-    '#utils/*': './src/utils/*',
+    '#components/*': './src/components/*', // [!code highlight]
+    '#utils/*': './src/utils/*', // [!code highlight]
   },
 } satisfies SkuConfig;
 ```
@@ -652,7 +669,8 @@ Default: `[]`
 
 When running `sku build`, sku will compile all your external packages (`node_modules`) through `@babel/preset-env`. This is to ensure external packages satisfy the browser support policy. However, this can cause very slow builds when large packages are processed. The `skipPackageCompatibilityCompilation` option allows you to pass a list of trusted packages to skip this behaviour.
 
-> Note: `react` & `react-dom` are skipped by default.
+> [!NOTE]
+> `react` & `react-dom` are skipped by default.
 
 Example:
 
@@ -680,8 +698,9 @@ export default {
 } satisfies SkuConfig;
 ```
 
-**NOTE**: Production source maps can increase memory usage during builds to the point where the Node process exhausts its heap memory.
-If this occurs, you can increase the memory limit for the Node process by setting the `NODE_OPTIONS` environment variable to `--max-old-space-size=4096` (or a higher value) before running the build command.
+> [!WARNING]
+> Production source maps can increase memory usage during builds to the point where the Node process exhausts its heap memory.
+> If this occurs, you can increase the memory limit for the Node process by setting the `NODE_OPTIONS` environment variable to `--max-old-space-size=4096` (or a higher value) before running the build command.
 
 For example:
 
@@ -754,7 +773,10 @@ Type: `string[]`
 
 Default: `[]`
 
-_This is an experimental option that may change or be removed without notice._
+Bundler: `vite`
+
+> [!WARNING]
+> This is an experimental option that may change or be removed without notice.
 
 An array of cjs import paths that have both a default and named exports.
 

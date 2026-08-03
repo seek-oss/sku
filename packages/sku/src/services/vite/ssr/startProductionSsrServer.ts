@@ -52,6 +52,7 @@ export const startProductionSsrServer = async ({
     manifest: { manifest, publicPath, entry },
     cspEnabled: csp.enabled,
     cspExtraScriptSrcHosts: csp.extraHosts,
+    cspReportTo: csp.reportTo,
     cspReportOnlyEnabled: csp.reportOnlyEnabled ?? false,
     cspReportOnlyExtraScriptSrcHosts: csp.reportOnlyExtraHosts ?? [],
     cspReportOnlyReportTo: csp.reportOnlyReportTo,

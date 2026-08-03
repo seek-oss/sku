@@ -7,9 +7,9 @@ const skuConfig: SkuConfig = {
   devServerMiddleware: './dev-middleware.js',
   dangerouslySetTSConfig: (config) => ({
     ...config,
-    include: ['**/*', '.storybook/*'],
+    include: ['**/*', '.storybook/*', '.storybook-vite/*'],
   }),
-  eslintIgnore: ['**/storybook-static/'],
+  eslintIgnore: ['**/storybook-static/', '**/storybook-static-vite/'],
 };
 
 export default skuConfig;

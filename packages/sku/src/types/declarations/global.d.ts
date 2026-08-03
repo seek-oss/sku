@@ -25,11 +25,16 @@ declare const __SKU_DEV_HTTPS__: boolean;
 declare const __SKU_LIBRARY_NAME__: string;
 declare const __SKU_LIBRARY_FILE__: string;
 
+/** Mirrors `ReportingEndpoint` from `utils/csp.ts`; this file must stay ambient, so it cannot import. */
+type SkuReportingEndpoint = { endpoint: string; url?: string };
+
 type SkuCSP = {
   enabled: boolean;
   extraHosts: string[];
+  /** Vite SSR `report-to` reporting endpoint (optional; unused by webpack SSR). */
+  reportTo?: SkuReportingEndpoint;
   /** Vite SSR Report-Only CSP (optional; unused by webpack SSR). */
   reportOnlyEnabled?: boolean;
   reportOnlyExtraHosts?: string[];
-  reportOnlyReportTo?: string;
+  reportOnlyReportTo?: SkuReportingEndpoint;
 };

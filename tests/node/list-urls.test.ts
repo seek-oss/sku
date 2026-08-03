@@ -9,8 +9,8 @@ const { sku } = scopeToFixture('list-urls');
 
 const makeUrls = (port: number) => [
   `http://localhost:${port}`,
-  `http://local.seek.com:${port}`,
-  `http://dev.seek.com.au:${port}`,
+  `http://seek.com.localhost:${port}`,
+  `http://au.seek.com.localhost:${port}`,
 ];
 
 const urls = makeUrls(8222);

@@ -36,6 +36,8 @@
 - [x] 4.3 Vocab: register language chunk only when `onRequest` returns `language`; no allowlist / sole-language default; no `addLanguageChunk` / client forward
 - [x] 4.4 When vocab / `languages` is active: resolve `@vocab/vite/runtime` from sku via `createRequire(import.meta.url)` and alias the export file in shared Vite `resolve.alias`; do not alias the `@vocab/vite` package root
 - [x] 4.5 Validate Vite SSR with vocab (translations fixture) without a consumer direct `@vocab/vite` dependency
+- [x] 4.6 Reconcile with master's `report-to` feature: consume the `ReportingEndpoint` values resolved by `createSkuContext`, support `cspReportTo` on the enforcing policy, and emit `Reporting-Endpoints` for URL-bearing endpoints
+- [x] 4.7 Cover the reconciled `report-to` behaviour in the Vite SSR fixture, e2e assertions, and `buildCspHeaders` unit tests
 
 ## 5. Fixtures and tests
 

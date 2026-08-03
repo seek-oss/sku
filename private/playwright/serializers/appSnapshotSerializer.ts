@@ -7,6 +7,7 @@ import { sanitizeString } from '../sanitizeString.ts';
 const snapshotHeaders = new Set([
   'content-security-policy',
   'content-security-policy-report-only',
+  'reporting-endpoints',
 ]);
 
 const emptyDiff = `===================================================================

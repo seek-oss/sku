@@ -9,17 +9,19 @@ By default, sku will render the first site in the [`sites`](./configuration#site
 ```ts
 export default {
   sites: [
-    { name: 'seekAnz', host: 'dev.seek.com.au' },
-    { name: 'jobStreet', host: 'dev.jobstreet.com' },
+    { name: 'seekAnz', host: 'au.seek.com.localhost' },
+    { name: 'jobStreet', host: 'jobstreet.com.localhost' },
   ],
 } satisfies SkuConfig;
 ```
 
-Now, if you request `http://dev.seek.com.au`, you will receive the `seekAnz` version of the app, and `http://dev.jobstreet.com` will return the `jobStreet` one.
+Now, if you request `http://au.seek.com.localhost`, you will receive the `seekAnz` version of the app, and `http://jobstreet.com.localhost` will return the `jobStreet` one.
+
+Prefer hostnames ending in `.localhost` for local development. They resolve to your machine automatically in most environments, so you usually do not need `/etc/hosts` entries.
 
 ### Setup hosts
 
-Switching site by host requires that the hosts are configured on your system to point to localhost. sku can do this for you.
+For hostnames that do not end in `.localhost`, switching site by host requires that the hosts are configured on your system to point to localhost. sku can do this for you. You can also run `setup-hosts` for `.localhost` names if you want explicit hosts-file entries.
 
 First add the following script to your `package.json`.
 
@@ -37,19 +39,22 @@ Then you can run the script to configure you machine with the required hosts.
 $ sudo npm run setup-hosts
 ```
 
-_**NOTE:** Modifying hosts configuration needs root privileges._
+> [!NOTE]
+> Modifying hosts configuration needs root privileges.
 
 ## Braid example
 
 The following is an example of how you would use this feature with [Braid](https://github.com/seek-oss/braid-design-system), but you can use this approach to vary your sites in any way.
 
-_**NOTE:** Currently this example is for static rendering projects only but SSR projects can follow the same pattern._
+> [!NOTE]
+> Currently this example is for static rendering projects only but SSR projects can follow the same pattern.
 
 ### Config
 
 Firstly, add a [`sites`](./configuration#sites) option to your `sku.config.js`. This tells sku to render a version of your app for each site you specify.
 
-_**NOTE:** For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes), however, you could just as easily map the theme name from your site._
+> [!NOTE]
+> For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes), however, you could just as easily map the theme name from your site.
 
 ```ts
 export default {

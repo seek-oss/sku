@@ -124,7 +124,7 @@ describe('buildCspHeaders report-to', () => {
       inlineScripts: [],
       extraHosts: [],
       reportOnlyExtraHosts: [],
-      reportOnlyReportTo: 'csp-endpoint',
+      reportOnlyReportTo: { endpoint: 'csp-endpoint' },
       development: false,
     });
 
@@ -134,21 +134,72 @@ describe('buildCspHeaders report-to', () => {
     expect(headers['Content-Security-Policy']).not.toContain('report-to');
   });
 
-  it('omits report-to when unset or empty', () => {
-    for (const reportOnlyReportTo of [undefined, '']) {
-      const headers = buildCspHeaders({
-        enabled: false,
-        reportOnlyEnabled: true,
-        inlineScripts: [],
-        extraHosts: [],
-        reportOnlyExtraHosts: [],
-        reportOnlyReportTo,
-        development: false,
-      });
+  it('includes report-to on the enforcing policy when configured', () => {
+    const headers = buildCspHeaders({
+      enabled: true,
+      reportOnlyEnabled: false,
+      inlineScripts: [],
+      extraHosts: [],
+      reportTo: { endpoint: 'csp-endpoint' },
+      reportOnlyExtraHosts: [],
+      development: false,
+    });
 
-      expect(headers['Content-Security-Policy-Report-Only']).not.toContain(
-        'report-to',
-      );
-    }
+    expect(headers['Content-Security-Policy']).toContain(
+      'report-to csp-endpoint',
+    );
+  });
+
+  it('omits report-to when unset', () => {
+    const headers = buildCspHeaders({
+      enabled: false,
+      reportOnlyEnabled: true,
+      inlineScripts: [],
+      extraHosts: [],
+      reportOnlyExtraHosts: [],
+      reportOnlyReportTo: undefined,
+      development: false,
+    });
+
+    expect(headers['Content-Security-Policy-Report-Only']).not.toContain(
+      'report-to',
+    );
+  });
+});
+
+describe('buildCspHeaders Reporting-Endpoints', () => {
+  it('emits a Reporting-Endpoints header for endpoints with a url', () => {
+    const headers = buildCspHeaders({
+      enabled: true,
+      reportOnlyEnabled: true,
+      inlineScripts: [],
+      extraHosts: [],
+      reportTo: { endpoint: 'csp-endpoint', url: 'https://example.com/csp' },
+      reportOnlyExtraHosts: [],
+      reportOnlyReportTo: {
+        endpoint: 'csp-report-only-endpoint',
+        url: 'https://example.com/csp-report-only',
+      },
+      development: false,
+    });
+
+    expect(headers['Reporting-Endpoints']).toBe(
+      'csp-endpoint="https://example.com/csp", csp-report-only-endpoint="https://example.com/csp-report-only"',
+    );
+  });
+
+  it('omits the Reporting-Endpoints header when no endpoint has a url', () => {
+    const headers = buildCspHeaders({
+      enabled: true,
+      reportOnlyEnabled: true,
+      inlineScripts: [],
+      extraHosts: [],
+      reportTo: { endpoint: 'csp-endpoint' },
+      reportOnlyExtraHosts: [],
+      reportOnlyReportTo: { endpoint: 'csp-endpoint' },
+      development: false,
+    });
+
+    expect(headers['Reporting-Endpoints']).toBeUndefined();
   });
 });

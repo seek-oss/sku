@@ -68,11 +68,9 @@ If CSP is enabled but nothing requested a nonce, the CSP header MUST still be em
 - **THEN** consumers MUST NOT use webpack/static `createUnsafeNonce` as the Vite SSR API
 - **AND** sku MUST NOT expose a Vite SSR helper that returns a new distinct nonce on each call for the same response
 
-### Requirement: Report-Only CSP may coexist with an enforcing policy and MUST support report-to
+### Requirement: Report-Only CSP may coexist with an enforcing policy
 
 Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an enforcing CSP.
-
-When Report-Only is enabled, consumers MUST be able to configure a `report-to` value, and sku MUST include that value in the Report-Only policy.
 
 #### Scenario: Report-Only header alongside enforcing policy
 
@@ -84,10 +82,28 @@ When Report-Only is enabled, consumers MUST be able to configure a `report-to` v
 - **WHEN** only Report-Only CSP is enabled
 - **THEN** the response includes `Content-Security-Policy-Report-Only` and does not require an enforcing `Content-Security-Policy` header
 
-#### Scenario: Configurable report-to on Report-Only policy
+### Requirement: Vite SSR report-to matches static Vite semantics
 
-- **WHEN** Report-Only CSP is enabled and a `report-to` value is configured
-- **THEN** the `Content-Security-Policy-Report-Only` header includes a `report-to` directive using that configured value
+Vite SSR MUST accept `cspReportTo` and `cspReportOnlyReportTo` in the same forms static Vite accepts: an endpoint name, a URL, or a tuple of both. `cspReportOnlyReportTo` MUST default to `cspReportTo`.
+
+Sku MUST include the resolved endpoint name as the `report-to` directive of the corresponding policy, and MUST emit a `Reporting-Endpoints` response header covering every resolved endpoint that carries a URL.
+
+Because Vite SSR ignores `cspDelivery` and always uses HTTP headers, `cspReportTo` MUST apply whenever CSP is enabled, rather than being gated on `header` delivery.
+
+#### Scenario: Configurable report-to on either policy
+
+- **WHEN** a `report-to` value is configured for the enforcing and/or Report-Only policy
+- **THEN** the corresponding `Content-Security-Policy` and/or `Content-Security-Policy-Report-Only` header includes a `report-to` directive using the resolved endpoint name
+
+#### Scenario: Reporting-Endpoints emitted for URL-bearing endpoints
+
+- **WHEN** a configured `report-to` value resolves to an endpoint that carries a URL
+- **THEN** the response includes a `Reporting-Endpoints` header mapping that endpoint name to its URL
+
+#### Scenario: No Reporting-Endpoints header without URLs
+
+- **WHEN** every configured `report-to` value is an endpoint name only
+- **THEN** sku MUST NOT emit a `Reporting-Endpoints` header, leaving the endpoint group for the app or its infrastructure to define
 
 ### Requirement: Vite SSR CSP assumes relative publicPath only
 
@@ -108,7 +124,9 @@ Consumer `cspExtraScriptSrcHosts` remains for third-party script hosts.
 
 This Vite SSR CSP capability MUST NOT change CSP delivery for webpack SSR apps or static apps.
 
-Static Vite may independently support `cspDelivery` (`tag` / `header` metadata) and Report-Only via the static HTML CSP path; those options MUST NOT control Vite SSR CSP (Vite SSR always uses HTTP headers and its own Report-Only / `report-to` config).
+Static Vite may independently support `cspDelivery` (`tag` / `header` metadata) and Report-Only via the static HTML CSP path; `cspDelivery` MUST NOT control Vite SSR CSP, which always uses HTTP headers.
+
+The `report-to` config options are shared with static Vite and MUST resolve identically for both paths; only the delivery of the resulting `Reporting-Endpoints` differs (a response header for SSR, `metadata.reportingEndpoints` for static).
 
 Static and webpack apps MAY continue to allow multiple `createUnsafeNonce` calls per render.
 

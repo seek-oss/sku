@@ -54,6 +54,7 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
           __SKU_CSP__: JSON.stringify({
             enabled: skuContext.cspEnabled,
             extraHosts: skuContext.cspExtraScriptSrcHosts,
+            reportTo: skuContext.cspReportTo,
             reportOnlyEnabled: skuContext.cspReportOnlyEnabled,
             reportOnlyExtraHosts: skuContext.cspReportOnlyExtraScriptSrcHosts,
             reportOnlyReportTo: skuContext.cspReportOnlyReportTo,

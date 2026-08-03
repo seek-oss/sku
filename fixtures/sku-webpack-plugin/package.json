@@ -8,7 +8,7 @@
     "react-dom": "catalog:"
   },
   "scripts": {
-    "start:asset-server": "http-server dist -p 9876 --cors"
+    "start:asset-server": "http-server dist --cors"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.28.5",

@@ -404,13 +404,15 @@ Emit the same metrics as static start: `start.initial` and `start.rebuild`.
 
 Derive `script-src` before `pipe`.
 
-Enforcing and/or Report-Only (`cspReportOnlyReportTo`).
+Enforcing and/or Report-Only, each with an optional `report-to` (`cspReportTo` / `cspReportOnlyReportTo`).
 
 Relative `publicPath` only (asset base; still covered by `'self'`).
 
 No meta `http-equiv`.
 
-**Coexistence with static Vite CSP (merged from master):** Static Vite now has `cspDelivery: 'tag' | 'header'` (meta vs `metadata.csp` JSON) and Report-Only via `createCSPHandler` → `metadata.cspReportOnly` / start-time headers. That path is separate from Vite SSR. Vite SSR keeps its own `buildCspHeaders` (real response headers, lazy single nonce, `cspReportOnlyReportTo`). Do not route Vite SSR through `cspDelivery` or the static HTML CSP handler.
+**Coexistence with static Vite CSP (merged from master):** Static Vite has `cspDelivery: 'tag' | 'header'` (meta vs `metadata.csp` JSON) and Report-Only via `createCSPHandler` → `metadata.cspReportOnly` / start-time headers. That rendering path is separate from Vite SSR, which keeps its own `buildCspHeaders` (real response headers, lazy single nonce). Do not route Vite SSR through `cspDelivery` or the static HTML CSP handler.
+
+The `report-to` config surface is shared, however. `createSkuContext` normalises `cspReportTo` / `cspReportOnlyReportTo` (endpoint name, URL, or tuple) into a `ReportingEndpoint` via `parseCspReportTo` from `utils/csp.ts`, and Report-Only falls back to the enforcing value. Vite SSR consumes those resolved endpoints, appends `report-to <endpoint>` to the matching policy, and emits a `Reporting-Endpoints` response header — built with the shared `stringifyReportingEndpoints` — for whichever endpoints carry a URL. Static writes the same value to `metadata.reportingEndpoints` instead.
 
 ### 12. Request-entry and routesEntry shapes
 

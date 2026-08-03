@@ -1,6 +1,7 @@
 node_modules
 npm-debug.log
 storybook-static/
+storybook-static-vite/
 
 # managed by sku
 .eslintcache

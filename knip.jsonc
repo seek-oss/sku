@@ -14,8 +14,9 @@
         "@swc/core",
         // Used in tests
         "jest-environment-jsdom",
-        // Optional peer dep
+        // Optional peer deps
         "@storybook/react-webpack5",
+        "@storybook/react-vite",
         // Needed so `declare module 'express-serve-static-core'` resolves under pnpm
         "@types/express-serve-static-core",
       ],

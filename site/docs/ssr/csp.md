@@ -4,6 +4,7 @@ When `cspEnabled` and/or `cspReportOnlyEnabled` are set, SSR delivers CSP as **H
 Meta `http-equiv` CSP is not used on the SSR path.
 
 See [CSP](../csp.md) and [Configuration](../configuration.md) for report-only options and extra script hosts.
+`cspReportTo` and `cspReportOnlyReportTo` behave as documented there, with any generated `Reporting-Endpoints` sent as a response header.
 SSR requires a relative `publicPath`.
 
 ## Nonces

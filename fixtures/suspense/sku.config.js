@@ -4,7 +4,7 @@ export default {
   sites: [
     {
       name: 'au',
-      host: 'dev.seek.com.au',
+      host: 'au.seek.com.localhost',
       routes: [{ route: '/', name: 'home' }],
     },
   ],

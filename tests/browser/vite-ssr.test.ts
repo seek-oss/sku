@@ -65,8 +65,12 @@ describe('vite-ssr', () => {
       expect(cspReportOnly).toBeTruthy();
       expect(csp).toContain('https://cdn.example.com');
       expect(cspReportOnly).toContain('https://report-only.example.com');
-      expect(cspReportOnly).toContain('report-to csp-endpoint');
-      expect(csp).not.toContain('report-to');
+      expect(csp).toContain('report-to csp-endpoint');
+      expect(cspReportOnly).toContain('report-to csp-report-only-endpoint');
+      // Only `cspReportTo` carries a URL, so only it appears in the header.
+      expect(response.headers.get('reporting-endpoints')).toBe(
+        'csp-endpoint="https://report.example.com/csp"',
+      );
       // sku mints a nonce when attaching it to React stream scripts.
       expect(csp).toMatch(/'nonce-/);
       expect(cspReportOnly).toMatch(/'nonce-/);
@@ -505,11 +509,16 @@ describe('vite-ssr', () => {
           expect(html).toContain('Vite SSR Home');
           expect(html).toContain('<!DOCTYPE html>');
           expect(html).toContain('/static/vite-ssr/');
-          expect(response.headers.get('content-security-policy')).toBeTruthy();
+          expect(response.headers.get('content-security-policy')).toContain(
+            'report-to csp-endpoint',
+          );
           const cspReportOnly = response.headers.get(
             'content-security-policy-report-only',
           );
-          expect(cspReportOnly).toContain('report-to csp-endpoint');
+          expect(cspReportOnly).toContain('report-to csp-report-only-endpoint');
+          expect(response.headers.get('reporting-endpoints')).toBe(
+            'csp-endpoint="https://report.example.com/csp"',
+          );
         },
         { timeout: 15000 },
       );

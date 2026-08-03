@@ -10,6 +10,7 @@ import express, {
   type RequestHandler,
   type Response,
 } from 'express';
+import type { ReportingEndpoint } from '../../../utils/csp.js';
 import { buildCspHeaders } from './csp.js';
 import {
   createSsrRequestContextMiddleware,
@@ -138,9 +139,10 @@ export interface SsrServerOptions {
   clientDirectory?: string;
   cspEnabled: boolean;
   cspExtraScriptSrcHosts: string[];
+  cspReportTo?: ReportingEndpoint;
   cspReportOnlyEnabled: boolean;
   cspReportOnlyExtraScriptSrcHosts: string[];
-  cspReportOnlyReportTo?: string;
+  cspReportOnlyReportTo?: ReportingEndpoint;
   development?: boolean;
   onRenderError?: (error: Error) => void;
 }
@@ -211,6 +213,7 @@ export const createHtmlRenderMiddleware =
     manifest,
     cspEnabled,
     cspExtraScriptSrcHosts,
+    cspReportTo,
     cspReportOnlyEnabled,
     cspReportOnlyExtraScriptSrcHosts,
     cspReportOnlyReportTo,
@@ -223,6 +226,7 @@ export const createHtmlRenderMiddleware =
     | 'manifest'
     | 'cspEnabled'
     | 'cspExtraScriptSrcHosts'
+    | 'cspReportTo'
     | 'cspReportOnlyEnabled'
     | 'cspReportOnlyExtraScriptSrcHosts'
     | 'cspReportOnlyReportTo'
@@ -274,6 +278,7 @@ export const createHtmlRenderMiddleware =
           inlineScripts: result.inlineScripts,
           nonce,
           extraHosts: cspExtraScriptSrcHosts,
+          reportTo: cspReportTo,
           reportOnlyExtraHosts: cspReportOnlyExtraScriptSrcHosts,
           reportOnlyReportTo: cspReportOnlyReportTo,
           development,
@@ -322,6 +327,7 @@ export const listen = async (
       manifest: options.manifest,
       cspEnabled: options.cspEnabled,
       cspExtraScriptSrcHosts: options.cspExtraScriptSrcHosts,
+      cspReportTo: options.cspReportTo,
       cspReportOnlyEnabled: options.cspReportOnlyEnabled,
       cspReportOnlyExtraScriptSrcHosts:
         options.cspReportOnlyExtraScriptSrcHosts,

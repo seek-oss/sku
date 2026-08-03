@@ -1,4 +1,8 @@
 import { createHash, randomBytes } from 'node:crypto';
+import {
+  type ReportingEndpoint,
+  stringifyReportingEndpoints,
+} from '../../../utils/csp.js';
 
 export const createCspNonce = () =>
   process.env.SKU_CSP_NONCE ?? randomBytes(16).toString('base64url');
@@ -17,7 +21,7 @@ export const buildContentSecurityPolicy = ({
   nonce?: string;
   extraHosts?: string[];
   development?: boolean;
-  reportTo?: string;
+  reportTo?: ReportingEndpoint;
 }) => {
   // Relative publicPath only: Document assets are covered by `'self'`.
   // Third-party scripts use `extraHosts` (`cspExtraScriptSrcHosts`).
@@ -43,7 +47,7 @@ export const buildContentSecurityPolicy = ({
   ];
 
   if (reportTo) {
-    directives.push(`report-to ${reportTo}`);
+    directives.push(`report-to ${reportTo.endpoint}`);
   }
 
   return directives.join('; ');
@@ -55,6 +59,7 @@ export const buildCspHeaders = ({
   inlineScripts,
   nonce,
   extraHosts,
+  reportTo,
   reportOnlyExtraHosts,
   reportOnlyReportTo,
   development,
@@ -64,11 +69,13 @@ export const buildCspHeaders = ({
   inlineScripts: string[];
   nonce?: string;
   extraHosts: string[];
+  reportTo?: ReportingEndpoint;
   reportOnlyExtraHosts: string[];
-  reportOnlyReportTo?: string;
+  reportOnlyReportTo?: ReportingEndpoint;
   development: boolean;
 }) => {
   const headers: Record<string, string> = {};
+  const reportingEndpoints: ReportingEndpoint[] = [];
 
   if (enabled) {
     headers['Content-Security-Policy'] = buildContentSecurityPolicy({
@@ -76,7 +83,12 @@ export const buildCspHeaders = ({
       nonce,
       extraHosts,
       development,
+      reportTo,
     });
+
+    if (reportTo?.url) {
+      reportingEndpoints.push(reportTo);
+    }
   }
   if (reportOnlyEnabled) {
     headers['Content-Security-Policy-Report-Only'] = buildContentSecurityPolicy(
@@ -85,9 +97,18 @@ export const buildCspHeaders = ({
         nonce,
         extraHosts: reportOnlyExtraHosts,
         development,
-        reportTo: reportOnlyReportTo || undefined,
+        reportTo: reportOnlyReportTo,
       },
     );
+
+    if (reportOnlyReportTo?.url) {
+      reportingEndpoints.push(reportOnlyReportTo);
+    }
+  }
+
+  if (reportingEndpoints.length) {
+    headers['Reporting-Endpoints'] =
+      stringifyReportingEndpoints(reportingEndpoints);
   }
 
   return headers;

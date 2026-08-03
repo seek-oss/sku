@@ -52,8 +52,8 @@ describe('routeMatcher', () => {
 
 describe('getMatchingRoute', () => {
   const sites = [
-    { name: 'au', host: 'dev.seek.com.au' },
-    { name: 'nz', host: 'dev.seek.co.nz' },
+    { name: 'au', host: 'au.seek.com.localhost' },
+    { name: 'nz', host: 'nz.seek.com.localhost' },
   ];
 
   it('returns the first matching route for a path', () => {
@@ -65,7 +65,7 @@ describe('getMatchingRoute', () => {
     expect(
       getMatchingRoute({
         routes,
-        hostname: 'dev.seek.com.au',
+        hostname: 'au.seek.com.localhost',
         path: '/details/123',
         sites,
       }),
@@ -81,7 +81,7 @@ describe('getMatchingRoute', () => {
     expect(
       getMatchingRoute({
         routes,
-        hostname: 'dev.seek.com.au',
+        hostname: 'au.seek.com.localhost',
         path: '/',
         sites,
       }),
@@ -90,7 +90,7 @@ describe('getMatchingRoute', () => {
     expect(
       getMatchingRoute({
         routes,
-        hostname: 'dev.seek.com.au',
+        hostname: 'au.seek.com.localhost',
         path: '/nz',
         sites,
       }),

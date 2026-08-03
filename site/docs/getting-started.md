@@ -56,3 +56,22 @@ When starting a new project with sku, you have two main approaches for how your 
 - **Advanced Use Cases**: Supports scenarios where on-the-fly computation, API calls, or user-specific data are needed at the moment of page load.
 
 Choose the rendering strategy that best fits your app’s needs. sku's best-practice setup ensures you get best practices for either approach out-of-the-box.
+
+## Creating a new project
+
+::: code-group
+
+```sh [New directory]
+$ pnpm dlx @sku-lib/create my-app --template=vite
+$ cd my-app
+$ pnpm start
+```
+
+```sh [Current directory]
+$ pnpm dlx @sku-lib/create . --template=vite
+$ pnpm start
+```
+
+:::
+
+By default, a new project's dependencies will be installed using the package manager it was run with.

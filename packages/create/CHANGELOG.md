@@ -1,5 +1,13 @@
 # @sku-lib/create
 
+## 1.3.2
+
+### Patch Changes
+
+- Improve package manager detection ([#1674](https://github.com/seek-oss/sku/pull/1674))
+
+  Package manager detection has been improved, and should now correctly detect the package manager your project uses, even when running from a coding agent.
+
 ## 1.3.1
 
 ### Patch Changes

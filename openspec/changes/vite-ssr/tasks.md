@@ -66,7 +66,7 @@
 ## 7. Docs and release
 
 - [x] 7.1 Docs: product + Migrating docs, `vite.md`, `csp.md`, `configuration.md`, create READMEs; experimental / not-for-production warning
-- [x] 7.2 Migrating: webpack dual-port → Vite SSR single `port`; `dist/server/server.js` + sibling `client/` / `server/` layout
+- [x] 7.2 Migrating: webpack dual-port → Vite SSR single `port`; `dist/server/server.js` + sibling `client/` / `server/` layout (**superseded in part by §22** — baked manifest, external assets recommended, `node_modules`)
 - [x] 7.3 Document CJS interop for Vite SSR `sku start` + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` (docs only; no runtime error rewrite; no new baked-in defaults)
 - [x] 7.4 Discourage `public` for Vite SSR in product + `configuration.md`; Migrating calls out moving off the folder
 - [x] 7.10 Document that Vite SSR does not support `dangerouslySetViteConfig` (hard-error; raise use-cases via sku-support) in `configuration.md` + product / Migrating
@@ -195,7 +195,7 @@ Fold-in: client callbacks cannot infer `ClientContext` / `Site` (inputs only) �
 
 Catch-all / Melways-style server-entry middleware must not eat hashed client assets under `publicPath`.
 
-- [x] 16.1 Production `listen`: mount `express.static(publicPath)` after request-context and **before** server-entry `middleware` (start order unchanged)
+- [x] 16.1 Production `listen`: mount `express.static(publicPath)` after request-context and **before** server-entry `middleware` when sibling `client/` exists (start order unchanged; **§22** makes the mount conditional)
 - [x] 16.2 Test: catch-all / returning middleware does not prevent serving an existing client asset under `publicPath`
 - [x] 16.3 Docs: `middleware.md` production mount order; migrate-from-webpack note that Vite SSR serves `client/` under `publicPath` before middleware
 
@@ -264,6 +264,19 @@ OpenSpec change / branch name `vite-ssr` stays as-is.
 - [x] 21.5 Docs: introduce **Managed Data Mode** as the architecture descriptor; use **SSR** only for render strategy; replace `sku/ssr`, `vite-ssr` template refs, `SkuSsr*` / “Vite SSR” product copy; note future Static is expected to share Managed Data Mode APIs
 - [x] 21.6 Changeset: describe experimental Managed Data Mode SSR end-state naming (`sku/runtime`, template `ssr`, types without `Ssr`) — do **not** call this a breaking change (unreleased)
 - [x] 21.7 Validate: `pnpm format` → `pnpm build` → `pnpm lint` → scoped create + SSR browser/node tests
+
+## 22. Production server self-containment + deploy docs
+
+Bake the Vite client manifest into the server build so production starts without sibling `client/`.
+Document recommended external assets vs standalone Node static, including runtime `node_modules`.
+
+- [ ] 22.1 Build: after client Vite build, bake/copy the Vite client manifest into the server output (server-local path the production entry can read)
+- [ ] 22.2 Production entry: load the baked server-local manifest; do not require `../client/.vite/manifest.json`
+- [ ] 22.3 Production `listen`: mount `express.static(publicPath)` only when a sibling `client/` directory exists; omit the mount (no hard-fail) when absent
+- [ ] 22.4 Tests: production server starts and streams HTML without sibling `client/` when baked manifest is present; existing static-before-middleware case still passes when sibling `client/` exists
+- [ ] 22.5 Docs: rewrite `deploy-to-production.md` — baked manifest / server without sibling `client/`; recommended reverse proxy or object storage for hashed assets; standalone Node static as experimentation only; production deploy needs `server/` + runtime `node_modules` (or equivalent)
+- [ ] 22.6 Docs: Migrating + `middleware.md` — optional Node static when sibling `client/` exists; productionised path hosts assets outside Node
+- [ ] 22.7 Validate: `pnpm format` → `pnpm build` → `pnpm lint` → scoped production SSR tests
 
 ## Deferred
 

@@ -108,6 +108,7 @@ Full contract: `design.md` Decisions 12 / 12a / 25.
 
 - Product and Migrating docs describe Managed Data Mode vs SSR.
 - They cover multi-site, the three value channels, and Apollo streaming.
+- Deploy docs cover a self-contained production server and recommended external hosting of hashed assets.
 - Release includes an experimental warning and a changeset.
 
 **Fixtures / tests**

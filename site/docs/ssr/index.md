@@ -2,7 +2,7 @@
 
 :::warning Experimental — SSR Managed Data Mode
 This documentation covers the new vite-based SSR Managed Data Mode.
-This is still only experimental support.
+This is available for experimentation.
 See [Webpack SSR](./webpack-ssr.md) for existing production support.
 :::
 

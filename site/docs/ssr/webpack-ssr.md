@@ -1,6 +1,6 @@
 # Webpack SSR
 
-:::warning Older Webpack SSR
+:::info Webpack SSR
 This page describes sku’s **older method for server-side rendering** using Webpack.
 For the new experimental Managed Data Mode SSR, see [Getting Started](./).
 :::

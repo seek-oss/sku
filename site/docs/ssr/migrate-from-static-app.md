@@ -17,9 +17,6 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 
 ## Config and commands
 
-Prefer scaffolding with `pnpm dlx @sku-lib/create my-app --template ssr`, or mirror that config.
-Use `sku start` / `sku build` (same commands as Static) — do not introduce `start-ssr` / `build-ssr`.
-
 ```ts
 import type { SkuConfig } from 'sku';
 

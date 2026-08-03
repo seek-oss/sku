@@ -5,6 +5,10 @@ import { configMiddleware, getLanguage, getSite } from './config.js';
 import { userIdContext } from './userIdContext.js';
 
 const server = defineServerEntry({
+  onListen({ port }) {
+    // eslint-disable-next-line no-console
+    console.log('Server is listening on port', port);
+  },
   getSite,
   getLanguage,
   getClientContext({ req }) {

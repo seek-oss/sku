@@ -241,7 +241,7 @@ Do not load them into the Node server entry.
 
 - **Production:** optional server-entry Express/Connect `middleware`. Omitted ⇒ no consumer middleware layer (not an error). Mounted in start and production when present.
 - **Dev-only:** optional config `devServerMiddleware`. Start only, never in the production server graph.
-- **Production order:** request-context → `express.static(publicPath)` → server-entry `middleware` (if any) → HTML.
+- **Production order:** request-context → optional `express.static(publicPath)` (only when a sibling `client/` exists) → server-entry `middleware` (if any) → HTML.
 - **Dev order:** request-context → `devServerMiddleware` → server-entry `middleware` (if any) → Vite → HTML.
 
 Document is sku-owned (React document metadata).
@@ -336,6 +336,39 @@ SSR uses a single config `port` for `sku start` and as the baked production defa
 Providing `serverPort` with SSR MUST fail config validation (webpack-only).
 Migrating docs must call this out (drop `serverPort`, map old `serverPort` → `port` or rely on `PORT`).
 
+**Production server self-containment (except hashed static files):**
+
+Document asset URLs come from the Vite client manifest.
+Today the production entry reads `../client/.vite/manifest.json` at startup.
+That hard-fails with `ENOENT` when `client/` is not a sibling of `server/`, even when hashed files are hosted elsewhere.
+
+`sku build` MUST bake or copy the Vite client manifest into the server output.
+The production entry MUST load that server-local manifest.
+It MUST NOT require a sibling `client/` directory (or the hashed files under it) to start or stream HTML.
+
+Hashed files under `client/` remain the static asset payload.
+They are not part of the Node process’s required runtime graph.
+
+The server bundle is **not** a frozen binary.
+Runtime dependencies still resolve from `node_modules` (or an equivalent production install) next to the deployed app.
+Deploy docs MUST say so.
+
+**Recommended production layout:**
+
+1. Run `sku build`.
+2. Upload `dist/client/` (hashed assets) to persistent object storage or an equivalent edge/origin for static files.
+3. Deploy `dist/server/` plus production `node_modules` (or `pnpm deploy` / image install equivalent).
+4. Put a reverse proxy or CDN in front that serves `publicPath` from that storage and forwards everything else to Node.
+
+Productionised services SHOULD NOT treat the Node process as the real origin for hashed assets.
+A reverse proxy or persistent storage serves those files ahead of (or instead of) Node.
+
+**Standalone / experimentation:**
+
+Deploying sibling `client/` + `server/` and letting Node serve assets via `express.static` remains useful for local production smoke tests and edge cases.
+It is not the recommended productionised path.
+Deploy docs MUST distinguish the two.
+
 ### 6. `publicPath` is the static asset prefix only (not React Router basename)
 
 `publicPath` is sku’s asset prefix.
@@ -343,14 +376,20 @@ It is the public URL path for static assets (webpack parity via `__SKU_PUBLIC_PA
 
 **Production / `sku build`:**
 Vite `config.base` is set to `publicPath` so emitted client URLs match.
-The production server mounts `express.static` at that prefix **before** server-entry `middleware`.
-HTML injects assets under `publicPath`.
+HTML injects assets under `publicPath` using the **baked** client manifest (Decision 5).
 
-Sku owns hashed client assets under relative `publicPath` and serves `client/` from the Node process.
-Webpack SSR production often never mounted Node static (CDN / reverse proxy / absolute `publicPath`), so catch-all middleware did not compete with sku-served assets.
-SSR requires relative `publicPath` and does mount `express.static`, so middleware-before-static is a footgun: Melways-style or returning middleware never reaches the static mount.
+When a sibling `client/` directory exists next to `server/`, the production server MAY mount `express.static` at `publicPath` **before** server-entry `middleware`.
+That mount is for standalone / local production convenience.
+It MUST NOT be required for Document rendering or process startup.
 
-Product answer: static under `publicPath` wins over consumer middleware.
+When no sibling `client/` exists, sku MUST NOT mount `express.static` for that prefix and MUST NOT fail solely because the directory is absent.
+
+SSR requires relative `publicPath`.
+Absolute / CDN `publicPath` remains rejected (Non-Goals).
+Browser asset URLs stay same-origin under `publicPath`.
+The edge layer (or standalone Node static) resolves those paths to files.
+
+When Node static **is** mounted, static under `publicPath` wins over consumer middleware.
 Do **not** treat `unlessStatic('/static/…')` (or equivalent) as the sku fix.
 Migrants should not reinvent that for every catch-all stack.
 Apps that intentionally intercept paths under `publicPath` are rare and own that routing (e.g. platform proxy), not sku’s default mount order.
@@ -904,7 +943,10 @@ Migrating MUST cover:
 - `routesEntry` + flat `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site).
 - Multi-site membership via `sites` on routes (optional language path params, union tree + allowlist, or sku host matching as the product story).
 - Webpack dual-port → SSR single `port` (reject `serverPort`; `PORT` still overrides prod).
-- `dist/server/server.js` + sibling `client/` / `server/`.
+- `dist/server/server.js` + sibling build `client/` / `server/`.
+- Baked server-local Vite client manifest (no sibling `client/` required to start).
+- Recommended production: host hashed assets via reverse proxy / persistent storage; ship `server/` with runtime `node_modules`.
+- Standalone Node `express.static` of sibling `client/` as experimentation / edge case only.
 - CJS interop for `sku start`.
 - Express 4 typing (shared sku major; no Express 5 in this change).
 - React Router 8 as optional peerDependency `^8` for Data Mode / route typing (SSR template/fixtures install it).
@@ -1341,8 +1383,11 @@ No compatibility aliases for prior in-branch names are required in product docs.
 | Shell-only CSP / late scripts                     | Lazy single nonce. Hash known bootstrap bodies.                                                                                                                                                        |
 | Absolute / `CDN` `publicPath`                     | Config rejects. Relative-only docs. No browser e2e for this edge case.                                                                                                                                 |
 | `publicPath` coupled to basename                  | Never pass `publicPath` as RR basename. Bake `__SKU_PUBLIC_PATH__`. Fixture for `/static/...` assets.                                                                                                  |
-| Start vs prod asset URLs                          | Start: Vite graph at `/`. Build/prod: `base` + static mount under `publicPath` (webpack start parity).                                                                                                 |
-| Catch-all middleware eats `publicPath` assets     | Production mounts `express.static(publicPath)` before server-entry middleware. Middleware + Migrating docs state the order.                                                                            |
+| Start vs prod asset URLs                          | Start: Vite graph at `/`. Build/prod: `base` + Document URLs under `publicPath` from baked manifest. Optional Node static only when sibling `client/` exists.                                          |
+| Sibling `client/` required for manifest           | Bake/copy Vite client manifest into `server/` at build. Production entry loads server-local manifest. No `ENOENT` on missing sibling `client/`.                                                        |
+| Catch-all middleware eats `publicPath` assets     | When Node static is mounted, mount it before server-entry middleware. Middleware + Migrating docs state the order.                                                                                     |
+| Server-only deploy missing runtime deps           | Deploy docs: ship `server/` with production `node_modules` (or equivalent). Server is self-contained except hashed static files, not a frozen binary.                                                  |
+| Node treated as production asset origin           | Docs: recommended path is reverse proxy / object storage for `client/`. Sibling `express.static` is standalone / experimentation only.                                                                 |
 | Unhashed `public` folder assets                   | Hard-error if `paths.public` exists. Disable `publicDir` / `copyPublicFiles` for SSR. Migrating + docs cover the move.                                                                                 |
 | `dangerouslySetViteConfig` / `vitePlugins` on SSR | Hard-error when set. Omit decorator plugin and consumer `vitePlugins` on SSR graph. Docs + sku-support for use-cases.                                                                                  |
 | CJS “got: object” on `sku start`                  | Docs. Consumer extends interop list (no new defaults, no runtime error rewrite).                                                                                                                       |
@@ -1388,7 +1433,7 @@ The template uses named `Component` on lazy pages and sets `expressTrustProxy: t
 Existing apps follow Migrating docs.
 Key topics include:
 
-- Ports and deploy layout (single `port`, `dist/server/server.js` + sibling `client/` / `server/`).
+- Ports and deploy layout (single `port`, `dist/server/server.js`, baked server-local manifest, recommended external assets vs standalone Node static, production `node_modules`).
 - CJS interop for `sku start`.
 - Express 4 typing and React Router 8 as an optional peer.
 - Named `Component` on lazy pages.

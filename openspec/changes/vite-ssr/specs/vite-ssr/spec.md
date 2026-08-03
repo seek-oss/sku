@@ -79,11 +79,21 @@ This edge case MUST NOT require a dedicated browser e2e fixture.
 
 `sku build` for an SSR app MUST produce sibling `client/` and `server/` directories under the build target (neither nested).
 
+`sku build` MUST bake or copy the Vite client manifest into the server output so the production server entry can resolve Document assets without reading a sibling `client/` path at runtime.
+
 #### Scenario: Production build layout
 
 - **WHEN** a consumer runs `sku build` for an SSR app
 - **THEN** sku produces sibling `client/` and `server/` under the build target
 - **AND** neither directory is nested inside the other
+- **AND** the server output includes a Vite client manifest usable without a sibling `client/` directory
+
+#### Scenario: Production server starts without sibling client assets
+
+- **WHEN** a consumer runs the production server entry with `server/` deployed and no sibling `client/` directory
+- **AND** the baked server-local manifest is present
+- **THEN** the process starts and can stream HTML Document responses
+- **AND** it does not fail with `ENOENT` opening `client/.vite/manifest.json`
 
 ### Requirement: routesEntry exports flat routes
 
@@ -872,9 +882,15 @@ Absolute `http(s)` / CDN `publicPath` MUST fail at config validation.
 `publicPath` MUST configure the static asset prefix only (webpack-aligned `__SKU_PUBLIC_PATH__`).
 
 For `sku build` / production, Vite `config.base` is an implementation detail and MUST be set to that prefix so emitted client URLs match.
-The production server MUST serve client assets under `publicPath`.
 
-In production, sku MUST mount `express.static` for `publicPath` **before** server-entry `middleware`, so existing client assets are served even when that middleware would otherwise handle (or return for) the same path.
+Production Document asset URLs MUST come from the baked server-local Vite client manifest (see the production build layout requirement).
+
+In production, when a sibling `client/` directory exists next to `server/`, sku MUST mount `express.static` for `publicPath` **before** server-entry `middleware`, so existing client assets are served even when that middleware would otherwise handle (or return for) the same path.
+
+When no sibling `client/` directory exists, sku MUST NOT mount `express.static` for that prefix and MUST NOT fail solely because the directory is absent.
+
+Node serving hashed assets via `express.static` is a standalone / experimentation convenience.
+Productionised deploys MUST be documented as hosting those assets via a reverse proxy or persistent storage ahead of (or instead of) the Node process.
 
 For `sku start`, sku MUST ignore config `publicPath` and serve the Vite module graph from `/` (bootstrap at `/@vite/client`, etc.).
 Sku MUST NOT set Vite `config.base` to `publicPath` during start.
@@ -900,14 +916,22 @@ The decoupled asset-prefix case MUST be covered by a fixture or equivalent test
 - **WHEN** an SSR app sets a relative `publicPath` such as `/static/my-app`
 - **AND** the browser requests an app route that does not start with that `publicPath`
 - **THEN** sku streams HTML for that route (not a basename mismatch 404)
-- **AND** in production, document assets are served under that `publicPath`
+- **AND** in production, document asset URLs use that `publicPath` prefix
 
-#### Scenario: Production static assets before server-entry middleware
+#### Scenario: Production static assets before server-entry middleware when client exists
 
-- **WHEN** an SSR production server has server-entry `middleware` that handles every request without calling `next`
+- **WHEN** an SSR production server has a sibling `client/` directory
+- **AND** server-entry `middleware` that handles every request without calling `next`
 - **AND** a client asset exists under `publicPath`
 - **THEN** that asset is still served from the static mount
 - **AND** the middleware does not handle that asset request
+
+#### Scenario: Missing sibling client does not fail startup
+
+- **WHEN** an SSR production server runs without a sibling `client/` directory
+- **AND** the baked server-local manifest is present
+- **THEN** the process starts successfully
+- **AND** sku does not mount `express.static` for `publicPath`
 
 #### Scenario: sku start serves Vite bootstrap from root
 
@@ -1161,9 +1185,18 @@ Sku MUST NOT add a runtime experimental gate.
 
 ### Requirement: Product and Migrating docs cover SSR topics
 
-SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site), default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) and sibling projection, always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()`, optional `middleware` / `onListen` / `onHydrate`, config `expressTrustProxy`, the three value channels vs the app-owned root layout route, middleware layers (including production mount order: request-context → `express.static(publicPath)` → server-entry `middleware` → HTML, and the existing `sku start` order), CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
+SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site), default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) and sibling projection, always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()`, optional `middleware` / `onListen` / `onHydrate`, config `expressTrustProxy`, the three value channels vs the app-owned root layout route, middleware layers (including production mount order: request-context → optional `express.static(publicPath)` when sibling `client/` exists → server-entry `middleware` → HTML, and the existing `sku start` order), CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
 
 Docs MUST diagram the three value channels with a Markdown table (and MAY use a nested list). Docs MUST NOT require Mermaid or a VitePress Mermaid plugin for this coverage.
+
+Deploy-to-production docs MUST cover:
+
+- production entry `node dist/server/server.js` and sibling build `client/` + `server/` layout
+- that Document asset URLs come from a baked server-local Vite client manifest (server starts without sibling `client/`)
+- that productionised services SHOULD host hashed `client/` assets via reverse proxy or persistent storage, not from the Node process
+- that shipping sibling `client/` so Node can `express.static` them is standalone / experimentation only
+- that the production Node deploy MUST include runtime `node_modules` (or an equivalent production install) alongside `server/`
+- relative `publicPath` only (no absolute / CDN asset base)
 
 Migrating docs MUST also cover:
 
@@ -1174,7 +1207,10 @@ Migrating docs MUST also cover:
 - multi-site membership via `sites` on routes (not `routesBySite` maps, dual-entry `routes` re-exports, optional language path params, union tree + allowlist, or sku host matching as the product story)
 - webpack dual-port (`port` + `serverPort`) vs SSR single `port` (`serverPort` rejected; production still honours `PORT`)
 - production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
-- that SSR production serves `client/` under `publicPath` **before** server-entry `middleware` (webpack SSR production often did not mount Node static)
+- that Document assets resolve from a baked server-local manifest (no sibling `client/` required to start)
+- that productionised deploys host `client/` via reverse proxy / persistent storage; Node `express.static` of sibling `client/` is standalone / experimentation only
+- that production Node deploys must include runtime `node_modules` (or equivalent) with `server/`
+- that when Node static is mounted, it serves under `publicPath` **before** server-entry `middleware`
 - CJS interop for `sku start`
 - Express 4 typing alignment (shared with webpack SSR; no Express 5 in this change)
 - React Router 8 as optional peerDependency for Data Mode / route typing (template/fixtures install it)
@@ -1222,8 +1258,18 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 
 - **WHEN** a reader opens **Migrate from Older / Webpack SSR App** docs
 - **THEN** docs explain webpack dual-port → SSR single `port` (drop `serverPort`; `PORT` still overrides production)
-- **AND** docs state the production server entry is `dist/server/server.js` with sibling `client/` and `server/` directories
-- **AND** docs note that production serves assets under `publicPath` before server-entry middleware
+- **AND** docs state the production server entry is `dist/server/server.js` with sibling `client/` and `server/` build outputs
+- **AND** docs state Document assets resolve from a baked server-local manifest
+- **AND** docs recommend hosting hashed assets outside Node for productionised deploys
+- **AND** docs note optional Node static of sibling `client/` under `publicPath` before server-entry middleware for standalone use
+
+#### Scenario: Deploy docs cover runtime package and asset hosting
+
+- **WHEN** a reader opens SSR deploy-to-production docs
+- **THEN** docs state the production Node deploy needs `server/` plus runtime `node_modules` (or equivalent)
+- **AND** docs recommend reverse proxy / persistent storage for hashed `client/` assets
+- **AND** docs describe sibling `client/` + Node `express.static` as standalone / experimentation only
+- **AND** docs state the server starts without sibling `client/` once the baked manifest is present
 
 #### Scenario: Migrating covers onStart and trust proxy
 

@@ -24,7 +24,7 @@ To get started, choose a project type:
 </div>
 
 :::warning 👋 Goodbye Webpack
-We are **migrating away from Webpack**. Support for Webpack and Webpack SSR project types will be **removed in a future sku major version**.
+We are **migrating away from Webpack**. Support for Webpack and Webpack SSR project types will be **removed once Vite-based solutions are fully supported**.
 :::
 
 ## What sku does

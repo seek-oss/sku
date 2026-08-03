@@ -1,6 +1,6 @@
 import { mergeConfig } from 'vite';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
-import { fixViteVanillaExtractDepScanPlugin } from '../../services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.ts';
+import { fixViteVanillaExtractDepScanPlugin } from '../../services/vite/plugins/esbuild/fixViteVanillaExtractDepScanPlugin.js';
 import type { StorybookConfig } from '@storybook/react-vite';
 
 type ViteFinal = NonNullable<StorybookConfig['viteFinal']>;

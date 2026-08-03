@@ -1,5 +1,50 @@
 # sku
 
+## 16.1.0
+
+### Minor Changes
+
+- `csp`: Add support for report-only Content Security Policy. ([#1631](https://github.com/seek-oss/sku/pull/1631))
+
+  Two new configuration options, `cspReportOnlyEnabled` and `cspReportOnlyExtraScriptSrcHosts`, allow the generation of a "report-only" CSP delivered via the `Content-Security-Policy-Report-Only` header.
+
+  See the [Content Security Policy](https://seek-oss.github.io/sku/docs/csp#report-only-content-security-policy) section of the sku docs for more details.
+
+- `csp`: Add `cspDelivery` config option. ([#1630](https://github.com/seek-oss/sku/pull/1630))
+
+  A new configuration option, `cspDelivery`, allows control of how the Content Security Policy is delivered and can be set to one of two values:
+
+  - `tag`: The CSP is embedded directly in the rendered HTML content via a `<meta http-equiv="Content-Security-Policy" …>` tag. This is the default and matches the previous behaviour.
+  - `header`: The CSP is written to a JSON metadata file alongside the rendered HTML content. This metadata can be used at deployment and/or request time to include a `Content-Security-Policy` header in the response for the rendered HTML content.
+
+  See the [Content Security Policy](https://seek-oss.github.io/sku/docs/csp#delivery) section of the sku docs for more details.
+
+- `csp`: Add support for reporting Content Security Policy violations. ([#1675](https://github.com/seek-oss/sku/pull/1675))
+
+  Two new configuration options, `cspReportTo` and `cspReportOnlyReportTo`, allow the reporting of CSP violations via the browser [Reporting API](https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API).
+
+  See the [Content Security Policy](https://seek-oss.github.io/sku/docs/csp#report-to) section of the sku docs for more details.
+
+- storybook: Add `viteFinal` API to the `sku/config/storybook` entrypoint ([#1676](https://github.com/seek-oss/sku/pull/1676))
+
+  This API is the Vite equivalent to the existing webpack-specific APIs already available via the `sku/config/storybook` entrypoint.
+  It injects sku-specific configuration into Storybook's Vite config, helping to ensure your Storybook works correctly with Braid and Vanilla Extract.
+  Please read the [sku Storybook docs] for more information.
+
+  [sku Storybook docs]: https://seek-oss.github.io/sku/docs/storybook
+
+### Patch Changes
+
+- Missing `*.localhost` hosts no longer trigger hosts-file warnings ([#1679](https://github.com/seek-oss/sku/pull/1679))
+
+- `configure`: Always add `.ssl` to `.gitignore` ([#1668](https://github.com/seek-oss/sku/pull/1668))
+
+  sku now always adds `.ssl` to `.gitignore`, rather than only when `httpsDevServer` is enabled.
+
+- Improve package manager detection ([#1674](https://github.com/seek-oss/sku/pull/1674))
+
+  Package manager detection has been improved, and should now correctly detect the package manager your project uses, even when running from a coding agent.
+
 ## 16.0.0
 
 There are a lot of changes in this major release, however most consumers should only need to run the following to address the majority of issues:

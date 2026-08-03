@@ -7,21 +7,21 @@ import type {
 } from './entryTypeExtractors.js';
 
 /**
- * Render-scoped bag for Vite SSR: always mounted by sku outside the router.
- * App hooks (`createSkuSsrContexts`) and sku runtime (`SkuSsrProvider`) MUST
- * share one module instance via `sku/ssr`. `unbundle: true` keeps one physical
- * dist module; Vite `optimizeDeps.exclude` for `'sku'` / `'sku/ssr'` stops
+ * Render-scoped bag for SSR: always mounted by sku outside the router.
+ * App hooks (`createSkuContexts`) and sku runtime (`SkuProvider`) MUST
+ * share one module instance via `sku/runtime`. `unbundle: true` keeps one physical
+ * dist module; Vite `optimizeDeps.exclude` for `'sku'` / `'sku/runtime'` stops
  * published installs cloning into `.vite/deps`. Same class as `useInsertHtml`.
  */
-type SkuSsrContextValue = {
+type SkuProviderValue = {
   site: string;
   clientContext: unknown;
   reactContext: unknown;
 };
 
-const SkuSsrContext = createContext<SkuSsrContextValue | null>(null);
+const SkuProviderContext = createContext<SkuProviderValue | null>(null);
 
-export const SkuSsrProvider = ({
+export const SkuProvider = ({
   site,
   clientContext,
   reactContext,
@@ -32,16 +32,16 @@ export const SkuSsrProvider = ({
   reactContext: unknown;
   children: ReactNode;
 }) => (
-  <SkuSsrContext.Provider value={{ site, clientContext, reactContext }}>
+  <SkuProviderContext.Provider value={{ site, clientContext, reactContext }}>
     {children}
-  </SkuSsrContext.Provider>
+  </SkuProviderContext.Provider>
 );
 
 type ReactContextUnion<ServerEntry, ClientEntry> =
   ReactContextOf<ServerEntry> | ReactContextOf<ClientEntry>;
 
 /**
- * Typed facade over the always-on `SkuSsrProvider`. Pass `typeof` the
+ * Typed facade over the always-on `SkuProvider`. Pass `typeof` the
  * default-exported entry objects — no hand-written `Site` / `ClientContext` /
  * `ReactContext` aliases required.
  *
@@ -49,26 +49,24 @@ type ReactContextUnion<ServerEntry, ClientEntry> =
  * - `ClientContext` from the server entry’s `getClientContext` return
  * - `ReactContext` from both entries’ `getReactContext` returns (union)
  */
-export function createSkuSsrContexts<ServerEntry, ClientEntry = unknown>() {
+export function createSkuContexts<ServerEntry, ClientEntry = unknown>() {
   type Site = SiteOf<ServerEntry>;
   type ClientContext = ClientContextOf<ServerEntry>;
   type ReactContext = ReactContextUnion<ServerEntry, ClientEntry>;
 
-  const useSkuSsrContext = (): SkuSsrContextValue => {
-    const value = useContext(SkuSsrContext);
+  const useSkuProviderContext = (): SkuProviderValue => {
+    const value = useContext(SkuProviderContext);
     if (value == null) {
-      throw new Error(
-        'sku SSR context hooks must be used within SkuSsrProvider',
-      );
+      throw new Error('sku SSR context hooks must be used within SkuProvider');
     }
     return value;
   };
 
   return {
-    useSite: (): Site => useSkuSsrContext().site as Site,
+    useSite: (): Site => useSkuProviderContext().site as Site,
     useClientContext: (): ClientContext =>
-      useSkuSsrContext().clientContext as ClientContext,
+      useSkuProviderContext().clientContext as ClientContext,
     useReactContext: (): ReactContext =>
-      useSkuSsrContext().reactContext as ReactContext,
+      useSkuProviderContext().reactContext as ReactContext,
   };
 }

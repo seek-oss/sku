@@ -1,5 +1,10 @@
 # Error pages
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 Route errors (loader failures, thrown `data()`, `404`, and `405` when a mutation hits a route without an `action`) render the nearest route `ErrorBoundary`.
 sku streams the document with the matching status code.
 
@@ -8,13 +13,13 @@ Customize with [React Router Error Boundaries](https://reactrouter.com/how-to/er
 ::: code-group
 
 ```tsx [routes.tsx]
-import type { SkuSsrRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku';
 
 import { RootLayout } from './RootLayout';
 import { ErrorBoundary } from './ErrorBoundary'; // [!code highlight]
 import { homeRoute } from './pages/home/route';
 
-export const routes: SkuSsrRouteObject[] = [
+export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     ErrorBoundary, // [!code highlight]
@@ -50,4 +55,4 @@ export function ErrorBoundary() {
 
 :::
 
-A root route `ErrorBoundary` does not catch errors thrown above the router (including `SkuSsrProvider`). See [Providers](./providers.md).
+A root route `ErrorBoundary` does not catch errors thrown above the router (including `SkuProvider`). See [Providers](./providers.md).

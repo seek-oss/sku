@@ -1,4 +1,4 @@
-import { type SkuSsrRouteObject, getCspNonce } from 'sku';
+import { type SkuRouteObject, getCspNonce } from 'sku';
 
 import { RootLayout } from './RootLayout.js';
 import { aboutRoutes } from './pages/about/route.js';
@@ -20,7 +20,7 @@ export type FixtureSite = 'au' | 'nz';
  * The root layout is pathless so it reads as a layout and keeps wrapping any
  * root-level sibling added later; children join against `/` either way.
  */
-export const routes: SkuSsrRouteObject[] = [
+export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     children: [

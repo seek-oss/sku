@@ -1,7 +1,7 @@
 import { ApolloLink, Observable } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client-react-streaming';
 import { getCspNonce } from 'sku';
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 import { resolveGraphql } from './graphql.js';
 

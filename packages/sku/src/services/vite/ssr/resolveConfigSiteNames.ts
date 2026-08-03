@@ -1,5 +1,5 @@
 /**
- * Config site names used to pre-build Vite SSR route trees.
+ * Config site names used to pre-build SSR route trees.
  * Empty or omitted `sites` soft-defaults to a single synthetic name `'default'`.
  */
 export const resolveConfigSiteNames = (

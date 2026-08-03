@@ -1,4 +1,4 @@
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 /** Realistic production middleware — health check before HTML render. */
 const server = defineServerEntry({

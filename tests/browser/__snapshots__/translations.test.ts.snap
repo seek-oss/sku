@@ -882,7 +882,7 @@ exports[`vite ssr translations > should render en 1`] = `
       rel="modulepreload"
       fetchpriority="low"
       nonce="RANDOM_NONCE"
-      href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      href="/@fs/{cwd}/packages/sku/dist/entries/ssr-client.dev.mjs"
     >
     <link
       rel="stylesheet"
@@ -910,7 +910,7 @@ exports[`vite ssr translations > should render en 1`] = `
     </script>
     <script
       type="module"
-      src="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      src="/@fs/{cwd}/packages/sku/dist/entries/ssr-client.dev.mjs"
       nonce="RANDOM_NONCE"
       async
     >
@@ -941,7 +941,7 @@ exports[`vite ssr translations > should render en-PSEUDO 1`] = `
       rel="modulepreload"
       fetchpriority="low"
       nonce="RANDOM_NONCE"
-      href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      href="/@fs/{cwd}/packages/sku/dist/entries/ssr-client.dev.mjs"
     >
     <link
       rel="stylesheet"
@@ -969,7 +969,7 @@ exports[`vite ssr translations > should render en-PSEUDO 1`] = `
     </script>
     <script
       type="module"
-      src="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      src="/@fs/{cwd}/packages/sku/dist/entries/ssr-client.dev.mjs"
       nonce="RANDOM_NONCE"
       async
     >
@@ -1000,7 +1000,7 @@ exports[`vite ssr translations > should render fr 1`] = `
       rel="modulepreload"
       fetchpriority="low"
       nonce="RANDOM_NONCE"
-      href="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      href="/@fs/{cwd}/packages/sku/dist/entries/ssr-client.dev.mjs"
     >
     <link
       rel="stylesheet"
@@ -1028,7 +1028,7 @@ exports[`vite ssr translations > should render fr 1`] = `
     </script>
     <script
       type="module"
-      src="/@fs/{cwd}/packages/sku/dist/entries/vite-ssr-client.dev.mjs"
+      src="/@fs/{cwd}/packages/sku/dist/entries/ssr-client.dev.mjs"
       nonce="RANDOM_NONCE"
       async
     >

@@ -1,7 +1,7 @@
 /**
  * Entry objects from `define*Entry` keep getters optional on the type, so
  * extract via `keyof` + `NonNullable` rather than `extends { getX: … }`.
- * Shared by `defineClientEntry` and `createSkuSsrContexts`.
+ * Shared by `defineClientEntry` and `createSkuContexts`.
  */
 export type SiteOf<ServerEntry> = 'getSite' extends keyof ServerEntry
   ? NonNullable<ServerEntry['getSite']> extends (...args: never[]) => infer S

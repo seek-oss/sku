@@ -1308,7 +1308,7 @@ Separate naming layers — do not collapse them into one word:
 | Public import                  | **`sku/runtime`**     | Browser-safe Managed Data Mode entry (Decision 26 consolidate + `optimizeDeps.exclude` target)                                                                                                       |
 | Public types / symbols         | Drop `Ssr`            | e.g. `SkuProvider`, `createSkuContexts`, `SkuRouteObject`, `SkuServerEntry` / `SkuClientEntry`, `SkuGetSite`, …                                                                                      |
 
-**Why not `sku/ssr`:**
+**Why not `sku/runtime`:**
 The import carries contract APIs that are not SSR-specific (`define*Entry`, `createSkuContexts`, `useSite`, …).
 SSR is a render strategy; the entry is the application runtime.
 

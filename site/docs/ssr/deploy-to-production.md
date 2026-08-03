@@ -1,5 +1,10 @@
 # Deploy to production
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 `sku build` emits sibling directories under the build target (for example `dist/`):
 
 - `client/` — browser assets and the Vite client manifest

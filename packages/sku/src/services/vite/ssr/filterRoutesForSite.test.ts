@@ -3,11 +3,11 @@ import {
   buildSiteRouteTrees,
   filterRoutesForSite,
 } from './filterRoutesForSite.js';
-import type { SkuSsrRouteObject } from './types.js';
+import type { SkuRouteObject } from './types.js';
 
 describe('filterRoutesForSite', () => {
   it('includes routes that omit sites for every site', () => {
-    const routes: SkuSsrRouteObject[] = [{ path: '/' }, { path: '/shared' }];
+    const routes: SkuRouteObject[] = [{ path: '/' }, { path: '/shared' }];
     expect(filterRoutesForSite(routes, 'au')).toEqual([
       { path: '/' },
       { path: '/shared' },
@@ -19,7 +19,7 @@ describe('filterRoutesForSite', () => {
   });
 
   it('includes routes only for sites listed in sites', () => {
-    const routes: SkuSsrRouteObject[] = [
+    const routes: SkuRouteObject[] = [
       { path: '/shared' },
       { path: '/au-only', sites: ['au'] },
       { path: '/nz-only', sites: ['nz'] },
@@ -35,12 +35,12 @@ describe('filterRoutesForSite', () => {
   });
 
   it('strips sites before returning RouteObjects', () => {
-    const routes: SkuSsrRouteObject[] = [{ path: '/au-only', sites: ['au'] }];
+    const routes: SkuRouteObject[] = [{ path: '/au-only', sites: ['au'] }];
     expect(filterRoutesForSite(routes, 'au')[0]).not.toHaveProperty('sites');
   });
 
   it('does not inherit sites from parent onto children', () => {
-    const routes: SkuSsrRouteObject[] = [
+    const routes: SkuRouteObject[] = [
       {
         path: '/',
         sites: ['au'],
@@ -63,7 +63,7 @@ describe('filterRoutesForSite', () => {
 });
 
 describe('buildSiteRouteTrees', () => {
-  const routes: SkuSsrRouteObject[] = [
+  const routes: SkuRouteObject[] = [
     { path: '/shared' },
     { path: '/au-only', sites: ['au'] },
   ];

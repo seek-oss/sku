@@ -26,7 +26,7 @@ describe('requireNamedExport', () => {
         kind: 'routes',
       }),
     ).toThrow(
-      /Vite SSR routesEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
+      /SSR routesEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
     );
   });
 
@@ -35,7 +35,7 @@ describe('requireNamedExport', () => {
       requireNamedExport({ getSite: 'nope' }, 'getSite', 'serverEntry', {
         kind: 'function',
       }),
-    ).toThrow(/Vite SSR serverEntry must export named 'getSite' as a function/);
+    ).toThrow(/SSR serverEntry must export named 'getSite' as a function/);
   });
 
   it('returns routes when exported as an array', () => {
@@ -51,7 +51,7 @@ describe('requireNamedExport', () => {
     expect(() =>
       requireNamedExport({}, 'routes', 'routesEntry', { kind: 'routes' }),
     ).toThrow(
-      /Vite SSR routesEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
+      /SSR routesEntry must export named 'routes' as an array\. Missing or non-array 'routes' export\./,
     );
   });
 
@@ -60,7 +60,7 @@ describe('requireNamedExport', () => {
       requireNamedExport({ routes: { au: [] } }, 'routes', 'routesEntry', {
         kind: 'routes',
       }),
-    ).toThrow(/Vite SSR routesEntry must export named 'routes' as an array/);
+    ).toThrow(/SSR routesEntry must export named 'routes' as an array/);
   });
 });
 
@@ -75,7 +75,7 @@ describe('rejectRoutesBySiteExport', () => {
     expect(() =>
       rejectRoutesBySiteExport({ routesBySite: { au: [] } }, 'routesEntry'),
     ).toThrow(
-      /Vite SSR routesEntry must not export named 'routesBySite'\. Export flat 'routes' with optional 'sites' membership on routesEntry instead\./,
+      /SSR routesEntry must not export named 'routesBySite'\. Export flat 'routes' with optional 'sites' membership on routesEntry instead\./,
     );
   });
 });
@@ -88,14 +88,14 @@ describe('requireDefaultEntry', () => {
 
   it('hard-errors when the default export is missing', () => {
     expect(() => requireDefaultEntry({}, 'serverEntry')).toThrow(
-      /Vite SSR serverEntry must export default an object/,
+      /SSR serverEntry must export default an object/,
     );
   });
 
   it('hard-errors when the default export is not an object', () => {
     expect(() =>
       requireDefaultEntry({ default: () => 'au' }, 'clientEntry'),
-    ).toThrow(/Vite SSR clientEntry must export default an object/);
+    ).toThrow(/SSR clientEntry must export default an object/);
   });
 });
 
@@ -104,7 +104,7 @@ describe('optionalEntryFunction / optionalOrRequiredEntryFunction', () => {
     expect(() =>
       optionalOrRequiredEntryFunction({}, 'getSite', 'serverEntry', true),
     ).toThrow(
-      /Vite SSR serverEntry must include 'getSite' as a function on its default export/,
+      /SSR serverEntry must include 'getSite' as a function on its default export/,
     );
   });
 

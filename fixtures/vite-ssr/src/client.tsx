@@ -1,5 +1,5 @@
 import { RouterContextProvider } from 'react-router';
-import { defineClientEntry as defineClientEntryFromServer } from 'sku/ssr';
+import { defineClientEntry as defineClientEntryFromServer } from 'sku/runtime';
 
 import type server from './server.js';
 import { userIdContext } from './userIdContext.js';

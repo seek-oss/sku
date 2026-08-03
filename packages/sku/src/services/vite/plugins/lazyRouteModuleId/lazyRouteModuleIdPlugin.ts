@@ -8,7 +8,7 @@ const include = /\.(jsx?|tsx?)$/;
  * Auto-derive `handle.moduleId` for idiomatic React Router lazy routes:
  * `lazy: () => import('./pages/about')`.
  *
- * Only runs in the Vite SSR environment. Never rewrites the `lazy` body,
+ * Only runs in the SSR environment. Never rewrites the `lazy` body,
  * never overwrites an explicit `moduleId`, and skips non-idiomatic shapes.
  */
 export function lazyRouteModuleIdPlugin(): Plugin {

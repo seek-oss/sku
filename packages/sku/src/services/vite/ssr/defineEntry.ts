@@ -2,7 +2,7 @@ import type { Request as ExpressRequest } from 'express';
 import type { RouterContextProvider } from 'react-router';
 
 import type { ClientContextOf, SiteOf } from './entryTypeExtractors.js';
-import type { JsonValue, SkuSsrMiddleware, SkuSsrOnListen } from './types.js';
+import type { JsonValue, SkuMiddleware, SkuOnListen } from './types.js';
 
 export type ServerEntryBody<
   Site extends string = string,
@@ -31,12 +31,12 @@ export type ServerEntryBody<
     reactContext: NoInfer<ReactContext> | undefined;
   }) => RouterContextProvider | Promise<RouterContextProvider>;
   /** Express middleware run before SSR for each request. */
-  middleware?: SkuSsrMiddleware;
+  middleware?: SkuMiddleware;
   /**
    * Called once after middleware + HTML are mounted and `listen` succeeds
    * (start + production). Not re-fired on server-entry HMR.
    */
-  onListen?: SkuSsrOnListen;
+  onListen?: SkuOnListen;
 };
 
 /**
@@ -77,7 +77,7 @@ declare const noServerEntryBrand: unique symbol;
 type NoServerEntry = { readonly [noServerEntryBrand]?: never };
 
 /**
- * Zero-runtime identity helper for the Vite SSR client entry object.
+ * Zero-runtime identity helper for the SSR client entry object.
  */
 export function defineClientEntry<ServerEntry>(): <ReactContext = undefined>(
   entry: ClientEntryBody<ServerEntry, ReactContext>,

@@ -81,7 +81,7 @@ describe('preloadHref', () => {
   it('is a silent no-op when no route tree is registered', () => {
     const warn = vi.fn();
 
-    // No `document` in this environment — outside Vite SSR / during server render.
+    // No `document` in this environment — outside SSR / during server render.
     preloadRoute.preloadHref('/about', warn);
 
     expect(warn).not.toHaveBeenCalled();

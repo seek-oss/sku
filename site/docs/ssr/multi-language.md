@@ -1,12 +1,17 @@
 # Multi-language / Localisation
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 When `languages` is configured, SSR registers the active language chunk (for example `en-translations`) on the initial document so text is available without a delayed download.
 
 Export `getLanguage` from the server entry so it returns a name from config `languages` (or `en-PSEUDO`):
 
 ```tsx
 // src/server.tsx
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
   getLanguage({ req }) {

@@ -8,7 +8,7 @@ Product docs and public APIs MUST describe this architecture as **Managed Data M
 
 Docs MUST note that Managed Data Mode is intended to be shared later by a new Static path on the same contract.
 
-The public import MUST be `sku/runtime` (not `sku/ssr`).
+The public import MUST be `sku/runtime` (not `sku/runtime`).
 
 Public type and helper names MUST NOT use an `Ssr` infix (e.g. `SkuProvider`, `createSkuContexts`, `SkuRouteObject`, `SkuServerEntry` / `SkuClientEntry`).
 

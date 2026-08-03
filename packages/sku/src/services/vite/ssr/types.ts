@@ -24,20 +24,20 @@ export interface RenderAssets extends DocumentAssets {
   bootstrapModules: string[];
 }
 
-/** Connect-compatible middleware from the Vite SSR server entry. */
-export type SkuSsrMiddleware = RequestHandler[];
+/** Connect-compatible middleware from the SSR server entry. */
+export type SkuMiddleware = RequestHandler[];
 
 /**
  * Optional server-entry post-listen hook — same window as webpack SSR `onStart`.
  * Called once after middleware + HTML are mounted and `listen` succeeds.
  */
-export type SkuSsrOnListen = (args: {
+export type SkuOnListen = (args: {
   app: Express;
   httpServer: HttpServer | HttpsServer;
   port: number;
 }) => void | Promise<void>;
 
-/** JSON-serialisable shell seed for Vite SSR `clientContext`. */
+/** JSON-serialisable shell seed for SSR `clientContext`. */
 export type JsonValue =
   string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
@@ -45,12 +45,12 @@ export type JsonValue =
  * Route object for `routesEntry`: React Router `RouteObject` plus optional
  * `sites` membership. Omit `sites` ⇒ route is on every config site; present ⇒
  * only those names. Sku type helper only — not a wrapped RR re-export.
- * `children` are also `SkuSsrRouteObject` so nested routes may set `sites`
+ * `children` are also `SkuRouteObject` so nested routes may set `sites`
  * (no parent→child inheritance — each route declares membership explicitly).
  */
-export type SkuSsrRouteObject = Omit<RouteObject, 'children'> & {
+export type SkuRouteObject = Omit<RouteObject, 'children'> & {
   sites?: string[];
-  children?: SkuSsrRouteObject[];
+  children?: SkuRouteObject[];
 };
 
 /**
@@ -58,7 +58,7 @@ export type SkuSsrRouteObject = Omit<RouteObject, 'children'> & {
  * Required when config `sites` has more than one entry; optional on single-site
  * (sku uses the sole config site name when omitted).
  */
-export type SkuSsrGetSite = (args: {
+export type SkuGetSite = (args: {
   /** Express request after consumer middleware (not Fetch `Request`). */
   req: ExpressRequest;
 }) => string;
@@ -67,15 +67,15 @@ export type SkuSsrGetSite = (args: {
  * Sync server-entry getter — configured language name (or `en-PSEUDO`) for
  * Document vocab chunk registration. Omit or return `undefined` ⇒ no chunk.
  */
-export type SkuSsrGetLanguage = (args: {
+export type SkuGetLanguage = (args: {
   req: ExpressRequest;
 }) => string | undefined;
 
 /**
  * Sync server-entry getter — shell-time JSON seed serialised into the hydrate
- * bootstrap and passed to always-on `SkuSsrProvider` as `clientContext`.
+ * bootstrap and passed to always-on `SkuProvider` as `clientContext`.
  */
-export type SkuSsrGetClientContext = (args: {
+export type SkuGetClientContext = (args: {
   req: ExpressRequest;
 }) => JsonValue | undefined;
 
@@ -83,7 +83,7 @@ export type SkuSsrGetClientContext = (args: {
  * Dual-entry getter — values that MAY differ on server vs client (e.g.
  * `makeClient`, `apiClient`). Not serialised; reaches React via `useReactContext`.
  */
-export type SkuSsrServerGetReactContext<
+export type SkuServerGetReactContext<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = (args: {
@@ -92,7 +92,7 @@ export type SkuSsrServerGetReactContext<
   clientContext: C | undefined;
 }) => R;
 
-export type SkuSsrClientGetReactContext<
+export type SkuClientGetReactContext<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = (args: { site: string; clientContext: C | undefined }) => R;
@@ -101,7 +101,7 @@ export type SkuSsrClientGetReactContext<
  * Optional server-entry `getRouterContext` — seeds React Router `requestContext`
  * for document `query()` / loaders. Receives already-resolved sibling values.
  */
-export type SkuSsrServerGetRouterContext<
+export type SkuServerGetRouterContext<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = (args: {
@@ -114,8 +114,8 @@ export type SkuSsrServerGetRouterContext<
   reactContext: R | undefined;
 }) => RouterContextProvider | Promise<RouterContextProvider>;
 
-/** Hydrate side effects only — request values reach React via `SkuSsrProvider`. */
-export type SkuSsrOnHydrate = (args: {
+/** Hydrate side effects only — request values reach React via `SkuProvider`. */
+export type SkuOnHydrate = (args: {
   clientContext: JsonValue | undefined;
 }) => void;
 
@@ -124,7 +124,7 @@ export type SkuSsrOnHydrate = (args: {
  * native `createBrowserRouter({ getContext })` (zero-arg) and injects hydrate
  * sibling values (`site`, `clientContext`, `reactContext`).
  */
-export type SkuSsrClientGetRouterContext<
+export type SkuClientGetRouterContext<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = (args: {
@@ -134,33 +134,33 @@ export type SkuSsrClientGetRouterContext<
 }) => RouterContextProvider;
 
 /**
- * Structural shape of a Vite SSR `serverEntry` default export (prefer
+ * Structural shape of a SSR `serverEntry` default export (prefer
  * `defineServerEntry` for sibling inference).
  */
-export type SkuSsrServerEntry<
+export type SkuServerEntry<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = {
-  getSite?: SkuSsrGetSite;
-  getLanguage?: SkuSsrGetLanguage;
+  getSite?: SkuGetSite;
+  getLanguage?: SkuGetLanguage;
   getClientContext?: (args: { req: ExpressRequest }) => C;
-  getReactContext?: SkuSsrServerGetReactContext<C, R>;
-  middleware?: SkuSsrMiddleware;
-  onListen?: SkuSsrOnListen;
-  getRouterContext?: SkuSsrServerGetRouterContext<C, R>;
+  getReactContext?: SkuServerGetReactContext<C, R>;
+  middleware?: SkuMiddleware;
+  onListen?: SkuOnListen;
+  getRouterContext?: SkuServerGetRouterContext<C, R>;
 };
 
 /**
- * Structural shape of a Vite SSR `clientEntry` default export (prefer
+ * Structural shape of a SSR `clientEntry` default export (prefer
  * `defineClientEntry` for sibling inference).
  */
-export type SkuSsrClientEntry<
+export type SkuClientEntry<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = {
-  onHydrate?: SkuSsrOnHydrate;
-  getReactContext?: SkuSsrClientGetReactContext<C, R>;
-  getRouterContext?: SkuSsrClientGetRouterContext<C, R>;
+  onHydrate?: SkuOnHydrate;
+  getReactContext?: SkuClientGetReactContext<C, R>;
+  getRouterContext?: SkuClientGetRouterContext<C, R>;
 };
 
 export interface RenderManifest {
@@ -214,7 +214,7 @@ declare global {
 declare module 'express-serve-static-core' {
   interface Request {
     /**
-     * Vite SSR: mint/reuse the single request-scoped CSP nonce.
+     * SSR: mint/reuse the single request-scoped CSP nonce.
      * Only include `'nonce-…'` in CSP after this (or `getCspNonce()`) is called.
      */
     getCspNonce?: () => string;

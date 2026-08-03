@@ -1,5 +1,5 @@
 import type { RouteObject } from 'react-router';
-import type { SkuSsrRouteObject } from './types.js';
+import type { SkuRouteObject } from './types.js';
 
 /**
  * Deep-filter `routesEntry` `routes` for one config site name.
@@ -10,7 +10,7 @@ import type { SkuSsrRouteObject } from './types.js';
  * - Strips `sites` before returning RR `RouteObject`s
  */
 export const filterRoutesForSite = (
-  routes: SkuSsrRouteObject[],
+  routes: SkuRouteObject[],
   site: string,
 ): RouteObject[] =>
   routes.flatMap((route) => {
@@ -34,7 +34,7 @@ export const filterRoutesForSite = (
  * module init and nothing here touches the per-request path.
  */
 export const buildSiteRouteTrees = (
-  routes: SkuSsrRouteObject[],
+  routes: SkuRouteObject[],
   siteNames: readonly string[],
 ): Record<string, RouteObject[]> =>
   Object.fromEntries(

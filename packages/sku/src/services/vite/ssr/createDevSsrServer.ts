@@ -16,11 +16,7 @@ import {
   type RenderFunction,
   type SsrServerResult,
 } from './ssrServerShared.js';
-import type {
-  RenderAssets,
-  SkuSsrMiddleware,
-  SkuSsrOnListen,
-} from './types.js';
+import type { RenderAssets, SkuMiddleware, SkuOnListen } from './types.js';
 
 const log = createDebug('sku:vite-ssr:dev-server');
 const require = createRequire(import.meta.url);
@@ -34,8 +30,8 @@ export const createDevSsrServer = async ({
 }): Promise<SsrServerResult & { vite: ViteDevServer }> => {
   // Dev wrapper runs React Refresh preamble before dynamically loading the
   // production client entry (tsdown can reorder static imports in the latter).
-  const clientEntry = require.resolve('#entries/vite-ssr-client.dev');
-  const serverEntry = require.resolve('#entries/vite-ssr-server');
+  const clientEntry = require.resolve('#entries/ssr-client.dev');
+  const serverEntry = require.resolve('#entries/ssr-server');
   const serverApp = express();
 
   if (skuContext.expressTrustProxy) {
@@ -59,8 +55,8 @@ export const createDevSsrServer = async ({
     },
   });
   const serverModule = (await vite.ssrLoadModule(serverEntry)) as {
-    middleware?: SkuSsrMiddleware;
-    onListen?: SkuSsrOnListen;
+    middleware?: SkuMiddleware;
+    onListen?: SkuOnListen;
     render: RenderFunction;
   };
 

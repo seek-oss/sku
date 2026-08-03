@@ -7,7 +7,7 @@ export function assertSiteName(
 ): asserts site is string {
   if (typeof site !== 'string' || site.length === 0) {
     throw new Error(
-      `Vite SSR ${source} must provide a non-empty string 'site'. Missing or invalid 'site'.`,
+      `SSR ${source} must provide a non-empty string 'site'. Missing or invalid 'site'.`,
     );
   }
 }
@@ -25,7 +25,7 @@ export const selectForSite = <T>(
 
   if (!Object.prototype.hasOwnProperty.call(siteMap, site)) {
     throw new Error(
-      `Vite SSR has no pre-built route tree for site '${site}'. Unknown or invalid 'site'.`,
+      `SSR has no pre-built route tree for site '${site}'. Unknown or invalid 'site'.`,
     );
   }
 

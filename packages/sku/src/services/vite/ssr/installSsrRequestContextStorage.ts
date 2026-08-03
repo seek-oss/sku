@@ -5,7 +5,7 @@ import {
 } from './requestContext.js';
 
 /**
- * Side-effect import from Vite SSR server entry points. Installs Node
+ * Side-effect import from SSR server entry points. Installs Node
  * AsyncLocalStorage into the shared requestContext module without pulling
  * `node:async_hooks` into the client bundle.
  */

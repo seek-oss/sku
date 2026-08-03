@@ -67,14 +67,12 @@ describe('generatePackageJson', () => {
     await fixture.rm();
   });
 
-  it('should generate package.json for vite-ssr template', async ({
-    expect,
-  }) => {
+  it('should generate package.json for ssr template', async ({ expect }) => {
     const fixture = await createFixture({});
 
     await generatePackageJson(fixture.path, {
-      projectName: 'my-vite-ssr-app',
-      template: 'vite-ssr',
+      projectName: 'my-ssr-app',
+      template: 'ssr',
       packageManager: 'npm',
     });
 
@@ -82,7 +80,7 @@ describe('generatePackageJson', () => {
 
     expect(packageJsonContent).toMatchInlineSnapshot(`
       "{
-        "name": "my-vite-ssr-app",
+        "name": "my-ssr-app",
         "version": "1.0.0",
         "private": true,
         "type": "module",

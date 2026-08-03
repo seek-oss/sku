@@ -1,15 +1,24 @@
 # Getting started
 
+:::warning Experimental — SSR Managed Data Mode
+This documentation covers the new vite-based SSR Managed Data Mode.
+This is still only experimental support.
+See [Webpack SSR](./webpack-ssr.md) for existing production support.
+:::
+
 Server-side rendering builds an isomorphic React app that renders on the server for each request, then hydrates in the browser.
 
-sku is built on [React Router Data Mode](https://reactrouter.com/start/modes#data).
-It runs the HTTP server, HTML document, streaming, hydration, and CSP headers.
+This path uses **Managed Data Mode**.
+sku owns the HTTP server, HTML document, streaming, hydration, and CSP headers.
+It wires [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing and data.
 You own pages, data, and providers.
+A future Static path is expected to share the same Managed Data Mode APIs.
+**SSR** here means the render strategy (`buildType: 'ssr'`).
 
 Use `sku start` / `sku build` to develop and build.
 
-:::warning Experimental — not for production
-SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
@@ -19,7 +28,7 @@ Migrating from a static app? See [Migrate from Static App](./migrate-from-static
 ## Scaffold a new app
 
 ```bash
-$ pnpm dlx @sku-lib/create my-app --template=vite-ssr
+$ pnpm dlx @sku-lib/create my-app --template=ssr
 $ cd my-app
 $ pnpm start
 ```
@@ -27,7 +36,7 @@ $ pnpm start
 Or in the current directory:
 
 ```bash
-$ pnpm dlx @sku-lib/create . --template=vite-ssr
+$ pnpm dlx @sku-lib/create . --template=ssr
 $ pnpm start
 ```
 
@@ -41,7 +50,7 @@ After scaffolding you get three app entries:
 - `src/client.tsx` — hydrate-time setup
 - `src/routes.tsx` — your React Router route tree
 
-The template also sets up a pathless root layout (for providers like Braid) and typed hooks via [`createSkuSsrContexts`](./providers.md).
+The template also sets up a pathless root layout (for providers like Braid) and typed hooks via [`createSkuContexts`](./providers.md) from `sku/runtime`.
 
 ## Configuration
 
@@ -59,7 +68,7 @@ export default {
 ```
 
 SSR requires a relative `publicPath` (for example `/`).
-The config [`public`](../configuration.md#public) assets folder and [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) are not supported — import assets from modules, and raise exceptional Vite needs via [support](../support.md).
+The config [`public`](../configuration.md#public) assets folder, [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig), and [`vitePlugins`](../configuration.md#viteplugins) are not supported — import assets from modules, and raise exceptional Vite needs via [support](../support.md).
 
 See [Configuration](../configuration.md) for all options.
 

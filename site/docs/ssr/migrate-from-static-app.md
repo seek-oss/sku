@@ -1,5 +1,10 @@
 # Migrate from Static App
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 High-level guide for moving a **static** sku app (webpack or Vite SSG) to SSR.
 For day-to-day API detail, prefer the [Getting started](./) topic pages.
 
@@ -8,11 +13,11 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 - SSR is Vite-only: `bundler: 'vite'` + `buildType: 'ssr'`
 - Relative `publicPath` (for example `/`) — absolute / CDN URLs are not supported
 - Move off the config [`public`](../configuration.md#public) assets folder — import assets from modules instead
-- Drop [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) — unsupported for SSR; raise use-cases via [support](../support.md)
+- Drop [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins) — unsupported for SSR; raise use-cases via [support](../support.md)
 
 ## Config and commands
 
-Prefer scaffolding with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or mirror that config.
+Prefer scaffolding with `pnpm dlx @sku-lib/create my-app --template ssr`, or mirror that config.
 Use `sku start` / `sku build` (same commands as Static) — do not introduce `start-ssr` / `build-ssr`.
 
 ```ts
@@ -38,7 +43,7 @@ export default {
 
 ## Providers and data
 
-- Wire [`createSkuSsrContexts`](./providers.md) and mount isomorphic providers in your root layout
+- Wire [`createSkuContexts`](./providers.md) and mount isomorphic providers in your root layout
 - Prefer [render-time data loading](./data-loading.md) for page content
 - Production Express handlers go on server-entry `middleware`; local mocks stay in [`devServerMiddleware`](../configuration.md#devservermiddleware) — see [Middleware](./middleware.md)
 

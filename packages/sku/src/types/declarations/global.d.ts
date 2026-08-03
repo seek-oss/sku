@@ -11,7 +11,7 @@ declare const __SKU_DEFAULT_SERVER_PORT__: string;
 declare const __SKU_PUBLIC_PATH__: string;
 declare const __SKU_CLIENT_PATH__: string;
 
-/** Config site names for Vite SSR per-site route tree pre-build. */
+/** Config site names for SSR per-site route tree pre-build. */
 declare const __SKU_SITES__: string[];
 
 declare const __SKU_CSP__: SkuCSP;
@@ -31,9 +31,9 @@ type SkuReportingEndpoint = { endpoint: string; url?: string };
 type SkuCSP = {
   enabled: boolean;
   extraHosts: string[];
-  /** Vite SSR `report-to` reporting endpoint (optional; unused by webpack SSR). */
+  /** SSR `report-to` reporting endpoint (optional; unused by webpack SSR). */
   reportTo?: SkuReportingEndpoint;
-  /** Vite SSR Report-Only CSP (optional; unused by webpack SSR). */
+  /** SSR Report-Only CSP (optional; unused by webpack SSR). */
   reportOnlyEnabled?: boolean;
   reportOnlyExtraHosts?: string[];
   reportOnlyReportTo?: SkuReportingEndpoint;

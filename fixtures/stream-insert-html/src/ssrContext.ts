@@ -1,7 +1,9 @@
-import { createSkuSsrContexts } from 'sku/ssr';
+import { createSkuContexts } from 'sku/runtime';
 
 import type client from './client.js';
 import type server from './server.js';
 
-export const { useSite, useClientContext, useReactContext } =
-  createSkuSsrContexts<typeof server, typeof client>();
+export const { useSite, useClientContext, useReactContext } = createSkuContexts<
+  typeof server,
+  typeof client
+>();

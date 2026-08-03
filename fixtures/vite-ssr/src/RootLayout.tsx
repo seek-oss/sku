@@ -8,7 +8,7 @@ import * as styles from './layout.css';
 
 /**
  * App-owned pathless layout route: router-aware wrapping lives here so
- * language tracks client navigation. Request seeds come from SkuSsrProvider.
+ * language tracks client navigation. Request seeds come from SkuProvider.
  */
 export const RootLayout = () => {
   const { pathname } = useLocation();

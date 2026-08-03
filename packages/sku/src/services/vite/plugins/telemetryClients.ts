@@ -1,6 +1,6 @@
 /**
  * Browser-side telemetry clients for Vite start.
- * Imported by the Vite SSR start-only client entry (not via transformIndexHtml).
+ * Imported by the SSR start-only client entry (not via transformIndexHtml).
  */
 import {
   SKU_INITIAL_PAGE_LOAD_EVENT,

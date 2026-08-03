@@ -1,4 +1,4 @@
-import { defineClientEntry } from 'sku/ssr';
+import { defineClientEntry } from 'sku/runtime';
 
 import type server from './server.js';
 

@@ -1,5 +1,10 @@
 # Routing
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 SSR uses [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing.
 
 Export a `routes` array from `src/routes.tsx` (config [`routesEntry`](../configuration.md#routesentry)).
@@ -37,13 +42,13 @@ Use a **pathless** root layout for app chrome and providers (see [Providers](./p
 
 ```tsx
 // src/routes.tsx
-import type { SkuSsrRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku';
 
 import { RootLayout } from './App/RootLayout';
 import { aboutRoute } from './pages/about/route';
 import { homeRoute } from './pages/home/route';
 
-export const routes: SkuSsrRouteObject[] = [
+export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     children: [homeRoute, aboutRoute],
@@ -73,9 +78,9 @@ Resolve the active site in the server entry with `getSite` (required when config
 
 ```tsx
 // src/routes.tsx
-import type { SkuSsrRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku';
 
-export const routes: SkuSsrRouteObject[] = [
+export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     children: [
@@ -89,7 +94,7 @@ export const routes: SkuSsrRouteObject[] = [
 
 ```tsx
 // src/server.tsx
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
   getSite({ req }) {
@@ -111,7 +116,7 @@ To warm chunks for a route the user is about to visit (React Router Data Mode ha
 
 ```tsx
 import { Link, type LinkProps } from 'react-router';
-import { usePreloadRoute } from 'sku/ssr';
+import { usePreloadRoute } from 'sku/runtime';
 
 export function PreloadingLink({ to, ...rest }: LinkProps) {
   const preload = usePreloadRoute(to);

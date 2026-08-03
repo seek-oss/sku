@@ -2,7 +2,7 @@ import { describe, expect, expectTypeOf, it } from 'vitest';
 import { RouterContextProvider } from 'react-router';
 
 import { defineClientEntry, defineServerEntry } from './defineEntry.js';
-import { createSkuSsrContexts } from './skuSsrContext.js';
+import { createSkuContexts } from './skuContext.js';
 
 describe('defineServerEntry Site / Language inference', () => {
   it('types sibling site and useSite from narrowed getSite', () => {
@@ -31,7 +31,7 @@ describe('defineServerEntry Site / Language inference', () => {
     expectTypeOf<Site>().toEqualTypeOf<'au' | 'nz'>();
     expectTypeOf<Language>().toEqualTypeOf<'en' | 'fr'>();
 
-    const { useSite } = createSkuSsrContexts<typeof server>();
+    const { useSite } = createSkuContexts<typeof server>();
     expect(useSite).toBeTypeOf('function');
     expectTypeOf(useSite).returns.toEqualTypeOf<'au' | 'nz'>();
   });
@@ -46,7 +46,7 @@ describe('defineServerEntry Site / Language inference', () => {
     expect(server.getSite).toBeUndefined();
     expect(server.getClientContext).toBeTypeOf('function');
 
-    const { useSite } = createSkuSsrContexts<typeof server>();
+    const { useSite } = createSkuContexts<typeof server>();
     expect(useSite).toBeTypeOf('function');
     expectTypeOf(useSite).returns.toEqualTypeOf<string>();
   });

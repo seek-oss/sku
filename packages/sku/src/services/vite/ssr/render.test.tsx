@@ -5,11 +5,11 @@ import { RouterContextProvider } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
-import { createSkuSsrContexts, SkuSsrProvider } from './skuSsrContext.js';
+import { createSkuContexts, SkuProvider } from './skuContext.js';
 import { render } from './render.js';
 import type { RenderAssets } from './types.js';
 
-const { useSite, useClientContext, useReactContext } = createSkuSsrContexts<
+const { useSite, useClientContext, useReactContext } = createSkuContexts<
   {
     getClientContext: () => { userId: string };
     getReactContext: () => { api: string };
@@ -82,7 +82,7 @@ const renderToHtml = async ({
 };
 
 describe('render', () => {
-  it('always mounts SkuSsrProvider with site, clientContext, and reactContext', async () => {
+  it('always mounts SkuProvider with site, clientContext, and reactContext', async () => {
     const html = await renderToHtml();
 
     expect(html).toContain('>au<');
@@ -142,7 +142,7 @@ describe('render', () => {
     );
 
     expect(source).not.toContain('createStaticHandler');
-    expect(source).toContain('SkuSsrProvider');
+    expect(source).toContain('SkuProvider');
   });
 
   it('uses the sole config site when getSite is omitted', async () => {
@@ -189,13 +189,13 @@ describe('render', () => {
         getSite: () => 'uk',
       }),
     ).rejects.toThrow(
-      /Vite SSR has no pre-built route tree for site 'uk'\. Unknown or invalid 'site'\./,
+      /SSR has no pre-built route tree for site 'uk'\. Unknown or invalid 'site'\./,
     );
   });
 });
 
-describe('createSkuSsrContexts', () => {
-  it('exposes SkuSsrProvider for shared context identity', () => {
-    expect(SkuSsrProvider).toBeTypeOf('function');
+describe('createSkuContexts', () => {
+  it('exposes SkuProvider for shared context identity', () => {
+    expect(SkuProvider).toBeTypeOf('function');
   });
 });

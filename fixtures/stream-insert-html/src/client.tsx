@@ -1,7 +1,7 @@
 import { ApolloLink, Observable } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client-react-streaming';
 import { print } from 'graphql';
-import { defineClientEntry } from 'sku/ssr';
+import { defineClientEntry } from 'sku/runtime';
 
 import type { resolveGraphql } from './graphql.js';
 import type server from './server.js';

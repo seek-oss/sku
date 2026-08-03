@@ -1,5 +1,5 @@
 {
   "greeting": {
-    "message": "Hello from Vite SSR"
+    "message": "Hello from SSR"
   }
 }

@@ -10,9 +10,9 @@ import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 
-const ssrClientEntry = require.resolve('#entries/vite-ssr-client');
-const ssrClientDevEntry = require.resolve('#entries/vite-ssr-client.dev');
-const ssrServerEntry = require.resolve('#entries/vite-ssr-server');
+const ssrClientEntry = require.resolve('#entries/ssr-client');
+const ssrClientDevEntry = require.resolve('#entries/ssr-client.dev');
+const ssrServerEntry = require.resolve('#entries/ssr-server');
 
 export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
   const outDir = createOutDir(skuContext.paths.target);

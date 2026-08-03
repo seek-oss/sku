@@ -10,7 +10,7 @@
   "module": "./dist/index.mjs",
   "exports": {
     ".": "./dist/index.mjs",
-    "./ssr": "./dist/ssr.mjs",
+    "./runtime": "./dist/runtime.mjs",
     "./@loadable/component": "./dist/@loadable/component.mjs",
     "./config/prettier": "./dist/config/prettier.mjs",
     "./config/eslint": "./dist/config/eslint.mjs",

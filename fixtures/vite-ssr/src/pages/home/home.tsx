@@ -23,7 +23,7 @@ export function Component() {
   return (
     <main>
       <h1 className={styles.shell} data-testid="shell">
-        Vite SSR Home - {site}
+        SSR Home - {site}
       </h1>
       <p data-testid="providers-user-id">
         {clientContext?.userId ?? 'missing'}

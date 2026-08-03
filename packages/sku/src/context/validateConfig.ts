@@ -77,7 +77,7 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
       skuConfig.publicPath.startsWith('//'))
   ) {
     errors.push(
-      `🚫 Vite SSR requires a relative '${strong(
+      `🚫 SSR requires a relative '${strong(
         'publicPath',
       )}' (e.g. '/' or '/static/'). Absolute http(s) / CDN publicPath is not supported.`,
     );
@@ -90,7 +90,7 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
     Object.prototype.hasOwnProperty.call(appSkuConfig, 'serverPort')
   ) {
     errors.push(
-      `🚫 Vite SSR does not support '${strong(
+      `🚫 SSR does not support '${strong(
         'serverPort',
       )}'. Use '${strong('port')}' for both \`sku start\` and the production default listen port (overridable via \`PORT\`).`,
     );
@@ -104,7 +104,7 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
     existsSync(getPathFromCwd(skuConfig.public))
   ) {
     errors.push(
-      `🚫 Vite SSR does not support the '${strong(
+      `🚫 SSR does not support the '${strong(
         'public',
       )}' assets folder ('${strong(
         skuConfig.public,
@@ -112,7 +112,8 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
     );
   }
 
-  // Check the consumer file (pre-defaults merge): defaults set dangerouslySetViteConfig to undefined.
+  // Check the consumer file (pre-defaults merge): defaults set dangerouslySetViteConfig to undefined
+  // and vitePlugins to [].
   if (
     skuConfig.buildType === 'ssr' &&
     skuConfig.bundler === 'vite' &&
@@ -122,8 +123,20 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
     )
   ) {
     errors.push(
-      `🚫 Vite SSR does not support '${strong(
+      `🚫 SSR does not support '${strong(
         'dangerouslySetViteConfig',
+      )}'. Raise exceptional Vite customisation needs in #sku-support with your use-case.`,
+    );
+  }
+
+  if (
+    skuConfig.buildType === 'ssr' &&
+    skuConfig.bundler === 'vite' &&
+    Object.prototype.hasOwnProperty.call(appSkuConfig, 'vitePlugins')
+  ) {
+    errors.push(
+      `🚫 SSR does not support '${strong(
+        'vitePlugins',
       )}'. Raise exceptional Vite customisation needs in #sku-support with your use-case.`,
     );
   }

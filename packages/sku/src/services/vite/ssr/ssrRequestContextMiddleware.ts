@@ -5,7 +5,7 @@ import type { SsrRequestContextStore } from './requestContext.js';
 const stores = new WeakMap<Request, SsrRequestContextStore>();
 
 /**
- * Lazily attaches request-scoped Vite SSR context before consumer middleware:
+ * Lazily attaches request-scoped SSR context before consumer middleware:
  * - `req.getCspNonce()` (mint-on-read)
  *
  * Language identity is set by the server request entry, not Express.

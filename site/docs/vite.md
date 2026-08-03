@@ -8,41 +8,17 @@ Sku supports Vite as an alternate to the Webpack bundler since v15.
 
 ## Limitations
 
-Vite support covers [static applications (SSG)][SSG] and opt-in [server-side rendering (SSR)][SSR].
+Vite support is currently only available for [static applications (SSG)][SSG].
+This means that only [`sku start`] and [`sku build`] are supported.
+[`sku serve`] is also available as it is bundler agnostic.
 
-- Static apps use [`sku start`] and [`sku build`] as today.
-- SSR apps set `bundler: 'vite'` and `buildType: 'ssr'`, then also use [`sku start`] / [`sku build`] (not `start-ssr` / `build-ssr`).
-- Webpack SSR continues to use [`sku start-ssr`] / [`sku build-ssr`] when `buildType` is unset.
+> **Experimental — SSR Support.**
+> A new Vite-based SSR with Managed Data Mode is available evaluation and testing using the new Managed Data Mode.
+> Do not use it in production yet; the API and behaviour may change. See [SSR].
 
 [`sku start`]: ./cli.md#start
 [`sku build`]: ./cli.md#build
 [`sku serve`]: ./cli.md#serve
-[`sku start-ssr`]: ./cli.md#start-ssr
-[`sku build-ssr`]: ./cli.md#build-ssr
-
-### SSR <Badge type="tip" text="SSR" /> <Badge type="warning" text="experimental" />
-
-> **Experimental — not for production.**
-> SSR is available for evaluation and testing.
-> Do not use it in production yet; the API and behaviour may change.
-
-Set `bundler: 'vite'` and `buildType: 'ssr'`, then use [`sku start`] / [`sku build`] (not `start-ssr` / `build-ssr`).
-
-```ts
-// sku.config.ts
-export default {
-  bundler: 'vite',
-  buildType: 'ssr',
-  publicPath: '/',
-  // …
-};
-```
-
-SSR requires a relative `publicPath`.
-Config [`sites`](./configuration.md#sites) is optional (empty/omitted soft-defaults to `'default'`).
-The config [`public`](./configuration.md#public) assets folder and [`dangerouslySetViteConfig`](./configuration.md#dangerouslysetviteconfig) are not supported.
-
-Scaffold with `pnpm dlx @sku-lib/create my-app --template vite-ssr`, or see [Server rendering](./ssr/) for entries, routing, providers, middleware, CSP, and migration guides.
 
 ### Planned deprecation of library mode
 
@@ -246,10 +222,10 @@ export default () => (
 
 ### Dev server middleware
 
-Config [`devServerMiddleware`](./configuration.md#devservermiddleware) mounts a consumer module during `sku start` only.
+The Vite dev server uses [`Connect`](https://github.com/senchalabs/connect) as its server framework, as opposed to `webpack` which uses [`Express`](https://expressjs.com/).
+As a result, the middleware API has changed - the middleware function now receives a `Connect.Server` instance that can be used to add middleware to the dev server.
 
-**Static Vite** uses [`Connect`](https://github.com/senchalabs/connect) as its server framework (webpack uses [`Express`](https://expressjs.com/)).
-The middleware function receives a `Connect.Server` instance:
+Middleware can be added to the dev server via the [`use`] method on the server instance:
 
 ```javascript
 // devMiddleware.js
@@ -266,10 +242,6 @@ export default function (server) {
   });
 }
 ```
-
-**SSR** (`buildType: 'ssr'`) uses Express on the custom single-port server.
-The same config key receives the Express app, and is mounted **before** the server entry’s named `middleware` (then Vite, then HTML render).
-Production never loads this file — see [Server rendering → Middleware](./ssr/middleware.md).
 
 > [!NOTE]
 > Currently only JavaScript middleware is supported.
@@ -310,9 +282,6 @@ export default {
 } satisfies SkuConfig;
 ```
 
-For SSR specifically, a related failure mode is React “Element type is invalid … got: object” under `sku start` when a CJS default export resolves as a module namespace.
-Prefer [`__UNSAFE_EXPERIMENTAL__cjsInteropDependencies`](./configuration.md#__unsafe_experimental__cjsinteropdependencies) for that case — see [Server rendering → CJS default-export interop](./ssr/troubleshooting.md#cjs-default-export-interop).
-
 [compilePackages]: ./configuration.md#compilepackages
 
 ### Vite client types
@@ -343,8 +312,7 @@ SVG imports within your application will need to be updated in order to function
 > [!IMPORTANT]
 > Your application must be on at least [sku v15.13.0] in order to use the `raw`, `url` and `inline` query parameters described below.
 
-The simplest way to migrate is to add the `raw` query parameter to all SVG imports in your codebase, which will import the raw SVG markup as a string in both webpack and Vite.
-This can be done automatically with the `svg-import-query-param` codemod:
+The simplest way to migrate is to add the `raw` query parameter to all SVG imports in your codebase, which will import the raw SVG markup as a string in both webpack and Vite. This can be done automatically with the `svg-import-query-param` codemod:
 
 ```sh
 pnpm dlx @sku-lib/codemod svg-import-query-param .

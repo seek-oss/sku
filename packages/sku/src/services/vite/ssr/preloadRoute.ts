@@ -4,11 +4,11 @@ let siteRouteTree: RouteObject[] | null = null;
 let warnedWithoutRouteTree = false;
 
 /**
- * Sku's Vite SSR client entry registers the selected site's filtered tree so
+ * Sku's SSR client entry registers the selected site's filtered tree so
  * `usePreloadRoute` matches the same routes the router navigates. App hooks and
- * sku runtime MUST share one module instance via `sku/ssr`. `unbundle: true`
+ * sku runtime MUST share one module instance via `sku/runtime`. `unbundle: true`
  * keeps one physical dist module; Vite `optimizeDeps.exclude` for `'sku'` /
- * `'sku/ssr'` stops published installs cloning into `.vite/deps`.
+ * `'sku/runtime'` stops published installs cloning into `.vite/deps`.
  */
 export const registerSiteRouteTree = (routes: RouteObject[]): void => {
   siteRouteTree = routes;
@@ -57,7 +57,7 @@ export const preloadHref = (
     ) {
       warnedWithoutRouteTree = true;
       warn(
-        'sku: usePreloadRoute did no work because no route tree is registered. Intent preloading is only available in Vite SSR apps (\'buildType: "ssr"\').',
+        'sku: usePreloadRoute did no work because no route tree is registered. Intent preloading is only available in SSR apps (\'buildType: "ssr"\').',
       );
     }
     return;
@@ -72,7 +72,7 @@ export const preloadHref = (
  * has no `<Link prefetch>`.
  *
  * Matching runs against the current site's tree, so a path belonging to another
- * site never warms. Outside Vite SSR (and during server render) it is a no-op.
+ * site never warms. Outside SSR (and during server render) it is a no-op.
  */
 export const usePreloadRoute = (to: To): (() => void) => {
   const href = useHref(to);

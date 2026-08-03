@@ -1,4 +1,4 @@
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 import { resolveLanguage } from './resolveLanguage.js';
 

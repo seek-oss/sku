@@ -16,10 +16,7 @@ program
   .description(description)
   .version(version)
   .argument('[project-name]', 'Name of the project to create')
-  .option(
-    '-t, --template <template>',
-    'Template to use (vite, vite-ssr, webpack)',
-  )
+  .option('-t, --template <template>', 'Template to use (vite, ssr, webpack)')
   .action(async (targetDir?: string, options: { template?: string } = {}) => {
     // Prompt for project name if not provided
     let finalTargetDir = targetDir;
@@ -60,10 +57,10 @@ program
               '(recommended for static apps) Uses Vite for serving and bundling, and Vitest for tests.',
           },
           {
-            title: 'Vite SSR',
-            value: 'vite-ssr',
+            title: 'SSR',
+            value: 'ssr',
             description:
-              'Server-side rendered app with Vite. Uses sku start / sku build.',
+              'Server-side rendered app (Managed Data Mode). Uses sku start / sku build. Experimental — not for production.',
           },
           {
             title: 'Webpack',

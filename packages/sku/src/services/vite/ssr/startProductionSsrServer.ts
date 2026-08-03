@@ -7,19 +7,15 @@ import {
   type RenderFunction,
   type SsrServerResult,
 } from './ssrServerShared.js';
-import type {
-  RenderAssets,
-  SkuSsrMiddleware,
-  SkuSsrOnListen,
-} from './types.js';
+import type { RenderAssets, SkuMiddleware, SkuOnListen } from './types.js';
 
 export const startProductionSsrServer = async ({
   middleware,
   onListen,
   render,
 }: {
-  middleware?: SkuSsrMiddleware;
-  onListen?: SkuSsrOnListen;
+  middleware?: SkuMiddleware;
+  onListen?: SkuOnListen;
   render: RenderFunction;
 }): Promise<SsrServerResult> => {
   const serverDirectory = path.dirname(fileURLToPath(import.meta.url));

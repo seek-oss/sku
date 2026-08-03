@@ -11,8 +11,8 @@ import {
   createInsertHtmlQueue,
   InsertHtmlProvider,
   runWithSsrRequestContext,
-  SkuSsrProvider,
-} from 'sku/ssr';
+  SkuProvider,
+} from 'sku/runtime';
 import Document from './Document.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
 import { createInsertHtmlTransform } from './createInsertHtmlTransform.js';
@@ -30,11 +30,11 @@ import type {
   RenderOptions,
   RenderResult,
   SkuRouteHandle,
-  SkuSsrGetClientContext,
-  SkuSsrGetLanguage,
-  SkuSsrGetSite,
-  SkuSsrServerGetReactContext,
-  SkuSsrServerGetRouterContext,
+  SkuGetClientContext,
+  SkuGetLanguage,
+  SkuGetSite,
+  SkuServerGetReactContext,
+  SkuServerGetRouterContext,
 } from './types.js';
 
 const wrapPipeWithInsertHtml = (
@@ -105,13 +105,13 @@ export interface RenderArgs {
   req: ExpressRequest;
   assets: RenderAssets;
   /** Required when config has >1 site; omit on single-site ⇒ sole config site. */
-  getSite?: SkuSsrGetSite;
-  getLanguage?: SkuSsrGetLanguage;
-  getClientContext?: SkuSsrGetClientContext;
-  getReactContext?: SkuSsrServerGetReactContext;
+  getSite?: SkuGetSite;
+  getLanguage?: SkuGetLanguage;
+  getClientContext?: SkuGetClientContext;
+  getReactContext?: SkuServerGetReactContext;
   options?: RenderOptions;
   renderManifest?: RenderManifest;
-  getRouterContext?: SkuSsrServerGetRouterContext;
+  getRouterContext?: SkuServerGetRouterContext;
 }
 
 const renderDocument = async ({
@@ -212,13 +212,13 @@ const renderDocument = async ({
     const stream = renderToPipeableStream(
       <InsertHtmlProvider insertHtml={insertHtmlQueue.insertHtml}>
         <Document assets={documentAssets}>
-          <SkuSsrProvider
+          <SkuProvider
             site={site}
             clientContext={clientContext}
             reactContext={reactContext}
           >
             {routerElement}
-          </SkuSsrProvider>
+          </SkuProvider>
         </Document>
       </InsertHtmlProvider>,
       {

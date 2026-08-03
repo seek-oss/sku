@@ -1,13 +1,18 @@
 # Providers and request context
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 Pass request-scoped values into React with typed hooks.
 Mount isomorphic providers (Braid, Vocab, Apollo, chrome) in your **root layout** route.
 
-sku mounts a `SkuSsrProvider` outside the router:
+sku mounts a `SkuProvider` outside the router:
 
 ```
 Document
-  └── SkuSsrProvider   ← site, clientContext, reactContext
+  └── SkuProvider   ← site, clientContext, reactContext
         └── Router
               └── root layout route   ← Vocab, Apollo, chrome
                     └── pages
@@ -19,13 +24,15 @@ Create hooks bound to your entry objects:
 
 ```tsx
 // src/App/ssrContext.ts
-import { createSkuSsrContexts } from 'sku/ssr';
+import { createSkuContexts } from 'sku/runtime';
 
 import type client from './client.js';
 import type server from './server.js';
 
-export const { useSite, useClientContext, useReactContext } =
-  createSkuSsrContexts<typeof server, typeof client>();
+export const { useSite, useClientContext, useReactContext } = createSkuContexts<
+  typeof server,
+  typeof client
+>();
 ```
 
 - `useSite()` — active site name
@@ -38,7 +45,7 @@ export const { useSite, useClientContext, useReactContext } =
 
 ```tsx
 // src/server.tsx
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
   getClientContext({ req }) {
@@ -93,13 +100,13 @@ export const RootLayout = () => (
 
 ```tsx
 // src/routes.tsx
-import type { SkuSsrRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku';
 
 import { RootLayout } from './App/RootLayout';
 import { aboutRoute } from './pages/about/route';
 import { homeRoute } from './pages/home/route';
 
-export const routes: SkuSsrRouteObject[] = [
+export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     children: [homeRoute, aboutRoute],
@@ -112,10 +119,10 @@ Isomorphic **provider components** mount in the root layout and read those value
 
 ## Entry helpers and typing
 
-Wrap each request entry with `defineServerEntry` / `defineClientEntry` from `sku/ssr` so TypeScript can infer sibling types.
+Wrap each request entry with `defineServerEntry` / `defineClientEntry` from `sku/runtime` so TypeScript can infer sibling types.
 Prefer `defineClientEntry<typeof server>()({ … })` so client callbacks get `Site` / `ClientContext` from the server entry.
 
-Do not annotate getters with the loose public aliases (`SkuSsrGetSite`, …) — they widen returns to `string` and defeat literal inference.
+Do not annotate getters with the loose public aliases (`SkuGetSite`, …) — they widen returns to `string` and defeat literal inference.
 
 Full getter reference: [Request entries](./entries.md).
 
@@ -127,6 +134,6 @@ sku does not auto-inject Braid reset.
 
 **Browser-only libraries:** construct them in client `getReactContext` and consume from the root layout or a small `useEffect` wrapper via `useReactContext()`.
 
-A root route `ErrorBoundary` does not catch errors thrown above the router (including `SkuSsrProvider`). See [Error pages](./error-pages.md).
+A root route `ErrorBoundary` does not catch errors thrown above the router (including `SkuProvider`). See [Error pages](./error-pages.md).
 
 Do not reach for Async Local Storage or module-level mutable state set by `onHydrate` for request values — use the hooks above.

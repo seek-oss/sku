@@ -18,30 +18,27 @@ import type {
   RenderAssets,
   RenderManifest,
   RenderOptions,
-  SkuSsrGetClientContext,
-  SkuSsrGetLanguage,
-  SkuSsrGetSite,
-  SkuSsrMiddleware,
-  SkuSsrOnListen,
-  SkuSsrServerEntry,
-  SkuSsrServerGetReactContext,
-  SkuSsrServerGetRouterContext,
-  SkuSsrRouteObject,
+  SkuGetClientContext,
+  SkuGetLanguage,
+  SkuGetSite,
+  SkuMiddleware,
+  SkuOnListen,
+  SkuServerEntry,
+  SkuServerGetReactContext,
+  SkuServerGetRouterContext,
+  SkuRouteObject,
 } from '../ssr/types.js';
 
 rejectRoutesBySiteExport(routesEntry, 'routesEntry');
 
-const routes = requireNamedExport<SkuSsrRouteObject[]>(
+const routes = requireNamedExport<SkuRouteObject[]>(
   routesEntry,
   'routes',
   'routesEntry',
   { kind: 'routes' },
 );
 
-const entry = requireDefaultEntry<SkuSsrServerEntry>(
-  serverEntry,
-  'serverEntry',
-);
+const entry = requireDefaultEntry<SkuServerEntry>(serverEntry, 'serverEntry');
 
 // Route tree — and each site's handler — is built once here rather than per request.
 const siteStaticHandlers = buildSiteStaticHandlers(
@@ -49,36 +46,30 @@ const siteStaticHandlers = buildSiteStaticHandlers(
 );
 
 // getSite required only when config has more than one site.
-const getSite = optionalOrRequiredEntryFunction<SkuSsrGetSite>(
+const getSite = optionalOrRequiredEntryFunction<SkuGetSite>(
   entry,
   'getSite',
   'serverEntry',
   __SKU_SITES__.length > 1,
 );
-const getLanguage = optionalEntryFunction<SkuSsrGetLanguage>(
-  entry,
-  'getLanguage',
-);
-const getClientContext = optionalEntryFunction<SkuSsrGetClientContext>(
+const getLanguage = optionalEntryFunction<SkuGetLanguage>(entry, 'getLanguage');
+const getClientContext = optionalEntryFunction<SkuGetClientContext>(
   entry,
   'getClientContext',
 );
-const getReactContext = optionalEntryFunction<SkuSsrServerGetReactContext>(
+const getReactContext = optionalEntryFunction<SkuServerGetReactContext>(
   entry,
   'getReactContext',
 );
 
-export const middleware = optionalEntryValue<SkuSsrMiddleware>(
+export const middleware = optionalEntryValue<SkuMiddleware>(
   entry,
   'middleware',
 );
 
-export const onListen = optionalEntryFunction<SkuSsrOnListen>(
-  entry,
-  'onListen',
-);
+export const onListen = optionalEntryFunction<SkuOnListen>(entry, 'onListen');
 
-const getRouterContext = optionalEntryFunction<SkuSsrServerGetRouterContext>(
+const getRouterContext = optionalEntryFunction<SkuServerGetRouterContext>(
   entry,
   'getRouterContext',
 );

@@ -17,7 +17,7 @@ type TelemetryOptions = {
   target: string;
   type: string;
   /**
-   * When false, skip transformIndexHtml script injection (Vite SSR delivers
+   * When false, skip transformIndexHtml script injection (SSR delivers
    * clients via the browser client entry instead). Default true for static.
    */
   injectHtml?: boolean;
@@ -81,7 +81,7 @@ export const telemetryPlugin = ({
 
 /**
  * This client script is used to measure the initial page load time.
- * Static Vite injects it via transformIndexHtml; Vite SSR imports telemetryClients.
+ * Static Vite injects it via transformIndexHtml; SSR imports telemetryClients.
  */
 const skuPageLoadTelemetryClient = js /* js */ `
   addEventListener("load", () => {
@@ -109,7 +109,7 @@ const handleInitialPageLoadEvent = (tags: Record<string, string>) => () => {
 
 /**
  * This client script is used to measure the HMR time.
- * Static Vite injects it via transformIndexHtml; Vite SSR imports telemetryClients.
+ * Static Vite injects it via transformIndexHtml; SSR imports telemetryClients.
  */
 const skuHmrTelemetryClient = js /* js */ `
   if (import.meta.hot) {

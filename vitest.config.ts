@@ -10,11 +10,11 @@ const repoRoot = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   resolve: {
     tsconfigPaths: true,
-    // Unit tests import SSR helpers relatively from source; sku runtime imports
-    // the same modules via `sku/ssr`. Without this alias Vitest resolves the
+    // Unit tests import helpers relatively from source; sku runtime imports
+    // the same modules via `sku/runtime`. Without this alias Vitest resolves the
     // package export to dist and splits React context / ALS identity.
     alias: {
-      'sku/ssr': path.join(repoRoot, 'packages/sku/src/ssr.ts'),
+      'sku/runtime': path.join(repoRoot, 'packages/sku/src/runtime.ts'),
     },
   },
   server: {

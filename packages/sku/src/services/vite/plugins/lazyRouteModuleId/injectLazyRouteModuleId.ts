@@ -4,7 +4,7 @@ import _generate, { type GeneratorResult } from '@babel/generator';
 import * as t from '@babel/types';
 import { resolveManifestModuleId } from '../../helpers/resolveManifestModuleId.js';
 
-// CJS/ESM interop for @babel/* — Vite SSR and Vitest resolve these differently.
+// CJS/ESM interop for @babel/* — SSR and Vitest resolve these differently.
 
 const traverse = ((_traverse as any).default ??
   _traverse) as typeof _traverse.default;

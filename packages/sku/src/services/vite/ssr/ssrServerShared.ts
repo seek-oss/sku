@@ -22,8 +22,8 @@ import type {
   RenderManifest,
   RenderOptions,
   RenderResult,
-  SkuSsrMiddleware,
-  SkuSsrOnListen,
+  SkuMiddleware,
+  SkuOnListen,
 } from './types.js';
 
 const toFetchHeaders = (headers: IncomingHttpHeaders): Headers => {
@@ -128,9 +128,9 @@ export type RenderFunction = (
 export interface SsrServerOptions {
   port: number;
   publicPath: string;
-  middleware?: SkuSsrMiddleware;
+  middleware?: SkuMiddleware;
   /** Called once after middleware + HTML are mounted and `listen` succeeds. */
-  onListen?: SkuSsrOnListen;
+  onListen?: SkuOnListen;
   /** When true, sets Express `trust proxy` hop count to `1`. */
   expressTrustProxy?: boolean;
   render: RenderFunction;
@@ -165,7 +165,7 @@ export interface SsrServerResult {
 }
 
 export const mountConsumerMiddleware = (
-  handlers: SkuSsrMiddleware | undefined,
+  handlers: SkuMiddleware | undefined,
   mount: (handler: RequestHandler) => void,
 ) => {
   if (handlers == null) {

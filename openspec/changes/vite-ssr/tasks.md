@@ -7,8 +7,8 @@
 - [x] 1.5 Add `react-router` as optional peerDependency `^8` for Vite SSR (fixtures/template install RR 8; do not force webpack fixtures onto RR 8); fix `bundler` JSDoc so Vite is not described as static-only
 - [x] 1.6 Hard-error when Vite SSR sets `dangerouslySetViteConfig`; omit decorator plugin on SSR graph; point error at sku-support
 - [x] 1.7 Remove `dangerouslySetViteConfig` from Vite SSR fixtures (e.g. translations `makeStableViteHashes`); use a supported path for stable hashes if still needed
-- [ ] 1.8 Hard-error when Vite SSR sets `vitePlugins`; omit consumer `vitePlugins` on SSR plugin graph; point error at sku-support
-- [ ] 1.9 Remove `vitePlugins` from Vite SSR fixtures if any set it
+- [x] 1.8 Hard-error when Vite SSR sets `vitePlugins`; omit consumer `vitePlugins` on SSR plugin graph; point error at sku-support
+- [x] 1.9 Remove `vitePlugins` from Vite SSR fixtures if any set it
 
 ## 2. Entries and runtime
 
@@ -22,8 +22,8 @@
 - [x] 2.11 Mount `telemetryPlugin` on the Vite SSR serve graph with `type: 'ssr'`; deliver page-load + HMR clients via client entry / bootstrap (not `transformIndexHtml`); mark `initialPageLoad` when the SSR dev server is ready
 - [x] 2.7 Resolve consumer entries via shared `__sku_alias__serverEntry` / `__sku_alias__clientEntry` (same aliases as static Vite)
 - [x] 2.8 Promise-scrub loader/action data; strip production `Error.stack`; harden Express→Fetch adapter (array headers; reconstruct body when stream consumed)
-- [x] 2.9 Import `virtual:sku/polyfills` at the top of the Vite SSR browser client entry (`vite-ssr-client.tsx`; covered by the start-only `.dev` dynamic load of that entry) so config `polyfills` load before hydrate — parity with static `vite-client.tsx` / webpack SSR client; do not load into the Node server entry
-- [x] 2.12 Register the selected site route tree from the client entry; export `usePreloadRoute` from a new `sku/ssr` subpath (both `lazy` shapes; no-op when unregistered + dev warning on client invoke)
+- [x] 2.9 Import `virtual:sku/polyfills` at the top of the Vite SSR browser client entry (`ssr-client.tsx`; covered by the start-only `.dev` dynamic load of that entry) so config `polyfills` load before hydrate — parity with static `vite-client.tsx` / webpack SSR client; do not load into the Node server entry
+- [x] 2.12 Register the selected site route tree from the client entry; export `usePreloadRoute` from a new `sku/runtime` subpath (both `lazy` shapes; no-op when unregistered + dev warning on client invoke)
 
 ## 3. Assets and publicPath
 
@@ -55,7 +55,7 @@
 - [x] 5.8 Unit tests for simplified language resolution and webpack-aligned production defines
 - [x] 5.9 Config/command validation only for edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + `serverPort`, existing `public` directory, Vite SSR + `dangerouslySetViteConfig`, Vite SSR + `vitePlugins`) — no browser e2e
 - [x] 5.11 Test: Vite SSR + `dangerouslySetViteConfig` hard-errors at config validation
-- [ ] 5.14 Test: Vite SSR + `vitePlugins` hard-errors at config validation
+- [x] 5.14 Test: Vite SSR + `vitePlugins` hard-errors at config validation
 - [x] 5.10 Translations fixture: Vite SSR adapters (shared `App` + vocab; dedicated entries; `sku.config.vite-ssr.ts`) covering `en` / `fr` / `en-PSEUDO` via `?pseudo=true`
 
 ## 6. Create template
@@ -70,7 +70,7 @@
 - [x] 7.3 Document CJS interop for Vite SSR `sku start` + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` (docs only; no runtime error rewrite; no new baked-in defaults)
 - [x] 7.4 Discourage `public` for Vite SSR in product + `configuration.md`; Migrating calls out moving off the folder
 - [x] 7.10 Document that Vite SSR does not support `dangerouslySetViteConfig` (hard-error; raise use-cases via sku-support) in `configuration.md` + product / Migrating
-- [ ] 7.12 Document that Vite SSR does not support `vitePlugins` (hard-error; raise use-cases via sku-support) in `configuration.md` + product / Migrating
+- [x] 7.12 Document that Vite SSR does not support `vitePlugins` (hard-error; raise use-cases via sku-support) in `configuration.md` + product / Migrating
 - [x] 7.5 Prefer render-time data loading via Suspense with clients from Providers (**superseded by §13** — `useReactContext` / `useClientContext`); loaders opt-in for waterfalls / document redirects / headers; no Express `req` → loader bridge
 - [x] 7.6 Migrating: server-only loaders vs client route graph (+ explicit `moduleId` when needed); Braid reset-before-Braid on `sku start`; client-only / window libraries (**superseded by §13** — `getReactContext`); Jest → Vitest prerequisite; `#` pathAliases / migrate-root-resolution
 - [x] 7.7 Drop “install `@vocab/vite` yourself” from product + Migrating once sku-owned alias is in place
@@ -88,12 +88,12 @@
 - [x] 8.6 Tests: `onRequest` receives `req` only; server/client `getRouterContext` wiring; omit optional → default behaviour
 - [x] 8.7 Docs: `entries.md` / `data-loading.md` / `middleware.md` (+ migrate / routing cross-links) — hierarchy, Data Mode vs Framework Mode, `onRequest({ req })` only, Express `Request` module augmentation for middleware-appended fields (`user` / `log` example), red warning against `req` in context, client-nav ≠ initial SSR example
 - [x] 8.8 Changeset: note `onRequest` args (`{ request }` → `{ req }`) + optional `getRouterContext` if needed
-- [x] 8.9 Rename dual-entry export `getContext` → `getRouterContext` (types `SkuSsrServerGetRouterContext` / `SkuSsrClientGetRouterContext`; RR `createBrowserRouter({ getContext })` unchanged)
+- [x] 8.9 Rename dual-entry export `getContext` → `getRouterContext` (types `SkuServerGetRouterContext` / `SkuClientGetRouterContext`; RR `createBrowserRouter({ getContext })` unchanged)
 
 ## 9. `routesEntry` + site-scoped routes via optional `sites`
 
 - [x] 9.1 Config: add `routesEntry` (default `src/routes.tsx`); resolve path on sku context; alias `__sku_alias__routesEntry` into both Vite SSR graphs; document in `configuration.md`
-- [x] 9.2 Types: export `SkuSsrRouteObject = RouteObject & { sites?: string[] }`; require named `routes` on `routesEntry`; hard-error missing/non-array `routes`; require `onRequest` return field `site`
+- [x] 9.2 Types: export `SkuRouteObject = RouteObject & { sites?: string[] }`; require named `routes` on `routesEntry`; hard-error missing/non-array `routes`; require `onRequest` return field `site`
 - [x] 9.3 Runtime: load `routes` from `routesEntry` only (sku wrappers); drop dual-entry `routes` require from client/server entries
 - [x] 9.4 Pre-build: for each config site name, filter `routes` by `sites` membership (omit ⇒ all sites; no parent→child inheritance); strip `sites` before RR; bake site-name list for production client if needed
 - [x] 9.4a Config: Vite SSR requires non-empty `sites` (≥1 site name); hard-error when empty; drop empty-`sites` soft path in site-name resolution
@@ -109,12 +109,12 @@
 
 ## 10. `Providers` outside the router + init-time static handler
 
-**Superseded by §13** for how request-scoped values reach React. Historical work kept the handler-at-init / outside-the-router split; §13 replaces app `Providers` with always-on `SkuSsrProvider` + `getReactContext`.
+**Superseded by §13** for how request-scoped values reach React. Historical work kept the handler-at-init / outside-the-router split; §13 replaces app `Providers` with always-on `SkuProvider` + `getReactContext`.
 
 Supersedes the earlier tree-mounted `AppWrapper`: router-aware wrapping becomes an app-owned root layout route, and sku's entry export moves outside the router.
 
 - [x] 10.3 Server: build `createStaticHandler` per site at init; per request select that handler and call only `query()` / `createStaticRouter`
-- [x] 10.1 Types: replace `SkuSsrAppWrapper` with `SkuSsrProviders` / `SkuSsrProvidersProps<Context>` (`children` + `site` + `clientContext`); rename `onHydrate` args to `{ clientContext }`; keep provider components out of the `onRequest` / `onHydrate` return types
+- [x] 10.1 Types: replace `SkuSsrAppWrapper` with `SkuProviders` / `SkuProvidersProps<Context>` (`children` + `site` + `clientContext`); rename `onHydrate` args to `{ clientContext }`; keep provider components out of the `onRequest` / `onHydrate` return types
 - [x] 10.2 Delete `withAppWrapperLayout.tsx` and `SKU_APP_WRAPPER_ROUTE_ID`; sku no longer wraps the route tree for providers
 - [x] 10.3a Server: render optional `Providers` between `Document` and `StaticRouterProvider` in `render.tsx`, passing `site` + `clientContext`; assert `render.tsx` no longer imports `createStaticHandler`
 - [x] 10.4 Client: render optional `Providers` between `Document` and `RouterProvider` with the same props from the hydrate bootstrap
@@ -129,63 +129,63 @@ Supersedes the earlier tree-mounted `AppWrapper`: router-aware wrapping becomes 
 
 Opens the one seam apps cannot reach themselves (Decision 21a). Sku stays transport-agnostic; the fixture proves Apollo.
 
-- [x] 11.1 Runtime: render-scoped injection queue + React context in a single module shared by `render` and `sku/ssr`; provide it outermost in `render.tsx` (around `Document`) so route code can reach it
-- [x] 11.2 Runtime: `useInsertHtml()` exported from `sku/ssr`; silent no-op with no injection context (client graph); never throws
+- [x] 11.1 Runtime: render-scoped injection queue + React context in a single module shared by `render` and `sku/runtime`; provide it outermost in `render.tsx` (around `Document`) so route code can reach it
+- [x] 11.2 Runtime: `useInsertHtml()` exported from `sku/runtime`; silent no-op with no injection context (client graph); never throws
 - [x] 11.3 Server: Node transform on the response pipe that renders queued nodes to markup and writes them before the next React chunk, flushing the remainder at stream end; works for `onShellReady` and `waitForAll`
 - [x] 11.4 Fixture `stream-insert-html`: Apollo Client 4 + `@apollo/client-react-streaming` `buildManualDataTransport({ useInsertHtml })`, provider as dual-entry `Providers` (**superseded by §13** — `getReactContext` + root layout), GraphQL endpoint served from server-entry `middleware`, `extraScriptProps={{ nonce: getCspNonce() }}` on the server entry only
 - [x] 11.5 Fixture: a route that queries during SSR and a route that queries only after hydration (client navigation), so cache reuse and fresh fetches are separately observable
 - [x] 11.6 Tests: injected markup lands before hydration; no-op off the SSR path without throwing; nonce present in `script-src`; injection survives `waitForAll`
 - [x] 11.7 E2E: server-run query data unchanged after hydration with no refetch; post-hydration query fetches; passes on both `sku start` and production build (guards the `browser` / `node` condition builds)
 - [x] 11.8 Docs: `data-loading.md` Apollo streaming walkthrough (**superseded by §13** for provider mount); `entries.md` / `csp.md` cross-links; migrate — drop two-pass `getDataFromTree`; state loader-transported query refs are unsupported and why
-- [x] 11.9 Changeset: `useInsertHtml` on `sku/ssr`; sku ships no Apollo dependency or config
+- [x] 11.9 Changeset: `useInsertHtml` on `sku/runtime`; sku ships no Apollo dependency or config
 
 ## 12. Flatten request-entry getters
 
 Replace `onRequest` with sync getters; make `middleware` / `onHydrate` optional.
 (**Superseded by §13** for the public contract shape — default-exported entry object, not per-getter named exports.)
 
-- [x] 12.1 Types: drop `SkuSsrOnRequest` / `SkuSsrOnRequestResult`; add `SkuSsrGetSite` / `SkuSsrGetLanguage` / `SkuSsrGetClientContext` (sync, `{ req }` only)
+- [x] 12.1 Types: drop `SkuSsrOnRequest` / `SkuSsrOnRequestResult`; add `SkuGetSite` / `SkuGetLanguage` / `SkuGetClientContext` (sync, `{ req }` only)
 - [x] 12.2 Server entry: optional getter + middleware reads; init-time `getSite` required when `__SKU_SITES__.length > 1`
 - [x] 12.3 Client entry: optional `onHydrate`
 - [x] 12.4 `render.tsx`: call getters before `query()`; sole config site when `getSite` omitted; validate when present
 - [x] 12.5 Production / start servers: tolerate absent `middleware`
 - [x] 12.6 Fixtures + translations: migrate off `onRequest` to getters
-- [x] 12.7 Create template: realistic `middleware` + `Providers` + `onHydrate` (**superseded by §13** — drop `Providers`, default entry objects + `createSkuSsrContexts`); single-site omits `getSite`
+- [x] 12.7 Create template: realistic `middleware` + `Providers` + `onHydrate` (**superseded by §13** — drop `Providers`, default entry objects + `createSkuContexts`); single-site omits `getSite`
 - [x] 12.8 Tests: single-site no `getSite`; multi-site missing `getSite` init error; unknown site per-request; omit `onHydrate`; omit `middleware`
 - [x] 12.9 Docs: entries / providers / multi-language / routing / data-loading + migrate — getters, optional middleware/onHydrate, sync/pure recommendation (**§13 rewrites providers docs + entry shape**)
 - [x] 12.10 Changeset: note getters replace `onRequest`; `middleware` / `onHydrate` optional (experimental API)
 
-## 13. Always-on SkuSsrProvider + default entry objects + three value channels
+## 13. Always-on SkuProvider + default entry objects + three value channels
 
 Replaces app-authored dual-entry `Providers`. Request entries are one default-exported object via `defineServerEntry` / `defineClientEntry` (not per-getter named exports).
 
-- [x] 13.1 Types: drop `SkuSsrProviders` / `SkuSsrProvidersProps`; add `SkuSsrServerEntry` / `SkuSsrClientEntry`; export `defineServerEntry` / `defineClientEntry` (zero-runtime, `NoInfer` sibling typing); extend runtime `getRouterContext` args with `site` / `clientContext` / `reactContext`; export `createSkuSsrContexts<typeof server, typeof client>()` from `sku/ssr`
-- [x] 13.2 Runtime: load `serverEntry` / `clientEntry` via **default export** object; call optional properties; always-on `SkuSsrProvider` in `render.tsx` / client entry (`site` + `clientContext` + `reactContext`); shared context module with `createSkuSsrContexts` (`unbundle: true` — published-install identity completed in §19 / Decision 26)
+- [x] 13.1 Types: drop `SkuProviders` / `SkuProvidersProps`; add `SkuServerEntry` / `SkuClientEntry`; export `defineServerEntry` / `defineClientEntry` (zero-runtime, `NoInfer` sibling typing); extend runtime `getRouterContext` args with `site` / `clientContext` / `reactContext`; export `createSkuContexts<typeof server, typeof client>()` from `sku/runtime`
+- [x] 13.2 Runtime: load `serverEntry` / `clientEntry` via **default export** object; call optional properties; always-on `SkuProvider` in `render.tsx` / client entry (`site` + `clientContext` + `reactContext`); shared context module with `createSkuContexts` (`unbundle: true` — published-install identity completed in §19 / Decision 26)
 - [x] 13.3 Runtime: call order `getSite` → `getLanguage` → `getClientContext` → `getReactContext` → `getRouterContext` → `query()`; pass sibling values; do not serialise `reactContext`
 - [x] 13.4 Runtime: remove optional `Providers` mount, markup-probe warnings, and related tests
-- [x] 13.5 `createSkuSsrContexts<typeof server, typeof client>()`: extract `ClientContext` / `ReactContext` from entry typeofs; typed `useSite` / `useClientContext` / `useReactContext`; no per-property `defineGet*`; no required hand-written context aliases
+- [x] 13.5 `createSkuContexts<typeof server, typeof client>()`: extract `ClientContext` / `ReactContext` from entry typeofs; typed `useSite` / `useClientContext` / `useReactContext`; no per-property `defineGet*`; no required hand-written context aliases
 - [x] 13.6 Wire client `getReactContext({ site, clientContext })` and client `getRouterContext({ site, clientContext, reactContext })` (wrap RR zero-arg `getContext`)
-- [x] 13.7 Fixtures: `defineServerEntry` / `defineClientEntry` default exports; remove `Providers.tsx`; vite-ssr uses `createSkuSsrContexts<typeof …>` + hooks; stream-insert-html moves Apollo mount to root layout via `useReactContext` + dual-entry `getReactContext` (`makeClient` / server nonce)
-- [x] 13.8 Create template: `define*Entry` + `createSkuSsrContexts<typeof …>` scaffold; no `Providers`; root layout ready for isomorphic provider mounts
+- [x] 13.7 Fixtures: `defineServerEntry` / `defineClientEntry` default exports; remove `Providers.tsx`; vite-ssr uses `createSkuContexts<typeof …>` + hooks; stream-insert-html moves Apollo mount to root layout via `useReactContext` + dual-entry `getReactContext` (`makeClient` / server nonce)
+- [x] 13.8 Create template: `define*Entry` + `createSkuContexts<typeof …>` scaffold; no `Providers`; root layout ready for isomorphic provider mounts
 - [x] 13.9 Tests: sibling projection into later getters; hooks read provider values; omit `getClientContext` / `getReactContext` → `undefined`; Apollo fixture still proves cache reuse without `Providers`
-- [x] 13.10 Docs: replace `providers.md` / entries / data-loading / migrate — `define*Entry` inference + `createSkuSsrContexts<typeof …>` example, three-channel Markdown table, root-layout Apollo, no Mermaid required; replace `Providers` API docs in place
-- [x] 13.11 Changeset: experimental API — `defineServerEntry` / `defineClientEntry`; default-exported entry objects; `getReactContext` + `SkuSsrProvider` + `createSkuSsrContexts<typeof …>`; sibling args on later getters (do **not** label as breaking; Vite SSR has not shipped)
+- [x] 13.10 Docs: replace `providers.md` / entries / data-loading / migrate — `define*Entry` inference + `createSkuContexts<typeof …>` example, three-channel Markdown table, root-layout Apollo, no Mermaid required; replace `Providers` API docs in place
+- [x] 13.11 Changeset: experimental API — `defineServerEntry` / `defineClientEntry`; default-exported entry objects; `getReactContext` + `SkuProvider` + `createSkuContexts<typeof …>`; sibling args on later getters (do **not** label as breaking; Vite SSR has not shipped)
 
 ## 14. Infer Site / Language in defineServerEntry; type useSite
 
 Fold-in: `getSite` / `getLanguage` returns join the existing `C` / `R` inference scope; `useSite` stops being hardcoded `string`.
 
 - [x] 14.1 `defineServerEntry`: add generics `S` / `L`; infer from `getSite` / `getLanguage` returns; type later sibling `site` as `NoInfer<S>` (keep `defineClientEntry` `site: string`)
-- [x] 14.2 `createSkuSsrContexts`: extract `Site` from server `getSite` (`string` when omitted); type `useSite(): Site`
-- [x] 14.3 Fixture / template: drop widening `SkuSsrGetSite` annotations; narrow inside `getSite`; remove `useSite() as FixtureSite` casts where inference covers them
-- [x] 14.4 Docs (`providers` / `entries`): document Site / Language inference; warn that annotating with `SkuSsrGetSite` / `SkuSsrGetLanguage` widens to `string`
+- [x] 14.2 `createSkuContexts`: extract `Site` from server `getSite` (`string` when omitted); type `useSite(): Site`
+- [x] 14.3 Fixture / template: drop widening `SkuGetSite` annotations; narrow inside `getSite`; remove `useSite() as FixtureSite` casts where inference covers them
+- [x] 14.4 Docs (`providers` / `entries`): document Site / Language inference; warn that annotating with `SkuGetSite` / `SkuGetLanguage` widens to `string`
 - [x] 14.5 Type-level / unit coverage: narrowed `getSite` → typed `useSite` + sibling `site`; omit `getSite` → `useSite` is `string`
 
 ## 15. Type defineClientEntry from ServerEntry
 
-Fold-in: client callbacks cannot infer `ClientContext` / `Site` (inputs only) — pass `typeof server` like `createSkuSsrContexts`.
+Fold-in: client callbacks cannot infer `ClientContext` / `Site` (inputs only) — pass `typeof server` like `createSkuContexts`.
 
-- [x] 15.1 `defineClientEntry<ServerEntry>`: extract `Site` / `ClientContext` via the same helpers as `createSkuSsrContexts`; type `onHydrate` / client getter `site` + `clientContext` from those; still infer `ReactContext` from client `getReactContext`; omit type arg ⇒ `ClientContext` is `undefined` and `site` is `string`
+- [x] 15.1 `defineClientEntry<ServerEntry>`: extract `Site` / `ClientContext` via the same helpers as `createSkuContexts`; type `onHydrate` / client getter `site` + `clientContext` from those; still infer `ReactContext` from client `getReactContext`; omit type arg ⇒ `ClientContext` is `undefined` and `site` is `string`
 - [x] 15.2 Fixture / template / create snapshot: `defineClientEntry<typeof server>` (type-only server import)
 - [x] 15.3 Docs (`providers` / `entries` / data-loading examples): document `defineClientEntry<typeof server>`; stop claiming client-side `ClientContext` inference alone
 - [x] 15.4 Type-level / unit coverage: narrowed server `getClientContext` / `getSite` → typed client callbacks; omit `ServerEntry` ⇒ `undefined` / `string`
@@ -203,7 +203,7 @@ Catch-all / Melways-style server-entry middleware must not eat hashed client ass
 
 Post-listen lifecycle (webpack `onStart` window) and opt-in Melways-shaped trust proxy.
 
-- [x] 17.1 Types: add optional `onListen` on `SkuSsrServerEntry` / `defineServerEntry` (`{ app, httpServer, port }` → `void | Promise<void>`)
+- [x] 17.1 Types: add optional `onListen` on `SkuServerEntry` / `defineServerEntry` (`{ app, httpServer, port }` → `void | Promise<void>`)
 - [x] 17.2 Config: add optional boolean `expressTrustProxy` (Vite SSR schema/validation/JSDoc); when `true`, set `app.set('trust proxy', 1)` before listen; omit/false → Express default
 - [x] 17.3 Runtime: call `onListen` once after middleware + HTML mounted and `listen` succeeds (shared production `listen` + `createDevSsrServer`); await promise; failure fails startup; do not re-call on server-entry HMR
 - [x] 17.4 Create template: set `expressTrustProxy: true` in `sku.config`
@@ -222,14 +222,14 @@ Reverses the §9.4a / 9.7a / 9.8a / 9.9a hard-error for empty Vite SSR `sites`. 
 - [x] 18.5 Docs: `configuration.md` / routing / migrate — Vite SSR `sites` optional; empty soft-defaults to `'default'`; `getSite` still required only when >1 site; drop “SSR requires at least one site” wording
 - [x] 18.6 Changeset: note empty config `sites` soft-defaults to `'default'` for Vite SSR (experimental API; do **not** label as breaking)
 
-## 19. Consolidate `sku/ssr` + `optimizeDeps.exclude`
+## 19. Consolidate `sku/runtime` + `optimizeDeps.exclude`
 
 Fixes published-install dual React context / shared-module identity (Decision 26). Fixtures hid the bug via `workspace:*` skipping dep prebundling; `unbundle: true` alone is not enough.
 
-- [x] 19.1 Re-export `@internal` runtime symbols from `sku/ssr` (`SkuSsrProvider`, `InsertHtmlProvider`, `createInsertHtmlQueue`, `registerSiteRouteTree`, `runWithSsrRequestContext`); update identity comments on the four shared modules + `ssr.ts`
-- [x] 19.2 Flip sku runtime call sites to `'sku/ssr'`: `vite-ssr-client.tsx` (`SkuSsrProvider`, `registerSiteRouteTree`), `render.tsx` (`SkuSsrProvider`, insert-html providers/queue, `runWithSsrRequestContext`); leave type-only / Node middleware / unit-test relative imports alone
-- [x] 19.3 Shared Vite config plugin: `optimizeDeps.exclude` includes `'sku'`, `'sku/ssr'`, and `skipPackageCompatibilityCompilation`; extract `SKU_VITE_OPTIMIZE_DEPS_EXCLUDE` for plugin + test
-- [x] 19.4 Node assert: `optimizeDeps.exclude` always includes `'sku'` and `'sku/ssr'`; keep existing `tests/browser/vite-ssr.test.ts` green (self-import / dual-context regression under workspace link); skip new tarball `sku start` e2e this pass
+- [x] 19.1 Re-export `@internal` runtime symbols from `sku/runtime` (`SkuProvider`, `InsertHtmlProvider`, `createInsertHtmlQueue`, `registerSiteRouteTree`, `runWithSsrRequestContext`); update identity comments on the four shared modules + `ssr.ts`
+- [x] 19.2 Flip sku runtime call sites to `'sku/runtime'`: `ssr-client.tsx` (`SkuProvider`, `registerSiteRouteTree`), `render.tsx` (`SkuProvider`, insert-html providers/queue, `runWithSsrRequestContext`); leave type-only / Node middleware / unit-test relative imports alone
+- [x] 19.3 Shared Vite config plugin: `optimizeDeps.exclude` includes `'sku'`, `'sku/runtime'`, and `skipPackageCompatibilityCompilation`; extract `SKU_VITE_OPTIMIZE_DEPS_EXCLUDE` for plugin + test
+- [x] 19.4 Node assert: `optimizeDeps.exclude` always includes `'sku'` and `'sku/runtime'`; keep existing `tests/browser/vite-ssr.test.ts` green (self-import / dual-context regression under workspace link); skip new tarball `sku start` e2e this pass
 - [x] 19.5 Validate: `pnpm format` → `pnpm build` → `pnpm lint` → scoped tests (new assert + vite-ssr browser)
 
 ## 20. Create template layout cleanup
@@ -244,26 +244,26 @@ End-state naming for the in-progress branch implementation (not yet on master). 
 
 ### From → to (public)
 
-| From                                      | To                                        |
-| ----------------------------------------- | ----------------------------------------- |
-| `sku/ssr`                                 | `sku/runtime`                             |
-| create template `vite-ssr`                | `ssr`                                     |
-| `SkuSsrProvider`                          | `SkuProvider`                             |
-| `createSkuSsrContexts`                    | `createSkuContexts`                       |
-| `SkuSsrRouteObject`                       | `SkuRouteObject`                          |
-| `SkuSsrServerEntry` / `SkuSsrClientEntry` | `SkuServerEntry` / `SkuClientEntry`       |
-| other public `SkuSsr*` types              | drop `Ssr` infix                          |
-| product copy “Vite SSR”                   | “SSR” (architecture: “Managed Data Mode”) |
+| From                                | To                                        |
+| ----------------------------------- | ----------------------------------------- |
+| `sku/runtime`                       | `sku/runtime`                             |
+| create template `vite-ssr`          | `ssr`                                     |
+| `SkuProvider`                       | `SkuProvider`                             |
+| `createSkuContexts`                 | `createSkuContexts`                       |
+| `SkuRouteObject`                    | `SkuRouteObject`                          |
+| `SkuServerEntry` / `SkuClientEntry` | `SkuServerEntry` / `SkuClientEntry`       |
+| other public `SkuSsr*` types        | drop `Ssr` infix                          |
+| product copy “Vite SSR”             | “SSR” (architecture: “Managed Data Mode”) |
 
 OpenSpec change / branch name `vite-ssr` stays as-is.
 
-- [ ] 21.1 Package exports: rename `./ssr` → `./runtime`; rename `src/ssr.ts` → `src/runtime.ts` (or equivalent); update `optimizeDeps.exclude` / `SKU_VITE_OPTIMIZE_DEPS_EXCLUDE` to `'sku/runtime'`; flip sku runtime call sites and identity comments from `'sku/ssr'` to `'sku/runtime'`
-- [ ] 21.2 Rename public symbols/types (drop `Ssr`): `SkuProvider`, `createSkuContexts`, `SkuRouteObject`, entry/getter types, etc.; update all packages/fixtures/tests/docs imports
-- [ ] 21.3 Create template: rename `packages/create/templates/vite-ssr` → `ssr`; update generator (`templates.ts`), Template type, prompts, and create tests from `vite-ssr` → `ssr`
-- [ ] 21.4 Optional consistency: rename internal SSR entry modules / `#entries/vite-ssr-client*` → `ssr-client*` (and server counterpart if named similarly); update fixture/test filenames that use `vite-ssr` where practical
-- [ ] 21.5 Docs: introduce **Managed Data Mode** as the architecture descriptor; use **SSR** only for render strategy; replace `sku/ssr`, `vite-ssr` template refs, `SkuSsr*` / “Vite SSR” product copy; note future Static is expected to share Managed Data Mode APIs
-- [ ] 21.6 Changeset: describe experimental Managed Data Mode SSR end-state naming (`sku/runtime`, template `ssr`, types without `Ssr`) — do **not** call this a breaking change (unreleased)
-- [ ] 21.7 Validate: `pnpm format` → `pnpm build` → `pnpm lint` → scoped create + SSR browser/node tests
+- [x] 21.1 Package exports: rename `./ssr` → `./runtime`; rename `src/ssr.ts` → `src/runtime.ts` (or equivalent); update `optimizeDeps.exclude` / `SKU_VITE_OPTIMIZE_DEPS_EXCLUDE` to `'sku/runtime'`; flip sku runtime call sites and identity comments from `'sku/ssr'` to `'sku/runtime'`
+- [x] 21.2 Rename public symbols/types (drop `Ssr`): `SkuProvider`, `createSkuContexts`, `SkuRouteObject`, entry/getter types, etc.; update all packages/fixtures/tests/docs imports
+- [x] 21.3 Create template: rename `packages/create/templates/vite-ssr` → `ssr`; update generator (`templates.ts`), Template type, prompts, and create tests from `vite-ssr` → `ssr`
+- [x] 21.4 Optional consistency: rename internal SSR entry modules / `#entries/vite-ssr-client*` → `ssr-client*` (and server counterpart if named similarly); update fixture/test filenames that use `vite-ssr` where practical
+- [x] 21.5 Docs: introduce **Managed Data Mode** as the architecture descriptor; use **SSR** only for render strategy; replace `sku/ssr`, `vite-ssr` template refs, `SkuSsr*` / “Vite SSR” product copy; note future Static is expected to share Managed Data Mode APIs
+- [x] 21.6 Changeset: describe experimental Managed Data Mode SSR end-state naming (`sku/runtime`, template `ssr`, types without `Ssr`) — do **not** call this a breaking change (unreleased)
+- [x] 21.7 Validate: `pnpm format` → `pnpm build` → `pnpm lint` → scoped create + SSR browser/node tests
 
 ## Deferred
 

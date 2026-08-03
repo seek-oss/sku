@@ -1,5 +1,10 @@
 # Content Security Policy
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 When `cspEnabled` and/or `cspReportOnlyEnabled` are set, SSR delivers CSP as **HTTP headers** (`Content-Security-Policy` / `Content-Security-Policy-Report-Only`).
 Meta `http-equiv` CSP is not used on the SSR path.
 

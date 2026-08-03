@@ -1,5 +1,10 @@
 # Middleware
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 SSR has three places to run middleware — pick the one that matches the job:
 
 1. **Server-entry `middleware`** — production and start; request context before HTML render
@@ -12,7 +17,7 @@ Export Connect/Express handlers from the server entry.
 sku mounts them before the HTML render path in both `sku start` and production.
 
 ```tsx
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
   middleware: [
@@ -35,7 +40,7 @@ For typing those fields, see [Typing middleware-attached fields](./entries.md#ty
 
 Do not put raw Express `req` into React Router context — project values via dual-entry [`getRouterContext`](./data-loading.md#router-context).
 
-SSR runs **Express 4**. Type middleware against Express 4 (`SkuSsrMiddleware` / `@types/express` major 4).
+SSR runs **Express 4**. Type middleware against Express 4 (`SkuMiddleware` / `@types/express` major 4).
 
 ## Dev-only mocks (`devServerMiddleware`)
 

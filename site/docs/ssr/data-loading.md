@@ -1,5 +1,10 @@
 # Data loading
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 Prefer **render-time** data loading in React for page content:
 
 1. Pass env-specific clients via dual-entry [`getReactContext`](./providers.md) (and serialisable seeds via `getClientContext`).
@@ -39,7 +44,7 @@ export const userIdContext = createContext<string | null>(null);
 ::: code-group
 
 ```tsx [server.tsx]
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 import { userIdContext } from './userIdContext';
 
@@ -58,7 +63,7 @@ export default server;
 ```
 
 ```tsx [client.tsx]
-import { defineClientEntry } from 'sku/ssr';
+import { defineClientEntry } from 'sku/runtime';
 
 import type server from './server';
 import { userIdContext } from './userIdContext';
@@ -115,14 +120,14 @@ export async function loader() {
 
 ## Apollo streaming hydration
 
-When a client cache must survive the stream (Apollo Client), pair render-time queries with a streaming data transport over [`useInsertHtml`](./entries.md#useinserthtml) from `sku/ssr`.
+When a client cache must survive the stream (Apollo Client), pair render-time queries with a streaming data transport over [`useInsertHtml`](./entries.md#useinserthtml) from `sku/runtime`.
 sku owns the injection seam; your app owns the client and transport — sku ships no Apollo dependency.
 
 ```tsx
 // src/ApolloProvider.tsx — transport only (isomorphic)
 import { WrapApolloProvider } from '@apollo/client-react-streaming';
 import { buildManualDataTransport } from '@apollo/client-react-streaming/manual-transport';
-import { useInsertHtml } from 'sku/ssr';
+import { useInsertHtml } from 'sku/runtime';
 
 export const ApolloProvider = WrapApolloProvider(
   buildManualDataTransport({ useInsertHtml }), // [!code highlight]
@@ -137,7 +142,7 @@ Mount the isomorphic Apollo provider in the root layout via `useReactContext()`:
 
 ```tsx [server.tsx]
 import { getCspNonce } from 'sku';
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
   getReactContext() {
@@ -155,7 +160,7 @@ export default server;
 ```
 
 ```tsx [client.tsx]
-import { defineClientEntry } from 'sku/ssr';
+import { defineClientEntry } from 'sku/runtime';
 
 import type server from './server';
 

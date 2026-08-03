@@ -5,7 +5,7 @@ import { setCwd } from '@sku-private/utils';
 import validateConfig from './validateConfig.js';
 import defaultSkuConfig from './defaultSkuConfig.js';
 
-describe('validateConfig — Vite SSR public assets folder', () => {
+describe('validateConfig — SSR public assets folder', () => {
   let exitSpy: ReturnType<typeof vi.spyOn>;
   let logSpy: ReturnType<typeof vi.spyOn>;
   const originalCwd = process.cwd();
@@ -48,7 +48,7 @@ describe('validateConfig — Vite SSR public assets folder', () => {
 
     expect(exitSpy).toHaveBeenCalledWith(1);
     const logged = logSpy.mock.calls.join('\n');
-    expect(logged).toContain('Vite SSR does not support the');
+    expect(logged).toContain('SSR does not support the');
     expect(logged).toContain('public');
     expect(logged).toContain('Import assets from modules instead');
   });
@@ -99,7 +99,7 @@ describe('validateConfig — Vite SSR public assets folder', () => {
   });
 });
 
-describe('validateConfig — Vite SSR dangerouslySetViteConfig', () => {
+describe('validateConfig — SSR dangerouslySetViteConfig', () => {
   let exitSpy: ReturnType<typeof vi.spyOn>;
   let logSpy: ReturnType<typeof vi.spyOn>;
 
@@ -135,7 +135,7 @@ describe('validateConfig — Vite SSR dangerouslySetViteConfig', () => {
 
     expect(exitSpy).toHaveBeenCalledWith(1);
     const logged = logSpy.mock.calls.join('\n');
-    expect(logged).toContain('Vite SSR does not support');
+    expect(logged).toContain('SSR does not support');
     expect(logged).toContain('dangerouslySetViteConfig');
     expect(logged).toContain('sku-support');
   });
@@ -177,7 +177,85 @@ describe('validateConfig — Vite SSR dangerouslySetViteConfig', () => {
   });
 });
 
-describe('validateConfig — Vite SSR sites', () => {
+describe('validateConfig — SSR vitePlugins', () => {
+  let exitSpy: ReturnType<typeof vi.spyOn>;
+  let logSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    exitSpy = vi.spyOn(process, 'exit').mockImplementation((code) => {
+      throw new Error(`process.exit: ${code}`);
+    });
+    logSpy = vi.spyOn(globalThis.console, 'log').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('hard-errors when vitePlugins is set', () => {
+    expect(() =>
+      validateConfig(
+        {
+          ...defaultSkuConfig,
+          bundler: 'vite',
+          buildType: 'ssr',
+          sites: ['default'],
+          vitePlugins: [{ name: 'consumer-plugin' }],
+        },
+        {
+          bundler: 'vite',
+          buildType: 'ssr',
+          sites: ['default'],
+          vitePlugins: [{ name: 'consumer-plugin' }],
+        },
+      ),
+    ).toThrow('process.exit: 1');
+
+    expect(exitSpy).toHaveBeenCalledWith(1);
+    const logged = logSpy.mock.calls.join('\n');
+    expect(logged).toContain('SSR does not support');
+    expect(logged).toContain('vitePlugins');
+    expect(logged).toContain('sku-support');
+  });
+
+  it('does not error when vitePlugins is omitted', () => {
+    expect(() =>
+      validateConfig(
+        {
+          ...defaultSkuConfig,
+          bundler: 'vite',
+          buildType: 'ssr',
+          sites: ['default'],
+        },
+        { bundler: 'vite', buildType: 'ssr', sites: ['default'] },
+      ),
+    ).not.toThrow();
+
+    expect(exitSpy).not.toHaveBeenCalled();
+  });
+
+  it('does not error for static Vite when vitePlugins is set', () => {
+    expect(() =>
+      validateConfig(
+        {
+          ...defaultSkuConfig,
+          bundler: 'vite',
+          buildType: 'static',
+          vitePlugins: [{ name: 'consumer-plugin' }],
+        },
+        {
+          bundler: 'vite',
+          buildType: 'static',
+          vitePlugins: [{ name: 'consumer-plugin' }],
+        },
+      ),
+    ).not.toThrow();
+
+    expect(exitSpy).not.toHaveBeenCalled();
+  });
+});
+
+describe('validateConfig — SSR sites', () => {
   let exitSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {

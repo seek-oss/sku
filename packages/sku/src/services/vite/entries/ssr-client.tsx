@@ -4,7 +4,7 @@ import { createBrowserRouter, matchRoutes, RouterProvider } from 'react-router';
 // Resolved by sku's Vite config plugin to the consumer client / routes entries.
 import * as clientEntry from '__sku_alias__clientEntry';
 import * as routesEntry from '__sku_alias__routesEntry';
-import { registerSiteRouteTree, SkuSsrProvider } from 'sku/ssr';
+import { registerSiteRouteTree, SkuProvider } from 'sku/runtime';
 import Document from '../ssr/Document.js';
 import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import {
@@ -15,37 +15,34 @@ import {
 } from '../ssr/requireNamedExport.js';
 import { assertSiteName, selectForSite } from '../ssr/selectForSite.js';
 import type {
-  SkuSsrClientEntry,
-  SkuSsrClientGetReactContext,
-  SkuSsrClientGetRouterContext,
-  SkuSsrOnHydrate,
-  SkuSsrRouteObject,
+  SkuClientEntry,
+  SkuClientGetReactContext,
+  SkuClientGetRouterContext,
+  SkuOnHydrate,
+  SkuRouteObject,
 } from '../ssr/types.js';
 
 rejectRoutesBySiteExport(routesEntry, 'routesEntry');
 
-const routes = requireNamedExport<SkuSsrRouteObject[]>(
+const routes = requireNamedExport<SkuRouteObject[]>(
   routesEntry,
   'routes',
   'routesEntry',
   { kind: 'routes' },
 );
 
-const entry = requireDefaultEntry<SkuSsrClientEntry>(
-  clientEntry,
-  'clientEntry',
-);
+const entry = requireDefaultEntry<SkuClientEntry>(clientEntry, 'clientEntry');
 
 const siteRouteTrees = buildSiteRouteTrees(routes, __SKU_SITES__);
 
-const onHydrate = optionalEntryFunction<SkuSsrOnHydrate>(entry, 'onHydrate');
+const onHydrate = optionalEntryFunction<SkuOnHydrate>(entry, 'onHydrate');
 
-const getReactContext = optionalEntryFunction<SkuSsrClientGetReactContext>(
+const getReactContext = optionalEntryFunction<SkuClientGetReactContext>(
   entry,
   'getReactContext',
 );
 
-const getRouterContext = optionalEntryFunction<SkuSsrClientGetRouterContext>(
+const getRouterContext = optionalEntryFunction<SkuClientGetRouterContext>(
   entry,
   'getRouterContext',
 );
@@ -100,13 +97,13 @@ const hydrate = async () => {
         }
       }
     >
-      <SkuSsrProvider
+      <SkuProvider
         site={site}
         clientContext={clientContext}
         reactContext={reactContext}
       >
         {routerElement}
-      </SkuSsrProvider>
+      </SkuProvider>
     </Document>,
   );
 };

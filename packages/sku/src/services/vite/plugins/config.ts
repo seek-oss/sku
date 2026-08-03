@@ -7,11 +7,11 @@ import { makePluginName } from '../helpers/makePluginName.js';
 const require = createRequire(import.meta.url);
 
 /**
- * Specifiers Vite must not clone into `.vite/deps`. Keeps app `sku/ssr` imports
- * and sku’s own Vite SSR runtime on the same module instances (provider context,
+ * Specifiers Vite must not clone into `.vite/deps`. Keeps app `sku/runtime` imports
+ * and sku’s own SSR runtime on the same module instances (provider context,
  * insert-html queue, preload registry, CSP nonce storage).
  */
-export const SKU_VITE_OPTIMIZE_DEPS_EXCLUDE = ['sku', 'sku/ssr'] as const;
+export const SKU_VITE_OPTIMIZE_DEPS_EXCLUDE = ['sku', 'sku/runtime'] as const;
 
 export const getViteOptimizeDepsExclude = (
   skipPackageCompatibilityCompilation: string[],

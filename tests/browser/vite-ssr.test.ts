@@ -42,14 +42,14 @@ describe('vite-ssr', () => {
 
       expect(html).toContain('<!DOCTYPE html>');
       expect(html).toContain('<html');
-      expect(html).toContain('Vite SSR Home');
+      expect(html).toContain('SSR Home');
       expect(html).not.toContain('id="app"');
       // Shell-first Suspense: fallback appears, then deferred content streams in.
       expect(html).toContain('data-testid="fallback"');
       expect(html).toContain('Deferred content ready');
       // Start serves Vite bootstrap from `/` (ignores config publicPath).
       expect(html).not.toContain('/static/vite-ssr/');
-      expect(html).toContain('vite-ssr-client');
+      expect(html).toContain('ssr-client');
       expect(html).toContain('/@vite/client');
 
       const viteClient = await fetch(`${url}/@vite/client`);
@@ -129,9 +129,7 @@ describe('vite-ssr', () => {
       const html = await response.text();
 
       // Client entry path is in bootstrapModules (not transformIndexHtml scripts).
-      const clientEntryMatch = html.match(
-        /\/@fs\/[^"']+vite-ssr-client\.dev[^"']*/,
-      );
+      const clientEntryMatch = html.match(/\/@fs\/[^"']+ssr-client\.dev[^"']*/);
       const clientEntryPath = clientEntryMatch?.[0];
       expect(clientEntryPath).toBeTruthy();
       if (!clientEntryPath) {
@@ -188,7 +186,7 @@ describe('vite-ssr', () => {
       await page.goto(url, { waitUntil: 'networkidle' });
       await page.getByTestId('deferred').waitFor({ state: 'visible' });
       expect(await page.getByTestId('shell').textContent()).toBe(
-        'Vite SSR Home - au',
+        'SSR Home - au',
       );
       expect(await page.getByTestId('deferred').textContent()).toBe(
         'Deferred content ready',
@@ -203,7 +201,7 @@ describe('vite-ssr', () => {
       expect(await response.text()).toBe('ok');
     });
 
-    it('projects middleware-attached state into SkuSsrProvider via getClientContext', async ({
+    it('projects middleware-attached state into SkuProvider via getClientContext', async ({
       task,
     }) => {
       skipCleanup(task.id);
@@ -217,7 +215,7 @@ describe('vite-ssr', () => {
       expect(html).toContain('"userId":"fixture-user"');
     });
 
-    it('keeps SkuSsrProvider values mounted across client navigations', async ({
+    it('keeps SkuProvider values mounted across client navigations', async ({
       task,
     }) => {
       skipCleanup(task.id);
@@ -230,7 +228,7 @@ describe('vite-ssr', () => {
         'fixture-user',
       );
 
-      // SkuSsrProvider sits outside the router, so seeds stay mounted across
+      // SkuProvider sits outside the router, so seeds stay mounted across
       // navigations rather than being rebuilt per request.
       await page.getByTestId('nav-about').click();
       await page.getByTestId('about').waitFor({ state: 'visible' });
@@ -340,7 +338,7 @@ describe('vite-ssr', () => {
       skipCleanup(task.id);
       const response = await fetch(`${url}/en/hello`);
       const html = await response.text();
-      expect(html).toContain('Hello from Vite SSR');
+      expect(html).toContain('Hello from SSR');
     });
 
     it('forwards loader redirect Responses', async ({ task }) => {
@@ -424,7 +422,7 @@ describe('vite-ssr', () => {
       await page.goto(url, { waitUntil: 'networkidle' });
       await page.getByTestId('shell').waitFor({ state: 'visible' });
       expect(await page.getByTestId('shell').textContent()).toBe(
-        'Vite SSR Home - au',
+        'SSR Home - au',
       );
       await page.close();
     });
@@ -506,7 +504,7 @@ describe('vite-ssr', () => {
           const response = await fetch('http://127.0.0.1:8201/');
           expect(response.ok).toBe(true);
           const html = await response.text();
-          expect(html).toContain('Vite SSR Home');
+          expect(html).toContain('SSR Home');
           expect(html).toContain('<!DOCTYPE html>');
           expect(html).toContain('/static/vite-ssr/');
           expect(response.headers.get('content-security-policy')).toContain(
@@ -574,7 +572,7 @@ describe('vite-ssr', () => {
           const response = await fetch('http://127.0.0.1:8201/en/hello');
           expect(response.ok).toBe(true);
           const html = await response.text();
-          expect(html).toContain('Hello from Vite SSR');
+          expect(html).toContain('Hello from SSR');
           expect(html).toContain('rel="modulepreload"');
           expect(html).toMatch(/en-translations[^"]*\.js/);
         },

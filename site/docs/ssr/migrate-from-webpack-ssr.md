@@ -1,5 +1,10 @@
 # Migrate from Webpack SSR
 
+:::danger Experimental — not for production
+SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
 High-level guide for moving from **Webpack SSR** (`sku start-ssr` / `sku build-ssr` / `renderCallback`) to **SSR**.
 
 Webpack SSR was lower-level and often required bespoke app behaviour, so migration details will depend on your solution.
@@ -10,13 +15,13 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 - `bundler: 'vite'` + `buildType: 'ssr'`
 - Relative `publicPath` only
 - Move off the config [`public`](../configuration.md#public) assets folder — import assets from modules instead
-- Drop [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) — unsupported for SSR; raise use-cases via [support](../support.md)
+- Drop [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins) — unsupported for SSR; raise use-cases via [support](../support.md)
 - Treat Jest → [Vitest](../vitest.md) as a prerequisite (`testRunner: 'vitest'`). Prefer a separate PR; use [`@sku-lib/codemod jest-to-vitest`](../vitest.md#migrating-to-vitest)
 - Replace webpack `baseUrl: '.'` / bare `src/…` imports with `#` subpath imports via [`pathAliases`](../configuration.md#pathaliases). Run `pnpm dlx @sku-lib/codemod migrate-root-resolution .`
 
 ## Config and commands
 
-Replace Webpack SSR scripts and dual-port config with Vite SSR’s single-port shape:
+Replace Webpack SSR scripts and dual-port config with SSR’s single-port shape:
 
 ```json
 {
@@ -58,7 +63,7 @@ export default {
 
 ## App-level providers
 
-- Wire [`createSkuSsrContexts`](./providers.md) — there is no app `Providers` export
+- Wire [`createSkuContexts`](./providers.md) — there is no app `Providers` export
 - Router-aware wrapping moves into your root layout route
 - Vocab: `getLanguage` on the server entry + `VocabProvider` in the root layout — see [Multi-language](./multi-language.md)
 - **Braid:** ensure `braid-design-system/reset` runs before any Braid-touching server module — see [Providers](./providers.md)

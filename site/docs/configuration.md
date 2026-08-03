@@ -48,8 +48,10 @@ Default: `webpack`
 
 The bundler that sku uses to build the application.
 
-Vite supports static or server-rendered apps via `buildType: 'ssr'`.
+`vite` is currently only supported for static apps.
 See [Vite support](./vite) for details.
+
+**Experimental** - Vite supports SSR with experimental Managed Data Mode. See [SSR](./ssr/).
 
 ## buildType
 
@@ -59,10 +61,8 @@ Default: 'static'
 
 Selects request-time SSR or static generation.
 
-- `'ssr'` for SSR applications. **Experimental — not for production** (see [Server rendering](./ssr/)).
+- `'ssr'` for SSR applications. **Experimental — not for production** (see [SSR](./ssr/)).
 - `'static'` for Static applications.
-
-See [Server rendering](./ssr/).
 
 ## clientEntry
 
@@ -72,9 +72,9 @@ Default: `./src/client.tsx`
 
 The client entry point to the app. Path may be `.tsx`, `.ts`, or `.js`.
 
-**Static / Webpack:** the file that executes your browser code. Each `route` can also specify a client entry; if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
+**Static / Webpack SSR:** the file that executes your browser code. Each `route` can also specify a client entry; if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
 
-**SSR:** required client entry that default-exports a `defineClientEntry` object (optional `onHydrate`, `getReactContext`, `getRouterContext`). Routes live on [`routesEntry`](#routesentry), not here. See [Request entries](./ssr/entries.md).
+**Static only:** Each `route` can also specify a client entry, if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
 
 ## compilePackages
 
@@ -118,7 +118,7 @@ Bundler: `vite`
 
 Where to report content security policy violations. Only relevant if `cspEnabled` is set to `true` and `cspDelivery` is set to `'header'`.
 
-Vite SSR (`buildType: 'ssr'`) ignores `cspDelivery` and always uses HTTP headers, so this applies whenever `cspEnabled` is `true`.
+SSR ignores `cspDelivery` and always uses HTTP headers, so this applies whenever `cspEnabled` is `true`.
 
 ## cspReportOnlyEnabled
 
@@ -132,11 +132,13 @@ Bundler: `vite`
 
 Enable report-only content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
 
-## cspReportOnlyExtraScriptSrcHosts <Badge type="info" text="Vite only" />
+## cspReportOnlyExtraScriptSrcHosts
 
 Type: `Array<string>`
 
 Default: `cspExtraScriptSrcHosts`
+
+Bundler: `vite`
 
 Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspReportOnlyEnabled` is set to `true`.
 
@@ -242,14 +244,14 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## dangerouslySetViteConfig <Badge type="info" text="Vite only" />
+## dangerouslySetViteConfig <Badge type="info" text="Vite Static Only" />
 
 Type: `function`
 
 This function provides a way to modify sku's Vite configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
 
-**Not supported for SSR** (`buildType: 'ssr'`). Providing `dangerouslySetViteConfig` with SSR fails config validation. Raise exceptional customisation needs via the [support page] with your use-case.
+**Not supported for SSR**. Providing `dangerouslySetViteConfig` with SSR fails config validation. Raise exceptional customisation needs via the [support page] with your use-case.
 
 Before customizing your Vite configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
@@ -364,7 +366,7 @@ Bundler: `vite` · `buildType: 'ssr'`
 
 When `true`, sku sets Express `app.set('trust proxy', 1)` (hop count **`1`**, not Express boolean `true`) before listen — the common Melways / single reverse-proxy case.
 
-Omit or `false` leaves Express’s default (`false`). This is opt-in via config (not a silent sku default). The create `vite-ssr` template sets `expressTrustProxy: true`.
+Omit or `false` leaves Express’s default (`false`). This is opt-in via config (not a silent sku default). The create `ssr` template sets `expressTrustProxy: true`.
 
 For any other trust-proxy value (`false`, `2`, an IP list, …), override in server-entry [`onListen`](./ssr/entries.md#onlisten) via `app.set('trust proxy', …)`.
 
@@ -431,7 +433,7 @@ Default: `false`
 
 Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`, and remains available for Safari and similar environments that still need a secure context over HTTPS even when using `*.localhost` hostnames.
 
-Supported for Static, webpack, and SSR (`buildType: 'ssr'`) via `sku start`.
+Supported for Static, webpack, and SSR via `sku start`.
 
 ## initialPath
 
@@ -545,7 +547,7 @@ Default: `8080`
 
 The port the app is hosted on when running `sku start`.
 
-**SSR** (`buildType: 'ssr'`): also the baked production default listen port (`node dist/server/server.js`). Override at runtime with `PORT`. SSR does not use [`serverPort`](#serverport).
+**SSR**: also the baked production default listen port (`node dist/server/server.js`). Override at runtime with `PORT`. SSR does not use [`serverPort`](#serverport).
 
 ## public
 
@@ -555,7 +557,7 @@ Default: `public`
 
 A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
 
-**Not supported for Vite SSR**
+**Not supported for SSR**
 
 ## publicPath
 
@@ -565,7 +567,7 @@ Default: `/`
 
 The URL all the static assets of the app are accessible under.
 
-For SSR (`buildType: 'ssr'`) the `publicPath` must be relative (e.g. `/` or `/static/`). Absolute `http(s)` / CDN URLs are not supported.
+For SSR the `publicPath` must be relative (e.g. `/` or `/static/`). Absolute `http(s)` / CDN URLs are not supported.
 
 For SSR, `publicPath` applies to `sku build` / production. `sku start` serves the Vite module graph from `/`.
 
@@ -609,7 +611,7 @@ Routes live on [`routesEntry`](#routesentry), not here.
 
 See [Request entries](./ssr/entries.md).
 
-## routesEntry <Badge type="info" text="Vite SSR only" />
+## routesEntry <Badge type="info" text="SSR only" />
 
 Type: `string`
 
@@ -617,7 +619,7 @@ Default: `./src/routes.tsx`
 
 Path may be `.tsx`, `.ts`, or `.js`.
 
-Module that exports named flat `routes` (`SkuSsrRouteObject[]`) for both the server and client graphs.
+Module that exports named flat `routes` (`SkuRouteObject[]`) for both the server and client graphs.
 Optional `sites?: string[]` on a route limits which config sites it appears on.
 Use `getSite` on the server entry when config has more than one site.
 
@@ -767,6 +769,8 @@ Bundler: `vite`
 
 Provides a way to add additional Vite plugins to the Vite config.
 
+**Not supported for SSR**. Providing `vitePlugins` with SSR fails config validation. Raise exceptional customisation needs via the [support page] with your use-case.
+
 ## \_\_UNSAFE_EXPERIMENTAL\_\_cjsInteropDependencies <Badge type="info" text="Vite only" />
 
 Type: `string[]`
@@ -782,6 +786,6 @@ An array of cjs import paths that have both a default and named exports.
 
 This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
 
-For SSR, packages that resolve to a module namespace object under `sku start` (React error “Element type is invalid … got: object”) often need an entry here — see [Server rendering → CJS default-export interop](./ssr/troubleshooting.md#cjs-default-export-interop). Sku already includes Apollo Client in its baked defaults; do not rely on sku expanding that list for other offenders.
+Packages that resolve to a module namespace object under `sku start` (React error “Element type is invalid … got: object”) often need an entry here — see [Server rendering → CJS default-export interop](./ssr/troubleshooting.md#cjs-default-export-interop).
 
 See https://github.com/cyco130/vite-plugin-cjs-interop for more information.

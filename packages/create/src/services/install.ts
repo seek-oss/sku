@@ -29,7 +29,7 @@ export const installDependencies = async (
   }
 
   const deps = [...DEPENDENCIES];
-  if (template === 'vite-ssr') {
+  if (template === 'ssr') {
     deps.push(...VITE_SSR_DEPENDENCIES);
   }
   const devDeps = [

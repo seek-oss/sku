@@ -1,5 +1,5 @@
 import { RouterContextProvider } from 'react-router';
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 import { configMiddleware, getLanguage, getSite } from './config.js';
 import { userIdContext } from './userIdContext.js';

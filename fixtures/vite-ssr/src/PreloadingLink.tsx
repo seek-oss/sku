@@ -1,5 +1,5 @@
 import { Link, type LinkProps } from 'react-router';
-import { usePreloadRoute } from 'sku/ssr';
+import { usePreloadRoute } from 'sku/runtime';
 
 /**
  * On hover / focus / touch, warms lazy route modules for the destination.

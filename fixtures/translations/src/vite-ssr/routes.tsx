@@ -1,6 +1,6 @@
 import { VocabProvider } from '@vocab/react';
 import { Outlet, useLocation } from 'react-router';
-import type { SkuSsrRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku';
 
 import App from '../App.js';
 import { resolveLanguage } from './resolveLanguage.js';
@@ -19,7 +19,7 @@ const RootLayout = () => {
   );
 };
 
-export const routes: SkuSsrRouteObject[] = [
+export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     children: [

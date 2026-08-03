@@ -1,15 +1,12 @@
 # Webpack SSR
 
-:::warning Pending deprecation: Webpack SSR
+:::warning Older Webpack SSR
 This page describes sku’s **older method for server-side rendering** using Webpack.
-For modern server-side rendering with Vite, see [Getting Started](./).
+For modern SSR with Managed Data Mode, see [Getting Started](./).
 :::
 
 Webpack SSR uses a low-level API and custom `-ssr` commands (`sku start-ssr` / `sku build-ssr`).
 You supply a `serverEntry` whose default export includes `renderCallback`.
-
-This path is discouraged for new apps.
-Existing Webpack SSR apps should follow [Migrate from Webpack SSR](./migrate-from-webpack-ssr.md).
 
 Minimal config and server entry:
 

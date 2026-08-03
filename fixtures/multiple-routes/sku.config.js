@@ -6,7 +6,7 @@ export default {
   sites: [
     {
       name: 'au',
-      host: 'dev.seek.com.au',
+      host: 'au.seek.com.localhost',
       routes: [
         { route: '/', name: 'home' },
         { route: '/details/$id', name: 'details' },
@@ -14,7 +14,7 @@ export default {
     },
     {
       name: 'nz',
-      host: 'dev.seek.co.nz',
+      host: 'nz.seek.com.localhost',
       routes: [
         { route: '/nz', name: 'home' },
         { route: '/nz/details/:id', name: 'details' },

@@ -23,14 +23,20 @@ describe('setupHosts', () => {
     })({
       ...context,
       sites: [
-        { name: 'foo', host: 'dev.seek.com' },
-        { name: 'bar', host: 'local.seek.com' },
+        { name: 'foo', host: 'seek.com.localhost' },
+        { name: 'bar', host: 'au.seek.com.localhost' },
       ],
       hosts: [],
     });
 
-    expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'dev.seek.com');
-    expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'local.seek.com');
+    expect(mockSetHosts).toHaveBeenCalledWith(
+      '127.0.0.1',
+      'seek.com.localhost',
+    );
+    expect(mockSetHosts).toHaveBeenCalledWith(
+      '127.0.0.1',
+      'au.seek.com.localhost',
+    );
   });
 
   it('should set app-wide hosts', async () => {
@@ -43,11 +49,17 @@ describe('setupHosts', () => {
     })({
       ...context,
       sites: [],
-      hosts: ['local.seek.com', 'dev.seek.com'],
+      hosts: ['au.seek.com.localhost', 'seek.com.localhost'],
     });
 
-    expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'local.seek.com');
-    expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'dev.seek.com');
+    expect(mockSetHosts).toHaveBeenCalledWith(
+      '127.0.0.1',
+      'au.seek.com.localhost',
+    );
+    expect(mockSetHosts).toHaveBeenCalledWith(
+      '127.0.0.1',
+      'seek.com.localhost',
+    );
   });
 
   it('should combine app-wide and site-specific hosts', async () => {
@@ -59,12 +71,18 @@ describe('setupHosts', () => {
       setSystemHost: mockSetHosts,
     })({
       ...context,
-      sites: [{ name: 'foo', host: 'dev.seek.com' }],
-      hosts: ['local.seek.com'],
+      sites: [{ name: 'foo', host: 'seek.com.localhost' }],
+      hosts: ['au.seek.com.localhost'],
     });
 
-    expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'local.seek.com');
-    expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'dev.seek.com');
+    expect(mockSetHosts).toHaveBeenCalledWith(
+      '127.0.0.1',
+      'au.seek.com.localhost',
+    );
+    expect(mockSetHosts).toHaveBeenCalledWith(
+      '127.0.0.1',
+      'seek.com.localhost',
+    );
   });
 
   it('should set ipv4 and ipv6 hosts', async () => {
@@ -76,12 +94,35 @@ describe('setupHosts', () => {
       setSystemHost: mockSetHosts,
     })({
       ...context,
-      hosts: ['local.seek.com'],
+      hosts: ['au.seek.com.localhost'],
     });
 
     expect(mockSetHosts).toHaveBeenCalledTimes(2);
-    expect(mockSetHosts).toHaveBeenCalledWith('127.0.0.1', 'local.seek.com');
-    expect(mockSetHosts).toHaveBeenCalledWith('::1', 'local.seek.com');
+    expect(mockSetHosts).toHaveBeenCalledWith(
+      '127.0.0.1',
+      'au.seek.com.localhost',
+    );
+    expect(mockSetHosts).toHaveBeenCalledWith('::1', 'au.seek.com.localhost');
+  });
+
+  it('should skip exact localhost', async () => {
+    const context = await createSkuContext({});
+    const mockSetHosts = vi.fn(async () => {});
+
+    await setupHosts({
+      getSystemHosts: async () => [],
+      setSystemHost: mockSetHosts,
+    })({
+      ...context,
+      hosts: ['localhost', 'au.seek.com.localhost'],
+    });
+
+    expect(mockSetHosts).not.toHaveBeenCalledWith('127.0.0.1', 'localhost');
+    expect(mockSetHosts).not.toHaveBeenCalledWith('::1', 'localhost');
+    expect(mockSetHosts).toHaveBeenCalledWith(
+      '127.0.0.1',
+      'au.seek.com.localhost',
+    );
   });
 
   it('should not set hosts if none are defined', async () => {
@@ -113,7 +154,7 @@ describe('setupHosts', () => {
       })({
         ...context,
         sites: [],
-        hosts: ['dev.seek.com'],
+        hosts: ['seek.com.localhost'],
       }),
     ).rejects.toThrow('Failed to set hosts');
   });
@@ -141,11 +182,61 @@ describe('checkHosts', () => {
       })({
         ...context,
         sites: [
-          { name: 'foo', host: 'dev.seek.com' },
-          { name: 'bar', host: 'local.seek.com' },
+          { name: 'foo', host: 'seek.com.localhost' },
+          { name: 'bar', host: 'au.seek.com.localhost' },
         ],
         hosts: [],
       }),
     ).resolves.not.toThrow();
+  });
+
+  it('should not warn for missing .localhost hosts', async () => {
+    const context = await createSkuContext({});
+    const consoleLogSpy = vi.spyOn(global.console, 'log');
+
+    await checkHosts({
+      setSystemHost: async () => {},
+      getSystemHosts: async () => [],
+    })({
+      ...context,
+      hosts: ['au.seek.com.localhost'],
+    });
+
+    expect(consoleLogSpy).not.toHaveBeenCalled();
+  });
+
+  it('should not warn for missing exact localhost', async () => {
+    const context = await createSkuContext({});
+    const consoleLogSpy = vi.spyOn(global.console, 'log');
+
+    await checkHosts({
+      setSystemHost: async () => {},
+      getSystemHosts: async () => [],
+    })({
+      ...context,
+      hosts: ['localhost'],
+    });
+
+    expect(consoleLogSpy).not.toHaveBeenCalled();
+  });
+
+  it('should warn for missing non-localhost hosts', async () => {
+    const context = await createSkuContext({});
+    const consoleLogSpy = vi.spyOn(global.console, 'log');
+
+    await checkHosts({
+      setSystemHost: async () => {},
+      getSystemHosts: async () => [],
+    })({
+      ...context,
+      hosts: ['custom.example'],
+    });
+
+    expect(consoleLogSpy).toHaveBeenCalled();
+    expect(
+      consoleLogSpy.mock.calls.some((call) =>
+        String(call[0]).includes('custom.example'),
+      ),
+    ).toBe(true);
   });
 });

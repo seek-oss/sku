@@ -5,8 +5,8 @@ import {
 
 export default {
   sites: [
-    { name: 'seekAnz', host: 'dev.seek.com.au' },
-    { name: 'jobStreet', host: 'dev.jobstreet.com' },
+    { name: 'seekAnz', host: 'au.seek.com.localhost' },
+    { name: 'jobStreet', host: 'jobstreet.com.localhost' },
   ],
   publicPath: '/',
   port: 8200,

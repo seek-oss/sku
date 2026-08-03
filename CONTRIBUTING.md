@@ -52,12 +52,14 @@ The following generators are available:
 
 ## Testing Your Changes
 
-Before running tests, some entries need to be added to your `/etc/hosts` file.
+Integration fixtures prefer `*.localhost` hostnames (for example `au.seek.com.localhost`), which usually resolve to your machine automatically without `/etc/hosts` entries.
 
-| Hostname            | IP Address  |
-| ------------------- | ----------- |
-| `dev.seek.com.au`   | `127.0.0.1` |
-| `dev.jobstreet.com` | `127.0.0.1` |
+If your environment does not resolve `*.localhost`, add the following entries (or run the script below):
+
+| Hostname                  | IP Address  |
+| ------------------------- | ----------- |
+| `au.seek.com.localhost`   | `127.0.0.1` |
+| `jobstreet.com.localhost` | `127.0.0.1` |
 
 This can either be done manually, or via the following script:
 

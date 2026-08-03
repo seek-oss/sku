@@ -9,17 +9,19 @@ By default, sku will render the first site in the [`sites`](./configuration#site
 ```ts
 export default {
   sites: [
-    { name: 'seekAnz', host: 'dev.seek.com.au' },
-    { name: 'jobStreet', host: 'dev.jobstreet.com' },
+    { name: 'seekAnz', host: 'au.seek.com.localhost' },
+    { name: 'jobStreet', host: 'jobstreet.com.localhost' },
   ],
 } satisfies SkuConfig;
 ```
 
-Now, if you request `http://dev.seek.com.au`, you will receive the `seekAnz` version of the app, and `http://dev.jobstreet.com` will return the `jobStreet` one.
+Now, if you request `http://au.seek.com.localhost`, you will receive the `seekAnz` version of the app, and `http://jobstreet.com.localhost` will return the `jobStreet` one.
+
+Prefer hostnames ending in `.localhost` for local development. They resolve to your machine automatically in most environments, so you usually do not need `/etc/hosts` entries.
 
 ### Setup hosts
 
-Switching site by host requires that the hosts are configured on your system to point to localhost. sku can do this for you.
+For hostnames that do not end in `.localhost`, switching site by host requires that the hosts are configured on your system to point to localhost. sku can do this for you. You can also run `setup-hosts` for `.localhost` names if you want explicit hosts-file entries.
 
 First add the following script to your `package.json`.
 

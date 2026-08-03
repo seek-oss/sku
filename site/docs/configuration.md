@@ -369,8 +369,10 @@ Type: `Array<string>`
 Default: `['localhost']`
 
 An array of custom hosts the app can be served off when running `sku start` or `sku start-ssr`.
-Your [hosts file](https://en.wikipedia.org/wiki/Hosts_%28file%29) must be configured to point these hosts to `localhost`.
-This can be done automatically by running [`sudo sku setup-hosts`](./cli.md#setup-hosts).
+
+We recommend hostnames ending in `.localhost` (for example `au.seek.com.localhost`). These usually resolve to your machine automatically, and sku will not warn when they are missing from your [hosts file](https://en.wikipedia.org/wiki/Hosts_%28file%29). Exact `localhost` is also exempt from that warning.
+
+For other custom hosts, your hosts file must point them to `localhost`. This can be done automatically by running [`sudo sku setup-hosts`](./cli.md#setup-hosts). `setup-hosts` will still write `.localhost` entries if you choose to run it.
 
 ## httpsDevServer
 
@@ -378,7 +380,7 @@ Type: `boolean`
 
 Default: `false`
 
-Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`.
+Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`, and remains available for Safari and similar environments that still need a secure context over HTTPS even when using `*.localhost` hostnames.
 
 ## initialPath
 

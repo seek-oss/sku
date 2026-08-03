@@ -972,6 +972,34 @@ Product / Migrating / `configuration.md` docs MUST state that the option is unsu
 - **THEN** docs state that SSR does not support the option
 - **AND** docs direct exceptional Vite customisation use-cases to sku-support
 
+### Requirement: SSR rejects vitePlugins
+
+SSR MUST NOT support `vitePlugins`.
+
+Sku opens escape hatches only for known best-practice needs.
+
+When that option is set, config validation MUST hard-error and point consumers to sku-support channels with their use-case.
+
+Sku MUST NOT mount consumer `vitePlugins` on the SSR plugin graph.
+
+Static Vite MAY keep existing `vitePlugins` behaviour.
+
+This edge case MUST NOT require a dedicated browser e2e fixture.
+
+Product / Migrating / `configuration.md` docs MUST state that the option is unsupported for SSR and that exceptional Vite customisation needs should go through support first.
+
+#### Scenario: vitePlugins rejected for SSR
+
+- **WHEN** an SSR app sets `vitePlugins`
+- **THEN** config validation fails
+- **AND** the error points consumers to sku-support channels
+
+#### Scenario: Docs state vitePlugins unsupported for SSR
+
+- **WHEN** a reader opens SSR product, Migrating, or `configuration.md` docs for `vitePlugins`
+- **THEN** docs state that SSR does not support the option
+- **AND** docs direct exceptional Vite customisation use-cases to sku-support
+
 ### Requirement: SSR uses a single port
 
 SSR MUST use config `port` for `sku start` and as the baked production default listen port (`__SKU_DEFAULT_SERVER_PORT__`).
@@ -1153,7 +1181,7 @@ Migrating docs MUST also cover:
 - that Express / React Router major upgrades may be breaking (middleware + Data Mode integration)
 - that this change does not ship Jest transforms for React Router 8
 - moving off config `public` / the public assets folder (import assets in modules instead; pattern discouraged)
-- that `dangerouslySetViteConfig` is unsupported for SSR (hard-error when set; raise use-cases via sku-support)
+- that `dangerouslySetViteConfig` and `vitePlugins` are unsupported for SSR (hard-error when set; raise use-cases via sku-support)
 - keeping server-only loader modules out of the client-imported route graph (split trees; set `handle.moduleId` when lazy factories are non-idiomatic)
 - prefer render-time React data loading via Suspense with clients from `useReactContext` / `useClientContext`; use loaders for avoiding heavily-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext` — not as the default for page content
 - Apollo streaming hydration end to end: an app-owned transport over `useInsertHtml`, dual-entry `getReactContext` for `makeClient` / server nonce `extraScriptProps`, isomorphic provider in the root layout via `useReactContext()`, and that Apollo apps must drop two-pass `getDataFromTree`
@@ -1215,6 +1243,12 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 
 - **WHEN** a reader opens SSR product or Migrating docs (and `configuration.md` for `dangerouslySetViteConfig`)
 - **THEN** docs state that SSR does not support `dangerouslySetViteConfig`
+- **AND** docs direct exceptional Vite customisation use-cases to sku-support
+
+#### Scenario: Docs discourage vitePlugins for SSR
+
+- **WHEN** a reader opens SSR product or Migrating docs (and `configuration.md` for `vitePlugins`)
+- **THEN** docs state that SSR does not support `vitePlugins`
 - **AND** docs direct exceptional Vite customisation use-cases to sku-support
 
 #### Scenario: Migrating covers Older SSR adoption topics

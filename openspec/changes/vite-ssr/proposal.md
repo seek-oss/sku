@@ -122,4 +122,4 @@ Full contract: `design.md` Decisions 12 / 12a / 25.
 
 - Adoption is opt-in via `buildType`.
 - `publicPath` stays relative and asset-only.
-- There is no `public` folder or `dangerouslySetViteConfig` for SSR.
+- There is no `public` folder, `dangerouslySetViteConfig`, or `vitePlugins` for SSR.

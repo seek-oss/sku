@@ -7,6 +7,8 @@
 - [x] 1.5 Add `react-router` as optional peerDependency `^8` for Vite SSR (fixtures/template install RR 8; do not force webpack fixtures onto RR 8); fix `bundler` JSDoc so Vite is not described as static-only
 - [x] 1.6 Hard-error when Vite SSR sets `dangerouslySetViteConfig`; omit decorator plugin on SSR graph; point error at sku-support
 - [x] 1.7 Remove `dangerouslySetViteConfig` from Vite SSR fixtures (e.g. translations `makeStableViteHashes`); use a supported path for stable hashes if still needed
+- [ ] 1.8 Hard-error when Vite SSR sets `vitePlugins`; omit consumer `vitePlugins` on SSR plugin graph; point error at sku-support
+- [ ] 1.9 Remove `vitePlugins` from Vite SSR fixtures if any set it
 
 ## 2. Entries and runtime
 
@@ -51,8 +53,9 @@
 - [x] 5.6 Tests: language chunk from `onRequest.language` / omit → no chunk; auto `moduleId` preloads; missing / non-array `routes` hard-error
 - [x] 5.7 Fixture: `PreloadingLink` built on `usePreloadRoute` (drop app-side routes context); production hover test for lazy chunk; assert a foreign-site path does not warm
 - [x] 5.8 Unit tests for simplified language resolution and webpack-aligned production defines
-- [x] 5.9 Config/command validation only for edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + `serverPort`, existing `public` directory, Vite SSR + `dangerouslySetViteConfig`) — no browser e2e
+- [x] 5.9 Config/command validation only for edge cases (webpack + `ssr`, `-ssr` with `buildType`, absolute/`CDN` `publicPath`, Vite SSR + `serverPort`, existing `public` directory, Vite SSR + `dangerouslySetViteConfig`, Vite SSR + `vitePlugins`) — no browser e2e
 - [x] 5.11 Test: Vite SSR + `dangerouslySetViteConfig` hard-errors at config validation
+- [ ] 5.14 Test: Vite SSR + `vitePlugins` hard-errors at config validation
 - [x] 5.10 Translations fixture: Vite SSR adapters (shared `App` + vocab; dedicated entries; `sku.config.vite-ssr.ts`) covering `en` / `fr` / `en-PSEUDO` via `?pseudo=true`
 
 ## 6. Create template
@@ -67,6 +70,7 @@
 - [x] 7.3 Document CJS interop for Vite SSR `sku start` + `__UNSAFE_EXPERIMENTAL__cjsInteropDependencies` (docs only; no runtime error rewrite; no new baked-in defaults)
 - [x] 7.4 Discourage `public` for Vite SSR in product + `configuration.md`; Migrating calls out moving off the folder
 - [x] 7.10 Document that Vite SSR does not support `dangerouslySetViteConfig` (hard-error; raise use-cases via sku-support) in `configuration.md` + product / Migrating
+- [ ] 7.12 Document that Vite SSR does not support `vitePlugins` (hard-error; raise use-cases via sku-support) in `configuration.md` + product / Migrating
 - [x] 7.5 Prefer render-time data loading via Suspense with clients from Providers (**superseded by §13** — `useReactContext` / `useClientContext`); loaders opt-in for waterfalls / document redirects / headers; no Express `req` → loader bridge
 - [x] 7.6 Migrating: server-only loaders vs client route graph (+ explicit `moduleId` when needed); Braid reset-before-Braid on `sku start`; client-only / window libraries (**superseded by §13** — `getReactContext`); Jest → Vitest prerequisite; `#` pathAliases / migrate-root-resolution
 - [x] 7.7 Drop “install `@vocab/vite` yourself” from product + Migrating once sku-owned alias is in place

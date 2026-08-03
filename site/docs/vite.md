@@ -336,7 +336,13 @@ Similar changes will need to be made in any libraries you consume that import SV
 Consumers of these libraries may see inconsistent results when importing SVG files, depending on the query parameters used by the library and the version of `sku` they are using.
 Ensure changes made to libraries for the purpose of Vite compatibility are communicated clearly in the release notes.
 
+### Storybook
+
+If your repo uses `sku`'s Storybook config (via the [`sku/config/storybook`] entrypoint), it's recommended to convert your Storybook to use Vite instead of webpack.
+See [sku's Storybook documentation] for more information.
+
 [sku v15.13.0]: https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md#15130
 [the vite docs]: https://vite.dev/guide/assets#importing-asset-as-url
 [the importing image assets docs]: ./extra-features.md#importing-image-assets
 [`data:` URLs]: https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data
+[sku's Storybook documentation]: ./api#sku-config-storybook

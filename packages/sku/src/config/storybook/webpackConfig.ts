@@ -4,12 +4,40 @@ import { resolvePackage } from '../../services/webpack/config/utils/resolvePacka
 import { getSkuContext } from '../../context/createSkuContext.js';
 import type { Configuration } from 'webpack';
 
+import type { StorybookConfig } from '@storybook/react-webpack5';
+
+import createBabelConfig from '../babel.js';
+
+interface WebpackOptions {
+  configType?: 'PRODUCTION' | 'DEVELOPMENT' | undefined;
+}
+
+type AsyncWebpackFinal = (
+  configuration: Configuration,
+  webpackOptions: WebpackOptions,
+) => Promise<Configuration>;
+
+export const webpackFinal: AsyncWebpackFinal = async (config, { configType }) =>
+  makeStorybookWebpackConfig(config, {
+    // storybook dev -> configType === 'DEVELOPMENT'
+    // storybook build -> configType === 'PRODUCTION'
+    isDevServer: configType === 'DEVELOPMENT',
+  });
+
+export const babel: NonNullable<StorybookConfig['babel']> = async () =>
+  createBabelConfig({
+    target: 'browser',
+    lang: 'ts',
+    browserslist: 'last 2 chrome versions',
+    displayNamesProd: true,
+  });
+
 const hot = process.env.SKU_HOT !== 'false';
 
 const EXAMPLE_CSS_FILE = 'example.css';
 const EXAMPLE_MDX_FILE = 'example.mdx';
 
-export default async (
+const makeStorybookWebpackConfig = async (
   config: Configuration,
   { isDevServer }: { isDevServer: boolean },
 ) => {

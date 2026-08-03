@@ -1,4 +1,5 @@
 storybook-static/
+storybook-static-vite/
 
 # managed by sku
 .eslintcache

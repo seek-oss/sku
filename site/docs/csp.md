@@ -2,7 +2,8 @@
 
 [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app. For statically rendered apps, a `script-src` policy can be automatically generated for you. SSR apps have an extra step.
 
-**This feature is not available to libraries**
+> [!NOTE]
+> This feature is not available to libraries
 
 ## Setup
 
@@ -29,25 +30,28 @@ If you need to allow scripts that are only known client side (e.g. scripts loade
 [Nonce] values can be used to permit inline scripts that are generated client side.
 Nonce values are created by calling `createUnsafeNonce` during render.
 
+> [!NOTE]
 > The [Content Security Policy (CSP)] requires that scripts be declared ahead of time.
 > For inline scripts this is typically done automatically by calculating a hash of their content when they are created during the initial render.
 > This ensures only authorised scripts are run in client environments.
 >
 > When a script is created dynamically on the client it may not be possible to predict the required hash, in this case a nonce can be used.
 
-**Warning:** Nonces are less safe than content hashes.
-Please consider if other options are available and whether the risks are acceptable for your use-case.
+> [!WARNING]
+> Nonces are less safe than content hashes.
+> Please consider if other options are available and whether the risks are acceptable for your use-case.
 
 `createUnsafeNonce`: Generates a random nonce value and returns it for use by the client. The nonce value is added to the generated [Content Security Policy (CSP)] Tags.
 
 **Example: Using `createUnsafeNonce` to create a nonce value and use it client side**
 
-```tsx
-// render.tsx
+::: code-group
+
+```tsx [render.tsx]
 export default {
   renderApp: ({ createUnsafeNonce }) => {
     const appHtml = renderToString(<App />);
-    const dynamicScriptNonce = createUnsafeNonce();
+    const dynamicScriptNonce = createUnsafeNonce(); // [!code highlight]
 
     return { appHtml, dynamicScriptNonce };
   },
@@ -62,15 +66,16 @@ export default {
 };
 ```
 
-```tsx
-// client.tsx
+```tsx [client.tsx]
 import App from './App';
 
 export default ({ dynamicScriptNonce }) => {
-  client.init({ nonce: dynamicScriptNonce });
+  client.init({ nonce: dynamicScriptNonce }); // [!code highlight]
   // ...
 };
 ```
+
+:::
 
 [nonce]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/nonce
 [Content Security Policy (CSP)]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
@@ -81,6 +86,7 @@ As sku doesn't handle the returned HTML in SSR apps, any extra scripts (scripts 
 
 In the `renderCallback` function, register all extra script tags (inline and external) via the `registerScript` function.
 
+> [!IMPORTANT]
 > If you are using multi-part responses via the `flushHeadTags` API, all scripts must be registered before sending the the initial response.
 
 ```tsx
@@ -94,8 +100,8 @@ const renderCallback: Server['renderCallback'] = (
   const someExternalScript = `<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js"></script>`;
   const someInlineScript = `<script>console.log('Hi');</script>`;
 
-  registerScript(someExternalScript);
-  registerScript(someInlineScript);
+  registerScript(someExternalScript); // [!code highlight]
+  registerScript(someInlineScript); // [!code highlight]
 
   const app = renderToString(
     <SkuProvider>

@@ -13,18 +13,18 @@ Before making any changes, it is highly recommend to read [the Vitest documentat
 
 To enable Vitest in `sku`, first install the required dependencies:
 
-```bash
+```sh
 pnpm add -D vitest
 ```
 
 Then, configure [`testRunner`][test runner] in your `sku` config:
 
-```typescript
+```ts
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
 export default {
-  testRunner: 'vitest',
+  testRunner: 'vitest', // [!code ++]
   ...
 } satisfies SkuConfig;
 ```
@@ -38,7 +38,9 @@ Differences that affect sku projects are listed here.
 The full list is documented in the Vitest documentation: [Migrating from Jest to Vitest].
 
 To automate most of the migration process, a codemod is available.
-Note that additional changes may still be required after running this codemod.
+
+> [!NOTE]
+> Additional changes may still be required after running this codemod.
 
 ```sh
 pnpm dlx @sku-lib/codemod jest-to-vitest .
@@ -66,7 +68,7 @@ Watch mode won't trigger in CI environments, so it's safe to omit the flag in yo
 Vitest does not install code coverage dependencies by default.
 To collect code coverage, pass the `--coverage` flag to the `sku test` command and install the `@vitest/coverage-v8` package:
 
-```bash
+```sh
 pnpm add -D @vitest/coverage-v8
 ```
 
@@ -74,10 +76,10 @@ pnpm add -D @vitest/coverage-v8
 
 If your test setup file includes an import for `@testing-library/jest-dom`, you may need to change this to `@testing-library/jest-dom/vitest`:
 
-```diff
+```ts
 // test-setup.ts
-- import '@testing-library/jest-dom';
-+ import '@testing-library/jest-dom/vitest';
+import '@testing-library/jest-dom'; // [!code --]
+import '@testing-library/jest-dom/vitest'; // [!code ++]
 ```
 
 **Globals Disabled**
@@ -87,20 +89,21 @@ Vitest does not.
 Sku adopts the Vitest defaults, meaning you will need to explicitly import these test functions.
 This change results in a cleaner global namespace, better type safety, clearer dependencies and is more consistency with modern javascript practices.
 
-```diff
-+ import { describe, expect, it } from 'vitest';
+```ts
+// myFunction.test.ts
+import { describe, expect, it } from 'vitest'; // [!code ++]
 ```
 
 Be aware that since globals are disabled, some common libraries like `testing-library` will not run auto DOM cleanup.
 If using these libraries, you will need to add cleanup to your configured `setupTests` file.
 
-```diff
+```ts
 import '@testing-library/jest-dom/vitest';
 
-+ import { cleanup } from '@testing-library/react';
-+ import { afterEach } from 'vitest';
+import { cleanup } from '@testing-library/react'; // [!code ++]
+import { afterEach } from 'vitest'; // [!code ++]
 
-+ afterEach(cleanup)
+afterEach(cleanup); // [!code ++]
 ```
 
 [Vitest]: https://vitest.dev/

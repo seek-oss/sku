@@ -6,7 +6,8 @@ The `sku test` command will invoke Jest, running any tests in files named `*.tes
 
 Since sku uses Jest as a testing framework, you can read the [Jest documentation](https://facebook.github.io/jest/) for more information on writing compatible tests.
 
-Note: `sku` will forward all command line args to `jest`.
+> [!NOTE]
+> `sku` will forward all command line args to `jest`.
 
 Example running tests in watch mode:
 

@@ -37,19 +37,22 @@ Then you can run the script to configure you machine with the required hosts.
 $ sudo npm run setup-hosts
 ```
 
-_**NOTE:** Modifying hosts configuration needs root privileges._
+> [!NOTE]
+> Modifying hosts configuration needs root privileges.
 
 ## Braid example
 
 The following is an example of how you would use this feature with [Braid](https://github.com/seek-oss/braid-design-system), but you can use this approach to vary your sites in any way.
 
-_**NOTE:** Currently this example is for static rendering projects only but SSR projects can follow the same pattern._
+> [!NOTE]
+> Currently this example is for static rendering projects only but SSR projects can follow the same pattern.
 
 ### Config
 
 Firstly, add a [`sites`](./configuration#sites) option to your `sku.config.js`. This tells sku to render a version of your app for each site you specify.
 
-_**NOTE:** For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes), however, you could just as easily map the theme name from your site._
+> [!NOTE]
+> For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes), however, you could just as easily map the theme name from your site.
 
 ```ts
 export default {

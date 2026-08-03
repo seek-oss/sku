@@ -8,7 +8,8 @@ Languages can be either a string, e.g. `en` or an object that designates a paren
 
 **E.g.** `{name: "en-AU", extends: "en"}`
 
-**Note:** sku assumes that the development language is `en`. This will be used as the base language for all development, including your initial translations.
+> [!NOTE]
+> sku assumes that the development language is `en`. This will be used as the base language for all development, including your initial translations.
 
 ## Getting started
 
@@ -34,13 +35,15 @@ To create your first translation you need to create a folder ending in `.vocab` 
 
 In the file, add translations in the form of `translationKey: { message: "The english translation" }`.
 
-**Recommendation:** Whilst you can use any key that you like we recommended to use a copy, or simplied version of the english translation.
+> [!TIP]
+> Whilst you can use any key that you like we recommended to use a copy, or simplied version of the english translation.
 
 Once created, when `yarn start` or `yarn build` is ran sku will create the appropriate files to allow you to import the translations into you code.
 
 **E.g.** `./App.vocab/index.ts`
 
-**Recommendation:** You can add translations files anywhere in your source code, however we recommend co-locating components with their translations. When you want to re-use a translation in multiple places you can move the `translation.json` as needed.
+> [!TIP]
+> You can add translations files anywhere in your source code, however we recommend co-locating components with their translations. When you want to re-use a translation in multiple places you can move the `translation.json` as needed.
 
 Now with the appropriate files created you can start importing your translations.
 
@@ -87,7 +90,8 @@ export default {
 } satisfies SkuConfig;
 ```
 
-**Note:** Any language specified by a site must be included in the top level `languages` field.
+> [!NOTE]
+> Any language specified by a site must be included in the top level `languages` field.
 
 ## Route specific languages
 
@@ -105,7 +109,8 @@ export default {
 } satisfies SkuConfig;
 ```
 
-**Note:** Any language specified by a route must be included in the top level `languages` field.
+> [!NOTE]
+> Any language specified by a route must be included in the top level `languages` field.
 
 ## Hierarchy
 
@@ -115,7 +120,8 @@ For example, only needing to translate a few strings with different spelling suc
 
 In this case you can have one language extend another. sku will then copy any missing translations from the base language to the more specific language.
 
-**Recommendation:** Avoid using a language extension where you don't want to risk sending the wrong translation to production. sku has no way to validate whether you intentionally missed a translation or simply made a mistake.
+> [!TIP]
+> Avoid using a language extension where you don't want to risk sending the wrong translation to production. sku has no way to validate whether you intentionally missed a translation or simply made a mistake.
 
 ## Custom locale
 
@@ -146,17 +152,19 @@ Phrase syncing requires two environment variables to be set: `PHRASE_PROJECT_ID`
 
 `PHRASE_API_TOKEN` must be set to an access token which can be created on the profile settings page.
 
-To push translations to Phrase:
+Push or pull translations with Phrase:
 
-```sh
+::: code-group
+
+```sh [push]
 $ sku translations push
 ```
 
-To pull translations from Phrase:
-
-```sh
+```sh [pull]
 $ sku translations pull
 ```
+
+:::
 
 ### Automatic Translation
 

@@ -26,6 +26,7 @@ If you need to specify a different config file you can do so with the `--config`
 $ sku start --config sku.custom.config.ts
 ```
 
+> [!NOTE]
 > When using the `--config` parameter, the specified file must exist. Sku will exit with an error if the file cannot be found.
 > Config files can use either TypeScript or JavaScript.
 
@@ -41,7 +42,7 @@ Config files can use either TypeScript or JavaScript.
 
 ## bundler
 
-Type: `webpack | vite`
+Type: `'webpack' | 'vite'`
 
 Default: `webpack`
 
@@ -120,7 +121,7 @@ Extra external hosts to allow in your `script-src` report-only [content security
 
 ## dangerouslySetESLintConfig
 
-Type: `function`
+Type: `(skuESLintConfig: Linter.Config[]) => Linter.Config[]`
 
 This function provides a way to modify sku's ESLint configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
@@ -133,6 +134,7 @@ Rather than disabling a rule purely because it causes frequent errors, consider 
 
 If you believe other consumers would benefit from the addition/removal/modificaton of a rule, consider contributing the change to [`eslint-config-seek`](https://github.com/seek-oss/eslint-config-seek).
 
+> [!WARNING]
 > Sku provides no guarantees that its ESLint configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -167,6 +169,7 @@ Make sure [`setupTests`] definitely doesn’t cover your needs before using.
 
 Before customizing your Jest configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
+> [!WARNING]
 > Sku provides no guarantees that its Jest configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -192,6 +195,7 @@ It should only be used in exceptional circumstances where a solution cannot be a
 
 Before customizing your TypeScript configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
+> [!WARNING]
 > Sku provides no guarantees that its TypeScript configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -223,6 +227,7 @@ If you only need to modify one of these configs, then you can check `env.mode` f
 
 This function can return a partial config object that will be deeply merged into existing config (recommended), or directly mutate the config (if the default merging cannot achieve the desired result).
 
+> [!WARNING]
 > Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -250,6 +255,7 @@ It should only be used in exceptional circumstances where a solution cannot be a
 
 Before customizing your Vitest configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
+> [!WARNING]
 > Sku provides no guarantees that its Vitest configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -278,6 +284,7 @@ Before customizing your Webpack configuration, please reach out via the [support
 As sku creates two webpack configs (`client` & `server|render`), this function will actually run twice.
 If you only need to modify one of these configs, then you can check `config.name`.
 
+> [!WARNING]
 > Sku provides no guarantees that its Webpack configuration will remain compatible with any customizations made within this function.
 > It is the responsibility of the user to ensure that their customizations are compatible with sku.
 
@@ -442,13 +449,11 @@ Subpath import specifiers must be prefixed with `#`.
 
 **Example:**
 
-`sku.config.ts`:
-
 ```typescript
 export default {
   pathAliases: {
-    '#components/*': './src/components/*',
-    '#utils/*': './src/utils/*',
+    '#components/*': './src/components/*', // [!code highlight]
+    '#utils/*': './src/utils/*', // [!code highlight]
   },
 } satisfies SkuConfig;
 ```
@@ -599,7 +604,8 @@ Default: `[]`
 
 When running `sku build`, sku will compile all your external packages (`node_modules`) through `@babel/preset-env`. This is to ensure external packages satisfy the browser support policy. However, this can cause very slow builds when large packages are processed. The `skipPackageCompatibilityCompilation` option allows you to pass a list of trusted packages to skip this behaviour.
 
-> Note: `react` & `react-dom` are skipped by default.
+> [!NOTE]
+> `react` & `react-dom` are skipped by default.
 
 Example:
 
@@ -627,8 +633,9 @@ export default {
 } satisfies SkuConfig;
 ```
 
-**NOTE**: Production source maps can increase memory usage during builds to the point where the Node process exhausts its heap memory.
-If this occurs, you can increase the memory limit for the Node process by setting the `NODE_OPTIONS` environment variable to `--max-old-space-size=4096` (or a higher value) before running the build command.
+> [!WARNING]
+> Production source maps can increase memory usage during builds to the point where the Node process exhausts its heap memory.
+> If this occurs, you can increase the memory limit for the Node process by setting the `NODE_OPTIONS` environment variable to `--max-old-space-size=4096` (or a higher value) before running the build command.
 
 For example:
 
@@ -705,7 +712,8 @@ Default: `[]`
 
 Bundler: `vite`
 
-_This is an experimental option that may change or be removed without notice._
+> [!WARNING]
+> This is an experimental option that may change or be removed without notice.
 
 An array of cjs import paths that have both a default and named exports.
 

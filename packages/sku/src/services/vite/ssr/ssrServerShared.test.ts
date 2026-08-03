@@ -364,6 +364,24 @@ describe('listen', () => {
     expect(await other.text()).toBe('middleware-handled');
   });
 
+  it('omits express.static when clientDirectory is absent', async () => {
+    const result = await listen({
+      ...baseListenOptions,
+      port: 0,
+      middleware: [
+        (_req, res) => {
+          res.status(418).type('text/plain').send('middleware-handled');
+        },
+      ],
+    });
+    servers.push(result);
+
+    const { port } = result.httpServer.address() as { port: number };
+    const assetPath = await fetch(`http://127.0.0.1:${port}/static/app.js`);
+    expect(assetPath.status).toBe(418);
+    expect(await assetPath.text()).toBe('middleware-handled');
+  });
+
   it('calls onListen once with app, httpServer, and bound port', async () => {
     const onListen = vi.fn();
     const result = await listen({

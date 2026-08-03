@@ -309,9 +309,6 @@ export const listen = async (
     serverApp.set('trust proxy', 1);
   }
 
-  // Production order: request-context → express.static(publicPath) →
-  // server-entry middleware → HTML. Static before middleware so catch-all /
-  // Melways-style handlers cannot eat hashed client assets.
   serverApp.use(createSsrRequestContextMiddleware());
   if (options.clientDirectory) {
     serverApp.use(options.publicPath, express.static(options.clientDirectory));

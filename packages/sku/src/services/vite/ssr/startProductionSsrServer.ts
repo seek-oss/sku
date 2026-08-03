@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import exists from '../../../utils/exists.js';
+import { CLIENT_MANIFEST_RELATIVE_PATH } from './clientManifestPath.js';
 import { findEntryChunk, type ClientManifest } from './resolveAssets.js';
 import {
   listen,
@@ -19,12 +21,12 @@ export const startProductionSsrServer = async ({
   render: RenderFunction;
 }): Promise<SsrServerResult> => {
   const serverDirectory = path.dirname(fileURLToPath(import.meta.url));
-  const clientDirectory = path.resolve(serverDirectory, '..', 'client');
+  const bakedManifestPath = path.join(
+    serverDirectory,
+    CLIENT_MANIFEST_RELATIVE_PATH,
+  );
   const manifest = JSON.parse(
-    await readFile(
-      path.join(clientDirectory, '.vite', 'manifest.json'),
-      'utf8',
-    ),
+    await readFile(bakedManifestPath, 'utf8'),
   ) as ClientManifest;
   const entry = findEntryChunk(manifest);
   const publicPath = __SKU_PUBLIC_PATH__;
@@ -33,6 +35,11 @@ export const startProductionSsrServer = async ({
     css: [],
     modulePreloads: [],
   };
+
+  const siblingClientDirectory = path.resolve(serverDirectory, '..', 'client');
+  const clientDirectory = (await exists(siblingClientDirectory))
+    ? siblingClientDirectory
+    : undefined;
 
   const csp = __SKU_CSP__;
 

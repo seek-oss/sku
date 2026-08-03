@@ -270,13 +270,13 @@ OpenSpec change / branch name `vite-ssr` stays as-is.
 Bake the Vite client manifest into the server build so production starts without sibling `client/`.
 Document recommended external assets vs standalone Node static, including runtime `node_modules`.
 
-- [ ] 22.1 Build: after client Vite build, bake/copy the Vite client manifest into the server output (server-local path the production entry can read)
-- [ ] 22.2 Production entry: load the baked server-local manifest; do not require `../client/.vite/manifest.json`
-- [ ] 22.3 Production `listen`: mount `express.static(publicPath)` only when a sibling `client/` directory exists; omit the mount (no hard-fail) when absent
-- [ ] 22.4 Tests: production server starts and streams HTML without sibling `client/` when baked manifest is present; existing static-before-middleware case still passes when sibling `client/` exists
-- [ ] 22.5 Docs: rewrite `deploy-to-production.md` — baked manifest / server without sibling `client/`; recommended reverse proxy or object storage for hashed assets; standalone Node static as experimentation only; production deploy needs `server/` + runtime `node_modules` (or equivalent)
-- [ ] 22.6 Docs: Migrating + `middleware.md` — optional Node static when sibling `client/` exists; productionised path hosts assets outside Node
-- [ ] 22.7 Validate: `pnpm format` → `pnpm build` → `pnpm lint` → scoped production SSR tests
+- [x] 22.1 Build: after client Vite build, bake/copy the Vite client manifest into the server output (server-local path the production entry can read)
+- [x] 22.2 Production entry: load the baked server-local manifest; do not require `../client/.vite/manifest.json`
+- [x] 22.3 Production `listen`: mount `express.static(publicPath)` only when a sibling `client/` directory exists; omit the mount (no hard-fail) when absent
+- [x] 22.4 Tests: production server starts and streams HTML without sibling `client/` when baked manifest is present; existing static-before-middleware case still passes when sibling `client/` exists
+- [x] 22.5 Docs: rewrite `deploy-to-production.md` — baked manifest / server without sibling `client/`; recommended reverse proxy or object storage for hashed assets; standalone Node static as experimentation only; production deploy needs `server/` + runtime `node_modules` (or equivalent)
+- [x] 22.6 Docs: Migrating + `middleware.md` — optional Node static when sibling `client/` exists; productionised path hosts assets outside Node
+- [x] 22.7 Validate: `pnpm format` → `pnpm build` → `pnpm lint` → scoped production SSR tests
 
 ## Deferred
 

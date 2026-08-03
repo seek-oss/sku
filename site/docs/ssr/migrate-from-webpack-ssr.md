@@ -73,7 +73,7 @@ export default {
 - Prefer [render-time data loading](./data-loading.md) for page content; use loaders for redirects, headers, or waterfalls
 - **Apollo:** replace `getDataFromTree` with streaming transport over [`useInsertHtml`](./entries.md#useinserthtml) — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration)
 - Keep production handlers on server-entry `middleware`; keep local mocks in `devServerMiddleware` — see [Middleware](./middleware.md)
-- Production serves `client/` under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware, so catch-all / Melways-style middleware cannot eat hashed assets
+- When sibling `client/` is present, production mounts Node static under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware so catch-all / Melways-style middleware cannot eat hashed assets. Productionised deploys host those assets outside Node instead
 
 :::danger Never put Express `req` in `RouterContextProvider`
 Project values both sides can supply.

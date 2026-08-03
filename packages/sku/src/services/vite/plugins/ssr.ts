@@ -2,6 +2,7 @@ import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { createOutDir } from '../helpers/bundleConfig.js';
 import { makePluginName } from '../helpers/makePluginName.js';
+import { CLIENT_MANIFEST_RELATIVE_PATH } from '../ssr/clientManifestPath.js';
 import { resolveConfigSiteNames } from '../ssr/resolveConfigSiteNames.js';
 import { lazyRouteModuleIdPlugin } from './lazyRouteModuleId/lazyRouteModuleIdPlugin.js';
 import { vitePluginSsrCss } from './ssrCss/plugin.js';
@@ -67,7 +68,7 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
           client: {
             build: {
               outDir: outDir.ssrClient,
-              manifest: true,
+              manifest: CLIENT_MANIFEST_RELATIVE_PATH,
               sourcemap: skuContext.sourceMapsProd,
               rolldownOptions: {
                 input: ssrClientEntry,

@@ -438,25 +438,25 @@ describe('vite-ssr', () => {
       const dist = fixturePath('dist');
       const clientDir = path.join(dist, 'client');
       const serverDir = path.join(dist, 'server');
-      const manifest = path.join(clientDir, '.vite', 'manifest.json');
+      const bakedManifest = path.join(serverDir, 'manifest.json');
       const serverEntry = path.join(serverDir, 'server.js');
 
       expect((await fs.stat(clientDir)).isDirectory()).toBe(true);
       expect((await fs.stat(serverDir)).isDirectory()).toBe(true);
-      expect((await fs.stat(manifest)).isFile()).toBe(true);
+      expect((await fs.stat(bakedManifest)).isFile()).toBe(true);
       expect((await fs.stat(serverEntry)).isFile()).toBe(true);
 
       // Neither nested in the other; client assets are not at dist root.
+      // Manifest lives under server/ only — not a public non-hashed client file.
       const distEntries = await fs.readdir(dist);
       expect(distEntries.sort()).toEqual(['client', 'server']);
-      expect(distEntries).not.toContain('.vite');
+      expect(await fs.readdir(clientDir)).not.toContain('manifest.json');
     });
 
     it('emits distinct client chunks for lazy routes', async () => {
       const manifestPath = path.join(
         fixturePath('dist'),
-        'client',
-        '.vite',
+        'server',
         'manifest.json',
       );
       const manifest = JSON.parse(
@@ -473,8 +473,7 @@ describe('vite-ssr', () => {
     it('emits named vocab language chunks', async () => {
       const manifestPath = path.join(
         fixturePath('dist'),
-        'client',
-        '.vite',
+        'server',
         'manifest.json',
       );
       const manifest = JSON.parse(
@@ -648,8 +647,7 @@ describe('vite-ssr', () => {
       skipCleanup(task.id);
       const manifestPath = path.join(
         fixturePath('dist'),
-        'client',
-        '.vite',
+        'server',
         'manifest.json',
       );
       const manifest = JSON.parse(

@@ -1,8 +1,8 @@
 ## ADDED Requirements
 
-### Requirement: Vite SSR CSP is delivered as HTTP headers
+### Requirement: SSR CSP is delivered as HTTP headers
 
-When CSP is enabled for a Vite SSR app, sku MUST set Content Security Policy via HTTP response headers, not HTML `http-equiv` meta tags.
+When CSP is enabled for an SSR app, sku MUST set Content Security Policy via HTTP response headers, not HTML `http-equiv` meta tags.
 
 #### Scenario: Enforcing CSP header on HTML responses
 
@@ -11,12 +11,12 @@ When CSP is enabled for a Vite SSR app, sku MUST set Content Security Policy via
 
 #### Scenario: No meta http-equiv CSP
 
-- **WHEN** CSP is enabled for a Vite SSR app
+- **WHEN** CSP is enabled for an SSR app
 - **THEN** sku MUST NOT inject a `Content-Security-Policy` meta `http-equiv` tag as the policy delivery mechanism
 
 ### Requirement: CSP is derived from shell HTML plus dynamic values
 
-sku MUST generate the Vite SSR CSP from the rendered document shell (known script tags and origins).
+sku MUST generate the SSR CSP from the rendered document shell (known script tags and origins).
 
 Sku MUST allow dynamic values such as nonces and hashes of known bootstrap script bodies.
 
@@ -30,13 +30,13 @@ Sku MUST allow dynamic values such as nonces and hashes of known bootstrap scrip
 - **WHEN** CSP is enabled and sku emits known inline bootstrap script content
 - **THEN** those exact script bodies are available for hashing into the CSP policy
 
-### Requirement: Vite SSR uses at most one CSP nonce per render, only when requested
+### Requirement: SSR uses at most one CSP nonce per render, only when requested
 
-For a Vite SSR HTML response, sku MUST generate at most one CSP nonce, only when explicitly requested (by consumer code or by sku when attaching a `nonce` to scripts).
+For an SSR HTML response, sku MUST generate at most one CSP nonce, only when explicitly requested (by consumer code or by sku when attaching a `nonce` to scripts).
 
 When requested, sku MUST reuse that same value everywhere for the response.
 
-Sku MUST NOT provide a Vite SSR API that creates additional distinct nonces for the same response (unlike static/webpack `createUnsafeNonce`).
+Sku MUST NOT provide an SSR API that creates additional distinct nonces for the same response (unlike static/webpack `createUnsafeNonce`).
 
 Sku MUST include `'nonce-…'` in the CSP header only if a nonce was requested.
 
@@ -44,13 +44,13 @@ If CSP is enabled but nothing requested a nonce, the CSP header MUST still be em
 
 #### Scenario: Nonce omitted from CSP when never requested
 
-- **WHEN** CSP is enabled for a Vite SSR HTML response
+- **WHEN** CSP is enabled for an SSR HTML response
 - **AND** neither consumer code nor sku requested a nonce during that request
 - **THEN** the CSP header does not include a `'nonce-…'` source
 
 #### Scenario: Requested nonce appears once in CSP and is reused
 
-- **WHEN** a nonce is requested during a Vite SSR render
+- **WHEN** a nonce is requested during an SSR render
 - **THEN** sku generates exactly one nonce for that request
 - **AND** the CSP header includes that nonce
 - **AND** every subsequent request for the nonce on that response returns the same value
@@ -58,19 +58,19 @@ If CSP is enabled but nothing requested a nonce, the CSP header MUST still be em
 
 #### Scenario: Consumer requests the shared nonce
 
-- **WHEN** consumer middleware or loaders explicitly request the Vite SSR CSP nonce during a request
+- **WHEN** consumer middleware or loaders explicitly request the SSR CSP nonce during a request
 - **THEN** they receive the request nonce
 - **AND** that nonce matches the nonce used in the CSP header and React stream for that response (when the header includes a nonce)
 
-#### Scenario: No multi-nonce factory on Vite SSR
+#### Scenario: No multi-nonce factory on SSR
 
-- **WHEN** a Vite SSR app needs CSP nonces
-- **THEN** consumers MUST NOT use webpack/static `createUnsafeNonce` as the Vite SSR API
-- **AND** sku MUST NOT expose a Vite SSR helper that returns a new distinct nonce on each call for the same response
+- **WHEN** an SSR app needs CSP nonces
+- **THEN** consumers MUST NOT use webpack/static `createUnsafeNonce` as the SSR API
+- **AND** sku MUST NOT expose an SSR helper that returns a new distinct nonce on each call for the same response
 
 ### Requirement: Report-Only CSP may coexist with an enforcing policy
 
-Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an enforcing CSP.
+SSR apps MUST support a Report-Only CSP that can be set in addition to an enforcing CSP.
 
 #### Scenario: Report-Only header alongside enforcing policy
 
@@ -82,13 +82,13 @@ Vite SSR apps MUST support a Report-Only CSP that can be set in addition to an e
 - **WHEN** only Report-Only CSP is enabled
 - **THEN** the response includes `Content-Security-Policy-Report-Only` and does not require an enforcing `Content-Security-Policy` header
 
-### Requirement: Vite SSR report-to matches static Vite semantics
+### Requirement: SSR report-to matches static Vite semantics
 
-Vite SSR MUST accept `cspReportTo` and `cspReportOnlyReportTo` in the same forms static Vite accepts: an endpoint name, a URL, or a tuple of both. `cspReportOnlyReportTo` MUST default to `cspReportTo`.
+SSR MUST accept `cspReportTo` and `cspReportOnlyReportTo` in the same forms static Vite accepts: an endpoint name, a URL, or a tuple of both. `cspReportOnlyReportTo` MUST default to `cspReportTo`.
 
 Sku MUST include the resolved endpoint name as the `report-to` directive of the corresponding policy, and MUST emit a `Reporting-Endpoints` response header covering every resolved endpoint that carries a URL.
 
-Because Vite SSR ignores `cspDelivery` and always uses HTTP headers, `cspReportTo` MUST apply whenever CSP is enabled, rather than being gated on `header` delivery.
+Because SSR ignores `cspDelivery` and always uses HTTP headers, `cspReportTo` MUST apply whenever CSP is enabled, rather than being gated on `header` delivery.
 
 #### Scenario: Configurable report-to on either policy
 
@@ -105,9 +105,9 @@ Because Vite SSR ignores `cspDelivery` and always uses HTTP headers, `cspReportT
 - **WHEN** every configured `report-to` value is an endpoint name only
 - **THEN** sku MUST NOT emit a `Reporting-Endpoints` header, leaving the endpoint group for the app or its infrastructure to define
 
-### Requirement: Vite SSR CSP assumes relative publicPath only
+### Requirement: SSR CSP assumes relative publicPath only
 
-Vite SSR CSP MUST assume a relative `publicPath` so Document assets are covered by `'self'`.
+SSR CSP MUST assume a relative `publicPath` so Document assets are covered by `'self'`.
 
 Absolute `http(s)` / CDN `publicPath` is not supported.
 
@@ -122,27 +122,27 @@ Consumer `cspExtraScriptSrcHosts` remains for third-party script hosts.
 
 ### Requirement: Webpack SSR and static CSP behavior are unchanged by this capability
 
-This Vite SSR CSP capability MUST NOT change CSP delivery for webpack SSR apps or static apps.
+This SSR CSP capability MUST NOT change CSP delivery for webpack SSR apps or static apps.
 
-Static Vite may independently support `cspDelivery` (`tag` / `header` metadata) and Report-Only via the static HTML CSP path; `cspDelivery` MUST NOT control Vite SSR CSP, which always uses HTTP headers.
+Static Vite may independently support `cspDelivery` (`tag` / `header` metadata) and Report-Only via the static HTML CSP path; `cspDelivery` MUST NOT control SSR CSP, which always uses HTTP headers.
 
 The `report-to` config options are shared with static Vite and MUST resolve identically for both paths; only the delivery of the resulting `Reporting-Endpoints` differs (a response header for SSR, `metadata.reportingEndpoints` for static).
 
 Static and webpack apps MAY continue to allow multiple `createUnsafeNonce` calls per render.
 
-#### Scenario: Static app CSP unchanged by Vite SSR path
+#### Scenario: Static app CSP unchanged by SSR path
 
 - **WHEN** a static app has CSP enabled
 - **THEN** its existing static CSP behavior remains as for that app mode (meta tag and/or metadata / start headers as configured)
-- **AND** Vite SSR does not rewrite that static delivery model
+- **AND** SSR does not rewrite that static delivery model
 
 #### Scenario: Static multi-nonce API unchanged
 
 - **WHEN** a static or webpack render calls `createUnsafeNonce` more than once
 - **THEN** existing multi-nonce behavior remains as today
 
-#### Scenario: cspDelivery does not apply to Vite SSR
+#### Scenario: cspDelivery does not apply to SSR
 
-- **WHEN** a Vite SSR app sets `cspDelivery`
-- **THEN** sku ignores that option for Vite SSR responses
+- **WHEN** an SSR app sets `cspDelivery`
+- **THEN** sku ignores that option for SSR responses
 - **AND** CSP is still delivered as HTTP headers (not meta `http-equiv`)

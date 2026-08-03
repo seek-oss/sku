@@ -234,21 +234,48 @@ Fixes published-install dual React context / shared-module identity (Decision 26
 - [x] 20.2 Home page inlines welcome content and demos `useSite()` (no `import.meta.env`); link to about route
 - [x] 20.3 Update create generate test + design/spec create-template wording
 
+## 21. Naming: Managed Data Mode + `sku/runtime` + template `ssr` (Decision 27)
+
+End-state naming for the in-progress branch implementation (not yet on master). Update code/docs/fixtures to match design/proposal/specs; no compatibility aliases required for prior in-branch names.
+
+### From → to (public)
+
+| From                                      | To                                        |
+| ----------------------------------------- | ----------------------------------------- |
+| `sku/ssr`                                 | `sku/runtime`                             |
+| create template `vite-ssr`                | `ssr`                                     |
+| `SkuSsrProvider`                          | `SkuProvider`                             |
+| `createSkuSsrContexts`                    | `createSkuContexts`                       |
+| `SkuSsrRouteObject`                       | `SkuRouteObject`                          |
+| `SkuSsrServerEntry` / `SkuSsrClientEntry` | `SkuServerEntry` / `SkuClientEntry`       |
+| other public `SkuSsr*` types              | drop `Ssr` infix                          |
+| product copy “Vite SSR”                   | “SSR” (architecture: “Managed Data Mode”) |
+
+OpenSpec change / branch name `vite-ssr` stays as-is.
+
+- [ ] 21.1 Package exports: rename `./ssr` → `./runtime`; rename `src/ssr.ts` → `src/runtime.ts` (or equivalent); update `optimizeDeps.exclude` / `SKU_VITE_OPTIMIZE_DEPS_EXCLUDE` to `'sku/runtime'`; flip sku runtime call sites and identity comments from `'sku/ssr'` to `'sku/runtime'`
+- [ ] 21.2 Rename public symbols/types (drop `Ssr`): `SkuProvider`, `createSkuContexts`, `SkuRouteObject`, entry/getter types, etc.; update all packages/fixtures/tests/docs imports
+- [ ] 21.3 Create template: rename `packages/create/templates/vite-ssr` → `ssr`; update generator (`templates.ts`), Template type, prompts, and create tests from `vite-ssr` → `ssr`
+- [ ] 21.4 Optional consistency: rename internal SSR entry modules / `#entries/vite-ssr-client*` → `ssr-client*` (and server counterpart if named similarly); update fixture/test filenames that use `vite-ssr` where practical
+- [ ] 21.5 Docs: introduce **Managed Data Mode** as the architecture descriptor; use **SSR** only for render strategy; replace `sku/ssr`, `vite-ssr` template refs, `SkuSsr*` / “Vite SSR” product copy; note future Static is expected to share Managed Data Mode APIs
+- [ ] 21.6 Changeset: describe experimental Managed Data Mode SSR end-state naming (`sku/runtime`, template `ssr`, types without `Ssr`) — do **not** call this a breaking change (unreleased)
+- [ ] 21.7 Validate: `pnpm format` → `pnpm build` → `pnpm lint` → scoped create + SSR browser/node tests
+
 ## Deferred
 
 - Optional compose slot above the router (app `Providers`-like) — deferred until root-layout + `getReactContext` prove insufficient
 - Public `useInitialLanguage` / language-in-React-context hook — deferred (analytics); `getLanguage` stays Document vocab preload only (return type still inferred on the server entry)
-- Generic `SkuSsrRouteObject<Site>` — follow-on; client-entry `Site` / `ClientContext` via `defineClientEntry<typeof server>` is §15; components also use `useSite()`
+- Generic `SkuRouteObject<Site>` — follow-on; client-entry `Site` / `ClientContext` via `defineClientEntry<typeof server>` is §15; components also use `useSite()`
 - Mermaid / VitePress Mermaid plugin for channel diagrams — optional polish; Markdown table is the required docs shape
 - Provider component returned from request-entry getters — Non-Goals (forced `createStaticHandler` onto the hot path)
 - Sku mounting providers inside the route tree as a pathless layout — Non-Goals (router-aware wrapping is the app's root layout route)
-- Consumer-authored Async Local Storage as the documented route to request state — Non-Goals (`SkuSsrProvider` + hooks instead)
+- Consumer-authored Async Local Storage as the documented route to request state — Non-Goals (`SkuProvider` + hooks instead)
 - Dual-entry `routes` re-exports / env-split route modules as a product feature — Non-Goals (`routesEntry` is one truth)
 - Runtime dual-`routes` / server↔client tree equality validation — Non-Goals (unnecessary with `routesEntry`)
 - Union tree + site allowlist as documented multi-site product story — Non-Goals
 - `routesBySite` map export — Non-Goals (trialled and rejected; replaced by flat `routes` + `sites`)
 - Parent→child inheritance of `sites` — Non-Goals (explicit annotation required)
-- Overloading config `routes` (prerender path lists) as the Vite SSR RouteObject entry — Non-Goals (`routesEntry` instead)
+- Overloading config `routes` (prerender path lists) as the SSR RouteObject entry — Non-Goals (`routesEntry` instead)
 - Sku-owned site resolution from config `hosts` / `sites[].host` — Non-Goals (apps provide `getSite` on the server entry object)
 - Sku reading site / language / clientContext from a conventional `req` field; sku push API (`setRequestContext`) — Non-Goals (libs contribute getter properties apps spread into the entry object)
 - `onRequest`-style combined value return bag / resolver — Non-Goals (optional getters on the default entry object)
@@ -256,19 +283,19 @@ Fixes published-install dual React context / shared-module identity (Decision 26
 - Async request-entry getters — Non-Goals (sync/pure; libs may memoise on `req`; optional async `getRouterContext` remains)
 - Tolerating a missing `serverEntry` / `clientEntry` file — Non-Goals (omit unused properties on the default export instead)
 - Sku-owned per-site path expansion / per-site JS bundles / routes returned from getters — Non-Goals
-- Vite SSR support for config `public` / unhashed public assets — Non-Goals until definitive need
+- SSR support for config `public` / unhashed public assets — Non-Goals until definitive need
 - Sku-owned listen logging by default / `onBeforeListen` — Non-Goals (apps log in `onListen`; top-level for pre-bind setup)
 - Soft-defaulting Express `trust proxy` without config — Non-Goals (opt-in `expressTrustProxy`; other values via `onListen`)
-- Express 5 (sku-wide; webpack SSR + Vite SSR + `sku serve`) — later change
+- Express 5 (sku-wide; webpack SSR + SSR + `sku serve`) — later change
 - React Router majors beyond 8 — later releases
 - Jest support for React Router 8 (webpack) — out of scope for this change
 - Automatic `*.server.ts` client strip — Non-Goals (docs / convention only)
-- Auto-inject Braid reset into sku Vite SSR server entry — Non-Goals (Braid optional; docs only)
+- Auto-inject Braid reset into sku SSR server entry — Non-Goals (Braid optional; docs only)
 - Raw Express `req` in `RouterContextProvider` — Non-Goals (red-warn in docs; project values via dual `getRouterContext`)
 - Framework Mode server-only `getLoadContext(req, res)` as sole API — Non-Goals (Data Mode dual request entry instead)
 - Passing `res` into getters / `getReactContext` / `getRouterContext` — Non-Goals v1
 - Passing Fetch `Request` into early getters — Non-Goals (`{ req }` only; Fetch on `query` / server `getRouterContext`)
-- `@sku-lib/vite/loadable` Document preloads for Vite SSR — Non-Goals (static / prerender only; optionally gate `preloadPlugin` to static later)
+- `@sku-lib/vite/loadable` Document preloads for SSR — Non-Goals (static / prerender only; optionally gate `preloadPlugin` to static later)
 - Sku-owned Apollo dependency / provider / config — Non-Goals (`useInsertHtml` seam only)
 - `@apollo/client-integration-react-router` loader transport (`apolloLoader` / `preloadQuery` query refs in loader data) — Non-Goals (alpha, RR7 peer, needs streaming loader data)
 - Streaming (turbo-stream) loader-data serialization — Non-Goals (would pull sku toward Framework Mode)

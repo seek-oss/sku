@@ -2,7 +2,7 @@
 
 :::warning Older Webpack SSR
 This page describes sku’s **older method for server-side rendering** using Webpack.
-For modern SSR with Managed Data Mode, see [Getting Started](./).
+For the new experimental Managed Data Mode SSR, see [Getting Started](./).
 :::
 
 Webpack SSR uses a low-level API and custom `-ssr` commands (`sku start-ssr` / `sku build-ssr`).

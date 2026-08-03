@@ -5,6 +5,8 @@ SSR with Managed Data Mode is available for evaluation and testing. Do not use i
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
+Hit something not covered here? Raise it via [support](../support.md) so we can help and expand this guide.
+
 ## CJS default-export interop
 
 Some CommonJS packages expose both a default and named exports.

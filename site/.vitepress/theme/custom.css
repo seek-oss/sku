@@ -85,7 +85,7 @@
 .project-types__cell {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.25rem;
   min-height: 5.5rem;
   padding: 1.25rem 1.35rem;
@@ -105,23 +105,39 @@
 }
 
 .project-types__name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
   font-weight: 700;
   font-size: 1.15rem;
   line-height: 1.3;
   color: var(--vp-c-text-1);
 }
 
-.project-types__meta {
-  font-size: 0.85rem;
-  color: var(--vp-c-text-2);
+.project-types__status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
-.project-types__cell--tip .project-types__name {
+.project-types__status--stable {
   color: var(--vp-c-brand-1);
 }
 
-.project-types__cell--info .project-types__name {
-  color: var(--vp-c-text-1);
+.project-types__status--experimental {
+  color: var(--vp-c-warning-1);
+}
+
+.project-types__status--deprecated {
+  color: var(--vp-c-danger-1);
+}
+
+.project-types__meta {
+  font-size: 0.85rem;
+  color: var(--vp-c-text-2);
 }
 
 @media (max-width: 480px) {

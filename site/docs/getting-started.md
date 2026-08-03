@@ -6,24 +6,24 @@ To get started, choose a project type:
 
 <div class="project-types" role="group" aria-label="sku project types">
   <a class="project-types__cell " href="./static-rendering">
-    <span class="project-types__name">Static</span>
+    <span class="project-types__name"><span class="project-types__status project-types__status--stable">Stable</span> Static</span>
     <span class="project-types__meta">Fast, Simple, Modern. Built on Vite</span>
   </a>
-  <a class="project-types__cell project-types__cell--tip" href="./ssr/">
-    <span class="project-types__name">SSR</span>
+  <a class="project-types__cell" href="./ssr/">
+    <span class="project-types__name"><span class="project-types__status project-types__status--experimental">Experimental</span> Managed Data Mode SSR</span>
     <span class="project-types__meta">Personalised, Powerful. Built on Vite</span>
   </a>
-  <a class="project-types__cell project-types__cell--info" href="./static-rendering">
-    <span class="project-types__name">Webpack Static</span>
+  <a class="project-types__cell" href="./static-rendering">
+    <span class="project-types__name"><span class="project-types__status project-types__status--deprecated">Deprecated</span> Webpack Static</span>
     <span class="project-types__meta">Classic sku</span>
   </a>
-  <a class="project-types__cell project-types__cell--info" href="./ssr/webpack-ssr">
-    <span class="project-types__name">Webpack SSR</span>
+  <a class="project-types__cell" href="./ssr/webpack-ssr">
+    <span class="project-types__name"><span class="project-types__status project-types__status--stable">Stable</span> Webpack SSR</span>
     <span class="project-types__meta">Low-level SSR</span>
   </a>
 </div>
 
-:::warning Webpack
+:::warning 👋 Goodbye Webpack
 We are **migrating away from Webpack**. Support for Webpack and Webpack SSR project types will be **removed in a future sku major version**.
 :::
 

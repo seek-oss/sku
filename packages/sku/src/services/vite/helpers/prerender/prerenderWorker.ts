@@ -10,9 +10,19 @@ import createCSPHandler, {
   type CSPHandler,
 } from '../../../webpack/entry/csp.js';
 import { ensureTargetDirectory } from '../../../../utils/buildFileUtils.js';
+import {
+  type ReportingEndpoint,
+  stringifyReportingEndpoints,
+} from '../../../../utils/csp.js';
 
 import type { WorkerData } from './prerenderConcurrently.js';
 import type { Render } from '../../../../types/types.js';
+
+type Metadata = {
+  csp?: string;
+  cspReportOnly?: string;
+  reportingEndpoints?: string;
+};
 
 // Vite handles generating Vanilla Extract CSS during its build, so we set a mock adapter
 // to prevent Vanilla Extract errors during pre-rendering.
@@ -29,8 +39,10 @@ const {
     cspEnabled,
     cspDelivery,
     cspExtraScriptSrcHosts,
+    cspReportTo,
     cspReportOnlyEnabled,
     cspReportOnlyExtraScriptSrcHosts,
+    cspReportOnlyReportTo,
     manifest,
     publicPath,
     targetPath,
@@ -66,17 +78,26 @@ await Promise.all(
 
       if (cspEnabled || cspReportOnlyEnabled) {
         cspHandler = createCSPHandler({
-          extraHosts: cspEnabled
-            ? [publicPath, ...cspExtraScriptSrcHosts]
-            : undefined,
-          reportOnlyExtraHosts: cspReportOnlyEnabled
-            ? [publicPath, ...cspReportOnlyExtraScriptSrcHosts]
-            : undefined,
+          ...(cspEnabled
+            ? {
+                extraHosts: [publicPath, ...cspExtraScriptSrcHosts],
+                reportTo: cspDelivery === 'header' ? cspReportTo : undefined,
+              }
+            : null),
+          ...(cspReportOnlyEnabled
+            ? {
+                reportOnlyExtraHosts: [
+                  publicPath,
+                  ...cspReportOnlyExtraScriptSrcHosts,
+                ],
+                reportOnlyReportTo: cspReportOnlyReportTo,
+              }
+            : null),
           isDevelopment: process.env.NODE_ENV === 'development',
         });
       }
 
-      const metadata: { csp?: string; cspReportOnly?: string } = {};
+      const metadata: Metadata = {};
       let html = '';
       try {
         html = await createPreRenderedHtml({
@@ -94,17 +115,31 @@ await Promise.all(
 
         if (cspHandler) {
           const root = cspHandler.processHtml(html);
+          const reportingEndpoints: ReportingEndpoint[] = [];
 
           if (cspEnabled) {
             if (cspDelivery === 'tag') {
               html = cspHandler.updateHtml(root);
             } else if (cspDelivery === 'header') {
               metadata.csp = cspHandler.createCSP();
+
+              if (cspReportTo?.url) {
+                reportingEndpoints.push(cspReportTo);
+              }
             }
           }
 
           if (cspReportOnlyEnabled) {
             metadata.cspReportOnly = cspHandler.createReportOnlyCSP();
+
+            if (cspReportOnlyReportTo?.url) {
+              reportingEndpoints.push(cspReportOnlyReportTo);
+            }
+          }
+
+          if (reportingEndpoints.length) {
+            metadata.reportingEndpoints =
+              stringifyReportingEndpoints(reportingEndpoints);
           }
         }
       } catch (e) {

@@ -48,6 +48,20 @@ const routes = {
   ],
 };
 
+const cspReportToTuple = {
+  type: 'tuple',
+  items: [
+    {
+      type: 'string',
+      pattern: /^[0-9A-Za-z._-]+$/,
+    },
+    { type: 'url' },
+  ],
+} as const;
+const cspReportTo = [cspReportToTuple, ...cspReportToTuple.items].map(
+  (schema) => ({ ...schema, optional: true }),
+);
+
 export default validator.compile({
   clientEntry: {
     type: 'string',
@@ -188,12 +202,14 @@ export default validator.compile({
     type: 'array',
     items: { type: 'string' },
   },
+  cspReportTo,
   cspReportOnlyEnabled: { type: 'boolean' },
   cspReportOnlyExtraScriptSrcHosts: {
     type: 'array',
     items: { type: 'string' },
     optional: true,
   },
+  cspReportOnlyReportTo: cspReportTo,
   httpsDevServer: {
     type: 'boolean',
   },

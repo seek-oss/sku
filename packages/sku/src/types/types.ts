@@ -548,6 +548,13 @@ export interface ViteSkuConfig {
   cspDelivery?: 'tag' | 'header';
 
   /**
+   * Where to report content security policy violations. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true` and {@link cspDelivery} is set to `'header'`.
+   *
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportto
+   */
+  cspReportTo?: string | [string, string];
+
+  /**
    * **Unavailable for libraries**
    *
    * Enable report-only content security policy feature. More info at https://seek-oss.github.io/sku/csp
@@ -564,6 +571,14 @@ export interface ViteSkuConfig {
    * @link https://seek-oss.github.io/sku/configuration#cspreportonlyextrascriptsrchosts
    */
   cspReportOnlyExtraScriptSrcHosts?: string[];
+
+  /**
+   * Where to report report-only content security policy violations. Only relevant if {@link cspReportOnlyEnabled} is set to `true`.
+   *
+   * @default {@link cspReportTo}
+   * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyreportto
+   */
+  cspReportOnlyReportTo?: string | [string, string];
 
   /**
    * This function provides a way to modify sku's Vite configuration.

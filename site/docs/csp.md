@@ -25,6 +25,22 @@ The `cspDelivery` option is only available when using Vite.
 
 If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraScriptSrcHosts` array in `sku.config.js`.
 
+### Report To
+
+The `cspReportTo` option allows reports of CSP violations to be captured via the browser [Reporting API].
+This option can be configured either as an _endpoint name_, a _URL_, or as a tuple of both, with the following outcome:
+
+- If only an _endpoint name_ is specified, then this value will be included in the CSP as the value of the [`report-to`] directive, and no [`Reporting-Endpoints`] header will be emitted.
+- If only a _URL_ is specified, then an endpoint name will be generated automatically and included in the CSP as the value of the [`report-to`] directive, and a [`Reporting-Endpoints`] header will be emitted containing the generated endpoint name and the provided URL.
+- If both an _endpoint name_ and a _URL_ is specified, then the provided endpoint name will be included in the CSP as the value of the [`report-to`] directive, and a [`Reporting-Endpoints`] header will be emitted containing both the provided endpoint name and URL.
+
+The `cspReportTo` option is only effective when using the `header` [delivery option](#delivery).
+If a [`Reporting-Endpoints`] header is emitted it will be written to same JSON file in the `metadata.reportingEndpoints` property.
+
+[Reporting API]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
+[`report-to`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/report-to
+[`Reporting-Endpoints`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Reporting-Endpoints
+
 ### Nonce Values
 
 [Nonce] values can be used to permit inline scripts that are generated client side.
@@ -135,6 +151,7 @@ This will cause a [`Content-Security-Policy-Report-Only`] header to be generated
 
 By default the report-only CSP will have the same content as the standard CSP, including the same [extra hosts](#extra-hosts).
 This can be changed by setting the `cspReportOnlyExtraScriptSrcHosts` array in `sku.config.js` to contain the script URLs for the report-only CSP.
+Similarly, the report-only CSP will share the same [reporting](#report-to) configuration as the standard CSP, and this also can be changed by setting the `cspReportOnlyReportTo` option.
 
 Unlike the standard CSP, a report-only CSP can only be delivered via an HTTP header and not via a `<meta http-equiv>` tag.
 As such there is no explicit [delivery option](#delivery) for a report-only CSP and the behaviour matches that of `header` CSP delivery, with the policy being written to the `metadata.cspReportOnly` property.

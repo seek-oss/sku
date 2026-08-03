@@ -97,6 +97,14 @@ Default: `[]`
 
 Extra external hosts to allow in your `script-src` [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspEnabled` is set to `true`.
 
+## cspReportTo
+
+Type: `string | [string, string]`
+
+Bundler: `vite`
+
+Where to report content security policy violations. Only relevant if `cspEnabled` is set to `true` and `cspDelivery` is set to `'header'`.
+
 ## cspReportOnlyEnabled
 
 Type: `boolean`
@@ -118,6 +126,16 @@ Default: `cspExtraScriptSrcHosts`
 Bundler: `vite`
 
 Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspReportOnlyEnabled` is set to `true`.
+
+## cspReportOnlyReportTo
+
+Type: `string | [string, string]`
+
+Default: `cspReportTo`
+
+Bundler: `vite`
+
+Where to report report-only content security policy violations. Only relevant if `cspReportOnlyEnabled` is set to `true`.
 
 ## dangerouslySetESLintConfig
 

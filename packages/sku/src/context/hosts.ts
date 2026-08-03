@@ -14,6 +14,11 @@ type HostSystemActions = {
   getSystemHosts: GetSystemHostFunction;
 };
 
+const isLocalhostHost = (host: string) => {
+  const normalised = host.toLowerCase();
+  return normalised === 'localhost' || normalised.endsWith('.localhost');
+};
+
 export const getAppHosts = ({ sites: configuredSites, hosts }: SkuContext) =>
   configuredSites
     .reduce<string[]>((acc, currSite) => {
@@ -59,7 +64,9 @@ export const checkHosts =
   async (skuContext: SkuContext): Promise<void> => {
     const systemHosts = await getSystemHosts(false);
     const missingHosts = getAppHosts(skuContext).filter(
-      (appHost) => !systemHosts.find(([_, host]) => appHost === host),
+      (appHost) =>
+        !isLocalhostHost(appHost) &&
+        !systemHosts.find(([_, host]) => appHost === host),
     );
 
     try {

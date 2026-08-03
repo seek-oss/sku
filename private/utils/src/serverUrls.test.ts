@@ -19,11 +19,11 @@ describe('serverUrls.first()', () => {
 
   it('appends initialPath when set', () => {
     const urls = serverUrls({
-      hosts: ['dev.site.com'],
+      hosts: ['site.com.localhost'],
       port: 3005,
       initialPath: '/foobar',
     });
-    expect(urls.first()).toBe('http://dev.site.com:3005/foobar');
+    expect(urls.first()).toBe('http://site.com.localhost:3005/foobar');
   });
 
   it('handles empty initialPath gracefully', () => {

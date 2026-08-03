@@ -143,6 +143,10 @@ sku format
 
 Update your hosts file to point any configured [`hosts`] to your local machine.
 
+We recommend `*.localhost` hostnames for local development; they usually resolve automatically and act as a secure context for browsers.
+
+Run `setup-hosts` for other custom hosts, or if you still want explicit `.localhost` entries.
+
 ```sh
 sudo sku setup-hosts
 ```

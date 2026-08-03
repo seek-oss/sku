@@ -4,5 +4,5 @@ export default {
   port: 8222,
   serverPort: 8223,
   serverEntry: 'src/server.tsx',
-  hosts: ['localhost', 'local.seek.com', 'dev.seek.com.au'],
+  hosts: ['localhost', 'seek.com.localhost', 'au.seek.com.localhost'],
 } satisfies SkuConfig;

@@ -16,10 +16,10 @@ It is not a history of intermediate APIs.
 
 ## 2. Package surface (`sku/runtime`)
 
-- [ ] 2.1 Export Managed Data Mode APIs from `sku/runtime` (not a strategy-branded subpath). Drop `Ssr` from public type names.
-- [ ] 2.2 Keep sku-only shared-state symbols off public `sku/runtime`. Mount them via private package `imports` (e.g. `#runtime/*`) that resolve to the same physical modules public hooks re-export (`SkuProvider`, insert-html helpers, site route registration, request-context runner).
-- [ ] 2.3 Add `optimizeDeps.exclude` for `'sku'` and `'sku/runtime'` (shared constant). Assert it in unit tests.
-- [ ] 2.4 Import `virtual:sku/polyfills` at the top of the SSR browser client entry only.
+- [x] 2.1 Export Managed Data Mode APIs from `sku/runtime` (not a strategy-branded subpath). Drop `Ssr` from public type names.
+- [x] 2.2 Keep sku-only shared-state symbols off public `sku/runtime`. Mount them via private package `imports` (e.g. `#runtime/*`) that resolve to the same physical modules public hooks re-export (`SkuProvider`, insert-html helpers, site route registration, request-context runner).
+- [x] 2.3 Add `optimizeDeps.exclude` for `'sku'` and `'sku/runtime'` (shared constant). Assert it in unit tests.
+- [x] 2.4 Import `virtual:sku/polyfills` at the top of the SSR browser client entry only.
 
 ## 3. `routesEntry` and site-scoped trees
 

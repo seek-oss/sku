@@ -8,10 +8,6 @@ import type {
 
 /**
  * Render-scoped bag for SSR: always mounted by sku outside the router.
- * App hooks (`createSkuContexts`) and sku runtime (`SkuProvider`) MUST
- * share one module instance via `sku/runtime`. `unbundle: true` keeps one physical
- * dist module; Vite `optimizeDeps.exclude` for `'sku'` / `'sku/runtime'` stops
- * published installs cloning into `.vite/deps`. Same class as `useInsertHtml`.
  */
 type SkuProviderValue = {
   site: string;

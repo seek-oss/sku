@@ -25,6 +25,7 @@
     "#entries/*": "./dist/entries/*.mjs",
     "#jest/file-mock": "./dist/jest/file-mock.mjs",
     "#jest/*": "./dist/jest/*.mjs",
+    "#runtime/*": "./dist/services/vite/ssr/*.mjs",
     "#vite/*": "./dist/vite/*.mjs",
     "#webpack/*": "./dist/webpack/*.mjs"
   },

@@ -3,13 +3,6 @@ import { createContext, useContext, type ReactNode } from 'react';
 export type InsertHtmlCallback = () => ReactNode;
 export type InsertHtml = (callback: InsertHtmlCallback) => void;
 
-/**
- * Render-scoped queue of HTML injection callbacks. Sku `render` (provider +
- * stream transform) and consumer `useInsertHtml` MUST share one module instance
- * via `sku/runtime`. `unbundle: true` keeps one physical dist module; Vite
- * `optimizeDeps.exclude` for `'sku'` / `'sku/runtime'` stops published installs
- * cloning into `.vite/deps`. Same class as the preload registry / CSP nonce.
- */
 export type InsertHtmlQueue = {
   insertHtml: InsertHtml;
   takeQueuedCallbacks: () => InsertHtmlCallback[];

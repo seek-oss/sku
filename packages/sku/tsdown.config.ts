@@ -32,6 +32,13 @@ export default defineConfig([
       'jest/ts-transform': 'src/config/jest/tsBabelTransform.ts',
       postinstall: './src/postinstall.ts',
       runtime: 'src/runtime.ts',
+      // Shared MDM modules are entries so sku-only mounts survive when public
+      // `sku/runtime` only re-exports consumer hooks via neverBundled `#runtime/*`.
+      'services/vite/ssr/skuContext': 'src/services/vite/ssr/skuContext.tsx',
+      'services/vite/ssr/insertHtml': 'src/services/vite/ssr/insertHtml.tsx',
+      'services/vite/ssr/preloadRoute': 'src/services/vite/ssr/preloadRoute.ts',
+      'services/vite/ssr/requestContext':
+        'src/services/vite/ssr/requestContext.ts',
       'vite/prerender-worker':
         'src/services/vite/helpers/prerender/prerenderWorker.ts',
       'webpack-plugin':
@@ -54,6 +61,12 @@ export default defineConfig([
         // Self-import via package exports — kept external so dist retains the
         // `sku/runtime` specifier (shared module identity with app code).
         'sku/runtime',
+        // Private package imports for sku-only shared-state mounts — same
+        // physical modules as public `sku/runtime` re-exports.
+        '#runtime/skuContext',
+        '#runtime/insertHtml',
+        '#runtime/preloadRoute',
+        '#runtime/requestContext',
       ],
     },
   },

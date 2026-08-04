@@ -7,12 +7,9 @@ import {
   type StaticHandlerContext,
 } from 'react-router';
 import { getChunkName } from '@vocab/vite/chunks';
-import {
-  createInsertHtmlQueue,
-  InsertHtmlProvider,
-  runWithSsrRequestContext,
-  SkuProvider,
-} from 'sku/runtime';
+import { createInsertHtmlQueue, InsertHtmlProvider } from '#runtime/insertHtml';
+import { SkuProvider } from '#runtime/skuContext';
+import { runWithSsrRequestContext } from '#runtime/requestContext';
 import Document from './Document.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
 import { createInsertHtmlTransform } from './createInsertHtmlTransform.js';

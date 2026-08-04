@@ -4,7 +4,8 @@ import { createBrowserRouter, matchRoutes, RouterProvider } from 'react-router';
 // Resolved by sku's Vite config plugin to the consumer client / routes entries.
 import * as clientEntry from '__sku_alias__clientEntry';
 import * as routesEntry from '__sku_alias__routesEntry';
-import { registerSiteRouteTree, SkuProvider } from 'sku/runtime';
+import { SkuProvider } from '#runtime/skuContext';
+import { registerSiteRouteTree } from '#runtime/preloadRoute';
 import Document from '../ssr/Document.js';
 import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import {

@@ -10,11 +10,28 @@ const repoRoot = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   resolve: {
     tsconfigPaths: true,
-    // Unit tests import helpers relatively from source; sku runtime imports
-    // the same modules via `sku/runtime`. Without this alias Vitest resolves the
-    // package export to dist and splits React context / ALS identity.
+    // Unit tests import helpers relatively from source; sku mounts shared
+    // state via `#runtime/*` and apps via `sku/runtime`. Without these aliases
+    // Vitest resolves package exports/imports to dist and splits React context
+    // / ALS identity.
     alias: {
       'sku/runtime': path.join(repoRoot, 'packages/sku/src/runtime.ts'),
+      '#runtime/skuContext': path.join(
+        repoRoot,
+        'packages/sku/src/services/vite/ssr/skuContext.tsx',
+      ),
+      '#runtime/insertHtml': path.join(
+        repoRoot,
+        'packages/sku/src/services/vite/ssr/insertHtml.tsx',
+      ),
+      '#runtime/preloadRoute': path.join(
+        repoRoot,
+        'packages/sku/src/services/vite/ssr/preloadRoute.ts',
+      ),
+      '#runtime/requestContext': path.join(
+        repoRoot,
+        'packages/sku/src/services/vite/ssr/requestContext.ts',
+      ),
     },
   },
   server: {

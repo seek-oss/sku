@@ -3,13 +3,6 @@ import { matchRoutes, useHref, type RouteObject, type To } from 'react-router';
 let siteRouteTree: RouteObject[] | null = null;
 let warnedWithoutRouteTree = false;
 
-/**
- * Sku's SSR client entry registers the selected site's filtered tree so
- * `usePreloadRoute` matches the same routes the router navigates. App hooks and
- * sku runtime MUST share one module instance via `sku/runtime`. `unbundle: true`
- * keeps one physical dist module; Vite `optimizeDeps.exclude` for `'sku'` /
- * `'sku/runtime'` stops published installs cloning into `.vite/deps`.
- */
 export const registerSiteRouteTree = (routes: RouteObject[]): void => {
   siteRouteTree = routes;
 };

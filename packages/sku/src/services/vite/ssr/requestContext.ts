@@ -22,11 +22,6 @@ let storage: ContextStorage = noopStorage;
  * `requestContext` module is imported by client route code via `getCspNonce`
  * from `sku/runtime`, so it must not statically import `node:async_hooks` (Vite's
  * browser external throws on any export access).
- *
- * App `getCspNonce` and sku `runWithSsrRequestContext` MUST share one module
- * instance via `sku/runtime`. `unbundle: true` keeps one physical dist module; Vite
- * `optimizeDeps.exclude` for `'sku'` / `'sku/runtime'` stops published installs
- * cloning into `.vite/deps`.
  */
 export const installSsrRequestContextStorage = (next: ContextStorage): void => {
   storage = next;

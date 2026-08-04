@@ -689,11 +689,56 @@ Sku MUST NOT add a runtime experimental gate.
 - **THEN** an experimental / not-for-production warning is present near the start
 - **AND** the changeset states the same
 
-### Requirement: Product and Migrating docs cover SSR topics
+### Requirement: Product docs cover core SSR topics
 
-SSR product docs MUST cover `routesEntry` + flat `routes`, optional `sites` membership, `getSite` tree selection (required when config has >1 site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site), default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext`) and sibling projection, always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()`, optional `middleware` / `onListen` / `onHydrate`, config `expressTrustProxy`, the three value channels vs the app-owned root layout route, middleware layers (including production mount order: request-context → optional `express.static(publicPath)` when sibling `client/` exists → server-entry `middleware` → HTML, and the existing `sku start` order), CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`, and MUST include Migrating docs for Static App and Older / Webpack SSR App.
+SSR product docs MUST describe Managed Data Mode vs SSR and the core app contract:
 
-Docs MUST diagram the three value channels with a Markdown table (and MAY use a nested list). Docs MUST NOT require Mermaid or a VitePress Mermaid plugin for this coverage.
+- `routesEntry` + flat `routes` with optional `sites` membership
+- `getSite` tree selection (required when config has >1 site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
+- default-exported request entries via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters and sibling projection
+- always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()`
+- optional `middleware` / `onListen` / `onHydrate` and config `expressTrustProxy`
+- the three value channels vs the app-owned root layout route
+- middleware layers (production: request-context → optional `express.static(publicPath)` when sibling `client/` exists → server-entry `middleware` → HTML, plus the existing `sku start` order)
+- CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`
+
+Docs MUST diagram the three value channels with a Markdown table (and MAY use a nested list).
+Docs MUST NOT require Mermaid or a VitePress Mermaid plugin for this coverage.
+
+Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/runtime` resolves (sku owns that pin via Vite alias).
+
+#### Scenario: Primary SSR docs have topic coverage
+
+- **WHEN** a reader opens SSR product docs
+- **THEN** docs cover `routesEntry`, `SkuProvider` / `createSkuContexts`, the three value channels, the app-owned root layout route, flat `routes`, optional `sites`, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onListen` / `onHydrate`, `expressTrustProxy`, CSP, and response headers
+- **AND** docs steer page content toward render-time data loading with clients from `useReactContext` / `useClientContext` (not loaders as the default)
+- **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext`
+- **AND** docs document optional dual-entry `getRouterContext` and Data Mode vs Framework Mode seeding
+- **AND** docs show how to type middleware-appended Express `req` fields via `express-serve-static-core` module augmentation
+- **AND** docs include a red warning against putting Express `req` into `RouterContextProvider`
+- **AND** docs include a client-navigation example where context works for a non-initial location without Express
+- **AND** docs show a complete Apollo streaming setup with `useInsertHtml`, `getReactContext` + root-layout provider, the nonce on injected scripts via `getCspNonce` from `sku/runtime`, and why loader-transported query refs are unsupported
+
+#### Scenario: Docs discourage public assets folder for SSR
+
+- **WHEN** a reader opens SSR product or Migrating docs (and `configuration.md` for `public`)
+- **THEN** docs state that SSR does not support the public assets folder
+- **AND** recommend importing assets from modules instead
+- **AND** Migrating notes that existing `public` folder usage must be moved off before adopting SSR
+
+#### Scenario: Docs discourage dangerouslySetViteConfig for SSR
+
+- **WHEN** a reader opens SSR product or Migrating docs (and `configuration.md` for `dangerouslySetViteConfig`)
+- **THEN** docs state that SSR does not support `dangerouslySetViteConfig`
+- **AND** docs direct exceptional Vite customisation use-cases to sku-support
+
+#### Scenario: Docs discourage vitePlugins for SSR
+
+- **WHEN** a reader opens SSR product or Migrating docs (and `configuration.md` for `vitePlugins`)
+- **THEN** docs state that SSR does not support `vitePlugins`
+- **AND** docs direct exceptional Vite customisation use-cases to sku-support
+
+### Requirement: Deploy-to-production docs cover SSR runtime layout
 
 Deploy-to-production docs MUST cover:
 
@@ -704,7 +749,19 @@ Deploy-to-production docs MUST cover:
 - that the production Node deploy MUST include runtime `node_modules` (or an equivalent production install) alongside `server/`
 - relative `publicPath` only (no absolute / CDN asset base)
 
-Migrating docs MUST also cover:
+#### Scenario: Deploy docs cover runtime package and asset hosting
+
+- **WHEN** a reader opens SSR deploy-to-production docs
+- **THEN** docs state the production Node deploy needs `server/` plus runtime `node_modules` (or equivalent)
+- **AND** docs recommend reverse proxy / persistent storage for hashed `client/` assets
+- **AND** docs describe sibling `client/` + Node `express.static` as standalone / experimentation only
+- **AND** docs state the server starts without sibling `client/` once the baked manifest is present
+
+### Requirement: Migrating docs cover Static and Webpack SSR adoption
+
+SSR MUST include Migrating docs for Static App and Older / Webpack SSR App.
+
+Migrating docs MUST cover:
 
 - named `Component` (not default export) for lazy routes
 - `routesEntry` + flat `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
@@ -726,12 +783,12 @@ Migrating docs MUST also cover:
 - that `dangerouslySetViteConfig` and `vitePlugins` are unsupported for SSR (hard-error when set; raise use-cases via sku-support)
 - keeping server-only loader modules out of the client-imported route graph (split trees; set `handle.moduleId` when lazy factories are non-idiomatic)
 - prefer render-time React data loading via Suspense with clients from `useReactContext` / `useClientContext`; use loaders for avoiding heavily-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext` — not as the default for page content
-- Apollo streaming hydration end to end: an app-owned transport over `useInsertHtml`, dual-entry `getReactContext` for `makeClient` / server nonce `extraScriptProps`, isomorphic provider in the root layout via `useReactContext()`, and that Apollo apps must drop two-pass `getDataFromTree`
+- Apollo streaming hydration end to end: an app-owned transport over `useInsertHtml`, dual-entry `getReactContext` for `makeClient` / server nonce `extraScriptProps` via `getCspNonce` from `sku/runtime`, isomorphic provider in the root layout via `useReactContext()`, and that Apollo apps must drop two-pass `getDataFromTree`
 - that loader-transported query refs (`@apollo/client-integration-react-router`'s `apolloLoader` / `preloadQuery`) are not supported, because sku's hydration bootstrap is JSON and promise-scrubbed
 - that loader `request` stays Fetch; Express `req` is available where designed on getters / server `getRouterContext`, not as the loader `request` argument
 - that early getters do not receive Fetch `Request` or `res`, and MUST stay synchronous / pure (libs may memoise on `req`); later getters receive sibling values
 - optional dual-entry `getRouterContext` (Data Mode vs Framework Mode; server seeds from middleware bag + Fetch `request` + siblings; client seeds from browser-visible state + siblings; same `createContext` keys; different construction; cadence: once per document `query` vs every client nav/fetcher)
-- how to type Express `req` fields appended by middleware (module augmentation of `express-serve-static-core` `Request`, shared by `middleware` / getters / server `getRouterContext`; same pattern as sku’s `getCspNonce`)
+- how to type Express `req` fields appended by middleware (module augmentation of `express-serve-static-core` `Request`, shared by `middleware` / getters / server `getRouterContext`; same pattern as sku’s `getCspNonce` from `sku/runtime`)
 - relation of Express `middleware` vs RR route `middleware` vs entry `getRouterContext`, and of `getClientContext` / `getReactContext` / `SkuProvider` hooks vs the app’s root layout route vs `getRouterContext` (loader/action context)
 - that wrapping which needs React Router hooks or loader data belongs in the app’s own root layout route in `routesEntry`
 - a **red warning** that apps MUST NOT put Express `req` (or other non-isomorphic platform objects) into `RouterContextProvider` — project values both sides can supply
@@ -740,20 +797,6 @@ Migrating docs MUST also cover:
 - libraries that touch `window` must not run in the Document SSR tree (prefer client `getReactContext` + root-layout / `useEffect` consumers)
 - Jest → Vitest as an SSR prerequisite (point at existing Vitest docs / `@sku-lib/codemod jest-to-vitest`)
 - path aliases: bare `src/…` / webpack `baseUrl` → `#src/…` via `pathAliases` (point at existing migrate-root-resolution guidance)
-
-Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/runtime` resolves (sku owns that pin via Vite alias).
-
-#### Scenario: Primary SSR docs have topic coverage
-
-- **WHEN** a reader opens SSR product docs
-- **THEN** docs cover `routesEntry`, `SkuProvider` / `createSkuContexts`, the three value channels, the app-owned root layout route, flat `routes`, optional `sites`, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onListen` / `onHydrate`, `expressTrustProxy`, CSP, and response headers
-- **AND** docs steer page content toward render-time data loading with clients from `useReactContext` / `useClientContext` (not loaders as the default)
-- **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext`
-- **AND** docs document optional dual-entry `getRouterContext` and Data Mode vs Framework Mode seeding
-- **AND** docs show how to type middleware-appended Express `req` fields via `express-serve-static-core` module augmentation
-- **AND** docs include a red warning against putting Express `req` into `RouterContextProvider`
-- **AND** docs include a client-navigation example where context works for a non-initial location without Express
-- **AND** docs show a complete Apollo streaming setup with `useInsertHtml`, `getReactContext` + root-layout provider, the nonce on injected scripts, and why loader-transported query refs are unsupported
 
 #### Scenario: Migrating docs exist
 
@@ -769,39 +812,12 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 - **AND** docs recommend hosting hashed assets outside Node for productionised deploys
 - **AND** docs note optional Node static of sibling `client/` under `publicPath` before server-entry middleware for standalone use
 
-#### Scenario: Deploy docs cover runtime package and asset hosting
-
-- **WHEN** a reader opens SSR deploy-to-production docs
-- **THEN** docs state the production Node deploy needs `server/` plus runtime `node_modules` (or equivalent)
-- **AND** docs recommend reverse proxy / persistent storage for hashed `client/` assets
-- **AND** docs describe sibling `client/` + Node `express.static` as standalone / experimentation only
-- **AND** docs state the server starts without sibling `client/` once the baked manifest is present
-
 #### Scenario: Migrating covers onStart and trust proxy
 
 - **WHEN** a reader opens **Migrate from Older / Webpack SSR App** docs
 - **THEN** docs map webpack `onStart` to server-entry `onListen({ app, httpServer, port })`
 - **AND** docs state trust proxy is opt-in via config `expressTrustProxy` (sets hop count `1`), not via `onStart`
 - **AND** docs note other trust-proxy values are set in `onListen`
-
-#### Scenario: Docs discourage public assets folder for SSR
-
-- **WHEN** a reader opens SSR product or Migrating docs (and `configuration.md` for `public`)
-- **THEN** docs state that SSR does not support the public assets folder
-- **AND** recommend importing assets from modules instead
-- **AND** Migrating notes that existing `public` folder usage must be moved off before adopting SSR
-
-#### Scenario: Docs discourage dangerouslySetViteConfig for SSR
-
-- **WHEN** a reader opens SSR product or Migrating docs (and `configuration.md` for `dangerouslySetViteConfig`)
-- **THEN** docs state that SSR does not support `dangerouslySetViteConfig`
-- **AND** docs direct exceptional Vite customisation use-cases to sku-support
-
-#### Scenario: Docs discourage vitePlugins for SSR
-
-- **WHEN** a reader opens SSR product or Migrating docs (and `configuration.md` for `vitePlugins`)
-- **THEN** docs state that SSR does not support `vitePlugins`
-- **AND** docs direct exceptional Vite customisation use-cases to sku-support
 
 #### Scenario: Migrating covers Older SSR adoption topics
 

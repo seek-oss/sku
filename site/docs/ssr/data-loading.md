@@ -141,8 +141,7 @@ Mount the isomorphic Apollo provider in the root layout via `useReactContext()`:
 ::: code-group
 
 ```tsx [server.tsx]
-import { getCspNonce } from 'sku';
-import { defineServerEntry } from 'sku/runtime';
+import { defineServerEntry, getCspNonce } from 'sku/runtime';
 
 const server = defineServerEntry({
   getReactContext() {

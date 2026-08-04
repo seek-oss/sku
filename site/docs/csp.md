@@ -65,7 +65,7 @@ A nonce is requested by:
 
 - sku itself, when attaching a `nonce` to React stream scripts (post-shell inline scripts that cannot be pre-hashed)
 - Express middleware: `req.getCspNonce()` (mint-on-read; later calls return the same value)
-- React Router loaders/actions: `getCspNonce()` from `sku` (same store while sku is rendering)
+- React Router loaders/actions: `getCspNonce()` from `sku/runtime` (same store while sku is rendering)
 
 All of those share one value for the response.
 Known bootstrap script bodies are still allowed via sha256 hashes.

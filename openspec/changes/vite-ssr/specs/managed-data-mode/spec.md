@@ -208,7 +208,8 @@ Omitting `onHydrate` MUST mean no hydrate side effects (not an error).
 
 Omitting `middleware` MUST mean no consumer middleware layer (not an error).
 
-Omitting `onListen` MUST mean no post-listen callback (not an error). See the `onListen` requirement for call timing.
+Omitting `onListen` MUST mean no post-listen callback (not an error).
+SSR defines `onListen` call timing and failure behaviour.
 
 Sku MUST always render `SkuProvider` outside the router — `Document` → `SkuProvider` → router — with `site`, `clientContext`, and `reactContext` for that document.
 

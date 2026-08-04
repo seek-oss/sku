@@ -277,7 +277,7 @@ The `sku/runtime` subpath is browser-safe (so webpack / static apps never pull t
 - [`createSkuContexts`](./providers.md#typed-hooks) — typed `useSite` / `useClientContext` / `useReactContext`
 - [`usePreloadRoute`](./routing.md#intent-preloading-with-usepreloadroute) — warm lazy route chunks on intent
 - [`useInsertHtml`](#useinserthtml) — queue React nodes into the SSR response stream
-- `getCspNonce` — also available from the main `sku` entry
+- `getCspNonce` — request the shared SSR CSP nonce (mint-on-read)
 
 ### `useInsertHtml`
 

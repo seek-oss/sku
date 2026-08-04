@@ -20,4 +20,3 @@ export type {
   SkuServerGetReactContext,
   SkuServerGetRouterContext,
 } from './services/vite/ssr/types.js';
-export { getCspNonce } from './services/vite/ssr/requestContext.js';

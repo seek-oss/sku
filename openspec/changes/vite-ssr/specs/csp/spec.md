@@ -36,6 +36,8 @@ For an SSR HTML response, sku MUST generate at most one CSP nonce, only when exp
 
 When requested, sku MUST reuse that same value everywhere for the response.
 
+Sku MUST expose that request via `getCspNonce` from `sku/runtime`.
+
 Sku MUST NOT provide an SSR API that creates additional distinct nonces for the same response (unlike static/webpack `createUnsafeNonce`).
 
 Sku MUST include `'nonce-…'` in the CSP header only if a nonce was requested.
@@ -58,7 +60,7 @@ If CSP is enabled but nothing requested a nonce, the CSP header MUST still be em
 
 #### Scenario: Consumer requests the shared nonce
 
-- **WHEN** consumer middleware or loaders explicitly request the SSR CSP nonce during a request
+- **WHEN** consumer middleware or loaders explicitly request the SSR CSP nonce via `getCspNonce` from `sku/runtime` during a request
 - **THEN** they receive the request nonce
 - **AND** that nonce matches the nonce used in the CSP header and React stream for that response (when the header includes a nonce)
 
@@ -70,7 +72,7 @@ If CSP is enabled but nothing requested a nonce, the CSP header MUST still be em
 
 #### Scenario: Injected scripts can carry the CSP nonce
 
-- **WHEN** an app injects a `<script>` carrying the nonce from `getCspNonce()` via `useInsertHtml`
+- **WHEN** an app injects a `<script>` carrying the nonce from `getCspNonce()` (imported from `sku/runtime`) via `useInsertHtml`
 - **THEN** the response `script-src` includes that `'nonce-…'`
 - **AND** the script is not required to be hashable at header-derivation time
 

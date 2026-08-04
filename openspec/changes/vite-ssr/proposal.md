@@ -41,7 +41,9 @@ Details: `design.md` Decision 12a.
 
 ## What Changes
 
-- Experimental SSR uses `buildType: 'ssr' | 'static'`.
+- Experimental SSR ships with Vite `buildType: 'ssr'`.
+- `buildType: 'static'` keeps today’s static Vite behaviour.
+- A future Managed Data Mode Static path is out of scope for this change.
 - Commands are `sku start` / `sku build`.
 - Webpack-style `-ssr` is not used.
 - First-class `routesEntry` defaults to `src/routes.tsx`.
@@ -80,7 +82,6 @@ Full list: `design.md` Non-Goals.
 - `managed-data-mode`: App contract shared by SSR today and a future Static path. Covers naming, `sku/runtime`, `routesEntry`, request entries, `SkuProvider` / `createSkuContexts`, `useInsertHtml`, intent preload, and the React Router 8 optional peer.
 - `ssr`: SSR render strategy and ship surface. Covers `buildType`, streaming Document, Express server, build layout, create template `ssr`, config rejects, and product / Migrating docs.
 - `csp`: SSR CSP delivery only (headers, shell-derived policy, lazy single nonce, report-only, report-to). Does not backfill static or webpack CSP behaviour.
-- `fixtures`: Temporary proof and coverage obligations for this change (Apollo e2e, lazy chunks, selected edge-case test planning). Intended to be dropped after review rather than synced as a living product capability.
 
 ### Modified Capabilities
 
@@ -94,7 +95,7 @@ The OpenSpec change / branch name remains `vite-ssr` as a historical workstream 
 
 - `buildType`
 - `routesEntry` and request entries via `defineServerEntry` / `defineClientEntry`
-- `sku/runtime` hooks: `createSkuContexts`, `useInsertHtml`, `usePreloadRoute`
+- `sku/runtime` hooks: `createSkuContexts`, `useInsertHtml`, `usePreloadRoute`, `getCspNonce`
 - `onListen` and `expressTrustProxy`
 - create template `ssr`
 

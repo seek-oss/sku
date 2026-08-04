@@ -16,7 +16,7 @@ SSR requires a relative `publicPath`.
 
 Request a nonce only when you need it for inline scripts or third-party tags:
 
-- `getCspNonce()` from `sku` (app code)
+- `getCspNonce()` from `sku/runtime` (app code)
 - `req.getCspNonce()` in server-entry [middleware](./middleware.md)
 
 At most one nonce is minted per HTML response.

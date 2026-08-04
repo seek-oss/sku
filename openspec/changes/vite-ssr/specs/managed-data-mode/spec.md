@@ -10,8 +10,6 @@ Docs MUST note that Managed Data Mode is intended to be shared later by a new St
 
 The public import MUST be `sku/runtime` (not `sku/ssr` or another strategy-branded subpath).
 
-Public type and helper names MUST NOT use an `Ssr` infix (e.g. `SkuProvider`, `createSkuContexts`, `SkuRouteObject`, `SkuServerEntry` / `SkuClientEntry`).
-
 Product docs, templates, and public APIs MUST NOT use the label `vite-ssr` (that name is reserved for this OpenSpec change / branch only).
 
 #### Scenario: Docs describe Managed Data Mode vs SSR
@@ -361,12 +359,15 @@ App code that imports shared Managed Data Mode state from `sku/runtime` (hooks f
 
 Sku MUST:
 
-1. Prefer the public `sku/runtime` specifier for sku runtime call sites that touch that shared state (re-export `@internal` symbols as needed), and
-2. Exclude `'sku'` and `'sku/runtime'` from Vite `optimizeDeps` in the shared Vite config plugin so published installs are not cloned into `.vite/deps`.
+1. Keep public `sku/runtime` limited to the consumer contract.
+2. Mount sku-only shared-state symbols via private package `imports` (for example `#runtime/*`), not via public exports marked `@internal`.
+3. Exclude `'sku'` and `'sku/runtime'` from Vite `optimizeDeps` in the shared Vite config plugin so published installs are not cloned into `.vite/deps`.
 
+Public `sku/runtime` modules MUST re-export from the same physical shared files that those private `#` imports resolve to.
 tsdown `unbundle: true` alone MUST NOT be treated as sufficient for published-package identity.
 
 Sku MUST NOT require consumers to inject their own Vite `optimizeDeps` config for this identity.
+Sku MUST NOT export sku-only shared-state symbols (`SkuProvider`, insert-html queue/provider, site route registration, request-context runner) from public `sku/runtime`.
 
 #### Scenario: Hooks read values from SkuProvider
 
@@ -377,6 +378,12 @@ Sku MUST NOT require consumers to inject their own Vite `optimizeDeps` config fo
 
 - **WHEN** sku builds the shared Vite config used by Managed Data Mode SSR (and static Vite)
 - **THEN** `optimizeDeps.exclude` includes `'sku'` and `'sku/runtime'`
+
+#### Scenario: Public runtime does not export sku-only mounts
+
+- **WHEN** an app imports from `sku/runtime`
+- **THEN** the public surface does not include `SkuProvider`, insert-html queue/provider helpers, site route registration, or the request-context runner
+- **AND** those symbols remain reachable only through sku’s private package `imports`
 
 ### Requirement: Apps can insert HTML into the response stream
 

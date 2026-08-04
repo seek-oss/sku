@@ -12,13 +12,12 @@ This path uses **Managed Data Mode**.
 sku owns the HTTP server, HTML document, streaming, hydration, and CSP headers.
 It wires [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing and data.
 You own pages, data, and providers.
-A future Static path is expected to share the same Managed Data Mode APIs.
 **SSR** here means the render strategy (`buildType: 'ssr'`).
 
 Use `sku start` / `sku build` to develop and build.
 
 :::danger Experimental — not for production
-SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 

@@ -13,7 +13,7 @@ This means that only [`sku start`] and [`sku build`] are supported.
 [`sku serve`] is also available as it is bundler agnostic.
 
 > **Experimental — SSR Support.**
-> A new Vite-based SSR with Managed Data Mode is available evaluation and testing using the new Managed Data Mode.
+> A new Vite-based Managed Data Mode SSR is available evaluation and testing using the new Managed Data Mode.
 > Do not use it in production yet; the API and behaviour may change. See [SSR].
 
 [`sku start`]: ./cli.md#start

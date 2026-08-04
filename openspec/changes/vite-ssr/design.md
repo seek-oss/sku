@@ -339,8 +339,6 @@ Migrating docs must call this out (drop `serverPort`, map old `serverPort` → `
 **Production server self-containment (except hashed static files):**
 
 Document asset URLs come from the Vite client manifest.
-Today the production entry reads `../client/.vite/manifest.json` at startup.
-That hard-fails with `ENOENT` when `client/` is not a sibling of `server/`, even when hashed files are hosted elsewhere.
 
 `sku build` MUST bake or copy the Vite client manifest into the server output.
 The production entry MUST load that server-local manifest.
@@ -1341,14 +1339,15 @@ Update identity comments on the four shared modules + `ssr.ts`:
 
 Separate naming layers — do not collapse them into one word:
 
-| Layer                          | Name                  | Role                                                                                                                                                                                                 |
-| ------------------------------ | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenSpec change / git branch   | `vite-ssr`            | Historical workstream id only — do **not** use in product docs, templates, public APIs, or user-facing copy                                                                                          |
-| Architecture / docs descriptor | **Managed Data Mode** | Sku-owned Document + React Router Data Mode contract (Decision 3). Use when describing the kind of API, comparing to webpack SSR / today’s static, or noting what SSR and a future Static path share |
-| Render strategy                | **SSR** / **Static**  | Selected by `buildType`. Product copy says “SSR”, never “Vite SSR”                                                                                                                                   |
-| Create template                | **`ssr`**             | `@sku-lib/create --template ssr` (not `vite-ssr`)                                                                                                                                                    |
-| Public import                  | **`sku/runtime`**     | Browser-safe Managed Data Mode entry (Decision 26 consolidate + `optimizeDeps.exclude` target)                                                                                                       |
-| Public types / symbols         | Drop `Ssr`            | e.g. `SkuProvider`, `createSkuContexts`, `SkuRouteObject`, `SkuServerEntry` / `SkuClientEntry`, `SkuGetSite`, …                                                                                      |
+| Layer                          | Name                              | Role                                                                                                                                                                                                 |
+| ------------------------------ | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenSpec change / git branch   | `vite-ssr`                        | Historical workstream id only — do **not** use in product docs, templates, public APIs, or user-facing copy                                                                                          |
+| Living OpenSpec capabilities   | `managed-data-mode`, `ssr`, `csp` | Product-surface specs synced into `openspec/specs/`. Change-local `fixtures` is review-only and is not intended to become a living capability. `vite-ssr` / `vite-ssr-csp` are not capability names. |
+| Architecture / docs descriptor | **Managed Data Mode**             | Sku-owned Document + React Router Data Mode contract (Decision 3). Use when describing the kind of API, comparing to webpack SSR / today’s static, or noting what SSR and a future Static path share |
+| Render strategy                | **SSR** / **Static**              | Selected by `buildType`. Product copy says “SSR”, never “Vite SSR”                                                                                                                                   |
+| Create template                | **`ssr`**                         | `@sku-lib/create --template ssr` (not `vite-ssr`)                                                                                                                                                    |
+| Public import                  | **`sku/runtime`**                 | Browser-safe Managed Data Mode entry (Decision 26 consolidate + `optimizeDeps.exclude` target)                                                                                                       |
+| Public types / symbols         | Drop `Ssr`                        | e.g. `SkuProvider`, `createSkuContexts`, `SkuRouteObject`, `SkuServerEntry` / `SkuClientEntry`, `SkuGetSite`, …                                                                                      |
 
 **Why not `sku/runtime`:**
 The import carries contract APIs that are not SSR-specific (`define*Entry`, `createSkuContexts`, `useSite`, …).

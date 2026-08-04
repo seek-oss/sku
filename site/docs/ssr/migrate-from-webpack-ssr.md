@@ -1,7 +1,7 @@
 # Migrate from Webpack SSR
 
 :::danger Experimental — not for production
-SSR with Managed Data Mode is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 

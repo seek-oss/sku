@@ -77,14 +77,16 @@ Full list: `design.md` Non-Goals.
 
 ### New Capabilities
 
-- `vite-ssr`: Managed Data Mode SSR lifecycle. Covers `buildType`, `routesEntry`, request entries, streaming Document, create template `ssr`, `sku/runtime`, and docs.
-- `vite-ssr-csp`: Shell-derived CSP headers, lazy single nonce, and optional report-only.
+- `managed-data-mode`: App contract shared by SSR today and a future Static path. Covers naming, `sku/runtime`, `routesEntry`, request entries, `SkuProvider` / `createSkuContexts`, `useInsertHtml`, intent preload, and the React Router 8 optional peer.
+- `ssr`: SSR render strategy and ship surface. Covers `buildType`, streaming Document, Express server, build layout, create template `ssr`, config rejects, and product / Migrating docs.
+- `csp`: SSR CSP delivery only (headers, shell-derived policy, lazy single nonce, report-only, report-to). Does not backfill static or webpack CSP behaviour.
+- `fixtures`: Temporary proof and coverage obligations for this change (Apollo e2e, lazy chunks, selected edge-case test planning). Intended to be dropped after review rather than synced as a living product capability.
 
 ### Modified Capabilities
 
 - (none)
 
-Bundler and command constraints for this mode live under `vite-ssr`.
+The OpenSpec change / branch name remains `vite-ssr` as a historical workstream id only.
 
 ## Impact
 

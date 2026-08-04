@@ -68,6 +68,12 @@ If CSP is enabled but nothing requested a nonce, the CSP header MUST still be em
 - **THEN** consumers MUST NOT use webpack/static `createUnsafeNonce` as the SSR API
 - **AND** sku MUST NOT expose an SSR helper that returns a new distinct nonce on each call for the same response
 
+#### Scenario: Injected scripts can carry the CSP nonce
+
+- **WHEN** an app injects a `<script>` carrying the nonce from `getCspNonce()` via `useInsertHtml`
+- **THEN** the response `script-src` includes that `'nonce-…'`
+- **AND** the script is not required to be hashable at header-derivation time
+
 ### Requirement: Report-Only CSP may coexist with an enforcing policy
 
 SSR apps MUST support a Report-Only CSP that can be set in addition to an enforcing CSP.
@@ -120,26 +126,12 @@ Consumer `cspExtraScriptSrcHosts` remains for third-party script hosts.
 - **THEN** the CSP header allows those assets via `'self'` (and nonces/hashes as applicable)
 - **AND** sku does not require an absolute/`CDN` origin allowance for sku-owned Document assets
 
-### Requirement: Webpack SSR and static CSP behavior are unchanged by this capability
+### Requirement: SSR ignores cspDelivery
 
-This SSR CSP capability MUST NOT change CSP delivery for webpack SSR apps or static apps.
+`cspDelivery` MUST NOT control SSR CSP.
+SSR MUST always deliver CSP via HTTP headers when CSP is enabled.
 
-Static Vite may independently support `cspDelivery` (`tag` / `header` metadata) and Report-Only via the static HTML CSP path; `cspDelivery` MUST NOT control SSR CSP, which always uses HTTP headers.
-
-The `report-to` config options are shared with static Vite and MUST resolve identically for both paths; only the delivery of the resulting `Reporting-Endpoints` differs (a response header for SSR, `metadata.reportingEndpoints` for static).
-
-Static and webpack apps MAY continue to allow multiple `createUnsafeNonce` calls per render.
-
-#### Scenario: Static app CSP unchanged by SSR path
-
-- **WHEN** a static app has CSP enabled
-- **THEN** its existing static CSP behavior remains as for that app mode (meta tag and/or metadata / start headers as configured)
-- **AND** SSR does not rewrite that static delivery model
-
-#### Scenario: Static multi-nonce API unchanged
-
-- **WHEN** a static or webpack render calls `createUnsafeNonce` more than once
-- **THEN** existing multi-nonce behavior remains as today
+This capability MUST NOT redefine CSP delivery for static or webpack apps.
 
 #### Scenario: cspDelivery does not apply to SSR
 

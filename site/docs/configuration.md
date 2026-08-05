@@ -44,7 +44,7 @@ Config files can use either TypeScript or JavaScript.
 
 Type: `'webpack' | 'vite'`
 
-Default: `webpack`
+Default: `'webpack'`
 
 The bundler that sku uses to build the application.
 
@@ -55,7 +55,7 @@ See [Vite support](./vite) for details.
 
 Type: `string`
 
-Default: `./src/client.js`
+Default: `'./src/client.js'`
 
 The client entry point to the app. The client entry is the file that executes your browser code.
 
@@ -522,7 +522,7 @@ The port the app is hosted on when running `sku start`.
 
 Type: `string`
 
-Default: `public`
+Default: `'public'`
 
 A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
 
@@ -530,7 +530,7 @@ A folder of public assets to be copied into the `target` directory after `sku bu
 
 Type: `string`
 
-Default: `/`
+Default: `'/'`
 
 The URL all the static assets of the app are accessible under.
 
@@ -540,7 +540,7 @@ Type: `string`
 
 **Only for static apps and libraries**
 
-Default: `./src/render.js`
+Default: `'./src/render.js'`
 
 The render entry file to the app. This file should export the required functions for static rendering. See [static-rendering](./static-rendering.md) for more info.
 
@@ -572,7 +572,7 @@ Bundler: `webpack`
 
 **Only for SSR apps**
 
-Default: `./src/server.js`
+Default: `'./src/server.js'`
 
 The entry file for the server.
 
@@ -680,7 +680,7 @@ An array of directories holding your app's source code. By default, sku expects 
 
 ## supportedBrowsers
 
-Type: `browserslist-query`
+Type: `Array<string>`
 
 Default: [browserslist-config-seek](https://github.com/seek-oss/browserslist-config-seek)
 
@@ -696,9 +696,9 @@ The directory to build your assets into when running `sku build` or `sku build-s
 
 ## testRunner
 
-Type: `jest | vitest`
+Type: `'jest' | 'vitest'`
 
-Default: `jest`
+Default: `'jest'`
 
 The test runner that sku uses to run the tests.
 

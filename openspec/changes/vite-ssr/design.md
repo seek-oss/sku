@@ -1,6 +1,6 @@
 ## Context
 
-SSR commands are blocked today.
+Vite SSR commands are blocked today.
 Webpack SSR uses Express `renderCallback`, string HTML, and CSP meta tags.
 
 This change introduces **Managed Data Mode**.

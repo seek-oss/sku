@@ -52,7 +52,7 @@ test('works with android and ios', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome149",
+      "chrome150",
       "ios11",
     ]
   `);
@@ -63,7 +63,7 @@ test('no support for android 4', () => {
 
   expect(target).toMatchInlineSnapshot(`
     [
-      "chrome149",
+      "chrome150",
     ]
   `);
 });

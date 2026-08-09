@@ -47,7 +47,7 @@ Details: `design.md` Decision 12a.
 - Commands are `sku start` / `sku build`.
 - Webpack-style `-ssr` is not used.
 - First-class `routesEntry` defaults to `src/routes.tsx`.
-- It exports flat `routes` with optional `sites`.
+- It exports named `routes` with optional `sites`.
 - Sku pre-builds per-site trees.
 - Apps resolve the site via `getSite` when multi-site.
 - Config `routes` (static prerender paths) stays separate.

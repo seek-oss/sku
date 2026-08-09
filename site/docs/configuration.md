@@ -619,7 +619,7 @@ Default: `./src/routes.tsx`
 
 Path may be `.tsx`, `.ts`, or `.js`.
 
-Module that exports named flat `routes` (`SkuRouteObject[]`) for both the server and client graphs.
+Module that exports named `routes` (`SkuRouteObject[]`) for both the server and client graphs.
 Optional `sites?: string[]` on a route limits which config sites it appears on.
 Use `getSite` on the server entry when config has more than one site.
 

@@ -24,7 +24,7 @@ See Decision 27.
 - Create template `ssr`.
 - First-class `routesEntry` with a named `routes` export.
 - First-class request-entry contracts.
-- First-class multi-site route trees via flat `routes`, optional `sites`, and `getSite`.
+- First-class multi-site route trees via `routes`, optional `sites`, and `getSite`.
 - Same spirit as first-class multi-language.
 - Full-document streaming with `hydrateRoot(document, …)`.
 - Shell-derived CSP headers.
@@ -34,6 +34,8 @@ See Decision 27.
 - Single config `port` only.
 - Config `serverPort` is rejected.
 - Named `Component` on lazy pages in template and docs.
+- Docs, template, and fixtures teach inline `lazy: () => import(…)` in `routesEntry`.
+- Page modules own `loader` / `action` / `Component` (and related route exports).
 - CJS interop docs.
 - Accurate config JSDoc.
 - React Router 8 as an optional peerDependency `^8` for SSR consumers only.
@@ -117,6 +119,9 @@ See Decision 27.
 - Soft-defaulting Express `trust proxy` for SSR without config (opt-in via `expressTrustProxy`).
 - Supporting the config `public` assets folder for SSR (until a definitive need).
 - Automatic `*.server.ts` client strip.
+- A sku `lazyRoute` (or similar) helper in this release.
+- Recommending a per-page `route.ts` stub as the happy path.
+- File-based route discovery, string-path `route("…", "./…")` codegen, or auto code-splitting transforms in this release.
 - Auto-injecting Braid reset into sku’s SSR server entry.
 - A new Jest → Vitest codemod beyond existing tooling / docs.
 - Making Express `req` the loader `request` argument (stays Fetch `Request`).
@@ -191,7 +196,6 @@ Consumers still import route primitives from `react-router` and may use `SkuRout
 
 Missing or non-array `routes` on `routesEntry` MUST hard-error.
 Sku loads `routes` from `routesEntry` only.
-It does not read `routes` / `routesBySite` from `serverEntry` / `clientEntry`.
 Config `routes` (static prerender path lists) remains unrelated.
 Do not overload that key for SSR `RouteObject` trees.
 
@@ -248,7 +252,7 @@ Do not load them into the Node server entry.
 Document is sku-owned (React document metadata).
 No consumer Document override in v1.
 
-### 4a. Flat `routes` + optional `sites` → pre-built site trees
+### 4a. `routes` + optional `sites` → pre-built site trees
 
 Multi-site apps need different React Router path sets per site (e.g. site-only pages).
 A single unfiltered `RouteObject[]` either over-matches unsupported paths or registers foreign paths on every host.
@@ -272,7 +276,7 @@ Route membership is declared on routes themselves.
 
 **Route membership:**
 
-- `routesEntry` exports flat `routes: SkuRouteObject[]`.
+- `routesEntry` exports named `routes: SkuRouteObject[]`.
 - Optional `sites?: string[]` on a route. Omit or `undefined` ⇒ route is included for **every** config site.
 - Present `sites` ⇒ route is included **only** for those site names (exact string match against config site names).
 - No parent → child inheritance of `sites`. Site-specific deviation MUST set `sites` explicitly on each divergent route. Friction is intentional.
@@ -311,7 +315,6 @@ Config `sites[].routes` (static prerender path lists) remains unrelated to SSR `
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | Sku host → site via config `sites[].host` | Config hosts are local-dev only; production hostnames are app/platform-owned                                                 |
 | Union tree + site allowlist middleware    | Cross-site paths still match then 404; easy to get wrong on client nav; every migrant reinvents it                           |
-| `routesBySite` map                        | Trialled and rejected; apps hand-build N trees; membership belongs on the route; sku can pre-filter a flat list              |
 | Dual-entry `routes` re-exports            | Redundant once `getRouterContext` / getters cover request-scoped values; hydration mismatch risk; `routesEntry` is one truth |
 | Getter / bag returns routes               | Weaker config-as-data; larger hydrate story; `routesEntry` stays clearer                                                     |
 | Optional path params for “language”       | Matches unsupported prefixes; not site-correct                                                                               |
@@ -321,7 +324,29 @@ Config `sites[].routes` (static prerender path lists) remains unrelated to SSR `
 | Conventional `req` field / sku push API   | Unversioned `string \| undefined`; collides across consumers; fails only on a request — see Decision 12                      |
 | Combined site+language+context resolver   | Reintroduces the return-bag shape Decision 12 pulled apart                                                                   |
 
-Document multi-site SSR via `routesEntry` + flat `routes` + optional `sites` + `getSite`, not these workarounds.
+Document multi-site SSR via `routesEntry` + `routes` with optional `sites` + `getSite`, not these workarounds.
+
+### 4b. Route authoring: inline `lazy` (light contract)
+
+`routesEntry` stays an explicit named `routes` array.
+That is intentional and light.
+It can grow later (opt-in discovery, string-path helpers, bundler transforms) without rewriting the platform contract.
+
+Happy path for docs, create template, and fixtures:
+
+- Compose path / index / `sites` / `lazy` in `routesEntry` (or a module it imports that only exports route config shells).
+- Put `loader`, `action`, `Component`, `ErrorBoundary`, and similar on the lazily imported page module.
+- Prefer idiomatic `lazy: () => import('./pages/about')` so `moduleId` / modulepreload keep working.
+
+Do not teach a per-page `route.ts` stub as the default.
+Do not add a sku route helper in this release.
+Plain React Router `RouteObject` / `SkuRouteObject` literals are enough.
+
+Keep server-only loader modules off the client-imported graph (existing convention).
+Isomorphic loaders and actions on the lazy page module are fine.
+
+Deferred (future opt-in, not this change): filesystem conventions, Framework Mode–shaped string paths, TanStack-style auto code-splitting.
+Intentionally avoid extra authoring rules now so those can expand the same light contract later.
 
 ### 5. Commands and deploy shape
 
@@ -924,7 +949,7 @@ Production route errors omit `Error.stack`.
 
 ### 20. Create template + Migrating docs
 
-Template `ssr` MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config` (visible Melways/SEEK-shaped trust proxy — see Decision 25), a `routesEntry` + flat `routes` scaffold (optional route-level `sites` only when membership differs), and `defineServerEntry` / `defineClientEntry` + `createSkuContexts<typeof …>` + optional `getClientContext` / `getReactContext` / `onHydrate` properties.
+Template `ssr` MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config` (visible Melways/SEEK-shaped trust proxy — see Decision 25), a `routesEntry` + `routes` scaffold (optional route-level `sites` only when membership differs), and `defineServerEntry` / `defineClientEntry` + `createSkuContexts<typeof …>` + optional `getClientContext` / `getReactContext` / `onHydrate` properties.
 The template omits `getSite` (sku uses the sole resolved site name).
 Multi-site examples declare ≥2 config sites and include `getSite` on the server entry object.
 Request entries do not re-export `routes`.
@@ -934,6 +959,10 @@ Typed hooks live in `src/ssrContext.ts`.
 The home page calls `useSite()` (soft-default `'default'` when config `sites` is omitted).
 There is no `src/App/` shell — page content lives under `src/pages/`.
 
+The template’s `routesEntry` inlines idiomatic `lazy: () => import(…)` for page routes.
+Page modules under `src/pages/` export named `Component` (and optional `loader` / `action`).
+There is no per-page `route.ts` stub in the template.
+
 Lazy page modules MUST use React Router Data Mode named `export function Component` (not `export default`) so they typecheck with `lazy: () => import('…')`.
 
 Migrating docs cover Static App and Older / Webpack SSR App, not under `docs/migration-guides/`.
@@ -941,8 +970,8 @@ Migrating docs cover Static App and Older / Webpack SSR App, not under `docs/mig
 Migrating MUST cover:
 
 - Named `Component` on lazy pages.
-- `routesEntry` + flat `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site).
-- Multi-site membership via `sites` on routes (optional language path params, union tree + allowlist, or sku host matching as the product story).
+- `routesEntry` + `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site).
+- Multi-site membership via `sites` on routes.
 - Webpack dual-port → SSR single `port` (reject `serverPort`; `PORT` still overrides prod).
 - `dist/server/server.js` + sibling build `client/` / `server/`.
 - Baked server-local Vite client manifest (no sibling `client/` required to start).
@@ -1442,7 +1471,7 @@ Webpack SSR apps that leave `buildType` unset stay on the existing path.
 Rollback is a config-only revert: remove `buildType`.
 
 New apps scaffold from `--template ssr`.
-The template uses named `Component` on lazy pages and sets `expressTrustProxy: true` in config.
+The template uses inline `lazy` in `routesEntry`, named `Component` on lazy pages, and `expressTrustProxy: true` in config.
 
 Existing apps follow Migrating docs.
 Key topics include:
@@ -1451,7 +1480,7 @@ Key topics include:
 - CJS interop for `sku start`.
 - Express 4 typing and React Router 8 as an optional peer.
 - Named `Component` on lazy pages.
-- `routesEntry` + flat `routes` + optional `sites` + `getSite`.
+- `routesEntry` + `routes` + optional `sites` + `getSite`.
 - `defineServerEntry` / `defineClientEntry` replacing `onRequest`, plus optional `middleware` / `onListen` / `onHydrate`.
 - Webpack `onStart` → `onListen` + config `expressTrustProxy`.
 - `createSkuContexts<typeof …>` + three value channels + root-layout wrapping.
@@ -1464,3 +1493,4 @@ Key topics include:
 ## Resolved / deferred
 
 - **Docs diagram format for the three channels:** Prefer a Markdown table (and optional nested list) in product docs. VitePress has no built-in Mermaid. The site does not ship `vitepress-plugin-mermaid` today. Mermaid remains optional deferred polish — do not block docs on it.
+- **Auto / file-based route building:** Deferred. Launch keeps an explicit `routes` array with inline `lazy`. A future release MAY add opt-in discovery or codegen on top of this light contract. Do not harden complex folder / `route.ts` recommendations in v1 that would fight that expansion.

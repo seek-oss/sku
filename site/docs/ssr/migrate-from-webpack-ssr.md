@@ -54,7 +54,7 @@ export default {
 ## Routes and request entries
 
 - Replace `{ renderCallback, middleware, onStart }` with `defineServerEntry` / `defineClientEntry` — see [Request entries](./entries.md)
-- Put routes in [`routesEntry`](../configuration.md#routesentry) with flat `routes` and optional `sites` — see [Routing](./routing.md)
+- Put routes in [`routesEntry`](../configuration.md#routesentry) with named `routes` and optional `sites` — see [Routing](./routing.md)
 - Lazy page modules must export named `Component` (not `export default`)
 - sku streams the Document — put isomorphic wrapping in the root layout and env-differing values in `getReactContext`
 - Map webpack `onStart({ app })` to server-entry [`onListen({ app, httpServer, port })`](./entries.md#onlisten) (bound port + `httpServer` for keep-alive timeouts)

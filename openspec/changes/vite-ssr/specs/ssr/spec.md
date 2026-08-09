@@ -582,7 +582,7 @@ Production remains HTTP.
 
 ### Requirement: Teams can scaffold an SSR app via create
 
-`@sku-lib/create` MUST offer a `ssr` template that MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config`, `routesEntry` configured, a flat `routes` scaffold with an app-owned pathless root layout at `src/RootLayout.tsx` (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuContexts<typeof server, typeof client>` wiring in `src/ssrContext.ts`, a home page that calls `useSite()`, and realistic default-exported request-entry objects (`middleware`, optional `onListen` / context getters, `onHydrate` — no `routes` re-export, no `Providers`, no `src/App/` shell).
+`@sku-lib/create` MUST offer a `ssr` template that MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config`, `routesEntry` configured, a `routes` scaffold with an app-owned pathless root layout at `src/RootLayout.tsx` (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuContexts<typeof server, typeof client>` wiring in `src/ssrContext.ts`, a home page that calls `useSite()`, and realistic default-exported request-entry objects (`middleware`, optional `onListen` / context getters, `onHydrate` — no `routes` re-export, no `Providers`, no `src/App/` shell).
 
 A template with zero or one resolved site MUST omit `getSite` (sku uses the sole resolved site name).
 Multi-site examples MUST declare ≥2 config sites and export `getSite`.
@@ -596,7 +596,7 @@ The static `vite` template MUST remain unchanged.
 #### Scenario: Create ssr template
 
 - **WHEN** a user runs `@sku-lib/create --template ssr`
-- **THEN** the project is SSR with `expressTrustProxy: true` and `routesEntry` exporting flat `routes`
+- **THEN** the project is SSR with `expressTrustProxy: true` and `routesEntry` exporting named `routes`
 - **AND** config `sites` may be omitted (soft-default `'default'`) or declare real site names
 - **AND** the server entry exports `middleware` (and may export `onListen` / context getters)
 - **AND** the client entry exports `onHydrate` (and may export context getters)
@@ -693,7 +693,7 @@ Sku MUST NOT add a runtime experimental gate.
 
 SSR product docs MUST describe Managed Data Mode vs SSR and the core app contract:
 
-- `routesEntry` + flat `routes` with optional `sites` membership
+- `routesEntry` + `routes` with optional `sites` membership
 - `getSite` tree selection (required when config has >1 site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
 - default-exported request entries via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters and sibling projection
 - always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()`
@@ -710,7 +710,7 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 #### Scenario: Primary SSR docs have topic coverage
 
 - **WHEN** a reader opens SSR product docs
-- **THEN** docs cover `routesEntry`, `SkuProvider` / `createSkuContexts`, the three value channels, the app-owned root layout route, flat `routes`, optional `sites`, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onListen` / `onHydrate`, `expressTrustProxy`, CSP, and response headers
+- **THEN** docs cover `routesEntry`, `SkuProvider` / `createSkuContexts`, the three value channels, the app-owned root layout route, named `routes`, optional `sites`, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onListen` / `onHydrate`, `expressTrustProxy`, CSP, and response headers
 - **AND** docs steer page content toward render-time data loading with clients from `useReactContext` / `useClientContext` (not loaders as the default)
 - **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext`
 - **AND** docs document optional dual-entry `getRouterContext` and Data Mode vs Framework Mode seeding
@@ -764,10 +764,10 @@ SSR MUST include Migrating docs for Static App and Older / Webpack SSR App.
 Migrating docs MUST cover:
 
 - named `Component` (not default export) for lazy routes
-- `routesEntry` + flat `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
+- `routesEntry` + `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
 - default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` instead of an `onRequest` value return bag; optional `middleware` / `onListen` / `onHydrate`
 - webpack `onStart` → server-entry `onListen({ app, httpServer, port })`; trust proxy via config `expressTrustProxy` (not `onStart`); other trust-proxy values via `onListen`
-- multi-site membership via `sites` on routes (not `routesBySite` maps, dual-entry `routes` re-exports, optional language path params, union tree + allowlist, or sku host matching as the product story)
+- multi-site membership via `sites` on routes
 - webpack dual-port (`port` + `serverPort`) vs SSR single `port` (`serverPort` rejected; production still honours `PORT`)
 - production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
 - that Document assets resolve from a baked server-local manifest (no sibling `client/` required to start)

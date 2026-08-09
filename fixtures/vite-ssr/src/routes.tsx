@@ -16,7 +16,7 @@ import { nzOnlyRoute } from './pages/nz-only/route.js';
 export type FixtureSite = 'au' | 'nz';
 
 /**
- * Flat `routesEntry` routes. Shared routes omit `sites` (every config site).
+ * `routesEntry` route tree. Shared routes omit `sites` (every config site).
  * Site-only routes set `sites` explicitly — no parent→child inheritance.
  * The root layout is pathless so it reads as a layout and keeps wrapping any
  * root-level sibling added later; children join against `/` either way.

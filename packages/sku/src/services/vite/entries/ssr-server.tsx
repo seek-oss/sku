@@ -9,7 +9,6 @@ import {
   optionalEntryFunction,
   optionalEntryValue,
   optionalOrRequiredEntryFunction,
-  rejectRoutesBySiteExport,
   requireDefaultEntry,
   requireNamedExport,
 } from '../ssr/requireNamedExport.js';
@@ -28,8 +27,6 @@ import type {
   SkuServerGetRouterContext,
   SkuRouteObject,
 } from '../ssr/types.js';
-
-rejectRoutesBySiteExport(routesEntry, 'routesEntry');
 
 const routes = requireNamedExport<SkuRouteObject[]>(
   routesEntry,

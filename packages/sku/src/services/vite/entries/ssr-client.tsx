@@ -10,7 +10,6 @@ import Document from '../ssr/Document.js';
 import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import {
   optionalEntryFunction,
-  rejectRoutesBySiteExport,
   requireDefaultEntry,
   requireNamedExport,
 } from '../ssr/requireNamedExport.js';
@@ -22,8 +21,6 @@ import type {
   SkuOnHydrate,
   SkuRouteObject,
 } from '../ssr/types.js';
-
-rejectRoutesBySiteExport(routesEntry, 'routesEntry');
 
 const routes = requireNamedExport<SkuRouteObject[]>(
   routesEntry,

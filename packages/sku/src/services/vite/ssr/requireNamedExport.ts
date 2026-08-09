@@ -39,23 +39,6 @@ export const requireNamedExport = <T>(
 };
 
 /**
- * `routesBySite` is rejected — use flat `routes` + optional `sites` on `routesEntry`.
- */
-export const rejectRoutesBySiteExport = (
-  moduleExports: object,
-  entryLabel: string,
-): void => {
-  if (
-    Object.prototype.hasOwnProperty.call(moduleExports, 'routesBySite') &&
-    (moduleExports as Record<string, unknown>).routesBySite !== undefined
-  ) {
-    throw new Error(
-      `SSR ${entryLabel} must not export named 'routesBySite'. Export flat 'routes' with optional 'sites' membership on routesEntry instead.`,
-    );
-  }
-};
-
-/**
  * SSR request entries `export default` one object (`defineServerEntry` /
  * `defineClientEntry`). Missing / non-object → hard error.
  */

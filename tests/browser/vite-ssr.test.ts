@@ -11,8 +11,8 @@ import { createPage } from '@sku-private/playwright';
 const { sku, node, fixturePath } = scopeToFixture('vite-ssr');
 
 describe('vite-ssr', () => {
-  describe('routesEntry flat routes + sites pattern', () => {
-    it('exports flat routes with optional sites from routesEntry only', async () => {
+  describe('routesEntry routes + sites pattern', () => {
+    it('exports routes with optional sites from routesEntry only', async () => {
       const [routes, nzOnlyRoute, server] = await Promise.all([
         fs.readFile(fixturePath('src/routes.tsx'), 'utf8'),
         fs.readFile(fixturePath('src/pages/nz-only/route.ts'), 'utf8'),

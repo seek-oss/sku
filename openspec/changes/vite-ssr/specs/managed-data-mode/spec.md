@@ -24,13 +24,13 @@ Product docs, templates, and public APIs MUST NOT use the label `vite-ssr` (that
 - **WHEN** an app imports Managed Data Mode helpers (`defineServerEntry`, `createSkuContexts`, `useInsertHtml`, …)
 - **THEN** the import specifier is `sku/runtime`
 
-### Requirement: routesEntry exports flat routes
+### Requirement: routesEntry exports routes
 
 Config MUST support `routesEntry` (default `src/routes.tsx`) for Managed Data Mode apps.
 
 Sku MUST resolve `routesEntry` into both the server and client graphs via `__sku_alias__routesEntry`.
 
-`routesEntry` MUST export named `routes` as `SkuRouteObject[]` (flat array).
+`routesEntry` MUST export named `routes` as `SkuRouteObject[]`.
 
 `SkuRouteObject` MUST be a sku type helper `RouteObject & { sites?: string[] }` (not a wrapped React Router re-export).
 

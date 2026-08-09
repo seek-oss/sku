@@ -4,7 +4,6 @@ import {
   optionalEntryFunction,
   optionalEntryValue,
   optionalOrRequiredEntryFunction,
-  rejectRoutesBySiteExport,
   requireDefaultEntry,
   requireNamedExport,
 } from './requireNamedExport.js';
@@ -61,22 +60,6 @@ describe('requireNamedExport', () => {
         kind: 'routes',
       }),
     ).toThrow(/SSR routesEntry must export named 'routes' as an array/);
-  });
-});
-
-describe('rejectRoutesBySiteExport', () => {
-  it('allows routesEntry without a routesBySite export', () => {
-    expect(() =>
-      rejectRoutesBySiteExport({ routes: [] }, 'routesEntry'),
-    ).not.toThrow();
-  });
-
-  it('hard-errors when routesBySite is exported on routesEntry', () => {
-    expect(() =>
-      rejectRoutesBySiteExport({ routesBySite: { au: [] } }, 'routesEntry'),
-    ).toThrow(
-      /SSR routesEntry must not export named 'routesBySite'\. Export flat 'routes' with optional 'sites' membership on routesEntry instead\./,
-    );
   });
 });
 

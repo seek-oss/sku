@@ -114,6 +114,13 @@ It is not a history of intermediate APIs.
 - [x] 13.4 Document unsupported SSR options (`public`, `dangerouslySetViteConfig`, `vitePlugins`, absolute `publicPath`). Document Express 4 + React Router 8 peer policy.
 - [x] 13.5 Changeset: experimental / not-for-production Managed Data Mode SSR. End-state public names. Do not label unreleased API churn as breaking.
 
+## 14. Inline lazy route authoring (docs / template / fixtures)
+
+- [ ] 14.1 Rewrite SSR routing docs in place: inline `lazy` in `routesEntry`; page modules own `loader` / `action` / `Component`; do not recommend per-page `route.ts` stubs.
+- [ ] 14.2 Align create template `ssr` to inline `lazy` (remove per-page `route.ts`; page modules under `src/pages/`).
+- [ ] 14.3 Align SSR fixtures to prefer inline `lazy` everywhere practical; update create snapshots / generate tests.
+- [ ] 14.4 Sweep product / Migrating / multi-language examples for leftover stub-folder happy-path wording; describe end state only.
+
 ## Deferred
 
 See design Non-Goals and Resolved / deferred for the full list.
@@ -122,4 +129,5 @@ High-signal follow-ons only:
 - Optional compose slot above the router if root layout + `getReactContext` prove insufficient
 - Public language-in-React-context hook
 - Generic `SkuRouteObject<Site>`
+- Opt-in auto / file-based route building on top of the light explicit `routes` + inline `lazy` contract (Decision 4b)
 - Express 5 and React Router majors beyond 8 (later changes)

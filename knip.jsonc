@@ -188,17 +188,33 @@
     "fixtures/vite-render-error": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },
-    "fixtures/vite-ssr": {
+    "fixtures/ssr-document": {
       "entry": [
         "src/server.tsx",
         "src/client.tsx",
         "src/routes.tsx",
         "sku.config.*",
       ],
+    },
+    "fixtures/ssr-data": {
+      "entry": [
+        "src/server.tsx",
+        "src/client.tsx",
+        "src/routes.tsx",
+        "sku.config.*",
+        "dev-middleware.js",
+      ],
       "ignoreDependencies": [
-        "@vocab/core",
         // Needed so `declare module 'express-serve-static-core'` resolves under pnpm
         "@types/express-serve-static-core",
+      ],
+    },
+    "fixtures/ssr-sites": {
+      "entry": [
+        "src/server.tsx",
+        "src/client.tsx",
+        "src/routes.tsx",
+        "sku.config.*",
       ],
     },
     "fixtures/logging": {

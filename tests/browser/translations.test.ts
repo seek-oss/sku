@@ -6,10 +6,12 @@ import {
   type BundlerValues,
   scopeToFixture,
   skipCleanup,
+  waitFor,
 } from '@sku-private/testing-library';
-import { rm } from 'node:fs/promises';
+import { readFile, rm } from 'node:fs/promises';
+import path from 'node:path';
 
-const { sku, fixturePath } = scopeToFixture('translations');
+const { sku, node, fixturePath } = scopeToFixture('translations');
 
 describe('translations', () => {
   describe.for(bundlers)('bundler %s', async (bundler) => {
@@ -118,5 +120,60 @@ describe('vite ssr translations', () => {
       url: `${viteSsrUrl}/en?pseudo=true`,
     });
     expect(app).toMatchSnapshot();
+  });
+});
+
+describe('vite ssr translations build', () => {
+  const prodUrl = 'http://localhost:8316';
+
+  beforeAll(async () => {
+    const distDir = fixturePath('dist');
+    await rm(distDir, { recursive: true, force: true });
+
+    const build = await sku('build', ['--config=sku.config.vite-ssr.ts']);
+    await build.findByText('Sku build complete');
+  });
+
+  it('emits named vocab language chunks', async () => {
+    const manifestPath = path.join(
+      fixturePath('dist'),
+      'server',
+      'manifest.json',
+    );
+    const manifest = JSON.parse(await readFile(manifestPath, 'utf8')) as Record<
+      string,
+      { file: string; name?: string }
+    >;
+
+    const languageChunks = Object.values(manifest).filter(
+      (chunk) =>
+        chunk.name === 'en-translations' || chunk.name === 'fr-translations',
+    );
+    expect(languageChunks.map((chunk) => chunk.name).sort()).toEqual([
+      'en-translations',
+      'fr-translations',
+    ]);
+  });
+
+  it('modulepreloads the active language vocab chunk from the server entry', async ({
+    task,
+  }) => {
+    skipCleanup(task.id);
+    await node(['dist/server/server.js'], {
+      spawnOpts: {
+        env: { ...process.env, PORT: '8316' },
+      },
+    });
+
+    await waitFor(
+      async () => {
+        const response = await fetch(`${prodUrl}/en`);
+        expect(response.ok).toBe(true);
+        const html = await response.text();
+        expect(html).toContain('rel="modulepreload"');
+        expect(html).toMatch(/en-translations[^"]*\.js/);
+      },
+      { timeout: 15000 },
+    );
   });
 });

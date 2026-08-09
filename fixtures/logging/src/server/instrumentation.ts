@@ -2,8 +2,9 @@ import { context, trace } from '@opentelemetry/api';
 import type { ServerInstrumentation } from 'react-router';
 
 import { log } from '../shared/log.js';
-import { markSpanError } from './tracing.js';
 import { getTracer } from '../shared/tracing.js';
+
+import { markSpanError } from './tracing.js';
 
 export const routeInstrumentation: Pick<ServerInstrumentation, 'route'> = {
   route(route) {

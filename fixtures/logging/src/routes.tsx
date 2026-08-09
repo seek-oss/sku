@@ -8,7 +8,7 @@ export const routes: SkuRouteObject[] = [
     Component: RootLayout,
     ErrorBoundary,
     children: [
-      { index: true, lazy: () => import('./pages/home/home.js') },
+      { index: true, lazy: () => import('./pages/home.js') },
       {
         path: 'loader-error',
         lazy: () => import('./pages/loader-error.js'),

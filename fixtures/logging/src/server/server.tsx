@@ -1,6 +1,7 @@
 import { defineServerEntry } from 'sku/runtime';
 
 import { log } from '../shared/log.js';
+
 import { routeInstrumentation } from './instrumentation.js';
 import { middleware } from './middleware.js';
 import { startServerTracing } from './tracing.js';

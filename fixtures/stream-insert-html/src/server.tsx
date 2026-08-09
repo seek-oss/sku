@@ -1,5 +1,6 @@
 import { ApolloLink, Observable } from '@apollo/client';
 import { ApolloClient, InMemoryCache } from '@apollo/client-react-streaming';
+import { Router } from 'express';
 import { defineServerEntry, getCspNonce } from 'sku/runtime';
 
 import { resolveGraphql } from './graphql.js';
@@ -38,6 +39,21 @@ const makeClient = () =>
     ),
   });
 
+// GET keeps the fixture free of body-parser wiring; HttpLink uses GET for queries.
+// eslint-disable-next-line new-cap
+const fixtureApi = Router();
+
+fixtureApi.get('/api/graphql', (req, res) => {
+  const result = resolveGraphql({
+    operationName:
+      typeof req.query.operationName === 'string'
+        ? req.query.operationName
+        : null,
+    query: typeof req.query.query === 'string' ? req.query.query : '',
+  });
+  res.status(200).type('application/json').send(result);
+});
+
 const server = defineServerEntry({
   getReactContext() {
     return {
@@ -46,23 +62,7 @@ const server = defineServerEntry({
       extraScriptProps: { nonce: getCspNonce() },
     };
   },
-  middleware: [
-    (req, res, next) => {
-      // GET keeps the fixture free of body-parser wiring; HttpLink uses GET for queries.
-      if (req.path === '/api/graphql' && req.method === 'GET') {
-        const result = resolveGraphql({
-          operationName:
-            typeof req.query.operationName === 'string'
-              ? req.query.operationName
-              : null,
-          query: typeof req.query.query === 'string' ? req.query.query : '',
-        });
-        res.status(200).type('application/json').send(result);
-        return;
-      }
-      next();
-    },
-  ],
+  middleware: [fixtureApi],
 });
 
 export default server;

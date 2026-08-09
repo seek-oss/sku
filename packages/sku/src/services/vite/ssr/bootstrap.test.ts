@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import type { StaticHandlerContext } from 'react-router';
+import {
+  UNSAFE_ErrorResponseImpl as ErrorResponseImpl,
+  type StaticHandlerContext,
+} from 'react-router';
 import { buildBootstrapScriptContent } from './bootstrap.js';
 
 const parseHydrationData = (script: string) => {
@@ -7,7 +10,19 @@ const parseHydrationData = (script: string) => {
   return JSON.parse(hydrationPart) as {
     loaderData: unknown;
     actionData: unknown;
-    errors: Record<string, { message?: string; stack?: string }> | null;
+    errors: Record<
+      string,
+      {
+        message?: string;
+        stack?: string;
+        __type?: string;
+        __subType?: string;
+        status?: number;
+        statusText?: string;
+        data?: unknown;
+        internal?: boolean;
+      }
+    > | null;
   };
 };
 
@@ -86,7 +101,10 @@ describe('buildBootstrapScriptContent', () => {
     );
 
     const data = parseHydrationData(script);
-    expect(data.errors?.['0']).toEqual({ message: 'Boom' });
+    expect(data.errors?.['0']).toEqual({
+      message: 'Boom',
+      __type: 'Error',
+    });
     expect(data.errors?.['0']).not.toHaveProperty('stack');
   });
 
@@ -105,9 +123,54 @@ describe('buildBootstrapScriptContent', () => {
     );
 
     const data = parseHydrationData(script);
-    expect(data.errors?.['0']).toMatchObject({
+    expect(data.errors?.['0']).toEqual({
       message: 'Boom',
+      __type: 'Error',
       stack: 'Error: Boom\n    at loader',
+    });
+  });
+
+  it('serialises RouteErrorResponse with __type for hydrate', () => {
+    const error = new ErrorResponseImpl(404, 'Not Found', 'Missing page', true);
+
+    const script = buildBootstrapScriptContent(
+      { css: [], modulePreloads: [] },
+      {
+        loaderData: {},
+        actionData: null,
+        errors: { '0': error },
+      } as unknown as StaticHandlerContext,
+      { site: 'au' },
+    );
+
+    const data = parseHydrationData(script);
+    expect(data.errors?.['0']).toEqual({
+      status: 404,
+      statusText: 'Not Found',
+      data: 'Missing page',
+      internal: true,
+      __type: 'RouteErrorResponse',
+    });
+  });
+
+  it('includes __subType for named Error subclasses', () => {
+    const error = new TypeError('Bad value');
+
+    const script = buildBootstrapScriptContent(
+      { css: [], modulePreloads: [] },
+      {
+        loaderData: {},
+        actionData: null,
+        errors: { '0': error },
+      } as unknown as StaticHandlerContext,
+      { development: false, site: 'au' },
+    );
+
+    const data = parseHydrationData(script);
+    expect(data.errors?.['0']).toEqual({
+      message: 'Bad value',
+      __type: 'Error',
+      __subType: 'TypeError',
     });
   });
 });

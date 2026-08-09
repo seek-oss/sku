@@ -77,7 +77,6 @@ const hydrate = async () => {
   );
 
   const router = createBrowserRouter(siteRoutes, {
-    hydrationData: window.__staticRouterHydrationData,
     // RR native getContext is zero-arg; wrap sku getRouterContext to inject
     // hydrate sibling values.
     ...(getRouterContext

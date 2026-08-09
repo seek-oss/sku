@@ -41,6 +41,8 @@ const serializeErrors = (
 
   return Object.fromEntries(
     Object.entries(errors).map(([key, error]) => {
+      // Match React Router's serializeErrors markers so createBrowserRouter's
+      // parseHydrationData / deserializeErrors can rebuild Error / ErrorResponse.
       if (isRouteErrorResponse(error)) {
         return [
           key,
@@ -48,6 +50,9 @@ const serializeErrors = (
             status: error.status,
             statusText: error.statusText,
             data: error.data,
+            // Runtime field required by isRouteErrorResponse / deserializeErrors.
+            internal: (error as { internal?: boolean }).internal === true,
+            __type: 'RouteErrorResponse',
           },
         ];
       }
@@ -56,6 +61,8 @@ const serializeErrors = (
           key,
           {
             message: error.message,
+            __type: 'Error',
+            ...(error.name !== 'Error' ? { __subType: error.name } : {}),
             ...(development && error.stack ? { stack: error.stack } : {}),
           },
         ];

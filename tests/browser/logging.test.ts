@@ -168,6 +168,35 @@ describe('logging', () => {
       expect(loaderSpan?.statusCode).toBe(SPAN_STATUS_ERROR);
     });
 
+    it('hydrates loader error pages without a text mismatch', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const page = await createPage();
+      const pageErrors: Error[] = [];
+      const consoleErrors: string[] = [];
+      page.on('pageerror', (error) => pageErrors.push(error));
+      page.on('console', (msg) => {
+        if (msg.type() === 'error') {
+          consoleErrors.push(msg.text());
+        }
+      });
+
+      await page.goto(`${baseUrl}/loader-error`, { waitUntil: 'networkidle' });
+      await page.getByTestId('error-boundary').waitFor({ state: 'visible' });
+      expect(await page.getByTestId('error-message').textContent()).toContain(
+        'Boom from loader',
+      );
+      expect(pageErrors).toEqual([]);
+      expect(
+        consoleErrors.filter((text) =>
+          text.includes('Hydration failed because the server rendered text'),
+        ),
+      ).toEqual([]);
+
+      await page.close();
+    });
+
     it('records render and suspense errors via ErrorBoundary', async ({
       task,
     }) => {

@@ -79,6 +79,18 @@ const waitForSpans = async (
   return getSpans();
 };
 
+/** Wait until RootLayout's useEffect has run (React Router owns <Link> clicks). */
+const waitForClientHydration = async (
+  page: Awaited<ReturnType<typeof createPage>>,
+) => {
+  await page.waitForFunction(
+    () =>
+      (window as Window & { __SKU_LOGGING_HYDRATED__?: boolean })
+        .__SKU_LOGGING_HYDRATED__ === true,
+    { timeout: 15000 },
+  );
+};
+
 describe('logging', () => {
   describe('start', () => {
     beforeAll(async () => {
@@ -237,8 +249,9 @@ describe('logging', () => {
       skipCleanup(task.id);
       const page = await createPage();
 
-      await page.goto(`${baseUrl}/action-error`, { waitUntil: 'load' });
+      await page.goto(`${baseUrl}/action-error`, { waitUntil: 'networkidle' });
       await page.getByTestId('action-error-page').waitFor({ state: 'visible' });
+      await waitForClientHydration(page);
       await clearTelemetry();
 
       await page.getByTestId('nav-home').click();
@@ -288,8 +301,9 @@ describe('logging', () => {
       skipCleanup(task.id);
       const page = await createPage();
 
-      await page.goto(baseUrl, { waitUntil: 'load' });
+      await page.goto(baseUrl, { waitUntil: 'networkidle' });
       await page.getByTestId('home-page').waitFor({ state: 'visible' });
+      await waitForClientHydration(page);
       await clearTelemetry();
 
       await page.getByTestId('nav-loader-error').click();

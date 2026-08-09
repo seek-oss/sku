@@ -13,11 +13,10 @@ Do not use it in production yet; the API and behaviour may change.
 sku wires React Router Data Mode for routing and data.
 Apps own routes, data, and providers.
 
-
 Scaffold a new app with `@sku-lib/create`:
 
 ```sh
 pnpm dlx @sku-lib/create my-app --template ssr
 ```
 
-Docs: [Vite](https://seek-oss.github.io/sku/#/./docs/vite), [Server rendering](https://seek-oss.github.io/sku/#/./docs/ssr/) (including providers, middleware, CSP, and migration guides), [CSP](https://seek-oss.github.io/sku/#/./docs/csp), [Configuration](https://seek-oss.github.io/sku/#/./docs/configuration).
+Docs: [Server rendering](https://seek-oss.github.io/sku/#/./docs/ssr/)

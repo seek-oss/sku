@@ -1,9 +1,10 @@
-import { describe, beforeAll, it, expect } from 'vitest';
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 import { getAppSnapshot } from '@sku-private/playwright';
 import fs from 'node:fs/promises';
 import net from 'node:net';
 
 import {
+  cleanup,
   scopeToFixture,
   skipCleanup,
   waitFor,
@@ -11,8 +12,9 @@ import {
 
 const { sku, fixturePath, node, exec } = scopeToFixture('ssr-hello-world');
 
-const DEV_SERVER_PORT = 8001;
-const NODE_SERVER_PORT = 8100;
+const START_DEV_SERVER_PORT = 8101;
+const START_NODE_SERVER_PORT = 8100;
+const BUILD_SERVER_PORT = 8001;
 
 // Probe whether a TCP port is accepting connections.
 // Used instead of `fetch` so it's agnostic to https/http.
@@ -32,11 +34,15 @@ const isPortListening = (port: number) =>
 
 describe('ssr-hello-world', () => {
   describe('start', () => {
-    const url = `https://localhost:${DEV_SERVER_PORT}`;
+    const url = `https://localhost:${START_DEV_SERVER_PORT}`;
 
     beforeAll(async () => {
       const start = await sku('start-ssr', ['--config=sku-start.config.ts']);
       await start.findByText('Server started');
+    });
+
+    afterAll(async () => {
+      await cleanup();
     });
 
     it('should start a development server', async ({ task }) => {
@@ -65,7 +71,7 @@ describe('ssr-hello-world', () => {
   });
 
   describe('build', () => {
-    const url = `http://localhost:${DEV_SERVER_PORT}`;
+    const url = `http://localhost:${BUILD_SERVER_PORT}`;
 
     beforeAll(async () => {
       const build = await sku('build-ssr', ['--config=sku-build.config.ts']);
@@ -74,7 +80,12 @@ describe('ssr-hello-world', () => {
 
     describe('default port', () => {
       it('should generate a production server based on config', async () => {
-        await node(['dist/server.cjs']);
+        const server = await node(['dist/server.cjs']);
+        expect(
+          await server.findByText(
+            `Server started on port ${BUILD_SERVER_PORT}`,
+          ),
+        ).toBeInTheConsole();
 
         const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
         expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
@@ -134,8 +145,8 @@ describe.each(['SIGINT', 'SIGTERM', 'SIGQUIT'] as const)(
       });
       await start.findByText('Server started');
 
-      expect(await isPortListening(NODE_SERVER_PORT)).toBe(true);
-      expect(await isPortListening(DEV_SERVER_PORT)).toBe(true);
+      expect(await isPortListening(START_NODE_SERVER_PORT)).toBe(true);
+      expect(await isPortListening(START_DEV_SERVER_PORT)).toBe(true);
 
       const { pid } = start.process;
       if (!pid) {
@@ -145,8 +156,8 @@ describe.each(['SIGINT', 'SIGTERM', 'SIGQUIT'] as const)(
       process.kill(-pid, signal);
 
       await waitFor(async () => {
-        expect(await isPortListening(NODE_SERVER_PORT)).toBe(false);
-        expect(await isPortListening(DEV_SERVER_PORT)).toBe(false);
+        expect(await isPortListening(START_NODE_SERVER_PORT)).toBe(false);
+        expect(await isPortListening(START_DEV_SERVER_PORT)).toBe(false);
       });
 
       await waitFor(() => expect(start.hasExit()).not.toBeNull());

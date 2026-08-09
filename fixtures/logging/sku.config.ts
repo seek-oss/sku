@@ -3,8 +3,9 @@ import type { SkuConfig } from 'sku';
 export default {
   bundler: 'vite',
   buildType: 'ssr',
-  publicPath: '/static/stream-insert-html/',
-  port: 8210,
+  clientEntry: 'src/client/client.tsx',
+  serverEntry: 'src/server/server.tsx',
+  publicPath: '/static/logging/',
+  port: 8212,
   target: 'dist',
-  cspEnabled: true,
 } satisfies SkuConfig;

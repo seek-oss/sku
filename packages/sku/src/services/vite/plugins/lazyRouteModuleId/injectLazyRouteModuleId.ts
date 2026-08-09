@@ -190,7 +190,15 @@ export const injectLazyRouteModuleId = ({
     return null;
   }
 
-  const output = generate(ast, { retainLines: true }, code);
+  const output = generate(
+    ast,
+    {
+      retainLines: true,
+      sourceMaps: true,
+      sourceFileName: id.split('?')[0] ?? id,
+    },
+    code,
+  );
   return {
     code: output.code,
     map: output.map,

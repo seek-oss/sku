@@ -24,6 +24,11 @@ Details: `design.md` Decision 4a.
 With Express `req` on entry getters / optional `getRouterContext`, apps have no need to separate server vs client route modules.
 A single `routesEntry` is the source of truth for both graphs.
 
+React Router’s stable `instrumentations` API observes loaders, actions, middleware, lazy, and client navigations.
+Sku creates `createStaticHandler` / `createBrowserRouter` itself, so apps cannot pass that option without a sku seam.
+This change adds optional `instrumentations` on each request entry and forwards them unchanged.
+Details: `design.md` Decision 28.
+
 Streaming data transports must inject `<script>` chunks between React stream chunks.
 That lets SSR queries hydrate the browser cache instead of refetching.
 Apollo Client streaming hydration is the main adoption case.
@@ -54,6 +59,9 @@ Details: `design.md` Decision 12a.
 - Request entries (`serverEntry` / `clientEntry`) default-export objects via `defineServerEntry` / `defineClientEntry`.
 - Optional getters include `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`.
 - Optional entry hooks include `middleware`, `onListen`, `onHydrate`, and dual-entry `getRouterContext`.
+- Optional dual-entry `instrumentations` pass through to React Router.
+- Server `instrumentations` forward into each site’s `createStaticHandler`.
+- Client `instrumentations` forward into `createBrowserRouter`.
 - Sku owns Document, streaming, assets, CSP, and always-on `SkuProvider` outside the router.
 - There is no app-authored dual-entry `Providers`.
 - Three value channels replace it: `getClientContext`, `getReactContext`, and `getRouterContext`.
@@ -99,7 +107,7 @@ The OpenSpec change / branch name remains `vite-ssr` as a historical workstream 
 - `onListen` and `expressTrustProxy`
 - create template `ssr`
 
-Full contract: `design.md` Decisions 12 / 12a / 25.
+Full contract: `design.md` Decisions 12 / 12a / 25 / 28.
 
 **Deps**
 

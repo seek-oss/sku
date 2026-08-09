@@ -1,115 +1,23 @@
-import { renderToPipeableStream, type PipeableStream } from 'react-dom/server';
-import type { Request as ExpressRequest } from 'express';
-import {
-  createStaticRouter,
-  StaticRouterProvider,
-  type StaticHandler,
-  type StaticHandlerContext,
-} from 'react-router';
-import { getChunkName } from '@vocab/vite/chunks';
-import { createInsertHtmlQueue, InsertHtmlProvider } from '#runtime/insertHtml';
-import { SkuProvider } from '#runtime/skuContext';
 import { runWithSsrRequestContext } from '#runtime/requestContext';
-import Document from './Document.js';
-import { buildBootstrapScriptContent } from './bootstrap.js';
-import { createInsertHtmlTransform } from './createInsertHtmlTransform.js';
+
+import { collectRouteHeaders } from './collectRouteHeaders.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
+import { getModuleIds } from './getModuleIds.js';
 import { getCspNonce } from './requestContext.js';
 import {
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,
 } from './resolveAssets.js';
 import { selectForSite } from './selectForSite.js';
+import { streamDocument } from './streamDocument.js';
 import type {
   DocumentAssets,
-  RenderAssets,
-  RenderManifest,
-  RenderOptions,
+  RenderArgs,
   RenderResult,
   SkuRouteHandle,
-  SkuGetClientContext,
-  SkuGetLanguage,
-  SkuGetSite,
-  SkuServerGetReactContext,
-  SkuServerGetRouterContext,
 } from './types.js';
 
-const wrapPipeWithInsertHtml = (
-  pipe: PipeableStream['pipe'],
-  queue: ReturnType<typeof createInsertHtmlQueue>,
-): PipeableStream['pipe'] => {
-  const wrappedPipe: PipeableStream['pipe'] = (destination) => {
-    const transform = createInsertHtmlTransform(queue);
-    pipe(transform);
-    return transform.pipe(destination);
-  };
-  return wrappedPipe;
-};
-
-/** Merge RR loader/action headers from all matches (append for Set-Cookie). */
-const collectRouteHeaders = (context: StaticHandlerContext): Headers => {
-  const headers = new Headers();
-  for (const { route } of context.matches) {
-    const routeId = route.id;
-    if (!routeId) {
-      continue;
-    }
-    const loaderHeaders = context.loaderHeaders[routeId];
-    const actionHeaders = context.actionHeaders[routeId];
-    loaderHeaders?.forEach((value, name) => {
-      headers.append(name, value);
-    });
-    actionHeaders?.forEach((value, name) => {
-      headers.append(name, value);
-    });
-  }
-  return headers;
-};
-
-const getModuleIds = (
-  matches: Array<{
-    route: { handle?: unknown; lazy?: unknown; path?: string };
-  }>,
-  {
-    development,
-    requestLanguage,
-  }: {
-    development: boolean;
-    requestLanguage?: string;
-  },
-): string[] => {
-  const moduleIds = matches.flatMap(({ route }) => {
-    const moduleId = (route.handle as SkuRouteHandle | undefined)?.moduleId;
-    if (development && route.lazy && !moduleId) {
-      console.warn(
-        `[sku] Lazy route at "${String(route.path ?? '(index)')}" is missing handle.moduleId. Prefer idiomatic lazy: () => import('./pages/about/about') so sku can auto-derive it, or set handle.moduleId explicitly to the Vite client manifest key (e.g. "src/pages/about/about.tsx") for production modulepreload links.`,
-      );
-    }
-    return moduleId ? [moduleId] : [];
-  });
-
-  // Vocab chunk only when getLanguage returns language — no allowlist / sole-language default.
-  if (requestLanguage) {
-    moduleIds.push(getChunkName(requestLanguage));
-  }
-
-  return moduleIds;
-};
-
-export interface RenderArgs {
-  siteStaticHandlers: Record<string, StaticHandler>;
-  request: Request;
-  req: ExpressRequest;
-  assets: RenderAssets;
-  /** Required when config has >1 site; omit on single-site ⇒ sole config site. */
-  getSite?: SkuGetSite;
-  getLanguage?: SkuGetLanguage;
-  getClientContext?: SkuGetClientContext;
-  getReactContext?: SkuServerGetReactContext;
-  options?: RenderOptions;
-  renderManifest?: RenderManifest;
-  getRouterContext?: SkuServerGetRouterContext;
-}
+export type { RenderArgs } from './types.js';
 
 const renderDocument = async ({
   siteStaticHandlers,
@@ -176,16 +84,6 @@ const renderDocument = async ({
     warnUnknownModuleIdsWithoutManifest(moduleIds);
   }
 
-  const router = createStaticRouter(dataRoutes, context);
-  const bootstrapScriptContent = buildBootstrapScriptContent(
-    documentAssets,
-    context,
-    {
-      development,
-      clientContext,
-      site,
-    },
-  );
   const routeHeaders = collectRouteHeaders(context);
   const waitForAll = context.matches.some(
     ({ route }) =>
@@ -196,80 +94,19 @@ const renderDocument = async ({
   // Consumers may already have requested the same value via getCspNonce / req.getCspNonce.
   const nonce = getCspNonce() ?? options.nonce;
 
-  const routerElement = (
-    <StaticRouterProvider router={router} context={context} hydrate={false} />
-  );
-
-  // Render-scoped: provider wraps Document so route code can reach it;
-  // the matching transform flushes queued nodes before each React chunk.
-  const insertHtmlQueue = createInsertHtmlQueue();
-
-  return new Promise((resolve, reject) => {
-    let ready = false;
-    const stream = renderToPipeableStream(
-      <InsertHtmlProvider insertHtml={insertHtmlQueue.insertHtml}>
-        <Document assets={documentAssets}>
-          <SkuProvider
-            site={site}
-            clientContext={clientContext}
-            reactContext={reactContext}
-          >
-            {routerElement}
-          </SkuProvider>
-        </Document>
-      </InsertHtmlProvider>,
-      {
-        bootstrapModules: assets.bootstrapModules,
-        bootstrapScriptContent,
-        nonce,
-        onShellReady() {
-          if (waitForAll || ready) {
-            return;
-          }
-          ready = true;
-          resolve({
-            pipe: wrapPipeWithInsertHtml(
-              stream.pipe.bind(stream),
-              insertHtmlQueue,
-            ),
-            abort: stream.abort.bind(stream),
-            statusCode: context.statusCode,
-            headers: routeHeaders,
-            inlineScripts: [bootstrapScriptContent],
-          });
-        },
-        onAllReady() {
-          if (!waitForAll || ready) {
-            return;
-          }
-          ready = true;
-          resolve({
-            pipe: wrapPipeWithInsertHtml(
-              stream.pipe.bind(stream),
-              insertHtmlQueue,
-            ),
-            abort: stream.abort.bind(stream),
-            statusCode: context.statusCode,
-            headers: routeHeaders,
-            inlineScripts: [bootstrapScriptContent],
-          });
-        },
-        onShellError(error) {
-          options.onShellError?.(error);
-          reject(error);
-        },
-        onError(error) {
-          options.onError?.(error);
-        },
-      },
-    );
-
-    const abort = () => stream.abort();
-    if (options.signal?.aborted) {
-      abort();
-    } else {
-      options.signal?.addEventListener('abort', abort, { once: true });
-    }
+  return streamDocument({
+    renderContext: context,
+    dataRoutes,
+    documentAssets,
+    assets,
+    site,
+    clientContext,
+    reactContext,
+    routeHeaders,
+    waitForAll,
+    nonce,
+    options,
+    allowErrorRetry: true,
   });
 };
 

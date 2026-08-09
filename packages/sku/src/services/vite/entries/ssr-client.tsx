@@ -10,6 +10,7 @@ import Document from '../ssr/Document.js';
 import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import {
   optionalEntryFunction,
+  optionalEntryValue,
   requireDefaultEntry,
   requireNamedExport,
 } from '../ssr/requireNamedExport.js';
@@ -44,6 +45,10 @@ const getRouterContext = optionalEntryFunction<SkuClientGetRouterContext>(
   entry,
   'getRouterContext',
 );
+
+const instrumentations = optionalEntryValue<
+  NonNullable<SkuClientEntry['instrumentations']>
+>(entry, 'instrumentations');
 
 const hydrate = async () => {
   const site = window.__SKU_SITE__;
@@ -81,6 +86,7 @@ const hydrate = async () => {
             getRouterContext({ site, clientContext, reactContext }),
         }
       : {}),
+    ...(instrumentations === undefined ? {} : { instrumentations }),
   });
 
   const routerElement = <RouterProvider router={router} />;

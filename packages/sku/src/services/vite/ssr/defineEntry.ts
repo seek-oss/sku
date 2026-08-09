@@ -1,5 +1,9 @@
 import type { Request as ExpressRequest } from 'express';
-import type { RouterContextProvider } from 'react-router';
+import type {
+  ClientInstrumentation,
+  RouterContextProvider,
+  ServerInstrumentation,
+} from 'react-router';
 
 import type { ClientContextOf, SiteOf } from './entryTypeExtractors.js';
 import type { JsonValue, SkuMiddleware, SkuOnListen } from './types.js';
@@ -37,6 +41,10 @@ export type ServerEntryBody<
    * (start + production). Not re-fired on server-entry HMR.
    */
   onListen?: SkuOnListen;
+  /**
+   * Optional React Router route-level instrumentations forwarded into `createStaticHandler` at module init.
+   */
+  instrumentations?: Array<Pick<ServerInstrumentation, 'route'>>;
 };
 
 /**
@@ -70,6 +78,11 @@ type ClientEntryBody<ServerEntry, ReactContext> = {
     clientContext: NoInfer<ClientContextOf<ServerEntry>> | undefined;
     reactContext: NoInfer<ReactContext> | undefined;
   }) => RouterContextProvider;
+  /**
+   * Optional React Router instrumentations (`router` + `route`) forwarded into
+   * `createBrowserRouter`.
+   */
+  instrumentations?: ClientInstrumentation[];
 };
 
 /** Empty server-entry shape — `SiteOf` / `ClientContextOf` → `string` / `undefined`. */

@@ -121,6 +121,15 @@ It is not a history of intermediate APIs.
 - [x] 14.3 Align SSR fixtures to prefer inline `lazy` everywhere practical; update create snapshots / generate tests.
 - [x] 14.4 Sweep product / Migrating / multi-language examples for leftover stub-folder happy-path wording; describe end state only.
 
+## 15. React Router `instrumentations` pass-through
+
+- [x] 15.1 Types: optional `instrumentations` on `SkuServerEntry` / `ServerEntryBody` as `Pick<ServerInstrumentation, 'route'>[]`, and on `SkuClientEntry` / `ClientEntryBody` as `ClientInstrumentation[]`.
+- [x] 15.2 Wire server entry `instrumentations` into `buildSiteStaticHandlers` → each `createStaticHandler(routes, { instrumentations })` at module init.
+- [x] 15.3 Wire client entry `instrumentations` into `createBrowserRouter(…, { instrumentations })`.
+- [x] 15.4 Unit tests: omit path unchanged; provided arrays forwarded; server handlers still built once at init.
+- [x] 15.5 Docs: brief entries coverage + server route-only vs client router+route note + link to React Router instrumentation guide. No dedicated Logging page.
+- [x] 15.6 Changeset: additive optional `instrumentations` pass-through.
+
 ## Deferred
 
 See design Non-Goals and Resolved / deferred for the full list.
@@ -131,3 +140,4 @@ High-signal follow-ons only:
 - Generic `SkuRouteObject<Site>`
 - Opt-in auto / file-based route building on top of the light explicit `routes` + inline `lazy` contract (Decision 4b)
 - Express 5 and React Router majors beyond 8 (later changes)
+- SSR observability beyond instrumentations (`onRequestComplete`, Logging docs page, observability fixture)

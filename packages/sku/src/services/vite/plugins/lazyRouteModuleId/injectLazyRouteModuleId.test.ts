@@ -52,6 +52,10 @@ describe('injectLazyRouteModuleId', () => {
     expect(result?.code).toMatch(
       /lazy:\s*\(\)\s*=>\s*import\(['"]\.\/pages\/about\/about['"]\)/,
     );
+    expect(result?.map).not.toBeNull();
+    expect(result?.map?.sources).toEqual(
+      expect.arrayContaining([expect.stringContaining('src/app.tsx')]),
+    );
   });
 
   it('resolves .js import specifiers to the real source extension', () => {

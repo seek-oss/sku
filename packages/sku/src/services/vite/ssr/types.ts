@@ -6,9 +6,12 @@ import type {
 import type { Server as HttpServer } from 'node:http';
 import type { Server as HttpsServer } from 'node:https';
 import type {
+  ClientInstrumentation,
   HydrationState,
   RouteObject,
   RouterContextProvider,
+  ServerInstrumentation,
+  StaticHandler,
   StaticHandlerContext,
 } from 'react-router';
 import type { PipeableStream } from 'react-dom/server';
@@ -148,6 +151,7 @@ export type SkuServerEntry<
   middleware?: SkuMiddleware;
   onListen?: SkuOnListen;
   getRouterContext?: SkuServerGetRouterContext<C, R>;
+  instrumentations?: Array<Pick<ServerInstrumentation, 'route'>>;
 };
 
 /**
@@ -161,6 +165,7 @@ export type SkuClientEntry<
   onHydrate?: SkuOnHydrate;
   getReactContext?: SkuClientGetReactContext<C, R>;
   getRouterContext?: SkuClientGetRouterContext<C, R>;
+  instrumentations?: ClientInstrumentation[];
 };
 
 export interface RenderManifest {
@@ -177,6 +182,21 @@ export interface RenderOptions {
   development?: boolean;
   onShellError?: (error: unknown) => void;
   onError?: (error: unknown) => void;
+}
+
+export interface RenderArgs {
+  siteStaticHandlers: Record<string, StaticHandler>;
+  request: Request;
+  req: ExpressRequest;
+  assets: RenderAssets;
+  /** Required when config has >1 site; omit on single-site ⇒ sole config site. */
+  getSite?: SkuGetSite;
+  getLanguage?: SkuGetLanguage;
+  getClientContext?: SkuGetClientContext;
+  getReactContext?: SkuServerGetReactContext;
+  options?: RenderOptions;
+  renderManifest?: RenderManifest;
+  getRouterContext?: SkuServerGetRouterContext;
 }
 
 export interface RenderSuccess {

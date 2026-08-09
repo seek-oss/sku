@@ -172,9 +172,9 @@ When that argument is provided, it MUST extract `Site` from the server entry’s
 When the `ServerEntry` type argument is omitted, `ClientContext` MUST be `undefined` and client `site` args MUST be `string`.
 Sku MUST also export structural types `SkuServerEntry` / `SkuClientEntry` (the shapes behind those helpers).
 
-Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`; optional `middleware`, `onListen`, and `getRouterContext`.
+Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`; optional `middleware`, `onListen`, `getRouterContext`, and `instrumentations`.
 
-Client entry object MAY include optional `onHydrate`, `getReactContext`, and `getRouterContext`.
+Client entry object MAY include optional `onHydrate`, `getReactContext`, `getRouterContext`, and `instrumentations`.
 
 `getSite` is required **only** when config `sites` has more than one entry (init hard-error when missing — see the site-selection requirement).
 All other listed properties are optional.
@@ -352,6 +352,43 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 
 - **WHEN** the server entry omits `getSite` (single-site)
 - **THEN** `useSite()` is typed as `string`
+
+### Requirement: Optional React Router instrumentations pass-through
+
+Server and client request entries MAY include optional `instrumentations`.
+
+Server `instrumentations` MUST use React Router’s static-handler shape (`Pick<ServerInstrumentation, "route">[]`).
+When present, sku MUST forward that array into **each** site’s `createStaticHandler(routes, { instrumentations })` at module init.
+
+Client `instrumentations` MUST use React Router’s `ClientInstrumentation[]` shape.
+When present, sku MUST forward that array into `createBrowserRouter(…, { instrumentations })`.
+
+Sku MUST NOT ship a default instrumentation.
+Omitting `instrumentations` on an entry MUST call the corresponding React Router API without the option.
+
+Sku MUST NOT wrap, filter, or compose the app’s instrumentation array.
+Sku MUST keep static handlers pre-built once per site at init (instrumentations do not move `createStaticHandler` onto the request path).
+
+Server and client `instrumentations` are separate optional fields.
+Sku MUST NOT require a shared array across entries.
+
+#### Scenario: Omitting instrumentations preserves current behaviour
+
+- **WHEN** the server entry omits `instrumentations`
+- **AND** the client entry omits `instrumentations`
+- **THEN** sku calls `createStaticHandler(routes)` without an `instrumentations` option
+- **AND** sku calls `createBrowserRouter(…)` without an `instrumentations` option
+
+#### Scenario: Server instrumentations reach every site static handler
+
+- **WHEN** the server entry provides `instrumentations`
+- **THEN** sku builds each site’s static handler with `createStaticHandler(routes, { instrumentations })`
+- **AND** those handlers are still created once at module init
+
+#### Scenario: Client instrumentations reach createBrowserRouter
+
+- **WHEN** the client entry provides `instrumentations`
+- **THEN** sku creates the browser router with `createBrowserRouter(siteRoutes, { instrumentations, … })`
 
 ### Requirement: Shared Managed Data Mode modules keep one identity under Vite
 

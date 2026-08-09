@@ -8,6 +8,9 @@ In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 Route errors (loader failures, thrown `data()`, `404`, and `405` when a mutation hits a route without an `action`) render the nearest route `ErrorBoundary`.
 sku streams the document with the matching status code.
 
+Sync Component throws and `waitForAll` Suspense rejections are recovered the same way:
+sku aborts the first stream and re-renders with the error on the static handler context so the nearest `ErrorBoundary` produces the HTML response (status `500` unless the error is a route error response).
+
 Customize with [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary):
 
 ::: code-group

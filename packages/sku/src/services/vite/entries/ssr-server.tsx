@@ -37,9 +37,14 @@ const routes = requireNamedExport<SkuRouteObject[]>(
 
 const entry = requireDefaultEntry<SkuServerEntry>(serverEntry, 'serverEntry');
 
+const instrumentations = optionalEntryValue<
+  NonNullable<SkuServerEntry['instrumentations']>
+>(entry, 'instrumentations');
+
 // Route tree — and each site's handler — is built once here rather than per request.
 const siteStaticHandlers = buildSiteStaticHandlers(
   buildSiteRouteTrees(routes, __SKU_SITES__),
+  instrumentations,
 );
 
 // getSite required only when config has more than one site.

@@ -6,7 +6,6 @@ export default {
   clientEntry: 'src/vite-ssr/client.tsx',
   serverEntry: 'src/vite-ssr/server.tsx',
   routesEntry: 'src/vite-ssr/routes.tsx',
-  sites: ['default'],
   languages: ['en', 'fr'],
   publicPath: '/static/translations/',
   target: 'dist',

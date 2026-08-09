@@ -49,6 +49,7 @@ See Decision 27.
 - Optional sync getters receive Express `{ req }` where needed.
 - Getters include `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`.
 - Optional entry hooks include `middleware`, `onListen`, `onHydrate`, and `getRouterContext`.
+- Optional dual-entry `instrumentations` pass through to React Router (Decision 28).
 - Always-on sku `SkuProvider` outside the router.
 - It carries `site`, serialised `clientContext`, and env `reactContext`.
 - Typed hooks via `createSkuContexts<typeof server, typeof client>()` on `sku/runtime`.
@@ -82,6 +83,8 @@ See Decision 27.
 - Optional server-entry `onListen` covers the same post-`listen` window as webpack `onStart`.
 - Opt-in config `expressTrustProxy` is a boolean that sets Express hop count `1`.
 - The create template sets `expressTrustProxy: true`.
+- Apps MAY pass React Router `instrumentations` on each request entry.
+- Sku forwards them into `createStaticHandler` / `createBrowserRouter` with no default instrumentation.
 
 **Non-Goals:**
 
@@ -128,6 +131,11 @@ See Decision 27.
 - Treating Framework Mode’s server-only `getLoadContext(req, res)` as sufficient for sku Data Mode.
 - Requiring `getClientContext`, `getReactContext`, or `getRouterContext` (all optional; omit → `undefined` / empty defaults).
 - Requiring `middleware`, `onListen`, or `onHydrate` (all optional).
+- Requiring `instrumentations` on either request entry (optional; omit ⇒ React Router defaults).
+- Shipping a sku-owned default React Router instrumentation.
+- A sku-owned `onRequestComplete` / document-outcome hook (follow-up observability change).
+- A dedicated SSR Logging product page or observability fixture in this change.
+- Depending on `@seek/logger` or `@opentelemetry/*` in sku-core.
 - Requiring `getSite` when config has zero or one site (sku uses the sole resolved name).
 - Passing Fetch `Request` into `getSite` / `getLanguage` / `getClientContext` (Express `req` only).
 - Passing `res` into getters / `getReactContext` / `getRouterContext` in v1.
@@ -202,8 +210,8 @@ Do not overload that key for SSR `RouteObject` trees.
 `serverEntry` / `clientEntry` each **`export default`** one object from `defineServerEntry` / `defineClientEntry` (structural types `SkuServerEntry` / `SkuClientEntry`).
 Sku reads that default export and calls optional properties.
 
-The server object exposes optional sync `getSite` / `getLanguage` / `getClientContext` / `getReactContext`, plus optional `middleware`, `onListen`, and `getRouterContext`.
-The client object exposes optional `onHydrate`, `getReactContext`, and `getRouterContext`.
+The server object exposes optional sync `getSite` / `getLanguage` / `getClientContext` / `getReactContext`, plus optional `middleware`, `onListen`, `getRouterContext`, and `instrumentations`.
+The client object exposes optional `onHydrate`, `getReactContext`, `getRouterContext`, and `instrumentations`.
 `getSite` is required **only** when config `sites` has more than one entry.
 A missing property then hard-errors at init (same class as missing `routes` on `routesEntry`).
 
@@ -569,6 +577,8 @@ export default defineServerEntry({
     clientContext: /* NoInfer<ClientContext> */ | undefined;
     reactContext: /* NoInfer<ReactContext> */ | undefined;
   }): RouterContextProvider | Promise<RouterContextProvider>;
+  // Route-level only — React Router CreateStaticHandlerOptions
+  instrumentations?: Pick<ServerInstrumentation, 'route'>[];
 });
 
 // clientEntry — default export; all properties optional
@@ -589,6 +599,8 @@ export default defineClientEntry<typeof server>()({
     clientContext: /* NoInfer<ClientContext> */ | undefined;
     reactContext: /* NoInfer<ReactContext> */ | undefined;
   }): RouterContextProvider;
+  // Router + route — React Router createBrowserRouter options
+  instrumentations?: ClientInstrumentation[];
 });
 ```
 
@@ -1416,6 +1428,39 @@ Matches sku owning more in-app runtime code, is strategy- and bundler-agnostic, 
 Public contracts use the names above.
 No compatibility aliases for prior in-branch names are required in product docs.
 
+### 28. React Router `instrumentations` pass-through
+
+React Router 8 exposes a stable `instrumentations` option for observational wrappers around route loaders/actions/middleware/lazy and (on the client) navigations/fetches.
+Sku owns `createStaticHandler` and `createBrowserRouter`, so apps cannot pass that option without a seam.
+
+**Server entry**
+
+```ts
+instrumentations?: Pick<ServerInstrumentation, 'route'>[];
+```
+
+Sku reads optional `instrumentations` from the server entry at module init and forwards the same array into **each** site’s `createStaticHandler(routes, { instrumentations })`.
+React Router’s static-handler options accept **route-level** instrumentations only.
+There is no handler-level instrumentation on sku’s Express document path.
+
+**Client entry**
+
+```ts
+instrumentations?: ClientInstrumentation[];
+```
+
+Sku forwards optional client `instrumentations` into `createBrowserRouter(siteRoutes, { instrumentations, … })`.
+Client instrumentations MAY include `router` and `route` levels.
+
+**Alternatives considered**
+
+| Option                                               | Why not                                                                                              |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| One shared `instrumentations` array for both entries | Static-handler and browser-router types differ (`route` only vs `router` + `route`)                  |
+| Sku-owned default OTel / logging instrumentation     | Core stays logger-agnostic; apps compose RR instrumentations                                         |
+| Framework Mode `handler` instrumentation on Express  | Sku’s document path is Data Mode `createStaticHandler` + Express, not RR’s Framework request handler |
+| Per-request handler rebuild to swap instrumentations | Conflicts with Decision 4a / init-once static handlers                                               |
+
 ## Risks / Trade-offs
 
 | Risk                                              | Mitigation                                                                                                                                                                                                      |
@@ -1482,11 +1527,12 @@ Key topics include:
 - Express 4 typing and React Router 8 as an optional peer.
 - Named `Component` on lazy pages.
 - `routesEntry` + `routes` + optional `sites` + `getSite`.
-- `defineServerEntry` / `defineClientEntry` replacing `onRequest`, plus optional `middleware` / `onListen` / `onHydrate`.
+- `defineServerEntry` / `defineClientEntry` replacing `onRequest`, plus optional `middleware` / `onListen` / `onHydrate` / `instrumentations`.
 - Webpack `onStart` → `onListen` + config `expressTrustProxy`.
 - `createSkuContexts<typeof …>` + three value channels + root-layout wrapping.
 - Moving off config `public`.
 - The data-loading hierarchy, optional `getRouterContext`, and the red warning against Express `req` in router context.
+- Optional React Router `instrumentations` pass-through (Decision 28) for loader/action/nav observation.
 - Apollo streaming transport via `useInsertHtml` + root-layout provider instead of `getDataFromTree`.
 - Server-only loaders, Braid reset order, and client-only libraries via `getReactContext`.
 - Jest → Vitest, `#` `pathAliases`, and sku-owned `@vocab/vite`.
@@ -1495,3 +1541,4 @@ Key topics include:
 
 - **Docs diagram format for the three channels:** Prefer a Markdown table (and optional nested list) in product docs. VitePress has no built-in Mermaid. The site does not ship `vitepress-plugin-mermaid` today. Mermaid remains optional deferred polish — do not block docs on it.
 - **Auto / file-based route building:** Deferred. Launch keeps an explicit `routes` array with inline `lazy` and per-page folders. A future release MAY add opt-in discovery or codegen on top of this light contract. Do not harden per-page `route.ts` stubs in v1 that would fight that expansion.
+- **SSR observability beyond instrumentations:** Deferred to a follow-up change. Includes `onRequestComplete`, a dedicated SSR Logging docs page, an observability fixture (`@seek/logger` / OTel examples), and any sku-owned default listen or lifecycle logging.

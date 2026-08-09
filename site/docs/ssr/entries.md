@@ -1,10 +1,5 @@
 # Request entries
 
-:::danger Experimental — not for production
-Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
-:::
-
 SSR apps have three entry modules:
 
 | Entry  | Default path     | Role                                     |
@@ -13,7 +8,7 @@ SSR apps have three entry modules:
 | Client | `src/client.tsx` | Hydrate-time setup                       |
 | Routes | `src/routes.tsx` | Route tree — see [Routing](./routing.md) |
 
-Server and client each **`export default`** an object from `defineServerEntry` / `defineClientEntry` (`sku/runtime`).
+Server and client each **`export default`** an object from `defineServerEntry` / `defineClientEntry` (`sku/ssr`).
 Prefer `defineClientEntry<typeof server>()({ … })` so client callbacks get typed `Site` / `ClientContext` from the server entry — see [Providers](./providers.md#entry-helpers-and-typing).
 
 ## Server entry
@@ -22,7 +17,7 @@ Start from the template shape — middleware only is enough for many apps:
 
 ```tsx
 // src/server.tsx
-import { defineServerEntry } from 'sku/runtime';
+import { defineServerEntry } from 'sku/ssr';
 
 const server = defineServerEntry({
   middleware: [
@@ -148,7 +143,7 @@ Raw `req` is `undefined` on client navigations.
 ```tsx
 // src/server.tsx
 import { RouterContextProvider } from 'react-router';
-import { defineServerEntry } from 'sku/runtime';
+import { defineServerEntry } from 'sku/ssr';
 
 import { userIdContext } from './userIdContext';
 
@@ -188,7 +183,7 @@ export default server;
 
 ```tsx
 // src/client.tsx
-import { defineClientEntry } from 'sku/runtime';
+import { defineClientEntry } from 'sku/ssr';
 
 import type server from './server';
 
@@ -243,7 +238,7 @@ getRouterContext?: (args: {
 ```tsx
 // src/client.tsx
 import { RouterContextProvider } from 'react-router';
-import { defineClientEntry } from 'sku/runtime';
+import { defineClientEntry } from 'sku/ssr';
 
 import type server from './server';
 import { userIdContext } from './userIdContext';
@@ -264,20 +259,20 @@ export default client;
 Named export of a React Router route tree — see [Routing](./routing.md).
 
 ```ts
-export const routes: SkuRouteObject[];
+export const routes: SkuSsrRouteObject[];
 ```
 
-`SkuRouteObject` is a React Router `RouteObject` plus optional `sites` for multi-site membership.
+`SkuSsrRouteObject` is a React Router `RouteObject` plus optional `sites` for multi-site membership.
 
-## `sku/runtime` helpers
+## `sku/ssr` helpers
 
-The `sku/runtime` subpath is browser-safe (so webpack / static apps never pull the optional `react-router` peer from the main `sku` entry).
+The `sku/ssr` subpath is browser-safe (so webpack / static apps never pull the optional `react-router` peer from the main `sku` entry).
 
 - [`defineServerEntry` / `defineClientEntry`](./providers.md#entry-helpers-and-typing) — entry typing helpers
-- [`createSkuContexts`](./providers.md#typed-hooks) — typed `useSite` / `useClientContext` / `useReactContext`
+- [`createSkuSsrContexts`](./providers.md#typed-hooks) — typed `useSite` / `useClientContext` / `useReactContext`
 - [`usePreloadRoute`](./routing.md#intent-preloading-with-usepreloadroute) — warm lazy route chunks on intent
 - [`useInsertHtml`](#useinserthtml) — queue React nodes into the SSR response stream
-- `getCspNonce` — request the shared SSR CSP nonce (mint-on-read)
+- `getCspNonce` — also available from the main `sku` entry
 
 ### `useInsertHtml`
 

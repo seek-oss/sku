@@ -139,7 +139,14 @@ export function preloadPlugin({
           count++;
           injectedModules.add(id);
         }
-        const output = generate(ast, {}, code);
+        const output = generate(
+          ast,
+          {
+            sourceMaps: true,
+            sourceFileName: id.split('?')[0] ?? id,
+          },
+          code,
+        );
         return {
           code: output.code,
           map: output.map,

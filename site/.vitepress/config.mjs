@@ -70,6 +70,7 @@ export default defineConfig({
             },
             { text: 'Error pages', link: '/ssr/error-pages' },
             { text: 'Middleware', link: '/ssr/middleware' },
+            { text: 'Logging', link: '/ssr/logging' },
             { text: 'Content Security Policy', link: '/ssr/csp' },
             {
               text: 'Deploy to production',

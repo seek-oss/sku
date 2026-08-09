@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { Writable } from 'node:stream';
 import type { Request as ExpressRequest } from 'express';
-import { RouterContextProvider } from 'react-router';
+import { Suspense, use } from 'react';
+import { Outlet, RouterContextProvider } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
@@ -136,13 +137,18 @@ describe('render', () => {
   });
 
   it('never creates a static handler on the request path', async () => {
-    const source = await readFile(
+    const renderSource = await readFile(
       new URL('./render.tsx', import.meta.url),
       'utf-8',
     );
+    const streamSource = await readFile(
+      new URL('./streamDocument.tsx', import.meta.url),
+      'utf-8',
+    );
 
-    expect(source).not.toContain('createStaticHandler');
-    expect(source).toContain('SkuProvider');
+    expect(renderSource).not.toContain('createStaticHandler');
+    expect(streamSource).not.toContain('createStaticHandler');
+    expect(streamSource).toContain('SkuProvider');
   });
 
   it('uses the sole config site when getSite is omitted', async () => {
@@ -191,5 +197,130 @@ describe('render', () => {
     ).rejects.toThrow(
       /SSR has no pre-built route tree for site 'uk'\. Unknown or invalid 'site'\./,
     );
+  });
+
+  it('recovers sync render throws via a second ErrorBoundary pass', async () => {
+    const Boom = () => {
+      throw new Error('Boom from render');
+    };
+    const ErrorBoundary = () => (
+      <main data-testid="error-boundary">Boom recovered</main>
+    );
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [{ index: true, Component: Boom }],
+        },
+      ],
+    });
+
+    const result = await render({
+      siteStaticHandlers: handlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+    });
+
+    if ('response' in result) {
+      throw new Error('Expected a streamed document, not a Response');
+    }
+
+    expect(result.statusCode).toBe(500);
+
+    const chunks: Buffer[] = [];
+    await new Promise<void>((resolve, reject) => {
+      const writable = new Writable({
+        write(chunk, _encoding, callback) {
+          chunks.push(Buffer.from(chunk));
+          callback();
+        },
+        final(callback) {
+          callback();
+          resolve();
+        },
+      });
+      writable.on('error', reject);
+      result.pipe(writable);
+    });
+
+    const html = Buffer.concat(chunks).toString('utf-8');
+    expect(html).toContain('data-testid="error-boundary"');
+    expect(html).toContain('Boom recovered');
+  });
+
+  it('recovers waitForAll Suspense rejections via a second ErrorBoundary pass', async () => {
+    const getRejected = () =>
+      new Promise<string>((_resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error('Boom from suspense'));
+        }, 20);
+      });
+
+    let pending: Promise<string> | undefined;
+    const DeferredBoom = () => {
+      pending ??= getRejected();
+      return <p>{use(pending)}</p>;
+    };
+    const ErrorBoundary = () => (
+      <main data-testid="error-boundary">Suspense recovered</main>
+    );
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: () => (
+                <Suspense fallback={<p>Loading</p>}>
+                  <DeferredBoom />
+                </Suspense>
+              ),
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+
+    const result = await render({
+      siteStaticHandlers: handlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+    });
+
+    if ('response' in result) {
+      throw new Error('Expected a streamed document, not a Response');
+    }
+
+    expect(result.statusCode).toBe(500);
+
+    const chunks: Buffer[] = [];
+    await new Promise<void>((resolve, reject) => {
+      const writable = new Writable({
+        write(chunk, _encoding, callback) {
+          chunks.push(Buffer.from(chunk));
+          callback();
+        },
+        final(callback) {
+          callback();
+          resolve();
+        },
+      });
+      writable.on('error', reject);
+      result.pipe(writable);
+    });
+
+    const html = Buffer.concat(chunks).toString('utf-8');
+    expect(html).toContain('data-testid="error-boundary"');
+    expect(html).toContain('Suspense recovered');
   });
 });

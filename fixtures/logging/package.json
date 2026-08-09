@@ -1,0 +1,30 @@
+{
+  "name": "@sku-fixtures/logging",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "sku build --config sku.config.ts",
+    "start": "sku start --config sku.config.ts",
+    "start:prod": "node dist/server/server.js"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
+    "@opentelemetry/core": "^2.10.0",
+    "@opentelemetry/resources": "^2.10.0",
+    "@opentelemetry/sdk-trace-base": "^2.10.0",
+    "@opentelemetry/sdk-trace-node": "^2.10.0",
+    "@opentelemetry/sdk-trace-web": "^2.10.0",
+    "@opentelemetry/semantic-conventions": "^1.43.0",
+    "express": "^4.22.1",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

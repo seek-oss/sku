@@ -201,5 +201,15 @@
         "@types/express-serve-static-core",
       ],
     },
+    "fixtures/logging": {
+      "entry": [
+        "src/server/server.tsx",
+        "src/client/client.tsx",
+        "src/routes.tsx",
+        "src/client/tracing.ts",
+        "src/server/tracing.ts",
+        "sku.config.*",
+      ],
+    },
   },
 }

@@ -36,16 +36,21 @@ React Router matches on the full path and does not let one route declare multipl
 Define the page once, then register a separate route object for each path:
 
 ```tsx
-// src/pages/page/route.ts
-import type { RouteObject } from 'react-router';
+// src/routes.tsx
+import type { SkuRouteObject } from 'sku';
 
-const route = {
-  lazy: () => import('./page'),
-} satisfies Omit<RouteObject, 'path'>;
+import { RootLayout } from './RootLayout';
 
-export const aboutRoutes: RouteObject[] = [
-  { ...route, path: 'page' },
-  { ...route, path: 'fr/page' },
+const pageLazy = () => import('./pages/page/page');
+
+export const routes: SkuRouteObject[] = [
+  {
+    Component: RootLayout,
+    children: [
+      { path: 'page', lazy: pageLazy },
+      { path: 'fr/page', lazy: pageLazy },
+    ],
+  },
 ];
 ```
 

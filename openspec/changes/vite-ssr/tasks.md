@@ -116,10 +116,10 @@ It is not a history of intermediate APIs.
 
 ## 14. Inline lazy route authoring (docs / template / fixtures)
 
-- [ ] 14.1 Rewrite SSR routing docs in place: inline `lazy` in `routesEntry`; page modules own `loader` / `action` / `Component`; do not recommend per-page `route.ts` stubs.
-- [ ] 14.2 Align create template `ssr` to inline `lazy` (remove per-page `route.ts`; page modules under `src/pages/`).
-- [ ] 14.3 Align SSR fixtures to prefer inline `lazy` everywhere practical; update create snapshots / generate tests.
-- [ ] 14.4 Sweep product / Migrating / multi-language examples for leftover stub-folder happy-path wording; describe end state only.
+- [x] 14.1 Rewrite SSR routing docs in place: inline `lazy` in `routesEntry`; page modules own `loader` / `action` / `Component`; do not recommend per-page `route.ts` stubs.
+- [x] 14.2 Align create template `ssr` to inline `lazy` (remove per-page `route.ts`; page modules under `src/pages/`).
+- [x] 14.3 Align SSR fixtures to prefer inline `lazy` everywhere practical; update create snapshots / generate tests.
+- [x] 14.4 Sweep product / Migrating / multi-language examples for leftover stub-folder happy-path wording; describe end state only.
 
 ## Deferred
 

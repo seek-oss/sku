@@ -336,7 +336,8 @@ Happy path for docs, create template, and fixtures:
 
 - Compose path / index / `sites` / `lazy` in `routesEntry` (or a module it imports that only exports route config shells).
 - Put `loader`, `action`, `Component`, `ErrorBoundary`, and similar on the lazily imported page module.
-- Prefer idiomatic `lazy: () => import('./pages/about')` so `moduleId` / modulepreload keep working.
+- Co-locate each page in its own folder under `src/pages/` (even when it is a single file).
+- Prefer idiomatic `lazy: () => import('./pages/about/about')` so `moduleId` / modulepreload keep working.
 
 Do not teach a per-page `route.ts` stub as the default.
 Do not add a sku route helper in this release.
@@ -957,10 +958,10 @@ Request entries do not re-export `routes`.
 The template’s `routesEntry` scaffolds an app-owned pathless root layout (`src/RootLayout.tsx`) so router-aware wrapping (and Apollo-style provider mounts) have an idiomatic home.
 Typed hooks live in `src/ssrContext.ts`.
 The home page calls `useSite()` (soft-default `'default'` when config `sites` is omitted).
-There is no `src/App/` shell — page content lives under `src/pages/`.
+There is no `src/App/` shell — page content lives in per-page folders under `src/pages/` (for example `src/pages/home/home.tsx`).
 
-The template’s `routesEntry` inlines idiomatic `lazy: () => import(…)` for page routes.
-Page modules under `src/pages/` export named `Component` (and optional `loader` / `action`).
+The template’s `routesEntry` inlines idiomatic `lazy: () => import('./pages/home/home')` for page routes.
+Page modules under those folders export named `Component` (and optional `loader` / `action`).
 There is no per-page `route.ts` stub in the template.
 
 Lazy page modules MUST use React Router Data Mode named `export function Component` (not `export default`) so they typecheck with `lazy: () => import('…')`.
@@ -1493,4 +1494,4 @@ Key topics include:
 ## Resolved / deferred
 
 - **Docs diagram format for the three channels:** Prefer a Markdown table (and optional nested list) in product docs. VitePress has no built-in Mermaid. The site does not ship `vitepress-plugin-mermaid` today. Mermaid remains optional deferred polish — do not block docs on it.
-- **Auto / file-based route building:** Deferred. Launch keeps an explicit `routes` array with inline `lazy`. A future release MAY add opt-in discovery or codegen on top of this light contract. Do not harden complex folder / `route.ts` recommendations in v1 that would fight that expansion.
+- **Auto / file-based route building:** Deferred. Launch keeps an explicit `routes` array with inline `lazy` and per-page folders. A future release MAY add opt-in discovery or codegen on top of this light contract. Do not harden per-page `route.ts` stubs in v1 that would fight that expansion.

@@ -15,17 +15,25 @@ For route API details (layouts, loaders, error boundaries), see [React Router Da
 
 ## Add a page
 
-Prefer co-locating each page in its own directory with a `route.ts` and a page module.
+Compose path / index / `sites` / `lazy` in `routesEntry`.
+Put `loader`, `action`, `Component`, and `ErrorBoundary` on the lazily imported page module.
 Use React Router’s [lazy factory](https://reactrouter.com/start/data/route-object#lazy) so each page is a separate chunk:
 
 ```tsx
-// src/pages/about/route.ts
-import type { RouteObject } from 'react-router';
+// src/routes.tsx
+import type { SkuRouteObject } from 'sku';
 
-export const aboutRoute = {
-  path: 'about',
-  lazy: () => import('./about'),
-} satisfies RouteObject;
+import { RootLayout } from './App/RootLayout';
+
+export const routes: SkuRouteObject[] = [
+  {
+    Component: RootLayout,
+    children: [
+      { index: true, lazy: () => import('./pages/home/home') },
+      { path: 'about', lazy: () => import('./pages/about/about') },
+    ],
+  },
+];
 ```
 
 Lazy page modules must export a named `Component` (not `export default`):
@@ -37,39 +45,14 @@ export function Component() {
 }
 ```
 
-Compose route configs in `routes.tsx`.
-Use a **pathless** root layout for app chrome and providers (see [Providers](./providers.md)):
+Use a **pathless** root layout for app chrome and providers (see [Providers](./providers.md)).
 
-```tsx
-// src/routes.tsx
-import type { SkuRouteObject } from 'sku';
-
-import { RootLayout } from './App/RootLayout';
-import { aboutRoute } from './pages/about/route';
-import { homeRoute } from './pages/home/route';
-
-export const routes: SkuRouteObject[] = [
-  {
-    Component: RootLayout,
-    children: [homeRoute, aboutRoute],
-  },
-];
-```
-
-```tsx
-// src/pages/home/route.ts
-import type { RouteObject } from 'react-router';
-
-export const homeRoute = {
-  index: true,
-  lazy: () => import('./home'),
-} satisfies RouteObject;
-```
-
-Import only route configs into `routes.tsx` — do not statically import page modules, or you lose per-route chunking.
+Do not statically import page modules into `routes.tsx`, or you lose per-route chunking.
+Prefer idiomatic `lazy: () => import('./pages/about/about')` so sku can derive production modulepreloads automatically.
 
 For page content, prefer [render-time data loading](./data-loading.md).
 Use loaders when you need document redirects, response headers, or to start work above a suspending tree.
+Export those loaders from the same page module as `Component`.
 
 ## Multi-site routes
 
@@ -84,9 +67,17 @@ export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     children: [
-      homeRoute,
-      { path: 'au-only', sites: ['au'] /* … */ },
-      { path: 'nz-only', sites: ['nz'] /* … */ },
+      { index: true, lazy: () => import('./pages/home/home') },
+      {
+        path: 'au-only',
+        sites: ['au'],
+        lazy: () => import('./pages/au-only/au-only'),
+      },
+      {
+        path: 'nz-only',
+        sites: ['nz'],
+        lazy: () => import('./pages/nz-only/nz-only'),
+      },
     ],
   },
 ];
@@ -139,7 +130,7 @@ Loader data is not prefetched — only route modules.
 
 ## Custom lazy shapes and `handle.moduleId`
 
-Prefer `lazy: () => import('./about')` so sku can derive production modulepreloads automatically.
+Prefer `lazy: () => import('./pages/about/about')` so sku can derive production modulepreloads automatically.
 
 If you need a non-idiomatic lazy shape (granular `lazy: { Component: … }`, multiple `import()` calls, or an indirect binding), set `handle.moduleId` to the Vite client manifest key (usually the source path, for example `src/pages/about/about.tsx`).
 An explicit value is never overwritten.

@@ -12,9 +12,9 @@ const manifest: ClientManifest = {
   'src/entry.tsx': {
     file: 'assets/entry.js',
     isEntry: true,
-    imports: ['src/pages/about.tsx'],
+    imports: ['src/pages/about/about.tsx'],
   },
-  'src/pages/about.tsx': {
+  'src/pages/about/about.tsx': {
     file: 'assets/about.js',
   },
 };
@@ -29,7 +29,7 @@ describe('resolveAssets', () => {
       manifest,
       publicPath: '/assets/',
       entry: manifest['src/entry.tsx'],
-      moduleIds: ['src/pages/about.tsx'],
+      moduleIds: ['src/pages/about/about.tsx'],
     });
 
     expect(assets.modulePreloads).toContain('/assets/assets/about.js');
@@ -59,7 +59,7 @@ describe('resolveAssets', () => {
       manifest,
       publicPath: '/',
       entry: manifest['src/entry.tsx'],
-      moduleIds: ['src/pages/missing.tsx'],
+      moduleIds: ['src/pages/missing/missing.tsx'],
       development: true,
     });
 
@@ -75,7 +75,7 @@ describe('resolveAssets', () => {
       manifest,
       publicPath: '/',
       entry: manifest['src/entry.tsx'],
-      moduleIds: ['src/pages/missing.tsx'],
+      moduleIds: ['src/pages/missing/missing.tsx'],
       development: false,
     });
 
@@ -92,11 +92,13 @@ describe('warnUnknownModuleIdsWithoutManifest', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const cwd = mkdtempSync(join(tmpdir(), 'sku-module-id-'));
 
-    warnUnknownModuleIdsWithoutManifest(['src/pages/missing.tsx'], { cwd });
+    warnUnknownModuleIdsWithoutManifest(['src/pages/missing/missing.tsx'], {
+      cwd,
+    });
 
     expect(warn).toHaveBeenCalledWith(
       expect.stringContaining(
-        'Unknown route handle.moduleId "src/pages/missing.tsx"',
+        'Unknown route handle.moduleId "src/pages/missing/missing.tsx"',
       ),
     );
   });
@@ -104,10 +106,10 @@ describe('warnUnknownModuleIdsWithoutManifest', () => {
   it('does not warn for path-like moduleIds that exist on disk', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const cwd = mkdtempSync(join(tmpdir(), 'sku-module-id-'));
-    mkdirSync(join(cwd, 'src', 'pages'), { recursive: true });
-    writeFileSync(join(cwd, 'src', 'pages', 'about.tsx'), '');
+    mkdirSync(join(cwd, 'src', 'pages', 'about'), { recursive: true });
+    writeFileSync(join(cwd, 'src', 'pages', 'about', 'about.tsx'), '');
 
-    warnUnknownModuleIdsWithoutManifest(['src/pages/about.tsx'], { cwd });
+    warnUnknownModuleIdsWithoutManifest(['src/pages/about/about.tsx'], { cwd });
 
     expect(warn).not.toHaveBeenCalled();
   });

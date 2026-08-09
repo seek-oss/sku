@@ -9,8 +9,11 @@ describe('resolveManifestModuleId', () => {
 
   beforeEach(() => {
     projectRoot = mkdtempSync(join(tmpdir(), 'sku-manifest-module-id-'));
-    mkdirSync(join(projectRoot, 'src/pages'), { recursive: true });
-    writeFileSync(join(projectRoot, 'src/pages/about.tsx'), 'export {};\n');
+    mkdirSync(join(projectRoot, 'src/pages/about'), { recursive: true });
+    writeFileSync(
+      join(projectRoot, 'src/pages/about/about.tsx'),
+      'export {};\n',
+    );
     writeFileSync(join(projectRoot, 'src/app.tsx'), 'export {};\n');
   });
 
@@ -22,37 +25,37 @@ describe('resolveManifestModuleId', () => {
     expect(
       resolveManifestModuleId({
         importerId: join(projectRoot, 'src/app.tsx'),
-        importPath: './pages/about',
+        importPath: './pages/about/about',
         cwd: projectRoot,
       }),
-    ).toBe('src/pages/about.tsx');
+    ).toBe('src/pages/about/about.tsx');
   });
 
   it('sniffs the real extension when the import uses .js', () => {
     expect(
       resolveManifestModuleId({
         importerId: join(projectRoot, 'src/app.tsx'),
-        importPath: './pages/about.js',
+        importPath: './pages/about/about.js',
         cwd: projectRoot,
       }),
-    ).toBe('src/pages/about.tsx');
+    ).toBe('src/pages/about/about.tsx');
   });
 
   it('strips Vite query strings from the importer id', () => {
     expect(
       resolveManifestModuleId({
         importerId: `${join(projectRoot, 'src/app.tsx')}?v=123`,
-        importPath: './pages/about',
+        importPath: './pages/about/about',
         cwd: projectRoot,
       }),
-    ).toBe('src/pages/about.tsx');
+    ).toBe('src/pages/about/about.tsx');
   });
 
   it('returns null when the target file cannot be found', () => {
     expect(
       resolveManifestModuleId({
         importerId: join(projectRoot, 'src/app.tsx'),
-        importPath: './pages/missing',
+        importPath: './pages/missing/missing',
         cwd: projectRoot,
       }),
     ).toBeNull();

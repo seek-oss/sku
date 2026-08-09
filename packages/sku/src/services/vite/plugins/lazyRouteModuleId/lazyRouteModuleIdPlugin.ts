@@ -6,7 +6,7 @@ const include = /\.(jsx?|tsx?)$/;
 
 /**
  * Auto-derive `handle.moduleId` for idiomatic React Router lazy routes:
- * `lazy: () => import('./pages/about')`.
+ * `lazy: () => import('./pages/about/about')`.
  *
  * Only runs in the SSR environment. Never rewrites the `lazy` body,
  * never overwrites an explicit `moduleId`, and skips non-idiomatic shapes.

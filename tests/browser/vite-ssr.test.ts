@@ -13,16 +13,14 @@ const { sku, node, fixturePath } = scopeToFixture('vite-ssr');
 describe('vite-ssr', () => {
   describe('routesEntry routes + sites pattern', () => {
     it('exports routes with optional sites from routesEntry only', async () => {
-      const [routes, nzOnlyRoute, server] = await Promise.all([
+      const [routes, server] = await Promise.all([
         fs.readFile(fixturePath('src/routes.tsx'), 'utf8'),
-        fs.readFile(fixturePath('src/pages/nz-only/route.ts'), 'utf8'),
         fs.readFile(fixturePath('src/server.tsx'), 'utf8'),
         fs.readFile(fixturePath('sku.config.ts'), 'utf8'),
       ]);
 
       expect(routes).toContain('export const routes');
       expect(routes).toContain("sites: ['au']");
-      expect(nzOnlyRoute).toContain("sites: ['nz']");
       expect(server).toContain('getSite');
     });
   });

@@ -33,7 +33,7 @@ export default {
 
 ## Routes and request entries
 
-- Replace the static page + `render.tsx` / `#app` client with [`routesEntry`](../configuration.md#routesentry) exporting `routes` — see [Routing](./routing.md)
+- Compose path / `lazy` in [`routesEntry`](../configuration.md#routesentry); put `loader` / `action` / `Component` on page modules — see [Routing](./routing.md)
 - Default-export request entries via `defineServerEntry` / `defineClientEntry` — see [Request entries](./entries.md)
 - Export `getSite` when config has more than one site; omit on single-site apps
 - Lazy page modules must export named `Component` (not `export default`)

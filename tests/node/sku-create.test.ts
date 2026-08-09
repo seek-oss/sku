@@ -254,6 +254,9 @@ describe.each(['webpack', 'vite', 'ssr'])('sku-create %s', (template) => {
       expect(skuConfig).toContain('expressTrustProxy: true');
       expect(routes).toContain('export const routes');
       expect(routes).toContain('Component: RootLayout');
+      expect(routes).toContain("lazy: () => import('./pages/home/home')");
+      expect(routes).toContain("lazy: () => import('./pages/about/about')");
+      expect(routes).not.toContain('/route');
       expect(server).toContain('defineServerEntry');
       expect(server).toContain('middleware');
       expect(server).toContain('/api/health');
@@ -264,6 +267,15 @@ describe.each(['webpack', 'vite', 'ssr'])('sku-create %s', (template) => {
       await expect(
         fs.access(fixturePath(projectName, 'src/ssrContext.ts')),
       ).resolves.toBeUndefined();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/pages/home/home.tsx')),
+      ).resolves.toBeUndefined();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/pages/about/about.tsx')),
+      ).resolves.toBeUndefined();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/pages/home/route.ts')),
+      ).rejects.toThrow();
       await expect(
         fs.access(fixturePath(projectName, 'src/App')),
       ).rejects.toThrow();

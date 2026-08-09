@@ -103,13 +103,14 @@ export const RootLayout = () => (
 import type { SkuRouteObject } from 'sku';
 
 import { RootLayout } from './App/RootLayout';
-import { aboutRoute } from './pages/about/route';
-import { homeRoute } from './pages/home/route';
 
 export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
-    children: [homeRoute, aboutRoute],
+    children: [
+      { index: true, lazy: () => import('./pages/home/home') },
+      { path: 'about', lazy: () => import('./pages/about/about') },
+    ],
   },
 ];
 ```

@@ -17,13 +17,12 @@ import type { SkuRouteObject } from 'sku';
 
 import { RootLayout } from './RootLayout';
 import { ErrorBoundary } from './ErrorBoundary'; // [!code highlight]
-import { homeRoute } from './pages/home/route';
 
 export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     ErrorBoundary, // [!code highlight]
-    children: [homeRoute],
+    children: [{ index: true, lazy: () => import('./pages/home/home') }],
   },
 ];
 ```

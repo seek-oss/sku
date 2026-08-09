@@ -49,7 +49,8 @@ After scaffolding you get three app entries:
 - `src/client.tsx` — hydrate-time setup
 - `src/routes.tsx` — your React Router route tree
 
-The template also sets up a pathless root layout (for providers like Braid) and typed hooks via [`createSkuContexts`](./providers.md) from `sku/runtime`.
+The template also sets up a pathless root layout (for providers like Braid), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md) from `sku/runtime`.
+Compose path / `lazy` in `routes.tsx`; export named `Component` from each page module.
 
 ## Configuration
 

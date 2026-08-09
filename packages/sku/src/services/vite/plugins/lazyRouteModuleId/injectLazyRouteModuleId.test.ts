@@ -9,10 +9,21 @@ describe('injectLazyRouteModuleId', () => {
 
   beforeEach(() => {
     projectRoot = mkdtempSync(join(tmpdir(), 'sku-lazy-module-id-'));
-    mkdirSync(join(projectRoot, 'src/pages'), { recursive: true });
-    writeFileSync(join(projectRoot, 'src/pages/about.tsx'), 'export {};\n');
-    writeFileSync(join(projectRoot, 'src/pages/details.tsx'), 'export {};\n');
-    writeFileSync(join(projectRoot, 'src/pages/hello.tsx'), 'export {};\n');
+    mkdirSync(join(projectRoot, 'src/pages/about'), { recursive: true });
+    mkdirSync(join(projectRoot, 'src/pages/details'), { recursive: true });
+    mkdirSync(join(projectRoot, 'src/pages/hello'), { recursive: true });
+    writeFileSync(
+      join(projectRoot, 'src/pages/about/about.tsx'),
+      'export {};\n',
+    );
+    writeFileSync(
+      join(projectRoot, 'src/pages/details/details.tsx'),
+      'export {};\n',
+    );
+    writeFileSync(
+      join(projectRoot, 'src/pages/hello/hello.tsx'),
+      'export {};\n',
+    );
     writeFileSync(join(projectRoot, 'src/app.tsx'), 'export {};\n');
   });
 
@@ -31,15 +42,15 @@ describe('injectLazyRouteModuleId', () => {
     const result = transform(`
       const routes = [{
         path: 'about',
-        lazy: () => import('./pages/about'),
+        lazy: () => import('./pages/about/about'),
       }];
     `);
 
     expect(result?.injected).toBe(true);
     expect(result?.code).toContain('moduleId');
-    expect(result?.code).toContain('src/pages/about.tsx');
+    expect(result?.code).toContain('src/pages/about/about.tsx');
     expect(result?.code).toMatch(
-      /lazy:\s*\(\)\s*=>\s*import\(['"]\.\/pages\/about['"]\)/,
+      /lazy:\s*\(\)\s*=>\s*import\(['"]\.\/pages\/about\/about['"]\)/,
     );
   });
 
@@ -47,18 +58,18 @@ describe('injectLazyRouteModuleId', () => {
     const result = transform(`
       const routes = [{
         path: 'about',
-        lazy: () => import('./pages/about.js'),
+        lazy: () => import('./pages/about/about.js'),
       }];
     `);
 
-    expect(result?.code).toContain('src/pages/about.tsx');
+    expect(result?.code).toContain('src/pages/about/about.tsx');
   });
 
   it('preserves an explicit handle.moduleId', () => {
     const result = transform(`
       const routes = [{
         path: 'about',
-        lazy: () => import('./pages/about'),
+        lazy: () => import('./pages/about/about'),
         handle: { moduleId: 'custom/about.js' },
       }];
     `);
@@ -70,14 +81,14 @@ describe('injectLazyRouteModuleId', () => {
     const result = transform(`
       const routes = [{
         path: 'about',
-        lazy: () => import('./pages/about'),
+        lazy: () => import('./pages/about/about'),
         handle: { waitForAll: true },
       }];
     `);
 
     expect(result?.injected).toBe(true);
     expect(result?.code).toContain('waitForAll');
-    expect(result?.code).toContain('src/pages/about.tsx');
+    expect(result?.code).toContain('src/pages/about/about.tsx');
   });
 
   it('skips granular lazy object shapes', () => {
@@ -85,7 +96,7 @@ describe('injectLazyRouteModuleId', () => {
       const routes = [{
         path: 'about',
         lazy: {
-          Component: () => import('./pages/about'),
+          Component: () => import('./pages/about/about'),
         },
       }];
     `);
@@ -98,8 +109,8 @@ describe('injectLazyRouteModuleId', () => {
       const routes = [{
         path: 'about',
         lazy: () => Promise.all([
-          import('./pages/about'),
-          import('./pages/details'),
+          import('./pages/about/about'),
+          import('./pages/details/details'),
         ]),
       }];
     `);
@@ -109,7 +120,7 @@ describe('injectLazyRouteModuleId', () => {
 
   it('skips indirect lazy bindings', () => {
     const result = transform(`
-      const loadAbout = () => import('./pages/about');
+      const loadAbout = () => import('./pages/about/about');
       const routes = [{
         path: 'about',
         lazy: loadAbout,
@@ -124,7 +135,7 @@ describe('injectLazyRouteModuleId', () => {
       const sharedHandle = { waitForAll: true };
       const routes = [{
         path: 'about',
-        lazy: () => import('./pages/about'),
+        lazy: () => import('./pages/about/about'),
         handle: sharedHandle,
       }];
     `);
@@ -135,13 +146,13 @@ describe('injectLazyRouteModuleId', () => {
   it('injects for multiple idiomatic lazy routes', () => {
     const result = transform(`
       const routes = [
-        { path: 'about', lazy: () => import('./pages/about') },
-        { path: 'details', lazy: () => import('./pages/details.js') },
+        { path: 'about', lazy: () => import('./pages/about/about') },
+        { path: 'details', lazy: () => import('./pages/details/details.js') },
       ];
     `);
 
     expect(result?.injected).toBe(true);
-    expect(result?.code).toContain('src/pages/about.tsx');
-    expect(result?.code).toContain('src/pages/details.tsx');
+    expect(result?.code).toContain('src/pages/about/about.tsx');
+    expect(result?.code).toContain('src/pages/details/details.tsx');
   });
 });

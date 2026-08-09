@@ -82,7 +82,7 @@ const getModuleIds = (
     const moduleId = (route.handle as SkuRouteHandle | undefined)?.moduleId;
     if (development && route.lazy && !moduleId) {
       console.warn(
-        `[sku] Lazy route at "${String(route.path ?? '(index)')}" is missing handle.moduleId. Prefer idiomatic lazy: () => import('./pages/…') so sku can auto-derive it, or set handle.moduleId explicitly to the Vite client manifest key (e.g. "src/pages/about.tsx") for production modulepreload links.`,
+        `[sku] Lazy route at "${String(route.path ?? '(index)')}" is missing handle.moduleId. Prefer idiomatic lazy: () => import('./pages/about/about') so sku can auto-derive it, or set handle.moduleId explicitly to the Vite client manifest key (e.g. "src/pages/about/about.tsx") for production modulepreload links.`,
       );
     }
     return moduleId ? [moduleId] : [];

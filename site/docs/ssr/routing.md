@@ -20,12 +20,13 @@ For route API details (layouts, loaders, error boundaries), see [React Router Da
 
 ### Compose the route tree
 
-Each route can set `path`, `index`, optional `sites`, and a `lazy` import.
-Put `loader`, `action`, `Component`, and `ErrorBoundary` on the lazily imported page module.
+Each route can set a path (or `index`), optional site membership, and a lazy page import.
+Put `loader`, `action`, `Component`, and `ErrorBoundary` on the lazily imported page module — not on the route object in `routes.tsx`.
 Use React Router’s [lazy factory](https://reactrouter.com/start/data/route-object#lazy) so each page is a separate chunk:
 
-```tsx
-// src/routes.tsx
+::: code-group
+
+```tsx [routes.tsx]
 import type { SkuRouteObject } from 'sku';
 
 import { RootLayout } from './App/RootLayout';
@@ -41,24 +42,35 @@ export const routes: SkuRouteObject[] = [
 ];
 ```
 
-Use a **pathless** root layout for app chrome and providers (see [Providers](./providers.md)).
+```tsx [RootLayout.tsx]
+import { Outlet } from 'react-router';
+
+export const RootLayout = () => <Outlet />;
+```
+
+```tsx [home.tsx]
+export function Component() {
+  return <main>Home</main>;
+}
+```
+
+```tsx [about.tsx]
+export function Component() {
+  return <main>About</main>;
+}
+```
+
+:::
+
+Lazy page modules must export a named `Component` (not `export default`).
+
+Use a **pathless** root layout for shared UI and providers (see [Providers](./providers.md)).
 
 You’re set up when:
 
 - Pages load via `lazy: () => import(...)` (not static imports into `routes.tsx`)
 - Each page module exports a named `Component`
-- App chrome lives on a pathless root layout
-
-### Page module exports
-
-Lazy page modules must export a named `Component` (not `export default`):
-
-```tsx
-// src/pages/about/about.tsx
-export function Component() {
-  return <main>About</main>;
-}
-```
+- Shared UI lives on a pathless root layout
 
 ### Keep pages lazy
 
@@ -81,10 +93,11 @@ When different sites need different path sets, set optional `sites` on a route.
 sku only includes that route when the active site is in the list.
 If you omit `sites`, the route is available on every configured site.
 
-Resolve the active site in the server entry with `getSite` (required when config has more than one site; omit on single-site apps):
+Resolve the active site in the server entry with [`getSite`](./entries.md#getsite) (required when config has more than one site; omit on single-site apps):
 
-```tsx
-// src/routes.tsx
+::: code-group
+
+```tsx [routes.tsx]
 import type { SkuRouteObject } from 'sku';
 
 import { RootLayout } from './App/RootLayout';
@@ -96,12 +109,12 @@ export const routes: SkuRouteObject[] = [
       { index: true, lazy: () => import('./pages/home/home') },
       {
         path: 'au-only',
-        sites: ['au'],
+        sites: ['au'], // [!code highlight]
         lazy: () => import('./pages/au-only/au-only'),
       },
       {
         path: 'nz-only',
-        sites: ['nz'],
+        sites: ['nz'], // [!code highlight]
         lazy: () => import('./pages/nz-only/nz-only'),
       },
     ],
@@ -109,8 +122,7 @@ export const routes: SkuRouteObject[] = [
 ];
 ```
 
-```tsx
-// src/server.tsx
+```tsx [server.tsx]
 import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
@@ -118,38 +130,23 @@ const server = defineServerEntry({
     return req.get('x-site') === 'nz' ? 'nz' : 'au';
   },
 });
+
 export default server;
 ```
 
-When the path itself differs by site (for example `/jobs` vs `/emploi`), declare separate route objects with the right `path` and `sites`.
-A small helper that returns the path string is fine — site membership still belongs on the route via `sites`:
-
-```tsx
-{
-  path: jobsPathForSite('au'), // e.g. 'jobs'
-  sites: ['au'],
-  lazy: () => import('./pages/jobs/jobs'),
-},
-{
-  path: jobsPathForSite('nz'), // e.g. 'emploi'
-  sites: ['nz'],
-  lazy: () => import('./pages/jobs/jobs'),
-},
-```
-
-Serving the same page at multiple **language** prefixes is covered under [Multi-language](./multi-language.md#multiple-paths-per-page--languages-in-path).
+:::
 
 ## Intent preloading with `usePreloadRoute`
 
 On the initial document, sku already emits `modulepreload` links for the matched route’s chunks.
-To warm chunks for a route the user is about to visit (React Router Data Mode has no `<Link prefetch>`), use `usePreloadRoute`:
+To warm chunks for a route the user is about to visit, use `usePreloadRoute`:
 
 ```tsx
 import { Link, type LinkProps } from 'react-router';
 import { usePreloadRoute } from 'sku/runtime';
 
 export function PreloadingLink({ to, ...rest }: LinkProps) {
-  const preload = usePreloadRoute(to);
+  const preload = usePreloadRoute(to); // [!code highlight]
 
   return (
     <Link
@@ -167,16 +164,11 @@ Calling the returned function loads matched lazy route modules for the current s
 It is fire-and-forget — a failed warm-up never throws; navigation reports the real error.
 Loader data is not prefetched — only route modules.
 
-## Advanced: custom lazy shapes
-
-If you need a non-idiomatic lazy shape (granular `lazy: { Component: … }`, multiple `import()` calls, or an indirect binding), set `handle.moduleId` to the Vite client manifest key — usually the source path relative to the project root, for example `src/pages/about/about.tsx`.
-An explicit value is never overwritten.
-Otherwise prefer the idiomatic `lazy` form above so sku can derive preloads for you.
-
 ## React Router route middleware
 
 React Router Data Mode supports a `middleware` array on routes for isomorphic behaviour on matched routes.
-That is separate from Express middleware on the server entry — see [Middleware](./middleware.md) for when to use each.
+That is separate from Express middleware on the server entry: use Express for HTTP-level work, and route `middleware` for behaviour tied to the matched route tree.
+See [Middleware](./middleware.md#react-router-route-middleware) for when to use each.
 
 ## See also
 

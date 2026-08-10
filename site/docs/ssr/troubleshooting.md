@@ -5,6 +5,7 @@ Managed Data Mode SSR is available for evaluation and testing. Do not use it in 
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
+Common Managed Data Mode SSR issues and fixes.
 Hit something not covered here? Raise it via [support](../support.md) so we can help and expand this guide.
 
 ## CJS default-export interop
@@ -37,3 +38,9 @@ export default {
 ```
 
 Prefer upgrading to an ESM build or replacing the dependency when possible.
+
+## See also
+
+- [Configuration](../configuration.md#__unsafe_experimental__cjsinteropdependencies) — CJS interop list
+- [Support](../support.md) — raise new issues
+- [Getting started](./) — Managed Data Mode overview

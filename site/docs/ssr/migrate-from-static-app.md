@@ -5,12 +5,12 @@ Managed Data Mode SSR is available for evaluation and testing. Do not use it in 
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
-High-level guide for moving a **static** sku app (webpack or Vite SSG) to SSR.
+High-level guide for moving a **static** sku app (webpack or Vite SSG) to Managed Data Mode SSR.
 For day-to-day API detail, prefer the [Getting started](./) topic pages.
 
 ## Requirements
 
-- SSR is Vite-only: `bundler: 'vite'` + `buildType: 'ssr'`
+- SSR is Vite-only: `bundler: 'vite'` and `buildType: 'ssr'`
 - Relative `publicPath` (for example `/`) — absolute / CDN URLs are not supported
 - Move off the config [`public`](../configuration.md#public) assets folder — import assets from modules instead
 - Drop [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins) — unsupported for SSR; raise use-cases via [support](../support.md)
@@ -33,19 +33,35 @@ export default {
 
 ## Routes and request entries
 
-- Compose path / `lazy` in [`routesEntry`](../configuration.md#routesentry); put `loader` / `action` / `Component` on page modules — see [Routing](./routing.md)
-- Default-export request entries via `defineServerEntry` / `defineClientEntry` — see [Request entries](./entries.md)
-- Export `getSite` when config has more than one site; omit on single-site apps
-- Lazy page modules must export named `Component` (not `export default`)
+Compose routes with `path` (or `index`) and `lazy` in [`routesEntry`](../configuration.md#routesentry).
+Put `loader`, `action`, and `Component` on page modules — see [Routing](./routing.md).
+
+Default-export request entries via `defineServerEntry` / `defineClientEntry` — see [Request entries](./entries.md).
+
+Export `getSite` when config has more than one site; omit on single-site apps.
+Lazy page modules must export a named `Component` (not `export default`).
 
 ## Providers and data
 
-- Wire [`createSkuContexts`](./providers.md) and mount isomorphic providers in your root layout
-- Prefer [render-time data loading](./data-loading.md) for page content
-- Production Express handlers go on server-entry `middleware`; local mocks stay in [`devServerMiddleware`](../configuration.md#devservermiddleware) — see [Middleware](./middleware.md)
+Wire [`createSkuContexts`](./providers.md#typed-hooks) and mount isomorphic providers in your root layout.
+Prefer [render-time data loading](./data-loading.md) for page content.
+
+Production Express handlers go on server-entry `middleware`.
+Local mocks stay in [`devServerMiddleware`](../configuration.md#devservermiddleware) — see [Middleware](./middleware.md).
 
 ## CSP and hydration
 
-- SSR emits **HTTP header** CSP, not meta `http-equiv` — see [CSP](./csp.md)
-- Replace `#app` `hydrateRoot` and `renderDocument` with sku’s full-document stream + `hydrateRoot(document)`
-- Use React document metadata in routes/layouts for head/SEO; the Document shell is not overridable
+SSR emits **HTTP header** CSP, not meta `http-equiv` — see [CSP](./csp.md).
+
+Replace `#app` `hydrateRoot` and `renderDocument` with sku’s full-document stream and `hydrateRoot(document)`.
+Use React document metadata in routes/layouts for head/SEO; the Document shell is not overridable.
+
+## See also
+
+- [Getting started](./) — scaffold and config
+- [Routing](./routing.md) — route tree and page modules
+- [Request entries](./entries.md) — server and client entries
+- [Providers](./providers.md) — typed hooks and root layout
+- [Data loading](./data-loading.md) — render-time fetch
+- [Middleware](./middleware.md) — Express vs dev mocks
+- [CSP](./csp.md) — header CSP

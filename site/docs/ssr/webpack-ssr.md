@@ -2,15 +2,17 @@
 
 :::info Webpack SSR
 This page describes sku’s **older method for server-side rendering** using Webpack.
-For the new experimental Managed Data Mode SSR, see [Getting Started](./).
+For the new experimental Managed Data Mode SSR, see [Getting started](./).
 :::
 
 Webpack SSR uses a low-level API and custom `-ssr` commands (`sku start-ssr` / `sku build-ssr`).
 You supply a `serverEntry` whose default export includes `renderCallback`.
 
-Minimal config and server entry:
+## Minimal setup
 
 ```ts
+import type { SkuConfig } from 'sku';
+
 export default {
   clientEntry: 'src/client.tsx',
   serverEntry: 'src/server/server.tsx',
@@ -26,9 +28,10 @@ Sku provides an [Express](https://expressjs.com/) server.
 The `serverEntry` default export may provide `renderCallback`, optional `middleware`, and optional `onStart`:
 
 ```tsx
-import template from './template';
-import middleware from './middleware';
 import type { Server } from 'sku';
+
+import middleware from './middleware';
+import template from './template';
 
 export default (): Server => ({
   renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
@@ -41,31 +44,38 @@ export default (): Server => ({
       template({ headTags: getHeadTags(), bodyTags: getBodyTags(), app }),
     );
   },
-  middleware: middleware,
+  middleware,
   onStart: (app) => {
-    console.log('My app started 👯‍♀️!');
-    app.keepAliveTimeout = 20000;
+    console.log('My app started');
+    app.keepAliveTimeout = 20_000;
   },
 });
 ```
 
-Commands (different from SSR / Static apps):
+## Commands
+
+These differ from Managed Data Mode SSR and Static apps:
 
 - `sku start-ssr` — development; uses both `port` and `serverPort`
 - `sku build-ssr` — production assets; run with `node ./dist/server.js` (listens on `serverPort`)
 - `sku test` — tests
 
-### Multi-part response
+## Multi-part response
 
 To return HTML at different times in the request, use `flushHeadTags` for head tags added since the previous call (typically from dynamic chunks):
 
 ```tsx
-import { initialResponseTemplate, followupResponseTemplate } from './template';
-import middleware from './middleware';
 import type { Server } from 'sku';
 
+import { followupResponseTemplate, initialResponseTemplate } from './template';
+import middleware from './middleware';
+
 export default (): Server => ({
-  renderCallback: ({ SkuProvider, getBodyTags, getHeadTags }, req, res) => {
+  renderCallback: async (
+    { SkuProvider, getBodyTags, flushHeadTags },
+    req,
+    res,
+  ) => {
     res.status(200);
     // Call `flushHeadTags` early to retrieve whatever tags are available.
     res.write(initialResponseTemplate({ headTags: flushHeadTags() })); // [!code highlight]
@@ -87,18 +97,18 @@ export default (): Server => ({
     );
     res.end();
   },
-  middleware: middleware,
+  middleware,
   onStart: (app) => {
-    console.log('My app started 👯‍♀️!');
-    app.keepAliveTimeout = 20000;
+    console.log('My app started');
+    app.keepAliveTimeout = 20_000;
   },
 });
 ```
 
-### Multi-language support
+## Multi-language support
 
 When using multiple languages the browser will download the language as needed, which can delay first paint.
-To ensure translations are available immediately, call `addLanguageChunk` from your render params (SSR uses server-entry `language` instead — see [Multi-language](./multi-language.md)):
+To ensure translations are available immediately, call `addLanguageChunk` from your render params:
 
 ```jsx
 export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
@@ -117,8 +127,9 @@ export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
 ```
 
 Static rendering registers language chunks automatically.
+Managed Data Mode SSR uses server-entry `getLanguage` instead — see [Multi-language](./multi-language.md).
 
-### Development server entrypoint
+## Development server entrypoint
 
 On the Webpack SSR path, `sku start-ssr` starts two services:
 
@@ -126,6 +137,12 @@ On the Webpack SSR path, `sku start-ssr` starts two services:
 - An SSR service running your app’s server code
 
 The dev server is the single entrypoint and proxies non-asset requests to the SSR service (similar to a production reverse proxy, and avoiding CORS for client requests).
-SSR uses a single port instead.
+Managed Data Mode SSR uses a single port instead.
 
-To proxy other traffic (for example APIs), use [Dev Server Middleware](../extra-features#devserver-middleware).
+To proxy other traffic (for example APIs), use [Dev Server Middleware](../extra-features.md#devserver-middleware).
+
+## See also
+
+- [Migrate from Webpack SSR](./migrate-from-webpack-ssr.md) — move to Managed Data Mode
+- [Getting started](./) — Managed Data Mode overview
+- [Extra features](../extra-features.md#devserver-middleware) — `devServerMiddleware`

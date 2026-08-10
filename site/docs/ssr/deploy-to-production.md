@@ -25,7 +25,7 @@ That lets you run `dist/server/` + `dist/client/` as a stand-alone server — us
 
 This is **not** recommended for production-grade deployments.
 
-See [Middleware](./middleware.md#mount-order-in-production) for mount order.
+See [Middleware → Mount order in production](./middleware.md#mount-order-in-production).
 
 ## Behind reverse proxy
 
@@ -37,3 +37,12 @@ Typical layout:
 2. Upload the contents of `dist/client/` to your bucket or origin (often under a key prefix that matches `publicPath`, for example `static/`).
 3. Deploy `dist/server/` **plus production `node_modules`**.
 4. Put a reverse proxy or CDN in front that serves `publicPath` from that storage and forwards everything else to the Node server.
+
+You’re set up when hashed assets are served from storage/CDN and only document requests reach Node.
+
+## See also
+
+- [Middleware](./middleware.md#mount-order-in-production) — production mount order
+- [Configuration](../configuration.md#publicpath) — relative `publicPath`
+- [CSP](./csp.md) — header CSP in production responses
+- [Getting started](./) — unsupported absolute `publicPath` and related options

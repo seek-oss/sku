@@ -6,16 +6,16 @@ In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
 Pass request-scoped values into React with typed hooks.
-Mount isomorphic providers (Braid, Vocab, Apollo, chrome) in your **root layout** route.
+Mount isomorphic providers (Braid, Vocab, Apollo) and shared UI in your **root layout** route.
 
 sku mounts a `SkuProvider` outside the router:
 
 ```
 Document
-  └── SkuProvider   ← site, clientContext, reactContext
-        └── Router
-              └── root layout route   ← Vocab, Apollo, chrome
-                    └── pages
+ └── SkuProvider   ← site, clientContext, reactContext
+      └── Router
+           └── root layout route   ← Vocab, Apollo, shared UI
+                └── pages
 ```
 
 ## Typed hooks
@@ -23,11 +23,11 @@ Document
 Create hooks bound to your entry objects:
 
 ```tsx
-// src/App/ssrContext.ts
+// src/ssrContext.ts
 import { createSkuContexts } from 'sku/runtime';
 
-import type client from './client.js';
-import type server from './server.js';
+import type client from './client';
+import type server from './server';
 
 export const { useSite, useClientContext, useReactContext } = createSkuContexts<
   typeof server,
@@ -52,6 +52,7 @@ const server = defineServerEntry({
     return { userId: req.user?.id ?? null };
   },
 });
+
 export default server;
 ```
 
@@ -60,15 +61,36 @@ export default server;
 ::: code-group
 
 ```tsx [server.tsx]
-getReactContext() {
-  return { makeClient: serverMakeClient };
-}
+// src/server.tsx
+import { defineServerEntry } from 'sku/runtime';
+
+const server = defineServerEntry({
+  getReactContext() {
+    return {
+      // Server-only client factory (API base URL, server link, …)
+      makeClient: () => createServerClient(),
+    };
+  },
+});
+
+export default server;
 ```
 
 ```tsx [client.tsx]
-getReactContext() {
-  return { makeClient: clientMakeClient };
-}
+// src/client.tsx
+import { defineClientEntry } from 'sku/runtime';
+
+import type server from './server';
+
+const client = defineClientEntry<typeof server>()({
+  getReactContext() {
+    return {
+      makeClient: () => createBrowserClient(),
+    };
+  },
+});
+
+export default client;
 ```
 
 :::
@@ -81,28 +103,35 @@ For loader/action dependency injection, see [Data loading → Router context](./
 ## Root layout for providers
 
 Wrapping that needs React Router hooks belongs in your own root layout in `routes.tsx`.
-Prefer a **pathless** layout over `path: '/'`:
+You can add a **pathless** layout to wrap child routes without adding a URL segment.
+The same root layout can be used for shared UI such as a header or footer.
 
-```tsx
-// src/App/RootLayout.tsx
+::: code-group
+
+```tsx [RootLayout.tsx]
 import 'braid-design-system/reset';
 
 import { BraidProvider } from 'braid-design-system';
 import seekJobs from 'braid-design-system/themes/seekJobs';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 
-export const RootLayout = () => (
-  <BraidProvider theme={seekJobs}>
-    <Outlet />
-  </BraidProvider>
-);
+export const RootLayout = () => {
+  const language = useLanguage();
+
+  return (
+    <BraidProvider theme={seekJobs}>
+      <Header />
+      <Outlet />
+      <Footer />
+    </BraidProvider>
+  );
+};
 ```
 
-```tsx
-// src/routes.tsx
+```tsx [routes.tsx]
 import type { SkuRouteObject } from 'sku';
 
-import { RootLayout } from './App/RootLayout';
+import { RootLayout } from './RootLayout';
 
 export const routes: SkuRouteObject[] = [
   {
@@ -115,26 +144,83 @@ export const routes: SkuRouteObject[] = [
 ];
 ```
 
+:::
+
 Env-specific **values** (API clients, etc.) come from dual-entry `getReactContext`.
-Isomorphic **provider components** mount in the root layout and read those values with hooks — for example Vocab keyed on the URL, or Apollo via `useReactContext()`. See [Multi-language](./multi-language.md) and [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
+Isomorphic **provider components** mount in the root layout and read those values with hooks — for example Vocab keyed on the URL, or Apollo via `useReactContext()`.
+See [Multi-language](./multi-language.md) and [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
 
-## Entry helpers and typing
+## Braid reset
 
-Wrap each request entry with `defineServerEntry` / `defineClientEntry` from `sku/runtime` so TypeScript can infer sibling types.
-Prefer `defineClientEntry<typeof server>()({ … })` so client callbacks get `Site` / `ClientContext` from the server entry.
-
-Do not annotate getters with the loose public aliases (`SkuGetSite`, …) — they widen returns to `string` and defeat literal inference.
-
-Full getter reference: [Request entries](./entries.md).
-
-## Notes
-
-**Braid:** import `braid-design-system/reset` before any module that touches Braid on the **server** graph (for example at the top of the root layout).
+Import `braid-design-system/reset` before any module that touches Braid on the **server** graph (for example at the top of the root layout).
 On `sku start`, Vite’s SSR evaluation order can differ from production.
 sku does not auto-inject Braid reset.
 
-**Browser-only libraries:** construct them in client `getReactContext` and consume from the root layout or a small `useEffect` wrapper via `useReactContext()`.
+## Browser-only libraries
 
-A root route `ErrorBoundary` does not catch errors thrown above the router (including `SkuProvider`). See [Error pages](./error-pages.md).
+Libraries that touch `window` (for example analytics SDKs) throw during Document SSR.
+Construct them in client `getReactContext` and return a stub (or omit the field) on the server.
+Consume from a small `useEffect` wrapper via `useReactContext()`:
 
-Do not reach for Async Local Storage or module-level mutable state set by `onHydrate` for request values — use the hooks above.
+::: code-group
+
+```tsx [client.tsx]
+// src/client.tsx
+import { defineClientEntry } from 'sku/runtime';
+
+import { createAnalytics } from './analytics';
+import type server from './server';
+
+const client = defineClientEntry<typeof server>()({
+  getReactContext() {
+    return { analytics: createAnalytics() };
+  },
+});
+
+export default client;
+```
+
+```tsx [server.tsx]
+import { defineServerEntry } from 'sku/runtime';
+
+const server = defineServerEntry({
+  getReactContext() {
+    return { analytics: null };
+  },
+});
+
+export default server;
+```
+
+```tsx [Analytics.tsx]
+import { useEffect } from 'react';
+
+import { useReactContext } from './ssrContext';
+
+export const Analytics = () => {
+  const { analytics } = useReactContext();
+
+  useEffect(() => {
+    analytics?.trackPageView();
+  }, [analytics]);
+
+  return null;
+};
+```
+
+:::
+
+Mount `<Analytics />` in the root layout.
+
+## Errors above the router
+
+A root route `ErrorBoundary` does not catch errors thrown above the router (including `SkuProvider`).
+See [Error pages](./error-pages.md).
+
+## See also
+
+- [Request entries](./entries.md) — getters and entry shapes
+- [Routing](./routing.md) — pathless root layout and pages
+- [Data loading](./data-loading.md) — render-time fetch and router context
+- [Multi-language](./multi-language.md) — Vocab in the root layout
+- [Runtime API](./runtime-api.md) — `createSkuContexts` and related helpers

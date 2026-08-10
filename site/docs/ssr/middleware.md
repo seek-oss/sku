@@ -9,7 +9,7 @@ SSR has three places to run middleware — pick the one that matches the job:
 
 1. **Server-entry `middleware`** — production and start; request context before HTML render
 2. **Config `devServerMiddleware`** — `sku start` only; local mocks and proxies
-3. **React Router route middleware** — isomorphic behaviour on matched routes (see [Routing](./routing.md#react-router-route-middleware))
+3. **React Router route middleware** — isomorphic behaviour on matched routes (see [React Router route middleware](#react-router-route-middleware))
 
 ## Server-entry middleware
 
@@ -17,6 +17,7 @@ Export Connect/Express handlers from the server entry.
 sku mounts them before the HTML render path in both `sku start` and production.
 
 ```tsx
+// src/server.tsx
 import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
@@ -85,6 +86,13 @@ export default (app) => {
 };
 ```
 
+## React Router route middleware
+
+React Router Data Mode supports a `middleware` array on routes for isomorphic behaviour on matched routes.
+That is separate from Express middleware on the server entry — use Express for HTTP-level work, and route `middleware` for behaviour tied to the matched route tree.
+
+See [Routing → React Router route middleware](./routing.md#react-router-route-middleware) and React Router’s [middleware docs](https://reactrouter.com/how-to/middleware).
+
 ## Mount order in production
 
 1. Request-context (sku; CSP nonce store, etc.)
@@ -106,3 +114,11 @@ App routes outside that prefix still reach middleware and HTML as usual.
 Dev mocks mount before production middleware so they can intercept traffic that would never reach the app in production.
 `sku start` does not mount `express.static` under `publicPath` — Vite serves the module graph from `/`.
 Put anything that must ship in production on the server-entry export; keep stubs and local-only routes in `devServerMiddleware`.
+
+## See also
+
+- [Request entries](./entries.md#middleware) — `middleware` on the server entry
+- [Data loading](./data-loading.md#router-context) — project Express values into router context
+- [Logging](./logging.md) — request access logs via Express middleware
+- [Deploy to production](./deploy-to-production.md) — stand-alone vs reverse-proxy asset serving
+- [Routing](./routing.md#react-router-route-middleware) — route-level middleware

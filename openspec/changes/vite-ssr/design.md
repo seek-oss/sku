@@ -64,7 +64,7 @@ See Decision 27.
 - `defineClientEntry<typeof server>` extracts `Site` / `ClientContext` from the server entry.
 - Hooks read types from `typeof` the entry objects.
 - Router-aware isomorphic wrapping lives in the app’s own root layout route in `routesEntry`.
-- That covers Vocab, Apollo provider mount, and page chrome.
+- That covers Vocab, Apollo provider mount, and shared UI.
 - App-owned streaming data transports via `useInsertHtml` on `sku/runtime`.
 - The hook is nonce-able and a no-op off the SSR path.
 - Apollo streaming hydration is proven by a fixture.
@@ -662,7 +662,7 @@ Omit `onHydrate` ⇒ no hydrate side effects.
 
 Two wrapping concerns were previously conflated into one sku-owned `AppWrapper` / app `Providers` mount:
 
-1. **Router-aware, isomorphic wrapping**. Needs `useLocation` / loader data (e.g. `VocabProvider` keyed on pathname, mounting Apollo around the outlet, page chrome).
+1. **Router-aware, isomorphic wrapping**. Needs `useLocation` / loader data (e.g. `VocabProvider` keyed on pathname, mounting Apollo around the outlet, shared UI).
 2. **Environment-scoped dependency values**. Server and client need _different_ modules or constructions (API clients, `makeClient`, client-only `window` SDKs). `routesEntry` is one shared module, so it cannot express the construction, only the consumption.
 
 **Pass-through `Providers` was the wrong seam.**
@@ -684,7 +684,7 @@ VitePress has no built-in Mermaid, and the site does not ship a Mermaid plugin t
 Document
   └── SkuProvider   ← always (site, clientContext, reactContext)
         └── Router
-              └── root layout route   ← Vocab, Apollo wrap, chrome
+              └── root layout route   ← Vocab, Apollo wrap, shared UI
                     └── pages
 ```
 

@@ -1,14 +1,19 @@
 # Request entries
 
-SSR apps have three entry modules:
+:::danger Experimental — not for production
+Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+:::
+
+SSR apps have three entry modules.
+Server and client each **`export default`** an object from `defineServerEntry` / `defineClientEntry`.
+Routes export a named `routes` array — see [Routing](./routing.md).
 
 | Entry                   | Default path     | Role                                     |
 | ----------------------- | ---------------- | ---------------------------------------- |
 | [Server](#server-entry) | `src/server.tsx` | Server setup (onListen, middleware)      |
 | [Client](#client-entry) | `src/client.tsx` | Hydrate-time setup                       |
 | [Routes](#routes-entry) | `src/routes.tsx` | Route tree — see [Routing](./routing.md) |
-
-Server and client each **`export default`** an object from `defineServerEntry` / `defineClientEntry`.
 
 ## Server entry
 
@@ -33,10 +38,18 @@ const server = defineServerEntry({
 export default server;
 ```
 
-Add getters when you need them.
-They run after consumer Express middleware and before React Router handles the document request, in this order: `getSite` → `getLanguage` → `getClientContext` → `getReactContext` → optional `getRouterContext`.
+You’re set up when the file default-exports a `defineServerEntry({ … })` object.
 
-Early getters (`getSite` / `getLanguage` / `getClientContext`) receive `{ req }` (the Express request).
+Add getters when you need them.
+They run after consumer Express middleware and before React Router handles the document request:
+
+1. `getSite`
+2. `getLanguage`
+3. `getClientContext`
+4. `getReactContext`
+5. optional `getRouterContext`
+
+Early getters (`getSite`, `getLanguage`, `getClientContext`) receive `{ req }` (the Express request).
 Later getters also receive already-resolved sibling values so you can project instead of re-deriving.
 
 ### getSite
@@ -48,16 +61,31 @@ Required when config has more than one site; omit on single-site apps.
 getSite?: (args: { req: ExpressRequest }) => Site;
 ```
 
+```tsx
+getSite({ req }) {
+  return req.get('x-site') === 'nz' ? 'nz' : 'au';
+},
+```
+
 Use [`useSite()`](./providers.md#typed-hooks) in the app.
 See [Routing → Multi-site](./routing.md#multi-site-routes).
 
 ### getLanguage
 
 Resolves the language for Document vocab chunk registration.
+Return a name from config `languages` (or `en-PSEUDO`).
 
 ```ts
 getLanguage?: (args: { req: ExpressRequest }) => Language;
 ```
+
+```tsx
+getLanguage({ req }) {
+  return req.path.startsWith('/th') ? 'th-TH' : 'en';
+},
+```
+
+See [Multi-language](./multi-language.md).
 
 ### getClientContext
 
@@ -65,6 +93,15 @@ JSON-serialisable content sent to the client and available via `useClientContext
 
 ```ts
 getClientContext?: (args: { req: ExpressRequest }) => ClientContext;
+```
+
+```tsx
+getClientContext({ req }) {
+  return {
+    theme: 'dark',
+    userId: req.user?.id ?? null,
+  };
+},
 ```
 
 ### getReactContext
@@ -79,6 +116,8 @@ getReactContext?: (args: {
 }) => ReactContext;
 ```
 
+Pair with a client `getReactContext` when values differ by environment — see [Providers](./providers.md#pass-values-into-react).
+
 ### middleware
 
 Express middleware run before SSR for each request.
@@ -90,9 +129,9 @@ middleware?: RequestHandler[];
 
 ### onListen
 
-Called once after middleware + HTML are mounted and `listen` succeeds (both `sku start` and production).
+Called once after middleware and HTML are mounted and `listen` succeeds (both `sku start` and production).
 Use it for keep-alive timeouts, readiness logging with the bound port, or rare Express knobs.
-Not re-fired on server-entry HMR.
+It is not re-fired on server-entry HMR.
 Omit if you do not need a post-listen hook.
 
 For Melways-shaped `trust proxy`, prefer config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (hop count `1`).
@@ -113,56 +152,27 @@ defineServerEntry({
     console.log(`listening on ${port}`);
     // rare: app.set('trust proxy', 2)
   },
-  // …
 });
 ```
 
-### getRouterContext
-
-Seeds React Router’s `RouterContextProvider` for loader/action DI.
-Prefer projecting isomorphic values both server and client can supply — see [Data loading → Router context](./data-loading.md#router-context).
-
-```ts
-getRouterContext?: (args: {
-  request: Request;
-  req: ExpressRequest;
-  site: Site;
-  clientContext: ClientContext | undefined;
-  reactContext: ReactContext | undefined;
-}) => RouterContextProvider | Promise<RouterContextProvider>;
-```
-
-:::warning Never put Express `req` in `RouterContextProvider`
-Project values both sides can supply.
-Raw `req` is `undefined` on client navigations.
-:::
-
-### Full example
+### Server entry example
 
 ```tsx
 // src/server.tsx
-import { RouterContextProvider } from 'react-router';
 import { defineServerEntry } from 'sku/runtime';
-
-import { userIdContext } from './userIdContext';
 
 const server = defineServerEntry({
   getSite({ req }) {
     return req.get('x-site') === 'nz' ? 'nz' : 'au';
   },
   getLanguage({ req }) {
-    return resolveLocaleFromPath(req.path);
+    return req.path.startsWith('/th') ? 'th-TH' : 'en';
   },
   getClientContext({ req }) {
     return {
       theme: 'dark',
       userId: req.user?.id ?? null,
     };
-  },
-  getRouterContext({ clientContext }) {
-    const ctx = new RouterContextProvider();
-    ctx.set(userIdContext, clientContext?.userId ?? null);
-    return ctx;
   },
   middleware: [
     (req, res, next) => {
@@ -195,6 +205,8 @@ const client = defineClientEntry<typeof server>()({
 export default client;
 ```
 
+Prefer `defineClientEntry<typeof server>()({ … })` so client callbacks get `Site` / `ClientContext` from the server entry.
+
 ### onHydrate
 
 Side effects before client React hydrate.
@@ -218,11 +230,27 @@ getReactContext?: (args: {
 }) => ReactContext;
 ```
 
+## Advanced: router context
+
+Optional dual-entry `getRouterContext` seeds React Router’s `RouterContextProvider` for loader/action dependency injection.
+Prefer projecting isomorphic values both server and client can supply — see [Data loading → Router context](./data-loading.md#router-context).
+
 ### getRouterContext
 
-Client seed for loader/action DI.
-Called on every client navigation / fetcher — not once at hydrate.
-Must work without Express — see [Data loading → Router context](./data-loading.md#router-context).
+Server signature — receives Express `req` plus already-resolved sibling values:
+
+```ts
+getRouterContext?: (args: {
+  request: Request;
+  req: ExpressRequest;
+  site: Site;
+  clientContext: ClientContext | undefined;
+  reactContext: ReactContext | undefined;
+}) => RouterContextProvider | Promise<RouterContextProvider>;
+```
+
+On the **client** entry, the same name is called on every client navigation / fetcher — not once at hydrate.
+It must work without Express:
 
 ```ts
 getRouterContext?: (args: {
@@ -232,9 +260,44 @@ getRouterContext?: (args: {
 }) => RouterContextProvider;
 ```
 
-### Full example with router context
+:::warning Never put Express `req` in `RouterContextProvider`
+Project values both sides can supply.
+Raw `req` is `undefined` on client navigations.
+:::
+
+### Router context example
 
 ```tsx
+// Shared key — src/userIdContext.ts
+import { createContext } from 'react-router';
+
+export const userIdContext = createContext<string | null>(null);
+```
+
+::: code-group
+
+```tsx [server.tsx]
+// src/server.tsx
+import { RouterContextProvider } from 'react-router';
+import { defineServerEntry } from 'sku/runtime';
+
+import { userIdContext } from './userIdContext';
+
+const server = defineServerEntry({
+  getClientContext({ req }) {
+    return { userId: req.user?.id ?? null };
+  },
+  getRouterContext({ clientContext }) {
+    const ctx = new RouterContextProvider();
+    ctx.set(userIdContext, clientContext?.userId ?? null);
+    return ctx;
+  },
+});
+
+export default server;
+```
+
+```tsx [client.tsx]
 // src/client.tsx
 import { RouterContextProvider } from 'react-router';
 import { defineClientEntry } from 'sku/runtime';
@@ -253,14 +316,25 @@ const client = defineClientEntry<typeof server>()({
 export default client;
 ```
 
+:::
+
 ## Routes entry
 
 Named export of a React Router route tree — see [Routing](./routing.md).
 
 ```ts
-export const routes: SkuSsrRouteObject[];
+import type { SkuRouteObject } from 'sku';
+
+export const routes: SkuRouteObject[];
 ```
 
-`SkuSsrRouteObject` is a React Router `RouteObject` plus optional `sites` for multi-site membership.
+`SkuRouteObject` is a React Router `RouteObject` plus optional `sites` for multi-site membership.
 
-See [Runtime API](./runtime-api.md) for `sku/runtime` helpers.
+## See also
+
+- [Routing](./routing.md) — compose the route tree
+- [Providers](./providers.md) — typed hooks and root layout
+- [Middleware](./middleware.md) — Express and `devServerMiddleware`
+- [Data loading](./data-loading.md) — render-time fetch and loaders
+- [Logging](./logging.md) — `instrumentations` on each entry
+- [Runtime API](./runtime-api.md) — `sku/runtime` helpers

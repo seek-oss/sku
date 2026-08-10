@@ -5,14 +5,14 @@ Managed Data Mode SSR is available for evaluation and testing. Do not use it in 
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
-High-level guide for moving from **Webpack SSR** (`sku start-ssr` / `sku build-ssr` / `renderCallback`) to **SSR**.
+High-level guide for moving from **Webpack SSR** (`sku start-ssr` / `sku build-ssr` / `renderCallback`) to Managed Data Mode SSR.
 
 Webpack SSR was lower-level and often required bespoke app behaviour, so migration details will depend on your solution.
 For day-to-day API detail, prefer the [Getting started](./) topic pages.
 
 ## Requirements
 
-- `bundler: 'vite'` + `buildType: 'ssr'`
+- `bundler: 'vite'` and `buildType: 'ssr'`
 - Relative `publicPath` only
 - Move off the config [`public`](../configuration.md#public) assets folder — import assets from modules instead
 - Drop [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins) — unsupported for SSR; raise use-cases via [support](../support.md)
@@ -47,33 +47,49 @@ export default {
 ```
 
 - Export `getSite` when more than one site
-- **Ports:** Webpack SSR used dual ports (`port` + `serverPort`). SSR is single-port — use [`port`](../configuration.md#port) (or `PORT` at runtime). Drop `serverPort`
+- **Ports:** Webpack SSR used dual ports (`port` + `serverPort`). Managed Data Mode is single-port — use [`port`](../configuration.md#port) (or `PORT` at runtime). Drop `serverPort`
 - **Deploy layout:** `node dist/server/server.js` with sibling `client/` + `server/` — not webpack’s single `dist/server.js`
 - Type server-entry `middleware` for Express 4; install React Router 8 in the app
 
 ## Routes and request entries
 
-- Compose path / `lazy` in [`routesEntry`](../configuration.md#routesentry); put `loader` / `action` / `Component` on page modules — see [Routing](./routing.md)
-- Replace `{ renderCallback, middleware, onStart }` with `defineServerEntry` / `defineClientEntry` — see [Request entries](./entries.md)
-- Lazy page modules must export named `Component` (not `export default`)
-- sku streams the Document — put isomorphic wrapping in the root layout and env-differing values in `getReactContext`
-- Map webpack `onStart({ app })` to server-entry [`onListen({ app, httpServer, port })`](./entries.md#onlisten) (bound port + `httpServer` for keep-alive timeouts)
-- Trust proxy is opt-in via config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (sets hop count `1`), not via `onStart` / `onListen`. Other trust-proxy values → `app.set('trust proxy', …)` in `onListen`
-- Keep server-only construction in server `getReactContext` (or server-only helpers) and consume via `useReactContext()`
+Compose routes with `path` (or `index`) and `lazy` in [`routesEntry`](../configuration.md#routesentry).
+Put `loader`, `action`, and `Component` on page modules — see [Routing](./routing.md).
+
+Replace `{ renderCallback, middleware, onStart }` with `defineServerEntry` / `defineClientEntry` — see [Request entries](./entries.md).
+
+Lazy page modules must export a named `Component` (not `export default`).
+
+sku streams the Document — put isomorphic wrapping in the root layout and env-differing values in `getReactContext`.
+
+Map webpack `onStart({ app })` to server-entry [`onListen({ app, httpServer, port })`](./entries.md#onlisten) (bound port + `httpServer` for keep-alive timeouts).
+
+Trust proxy is opt-in via config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (sets hop count `1`), not via `onStart` / `onListen`.
+Other trust-proxy values go in `onListen` via `app.set('trust proxy', …)`.
+
+Keep server-only construction in server `getReactContext` (or server-only helpers) and consume via `useReactContext()`.
 
 ## App-level providers
 
-- Wire [`createSkuContexts`](./providers.md) — there is no app `Providers` export
-- Router-aware wrapping moves into your root layout route
-- Vocab: `getLanguage` on the server entry + `VocabProvider` in the root layout — see [Multi-language](./multi-language.md)
-- **Braid:** ensure `braid-design-system/reset` runs before any Braid-touching server module — see [Providers](./providers.md)
+Wire [`createSkuContexts`](./providers.md#typed-hooks) — there is no app `Providers` export.
+
+Router-aware wrapping moves into your root layout route.
+
+Vocab: `getLanguage` on the server entry and `VocabProvider` in the root layout — see [Multi-language](./multi-language.md).
+
+**Braid:** ensure `braid-design-system/reset` runs before any Braid-touching server module — see [Providers → Braid reset](./providers.md#braid-reset).
 
 ## Data loading and middleware
 
-- Prefer [render-time data loading](./data-loading.md) for page content; use loaders for redirects, headers, or waterfalls
-- **Apollo:** replace `getDataFromTree` with streaming transport over [`useInsertHtml`](./runtime-api.md#useinserthtml) — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration)
-- Keep production handlers on server-entry `middleware`; keep local mocks in `devServerMiddleware` — see [Middleware](./middleware.md)
-- When sibling `client/` is present, production mounts Node static under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware so catch-all / Melways-style middleware cannot eat hashed assets. Productionised deploys host those assets outside Node instead
+Prefer [render-time data loading](./data-loading.md) for page content.
+Use loaders for redirects, headers, or waterfalls.
+
+**Apollo:** replace `getDataFromTree` with streaming transport over [`useInsertHtml`](./runtime-api.md#useinserthtml) — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
+
+Keep production handlers on server-entry `middleware`; keep local mocks in `devServerMiddleware` — see [Middleware](./middleware.md).
+
+When sibling `client/` is present, production mounts Node static under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware so catch-all / Melways-style middleware cannot eat hashed assets.
+Productionised deploys host those assets outside Node instead.
 
 :::danger Never put Express `req` in `RouterContextProvider`
 Project values both sides can supply.
@@ -82,10 +98,23 @@ Raw `req` is missing on client navigations — see [Data loading → Router cont
 
 ## CSP and hydration
 
-- Use header CSP + the single request-scoped nonce (`getCspNonce` / `req.getCspNonce`) — see [CSP](./csp.md)
-- Drop hand-rolled HTML templates / `getHeadTags` / `getBodyTags`
-- Hydration is full-document (`hydrateRoot(document)`), not a partial mount inside markup from `renderCallback`
+Use header CSP and the single request-scoped nonce (`getCspNonce` / `req.getCspNonce`) — see [CSP](./csp.md).
+
+Drop hand-rolled HTML templates / `getHeadTags` / `getBodyTags`.
+
+Hydration is full-document (`hydrateRoot(document)`), not a partial mount inside markup from `renderCallback`.
 
 ## Troubleshooting
 
 If `sku start` fails with React “Element type is invalid … got: object” for a CJS package that still builds in production, see [CJS default-export interop](./troubleshooting.md#cjs-default-export-interop).
+
+## See also
+
+- [Getting started](./) — Managed Data Mode overview
+- [Request entries](./entries.md) — `defineServerEntry` / `defineClientEntry`
+- [Routing](./routing.md) — route tree and page modules
+- [Providers](./providers.md) — typed hooks and Braid reset
+- [Data loading](./data-loading.md) — render-time fetch and Apollo
+- [Middleware](./middleware.md) — Express vs `devServerMiddleware`
+- [Deploy to production](./deploy-to-production.md) — `dist/server` + `dist/client`
+- [Webpack SSR](./webpack-ssr.md) — current production path

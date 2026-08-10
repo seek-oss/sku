@@ -18,9 +18,6 @@ Managed Data Mode SSR is available for evaluation and testing. Do not use it in 
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
-Migrating from Webpack SSR? See [Migrate from Webpack SSR](./migrate-from-webpack-ssr.md).
-Migrating from a static app? See [Migrate from Static App](./migrate-from-static-app.md).
-
 ## Scaffold a new app
 
 ```bash
@@ -46,7 +43,7 @@ After scaffolding you get three app entries:
 - `src/client.tsx` — hydrate-time setup
 - `src/routes.tsx` — your React Router route tree
 
-The template also sets up a root layout (for providers like Braid), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md) from `sku/runtime`.
+The template also sets up a root layout (for providers like Braid), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md#typed-hooks) from `sku/runtime`.
 
 ## Configuration
 
@@ -65,11 +62,11 @@ export default {
 
 See [Configuration](../configuration.md) for all options.
 
-### Not Supported / Not Planned
+### Unsupported configuration
 
 Because sku owns more of the server and build in Managed Data Mode SSR, these options are not supported and are not planned:
 
-- Absolute `publicPath` (for example `https://seekcdn.com/*`).
+- Absolute `publicPath` (for example `https://seekcdn.com/*`)
 - [`public`](../configuration.md#public) assets folder
 - [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig)
 - [`vitePlugins`](../configuration.md#viteplugins)
@@ -83,5 +80,7 @@ For exceptional requirements raise a query via [support](../support.md).
 - [Providers](./providers.md) — pass values into React
 - [Data loading](./data-loading.md) — fetch page content
 - [Deploy to production](./deploy-to-production.md) — when you’re ready to ship
+- [Migrate from Webpack SSR](./migrate-from-webpack-ssr.md)
+- [Migrate from Static App](./migrate-from-static-app.md)
 
 Looking to add an application-level feature that many apps might share? Reach out via [support](../support.md) — we prefer to internalise common solutions in sku where it makes sense.

@@ -5,13 +5,12 @@ Managed Data Mode SSR is available for evaluation and testing. Do not use it in 
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
-Prefer **render-time** data loading in React for page content:
+Prefer **render-time** data loading in React for page content.
+That keeps shared UI portable without per-app loader wiring.
 
-1. Pass env-specific clients via dual-entry [`getReactContext`](./providers.md) (and serialisable seeds via `getClientContext`).
+1. Pass env-specific clients via dual-entry [`getReactContext`](./providers.md#pass-values-into-react) (and serialisable seeds via `getClientContext`).
 2. Mount isomorphic providers in your [root layout](./providers.md#root-layout-for-providers) and read values with `useReactContext()` / `useClientContext()`.
 3. Fetch in the React tree with Suspense (for example `useQuery`) so the same components work on SSR and client navigations.
-
-That keeps shared UI portable without per-app loader wiring.
 
 ## When to use loaders
 
@@ -22,7 +21,20 @@ Reach for React Router **loaders** when you need to:
 - inject values into loaders via optional dual-entry [`getRouterContext`](#router-context)
 
 [`<Navigate />`](https://reactrouter.com/api/components/Navigate) and [`useNavigate()`](https://reactrouter.com/api/hooks/useNavigate) are browser controls and will **not** create a document HTTP redirect.
-Use a loader `redirect()` when the response must be a real redirect.
+Use a loader `redirect()` when the response must be a real redirect:
+
+```tsx
+// src/pages/legacy/legacy.tsx
+import { redirect } from 'react-router';
+
+export function loader() {
+  return redirect('/new-home');
+}
+
+export function Component() {
+  return null;
+}
+```
 
 Loaders receive a Fetch `Request`, not Express `req`.
 Express `req` is available to [entry getters](./entries.md) and optional server `getRouterContext`.
@@ -36,19 +48,21 @@ Optional dual-entry `getRouterContext` seeds React Router’s `RouterContextProv
 If you use it, define it on **both** server and client entries with the same `createContext` keys — client navigations have no Express request:
 
 ```tsx
-// Shared key
-import { createContext, RouterContextProvider } from 'react-router';
+// src/userIdContext.ts
+import { createContext } from 'react-router';
+
 export const userIdContext = createContext<string | null>(null);
 ```
 
 ::: code-group
 
 ```tsx [server.tsx]
+// src/server.tsx
+import { RouterContextProvider } from 'react-router';
 import { defineServerEntry } from 'sku/runtime';
 
 import { userIdContext } from './userIdContext';
 
-// Project from getClientContext
 const server = defineServerEntry({
   getClientContext({ req }) {
     return { userId: req.user?.id ?? null };
@@ -59,16 +73,18 @@ const server = defineServerEntry({
     return ctx;
   },
 });
+
 export default server;
 ```
 
 ```tsx [client.tsx]
+// src/client.tsx
+import { RouterContextProvider } from 'react-router';
 import { defineClientEntry } from 'sku/runtime';
 
 import type server from './server';
 import { userIdContext } from './userIdContext';
 
-// Same projection from hydrate seed
 const client = defineClientEntry<typeof server>()({
   getRouterContext({ clientContext }) {
     const ctx = new RouterContextProvider();
@@ -76,6 +92,7 @@ const client = defineClientEntry<typeof server>()({
     return ctx;
   },
 });
+
 export default client;
 ```
 
@@ -83,6 +100,10 @@ export default client;
 
 ```tsx
 // loader — works on document SSR and after client navigation
+import type { LoaderFunctionArgs } from 'react-router';
+
+import { userIdContext } from './userIdContext';
+
 export async function loader({ context }: LoaderFunctionArgs) {
   return { userId: context.get(userIdContext) };
 }
@@ -141,6 +162,8 @@ Mount the isomorphic Apollo provider in the root layout via `useReactContext()`:
 ::: code-group
 
 ```tsx [server.tsx]
+// src/server.tsx
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { defineServerEntry, getCspNonce } from 'sku/runtime';
 
 const server = defineServerEntry({
@@ -155,15 +178,17 @@ const server = defineServerEntry({
     };
   },
 });
+
 export default server;
 ```
 
 ```tsx [client.tsx]
+// src/client.tsx
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { defineClientEntry } from 'sku/runtime';
 
 import type server from './server';
 
-// Different makeClient; omit extraScriptProps
 const client = defineClientEntry<typeof server>()({
   getReactContext() {
     return {
@@ -175,18 +200,22 @@ const client = defineClientEntry<typeof server>()({
     };
   },
 });
+
 export default client;
 ```
 
 :::
 
 ```tsx
-// root layout
-import { useReactContext } from './ssrContext';
+// src/RootLayout.tsx
+import { Outlet } from 'react-router';
+
 import { ApolloProvider } from './ApolloProvider';
+import { useReactContext } from './ssrContext';
 
 export const RootLayout = () => {
   const reactContext = useReactContext();
+
   return (
     <ApolloProvider
       makeClient={reactContext.makeClient}
@@ -207,3 +236,12 @@ Queries issued after hydration (client navigation) still fetch normally.
 
 Loader-transported Apollo query refs (`apolloLoader` / `preloadQuery`) are unsupported — use render-time queries under the transport instead.
 Drop two-pass `getDataFromTree`; it is incompatible with streaming Document SSR.
+
+## See also
+
+- [Providers](./providers.md) — `getReactContext` and root layout
+- [Request entries](./entries.md#getroutercontext) — `getRouterContext` shapes
+- [Routing](./routing.md#when-to-use-loaders) — loaders on page modules
+- [Runtime API](./runtime-api.md#useinserthtml) — `useInsertHtml`
+- [CSP](./csp.md) — nonce for injected scripts
+- [Middleware](./middleware.md) — attach values on Express `req`

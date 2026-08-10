@@ -1,4 +1,4 @@
-import type { SkuRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku/runtime';
 
 import { ErrorBoundary } from './ErrorBoundary.js';
 import { RootLayout } from './RootLayout.js';

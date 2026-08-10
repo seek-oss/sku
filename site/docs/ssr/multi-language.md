@@ -56,33 +56,46 @@ export const RootLayout = () => {
 
 For Vocab setup ([`languages`](../configuration.md#languages) config, `.vocab` folders, translation workflow), see [Multiple languages](../multi-language.md).
 
-## Multiple paths per page / languages in path
+## Languages in the path
 
-Some URL schemes serve the same page at more than one path — for example `/about` for a default language and `/fr/about` when the language is nested in the path.
+Some URL schemes serve the same page at more than one path — for example `/about` for one language and `/fr/about` for another.
 
-React Router matches on the full path and does not let one route declare multiple paths.
-Define the page once, then register a separate route object for each path:
+React Router matches one path per route object, so you need a separate route for each concrete path.
+
+Prefer listing supported prefixes over a dynamic `:lang` segment — a param would also match unsupported prefixes.
+
+You can duplicate route objects by hand, or use `expandRoutePath` below.
+
+### expandRoutePath
+
+Export optional `expandRoutePath` from [`routesEntry`](../configuration.md#routesentry). sku clones the route for each returned path:
 
 ```tsx
 // src/routes.tsx
-import type { SkuRouteObject } from 'sku';
+import type { ExpandRoutePath, SkuRouteObject } from 'sku/runtime';
 
 import { RootLayout } from './RootLayout';
 
-const pageLazy = () => import('./pages/page/page');
+export const expandRoutePath: ExpandRoutePath = ({ path }) => {
+  if (path === 'about') {
+    return ['about', 'fr/about'];
+  }
+  return [path];
+};
 
 export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
-    children: [
-      { path: 'page', lazy: pageLazy },
-      { path: 'fr/page', lazy: pageLazy },
-    ],
+    children: [{ path: 'about', lazy: () => import('./pages/about/about') }],
   },
 ];
 ```
 
-Prefer listing supported prefixes over a dynamic `:lang` segment — a dynamic segment would also match unsupported prefixes.
+`expandRoutePath` is not a substitute for [`getLanguage`](./entries.md#getlanguage) — that still selects the Vocab chunk on the Document.
+
+Hand-duplicating is fine for more control. Do not share one `const pageLazy = () => import(…)` across copies — that breaks automatic `modulepreload`. Prefer `expandRoutePath`, or give each duplicate its own inline `lazy`.
+
+For nested routes, index homes, and per-site expansion, see [Routing → Multiple paths with expandRoutePath](./routing.md#multiple-paths-with-expandroutepath).
 
 ## See also
 

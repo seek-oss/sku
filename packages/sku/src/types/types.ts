@@ -415,6 +415,8 @@ export interface SkuConfigBase {
    * the server and client graphs. Optional `sites` on routes declares
    * multi-site membership; apps select the tree via `getSite` (required when
    * config has more than one site; sole config site when omitted on single-site).
+   * Optional named `expandRoutePath` maps one logical path (including index
+   * homes via `path: ''`) to concrete paths while sku pre-builds each site tree.
    *
    * @default "./src/routes.tsx"
    * @link https://seek-oss.github.io/sku/configuration#routesentry

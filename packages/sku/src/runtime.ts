@@ -8,6 +8,8 @@ export {
 } from './services/vite/ssr/defineEntry.js';
 export type { ServerEntryBody } from './services/vite/ssr/defineEntry.js';
 export type {
+  ExpandRoutePath,
+  ExpandRoutePathArgs,
   JsonValue,
   SkuClientEntry,
   SkuClientGetReactContext,

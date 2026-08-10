@@ -129,7 +129,7 @@ export const RootLayout = () => {
 ```
 
 ```tsx [routes.tsx]
-import type { SkuRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku/runtime';
 
 import { RootLayout } from './RootLayout';
 

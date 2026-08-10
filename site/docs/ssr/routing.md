@@ -27,7 +27,7 @@ Use React Router’s [lazy factory](https://reactrouter.com/start/data/route-obj
 ::: code-group
 
 ```tsx [routes.tsx]
-import type { SkuRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku/runtime';
 
 import { RootLayout } from './App/RootLayout';
 
@@ -98,7 +98,7 @@ Resolve the active site in the server entry with [`getSite`](./entries.md#getsit
 ::: code-group
 
 ```tsx [routes.tsx]
-import type { SkuRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku/runtime';
 
 import { RootLayout } from './App/RootLayout';
 
@@ -135,6 +135,45 @@ export default server;
 ```
 
 :::
+
+## Multiple paths with `expandRoutePath`
+
+When the same page should match more than one concrete path (for example `/about` and `/fr/about`, or `/` and `/fr`), export optional `expandRoutePath` from `routesEntry`.
+sku calls it while pre-building each site tree and clones the route for each returned path.
+Index homes are called with `path: ''` — return `''` to keep `index: true`, or a non-empty string for a prefixed home without `index`.
+
+```tsx
+import type { ExpandRoutePath, SkuRouteObject } from 'sku/runtime';
+
+export const expandRoutePath: ExpandRoutePath = ({
+  path,
+  site,
+  parentSegments,
+}) => {
+  if (parentSegments.length > 0) {
+    return [path];
+  }
+  if (path === '' && site === 'au') {
+    return ['', 'au'];
+  }
+  if (path === 'about' && site === 'au') {
+    return ['about', 'au/about'];
+  }
+  return [path];
+};
+
+export const routes: SkuRouteObject[] = [
+  {
+    Component: RootLayout,
+    children: [
+      { index: true, lazy: () => import('./pages/home/home') },
+      { path: 'about', lazy: () => import('./pages/about/about') },
+    ],
+  },
+];
+```
+
+See [Multi-language → Languages in the path](./multi-language.md#languages-in-the-path) for the localisation-prefix case.
 
 ## Intent preloading with `usePreloadRoute`
 

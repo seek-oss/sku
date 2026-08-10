@@ -1,4 +1,4 @@
-import type { SkuRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku/runtime';
 import { getCspNonce } from 'sku/runtime';
 
 import { RootLayout } from './RootLayout.js';

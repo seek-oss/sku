@@ -620,12 +620,6 @@ Default: `./src/routes.tsx`
 Path may be `.tsx`, `.ts`, or `.js`.
 
 Module that exports named `routes` (`SkuRouteObject[]`) for both the server and client graphs.
-Compose path / index / `sites` / `lazy` here.
-Put `loader`, `action`, and `Component` on the lazily imported page modules.
-Optional `sites?: string[]` on a route limits which config sites it appears on.
-Use `getSite` on the server entry when config has more than one site.
-
-Do not overload config [`routes`](#routes) (static prerender path lists) for this — that remains a separate concept.
 
 See [Routing](./ssr/routing.md).
 

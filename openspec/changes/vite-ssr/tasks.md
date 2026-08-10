@@ -128,7 +128,16 @@ It is not a history of intermediate APIs.
 - [x] 15.3 Wire client entry `instrumentations` into `createBrowserRouter(…, { instrumentations })`.
 - [x] 15.4 Unit tests: omit path unchanged; provided arrays forwarded; server handlers still built once at init.
 - [x] 15.5 Docs: brief entries coverage + server route-only vs client router+route note + link to React Router instrumentation guide. No dedicated Logging page.
-- [x] 15.6 Changeset: additive optional `instrumentations` pass-through.
+
+## 16. Optional `expandRoutePath`
+
+- [x] 16.1 Types: optional `expandRoutePath` on `routesEntry` with `{ path, site, parentSegments }` → `string[]`. Export a public type for the hook args/result.
+- [x] 16.2 Pre-build: after `sites` filter, call `expandRoutePath` for string-`path` routes and for `index: true` (`path: ''`). Clone per returned entry. Preserve `lazy` / `handle`. Build `parentSegments` from source path-bearing ancestors. Empty array omits. Identity when omitted (`[path]` / `['']`). Never re-expand clones.
+- [x] 16.3 Init hard-errors for non-function export and non-`string[]` returns. Unit tests for identity, duplicate paths, nested `parentSegments`, empty omit, invalid return, and `moduleId` preservation on clones.
+- [x] 16.4 Fixture + browser coverage for `/about` and a prefixed sibling path (and sites-scoped behaviour when practical).
+- [x] 16.5 Review existing multi-language SSR fixtures (for example `translations`) and improve them with `expandRoutePath` where route paths are duplicated by language/prefix.
+- [x] 16.6 Docs: multi-language / routing teach `expandRoutePath`. Remove shared `pageLazy` examples. Call out preload-safe cloning. Migrating mentions the hook.
+- [x] 16.7 Index homes: call `expandRoutePath` for `index: true` with `path: ''`. Map `''` → keep index, non-empty → `path` clone without `index`. Identity `['']` when omitted. Unit/fixture/docs coverage for `/` + prefixed home. Do not re-expand clones.
 
 ## Deferred
 

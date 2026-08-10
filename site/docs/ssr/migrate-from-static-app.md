@@ -35,6 +35,7 @@ export default {
 
 Compose routes with `path` (or `index`) and `lazy` in [`routesEntry`](../configuration.md#routesentry).
 Put `loader`, `action`, and `Component` on page modules — see [Routing](./routing.md).
+Optional `expandRoutePath` maps one logical path to per-site concrete paths — see [Multi-language](./multi-language.md#expandroutepath).
 
 Default-export request entries via `defineServerEntry` / `defineClientEntry` — see [Request entries](./entries.md).
 

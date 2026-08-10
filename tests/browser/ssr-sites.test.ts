@@ -41,6 +41,57 @@ describe('ssr-sites', () => {
       expect(nzHtml).not.toContain('data-testid="au-only-page"');
     });
 
+    it('serves expandRoutePath clones for /about and /au/about on AU', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+
+      const about = await fetch(`${url}/about`);
+      expect(about.ok).toBe(true);
+      expect(await about.text()).toContain('data-testid="about"');
+
+      const prefixed = await fetch(`${url}/au/about`);
+      expect(prefixed.ok).toBe(true);
+      expect(await prefixed.text()).toContain('data-testid="about"');
+
+      // NZ does not expand about — /au/about is absent from the NZ tree.
+      const foreignPrefixed = await fetch(`${url}/au/about`, {
+        headers: { 'x-sku-site': 'nz' },
+      });
+      const foreignHtml = await foreignPrefixed.text();
+      expect(foreignHtml).not.toContain('data-testid="about"');
+
+      const nzAbout = await fetch(`${url}/about`, {
+        headers: { 'x-sku-site': 'nz' },
+      });
+      expect(nzAbout.ok).toBe(true);
+      expect(await nzAbout.text()).toContain('data-testid="about"');
+    });
+
+    it('serves expandRoutePath index home clones for / and /au on AU', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+
+      const home = await fetch(`${url}/`);
+      expect(home.ok).toBe(true);
+      expect(await home.text()).toContain('data-testid="shell"');
+
+      const prefixed = await fetch(`${url}/au`);
+      expect(prefixed.ok).toBe(true);
+      const prefixedHtml = await prefixed.text();
+      expect(prefixedHtml).toContain('data-testid="shell"');
+      expect(prefixedHtml).toContain('SSR Sites Home -');
+      expect(prefixedHtml).toContain('__SKU_SITE__="au"');
+
+      // NZ does not expand the index home — /au is absent from the NZ tree.
+      const foreignPrefixed = await fetch(`${url}/au`, {
+        headers: { 'x-sku-site': 'nz' },
+      });
+      const foreignHtml = await foreignPrefixed.text();
+      expect(foreignHtml).not.toContain('data-testid="shell"');
+    });
+
     it('hydrates the document with the selected site', async ({ task }) => {
       skipCleanup(task.id);
       const page = await createPage();

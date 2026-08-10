@@ -3,7 +3,8 @@ import {
   buildSiteRouteTrees,
   filterRoutesForSite,
 } from './filterRoutesForSite.js';
-import type { SkuRouteObject } from './types.js';
+import { optionalNamedFunction } from './requireNamedExport.js';
+import type { ExpandRoutePath, SkuRouteObject } from './types.js';
 
 describe('filterRoutesForSite', () => {
   it('includes routes that omit sites for every site', () => {
@@ -62,6 +63,257 @@ describe('filterRoutesForSite', () => {
   });
 });
 
+describe('expandRoutePath', () => {
+  const aboutLazy = () => Promise.resolve({ Component: () => null });
+
+  it('leaves paths unchanged when expandRoutePath is omitted', () => {
+    const routes: SkuRouteObject[] = [{ path: 'about', lazy: aboutLazy }];
+    expect(filterRoutesForSite(routes, 'au')).toEqual([
+      { path: 'about', lazy: aboutLazy },
+    ]);
+  });
+
+  it('duplicates a path when expandRoutePath returns multiple paths', () => {
+    const expandRoutePath: ExpandRoutePath = ({
+      path,
+      site,
+      parentSegments,
+    }) => {
+      if (parentSegments.length > 0) {
+        return [path];
+      }
+      if (path === 'about' && site === 'th') {
+        return ['th/about', 'about'];
+      }
+      return [path];
+    };
+
+    const routes: SkuRouteObject[] = [
+      {
+        path: 'about',
+        lazy: aboutLazy,
+        handle: { moduleId: 'src/pages/about/about.tsx' },
+      },
+    ];
+
+    const thTree = filterRoutesForSite(routes, 'th', expandRoutePath);
+    expect(thTree).toEqual([
+      {
+        path: 'th/about',
+        lazy: aboutLazy,
+        handle: { moduleId: 'src/pages/about/about.tsx' },
+      },
+      {
+        path: 'about',
+        lazy: aboutLazy,
+        handle: { moduleId: 'src/pages/about/about.tsx' },
+      },
+    ]);
+    // Same lazy + handle reference on each clone (preload-safe).
+    expect(thTree[0]?.lazy).toBe(aboutLazy);
+    expect(thTree[1]?.lazy).toBe(aboutLazy);
+    expect(thTree[0]?.handle).toBe(routes[0]?.handle);
+    expect(thTree[1]?.handle).toBe(routes[0]?.handle);
+  });
+
+  it('passes source parentSegments for nested path-bearing ancestors', () => {
+    const calls: Array<{
+      path: string;
+      parentSegments: string[];
+    }> = [];
+
+    const expandRoutePath: ExpandRoutePath = (args) => {
+      calls.push({ path: args.path, parentSegments: args.parentSegments });
+      if (args.parentSegments.length > 0) {
+        return [args.path];
+      }
+      if (args.path === 'account') {
+        return ['th/account', 'account'];
+      }
+      return [args.path];
+    };
+
+    const routes: SkuRouteObject[] = [
+      {
+        Component: () => null,
+        children: [
+          {
+            path: 'account',
+            children: [{ path: 'settings' }],
+          },
+        ],
+      },
+    ];
+
+    const tree = filterRoutesForSite(routes, 'th', expandRoutePath);
+
+    expect(calls).toEqual([
+      { path: 'account', parentSegments: [] },
+      { path: 'settings', parentSegments: ['account'] },
+      { path: 'settings', parentSegments: ['account'] },
+    ]);
+    expect(tree).toEqual([
+      {
+        Component: routes[0]?.Component,
+        children: [
+          {
+            path: 'th/account',
+            children: [{ path: 'settings' }],
+          },
+          {
+            path: 'account',
+            children: [{ path: 'settings' }],
+          },
+        ],
+      },
+    ]);
+  });
+
+  it('omits a route when expandRoutePath returns an empty array', () => {
+    const expandRoutePath: ExpandRoutePath = ({ path, site }) =>
+      path === 'hidden' && site === 'nz' ? [] : [path];
+
+    const routes: SkuRouteObject[] = [{ path: 'shared' }, { path: 'hidden' }];
+
+    expect(filterRoutesForSite(routes, 'nz', expandRoutePath)).toEqual([
+      { path: 'shared' },
+    ]);
+    expect(filterRoutesForSite(routes, 'au', expandRoutePath)).toEqual([
+      { path: 'shared' },
+      { path: 'hidden' },
+    ]);
+  });
+
+  it('does not call expandRoutePath for pathless layout routes', () => {
+    const calls: string[] = [];
+    const expandRoutePath: ExpandRoutePath = ({ path }) => {
+      calls.push(path);
+      return [path];
+    };
+
+    const leaf = { path: 'leaf', Component: () => null };
+    const routes: SkuRouteObject[] = [
+      {
+        Component: () => null,
+        children: [leaf],
+      },
+    ];
+
+    expect(filterRoutesForSite(routes, 'au', expandRoutePath)).toEqual([
+      {
+        Component: routes[0]?.Component,
+        children: [{ path: 'leaf', Component: leaf.Component }],
+      },
+    ]);
+    // Pathless parent is skipped; only the leaf is expanded.
+    expect(calls).toEqual(['leaf']);
+  });
+
+  it('leaves index unchanged when expandRoutePath is omitted', () => {
+    const home = { index: true as const, lazy: aboutLazy };
+    expect(filterRoutesForSite([home], 'au')).toEqual([home]);
+  });
+
+  it("expands an index home with path: '' into index + path clones", () => {
+    const expandRoutePath: ExpandRoutePath = ({ path, parentSegments }) => {
+      if (parentSegments.length > 0) {
+        return [path];
+      }
+      if (path === '') {
+        return ['', 'fr'];
+      }
+      return [path];
+    };
+
+    const homeLazy = () => Promise.resolve({ Component: () => null });
+    const routes: SkuRouteObject[] = [
+      {
+        Component: () => null,
+        children: [
+          {
+            index: true,
+            lazy: homeLazy,
+            handle: { moduleId: 'src/pages/home/home.tsx' },
+          },
+        ],
+      },
+    ];
+
+    const tree = filterRoutesForSite(routes, 'au', expandRoutePath);
+    expect(tree).toEqual([
+      {
+        Component: routes[0]?.Component,
+        children: [
+          {
+            index: true,
+            lazy: homeLazy,
+            handle: { moduleId: 'src/pages/home/home.tsx' },
+          },
+          {
+            path: 'fr',
+            lazy: homeLazy,
+            handle: { moduleId: 'src/pages/home/home.tsx' },
+          },
+        ],
+      },
+    ]);
+    const clones = tree[0]?.children ?? [];
+    expect(clones[0]).not.toHaveProperty('path');
+    expect(clones[1]).not.toHaveProperty('index');
+    expect(clones[0]?.lazy).toBe(homeLazy);
+    expect(clones[1]?.lazy).toBe(homeLazy);
+    expect(clones[0]?.handle).toBe(routes[0]?.children?.[0]?.handle);
+    expect(clones[1]?.handle).toBe(routes[0]?.children?.[0]?.handle);
+  });
+
+  it('does not re-expand clones from a prior expansion', () => {
+    const calls: string[] = [];
+    const expandRoutePath: ExpandRoutePath = ({ path }) => {
+      calls.push(path);
+      if (path === '') {
+        return ['', 'fr'];
+      }
+      return [path];
+    };
+
+    filterRoutesForSite(
+      [{ index: true, Component: () => null }],
+      'au',
+      expandRoutePath,
+    );
+
+    // Called once on the source index — never again on the '' or 'fr' clones.
+    expect(calls).toEqual(['']);
+  });
+
+  it('hard-errors when expandRoutePath returns a non-string array', () => {
+    const expandRoutePath = (() => [1, 2]) as unknown as ExpandRoutePath;
+    expect(() =>
+      filterRoutesForSite([{ path: 'about' }], 'au', expandRoutePath),
+    ).toThrow(
+      /SSR routesEntry expandRoutePath must return string\[\]\. Invalid return for path 'about' on site 'au'\./,
+    );
+  });
+
+  it('hard-errors when expandRoutePath is present but not a function', () => {
+    expect(() =>
+      optionalNamedFunction(
+        { expandRoutePath: 'nope' },
+        'expandRoutePath',
+        'routesEntry',
+      ),
+    ).toThrow(
+      /SSR routesEntry must export named 'expandRoutePath' as a function when present\. Invalid 'expandRoutePath' export\./,
+    );
+  });
+
+  it('returns undefined when expandRoutePath is omitted', () => {
+    expect(
+      optionalNamedFunction({}, 'expandRoutePath', 'routesEntry'),
+    ).toBeUndefined();
+  });
+});
+
 describe('buildSiteRouteTrees', () => {
   const routes: SkuRouteObject[] = [
     { path: '/shared' },
@@ -80,5 +332,25 @@ describe('buildSiteRouteTrees', () => {
 
     expect(trees.au.map(({ path }) => path)).toEqual(['/shared', '/au-only']);
     expect(trees.nz.map(({ path }) => path)).toEqual(['/shared']);
+  });
+
+  it('applies expandRoutePath after sites membership filtering', () => {
+    const expandRoutePath: ExpandRoutePath = ({ path, site }) => {
+      if (path === 'about' && site === 'au') {
+        return ['about', 'au/about'];
+      }
+      return [path];
+    };
+
+    const trees = buildSiteRouteTrees(
+      [{ path: 'about' }, { path: 'nz-only', sites: ['nz'] }],
+      ['au', 'nz'],
+      expandRoutePath,
+    );
+
+    expect(trees).toEqual({
+      au: [{ path: 'about' }, { path: 'au/about' }],
+      nz: [{ path: 'about' }, { path: 'nz-only' }],
+    });
   });
 });

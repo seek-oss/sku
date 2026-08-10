@@ -24,7 +24,7 @@ Customize with [React Router Error Boundaries](https://reactrouter.com/how-to/er
 
 ```tsx [routes.tsx]
 // src/routes.tsx
-import type { SkuRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku/runtime';
 
 import { ErrorBoundary } from './ErrorBoundary';
 import { RootLayout } from './RootLayout';

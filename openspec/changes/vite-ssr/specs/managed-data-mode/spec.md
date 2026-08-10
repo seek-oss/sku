@@ -62,7 +62,7 @@ Optional `sites?: string[]` on a `SkuRouteObject` declares membership:
 Sku MUST NOT inherit `sites` from parent routes to children.
 Site-specific routes MUST set `sites` explicitly.
 
-Sku MUST pre-build per-site trees from resolved site names + `routesEntry` `routes` at init (not per request), strip `sites` before React Router APIs, and select the pre-built tree for the resolved `site`.
+Sku MUST pre-build per-site trees from resolved site names + `routesEntry` `routes` at init (not per request), apply optional `expandRoutePath` after `sites` membership filtering (see expandRoutePath requirement), strip `sites` before React Router APIs, and select the pre-built tree for the resolved `site`.
 
 Sku MUST create each site’s React Router static handler once at init and MUST NOT call `createStaticHandler` on the per-request path — per request sku only selects the pre-built handler and calls `query()` / `createStaticRouter`.
 
@@ -158,6 +158,94 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Managed Dat
 - **WHEN** config defines `sites[].host` values
 - **THEN** sku still resolves `site` via `getSite` (or the sole resolved site)
 - **AND** does not choose the tree from the request `Host` header alone
+
+### Requirement: Optional expandRoutePath maps paths while pre-building site trees
+
+`routesEntry` MAY export a sync named `expandRoutePath` with this signature:
+
+```ts
+expandRoutePath(args: {
+  path: string;
+  site: string;
+  parentSegments: string[];
+}): string[];
+```
+
+Sku MUST call it only while pre-building each site tree at init (not per request).
+Sku MUST call it for routes that have a string `path` and for `index: true` routes.
+For `index: true` routes, sku MUST pass `path: ''`.
+Sku MUST NOT call it for pathless layout routes (no `path`, not index).
+Sku MUST call it only on the source (pre-expansion) tree and MUST NOT call it again on clones produced by expansion.
+
+Call order for each site tree: `sites` membership filter first, then `expandRoutePath`, then strip `sites`.
+
+When `expandRoutePath` is omitted, sku MUST treat each path-bearing route as `[path]` and each index route as `['']` (identity).
+
+`parentSegments` MUST list authored `path` values from path-bearing ancestors only (pathless and index ancestors omitted), not including the current route, and MUST use source (pre-expansion) segments rather than expanded paths.
+
+The return value MUST be a `string[]`.
+An empty array MUST omit that route node for the current site.
+
+For a path-bearing source route, each returned string MUST be the clone’s `path`.
+Sku MUST shallow-clone the route for each returned path, preserve `lazy` and existing `handle` (including injected `moduleId`), and clone children under each result with relative child paths unchanged.
+
+For an `index: true` source route:
+
+- A returned `''` MUST produce a clone that keeps `index: true` (no `path`)
+- A returned non-empty string MUST produce a clone with that `path` and without `index`
+- Clones MUST preserve `lazy` and existing `handle` (including injected `moduleId`) the same way as path-bearing clones
+
+Sku MUST hard-error at init when `expandRoutePath` is present but not a function, or when a call returns a value that is not an array of strings.
+
+Sku MUST NOT use `expandRoutePath` as a substitute for `getLanguage` / Vocab chunk selection.
+
+Sku MUST NOT special-case catch-all or “already prefixed” segments.
+Apps decide that policy inside `expandRoutePath`.
+
+Product docs MUST teach `expandRoutePath` for multi-path pages (including index homes via `path: ''`) and MUST NOT teach sharing one `const pageLazy = () => import(…)` across hand-duplicated route objects.
+
+#### Scenario: Omitted expandRoutePath leaves paths unchanged
+
+- **WHEN** `routesEntry` omits `expandRoutePath`
+- **AND** a route has `path: 'about'`
+- **THEN** the pre-built trees keep `path: 'about'` for that route
+
+#### Scenario: Omitted expandRoutePath leaves index unchanged
+
+- **WHEN** `routesEntry` omits `expandRoutePath`
+- **AND** a route is `index: true`
+- **THEN** the pre-built trees keep that index route
+
+#### Scenario: expandRoutePath duplicates a localisation-root path
+
+- **WHEN** `expandRoutePath` returns `['th/about', 'about']` for `{ path: 'about', site: 'th', parentSegments: [] }`
+- **THEN** site `th`’s tree includes both `th/about` and `about` route nodes
+- **AND** both clones preserve the source route’s `lazy` and `handle.moduleId` when present
+
+#### Scenario: expandRoutePath expands an index home
+
+- **WHEN** an authored route is `index: true`
+- **AND** `expandRoutePath` is called with `path: ''`
+- **AND** it returns `['', 'fr']`
+- **THEN** the site tree includes an `index: true` clone and a `path: 'fr'` clone of the same page
+- **AND** both clones preserve the source route’s `lazy` and `handle.moduleId` when present
+
+#### Scenario: Nested segments can opt out via parentSegments
+
+- **WHEN** a child route has `path: 'settings'` under authored parent `path: 'account'`
+- **AND** `expandRoutePath` returns `[path]` whenever `parentSegments.length > 0`
+- **THEN** sku calls the hook with `parentSegments: ['account']`
+- **AND** the child keeps a single `settings` segment under each expanded parent clone
+
+#### Scenario: Empty array omits the route for that site
+
+- **WHEN** `expandRoutePath` returns `[]` for a path-bearing route on site `nz`
+- **THEN** that route node is absent from the `nz` pre-built tree
+
+#### Scenario: Invalid expandRoutePath return hard-errors at init
+
+- **WHEN** `expandRoutePath` returns a non-array or an array with a non-string entry
+- **THEN** sku fails with a hard error at init
 
 ### Requirement: Optional server and client request exports
 

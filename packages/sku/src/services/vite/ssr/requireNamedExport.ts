@@ -39,6 +39,27 @@ export const requireNamedExport = <T>(
 };
 
 /**
+ * Optional named function export on a module (e.g. `expandRoutePath` on
+ * `routesEntry`). Omitted ⇒ `undefined`. Present but not a function ⇒ hard error.
+ */
+export const optionalNamedFunction = <T extends (...args: never[]) => unknown>(
+  moduleExports: object,
+  name: string,
+  entryLabel: string,
+): T | undefined => {
+  const value = (moduleExports as Record<string, unknown>)[name];
+  if (value === undefined) {
+    return undefined;
+  }
+  if (typeof value !== 'function') {
+    throw new Error(
+      `SSR ${entryLabel} must export named '${name}' as a function when present. Invalid '${name}' export.`,
+    );
+  }
+  return value as T;
+};
+
+/**
  * SSR request entries `export default` one object (`defineServerEntry` /
  * `defineClientEntry`). Missing / non-object → hard error.
  */

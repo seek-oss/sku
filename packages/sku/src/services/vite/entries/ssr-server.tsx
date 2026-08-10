@@ -8,12 +8,14 @@ import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
 import {
   optionalEntryFunction,
   optionalEntryValue,
+  optionalNamedFunction,
   optionalOrRequiredEntryFunction,
   requireDefaultEntry,
   requireNamedExport,
 } from '../ssr/requireNamedExport.js';
 import { render as renderApp } from '../ssr/render.js';
 import type {
+  ExpandRoutePath,
   RenderAssets,
   RenderManifest,
   RenderOptions,
@@ -35,6 +37,12 @@ const routes = requireNamedExport<SkuRouteObject[]>(
   { kind: 'routes' },
 );
 
+const expandRoutePath = optionalNamedFunction<ExpandRoutePath>(
+  routesEntry,
+  'expandRoutePath',
+  'routesEntry',
+);
+
 const entry = requireDefaultEntry<SkuServerEntry>(serverEntry, 'serverEntry');
 
 const instrumentations = optionalEntryValue<
@@ -43,7 +51,7 @@ const instrumentations = optionalEntryValue<
 
 // Route tree — and each site's handler — is built once here rather than per request.
 const siteStaticHandlers = buildSiteStaticHandlers(
-  buildSiteRouteTrees(routes, __SKU_SITES__),
+  buildSiteRouteTrees(routes, __SKU_SITES__, expandRoutePath),
   instrumentations,
 );
 

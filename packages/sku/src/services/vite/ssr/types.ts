@@ -57,6 +57,34 @@ export type SkuRouteObject = Omit<RouteObject, 'children'> & {
 };
 
 /**
+ * Args for optional `routesEntry` `expandRoutePath`.
+ * Called while pre-building each site tree (after `sites` membership filter).
+ */
+export type ExpandRoutePathArgs = {
+  /**
+   * This route’s own authored `path`, or `''` when the route is `index: true`.
+   */
+  path: string;
+  /** Resolved site name for the tree being built. */
+  site: string;
+  /**
+   * Authored `path` values from path-bearing ancestors only (pathless layouts
+   * and index ancestors omitted), not including the current route.
+   * Source (pre-expansion) segments.
+   */
+  parentSegments: string[];
+};
+
+/**
+ * Optional `routesEntry` hook — map one logical path to concrete paths per site.
+ * Return `string[]` replacement paths (empty ⇒ omit).
+ * Omitted export ⇒ identity (`[path]` / `['']` for index).
+ * For an index source, `''` keeps `index: true`; a non-empty string becomes a
+ * `path` clone without `index`.
+ */
+export type ExpandRoutePath = (args: ExpandRoutePathArgs) => string[];
+
+/**
  * Sync server-entry getter — app-owned site name selecting the pre-built tree.
  * Required when config `sites` has more than one entry; optional on single-site
  * (sku uses the sole config site name when omitted).

@@ -1,8 +1,9 @@
 import { VocabProvider } from '@vocab/react';
 import { Outlet, useLocation } from 'react-router';
-import type { SkuRouteObject } from 'sku';
+import type { ExpandRoutePath, SkuRouteObject } from 'sku/runtime';
 
 import App from '../App.js';
+
 import { resolveLanguage } from './resolveLanguage.js';
 
 /**
@@ -19,12 +20,27 @@ const RootLayout = () => {
   );
 };
 
+/**
+ * Map the logical `content` path to language-prefixed concrete paths.
+ * Nested segments (none here) would see `parentSegments.length > 0` and stay
+ * relative under each expanded parent clone.
+ */
+export const expandRoutePath: ExpandRoutePath = ({ path, parentSegments }) => {
+  if (parentSegments.length > 0) {
+    return [path];
+  }
+  if (path === 'content') {
+    return ['en', 'fr'];
+  }
+  return [path];
+};
+
 export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     children: [
       {
-        path: '*',
+        path: 'content',
         Component: App,
       },
     ],

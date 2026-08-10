@@ -1,5 +1,5 @@
 import { redirect } from 'react-router';
-import type { SkuRouteObject } from 'sku';
+import type { SkuRouteObject } from 'sku/runtime';
 
 import { RootLayout } from './RootLayout.js';
 

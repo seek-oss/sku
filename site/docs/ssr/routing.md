@@ -171,6 +171,18 @@ export const routes: SkuRouteObject[] = [
 
 See [Multi-language → Languages in the path](./multi-language.md#languages-in-the-path) for the localisation-prefix case.
 
+## Case-sensitive paths
+
+By default, sku matches route paths case-sensitively.
+If a route omits React Router’s [`caseSensitive`](https://reactrouter.com/api/data-routers/RouteObject#casesensitive), sku sets `caseSensitive: true` while pre-building the site tree.
+So `/about` matches a route with `path: 'about'`, and `/About` does not.
+
+Opt out on a specific route when you need case-insensitive matching:
+
+```tsx
+{ path: 'about', caseSensitive: false, lazy: () => import('./pages/about/about') },
+```
+
 ## Intent preloading with `usePreloadRoute`
 
 On the initial document, sku already emits `modulepreload` links for the matched route’s chunks.

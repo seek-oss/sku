@@ -1,21 +1,22 @@
+import { matchRoutes } from 'react-router';
 import { describe, expect, it } from 'vitest';
 import {
   buildSiteRouteTrees,
-  filterRoutesForSite,
-} from './filterRoutesForSite.js';
+  buildRoutesForSite,
+} from './buildSiteRouteTrees.js';
 import { optionalNamedFunction } from './requireNamedExport.js';
 import type { MapRoutePath, SkuRouteObject } from './types.js';
 
-describe('filterRoutesForSite', () => {
+describe('buildRoutesForSite', () => {
   it('includes routes that omit sites for every site', () => {
     const routes: SkuRouteObject[] = [{ path: '/' }, { path: '/shared' }];
-    expect(filterRoutesForSite(routes, 'au')).toEqual([
-      { path: '/' },
-      { path: '/shared' },
+    expect(buildRoutesForSite(routes, 'au')).toEqual([
+      { path: '/', caseSensitive: true },
+      { path: '/shared', caseSensitive: true },
     ]);
-    expect(filterRoutesForSite(routes, 'nz')).toEqual([
-      { path: '/' },
-      { path: '/shared' },
+    expect(buildRoutesForSite(routes, 'nz')).toEqual([
+      { path: '/', caseSensitive: true },
+      { path: '/shared', caseSensitive: true },
     ]);
   });
 
@@ -25,19 +26,19 @@ describe('filterRoutesForSite', () => {
       { path: '/au-only', sites: ['au'] },
       { path: '/nz-only', sites: ['nz'] },
     ];
-    expect(filterRoutesForSite(routes, 'au')).toEqual([
-      { path: '/shared' },
-      { path: '/au-only' },
+    expect(buildRoutesForSite(routes, 'au')).toEqual([
+      { path: '/shared', caseSensitive: true },
+      { path: '/au-only', caseSensitive: true },
     ]);
-    expect(filterRoutesForSite(routes, 'nz')).toEqual([
-      { path: '/shared' },
-      { path: '/nz-only' },
+    expect(buildRoutesForSite(routes, 'nz')).toEqual([
+      { path: '/shared', caseSensitive: true },
+      { path: '/nz-only', caseSensitive: true },
     ]);
   });
 
   it('strips sites before returning RouteObjects', () => {
     const routes: SkuRouteObject[] = [{ path: '/au-only', sites: ['au'] }];
-    expect(filterRoutesForSite(routes, 'au')[0]).not.toHaveProperty('sites');
+    expect(buildRoutesForSite(routes, 'au')[0]).not.toHaveProperty('sites');
   });
 
   it('does not inherit sites from parent onto children', () => {
@@ -50,15 +51,55 @@ describe('filterRoutesForSite', () => {
     ];
 
     // Parent excluded for nz ⇒ whole subtree absent (structure, not inheritance).
-    expect(filterRoutesForSite(routes, 'nz')).toEqual([]);
+    expect(buildRoutesForSite(routes, 'nz')).toEqual([]);
 
     // Parent included for au; child omitting sites is still included (no inheritance
     // means omit ⇒ all-sites, and parent already passed the filter).
-    expect(filterRoutesForSite(routes, 'au')).toEqual([
+    expect(buildRoutesForSite(routes, 'au')).toEqual([
       {
         path: '/',
-        children: [{ path: 'au-child' }],
+        caseSensitive: true,
+        children: [{ path: 'au-child', caseSensitive: true }],
       },
+    ]);
+  });
+});
+
+describe('caseSensitive default', () => {
+  it('fills omitted caseSensitive to true so /About does not match about', () => {
+    const tree = buildRoutesForSite([{ path: 'about' }], 'au');
+
+    expect(tree).toEqual([{ path: 'about', caseSensitive: true }]);
+    expect(matchRoutes(tree, '/about')).not.toBeNull();
+    expect(matchRoutes(tree, '/About')).toBeNull();
+  });
+
+  it('preserves explicit caseSensitive false', () => {
+    const tree = buildRoutesForSite(
+      [{ path: 'about', caseSensitive: false }],
+      'au',
+    );
+
+    expect(tree).toEqual([{ path: 'about', caseSensitive: false }]);
+    expect(matchRoutes(tree, '/about')).not.toBeNull();
+    expect(matchRoutes(tree, '/About')).not.toBeNull();
+  });
+
+  it('preserves explicit caseSensitive true', () => {
+    expect(
+      buildRoutesForSite([{ path: 'about', caseSensitive: true }], 'au'),
+    ).toEqual([{ path: 'about', caseSensitive: true }]);
+  });
+
+  it('fills caseSensitive on mapRoutePath clones', () => {
+    const mapRoutePath: MapRoutePath = ({ path }) =>
+      path === 'about' ? ['about', 'fr/about'] : [path];
+
+    const tree = buildRoutesForSite([{ path: 'about' }], 'au', mapRoutePath);
+
+    expect(tree).toEqual([
+      { path: 'about', caseSensitive: true },
+      { path: 'fr/about', caseSensitive: true },
     ]);
   });
 });
@@ -68,8 +109,8 @@ describe('mapRoutePath', () => {
 
   it('leaves paths unchanged when mapRoutePath is omitted', () => {
     const routes: SkuRouteObject[] = [{ path: 'about', lazy: aboutLazy }];
-    expect(filterRoutesForSite(routes, 'au')).toEqual([
-      { path: 'about', lazy: aboutLazy },
+    expect(buildRoutesForSite(routes, 'au')).toEqual([
+      { path: 'about', lazy: aboutLazy, caseSensitive: true },
     ]);
   });
 
@@ -92,17 +133,19 @@ describe('mapRoutePath', () => {
       },
     ];
 
-    const thTree = filterRoutesForSite(routes, 'th', mapRoutePath);
+    const thTree = buildRoutesForSite(routes, 'th', mapRoutePath);
     expect(thTree).toEqual([
       {
         path: 'th/about',
         lazy: aboutLazy,
         handle: { moduleId: 'src/pages/about/about.tsx' },
+        caseSensitive: true,
       },
       {
         path: 'about',
         lazy: aboutLazy,
         handle: { moduleId: 'src/pages/about/about.tsx' },
+        caseSensitive: true,
       },
     ]);
     // Same lazy + handle reference on each clone (preload-safe).
@@ -141,7 +184,7 @@ describe('mapRoutePath', () => {
       },
     ];
 
-    const tree = filterRoutesForSite(routes, 'th', mapRoutePath);
+    const tree = buildRoutesForSite(routes, 'th', mapRoutePath);
 
     expect(calls).toEqual([
       { path: 'account', parentSegments: [] },
@@ -151,14 +194,17 @@ describe('mapRoutePath', () => {
     expect(tree).toEqual([
       {
         Component: routes[0]?.Component,
+        caseSensitive: true,
         children: [
           {
             path: 'th/account',
-            children: [{ path: 'settings' }],
+            caseSensitive: true,
+            children: [{ path: 'settings', caseSensitive: true }],
           },
           {
             path: 'account',
-            children: [{ path: 'settings' }],
+            caseSensitive: true,
+            children: [{ path: 'settings', caseSensitive: true }],
           },
         ],
       },
@@ -171,12 +217,12 @@ describe('mapRoutePath', () => {
 
     const routes: SkuRouteObject[] = [{ path: 'shared' }, { path: 'hidden' }];
 
-    expect(filterRoutesForSite(routes, 'nz', mapRoutePath)).toEqual([
-      { path: 'shared' },
+    expect(buildRoutesForSite(routes, 'nz', mapRoutePath)).toEqual([
+      { path: 'shared', caseSensitive: true },
     ]);
-    expect(filterRoutesForSite(routes, 'au', mapRoutePath)).toEqual([
-      { path: 'shared' },
-      { path: 'hidden' },
+    expect(buildRoutesForSite(routes, 'au', mapRoutePath)).toEqual([
+      { path: 'shared', caseSensitive: true },
+      { path: 'hidden', caseSensitive: true },
     ]);
   });
 
@@ -195,10 +241,17 @@ describe('mapRoutePath', () => {
       },
     ];
 
-    expect(filterRoutesForSite(routes, 'au', mapRoutePath)).toEqual([
+    expect(buildRoutesForSite(routes, 'au', mapRoutePath)).toEqual([
       {
         Component: routes[0]?.Component,
-        children: [{ path: 'leaf', Component: leaf.Component }],
+        caseSensitive: true,
+        children: [
+          {
+            path: 'leaf',
+            Component: leaf.Component,
+            caseSensitive: true,
+          },
+        ],
       },
     ]);
     // Pathless parent is skipped; only the leaf is expanded.
@@ -207,7 +260,9 @@ describe('mapRoutePath', () => {
 
   it('leaves index unchanged when mapRoutePath is omitted', () => {
     const home = { index: true as const, lazy: aboutLazy };
-    expect(filterRoutesForSite([home], 'au')).toEqual([home]);
+    expect(buildRoutesForSite([home], 'au')).toEqual([
+      { ...home, caseSensitive: true },
+    ]);
   });
 
   it("expands an index home with path: '' into index + path clones", () => {
@@ -235,20 +290,23 @@ describe('mapRoutePath', () => {
       },
     ];
 
-    const tree = filterRoutesForSite(routes, 'au', mapRoutePath);
+    const tree = buildRoutesForSite(routes, 'au', mapRoutePath);
     expect(tree).toEqual([
       {
         Component: routes[0]?.Component,
+        caseSensitive: true,
         children: [
           {
             index: true,
             lazy: homeLazy,
             handle: { moduleId: 'src/pages/home/home.tsx' },
+            caseSensitive: true,
           },
           {
             path: 'fr',
             lazy: homeLazy,
             handle: { moduleId: 'src/pages/home/home.tsx' },
+            caseSensitive: true,
           },
         ],
       },
@@ -272,7 +330,7 @@ describe('mapRoutePath', () => {
       return [path];
     };
 
-    filterRoutesForSite(
+    buildRoutesForSite(
       [{ index: true, Component: () => null }],
       'au',
       mapRoutePath,
@@ -285,7 +343,7 @@ describe('mapRoutePath', () => {
   it('hard-errors when mapRoutePath returns a non-string array', () => {
     const mapRoutePath = (() => [1, 2]) as unknown as MapRoutePath;
     expect(() =>
-      filterRoutesForSite([{ path: 'about' }], 'au', mapRoutePath),
+      buildRoutesForSite([{ path: 'about' }], 'au', mapRoutePath),
     ).toThrow(
       /SSR routesEntry mapRoutePath must return string\[\]\. Invalid return for path 'about' on site 'au'\./,
     );
@@ -318,8 +376,11 @@ describe('buildSiteRouteTrees', () => {
 
   it('pre-builds a tree per config site name', () => {
     expect(buildSiteRouteTrees(routes, ['au', 'nz'])).toEqual({
-      au: [{ path: '/shared' }, { path: '/au-only' }],
-      nz: [{ path: '/shared' }],
+      au: [
+        { path: '/shared', caseSensitive: true },
+        { path: '/au-only', caseSensitive: true },
+      ],
+      nz: [{ path: '/shared', caseSensitive: true }],
     });
   });
 
@@ -345,8 +406,14 @@ describe('buildSiteRouteTrees', () => {
     );
 
     expect(trees).toEqual({
-      au: [{ path: 'about' }, { path: 'au/about' }],
-      nz: [{ path: 'about' }, { path: 'nz-only' }],
+      au: [
+        { path: 'about', caseSensitive: true },
+        { path: 'au/about', caseSensitive: true },
+      ],
+      nz: [
+        { path: 'about', caseSensitive: true },
+        { path: 'nz-only', caseSensitive: true },
+      ],
     });
   });
 });

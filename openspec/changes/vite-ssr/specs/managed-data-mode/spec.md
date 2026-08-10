@@ -62,7 +62,7 @@ Optional `sites?: string[]` on a `SkuRouteObject` declares membership:
 Sku MUST NOT inherit `sites` from parent routes to children.
 Site-specific routes MUST set `sites` explicitly.
 
-Sku MUST pre-build per-site trees from resolved site names + `routesEntry` `routes` at init (not per request), apply optional `mapRoutePath` after `sites` membership filtering (see mapRoutePath requirement), strip `sites` before React Router APIs, and select the pre-built tree for the resolved `site`.
+Sku MUST pre-build per-site trees from resolved site names + `routesEntry` `routes` at init (not per request), apply optional `mapRoutePath` after `sites` membership filtering, default undefined `caseSensitive` to `true`, strip `sites` before React Router APIs, and select the pre-built tree for the resolved `site`.
 
 Sku MUST create each site’s React Router static handler once at init and MUST NOT call `createStaticHandler` on the per-request path — per request sku only selects the pre-built handler and calls `query()` / `createStaticRouter`.
 
@@ -246,6 +246,38 @@ Product docs MUST teach `mapRoutePath` for multi-path pages (including index hom
 
 - **WHEN** `mapRoutePath` returns a non-array or an array with a non-string entry
 - **THEN** sku fails with a hard error at init
+
+### Requirement: Case-sensitive path matching by default
+
+React Router’s per-route `caseSensitive` defaults to `false` when omitted.
+Managed Data Mode MUST prefer case-sensitive URL path matching.
+
+While pre-building each site tree, when a route object’s `caseSensitive` is `undefined`, sku MUST set `caseSensitive: true` on the object passed to React Router APIs.
+When `caseSensitive` is already `true` or `false`, sku MUST leave it unchanged.
+That fill MUST apply to every route node in the pre-built tree, including clones produced by `mapRoutePath`.
+
+Call order remains: `sites` membership filter, then optional `mapRoutePath`, then the `caseSensitive` default fill, then strip `sites`.
+
+Server `createStaticHandler`, client `createBrowserRouter`, and intent-preload `matchRoutes` MUST all use the same filled trees.
+
+#### Scenario: Omitted caseSensitive becomes true
+
+- **WHEN** a route has `path: 'about'` and omits `caseSensitive`
+- **THEN** the pre-built tree passes that route to React Router with `caseSensitive: true`
+- **AND** `/about` matches
+- **AND** `/About` does not match
+
+#### Scenario: Explicit caseSensitive false is preserved
+
+- **WHEN** a route sets `caseSensitive: false`
+- **THEN** the pre-built tree keeps `caseSensitive: false`
+- **AND** React Router’s case-insensitive matching applies for that route
+
+#### Scenario: mapRoutePath clones inherit the fill
+
+- **WHEN** a source route omits `caseSensitive`
+- **AND** `mapRoutePath` returns multiple paths for that route
+- **THEN** each clone in the pre-built tree has `caseSensitive: true`
 
 ### Requirement: Optional server and client request exports
 

@@ -29,6 +29,9 @@ See Decision 27.
 - Sku owns preload-safe duplication.
 - Apps own path policy (no sku-owned localisation rules).
 - Same spirit as first-class multi-language.
+- Case-sensitive path matching by default.
+- During tree pre-build, sku sets `caseSensitive: true` when a route leaves it undefined.
+- Explicit `caseSensitive: false` remains the per-route escape hatch.
 - Full-document streaming with `hydrateRoot(document, …)`.
 - Shell-derived CSP headers.
 - Per-route and vocab chunks via sku-owned `@vocab/vite` resolve.
@@ -56,7 +59,8 @@ See Decision 27.
 - Always-on sku `SkuProvider` outside the router.
 - It carries `site`, serialised `clientContext`, and env `reactContext`.
 - Typed hooks via `createSkuContexts<typeof server, typeof client>()` on `sku/runtime`.
-- Sku does not wrap the route tree.
+- Sku does not wrap the route tree for providers.
+- Pre-build may still strip `sites`, apply `mapRoutePath`, and default `caseSensitive`.
 - `createStaticHandler` is pre-built per site.
 - Three value channels: `getClientContext`, dual-entry `getReactContext`, and dual-entry `getRouterContext`.
 - `getClientContext` is the serialised isomorphic React seed.
@@ -105,6 +109,8 @@ See Decision 27.
 - Differing server vs client route modules as a product feature.
 - Sku-owned site resolution from config `hosts` / `sites[].host` (local-dev listen/setup only).
 - Sku-owned localisation / path-prefix rule tables (apps own `mapRoutePath` policy; sku owns calling it and cloning routes).
+- A sku.config kill-switch for case-sensitive path matching (per-route `caseSensitive: false` is the escape hatch).
+- Wrong-case → canonical-path redirects (matching only; apps own any redirect middleware).
 - Requiring a non-empty config `sites` array for SSR (empty soft-defaults to `'default'`).
 - Per-site JS bundles.
 - Returning routes from a request-entry getter or bag.
@@ -279,8 +285,10 @@ Route membership is declared on routes themselves.
 - Typing `SkuRouteObject.sites`.
 - Loading `routes` from `routesEntry`.
 - Pre-building per-site trees from config site names.
+- Defaulting `caseSensitive` to `true` when a route leaves it undefined (React Router itself defaults to `false`).
 - Stripping `sites` before passing trees to React Router APIs.
-- Creating `createStaticHandler` once per site at init. Sku never wraps the tree because provider mounting sits outside the router.
+- Creating `createStaticHandler` once per site at init.
+- Sku never wraps the tree for providers because provider mounting sits outside the router.
 - Selecting that handler for the resolved `site`.
 - Serialising `site` into the hydrate bootstrap.
 - Using that same `site` on the client for `createBrowserRouter`.
@@ -293,6 +301,18 @@ Route membership is declared on routes themselves.
 - No parent → child inheritance of `sites`. Site-specific deviation MUST set `sites` explicitly on each divergent route. Friction is intentional.
 - The tree walk stays recursive: if a parent is excluded for a site, that parent’s subtree is absent from that site’s tree (structure, not field inheritance).
 
+**Path case sensitivity:**
+
+- React Router’s `caseSensitive` on each route defaults to `false` when omitted.
+- SEEK prefers case-sensitive URLs.
+- During pre-build, when a route’s `caseSensitive` is `undefined`, sku sets `caseSensitive: true` on the object passed to React Router.
+- Explicit `true` or `false` is left unchanged.
+- That fill runs for every route node in the pre-built tree (including `mapRoutePath` clones).
+- Server handlers, client `createBrowserRouter`, and preload `matchRoutes` all consume the same filled trees.
+- There is no router-level React Router option and no sku.config toggle in this change.
+- Wrong-case requests do not match (typically 404 / error boundary).
+- Sku does not redirect to a canonical casing.
+
 **Config sites:**
 SSR does **not** require a non-empty config `sites` array.
 Empty or omitted `sites` soft-defaults to a single synthetic site name `'default'` for pre-build + allowlist (same class as other sku empty-config soft paths).
@@ -300,7 +320,7 @@ Apps that care about site names declare real ones.
 Multi-site still needs ≥2 configured names + `getSite`.
 
 **Pre-build:**
-At init (not per request), for each resolved site name (config names, or `['default']` when empty), sku deep-filters `routes` by `sites` membership, optionally maps paths via `mapRoutePath` (Decision 4c), and strips `sites` from the objects passed to React Router.
+At init (not per request), for each resolved site name (config names, or `['default']` when empty), sku deep-filters `routes` by `sites` membership, optionally maps paths via `mapRoutePath` (Decision 4c), defaults undefined `caseSensitive` to `true`, and strips `sites` from the objects passed to React Router.
 The client needs the same site-name list (bake from config for production client, same as other `__SKU_*` defines) so both sides pre-build identically from the same `routesEntry` module.
 
 **Resolve site:**
@@ -322,18 +342,21 @@ Config `sites[].routes` (static prerender path lists) remains unrelated to SSR `
 
 **Why not alternatives as the product answer:**
 
-| Approach                                  | Why not                                                                                                                      |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| Sku host → site via config `sites[].host` | Config hosts are local-dev only; production hostnames are app/platform-owned                                                 |
-| Union tree + site allowlist middleware    | Cross-site paths still match then 404; easy to get wrong on client nav; every migrant reinvents it                           |
-| Dual-entry `routes` re-exports            | Redundant once `getRouterContext` / getters cover request-scoped values; hydration mismatch risk; `routesEntry` is one truth |
-| Getter / bag returns routes               | Weaker config-as-data; larger hydrate story; `routesEntry` stays clearer                                                     |
-| Optional path params for “language”       | Matches unsupported prefixes; not site-correct                                                                               |
-| One deploy/process per site               | Does not match multi-host deploys that share a process                                                                       |
-| Inherit `sites` from parents              | Hides site splits; explicit annotation keeps deviation visible                                                               |
-| Overload config `routes`                  | Already means static prerender path lists; keep `routesEntry` for the RR module                                              |
-| Conventional `req` field / sku push API   | Unversioned `string \| undefined`; collides across consumers; fails only on a request — see Decision 12                      |
-| Combined site+language+context resolver   | Reintroduces the return-bag shape Decision 12 pulled apart                                                                   |
+| Approach                                   | Why not                                                                                                                      |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| Sku host → site via config `sites[].host`  | Config hosts are local-dev only; production hostnames are app/platform-owned                                                 |
+| Union tree + site allowlist middleware     | Cross-site paths still match then 404; easy to get wrong on client nav; every migrant reinvents it                           |
+| Dual-entry `routes` re-exports             | Redundant once `getRouterContext` / getters cover request-scoped values; hydration mismatch risk; `routesEntry` is one truth |
+| Getter / bag returns routes                | Weaker config-as-data; larger hydrate story; `routesEntry` stays clearer                                                     |
+| Optional path params for “language”        | Matches unsupported prefixes; not site-correct                                                                               |
+| One deploy/process per site                | Does not match multi-host deploys that share a process                                                                       |
+| Inherit `sites` from parents               | Hides site splits; explicit annotation keeps deviation visible                                                               |
+| Overload config `routes`                   | Already means static prerender path lists; keep `routesEntry` for the RR module                                              |
+| Conventional `req` field / sku push API    | Unversioned `string \| undefined`; collides across consumers; fails only on a request — see Decision 12                      |
+| Combined site+language+context resolver    | Reintroduces the return-bag shape Decision 12 pulled apart                                                                   |
+| Leave RR `caseSensitive` default (`false`) | SEEK prefers case-sensitive URLs; fill `true` when undefined so apps keep a per-route opt-out                                |
+| sku.config case-sensitivity kill-switch    | Extra dial; per-route `caseSensitive: false` is enough for the rare escape hatch                                             |
+| Wrong-case → canonical redirect            | Matching policy only in this change; apps own redirect middleware if they want it                                            |
 
 Document multi-site SSR via `routesEntry` + `routes` with optional `sites` + `getSite`, and multi-path pages via optional `mapRoutePath` (Decision 4c), not these workarounds.
 

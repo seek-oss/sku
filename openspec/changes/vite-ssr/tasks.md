@@ -140,6 +140,12 @@ It is not a history of intermediate APIs.
 - [x] 16.7 Index homes: call `mapRoutePath` for `index: true` with `path: ''`. Map `''` → keep index, non-empty → `path` clone without `index`. Identity `['']` when omitted. Unit/fixture/docs coverage for `/` + prefixed home. Do not re-map clones.
 - [x] 16.8 Rename `expandRoutePath` / `ExpandRoutePath` → `mapRoutePath` / `MapRoutePath` in specs, docs, fixtures, and implementation.
 
+## 17. Case-sensitive path matching by default
+
+- [x] 17.1 During `buildRoutesForSite` / `buildSiteRouteTrees` pre-build, set `caseSensitive: true` when a route leaves it undefined. Preserve explicit `true` / `false`. Apply to `mapRoutePath` clones. Keep call order: sites → `mapRoutePath` → caseSensitive fill → strip `sites`.
+- [x] 17.2 Unit tests: omitted → `true` and `/About` does not match `about`; explicit `false` preserved; clones from `mapRoutePath` get the fill.
+- [x] 17.3 Docs (routing): state the case-sensitive default and per-route `caseSensitive: false` escape hatch. No config kill-switch. No wrong-case redirect behaviour from sku.
+
 ## Deferred
 
 See design Non-Goals and Resolved / deferred for the full list.

@@ -7,7 +7,7 @@ import * as routesEntry from '__sku_alias__routesEntry';
 import { SkuProvider } from '#runtime/skuContext';
 import { registerSiteRouteTree } from '#runtime/preloadRoute';
 import Document from '../ssr/Document.js';
-import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
+import { buildSiteRouteTrees } from '../ssr/buildSiteRouteTrees.js';
 import {
   optionalEntryFunction,
   optionalEntryValue,

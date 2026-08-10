@@ -4,7 +4,7 @@ import type { Request as ExpressRequest } from 'express';
 import * as routesEntry from '__sku_alias__routesEntry';
 import * as serverEntry from '__sku_alias__serverEntry';
 import { buildSiteStaticHandlers } from '../ssr/buildSiteStaticHandlers.js';
-import { buildSiteRouteTrees } from '../ssr/filterRoutesForSite.js';
+import { buildSiteRouteTrees } from '../ssr/buildSiteRouteTrees.js';
 import {
   optionalEntryFunction,
   optionalEntryValue,

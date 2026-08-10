@@ -34,22 +34,7 @@ function cloneMappedRoute(
   return { ...withoutIndex, path: mappedPath };
 }
 
-/**
- * Deep-filter `routesEntry` `routes` for one config site name, optionally map
- * paths via `mapRoutePath`, then strip `sites`.
- * - Omit / undefined `sites` ⇒ included for every site
- * - Present `sites` ⇒ included only when the list contains `site` (exact match)
- * - No parent→child inheritance of `sites` (children omit ⇒ still all-sites)
- * - If a parent is excluded, its subtree is absent (structure, not inheritance)
- * - `mapRoutePath` runs for string-`path` routes and `index: true` (`path: ''`)
- * - Not called for pathless layout routes (no `path`, not index)
- * - `parentSegments` use source (pre-mapping) path-bearing ancestors only
- * - Index ancestors do not contribute a segment
- * - Empty map return omits the route; omitted map ⇒ identity `[path]` / `['']`
- * - Index `''` keeps `index: true`; non-empty becomes a `path` clone without `index`
- * - Strips `sites` before returning RR `RouteObject`s
- */
-export const filterRoutesForSite = (
+export const buildRoutesForSite = (
   routes: SkuRouteObject[],
   site: string,
   mapRoutePath?: MapRoutePath,
@@ -93,26 +78,31 @@ export const filterRoutesForSite = (
         : [...parentSegments, authoredPath];
 
     return mappedPaths.map((mappedPath) => {
-      const filtered: RouteObject =
+      const built: RouteObject =
         mappedPath === undefined
           ? { ...rest }
           : cloneMappedRoute(rest, mappedPath, isIndexSource);
 
+      if (built.caseSensitive === undefined) {
+        built.caseSensitive = true;
+      }
+
       if (children) {
-        filtered.children = filterRoutesForSite(
+        built.children = buildRoutesForSite(
           children,
           site,
           mapRoutePath,
           nextParentSegments,
         );
       }
-      return filtered;
+      return built;
     });
   });
 
 /**
  * Pre-build a site → route tree map from config site names + `routesEntry` routes.
- * Optional `mapRoutePath` runs after `sites` membership filtering.
+ * Optional `mapRoutePath` runs after `sites` membership filtering, then undefined
+ * `caseSensitive` is filled to `true`.
  * Sku never wraps the tree — `Providers` render outside the router and any
  * router-aware wrapping is the app's own root layout route — so this runs once at
  * module init and nothing here touches the per-request path.
@@ -125,6 +115,6 @@ export const buildSiteRouteTrees = (
   Object.fromEntries(
     siteNames.map((name) => [
       name,
-      filterRoutesForSite(routes, name, mapRoutePath),
+      buildRoutesForSite(routes, name, mapRoutePath),
     ]),
   );

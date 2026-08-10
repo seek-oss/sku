@@ -24,13 +24,13 @@ Product docs, templates, and public APIs MUST NOT use the label `vite-ssr` (that
 - **WHEN** an app imports Managed Data Mode helpers (`defineServerEntry`, `createSkuContexts`, `useInsertHtml`, …)
 - **THEN** the import specifier is `sku/runtime`
 
-### Requirement: routesEntry exports flat routes
+### Requirement: routesEntry exports routes
 
 Config MUST support `routesEntry` (default `src/routes.tsx`) for Managed Data Mode apps.
 
 Sku MUST resolve `routesEntry` into both the server and client graphs via `__sku_alias__routesEntry`.
 
-`routesEntry` MUST export named `routes` as `SkuRouteObject[]` (flat array).
+`routesEntry` MUST export named `routes` as `SkuRouteObject[]`.
 
 `SkuRouteObject` MUST be a sku type helper `RouteObject & { sites?: string[] }` (not a wrapped React Router re-export).
 
@@ -62,7 +62,7 @@ Optional `sites?: string[]` on a `SkuRouteObject` declares membership:
 Sku MUST NOT inherit `sites` from parent routes to children.
 Site-specific routes MUST set `sites` explicitly.
 
-Sku MUST pre-build per-site trees from resolved site names + `routesEntry` `routes` at init (not per request), strip `sites` before React Router APIs, and select the pre-built tree for the resolved `site`.
+Sku MUST pre-build per-site trees from resolved site names + `routesEntry` `routes` at init (not per request), apply optional `mapRoutePath` after `sites` membership filtering, default undefined `caseSensitive` to `true`, strip `sites` before React Router APIs, and select the pre-built tree for the resolved `site`.
 
 Sku MUST create each site’s React Router static handler once at init and MUST NOT call `createStaticHandler` on the per-request path — per request sku only selects the pre-built handler and calls `query()` / `createStaticRouter`.
 
@@ -159,6 +159,126 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Managed Dat
 - **THEN** sku still resolves `site` via `getSite` (or the sole resolved site)
 - **AND** does not choose the tree from the request `Host` header alone
 
+### Requirement: Optional mapRoutePath maps paths while pre-building site trees
+
+`routesEntry` MAY export a sync named `mapRoutePath` with this signature:
+
+```ts
+mapRoutePath(args: {
+  path: string;
+  site: string;
+  parentSegments: string[];
+}): string[];
+```
+
+Sku MUST call it only while pre-building each site tree at init (not per request).
+Sku MUST call it for routes that have a string `path` and for `index: true` routes.
+For `index: true` routes, sku MUST pass `path: ''`.
+Sku MUST NOT call it for pathless layout routes (no `path`, not index).
+Sku MUST call it only on the source (pre-mapping) tree and MUST NOT call it again on clones produced by mapping.
+
+Call order for each site tree: `sites` membership filter first, then `mapRoutePath`, then strip `sites`.
+
+When `mapRoutePath` is omitted, sku MUST treat each path-bearing route as `[path]` and each index route as `['']` (identity).
+
+`parentSegments` MUST list authored `path` values from path-bearing ancestors only (pathless and index ancestors omitted), not including the current route, and MUST use source (pre-mapping) segments rather than mapped paths.
+
+The return value MUST be a `string[]`.
+An empty array MUST omit that route node for the current site.
+
+For a path-bearing source route, each returned string MUST be the clone’s `path`.
+Sku MUST shallow-clone the route for each returned path, preserve `lazy` and existing `handle` (including injected `moduleId`), and clone children under each result with relative child paths unchanged.
+
+For an `index: true` source route:
+
+- A returned `''` MUST produce a clone that keeps `index: true` (no `path`)
+- A returned non-empty string MUST produce a clone with that `path` and without `index`
+- Clones MUST preserve `lazy` and existing `handle` (including injected `moduleId`) the same way as path-bearing clones
+
+Sku MUST hard-error at init when `mapRoutePath` is present but not a function, or when a call returns a value that is not an array of strings.
+
+Sku MUST NOT use `mapRoutePath` as a substitute for `getLanguage` / Vocab chunk selection.
+
+Sku MUST NOT special-case catch-all or “already prefixed” segments.
+Apps decide that policy inside `mapRoutePath`.
+
+Product docs MUST teach `mapRoutePath` for multi-path pages (including index homes via `path: ''`) and MUST NOT teach sharing one `const pageLazy = () => import(…)` across hand-duplicated route objects.
+
+#### Scenario: Omitted mapRoutePath leaves paths unchanged
+
+- **WHEN** `routesEntry` omits `mapRoutePath`
+- **AND** a route has `path: 'about'`
+- **THEN** the pre-built trees keep `path: 'about'` for that route
+
+#### Scenario: Omitted mapRoutePath leaves index unchanged
+
+- **WHEN** `routesEntry` omits `mapRoutePath`
+- **AND** a route is `index: true`
+- **THEN** the pre-built trees keep that index route
+
+#### Scenario: mapRoutePath duplicates a localisation-root path
+
+- **WHEN** `mapRoutePath` returns `['th/about', 'about']` for `{ path: 'about', site: 'th', parentSegments: [] }`
+- **THEN** site `th`’s tree includes both `th/about` and `about` route nodes
+- **AND** both clones preserve the source route’s `lazy` and `handle.moduleId` when present
+
+#### Scenario: mapRoutePath maps an index home
+
+- **WHEN** an authored route is `index: true`
+- **AND** `mapRoutePath` is called with `path: ''`
+- **AND** it returns `['', 'fr']`
+- **THEN** the site tree includes an `index: true` clone and a `path: 'fr'` clone of the same page
+- **AND** both clones preserve the source route’s `lazy` and `handle.moduleId` when present
+
+#### Scenario: Nested segments can opt out via parentSegments
+
+- **WHEN** a child route has `path: 'settings'` under authored parent `path: 'account'`
+- **AND** `mapRoutePath` returns `[path]` whenever `parentSegments.length > 0`
+- **THEN** sku calls the hook with `parentSegments: ['account']`
+- **AND** the child keeps a single `settings` segment under each expanded parent clone
+
+#### Scenario: Empty array omits the route for that site
+
+- **WHEN** `mapRoutePath` returns `[]` for a path-bearing route on site `nz`
+- **THEN** that route node is absent from the `nz` pre-built tree
+
+#### Scenario: Invalid mapRoutePath return hard-errors at init
+
+- **WHEN** `mapRoutePath` returns a non-array or an array with a non-string entry
+- **THEN** sku fails with a hard error at init
+
+### Requirement: Case-sensitive path matching by default
+
+React Router’s per-route `caseSensitive` defaults to `false` when omitted.
+Managed Data Mode MUST prefer case-sensitive URL path matching.
+
+While pre-building each site tree, when a route object’s `caseSensitive` is `undefined`, sku MUST set `caseSensitive: true` on the object passed to React Router APIs.
+When `caseSensitive` is already `true` or `false`, sku MUST leave it unchanged.
+That fill MUST apply to every route node in the pre-built tree, including clones produced by `mapRoutePath`.
+
+Call order remains: `sites` membership filter, then optional `mapRoutePath`, then the `caseSensitive` default fill, then strip `sites`.
+
+Server `createStaticHandler`, client `createBrowserRouter`, and intent-preload `matchRoutes` MUST all use the same filled trees.
+
+#### Scenario: Omitted caseSensitive becomes true
+
+- **WHEN** a route has `path: 'about'` and omits `caseSensitive`
+- **THEN** the pre-built tree passes that route to React Router with `caseSensitive: true`
+- **AND** `/about` matches
+- **AND** `/About` does not match
+
+#### Scenario: Explicit caseSensitive false is preserved
+
+- **WHEN** a route sets `caseSensitive: false`
+- **THEN** the pre-built tree keeps `caseSensitive: false`
+- **AND** React Router’s case-insensitive matching applies for that route
+
+#### Scenario: mapRoutePath clones inherit the fill
+
+- **WHEN** a source route omits `caseSensitive`
+- **AND** `mapRoutePath` returns multiple paths for that route
+- **THEN** each clone in the pre-built tree has `caseSensitive: true`
+
 ### Requirement: Optional server and client request exports
 
 `serverEntry` / `clientEntry` MUST each **`export default`** one object.
@@ -172,9 +292,9 @@ When that argument is provided, it MUST extract `Site` from the server entry’s
 When the `ServerEntry` type argument is omitted, `ClientContext` MUST be `undefined` and client `site` args MUST be `string`.
 Sku MUST also export structural types `SkuServerEntry` / `SkuClientEntry` (the shapes behind those helpers).
 
-Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`; optional `middleware`, `onListen`, and `getRouterContext`.
+Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`; optional `middleware`, `onListen`, `getRouterContext`, and `instrumentations`.
 
-Client entry object MAY include optional `onHydrate`, `getReactContext`, and `getRouterContext`.
+Client entry object MAY include optional `onHydrate`, `getReactContext`, `getRouterContext`, and `instrumentations`.
 
 `getSite` is required **only** when config `sites` has more than one entry (init hard-error when missing — see the site-selection requirement).
 All other listed properties are optional.
@@ -352,6 +472,43 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 
 - **WHEN** the server entry omits `getSite` (single-site)
 - **THEN** `useSite()` is typed as `string`
+
+### Requirement: Optional React Router instrumentations pass-through
+
+Server and client request entries MAY include optional `instrumentations`.
+
+Server `instrumentations` MUST use React Router’s static-handler shape (`Pick<ServerInstrumentation, "route">[]`).
+When present, sku MUST forward that array into **each** site’s `createStaticHandler(routes, { instrumentations })` at module init.
+
+Client `instrumentations` MUST use React Router’s `ClientInstrumentation[]` shape.
+When present, sku MUST forward that array into `createBrowserRouter(…, { instrumentations })`.
+
+Sku MUST NOT ship a default instrumentation.
+Omitting `instrumentations` on an entry MUST call the corresponding React Router API without the option.
+
+Sku MUST NOT wrap, filter, or compose the app’s instrumentation array.
+Sku MUST keep static handlers pre-built once per site at init (instrumentations do not move `createStaticHandler` onto the request path).
+
+Server and client `instrumentations` are separate optional fields.
+Sku MUST NOT require a shared array across entries.
+
+#### Scenario: Omitting instrumentations preserves current behaviour
+
+- **WHEN** the server entry omits `instrumentations`
+- **AND** the client entry omits `instrumentations`
+- **THEN** sku calls `createStaticHandler(routes)` without an `instrumentations` option
+- **AND** sku calls `createBrowserRouter(…)` without an `instrumentations` option
+
+#### Scenario: Server instrumentations reach every site static handler
+
+- **WHEN** the server entry provides `instrumentations`
+- **THEN** sku builds each site’s static handler with `createStaticHandler(routes, { instrumentations })`
+- **AND** those handlers are still created once at module init
+
+#### Scenario: Client instrumentations reach createBrowserRouter
+
+- **WHEN** the client entry provides `instrumentations`
+- **THEN** sku creates the browser router with `createBrowserRouter(siteRoutes, { instrumentations, … })`
 
 ### Requirement: Shared Managed Data Mode modules keep one identity under Vite
 

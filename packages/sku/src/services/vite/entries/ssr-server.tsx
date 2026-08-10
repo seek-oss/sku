@@ -15,7 +15,7 @@ import {
 } from '../ssr/requireNamedExport.js';
 import { render as renderApp } from '../ssr/render.js';
 import type {
-  ExpandRoutePath,
+  MapRoutePath,
   RenderAssets,
   RenderManifest,
   RenderOptions,
@@ -37,9 +37,9 @@ const routes = requireNamedExport<SkuRouteObject[]>(
   { kind: 'routes' },
 );
 
-const expandRoutePath = optionalNamedFunction<ExpandRoutePath>(
+const mapRoutePath = optionalNamedFunction<MapRoutePath>(
   routesEntry,
-  'expandRoutePath',
+  'mapRoutePath',
   'routesEntry',
 );
 
@@ -51,7 +51,7 @@ const instrumentations = optionalEntryValue<
 
 // Route tree — and each site's handler — is built once here rather than per request.
 const siteStaticHandlers = buildSiteStaticHandlers(
-  buildSiteRouteTrees(routes, __SKU_SITES__, expandRoutePath),
+  buildSiteRouteTrees(routes, __SKU_SITES__, mapRoutePath),
   instrumentations,
 );
 

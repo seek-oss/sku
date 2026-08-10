@@ -47,7 +47,7 @@ Details: `design.md` Decision 12a.
 - Webpack-style `-ssr` is not used.
 - First-class `routesEntry` defaults to `src/routes.tsx`.
 - It exports named `routes` with optional `sites`.
-- Optional `expandRoutePath` maps one logical path to per-site concrete paths during tree pre-build.
+- Optional `mapRoutePath` maps one logical path to per-site concrete paths during tree pre-build.
 - Sku pre-builds per-site trees.
 - Apps resolve the site via `getSite` when multi-site.
 - Config `routes` (static prerender paths) stays separate.
@@ -79,7 +79,7 @@ Full list: `design.md` Non-Goals.
 
 ### New Capabilities
 
-- `managed-data-mode`: App contract shared by SSR today and a future Static path. Covers naming, `sku/runtime`, `routesEntry` (including optional `expandRoutePath`), request entries, `SkuProvider` / `createSkuContexts`, `useInsertHtml`, intent preload, and the React Router 8 optional peer.
+- `managed-data-mode`: App contract shared by SSR today and a future Static path. Covers naming, `sku/runtime`, `routesEntry` (including optional `mapRoutePath`), request entries, `SkuProvider` / `createSkuContexts`, `useInsertHtml`, intent preload, and the React Router 8 optional peer.
 - `ssr`: SSR render strategy and ship surface. Covers `buildType`, streaming Document, Express server, build layout, create template `ssr`, config rejects, and product / Migrating docs.
 - `csp`: SSR CSP delivery only (headers, shell-derived policy, lazy single nonce, report-only, report-to). Does not backfill static or webpack CSP behaviour.
 
@@ -110,7 +110,7 @@ Full contract: `design.md` Decisions 12 / 12a / 25 / 28.
 **Docs / release**
 
 - Product and Migrating docs describe Managed Data Mode vs SSR.
-- They cover multi-site, optional `expandRoutePath` for multi-path pages, the three value channels, and Apollo streaming.
+- They cover multi-site, optional `mapRoutePath` for multi-path pages, the three value channels, and Apollo streaming.
 - Deploy docs cover a self-contained production server and recommended external hosting of hashed assets.
 - Release includes an experimental warning and a changeset.
 

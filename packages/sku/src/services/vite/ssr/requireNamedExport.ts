@@ -39,7 +39,7 @@ export const requireNamedExport = <T>(
 };
 
 /**
- * Optional named function export on a module (e.g. `expandRoutePath` on
+ * Optional named function export on a module (e.g. `mapRoutePath` on
  * `routesEntry`). Omitted ⇒ `undefined`. Present but not a function ⇒ hard error.
  */
 export const optionalNamedFunction = <T extends (...args: never[]) => unknown>(

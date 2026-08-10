@@ -1,4 +1,4 @@
-import type { ExpandRoutePath, SkuRouteObject } from 'sku/runtime';
+import type { MapRoutePath, SkuRouteObject } from 'sku/runtime';
 
 import { RootLayout } from './RootLayout.js';
 
@@ -7,11 +7,7 @@ import { RootLayout } from './RootLayout.js';
  * Index homes use `path: ''` — `''` keeps the unprefixed `/`, `'au'` becomes `/au`.
  * Nested segments leave `parentSegments.length > 0` and stay relative.
  */
-export const expandRoutePath: ExpandRoutePath = ({
-  path,
-  site,
-  parentSegments,
-}) => {
+export const mapRoutePath: MapRoutePath = ({ path, site, parentSegments }) => {
   if (parentSegments.length > 0) {
     return [path];
   }
@@ -29,7 +25,7 @@ export const expandRoutePath: ExpandRoutePath = ({
 /**
  * `routesEntry` route tree. Shared routes omit `sites` (every config site).
  * Site-only routes set `sites` explicitly — no parent→child inheritance.
- * `expandRoutePath` clones the index home and `about` for AU so `/` + `/au`
+ * `mapRoutePath` clones the index home and `about` for AU so `/` + `/au`
  * and `/about` + `/au/about` share the same lazy modules (preload-safe).
  */
 export const routes: SkuRouteObject[] = [

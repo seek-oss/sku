@@ -41,7 +41,7 @@ describe('ssr-sites', () => {
       expect(nzHtml).not.toContain('data-testid="au-only-page"');
     });
 
-    it('serves expandRoutePath clones for /about and /au/about on AU', async ({
+    it('serves mapRoutePath clones for /about and /au/about on AU', async ({
       task,
     }) => {
       skipCleanup(task.id);
@@ -68,7 +68,7 @@ describe('ssr-sites', () => {
       expect(await nzAbout.text()).toContain('data-testid="about"');
     });
 
-    it('serves expandRoutePath index home clones for / and /au on AU', async ({
+    it('serves mapRoutePath index home clones for / and /au on AU', async ({
       task,
     }) => {
       skipCleanup(task.id);

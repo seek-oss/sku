@@ -17,7 +17,7 @@ import {
 } from '../ssr/requireNamedExport.js';
 import { assertSiteName, selectForSite } from '../ssr/selectForSite.js';
 import type {
-  ExpandRoutePath,
+  MapRoutePath,
   SkuClientEntry,
   SkuClientGetReactContext,
   SkuClientGetRouterContext,
@@ -32,19 +32,15 @@ const routes = requireNamedExport<SkuRouteObject[]>(
   { kind: 'routes' },
 );
 
-const expandRoutePath = optionalNamedFunction<ExpandRoutePath>(
+const mapRoutePath = optionalNamedFunction<MapRoutePath>(
   routesEntry,
-  'expandRoutePath',
+  'mapRoutePath',
   'routesEntry',
 );
 
 const entry = requireDefaultEntry<SkuClientEntry>(clientEntry, 'clientEntry');
 
-const siteRouteTrees = buildSiteRouteTrees(
-  routes,
-  __SKU_SITES__,
-  expandRoutePath,
-);
+const siteRouteTrees = buildSiteRouteTrees(routes, __SKU_SITES__, mapRoutePath);
 
 const onHydrate = optionalEntryFunction<SkuOnHydrate>(entry, 'onHydrate');
 

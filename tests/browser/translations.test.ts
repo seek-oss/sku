@@ -58,7 +58,7 @@ describe('translations', () => {
   });
 });
 
-describe('ssr translations', () => {
+describe('webpack ssr translations', () => {
   const backendUrl = `http://localhost:8310`;
 
   beforeAll(async () => {
@@ -90,7 +90,6 @@ describe('ssr translations', () => {
   });
 });
 
-// Runs after webpack SSR in this file so both long-lived servers are not started concurrently.
 describe('vite ssr translations', () => {
   const viteSsrUrl = `http://localhost:8315`;
 

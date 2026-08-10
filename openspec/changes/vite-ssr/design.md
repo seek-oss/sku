@@ -25,7 +25,7 @@ See Decision 27.
 - First-class `routesEntry` with a named `routes` export.
 - First-class request-entry contracts.
 - First-class multi-site route trees via `routes`, optional `sites`, and `getSite`.
-- Optional `routesEntry` `expandRoutePath` so apps map one logical path to per-site concrete paths.
+- Optional `routesEntry` `mapRoutePath` so apps map one logical path to per-site concrete paths.
 - Sku owns preload-safe duplication.
 - Apps own path policy (no sku-owned localisation rules).
 - Same spirit as first-class multi-language.
@@ -104,7 +104,7 @@ See Decision 27.
 - Dual-entry `routes` re-exports from `serverEntry` / `clientEntry`.
 - Differing server vs client route modules as a product feature.
 - Sku-owned site resolution from config `hosts` / `sites[].host` (local-dev listen/setup only).
-- Sku-owned localisation / path-prefix rule tables (apps own `expandRoutePath` policy; sku owns calling it and cloning routes).
+- Sku-owned localisation / path-prefix rule tables (apps own `mapRoutePath` policy; sku owns calling it and cloning routes).
 - Requiring a non-empty config `sites` array for SSR (empty soft-defaults to `'default'`).
 - Per-site JS bundles.
 - Returning routes from a request-entry getter or bag.
@@ -300,7 +300,7 @@ Apps that care about site names declare real ones.
 Multi-site still needs ≥2 configured names + `getSite`.
 
 **Pre-build:**
-At init (not per request), for each resolved site name (config names, or `['default']` when empty), sku deep-filters `routes` by `sites` membership, optionally expands paths via `expandRoutePath` (Decision 4c), and strips `sites` from the objects passed to React Router.
+At init (not per request), for each resolved site name (config names, or `['default']` when empty), sku deep-filters `routes` by `sites` membership, optionally maps paths via `mapRoutePath` (Decision 4c), and strips `sites` from the objects passed to React Router.
 The client needs the same site-name list (bake from config for production client, same as other `__SKU_*` defines) so both sides pre-build identically from the same `routesEntry` module.
 
 **Resolve site:**
@@ -335,7 +335,7 @@ Config `sites[].routes` (static prerender path lists) remains unrelated to SSR `
 | Conventional `req` field / sku push API   | Unversioned `string \| undefined`; collides across consumers; fails only on a request — see Decision 12                      |
 | Combined site+language+context resolver   | Reintroduces the return-bag shape Decision 12 pulled apart                                                                   |
 
-Document multi-site SSR via `routesEntry` + `routes` with optional `sites` + `getSite`, and multi-path pages via optional `expandRoutePath` (Decision 4c), not these workarounds.
+Document multi-site SSR via `routesEntry` + `routes` with optional `sites` + `getSite`, and multi-path pages via optional `mapRoutePath` (Decision 4c), not these workarounds.
 
 ### 4b. Route authoring: inline `lazy` (light contract)
 
@@ -352,7 +352,7 @@ Happy path for docs, create template, and fixtures:
 
 Do not teach a per-page `route.ts` stub as the default.
 Do not add a sku `lazyRoute` (or similar) wrapper helper in this release.
-Optional path mapping is the app-exported `expandRoutePath` hook (Decision 4c), not a sku wrapper around each page.
+Optional path mapping is the app-exported `mapRoutePath` hook (Decision 4c), not a sku wrapper around each page.
 Plain React Router `RouteObject` / `SkuRouteObject` literals remain the page authoring surface.
 
 Keep server-only loader modules off the client-imported graph (existing convention).
@@ -361,7 +361,7 @@ Isomorphic loaders and actions on the lazy page module are fine.
 Deferred (future opt-in, not this change): filesystem conventions, Framework Mode–shaped string paths, TanStack-style auto code-splitting.
 Intentionally avoid extra authoring rules now so those can expand the same light contract later.
 
-### 4c. Optional `expandRoutePath` (per-site path mapping)
+### 4c. Optional `mapRoutePath` (per-site path mapping)
 
 Apps often need the same logical page at more than one concrete path per site (for example `/about` and `/fr/about`, or `/` and `/fr` for a home).
 React Router needs one route object per full path.
@@ -373,13 +373,13 @@ Sku does **not** ship localisation rule tables or hard-code path-prefix schemes.
 
 **Sku owns** calling the optional hook while pre-building each site tree, cloning route nodes preload-safely, and stripping sku-only fields before React Router.
 
-**Export:** optional named `expandRoutePath` on `routesEntry` (same module as `routes`).
+**Export:** optional named `mapRoutePath` on `routesEntry` (same module as `routes`).
 Omitted ⇒ identity mapping (`[path]` for path-bearing routes, `['']` for index routes).
 
 **Signature:**
 
 ```ts
-expandRoutePath(args: {
+mapRoutePath(args: {
   path: string;
   site: string;
   parentSegments: string[];
@@ -412,12 +412,12 @@ For an **`index: true`** source route:
 - Not for pathless layout routes (no `path`, not index).
 - After `sites` membership filtering for the current site.
 - At init during per-site tree build (sync, pure — no `req`).
-- Only on the **source** (pre-expansion) tree.
-- Sku MUST NOT call `expandRoutePath` again on clones produced by a prior expansion.
+- Only on the **source** (pre-mapping) tree.
+- Sku MUST NOT call `mapRoutePath` again on clones produced by a prior mapping.
 
 **`parentSegments` construction:**
 
-- Walk the **source** (pre-expansion) tree.
+- Walk the **source** (pre-mapping) tree.
 - Append an ancestor’s authored `path` when that ancestor is path-bearing.
 - Skip pathless ancestors (they add no URL segment).
 - Index ancestors do not contribute a segment.
@@ -435,7 +435,7 @@ Catch-alls and other special segments (for example `path: '*'`) stay app policy 
 - Preserve `lazy`, existing `handle` (including build-injected `moduleId`), and children structure.
 - Do not re-wrap `lazy`.
 - Runtime clones run after the routes module transform, so copied `handle.moduleId` keeps Document modulepreload working.
-- Docs MUST show `expandRoutePath` (or inline `lazy` / explicit `handle.moduleId` per hand-written duplicate).
+- Docs MUST show `mapRoutePath` (or inline `lazy` / explicit `handle.moduleId` per hand-written duplicate).
 - Docs MUST NOT teach a shared `const pageLazy = () => import(…)` reused across hand-duplicated route objects.
 
 **Validation (init, fail closed):**
@@ -448,7 +448,7 @@ Catch-alls and other special segments (for example `path: '*'`) stay app policy 
 - Replacing `getLanguage` / Vocab chunk selection (still request-time, separate).
 - Dynamic `:lang` segments as the product answer (still rejected in Decision 4a).
 - Sku-owned knowledge of which languages or prefixes an organisation uses.
-- Sku-owned catch-all or “already prefixed segment” rules (apps decide in `expandRoutePath`).
+- Sku-owned catch-all or “already prefixed segment” rules (apps decide in `mapRoutePath`).
 
 ### 5. Commands and deploy shape
 
@@ -1077,7 +1077,7 @@ Migrating MUST cover:
 
 - Named `Component` on lazy pages.
 - `routesEntry` + `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site).
-- Optional `expandRoutePath` for per-site multi-path pages (Decision 4c).
+- Optional `mapRoutePath` for per-site multi-path pages (Decision 4c).
 - Multi-site membership via `sites` on routes.
 - Webpack dual-port → SSR single `port` (reject `serverPort`; `PORT` still overrides prod).
 - `dist/server/server.js` + sibling build `client/` / `server/`.
@@ -1564,7 +1564,7 @@ Client instrumentations MAY include `router` and `route` levels.
 | App omits or invents `site`                       | Empty config `sites` soft-defaults to `'default'`. Multi-site requires `getSite` at init. Hard-error if return is non-string or not a resolved site name. 0–1 site uses sole name when getter omitted.          |
 | Duplicate parse across getters                    | Accepted. Docs say keep getters sync/pure. Shared libs memoise on `req`.                                                                                                                                        |
 | Accidental site splits                            | No `sites` inheritance. Site-specific routes must set `sites` explicitly.                                                                                                                                       |
-| Hand-duplicated language paths / shared `lazy`    | Optional `expandRoutePath` clones after membership filter and copies `handle.moduleId`. Docs forbid shared `pageLazy` across hand copies.                                                                       |
+| Hand-duplicated language paths / shared `lazy`    | Optional `mapRoutePath` clones after membership filter and copies `handle.moduleId`. Docs forbid shared `pageLazy` across hand copies.                                                                          |
 | Shell-only CSP / late scripts                     | Lazy single nonce. Hash known bootstrap bodies.                                                                                                                                                                 |
 | Absolute / `CDN` `publicPath`                     | Config rejects. Relative-only docs. No browser e2e for this edge case.                                                                                                                                          |
 | `publicPath` coupled to basename                  | Never pass `publicPath` as RR basename. Bake `__SKU_PUBLIC_PATH__`. Fixture for `/static/...` assets.                                                                                                           |
@@ -1622,7 +1622,7 @@ Key topics include:
 - Express 4 typing and React Router 8 as an optional peer.
 - Named `Component` on lazy pages.
 - `routesEntry` + `routes` + optional `sites` + `getSite`.
-- Optional `expandRoutePath` for per-site multi-path pages.
+- Optional `mapRoutePath` for per-site multi-path pages.
 - `defineServerEntry` / `defineClientEntry` replacing `onRequest`, plus optional `middleware` / `onListen` / `onHydrate` / `instrumentations`.
 - Webpack `onStart` → `onListen` + config `expressTrustProxy`.
 - `createSkuContexts<typeof …>` + three value channels + root-layout wrapping.

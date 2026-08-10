@@ -64,19 +64,19 @@ React Router matches one path per route object, so you need a separate route for
 
 Prefer listing supported prefixes over a dynamic `:lang` segment — a param would also match unsupported prefixes.
 
-You can duplicate route objects by hand, or use `expandRoutePath` below.
+You can duplicate route objects by hand, or use `mapRoutePath` below.
 
-### expandRoutePath
+### mapRoutePath
 
-Export optional `expandRoutePath` from [`routesEntry`](../configuration.md#routesentry). sku clones the route for each returned path:
+Export optional `mapRoutePath` from [`routesEntry`](../configuration.md#routesentry). sku clones the route for each returned path:
 
 ```tsx
 // src/routes.tsx
-import type { ExpandRoutePath, SkuRouteObject } from 'sku/runtime';
+import type { MapRoutePath, SkuRouteObject } from 'sku/runtime';
 
 import { RootLayout } from './RootLayout';
 
-export const expandRoutePath: ExpandRoutePath = ({ path }) => {
+export const mapRoutePath: MapRoutePath = ({ path }) => {
   if (path === 'about') {
     return ['about', 'fr/about'];
   }
@@ -91,11 +91,11 @@ export const routes: SkuRouteObject[] = [
 ];
 ```
 
-`expandRoutePath` is not a substitute for [`getLanguage`](./entries.md#getlanguage) — that still selects the Vocab chunk on the Document.
+`mapRoutePath` is not a substitute for [`getLanguage`](./entries.md#getlanguage) — that still selects the Vocab chunk on the Document.
 
-Hand-duplicating is fine for more control. Do not share one `const pageLazy = () => import(…)` across copies — that breaks automatic `modulepreload`. Prefer `expandRoutePath`, or give each duplicate its own inline `lazy`.
+Hand-duplicating is fine for more control. Do not share one `const pageLazy = () => import(…)` across copies — that breaks automatic `modulepreload`. Prefer `mapRoutePath`, or give each duplicate its own inline `lazy`.
 
-For nested routes, index homes, and per-site expansion, see [Routing → Multiple paths with expandRoutePath](./routing.md#multiple-paths-with-expandroutepath).
+For nested routes, index homes, and per-site mapping, see [Routing → Multiple paths with mapRoutePath](./routing.md#multiple-paths-with-maproutepath).
 
 ## See also
 

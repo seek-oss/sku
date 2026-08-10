@@ -4,7 +4,7 @@ import {
   filterRoutesForSite,
 } from './filterRoutesForSite.js';
 import { optionalNamedFunction } from './requireNamedExport.js';
-import type { ExpandRoutePath, SkuRouteObject } from './types.js';
+import type { MapRoutePath, SkuRouteObject } from './types.js';
 
 describe('filterRoutesForSite', () => {
   it('includes routes that omit sites for every site', () => {
@@ -63,22 +63,18 @@ describe('filterRoutesForSite', () => {
   });
 });
 
-describe('expandRoutePath', () => {
+describe('mapRoutePath', () => {
   const aboutLazy = () => Promise.resolve({ Component: () => null });
 
-  it('leaves paths unchanged when expandRoutePath is omitted', () => {
+  it('leaves paths unchanged when mapRoutePath is omitted', () => {
     const routes: SkuRouteObject[] = [{ path: 'about', lazy: aboutLazy }];
     expect(filterRoutesForSite(routes, 'au')).toEqual([
       { path: 'about', lazy: aboutLazy },
     ]);
   });
 
-  it('duplicates a path when expandRoutePath returns multiple paths', () => {
-    const expandRoutePath: ExpandRoutePath = ({
-      path,
-      site,
-      parentSegments,
-    }) => {
+  it('duplicates a path when mapRoutePath returns multiple paths', () => {
+    const mapRoutePath: MapRoutePath = ({ path, site, parentSegments }) => {
       if (parentSegments.length > 0) {
         return [path];
       }
@@ -96,7 +92,7 @@ describe('expandRoutePath', () => {
       },
     ];
 
-    const thTree = filterRoutesForSite(routes, 'th', expandRoutePath);
+    const thTree = filterRoutesForSite(routes, 'th', mapRoutePath);
     expect(thTree).toEqual([
       {
         path: 'th/about',
@@ -122,7 +118,7 @@ describe('expandRoutePath', () => {
       parentSegments: string[];
     }> = [];
 
-    const expandRoutePath: ExpandRoutePath = (args) => {
+    const mapRoutePath: MapRoutePath = (args) => {
       calls.push({ path: args.path, parentSegments: args.parentSegments });
       if (args.parentSegments.length > 0) {
         return [args.path];
@@ -145,7 +141,7 @@ describe('expandRoutePath', () => {
       },
     ];
 
-    const tree = filterRoutesForSite(routes, 'th', expandRoutePath);
+    const tree = filterRoutesForSite(routes, 'th', mapRoutePath);
 
     expect(calls).toEqual([
       { path: 'account', parentSegments: [] },
@@ -169,24 +165,24 @@ describe('expandRoutePath', () => {
     ]);
   });
 
-  it('omits a route when expandRoutePath returns an empty array', () => {
-    const expandRoutePath: ExpandRoutePath = ({ path, site }) =>
+  it('omits a route when mapRoutePath returns an empty array', () => {
+    const mapRoutePath: MapRoutePath = ({ path, site }) =>
       path === 'hidden' && site === 'nz' ? [] : [path];
 
     const routes: SkuRouteObject[] = [{ path: 'shared' }, { path: 'hidden' }];
 
-    expect(filterRoutesForSite(routes, 'nz', expandRoutePath)).toEqual([
+    expect(filterRoutesForSite(routes, 'nz', mapRoutePath)).toEqual([
       { path: 'shared' },
     ]);
-    expect(filterRoutesForSite(routes, 'au', expandRoutePath)).toEqual([
+    expect(filterRoutesForSite(routes, 'au', mapRoutePath)).toEqual([
       { path: 'shared' },
       { path: 'hidden' },
     ]);
   });
 
-  it('does not call expandRoutePath for pathless layout routes', () => {
+  it('does not call mapRoutePath for pathless layout routes', () => {
     const calls: string[] = [];
-    const expandRoutePath: ExpandRoutePath = ({ path }) => {
+    const mapRoutePath: MapRoutePath = ({ path }) => {
       calls.push(path);
       return [path];
     };
@@ -199,7 +195,7 @@ describe('expandRoutePath', () => {
       },
     ];
 
-    expect(filterRoutesForSite(routes, 'au', expandRoutePath)).toEqual([
+    expect(filterRoutesForSite(routes, 'au', mapRoutePath)).toEqual([
       {
         Component: routes[0]?.Component,
         children: [{ path: 'leaf', Component: leaf.Component }],
@@ -209,13 +205,13 @@ describe('expandRoutePath', () => {
     expect(calls).toEqual(['leaf']);
   });
 
-  it('leaves index unchanged when expandRoutePath is omitted', () => {
+  it('leaves index unchanged when mapRoutePath is omitted', () => {
     const home = { index: true as const, lazy: aboutLazy };
     expect(filterRoutesForSite([home], 'au')).toEqual([home]);
   });
 
   it("expands an index home with path: '' into index + path clones", () => {
-    const expandRoutePath: ExpandRoutePath = ({ path, parentSegments }) => {
+    const mapRoutePath: MapRoutePath = ({ path, parentSegments }) => {
       if (parentSegments.length > 0) {
         return [path];
       }
@@ -239,7 +235,7 @@ describe('expandRoutePath', () => {
       },
     ];
 
-    const tree = filterRoutesForSite(routes, 'au', expandRoutePath);
+    const tree = filterRoutesForSite(routes, 'au', mapRoutePath);
     expect(tree).toEqual([
       {
         Component: routes[0]?.Component,
@@ -266,9 +262,9 @@ describe('expandRoutePath', () => {
     expect(clones[1]?.handle).toBe(routes[0]?.children?.[0]?.handle);
   });
 
-  it('does not re-expand clones from a prior expansion', () => {
+  it('does not re-map clones from a prior mapping', () => {
     const calls: string[] = [];
-    const expandRoutePath: ExpandRoutePath = ({ path }) => {
+    const mapRoutePath: MapRoutePath = ({ path }) => {
       calls.push(path);
       if (path === '') {
         return ['', 'fr'];
@@ -279,37 +275,37 @@ describe('expandRoutePath', () => {
     filterRoutesForSite(
       [{ index: true, Component: () => null }],
       'au',
-      expandRoutePath,
+      mapRoutePath,
     );
 
     // Called once on the source index — never again on the '' or 'fr' clones.
     expect(calls).toEqual(['']);
   });
 
-  it('hard-errors when expandRoutePath returns a non-string array', () => {
-    const expandRoutePath = (() => [1, 2]) as unknown as ExpandRoutePath;
+  it('hard-errors when mapRoutePath returns a non-string array', () => {
+    const mapRoutePath = (() => [1, 2]) as unknown as MapRoutePath;
     expect(() =>
-      filterRoutesForSite([{ path: 'about' }], 'au', expandRoutePath),
+      filterRoutesForSite([{ path: 'about' }], 'au', mapRoutePath),
     ).toThrow(
-      /SSR routesEntry expandRoutePath must return string\[\]\. Invalid return for path 'about' on site 'au'\./,
+      /SSR routesEntry mapRoutePath must return string\[\]\. Invalid return for path 'about' on site 'au'\./,
     );
   });
 
-  it('hard-errors when expandRoutePath is present but not a function', () => {
+  it('hard-errors when mapRoutePath is present but not a function', () => {
     expect(() =>
       optionalNamedFunction(
-        { expandRoutePath: 'nope' },
-        'expandRoutePath',
+        { mapRoutePath: 'nope' },
+        'mapRoutePath',
         'routesEntry',
       ),
     ).toThrow(
-      /SSR routesEntry must export named 'expandRoutePath' as a function when present\. Invalid 'expandRoutePath' export\./,
+      /SSR routesEntry must export named 'mapRoutePath' as a function when present\. Invalid 'mapRoutePath' export\./,
     );
   });
 
-  it('returns undefined when expandRoutePath is omitted', () => {
+  it('returns undefined when mapRoutePath is omitted', () => {
     expect(
-      optionalNamedFunction({}, 'expandRoutePath', 'routesEntry'),
+      optionalNamedFunction({}, 'mapRoutePath', 'routesEntry'),
     ).toBeUndefined();
   });
 });
@@ -334,8 +330,8 @@ describe('buildSiteRouteTrees', () => {
     expect(trees.nz.map(({ path }) => path)).toEqual(['/shared']);
   });
 
-  it('applies expandRoutePath after sites membership filtering', () => {
-    const expandRoutePath: ExpandRoutePath = ({ path, site }) => {
+  it('applies mapRoutePath after sites membership filtering', () => {
+    const mapRoutePath: MapRoutePath = ({ path, site }) => {
       if (path === 'about' && site === 'au') {
         return ['about', 'au/about'];
       }
@@ -345,7 +341,7 @@ describe('buildSiteRouteTrees', () => {
     const trees = buildSiteRouteTrees(
       [{ path: 'about' }, { path: 'nz-only', sites: ['nz'] }],
       ['au', 'nz'],
-      expandRoutePath,
+      mapRoutePath,
     );
 
     expect(trees).toEqual({

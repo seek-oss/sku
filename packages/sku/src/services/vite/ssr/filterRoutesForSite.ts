@@ -1,7 +1,7 @@
 import type { RouteObject } from 'react-router';
-import type { ExpandRoutePath, SkuRouteObject } from './types.js';
+import type { MapRoutePath, SkuRouteObject } from './types.js';
 
-function assertExpandRoutePathReturn(
+function assertMapRoutePathReturn(
   value: unknown,
   path: string,
   site: string,
@@ -11,48 +11,48 @@ function assertExpandRoutePathReturn(
     value.some((entry) => typeof entry !== 'string')
   ) {
     throw new Error(
-      `SSR routesEntry expandRoutePath must return string[]. Invalid return for path '${path}' on site '${site}'.`,
+      `SSR routesEntry mapRoutePath must return string[]. Invalid return for path '${path}' on site '${site}'.`,
     );
   }
 }
 
-function cloneExpandedRoute(
+function cloneMappedRoute(
   rest: Omit<SkuRouteObject, 'sites' | 'children'>,
-  expandedPath: string,
+  mappedPath: string,
   isIndexSource: boolean,
 ): RouteObject {
   if (!isIndexSource) {
-    return { ...rest, path: expandedPath };
+    return { ...rest, path: mappedPath };
   }
 
-  if (expandedPath === '') {
+  if (mappedPath === '') {
     const { path: _path, ...withoutPath } = rest;
     return { ...withoutPath, index: true };
   }
 
   const { index: _index, ...withoutIndex } = rest;
-  return { ...withoutIndex, path: expandedPath };
+  return { ...withoutIndex, path: mappedPath };
 }
 
 /**
- * Deep-filter `routesEntry` `routes` for one config site name, optionally expand
- * paths via `expandRoutePath`, then strip `sites`.
+ * Deep-filter `routesEntry` `routes` for one config site name, optionally map
+ * paths via `mapRoutePath`, then strip `sites`.
  * - Omit / undefined `sites` ⇒ included for every site
  * - Present `sites` ⇒ included only when the list contains `site` (exact match)
  * - No parent→child inheritance of `sites` (children omit ⇒ still all-sites)
  * - If a parent is excluded, its subtree is absent (structure, not inheritance)
- * - `expandRoutePath` runs for string-`path` routes and `index: true` (`path: ''`)
+ * - `mapRoutePath` runs for string-`path` routes and `index: true` (`path: ''`)
  * - Not called for pathless layout routes (no `path`, not index)
- * - `parentSegments` use source (pre-expansion) path-bearing ancestors only
+ * - `parentSegments` use source (pre-mapping) path-bearing ancestors only
  * - Index ancestors do not contribute a segment
- * - Empty expand return omits the route; omitted expand ⇒ identity `[path]` / `['']`
+ * - Empty map return omits the route; omitted map ⇒ identity `[path]` / `['']`
  * - Index `''` keeps `index: true`; non-empty becomes a `path` clone without `index`
  * - Strips `sites` before returning RR `RouteObject`s
  */
 export const filterRoutesForSite = (
   routes: SkuRouteObject[],
   site: string,
-  expandRoutePath?: ExpandRoutePath,
+  mapRoutePath?: MapRoutePath,
   parentSegments: readonly string[] = [],
 ): RouteObject[] =>
   routes.flatMap((route) => {
@@ -68,22 +68,22 @@ export const filterRoutesForSite = (
     // Index homes expand with `path: ''`; pathless layouts are not expanded.
     const sourcePath: string | undefined = isIndexSource ? '' : authoredPath;
 
-    const expandedPaths =
+    const mappedPaths =
       sourcePath === undefined
         ? [undefined]
         : (() => {
-            const result = expandRoutePath
-              ? expandRoutePath({
+            const result = mapRoutePath
+              ? mapRoutePath({
                   path: sourcePath,
                   site,
                   parentSegments: [...parentSegments],
                 })
               : [sourcePath];
-            assertExpandRoutePathReturn(result, sourcePath, site);
+            assertMapRoutePathReturn(result, sourcePath, site);
             return result;
           })();
 
-    if (expandedPaths.length === 0) {
+    if (mappedPaths.length === 0) {
       return [];
     }
 
@@ -92,17 +92,17 @@ export const filterRoutesForSite = (
         ? parentSegments
         : [...parentSegments, authoredPath];
 
-    return expandedPaths.map((expandedPath) => {
+    return mappedPaths.map((mappedPath) => {
       const filtered: RouteObject =
-        expandedPath === undefined
+        mappedPath === undefined
           ? { ...rest }
-          : cloneExpandedRoute(rest, expandedPath, isIndexSource);
+          : cloneMappedRoute(rest, mappedPath, isIndexSource);
 
       if (children) {
         filtered.children = filterRoutesForSite(
           children,
           site,
-          expandRoutePath,
+          mapRoutePath,
           nextParentSegments,
         );
       }
@@ -112,7 +112,7 @@ export const filterRoutesForSite = (
 
 /**
  * Pre-build a site → route tree map from config site names + `routesEntry` routes.
- * Optional `expandRoutePath` runs after `sites` membership filtering.
+ * Optional `mapRoutePath` runs after `sites` membership filtering.
  * Sku never wraps the tree — `Providers` render outside the router and any
  * router-aware wrapping is the app's own root layout route — so this runs once at
  * module init and nothing here touches the per-request path.
@@ -120,11 +120,11 @@ export const filterRoutesForSite = (
 export const buildSiteRouteTrees = (
   routes: SkuRouteObject[],
   siteNames: readonly string[],
-  expandRoutePath?: ExpandRoutePath,
+  mapRoutePath?: MapRoutePath,
 ): Record<string, RouteObject[]> =>
   Object.fromEntries(
     siteNames.map((name) => [
       name,
-      filterRoutesForSite(routes, name, expandRoutePath),
+      filterRoutesForSite(routes, name, mapRoutePath),
     ]),
   );

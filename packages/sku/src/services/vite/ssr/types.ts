@@ -57,10 +57,10 @@ export type SkuRouteObject = Omit<RouteObject, 'children'> & {
 };
 
 /**
- * Args for optional `routesEntry` `expandRoutePath`.
+ * Args for optional `routesEntry` `mapRoutePath`.
  * Called while pre-building each site tree (after `sites` membership filter).
  */
-export type ExpandRoutePathArgs = {
+export type MapRoutePathArgs = {
   /**
    * This route’s own authored `path`, or `''` when the route is `index: true`.
    */
@@ -70,7 +70,7 @@ export type ExpandRoutePathArgs = {
   /**
    * Authored `path` values from path-bearing ancestors only (pathless layouts
    * and index ancestors omitted), not including the current route.
-   * Source (pre-expansion) segments.
+   * Source (pre-mapping) segments.
    */
   parentSegments: string[];
 };
@@ -82,7 +82,7 @@ export type ExpandRoutePathArgs = {
  * For an index source, `''` keeps `index: true`; a non-empty string becomes a
  * `path` clone without `index`.
  */
-export type ExpandRoutePath = (args: ExpandRoutePathArgs) => string[];
+export type MapRoutePath = (args: MapRoutePathArgs) => string[];
 
 /**
  * Sync server-entry getter — app-owned site name selecting the pre-built tree.

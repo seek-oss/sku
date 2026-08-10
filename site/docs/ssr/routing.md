@@ -136,20 +136,16 @@ export default server;
 
 :::
 
-## Multiple paths with `expandRoutePath`
+## Multiple paths with `mapRoutePath`
 
-When the same page should match more than one concrete path (for example `/about` and `/fr/about`, or `/` and `/fr`), export optional `expandRoutePath` from `routesEntry`.
+When the same page should match more than one concrete path (for example `/about` and `/fr/about`, or `/` and `/fr`), export optional `mapRoutePath` from `routesEntry`.
 sku calls it while pre-building each site tree and clones the route for each returned path.
 Index homes are called with `path: ''` — return `''` to keep `index: true`, or a non-empty string for a prefixed home without `index`.
 
 ```tsx
-import type { ExpandRoutePath, SkuRouteObject } from 'sku/runtime';
+import type { MapRoutePath, SkuRouteObject } from 'sku/runtime';
 
-export const expandRoutePath: ExpandRoutePath = ({
-  path,
-  site,
-  parentSegments,
-}) => {
+export const mapRoutePath: MapRoutePath = ({ path, site, parentSegments }) => {
   if (parentSegments.length > 0) {
     return [path];
   }

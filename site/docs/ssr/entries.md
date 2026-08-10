@@ -323,15 +323,15 @@ export default client;
 Named export of a React Router route tree — see [Routing](./routing.md).
 
 ```ts
-import type { ExpandRoutePath, SkuRouteObject } from 'sku/runtime';
+import type { MapRoutePath, SkuRouteObject } from 'sku/runtime';
 
 export const routes: SkuRouteObject[];
-export const expandRoutePath?: ExpandRoutePath;
+export const mapRoutePath?: MapRoutePath;
 ```
 
 `SkuRouteObject` is a React Router `RouteObject` plus optional `sites` for multi-site membership.
 
-Optional `expandRoutePath` clones path-bearing and index routes for alternate paths (index homes use `path: ''`) — see [Multi-language](./multi-language.md#expandroutepath).
+Optional `mapRoutePath` clones path-bearing and index routes for alternate paths (index homes use `path: ''`) — see [Multi-language](./multi-language.md#maproutepath).
 
 ## See also
 

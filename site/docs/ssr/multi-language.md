@@ -5,11 +5,13 @@ Managed Data Mode SSR is available for evaluation and testing. Do not use it in 
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
-When `languages` is configured, SSR can preload the active language chunk (for example `en-translations`) on the initial document so translated text is available without a delayed download.
+Managed Data Mode SSR supports the common multi-language approach using Vocab. See [Multiple languages](../multi-language.md) for setup and workflow.
+
+When [`languages`](../configuration.md#languages) is configured, SSR can preload the active language chunk (for example `en-translations`) on the initial document so translated text is available without a delayed download.
 
 ## Preload the language chunk
 
-Export `getLanguage` from the server entry so it returns a name from config `languages` (or `en-PSEUDO`):
+Export [`getLanguage`](./entries.md#getlanguage) from the server entry so it returns a name from config [`languages`](../configuration.md#languages) (or `en-PSEUDO`):
 
 ```tsx
 // src/server.tsx
@@ -24,12 +26,13 @@ const server = defineServerEntry({
 export default server;
 ```
 
-If `getLanguage` is omitted, no language chunk is preloaded and text may load later.
+If [`getLanguage`](./entries.md#getlanguage) is omitted, no language chunk is preloaded and text may load later.
 
 ## VocabProvider in the root layout
 
-Wrap your UI in `VocabProvider` in the [root layout](./providers.md#root-layout-for-providers).
-Locale must track client navigation, so re-derive it the same way in the layout (URL or cookies) with React Router hooks — or seed it through `clientContext`:
+Wrap your UI in `VocabProvider` in the [root layout](./providers.md#root-layout-for-providers), and pass the active language so it stays in sync on client navigation.
+
+If language is in the path, derive it from the router (as in the example below). If it comes from a cookie or other context, read that in the layout the same way.
 
 ```tsx
 // src/RootLayout.tsx
@@ -51,7 +54,7 @@ export const RootLayout = () => {
 };
 ```
 
-For Vocab setup (`languages` config, `.vocab` folders, translation workflow), see [Multiple languages](../multi-language.md).
+For Vocab setup ([`languages`](../configuration.md#languages) config, `.vocab` folders, translation workflow), see [Multiple languages](../multi-language.md).
 
 ## Multiple paths per page / languages in path
 

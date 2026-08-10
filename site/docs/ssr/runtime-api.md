@@ -16,8 +16,6 @@ Most helpers are documented on the topic pages that use them; this page indexes 
 | [`useInsertHtml`](#useinserthtml)                                        | Queue React nodes into the SSR response stream           |
 | [`getCspNonce`](#getcspnonce)                                            | Request a CSP nonce for inline / injected scripts        |
 
-`getCspNonce` is also available from the main `sku` entry for backwards compatibility.
-
 ## `useInsertHtml`
 
 Returns `(callback: () => ReactNode) => void`.

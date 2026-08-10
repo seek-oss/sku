@@ -399,6 +399,10 @@ Sku does **not** ship localisation rule tables or hard-code path-prefix schemes.
 **Export:** optional named `mapRoutePath` on `routesEntry` (same module as `routes`).
 Omitted ⇒ identity mapping (`[path]` for path-bearing routes, `['']` for index routes).
 
+Sku calls it sync at init on the authored tree after `sites` filtering.
+It applies to path-bearing and index routes only, not pathless layouts.
+It runs once per source node.
+
 **Signature:**
 
 ```ts
@@ -409,57 +413,25 @@ mapRoutePath(args: {
 }): string[];
 ```
 
-| Arg              | Meaning                                                                                               |
-| ---------------- | ----------------------------------------------------------------------------------------------------- |
-| `path`           | This route’s own authored `path`, or `''` when the route is `index: true`                             |
-| `site`           | Resolved site name for the tree being built                                                           |
-| `parentSegments` | Path segments from **path-bearing ancestors only** (pathless layouts omitted), **not including self** |
+- `path` — this route’s own authored `path`, or `''` when the route is `index: true`.
+- `site` — resolved site name for the tree being built.
+- `parentSegments` — authored path segments from path-bearing ancestors on the source tree, excluding self.
 
 **Return:** always `string[]`.
 Each entry describes one clone of this route node.
 Children are cloned under each result with relative segments unchanged.
-An empty array omits this route node for that site (and that clone branch).
+An empty array omits this route node for that site.
 
-For a **path-bearing** source route, each returned string is the clone’s `path`.
+For a path-bearing source route, each returned string is the clone’s `path`.
 
-For an **`index: true`** source route:
+For an `index: true` source route, `''` keeps `index: true` (unprefixed home).
+A non-empty string becomes that `path` without `index` (prefixed home).
+Prefer the hook over hand-authored home duplicates beside `{ index: true }`.
 
-- `''` ⇒ clone keeps `index: true` (no `path`) — the unprefixed home.
-- A non-empty string (for example `'fr'`) ⇒ clone is `{ path: thatString, … }` with `index` removed — a prefixed home.
-- Do not author separate `{ path: 'fr', … }` home duplicates beside `{ index: true }` when the hook can emit them.
-
-**When sku calls it:**
-
-- For routes with a string `path`.
-- For `index: true` routes (with `path: ''`).
-- Not for pathless layout routes (no `path`, not index).
-- After `sites` membership filtering for the current site.
-- At init during per-site tree build (sync, pure — no `req`).
-- Only on the **source** (pre-mapping) tree.
-- Sku MUST NOT call `mapRoutePath` again on clones produced by a prior mapping.
-
-**`parentSegments` construction:**
-
-- Walk the **source** (pre-mapping) tree.
-- Append an ancestor’s authored `path` when that ancestor is path-bearing.
-- Skip pathless ancestors (they add no URL segment).
-- Index ancestors do not contribute a segment.
-- Do **not** push expanded/prefixed paths into `parentSegments`.
-- Root-list routes and children of only pathless ancestors see `parentSegments: []`.
-
-Typical app policy: if `parentSegments.length > 0`, return `[path]` (leave nested segments alone).
-Expand only localisation-root segments (`parentSegments.length === 0`), including expanding a nested branch root so children stay relative (`account` → `th/account` yields `/th/account/settings`).
-Index homes use `path === ''` (for example return `['', 'fr']` for `/` and `/fr`).
-Catch-alls and other special segments (for example `path: '*'`) stay app policy — sku does not special-case them.
-
-**Cloning / modulepreload:**
-
-- Shallow-clone each matching route for each returned entry.
-- Preserve `lazy`, existing `handle` (including build-injected `moduleId`), and children structure.
-- Do not re-wrap `lazy`.
-- Runtime clones run after the routes module transform, so copied `handle.moduleId` keeps Document modulepreload working.
-- Docs MUST show `mapRoutePath` (or inline `lazy` / explicit `handle.moduleId` per hand-written duplicate).
-- Docs MUST NOT teach a shared `const pageLazy = () => import(…)` reused across hand-duplicated route objects.
+Typical app policy expands only localisation-root segments (`parentSegments.length === 0`).
+Nested segments return `[path]` so children stay relative under each expanded parent (`account` → `th/account` yields `/th/account/settings`).
+Index homes use `path === ''` (for example `['', 'fr']` for `/` and `/fr`).
+Catch-alls and other special segments stay app policy.
 
 **Validation (init, fail closed):**
 

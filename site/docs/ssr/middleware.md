@@ -36,11 +36,29 @@ export default server;
 ```
 
 Use this for production request handlers and for attaching values on `req` that [entry getters](./entries.md) (or server `getRouterContext`) will read.
-For typing those fields, see [Typing middleware-attached fields](./entries.md#typing-middleware-attached-fields-on-req).
 
 Do not put raw Express `req` into React Router context — project values via dual-entry [`getRouterContext`](./data-loading.md#router-context).
 
 SSR runs **Express 4**. Type middleware against Express 4 (`SkuMiddleware` / `@types/express` major 4).
+
+## Typing middleware-attached fields on `req`
+
+Fields you append in middleware (`req.user`, `req.log`, …) are not on Express’s stock `Request` type.
+Augment Express the same way sku does for `getCspNonce`.
+
+Install `@types/express-serve-static-core` as a direct dependency, then:
+
+```ts
+// e.g. src/types/express.d.ts (ensure included by tsconfig)
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: { id: string };
+    log?: { info: (msg: string) => void };
+  }
+}
+```
+
+That augmentation is shared by `middleware`, the getters, and server `getRouterContext`.
 
 ## Dev-only mocks (`devServerMiddleware`)
 

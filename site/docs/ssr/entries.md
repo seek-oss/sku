@@ -2,14 +2,13 @@
 
 SSR apps have three entry modules:
 
-| Entry  | Default path     | Role                                     |
-| ------ | ---------------- | ---------------------------------------- |
-| Server | `src/server.tsx` | Per-request server setup                 |
-| Client | `src/client.tsx` | Hydrate-time setup                       |
-| Routes | `src/routes.tsx` | Route tree — see [Routing](./routing.md) |
+| Entry                   | Default path     | Role                                     |
+| ----------------------- | ---------------- | ---------------------------------------- |
+| [Server](#server-entry) | `src/server.tsx` | Server setup (onListen, middleware)      |
+| [Client](#client-entry) | `src/client.tsx` | Hydrate-time setup                       |
+| [Routes](#routes-entry) | `src/routes.tsx` | Route tree — see [Routing](./routing.md) |
 
-Server and client each **`export default`** an object from `defineServerEntry` / `defineClientEntry` (`sku/ssr`).
-Prefer `defineClientEntry<typeof server>()({ … })` so client callbacks get typed `Site` / `ClientContext` from the server entry — see [Providers](./providers.md#entry-helpers-and-typing).
+Server and client each **`export default`** an object from `defineServerEntry` / `defineClientEntry`.
 
 ## Server entry
 
@@ -17,7 +16,7 @@ Start from the template shape — middleware only is enough for many apps:
 
 ```tsx
 // src/server.tsx
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
   middleware: [
@@ -143,7 +142,7 @@ Raw `req` is `undefined` on client navigations.
 ```tsx
 // src/server.tsx
 import { RouterContextProvider } from 'react-router';
-import { defineServerEntry } from 'sku/ssr';
+import { defineServerEntry } from 'sku/runtime';
 
 import { userIdContext } from './userIdContext';
 
@@ -183,7 +182,7 @@ export default server;
 
 ```tsx
 // src/client.tsx
-import { defineClientEntry } from 'sku/ssr';
+import { defineClientEntry } from 'sku/runtime';
 
 import type server from './server';
 
@@ -238,7 +237,7 @@ getRouterContext?: (args: {
 ```tsx
 // src/client.tsx
 import { RouterContextProvider } from 'react-router';
-import { defineClientEntry } from 'sku/ssr';
+import { defineClientEntry } from 'sku/runtime';
 
 import type server from './server';
 import { userIdContext } from './userIdContext';
@@ -264,41 +263,4 @@ export const routes: SkuSsrRouteObject[];
 
 `SkuSsrRouteObject` is a React Router `RouteObject` plus optional `sites` for multi-site membership.
 
-## `sku/ssr` helpers
-
-The `sku/ssr` subpath is browser-safe (so webpack / static apps never pull the optional `react-router` peer from the main `sku` entry).
-
-- [`defineServerEntry` / `defineClientEntry`](./providers.md#entry-helpers-and-typing) — entry typing helpers
-- [`createSkuSsrContexts`](./providers.md#typed-hooks) — typed `useSite` / `useClientContext` / `useReactContext`
-- [`usePreloadRoute`](./routing.md#intent-preloading-with-usepreloadroute) — warm lazy route chunks on intent
-- [`useInsertHtml`](#useinserthtml) — queue React nodes into the SSR response stream
-- `getCspNonce` — also available from the main `sku` entry
-
-### `useInsertHtml`
-
-Returns `(callback: () => ReactNode) => void`.
-During document SSR, sku writes queued nodes into the response stream (first batch before `</head>`, then before later React chunks).
-In the browser it is a silent no-op.
-
-Use it for streaming data transports such as Apollo’s `buildManualDataTransport` — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
-
-Injected script bodies must carry the [CSP nonce](./csp.md).
-
-## Typing middleware-attached fields on `req`
-
-Fields you append in middleware (`req.user`, `req.log`, …) are not on Express’s stock `Request` type.
-Augment Express the same way sku does for `getCspNonce`.
-
-Install `@types/express-serve-static-core` as a direct dependency, then:
-
-```ts
-// e.g. src/types/express.d.ts (ensure included by tsconfig)
-declare module 'express-serve-static-core' {
-  interface Request {
-    user?: { id: string };
-    log?: { info: (msg: string) => void };
-  }
-}
-```
-
-That augmentation is shared by `middleware`, the getters, and server `getRouterContext`.
+See [Runtime API](./runtime-api.md) for `sku/runtime` helpers.

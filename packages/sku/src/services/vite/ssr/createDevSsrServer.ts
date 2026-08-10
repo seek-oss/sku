@@ -35,36 +35,33 @@ export const createDevSsrServer = async ({
   const serverApp = express();
 
   if (skuContext.expressTrustProxy) {
-    // Hop count 1 (not boolean true) — safer single-hop Melways/proxy case.
+    // Hop count 1 (not boolean true) — safer single-hop proxy case.
     serverApp.set('trust proxy', 1);
   }
 
-  // Shared getAppHosts (`hosts` ∪ `sites[].host`) — same as static Vite / webpack.
   const httpServer = await createServer({
     requestListener: serverApp,
     httpsDevServer: skuContext.httpsDevServer,
     hosts: getAppHosts(skuContext),
   });
+
   const vite = await createViteServer({
     ...createConfig(skuContext, environment),
     appType: 'custom',
     server: {
       middlewareMode: true,
-      // Keep HMR on the same listener (HTTP or HTTPS) sku owns.
       hmr: { server: httpServer },
     },
   });
+
   const serverModule = (await vite.ssrLoadModule(serverEntry)) as {
     middleware?: SkuMiddleware;
     onListen?: SkuOnListen;
     render: RenderFunction;
   };
 
-  // Mount order: request-context → optional config `devServerMiddleware` →
-  // server-entry `middleware` → Vite → HTML render. Dev mocks stay outside the
-  // production server graph (loaded only here, never from the SSR entry).
-  // Start does not mount express.static under publicPath (Vite owns assets).
   serverApp.use(createSsrRequestContextMiddleware());
+
   if (skuContext.paths.devServerMiddleware) {
     log(
       'Using dev server middleware at %s',
@@ -78,9 +75,11 @@ export const createDevSsrServer = async ({
       log('Dev server middleware loaded');
     }
   }
+
   mountConsumerMiddleware(serverModule.middleware, (middleware) =>
     serverApp.use(middleware),
   );
+
   serverApp.use(vite.middlewares);
 
   const assets: RenderAssets = {

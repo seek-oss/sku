@@ -12,9 +12,6 @@ This path uses **Managed Data Mode**.
 sku owns the HTTP server, HTML document, streaming, hydration, and CSP headers.
 It wires [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing and data.
 You own pages, data, and providers.
-**SSR** here means the render strategy (`buildType: 'ssr'`).
-
-Use `sku start` / `sku build` to develop and build.
 
 :::danger Experimental — not for production
 Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
@@ -45,12 +42,11 @@ Interactive create also offers **SSR** as a choice alongside **Static**.
 
 After scaffolding you get three app entries:
 
-- `src/server.tsx` — per-request server setup (middleware, optional getters)
+- `src/server.tsx` — server setup (middleware, optional getters)
 - `src/client.tsx` — hydrate-time setup
 - `src/routes.tsx` — your React Router route tree
 
-The template also sets up a pathless root layout (for providers like Braid), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md) from `sku/runtime`.
-Compose path / `lazy` in `routes.tsx`; export named `Component` from each page module.
+The template also sets up a root layout (for providers like Braid), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md) from `sku/runtime`.
 
 ## Configuration
 
@@ -67,10 +63,18 @@ export default {
 } satisfies SkuConfig;
 ```
 
-SSR requires a relative `publicPath` (for example `/`).
-The config [`public`](../configuration.md#public) assets folder, [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig), and [`vitePlugins`](../configuration.md#viteplugins) are not supported — import assets from modules, and raise exceptional Vite needs via [support](../support.md).
-
 See [Configuration](../configuration.md) for all options.
+
+### Not Supported / Not Planned
+
+Because sku owns more of the server and build in Managed Data Mode SSR, these options are not supported and are not planned:
+
+- Absolute `publicPath` (for example `https://seekcdn.com/*`).
+- [`public`](../configuration.md#public) assets folder
+- [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig)
+- [`vitePlugins`](../configuration.md#viteplugins)
+
+For exceptional requirements raise a query via [support](../support.md).
 
 ## Next steps
 

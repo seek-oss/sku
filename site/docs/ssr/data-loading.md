@@ -120,7 +120,7 @@ export async function loader() {
 
 ## Apollo streaming hydration
 
-When a client cache must survive the stream (Apollo Client), pair render-time queries with a streaming data transport over [`useInsertHtml`](./entries.md#useinserthtml) from `sku/runtime`.
+When a client cache must survive the stream (Apollo Client), pair render-time queries with a streaming data transport over [`useInsertHtml`](./runtime-api.md#useinserthtml) from `sku/runtime`.
 sku owns the injection seam; your app owns the client and transport — sku ships no Apollo dependency.
 
 ```tsx

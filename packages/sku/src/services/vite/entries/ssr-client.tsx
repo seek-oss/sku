@@ -61,7 +61,6 @@ const hydrate = async () => {
 
   const reactContext = getReactContext?.({ site, clientContext });
 
-  // publicPath is the static asset prefix only — never React Router basename.
   const lazyMatches = matchRoutes(siteRoutes, window.location)?.filter(
     ({ route }) => route.lazy,
   );
@@ -77,8 +76,6 @@ const hydrate = async () => {
   );
 
   const router = createBrowserRouter(siteRoutes, {
-    // RR native getContext is zero-arg; wrap sku getRouterContext to inject
-    // hydrate sibling values.
     ...(getRouterContext
       ? {
           getContext: () =>
@@ -87,8 +84,6 @@ const hydrate = async () => {
       : {}),
     ...(instrumentations === undefined ? {} : { instrumentations }),
   });
-
-  const routerElement = <RouterProvider router={router} />;
 
   hydrateRoot(
     document,
@@ -105,7 +100,7 @@ const hydrate = async () => {
         clientContext={clientContext}
         reactContext={reactContext}
       >
-        {routerElement}
+        <RouterProvider router={router} />
       </SkuProvider>
     </Document>,
   );

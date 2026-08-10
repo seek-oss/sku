@@ -21,6 +21,6 @@ Request a nonce only when you need it for inline scripts or third-party tags:
 
 At most one nonce is minted per HTML response.
 
-Streaming data transports that inject `<script>` tags via [`useInsertHtml`](./entries.md#useinserthtml) (for example Apollo) must put that nonce on the injected scripts — their bodies are not known when headers are derived from the shell.
+Streaming data transports that inject `<script>` tags via [`useInsertHtml`](./runtime-api.md#useinserthtml) (for example Apollo) must put that nonce on the injected scripts — their bodies are not known when headers are derived from the shell.
 
 See [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).

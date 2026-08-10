@@ -60,17 +60,19 @@ export default defineConfig({
           collapsed: true,
           items: [
             { text: 'Getting started', link: '/ssr/' },
-            { text: 'Request entries', link: '/ssr/entries' },
+            { text: 'App entries', link: '/ssr/entries' },
             { text: 'Routing', link: '/ssr/routing' },
             { text: 'Providers', link: '/ssr/providers' },
+            { text: 'Runtime API', link: '/ssr/runtime-api' },
             { text: 'Data loading', link: '/ssr/data-loading' },
+
             {
               text: 'Multi-language / Localisation',
               link: '/ssr/multi-language',
             },
             { text: 'Error pages', link: '/ssr/error-pages' },
             { text: 'Middleware', link: '/ssr/middleware' },
-            { text: 'Logging', link: '/ssr/logging' },
+            { text: 'Logging / Observability', link: '/ssr/logging' },
             { text: 'Content Security Policy', link: '/ssr/csp' },
             {
               text: 'Deploy to production',

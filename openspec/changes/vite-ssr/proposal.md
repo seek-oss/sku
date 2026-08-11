@@ -49,7 +49,6 @@ Details: `design.md` Decision 12a.
 - It exports named `routes` with optional `sites`.
 - Optional `mapRoutePath` maps one logical path to per-site concrete paths during tree pre-build.
 - Sku pre-builds per-site trees.
-- During pre-build, sku defaults React Router path matching to case-sensitive when a route omits `caseSensitive`.
 - Apps opt out per route with `caseSensitive: false`.
 - Apps resolve the site via `getSite` when multi-site.
 - Config `routes` (static prerender paths) stays separate.

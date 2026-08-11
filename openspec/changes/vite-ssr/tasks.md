@@ -146,6 +146,38 @@ It is not a history of intermediate APIs.
 - [x] 17.2 Unit tests: omitted → `true` and `/About` does not match `about`; explicit `false` preserved; clones from `mapRoutePath` get the fill.
 - [x] 17.3 Docs (routing): state the case-sensitive default and per-route `caseSensitive: false` escape hatch. No config kill-switch. No wrong-case redirect behaviour from sku.
 
+## 14. Inline lazy route authoring (docs / template / fixtures)
+
+- [ ] 14.1 Rewrite SSR routing docs in place: inline `lazy` in `routesEntry`; page modules own `loader` / `action` / `Component`; do not recommend per-page `route.ts` stubs.
+- [ ] 14.2 Align create template `ssr` to inline `lazy` (remove per-page `route.ts`; page modules under `src/pages/`).
+- [ ] 14.3 Align SSR fixtures to prefer inline `lazy` everywhere practical; update create snapshots / generate tests.
+- [ ] 14.4 Sweep product / Migrating / multi-language examples for leftover stub-folder happy-path wording; describe end state only.
+
+## 15. React Router `instrumentations` pass-through
+
+- [ ] 15.1 Types: optional `instrumentations` on `SkuServerEntry` / `ServerEntryBody` as `Pick<ServerInstrumentation, 'route'>[]`, and on `SkuClientEntry` / `ClientEntryBody` as `ClientInstrumentation[]`.
+- [ ] 15.2 Wire server entry `instrumentations` into `buildSiteStaticHandlers` → each `createStaticHandler(routes, { instrumentations })` at module init.
+- [ ] 15.3 Wire client entry `instrumentations` into `createBrowserRouter(…, { instrumentations })`.
+- [ ] 15.4 Unit tests: omit path unchanged; provided arrays forwarded; server handlers still built once at init.
+- [ ] 15.5 Docs: brief entries coverage + server route-only vs client router+route note + link to React Router instrumentation guide. No dedicated Logging page.
+
+## 16. Optional `mapRoutePath`
+
+- [ ] 16.1 Types: optional `mapRoutePath` on `routesEntry` with `{ path, site, parentSegments }` → `string[]`. Export a public type for the hook args/result.
+- [ ] 16.2 Pre-build: after `sites` filter, call `mapRoutePath` for string-`path` routes and for `index: true` (`path: ''`). Clone per returned entry. Preserve `lazy` / `handle`. Build `parentSegments` from source path-bearing ancestors. Empty array omits. Identity when omitted (`[path]` / `['']`). Never re-map clones.
+- [ ] 16.3 Init hard-errors for non-function export and non-`string[]` returns. Unit tests for identity, duplicate paths, nested `parentSegments`, empty omit, invalid return, and `moduleId` preservation on clones.
+- [ ] 16.4 Fixture + browser coverage for `/about` and a prefixed sibling path (and sites-scoped behaviour when practical).
+- [ ] 16.5 Review existing multi-language SSR fixtures (for example `translations`) and improve them with `mapRoutePath` where route paths are duplicated by language/prefix.
+- [ ] 16.6 Docs: multi-language / routing teach `mapRoutePath`. Remove shared `pageLazy` examples. Call out preload-safe cloning. Migrating mentions the hook.
+- [ ] 16.7 Index homes: call `mapRoutePath` for `index: true` with `path: ''`. Map `''` → keep index, non-empty → `path` clone without `index`. Identity `['']` when omitted. Unit/fixture/docs coverage for `/` + prefixed home. Do not re-map clones.
+- [ ] 16.8 Rename `expandRoutePath` / `ExpandRoutePath` → `mapRoutePath` / `MapRoutePath` in specs, docs, fixtures, and implementation.
+
+## 17. Case-sensitive path matching by default
+
+- [ ] 17.1 During `buildRoutesForSite` / `buildSiteRouteTrees` pre-build, set `caseSensitive: true` when a route leaves it undefined. Preserve explicit `true` / `false`. Apply to `mapRoutePath` clones. Keep call order: sites → `mapRoutePath` → caseSensitive fill → strip `sites`.
+- [ ] 17.2 Unit tests: omitted → `true` and `/About` does not match `about`; explicit `false` preserved; clones from `mapRoutePath` get the fill.
+- [ ] 17.3 Docs (routing): state the case-sensitive default and per-route `caseSensitive: false` escape hatch. No config kill-switch. No wrong-case redirect behaviour from sku.
+
 ## Deferred
 
 See design Non-Goals and Resolved / deferred for the full list.

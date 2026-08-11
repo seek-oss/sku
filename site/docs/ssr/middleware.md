@@ -7,9 +7,9 @@ In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
 SSR has three places to run middleware — pick the one that matches the job:
 
-1. **Server-entry `middleware`** — production and start; request context before HTML render
-2. **Config `devServerMiddleware`** — `sku start` only; local mocks and proxies
-3. **React Router route middleware** — isomorphic behaviour on matched routes (see [React Router route middleware](#react-router-route-middleware))
+1. **[Server `middleware`](#server-entry-middleware)** — production and start; request context before HTML render
+2. **[Config `devServerMiddleware`](#dev-only-mocks-devservermiddleware)** — `sku start` only; local mocks and proxies
+3. **[React Router middleware](#react-router-route-middleware)** — isomorphic behaviour on matched routes
 
 ## Server-entry middleware
 
@@ -40,8 +40,6 @@ Use this for production request handlers and for attaching values on `req` that 
 
 Do not put raw Express `req` into React Router context — project values via dual-entry [`getRouterContext`](./data-loading.md#router-context).
 
-SSR runs **Express 4**. Type middleware against Express 4 (`SkuMiddleware` / `@types/express` major 4).
-
 ## Typing middleware-attached fields on `req`
 
 Fields you append in middleware (`req.user`, `req.log`, …) are not on Express’s stock `Request` type.
@@ -66,8 +64,9 @@ That augmentation is shared by `middleware`, the getters, and server `getRouterC
 Use config [`devServerMiddleware`](../configuration.md#devservermiddleware) for local mocks and proxies that production never serves from the Node app (for example `/api` traffic a reverse proxy handles when deployed).
 sku mounts that file only in SSR `sku start`, never in the production server.
 
-```ts
-// sku.config.ts
+::: code-group
+
+```ts [sku.config.ts]
 import type { SkuConfig } from 'sku';
 
 export default {
@@ -77,14 +76,15 @@ export default {
 } satisfies SkuConfig;
 ```
 
-```js
-// dev-middleware.js
+```js [dev-middleware.js]
 export default (app) => {
   app.get('/mock-api', (_req, res) => {
     res.status(200).type('text/plain').send('ok');
   });
 };
 ```
+
+:::
 
 ## React Router route middleware
 
@@ -111,7 +111,7 @@ App routes outside that prefix still reach middleware and HTML as usual.
 4. Vite middlewares (HMR / assets)
 5. HTML render
 
-Dev mocks mount before production middleware so they can intercept traffic that would never reach the app in production.
+Dev-only mocks mount before production middleware so they can intercept traffic that would never reach the app in production.
 `sku start` does not mount `express.static` under `publicPath` — Vite serves the module graph from `/`.
 Put anything that must ship in production on the server-entry export; keep stubs and local-only routes in `devServerMiddleware`.
 

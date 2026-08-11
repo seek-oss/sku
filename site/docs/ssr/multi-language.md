@@ -11,7 +11,7 @@ When [`languages`](../configuration.md#languages) is configured, SSR can preload
 
 ## Preload the language chunk
 
-Export [`getLanguage`](./entries.md#getlanguage) from the server entry so it returns a name from config [`languages`](../configuration.md#languages) (or `en-PSEUDO`):
+Implement a [`getLanguage`](./entries.md#getlanguage) method in your server entry so it returns a name from config [`languages`](../configuration.md#languages) (or `en-PSEUDO`):
 
 ```tsx
 // src/server.tsx
@@ -64,11 +64,11 @@ React Router matches one path per route object, so you need a separate route for
 
 Prefer listing supported prefixes over a dynamic `:lang` segment — a param would also match unsupported prefixes.
 
-You can duplicate route objects by hand, or use `mapRoutePath` below.
+You can create each route object by hand, or use [`mapRoutePath`](#maproutepath) to automatically expand them.
 
 ### mapRoutePath
 
-Export optional `mapRoutePath` from [`routesEntry`](../configuration.md#routesentry). sku clones the route for each returned path:
+`mapRoutePath` is an optional export from [`routesEntry`](../configuration.md#routesentry) that expands one logical route into several concrete paths. Use it when the same page should match more than one path:
 
 ```tsx
 // src/routes.tsx
@@ -93,7 +93,7 @@ export const routes: SkuRouteObject[] = [
 
 `mapRoutePath` is not a substitute for [`getLanguage`](./entries.md#getlanguage) — that still selects the Vocab chunk on the Document.
 
-Hand-duplicating is fine for more control. Do not share one `const pageLazy = () => import(…)` across copies — that breaks automatic `modulepreload`. Prefer `mapRoutePath`, or give each duplicate its own inline `lazy`.
+Hand-duplicating is fine for more control. However, be careful not to share one `const pageLazy = () => import(…)` across copies — that breaks automatic `modulepreload`.
 
 For nested routes, index homes, and per-site mapping, see [Routing → Multiple paths with mapRoutePath](./routing.md#multiple-paths-with-maproutepath).
 

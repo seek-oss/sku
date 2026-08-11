@@ -93,8 +93,8 @@ When sibling `client/` is present, production mounts Node static under [`publicP
 Productionised deploys host those assets outside Node instead.
 
 :::danger Never put Express `req` in `RouterContextProvider`
-Project values both sides can supply.
-Raw `req` is missing on client navigations — see [Data loading → Router context](./data-loading.md#router-context).
+Prefer values both sides can supply.
+Raw `req` is bot available on client navigations — see [Data loading → Router context](./data-loading.md#router-context).
 :::
 
 ## CSP and hydration

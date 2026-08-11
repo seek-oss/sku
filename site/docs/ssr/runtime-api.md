@@ -6,7 +6,7 @@ In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
 Import browser-safe Managed Data Mode helpers from `sku/runtime`.
-Most helpers are documented on the topic pages that use them; this page indexes those exports and documents `useInsertHtml` and `getCspNonce`.
+Most helpers are documented on the topic pages that use them.
 
 | Export                                                                   | Use for                                                  |
 | ------------------------------------------------------------------------ | -------------------------------------------------------- |

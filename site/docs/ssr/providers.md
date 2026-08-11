@@ -61,7 +61,6 @@ export default server;
 ::: code-group
 
 ```tsx [server.tsx]
-// src/server.tsx
 import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
@@ -77,7 +76,6 @@ export default server;
 ```
 
 ```tsx [client.tsx]
-// src/client.tsx
 import { defineClientEntry } from 'sku/runtime';
 
 import type server from './server';
@@ -165,7 +163,6 @@ Consume from a small `useEffect` wrapper via `useReactContext()`:
 ::: code-group
 
 ```tsx [client.tsx]
-// src/client.tsx
 import { defineClientEntry } from 'sku/runtime';
 
 import { createAnalytics } from './analytics';
@@ -212,15 +209,11 @@ export const Analytics = () => {
 
 Mount `<Analytics />` in the root layout.
 
-## Errors above the router
-
-A root route `ErrorBoundary` does not catch errors thrown above the router (including `SkuProvider`).
-See [Error pages](./error-pages.md).
-
 ## See also
 
 - [Request entries](./entries.md) — getters and entry shapes
 - [Routing](./routing.md) — pathless root layout and pages
 - [Data loading](./data-loading.md) — render-time fetch and router context
 - [Multi-language](./multi-language.md) — Vocab in the root layout
+- [Error pages → Errors above the router](./error-pages.md#errors-above-the-router) — route boundaries do not cover `SkuProvider`
 - [Runtime API](./runtime-api.md) — `createSkuContexts` and related helpers

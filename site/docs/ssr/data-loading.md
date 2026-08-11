@@ -5,6 +5,13 @@ Managed Data Mode SSR is available for evaluation and testing. Do not use it in 
 In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 :::
 
+sku supports two data-loading paths for Managed Data Mode SSR:
+
+- **Render-time** fetching in the React tree (Suspense, client libraries such as Apollo) during document SSR and after hydration
+- React Router **loaders** and **actions** on page modules, including document `redirect()`, response headers, and optional dual-entry [`getRouterContext`](#router-context)
+
+## Prefer render-time for page content
+
 Prefer **render-time** data loading in React for page content.
 That keeps shared UI portable without per-app loader wiring.
 
@@ -57,7 +64,6 @@ export const userIdContext = createContext<string | null>(null);
 ::: code-group
 
 ```tsx [server.tsx]
-// src/server.tsx
 import { RouterContextProvider } from 'react-router';
 import { defineServerEntry } from 'sku/runtime';
 
@@ -78,7 +84,6 @@ export default server;
 ```
 
 ```tsx [client.tsx]
-// src/client.tsx
 import { RouterContextProvider } from 'react-router';
 import { defineClientEntry } from 'sku/runtime';
 
@@ -110,8 +115,8 @@ export async function loader({ context }: LoaderFunctionArgs) {
 ```
 
 :::warning Never put Express `req` in `RouterContextProvider`
-Project values both sides can supply.
-Raw `req` is missing on client navigations.
+Prefer values both sides can supply.
+Raw `req` is not available on client navigations.
 :::
 
 Export shapes: [Request entries](./entries.md#getroutercontext).
@@ -162,7 +167,6 @@ Mount the isomorphic Apollo provider in the root layout via `useReactContext()`:
 ::: code-group
 
 ```tsx [server.tsx]
-// src/server.tsx
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { defineServerEntry, getCspNonce } from 'sku/runtime';
 
@@ -183,7 +187,6 @@ export default server;
 ```
 
 ```tsx [client.tsx]
-// src/client.tsx
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { defineClientEntry } from 'sku/runtime';
 

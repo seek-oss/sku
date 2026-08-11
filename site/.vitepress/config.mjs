@@ -63,7 +63,6 @@ export default defineConfig({
             { text: 'App entries', link: '/ssr/entries' },
             { text: 'Routing', link: '/ssr/routing' },
             { text: 'Providers', link: '/ssr/providers' },
-            { text: 'Runtime API', link: '/ssr/runtime-api' },
             { text: 'Data loading', link: '/ssr/data-loading' },
 
             {
@@ -78,6 +77,7 @@ export default defineConfig({
               text: 'Deploy to production',
               link: '/ssr/deploy-to-production',
             },
+            { text: 'Runtime API', link: '/ssr/runtime-api' },
             { text: 'Webpack SSR', link: '/ssr/webpack-ssr' },
             { text: 'Troubleshooting', link: '/ssr/troubleshooting' },
             {

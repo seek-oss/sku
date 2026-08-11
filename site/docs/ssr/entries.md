@@ -261,7 +261,7 @@ getRouterContext?: (args: {
 ```
 
 :::warning Never put Express `req` in `RouterContextProvider`
-Project values both sides can supply.
+Prefer values both sides can supply.
 Raw `req` is `undefined` on client navigations.
 :::
 
@@ -277,7 +277,6 @@ export const userIdContext = createContext<string | null>(null);
 ::: code-group
 
 ```tsx [server.tsx]
-// src/server.tsx
 import { RouterContextProvider } from 'react-router';
 import { defineServerEntry } from 'sku/runtime';
 
@@ -298,7 +297,6 @@ export default server;
 ```
 
 ```tsx [client.tsx]
-// src/client.tsx
 import { RouterContextProvider } from 'react-router';
 import { defineClientEntry } from 'sku/runtime';
 

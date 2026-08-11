@@ -581,7 +581,7 @@ export interface ViteSkuConfig {
    * **SSR only** (`buildType: 'ssr'`)
    *
    * When `true`, sku sets Express `app.set('trust proxy', 1)` (hop count `1`)
-   * before listen — the common Melways / single reverse-proxy case.
+   * before listen — the common single reverse-proxy case.
    * Omit or `false` leaves Express’s default (`false`).
    * Other trust-proxy values (`false`, `2`, IP lists, …) override in server-entry
    * [`onListen`](https://seek-oss.github.io/sku/ssr/entries#onlisten).

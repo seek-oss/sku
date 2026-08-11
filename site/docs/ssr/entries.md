@@ -134,7 +134,7 @@ Use it for keep-alive timeouts, readiness logging with the bound port, or rare E
 It is not re-fired on server-entry HMR.
 Omit if you do not need a post-listen hook.
 
-For Melways-shaped `trust proxy`, prefer config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (hop count `1`).
+For a single reverse-proxy hop, prefer config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (hop count `1`).
 Override other trust-proxy values here via `app.set('trust proxy', …)`.
 
 ```ts

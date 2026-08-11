@@ -89,7 +89,7 @@ Use loaders for redirects, headers, or waterfalls.
 
 Keep production handlers on server-entry `middleware`; keep local mocks in `devServerMiddleware` — see [Middleware](./middleware.md).
 
-When sibling `client/` is present, production mounts Node static under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware so catch-all / Melways-style middleware cannot eat hashed assets.
+When sibling `client/` is present, production mounts Node static under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware so catch-all URL-pattern middleware cannot eat hashed assets.
 Productionised deploys host those assets outside Node instead.
 
 :::danger Never put Express `req` in `RouterContextProvider`

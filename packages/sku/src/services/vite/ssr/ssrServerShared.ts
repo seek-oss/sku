@@ -305,7 +305,7 @@ export const listen = async (
   const httpServer = createHttpServer(serverApp);
 
   if (options.expressTrustProxy) {
-    // Hop count 1 (not boolean true) — safer single-hop Melways/proxy case.
+    // Hop count 1 (not boolean true) — safer single-hop reverse-proxy case.
     serverApp.set('trust proxy', 1);
   }
 

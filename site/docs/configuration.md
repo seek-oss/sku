@@ -364,7 +364,7 @@ Default: `false`
 
 Bundler: `vite` · `buildType: 'ssr'`
 
-When `true`, sku sets Express `app.set('trust proxy', 1)` (hop count **`1`**, not Express boolean `true`) before listen — the common Melways / single reverse-proxy case.
+When `true`, sku sets Express `app.set('trust proxy', 1)` (hop count **`1`**, not Express boolean `true`) before listen — the common single reverse-proxy case.
 
 Omit or `false` leaves Express’s default (`false`). This is opt-in via config (not a silent sku default). The create `ssr` template sets `expressTrustProxy: true`.
 

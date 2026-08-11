@@ -100,7 +100,7 @@ See [Routing → React Router route middleware](./routing.md#react-router-route-
 3. Server-entry `middleware` (optional)
 4. HTML render
 
-Static mounts **before** server-entry middleware so catch-all or Melways-style handlers cannot eat hashed client assets under `publicPath`.
+Static mounts **before** server-entry middleware so catch-all URL-pattern handlers cannot eat hashed client assets under `publicPath`.
 App routes outside that prefix still reach middleware and HTML as usual.
 
 ## Mount order in `sku start`

@@ -1050,7 +1050,7 @@ Production route errors omit `Error.stack`.
 
 ### 20. Create template + Migrating docs
 
-Template `ssr` MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config` (visible Melways/SEEK-shaped trust proxy — see Decision 25), a `routesEntry` + `routes` scaffold (optional route-level `sites` only when membership differs), and `defineServerEntry` / `defineClientEntry` + `createSkuContexts<typeof …>` + optional `getClientContext` / `getReactContext` / `onHydrate` properties.
+Template `ssr` MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config` (visible single reverse-proxy trust proxy — see Decision 25), a `routesEntry` + `routes` scaffold (optional route-level `sites` only when membership differs), and `defineServerEntry` / `defineClientEntry` + `createSkuContexts<typeof …>` + optional `getClientContext` / `getReactContext` / `onHydrate` properties.
 The template omits `getSite` (sku uses the sole resolved site name).
 Multi-site examples declare ≥2 config sites and include `getSite` on the server entry object.
 Request entries do not re-export `routes`.
@@ -1327,7 +1327,7 @@ Jest support for React Router 8 (if ever needed for webpack) is a separate conce
 Webpack SSR’s `onStart({ app })` was the post-listen hook for server setup (logging, timeouts, Express knobs).
 Migration spikes (CBS was the only app still on webpack `onStart`) showed the real gaps were:
 
-1. Express `trust proxy` behind Melways / reverse proxies.
+1. Express `trust proxy` behind reverse proxies.
 2. `httpServer.keepAliveTimeout` (webpack only passed `app`, so timeouts never applied).
 3. Readiness logging with the **bound** port.
 
@@ -1356,18 +1356,18 @@ Wire the call from shared production `listen` and `createDevSsrServer` (start).
 - When `true`, sku sets `app.set('trust proxy', 1)` (hop count **`1`**, despite the boolean name — safer single-hop than Express boolean `true`).
 - When omitted / `false`: leave Express default (`false`). Not magically on.
 - Not a silent sku default — opt-in via config.
-- Create template MUST set `expressTrustProxy: true` so new apps get SEEK/Melways-shaped behaviour visibly in config.
+- Create template MUST set `expressTrustProxy: true` so new apps get single reverse-proxy behaviour visibly in config.
 - Any other trust-proxy value (`false`, `2`, IP list, …) → override in `onListen` via `app.set('trust proxy', …)`.
 
 Rejected alternatives:
 
-| Approach                                  | Why not                                                                                  |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Invisible sku default for `trust proxy`   | Hides Melways behaviour; hard to discover; rejected in favour of named config + template |
-| Express `app.set('trust proxy', true)`    | Boolean `true` trusts all hops; hop count `1` is the common SEEK case                    |
-| `onBeforeListen` hook                     | Module top-level already covers process-wide setup before bind                           |
-| Sku-owned listen logging                  | Apps own logging; `onListen` + bound `port` is enough                                    |
-| Pass only `app` (webpack `onStart` shape) | Blocks `httpServer.keepAliveTimeout`; migrants need the server handle                    |
+| Approach                                  | Why not                                                                                        |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Invisible sku default for `trust proxy`   | Hides reverse-proxy behaviour; hard to discover; rejected in favour of named config + template |
+| Express `app.set('trust proxy', true)`    | Boolean `true` trusts all hops; hop count `1` is the common SEEK case                          |
+| `onBeforeListen` hook                     | Module top-level already covers process-wide setup before bind                                 |
+| Sku-owned listen logging                  | Apps own logging; `onListen` + bound `port` is enough                                          |
+| Pass only `app` (webpack `onStart` shape) | Blocks `httpServer.keepAliveTimeout`; migrants need the server handle                          |
 
 Example:
 

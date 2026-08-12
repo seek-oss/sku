@@ -1,16 +1,6 @@
-import {
-  dirname,
-  extname,
-  resolve,
-  parse as pathParse,
-  relative,
-} from 'node:path';
-import { readdirSync } from 'node:fs';
 import * as t from '@babel/types';
 import type { NodePath } from '@babel/traverse';
-
-const getRelativePath = (filePath: string) =>
-  relative(process.cwd(), filePath).replace(/\\/g, '/');
+import { resolveManifestModuleId } from '../../../helpers/resolveManifestModuleId.js';
 
 export const injectModuleID = ({
   callPath,
@@ -29,19 +19,14 @@ export const injectModuleID = ({
           .find((arg) => arg.isStringLiteral());
         if (stringLiteralNodePath) {
           const importPath = stringLiteralNodePath.node.value;
+          const relativePath = resolveManifestModuleId({
+            importerId: id,
+            importPath,
+          });
 
-          const absolutePath = resolve(dirname(id), importPath);
-          const files = readdirSync(dirname(absolutePath));
-          const name = pathParse(absolutePath).base;
-
-          const found = files.find(
-            (x) =>
-              x.replace(extname(x), '') === name.replace(extname(name), ''),
-          );
-
-          const relativePath = getRelativePath(
-            `${dirname(absolutePath)}/${found}`,
-          );
+          if (!relativePath) {
+            return;
+          }
 
           // Inject the ssr key into the loadable function call options
           const ssrKeyObjectProperty = t.objectProperty(

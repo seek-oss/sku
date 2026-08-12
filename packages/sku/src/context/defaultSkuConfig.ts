@@ -6,10 +6,12 @@ const defaultDecorator = <T>(a: T) => a;
 
 export default {
   bundler: 'webpack',
+  buildType: undefined,
   testRunner: 'jest',
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   serverEntry: 'src/server.tsx',
+  routesEntry: 'src/routes.tsx',
   libraryEntry: undefined,
   routes: [],
   sites: [],
@@ -45,6 +47,7 @@ export default {
   cspReportOnlyEnabled: false,
   cspReportOnlyExtraScriptSrcHosts: undefined,
   cspReportOnlyReportTo: undefined,
+  expressTrustProxy: false,
   httpsDevServer: false,
   devServerMiddleware: undefined,
   languages: undefined,

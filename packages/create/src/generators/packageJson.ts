@@ -1,6 +1,6 @@
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { Template } from '../types/index.js';
+import { type Template, isViteBasedTemplate } from '../types/index.js';
 import type { SupportedPackageManager } from '@sku-private/utils';
 import { execAsync } from '../utils/execAsync.js';
 
@@ -14,7 +14,7 @@ export const generatePackageJson = async (
   targetPath: string,
   { projectName, template, packageManager }: PackageJsonOptions,
 ) => {
-  const isVite = template === 'vite';
+  const isVite = isViteBasedTemplate(template);
   const testFlag = isVite ? ' --run' : '';
   const resolvedPackageManager =
     await resolvePackageManagerField(packageManager);

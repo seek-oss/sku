@@ -20,6 +20,9 @@ export const vitestHandler = async ({
 
   const overrideableOptions: TestUserConfig = skuContext.vitestDecorator({
     css: true,
+    // Vitest intercepts console by default and can drop setupFiles logs (and other
+    // output not tied to a test). Keep raw console so setupTests and debugging work.
+    disableConsoleIntercept: true,
     environment: 'jsdom',
   });
   const nonOverrideableOptions: TestUserConfig = {

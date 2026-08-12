@@ -96,9 +96,20 @@ describe('template flag', () => {
       ),
     ).toBeInTheConsole();
   });
+
+  it('should create a ssr project', async () => {
+    const result = await create(projectName, ['--template', 'ssr'], {
+      spawnOpts: { env: createEnv },
+    });
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName} with ssr template`,
+      ),
+    ).toBeInTheConsole();
+  });
 });
 
-describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
+describe.each(['webpack', 'vite', 'ssr'])('sku-create %s', (template) => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
   });
@@ -122,6 +133,8 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
         ),
       ).toBeInTheConsole();
 
+      // Vite → SSR → Webpack
+      await result.userEvent.keyboard('[ArrowDown]');
       await result.userEvent.keyboard('[ArrowDown]');
       expect(await result.findByText('❯ Webpack')).toBeInTheConsole();
 
@@ -165,6 +178,34 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
     ).toBeInTheConsole();
   });
 
+  it.runIf(template === 'ssr')('should create a ssr project', async () => {
+    const result = await create(projectName, [], {
+      spawnOpts: { env: createEnv },
+    });
+    expect(
+      await result.findByText(
+        'Which template would you like to use?',
+        {},
+        { timeout },
+      ),
+    ).toBeInTheConsole();
+
+    await result.userEvent.keyboard('[ArrowDown]');
+    expect(await result.findByText('❯ SSR')).toBeInTheConsole();
+
+    await result.userEvent.keyboard('[Enter]');
+
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName} with ssr template`,
+      ),
+    ).toBeInTheConsole();
+
+    expect(
+      await result.findByText(`${projectName} created`),
+    ).toBeInTheConsole();
+  });
+
   it('should create package.json', async () => {
     const contents = await fs.readFile(
       fixturePath(projectName, 'package.json'),
@@ -181,12 +222,75 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
     'eslint.config.mjs',
     'README.md',
     '.prettierignore',
-    'src/App/NextSteps.tsx',
+    ...(template === 'ssr' ? [] : ['src/App/NextSteps.tsx']),
     'pnpm-workspace.yaml',
   ])('should create %s', async (file) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
 
     expect(stripYamlVersions(contents)).toMatchSnapshot();
+  });
+
+  it.runIf(template === 'ssr')(
+    'should create SSR entry files with named exports',
+    async () => {
+      const routes = await fs.readFile(
+        fixturePath(projectName, 'src/routes.tsx'),
+        'utf-8',
+      );
+      const server = await fs.readFile(
+        fixturePath(projectName, 'src/server.tsx'),
+        'utf-8',
+      );
+      const client = await fs.readFile(
+        fixturePath(projectName, 'src/client.tsx'),
+        'utf-8',
+      );
+      const skuConfig = await fs.readFile(
+        fixturePath(projectName, 'sku.config.ts'),
+        'utf-8',
+      );
+
+      expect(skuConfig).toContain("buildType: 'ssr'");
+      expect(skuConfig).toContain('expressTrustProxy: true');
+      expect(routes).toContain('export const routes');
+      expect(routes).toContain('Component: RootLayout');
+      expect(routes).toContain("lazy: () => import('./pages/home/home')");
+      expect(routes).toContain("lazy: () => import('./pages/about/about')");
+      expect(routes).not.toContain('/route');
+      expect(server).toContain('defineServerEntry');
+      expect(server).toContain('middleware');
+      expect(server).toContain('/api/health');
+      expect(client).toContain('defineClientEntry');
+      expect(client).toContain('typeof server');
+      expect(client).toContain("import type server from './server'");
+      expect(client).toContain('onHydrate');
+      await expect(
+        fs.access(fixturePath(projectName, 'src/ssrContext.ts')),
+      ).resolves.toBeUndefined();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/pages/home/home.tsx')),
+      ).resolves.toBeUndefined();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/pages/about/about.tsx')),
+      ).resolves.toBeUndefined();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/pages/home/route.ts')),
+      ).rejects.toThrow();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/App')),
+      ).rejects.toThrow();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/render.tsx')),
+      ).rejects.toThrow();
+    },
+  );
+
+  it.runIf(template === 'vite')('should not set buildType ssr', async () => {
+    const skuConfig = await fs.readFile(
+      fixturePath(projectName, 'sku.config.ts'),
+      'utf-8',
+    );
+    expect(skuConfig).not.toContain("buildType: 'ssr'");
   });
 
   it('should pass lint', async () => {

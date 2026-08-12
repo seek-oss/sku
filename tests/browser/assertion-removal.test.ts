@@ -62,7 +62,9 @@ describe('assertion-removal', () => {
 
   describe('test', () => {
     it('should keep "assert" and "invariant" in tests', async () => {
-      const test = await sku('test');
+      // Jest 30's default non-TTY reporter is summary-only and ignores --verbose
+      // unless the default reporter is selected explicitly.
+      const test = await sku('test', ['--verbose', '--reporters=default']);
       expect(await test.findByError('assert should throw')).toBeInTheConsole();
       expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
     });

@@ -1,12 +1,38 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defaultExclude, defineConfig } from 'vitest/config';
 import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 const babelPluginDisplayNameTests = 'packages/babel-plugin-display-name';
+const repoRoot = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   resolve: {
     tsconfigPaths: true,
+    // Unit tests import helpers relatively from source; sku mounts shared
+    // state via `#runtime/*` and apps via `sku/runtime`. Without these aliases
+    // Vitest resolves package exports/imports to dist and splits React context
+    // / ALS identity.
+    alias: {
+      'sku/runtime': path.join(repoRoot, 'packages/sku/src/runtime.ts'),
+      '#runtime/skuContext': path.join(
+        repoRoot,
+        'packages/sku/src/services/vite/ssr/skuContext.tsx',
+      ),
+      '#runtime/insertHtml': path.join(
+        repoRoot,
+        'packages/sku/src/services/vite/ssr/insertHtml.tsx',
+      ),
+      '#runtime/preloadRoute': path.join(
+        repoRoot,
+        'packages/sku/src/services/vite/ssr/preloadRoute.ts',
+      ),
+      '#runtime/requestContext': path.join(
+        repoRoot,
+        'packages/sku/src/services/vite/ssr/requestContext.ts',
+      ),
+    },
   },
   server: {
     watch: {

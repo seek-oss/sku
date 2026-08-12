@@ -27,6 +27,12 @@ export const buildSsrAction = async ({
   stats: StatsChoices;
   skuContext: SkuContext;
 }) => {
+  if (skuContext.buildType) {
+    throw new Error(
+      '`sku build-ssr` is not used with `buildType`. Use `sku build` instead.',
+    );
+  }
+
   if (skuContext.bundler === 'vite') {
     throw new Error(
       'The command does not supported the Vite bundler at this time. SSR is only supported with Webpack.',

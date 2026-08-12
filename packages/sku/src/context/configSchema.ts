@@ -63,6 +63,11 @@ const cspReportTo = [cspReportToTuple, ...cspReportToTuple.items].map(
 );
 
 export default validator.compile({
+  buildType: {
+    type: 'enum',
+    values: ['ssr', 'static'],
+    optional: true,
+  },
   clientEntry: {
     type: 'string',
   },
@@ -70,6 +75,9 @@ export default validator.compile({
     type: 'string',
   },
   serverEntry: {
+    type: 'string',
+  },
+  routesEntry: {
     type: 'string',
   },
   libraryEntry: {
@@ -210,6 +218,10 @@ export default validator.compile({
     optional: true,
   },
   cspReportOnlyReportTo: cspReportTo,
+  expressTrustProxy: {
+    type: 'boolean',
+    optional: true,
+  },
   httpsDevServer: {
     type: 'boolean',
   },

@@ -263,6 +263,7 @@ export const createHtmlRenderMiddleware =
         return;
       }
       if (controller.signal.aborted) {
+        result.abort();
         return;
       }
 

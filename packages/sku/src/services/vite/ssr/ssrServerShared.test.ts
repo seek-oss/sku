@@ -199,6 +199,7 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
 
     await done;
 
+    expect(abort).toHaveBeenCalledTimes(1);
     expect(pipe).not.toHaveBeenCalled();
     expect(res.set).not.toHaveBeenCalled();
     expect(res.status).not.toHaveBeenCalled();

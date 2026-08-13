@@ -118,6 +118,30 @@ describe('insertHtml stream injection', () => {
     expect(html).toContain('>deferred<');
   });
 
+  it('aborts the React stream when an insertion callback throws', async () => {
+    const insertionError = new Error('Unable to serialize inserted state');
+    const ThrowingInjectingPage = () => {
+      const insertHtml = useInsertHtml();
+      insertHtml(() => {
+        throw insertionError;
+      });
+      return <main>page</main>;
+    };
+
+    await expect(
+      renderToHtml({
+        routes: [{ path: '/', Component: ThrowingInjectingPage }],
+      }),
+    ).rejects.toBe(insertionError);
+
+    const { html } = await renderToHtml({
+      routes: [
+        { path: '/', Component: () => <InjectingPage marker="recovered" /> },
+      ],
+    });
+    expect(html).toContain('data-marker="recovered"');
+  });
+
   it('allows injected scripts to carry a CSP nonce from getCspNonce', async () => {
     const { createSsrRequestContextStore } =
       await import('./createSsrRequestContextStore.js');

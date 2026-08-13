@@ -35,6 +35,9 @@ export type StreamDocumentArgs = {
   allowErrorRetry: boolean;
 };
 
+type RenderAttemptState =
+  'rendering' | 'retrying' | 'ready' | 'aborted' | 'failed';
+
 export const streamDocument = ({
   renderContext,
   dataRoutes,
@@ -65,34 +68,62 @@ export const streamDocument = ({
   const insertHtmlQueue = createInsertHtmlQueue();
 
   return new Promise((resolve, reject) => {
-    let ready = false;
-    let abortedForRetry = false;
+    let state: RenderAttemptState = 'rendering';
+    let streamAborted = false;
+    let removeAbortListener = () => {};
+
+    const abortStream = () => {
+      if (streamAborted) {
+        return;
+      }
+      streamAborted = true;
+      stream.abort();
+    };
+
+    const rejectAttempt = (error: unknown) => {
+      if (state !== 'rendering') {
+        return;
+      }
+      state = 'failed';
+      removeAbortListener();
+      reject(error);
+    };
 
     const retryFromError = (error: unknown) => {
-      if (!allowErrorRetry || abortedForRetry) {
+      if (!allowErrorRetry || state !== 'rendering') {
         return false;
       }
-      abortedForRetry = true;
-      stream.abort();
-      const errorContext = getStaticContextFromError(
-        dataRoutes,
-        renderContext,
-        error,
-      );
-      streamDocument({
-        renderContext: errorContext,
-        dataRoutes,
-        documentAssets,
-        assets,
-        site,
-        clientContext,
-        reactContext,
-        routeHeaders,
-        waitForAll,
-        nonce,
-        options,
-        allowErrorRetry: false,
-      }).then(resolve, reject);
+      state = 'retrying';
+      removeAbortListener();
+      abortStream();
+
+      const retry = async () => {
+        try {
+          const errorContext = getStaticContextFromError(
+            dataRoutes,
+            renderContext,
+            error,
+          );
+          const result = await streamDocument({
+            renderContext: errorContext,
+            dataRoutes,
+            documentAssets,
+            assets,
+            site,
+            clientContext,
+            reactContext,
+            routeHeaders,
+            waitForAll,
+            nonce,
+            options,
+            allowErrorRetry: false,
+          });
+          resolve(result);
+        } catch (retryError) {
+          reject(retryError);
+        }
+      };
+      retry();
       return true;
     };
 
@@ -117,60 +148,84 @@ export const streamDocument = ({
         bootstrapScriptContent,
         nonce,
         onShellReady() {
-          if (waitForAll || ready || abortedForRetry) {
+          if (waitForAll || state !== 'rendering') {
             return;
           }
-          ready = true;
+          state = 'ready';
           resolve({
             pipe: wrapPipeWithInsertHtml(
               stream.pipe.bind(stream),
               insertHtmlQueue,
+              abortStream,
             ),
-            abort: stream.abort.bind(stream),
+            abort: abortStream,
             statusCode: renderContext.statusCode,
             headers: routeHeaders,
             inlineScripts: [bootstrapScriptContent],
           });
         },
         onAllReady() {
-          if (!waitForAll || ready || abortedForRetry) {
+          if (!waitForAll || state !== 'rendering') {
             return;
           }
-          ready = true;
+          state = 'ready';
           resolve({
             pipe: wrapPipeWithInsertHtml(
               stream.pipe.bind(stream),
               insertHtmlQueue,
+              abortStream,
             ),
-            abort: stream.abort.bind(stream),
+            abort: abortStream,
             statusCode: renderContext.statusCode,
             headers: routeHeaders,
             inlineScripts: [bootstrapScriptContent],
           });
         },
         onShellError(error) {
+          if (state !== 'rendering') {
+            return;
+          }
           options.onShellError?.(error);
           if (retryFromError(error)) {
             return;
           }
-          reject(error);
+          rejectAttempt(error);
         },
         onError(error) {
+          if (state !== 'rendering' && state !== 'ready') {
+            return;
+          }
           options.onError?.(error);
           // Suspense rejections never settle for onAllReady; retry once we
           // see the error while still buffering for waitForAll.
-          if (waitForAll && !ready) {
+          if (waitForAll && state === 'rendering') {
             retryFromError(error);
           }
         },
       },
     );
 
-    const abort = () => stream.abort();
-    if (options.signal?.aborted) {
-      abort();
+    const signal = options.signal;
+    const abortFromSignal = () => {
+      if (state === 'retrying' || state === 'aborted' || state === 'failed') {
+        return;
+      }
+      state = 'aborted';
+      abortStream();
+      reject(
+        signal?.reason ??
+          new DOMException('The render was aborted', 'AbortError'),
+      );
+    };
+
+    if (signal?.aborted) {
+      abortFromSignal();
+    } else if (signal) {
+      signal.addEventListener('abort', abortFromSignal, { once: true });
+      removeAbortListener = () =>
+        signal.removeEventListener('abort', abortFromSignal);
     } else {
-      options.signal?.addEventListener('abort', abort, { once: true });
+      removeAbortListener = () => {};
     }
   });
 };

@@ -1,5 +1,5 @@
 import type { PipeableStream } from 'react-dom/server';
-import { pipeline } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 
 import { createInsertHtmlTransform } from './createInsertHtmlTransform.js';
 import type { InsertHtmlQueue } from './insertHtml.js';
@@ -11,11 +11,14 @@ export const wrapPipeWithInsertHtml = (
 ): PipeableStream['pipe'] => {
   const wrappedPipe: PipeableStream['pipe'] = (destination) => {
     const transform = createInsertHtmlTransform(queue);
-    pipeline(transform, destination, (error) => {
-      if (error) {
+    const pipeToDestination = async () => {
+      try {
+        await pipeline(transform, destination);
+      } catch {
         abort();
       }
-    });
+    };
+    pipeToDestination();
     try {
       pipe(transform);
     } catch (error) {

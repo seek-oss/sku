@@ -35,8 +35,16 @@ export type StreamDocumentArgs = {
   allowErrorRetry: boolean;
 };
 
+const RENDER_ATTEMPT_STATE = {
+  RENDERING: 'rendering',
+  RETRYING: 'retrying',
+  READY: 'ready',
+  ABORTED: 'aborted',
+  FAILED: 'failed',
+} as const;
+
 type RenderAttemptState =
-  'rendering' | 'retrying' | 'ready' | 'aborted' | 'failed';
+  (typeof RENDER_ATTEMPT_STATE)[keyof typeof RENDER_ATTEMPT_STATE];
 
 export const streamDocument = ({
   renderContext,
@@ -68,7 +76,7 @@ export const streamDocument = ({
   const insertHtmlQueue = createInsertHtmlQueue();
 
   return new Promise((resolve, reject) => {
-    let state: RenderAttemptState = 'rendering';
+    let state: RenderAttemptState = RENDER_ATTEMPT_STATE.RENDERING;
     let streamAborted = false;
     let removeAbortListener = () => {};
 
@@ -81,19 +89,19 @@ export const streamDocument = ({
     };
 
     const rejectAttempt = (error: unknown) => {
-      if (state !== 'rendering') {
+      if (state !== RENDER_ATTEMPT_STATE.RENDERING) {
         return;
       }
-      state = 'failed';
+      state = RENDER_ATTEMPT_STATE.FAILED;
       removeAbortListener();
       reject(error);
     };
 
     const retryFromError = (error: unknown) => {
-      if (!allowErrorRetry || state !== 'rendering') {
+      if (!allowErrorRetry || state !== RENDER_ATTEMPT_STATE.RENDERING) {
         return false;
       }
-      state = 'retrying';
+      state = RENDER_ATTEMPT_STATE.RETRYING;
       removeAbortListener();
       abortStream();
 
@@ -148,10 +156,10 @@ export const streamDocument = ({
         bootstrapScriptContent,
         nonce,
         onShellReady() {
-          if (waitForAll || state !== 'rendering') {
+          if (waitForAll || state !== RENDER_ATTEMPT_STATE.RENDERING) {
             return;
           }
-          state = 'ready';
+          state = RENDER_ATTEMPT_STATE.READY;
           resolve({
             pipe: wrapPipeWithInsertHtml(
               stream.pipe.bind(stream),
@@ -165,10 +173,10 @@ export const streamDocument = ({
           });
         },
         onAllReady() {
-          if (!waitForAll || state !== 'rendering') {
+          if (!waitForAll || state !== RENDER_ATTEMPT_STATE.RENDERING) {
             return;
           }
-          state = 'ready';
+          state = RENDER_ATTEMPT_STATE.READY;
           resolve({
             pipe: wrapPipeWithInsertHtml(
               stream.pipe.bind(stream),
@@ -182,7 +190,7 @@ export const streamDocument = ({
           });
         },
         onShellError(error) {
-          if (state !== 'rendering') {
+          if (state !== RENDER_ATTEMPT_STATE.RENDERING) {
             return;
           }
           options.onShellError?.(error);
@@ -192,13 +200,16 @@ export const streamDocument = ({
           rejectAttempt(error);
         },
         onError(error) {
-          if (state !== 'rendering' && state !== 'ready') {
+          if (
+            state !== RENDER_ATTEMPT_STATE.RENDERING &&
+            state !== RENDER_ATTEMPT_STATE.READY
+          ) {
             return;
           }
           options.onError?.(error);
           // Suspense rejections never settle for onAllReady; retry once we
           // see the error while still buffering for waitForAll.
-          if (waitForAll && state === 'rendering') {
+          if (waitForAll && state === RENDER_ATTEMPT_STATE.RENDERING) {
             retryFromError(error);
           }
         },
@@ -207,10 +218,14 @@ export const streamDocument = ({
 
     const signal = options.signal;
     const abortFromSignal = () => {
-      if (state === 'retrying' || state === 'aborted' || state === 'failed') {
+      if (
+        state === RENDER_ATTEMPT_STATE.RETRYING ||
+        state === RENDER_ATTEMPT_STATE.ABORTED ||
+        state === RENDER_ATTEMPT_STATE.FAILED
+      ) {
         return;
       }
-      state = 'aborted';
+      state = RENDER_ATTEMPT_STATE.ABORTED;
       abortStream();
       reject(
         signal?.reason ??

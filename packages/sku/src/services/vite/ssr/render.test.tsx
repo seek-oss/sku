@@ -199,6 +199,64 @@ describe('render', () => {
     );
   });
 
+  it('recovers sync render throws via a second ErrorBoundary pass', async () => {
+    const Boom = () => {
+      throw new Error('Boom from render');
+    };
+    const ErrorBoundary = () => (
+      <main data-testid="error-boundary">Boom recovered</main>
+    );
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [{ index: true, Component: Boom }],
+        },
+      ],
+    });
+    const onError = vi.fn();
+    const onShellError = vi.fn();
+
+    const result = await render({
+      siteStaticHandlers: handlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      options: { onError, onShellError },
+    });
+
+    if ('response' in result) {
+      throw new Error('Expected a streamed document, not a Response');
+    }
+
+    expect(result.statusCode).toBe(500);
+
+    const chunks: Buffer[] = [];
+    await new Promise<void>((resolve, reject) => {
+      const writable = new Writable({
+        write(chunk, _encoding, callback) {
+          chunks.push(Buffer.from(chunk));
+          callback();
+        },
+        final(callback) {
+          callback();
+          resolve();
+        },
+      });
+      writable.on('error', reject);
+      result.pipe(writable);
+    });
+
+    const html = Buffer.concat(chunks).toString('utf-8');
+    expect(html).toContain('data-testid="error-boundary"');
+    expect(html).toContain('Boom recovered');
+    expect(onShellError).toHaveBeenCalledTimes(1);
+    expect(onError).toHaveBeenCalledTimes(1);
+  });
+
   it('recovers waitForAll sync render throws via a second ErrorBoundary pass', async () => {
     const Boom = () => {
       throw new Error('Boom from render');

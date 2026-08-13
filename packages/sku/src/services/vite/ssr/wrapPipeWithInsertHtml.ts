@@ -14,8 +14,8 @@ export const wrapPipeWithInsertHtml = (
     const pipeToDestination = async () => {
       try {
         await pipeline(transform, destination);
-      } catch {
-        abort();
+      } catch (error) {
+        abort(error);
       }
     };
     pipeToDestination();

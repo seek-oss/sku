@@ -303,7 +303,7 @@ export const createHtmlRenderMiddleware =
         }),
       });
       res.status(result.statusCode);
-      controller.signal.addEventListener('abort', result.abort, {
+      controller.signal.addEventListener('abort', () => result.abort(), {
         once: true,
       });
       result.pipe(res);

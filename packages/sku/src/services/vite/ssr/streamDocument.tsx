@@ -35,16 +35,8 @@ export type StreamDocumentArgs = {
   allowErrorRetry: boolean;
 };
 
-const RENDER_ATTEMPT_STATE = {
-  RENDERING: 'rendering',
-  RETRYING: 'retrying',
-  READY: 'ready',
-  ABORTED: 'aborted',
-  FAILED: 'failed',
-} as const;
-
 type RenderAttemptState =
-  (typeof RENDER_ATTEMPT_STATE)[keyof typeof RENDER_ATTEMPT_STATE];
+  'rendering' | 'retrying' | 'ready' | 'aborted' | 'failed';
 
 export const streamDocument = ({
   renderContext,
@@ -76,32 +68,37 @@ export const streamDocument = ({
   const insertHtmlQueue = createInsertHtmlQueue();
 
   return new Promise((resolve, reject) => {
-    let state: RenderAttemptState = RENDER_ATTEMPT_STATE.RENDERING;
+    let state: RenderAttemptState = 'rendering';
     let streamAborted = false;
-    let removeAbortListener = () => {};
+    let removeAbortListener = () => { };
 
-    const abortStream = () => {
+    const abortStream = (reason?: unknown) => {
       if (streamAborted) {
         return;
       }
       streamAborted = true;
-      stream.abort();
+      stream.abort(reason);
+      // After the shell, React abort() does not call onError unless abortable
+      // work remains. Surface insert/pipeline failures ourselves.
+      if (state === 'ready' && reason !== undefined) {
+        options.onError?.(reason);
+      }
     };
 
     const rejectAttempt = (error: unknown) => {
-      if (state !== RENDER_ATTEMPT_STATE.RENDERING) {
+      if (state !== 'rendering') {
         return;
       }
-      state = RENDER_ATTEMPT_STATE.FAILED;
+      state = 'failed';
       removeAbortListener();
       reject(error);
     };
 
     const retryFromError = (error: unknown) => {
-      if (!allowErrorRetry || state !== RENDER_ATTEMPT_STATE.RENDERING) {
+      if (!allowErrorRetry || state !== 'rendering') {
         return false;
       }
-      state = RENDER_ATTEMPT_STATE.RETRYING;
+      state = 'retrying';
       removeAbortListener();
       abortStream();
 
@@ -156,10 +153,10 @@ export const streamDocument = ({
         bootstrapScriptContent,
         nonce,
         onShellReady() {
-          if (waitForAll || state !== RENDER_ATTEMPT_STATE.RENDERING) {
+          if (waitForAll || state !== 'rendering') {
             return;
           }
-          state = RENDER_ATTEMPT_STATE.READY;
+          state = 'ready';
           resolve({
             pipe: wrapPipeWithInsertHtml(
               stream.pipe.bind(stream),
@@ -173,10 +170,10 @@ export const streamDocument = ({
           });
         },
         onAllReady() {
-          if (!waitForAll || state !== RENDER_ATTEMPT_STATE.RENDERING) {
+          if (!waitForAll || state !== 'rendering') {
             return;
           }
-          state = RENDER_ATTEMPT_STATE.READY;
+          state = 'ready';
           resolve({
             pipe: wrapPipeWithInsertHtml(
               stream.pipe.bind(stream),
@@ -190,7 +187,7 @@ export const streamDocument = ({
           });
         },
         onShellError(error) {
-          if (state !== RENDER_ATTEMPT_STATE.RENDERING) {
+          if (state !== 'rendering') {
             return;
           }
           options.onShellError?.(error);
@@ -200,16 +197,13 @@ export const streamDocument = ({
           rejectAttempt(error);
         },
         onError(error) {
-          if (
-            state !== RENDER_ATTEMPT_STATE.RENDERING &&
-            state !== RENDER_ATTEMPT_STATE.READY
-          ) {
+          if (state !== 'rendering' && state !== 'ready') {
             return;
           }
           options.onError?.(error);
           // Suspense rejections never settle for onAllReady; retry once we
           // see the error while still buffering for waitForAll.
-          if (waitForAll && state === RENDER_ATTEMPT_STATE.RENDERING) {
+          if (waitForAll && state === 'rendering') {
             retryFromError(error);
           }
         },
@@ -218,19 +212,15 @@ export const streamDocument = ({
 
     const signal = options.signal;
     const abortFromSignal = () => {
-      if (
-        state === RENDER_ATTEMPT_STATE.RETRYING ||
-        state === RENDER_ATTEMPT_STATE.ABORTED ||
-        state === RENDER_ATTEMPT_STATE.FAILED
-      ) {
+      if (state === 'retrying' || state === 'aborted' || state === 'failed') {
         return;
       }
-      state = RENDER_ATTEMPT_STATE.ABORTED;
-      abortStream();
-      reject(
+      state = 'aborted';
+      const reason =
         signal?.reason ??
-          new DOMException('The render was aborted', 'AbortError'),
-      );
+        new DOMException('The render was aborted', 'AbortError');
+      abortStream(reason);
+      reject(reason);
     };
 
     if (signal?.aborted) {
@@ -240,7 +230,7 @@ export const streamDocument = ({
       removeAbortListener = () =>
         signal.removeEventListener('abort', abortFromSignal);
     } else {
-      removeAbortListener = () => {};
+      removeAbortListener = () => { };
     }
   });
 };

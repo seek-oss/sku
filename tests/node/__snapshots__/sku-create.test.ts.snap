@@ -387,7 +387,7 @@ export function NextSteps({ environment }: NextStepsProps) {
 
 exports[`sku-create vite > should create src/vite.env.d.ts 1`] = `
 "// eslint-disable-next-line spaced-comment
-/// <reference types=\\"sku/vite/client\\" />
+/// <reference types="sku/vite/client" />
 "
 `;
 

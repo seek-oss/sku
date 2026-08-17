@@ -182,20 +182,12 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
     'README.md',
     '.prettierignore',
     'src/App/NextSteps.tsx',
+    ...(template !== 'webpack' ? ['src/vite.env.d.ts'] : []),
     'pnpm-workspace.yaml',
   ])('should create %s', async (file) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
 
     expect(stripYamlVersions(contents)).toMatchSnapshot();
-  });
-
-  it.runIf(template === 'vite')('should create src/vite.env.d.ts', async () => {
-    const contents = await fs.readFile(
-      fixturePath(projectName, 'src/vite.env.d.ts'),
-      'utf-8',
-    );
-
-    expect(contents).toMatchSnapshot();
   });
 
   it('should pass lint', async () => {

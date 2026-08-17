@@ -189,6 +189,15 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
     expect(stripYamlVersions(contents)).toMatchSnapshot();
   });
 
+  it.runIf(template === 'vite')('should create src/vite.env.d.ts', async () => {
+    const contents = await fs.readFile(
+      fixturePath(projectName, 'src/vite.env.d.ts'),
+      'utf-8',
+    );
+
+    expect(contents).toMatchSnapshot();
+  });
+
   it('should pass lint', async () => {
     const { sku } = scopeToSkuFixture('sku-create/new-project');
     const result = await sku('lint');

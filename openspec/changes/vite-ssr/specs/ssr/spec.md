@@ -161,16 +161,75 @@ When a matched route sets `handle.waitForAll: true`, sku MUST wait for `onAllRea
 - **WHEN** a matched route has `handle.waitForAll: true`
 - **THEN** sku pipes the HTML body only after `onAllReady`
 
-### Requirement: Client disconnect aborts render before write
+### Requirement: Client disconnect aborts document work
 
-When the client disconnects before HTML headers are committed, sku MUST abort the stream and MUST NOT write the document body.
+When the client disconnects, sku MUST stop document work for that request.
 
-Dev and production MUST share this abort-before-write behaviour.
+Dev and production MUST share this behaviour.
 
 #### Scenario: Disconnect before headers
 
 - **WHEN** the client disconnects before HTML headers are committed
 - **THEN** sku aborts the stream and does not write the document body
+
+#### Scenario: Disconnect before a short-circuit Response is written
+
+- **WHEN** render resolves to a loader or action `Response` after the client has disconnected
+- **THEN** sku does not write that response
+
+#### Scenario: Disconnect while buffering waitForAll
+
+- **WHEN** the client disconnects while sku is still waiting for `onAllReady`
+- **THEN** sku aborts the render
+- **AND** sku MUST NOT start an ErrorBoundary recovery pass for that cancellation
+
+#### Scenario: Disconnect after piping starts
+
+- **WHEN** the client disconnects after the HTML body has started piping
+- **THEN** sku aborts the React stream
+
+### Requirement: Render attempts settle once
+
+Each document render attempt MUST settle at most once.
+
+It settles by resolving with a pipeable result or by rejecting.
+
+When the render `AbortSignal` is already aborted, or aborts before settle, the attempt MUST reject with the abort reason.
+
+The attempt MUST NOT hang unsettled after cancellation.
+
+Cancellation MUST NOT trigger the ErrorBoundary recovery pass.
+
+#### Scenario: Already-aborted signal rejects promptly
+
+- **WHEN** render starts with an already-aborted signal
+- **THEN** the render promise rejects with the abort reason
+- **AND** sku does not resolve a pipeable document
+
+#### Scenario: Abort during pending waitForAll does not retry
+
+- **WHEN** a `waitForAll` render is still pending
+- **AND** the render signal aborts
+- **THEN** the render promise rejects with the abort reason
+- **AND** sku does not render an ErrorBoundary recovery pass for that abort
+
+### Requirement: Cancellation is not an Express render error
+
+When HTML middleware cancels because the client disconnected, sku MUST NOT forward that cancellation through Express error handling.
+
+Genuine render failures on a still-connected request MUST still reach Express error handling.
+
+#### Scenario: Disconnect suppresses cancel rejection
+
+- **WHEN** render rejects because the client disconnected
+- **THEN** sku does not call the render-error hook
+- **AND** sku does not pass the error to Express `next`
+
+#### Scenario: Connected render failure reaches Express
+
+- **WHEN** render rejects while the client is still connected
+- **THEN** sku invokes the render-error hook when configured
+- **AND** sku passes the error to Express `next`
 
 ### Requirement: Loader and action Responses are forwarded
 

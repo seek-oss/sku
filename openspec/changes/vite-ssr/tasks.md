@@ -153,6 +153,14 @@ It is not a history of intermediate APIs.
 - [x] 18.4 Rename consumer `ssrContext.ts` → `skuContext.ts` in the create template, SSR fixtures, product / Migrating docs, and snapshots.
 - [x] 18.5 Docs: teach `SkuRouteObject<SiteOf<typeof server>>` next to `createSkuContexts`. Note the union is `getSite`, not `sku.config`.
 
+## 19. Document stream lifecycle hardening
+
+- [ ] 19.1 `streamDocument`: single-settle ownership per attempt (`open` → resolved / rejected / cancelled). Cancel rejects with abort reason and aborts React. Late callbacks no-op.
+- [ ] 19.2 Cancel MUST NOT start the ErrorBoundary recovery pass (including `waitForAll` pending). Keep one recovery pass only for real render failures via a fresh abandoned-then-retry attempt.
+- [ ] 19.3 HTML middleware: skip render when already disconnected; abort after resolve before any write (HTML or short-circuit `Response`); abort React on disconnect after `pipe`; swallow cancel rejections; forward genuine connected failures to Express.
+- [ ] 19.4 Insert/transform failure after pipe: abort React and error the Node response stream. Do not treat React `onError` as the success criterion for insert failures.
+- [ ] 19.5 Tests: already-aborted signal, abort during pending `waitForAll` (no ErrorBoundary), disconnect before Response write, disconnect after pipe, connected vs cancelled Express error paths, insert callback throw fails the stream.
+
 ## Deferred
 
 See design Non-Goals and Resolved / deferred for the full list.

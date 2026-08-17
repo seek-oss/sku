@@ -585,6 +585,45 @@ Optional `handle.waitForAll` waits for `onAllReady`.
 Abort on client disconnect.
 Client hydrates via `hydrateRoot(document, …)`.
 
+### 9a. Document render attempt lifecycle
+
+Each `renderToPipeableStream` call is one attempt.
+An attempt settles at most once: resolve with a pipeable result, or reject.
+
+Ownership is a small outcome (`open` → `resolved` | `rejected` | `cancelled`).
+Late React callbacks after settle MUST no-op.
+
+**Cancellation** (render `AbortSignal` aborted, including already-aborted at start):
+
+- Reject the attempt with the abort reason.
+- Abort the React stream.
+- MUST NOT start the ErrorBoundary recovery pass.
+- MUST NOT leave the render promise hanging.
+
+Abort alone is not enough.
+React’s `onError` does not settle sku’s promise, and after the shell `abort()` may not call `onError` at all.
+
+**Recoverable render failure** (Component / Suspense throw while still eligible):
+
+- At most one ErrorBoundary recovery pass via a fresh attempt (`getStaticContextFromError`).
+- The first attempt is abandoned so its callbacks cannot settle or retry again.
+- Recovery is for real render failures only, never for cancellation.
+
+**Insert / pipe transform failure** after the attempt has resolved to a pipeable result:
+
+- Abort the React stream.
+- Error the Node response stream.
+- Correctness is the aborted React work plus the failed destination stream.
+- Calling React `onError` for logging is optional and MUST NOT be the success criterion.
+- Partial HTML may already have been sent.
+
+Rejected approaches:
+
+| Approach                                   | Why not                                                                |
+| ------------------------------------------ | ---------------------------------------------------------------------- |
+| Abort via `stream.abort()` only            | Promise can hang; `waitForAll` `onError` can start ErrorBoundary retry |
+| Require post-shell abort to call `onError` | React does not guarantee that; Node stream failure is the contract     |
+
 ### 10. No `transformIndexHtml` on the SSR path
 
 The React Refresh preamble is loaded via the client entry.
@@ -1088,8 +1127,17 @@ Loader-data prefetch stays out of scope.
 
 ### 18. Shared HTML middleware + loader/action headers
 
-Dev/prod share abort-before-write.
+Dev/prod share the same HTML middleware and disconnect handling.
+
+Wire an `AbortController` to client disconnect for the request.
+Skip starting render when the request is already disconnected.
+After `render` resolves, if cancelled: abort any pipeable result and write nothing (including short-circuit `Response` bodies).
+After `pipe` starts, disconnect still aborts React.
+
 On streamed HTML, forward `loaderHeaders` / `actionHeaders` (append; preserve `Set-Cookie`), then sku `Content-Type` / CSP.
+
+Cancellation rejections MUST NOT reach Express `next` or the render-error hook.
+Genuine failures on a connected request still do.
 
 ### 19. Hydration payload safety
 
@@ -1289,6 +1337,7 @@ Module identity (sku `render` via private `#` imports + consumer `sku/runtime` �
 - Sku renders queued nodes to static markup and writes them into the response **before the next React chunk**, and flushes any remainder at stream end. Injection therefore lands after the shell but before hydration runs.
 - Anywhere there is no sku SSR render around it — including the client graph — it is a silent no-op. It MUST NOT throw. Apollo’s Next.js implementation throws on a missing context; sku’s must not.
 - Under `handle.waitForAll`, injection still happens; the whole document is buffered to `onAllReady` and written in order.
+- If an insert callback or the flush transform throws after pipe has started, sku aborts the React stream and errors the Node response stream (Decision 9a). Partial HTML may already be on the wire.
 
 **CSP:**
 Injected script bodies are not known when headers are derived from the shell, so they cannot be hashed — they MUST carry the nonce.
@@ -1648,6 +1697,9 @@ Client instrumentations MAY include `router` and `route` levels.
 | Duplicate queries after hydration                 | Fixture asserts server-run queries are served from the transported cache and that a post-hydration query still fetches.                                                                                         |
 | Wrong transport build resolved                    | Apollo ships separate `browser` / `node` condition builds and asserts on mismatch. Fixture exercises both `sku start` and production.                                                                           |
 | Injection lost under `waitForAll`                 | Buffer to `onAllReady` and write injected nodes in stream order. Covered by tests.                                                                                                                              |
+| Hung render promise on abort                      | Decision 9a: cancel rejects the attempt with the abort reason. Do not rely on React `onError` alone to settle.                                                                                                  |
+| ErrorBoundary retry after disconnect              | Decision 9a: cancellation abandons the attempt and MUST NOT start recovery. Middleware swallows cancel rejections (Decision 18).                                                                                |
+| Insert flush throws mid-stream                    | Abort React and error the destination stream. Do not leave React writing into a dead transform. Covered by tests.                                                                                               |
 | Transport module duplicated in graph              | Decision 26 (same as `getCspNonce` / preload / `SkuProvider`). Exclude stops `.vite/deps` clone. Public + private `#` paths share physical modules via `unbundle`.                                              |
 | Dual path under published install                 | `optimizeDeps.exclude` for `sku` + `sku/runtime` keeps app imports and sku `#` mounts on the same unbundled modules. Skip dedicated tarball e2e this pass.                                                      |
 | Trust proxy off unless configured                 | Opt-in `expressTrustProxy`. Template sets `true`. Other values via `onListen`.                                                                                                                                  |

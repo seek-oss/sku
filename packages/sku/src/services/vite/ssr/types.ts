@@ -44,6 +44,8 @@ export type SkuOnListen = (args: {
 export type JsonValue =
   string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
+export type { SiteOf } from './entryTypeExtractors.js';
+
 /**
  * Route object for `routesEntry`: React Router `RouteObject` plus optional
  * `sites` membership. Omit `sites` ⇒ route is on every config site; present ⇒
@@ -51,9 +53,12 @@ export type JsonValue =
  * `children` are also `SkuRouteObject` so nested routes may set `sites`
  * (no parent→child inheritance — each route declares membership explicitly).
  */
-export type SkuRouteObject = Omit<RouteObject, 'children'> & {
-  sites?: string[];
-  children?: SkuRouteObject[];
+export type SkuRouteObject<Site extends string = string> = Omit<
+  RouteObject,
+  'children'
+> & {
+  sites?: Site[];
+  children?: Array<SkuRouteObject<Site>>;
 };
 
 /**

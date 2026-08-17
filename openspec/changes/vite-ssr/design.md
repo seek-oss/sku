@@ -25,6 +25,7 @@ See Decision 27.
 - First-class `routesEntry` with a named `routes` export.
 - First-class request-entry contracts.
 - First-class multi-site route trees via `routes`, optional `sites`, and `getSite`.
+- `SkuRouteObject<Site>` and `SiteOf<typeof server>` type `sites` from `getSite`.
 - Optional `routesEntry` `mapRoutePath` so apps map one logical path to per-site concrete paths.
 - Sku owns preload-safe duplication.
 - Apps own path policy (no sku-owned localisation rules).
@@ -207,7 +208,14 @@ Add first-class config `routesEntry` (default `src/routes.tsx`) for the route tr
 Sku resolves it via `__sku_alias__routesEntry` into **both** the server and client Vite graphs (same alias pattern as `__sku_alias__serverEntry` / `__sku_alias__clientEntry`).
 
 `routesEntry` MUST export named `routes: SkuRouteObject[]`.
-`SkuRouteObject` is a sku type helper only: `RouteObject & { sites?: string[] }`.
+`SkuRouteObject` is a sku type helper only: `SkuRouteObject<Site extends string = string>` with `sites?: Site[]` and recursive `children?: SkuRouteObject<Site>[]`.
+Omitting the generic leaves `sites` as `string[]`.
+Sku MUST export `SiteOf<ServerEntry>` from `sku/runtime`.
+It is the same extractor `createSkuContexts` and `defineClientEntry` use for `Site`.
+When `getSite` is omitted, `SiteOf` is `string`.
+Multi-site apps type `routes` as `SkuRouteObject<SiteOf<typeof server>>[]` so `sites` is checked against the server entry’s `getSite` return.
+The generic types against `getSite`, not config `sites`.
+Runtime membership matching remains exact string match against resolved config site names.
 Sku MUST NOT re-export a wrapped React Router `RouteObject` as the product API.
 Consumers still import route primitives from `react-router` and may use `SkuRouteObject` for the optional `sites` field.
 
@@ -282,7 +290,8 @@ Route membership is declared on routes themselves.
 
 **Sku owns:**
 
-- Typing `SkuRouteObject.sites`.
+- Typing `SkuRouteObject.sites` as `Site[]` (`Site` defaults to `string`).
+- Exporting `SiteOf<ServerEntry>` from `sku/runtime` so apps bind that `Site` to `getSite`.
 - Loading `routes` from `routesEntry`.
 - Pre-building per-site trees from config site names.
 - Defaulting `caseSensitive` to `true` when a route leaves it undefined (React Router itself defaults to `false`).
@@ -296,8 +305,13 @@ Route membership is declared on routes themselves.
 **Route membership:**
 
 - `routesEntry` exports named `routes: SkuRouteObject[]`.
-- Optional `sites?: string[]` on a route. Omit or `undefined` ⇒ route is included for **every** config site.
+- Multi-site apps type that array as `SkuRouteObject<SiteOf<typeof server>>[]`.
+- Optional `sites?: Site[]` on a route. Omit or `undefined` ⇒ route is included for **every** config site.
 - Present `sites` ⇒ route is included **only** for those site names (exact string match against config site names).
+- The TypeScript generic checks `sites` against `getSite`’s return.
+- It does not read config `sites`.
+- Extra config names can still reach pre-build at runtime.
+- Runtime still fail-closes on an unknown `getSite` return.
 - No parent → child inheritance of `sites`. Site-specific deviation MUST set `sites` explicitly on each divergent route. Friction is intentional.
 - The tree walk stays recursive: if a parent is excluded for a site, that parent’s subtree is absent from that site’s tree (structure, not field inheritance).
 
@@ -634,11 +648,24 @@ Static writes the same value to `metadata.reportingEndpoints` instead.
 ### 12. Request-entry and routesEntry shapes
 
 ```ts
-// sku public type (lighter option — not a wrapped RR re-export)
-type SkuRouteObject = RouteObject & { sites?: string[] };
+// sku public types (lighter option — not a wrapped RR re-export)
+type SiteOf<ServerEntry> = /* getSite return, or string when omitted */;
+type SkuRouteObject<Site extends string = string> = Omit<
+  RouteObject,
+  'children'
+> & {
+  sites?: Site[];
+  children?: SkuRouteObject<Site>[];
+};
+type MapRoutePath = (args: {
+  path: string;
+  site: string;
+  parentSegments: string[];
+}) => string[];
 
 // routesEntry (config `routesEntry`, default `src/routes.tsx`)
-export const routes: SkuRouteObject[];
+export const routes: SkuRouteObject<SiteOf<typeof server>>[];
+// single-site / omitted getSite: SkuRouteObject[] (Site = string)
 
 // serverEntry — default export; getSite required only when config has >1 site
 import { defineServerEntry } from 'sku/runtime';
@@ -862,15 +889,29 @@ const client = defineClientEntry<typeof server>()({
 });
 export default client;
 
-// ssrContext.ts — type-only imports; no runtime cycle with entries
+// skuContext.ts — type-only imports; no runtime cycle with entries
 import type server from './server';
 import type client from './client';
-import { createSkuContexts } from 'sku/runtime';
+import {
+  createSkuContexts,
+  type SiteOf,
+  type SkuRouteObject,
+} from 'sku/runtime';
 
 export const { useSite, useClientContext, useReactContext } = createSkuContexts<
   typeof server,
   typeof client
 >();
+
+export type AppRouteObject = SkuRouteObject<SiteOf<typeof server>>;
+
+// routes.tsx — same Site as useSite, via alias from skuContext
+import type { AppRouteObject } from './skuContext';
+
+export const routes: AppRouteObject[] = [
+  { path: 'au-only', sites: ['au'] },
+  { path: 'nz-only', sites: ['nz'] },
+];
 ```
 
 `createSkuContexts` is a typed facade over one well-known React context module that sku’s render also uses.
@@ -887,6 +928,12 @@ It extracts:
 
 `useSite()` returns that `Site` union.
 No consumer cast is required.
+The same `Site` types `SkuRouteObject.sites`.
+Apps alias that type next to `createSkuContexts` in `src/skuContext.ts`.
+`routesEntry` imports the alias.
+It does not import the server entry.
+`createSkuContexts` MUST NOT return a `defineRoutes` helper.
+`routesEntry` MUST NOT take a runtime import from the hooks module solely to type `sites`.
 Language is not extracted into a React hook (see Non-Goals / Deferred).
 Hand-written `ClientContext` / `ReactContext` / site aliases remain optional style when an app prefers them.
 They are not required.
@@ -897,10 +944,11 @@ Rejected alternatives:
 - Per-property `defineGet*` helpers (ugly; one entry object is enough).
 - Requiring apps to declare context interfaces before writing getters.
 - Per-getter named exports (splits one contract; worse typing ergonomics).
-- Declaring `sites` on the server entry object or importing `sku.config` into the React graph for typing. Duplicates config and creates a layering smell. Apps narrow in `getSite` instead.
+- Declaring `sites` on the server entry object or importing `sku.config` into the React graph for typing. Duplicates config and creates a layering smell. Apps narrow in `getSite` instead. `SiteOf` reads that narrowed return.
 - Expecting `defineClientEntry` to infer `ClientContext` from client callback parameters alone. Inputs are not inference sources. Pass `typeof server`.
 - Hand-rolling a `ClientContext` type alias solely for `defineClientEntry<ClientContext>` when `typeof server` already carries it (optional style only; not required).
-- Generic `SkuRouteObject<S>` for route membership in this pass (follow-on).
+- Documenting a handwritten `SkuRouteObject<'au' | 'nz'>` as the happy path. That union can drift from `getSite`. It remains valid TypeScript. `SiteOf<typeof server>` is the documented source of truth.
+- Returning a `defineRoutes` identity from `createSkuContexts`. That couples `routesEntry` to the hooks module at runtime.
 
 React Router `createContext` keys for loaders remain a separate typing layer (RR already types `context.get(key)`).
 They are not fields extracted from the entry objects.
@@ -1056,7 +1104,11 @@ Multi-site examples declare ≥2 config sites and include `getSite` on the serve
 Request entries do not re-export `routes`.
 
 The template’s `routesEntry` scaffolds an app-owned pathless root layout (`src/RootLayout.tsx`) so router-aware wrapping (and Apollo-style provider mounts) have an idiomatic home.
-Typed hooks live in `src/ssrContext.ts`.
+Typed hooks live in `src/skuContext.ts`.
+The template omits `getSite`, so it keeps unparameterized `SkuRouteObject[]` (`Site` is `string`).
+Multi-site examples alias `SkuRouteObject` next to `createSkuContexts`.
+`routesEntry` imports that alias.
+It does not import the server entry.
 The home page calls `useSite()` (soft-default `'default'` when config `sites` is omitted).
 There is no `src/App/` shell — page content lives in per-page folders under `src/pages/` (for example `src/pages/home/home.tsx`).
 
@@ -1493,7 +1545,8 @@ Separate naming layers — do not collapse them into one word:
 | Render strategy                | **SSR** / **Static**              | Selected by `buildType`. Product copy says “SSR”, never “Vite SSR”                                                                                                                                   |
 | Create template                | **`ssr`**                         | `@sku-lib/create --template ssr` (not `vite-ssr`)                                                                                                                                                    |
 | Public import                  | **`sku/runtime`**                 | Browser-safe Managed Data Mode consumer entry (Decision 26: public contract + `optimizeDeps.exclude` target)                                                                                         |
-| Public types / symbols         | Drop `Ssr`                        | e.g. `createSkuContexts`, `SkuRouteObject`, `SkuServerEntry` / `SkuClientEntry`, `SkuGetSite`, … (`SkuProvider` stays a sku-internal mount name, not a public `sku/runtime` export)                  |
+| Public types / symbols         | Drop `Ssr`                        | e.g. `createSkuContexts`, `SkuRouteObject`, `SiteOf`, `SkuServerEntry` / `SkuClientEntry`, `SkuGetSite`, … (`SkuProvider` stays a sku-internal mount name, not a public `sku/runtime` export)        |
+| Consumer typed-hooks module    | **`src/skuContext.ts`**           | App file that calls `createSkuContexts`. Not sku’s resolved-config `SkuContext`. Product docs, the create template, and fixtures use this name.                                                      |
 
 **Why not `sku/ssr` (or another strategy-branded subpath):**
 The import carries contract APIs that are not SSR-specific (`define*Entry`, `createSkuContexts`, `useSite`, …).

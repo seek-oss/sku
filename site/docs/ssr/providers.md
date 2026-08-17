@@ -23,7 +23,7 @@ Document
 Create hooks bound to your entry objects:
 
 ```tsx
-// src/ssrContext.ts
+// src/skuContext.ts
 import { createSkuContexts } from 'sku/runtime';
 
 import type client from './client';
@@ -38,6 +38,8 @@ export const { useSite, useClientContext, useReactContext } = createSkuContexts<
 - `useSite()` — active site name
 - `useClientContext()` — serialisable content from `getClientContext` (shared with the browser)
 - `useReactContext()` — env-differing values from `getReactContext` (may differ on server vs client)
+
+To type `sites` on routes from the same `getSite` union, see [Strictly typed sites in route objects](./routing.md#strictly-typed-sites-in-route-objects).
 
 ## Pass values into React
 
@@ -192,7 +194,7 @@ export default server;
 ```tsx [Analytics.tsx]
 import { useEffect } from 'react';
 
-import { useReactContext } from './ssrContext';
+import { useReactContext } from './skuContext';
 
 export const Analytics = () => {
   const { analytics } = useReactContext();

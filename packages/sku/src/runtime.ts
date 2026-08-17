@@ -11,6 +11,7 @@ export type {
   MapRoutePath,
   MapRoutePathArgs,
   JsonValue,
+  SiteOf,
   SkuClientEntry,
   SkuClientGetReactContext,
   SkuClientGetRouterContext,

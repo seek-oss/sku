@@ -1,4 +1,4 @@
-import { useClientContext } from '../../ssrContext.js';
+import { useClientContext } from '../../skuContext.js';
 
 export function Component() {
   const clientContext = useClientContext();

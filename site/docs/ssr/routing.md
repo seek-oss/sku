@@ -136,6 +136,46 @@ export default server;
 
 :::
 
+### Strictly typed sites in route objects
+
+When defining `sites` in a route, you can narrow down the type of sites by defining `SiteName` in `SkuRouteObject<SiteName>`.
+
+You can get the site name directly from the return of your [`getSite`](./entries.md#getsite) method using `SkuRouteObject<SiteOf<typeof server>>`.
+
+A good practice is to export route types from the same file as `createSkuContexts`, then import them wherever you define routes.
+Do not import the server entry into those files.
+
+::: code-group
+
+```tsx [skuContext.ts]
+import {
+  createSkuContexts,
+  type SiteOf,
+  type SkuRouteObject,
+} from 'sku/runtime';
+
+import type client from './client';
+import type server from './server';
+
+export const { useSite, useClientContext, useReactContext } = createSkuContexts<
+  typeof server,
+  typeof client
+>();
+
+export type AppRouteObject = SkuRouteObject<SiteOf<typeof server>>;
+```
+
+```tsx [routes.tsx]
+import type { AppRouteObject } from './skuContext';
+
+export const routes: AppRouteObject[] = [
+  { path: 'au-only', sites: ['au'] },
+  { path: 'nz-only', sites: ['nz'] },
+];
+```
+
+:::
+
 ## Multiple paths with `mapRoutePath`
 
 When the same page should match more than one concrete path (for example `/about` and `/fr/about`, or `/` and `/fr`), export optional `mapRoutePath` from `routesEntry`.

@@ -1,7 +1,7 @@
 import { Outlet, Link } from 'react-router';
 
 import { ApolloProvider } from './ApolloProvider.js';
-import { useReactContext } from './ssrContext.js';
+import { useReactContext } from './skuContext.js';
 
 /**
  * Pathless root layout: isomorphic Apollo provider mounts here and reads

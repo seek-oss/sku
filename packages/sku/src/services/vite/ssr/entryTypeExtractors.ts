@@ -5,7 +5,9 @@
  */
 export type SiteOf<ServerEntry> = 'getSite' extends keyof ServerEntry
   ? NonNullable<ServerEntry['getSite']> extends (...args: never[]) => infer S
-    ? S
+    ? S extends string
+      ? S
+      : string
     : string
   : string;
 

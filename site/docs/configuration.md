@@ -620,6 +620,7 @@ Default: `./src/routes.tsx`
 Path may be `.tsx`, `.ts`, or `.js`.
 
 Module that exports named `routes` (`SkuRouteObject[]`) for both the server and client graphs.
+Multi-site apps type that array with the [`AppRouteObject` alias](./ssr/routing.md#strictly-typed-sites-in-route-objects) next to `createSkuContexts`.
 
 See [Routing](./ssr/routing.md).
 

@@ -214,7 +214,7 @@ export default client;
 import { Outlet } from 'react-router';
 
 import { ApolloProvider } from './ApolloProvider';
-import { useReactContext } from './ssrContext';
+import { useReactContext } from './skuContext';
 
 export const RootLayout = () => {
   const reactContext = useReactContext();

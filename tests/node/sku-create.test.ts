@@ -265,7 +265,7 @@ describe.each(['webpack', 'vite', 'ssr'])('sku-create %s', (template) => {
       expect(client).toContain("import type server from './server'");
       expect(client).toContain('onHydrate');
       await expect(
-        fs.access(fixturePath(projectName, 'src/ssrContext.ts')),
+        fs.access(fixturePath(projectName, 'src/skuContext.ts')),
       ).resolves.toBeUndefined();
       await expect(
         fs.access(fixturePath(projectName, 'src/pages/home/home.tsx')),

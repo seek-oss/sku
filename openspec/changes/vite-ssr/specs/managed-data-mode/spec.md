@@ -32,7 +32,18 @@ Sku MUST resolve `routesEntry` into both the server and client graphs via `__sku
 
 `routesEntry` MUST export named `routes` as `SkuRouteObject[]`.
 
-`SkuRouteObject` MUST be a sku type helper `RouteObject & { sites?: string[] }` (not a wrapped React Router re-export).
+`SkuRouteObject` MUST be a sku type helper `SkuRouteObject<Site extends string = string>` with `sites?: Site[]` and recursive `children?: SkuRouteObject<Site>[]` (not a wrapped React Router re-export).
+
+Omitting the generic MUST leave `sites` as `string[]`.
+
+Sku MUST export `SiteOf<ServerEntry>` from `sku/runtime`.
+It MUST be the same extractor `createSkuContexts` and `defineClientEntry` use for `Site`.
+When `getSite` is omitted, `SiteOf` MUST be `string`.
+
+Apps MAY write `SkuRouteObject<SiteOf<typeof server>>[]` so `sites` is checked against the server entry’s `getSite` return.
+Apps MAY alias `SkuRouteObject` next to `createSkuContexts` in `src/skuContext.ts`.
+Product docs and fixtures MUST import that alias into `routesEntry`.
+They MUST NOT import the server entry into `routesEntry` for that typing.
 
 Missing or non-array `routes` on `routesEntry` MUST hard-error.
 
@@ -52,9 +63,22 @@ Config `routes` (static prerender path lists) MUST NOT be used as the Managed Da
 - **THEN** sku fails with a hard error naming the entry/export
 - **AND** does not use `default` or soft-skip
 
+#### Scenario: sites membership is typed from SiteOf
+
+- **WHEN** `getSite` returns `'au' | 'nz'`
+- **AND** the app types `routes` as `SkuRouteObject<SiteOf<typeof server>>[]`
+- **THEN** `sites: ['au']` type-checks
+- **AND** `sites: ['uk']` is a type error
+
+#### Scenario: omitted getSite leaves sites as string
+
+- **WHEN** the server entry omits `getSite`
+- **AND** the app types `routes` as `SkuRouteObject[]`
+- **THEN** `sites` is typed as `string[]`
+
 ### Requirement: Optional sites membership and getSite select site-scoped route tree
 
-Optional `sites?: string[]` on a `SkuRouteObject` declares membership:
+Optional `sites?: Site[]` on a `SkuRouteObject<Site>` declares membership:
 
 - Omit / undefined ⇒ the route is included for **every** resolved site
 - Present ⇒ the route is included **only** for those site names (exact match against resolved site names)
@@ -334,6 +358,11 @@ Sku MUST always render `SkuProvider` outside the router — `Document` → `SkuP
 Sku MUST export `createSkuContexts<typeof server, typeof client>()` from `sku/runtime` so apps can obtain typed `useSite` / `useClientContext` / `useReactContext` bound to that provider.
 `createSkuContexts` MUST extract `Site` from the server entry’s `getSite` return (`string` when `getSite` is omitted), `ClientContext` from `getClientContext`, and `ReactContext` from both entries’ `getReactContext` returns (union when they differ).
 `useSite()` MUST return that `Site` type.
+That same `Site` MUST type `SkuRouteObject.sites` when apps write `SkuRouteObject<SiteOf<typeof server>>`.
+Apps MAY alias that type next to `createSkuContexts` in `src/skuContext.ts`.
+Product docs and fixtures MUST import that alias into `routesEntry`.
+They MUST NOT import the server entry into `routesEntry` for that typing.
+`createSkuContexts` MUST NOT return a `defineRoutes` helper.
 `createSkuContexts` MUST NOT extract a language React hook from `getLanguage` in this change.
 Apps MUST NOT be required to declare hand-written `ClientContext` / `ReactContext` / site aliases.
 `createSkuContexts` MUST NOT ship per-property `defineGet*` helpers.
@@ -467,6 +496,13 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **THEN** `useSite()` is typed as that union
 - **AND** later server sibling getters receive `site` typed as that union
 - **AND** `defineClientEntry<typeof server>` client sibling `site` args are typed as that union
+
+#### Scenario: SkuRouteObject sites typed from the same SiteOf
+
+- **WHEN** `getSite` returns `'au' | 'nz'`
+- **AND** the app types `routes` as `SkuRouteObject<SiteOf<typeof server>>[]` next to `createSkuContexts`
+- **THEN** `sites` is typed as `('au' | 'nz')[]`
+- **AND** `useSite()` is typed as `'au' | 'nz'`
 
 #### Scenario: Omitting getSite leaves useSite as string
 

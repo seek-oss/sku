@@ -1,4 +1,6 @@
-import type { MapRoutePath, SkuRouteObject } from 'sku/runtime';
+import type { MapRoutePath } from 'sku/runtime';
+
+import type { AppRouteObject } from './skuContext.js';
 
 import { RootLayout } from './RootLayout.js';
 
@@ -28,7 +30,7 @@ export const mapRoutePath: MapRoutePath = ({ path, site, parentSegments }) => {
  * `mapRoutePath` clones the index home and `about` for AU so `/` + `/au`
  * and `/about` + `/au/about` share the same lazy modules (preload-safe).
  */
-export const routes: SkuRouteObject[] = [
+export const routes: AppRouteObject[] = [
   {
     Component: RootLayout,
     children: [

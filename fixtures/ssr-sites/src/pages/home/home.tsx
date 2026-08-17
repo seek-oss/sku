@@ -1,4 +1,4 @@
-import { useSite } from '../../ssrContext.js';
+import { useSite } from '../../skuContext.js';
 
 export function Component() {
   const site = useSite();

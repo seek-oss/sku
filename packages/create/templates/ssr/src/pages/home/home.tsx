@@ -11,7 +11,7 @@ import {
 } from 'braid-design-system';
 import { Link } from 'react-router';
 
-import { useSite } from '../../ssrContext';
+import { useSite } from '../../skuContext';
 
 import * as styles from './home.css';
 

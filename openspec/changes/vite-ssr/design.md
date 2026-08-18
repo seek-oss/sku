@@ -587,29 +587,52 @@ Client hydrates via `hydrateRoot(document, …)`.
 
 ### 9a. Document render attempt lifecycle
 
-Each `renderToPipeableStream` call is one attempt.
-An attempt settles at most once: resolve with a pipeable result, or reject.
+Two objects own streaming, not a shared `{ pipe, abort }` handle.
 
-Ownership is a small outcome (`open` → `resolved` | `rejected` | `cancelled`).
+**Attempt** is one `renderToPipeableStream` call.
+It settles at most once: ready to commit, or reject.
 Late React callbacks after settle MUST no-op.
+`abort()` always stops that React stream, including after settle, so a deadline or disconnect can still tear it down.
 
-**Cancellation** (render `AbortSignal` aborted, including already-aborted at start):
+**Policy** (`render` + `streamDocument`) owns retry, cancellation, and the deadline.
+`render()` MUST reject with the abort reason when the signal is already aborted, before `query()`.
+It MUST reject again if the signal aborts before a document is ready to commit.
+Loaders and actions MUST NOT run after abort.
 
-- Reject the attempt with the abort reason.
+At most one ErrorBoundary recovery pass, via a fresh attempt (`getStaticContextFromError`).
+The failed attempt is aborted so its callbacks cannot settle the policy promise.
+Recovery is for real render failures only.
+Cancellation, timeout, and a throw from recovery setup MUST NOT start or continue recovery.
+A recovery-setup throw MUST reject `render()`.
+
+**Commit** is the only HTTP seam.
+HTML middleware MUST NOT call React `pipe` / `abort` directly.
+`commit(destination, { signal, beforePipe })` MUST:
+
+1. Subscribe `signal` → abort React before any write.
+2. No-op the body when `signal` is already aborted.
+3. Run `beforePipe` (route headers, CSP, status).
+4. Recheck `signal` after `beforePipe` and skip `pipe` when aborted.
+5. Wrap `pipe` with the insert-html transform.
+
+**Deadline:** 10s from the start of `streamDocument`, shared across the recovery attempt.
+Not a public config knob.
+Timeout before commit rejects (Express error path while connected).
+Timeout after commit aborts remaining React work only.
+Webpack’s string renderer already aborts at 5s.
+Streaming uses 10s so shell-first responses can flush deferred content.
+
+**Cancellation** (render `AbortSignal` aborted):
+
+- Reject with the abort reason.
 - Abort the React stream.
 - MUST NOT start the ErrorBoundary recovery pass.
 - MUST NOT leave the render promise hanging.
 
-Abort alone is not enough.
+Aborting React alone is not enough.
 React’s `onError` does not settle sku’s promise, and after the shell `abort()` may not call `onError` at all.
 
-**Recoverable render failure** (Component / Suspense throw while still eligible):
-
-- At most one ErrorBoundary recovery pass via a fresh attempt (`getStaticContextFromError`).
-- The first attempt is abandoned so its callbacks cannot settle or retry again.
-- Recovery is for real render failures only, never for cancellation.
-
-**Insert / pipe transform failure** after the attempt has resolved to a pipeable result:
+**Insert / pipe transform failure** after commit has started the body:
 
 - Abort the React stream.
 - Error the Node response stream.
@@ -619,10 +642,12 @@ React’s `onError` does not settle sku’s promise, and after the shell `abort(
 
 Rejected approaches:
 
-| Approach                                   | Why not                                                                |
-| ------------------------------------------ | ---------------------------------------------------------------------- |
-| Abort via `stream.abort()` only            | Promise can hang; `waitForAll` `onError` can start ErrorBoundary retry |
-| Require post-shell abort to call `onError` | React does not guarantee that; Node stream failure is the contract     |
+| Approach                                   | Why not                                                                    |
+| ------------------------------------------ | -------------------------------------------------------------------------- |
+| Abort via `stream.abort()` only            | Promise can hang; `waitForAll` `onError` can start ErrorBoundary retry     |
+| Require post-shell abort to call `onError` | React does not guarantee that; Node stream failure is the contract         |
+| Expose `{ pipe, abort }` to middleware     | Abort/pipe protocol splits across files and misses the header-write window |
+| Recursive `streamDocument` + phase enum    | Retry policy mixed into one React attempt                                  |
 
 ### 10. No `transformIndexHtml` on the SSR path
 
@@ -1131,13 +1156,14 @@ Dev/prod share the same HTML middleware and disconnect handling.
 
 Wire an `AbortController` to client disconnect for the request.
 Skip starting render when the request is already disconnected.
-After `render` resolves, if cancelled: abort any pipeable result and write nothing (including short-circuit `Response` bodies).
-After `pipe` starts, disconnect still aborts React.
+After `render` resolves to a short-circuit `Response`, if cancelled: write nothing.
+After `render` resolves to a document, always `commit` with that signal.
+`commit` aborts React and skips the body when the client is gone, including during `beforePipe` header writes.
 
-On streamed HTML, forward `loaderHeaders` / `actionHeaders` (append; preserve `Set-Cookie`), then sku `Content-Type` / CSP.
+On streamed HTML, `beforePipe` forwards `loaderHeaders` / `actionHeaders` (append; preserve `Set-Cookie`), then sku `Content-Type` / CSP.
 
 Cancellation rejections MUST NOT reach Express `next` or the render-error hook.
-Genuine failures on a connected request still do.
+Genuine failures on a connected request still do, including the document render deadline.
 
 ### 19. Hydration payload safety
 
@@ -1697,8 +1723,12 @@ Client instrumentations MAY include `router` and `route` levels.
 | Duplicate queries after hydration                 | Fixture asserts server-run queries are served from the transported cache and that a post-hydration query still fetches.                                                                                         |
 | Wrong transport build resolved                    | Apollo ships separate `browser` / `node` condition builds and asserts on mismatch. Fixture exercises both `sku start` and production.                                                                           |
 | Injection lost under `waitForAll`                 | Buffer to `onAllReady` and write injected nodes in stream order. Covered by tests.                                                                                                                              |
-| Hung render promise on abort                      | Decision 9a: cancel rejects the attempt with the abort reason. Do not rely on React `onError` alone to settle.                                                                                                  |
-| ErrorBoundary retry after disconnect              | Decision 9a: cancellation abandons the attempt and MUST NOT start recovery. Middleware swallows cancel rejections (Decision 18).                                                                                |
+| Hung render promise on abort                      | Decision 9a: policy rejects with the abort reason. Do not rely on React `onError` alone to settle.                                                                                                              |
+| ErrorBoundary retry after disconnect              | Decision 9a: cancellation MUST NOT start recovery. Middleware swallows cancel rejections (Decision 18).                                                                                                         |
+| Abort during header writes still pipes            | `commit` subscribes to abort before `beforePipe` and rechecks before `pipe`.                                                                                                                                    |
+| Already-aborted POST still runs the action        | `render()` rejects before `query()` when the signal is already aborted.                                                                                                                                         |
+| Recovery setup throw hangs the promise            | Policy catches `getStaticContextFromError` and rejects.                                                                                                                                                         |
+| Hung `waitForAll` / Suspense holds the socket     | 10s sku-owned deadline from `streamDocument` start. Uncommitted → reject. After commit → abort remaining React work.                                                                                            |
 | Insert flush throws mid-stream                    | Abort React and error the destination stream. Do not leave React writing into a dead transform. Covered by tests.                                                                                               |
 | Transport module duplicated in graph              | Decision 26 (same as `getCspNonce` / preload / `SkuProvider`). Exclude stops `.vite/deps` clone. Public + private `#` paths share physical modules via `unbundle`.                                              |
 | Dual path under published install                 | `optimizeDeps.exclude` for `sku` + `sku/runtime` keeps app imports and sku `#` mounts on the same unbundled modules. Skip dedicated tarball e2e this pass.                                                      |

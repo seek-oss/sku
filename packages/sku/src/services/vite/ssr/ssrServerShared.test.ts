@@ -11,7 +11,9 @@ import {
   listen,
   type RenderFunction,
 } from './ssrServerShared.js';
+import { bindCommit } from './bindCommit.js';
 import type { RenderResult } from './types.js';
+import type { PipeableStream } from 'react-dom/server';
 
 const createMockRes = (): Response => {
   const headers: Record<string, string | string[]> = {};
@@ -50,6 +52,32 @@ const createMockRes = (): Response => {
   });
   return res as Response;
 };
+
+const createDocumentResult = ({
+  abort = vi.fn(),
+  pipe = vi.fn((destination: NodeJS.WritableStream) => destination),
+  statusCode = 200,
+  headers = new Headers(),
+  inlineScripts = [] as string[],
+}: {
+  abort?: ReturnType<typeof vi.fn>;
+  pipe?: ReturnType<typeof vi.fn>;
+  statusCode?: number;
+  headers?: Headers;
+  inlineScripts?: string[];
+} = {}) => ({
+  abort,
+  pipe,
+  result: {
+    statusCode,
+    headers,
+    inlineScripts,
+    commit: bindCommit({
+      pipe: pipe as PipeableStream['pipe'],
+      abort: abort as PipeableStream['abort'],
+    }),
+  } satisfies RenderResult,
+});
 
 const baseListenOptions = {
   publicPath: '/static/',
@@ -195,15 +223,8 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
 
     res.emit('close');
 
-    const abort = vi.fn();
-    const pipe = vi.fn();
-    resolveRender({
-      pipe,
-      abort,
-      statusCode: 200,
-      headers: new Headers(),
-      inlineScripts: [],
-    });
+    const { abort, pipe, result } = createDocumentResult();
+    resolveRender(result);
 
     await done;
 
@@ -262,31 +283,25 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
     expect(next).not.toHaveBeenCalled();
   });
 
-  it('aborts React when the client disconnects after the pre-write check', async () => {
-    const abort = vi.fn();
-    const pipe = vi.fn();
+  it('aborts React when the client disconnects during header writes and does not pipe', async () => {
+    const { abort, pipe, result } = createDocumentResult();
     const res = createMockRes();
-    // Disconnect lands after the middleware has already checked the signal,
-    // while it is still writing headers.
+    // Disconnect lands while commit is writing headers, after the initial
+    // abort check and before pipe.
     (res.set as ReturnType<typeof vi.fn>).mockImplementationOnce(() => {
       res.emit('close');
       return res;
     });
 
     const middleware = createHtmlRenderMiddleware({
-      render: async () => ({
-        pipe,
-        abort,
-        statusCode: 200,
-        headers: new Headers(),
-        inlineScripts: [],
-      }),
+      render: async () => result,
       ...htmlMiddlewareOptions,
     });
 
     await middleware(createReq(), res, vi.fn());
 
     expect(abort).toHaveBeenCalledTimes(1);
+    expect(pipe).not.toHaveBeenCalled();
   });
 
   it('does not write a short-circuit Response when the client disconnects mid-read', async () => {
@@ -316,16 +331,9 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
   });
 
   it('aborts React when the client disconnects after pipe starts', async () => {
-    const abort = vi.fn();
-    const pipe = vi.fn();
+    const { abort, pipe, result } = createDocumentResult();
     const middleware = createHtmlRenderMiddleware({
-      render: async () => ({
-        pipe,
-        abort,
-        statusCode: 200,
-        headers: new Headers(),
-        inlineScripts: [],
-      }),
+      render: async () => result,
       ...htmlMiddlewareOptions,
     });
 
@@ -392,13 +400,10 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
 
   it('omits nonce from CSP headers when none was requested', async () => {
     const middleware = createHtmlRenderMiddleware({
-      render: async () => ({
-        pipe: vi.fn(),
-        abort: vi.fn(),
-        statusCode: 200,
-        headers: new Headers(),
-        inlineScripts: ['console.log(1)'],
-      }),
+      render: async () =>
+        createDocumentResult({
+          inlineScripts: ['console.log(1)'],
+        }).result,
       assets: { bootstrapModules: [], css: [], modulePreloads: [] },
       cspEnabled: true,
       cspExtraScriptSrcHosts: [],
@@ -425,15 +430,12 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
 
   it('appends loader headers such as Set-Cookie before CSP', async () => {
     const middleware = createHtmlRenderMiddleware({
-      render: async () => ({
-        pipe: vi.fn(),
-        abort: vi.fn(),
-        statusCode: 200,
-        headers: new Headers({
-          'Set-Cookie': 'sku-vite-ssr=1; Path=/',
-        }),
-        inlineScripts: [],
-      }),
+      render: async () =>
+        createDocumentResult({
+          headers: new Headers({
+            'Set-Cookie': 'sku-vite-ssr=1; Path=/',
+          }),
+        }).result,
       assets: { bootstrapModules: [], css: [], modulePreloads: [] },
       cspEnabled: false,
       cspExtraScriptSrcHosts: [],
@@ -461,13 +463,9 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
   });
 
   it('threads Express req into render (getters receive req only)', async () => {
-    const render = vi.fn<RenderFunction>(async () => ({
-      pipe: vi.fn(),
-      abort: vi.fn(),
-      statusCode: 200,
-      headers: new Headers(),
-      inlineScripts: [],
-    }));
+    const render = vi.fn<RenderFunction>(
+      async () => createDocumentResult().result,
+    );
 
     const middleware = createHtmlRenderMiddleware({
       render,

@@ -46,7 +46,7 @@ const renderToHtml = async ({
       },
     });
     writable.on('error', reject);
-    result.pipe(writable);
+    result.commit(writable);
   });
 
   return {
@@ -163,7 +163,7 @@ describe('insertHtml stream injection', () => {
         },
       });
       writable.on('error', reject);
-      result.pipe(writable);
+      result.commit(writable);
     });
 
     const html = Buffer.concat(chunks).toString('utf-8');

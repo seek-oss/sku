@@ -161,6 +161,14 @@ It is not a history of intermediate APIs.
 - [x] 19.4 Insert/transform failure after pipe: abort React and error the Node response stream. Do not treat React `onError` as the success criterion for insert failures.
 - [x] 19.5 Tests: already-aborted signal, abort during pending `waitForAll` (no ErrorBoundary), disconnect before Response write, disconnect after pipe, connected vs cancelled Express error paths, insert callback throw fails the stream.
 
+## 20. Document stream ownership refactor
+
+- [x] 20.1 Split one React attempt (`createDocumentAttempt`) from retry/cancel/deadline policy (`streamDocument` loop). Drop recursive retry and the `allowErrorRetry` flag.
+- [x] 20.2 Replace `{ pipe, abort }` with `commit(destination, { signal, beforePipe })`. Subscribe abort before header writes. Recheck before `pipe`. Fold insert-html wrapping into commit.
+- [x] 20.3 `render()` rejects on an already-aborted signal before `query()`. Recovery-setup throws reject. 10s sku-owned deadline from `streamDocument` start (no retry on timeout).
+- [x] 20.4 HTML middleware always `commit`s document results with the disconnect signal. Split `ssrServerShared` (web request, sendResponse, middleware, listen).
+- [x] 20.5 Tests: abort during `beforePipe` does not pipe; aborted signal skips actions/`query`; recovery-setup throw rejects; waitForAll deadline rejects without ErrorBoundary; abort of the recovery attempt.
+
 ## Deferred
 
 See design Non-Goals and Resolved / deferred for the full list.

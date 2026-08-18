@@ -1,5 +1,6 @@
 import { runWithSsrRequestContext } from '#runtime/requestContext';
 
+import { abortReason } from './abortReason.js';
 import { collectRouteHeaders } from './collectRouteHeaders.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
 import { getModuleIds } from './getModuleIds.js';
@@ -32,6 +33,10 @@ const renderDocument = async ({
   renderManifest,
   getRouterContext,
 }: RenderArgs): Promise<RenderResult> => {
+  if (options.signal?.aborted) {
+    throw abortReason(options.signal);
+  }
+
   // Call order before query(): site → language → clientContext → reactContext → routerContext.
   const site = getSite ? getSite({ req }) : Object.keys(siteStaticHandlers)[0];
   const language = getLanguage?.({ req });
@@ -57,6 +62,10 @@ const renderDocument = async ({
     request,
     requestContext ? { requestContext } : undefined,
   );
+
+  if (options.signal?.aborted) {
+    throw abortReason(options.signal);
+  }
 
   if (context instanceof Response) {
     return { response: context };
@@ -106,7 +115,6 @@ const renderDocument = async ({
     waitForAll,
     nonce,
     options,
-    allowErrorRetry: true,
   });
 };
 

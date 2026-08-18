@@ -215,6 +215,8 @@ export interface RenderOptions {
   development?: boolean;
   onShellError?: (error: unknown) => void;
   onError?: (error: unknown) => void;
+  /** Document render deadline in ms. Default 10_000. */
+  renderTimeoutMs?: number;
 }
 
 export interface RenderArgs {
@@ -232,12 +234,23 @@ export interface RenderArgs {
   getRouterContext?: SkuServerGetRouterContext;
 }
 
+export type DocumentDestination = Parameters<PipeableStream['pipe']>[0];
+
+export type CommitDocumentOptions = {
+  signal?: AbortSignal;
+  beforePipe?: (destination: DocumentDestination) => void;
+};
+
+export type CommitDocument = (
+  destination: DocumentDestination,
+  options?: CommitDocumentOptions,
+) => void;
+
 export interface RenderSuccess {
-  pipe: PipeableStream['pipe'];
-  abort: PipeableStream['abort'];
   statusCode: number;
   headers: Headers;
   inlineScripts: string[];
+  commit: CommitDocument;
 }
 
 export type RenderResult = RenderSuccess | { response: Response };

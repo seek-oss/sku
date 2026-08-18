@@ -13,7 +13,6 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@sku-private/test-utils": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vanilla-extract/css": "catalog:",

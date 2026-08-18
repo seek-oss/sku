@@ -15,7 +15,7 @@ export const configPlugin = ({
   skuContext: SkuContext;
 }): PluginOption => ({
   name: makePluginName('config'),
-  config: () => ({
+  config: async () => ({
     publicDir: skuContext.paths.public,
     root: process.cwd(),
     resolve: {
@@ -42,7 +42,16 @@ export const configPlugin = ({
       rolldownOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],
       },
-      exclude: skuContext.skipPackageCompatibilityCompilation,
+      exclude: [
+        ...skuContext.skipPackageCompatibilityCompilation,
+        // Pre-bundling bypasses plugin transforms, so compile packages have to be
+        // excluded for their loadable imports to be converted. Without this, the
+        // dev server converts them for the server render but not for the client,
+        // which results in a hydration mismatch.
+        ...(skuContext.convertLoadable
+          ? await skuContext.paths.compilePackages()
+          : []),
+      ],
     },
     ssr: {
       external: ['serialize-javascript', '@sku-lib/vite'],

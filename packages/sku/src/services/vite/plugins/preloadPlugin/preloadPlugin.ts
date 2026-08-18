@@ -19,8 +19,10 @@ import { makePluginName } from '../../helpers/makePluginName.js';
  * Any improvements here are encouraged and more than welcome.
  */
 
-const traverse = _traverse.default;
-const generate = _generate.default;
+// These packages are CJS. Node's interop nests their export under `default`, while a
+// bundler's interop unwraps it.
+const traverse = _traverse.default ?? _traverse;
+const generate = _generate.default ?? _generate;
 
 interface PluginOptions {
   /**
@@ -33,8 +35,11 @@ interface PluginOptions {
   convertFromWebpack?: boolean;
 }
 
-// Modules to scan for dynamic imports
-const include = /\.(jsx?|tsx?)$/;
+// Modules to scan for dynamic imports.
+const include = /\.[cm]?[jt]sx?$/;
+
+// dev server served modules carry a query string, e.g. `?v=`, which has to be removed.
+const cleanId = (id: string) => id.split('?')[0];
 
 // Find all JSX files that have the `loadable` import.
 // Find the `loadable` import and inject the moduleId into the third argument.
@@ -50,101 +55,101 @@ export function preloadPlugin({
   return {
     name: makePluginName('preload'),
 
-    async transform(code, id) {
+    async transform(code, rawId) {
       const isSsr = this.environment?.name === 'ssr';
+      const id = cleanId(rawId);
 
       if (!include.test(id)) {
         return null;
       }
 
-      if (
-        code.includes(WEBPACK_LOADABLE_IMPORT) &&
-        code.includes(VITE_LOADABLE_IMPORT)
-      ) {
+      const hasWebpackLoadableImport = code.includes(WEBPACK_LOADABLE_IMPORT);
+      const hasViteLoadableImport = code.includes(VITE_LOADABLE_IMPORT);
+
+      if (!hasWebpackLoadableImport && !hasViteLoadableImport) {
+        return null;
+      }
+
+      if (hasWebpackLoadableImport && hasViteLoadableImport) {
         throw new Error(
           `Both ${WEBPACK_LOADABLE_IMPORT} and ${VITE_LOADABLE_IMPORT} imports found in ${id}. Please remove one of them.`,
         );
       }
 
-      let ast;
-      // Find dynamic imports
-      if (
-        code.includes(WEBPACK_LOADABLE_IMPORT) ||
-        code.includes(VITE_LOADABLE_IMPORT)
-      ) {
-        ast = parse(code, {
-          sourceType: 'module',
-          plugins: ['jsx', 'typescript'],
-        });
-
-        let injected = false;
-
-        let loadableFunctionIdentifier = 'loadable';
-
-        traverse(ast, {
-          ImportDeclaration(importPath) {
-            if (
-              !convertFromWebpack &&
-              code.includes(WEBPACK_LOADABLE_IMPORT) &&
-              !code.includes(VITE_LOADABLE_IMPORT)
-            ) {
-              console.log(
-                `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid in a Vite application. Please install '@sku-lib/vite' and run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`,
-              );
-              return;
-            }
-
-            // Find the loadable import name and see if it has been aliased.
-            if (
-              t.isStringLiteral(importPath.node.source, {
-                value: VITE_LOADABLE_IMPORT,
-              })
-            ) {
-              loadableFunctionIdentifier =
-                getViteLoadableSpecifierName(importPath);
-              return;
-            }
-
-            if (
-              t.isStringLiteral(importPath.node.source, {
-                value: WEBPACK_LOADABLE_IMPORT,
-              })
-            ) {
-              loadableFunctionIdentifier =
-                getWebpackLoadableSpecifierName(importPath);
-              convertWebpackToViteImport(importPath);
-              // Handle imports of loadableReady imports here too.
-            }
-          },
-          CallExpression(callPath) {
-            // only inject the module ID for ssr builds.
-            if (
-              callPath
-                .get('callee')
-                .isIdentifier({ name: loadableFunctionIdentifier }) &&
-              isSsr
-            ) {
-              injected = injectModuleID({
-                callPath,
-                id,
-              });
-            }
-          },
-        });
-
-        if (injected) {
-          if (debug) {
-            this.info('Injected moduleId in React component');
-          }
-          count++;
-          injectedModules.add(id);
-        }
-        const output = generate(ast, {}, code);
-        return {
-          code: output.code,
-          map: output.map,
-        };
+      if (hasWebpackLoadableImport && !convertFromWebpack) {
+        console.log(
+          `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid in a Vite application. Please install '@sku-lib/vite' and run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`,
+        );
       }
+
+      // Find dynamic imports
+      const ast = parse(code, {
+        sourceType: 'unambiguous',
+        plugins: ['jsx', 'typescript'],
+      });
+
+      let injected = false;
+
+      let loadableFunctionIdentifier = 'loadable';
+
+      traverse(ast, {
+        ImportDeclaration(importPath) {
+          // Find the loadable import name and see if it has been aliased.
+          if (
+            t.isStringLiteral(importPath.node.source, {
+              value: VITE_LOADABLE_IMPORT,
+            })
+          ) {
+            loadableFunctionIdentifier =
+              getViteLoadableSpecifierName(importPath);
+            return;
+          }
+
+          if (
+            convertFromWebpack &&
+            t.isStringLiteral(importPath.node.source, {
+              value: WEBPACK_LOADABLE_IMPORT,
+            })
+          ) {
+            const localName = getWebpackLoadableSpecifierName(importPath);
+
+            // leave named imports (e.g., `loadableReady`) alone since they have no vite equivalent.
+            if (!localName) {
+              return;
+            }
+
+            loadableFunctionIdentifier = localName;
+            convertWebpackToViteImport(importPath, localName);
+          }
+        },
+        CallExpression(callPath) {
+          // only inject the module ID for ssr builds.
+          if (
+            callPath
+              .get('callee')
+              .isIdentifier({ name: loadableFunctionIdentifier }) &&
+            isSsr
+          ) {
+            injected = injectModuleID({
+              callPath,
+              id,
+            });
+          }
+        },
+      });
+
+      if (injected) {
+        if (debug) {
+          this.info('Injected moduleId in React component');
+        }
+        count++;
+        injectedModules.add(id);
+      }
+      const output = generate(ast, {}, code);
+      return {
+        code: output.code,
+        map: output.map,
+      };
 
       return null;
     },

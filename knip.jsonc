@@ -178,5 +178,12 @@
     "fixtures/vite-render-error": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },
+    "fixtures/vite-compile-package-styles": {
+      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      "ignoreDependencies": [
+        "@sku-fixtures/package-with-vanilla-extract-source",
+        "@vanilla-extract/css",
+      ],
+    },
   },
 }

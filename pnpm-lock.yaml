@@ -1007,9 +1007,6 @@ importers:
         specifier: 'catalog:'
         version: 19.2.7(react@19.2.7)
     devDependencies:
-      '@sku-private/test-utils':
-        specifier: workspace:*
-        version: link:../../private/test-utils
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.17

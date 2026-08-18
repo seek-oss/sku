@@ -995,6 +995,37 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/vite-compile-package-styles:
+    dependencies:
+      '@sku-fixtures/package-with-vanilla-extract-source':
+        specifier: ./fake/node_modules/package-with-vanilla-extract-source
+        version: link:fake/node_modules/package-with-vanilla-extract-source
+      react:
+        specifier: 'catalog:'
+        version: 19.2.7
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.7(react@19.2.7)
+    devDependencies:
+      '@sku-private/test-utils':
+        specifier: workspace:*
+        version: link:../../private/test-utils
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.17)
+      '@vanilla-extract/css':
+        specifier: 'catalog:'
+        version: 1.21.1(babel-plugin-macros@3.1.0)
+      dedent:
+        specifier: ^1.5.1
+        version: 1.7.2(babel-plugin-macros@3.1.0)
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/vite-loadable-css-order:
     dependencies:
       '@sku-private/react-lib-with-loadable':

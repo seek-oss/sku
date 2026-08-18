@@ -580,10 +580,32 @@ Docs (`configuration.md` + SSR product / Migrating) MUST state that both options
 ### 9. Full-document streaming
 
 React owns `<html>`, `<head>`, and `<body>`.
-Pipe on `onShellReady`.
-Optional `handle.waitForAll` waits for `onAllReady`.
-Abort on client disconnect.
 Client hydrates via `hydrateRoot(document, …)`.
+
+Default pipe is `onShellReady` (shell first, then deferred).
+Optional `handle.waitForAll` waits for `onAllReady` before the HTML body starts.
+
+**Commit is the point of no return.**
+Before sku pipes the document, the request must end as HTML (success or ErrorBoundary) or as a cancelled request.
+After pipe starts, sku MUST NOT start a second document.
+
+Loader / action errors already on the static context from `query()` render ErrorBoundary on the first pass (Decision 3).
+A throw from the React tree during `renderToPipeableStream` does not.
+React will not produce ErrorBoundary HTML on that first pass, and under `waitForAll` a rejected Suspense tree means `onAllReady` never settles.
+
+**Before commit**, sku recovers at most once: abort the failed attempt, put the error on a static context at the deepest rendered boundary, and render again so the nearest ErrorBoundary is the body (status 500, or the status of a route error response).
+That second pass is a normal errored-route render.
+If it cannot produce a document, fail the request (Express). Do not loop. Do not hang waiting for `onAllReady`.
+
+Client abort is not a render error and MUST NOT start recovery.
+The HTML middleware owns request liveness as one `AbortSignal`.
+The stream attempt honours it in every phase (Decision 18).
+
+**After commit**, disconnect aborts React.
+Insert / pipeline failures abort React and MUST be surfaced on `onError` — React’s `abort()` after the shell does not reliably call `onError` (Decision 21a owns the insert transform).
+Partial HTML on a live connection is inherent to streaming.
+
+Rejected: a sku-owned error-page API; treating `onError` after the shell as a new document; retrying on abort.
 
 ### 10. No `transformIndexHtml` on the SSR path
 
@@ -1088,7 +1110,14 @@ Loader-data prefetch stays out of scope.
 
 ### 18. Shared HTML middleware + loader/action headers
 
-Dev/prod share abort-before-write.
+The HTML middleware owns request liveness as one `AbortSignal` from disconnect (`req` aborted / `res` close).
+The stream attempt honours that signal in every phase (Decision 9).
+
+Before commit: abort, do not write the document body, do not start ErrorBoundary recovery, do not `next(error)` for the abort.
+After pipe starts: abort React. Do not start a second document.
+
+Dev/prod share this behaviour.
+
 On streamed HTML, forward `loaderHeaders` / `actionHeaders` (append; preserve `Set-Cookie`), then sku `Content-Type` / CSP.
 
 ### 19. Hydration payload safety
@@ -1648,6 +1677,12 @@ Client instrumentations MAY include `router` and `route` levels.
 | Duplicate queries after hydration                 | Fixture asserts server-run queries are served from the transported cache and that a post-hydration query still fetches.                                                                                         |
 | Wrong transport build resolved                    | Apollo ships separate `browser` / `node` condition builds and asserts on mismatch. Fixture exercises both `sku start` and production.                                                                           |
 | Injection lost under `waitForAll`                 | Buffer to `onAllReady` and write injected nodes in stream order. Covered by tests.                                                                                                                              |
+| `waitForAll` hangs on rejected Suspense           | Treat a render error while still buffering as pre-commit failure. Recover once via ErrorBoundary. Must not wait forever for `onAllReady`.                                                                       |
+| Render-error retry loops                          | Recover at most once. Abort / disconnect is not a render error and must not start recovery.                                                                                                                     |
+| Recovery pass hangs when it also errors           | Fail closed to Express if the ErrorBoundary pass cannot produce a document (including `waitForAll` errors that arrive via `onError`, not `onShellError`).                                                       |
+| Abort reported as Express 500                     | Middleware swallows rejection when the signal is aborted / the client is gone. Do not `next(error)` for disconnect.                                                                                             |
+| Silent post-shell abort                           | React `abort()` after the shell does not reliably call `onError`. Sku surfaces insert / pipeline failures on `onError` itself.                                                                                  |
+| RR private deepest-boundary id                    | Used only to place the recovered error on the static context. Fall back to the root route id; re-throw if none.                                                                                                 |
 | Transport module duplicated in graph              | Decision 26 (same as `getCspNonce` / preload / `SkuProvider`). Exclude stops `.vite/deps` clone. Public + private `#` paths share physical modules via `unbundle`.                                              |
 | Dual path under published install                 | `optimizeDeps.exclude` for `sku` + `sku/runtime` keeps app imports and sku `#` mounts on the same unbundled modules. Skip dedicated tarball e2e this pass.                                                      |
 | Trust proxy off unless configured                 | Opt-in `expressTrustProxy`. Template sets `true`. Other values via `onListen`.                                                                                                                                  |

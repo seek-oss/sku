@@ -157,6 +157,25 @@ describe('createWebRequest', () => {
 });
 
 describe('createHtmlRenderMiddleware abort-before-write', () => {
+  const htmlMiddlewareOptions = {
+    assets: { bootstrapModules: [], css: [], modulePreloads: [] },
+    cspEnabled: false,
+    cspExtraScriptSrcHosts: [] as string[],
+    cspReportOnlyEnabled: false,
+    cspReportOnlyExtraScriptSrcHosts: [] as string[],
+    development: true,
+  };
+
+  const createReq = (overrides: Record<string, unknown> = {}) =>
+    ({
+      protocol: 'http',
+      originalUrl: '/',
+      method: 'GET',
+      get: () => 'localhost',
+      headers: {},
+      ...overrides,
+    }) as unknown as Request;
+
   it('does not write HTML when the client disconnects before headers', async () => {
     let resolveRender!: (result: RenderResult) => void;
     const renderPromise = new Promise<RenderResult>((resolve) => {
@@ -165,21 +184,10 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
 
     const middleware = createHtmlRenderMiddleware({
       render: async () => renderPromise,
-      assets: { bootstrapModules: [], css: [], modulePreloads: [] },
-      cspEnabled: false,
-      cspExtraScriptSrcHosts: [],
-      cspReportOnlyEnabled: false,
-      cspReportOnlyExtraScriptSrcHosts: [],
-      development: true,
+      ...htmlMiddlewareOptions,
     });
 
-    const req = {
-      protocol: 'http',
-      originalUrl: '/',
-      method: 'GET',
-      get: () => 'localhost',
-      headers: {},
-    } as unknown as Request;
+    const req = createReq();
     const res = createMockRes();
     const next = vi.fn();
 
@@ -204,6 +212,182 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
     expect(res.set).not.toHaveBeenCalled();
     expect(res.status).not.toHaveBeenCalled();
     expect(next).not.toHaveBeenCalled();
+  });
+
+  it('skips render when the request is already disconnected', async () => {
+    const render = vi.fn();
+    const middleware = createHtmlRenderMiddleware({
+      render,
+      ...htmlMiddlewareOptions,
+    });
+
+    const req = createReq({ destroyed: true });
+    const res = createMockRes();
+    const next = vi.fn();
+
+    await middleware(req, res, next);
+
+    expect(render).not.toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it('does not write a short-circuit Response after disconnect', async () => {
+    let resolveRender!: (result: RenderResult) => void;
+    const renderPromise = new Promise<RenderResult>((resolve) => {
+      resolveRender = resolve;
+    });
+
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => renderPromise,
+      ...htmlMiddlewareOptions,
+    });
+
+    const req = createReq();
+    const res = createMockRes();
+    const next = vi.fn();
+
+    const done = middleware(req, res, next);
+    res.emit('close');
+    resolveRender({
+      response: new Response('gone', {
+        status: 302,
+        headers: { Location: '/' },
+      }),
+    });
+
+    await done;
+
+    expect(res.status).not.toHaveBeenCalled();
+    expect(res.end).not.toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it('aborts React when the client disconnects after the pre-write check', async () => {
+    const abort = vi.fn();
+    const pipe = vi.fn();
+    const res = createMockRes();
+    // Disconnect lands after the middleware has already checked the signal,
+    // while it is still writing headers.
+    (res.set as ReturnType<typeof vi.fn>).mockImplementationOnce(() => {
+      res.emit('close');
+      return res;
+    });
+
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => ({
+        pipe,
+        abort,
+        statusCode: 200,
+        headers: new Headers(),
+        inlineScripts: [],
+      }),
+      ...htmlMiddlewareOptions,
+    });
+
+    await middleware(createReq(), res, vi.fn());
+
+    expect(abort).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not write a short-circuit Response when the client disconnects mid-read', async () => {
+    const res = createMockRes();
+    const response = {
+      status: 302,
+      headers: new Headers({ Location: '/next' }),
+      body: {},
+      arrayBuffer: async () => {
+        res.emit('close');
+        return new TextEncoder().encode('redirect').buffer;
+      },
+    } as unknown as globalThis.Response;
+
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => ({ response }),
+      ...htmlMiddlewareOptions,
+    });
+    const next = vi.fn();
+
+    await middleware(createReq(), res, next);
+
+    expect(res.append).not.toHaveBeenCalled();
+    expect(res.status).not.toHaveBeenCalled();
+    expect(res.end).not.toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it('aborts React when the client disconnects after pipe starts', async () => {
+    const abort = vi.fn();
+    const pipe = vi.fn();
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => ({
+        pipe,
+        abort,
+        statusCode: 200,
+        headers: new Headers(),
+        inlineScripts: [],
+      }),
+      ...htmlMiddlewareOptions,
+    });
+
+    const req = createReq();
+    const res = createMockRes();
+
+    await middleware(req, res, vi.fn());
+
+    expect(pipe).toHaveBeenCalledTimes(1);
+    expect(abort).not.toHaveBeenCalled();
+
+    res.emit('close');
+
+    expect(abort).toHaveBeenCalledTimes(1);
+  });
+
+  it('swallows cancel rejections and does not call Express next', async () => {
+    const onRenderError = vi.fn();
+    let rejectRender!: (error: Error) => void;
+    const renderPromise = new Promise<RenderResult>((_resolve, reject) => {
+      rejectRender = reject;
+    });
+
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => renderPromise,
+      onRenderError,
+      ...htmlMiddlewareOptions,
+    });
+
+    const req = createReq();
+    const res = createMockRes();
+    const next = vi.fn();
+
+    const done = middleware(req, res, next);
+    res.emit('close');
+    rejectRender(new Error('render cancelled'));
+
+    await done;
+
+    expect(onRenderError).not.toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it('forwards connected render failures to Express next', async () => {
+    const onRenderError = vi.fn();
+    const boom = new Error('genuine render failure');
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => {
+        throw boom;
+      },
+      onRenderError,
+      ...htmlMiddlewareOptions,
+    });
+
+    const req = createReq();
+    const res = createMockRes();
+    const next = vi.fn();
+
+    await middleware(req, res, next);
+
+    expect(onRenderError).toHaveBeenCalledWith(boom);
+    expect(next).toHaveBeenCalledWith(boom);
   });
 
   it('omits nonce from CSP headers when none was requested', async () => {

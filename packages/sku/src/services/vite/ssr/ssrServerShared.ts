@@ -194,16 +194,20 @@ export const createWebRequest = (
 export const sendResponse = async (
   response: globalThis.Response,
   res: Response,
+  signal?: AbortSignal,
 ) => {
+  // Buffer before touching `res` so a disconnect during the read writes nothing.
+  const body = response.body
+    ? Buffer.from(await response.arrayBuffer())
+    : undefined;
+  if (signal?.aborted) {
+    return;
+  }
   response.headers.forEach((value, name) => {
     res.append(name, value);
   });
   res.status(response.status);
-  if (response.body) {
-    res.end(Buffer.from(await response.arrayBuffer()));
-  } else {
-    res.end();
-  }
+  res.end(body);
 };
 
 export const createHtmlRenderMiddleware =
@@ -242,6 +246,12 @@ export const createHtmlRenderMiddleware =
     };
     res.once('close', onClose);
 
+    // Skip starting render when the client is already gone.
+    if (req.destroyed || res.writableEnded) {
+      controller.abort();
+      return;
+    }
+
     try {
       const requestContextStore =
         getRequestContextStore(req) ?? createSsrRequestContextStore();
@@ -259,9 +269,20 @@ export const createHtmlRenderMiddleware =
       );
 
       if ('response' in result) {
-        await sendResponse(result.response, res);
+        // Cancelled before any write: write nothing, including short-circuit
+        // loader/action Response bodies.
+        if (controller.signal.aborted) {
+          return;
+        }
+        await sendResponse(result.response, res, controller.signal);
         return;
       }
+
+      // Abort listeners are not retroactive, so register before checking the
+      // signal. A disconnect from here on still tears down the React stream.
+      controller.signal.addEventListener('abort', result.abort, {
+        once: true,
+      });
       if (controller.signal.aborted) {
         result.abort();
         return;
@@ -286,11 +307,9 @@ export const createHtmlRenderMiddleware =
         }),
       });
       res.status(result.statusCode);
-      controller.signal.addEventListener('abort', result.abort, {
-        once: true,
-      });
       result.pipe(res);
     } catch (error) {
+      // Cancellation rejections must not reach Express error handling.
       if (controller.signal.aborted) {
         return;
       }

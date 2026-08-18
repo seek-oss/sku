@@ -35,6 +35,14 @@ export type StreamDocumentArgs = {
   allowErrorRetry: boolean;
 };
 
+/** Per-attempt ownership: settles at most once (or is abandoned for recovery). */
+type AttemptPhase =
+  'open' | 'resolved' | 'rejected' | 'cancelled' | 'abandoned';
+
+const abortReason = (signal: AbortSignal | undefined): unknown =>
+  signal?.reason ??
+  new DOMException('This operation was aborted', 'AbortError');
+
 export const streamDocument = ({
   renderContext,
   dataRoutes,
@@ -65,22 +73,51 @@ export const streamDocument = ({
   const insertHtmlQueue = createInsertHtmlQueue();
 
   return new Promise((resolve, reject) => {
-    let ready = false;
-    let abortedForRetry = false;
+    let phase: AttemptPhase = 'open';
+    // Filled synchronously before any React callback or abort listener runs.
+    const streamRef: {
+      current?: ReturnType<typeof renderToPipeableStream>;
+    } = {};
+
+    const settleResolved = (result: RenderResult) => {
+      if (phase !== 'open') {
+        return;
+      }
+      phase = 'resolved';
+      resolve(result);
+    };
+
+    const settleRejected = (error: unknown) => {
+      if (phase !== 'open') {
+        return;
+      }
+      phase = 'rejected';
+      reject(error);
+    };
+
+    const cancelAttempt = () => {
+      if (phase !== 'open') {
+        return;
+      }
+      phase = 'cancelled';
+      streamRef.current?.abort();
+      reject(abortReason(options.signal));
+    };
 
     const retryFromError = (error: unknown) => {
-      if (!allowErrorRetry || abortedForRetry) {
+      // Cancellation must never start ErrorBoundary recovery.
+      if (phase !== 'open' || !allowErrorRetry) {
         return false;
       }
-      abortedForRetry = true;
-      stream.abort();
-      const errorContext = getStaticContextFromError(
-        dataRoutes,
-        renderContext,
-        error,
-      );
+      // Abandon this attempt so late React callbacks cannot settle or retry again.
+      phase = 'abandoned';
+      streamRef.current?.abort();
       streamDocument({
-        renderContext: errorContext,
+        renderContext: getStaticContextFromError(
+          dataRoutes,
+          renderContext,
+          error,
+        ),
         dataRoutes,
         documentAssets,
         assets,
@@ -117,14 +154,14 @@ export const streamDocument = ({
         bootstrapScriptContent,
         nonce,
         onShellReady() {
-          if (waitForAll || ready || abortedForRetry) {
+          if (waitForAll || phase !== 'open') {
             return;
           }
-          ready = true;
-          resolve({
+          settleResolved({
             pipe: wrapPipeWithInsertHtml(
               stream.pipe.bind(stream),
               insertHtmlQueue,
+              stream.abort.bind(stream),
             ),
             abort: stream.abort.bind(stream),
             statusCode: renderContext.statusCode,
@@ -133,14 +170,14 @@ export const streamDocument = ({
           });
         },
         onAllReady() {
-          if (!waitForAll || ready || abortedForRetry) {
+          if (!waitForAll || phase !== 'open') {
             return;
           }
-          ready = true;
-          resolve({
+          settleResolved({
             pipe: wrapPipeWithInsertHtml(
               stream.pipe.bind(stream),
               insertHtmlQueue,
+              stream.abort.bind(stream),
             ),
             abort: stream.abort.bind(stream),
             statusCode: renderContext.statusCode,
@@ -153,24 +190,25 @@ export const streamDocument = ({
           if (retryFromError(error)) {
             return;
           }
-          reject(error);
+          settleRejected(error);
         },
         onError(error) {
           options.onError?.(error);
           // Suspense rejections never settle for onAllReady; retry once we
           // see the error while still buffering for waitForAll.
-          if (waitForAll && !ready) {
+          // Cancelled / abandoned attempts must not start recovery here.
+          if (waitForAll && phase === 'open') {
             retryFromError(error);
           }
         },
       },
     );
+    streamRef.current = stream;
 
-    const abort = () => stream.abort();
     if (options.signal?.aborted) {
-      abort();
+      cancelAttempt();
     } else {
-      options.signal?.addEventListener('abort', abort, { once: true });
+      options.signal?.addEventListener('abort', cancelAttempt, { once: true });
     }
   });
 };

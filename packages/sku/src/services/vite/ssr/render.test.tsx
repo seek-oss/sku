@@ -10,6 +10,8 @@ import { createSkuContexts } from './skuContext.js';
 import { render } from './render.js';
 import type { RenderAssets } from './types.js';
 
+const neverResolving = () => new Promise<string>(() => {});
+
 const { useSite, useClientContext, useReactContext } = createSkuContexts<
   {
     getClientContext: () => { userId: string };
@@ -322,5 +324,77 @@ describe('render', () => {
     const html = Buffer.concat(chunks).toString('utf-8');
     expect(html).toContain('data-testid="error-boundary"');
     expect(html).toContain('Suspense recovered');
+  });
+
+  it('rejects promptly when the render signal is already aborted', async () => {
+    const controller = new AbortController();
+    const reason = new Error('already gone');
+    controller.abort(reason);
+
+    await expect(
+      render({
+        siteStaticHandlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        options: { signal: controller.signal },
+      }),
+    ).rejects.toBe(reason);
+  });
+
+  it('aborts waitForAll without ErrorBoundary recovery when the signal aborts', async () => {
+    let errorBoundaryRendered = false;
+    const ErrorBoundary = () => {
+      errorBoundaryRendered = true;
+      return <main data-testid="error-boundary">should-not-render</main>;
+    };
+    const Layout = () => <Outlet />;
+    let markPendingStarted!: () => void;
+    const pendingStarted = new Promise<void>((resolve) => {
+      markPendingStarted = resolve;
+    });
+    const Pending = () => {
+      markPendingStarted();
+      return <p>{use(neverResolving())}</p>;
+    };
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: () => (
+                <Suspense fallback={<p>Loading</p>}>
+                  <Pending />
+                </Suspense>
+              ),
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+
+    const controller = new AbortController();
+    const reason = new Error('client disconnect');
+    const pending = render({
+      siteStaticHandlers: handlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      options: { signal: controller.signal },
+    });
+
+    // Abort only once the route has suspended, so the assertion never races
+    // the first render pass.
+    await pendingStarted;
+    controller.abort(reason);
+
+    await expect(pending).rejects.toBe(reason);
+    expect(errorBoundaryRendered).toBe(false);
   });
 });

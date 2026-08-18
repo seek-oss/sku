@@ -201,10 +201,12 @@ export const streamDocument = ({
             return;
           }
           options.onError?.(error);
-          // Suspense rejections never settle for onAllReady; retry once we
-          // see the error while still buffering for waitForAll.
-          if (waitForAll && state === 'rendering') {
-            retryFromError(error);
+          // Suspense rejections never settle for onAllReady. Recover once
+          // while still buffering; fail closed if this pass cannot produce
+          // a document (recovery has allowErrorRetry: false).
+          if (waitForAll && state === 'rendering' && !retryFromError(error)) {
+            rejectAttempt(error);
+            abortStream();
           }
         },
       },

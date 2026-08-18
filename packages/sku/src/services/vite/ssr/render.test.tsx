@@ -393,6 +393,101 @@ describe('render', () => {
     expect(html).toContain('Suspense recovered');
   });
 
+  it('fails closed when waitForAll ErrorBoundary recovery throws', async () => {
+    const Boom = () => {
+      throw new Error('Boom from render');
+    };
+    const ErrorBoundary = () => {
+      throw new Error('Boom from ErrorBoundary');
+    };
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: Boom,
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+    const onError = vi.fn();
+    const onShellError = vi.fn();
+
+    await expect(
+      render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        options: { onError, onShellError },
+      }),
+    ).rejects.toThrow('Boom from ErrorBoundary');
+    expect(onError).toHaveBeenCalled();
+  });
+
+  it('fails closed when waitForAll ErrorBoundary recovery rejects under Suspense', async () => {
+    const getRejected = (message: string) =>
+      new Promise<string>((_resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error(message));
+        }, 20);
+      });
+
+    let pagePending: Promise<string> | undefined;
+    const DeferredBoom = () => {
+      pagePending ??= getRejected('Boom from suspense');
+      return <p>{use(pagePending)}</p>;
+    };
+
+    let boundaryPending: Promise<string> | undefined;
+    const ErrorBoundary = () => {
+      boundaryPending ??= getRejected('Boom from ErrorBoundary');
+      return <p>{use(boundaryPending)}</p>;
+    };
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: () => (
+                <Suspense fallback={<p>Loading</p>}>
+                  <DeferredBoom />
+                </Suspense>
+              ),
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+    const onError = vi.fn();
+    const onShellError = vi.fn();
+
+    await expect(
+      render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        options: { onError, onShellError },
+      }),
+    ).rejects.toThrow('Boom from ErrorBoundary');
+    expect(onError).toHaveBeenCalled();
+    expect(onShellError).not.toHaveBeenCalled();
+  });
+
   it('rejects promptly when the render signal is already aborted', async () => {
     const controller = new AbortController();
     const reason = new Error('Already disconnected');
@@ -419,7 +514,7 @@ describe('render', () => {
   });
 
   it('does not retry a pending waitForAll render after signal abort', async () => {
-    const never = new Promise<string>(() => {});
+    const never = new Promise<string>(() => { });
     const Suspended = () => <p>{use(never)}</p>;
     const renderErrorBoundary = vi.fn();
     const ErrorBoundary = () => {

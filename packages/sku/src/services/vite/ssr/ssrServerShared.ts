@@ -206,6 +206,9 @@ export const sendResponse = async (
   }
 };
 
+const isDisconnected = (req: Request, res: Response): boolean =>
+  req.aborted || res.destroyed;
+
 export const createHtmlRenderMiddleware =
   ({
     render,
@@ -234,13 +237,23 @@ export const createHtmlRenderMiddleware =
     | 'onRenderError'
   >): RequestHandler =>
   async (req, res, next) => {
+    if (isDisconnected(req, res)) {
+      return;
+    }
+
     const controller = new AbortController();
-    const onClose = () => {
+    const onDisconnect = () => {
       if (!res.writableEnded) {
         controller.abort();
       }
     };
-    res.once('close', onClose);
+    req.once('aborted', onDisconnect);
+    res.once('close', onDisconnect);
+
+    if (isDisconnected(req, res)) {
+      onDisconnect();
+      return;
+    }
 
     try {
       const requestContextStore =
@@ -258,12 +271,16 @@ export const createHtmlRenderMiddleware =
         manifest,
       );
 
-      if ('response' in result) {
-        await sendResponse(result.response, res);
+      if (controller.signal.aborted || isDisconnected(req, res)) {
+        controller.abort();
+        if (!('response' in result)) {
+          result.abort();
+        }
         return;
       }
-      if (controller.signal.aborted) {
-        result.abort();
+
+      if ('response' in result) {
+        await sendResponse(result.response, res);
         return;
       }
 
@@ -286,12 +303,12 @@ export const createHtmlRenderMiddleware =
         }),
       });
       res.status(result.statusCode);
-      controller.signal.addEventListener('abort', result.abort, {
+      controller.signal.addEventListener('abort', () => result.abort(), {
         once: true,
       });
       result.pipe(res);
     } catch (error) {
-      if (controller.signal.aborted) {
+      if (controller.signal.aborted || isDisconnected(req, res)) {
         return;
       }
       onRenderError?.(error as Error);

@@ -161,16 +161,89 @@ When a matched route sets `handle.waitForAll: true`, sku MUST wait for `onAllRea
 - **WHEN** a matched route has `handle.waitForAll: true`
 - **THEN** sku pipes the HTML body only after `onAllReady`
 
-### Requirement: Client disconnect aborts render before write
+### Requirement: Pre-commit render errors produce an ErrorBoundary document
 
-When the client disconnects before HTML headers are committed, sku MUST abort the stream and MUST NOT write the document body.
+A render error is a throw from the React tree during document SSR (a sync component throw, or a rejected Suspense tree).
 
-Dev and production MUST share this abort-before-write behaviour.
+This is distinct from a route error already recorded on the static handler context by `query()` (loaders / actions). Those remain the errored-route requirement below.
+
+Commit is the point of no return: sku starts the HTML body (pipes the document).
+
+When a render error occurs before commit, sku MUST still produce a streamed HTML document whose body is the nearest `ErrorBoundary` (or React Router’s default) and whose status is `500`, or the status of a route error response if the thrown value is one.
+
+Sku MUST NOT hang waiting for `onAllReady` when a render error occurs while buffering for `waitForAll`.
+
+Sku MUST attempt this recovery at most once per request. If recovery cannot produce a document, the render MUST fail and Express error handling MUST run.
+
+Client abort / disconnect MUST NOT be treated as a render error and MUST NOT start recovery.
+
+Sku MAY report the original render error to `onError` / `onShellError` even when recovery succeeds.
+
+#### Scenario: Sync throw before the shell is piped
+
+- **WHEN** a matched route component throws during SSR before the HTML body is committed
+- **THEN** the response is HTML with status 500
+- **AND** the body is the nearest `ErrorBoundary`
+
+#### Scenario: waitForAll Suspense rejection does not hang
+
+- **WHEN** a matched route has `handle.waitForAll: true`
+- **AND** a deferred tree rejects before `onAllReady`
+- **THEN** sku does not wait forever for `onAllReady`
+- **AND** the response is HTML with status 500
+- **AND** the body is the nearest `ErrorBoundary`
+
+#### Scenario: Recovery is once
+
+- **WHEN** the ErrorBoundary pass also fails to produce a document
+- **THEN** sku does not retry again
+- **AND** the render fails to Express error handling
+
+#### Scenario: Abort is not recovery
+
+- **WHEN** the request is aborted while a `waitForAll` render is still buffering
+- **THEN** sku does not render an ErrorBoundary document
+- **AND** sku does not treat that abort as a render error for Express
+
+### Requirement: Client disconnect aborts the render
+
+When the client disconnects before the HTML body is committed, sku MUST abort the stream and MUST NOT write the document body.
+
+When the client disconnects after piping has started, sku MUST abort the React stream.
+
+Disconnect MUST NOT be forwarded as an Express render error.
+
+Dev and production MUST share this behaviour.
 
 #### Scenario: Disconnect before headers
 
 - **WHEN** the client disconnects before HTML headers are committed
 - **THEN** sku aborts the stream and does not write the document body
+
+#### Scenario: Disconnect after piping starts
+
+- **WHEN** the client disconnects after sku has started piping the HTML body
+- **THEN** sku aborts the React stream
+
+#### Scenario: Disconnect during render is not an Express error
+
+- **WHEN** the client disconnects while render is still in progress
+- **THEN** sku does not call Express `next(error)` for that abort
+
+### Requirement: Post-commit pipe failures abort React
+
+After the HTML body is committed, sku MUST NOT start a second document.
+
+When the insert-html transform or the response pipe fails after commit, sku MUST abort the React stream and MUST surface that error through the render `onError` path.
+
+Partial HTML on a live connection is inherent to streaming.
+
+#### Scenario: Insert callback throw after shell
+
+- **WHEN** an `insertHtml` callback throws after the shell is ready
+- **THEN** sku aborts the React stream
+- **AND** the error is reported through `onError`
+- **AND** sku does not start a second HTML document
 
 ### Requirement: Loader and action Responses are forwarded
 
@@ -192,7 +265,9 @@ On streamed HTML (not a short-circuit `Response`), sku MUST forward `loaderHeade
 
 ### Requirement: Errored routes use the static handler status code
 
-Errored routes MUST use `context.statusCode` and the nearest `ErrorBoundary` (or React Router’s default).
+When React Router records a route error on the static handler context during `query()` (loader / action), sku MUST use `context.statusCode` and the nearest `ErrorBoundary` (or React Router’s default) on the first render pass.
+
+Throws during `renderToPipeableStream` are the pre-commit render-error requirement above, not this one.
 
 Sku MUST NOT provide a separate error-page API.
 

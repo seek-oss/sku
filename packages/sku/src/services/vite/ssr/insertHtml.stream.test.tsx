@@ -1,7 +1,7 @@
 import { Writable } from 'node:stream';
 import { Suspense, use, cache } from 'react';
 import type { Request as ExpressRequest } from 'express';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
 import { render } from './render.js';
@@ -18,8 +18,10 @@ const getSite = () => 'au';
 
 const renderToHtml = async ({
   routes,
+  onError,
 }: {
   routes: Parameters<typeof buildSiteStaticHandlers>[0]['au'];
+  onError?: (error: unknown) => void;
 }) => {
   const result = await render({
     siteStaticHandlers: buildSiteStaticHandlers({ au: routes }),
@@ -27,6 +29,7 @@ const renderToHtml = async ({
     req: { path: '/' } as ExpressRequest,
     assets,
     getSite,
+    options: onError ? { onError } : undefined,
   });
 
   if ('response' in result) {
@@ -116,6 +119,33 @@ describe('insertHtml stream injection', () => {
     expect(html).toContain('data-testid="sku-injected"');
     expect(html).toContain('data-marker="deferred"');
     expect(html).toContain('>deferred<');
+  });
+
+  it('aborts the React stream when an insertion callback throws', async () => {
+    const insertionError = new Error('Unable to serialize inserted state');
+    const onError = vi.fn();
+    const ThrowingInjectingPage = () => {
+      const insertHtml = useInsertHtml();
+      insertHtml(() => {
+        throw insertionError;
+      });
+      return <main>page</main>;
+    };
+
+    await expect(
+      renderToHtml({
+        routes: [{ path: '/', Component: ThrowingInjectingPage }],
+        onError,
+      }),
+    ).rejects.toBe(insertionError);
+    expect(onError).toHaveBeenCalledWith(insertionError);
+
+    const { html } = await renderToHtml({
+      routes: [
+        { path: '/', Component: () => <InjectingPage marker="recovered" /> },
+      ],
+    });
+    expect(html).toContain('data-marker="recovered"');
   });
 
   it('allows injected scripts to carry a CSP nonce from getCspNonce', async () => {

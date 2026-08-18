@@ -53,6 +53,8 @@ It is not a history of intermediate APIs.
 - [x] 5.7 Mount `telemetryPlugin` with `type: 'ssr'`. Deliver page-load + HMR clients via client entry / bootstrap.
 - [x] 5.8 Promise-scrub loader/action data. Strip production `Error.stack`. Harden Express→Fetch adapter.
 - [x] 5.9 Hydrate client from bootstrap `site` (same as SSR). Call optional `onHydrate({ clientContext })` only.
+- [x] 5.10 Stream commit point: one ErrorBoundary recovery before the HTML body starts; abort is not recovery; post-commit insert/pipeline abort surfaces `onError`; disconnect after pipe aborts React.
+- [x] 5.11 Fail closed when that recovery pass cannot produce a document (must not hang on `waitForAll`).
 
 ## 6. Assets, `publicPath`, and production layout
 
@@ -99,6 +101,7 @@ It is not a history of intermediate APIs.
 - [x] 11.7 Tests: site filtering, soft-default `'default'`, fail-closed unknown site, foreign-site path does not match, catch-all middleware does not block assets under `publicPath`.
 - [x] 11.8 Tests: production server starts and streams without sibling `client/` when baked manifest is present. Dual-context / `sku/runtime` identity stays green under workspace link.
 - [x] 11.9 Fixture `PreloadingLink` on `usePreloadRoute`. Production hover warms lazy chunk. Foreign-site path does not warm.
+- [x] 11.10 Tests: sync throw → ErrorBoundary; `waitForAll` sync / Suspense → ErrorBoundary; abort-before-render; abort during `waitForAll` does not retry; `insertHtml` throw aborts and `onError`; disconnect after pipe; disconnect does not `next(error)`.
 
 ## 12. Create template
 

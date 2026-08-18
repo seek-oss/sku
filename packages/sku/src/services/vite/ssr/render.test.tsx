@@ -3,7 +3,7 @@ import { Writable } from 'node:stream';
 import type { Request as ExpressRequest } from 'express';
 import { Suspense, use } from 'react';
 import { Outlet, RouterContextProvider } from 'react-router';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
 import { createSkuContexts } from './skuContext.js';
@@ -216,6 +216,8 @@ describe('render', () => {
         },
       ],
     });
+    const onError = vi.fn();
+    const onShellError = vi.fn();
 
     const result = await render({
       siteStaticHandlers: handlers,
@@ -223,6 +225,7 @@ describe('render', () => {
       req: { path: '/' } as ExpressRequest,
       assets,
       getSite,
+      options: { onError, onShellError },
     });
 
     if ('response' in result) {
@@ -250,6 +253,72 @@ describe('render', () => {
     const html = Buffer.concat(chunks).toString('utf-8');
     expect(html).toContain('data-testid="error-boundary"');
     expect(html).toContain('Boom recovered');
+    expect(onShellError).toHaveBeenCalledTimes(1);
+    expect(onError).toHaveBeenCalledTimes(1);
+  });
+
+  it('recovers waitForAll sync render throws via a second ErrorBoundary pass', async () => {
+    const Boom = () => {
+      throw new Error('Boom from render');
+    };
+    const ErrorBoundary = () => (
+      <main data-testid="error-boundary">Boom recovered</main>
+    );
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: Boom,
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+    const onError = vi.fn();
+    const onShellError = vi.fn();
+
+    const result = await render({
+      siteStaticHandlers: handlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      options: { onError, onShellError },
+    });
+
+    if ('response' in result) {
+      throw new Error('Expected a streamed document, not a Response');
+    }
+
+    expect(result.statusCode).toBe(500);
+
+    const chunks: Buffer[] = [];
+    await new Promise<void>((resolve, reject) => {
+      const writable = new Writable({
+        write(chunk, _encoding, callback) {
+          chunks.push(Buffer.from(chunk));
+          callback();
+        },
+        final(callback) {
+          callback();
+          resolve();
+        },
+      });
+      writable.on('error', reject);
+      result.pipe(writable);
+    });
+
+    const html = Buffer.concat(chunks).toString('utf-8');
+    expect(html).toContain('data-testid="error-boundary"');
+    expect(html).toContain('Boom recovered');
+    expect(onError).toHaveBeenCalledTimes(1);
+    expect(onShellError).not.toHaveBeenCalled();
   });
 
   it('recovers waitForAll Suspense rejections via a second ErrorBoundary pass', async () => {
@@ -322,5 +391,178 @@ describe('render', () => {
     const html = Buffer.concat(chunks).toString('utf-8');
     expect(html).toContain('data-testid="error-boundary"');
     expect(html).toContain('Suspense recovered');
+  });
+
+  it('fails closed when waitForAll ErrorBoundary recovery throws', async () => {
+    const Boom = () => {
+      throw new Error('Boom from render');
+    };
+    const ErrorBoundary = () => {
+      throw new Error('Boom from ErrorBoundary');
+    };
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: Boom,
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+    const onError = vi.fn();
+    const onShellError = vi.fn();
+
+    await expect(
+      render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        options: { onError, onShellError },
+      }),
+    ).rejects.toThrow('Boom from ErrorBoundary');
+    expect(onError).toHaveBeenCalled();
+  });
+
+  it('fails closed when waitForAll ErrorBoundary recovery rejects under Suspense', async () => {
+    const getRejected = (message: string) =>
+      new Promise<string>((_resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error(message));
+        }, 20);
+      });
+
+    let pagePending: Promise<string> | undefined;
+    const DeferredBoom = () => {
+      pagePending ??= getRejected('Boom from suspense');
+      return <p>{use(pagePending)}</p>;
+    };
+
+    let boundaryPending: Promise<string> | undefined;
+    const ErrorBoundary = () => {
+      boundaryPending ??= getRejected('Boom from ErrorBoundary');
+      return <p>{use(boundaryPending)}</p>;
+    };
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: () => (
+                <Suspense fallback={<p>Loading</p>}>
+                  <DeferredBoom />
+                </Suspense>
+              ),
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+    const onError = vi.fn();
+    const onShellError = vi.fn();
+
+    await expect(
+      render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        options: { onError, onShellError },
+      }),
+    ).rejects.toThrow('Boom from ErrorBoundary');
+    expect(onError).toHaveBeenCalled();
+    expect(onShellError).not.toHaveBeenCalled();
+  });
+
+  it('rejects promptly when the render signal is already aborted', async () => {
+    const controller = new AbortController();
+    const reason = new Error('Already disconnected');
+    controller.abort(reason);
+    const onError = vi.fn();
+    const onShellError = vi.fn();
+
+    await expect(
+      render({
+        siteStaticHandlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        options: {
+          signal: controller.signal,
+          onError,
+          onShellError,
+        },
+      }),
+    ).rejects.toBe(reason);
+    expect(onError).not.toHaveBeenCalled();
+    expect(onShellError).not.toHaveBeenCalled();
+  });
+
+  it('does not retry a pending waitForAll render after signal abort', async () => {
+    const never = new Promise<string>(() => { });
+    const Suspended = () => <p>{use(never)}</p>;
+    const renderErrorBoundary = vi.fn();
+    const ErrorBoundary = () => {
+      renderErrorBoundary();
+      return <main>Should not render</main>;
+    };
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          ErrorBoundary,
+          Component: () => <Outlet />,
+          children: [
+            {
+              index: true,
+              Component: () => (
+                <Suspense fallback={<p>Loading</p>}>
+                  <Suspended />
+                </Suspense>
+              ),
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+    const controller = new AbortController();
+    const reason = new Error('Client disconnected');
+    const onError = vi.fn();
+    const onShellError = vi.fn();
+
+    const result = render({
+      siteStaticHandlers: handlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      options: {
+        signal: controller.signal,
+        onError,
+        onShellError,
+      },
+    });
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    controller.abort(reason);
+
+    await expect(result).rejects.toBe(reason);
+    expect(renderErrorBoundary).not.toHaveBeenCalled();
+    expect(onError).not.toHaveBeenCalled();
+    expect(onShellError).not.toHaveBeenCalled();
   });
 });

@@ -13,10 +13,25 @@ import {
 } from './ssrServerShared.js';
 import type { RenderResult } from './types.js';
 
+const createMockReq = (overrides: Record<string, unknown> = {}): Request =>
+  Object.assign(
+    new EventEmitter(),
+    {
+      protocol: 'http',
+      originalUrl: '/',
+      method: 'GET',
+      get: () => 'localhost',
+      headers: {},
+      aborted: false,
+    },
+    overrides,
+  ) as unknown as Request;
+
 const createMockRes = (): Response => {
   const headers: Record<string, string | string[]> = {};
   const res = new EventEmitter() as any;
   res.writableEnded = false;
+  res.destroyed = false;
   res.setHeader = vi.fn((name: string, value: unknown) => {
     headers[String(name).toLowerCase()] = value as string | string[];
     return res;
@@ -173,13 +188,7 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
       development: true,
     });
 
-    const req = {
-      protocol: 'http',
-      originalUrl: '/',
-      method: 'GET',
-      get: () => 'localhost',
-      headers: {},
-    } as unknown as Request;
+    const req = createMockReq();
     const res = createMockRes();
     const next = vi.fn();
 
@@ -206,6 +215,146 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
     expect(next).not.toHaveBeenCalled();
   });
 
+  it('does not render when middleware starts after the request disconnected', async () => {
+    const render = vi.fn<RenderFunction>();
+    const middleware = createHtmlRenderMiddleware({
+      render,
+      assets: { bootstrapModules: [], css: [], modulePreloads: [] },
+      cspEnabled: false,
+      cspExtraScriptSrcHosts: [],
+      cspReportOnlyEnabled: false,
+      cspReportOnlyExtraScriptSrcHosts: [],
+      development: true,
+    });
+    const req = createMockReq({ aborted: true });
+    const res = createMockRes();
+    const next = vi.fn();
+
+    await middleware(req, res, next);
+
+    expect(render).not.toHaveBeenCalled();
+    expect(res.set).not.toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it('does not forward a Response resolved after disconnect', async () => {
+    let resolveRender!: (result: RenderResult) => void;
+    const renderPromise = new Promise<RenderResult>((resolve) => {
+      resolveRender = resolve;
+    });
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => renderPromise,
+      assets: { bootstrapModules: [], css: [], modulePreloads: [] },
+      cspEnabled: false,
+      cspExtraScriptSrcHosts: [],
+      cspReportOnlyEnabled: false,
+      cspReportOnlyExtraScriptSrcHosts: [],
+      development: true,
+    });
+    const req = createMockReq();
+    const res = createMockRes();
+    const next = vi.fn();
+
+    const done = middleware(req, res, next);
+    res.emit('close');
+    resolveRender({
+      response: new globalThis.Response('Too late', {
+        status: 302,
+        headers: { Location: '/elsewhere' },
+      }),
+    });
+
+    await done;
+
+    expect(res.append).not.toHaveBeenCalled();
+    expect(res.status).not.toHaveBeenCalled();
+    expect(res.end).not.toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
+  });
+
+  it('aborts React when the request disconnects after piping starts', async () => {
+    const abort = vi.fn();
+    const pipe = vi.fn();
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => ({
+        pipe,
+        abort,
+        statusCode: 200,
+        headers: new Headers(),
+        inlineScripts: [],
+      }),
+      assets: { bootstrapModules: [], css: [], modulePreloads: [] },
+      cspEnabled: false,
+      cspExtraScriptSrcHosts: [],
+      cspReportOnlyEnabled: false,
+      cspReportOnlyExtraScriptSrcHosts: [],
+      development: true,
+    });
+    const req = createMockReq();
+    const res = createMockRes();
+
+    await middleware(req, res, vi.fn());
+    req.emit('aborted');
+    res.emit('close');
+
+    expect(pipe).toHaveBeenCalledWith(res);
+    expect(abort).toHaveBeenCalledTimes(1);
+  });
+
+  it('forwards a connected render rejection to Express unchanged', async () => {
+    const error = new Error('Render failed');
+    const onRenderError = vi.fn();
+    const next = vi.fn();
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => {
+        throw error;
+      },
+      assets: { bootstrapModules: [], css: [], modulePreloads: [] },
+      cspEnabled: false,
+      cspExtraScriptSrcHosts: [],
+      cspReportOnlyEnabled: false,
+      cspReportOnlyExtraScriptSrcHosts: [],
+      development: true,
+      onRenderError,
+    });
+
+    await middleware(createMockReq(), createMockRes(), next);
+
+    expect(onRenderError).toHaveBeenCalledTimes(1);
+    expect(onRenderError).toHaveBeenCalledWith(error);
+    expect(next).toHaveBeenCalledTimes(1);
+    expect(next).toHaveBeenCalledWith(error);
+  });
+
+  it('suppresses a render rejection after disconnect', async () => {
+    let rejectRender!: (error: Error) => void;
+    const renderPromise = new Promise<RenderResult>((_resolve, reject) => {
+      rejectRender = reject;
+    });
+    const onRenderError = vi.fn();
+    const next = vi.fn();
+    const middleware = createHtmlRenderMiddleware({
+      render: async () => renderPromise,
+      assets: { bootstrapModules: [], css: [], modulePreloads: [] },
+      cspEnabled: false,
+      cspExtraScriptSrcHosts: [],
+      cspReportOnlyEnabled: false,
+      cspReportOnlyExtraScriptSrcHosts: [],
+      development: true,
+      onRenderError,
+    });
+    const req = createMockReq();
+    const res = createMockRes();
+
+    const done = middleware(req, res, next);
+    res.emit('close');
+    rejectRender(new Error('Aborted render'));
+    await done;
+
+    expect(onRenderError).not.toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
+  });
+
   it('omits nonce from CSP headers when none was requested', async () => {
     const middleware = createHtmlRenderMiddleware({
       render: async () => ({
@@ -223,13 +372,7 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
       development: false,
     });
 
-    const req = {
-      protocol: 'http',
-      originalUrl: '/',
-      method: 'GET',
-      get: () => 'localhost',
-      headers: {},
-    } as unknown as Request;
+    const req = createMockReq();
     const res = createMockRes();
 
     await middleware(req, res, vi.fn());
@@ -258,13 +401,7 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
       development: false,
     });
 
-    const req = {
-      protocol: 'http',
-      originalUrl: '/set-cookie',
-      method: 'GET',
-      get: () => 'localhost',
-      headers: {},
-    } as unknown as Request;
+    const req = createMockReq({ originalUrl: '/set-cookie' });
     const res = createMockRes();
 
     await middleware(req, res, vi.fn());
@@ -295,15 +432,11 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
       development: true,
     });
 
-    const req = {
-      protocol: 'http',
+    const req = createMockReq({
       originalUrl: '/about?x=1',
-      method: 'GET',
       path: '/about',
-      get: () => 'localhost',
-      headers: {},
       skuUserId: 'from-middleware',
-    } as unknown as Request;
+    });
     const res = createMockRes();
 
     await middleware(req, res, vi.fn());

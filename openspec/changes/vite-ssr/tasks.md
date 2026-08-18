@@ -54,7 +54,7 @@ It is not a history of intermediate APIs.
 - [x] 5.8 Promise-scrub loader/action data. Strip production `Error.stack`. Harden Express→Fetch adapter.
 - [x] 5.9 Hydrate client from bootstrap `site` (same as SSR). Call optional `onHydrate({ clientContext })` only.
 - [x] 5.10 Stream commit point: one ErrorBoundary recovery before the HTML body starts; abort is not recovery; post-commit insert/pipeline abort surfaces `onError`; disconnect after pipe aborts React.
-- [ ] 5.11 Fail closed when that recovery pass cannot produce a document (must not hang on `waitForAll`).
+- [x] 5.11 Fail closed when that recovery pass cannot produce a document (must not hang on `waitForAll`).
 
 ## 6. Assets, `publicPath`, and production layout
 

@@ -5,7 +5,7 @@ import { createDebug } from 'obug';
 
 const debug = createDebug('sku:fix-vanilla-extract-dep-scan');
 
-// Vanilla Extract files are conventionally imported without their final extension,
+// When bundling uncompiled packages, CSS files are imported without their final extension,
 // e.g. `./styles.css` resolves to `./styles.css.ts`. `cssFileFilter` only matches the
 // latter, so this looser filter is used to decide which specifiers are worth resolving.
 // `cssFileFilter` is then applied to the resolved path, which always has its extension.

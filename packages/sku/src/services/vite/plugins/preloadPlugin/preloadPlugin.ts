@@ -44,22 +44,29 @@ const cleanId = (id: string) => id.split('?')[0];
  * Otherwise, warns that the import is invalid and needs to be converted via codemod.
  */
 const convertOrWarnAboutWebpackLoadable = ({
+  hasWebpack,
   ast,
   id,
   convertFromWebpack,
 }: {
+  hasWebpack: boolean;
   ast: t.File;
   id: string;
   convertFromWebpack: boolean | undefined;
 }) => {
+  if (!hasWebpack) {
+    return false;
+  }
+
   if (!convertFromWebpack) {
     console.log(
       `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid in a Vite application. Please install '@sku-lib/vite' and run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`,
     );
-    return;
+    return false;
   }
 
   rewriteWebpackLoadableImportsInAst(ast);
+  return true;
 };
 
 /**
@@ -135,22 +142,22 @@ export function preloadPlugin({
       }
 
       const { hasWebpack, hasVite } = assertSingleLoadableRuntime(code, id);
-
       if (!hasWebpack && !hasVite) {
         return null;
       }
 
       const ast = parseLoadableSource(code);
-
-      if (hasWebpack) {
-        convertOrWarnAboutWebpackLoadable({
-          ast,
-          id,
-          convertFromWebpack,
-        });
-      }
-
+      const converted = convertOrWarnAboutWebpackLoadable({
+        ast,
+        id,
+        hasWebpack,
+        convertFromWebpack,
+      });
       const injected = isSsr && injectLoadableModuleId({ ast, id });
+
+      if (!converted && !injected) {
+        return null;
+      }
 
       if (injected) {
         if (debug) {

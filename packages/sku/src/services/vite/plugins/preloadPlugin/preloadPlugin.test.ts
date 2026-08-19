@@ -93,7 +93,7 @@ describe('preloadPlugin', () => {
       expect(consoleLog.mock.calls[0][0]).toContain(
         `Found 'sku/@loadable/component' import in '${id}'`,
       );
-      expect(code).not.toContain('@sku-lib/vite/loadable');
+      expect(code).toBeNull();
 
       consoleLog.mockRestore();
     });

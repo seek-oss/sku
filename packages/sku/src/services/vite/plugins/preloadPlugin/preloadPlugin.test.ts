@@ -65,39 +65,6 @@ describe('preloadPlugin', () => {
       },
     );
 
-    it('preserves an aliased local name', async () => {
-      const code = await transformCode({
-        id: '/project/node_modules/some-package/dist/index.mjs',
-        code: dedent /* tsx */ `
-        import myLoadable from 'sku/@loadable/component';
-        const Component = myLoadable(() => import('./Component.mjs'));
-        `,
-      });
-
-      expect(code).toMatchInlineSnapshot(`
-        "import { loadable as myLoadable } from "@sku-lib/vite/loadable";
-        const Component = myLoadable(() => import('./Component.mjs'));"
-      `);
-    });
-
-    it('preserves imports that have no vite equivalent', async () => {
-      const code = await transformCode({
-        id: '/project/src/client.tsx',
-        code: dedent /* tsx */ `
-        import loadable, { loadableReady } from 'sku/@loadable/component';
-        const Component = loadable(() => import('./Component'));
-        loadableReady(() => {});
-        `,
-      });
-
-      expect(code).toMatchInlineSnapshot(`
-        "import { loadableReady } from "sku/@loadable/component";
-        import { loadable } from "@sku-lib/vite/loadable";
-        const Component = loadable(() => import('./Component'));
-        loadableReady(() => {});"
-      `);
-    });
-
     it('ignores files that are not scanned', async () => {
       const code = await transformCode({
         id: '/project/src/App.vue',
@@ -191,17 +158,5 @@ describe('preloadPlugin', () => {
         }, "packages/sku/src/services/vite/plugins/preloadPlugin/preloadPlugin.ts");"
       `);
     });
-  });
-
-  it('throws when both loadable imports are present', async () => {
-    await expect(
-      transformCode({
-        id: '/project/src/App.jsx',
-        code: dedent /* tsx */ `
-        import loadable from 'sku/@loadable/component';
-        import { loadable as viteLoadable } from '@sku-lib/vite/loadable';
-        `,
-      }),
-    ).rejects.toThrow('Please remove one of them');
   });
 });

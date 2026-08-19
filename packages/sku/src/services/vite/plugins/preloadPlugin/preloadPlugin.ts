@@ -1,4 +1,3 @@
-import { parse } from '@babel/parser';
 import _traverse from '@babel/traverse';
 import _generate from '@babel/generator';
 import * as t from '@babel/types';
@@ -8,16 +7,15 @@ import {
   WEBPACK_LOADABLE_IMPORT,
 } from './helpers/constants.js';
 import { getViteLoadableSpecifierName } from './helpers/getViteLoadableSpecifierName.js';
-import { getWebpackLoadableSpecifierName } from './helpers/getWebpackLoadableSpecifierName.js';
-import { convertWebpackToViteImport } from './helpers/convertWebpackToViteImport.js';
 import { injectModuleID } from './helpers/injectModuleID.js';
+import {
+  assertSingleLoadableRuntime,
+  parseLoadableSource,
+  rewriteWebpackLoadableImportsInAst,
+} from './helpers/rewriteWebpackLoadableImports.js';
 import { getExecuteCommand } from '@sku-private/utils';
 import { makePluginName } from '../../helpers/makePluginName.js';
-
-/* NOTE: This implementation can probably be improved and simplified.
- * My primary goal was to get it working and replacing but my limited experience with AST parsing is likely showing.
- * Any improvements here are encouraged and more than welcome.
- */
+import { convertLoadableDepOptimizePlugin } from '../esbuild/convertLoadableDepOptimizePlugin.js';
 
 // These packages are CJS. Node's interop nests their export under `default`, while a
 // bundler's interop unwraps it.
@@ -55,7 +53,21 @@ export function preloadPlugin({
   return {
     name: makePluginName('preload'),
 
-    async transform(code, rawId) {
+    ...(convertFromWebpack
+      ? {
+          config: () => ({
+            optimizeDeps: {
+              rolldownOptions: {
+                plugins: [convertLoadableDepOptimizePlugin()],
+              },
+            },
+          }),
+        }
+      : {}),
+
+    // This transform applies to bundled code only.
+    // Pre-bundled or optimized code is not transformed and is handled in optimizeDeps.rolldownOptions plugin instead.
+    transform(code, rawId) {
       const isSsr = this.environment?.name === 'ssr';
       const id = cleanId(rawId);
 
@@ -63,38 +75,30 @@ export function preloadPlugin({
         return null;
       }
 
-      const hasWebpackLoadableImport = code.includes(WEBPACK_LOADABLE_IMPORT);
-      const hasViteLoadableImport = code.includes(VITE_LOADABLE_IMPORT);
+      const { hasWebpack, hasVite } = assertSingleLoadableRuntime(code, id);
 
-      if (!hasWebpackLoadableImport && !hasViteLoadableImport) {
+      if (!hasWebpack && !hasVite) {
         return null;
       }
 
-      if (hasWebpackLoadableImport && hasViteLoadableImport) {
-        throw new Error(
-          `Both ${WEBPACK_LOADABLE_IMPORT} and ${VITE_LOADABLE_IMPORT} imports found in ${id}. Please remove one of them.`,
-        );
-      }
-
-      if (hasWebpackLoadableImport && !convertFromWebpack) {
+      if (hasWebpack && !convertFromWebpack) {
         console.log(
           `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid in a Vite application. Please install '@sku-lib/vite' and run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`,
         );
       }
 
-      // Find dynamic imports
-      const ast = parse(code, {
-        sourceType: 'unambiguous',
-        plugins: ['jsx', 'typescript'],
-      });
+      const ast = parseLoadableSource(code);
 
+      if (convertFromWebpack && hasWebpack) {
+        rewriteWebpackLoadableImportsInAst(ast);
+      }
+
+      // Inject the module ID into the third argument of the `loadable()` call.
       let injected = false;
-
       let loadableFunctionIdentifier = 'loadable';
 
       traverse(ast, {
         ImportDeclaration(importPath) {
-          // Find the loadable import name and see if it has been aliased.
           if (
             t.isStringLiteral(importPath.node.source, {
               value: VITE_LOADABLE_IMPORT,
@@ -102,24 +106,6 @@ export function preloadPlugin({
           ) {
             loadableFunctionIdentifier =
               getViteLoadableSpecifierName(importPath);
-            return;
-          }
-
-          if (
-            convertFromWebpack &&
-            t.isStringLiteral(importPath.node.source, {
-              value: WEBPACK_LOADABLE_IMPORT,
-            })
-          ) {
-            const localName = getWebpackLoadableSpecifierName(importPath);
-
-            // leave named imports (e.g., `loadableReady`) alone since they have no vite equivalent.
-            if (!localName) {
-              return;
-            }
-
-            loadableFunctionIdentifier = localName;
-            convertWebpackToViteImport(importPath, localName);
           }
         },
         CallExpression(callPath) {
@@ -150,8 +136,6 @@ export function preloadPlugin({
         code: output.code,
         map: output.map,
       };
-
-      return null;
     },
 
     buildEnd() {

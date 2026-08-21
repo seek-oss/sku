@@ -38,6 +38,7 @@ export const configPlugin = ({
         skuContext.paths.renderEntry,
         renderEntry,
         clientEntry,
+        ...skuContext.polyfills,
       ],
       rolldownOptions: {
         plugins: [fixViteVanillaExtractDepScanPlugin()],

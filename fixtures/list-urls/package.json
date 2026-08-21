@@ -1,5 +1,5 @@
 {
-  "name": "@sku-fixtures/port-clash",
+  "name": "@sku-fixtures/list-urls",
   "private": true,
   "scripts": {
     "start": "sku start",

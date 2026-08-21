@@ -1,5 +1,13 @@
 # @sku-lib/create
 
+## 1.3.3
+
+### Patch Changes
+
+- Include Vite client types in the vite template ([#1691](https://github.com/seek-oss/sku/pull/1691))
+
+  New vite projects now have Vite client APIs typed out of the box.
+
 ## 1.3.2
 
 ### Patch Changes

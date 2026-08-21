@@ -265,7 +265,7 @@ exports[`translations > bundler vite > should render en 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,47 +1,46 @@
+@@ -1,48 +1,47 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -305,6 +305,7 @@ exports[`translations > bundler vite > should render en 1`] = `
      <script
        type="module"
        src="/en-translations.js"
+       data-chunk
      >
      </script>
      <script
@@ -321,7 +322,7 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,47 +1,46 @@
+@@ -1,48 +1,47 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -361,6 +362,7 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
      <script
        type="module"
        src="/en-translations.js"
+       data-chunk
      >
      </script>
      <script
@@ -377,7 +379,7 @@ exports[`translations > bundler vite > should render fr 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,47 +1,46 @@
+@@ -1,48 +1,47 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -417,6 +419,7 @@ exports[`translations > bundler vite > should render fr 1`] = `
      <script
        type="module"
        src="/fr-translations.js"
+       data-chunk
      >
      </script>
      <script
@@ -433,7 +436,7 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,47 +1,46 @@
+@@ -1,48 +1,47 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -473,6 +476,7 @@ exports[`translations > bundler vite > should support query parameters 1`] = `
      <script
        type="module"
        src="/en-translations.js"
+       data-chunk
      >
      </script>
      <script

@@ -61,6 +61,7 @@ export class Collector {
       scripts: this.scriptIds,
       nonce: this.nonce,
       base: this.base,
+      markAsChunk: true,
     });
   }
   public getAllPreloads() {
@@ -97,6 +98,7 @@ const parseManifestForEntry = ({
   scripts,
   base,
   seenChunks = new Set<string>(),
+  markAsChunk = false,
 }: {
   manifest: Manifest;
   entry: string;
@@ -105,6 +107,7 @@ const parseManifestForEntry = ({
   scripts: Map<string, InjectableScript>;
   base?: string;
   seenChunks?: Set<string>;
+  markAsChunk?: boolean;
 }) => {
   const foundChunk =
     manifest[entry] ??
@@ -156,10 +159,14 @@ const parseManifestForEntry = ({
 
   addFileToPreloads({ preloads, entry, entryChunk, nonce });
 
+  const isEntry = Boolean(entryChunk.isEntry);
+  const existing = scripts.get(entry);
+
   scripts.set(entry, {
     src: entryChunk.file,
-    isEntry: Boolean(entryChunk.isEntry),
+    isEntry,
     nonce,
+    isChunk: Boolean((markAsChunk || existing?.isChunk) && !isEntry),
   });
 };
 

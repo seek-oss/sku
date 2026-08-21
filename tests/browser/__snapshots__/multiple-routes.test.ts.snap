@@ -89,11 +89,13 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       type="module"
       src="SCRIPTS[3]"
+      data-chunk
     >
     </script>
     <script
       type="module"
       src="SCRIPTS[2]"
+      data-chunk
     >
     </script>
     <script
@@ -167,6 +169,7 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       type="module"
       src="SCRIPTS[2]"
+      data-chunk
     >
     </script>
     <script
@@ -249,11 +252,13 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       type="module"
       src="SCRIPTS[3]"
+      data-chunk
     >
     </script>
     <script
       type="module"
       src="SCRIPTS[2]"
+      data-chunk
     >
     </script>
     <script
@@ -327,6 +332,7 @@ SOURCE HTML: <!DOCTYPE html>
     <script
       type="module"
       src="SCRIPTS[2]"
+      data-chunk
     >
     </script>
     <script
@@ -345,7 +351,7 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,78 +1,78 @@
+@@ -1,80 +1,80 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -411,11 +417,13 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
      <script
        type="module"
        src="/static/place/AsyncComponent.js"
+       data-chunk
      >
      </script>
      <script
        type="module"
        src="/static/place/Details.js"
+       data-chunk
      >
      </script>
      <script
@@ -488,6 +496,7 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     <script
       type="module"
       src="/static/place/Home.js"
+      data-chunk
     >
     </script>
     <script

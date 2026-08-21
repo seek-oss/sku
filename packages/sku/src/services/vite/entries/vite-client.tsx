@@ -22,11 +22,27 @@ if (process.env.NODE_ENV === 'development') {
   }
 }
 
-let clientContext = {};
+const waitForLoadableChunks = async () => {
+  const scripts = document.querySelectorAll<HTMLScriptElement>(
+    'script[data-required-chunk][src]',
+  );
 
-const dataElement = document.getElementById('__SKU_CLIENT_CONTEXT__');
-if (dataElement) {
-  clientContext = JSON.parse(dataElement.textContent || '{}');
-}
+  await Promise.all(
+    Array.from(scripts, (script) => import(/* @vite-ignore */ script.src)),
+  );
+};
 
-client(clientContext);
+const startClient = async () => {
+  await waitForLoadableChunks();
+
+  let clientContext = {};
+
+  const dataElement = document.getElementById('__SKU_CLIENT_CONTEXT__');
+  if (dataElement) {
+    clientContext = JSON.parse(dataElement.textContent || '{}');
+  }
+
+  client(clientContext);
+};
+
+startClient();

@@ -65,6 +65,7 @@ overrides:
   # Multiple versions of esbuild tend to crop up in the lockfile. Pin to a specific minor version
   # purely to reduce installation size.
   esbuild: ~0.28.0
+  '@vocab/vite': '1.0.6-vite-isolate-translations-chunk-20260828063901'
 
 preferWorkspacePackages: true
 

@@ -1,11 +1,22 @@
 export type InjectableScript = {
   src: string;
-  isEntry: boolean;
   nonce?: string;
+  isRequiredChunk?: boolean;
 };
 
-export const createScriptTag = ({ nonce, src }: InjectableScript) =>
-  `<script type="module" src="${src}" ${nonce ? `nonce="${nonce}"` : ''}></script>`;
+export const createScriptTag = ({
+  nonce,
+  src,
+  isRequiredChunk,
+}: InjectableScript) => {
+  const attributes = [
+    `type="module"`,
+    isRequiredChunk ? 'async data-required-chunk' : null,
+    `src="${src}"`,
+    nonce ? `nonce="${nonce}"` : null,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-export const sortInjectableScript = (a: InjectableScript) =>
-  a.isEntry ? 1 : -1;
+  return `<script ${attributes}></script>`;
+};

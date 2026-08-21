@@ -47,6 +47,11 @@ describe('translations', () => {
       const app = await getAppSnapshot({
         url: `${baseUrl}/en?pseudo=true`,
       });
+      // SSG prerenders English (`?pseudo` is ignored at render time) and
+      // hydrates with that language. en-PSEUDO is loaded on the client after
+      // hydration.
+      expect(app.sourceHtml).toContain('Hello sku');
+      expect(app.clientRenderContent).toContain('Ḩẽẽẽƚƚööö šķǚǚǚ');
       expect(app).toMatchSnapshot();
     });
 
@@ -59,7 +64,7 @@ describe('translations', () => {
 });
 
 describe('webpack ssr translations', () => {
-  const backendUrl = `http://localhost:8310`;
+  const backendUrl = `http://localhost:8314`;
 
   beforeAll(async () => {
     const distDir = fixturePath('dist');

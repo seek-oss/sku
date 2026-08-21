@@ -52,9 +52,6 @@ catalogs:
     '@vanilla-extract/webpack-plugin':
       specifier: ^2.3.26
       version: 2.3.27
-    '@vocab/vite':
-      specifier: ^1.0.4
-      version: 1.0.5
     braid-design-system:
       specifier: ^34.0.0
       version: 34.6.1
@@ -100,6 +97,7 @@ catalogs:
 
 overrides:
   esbuild: ~0.28.0
+  '@vocab/vite': 1.0.6-vite-isolate-translations-chunk-20260828063901
 
 pnpmfileChecksum: sha256-BJdU5A0PR48f+qVWdlca0zjt2m4OSJwKkKWHz8OgDE0=
 
@@ -1496,8 +1494,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.2
       '@vocab/vite':
-        specifier: 'catalog:'
-        version: 1.0.5(supports-color@8.1.1)(vite@8.2.0)
+        specifier: 1.0.6-vite-isolate-translations-chunk-20260828063901
+        version: 1.0.6-vite-isolate-translations-chunk-20260828063901(supports-color@8.1.1)(vite@8.2.0)
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.25(supports-color@8.1.1)(webpack@5.109.2)
@@ -5573,8 +5571,8 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
 
-  '@vocab/vite@1.0.5':
-    resolution: {integrity: sha512-Muh2OvCKn5uVk8W37d/X+BESr7rSxoFhgfzz1ByjGjIp6IMbgt0CK5Kf7c4PVOVh2u7RvUwhvYcyZzeP6dW+oA==}
+  '@vocab/vite@1.0.6-vite-isolate-translations-chunk-20260828063901':
+    resolution: {integrity: sha512-3CYDhLLyWAezGlGL1kY1iihGmtGmg9fzO/VAeztAvu5CFDSGRwIz5UgxVQpG+Dv5nIkLQNmdgww749t4Unzqwg==}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
 
@@ -15021,7 +15019,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@1.0.5(supports-color@8.1.1)(vite@8.2.0)':
+  '@vocab/vite@1.0.6-vite-isolate-translations-chunk-20260828063901(supports-color@8.1.1)(vite@8.2.0)':
     dependencies:
       '@vocab/core': 1.8.2(supports-color@8.1.1)
       cjs-module-lexer: 2.2.0

@@ -88,17 +88,21 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script
       type="module"
-      src="SCRIPTS[3]"
+      src="SCRIPTS[1]"
     >
     </script>
     <script
       type="module"
+      async
+      data-required-chunk
       src="SCRIPTS[2]"
     >
     </script>
     <script
       type="module"
-      src="SCRIPTS[1]"
+      async
+      data-required-chunk
+      src="SCRIPTS[3]"
     >
     </script>
   </body>
@@ -166,12 +170,14 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script
       type="module"
-      src="SCRIPTS[2]"
+      src="SCRIPTS[1]"
     >
     </script>
     <script
       type="module"
-      src="SCRIPTS[1]"
+      async
+      data-required-chunk
+      src="SCRIPTS[2]"
     >
     </script>
   </body>
@@ -248,17 +254,21 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script
       type="module"
-      src="SCRIPTS[3]"
+      src="SCRIPTS[1]"
     >
     </script>
     <script
       type="module"
+      async
+      data-required-chunk
       src="SCRIPTS[2]"
     >
     </script>
     <script
       type="module"
-      src="SCRIPTS[1]"
+      async
+      data-required-chunk
+      src="SCRIPTS[3]"
     >
     </script>
   </body>
@@ -326,12 +336,14 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
     <script
       type="module"
-      src="SCRIPTS[2]"
+      src="SCRIPTS[1]"
     >
     </script>
     <script
       type="module"
-      src="SCRIPTS[1]"
+      async
+      data-required-chunk
+      src="SCRIPTS[2]"
     >
     </script>
   </body>
@@ -345,7 +357,7 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,78 +1,78 @@
+@@ -1,82 +1,82 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -410,17 +422,21 @@ exports[`multiple-routes > bundler: vite > build and serve > should render detai
      </script>
      <script
        type="module"
-       src="/static/place/AsyncComponent.js"
+       src="/static/place/vite-client.js"
      >
      </script>
      <script
        type="module"
+       async
+       data-required-chunk
        src="/static/place/Details.js"
      >
      </script>
      <script
        type="module"
-       src="/static/place/vite-client.js"
+       async
+       data-required-chunk
+       src="/static/place/AsyncComponent.js"
      >
      </script>
    </body>
@@ -487,12 +503,14 @@ exports[`multiple-routes > bundler: vite > build and serve > should render home 
     </script>
     <script
       type="module"
-      src="/static/place/Home.js"
+      src="/static/place/vite-client.js"
     >
     </script>
     <script
       type="module"
-      src="/static/place/vite-client.js"
+      async
+      data-required-chunk
+      src="/static/place/Home.js"
     >
     </script>
   </body>

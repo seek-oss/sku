@@ -8,7 +8,5 @@ export const getWebpackLoadableSpecifierName = (
     .get('specifiers')
     .find((specifier) => specifier.isImportDefaultSpecifier());
 
-  return defaultSpecifier?.node.local.name ?? 'loadable';
-
-  // TODO: Handle loadable ready.
+  return defaultSpecifier?.node.local.name;
 };

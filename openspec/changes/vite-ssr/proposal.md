@@ -17,9 +17,8 @@ It ships **experimental** (not for production).
 
 Multi-site apps need different path sets per site.
 A single unfiltered route list either over-matches or registers foreign paths on every host.
-This change makes site-scoped trees first-class via `routesEntry` + optional route `sites` + app `getSite`.
-That matches the spirit of first-class multi-language.
-Details: `design.md` Decision 4a.
+This change makes site-scoped trees and automatically expanded paths for multi-language support first-class.
+Details: `design.md` Decisions 4a and 4c.
 
 With Express `req` on entry getters / optional `getRouterContext`, apps have no need to separate server vs client route modules.
 A single `routesEntry` is the source of truth for both graphs.
@@ -47,7 +46,8 @@ Details: `design.md` Decision 12a.
 - Commands are `sku start` / `sku build`.
 - Webpack-style `-ssr` is not used.
 - First-class `routesEntry` defaults to `src/routes.tsx`.
-- It exports flat `routes` with optional `sites`.
+- It exports named `routes` with optional `sites`.
+- Optional `mapRoutePath` maps one logical path to per-site concrete paths during tree pre-build.
 - Sku pre-builds per-site trees.
 - Apps resolve the site via `getSite` when multi-site.
 - Config `routes` (static prerender paths) stays separate.
@@ -79,7 +79,7 @@ Full list: `design.md` Non-Goals.
 
 ### New Capabilities
 
-- `managed-data-mode`: App contract shared by SSR today and a future Static path. Covers naming, `sku/runtime`, `routesEntry`, request entries, `SkuProvider` / `createSkuContexts`, `useInsertHtml`, intent preload, and the React Router 8 optional peer.
+- `managed-data-mode`: App contract shared by SSR today and a future Static path. Covers naming, `sku/runtime`, `routesEntry` (including optional `mapRoutePath`), request entries, `SkuProvider` / `createSkuContexts`, `useInsertHtml`, intent preload, and the React Router 8 optional peer.
 - `ssr`: SSR render strategy and ship surface. Covers `buildType`, streaming Document, Express server, build layout, create template `ssr`, config rejects, and product / Migrating docs.
 - `csp`: SSR CSP delivery only (headers, shell-derived policy, lazy single nonce, report-only, report-to). Does not backfill static or webpack CSP behaviour.
 
@@ -99,7 +99,7 @@ The OpenSpec change / branch name remains `vite-ssr` as a historical workstream 
 - `onListen` and `expressTrustProxy`
 - create template `ssr`
 
-Full contract: `design.md` Decisions 12 / 12a / 25.
+Full contract: `design.md` Decisions 12 / 12a / 25 / 28.
 
 **Deps**
 
@@ -110,7 +110,7 @@ Full contract: `design.md` Decisions 12 / 12a / 25.
 **Docs / release**
 
 - Product and Migrating docs describe Managed Data Mode vs SSR.
-- They cover multi-site, the three value channels, and Apollo streaming.
+- They cover multi-site, optional `mapRoutePath` for multi-path pages, the three value channels, and Apollo streaming.
 - Deploy docs cover a self-contained production server and recommended external hosting of hashed assets.
 - Release includes an experimental warning and a changeset.
 

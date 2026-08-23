@@ -1,23 +1,26 @@
 :root {
-  --vp-c-brand-1: #8300fc;
-  --vp-c-brand-2: #6a00d1;
-  --vp-c-brand-3: #8300fc;
-  --vp-c-brand-soft: rgba(131, 0, 252, 0.14);
+  --brand-base: rgb(131 0 252);
+  --vp-c-brand-1: var(--brand-base);
+  --vp-c-brand-2: rgb(106 0 209);
+  --vp-c-brand-3: var(--brand-base);
 
-  --vp-c-bg-alt: #f8f8f8;
-  --vp-c-bg-soft: #f8f8f8;
-  --vp-c-bg-mute: #efefef;
+  --vp-c-brand-soft: rgb(from var(--brand-base) r g b / 0.14);
+
+  --vp-c-bg-alt: rgb(248 248 248);
+  --vp-c-bg-soft: rgb(248 248 248);
+  --vp-c-bg-mute: rgb(239 239 239);
 
   --vp-font-family-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
-  --vp-home-hero-name-color: #8300fc;
+  --vp-home-hero-name-color: --vp-c-brand-1;
   --vp-home-hero-image-background-image: linear-gradient(
     160deg,
-    rgba(131, 0, 252, 0.18) 0%,
-    rgba(131, 0, 252, 0.04) 55%,
-    rgba(248, 248, 248, 0.9) 100%
+    rgb(from var(--vp-c-brand-1) r g b / 0.18) 0%,
+    rgb(from var(--vp-c-brand-1) r g b / 0.04) 55%,
+    rgb(248 248 248 / 0.9) 100%
   );
   --vp-home-hero-image-filter: blur(44px);
+  --vp-code-line-highlight-color: rgb(from var(--vp-c-brand-1) r g b / 0.06);
 
   scrollbar-gutter: stable;
 }
@@ -30,10 +33,10 @@
   background:
     radial-gradient(
       ellipse 80% 50% at 50% -10%,
-      rgba(131, 0, 252, 0.1),
+      rgb(from var(--vp-c-brand-1) r g b / 0.1),
       transparent 70%
     ),
-    #fff;
+    rgb(255 255 255);
 }
 
 .VPHomeHero .image-src {
@@ -55,8 +58,8 @@
 }
 
 .VPFeatures .box {
-  border: 1px solid #efefef;
-  background: #f8f8f8;
+  border: 1px solid var(--vp-c-bg-mute);
+  background: var(--vp-c-bg-soft);
   box-shadow: none;
   border-radius: 12px;
   height: 100%;

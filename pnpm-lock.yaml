@@ -1002,20 +1002,20 @@ importers:
         version: link:fake/node_modules/package-with-vanilla-extract-source
       react:
         specifier: 'catalog:'
-        version: 19.2.7
+        version: 19.2.8
       react-dom:
         specifier: 'catalog:'
-        version: 19.2.7(react@19.2.7)
+        version: 19.2.8(react@19.2.8)
     devDependencies:
       '@types/react':
         specifier: 'catalog:'
-        version: 19.2.17
+        version: 19.2.18
       '@types/react-dom':
         specifier: 'catalog:'
-        version: 19.2.3(@types/react@19.2.17)
+        version: 19.2.4(@types/react@19.2.18)
       '@vanilla-extract/css':
         specifier: 'catalog:'
-        version: 1.21.1(babel-plugin-macros@3.1.0)
+        version: 1.21.2(babel-plugin-macros@3.1.0)
       dedent:
         specifier: ^1.5.1
         version: 1.7.2(babel-plugin-macros@3.1.0)

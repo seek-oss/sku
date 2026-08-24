@@ -10,6 +10,7 @@ import { getViteLoadableSpecifierName } from './helpers/getViteLoadableSpecifier
 import { injectModuleID } from './helpers/injectModuleID.js';
 import {
   assertSingleLoadableRuntime,
+  createWebpackLoadableImportDependencyMessage,
   createWebpackLoadableImportMessage,
   parseLoadableSource,
   rewriteWebpackLoadableImportsInAst,
@@ -151,7 +152,9 @@ export function preloadPlugin({
           return;
         }
 
-        const message = createWebpackLoadableImportMessage(id);
+        const message = id.includes('node_modules')
+          ? createWebpackLoadableImportDependencyMessage(id)
+          : createWebpackLoadableImportMessage(id);
         if (isBuild) {
           this.error(message);
         } else {

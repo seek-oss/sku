@@ -2,7 +2,7 @@ import type { Plugin } from 'rolldown';
 import { makePluginName } from '../../helpers/makePluginName.js';
 import { WEBPACK_LOADABLE_IMPORT } from '../preloadPlugin/helpers/constants.js';
 import {
-  createWebpackLoadableImportMessage,
+  createWebpackLoadableImportDependencyMessage,
   rewriteWebpackLoadableImports,
 } from '../preloadPlugin/helpers/rewriteWebpackLoadableImports.js';
 
@@ -27,13 +27,13 @@ export const convertLoadableDepOptimizePlugin = ({
     },
     handler(code, id) {
       if (!convertFromWebpack) {
-        this.warn(createWebpackLoadableImportMessage(id));
+        this.warn(createWebpackLoadableImportDependencyMessage(id));
         return null;
       }
 
       const result = rewriteWebpackLoadableImports(code, id);
       if ((result?.code ?? code).includes(WEBPACK_LOADABLE_IMPORT)) {
-        this.warn(createWebpackLoadableImportMessage(id));
+        this.warn(createWebpackLoadableImportDependencyMessage(id));
       }
       return result;
     },

@@ -19,7 +19,10 @@ export const parseLoadableSource = (code: string) =>
   });
 
 export const createWebpackLoadableImportMessage = (id: string) =>
-  `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid in a Vite application. Please install '@sku-lib/vite' and run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`;
+  `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid with the vite bundler. Please run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`;
+
+export const createWebpackLoadableImportDependencyMessage = (id: string) =>
+  `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid with the vite bundler. Please contact the dependency author to migrate to '${VITE_LOADABLE_IMPORT}' and remove any 'loadableReady' calls, which dependencies should not make.`;
 
 export const assertSingleLoadableRuntime = (code: string, id: string) => {
   const hasWebpack = code.includes(WEBPACK_LOADABLE_IMPORT);

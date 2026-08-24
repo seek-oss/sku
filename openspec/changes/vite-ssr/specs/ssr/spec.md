@@ -177,6 +177,8 @@ Sku MUST attempt this recovery at most once per request. If recovery cannot prod
 
 Client abort / disconnect MUST NOT be treated as a render error and MUST NOT start recovery.
 
+If abort occurs while the recovery pass is still running, sku MUST stop without hanging, MUST NOT complete that pass as a document, and MUST NOT report the abort through `onError` / `onShellError`.
+
 Sku MAY report the original render error to `onError` / `onShellError` even when recovery succeeds.
 
 #### Scenario: Sync throw before the shell is piped
@@ -204,10 +206,22 @@ Sku MAY report the original render error to `onError` / `onShellError` even when
 - **WHEN** the request is aborted while a `waitForAll` render is still buffering
 - **THEN** sku does not render an ErrorBoundary document
 - **AND** sku does not treat that abort as a render error for Express
+- **AND** sku does not report the abort through `onError` / `onShellError`
+
+#### Scenario: Abort during ErrorBoundary recovery
+
+- **WHEN** sku has started the ErrorBoundary recovery pass
+- **AND** the request is aborted before that pass produces a document
+- **THEN** sku does not hang
+- **AND** sku does not write an HTML document for that request
+- **AND** sku does not treat that abort as a render error for Express
+- **AND** sku does not report the abort through `onError` / `onShellError`
 
 ### Requirement: Client disconnect aborts document work
 
 When the client disconnects, sku MUST stop document work for that request.
+
+Client abort / disconnect MUST NOT be reported through `onError` / `onShellError`. Insert and pipeline failures after commit remain on the `onError` path below.
 
 Dev and production MUST share this behaviour.
 
@@ -217,6 +231,16 @@ Disconnect after `render` has a document ready, including during header writes, 
 
 - **WHEN** the client disconnects before HTML headers are committed
 - **THEN** sku aborts the stream and does not write the document body
+- **AND** sku does not report the abort through `onError` / `onShellError`
+
+#### Scenario: Disconnect during HTML header writes
+
+- **WHEN** the document stream is already ready
+- **AND** the client disconnects while sku is writing HTML headers
+- **THEN** sku aborts the React stream
+- **AND** sku does not pipe the HTML body
+- **AND** sku does not call Express `next(error)` for that abort
+- **AND** sku does not report the abort through `onError` / `onShellError`
 
 #### Scenario: Disconnect during header writes
 
@@ -239,6 +263,7 @@ Disconnect after `render` has a document ready, including during header writes, 
 
 - **WHEN** the client disconnects after the HTML body has started piping
 - **THEN** sku aborts the React stream
+- **AND** sku does not report the abort through `onError` / `onShellError`
 
 ### Requirement: Render attempts settle once
 
@@ -312,6 +337,7 @@ Genuine render failures on a still-connected request MUST still reach Express er
 - **WHEN** render rejects because the client disconnected
 - **THEN** sku does not call the render-error hook
 - **AND** sku does not pass the error to Express `next`
+- **AND** sku does not report the abort through `onError` / `onShellError`
 
 #### Scenario: Connected render failure reaches Express
 
@@ -338,10 +364,27 @@ Partial HTML on a live connection is inherent to streaming.
 
 When React Router returns a `Response` from `query` (for example a redirect), sku MUST forward that response instead of streaming HTML.
 
+If the client disconnects while that `Response` is being read, sku MUST NOT write it.
+
+When the request abort signal is already aborted before `query()`, sku MUST NOT run route loaders or actions.
+
 #### Scenario: Loader redirect Response
 
 - **WHEN** a loader returns a redirect `Response`
 - **THEN** sku forwards that status/headers/body and does not stream HTML
+
+#### Scenario: Disconnect while reading a short-circuit Response
+
+- **WHEN** `query` returns a `Response`
+- **AND** the client disconnects before that body is written
+- **THEN** sku does not write that `Response` to the client
+- **AND** sku does not call Express `next(error)` for that abort
+
+#### Scenario: Already-aborted signal skips actions
+
+- **WHEN** the request is already aborted before render
+- **THEN** route actions do not run
+- **AND** sku does not stream HTML
 
 ### Requirement: Document responses forward loader and action headers
 

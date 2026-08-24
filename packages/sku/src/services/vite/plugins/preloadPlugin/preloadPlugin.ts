@@ -10,10 +10,10 @@ import { getViteLoadableSpecifierName } from './helpers/getViteLoadableSpecifier
 import { injectModuleID } from './helpers/injectModuleID.js';
 import {
   assertSingleLoadableRuntime,
+  createWebpackLoadableImportMessage,
   parseLoadableSource,
   rewriteWebpackLoadableImportsInAst,
 } from './helpers/rewriteWebpackLoadableImports.js';
-import { getExecuteCommand } from '@sku-private/utils';
 import { makePluginName } from '../../helpers/makePluginName.js';
 import { convertLoadableDepOptimizePlugin } from '../esbuild/convertLoadableDepOptimizePlugin.js';
 
@@ -31,6 +31,11 @@ interface PluginOptions {
    * Convert loadable import from webpack to vite
    */
   convertFromWebpack?: boolean;
+  /**
+   * The sku command being run. Remaining webpack loadable imports fail the
+   * build on `build` and warn on any other command.
+   */
+  commandName?: string;
 }
 
 // Modules to scan for dynamic imports.
@@ -41,27 +46,18 @@ const cleanId = (id: string) => id.split('?')[0];
 
 /**
  * If conversion is enabled, rewrites the webpack loadable import to its Vite equivalent.
- * Otherwise, warns that the import is invalid and needs to be converted via codemod.
+ * Returns whether a rewrite was attempted.
  */
-const convertOrWarnAboutWebpackLoadable = ({
+const convertWebpackLoadable = ({
   hasWebpack,
   ast,
-  id,
   convertFromWebpack,
 }: {
   hasWebpack: boolean;
   ast: t.File;
-  id: string;
   convertFromWebpack: boolean | undefined;
 }) => {
-  if (!hasWebpack) {
-    return false;
-  }
-
-  if (!convertFromWebpack) {
-    console.log(
-      `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid in a Vite application. Please install '@sku-lib/vite' and run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`,
-    );
+  if (!hasWebpack || !convertFromWebpack) {
     return false;
   }
 
@@ -112,25 +108,27 @@ const injectLoadableModuleId = ({
 export function preloadPlugin({
   debug,
   convertFromWebpack,
+  commandName,
 }: PluginOptions = {}): Plugin {
   const lazyImportedModules = new Set();
   const injectedModules = new Set();
   let count = 0;
+
+  // Vite's own `command` can't be trusted here: the VE compiler's `createServer`
+  // reports `serve` during `sku build`, so switch on the sku command instead.
+  const isBuild = Boolean(commandName?.startsWith('build'));
+
   return {
     name: makePluginName('preload'),
 
     // handle pre-bundled or optimized code that contains webpack loadable imports
-    ...(convertFromWebpack
-      ? {
-          config: () => ({
-            optimizeDeps: {
-              rolldownOptions: {
-                plugins: [convertLoadableDepOptimizePlugin()],
-              },
-            },
-          }),
-        }
-      : {}),
+    config: () => ({
+      optimizeDeps: {
+        rolldownOptions: {
+          plugins: [convertLoadableDepOptimizePlugin({ convertFromWebpack })],
+        },
+      },
+    }),
 
     // handles bundled code only.
     transform(code, rawId) {
@@ -146,16 +144,31 @@ export function preloadPlugin({
         return null;
       }
 
+      // The webpack specifier must never survive to the bundle. Conversion is
+      // best-effort, so whatever remains after any rewrite is reported.
+      const reportRemainingWebpackImport = (outputCode: string) => {
+        if (!outputCode.includes(WEBPACK_LOADABLE_IMPORT)) {
+          return;
+        }
+
+        const message = createWebpackLoadableImportMessage(id);
+        if (isBuild) {
+          this.error(message);
+        } else {
+          this.warn(message);
+        }
+      };
+
       const ast = parseLoadableSource(code);
-      const converted = convertOrWarnAboutWebpackLoadable({
+      const converted = convertWebpackLoadable({
         ast,
-        id,
         hasWebpack,
         convertFromWebpack,
       });
       const injected = isSsr && injectLoadableModuleId({ ast, id });
 
       if (!converted && !injected) {
+        reportRemainingWebpackImport(code);
         return null;
       }
 
@@ -167,6 +180,7 @@ export function preloadPlugin({
         injectedModules.add(id);
       }
       const output = generate(ast, {}, code);
+      reportRemainingWebpackImport(output.code);
       return {
         code: output.code,
         map: output.map,

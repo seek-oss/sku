@@ -18,24 +18,38 @@ interface PluginOptions {
 // Production builds see dependency source through the preload plugin's transform.
 export const convertLoadableDepOptimizePlugin = ({
   convertFromWebpack,
-}: PluginOptions = {}): Plugin => ({
-  name: makePluginName('convert-loadable-dep-optimize'),
-  transform: {
-    filter: {
-      id: /\.[cm]?js$/,
-      code: WEBPACK_LOADABLE_IMPORT,
-    },
-    handler(code, id) {
-      if (!convertFromWebpack) {
-        this.warn(createWebpackLoadableImportDependencyMessage(id));
-        return null;
-      }
+}: PluginOptions = {}): Plugin => {
+  const warnedModules = new Set<string>();
 
-      const result = rewriteWebpackLoadableImports(code, id);
-      if ((result?.code ?? code).includes(WEBPACK_LOADABLE_IMPORT)) {
-        this.warn(createWebpackLoadableImportDependencyMessage(id));
-      }
-      return result;
+  // Vite's dep optimizer runs rolldown with `logLevel: 'silent'`, which
+  // suppresses `this.warn`, so report directly to the console instead.
+  const warn = (id: string) => {
+    if (warnedModules.has(id)) {
+      return;
+    }
+    warnedModules.add(id);
+    console.warn(createWebpackLoadableImportDependencyMessage(id));
+  };
+
+  return {
+    name: makePluginName('convert-loadable-dep-optimize'),
+    transform: {
+      filter: {
+        id: /\.[cm]?js$/,
+        code: WEBPACK_LOADABLE_IMPORT,
+      },
+      handler(code, id) {
+        if (!convertFromWebpack) {
+          warn(id);
+          return null;
+        }
+
+        const result = rewriteWebpackLoadableImports(code, id);
+        if ((result?.code ?? code).includes(WEBPACK_LOADABLE_IMPORT)) {
+          warn(id);
+        }
+        return result;
+      },
     },
-  },
-});
+  };
+};

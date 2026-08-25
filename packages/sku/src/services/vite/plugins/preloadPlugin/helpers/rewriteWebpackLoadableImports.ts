@@ -18,11 +18,13 @@ export const parseLoadableSource = (code: string) =>
     plugins: ['jsx', 'typescript'],
   });
 
+// shown when loadable webpack is found within the main bundle and the codemod can be used to fix it
 export const createWebpackLoadableImportMessage = (id: string) =>
-  `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid with the vite bundler. Please run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`;
+  `[SKU] Found ${WEBPACK_LOADABLE_IMPORT} import in '${id}'. This import is invalid with the vite bundler. Please run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`;
 
+// shown when loadable webpack is found within a dependency and the codemod can't be used to fix it (--convert-loadable is required)
 export const createWebpackLoadableImportDependencyMessage = (id: string) =>
-  `Found '${WEBPACK_LOADABLE_IMPORT}' import in '${id}'. This import is invalid with the vite bundler. Please contact the dependency author to migrate to '${VITE_LOADABLE_IMPORT}' and remove any 'loadableReady' calls, which dependencies should not make.`;
+  `[SKU] Found ${WEBPACK_LOADABLE_IMPORT} import in '${id}'. Please run sku with '--convert-loadable' to automatically convert the import to ${VITE_LOADABLE_IMPORT}. If this error persists, please contact the dependency author to remove unsupported loadable imports (e.g., loadableReady).`;
 
 export const assertSingleLoadableRuntime = (code: string, id: string) => {
   const hasWebpack = code.includes(WEBPACK_LOADABLE_IMPORT);

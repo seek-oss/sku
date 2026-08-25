@@ -155,6 +155,7 @@ export function preloadPlugin({
         const message = id.includes('node_modules')
           ? createWebpackLoadableImportDependencyMessage(id)
           : createWebpackLoadableImportMessage(id);
+
         if (isBuild) {
           this.error(message);
         } else {

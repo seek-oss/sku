@@ -110,7 +110,7 @@ describe('preloadPlugin', () => {
       );
       expect(warn).toHaveBeenCalledTimes(1);
       expect(warn.mock.calls[0][0]).toContain(
-        `Found 'sku/@loadable/component' import in '/project/src/App.jsx'`,
+        `Found sku/@loadable/component import in '/project/src/App.jsx'`,
       );
       expect(warn.mock.calls[0][0]).toContain('transform-vite-loadable');
       expect(error).not.toHaveBeenCalled();
@@ -134,7 +134,7 @@ describe('preloadPlugin', () => {
       );
       expect(error).toHaveBeenCalledTimes(1);
       expect(error.mock.calls[0][0]).toContain(
-        `Found 'sku/@loadable/component' import in '/project/src/App.jsx'`,
+        `Found sku/@loadable/component import in '/project/src/App.jsx'`,
       );
       expect(warn).not.toHaveBeenCalled();
     });
@@ -155,7 +155,7 @@ describe('preloadPlugin', () => {
 
       expect(warn).toHaveBeenCalledTimes(1);
       expect(warn.mock.calls[0][0]).toContain(
-        `Found 'sku/@loadable/component' import in '${id}'`,
+        `Found sku/@loadable/component import in '${id}'`,
       );
       expect(warn.mock.calls[0][0]).toContain('contact the dependency author');
       expect(error).not.toHaveBeenCalled();
@@ -176,7 +176,7 @@ describe('preloadPlugin', () => {
 
       expect(error).toHaveBeenCalledTimes(1);
       expect(error.mock.calls[0][0]).toContain(
-        `Found 'sku/@loadable/component' import in '${id}'`,
+        `Found sku/@loadable/component import in '${id}'`,
       );
       expect(error.mock.calls[0][0]).toContain('contact the dependency author');
       expect(warn).not.toHaveBeenCalled();

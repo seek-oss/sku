@@ -5,6 +5,7 @@ import {
   createWebpackLoadableImportDependencyMessage,
   rewriteWebpackLoadableImports,
 } from '../preloadPlugin/helpers/rewriteWebpackLoadableImports.js';
+import { caution } from '@sku-private/utils/console';
 
 interface PluginOptions {
   /**
@@ -28,7 +29,7 @@ export const convertLoadableDepOptimizePlugin = ({
       return;
     }
     warnedModules.add(id);
-    console.warn(createWebpackLoadableImportDependencyMessage(id));
+    console.warn(caution(createWebpackLoadableImportDependencyMessage(id)));
   };
 
   return {

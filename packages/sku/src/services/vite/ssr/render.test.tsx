@@ -3,7 +3,7 @@ import { Writable } from 'node:stream';
 import type { Request as ExpressRequest } from 'express';
 import { Suspense, use } from 'react';
 import { Outlet, RouterContextProvider } from 'react-router';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
 import { createSkuContexts } from './skuContext.js';
@@ -385,10 +385,15 @@ describe('render', () => {
     };
 
     let boundaryPending: Promise<string> | undefined;
-    const ErrorBoundary = () => {
+    const BoundaryBoom = () => {
       boundaryPending ??= getRejected('Boom from ErrorBoundary');
       return <p>{use(boundaryPending)}</p>;
     };
+    const ErrorBoundary = () => (
+      <Suspense fallback={<p>Loading recovery</p>}>
+        <BoundaryBoom />
+      </Suspense>
+    );
     const Layout = () => <Outlet />;
     const handlers = buildSiteStaticHandlers({
       au: [

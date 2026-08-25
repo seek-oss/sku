@@ -46,7 +46,7 @@ describe('convertLoadableDepOptimizePlugin', () => {
 
     expect(warn).toHaveBeenCalledTimes(1);
     expect(warn.mock.calls[0][0]).toContain(
-      `Found 'sku/@loadable/component' import in '${id}'`,
+      `Found sku/@loadable/component import in '${id}'`,
     );
     expect(warn.mock.calls[0][0]).toContain('contact the dependency author');
     expect(code).toBeNull();
@@ -79,7 +79,7 @@ describe('convertLoadableDepOptimizePlugin', () => {
 
     expect(warn).toHaveBeenCalledTimes(1);
     expect(warn.mock.calls[0][0]).toContain(
-      `Found 'sku/@loadable/component' import in '${id}'`,
+      `Found sku/@loadable/component import in '${id}'`,
     );
     expect(warn.mock.calls[0][0]).toContain('contact the dependency author');
     expect(code).toContain('sku/@loadable/component');

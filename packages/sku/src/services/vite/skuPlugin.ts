@@ -32,6 +32,7 @@ export const skuPlugin = ({
   preloadPlugin({
     // Convert loadable import from webpack to vite. Can be put behind a flag.
     convertFromWebpack: skuContext.convertLoadable,
+    commandName: skuContext.commandName,
   }),
   polyfillsPlugin(skuContext),
   vitePluginSsrCss({

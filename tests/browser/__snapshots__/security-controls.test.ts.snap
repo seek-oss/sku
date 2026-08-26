@@ -92,6 +92,7 @@ exports[`security-controls > build-ssr > should start a server with content-secu
 `;
 
 exports[`security-controls > bundler vite > csp-delivery > serve > should serve an app with security controls 1`] = `
+content-security-policy: script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE';
 ===================================================================
 --- sourceHtml
 +++ clientHtml
@@ -138,7 +139,7 @@ exports[`security-controls > bundler vite > csp-delivery > serve > should serve 
        src="/vite-client.js"
      >
      </script>
-+    <script nonce="RANDOM_NONCE">
++    <script nonce>
 +      console.log("Hello from dynamically created script")
 +    </script>
    </body>
@@ -241,6 +242,7 @@ content-security-policy: script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9
 `;
 
 exports[`security-controls > bundler vite > csp-report-only > serve > should serve an app with security controls 1`] = `
+content-security-policy-report-only: script-src 'self' https://some-report-only-cdn.com 'nonce-RANDOM_NONCE';
 ===================================================================
 --- sourceHtml
 +++ clientHtml
@@ -291,7 +293,7 @@ exports[`security-controls > bundler vite > csp-report-only > serve > should ser
        src="/vite-client.js"
      >
      </script>
-+    <script nonce="RANDOM_NONCE">
++    <script nonce>
 +      console.log("Hello from dynamically created script")
 +    </script>
    </body>
@@ -398,6 +400,8 @@ content-security-policy-report-only: script-src 'self' https://some-report-only-
 `;
 
 exports[`security-controls > bundler vite > csp-report-to > endpoint > serve > should serve an app with security controls 1`] = `
+content-security-policy: script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE'; report-to some-reporting-endpoint;
+content-security-policy-report-only: script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE'; report-to some-report-only-reporting-endpoint;
 ===================================================================
 --- sourceHtml
 +++ clientHtml
@@ -444,7 +448,7 @@ exports[`security-controls > bundler vite > csp-report-to > endpoint > serve > s
        src="/vite-client.js"
      >
      </script>
-+    <script nonce="RANDOM_NONCE">
++    <script nonce>
 +      console.log("Hello from dynamically created script")
 +    </script>
    </body>
@@ -548,6 +552,9 @@ content-security-policy-report-only: script-src 'self' https://some-cdn.com 'sha
 `;
 
 exports[`security-controls > bundler vite > csp-report-to > tuple > serve > should serve an app with security controls 1`] = `
+content-security-policy: script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE'; report-to some-reporting-endpoint;
+content-security-policy-report-only: script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE'; report-to some-report-only-reporting-endpoint;
+reporting-endpoints: some-reporting-endpoint="https://some-reporting-url.com", some-report-only-reporting-endpoint="https://some-report-only-reporting-url.com"
 ===================================================================
 --- sourceHtml
 +++ clientHtml
@@ -594,7 +601,7 @@ exports[`security-controls > bundler vite > csp-report-to > tuple > serve > shou
        src="/vite-client.js"
      >
      </script>
-+    <script nonce="RANDOM_NONCE">
++    <script nonce>
 +      console.log("Hello from dynamically created script")
 +    </script>
    </body>
@@ -699,6 +706,9 @@ reporting-endpoints: some-reporting-endpoint="https://some-reporting-url.com", s
 `;
 
 exports[`security-controls > bundler vite > csp-report-to > url > serve > should serve an app with security controls 1`] = `
+content-security-policy: script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE'; report-to endpoint-c3d91ec9;
+content-security-policy-report-only: script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE'; report-to endpoint-abc46dc8;
+reporting-endpoints: endpoint-c3d91ec9="https://some-reporting-url.com", endpoint-abc46dc8="https://some-report-only-reporting-url.com"
 ===================================================================
 --- sourceHtml
 +++ clientHtml
@@ -745,7 +755,7 @@ exports[`security-controls > bundler vite > csp-report-to > url > serve > should
        src="/vite-client.js"
      >
      </script>
-+    <script nonce="RANDOM_NONCE">
++    <script nonce>
 +      console.log("Hello from dynamically created script")
 +    </script>
    </body>

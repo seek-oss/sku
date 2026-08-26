@@ -9,7 +9,6 @@ export const defaultConfig = {
     'unrs-resolver': true,
   },
   blockExoticSubdeps: true,
-  ignorePatchFailures: false,
   minimumReleaseAge: 4320,
   minimumReleaseAgeExclude: [
     '@braid-design-system/*',
@@ -23,7 +22,6 @@ export const defaultConfig = {
     'eslint-config-seek',
     'sku',
   ],
-  packageManagerStrictVersion: true,
   publicHoistPattern: ['eslint', 'prettier'],
   strictDepBuilds: false,
   trustPolicy: 'off',

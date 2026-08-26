@@ -125,7 +125,6 @@ exports[`sku-create vite > should create pnpm-workspace.yaml 1`] = `
 blockExoticSubdeps: true
 configDependencies:
   pnpm-plugin-sku: VERSION_IGNORED
-ignorePatchFailures: false
 minimumReleaseAge: 4320 # 3 days
 minimumReleaseAgeExclude:
   - '@braid-design-system/*'
@@ -138,7 +137,6 @@ minimumReleaseAgeExclude:
   - browserslist-config-seek
   - eslint-config-seek
   - sku
-packageManagerStrictVersion: true
 publicHoistPattern:
   - eslint
   - prettier
@@ -514,7 +512,6 @@ exports[`sku-create webpack > should create pnpm-workspace.yaml 1`] = `
 blockExoticSubdeps: true
 configDependencies:
   pnpm-plugin-sku: VERSION_IGNORED
-ignorePatchFailures: false
 minimumReleaseAge: 4320 # 3 days
 minimumReleaseAgeExclude:
   - '@braid-design-system/*'
@@ -527,7 +524,6 @@ minimumReleaseAgeExclude:
   - browserslist-config-seek
   - eslint-config-seek
   - sku
-packageManagerStrictVersion: true
 publicHoistPattern:
   - eslint
   - prettier

@@ -610,3 +610,9 @@ export type SkuConfig = SkuConfigBase &
       } & WebpackSkuConfig)
     | ({ bundler: 'vite' } & ViteSkuConfig)
   );
+
+export type Metadata = {
+  csp?: string;
+  cspReportOnly?: string;
+  reportingEndpoints?: string;
+};

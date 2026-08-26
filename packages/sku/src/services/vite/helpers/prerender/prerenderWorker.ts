@@ -16,13 +16,7 @@ import {
 } from '../../../../utils/csp.js';
 
 import type { WorkerData } from './prerenderConcurrently.js';
-import type { Render } from '../../../../types/types.js';
-
-type Metadata = {
-  csp?: string;
-  cspReportOnly?: string;
-  reportingEndpoints?: string;
-};
+import type { Metadata, Render } from '../../../../types/types.js';
 
 // Vite handles generating Vanilla Extract CSS during its build, so we set a mock adapter
 // to prevent Vanilla Extract errors during pre-rendering.

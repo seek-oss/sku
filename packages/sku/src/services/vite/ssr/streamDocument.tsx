@@ -1,176 +1,110 @@
-import { renderToPipeableStream } from 'react-dom/server';
+import { abortReason } from './abortReason.js';
 import {
-  createStaticRouter,
-  StaticRouterProvider,
-  type DataRouteObject,
-  type StaticHandlerContext,
-} from 'react-router';
-import { createInsertHtmlQueue, InsertHtmlProvider } from '#runtime/insertHtml';
-import { SkuProvider } from '#runtime/skuContext';
-
-import Document from './Document.js';
-import { buildBootstrapScriptContent } from './bootstrap.js';
+  createDocumentAttempt,
+  type CreateDocumentAttemptArgs,
+  type DocumentAttempt,
+} from './createDocumentAttempt.js';
 import { getStaticContextFromError } from './getStaticContextFromError.js';
-import { wrapPipeWithInsertHtml } from './wrapPipeWithInsertHtml.js';
-import type {
-  DocumentAssets,
-  JsonValue,
-  RenderAssets,
-  RenderOptions,
-  RenderResult,
-} from './types.js';
+import type { DocumentDestination, RenderSuccess } from './types.js';
 
-export type StreamDocumentArgs = {
-  renderContext: StaticHandlerContext;
-  dataRoutes: DataRouteObject[];
-  documentAssets: DocumentAssets;
-  assets: RenderAssets;
-  site: string;
-  clientContext: JsonValue | undefined;
-  reactContext: unknown;
-  routeHeaders: Headers;
-  waitForAll: boolean;
-  nonce?: string;
-  options: RenderOptions;
-  allowErrorRetry: boolean;
+export type StreamDocumentArgs = CreateDocumentAttemptArgs & {
+  timeoutMs?: number;
 };
 
-export const streamDocument = ({
-  renderContext,
-  dataRoutes,
-  documentAssets,
-  assets,
-  site,
-  clientContext,
-  reactContext,
-  routeHeaders,
-  waitForAll,
-  nonce,
-  options,
-  allowErrorRetry,
-}: StreamDocumentArgs): Promise<RenderResult> => {
-  const router = createStaticRouter(dataRoutes, renderContext);
-  const bootstrapScriptContent = buildBootstrapScriptContent(
-    documentAssets,
-    renderContext,
-    {
-      development: options.development ?? false,
-      clientContext,
-      site,
-    },
+export const DOCUMENT_RENDER_TIMEOUT_MS = 10_000;
+
+const isTimeoutError = (error: unknown): boolean =>
+  error instanceof DOMException && error.name === 'TimeoutError';
+
+const onDestinationEnd = (
+  destination: DocumentDestination,
+  listener: () => void,
+) => {
+  const emitter = destination as DocumentDestination & {
+    once?: (event: string, listener: () => void) => void;
+  };
+  emitter.once?.('finish', listener);
+  emitter.once?.('close', listener);
+};
+
+export const streamDocument = async ({
+  timeoutMs,
+  ...attemptArgs
+}: StreamDocumentArgs): Promise<RenderSuccess> => {
+  const { options } = attemptArgs;
+  const deadlineMs =
+    timeoutMs ?? options.renderTimeoutMs ?? DOCUMENT_RENDER_TIMEOUT_MS;
+  let renderContext = attemptArgs.renderContext;
+  let retried = false;
+  let currentAttempt: DocumentAttempt | undefined;
+
+  const timeoutReason = new DOMException(
+    'SSR document render exceeded the sku timeout',
+    'TimeoutError',
   );
 
-  // Render-scoped: provider wraps Document so route code can reach it;
-  // the matching transform flushes queued nodes before each React chunk.
-  const insertHtmlQueue = createInsertHtmlQueue();
+  const timeoutId =
+    deadlineMs > 0
+      ? setTimeout(() => {
+          currentAttempt?.abort(timeoutReason);
+        }, deadlineMs)
+      : undefined;
+  timeoutId?.unref();
 
-  return new Promise((resolve, reject) => {
-    let ready = false;
-    let abortedForRetry = false;
+  const clearDeadline = () => {
+    if (timeoutId !== undefined) {
+      clearTimeout(timeoutId);
+    }
+  };
 
-    const retryFromError = (error: unknown) => {
-      if (!allowErrorRetry || abortedForRetry) {
-        return false;
-      }
-      abortedForRetry = true;
-      stream.abort();
-      const errorContext = getStaticContextFromError(
-        dataRoutes,
-        renderContext,
-        error,
-      );
-      streamDocument({
-        renderContext: errorContext,
-        dataRoutes,
-        documentAssets,
-        assets,
-        site,
-        clientContext,
-        reactContext,
-        routeHeaders,
-        waitForAll,
-        nonce,
-        options,
-        allowErrorRetry: false,
-      }).then(resolve, reject);
-      return true;
+  while (true) {
+    const attempt = createDocumentAttempt({
+      ...attemptArgs,
+      renderContext,
+    });
+    currentAttempt = attempt;
+
+    const cancel = () => {
+      attempt.abort(abortReason(options.signal));
     };
 
-    const stream = renderToPipeableStream(
-      <InsertHtmlProvider insertHtml={insertHtmlQueue.insertHtml}>
-        <Document assets={documentAssets}>
-          <SkuProvider
-            site={site}
-            clientContext={clientContext}
-            reactContext={reactContext}
-          >
-            <StaticRouterProvider
-              router={router}
-              context={renderContext}
-              hydrate={false}
-            />
-          </SkuProvider>
-        </Document>
-      </InsertHtmlProvider>,
-      {
-        bootstrapModules: assets.bootstrapModules,
-        bootstrapScriptContent,
-        nonce,
-        onShellReady() {
-          if (waitForAll || ready || abortedForRetry) {
-            return;
-          }
-          ready = true;
-          resolve({
-            pipe: wrapPipeWithInsertHtml(
-              stream.pipe.bind(stream),
-              insertHtmlQueue,
-            ),
-            abort: stream.abort.bind(stream),
-            statusCode: renderContext.statusCode,
-            headers: routeHeaders,
-            inlineScripts: [bootstrapScriptContent],
-          });
-        },
-        onAllReady() {
-          if (!waitForAll || ready || abortedForRetry) {
-            return;
-          }
-          ready = true;
-          resolve({
-            pipe: wrapPipeWithInsertHtml(
-              stream.pipe.bind(stream),
-              insertHtmlQueue,
-            ),
-            abort: stream.abort.bind(stream),
-            statusCode: renderContext.statusCode,
-            headers: routeHeaders,
-            inlineScripts: [bootstrapScriptContent],
-          });
-        },
-        onShellError(error) {
-          options.onShellError?.(error);
-          if (retryFromError(error)) {
-            return;
-          }
-          reject(error);
-        },
-        onError(error) {
-          options.onError?.(error);
-          // Suspense rejections never settle for onAllReady; retry once we
-          // see the error while still buffering for waitForAll.
-          if (waitForAll && !ready) {
-            retryFromError(error);
-          }
-        },
-      },
-    );
-
-    const abort = () => stream.abort();
     if (options.signal?.aborted) {
-      abort();
+      cancel();
     } else {
-      options.signal?.addEventListener('abort', abort, { once: true });
+      options.signal?.addEventListener('abort', cancel, { once: true });
     }
-  });
+
+    try {
+      const handle = await attempt.ready;
+      options.signal?.removeEventListener('abort', cancel);
+      return {
+        ...handle,
+        commit: (destination, commitOptions) => {
+          onDestinationEnd(destination, clearDeadline);
+          handle.commit(destination, commitOptions);
+        },
+      };
+    } catch (error) {
+      options.signal?.removeEventListener('abort', cancel);
+      if (options.signal?.aborted) {
+        clearDeadline();
+        throw abortReason(options.signal);
+      }
+      if (isTimeoutError(error) || retried) {
+        clearDeadline();
+        throw error;
+      }
+      retried = true;
+      try {
+        renderContext = getStaticContextFromError(
+          attemptArgs.dataRoutes,
+          renderContext,
+          error,
+        );
+      } catch {
+        clearDeadline();
+        throw error;
+      }
+    }
+  }
 };

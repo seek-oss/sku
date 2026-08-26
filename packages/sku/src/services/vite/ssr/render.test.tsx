@@ -10,6 +10,8 @@ import { createSkuContexts } from './skuContext.js';
 import { render } from './render.js';
 import type { RenderAssets } from './types.js';
 
+const neverResolving = () => new Promise<string>(() => {});
+
 const { useSite, useClientContext, useReactContext } = createSkuContexts<
   {
     getClientContext: () => { userId: string };
@@ -76,7 +78,7 @@ const renderToHtml = async ({
       },
     });
     writable.on('error', reject);
-    result.pipe(writable);
+    result.commit(writable);
   });
 
   return Buffer.concat(chunks).toString('utf-8');
@@ -145,10 +147,15 @@ describe('render', () => {
       new URL('./streamDocument.tsx', import.meta.url),
       'utf-8',
     );
+    const attemptSource = await readFile(
+      new URL('./createDocumentAttempt.tsx', import.meta.url),
+      'utf-8',
+    );
 
     expect(renderSource).not.toContain('createStaticHandler');
     expect(streamSource).not.toContain('createStaticHandler');
-    expect(streamSource).toContain('SkuProvider');
+    expect(attemptSource).not.toContain('createStaticHandler');
+    expect(attemptSource).toContain('SkuProvider');
   });
 
   it('uses the sole config site when getSite is omitted', async () => {
@@ -177,7 +184,7 @@ describe('render', () => {
         },
       });
       writable.on('error', reject);
-      result.pipe(writable);
+      result.commit(writable);
     });
 
     const html = Buffer.concat(chunks).toString('utf-8');
@@ -244,7 +251,7 @@ describe('render', () => {
         },
       });
       writable.on('error', reject);
-      result.pipe(writable);
+      result.commit(writable);
     });
 
     const html = Buffer.concat(chunks).toString('utf-8');
@@ -316,11 +323,205 @@ describe('render', () => {
         },
       });
       writable.on('error', reject);
-      result.pipe(writable);
+      result.commit(writable);
     });
 
     const html = Buffer.concat(chunks).toString('utf-8');
     expect(html).toContain('data-testid="error-boundary"');
     expect(html).toContain('Suspense recovered');
+  });
+
+  it('rejects promptly when the render signal is already aborted', async () => {
+    const controller = new AbortController();
+    const reason = new Error('already gone');
+    controller.abort(reason);
+
+    await expect(
+      render({
+        siteStaticHandlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        options: { signal: controller.signal },
+      }),
+    ).rejects.toBe(reason);
+  });
+
+  it('aborts waitForAll without ErrorBoundary recovery when the signal aborts', async () => {
+    let errorBoundaryRendered = false;
+    const ErrorBoundary = () => {
+      errorBoundaryRendered = true;
+      return <main data-testid="error-boundary">should-not-render</main>;
+    };
+    const Layout = () => <Outlet />;
+    let markPendingStarted!: () => void;
+    const pendingStarted = new Promise<void>((resolve) => {
+      markPendingStarted = resolve;
+    });
+    const Pending = () => {
+      markPendingStarted();
+      return <p>{use(neverResolving())}</p>;
+    };
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: () => (
+                <Suspense fallback={<p>Loading</p>}>
+                  <Pending />
+                </Suspense>
+              ),
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+
+    const controller = new AbortController();
+    const reason = new Error('client disconnect');
+    const pending = render({
+      siteStaticHandlers: handlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      options: { signal: controller.signal },
+    });
+
+    // Abort only once the route has suspended, so the assertion never races
+    // the first render pass.
+    await pendingStarted;
+    controller.abort(reason);
+
+    await expect(pending).rejects.toBe(reason);
+    expect(errorBoundaryRendered).toBe(false);
+  });
+
+  it('does not run actions when the render signal is already aborted', async () => {
+    let actionCalled = false;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          path: '/',
+          Component: Page,
+          action: () => {
+            actionCalled = true;
+            return null;
+          },
+        },
+      ],
+    });
+    const controller = new AbortController();
+    const reason = new Error('already gone');
+    controller.abort(reason);
+
+    await expect(
+      render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/', { method: 'POST' }),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        options: { signal: controller.signal },
+      }),
+    ).rejects.toBe(reason);
+    expect(actionCalled).toBe(false);
+  });
+
+  it('rejects waitForAll when the render deadline elapses without ErrorBoundary recovery', async () => {
+    let errorBoundaryRendered = false;
+    const ErrorBoundary = () => {
+      errorBoundaryRendered = true;
+      return <main data-testid="error-boundary">should-not-render</main>;
+    };
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: () => (
+                <Suspense fallback={<p>Loading</p>}>
+                  <p>{use(neverResolving())}</p>
+                </Suspense>
+              ),
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+
+    await expect(
+      render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        options: { renderTimeoutMs: 80 },
+      }),
+    ).rejects.toMatchObject({ name: 'TimeoutError' });
+    expect(errorBoundaryRendered).toBe(false);
+  });
+
+  it('aborts an ErrorBoundary recovery attempt without hanging', async () => {
+    let markRecoveryStarted!: () => void;
+    const recoveryStarted = new Promise<void>((resolve) => {
+      markRecoveryStarted = resolve;
+    });
+    const Boom = () => {
+      throw new Error('Boom from render');
+    };
+    const PendingRecovery = () => {
+      markRecoveryStarted();
+      return <p>{use(neverResolving())}</p>;
+    };
+    const ErrorBoundary = () => (
+      <Suspense fallback={<p>Loading recovery</p>}>
+        <PendingRecovery />
+      </Suspense>
+    );
+    const Layout = () => <Outlet />;
+    const handlers = buildSiteStaticHandlers({
+      au: [
+        {
+          Component: Layout,
+          ErrorBoundary,
+          children: [
+            {
+              index: true,
+              Component: Boom,
+              handle: { waitForAll: true },
+            },
+          ],
+        },
+      ],
+    });
+
+    const controller = new AbortController();
+    const reason = new Error('client disconnect during recovery');
+    const pending = render({
+      siteStaticHandlers: handlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      options: { signal: controller.signal },
+    });
+
+    await recoveryStarted;
+    controller.abort(reason);
+
+    await expect(pending).rejects.toBe(reason);
   });
 });

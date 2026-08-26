@@ -606,6 +606,13 @@ Sku MUST NOT ship a dependency on, or configuration for, any specific data-trans
 - **WHEN** a matched route sets `handle.waitForAll` and the app injects nodes
 - **THEN** the buffered document still contains the injected markup in stream order
 
+#### Scenario: Insert callback failure fails the stream
+
+- **WHEN** an `insertHtml` callback throws while sku flushes markup into the response
+- **THEN** sku aborts the React stream
+- **AND** the response stream errors
+- **AND** partial HTML already written MAY remain on the wire
+
 ### Requirement: Intent route preloading is a sku API
 
 Sku MUST expose a `usePreloadRoute(to)` hook returning a zero-argument function that warms the lazy modules for `to`.

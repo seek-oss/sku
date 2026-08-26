@@ -76,6 +76,26 @@ describe('security-controls', () => {
       });
     });
 
+    describe('serve', async () => {
+      const port = await getPort();
+      const url = `http://localhost:${port}`;
+
+      beforeAll(async () => {
+        const build = await sku('build', [...args[bundler]]);
+        await build.findByText('Sku build complete');
+
+        const serve = await sku('serve', [`--port=${port}`]);
+        await serve.findByText('Server started');
+      });
+
+      it('should serve an app with security controls', async () => {
+        const app = await getAppSnapshot({
+          url,
+        });
+        expect(app).toMatchSnapshot();
+      });
+    });
+
     describe.runIf(bundler === 'vite')('csp-delivery', () => {
       describe('start', async () => {
         const port = await getPort();
@@ -129,6 +149,28 @@ describe('security-controls', () => {
 
         it('should generate a CSP with nonce value', async () => {
           expect(cspHeader).match(/nonce-RANDOM_NONCE/);
+        });
+      });
+
+      describe('serve', async () => {
+        const port = await getPort();
+        const url = `http://localhost:${port}`;
+
+        beforeAll(async () => {
+          const build = await sku('build', [
+            '--config=sku.config.vite.csp-delivery.ts',
+          ]);
+          await build.findByText('Sku build complete');
+
+          const serve = await sku('serve', [`--port=${port}`]);
+          await serve.findByText('Server started');
+        });
+
+        it('should serve an app with security controls', async () => {
+          const app = await getAppSnapshot({
+            url,
+          });
+          expect(app).toMatchSnapshot();
         });
       });
     });
@@ -190,6 +232,28 @@ describe('security-controls', () => {
           expect(cspReportOnlyHeader).match(/nonce-RANDOM_NONCE/);
         });
       });
+
+      describe('serve', async () => {
+        const port = await getPort();
+        const url = `http://localhost:${port}`;
+
+        beforeAll(async () => {
+          const build = await sku('build', [
+            '--config=sku.config.vite.csp-report-only.ts',
+          ]);
+          await build.findByText('Sku build complete');
+
+          const serve = await sku('serve', [`--port=${port}`]);
+          await serve.findByText('Server started');
+        });
+
+        it('should serve an app with security controls', async () => {
+          const app = await getAppSnapshot({
+            url,
+          });
+          expect(app).toMatchSnapshot();
+        });
+      });
     });
 
     describe.runIf(bundler === 'vite')('csp-report-to', () => {
@@ -247,6 +311,28 @@ describe('security-controls', () => {
 
           it('should not generate a reporting-endpoints header', () => {
             expect(reportingEndpointsHeader).toBeNull();
+          });
+        });
+
+        describe('serve', async () => {
+          const port = await getPort();
+          const url = `http://localhost:${port}`;
+
+          beforeAll(async () => {
+            const build = await sku('build', [
+              '--config=sku.config.vite.csp-report-to.endpoint.ts',
+            ]);
+            await build.findByText('Sku build complete');
+
+            const serve = await sku('serve', [`--port=${port}`]);
+            await serve.findByText('Server started');
+          });
+
+          it('should serve an app with security controls', async () => {
+            const app = await getAppSnapshot({
+              url,
+            });
+            expect(app).toMatchSnapshot();
           });
         });
       });
@@ -324,6 +410,28 @@ describe('security-controls', () => {
             );
           });
         });
+
+        describe('serve', async () => {
+          const port = await getPort();
+          const url = `http://localhost:${port}`;
+
+          beforeAll(async () => {
+            const build = await sku('build', [
+              '--config=sku.config.vite.csp-report-to.url.ts',
+            ]);
+            await build.findByText('Sku build complete');
+
+            const serve = await sku('serve', [`--port=${port}`]);
+            await serve.findByText('Server started');
+          });
+
+          it('should serve an app with security controls', async () => {
+            const app = await getAppSnapshot({
+              url,
+            });
+            expect(app).toMatchSnapshot();
+          });
+        });
       });
 
       describe('tuple', () => {
@@ -392,6 +500,28 @@ describe('security-controls', () => {
             expect(reportingEndpointsHeader).toContain(
               'some-report-only-reporting-endpoint="https://some-report-only-reporting-url.com"',
             );
+          });
+        });
+
+        describe('serve', async () => {
+          const port = await getPort();
+          const url = `http://localhost:${port}`;
+
+          beforeAll(async () => {
+            const build = await sku('build', [
+              '--config=sku.config.vite.csp-report-to.tuple.ts',
+            ]);
+            await build.findByText('Sku build complete');
+
+            const serve = await sku('serve', [`--port=${port}`]);
+            await serve.findByText('Server started');
+          });
+
+          it('should serve an app with security controls', async () => {
+            const app = await getAppSnapshot({
+              url,
+            });
+            expect(app).toMatchSnapshot();
           });
         });
       });

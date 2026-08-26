@@ -1,3 +1,4 @@
+import { glob, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import exists from '../../../utils/exists.js';
 import express from 'express';
@@ -25,6 +26,13 @@ import {
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { serverUrls } from '@sku-private/utils';
 import { accent, critical, strong } from '@sku-private/utils/console';
+import type { Metadata } from '../../../types/types.js';
+
+const metadataHeaderMap: Record<keyof Metadata, string> = {
+  csp: 'content-security-policy',
+  cspReportOnly: 'content-security-policy-report-only',
+  reportingEndpoints: 'reporting-endpoints',
+};
 
 export const serveAction = async ({
   site: preferredSite,
@@ -102,6 +110,34 @@ export const serveAction = async ({
     skuContext,
   });
 
+  const headers = [
+    {
+      source: '**/*.*',
+      headers: [
+        {
+          key: 'Access-Control-Allow-Origin',
+          value: '*',
+        },
+      ],
+    },
+  ];
+
+  const metadataFilesPattern = join(environment, '**/index.html.json');
+  const metadataFiles = glob(metadataFilesPattern, { cwd: paths.target });
+
+  for await (const metadataFile of metadataFiles) {
+    const { metadata } = JSON.parse(
+      await readFile(join(paths.target, metadataFile), 'utf-8'),
+    ) as { metadata: Metadata };
+
+    headers.push({
+      source: metadataFile.slice(0, -5), // Remove '.json' extension.
+      headers: (Object.entries(metadata) as Array<[keyof Metadata, string]>)
+        .filter(([key]) => key in metadataHeaderMap)
+        .map(([key, value]) => ({ key: metadataHeaderMap[key], value })),
+    });
+  }
+
   const app = express();
 
   if (paths.devServerMiddleware) {
@@ -163,17 +199,7 @@ export const serveAction = async ({
       rewrites,
       public: paths.relativeTarget,
       directoryListing: false,
-      headers: [
-        {
-          source: '**/*.*',
-          headers: [
-            {
-              key: 'Access-Control-Allow-Origin',
-              value: '*',
-            },
-          ],
-        },
-      ],
+      headers,
     });
   });
 

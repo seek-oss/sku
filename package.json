@@ -60,7 +60,7 @@
     "@sku-private/testing-library": "workspace:*",
     "@tsconfig/node24": "^24.0.4",
     "@types/node": "catalog:",
-    "cli-testing-library": "^3.0.1",
+    "cli-testing-library": "catalog:",
     "eslint": "^9.10.0",
     "eslint-config-seek": "^15.0.4",
     "eslint-import-resolver-typescript": "^4.4.4",

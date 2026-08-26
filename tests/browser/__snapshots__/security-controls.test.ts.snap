@@ -91,6 +91,61 @@ exports[`security-controls > build-ssr > should start a server with content-secu
 </html>
 `;
 
+exports[`security-controls > bundler vite > csp-delivery > serve > should serve an app with security controls 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,43 +1,46 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="stylesheet"
+       href="/vite-client.css"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client.js"
+       crossorigin
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="_14y9ssh0">
+         <div class="_14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
+     <script
+       type="module"
+       src="/vite-client.js"
+     >
+     </script>
++    <script nonce="RANDOM_NONCE">
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
 exports[`security-controls > bundler vite > csp-delivery > start > should start an app with security controls 1`] = `
 content-security-policy: script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=' 'nonce-RANDOM_NONCE';
 ===================================================================
@@ -178,6 +233,65 @@ content-security-policy: script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9
        {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
      </script>
 +    <script nonce>
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
+exports[`security-controls > bundler vite > csp-report-only > serve > should serve an app with security controls 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,47 +1,50 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta
+       http-equiv="Content-Security-Policy"
+       content="script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE';"
+     >
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="stylesheet"
+       href="/vite-client.css"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client.js"
+       crossorigin
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="_14y9ssh0">
+         <div class="_14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
+     <script
+       type="module"
+       src="/vite-client.js"
+     >
+     </script>
++    <script nonce="RANDOM_NONCE">
 +      console.log("Hello from dynamically created script")
 +    </script>
    </body>
@@ -283,6 +397,61 @@ content-security-policy-report-only: script-src 'self' https://some-report-only-
 \\ No newline at end of file
 `;
 
+exports[`security-controls > bundler vite > csp-report-to > endpoint > serve > should serve an app with security controls 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,43 +1,46 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="stylesheet"
+       href="/vite-client.css"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client.js"
+       crossorigin
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="_14y9ssh0">
+         <div class="_14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
+     <script
+       type="module"
+       src="/vite-client.js"
+     >
+     </script>
++    <script nonce="RANDOM_NONCE">
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
 exports[`security-controls > bundler vite > csp-report-to > endpoint > start > should start an app with security controls 1`] = `
 content-security-policy: script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=' 'nonce-RANDOM_NONCE'; report-to some-reporting-endpoint;
 content-security-policy-report-only: script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=' 'nonce-RANDOM_NONCE'; report-to some-report-only-reporting-endpoint;
@@ -371,6 +540,61 @@ content-security-policy-report-only: script-src 'self' https://some-cdn.com 'sha
        {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
      </script>
 +    <script nonce>
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
+exports[`security-controls > bundler vite > csp-report-to > tuple > serve > should serve an app with security controls 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,43 +1,46 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="stylesheet"
+       href="/vite-client.css"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client.js"
+       crossorigin
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="_14y9ssh0">
+         <div class="_14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
+     <script
+       type="module"
+       src="/vite-client.js"
+     >
+     </script>
++    <script nonce="RANDOM_NONCE">
 +      console.log("Hello from dynamically created script")
 +    </script>
    </body>
@@ -474,6 +698,61 @@ reporting-endpoints: some-reporting-endpoint="https://some-reporting-url.com", s
 \\ No newline at end of file
 `;
 
+exports[`security-controls > bundler vite > csp-report-to > url > serve > should serve an app with security controls 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,43 +1,46 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="stylesheet"
+       href="/vite-client.css"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client.js"
+       crossorigin
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="_14y9ssh0">
+         <div class="_14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
+     <script
+       type="module"
+       src="/vite-client.js"
+     >
+     </script>
++    <script nonce="RANDOM_NONCE">
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
 exports[`security-controls > bundler vite > csp-report-to > url > start > should start an app with security controls 1`] = `
 content-security-policy: script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=' 'nonce-RANDOM_NONCE'; report-to endpoint-c3d91ec9;
 content-security-policy-report-only: script-src 'self' https://some-cdn.com 'sha256-Z2/iFzh9VMlVkEOar1f/oSHWwQk3ve1qk/C2WdsC4Xk=' 'sha256-UBWhRaCtYn0qJIs3GeFksNFLt/GkChOdRUDOMGEwb4A=' 'nonce-RANDOM_NONCE'; report-to endpoint-abc46dc8;
@@ -570,6 +849,65 @@ reporting-endpoints: endpoint-c3d91ec9="https://some-reporting-url.com", endpoin
 \\ No newline at end of file
 `;
 
+exports[`security-controls > bundler vite > serve > should serve an app with security controls 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,47 +1,50 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta
+       http-equiv="Content-Security-Policy"
+       content="script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE';"
+     >
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       rel="stylesheet"
+       href="/vite-client.css"
+       crossorigin
+     >
+     <link
+       rel="modulepreload"
+       href="/vite-client.js"
+       crossorigin
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="_14y9ssh0">
+         <div class="_14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
+     <script
+       type="module"
+       src="/vite-client.js"
+     >
+     </script>
++    <script nonce="RANDOM_NONCE">
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
 exports[`security-controls > bundler vite > start > should start an app with security controls 1`] = `
 ===================================================================
 --- sourceHtml
@@ -658,6 +996,103 @@ exports[`security-controls > bundler vite > start > should start an app with sec
        type="application/json"
      >
        {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
++    <script nonce="RANDOM_NONCE">
++      console.log("Hello from dynamically created script")
++    </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
+exports[`security-controls > bundler webpack > serve > should serve an app with security controls 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,85 +1,88 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta
+       http-equiv="Content-Security-Policy"
+       content="script-src 'self' https://some-cdn.com 'nonce-RANDOM_NONCE';"
+     >
+     <meta charset="UTF-8">
+     <title>
+       hello-world
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       data-chunk="main"
+       rel="stylesheet"
+       href="/main-3c56f665610e32e791fe.css"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/runtime.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/2.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/main.js"
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div class="_14y9ssh0">
+         <div class="_14y9ssh1">
+-          Initial
++          Client
+         </div>
+       </div>
+     </div>
+     <script
+       id="__SKU_CLIENT_CONTEXT__"
+       type="application/json"
+     >
+       {"environment":"","dynamicScriptNonce":"RANDOM_NONCE"}
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS__"
+       type="application/json"
+     >
+       []
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS___ext"
+       type="application/json"
+     >
+       {"namedChunks":[]}
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/runtime.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/2.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/main.js"
+     >
      </script>
 +    <script nonce="RANDOM_NONCE">
 +      console.log("Hello from dynamically created script")

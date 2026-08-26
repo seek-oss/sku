@@ -2,6 +2,7 @@ import { parse } from '@babel/parser';
 import _traverse from '@babel/traverse';
 import _generate from '@babel/generator';
 import * as t from '@babel/types';
+import { getExecuteCommand } from '@sku-private/utils';
 import { VITE_LOADABLE_IMPORT, WEBPACK_LOADABLE_IMPORT } from './constants.js';
 import { getWebpackLoadableSpecifierName } from './getWebpackLoadableSpecifierName.js';
 import { convertWebpackToViteImport } from './convertWebpackToViteImport.js';
@@ -16,6 +17,14 @@ export const parseLoadableSource = (code: string) =>
     sourceType: 'unambiguous',
     plugins: ['jsx', 'typescript'],
   });
+
+// shown when loadable webpack is found within the main bundle and the codemod can be used to fix it
+export const createWebpackLoadableImportMessage = (id: string) =>
+  `[SKU] Found ${WEBPACK_LOADABLE_IMPORT} import in '${id}'. This import is invalid with the vite bundler. Please run '${getExecuteCommand(['@sku-lib/codemod', 'transform-vite-loadable'])}' to update all imports.`;
+
+// shown when loadable webpack is found within a dependency and the codemod can't be used to fix it (--convert-loadable is required)
+export const createWebpackLoadableImportDependencyMessage = (id: string) =>
+  `[SKU] Found ${WEBPACK_LOADABLE_IMPORT} import in '${id}'. Please run sku with '--convert-loadable' to automatically convert the import to ${VITE_LOADABLE_IMPORT}. If this error persists, please contact the dependency author to remove unsupported loadable imports (e.g., loadableReady).`;
 
 export const assertSingleLoadableRuntime = (code: string, id: string) => {
   const hasWebpack = code.includes(WEBPACK_LOADABLE_IMPORT);

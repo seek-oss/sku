@@ -142,10 +142,6 @@
     },
     "fixtures/stream-insert-html": {
       "entry": ["src/server.tsx", "src/client.tsx", "sku.config.*"],
-      "ignoreDependencies": [
-        // Peer of @apollo/client / @apollo/client-react-streaming
-        "rxjs",
-      ],
     },
     "fixtures/translations": {
       "entry": [

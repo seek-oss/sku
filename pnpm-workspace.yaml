@@ -70,3 +70,5 @@ preferWorkspacePackages: true
 
 publicHoistPattern:
   - '@babel/*'
+
+verifyDepsBeforeRun: warn

@@ -1,5 +1,103 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`styling > build > should create valid app 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,89 +1,89 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       data-chunk="main"
+       rel="stylesheet"
+       href="/styling/main-8dd0b8665bc753a39a0d.css"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/styling/runtime.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/styling/2.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/styling/main.js"
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div>
+         <div>
+           Render type:
+-          Initial
++          Client
+         </div>
+         <div>
+           <span
+             class="external"
+             data-automation-external="true"
+           >
+             This should be invisible
+           </span>
+           <div
+             class="qiwkl41 qiwkl40"
+             data-automation-vanilla="true"
+           >
+           </div>
+         </div>
+       </div>
+     </div>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS__"
+       type="application/json"
+     >
+       []
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS___ext"
+       type="application/json"
+     >
+       {"namedChunks":[]}
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/styling/runtime.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/styling/2.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/styling/main.js"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
+`;
+
 exports[`styling > build > should generate the expected files 1`] = `
 {
   "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
@@ -129,4 +227,102 @@ SOURCE HTML: <!DOCTYPE html>
   "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
+`;
+
+exports[`styling > start > should start a development server 1`] = `
+===================================================================
+--- sourceHtml
++++ clientHtml
+@@ -1,89 +1,89 @@
+ <!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="UTF-8">
+     <title>
+       My Awesome Project
+     </title>
+     <meta
+       name="viewport"
+       content="width=device-width, initial-scale=1"
+     >
+     <link
+       data-chunk="main"
+       rel="stylesheet"
+       href="/main.css"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/runtime.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/2.js"
+     >
+     <link
+       data-chunk="main"
+       rel="preload"
+       as="script"
+       href="/main.js"
+     >
+   </head>
+   <body>
+     <div id="app">
+       <div>
+         <div>
+           Render type:
+-          Initial
++          Client
+         </div>
+         <div>
+           <span
+             class="external"
+             data-automation-external="true"
+           >
+             This should be invisible
+           </span>
+           <div
+             class="BlueBlock_root__qiwkl41 BlueBlock_border__qiwkl40"
+             data-automation-vanilla="true"
+           >
+           </div>
+         </div>
+       </div>
+     </div>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS__"
+       type="application/json"
+     >
+       []
+     </script>
+     <script
+       id="__LOADABLE_REQUIRED_CHUNKS___ext"
+       type="application/json"
+     >
+       {"namedChunks":[]}
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/runtime.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/2.js"
+     >
+     </script>
+     <script
+       async
+       data-chunk="main"
+       src="/main.js"
+     >
+     </script>
+   </body>
+ </html>
+\\ No newline at end of file
 `;

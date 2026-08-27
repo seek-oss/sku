@@ -53,7 +53,7 @@ See Decision 27.
 - SSR requires Vitest.
 - Request entries `export default` one object via `defineServerEntry` / `defineClientEntry`.
 - Those helpers are zero-runtime inference helpers.
-- Optional sync getters receive Express `{ req }` where needed.
+- Optional getters receive Express `{ req }` where needed.
 - Getters include `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`.
 - Optional entry hooks include `middleware`, `onListen`, `onHydrate`, and `getRouterContext`.
 - Optional dual-entry `instrumentations` pass through to React Router (Decision 28).
@@ -69,6 +69,7 @@ See Decision 27.
 - `getRouterContext` supplies values for React Router loaders and actions.
 - Later getters receive already-resolved sibling values.
 - `defineServerEntry` infers types from getter returns.
+- Maybe-Promise getters unwrap with `Awaited` so hooks see the resolved value.
 - `defineClientEntry<typeof server>` extracts `Site` / `ClientContext` from the server entry.
 - Hooks read types from `typeof` the entry objects.
 - Router-aware isomorphic wrapping lives in the app’s own root layout route in `routesEntry`.
@@ -149,7 +150,7 @@ See Decision 27.
 - Requiring `getSite` when config has zero or one site (sku uses the sole resolved name).
 - Passing Fetch `Request` into `getSite` / `getLanguage` / `getClientContext` (Express `req` only).
 - Passing `res` into getters / `getReactContext` / `getRouterContext` in v1.
-- Async request-entry getters (sync-only; `getRouterContext` MAY still be async because it seeds loader context).
+- Making `getSite` or `getLanguage` async.
 - Treating raw Express `req` (or other non-isomorphic platform objects) in `RouterContextProvider` as a supported pattern.
 - Shipping Jest support for React Router 8 (transforms / ESM interop).
 - Forcing webpack fixtures or non–Vite-SSR apps onto React Router 8.
@@ -227,7 +228,7 @@ Do not overload that key for SSR `RouteObject` trees.
 `serverEntry` / `clientEntry` each **`export default`** one object from `defineServerEntry` / `defineClientEntry` (structural types `SkuServerEntry` / `SkuClientEntry`).
 Sku reads that default export and calls optional properties.
 
-The server object exposes optional sync `getSite` / `getLanguage` / `getClientContext` / `getReactContext`, plus optional `middleware`, `onListen`, `getRouterContext`, and `instrumentations`.
+The server object exposes optional `getSite` / `getLanguage` / `getClientContext` / `getReactContext`, plus optional `middleware`, `onListen`, `getRouterContext`, and `instrumentations`.
 The client object exposes optional `onHydrate`, `getReactContext`, `getRouterContext`, and `instrumentations`.
 `getSite` is typed as a function when present.
 Sku does not hard-error at init if it is omitted.
@@ -809,12 +810,35 @@ Accepted cost: site and language often derive from one parse, so two getters can
 Libraries can memoise on `req`.
 A single combined **value** resolver was rejected because it reintroduces the `onRequest` return-bag shape.
 
-Getters are **sync-only** and SHOULD stay pure/simple.
+`getSite` and `getLanguage` are **sync-only** and SHOULD stay pure/simple.
 Docs recommend that.
-Optional `getRouterContext` MAY still be async because it seeds loader context next to `query`.
+
+`getClientContext` and dual-entry `getReactContext` MAY return a Promise.
+Sku awaits each before calling the next getter.
+On the client, sku awaits `getReactContext` before `createBrowserRouter` and `hydrateRoot`.
+There is no client `getClientContext`.
+The client reads the serialised seed from the hydrate bootstrap.
+
+`useClientContext()` and `useReactContext()` always see the resolved value.
+`ClientContext` and `ReactContext` inference unwrap with `Awaited`.
+Sibling args receive that unwrapped value, not a Promise.
+
+Optional server `getRouterContext` MAY still be async because it seeds loader context next to `query`.
+Client `getRouterContext` stays sync.
+React Router `getContext` runs on every navigation and fetcher.
+
+Async I/O that only needs to attach fields on `req` can still live in Express `middleware`.
+Prefer middleware when several getters would otherwise await the same work.
+Use async `getClientContext` when the serialisable seed itself needs I/O.
+Use async `getReactContext` when the env-differing React bag needs I/O.
+Do not put per-route page data in either getter.
+Loaders and Suspense remain the data-loading path.
+
+Awaiting these getters delays `query()` and the shell (TTFB).
+Client `getReactContext` I/O delays hydration start.
 
 **Call order (all before `query()`):**
-`getSite` (or sole resolved site) → `getLanguage` → `getClientContext` → `getReactContext` → optional server `getRouterContext` → `query()`.
+`getSite` (or sole resolved site) → `getLanguage` → `getClientContext` (awaited) → `getReactContext` (awaited) → optional server `getRouterContext` → `query()`.
 Later getters receive already-resolved sibling values (`site`, `clientContext`, `reactContext`) so apps project instead of re-deriving.
 `getClientContext` runs before render so its value reaches the hydrate bootstrap and `SkuProvider`.
 Keep the existing docs warning that `clientContext` is serialised after shell-ready into the bootstrap script.
@@ -886,9 +910,12 @@ Bare `export default { … }` has no generic inference scope, so sibling methods
 `defineServerEntry` / `defineClientEntry` are zero-runtime identity helpers that create that scope: infer returns, apply them to later sibling args via `NoInfer` on input positions.
 
 `defineServerEntry` infers `Site` / `Language` / `ClientContext` / `ReactContext` from `getSite` / `getLanguage` / `getClientContext` / `getReactContext`.
+Maybe-Promise returns unwrap with `Awaited`.
 Server later getters receive `site: NoInfer<Site>`.
 
 `defineClientEntry<ServerEntry>` extracts `Site` / `ClientContext` from that server entry (`string` / `undefined` when the corresponding getter is omitted) and infers `ReactContext` from client `getReactContext`.
+That `ReactContext` unwraps with `Awaited`.
+Extracted `ClientContext` is already unwrapped from the server getter.
 Client sibling `site` / `clientContext` args use those extracted types.
 The hydrate bootstrap carries the same values the server produced.
 Reuse the same extractors as `createSkuContexts` (do not invent a second `ClientContextOf` shape).
@@ -988,7 +1015,9 @@ It extracts:
 
 - `Site` from the server entry’s `getSite` return (or `string` if `getSite` is omitted on a 0–1 site app / sole resolved name).
 - `ClientContext` from the server entry’s `getClientContext` return (or `undefined` if omitted).
-- `ReactContext` from both entries’ `getReactContext` returns as a union. Server may include fields the client omits (e.g. `extraScriptProps`).
+- That return unwraps with `Awaited` when the getter is async.
+- `ReactContext` from both entries’ `getReactContext` returns as a union, also `Awaited`.
+- Server may include fields the client omits (e.g. `extraScriptProps`).
 
 `useSite()` returns that `Site` union.
 No consumer cast is required.
@@ -1022,6 +1051,8 @@ They are not fields extracted from the entry objects.
 - `getSite` / `getLanguage` / `getClientContext` receive `{ req }` only (Express after consumer middleware). Do not pass Fetch `Request` or `res`.
 - Server `getReactContext` receives `{ req, site, clientContext }`.
 - Client `getReactContext` receives `{ site, clientContext }` from the hydrate bootstrap (no Express).
+- Sku awaits `getClientContext` and `getReactContext` when they return a Promise.
+- Sibling args and hooks receive the resolved value.
 - Server `getRouterContext` receives `{ request, req, site, clientContext, reactContext }`.
 - Client `getRouterContext` receives `{ site, clientContext, reactContext }`. Sku wraps RR’s zero-arg `getContext` to pass those args.
 - Typical projection: put serialisable seeds in `clientContext`, put `apiClient` / `makeClient` in `reactContext`, and have `getRouterContext` do `ctx.set(userId, clientContext.userId)` rather than re-reading `req`.
@@ -1686,7 +1717,8 @@ Client instrumentations MAY include `router` and `route` levels.
 | Dual `routes` hydration mismatch                  | Eliminated by first-class `routesEntry` (one module in both graphs). No runtime tree checker.                                                                                                                   |
 | Wrong-site tree / foreign path match              | Pre-filter `sites` into per-site trees before RR. `getSite` (or sole resolved site) selects. Serialize `site` for client. Fail closed on invalid or unknown site.                                               |
 | App omits or invents `site`                       | Empty config `sites` soft-defaults to `'default'`. Multi-site apps provide typed `getSite`. Hard-error if return is non-string or not a resolved site name. 0–1 site uses sole name when getter omitted.        |
-| Duplicate parse across getters                    | Accepted. Docs say keep getters sync/pure. Shared libs memoise on `req`.                                                                                                                                        |
+| Duplicate parse across getters                    | Accepted. Docs say keep `getSite` / `getLanguage` sync/pure. Shared libs memoise on `req`.                                                                                                                      |
+| Async getter I/O delays TTFB / hydrate            | Await `getClientContext` / `getReactContext` only when that bag needs I/O. Prefer middleware for shared `req` attach. Page data stays in loaders / Suspense.                                                    |
 | Accidental site splits                            | No `sites` inheritance. Site-specific routes must set `sites` explicitly.                                                                                                                                       |
 | Hand-duplicated language paths / shared `lazy`    | Optional `mapRoutePath` clones after membership filter and copies `handle.moduleId`. Docs forbid shared `pageLazy` across hand copies.                                                                          |
 | Shell-only CSP / late scripts                     | Lazy single nonce. Hash known bootstrap bodies.                                                                                                                                                                 |

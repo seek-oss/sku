@@ -130,3 +130,102 @@ describe('defineClientEntry from ServerEntry', () => {
     expect(client.getReactContext).toBeTypeOf('function');
   });
 });
+
+describe('async getClientContext / getReactContext inference', () => {
+  it('unwraps Promise returns for hooks and sibling args', () => {
+    const server = defineServerEntry({
+      getSite() {
+        return 'au' as const;
+      },
+      async getClientContext() {
+        return { userId: 'fixture-user' as const };
+      },
+      async getReactContext({ site, clientContext }) {
+        expectTypeOf(site).toEqualTypeOf<'au'>();
+        expectTypeOf(clientContext).toEqualTypeOf<
+          { userId: 'fixture-user' } | undefined
+        >();
+        return { api: 'server-api' as const };
+      },
+      getRouterContext({ clientContext, reactContext }) {
+        expectTypeOf(clientContext).toEqualTypeOf<
+          { userId: 'fixture-user' } | undefined
+        >();
+        expectTypeOf(reactContext).toEqualTypeOf<
+          { api: 'server-api' } | undefined
+        >();
+        return new RouterContextProvider();
+      },
+    });
+
+    const { useClientContext, useReactContext } =
+      createSkuContexts<typeof server>();
+    expectTypeOf(useClientContext).returns.toEqualTypeOf<{
+      userId: 'fixture-user';
+    }>();
+    expectTypeOf(useReactContext).returns.toEqualTypeOf<
+      { api: 'server-api' } | undefined
+    >();
+
+    const client = defineClientEntry<typeof server>()({
+      async getReactContext({ clientContext }) {
+        expectTypeOf(clientContext).toEqualTypeOf<
+          { userId: 'fixture-user' } | undefined
+        >();
+        return { api: 'client-api' as const };
+      },
+      getRouterContext({ reactContext }) {
+        expectTypeOf(reactContext).toEqualTypeOf<
+          { api: 'client-api' } | undefined
+        >();
+        return new RouterContextProvider();
+      },
+    });
+
+    expect(server.getClientContext).toBeTypeOf('function');
+    expect(client.getReactContext).toBeTypeOf('function');
+
+    const { useReactContext: useUnionReactContext } = createSkuContexts<
+      typeof server,
+      typeof client
+    >();
+    expectTypeOf(useUnionReactContext).returns.toEqualTypeOf<
+      { api: 'server-api' } | { api: 'client-api' }
+    >();
+  });
+
+  it('unwraps a sync getter that returns a Promise', () => {
+    const server = defineServerEntry({
+      getClientContext() {
+        return Promise.resolve({ userId: 'fixture-user' as const });
+      },
+    });
+
+    const { useClientContext } = createSkuContexts<typeof server>();
+    expectTypeOf(useClientContext).returns.toEqualTypeOf<{
+      userId: 'fixture-user';
+    }>();
+    expect(server.getClientContext).toBeTypeOf('function');
+  });
+
+  it('keeps getSite, getLanguage, and client getRouterContext synchronous', () => {
+    const serverWithAsyncSite = defineServerEntry({
+      // @ts-expect-error getSite must be synchronous
+      getSite: async () => 'au' as const,
+    });
+    const serverWithAsyncLanguage = defineServerEntry({
+      // @ts-expect-error getLanguage must be synchronous
+      getLanguage: async () => 'en' as const,
+    });
+    const clientWithAsyncRouterContext = defineClientEntry({
+      // @ts-expect-error client getRouterContext must be synchronous
+      getRouterContext: async () => new RouterContextProvider(),
+    });
+
+    expect(serverWithAsyncSite.getSite).toBeTypeOf('function');
+    expect(serverWithAsyncLanguage.getLanguage).toBeTypeOf('function');
+    expect(clientWithAsyncRouterContext.getRouterContext).toBeTypeOf(
+      'function',
+    );
+  });
+});

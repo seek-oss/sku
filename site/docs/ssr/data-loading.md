@@ -19,6 +19,10 @@ That keeps shared UI portable without per-app loader wiring.
 2. Mount isomorphic providers in your [root layout](./providers.md#root-layout-for-providers) and read values with `useReactContext()` / `useClientContext()`.
 3. Fetch in the React tree with Suspense (for example `useQuery`) so the same components work on SSR and client navigations.
 
+[`getClientContext`](./entries.md#getclientcontext) and [`getReactContext`](./entries.md#getreactcontext) may be async when the serialisable seed or env-differing values need I/O.
+Do not load per-route page data there.
+Use loaders or Suspense instead.
+
 sku does not support React Server Components.
 React [`cache()`](https://react.dev/reference/react/cache) can still memoize work per request during document SSR.
 

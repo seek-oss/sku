@@ -42,8 +42,8 @@ type ReactContextUnion<ServerEntry, ClientEntry> =
  * `ReactContext` aliases required.
  *
  * - `Site` from the server entry’s `getSite` return (`string` when omitted)
- * - `ClientContext` from the server entry’s `getClientContext` return
- * - `ReactContext` from both entries’ `getReactContext` returns (union)
+ * - `ClientContext` from the server entry’s `getClientContext` return (`Awaited`)
+ * - `ReactContext` from both entries’ `getReactContext` returns (union, `Awaited`)
  */
 export function createSkuContexts<ServerEntry, ClientEntry = unknown>() {
   type Site = SiteOf<ServerEntry>;

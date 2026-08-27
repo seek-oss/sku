@@ -893,8 +893,13 @@ Migrating docs MUST cover:
 - prefer render-time React data loading via Suspense with clients from `useReactContext` / `useClientContext`; use loaders for avoiding heavily-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext` — not as the default for page content
 - Apollo streaming hydration end to end: an app-owned transport over `useInsertHtml`, dual-entry `getReactContext` for `makeClient` / server nonce `extraScriptProps` via `getCspNonce` from `sku/runtime`, isomorphic provider in the root layout via `useReactContext()`, and that Apollo apps must drop two-pass `getDataFromTree`
 - that loader-transported query refs (`@apollo/client-integration-react-router`'s `apolloLoader` / `preloadQuery`) are not supported, because sku's hydration bootstrap is JSON and promise-scrubbed
-- that loader `request` stays Fetch; Express `req` is available where designed on getters / server `getRouterContext`, not as the loader `request` argument
-- that early getters do not receive Fetch `Request` or `res`, and MUST stay synchronous / pure (libs may memoise on `req`); later getters receive sibling values
+- that loader `request` stays Fetch. Express `req` is available where designed on getters / server `getRouterContext`, not as the loader `request` argument
+- that `getSite` and `getLanguage` do not receive Fetch `Request` or `res`
+- that `getSite` and `getLanguage` MUST stay synchronous and pure (libs may memoise on `req`)
+- that `getClientContext` and dual-entry `getReactContext` MAY return a Promise
+- that sku awaits those getters so hooks and sibling getters see the resolved value
+- that page data still belongs in loaders / Suspense, not in those getters
+- that later getters receive already-resolved sibling values
 - optional dual-entry `getRouterContext` (Data Mode vs Framework Mode; server seeds from middleware bag + Fetch `request` + siblings; client seeds from browser-visible state + siblings; same `createContext` keys; different construction; cadence: once per document `query` vs every client nav/fetcher)
 - how to type Express `req` fields appended by middleware (module augmentation of `express-serve-static-core` `Request`, shared by `middleware` / getters / server `getRouterContext`; same pattern as sku’s `getCspNonce` from `sku/runtime`)
 - relation of Express `middleware` vs RR route `middleware` vs entry `getRouterContext`, and of `getClientContext` / `getReactContext` / `SkuProvider` hooks vs the app’s root layout route vs `getRouterContext` (loader/action context)

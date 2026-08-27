@@ -92,7 +92,7 @@ See [Multi-language](./multi-language.md).
 JSON-serialisable content sent to the client and available via `useClientContext()`.
 
 ```ts
-getClientContext?: (args: { req: ExpressRequest }) => ClientContext;
+getClientContext?: (args: { req: ExpressRequest }) => ClientContext | Promise<ClientContext>;
 ```
 
 ```tsx
@@ -113,7 +113,7 @@ getReactContext?: (args: {
   req: ExpressRequest;
   site: Site;
   clientContext: ClientContext | undefined;
-}) => ReactContext;
+}) => ReactContext | Promise<ReactContext>;
 ```
 
 Pair with a client `getReactContext` when values differ by environment — see [Providers](./providers.md#pass-values-into-react).
@@ -227,7 +227,7 @@ Client-specific values for `useReactContext()` (same channel as the server; no E
 getReactContext?: (args: {
   site: Site;
   clientContext: ClientContext | undefined;
-}) => ReactContext;
+}) => ReactContext | Promise<ReactContext>;
 ```
 
 ## Advanced: router context

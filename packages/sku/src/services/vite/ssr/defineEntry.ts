@@ -19,20 +19,22 @@ export type ServerEntryBody<
   /** Resolves the language for Document vocab chunk registration. */
   getLanguage?: (args: { req: ExpressRequest }) => Language;
   /** JSON seed serialised to the client and passed to React and Router context. */
-  getClientContext?: (args: { req: ExpressRequest }) => ClientContext;
+  getClientContext?: (args: {
+    req: ExpressRequest;
+  }) => ClientContext | Promise<ClientContext>;
   /** Server-specific values for React via `useReactContext` (e.g. API clients). */
   getReactContext?: (args: {
     req: ExpressRequest;
     site: NoInfer<Site>;
-    clientContext: NoInfer<ClientContext> | undefined;
-  }) => ReactContext;
+    clientContext: NoInfer<Awaited<ClientContext>> | undefined;
+  }) => ReactContext | Promise<ReactContext>;
   /** Server-specific values for Router Router context (loaders, actions and middleware) */
   getRouterContext?: (args: {
     request: Request;
     req: ExpressRequest;
     site: NoInfer<Site>;
-    clientContext: NoInfer<ClientContext> | undefined;
-    reactContext: NoInfer<ReactContext> | undefined;
+    clientContext: NoInfer<Awaited<ClientContext>> | undefined;
+    reactContext: NoInfer<Awaited<ReactContext>> | undefined;
   }) => RouterContextProvider | Promise<RouterContextProvider>;
   /** Express middleware run before SSR for each request. */
   middleware?: SkuMiddleware;
@@ -71,12 +73,12 @@ type ClientEntryBody<ServerEntry, ReactContext> = {
   getReactContext?: (args: {
     site: SiteOf<ServerEntry>;
     clientContext: NoInfer<ClientContextOf<ServerEntry>> | undefined;
-  }) => ReactContext;
+  }) => ReactContext | Promise<ReactContext>;
   /** Client-specific values for Router Router context (loaders, actions and middleware) */
   getRouterContext?: (args: {
     site: SiteOf<ServerEntry>;
     clientContext: NoInfer<ClientContextOf<ServerEntry>> | undefined;
-    reactContext: NoInfer<ReactContext> | undefined;
+    reactContext: NoInfer<Awaited<ReactContext>> | undefined;
   }) => RouterContextProvider;
   /**
    * Optional React Router instrumentations (`router` + `route`) forwarded into

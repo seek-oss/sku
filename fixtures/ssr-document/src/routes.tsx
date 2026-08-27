@@ -1,11 +1,13 @@
 import type { SkuRouteObject } from 'sku/runtime';
 import { getCspNonce } from 'sku/runtime';
 
+import { ErrorBoundary } from './ErrorBoundary.js';
 import { RootLayout } from './RootLayout.js';
 
 export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
+    ErrorBoundary,
     children: [
       { index: true, lazy: () => import('./pages/home/home.js') },
       { path: 'about', lazy: () => import('./pages/about/about.js') },

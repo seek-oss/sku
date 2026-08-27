@@ -10,6 +10,8 @@ import type {
   RenderManifest,
   RenderOptions,
   RenderResult,
+  SkuMiddleware,
+  SkuOnListen,
 } from './types.js';
 
 export type RenderFunction = (
@@ -19,6 +21,13 @@ export type RenderFunction = (
   options?: RenderOptions,
   manifest?: RenderManifest,
 ) => Promise<RenderResult>;
+
+/** Named exports from sku’s internal `ssr-server` entry (not `SkuServerEntry`). */
+export type SsrServerModule = {
+  middleware?: SkuMiddleware;
+  onListen?: SkuOnListen;
+  render: RenderFunction;
+};
 
 export const createHtmlRenderMiddleware =
   ({

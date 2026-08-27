@@ -1,9 +1,9 @@
 # Request entries
 
-:::danger Experimental — not for production
-Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
-:::
+> [!CAUTION]
+> Experimental — not for production.
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
 SSR apps have three entry modules.
 Server and client each **`export default`** an object from `defineServerEntry` / `defineClientEntry`.

@@ -1,9 +1,9 @@
 # Runtime API
 
-:::danger Experimental — not for production
-Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
-:::
+> [!CAUTION]
+> Experimental — not for production.
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
 Import browser-safe Managed Data Mode helpers from `sku/runtime`.
 Most helpers are documented on the topic pages that use them.

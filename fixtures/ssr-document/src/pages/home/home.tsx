@@ -1,13 +1,11 @@
-import { Suspense, use, cache } from 'react';
+import { Suspense, use } from 'react';
 
 import * as styles from './home.css';
 
-const getDeferredMessage = cache(
-  () =>
-    new Promise<string>((resolve) => {
-      setTimeout(() => resolve('Deferred content ready'), 50);
-    }),
-);
+const getDeferredMessage = () =>
+  new Promise<string>((resolve) => {
+    setTimeout(() => resolve('Deferred content ready'), 50);
+  });
 
 const DeferredMessage = () => {
   const message = use(getDeferredMessage());

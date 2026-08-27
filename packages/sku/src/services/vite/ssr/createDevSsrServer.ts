@@ -13,10 +13,10 @@ import {
   createHtmlRenderMiddleware,
   mountConsumerMiddleware,
   resolveBoundPort,
-  type RenderFunction,
+  type SsrServerModule,
   type SsrServerResult,
 } from './ssrServerShared.js';
-import type { RenderAssets, SkuMiddleware, SkuOnListen } from './types.js';
+import type { RenderAssets } from './types.js';
 
 const log = createDebug('sku:vite-ssr:dev-server');
 const require = createRequire(import.meta.url);
@@ -54,11 +54,9 @@ export const createDevSsrServer = async ({
     },
   });
 
-  const serverModule = (await vite.ssrLoadModule(serverEntry)) as {
-    middleware?: SkuMiddleware;
-    onListen?: SkuOnListen;
-    render: RenderFunction;
-  };
+  const serverModule = (await vite.ssrLoadModule(
+    serverEntry,
+  )) as SsrServerModule;
 
   serverApp.use(createSsrRequestContextMiddleware());
 
@@ -89,10 +87,10 @@ export const createDevSsrServer = async ({
     modulePreloads: [],
   };
 
-  const render: RenderFunction = async (...args) => {
-    const latestModule = (await vite.ssrLoadModule(serverEntry)) as {
-      render: RenderFunction;
-    };
+  const render: SsrServerModule['render'] = async (...args) => {
+    const latestModule = (await vite.ssrLoadModule(
+      serverEntry,
+    )) as SsrServerModule;
     return latestModule.render(...args);
   };
 

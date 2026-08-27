@@ -1,9 +1,9 @@
 # Providers and request context
 
-:::danger Experimental — not for production
-Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
-:::
+> [!CAUTION]
+> Experimental — not for production.
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
 Pass request-scoped values into React with typed hooks.
 Mount isomorphic providers (Braid, Vocab, Apollo) and shared UI in your **root layout** route.

@@ -10,8 +10,8 @@ const CLIENT_HTML_SETTLE_ATTEMPTS = 40;
 const CLIENT_HTML_SETTLE_INTERVAL_MS = 50;
 
 /**
- * Wait until `page.content()` is unchanged across two reads so client effects
- * (e.g. `useEffect`) and late style injection are reflected in snapshots.
+ * Wait until `page.content()` is unchanged across two reads so client hydration
+ * and `useEffect` updates are reflected in `clientRenderContent` snapshots.
  */
 const waitForClientHtmlToSettle = async (page: Page) => {
   let previous = await page.content();

@@ -1,6 +1,6 @@
-import { Suspense, use, cache } from 'react';
+import { Suspense, use, useState } from 'react';
 
-const getRejectedMessage = cache(() => {
+const getRejectedMessage = () => {
   const promise = new Promise<string>((_resolve, reject) => {
     setTimeout(() => {
       reject(new Error('Boom from suspense'));
@@ -10,19 +10,21 @@ const getRejectedMessage = cache(() => {
   // remain subscribed to this rejection — keep the process alive.
   promise.catch(() => undefined);
   return promise;
-});
+};
 
-const DeferredBoom = () => {
-  const message = use(getRejectedMessage());
+const DeferredBoom = ({ promise }: { promise: Promise<string> }) => {
+  const message = use(promise);
   return <p>{message}</p>;
 };
 
 export function Component() {
+  const [rejectedMessage] = useState(getRejectedMessage);
+
   return (
     <main data-testid="suspense-error-page">
       <h1>Suspense error</h1>
       <Suspense fallback={<p data-testid="suspense-fallback">Loading…</p>}>
-        <DeferredBoom />
+        <DeferredBoom promise={rejectedMessage} />
       </Suspense>
     </main>
   );

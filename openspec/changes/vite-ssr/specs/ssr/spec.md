@@ -792,7 +792,7 @@ SSR product docs MUST describe Managed Data Mode vs SSR and the core app contrac
 - `SkuRouteObject<SiteOf<typeof server>>` for multi-site `sites` typing (same `Site` as `useSite`)
 - optional `mapRoutePath` for per-site multi-path pages, including index homes via `path: ''` (and correct preload-safe examples)
 - case-sensitive path matching by default (`caseSensitive: true` when omitted) and per-route `caseSensitive: false` opt-out
-- `getSite` tree selection (required when config has >1 site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
+- `getSite` tree selection (sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
 - default-exported request entries via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters and sibling projection
 - always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()` in `src/skuContext.ts`
 - optional `middleware` / `onListen` / `onHydrate` / dual-entry `instrumentations` and config `expressTrustProxy`
@@ -869,7 +869,7 @@ SSR MUST include Migrating docs for Static App and Older / Webpack SSR App.
 Migrating docs MUST cover:
 
 - named `Component` (not default export) for lazy routes
-- `routesEntry` + `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
+- `routesEntry` + `routes` + optional `sites` + `getSite` (fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
 - `SkuRouteObject<SiteOf<typeof server>>` for multi-site `sites` typing
 - optional `mapRoutePath` for per-site multi-path pages
 - case-sensitive path matching by default and per-route `caseSensitive: false` opt-out

@@ -1,10 +1,10 @@
 # Getting started
 
-:::warning Experimental — SSR Managed Data Mode
-This documentation covers the new vite-based SSR Managed Data Mode.
-This is available for experimentation.
-See [Webpack SSR](./webpack-ssr.md) for existing production support.
-:::
+> [!WARNING]
+> Experimental — SSR Managed Data Mode.
+> This documentation covers the new vite-based SSR Managed Data Mode.
+> This is available for experimentation.
+> See [Webpack SSR](./webpack-ssr.md) for existing production support.
 
 Server-side rendering builds an isomorphic React app that renders on the server for each request, then hydrates in the browser.
 
@@ -13,10 +13,10 @@ sku owns the HTTP server, HTML document, streaming, hydration, and CSP headers.
 It wires [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing and data.
 You own pages, data, and providers.
 
-:::danger Experimental — not for production
-Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
-:::
+> [!CAUTION]
+> Experimental — not for production.
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
 ## Scaffold a new app
 

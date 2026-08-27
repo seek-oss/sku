@@ -409,21 +409,6 @@ export interface SkuConfigBase {
   serverEntry?: string;
 
   /**
-   * **Only for SSR** (`buildType: 'ssr'`)
-   *
-   * Module that exports named `routes` (`SkuRouteObject[]`) for both
-   * the server and client graphs. Optional `sites` on routes declares
-   * multi-site membership; apps select the tree via `getSite` (required when
-   * config has more than one site; sole config site when omitted on single-site).
-   * Optional named `mapRoutePath` maps one logical path (including index
-   * homes via `path: ''`) to concrete paths while sku pre-builds each site tree.
-   *
-   * @default "./src/routes.tsx"
-   * @link https://seek-oss.github.io/sku/configuration#routesentry
-   */
-  routesEntry?: string;
-
-  /**
    * Point to a JS file that will run before your tests to setup the testing environment.
    *
    * @link https://seek-oss.github.io/sku/configuration#setuptests
@@ -553,6 +538,21 @@ export interface WebpackSkuConfig {
 }
 
 export interface ViteSkuConfig {
+  /**
+   * **Only for Managed Data Mode**
+   *
+   * Module that exports named `routes` (`SkuRouteObject[]`) for both
+   * the server and client graphs. Optional `sites` on routes declares
+   * multi-site membership; apps select the tree via `getSite` (required when
+   * config has more than one site; sole config site when omitted on single-site).
+   * Optional named `mapRoutePath` maps one logical path (including index
+   * homes via `path: ''`) to concrete paths while sku pre-builds each site tree.
+   *
+   * @default "./src/routes.tsx"
+   * @link https://seek-oss.github.io/sku/configuration#routesentry
+   */
+  routesEntry?: string;
+
   /**
    * An array of cjs import paths that have both a default and named exports.
    * This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.

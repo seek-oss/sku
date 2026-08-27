@@ -6,7 +6,7 @@ import { Outlet, RouterContextProvider } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
-import { createSkuContexts } from './skuContext.js';
+import { createSkuContexts } from 'sku/runtime';
 import { render } from './render.js';
 import type { RenderAssets } from './types.js';
 

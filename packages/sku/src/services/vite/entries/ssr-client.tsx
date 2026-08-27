@@ -8,55 +8,23 @@ import { SkuProvider } from '#runtime/skuContext';
 import { registerSiteRouteTree } from '#runtime/preloadRoute';
 import Document from '../ssr/Document.js';
 import { buildSiteRouteTrees } from '../ssr/buildSiteRouteTrees.js';
-import {
-  optionalEntryFunction,
-  optionalEntryValue,
-  optionalNamedFunction,
-  requireDefaultEntry,
-  requireNamedExport,
-} from '../ssr/requireNamedExport.js';
+import { readRoutesEntry } from '../ssr/readRoutesEntry.js';
 import { assertSiteName, selectForSite } from '../ssr/selectForSite.js';
-import type {
-  MapRoutePath,
-  SkuClientEntry,
-  SkuClientGetReactContext,
-  SkuClientGetRouterContext,
-  SkuOnHydrate,
-  SkuRouteObject,
-} from '../ssr/types.js';
+import type { SkuClientEntry } from '../ssr/types.js';
 
-const routes = requireNamedExport<SkuRouteObject[]>(
-  routesEntry,
-  'routes',
-  'routesEntry',
-  { kind: 'routes' },
-);
+const { routes, mapRoutePath } = readRoutesEntry(routesEntry);
 
-const mapRoutePath = optionalNamedFunction<MapRoutePath>(
-  routesEntry,
-  'mapRoutePath',
-  'routesEntry',
-);
+const entry = clientEntry.default;
+if (entry == null || typeof entry !== 'object') {
+  throw new Error(
+    `SSR clientEntry must export default an object (via defineServerEntry / defineClientEntry). Missing or invalid default export.`,
+  );
+}
 
-const entry = requireDefaultEntry<SkuClientEntry>(clientEntry, 'clientEntry');
+const { onHydrate, getReactContext, getRouterContext, instrumentations } =
+  entry as SkuClientEntry;
 
 const siteRouteTrees = buildSiteRouteTrees(routes, __SKU_SITES__, mapRoutePath);
-
-const onHydrate = optionalEntryFunction<SkuOnHydrate>(entry, 'onHydrate');
-
-const getReactContext = optionalEntryFunction<SkuClientGetReactContext>(
-  entry,
-  'getReactContext',
-);
-
-const getRouterContext = optionalEntryFunction<SkuClientGetRouterContext>(
-  entry,
-  'getRouterContext',
-);
-
-const instrumentations = optionalEntryValue<
-  NonNullable<SkuClientEntry['instrumentations']>
->(entry, 'instrumentations');
 
 const hydrate = async () => {
   const site = window.__SKU_SITE__;

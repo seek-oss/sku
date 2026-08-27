@@ -122,8 +122,14 @@ describe('logging', () => {
           (event) => event.event === 'loader' && event.status === 'success',
         ),
       );
-      expect(events.some((event) => event.event === 'http.request')).toBe(true);
-      expect(events.some((event) => event.event === 'api.work')).toBe(true);
+      expect(events.map((event) => event.event).sort()).toMatchInlineSnapshot(`
+        [
+          "api.work",
+          "http.request",
+          "http.request",
+          "loader",
+        ]
+      `);
 
       const spans = await waitForSpans(
         (recorded) =>
@@ -131,6 +137,13 @@ describe('logging', () => {
           recorded.some((span) => span.name.startsWith('loader')) &&
           recorded.some((span) => span.name.includes('/api/work')),
       );
+      expect(spans.map((span) => span.name).sort()).toMatchInlineSnapshot(`
+        [
+          "HTTP GET /",
+          "HTTP GET /api/work",
+          "loader /",
+        ]
+      `);
 
       const documentSpan = spans.find((span) => span.name === 'HTTP GET /');
       const loaderSpan = spans.find((span) => span.name.startsWith('loader'));

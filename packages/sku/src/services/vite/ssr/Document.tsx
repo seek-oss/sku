@@ -7,7 +7,7 @@ interface DocumentProps {
   assets: DocumentAssets;
 }
 
-export const Document = ({ children, assets }: DocumentProps) => (
+const Document = ({ children, assets }: DocumentProps) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />

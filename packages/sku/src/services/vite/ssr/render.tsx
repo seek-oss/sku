@@ -1,10 +1,9 @@
-import { runWithSsrRequestContext } from '#runtime/requestContext';
+import { getCspNonce, runWithSsrRequestContext } from '#runtime/requestContext';
 
 import { abortReason } from './abortReason.js';
 import { collectRouteHeaders } from './collectRouteHeaders.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
 import { getModuleIds } from './getModuleIds.js';
-import { getCspNonce } from './requestContext.js';
 import {
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,

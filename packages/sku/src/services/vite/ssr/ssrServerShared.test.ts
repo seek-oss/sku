@@ -4,11 +4,12 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { Request, Response } from 'express';
+import type { Request, RequestHandler, Response } from 'express';
 import {
   createHtmlRenderMiddleware,
   createWebRequest,
   listen,
+  mountConsumerMiddleware,
   type RenderFunction,
 } from './ssrServerShared.js';
 import { bindCommit } from './bindCommit.js';
@@ -205,6 +206,8 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
     }) as unknown as Request;
 
   it('does not write HTML when the client disconnects before headers', async () => {
+    // Deferred so the test can disconnect before render() resolves.
+
     let resolveRender!: (result: RenderResult) => void;
     const renderPromise = new Promise<RenderResult>((resolve) => {
       resolveRender = resolve;
@@ -253,6 +256,8 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
   });
 
   it('does not write a short-circuit Response after disconnect', async () => {
+    // Deferred so the test can disconnect before render() resolves.
+
     let resolveRender!: (result: RenderResult) => void;
     const renderPromise = new Promise<RenderResult>((resolve) => {
       resolveRender = resolve;
@@ -352,6 +357,8 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
 
   it('swallows cancel rejections and does not call Express next', async () => {
     const onRenderError = vi.fn();
+    // Deferred so the test can reject after disconnect.
+
     let rejectRender!: (error: Error) => void;
     const renderPromise = new Promise<RenderResult>((_resolve, reject) => {
       rejectRender = reject;
@@ -651,5 +658,23 @@ describe('listen', () => {
     servers.push(result);
 
     expect(result.app.get('trust proxy')).toBe(false);
+  });
+});
+
+describe('mountConsumerMiddleware', () => {
+  it('does nothing when middleware is omitted', () => {
+    const mount = vi.fn();
+    expect(() => mountConsumerMiddleware(undefined, mount)).not.toThrow();
+    expect(mount).not.toHaveBeenCalled();
+  });
+
+  it('mounts each handler when middleware is present', () => {
+    const a: RequestHandler = (_req, _res, next) => next();
+    const b: RequestHandler = (_req, _res, next) => next();
+    const mount = vi.fn();
+    mountConsumerMiddleware([a, b], mount);
+    expect(mount).toHaveBeenCalledTimes(2);
+    expect(mount).toHaveBeenNthCalledWith(1, a);
+    expect(mount).toHaveBeenNthCalledWith(2, b);
   });
 });

@@ -59,7 +59,7 @@ export const configPlugin = ({
       ),
     },
     ssr: {
-      external: ['serialize-javascript', '@sku-lib/vite'],
+      external: ['@sku-lib/vite'],
     },
   }),
 });

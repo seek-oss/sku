@@ -3,7 +3,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import exists from '../../../utils/exists.js';
 import { CLIENT_MANIFEST_RELATIVE_PATH } from './clientManifestPath.js';
-import { findEntryChunk, type ClientManifest } from './resolveAssets.js';
+import {
+  findEntryChunk,
+  joinPublicPath,
+  type ClientManifest,
+} from './resolveAssets.js';
 import {
   listen,
   type RenderFunction,
@@ -31,7 +35,7 @@ export const startProductionSsrServer = async ({
   const entry = findEntryChunk(manifest);
   const publicPath = __SKU_PUBLIC_PATH__;
   const assets: RenderAssets = {
-    bootstrapModules: [path.posix.join(publicPath, entry.file)],
+    bootstrapModules: [joinPublicPath(publicPath, entry.file)],
     css: [],
     modulePreloads: [],
   };

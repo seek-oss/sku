@@ -127,8 +127,7 @@ describe('ssr-sites', () => {
           const response = await fetch('http://127.0.0.1:8217/');
           expect(response.ok).toBe(true);
           const html = await response.text();
-          expect(html).toContain('__SKU_SITE__');
-          expect(html).toContain('"au"');
+          expect(html).toContain('__SKU_SITE__="au"');
         },
         { timeout: 15000 },
       );

@@ -1,6 +1,4 @@
-import { mkdtempSync, writeFileSync, mkdirSync } from 'node:fs';
-import { join } from 'node:path';
-import { tmpdir } from 'node:os';
+import { createFixture } from 'fs-fixture';
 import { describe, expect, it, vi, afterEach } from 'vitest';
 import {
   resolveAssets,
@@ -88,12 +86,12 @@ describe('warnUnknownModuleIdsWithoutManifest', () => {
     vi.restoreAllMocks();
   });
 
-  it('warns for path-like moduleIds that do not exist on disk', () => {
+  it('warns for path-like moduleIds that do not exist on disk', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const cwd = mkdtempSync(join(tmpdir(), 'sku-module-id-'));
+    await using fixture = await createFixture({});
 
     warnUnknownModuleIdsWithoutManifest(['src/pages/missing/missing.tsx'], {
-      cwd,
+      cwd: fixture.path,
     });
 
     expect(warn).toHaveBeenCalledWith(
@@ -103,22 +101,26 @@ describe('warnUnknownModuleIdsWithoutManifest', () => {
     );
   });
 
-  it('does not warn for path-like moduleIds that exist on disk', () => {
+  it('does not warn for path-like moduleIds that exist on disk', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const cwd = mkdtempSync(join(tmpdir(), 'sku-module-id-'));
-    mkdirSync(join(cwd, 'src', 'pages', 'about'), { recursive: true });
-    writeFileSync(join(cwd, 'src', 'pages', 'about', 'about.tsx'), '');
+    await using fixture = await createFixture({
+      'src/pages/about/about.tsx': '',
+    });
 
-    warnUnknownModuleIdsWithoutManifest(['src/pages/about/about.tsx'], { cwd });
+    warnUnknownModuleIdsWithoutManifest(['src/pages/about/about.tsx'], {
+      cwd: fixture.path,
+    });
 
     expect(warn).not.toHaveBeenCalled();
   });
 
-  it('skips vocab chunk names that are not path-like', () => {
+  it('skips vocab chunk names that are not path-like', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const cwd = mkdtempSync(join(tmpdir(), 'sku-module-id-'));
+    await using fixture = await createFixture({});
 
-    warnUnknownModuleIdsWithoutManifest(['en-translations'], { cwd });
+    warnUnknownModuleIdsWithoutManifest(['en-translations'], {
+      cwd: fixture.path,
+    });
 
     expect(warn).not.toHaveBeenCalled();
   });

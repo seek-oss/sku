@@ -1,9 +1,9 @@
 # Migrate from Static App
 
-:::danger Experimental — not for production
-Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
-:::
+> [!CAUTION]
+> Experimental — not for production.
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
 High-level guide for moving a **static** sku app (webpack or Vite SSG) to Managed Data Mode SSR.
 For day-to-day API detail, prefer the [Getting started](./) topic pages.

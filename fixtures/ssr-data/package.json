@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "sku build --config sku.config.ts",
-    "start": "sku start --config sku.config.ts",
+    "build": "sku build",
+    "start": "sku start",
     "start:prod": "node dist/server/server.js"
   },
   "dependencies": {

@@ -5,49 +5,34 @@ import * as routesEntry from '__sku_alias__routesEntry';
 import * as serverEntry from '__sku_alias__serverEntry';
 import { buildSiteStaticHandlers } from '../ssr/buildSiteStaticHandlers.js';
 import { buildSiteRouteTrees } from '../ssr/buildSiteRouteTrees.js';
-import {
-  optionalEntryFunction,
-  optionalEntryValue,
-  optionalNamedFunction,
-  optionalOrRequiredEntryFunction,
-  requireDefaultEntry,
-  requireNamedExport,
-} from '../ssr/requireNamedExport.js';
+import { readRoutesEntry } from '../ssr/readRoutesEntry.js';
 import { render as renderApp } from '../ssr/render.js';
 import type {
-  MapRoutePath,
   RenderAssets,
   RenderManifest,
   RenderOptions,
-  SkuGetClientContext,
-  SkuGetLanguage,
-  SkuGetSite,
-  SkuMiddleware,
-  SkuOnListen,
   SkuServerEntry,
-  SkuServerGetReactContext,
-  SkuServerGetRouterContext,
-  SkuRouteObject,
 } from '../ssr/types.js';
 
-const routes = requireNamedExport<SkuRouteObject[]>(
-  routesEntry,
-  'routes',
-  'routesEntry',
-  { kind: 'routes' },
-);
+const { routes, mapRoutePath } = readRoutesEntry(routesEntry);
 
-const mapRoutePath = optionalNamedFunction<MapRoutePath>(
-  routesEntry,
-  'mapRoutePath',
-  'routesEntry',
-);
+const entry = serverEntry.default;
+if (entry == null || typeof entry !== 'object') {
+  throw new Error(
+    `SSR serverEntry must export default an object (via defineServerEntry / defineClientEntry). Missing or invalid default export.`,
+  );
+}
 
-const entry = requireDefaultEntry<SkuServerEntry>(serverEntry, 'serverEntry');
-
-const instrumentations = optionalEntryValue<
-  NonNullable<SkuServerEntry['instrumentations']>
->(entry, 'instrumentations');
+const {
+  getSite,
+  getLanguage,
+  getClientContext,
+  getReactContext,
+  getRouterContext,
+  middleware,
+  onListen,
+  instrumentations,
+} = entry as SkuServerEntry;
 
 // Route tree — and each site's handler — is built once here rather than per request.
 const siteStaticHandlers = buildSiteStaticHandlers(
@@ -55,34 +40,7 @@ const siteStaticHandlers = buildSiteStaticHandlers(
   instrumentations,
 );
 
-// getSite required only when config has more than one site.
-const getSite = optionalOrRequiredEntryFunction<SkuGetSite>(
-  entry,
-  'getSite',
-  'serverEntry',
-  __SKU_SITES__.length > 1,
-);
-const getLanguage = optionalEntryFunction<SkuGetLanguage>(entry, 'getLanguage');
-const getClientContext = optionalEntryFunction<SkuGetClientContext>(
-  entry,
-  'getClientContext',
-);
-const getReactContext = optionalEntryFunction<SkuServerGetReactContext>(
-  entry,
-  'getReactContext',
-);
-
-export const middleware = optionalEntryValue<SkuMiddleware>(
-  entry,
-  'middleware',
-);
-
-export const onListen = optionalEntryFunction<SkuOnListen>(entry, 'onListen');
-
-const getRouterContext = optionalEntryFunction<SkuServerGetRouterContext>(
-  entry,
-  'getRouterContext',
-);
+export { middleware, onListen };
 
 export const render = (
   request: Request,

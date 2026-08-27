@@ -222,7 +222,18 @@ describe.each(['webpack', 'vite', 'ssr'])('sku-create %s', (template) => {
     'eslint.config.mjs',
     'README.md',
     '.prettierignore',
-    ...(template === 'ssr' ? [] : ['src/App/NextSteps.tsx']),
+    ...(template === 'ssr'
+      ? [
+          'src/routes.tsx',
+          'src/server.tsx',
+          'src/client.tsx',
+          'src/skuContext.ts',
+          'src/RootLayout.tsx',
+          'src/ErrorBoundary.tsx',
+          'src/pages/home/home.tsx',
+          'src/pages/about/about.tsx',
+        ]
+      : ['src/App/NextSteps.tsx']),
     ...(template === 'vite' ? ['src/vite.env.d.ts'] : []),
     'pnpm-workspace.yaml',
   ])('should create %s', async (file) => {
@@ -232,48 +243,8 @@ describe.each(['webpack', 'vite', 'ssr'])('sku-create %s', (template) => {
   });
 
   it.runIf(template === 'ssr')(
-    'should create SSR entry files with named exports',
+    'should omit static-app files from the SSR template',
     async () => {
-      const routes = await fs.readFile(
-        fixturePath(projectName, 'src/routes.tsx'),
-        'utf-8',
-      );
-      const server = await fs.readFile(
-        fixturePath(projectName, 'src/server.tsx'),
-        'utf-8',
-      );
-      const client = await fs.readFile(
-        fixturePath(projectName, 'src/client.tsx'),
-        'utf-8',
-      );
-      const skuConfig = await fs.readFile(
-        fixturePath(projectName, 'sku.config.ts'),
-        'utf-8',
-      );
-
-      expect(skuConfig).toContain("buildType: 'ssr'");
-      expect(skuConfig).toContain('expressTrustProxy: true');
-      expect(routes).toContain('export const routes');
-      expect(routes).toContain('Component: RootLayout');
-      expect(routes).toContain("lazy: () => import('./pages/home/home')");
-      expect(routes).toContain("lazy: () => import('./pages/about/about')");
-      expect(routes).not.toContain('/route');
-      expect(server).toContain('defineServerEntry');
-      expect(server).toContain('middleware');
-      expect(server).toContain('/api/health');
-      expect(client).toContain('defineClientEntry');
-      expect(client).toContain('typeof server');
-      expect(client).toContain("import type server from './server'");
-      expect(client).toContain('onHydrate');
-      await expect(
-        fs.access(fixturePath(projectName, 'src/skuContext.ts')),
-      ).resolves.toBeUndefined();
-      await expect(
-        fs.access(fixturePath(projectName, 'src/pages/home/home.tsx')),
-      ).resolves.toBeUndefined();
-      await expect(
-        fs.access(fixturePath(projectName, 'src/pages/about/about.tsx')),
-      ).resolves.toBeUndefined();
       await expect(
         fs.access(fixturePath(projectName, 'src/pages/home/route.ts')),
       ).rejects.toThrow();

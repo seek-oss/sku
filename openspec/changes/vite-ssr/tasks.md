@@ -35,7 +35,7 @@ It is not a history of intermediate APIs.
 - [x] 4.2 Infer `Site` / `Language` / `ClientContext` / `ReactContext` from getter returns. `defineClientEntry<typeof server>` types client `site` / `clientContext` from the server entry.
 - [x] 4.3 Load server/client entries as default-exported objects. Call optional properties only.
 - [x] 4.4 Call order before `query()`: `getSite` → `getLanguage` → `getClientContext` → `getReactContext` → optional `getRouterContext`. Pass sibling values. Do not serialise `reactContext`.
-- [x] 4.5 Require `getSite` at init only when resolved sites length is `> 1`. Sole resolved site when omitted.
+- [x] 4.5 Do not hard-error at init for omitted `getSite`. Types cover the getter. Sole resolved site when omitted.
 - [x] 4.6 Always mount `SkuProvider` outside the router with `site` + `clientContext` + `reactContext`. No app-authored `Providers` export.
 - [x] 4.7 Export `createSkuContexts<typeof server, typeof client>()` with typed `useSite` / `useClientContext` / `useReactContext`.
 - [x] 4.8 Wire optional dual `getRouterContext` into `query({ requestContext })` and `createBrowserRouter({ getContext })`.

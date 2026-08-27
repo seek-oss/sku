@@ -1,9 +1,9 @@
 # Data loading
 
-:::danger Experimental — not for production
-Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
-:::
+> [!CAUTION]
+> Experimental — not for production.
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
 sku supports two data-loading paths for Managed Data Mode SSR:
 
@@ -18,6 +18,9 @@ That keeps shared UI portable without per-app loader wiring.
 1. Pass env-specific clients via dual-entry [`getReactContext`](./providers.md#pass-values-into-react) (and serialisable seeds via `getClientContext`).
 2. Mount isomorphic providers in your [root layout](./providers.md#root-layout-for-providers) and read values with `useReactContext()` / `useClientContext()`.
 3. Fetch in the React tree with Suspense (for example `useQuery`) so the same components work on SSR and client navigations.
+
+sku does not support React Server Components.
+React [`cache()`](https://react.dev/reference/react/cache) can still memoize work per request during document SSR.
 
 ## When to use loaders
 

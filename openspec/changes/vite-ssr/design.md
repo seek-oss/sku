@@ -229,8 +229,8 @@ Sku reads that default export and calls optional properties.
 
 The server object exposes optional sync `getSite` / `getLanguage` / `getClientContext` / `getReactContext`, plus optional `middleware`, `onListen`, `getRouterContext`, and `instrumentations`.
 The client object exposes optional `onHydrate`, `getReactContext`, `getRouterContext`, and `instrumentations`.
-`getSite` is required **only** when config `sites` has more than one entry.
-A missing property then hard-errors at init (same class as missing `routes` on `routesEntry`).
+`getSite` is typed as a function when present.
+Sku does not hard-error at init if it is omitted.
 
 Optional properties omitted mean noops / defaults.
 No consumer middleware, no hydrate side effects, sole resolved site name when `getSite` is omitted on a 0–1 site app (empty config soft-defaults to `'default'`), and `clientContext` / `reactContext` `undefined`.
@@ -331,7 +331,7 @@ Route membership is declared on routes themselves.
 SSR does **not** require a non-empty config `sites` array.
 Empty or omitted `sites` soft-defaults to a single synthetic site name `'default'` for pre-build + allowlist (same class as other sku empty-config soft paths).
 Apps that care about site names declare real ones.
-Multi-site still needs ≥2 configured names + `getSite`.
+Multi-site apps still provide `getSite` (typed on the server entry).
 
 **Pre-build:**
 At init (not per request), for each resolved site name (config names, or `['default']` when empty), sku deep-filters `routes` by `sites` membership, optionally maps paths via `mapRoutePath` (Decision 4c), defaults undefined `caseSensitive` to `true`, and strips `sites` from the objects passed to React Router.
@@ -339,8 +339,8 @@ The client needs the same site-name list (bake from config for production client
 
 **Resolve site:**
 
-- Zero configured sites (soft-default `'default'`) or one configured site ⇒ sku uses that sole resolved name when `getSite` is omitted. If `getSite` is exported, sku still calls it and validates the return against the resolved name list.
-- Multiple configured sites ⇒ missing `getSite` export is a **hard error at init** (names the export; same treatment as missing `routes` on `routesEntry`).
+- When `getSite` is omitted, sku uses the sole resolved name (the one config site, or `'default'` when config `sites` is empty).
+- When `getSite` is present, sku calls it and validates the return against the resolved name list.
 - Non-string `site` from `getSite`, or a `site` not among resolved site names / no pre-built entry ⇒ **fail closed** per request (hard error).
 
 **Select tree / handler:** the pre-built tree (and server `createStaticHandler`) for that `site`.
@@ -731,7 +731,7 @@ type MapRoutePath = (args: {
 export const routes: SkuRouteObject<SiteOf<typeof server>>[];
 // single-site / omitted getSite: SkuRouteObject[] (Site = string)
 
-// serverEntry — default export; getSite required only when config has >1 site
+// serverEntry — default export
 import { defineServerEntry } from 'sku/runtime';
 
 export default defineServerEntry({
@@ -1069,7 +1069,8 @@ That forces injected imports (including ones `@vocab/vite` injects into `.vocab`
 The alias is project-wide.
 It also covers bare `@vocab/vite/runtime` from shared React packages (e.g. Header/Footer with `.vocab`) when those modules are in the Vite graph — the usual sku path via `compilePackages` (SSR `noExternal`).
 Vocab’s compile ignore already skips only `node_modules/sku/**` and `node_modules/vocab/**`, so dependency `.vocab` folders remain discoverable.
-Sku separately compiles configured `compilePackages` roots because Vocab’s own compile ignores `node_modules`.
+Translated `compilePackages` MUST publish compiled `.vocab` output from **their own** vocab/sku config.
+Sku does not recompile those packages with the consumer’s language list.
 
 Out of scope / does not help: packages left as true SSR externals where Node resolves `@vocab/vite/runtime` at runtime outside Vite (uncommon for sku shared UI).
 If a consumer also installs `@vocab/vite`, the alias still prefers sku’s copy.
@@ -1197,7 +1198,7 @@ Migrating docs cover Static App and Older / Webpack SSR App, not under `docs/mig
 Migrating MUST cover:
 
 - Named `Component` on lazy pages.
-- `routesEntry` + `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site).
+- `routesEntry` + `routes` + optional `sites` + `getSite` (fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site).
 - Optional `mapRoutePath` for per-site multi-path pages (Decision 4c).
 - Multi-site membership via `sites` on routes.
 - Webpack dual-port → SSR single `port` (reject `serverPort`; `PORT` still overrides prod).
@@ -1612,16 +1613,16 @@ Update identity comments on the four shared modules + `ssr.ts`:
 
 Separate naming layers — do not collapse them into one word:
 
-| Layer                          | Name                              | Role                                                                                                                                                                                                 |
-| ------------------------------ | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenSpec change / git branch   | `vite-ssr`                        | Historical workstream id only — do **not** use in product docs, templates, public APIs, or user-facing copy                                                                                          |
-| Living OpenSpec capabilities   | `managed-data-mode`, `ssr`, `csp` | Product-surface specs synced into `openspec/specs/`. Fixture / e2e proof stays in proposal Impact and `tasks.md` — not a living capability. `vite-ssr` / `vite-ssr-csp` are not capability names.    |
-| Architecture / docs descriptor | **Managed Data Mode**             | Sku-owned Document + React Router Data Mode contract (Decision 3). Use when describing the kind of API, comparing to webpack SSR / today’s static, or noting what SSR and a future Static path share |
-| Render strategy                | **SSR** / **Static**              | Selected by `buildType`. Product copy says “SSR”, never “Vite SSR”                                                                                                                                   |
-| Create template                | **`ssr`**                         | `@sku-lib/create --template ssr` (not `vite-ssr`)                                                                                                                                                    |
-| Public import                  | **`sku/runtime`**                 | Browser-safe Managed Data Mode consumer entry (Decision 26: public contract + `optimizeDeps.exclude` target)                                                                                         |
-| Public types / symbols         | Drop `Ssr`                        | e.g. `createSkuContexts`, `SkuRouteObject`, `SiteOf`, `SkuServerEntry` / `SkuClientEntry`, `SkuGetSite`, … (`SkuProvider` stays a sku-internal mount name, not a public `sku/runtime` export)        |
-| Consumer typed-hooks module    | **`src/skuContext.ts`**           | App file that calls `createSkuContexts`. Not sku’s resolved-config `SkuContext`. Product docs, the create template, and fixtures use this name.                                                      |
+| Layer                          | Name                              | Role                                                                                                                                                                                                                                                                                                                                              |
+| ------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenSpec change / git branch   | `vite-ssr`                        | Historical workstream id only — do **not** use in product docs, templates, public APIs, or user-facing copy                                                                                                                                                                                                                                       |
+| Living OpenSpec capabilities   | `managed-data-mode`, `ssr`, `csp` | Product-surface specs synced into `openspec/specs/`. Fixture / e2e proof stays in proposal Impact and `tasks.md` — not a living capability. `vite-ssr` / `vite-ssr-csp` are not capability names.                                                                                                                                                 |
+| Architecture / docs descriptor | **Managed Data Mode**             | Sku-owned Document + React Router Data Mode contract (Decision 3). Use when describing the kind of API, comparing to webpack SSR / today’s static, or noting what SSR and a future Static path share                                                                                                                                              |
+| Render strategy                | **SSR** / **Static**              | Selected by `buildType`. Product copy says “SSR”, never “Vite SSR”                                                                                                                                                                                                                                                                                |
+| Create template                | **`ssr`**                         | `@sku-lib/create --template ssr` (not `vite-ssr`)                                                                                                                                                                                                                                                                                                 |
+| Public import                  | **`sku/runtime`**                 | Browser-safe Managed Data Mode consumer entry (Decision 26: public contract + `optimizeDeps.exclude` target)                                                                                                                                                                                                                                      |
+| Public types / symbols         | Drop `Ssr`                        | `createSkuContexts`, `SkuRouteObject`, `SiteOf`, `SkuServerEntry` / `SkuClientEntry`, `MapRoutePath` / `MapRoutePathArgs`, `SkuMiddleware`, `SkuOnListen`, `SkuOnHydrate`, `JsonValue` (`SkuProvider` stays a sku-internal mount name, not a public `sku/runtime` export). Do not export getter aliases (`SkuGetSite`, …) — they widen inference. |
+| Consumer typed-hooks module    | **`src/skuContext.ts`**           | App file that calls `createSkuContexts`. Not sku’s resolved-config `SkuContext`. Product docs, the create template, and fixtures use this name.                                                                                                                                                                                                   |
 
 **Why not `sku/ssr` (or another strategy-branded subpath):**
 The import carries contract APIs that are not SSR-specific (`define*Entry`, `createSkuContexts`, `useSite`, …).
@@ -1684,7 +1685,7 @@ Client instrumentations MAY include `router` and `route` levels.
 | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Dual `routes` hydration mismatch                  | Eliminated by first-class `routesEntry` (one module in both graphs). No runtime tree checker.                                                                                                                   |
 | Wrong-site tree / foreign path match              | Pre-filter `sites` into per-site trees before RR. `getSite` (or sole resolved site) selects. Serialize `site` for client. Fail closed on invalid or unknown site.                                               |
-| App omits or invents `site`                       | Empty config `sites` soft-defaults to `'default'`. Multi-site requires `getSite` at init. Hard-error if return is non-string or not a resolved site name. 0–1 site uses sole name when getter omitted.          |
+| App omits or invents `site`                       | Empty config `sites` soft-defaults to `'default'`. Multi-site apps provide typed `getSite`. Hard-error if return is non-string or not a resolved site name. 0–1 site uses sole name when getter omitted.        |
 | Duplicate parse across getters                    | Accepted. Docs say keep getters sync/pure. Shared libs memoise on `req`.                                                                                                                                        |
 | Accidental site splits                            | No `sites` inheritance. Site-specific routes must set `sites` explicitly.                                                                                                                                       |
 | Hand-duplicated language paths / shared `lazy`    | Optional `mapRoutePath` clones after membership filter and copies `handle.moduleId`. Docs forbid shared `pageLazy` across hand copies.                                                                          |

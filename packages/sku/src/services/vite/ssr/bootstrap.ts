@@ -1,4 +1,5 @@
 import { isRouteErrorResponse, type StaticHandlerContext } from 'react-router';
+import serializeJavascript from 'serialize-javascript';
 import type {
   DocumentAssets,
   JsonValue,
@@ -6,12 +7,7 @@ import type {
 } from './types.js';
 
 const escapeScriptValue = (value: unknown) =>
-  JSON.stringify(value)
-    .replace(/</g, '\\u003c')
-    .replace(/>/g, '\\u003e')
-    .replace(/&/g, '\\u0026')
-    .replace(/\u2028/g, '\\u2028')
-    .replace(/\u2029/g, '\\u2029');
+  serializeJavascript(value, { isJSON: true });
 
 const replacePromises = (value: unknown): unknown => {
   if (value instanceof Promise) {

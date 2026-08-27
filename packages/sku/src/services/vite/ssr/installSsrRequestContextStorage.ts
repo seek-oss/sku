@@ -2,7 +2,7 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 import {
   installSsrRequestContextStorage,
   type SsrRequestContextStore,
-} from './requestContext.js';
+} from '#runtime/requestContext';
 
 /**
  * Side-effect import from SSR server entry points. Installs Node

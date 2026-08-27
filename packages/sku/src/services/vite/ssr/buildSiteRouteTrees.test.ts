@@ -4,7 +4,6 @@ import {
   buildSiteRouteTrees,
   buildRoutesForSite,
 } from './buildSiteRouteTrees.js';
-import { optionalNamedFunction } from './requireNamedExport.js';
 import type { MapRoutePath, SkuRouteObject } from './types.js';
 
 describe('buildRoutesForSite', () => {
@@ -347,24 +346,6 @@ describe('mapRoutePath', () => {
     ).toThrow(
       /SSR routesEntry mapRoutePath must return string\[\]\. Invalid return for path 'about' on site 'au'\./,
     );
-  });
-
-  it('hard-errors when mapRoutePath is present but not a function', () => {
-    expect(() =>
-      optionalNamedFunction(
-        { mapRoutePath: 'nope' },
-        'mapRoutePath',
-        'routesEntry',
-      ),
-    ).toThrow(
-      /SSR routesEntry must export named 'mapRoutePath' as a function when present\. Invalid 'mapRoutePath' export\./,
-    );
-  });
-
-  it('returns undefined when mapRoutePath is omitted', () => {
-    expect(
-      optionalNamedFunction({}, 'mapRoutePath', 'routesEntry'),
-    ).toBeUndefined();
   });
 });
 

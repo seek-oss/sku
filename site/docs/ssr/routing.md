@@ -1,9 +1,9 @@
 # Routing
 
-:::danger Experimental — not for production
-Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
-:::
+> [!CAUTION]
+> Experimental — not for production.
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
 This page covers the route tree, page modules, multi-site membership, and intent preloading.
 
@@ -80,6 +80,14 @@ Prefer the idiomatic form so sku can derive production [`modulepreload`](https:/
 ```tsx
 lazy: () => import('./pages/about/about');
 ```
+
+### Automatic modulepreload
+
+Idiomatic `lazy: () => import(...)` lets sku set `handle.moduleId` to the Vite client manifest key (for example `src/pages/about/about.tsx`).
+That is how production document responses emit [`modulepreload`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#modulepreload) links for the matched route.
+
+If you use another `lazy` shape, set `handle.moduleId` yourself to that same manifest key.
+sku warns in development when a lazy route is missing `moduleId`, and skips that route’s production preloads.
 
 ### When to use loaders
 

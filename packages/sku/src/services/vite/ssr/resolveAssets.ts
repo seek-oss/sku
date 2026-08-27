@@ -1,20 +1,13 @@
 import { existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { posix as posixPath, resolve } from 'node:path';
+import type { Manifest, ManifestChunk } from 'vite';
 
-export interface ManifestChunk {
-  file: string;
-  name?: string;
-  css?: string[];
-  imports?: string[];
-  dynamicImports?: string[];
-  isEntry?: boolean;
-  src?: string;
-}
+export type { ManifestChunk };
+export type ClientManifest = Manifest;
 
-export type ClientManifest = Record<string, ManifestChunk>;
-
-const joinPublicPath = (publicPath: string, file: string) =>
-  `${publicPath.endsWith('/') ? publicPath : `${publicPath}/`}${file}`;
+/** Join a URL `publicPath` prefix with a manifest file. Always posix; never OS paths. */
+export const joinPublicPath = (publicPath: string, file: string) =>
+  posixPath.join(publicPath, file);
 
 /** Source-path shaped ids (cwd-relative), not vocab chunk names like `en-translations`. */
 const isPathLikeModuleId = (moduleId: string) =>

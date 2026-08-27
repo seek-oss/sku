@@ -1,9 +1,9 @@
 # Error pages
 
-:::danger Experimental — not for production
-Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
-:::
+> [!CAUTION]
+> Experimental — not for production.
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
+> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
 sku turns route failures into document responses: the nearest React Router `ErrorBoundary` renders the UI, and the streamed response uses the matching HTTP status code.
 
@@ -11,6 +11,10 @@ sku turns route failures into document responses: the nearest React Router `Erro
 
 When a loader fails, a route throws, or the URL does not match, readers should see your UI rather than a blank document.
 Attach an `ErrorBoundary` on a layout route so every child under it shares the same failure UI.
+
+Without a route `ErrorBoundary`, React Router hydrates its default error UI over the SSR error HTML.
+That can briefly flash a stack trace before the default “Hey developer” page.
+Provide an `ErrorBoundary` on the root route to provide a nicer user experience.
 
 sku uses [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary):
 

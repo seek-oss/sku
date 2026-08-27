@@ -1,11 +1,11 @@
 import { Writable } from 'node:stream';
-import { Suspense, use, cache } from 'react';
+import { Suspense, use } from 'react';
 import type { Request as ExpressRequest } from 'express';
 import { describe, expect, it } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
 import { render } from './render.js';
-import { useInsertHtml } from './insertHtml.js';
+import { useInsertHtml } from 'sku/runtime';
 import type { RenderAssets } from './types.js';
 
 const assets: RenderAssets = {
@@ -65,12 +65,10 @@ const InjectingPage = ({ marker }: { marker: string }) => {
   return <main data-testid="page">page</main>;
 };
 
-const getDeferred = cache(
-  () =>
-    new Promise<string>((resolve) => {
-      setTimeout(() => resolve('deferred'), 20);
-    }),
-);
+const getDeferred = () =>
+  new Promise<string>((resolve) => {
+    setTimeout(() => resolve('deferred'), 20);
+  });
 
 const DeferredInjectingPage = () => {
   const message = use(getDeferred());
@@ -121,7 +119,7 @@ describe('insertHtml stream injection', () => {
   it('allows injected scripts to carry a CSP nonce from getCspNonce', async () => {
     const { createSsrRequestContextStore } =
       await import('./createSsrRequestContextStore.js');
-    const { getCspNonce } = await import('./requestContext.js');
+    const { getCspNonce } = await import('sku/runtime');
 
     const NonceInjectingPage = () => {
       const insertHtml = useInsertHtml();

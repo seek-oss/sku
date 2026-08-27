@@ -23,7 +23,7 @@ export const selectForSite = <T>(
 ): T => {
   assertSiteName(site, source);
 
-  if (!Object.prototype.hasOwnProperty.call(siteMap, site)) {
+  if (!Object.hasOwn(siteMap, site)) {
     throw new Error(
       `SSR has no pre-built route tree for site '${site}'. Unknown or invalid 'site'.`,
     );

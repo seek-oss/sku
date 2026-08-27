@@ -1,6 +1,9 @@
 export { createWebRequest } from './createWebRequest.js';
 export { sendResponse } from './sendResponse.js';
-export { createHtmlRenderMiddleware } from './createHtmlRenderMiddleware.js';
+export {
+  createHtmlRenderMiddleware,
+  type SsrServerModule,
+} from './createHtmlRenderMiddleware.js';
 export {
   listen,
   mountConsumerMiddleware,

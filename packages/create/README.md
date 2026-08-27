@@ -10,9 +10,9 @@ pnpm dlx @sku-lib/create my-app
 
 | Template | Flag                 | Notes                                                                                                                         |
 | -------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| Vite     | `--template vite`    | Static / SSG app (default interactive choice). Vitest.                                                                        |
+| Vite     | `--template vite`    | Static / SSG app (default interactive choice). Vite + Vitest.                                                                 |
 | SSR      | `--template ssr`     | Server-rendered Managed Data Mode app (`buildType: 'ssr'`). Experimental — not for production. Use `sku start` / `sku build`. |
-| Webpack  | `--template webpack` | Webpack + Jest.                                                                                                               |
+| Webpack  | `--template webpack` | Legacy static / SSG app. Webpack + Jest.                                                                                      |
 
 ```sh
 pnpm dlx @sku-lib/create my-app --template ssr

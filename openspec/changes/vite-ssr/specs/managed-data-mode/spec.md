@@ -97,8 +97,8 @@ Empty or omitted `sites` MUST soft-default to a single synthetic site name `'def
 
 **Resolve `site`:**
 
-- Zero configured sites (soft-default `'default'`) or one configured site ⇒ when `getSite` is omitted, sku MUST use that sole resolved site name; when `getSite` is present on the server entry object, sku MUST call it and validate the return against the resolved name list.
-- Multiple configured sites ⇒ missing `getSite` property MUST hard-error at init (naming the property; same class as missing `routes` on `routesEntry`).
+- When `getSite` is omitted, sku MUST use the sole resolved site name (the one config site, or `'default'` when config `sites` is empty).
+- When `getSite` is present on the server entry object, sku MUST call it and validate the return against the resolved name list.
 - Non-string `site` from `getSite`, or a `site` that is not a resolved site name / has no pre-built tree, MUST fail closed per request (hard error).
 
 Sku MUST serialize that `site` into the hydrate bootstrap and select the same pre-built tree for client `createBrowserRouter`.
@@ -154,12 +154,6 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Managed Dat
 - **WHEN** a Managed Data Mode app serves multiple document requests for the same site
 - **THEN** sku reuses the static handler built for that site at init
 - **AND** does not call `createStaticHandler` on the request path
-
-#### Scenario: Multi-site missing getSite hard-errors at init
-
-- **WHEN** config defines more than one site
-- **AND** the server entry omits `getSite`
-- **THEN** sku fails with a hard error at init naming the `getSite` property
 
 #### Scenario: Non-string getSite fails closed
 
@@ -320,12 +314,12 @@ Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClien
 
 Client entry object MAY include optional `onHydrate`, `getReactContext`, `getRouterContext`, and `instrumentations`.
 
-`getSite` is required **only** when config `sites` has more than one entry (init hard-error when missing — see the site-selection requirement).
-All other listed properties are optional.
+All listed properties are optional.
+When `getSite` is omitted, sku uses the sole resolved site name (see the site-selection requirement).
 
 Sku MUST NOT specially gate on entry file existence; a missing file fails via normal module resolution.
 
-Sku MUST call getters in this order before `query()`: `getSite` (when present or required) → `getLanguage` → `getClientContext` → `getReactContext` → optional server `getRouterContext`.
+Sku MUST call getters in this order before `query()`: `getSite` (when present) → `getLanguage` → `getClientContext` → `getReactContext` → optional server `getRouterContext`.
 
 Later getters MUST receive already-resolved sibling values so apps can project without re-deriving:
 

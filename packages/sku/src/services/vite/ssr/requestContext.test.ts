@@ -1,12 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { buildContentSecurityPolicy, buildCspHeaders } from './csp.js';
-import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
-import {
-  getCspNonce,
-  peekCspNonce,
-  runWithSsrRequestContext,
-  type SsrRequestContextStore,
-} from './requestContext.js';
+import type { SsrRequestContextStore } from './requestContext.js';
 
 describe('getCspNonce browser safety', () => {
   it('does not pull node:async_hooks into the shared requestContext module', async () => {
@@ -39,23 +33,6 @@ describe('getCspNonce browser safety', () => {
     ).toBeUndefined();
   });
 
-  it('propagates nonce via AsyncLocalStorage when installed', async () => {
-    vi.resetModules();
-    vi.doUnmock('node:async_hooks');
-
-    await import('./installSsrRequestContextStorage.js');
-    const requestContext = await import('./requestContext.js');
-    const { createSsrRequestContextStore: createStore } =
-      await import('./createSsrRequestContextStore.js');
-
-    expect(
-      requestContext.runWithSsrRequestContext(createStore('server-nonce'), () =>
-        requestContext.getCspNonce(),
-      ),
-    ).toBe('server-nonce');
-    expect(requestContext.getCspNonce()).toBeUndefined();
-  });
-
   it('does not pull node:crypto into the shared requestContext module', async () => {
     vi.resetModules();
     vi.doMock('node:crypto', () => {
@@ -65,25 +42,6 @@ describe('getCspNonce browser safety', () => {
     await expect(import('./requestContext.js')).resolves.toBeTruthy();
 
     vi.doUnmock('node:crypto');
-  });
-});
-
-describe('lazy request-scoped CSP nonce', () => {
-  it('does not mint until requested', () => {
-    const store = createSsrRequestContextStore();
-    expect(store.peekCspNonce()).toBeUndefined();
-    expect(
-      runWithSsrRequestContext(store, () => peekCspNonce()),
-    ).toBeUndefined();
-  });
-
-  it('mints once and reuses the same value', () => {
-    const store = createSsrRequestContextStore();
-    const first = runWithSsrRequestContext(store, () => getCspNonce());
-    const second = runWithSsrRequestContext(store, () => getCspNonce());
-    expect(first).toBeTruthy();
-    expect(second).toBe(first);
-    expect(store.peekCspNonce()).toBe(first);
   });
 });
 

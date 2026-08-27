@@ -7,7 +7,7 @@ interface DocumentProps {
   assets: DocumentAssets;
 }
 
-const Document = ({ children, assets }: DocumentProps) => (
+export const Document = ({ children, assets }: DocumentProps) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />
@@ -27,5 +27,3 @@ const Document = ({ children, assets }: DocumentProps) => (
     <body>{children}</body>
   </html>
 );
-
-export default Document;

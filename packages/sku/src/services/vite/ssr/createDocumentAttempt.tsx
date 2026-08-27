@@ -11,7 +11,7 @@ import { SkuProvider } from '#runtime/skuContext';
 import { abortReason } from './abortReason.js';
 import { bindCommit } from './bindCommit.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
-import Document from './Document.js';
+import { Document } from './Document.js';
 import type {
   DocumentAssets,
   JsonValue,

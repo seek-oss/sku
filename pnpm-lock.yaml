@@ -58,6 +58,9 @@ catalogs:
     braid-design-system:
       specifier: ^34.0.0
       version: 34.3.0
+    cli-testing-library:
+      specifier: ^4.0.0
+      version: 4.0.0
     commander:
       specifier: ^14.0.1
       version: 14.0.3
@@ -132,8 +135,8 @@ importers:
         specifier: 'catalog:'
         version: 24.12.4
       cli-testing-library:
-        specifier: ^3.0.1
-        version: 3.0.1(vitest@4.1.9)
+        specifier: 'catalog:'
+        version: 4.0.0(@jest/globals@30.4.1)(vitest@4.1.9)
       eslint:
         specifier: ^9.10.0
         version: 9.39.4(jiti@2.7.0)(supports-color@8.1.1)
@@ -1174,6 +1177,34 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
+  fixtures/vite-compile-package-styles:
+    dependencies:
+      '@sku-fixtures/package-with-vanilla-extract-source':
+        specifier: ./fake/node_modules/package-with-vanilla-extract-source
+        version: link:fake/node_modules/package-with-vanilla-extract-source
+      react:
+        specifier: 'catalog:'
+        version: 19.2.7
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.7(react@19.2.7)
+    devDependencies:
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.17)
+      '@vanilla-extract/css':
+        specifier: 'catalog:'
+        version: 1.21.1(babel-plugin-macros@3.1.0)
+      dedent:
+        specifier: ^1.5.1
+        version: 1.7.2(babel-plugin-macros@3.1.0)
+      sku:
+        specifier: workspace:*
+        version: link:../../packages/sku
+
   fixtures/vite-loadable-css-order:
     dependencies:
       '@sku-private/react-lib-with-loadable':
@@ -1848,8 +1879,8 @@ importers:
         specifier: workspace:*
         version: link:../test-utils
       cli-testing-library:
-        specifier: ^3.0.1
-        version: 3.0.1(vitest@4.1.9)
+        specifier: 'catalog:'
+        version: 4.0.0(@jest/globals@30.4.1)(vitest@4.1.9)
       fs-fixture:
         specifier: ^2.6.0
         version: 2.14.0
@@ -2110,6 +2141,10 @@ packages:
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/code-frame@8.0.0':
+    resolution: {integrity: sha512-dYYg153EyN2Ekbqw2zAsbd6/JR+9N2SEoC7YV2GyyqMM7x9bLDTjBD6XBhSMLH0wtIVyJj03jWNriQhaN+eoCw==}
+    engines: {node: ^22.18.0 || >=24.11.0}
+
   '@babel/compat-data@7.29.7':
     resolution: {integrity: sha512-locTkQyKvwIEgBzVrn8693ebc97F2U8ZHjbXwDXJ5Fn2TCpNwTlKcaKLkdHop5c/icOFE7qt7Q9JC5hnKNa6Gg==}
     engines: {node: '>=6.9.0'}
@@ -2196,6 +2231,10 @@ packages:
   '@babel/helper-validator-identifier@7.29.7':
     resolution: {integrity: sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg==}
     engines: {node: '>=6.9.0'}
+
+  '@babel/helper-validator-identifier@8.0.4':
+    resolution: {integrity: sha512-4wFaiLd0bVo4cIoTXI3zKI038NIWE/cr3jvBjejOVYVxV/m8Ltav1USiGzG1fmS5J2RhgEOgXNNK46cRPnRsrg==}
+    engines: {node: ^22.18.0 || >=24.11.0}
 
   '@babel/helper-validator-option@7.29.7':
     resolution: {integrity: sha512-N9ZErrD+yW5geCDtBqnOoxmR8+tNKiGuxKlDpuJxfsqpa2dFcexaziGAE/qoHLiDDreVNMupxGmSoNlyvsA3gw==}
@@ -6514,16 +6553,13 @@ packages:
     resolution: {integrity: sha512-ywqV+5MmyL4E7ybXgKys4DugZbX0FC6LnwrhjuykIjnK9k8OQacQ7axGKnjDXWNhns0xot3bZI5h55H8yo9cJg==}
     engines: {node: '>=6'}
 
-  cli-testing-library@3.0.1:
-    resolution: {integrity: sha512-fkQ8D2hQS53RP3s0yuCMHmTfPUMEqtVtJG0rs13MNE2khnkSaY8MsNxN7rSJZAzOOVsSg2I2F2XjEITJwf5dFg==}
-    engines: {node: '>=16'}
+  cli-testing-library@4.0.0:
+    resolution: {integrity: sha512-QfC3cJyIA8z9YltHTtHG+zWgxxPIaMctikPZBR5f3ZG9Ku+DvzLseH3aybijuyd1PQOD/RmIfI9A/O5TFhSR+w==}
+    engines: {node: ^22.18.0 || >=24.11.0}
     peerDependencies:
-      '@jest/expect': ^29.0.0
-      '@jest/globals': ^29.0.0
-      vitest: ^3.0.0
+      '@jest/globals': ^29.0.0 || ^30.0.0
+      vitest: ^3.2.0 || ^4.0.0 || ^5.0.0
     peerDependenciesMeta:
-      '@jest/expect':
-        optional: true
       '@jest/globals':
         optional: true
       vitest:
@@ -7278,6 +7314,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -8413,6 +8450,9 @@ packages:
   jiti@2.7.0:
     resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
+
+  js-tokens@10.0.0:
+    resolution: {integrity: sha512-lM/UBzQmfJRo9ABXbPWemivdCW8V2G8FHaHdypQaIy523snUjog0W71ayWXTjiR+ixeMyVHN2XcpnTd/liPg/Q==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -9977,9 +10017,9 @@ packages:
     resolution: {integrity: sha512-ZA6oR3T/pEyuqwMgAKT0/hAv8oAXckzbkmR0UkUosQ+Mc4RxGoJkRmwHgHufaenlyAgE1Mxgpdcrf75y6XcnDg==}
     engines: {node: '>=14.16'}
 
-  slice-ansi@7.1.2:
-    resolution: {integrity: sha512-iOBWFgUX7caIZiuutICxVgX1SdxwAVFFKwt1EvMYYec/NWO5meOJ6K5uQxhrYBdQJne4KxiqZc+KptFOWFSI9w==}
-    engines: {node: '>=18'}
+  slice-ansi@9.0.0:
+    resolution: {integrity: sha512-SO/3iYL5S3W57LLEniscOGPZgOqZUPCx6d3dB+52B80yJ0XstzsC/eV8gnA4tM3MHDrKz+OCFSLNjswdSC+/bA==}
+    engines: {node: '>=22'}
 
   smol-toml@1.6.1:
     resolution: {integrity: sha512-dWUG8F5sIIARXih1DTaQAX4SsiTXhInKf1buxdY9DIg4ZYPZK5nGM1VRIYmEbDbsHt7USo99xSLFu5Q1IqTmsg==}
@@ -11372,6 +11412,11 @@ snapshots:
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
+  '@babel/code-frame@8.0.0':
+    dependencies:
+      '@babel/helper-validator-identifier': 8.0.4
+      js-tokens: 10.0.0
+
   '@babel/compat-data@7.29.7': {}
 
   '@babel/core@7.29.7(supports-color@8.1.1)':
@@ -11504,6 +11549,8 @@ snapshots:
   '@babel/helper-string-parser@7.29.7': {}
 
   '@babel/helper-validator-identifier@7.29.7': {}
+
+  '@babel/helper-validator-identifier@8.0.4': {}
 
   '@babel/helper-validator-option@7.29.7': {}
 
@@ -16117,17 +16164,17 @@ snapshots:
 
   cli-spinners@2.9.2: {}
 
-  cli-testing-library@3.0.1(vitest@4.1.9):
+  cli-testing-library@4.0.0(@jest/globals@30.4.1)(vitest@4.1.9):
     dependencies:
-      '@babel/code-frame': 7.29.7
-      '@babel/runtime': 7.29.7
+      '@babel/code-frame': 8.0.0
       picocolors: 1.1.1
       redent: 4.0.0
-      slice-ansi: 7.1.2
+      slice-ansi: 9.0.0
       strip-ansi: 7.2.0
       strip-final-newline: 4.0.0
       tree-kill: 1.2.2
     optionalDependencies:
+      '@jest/globals': 30.4.1(supports-color@8.1.1)
       vitest: 4.1.9(@opentelemetry/api@1.9.1)(@types/node@24.12.4)(jsdom@26.1.0)(vite@8.1.4)
 
   cli-width@4.1.0: {}
@@ -18438,6 +18485,8 @@ snapshots:
 
   jiti@2.7.0: {}
 
+  js-tokens@10.0.0: {}
+
   js-tokens@4.0.0: {}
 
   js-yaml@3.14.2:
@@ -20138,7 +20187,7 @@ snapshots:
 
   slash@5.1.0: {}
 
-  slice-ansi@7.1.2:
+  slice-ansi@9.0.0:
     dependencies:
       ansi-styles: 6.2.3
       is-fullwidth-code-point: 5.1.0

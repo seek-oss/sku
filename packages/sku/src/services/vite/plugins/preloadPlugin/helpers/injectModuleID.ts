@@ -52,8 +52,6 @@ export const injectModuleID = ({
 
           callPath.node.arguments.push(t.stringLiteral(relativePath));
 
-          callPath.get('callee').replaceWith(t.identifier('loadable'));
-
           injected = true;
         }
       }

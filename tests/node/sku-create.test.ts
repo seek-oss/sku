@@ -223,6 +223,7 @@ describe.each(['webpack', 'vite', 'ssr'])('sku-create %s', (template) => {
     'README.md',
     '.prettierignore',
     ...(template === 'ssr' ? [] : ['src/App/NextSteps.tsx']),
+    ...(template === 'vite' ? ['src/vite.env.d.ts'] : []),
     'pnpm-workspace.yaml',
   ])('should create %s', async (file) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');

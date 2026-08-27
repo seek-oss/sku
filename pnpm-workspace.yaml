@@ -37,6 +37,7 @@ catalog:
   '@vanilla-extract/webpack-plugin': '^2.3.26'
   '@vocab/vite': ^1.0.4
   braid-design-system: ^34.0.0
+  cli-testing-library: ^4.0.0
   commander: ^14.0.1
   # 05/08/25: there is currently a bug in later versions of jiti that break eslint ts support. Pinning to 2.4.2 fixes the issue. (last checked with v2.6.1)
   # 12/11/25: Unpinning for now and using JS eslint config because jiti peer deps from other packages are causing issues. We can re-evaluate later.

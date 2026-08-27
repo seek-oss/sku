@@ -1,17 +1,18 @@
-import type * as t from '@babel/types';
+import * as t from '@babel/types';
 import type { NodePath } from '@babel/traverse';
 import { VITE_LOADABLE_NAME } from './constants.js';
 
 export const getViteLoadableSpecifierName = (
   importPath: NodePath<t.ImportDeclaration>,
 ) => {
-  const loadableNamedSpecifier = importPath
-    .get('specifiers')
-    .find((specifier) =>
-      specifier.isImportSpecifier({
-        imported: { name: 'loadable' },
-      }),
-    );
+  for (const specifier of importPath.node.specifiers) {
+    if (
+      t.isImportSpecifier(specifier) &&
+      t.isIdentifier(specifier.imported, { name: VITE_LOADABLE_NAME })
+    ) {
+      return specifier.local.name;
+    }
+  }
 
-  return loadableNamedSpecifier?.node.local.name ?? VITE_LOADABLE_NAME;
+  return VITE_LOADABLE_NAME;
 };

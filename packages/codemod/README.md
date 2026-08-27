@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/sku-codemod.svg?style=flat-square)](https://www.npmjs.com/package/sku-codemod)
+[![npm](https://img.shields.io/npm/v/@sku-lib/codemod.svg?style=flat-square)](https://www.npmjs.com/package/@sku-lib/codemod)
 
 # Codemods for `sku`
 

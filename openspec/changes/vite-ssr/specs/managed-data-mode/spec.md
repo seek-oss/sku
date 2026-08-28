@@ -342,12 +342,18 @@ Sku MUST NOT pass `res` into getters or `getRouterContext`.
 Sku MUST NOT pass Fetch `Request` into `getSite` / `getLanguage` / `getClientContext` (Fetch stays on `query()` and optional server `getRouterContext`).
 
 When `getLanguage` is omitted or returns `undefined`, sku MUST NOT register a vocab language chunk.
-When `getClientContext` is omitted or returns `undefined`, `clientContext` is `undefined` on both SSR and hydrate — the bootstrap MUST emit JS `undefined` (not JSON `null`). An explicit `null` return MUST serialise as JSON `null`.
+When `getClientContext` is omitted or returns `undefined`, `clientContext` is `undefined` on both SSR and hydrate — the bootstrap MUST emit JS `undefined` (not JSON `null`).
+An explicit `null` return MUST serialise as JSON `null`.
+`ClientContext` MUST be typed as `JsonValue | undefined`.
+`JsonValue` object values MAY be `JsonValue | undefined`.
+When `getClientContext` returns a non-`undefined` value, sku MUST normalise it before sibling getters, `SkuProvider`, and bootstrap serialisation.
+Object keys whose value is `undefined` MUST be dropped.
+`undefined` array elements MUST become `null`.
 When `getReactContext` is omitted, `reactContext` is `undefined`.
 Sku MUST NOT forward `language` to the client.
 Sku MUST NOT serialise `reactContext` into the hydrate bootstrap.
 
-When the client entry includes `onHydrate`, sku MUST invoke it with `{ clientContext }` only — the same value from `getClientContext`.
+When the client entry includes `onHydrate`, sku MUST invoke it with `{ clientContext }` only — the same normalised value that `SkuProvider` and the hydrate bootstrap see.
 Omitting `onHydrate` MUST mean no hydrate side effects (not an error).
 
 Omitting `middleware` MUST mean no consumer middleware layer (not an error).
@@ -383,6 +389,8 @@ When the client entry includes `getRouterContext`, sku MUST map it into `createB
 
 Omitting either `getRouterContext` MUST preserve today’s empty/default context behaviour.
 
+Loaders, actions, and route middleware read those values via `context.get()`.
+
 Sku MUST NOT make Express `req` the loader `request` argument (`query()` continues to use Fetch `Request` only).
 
 #### Scenario: Default export is the request-entry contract
@@ -397,6 +405,7 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **THEN** sku invokes present getters in order before `query()`
 - **AND** sku awaits `getClientContext` and `getReactContext` when they return a Promise
 - **AND** later getters receive already-resolved `site` / `clientContext` / `reactContext`
+- **AND** `clientContext` passed to later getters is the normalised JSON value
 - **AND** sku uses those values for site selection, vocab preload, `SkuProvider`, and the hydrate bootstrap (`clientContext` + `site` only)
 
 #### Scenario: Getters can read middleware-attached Express state
@@ -439,8 +448,13 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 
 - **WHEN** server `getClientContext` returns a Promise
 - **THEN** sku awaits it before `getReactContext`, `getRouterContext`, and `query()`
-- **AND** sibling getters and `SkuProvider` receive the resolved value
-- **AND** the hydrate bootstrap serialises that resolved value
+- **AND** sibling getters and `SkuProvider` receive the resolved, normalised value
+- **AND** the hydrate bootstrap serialises that normalised value
+
+#### Scenario: Nested undefined in clientContext is normalised before consumers
+
+- **WHEN** `getClientContext` returns `{ userId: undefined, tags: [undefined] }`
+- **THEN** sibling getters, `SkuProvider`, and the hydrate bootstrap receive `{ tags: [null] }`
 
 #### Scenario: Client getReactContext may return a Promise
 

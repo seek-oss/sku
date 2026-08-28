@@ -42,7 +42,12 @@ export type SkuOnListen = (args: {
 
 /** JSON-serialisable shell seed for SSR `clientContext`. */
 export type JsonValue =
-  string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
+  | string
+  | number
+  | boolean
+  | null
+  | Array<JsonValue | undefined>
+  | { [key: string]: JsonValue | undefined };
 
 export type { SiteOf } from './entryTypeExtractors.js';
 

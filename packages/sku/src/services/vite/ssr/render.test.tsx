@@ -106,6 +106,89 @@ describe('render', () => {
     expect(html).not.toContain('window.__SKU_CLIENT_CONTEXT__=null');
   });
 
+  it('normalises nested undefined in clientContext for siblings, SkuProvider, and bootstrap', async () => {
+    let siblingContext: unknown;
+    const nestedHandlers = buildSiteStaticHandlers({
+      au: [
+        {
+          path: '/',
+          Component: () => (
+            <main>
+              <p data-testid="keys">
+                {Object.keys(useClientContext() ?? {}).join(',')}
+              </p>
+            </main>
+          ),
+        },
+      ],
+    });
+
+    const result = await render({
+      siteStaticHandlers: nestedHandlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      getClientContext: () => ({
+        theme: 'dark',
+        userId: undefined,
+        tags: [undefined, 'a'],
+      }),
+      getReactContext: ({ clientContext }) => {
+        siblingContext = clientContext;
+        return { api: 'server-api' };
+      },
+    });
+
+    if ('response' in result) {
+      throw new Error('Expected a streamed document, not a Response');
+    }
+
+    const chunks: Buffer[] = [];
+    await new Promise<void>((resolve, reject) => {
+      const writable = new Writable({
+        write(chunk, _encoding, callback) {
+          chunks.push(Buffer.from(chunk));
+          callback();
+        },
+        final(callback) {
+          callback();
+          resolve();
+        },
+      });
+      writable.on('error', reject);
+      result.commit(writable);
+    });
+
+    const html = Buffer.concat(chunks).toString('utf-8');
+    const expected = { theme: 'dark', tags: [null, 'a'] };
+
+    expect(siblingContext).toEqual(expected);
+    expect(html).toContain('>theme,tags<');
+    expect(html).toContain(
+      'window.__SKU_CLIENT_CONTEXT__={"theme":"dark","tags":[null,"a"]}',
+    );
+  });
+
+  it('keeps top-level undefined clientContext as JS undefined after normalisation', async () => {
+    let siblingContext: unknown = 'unset';
+
+    await render({
+      siteStaticHandlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      getClientContext: () => undefined,
+      getReactContext: ({ clientContext }) => {
+        siblingContext = clientContext;
+        return { api: 'server-api' };
+      },
+    });
+
+    expect(siblingContext).toBeUndefined();
+  });
+
   it('projects sibling values into getRouterContext before query()', async () => {
     let seen: {
       site?: string;

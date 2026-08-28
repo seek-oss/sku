@@ -20,4 +20,17 @@ const userIdMiddleware: RequestHandler = (req, _res, next) => {
   next();
 };
 
-export const middleware: SkuMiddleware = [userIdMiddleware, fixtureApi];
+// Would steal Vite module-graph URLs if mounted before Vite middlewares.
+const stealViteAssetsIfReached: RequestHandler = (req, res, next) => {
+  if (req.path === '/@vite/client' || req.path.startsWith('/@fs/')) {
+    res.status(418).type('text/plain').send('middleware-handled');
+    return;
+  }
+  next();
+};
+
+export const middleware: SkuMiddleware = [
+  userIdMiddleware,
+  stealViteAssetsIfReached,
+  fixtureApi,
+];

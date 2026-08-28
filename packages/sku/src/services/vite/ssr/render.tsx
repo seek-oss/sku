@@ -8,6 +8,7 @@ import {
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,
 } from './resolveAssets.js';
+import { normaliseClientContext } from './normaliseClientContext.js';
 import { selectForSite } from './selectForSite.js';
 import { streamDocument } from './streamDocument.js';
 import type {
@@ -39,7 +40,9 @@ const renderDocument = async ({
   // Call order before query(): site → language → clientContext → reactContext → routerContext.
   const site = getSite ? getSite({ req }) : Object.keys(siteStaticHandlers)[0];
   const language = getLanguage?.({ req });
-  const clientContext = await getClientContext?.({ req });
+  const clientContext = normaliseClientContext(
+    await getClientContext?.({ req }),
+  );
   const reactContext = await getReactContext?.({ req, site, clientContext });
 
   const { query, dataRoutes } = selectForSite(

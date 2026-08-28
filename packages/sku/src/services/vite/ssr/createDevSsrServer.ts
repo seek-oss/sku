@@ -1,5 +1,5 @@
 import { createRequire } from 'node:module';
-import express from 'express';
+import express, { type Express, type RequestHandler } from 'express';
 import { createDebug } from 'obug';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
@@ -16,10 +16,33 @@ import {
   type SsrServerModule,
   type SsrServerResult,
 } from './ssrServerShared.js';
-import type { RenderAssets } from './types.js';
+import type { RenderAssets, SkuMiddleware } from './types.js';
 
 const log = createDebug('sku:vite-ssr:dev-server');
 const require = createRequire(import.meta.url);
+
+/** Start mount order: request-context → Vite → optional devServerMiddleware → server-entry → HTML. */
+export const mountStartSsrMiddleware = ({
+  app,
+  viteMiddlewares,
+  loadDevServerMiddleware,
+  consumerMiddleware,
+  htmlMiddleware,
+}: {
+  app: Express;
+  viteMiddlewares: RequestHandler;
+  loadDevServerMiddleware?: (app: Express) => void;
+  consumerMiddleware?: SkuMiddleware;
+  htmlMiddleware: RequestHandler;
+}): void => {
+  app.use(createSsrRequestContextMiddleware());
+  app.use(viteMiddlewares);
+  loadDevServerMiddleware?.(app);
+  mountConsumerMiddleware(consumerMiddleware, (middleware) =>
+    app.use(middleware),
+  );
+  app.use(htmlMiddleware);
+};
 
 export const createDevSsrServer = async ({
   skuContext,
@@ -58,8 +81,7 @@ export const createDevSsrServer = async ({
     serverEntry,
   )) as SsrServerModule;
 
-  serverApp.use(createSsrRequestContextMiddleware());
-
+  let loadDevServerMiddleware: ((app: Express) => void) | undefined;
   if (skuContext.paths.devServerMiddleware) {
     log(
       'Using dev server middleware at %s',
@@ -69,16 +91,10 @@ export const createDevSsrServer = async ({
       await import(skuContext.paths.devServerMiddleware)
     ).default;
     if (devServerMiddleware && typeof devServerMiddleware === 'function') {
-      devServerMiddleware(serverApp);
+      loadDevServerMiddleware = devServerMiddleware;
       log('Dev server middleware loaded');
     }
   }
-
-  mountConsumerMiddleware(serverModule.middleware, (middleware) =>
-    serverApp.use(middleware),
-  );
-
-  serverApp.use(vite.middlewares);
 
   const assets: RenderAssets = {
     bootstrapModules: [`/@vite/client`, `/@fs/${clientEntry}`],
@@ -94,8 +110,12 @@ export const createDevSsrServer = async ({
     return latestModule.render(...args);
   };
 
-  serverApp.use(
-    createHtmlRenderMiddleware({
+  mountStartSsrMiddleware({
+    app: serverApp,
+    viteMiddlewares: vite.middlewares,
+    loadDevServerMiddleware,
+    consumerMiddleware: serverModule.middleware,
+    htmlMiddleware: createHtmlRenderMiddleware({
       render,
       assets,
       cspEnabled: skuContext.cspEnabled,
@@ -110,7 +130,7 @@ export const createDevSsrServer = async ({
         vite.ssrFixStacktrace(error);
       },
     }),
-  );
+  });
 
   const listenPort = skuContext.port.client;
   await new Promise<void>((resolve, reject) => {

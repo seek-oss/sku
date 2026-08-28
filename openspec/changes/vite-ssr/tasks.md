@@ -180,6 +180,24 @@ It is not a history of intermediate APIs.
 - [x] 21.7 Runtime tests: Promise-returning getters are awaited before `query()` / hydrate. Rejection fails the document or hydrate.
 - [x] 21.8 Type dual-entry `getRouterContext` as `RouterContextProvider | Promise<RouterContextProvider>`.
 
+## 22. Nested `undefined` in `clientContext`
+
+- [x] 22.1 Widen `JsonValue` object values to `JsonValue | undefined`.
+- [x] 22.2 After `getClientContext` resolves, one JSON-compatible walk: drop `undefined` object keys, coerce `undefined` array elements to `null`. Same value to sibling getters, `SkuProvider`, bootstrap, and `onHydrate`. Top-level omit/`undefined` stays JS `undefined`.
+- [x] 22.3 Type-level tests: optional fields and `'dark' | undefined` type-check. Dates/functions still fail.
+- [x] 22.4 Runtime tests: object-key drop, array `null` coerce, top-level `undefined` unchanged, SSR and hydrate agree.
+
+## 23. Start mounts Vite before consumer middleware
+
+- [x] 23.1 Reorder `createDevSsrServer`: request-context → Vite → `devServerMiddleware` → server-entry `middleware` → HTML.
+- [x] 23.2 Tests: Vite asset URL (e.g. `/@vite/client`) is not handled by catch-all server-entry middleware. Document paths still reach consumer middleware + HTML. `devServerMiddleware` still runs after Vite, before server-entry, and stays out of production.
+- [x] 23.3 Update `middleware.md` start mount order to match.
+
+## 24. Three-channel docs
+
+- [x] 24.1 Canonical section near the top of `data-loading.md` (after two-path intro, before “Prefer render-time”): table, JSON + nested-`undefined` rules, `createSkuContexts` / `useClientContext()` links, router context for loaders/actions/route middleware.
+- [x] 24.2 `providers.md` and `entries.md` link that section instead of re-teaching the taxonomy.
+
 ## Deferred
 
 See design Non-Goals and Resolved / deferred for the full list.

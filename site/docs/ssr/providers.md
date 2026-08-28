@@ -43,7 +43,7 @@ To type `sites` on routes from the same `getSite` union, see [Strictly typed sit
 
 ## Pass values into React
 
-**Serialisable content** (theme, user id) — set `getClientContext` on the server entry and read with `useClientContext()`:
+**Serialisable content** (theme, user id) — set [`getClientContext`](./entries.md#getclientcontext) on the server entry and read with `useClientContext()`:
 
 ```tsx
 // src/server.tsx
@@ -58,7 +58,7 @@ const server = defineServerEntry({
 export default server;
 ```
 
-**Env-differing values** (API clients, server-only links) — set `getReactContext` on **both** entries and read with `useReactContext()`:
+**Env-differing values** (API clients, server-only links) — set [`getReactContext`](./entries.md#getreactcontext) on **both** entries and read with `useReactContext()`:
 
 ::: code-group
 
@@ -98,7 +98,7 @@ export default client;
 `clientContext` and `reactContext` are set for the page load and do not change across client navigations.
 Anything that must track navigation (for example locale from the URL) belongs in the route tree.
 
-For loader/action dependency injection, see [Data loading → Router context](./data-loading.md#router-context).
+For loader/action/route-middleware dependency injection, see [Data loading → Router context](./data-loading.md#router-context).
 
 ## Root layout for providers
 

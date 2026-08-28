@@ -323,7 +323,7 @@ When `getSite` is omitted, sku uses the sole resolved site name (see the site-se
 Sku MUST NOT specially gate on entry file existence; a missing file fails via normal module resolution.
 
 Sku MUST call getters in this order before `query()`: `getSite` (when present) → `getLanguage` → `getClientContext` → `getReactContext` → optional server `getRouterContext`.
-Sku MUST await `getClientContext` and `getReactContext` when they return a Promise.
+Sku MUST await `getClientContext`, `getReactContext`, and server `getRouterContext` when they return a Promise.
 
 Later getters MUST receive already-resolved sibling values so apps can project without re-deriving:
 
@@ -335,8 +335,8 @@ Later getters MUST receive already-resolved sibling values so apps can project w
 
 `getSite` and `getLanguage` MUST be synchronous.
 `getClientContext` and dual-entry `getReactContext` MAY return a Promise.
-Optional server `getRouterContext` MAY return a Promise.
-Client `getRouterContext` MUST be synchronous.
+Dual-entry `getRouterContext` MAY return a Promise.
+React Router awaits client `getContext`.
 When the client entry includes `getReactContext`, sku MUST await it before creating the browser router and hydrating.
 Sku MUST NOT pass `res` into getters or `getRouterContext`.
 Sku MUST NOT pass Fetch `Request` into `getSite` / `getLanguage` / `getClientContext` (Fetch stays on `query()` and optional server `getRouterContext`).
@@ -453,7 +453,8 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **WHEN** the server entry includes `getRouterContext`
 - **AND** a document request is handled
 - **THEN** sku calls server `getRouterContext` with `{ request, req, site, clientContext, reactContext }` before `query()`
-- **AND** passes the result as `requestContext` to `query()`
+- **AND** awaits the result when it is a Promise
+- **AND** passes the resolved `RouterContextProvider` as `requestContext` to `query()`
 
 #### Scenario: Optional client getRouterContext seeds createBrowserRouter
 
@@ -461,6 +462,8 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **AND** the browser router is created
 - **THEN** sku maps that function into `createBrowserRouter({ getContext })`
 - **AND** each call receives `{ site, clientContext, reactContext }`
+- **AND** that mapped function MAY return a Promise
+- **AND** React Router awaits `getContext`
 
 #### Scenario: Omitting getRouterContext keeps default behaviour
 

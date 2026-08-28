@@ -167,7 +167,7 @@ export type SkuClientGetRouterContext<
   site: string;
   clientContext: C | undefined;
   reactContext: R | undefined;
-}) => RouterContextProvider;
+}) => RouterContextProvider | Promise<RouterContextProvider>;
 
 /**
  * Structural shape of a SSR `serverEntry` default export (prefer

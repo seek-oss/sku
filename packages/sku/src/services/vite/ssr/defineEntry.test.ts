@@ -147,7 +147,7 @@ describe('async getClientContext / getReactContext inference', () => {
         >();
         return { api: 'server-api' as const };
       },
-      getRouterContext({ clientContext, reactContext }) {
+      async getRouterContext({ clientContext, reactContext }) {
         expectTypeOf(clientContext).toEqualTypeOf<
           { userId: 'fixture-user' } | undefined
         >();
@@ -174,7 +174,7 @@ describe('async getClientContext / getReactContext inference', () => {
         >();
         return { api: 'client-api' as const };
       },
-      getRouterContext({ reactContext }) {
+      async getRouterContext({ reactContext }) {
         expectTypeOf(reactContext).toEqualTypeOf<
           { api: 'client-api' } | undefined
         >();
@@ -208,7 +208,7 @@ describe('async getClientContext / getReactContext inference', () => {
     expect(server.getClientContext).toBeTypeOf('function');
   });
 
-  it('keeps getSite, getLanguage, and client getRouterContext synchronous', () => {
+  it('keeps getSite and getLanguage synchronous', () => {
     const serverWithAsyncSite = defineServerEntry({
       // @ts-expect-error getSite must be synchronous
       getSite: async () => 'au' as const,
@@ -217,15 +217,20 @@ describe('async getClientContext / getReactContext inference', () => {
       // @ts-expect-error getLanguage must be synchronous
       getLanguage: async () => 'en' as const,
     });
-    const clientWithAsyncRouterContext = defineClientEntry({
-      // @ts-expect-error client getRouterContext must be synchronous
-      getRouterContext: async () => new RouterContextProvider(),
-    });
 
     expect(serverWithAsyncSite.getSite).toBeTypeOf('function');
     expect(serverWithAsyncLanguage.getLanguage).toBeTypeOf('function');
-    expect(clientWithAsyncRouterContext.getRouterContext).toBeTypeOf(
-      'function',
-    );
+  });
+
+  it('allows dual-entry getRouterContext to return a Promise', () => {
+    const server = defineServerEntry({
+      getRouterContext: async () => new RouterContextProvider(),
+    });
+    const client = defineClientEntry({
+      getRouterContext: async () => new RouterContextProvider(),
+    });
+
+    expect(server.getRouterContext).toBeTypeOf('function');
+    expect(client.getRouterContext).toBeTypeOf('function');
   });
 });

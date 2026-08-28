@@ -257,7 +257,7 @@ getRouterContext?: (args: {
   site: Site;
   clientContext: ClientContext | undefined;
   reactContext: ReactContext | undefined;
-}) => RouterContextProvider;
+}) => RouterContextProvider | Promise<RouterContextProvider>;
 ```
 
 :::warning Never put Express `req` in `RouterContextProvider`

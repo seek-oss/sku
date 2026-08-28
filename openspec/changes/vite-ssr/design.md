@@ -778,7 +778,7 @@ export default defineClientEntry<typeof server>()({
     site: /* Site from ServerEntry */;
     clientContext: /* NoInfer<ClientContext> */ | undefined;
     reactContext: /* NoInfer<ReactContext> */ | undefined;
-  }): RouterContextProvider;
+  }): RouterContextProvider | Promise<RouterContextProvider>;
   // Router + route — React Router createBrowserRouter options
   instrumentations?: ClientInstrumentation[];
 });
@@ -823,9 +823,11 @@ The client reads the serialised seed from the hydrate bootstrap.
 `ClientContext` and `ReactContext` inference unwrap with `Awaited`.
 Sibling args receive that unwrapped value, not a Promise.
 
-Optional server `getRouterContext` MAY still be async because it seeds loader context next to `query`.
-Client `getRouterContext` stays sync.
-React Router `getContext` runs on every navigation and fetcher.
+Dual-entry `getRouterContext` MAY return a Promise.
+Sku awaits the server getter before `query()`.
+React Router awaits client `getContext` on every navigation and fetcher.
+Prefer projecting already-resolved sibling values.
+Async client I/O delays every navigation and fetcher before loaders run.
 
 Async I/O that only needs to attach fields on `req` can still live in Express `middleware`.
 Prefer middleware when several getters would otherwise await the same work.

@@ -79,7 +79,7 @@ type ClientEntryBody<ServerEntry, ReactContext> = {
     site: SiteOf<ServerEntry>;
     clientContext: NoInfer<ClientContextOf<ServerEntry>> | undefined;
     reactContext: NoInfer<Awaited<ReactContext>> | undefined;
-  }) => RouterContextProvider;
+  }) => RouterContextProvider | Promise<RouterContextProvider>;
   /**
    * Optional React Router instrumentations (`router` + `route`) forwarded into
    * `createBrowserRouter`.

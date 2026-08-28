@@ -304,13 +304,16 @@ Sku MUST read that default export and call optional properties on it.
 
 Sku MUST export `defineServerEntry` / `defineClientEntry` from `sku/runtime` as zero-runtime identity helpers that infer types from getter returns and type later sibling args (`NoInfer` on input positions).
 `defineServerEntry` MUST infer `Site` from `getSite`, `Language` from `getLanguage`, `ClientContext` from `getClientContext`, and `ReactContext` from `getReactContext`, and MUST type later sibling `site` args as that `Site`.
+`ClientContext` and `ReactContext` inference MUST unwrap with `Awaited`.
 `defineClientEntry` MUST accept an optional `ServerEntry` type argument (`defineClientEntry<typeof server>`).
 When that argument is provided, it MUST extract `Site` from the server entry’s `getSite` return (`string` when omitted) and `ClientContext` from `getClientContext` (`undefined` when omitted), reuse the same extractors as `createSkuContexts`, and MUST type client sibling `site` / `clientContext` args (including `onHydrate`) from those extracted types.
 `defineClientEntry` MUST still infer `ReactContext` from the client entry’s own `getReactContext` return.
+That inference MUST unwrap with `Awaited`.
 When the `ServerEntry` type argument is omitted, `ClientContext` MUST be `undefined` and client `site` args MUST be `string`.
 Sku MUST also export structural types `SkuServerEntry` / `SkuClientEntry` (the shapes behind those helpers).
 
-Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`; optional `middleware`, `onListen`, `getRouterContext`, and `instrumentations`.
+Server entry object MAY include `getSite`, `getLanguage`, `getClientContext`, and `getReactContext`.
+It MAY also include optional `middleware`, `onListen`, `getRouterContext`, and `instrumentations`.
 
 Client entry object MAY include optional `onHydrate`, `getReactContext`, `getRouterContext`, and `instrumentations`.
 
@@ -320,6 +323,7 @@ When `getSite` is omitted, sku uses the sole resolved site name (see the site-se
 Sku MUST NOT specially gate on entry file existence; a missing file fails via normal module resolution.
 
 Sku MUST call getters in this order before `query()`: `getSite` (when present) → `getLanguage` → `getClientContext` → `getReactContext` → optional server `getRouterContext`.
+Sku MUST await `getClientContext`, `getReactContext`, and server `getRouterContext` when they return a Promise.
 
 Later getters MUST receive already-resolved sibling values so apps can project without re-deriving:
 
@@ -329,7 +333,11 @@ Later getters MUST receive already-resolved sibling values so apps can project w
 - Server `getRouterContext` receives `{ request, req, site, clientContext, reactContext }`
 - Client `getRouterContext` receives `{ site, clientContext, reactContext }`
 
-Getters other than optional `getRouterContext` MUST be synchronous.
+`getSite` and `getLanguage` MUST be synchronous.
+`getClientContext` and dual-entry `getReactContext` MAY return a Promise.
+Dual-entry `getRouterContext` MAY return a Promise.
+React Router awaits client `getContext`.
+When the client entry includes `getReactContext`, sku MUST await it before creating the browser router and hydrating.
 Sku MUST NOT pass `res` into getters or `getRouterContext`.
 Sku MUST NOT pass Fetch `Request` into `getSite` / `getLanguage` / `getClientContext` (Fetch stays on `query()` and optional server `getRouterContext`).
 
@@ -351,6 +359,8 @@ Sku MUST always render `SkuProvider` outside the router — `Document` → `SkuP
 
 Sku MUST export `createSkuContexts<typeof server, typeof client>()` from `sku/runtime` so apps can obtain typed `useSite` / `useClientContext` / `useReactContext` bound to that provider.
 `createSkuContexts` MUST extract `Site` from the server entry’s `getSite` return (`string` when `getSite` is omitted), `ClientContext` from `getClientContext`, and `ReactContext` from both entries’ `getReactContext` returns (union when they differ).
+Those `ClientContext` and `ReactContext` extractions MUST unwrap with `Awaited`.
+`useClientContext()` and `useReactContext()` MUST return those unwrapped types.
 `useSite()` MUST return that `Site` type.
 That same `Site` MUST type `SkuRouteObject.sites` when apps write `SkuRouteObject<SiteOf<typeof server>>`.
 Apps MAY alias that type next to `createSkuContexts` in `src/skuContext.ts`.
@@ -385,6 +395,7 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 
 - **WHEN** an SSR app handles a document request
 - **THEN** sku invokes present getters in order before `query()`
+- **AND** sku awaits `getClientContext` and `getReactContext` when they return a Promise
 - **AND** later getters receive already-resolved `site` / `clientContext` / `reactContext`
 - **AND** sku uses those values for site selection, vocab preload, `SkuProvider`, and the hydrate bootstrap (`clientContext` + `site` only)
 
@@ -420,15 +431,30 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 
 - **WHEN** an entry includes `getReactContext`
 - **THEN** sku calls it with the sibling args for that environment
-- **AND** passes the result to `SkuProvider` as `reactContext`
+- **AND** awaits the result when it is a Promise
+- **AND** passes the resolved value to `SkuProvider` as `reactContext`
 - **AND** does not serialise it into the hydrate bootstrap
+
+#### Scenario: getClientContext may return a Promise
+
+- **WHEN** server `getClientContext` returns a Promise
+- **THEN** sku awaits it before `getReactContext`, `getRouterContext`, and `query()`
+- **AND** sibling getters and `SkuProvider` receive the resolved value
+- **AND** the hydrate bootstrap serialises that resolved value
+
+#### Scenario: Client getReactContext may return a Promise
+
+- **WHEN** the client entry’s `getReactContext` returns a Promise
+- **THEN** sku awaits it before creating the browser router and hydrating
+- **AND** `SkuProvider` receives the resolved `reactContext`
 
 #### Scenario: Optional server getRouterContext seeds query requestContext
 
 - **WHEN** the server entry includes `getRouterContext`
 - **AND** a document request is handled
 - **THEN** sku calls server `getRouterContext` with `{ request, req, site, clientContext, reactContext }` before `query()`
-- **AND** passes the result as `requestContext` to `query()`
+- **AND** awaits the result when it is a Promise
+- **AND** passes the resolved `RouterContextProvider` as `requestContext` to `query()`
 
 #### Scenario: Optional client getRouterContext seeds createBrowserRouter
 
@@ -436,6 +462,8 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **AND** the browser router is created
 - **THEN** sku maps that function into `createBrowserRouter({ getContext })`
 - **AND** each call receives `{ site, clientContext, reactContext }`
+- **AND** that mapped function MAY return a Promise
+- **AND** React Router awaits `getContext`
 
 #### Scenario: Omitting getRouterContext keeps default behaviour
 
@@ -468,6 +496,12 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **THEN** later server getters’ sibling args are typed from earlier getters’ return types
 - **AND** `createSkuContexts<typeof server, typeof client>()` exposes matching hook return types without hand-written context aliases
 
+#### Scenario: Async getter return types unwrap
+
+- **WHEN** `getClientContext` or `getReactContext` is declared `async` or returns a Promise
+- **THEN** `createSkuContexts` hook return types are the resolved value, not `Promise<T>`
+- **AND** later sibling getter args are typed as that resolved value
+
 #### Scenario: defineClientEntry types from ServerEntry
 
 - **WHEN** an app wraps its client default export in `defineClientEntry<typeof server>`
@@ -476,6 +510,7 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **THEN** `onHydrate` / client `getReactContext` / client `getRouterContext` receive `clientContext` typed as that shape
 - **AND** client sibling `site` args are typed as that site union
 - **AND** client `ReactContext` is still inferred from the client’s own `getReactContext` return
+- **AND** that inference unwraps a Promise return
 
 #### Scenario: Omitting ServerEntry on defineClientEntry
 

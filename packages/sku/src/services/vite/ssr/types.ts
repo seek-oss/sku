@@ -108,12 +108,12 @@ export type SkuGetLanguage = (args: {
 }) => string | undefined;
 
 /**
- * Sync server-entry getter — shell-time JSON seed serialised into the hydrate
+ * Server-entry getter — shell-time JSON seed serialised into the hydrate
  * bootstrap and passed to always-on `SkuProvider` as `clientContext`.
  */
 export type SkuGetClientContext = (args: {
   req: ExpressRequest;
-}) => JsonValue | undefined;
+}) => JsonValue | undefined | Promise<JsonValue | undefined>;
 
 /**
  * Dual-entry getter — values that MAY differ on server vs client (e.g.
@@ -126,12 +126,12 @@ export type SkuServerGetReactContext<
   req: ExpressRequest;
   site: string;
   clientContext: C | undefined;
-}) => R;
+}) => R | Promise<R>;
 
 export type SkuClientGetReactContext<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
-> = (args: { site: string; clientContext: C | undefined }) => R;
+> = (args: { site: string; clientContext: C | undefined }) => R | Promise<R>;
 
 /**
  * Optional server-entry `getRouterContext` — seeds React Router `requestContext`
@@ -167,7 +167,7 @@ export type SkuClientGetRouterContext<
   site: string;
   clientContext: C | undefined;
   reactContext: R | undefined;
-}) => RouterContextProvider;
+}) => RouterContextProvider | Promise<RouterContextProvider>;
 
 /**
  * Structural shape of a SSR `serverEntry` default export (prefer
@@ -179,7 +179,7 @@ export type SkuServerEntry<
 > = {
   getSite?: SkuGetSite;
   getLanguage?: SkuGetLanguage;
-  getClientContext?: (args: { req: ExpressRequest }) => C;
+  getClientContext?: (args: { req: ExpressRequest }) => C | Promise<C>;
   getReactContext?: SkuServerGetReactContext<C, R>;
   middleware?: SkuMiddleware;
   onListen?: SkuOnListen;

@@ -35,7 +35,7 @@ const hydrate = async () => {
   const clientContext = window.__SKU_CLIENT_CONTEXT__;
   onHydrate?.({ clientContext });
 
-  const reactContext = getReactContext?.({ site, clientContext });
+  const reactContext = await getReactContext?.({ site, clientContext });
 
   const lazyMatches = matchRoutes(siteRoutes, window.location)?.filter(
     ({ route }) => route.lazy,

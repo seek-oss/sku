@@ -17,12 +17,12 @@ export type ClientContextOf<ServerEntry> =
     ? NonNullable<ServerEntry['getClientContext']> extends (
         ...args: never[]
       ) => infer C
-      ? C
+      ? Awaited<C>
       : undefined
     : undefined;
 
 export type ReactContextOf<Entry> = 'getReactContext' extends keyof Entry
   ? NonNullable<Entry['getReactContext']> extends (...args: never[]) => infer R
-    ? R
+    ? Awaited<R>
     : undefined
   : undefined;

@@ -39,8 +39,8 @@ const renderDocument = async ({
   // Call order before query(): site → language → clientContext → reactContext → routerContext.
   const site = getSite ? getSite({ req }) : Object.keys(siteStaticHandlers)[0];
   const language = getLanguage?.({ req });
-  const clientContext = getClientContext?.({ req });
-  const reactContext = getReactContext?.({ req, site, clientContext });
+  const clientContext = await getClientContext?.({ req });
+  const reactContext = await getReactContext?.({ req, site, clientContext });
 
   const { query, dataRoutes } = selectForSite(
     siteStaticHandlers,

@@ -3,7 +3,7 @@ import { Writable } from 'node:stream';
 import type { Request as ExpressRequest } from 'express';
 import { Suspense, use } from 'react';
 import { Outlet, RouterContextProvider } from 'react-router';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
 import { createSkuContexts } from 'sku/runtime';
@@ -136,6 +136,175 @@ describe('render', () => {
       clientContext: { userId: 'user-1' },
       reactContext: { api: 'server-api' },
     });
+  });
+
+  it('awaits Promise getClientContext before later getters and query()', async () => {
+    const order: string[] = [];
+    let release!: (value: { userId: string }) => void;
+    const originalQuery = siteStaticHandlers.au.query.bind(
+      siteStaticHandlers.au,
+    );
+    const query = vi.spyOn(siteStaticHandlers.au, 'query');
+    query.mockImplementation((...args) => {
+      order.push('query');
+      return originalQuery(...args);
+    });
+
+    const pending = render({
+      siteStaticHandlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      getClientContext: () => {
+        order.push('clientContext');
+        return new Promise<{ userId: string }>((resolve) => {
+          release = resolve;
+        });
+      },
+      getReactContext: () => {
+        order.push('reactContext');
+        return { api: 'server-api' };
+      },
+      getRouterContext: () => {
+        order.push('routerContext');
+        return new RouterContextProvider();
+      },
+    });
+
+    await Promise.resolve();
+    expect(order).toEqual(['clientContext']);
+
+    release({ userId: 'user-1' });
+    await pending;
+
+    expect(order).toEqual([
+      'clientContext',
+      'reactContext',
+      'routerContext',
+      'query',
+    ]);
+  });
+
+  it('awaits Promise getReactContext before getRouterContext and query()', async () => {
+    const order: string[] = [];
+    let release!: (value: { api: string }) => void;
+    const originalQuery = siteStaticHandlers.au.query.bind(
+      siteStaticHandlers.au,
+    );
+    const query = vi.spyOn(siteStaticHandlers.au, 'query');
+    query.mockImplementation((...args) => {
+      order.push('query');
+      return originalQuery(...args);
+    });
+
+    const pending = render({
+      siteStaticHandlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      getClientContext,
+      getReactContext: () => {
+        order.push('reactContext');
+        return new Promise<{ api: string }>((resolve) => {
+          release = resolve;
+        });
+      },
+      getRouterContext: () => {
+        order.push('routerContext');
+        return new RouterContextProvider();
+      },
+    });
+
+    await Promise.resolve();
+    expect(order).toEqual(['reactContext']);
+
+    release({ api: 'server-api' });
+    await pending;
+
+    expect(order).toEqual(['reactContext', 'routerContext', 'query']);
+  });
+
+  it('fails the document when getClientContext rejects', async () => {
+    const error = new Error('clientContext failed');
+    let laterGetterCalled = false;
+
+    await expect(
+      render({
+        siteStaticHandlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        getClientContext: () => Promise.reject(error),
+        getReactContext: () => {
+          laterGetterCalled = true;
+          return { api: 'server-api' };
+        },
+      }),
+    ).rejects.toBe(error);
+
+    expect(laterGetterCalled).toBe(false);
+  });
+
+  it('fails the document when getReactContext rejects', async () => {
+    const error = new Error('reactContext failed');
+    let routerContextCalled = false;
+
+    await expect(
+      render({
+        siteStaticHandlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+        getClientContext,
+        getReactContext: () => Promise.reject(error),
+        getRouterContext: () => {
+          routerContextCalled = true;
+          return new RouterContextProvider();
+        },
+      }),
+    ).rejects.toBe(error);
+
+    expect(routerContextCalled).toBe(false);
+  });
+
+  it('renders resolved values from Promise-returning getters', async () => {
+    const result = await render({
+      siteStaticHandlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      getClientContext: async () => ({ userId: 'async-user' }),
+      getReactContext: async () => ({ api: 'async-api' }),
+    });
+
+    if ('response' in result) {
+      throw new Error('Expected a streamed document, not a Response');
+    }
+
+    const chunks: Buffer[] = [];
+    await new Promise<void>((resolve, reject) => {
+      const writable = new Writable({
+        write(chunk, _encoding, callback) {
+          chunks.push(Buffer.from(chunk));
+          callback();
+        },
+        final(callback) {
+          callback();
+          resolve();
+        },
+      });
+      writable.on('error', reject);
+      result.commit(writable);
+    });
+
+    const html = Buffer.concat(chunks).toString('utf-8');
+    expect(html).toContain('>async-user<');
+    expect(html).toContain('>async-api<');
   });
 
   it('never creates a static handler on the request path', async () => {

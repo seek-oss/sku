@@ -169,6 +169,17 @@ It is not a history of intermediate APIs.
 - [x] 20.4 HTML middleware always `commit`s document results with the disconnect signal. Split `ssrServerShared` (web request, sendResponse, middleware, listen).
 - [x] 20.5 Tests: abort during `beforePipe` does not pipe; aborted signal skips actions/`query`; recovery-setup throw rejects; waitForAll deadline rejects without ErrorBoundary; abort of the recovery attempt.
 
+## 21. Async getters
+
+- [x] 21.1 Type `getClientContext` and dual-entry `getReactContext`/`getRouterContext` as `T | Promise<T>`.
+- [x] 21.2 Unwrap with `Awaited` in extractors, `define*Entry` sibling args, and `createSkuContexts` hooks.
+- [x] 21.3 Keep `getSite` / `getLanguage` synchronous.
+- [x] 21.4 Server: `await getClientContext` then `await getReactContext` before `getRouterContext` / `query()`.
+- [x] 21.5 Client: `await getReactContext` before `createBrowserRouter` / `hydrateRoot`.
+- [x] 21.6 Type-level tests: Promise returns unwrap for hooks and sibling args. Dual-entry `getRouterContext` accepts Promise. `getSite` / `getLanguage` stay sync.
+- [x] 21.7 Runtime tests: Promise-returning getters are awaited before `query()` / hydrate. Rejection fails the document or hydrate.
+- [x] 21.8 Type dual-entry `getRouterContext` as `RouterContextProvider | Promise<RouterContextProvider>`.
+
 ## Deferred
 
 See design Non-Goals and Resolved / deferred for the full list.

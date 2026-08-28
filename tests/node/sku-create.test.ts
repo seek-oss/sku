@@ -96,9 +96,20 @@ describe('template flag', () => {
       ),
     ).toBeInTheConsole();
   });
+
+  it('should create a ssr project', async () => {
+    const result = await create(projectName, ['--template', 'ssr'], {
+      spawnOpts: { env: createEnv },
+    });
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName} with ssr template`,
+      ),
+    ).toBeInTheConsole();
+  });
 });
 
-describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
+describe.each(['webpack', 'vite', 'ssr'])('sku-create %s', (template) => {
   beforeAll(async () => {
     await fs.rm(projectDirectory, { recursive: true, force: true });
   });
@@ -122,6 +133,8 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
         ),
       ).toBeInTheConsole();
 
+      // Vite → SSR → Webpack
+      await result.userEvent.keyboard('[ArrowDown]');
       await result.userEvent.keyboard('[ArrowDown]');
       expect(await result.findByText('❯ Webpack')).toBeInTheConsole();
 
@@ -165,6 +178,34 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
     ).toBeInTheConsole();
   });
 
+  it.runIf(template === 'ssr')('should create a ssr project', async () => {
+    const result = await create(projectName, [], {
+      spawnOpts: { env: createEnv },
+    });
+    expect(
+      await result.findByText(
+        'Which template would you like to use?',
+        {},
+        { timeout },
+      ),
+    ).toBeInTheConsole();
+
+    await result.userEvent.keyboard('[ArrowDown]');
+    expect(await result.findByText('❯ SSR')).toBeInTheConsole();
+
+    await result.userEvent.keyboard('[Enter]');
+
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName} with ssr template`,
+      ),
+    ).toBeInTheConsole();
+
+    expect(
+      await result.findByText(`${projectName} created`),
+    ).toBeInTheConsole();
+  });
+
   it('should create package.json', async () => {
     const contents = await fs.readFile(
       fixturePath(projectName, 'package.json'),
@@ -181,13 +222,47 @@ describe.each(['webpack', 'vite'])('sku-create %s', (template) => {
     'eslint.config.mjs',
     'README.md',
     '.prettierignore',
-    'src/App/NextSteps.tsx',
-    ...(template !== 'webpack' ? ['src/vite.env.d.ts'] : []),
+    ...(template === 'ssr'
+      ? [
+          'src/routes.tsx',
+          'src/server.tsx',
+          'src/client.tsx',
+          'src/skuContext.ts',
+          'src/RootLayout.tsx',
+          'src/ErrorBoundary.tsx',
+          'src/pages/home/home.tsx',
+          'src/pages/about/about.tsx',
+        ]
+      : ['src/App/NextSteps.tsx']),
+    ...(template === 'vite' ? ['src/vite.env.d.ts'] : []),
     'pnpm-workspace.yaml',
   ])('should create %s', async (file) => {
     const contents = await fs.readFile(fixturePath(projectName, file), 'utf-8');
 
     expect(stripYamlVersions(contents)).toMatchSnapshot();
+  });
+
+  it.runIf(template === 'ssr')(
+    'should omit static-app files from the SSR template',
+    async () => {
+      await expect(
+        fs.access(fixturePath(projectName, 'src/pages/home/route.ts')),
+      ).rejects.toThrow();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/App')),
+      ).rejects.toThrow();
+      await expect(
+        fs.access(fixturePath(projectName, 'src/render.tsx')),
+      ).rejects.toThrow();
+    },
+  );
+
+  it.runIf(template === 'vite')('should not set buildType ssr', async () => {
+    const skuConfig = await fs.readFile(
+      fixturePath(projectName, 'sku.config.ts'),
+      'utf-8',
+    );
+    expect(skuConfig).not.toContain("buildType: 'ssr'");
   });
 
   it('should pass lint', async () => {

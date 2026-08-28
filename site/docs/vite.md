@@ -12,6 +12,10 @@ Vite support is currently only available for [static applications (SSG)][SSG].
 This means that only [`sku start`] and [`sku build`] are supported.
 [`sku serve`] is also available as it is bundler agnostic.
 
+> **Experimental — SSR Support.**
+> A new Vite-based Managed Data Mode SSR is available for evaluation and testing using the new Managed Data Mode.
+> Do not use it in production yet; the API and behaviour may change. See [SSR].
+
 [`sku start`]: ./cli.md#start
 [`sku build`]: ./cli.md#build
 [`sku serve`]: ./cli.md#serve
@@ -23,7 +27,7 @@ However, this feature is planned for deprecation and will not be supported with 
 A migration guide for `sku` libraries will be provided in the future once the deprecation is finalised.
 
 [SSG]: ./static-rendering.md
-[SSR]: ./server-rendering.md
+[SSR]: ./ssr/
 [libraries]: ./libraries.md
 
 ## Prerequisites

@@ -18,6 +18,16 @@ type Fixture = Awaited<ReturnType<typeof createFixture>>;
 const createSrcFixture = (files: Record<string, string>) =>
   createFixture(files, { tempDir: fixturePath() });
 
+const withSrcFixture = async <T>(
+  files: Record<string, string>,
+  run: (fixture: Fixture) => Promise<T>,
+): Promise<T> => {
+  await using fixture = await createSrcFixture(files);
+  // Must await so `await using` disposes after `run` finishes, not when the
+  // promise is merely returned.
+  return await run(fixture);
+};
+
 const relativePathFromFixture = (fixture: Fixture, ...subpaths: string[]) =>
   path.relative(fixturePath(), fixture.getPath(...subpaths));
 
@@ -42,13 +52,11 @@ describe('lint-format', () => {
       let lint: RenderResult;
 
       beforeAll(async () => {
-        const fixture = await createSrcFixture({
-          'passing.ts': passingFile,
+        lint = await withSrcFixture({ 'passing.ts': passingFile }, async () => {
+          const result = await sku('lint');
+          await expect(result).toMatchExitCode(0);
+          return result;
         });
-        lint = await sku('lint');
-
-        await expect(lint).toMatchExitCode(0);
-        fixture.rm();
       });
 
       it('should run every linter', async () => {
@@ -76,16 +84,18 @@ describe('lint-format', () => {
       let lint: RenderResult;
 
       beforeAll(async () => {
-        const fixture = await createSrcFixture({
-          'typeError.ts': typeErrorFile,
-          'prettierError.js': prettierErrorFile,
-          'esLintError.test.ts': esLintErrorFile,
-        });
-
-        lint = await sku('lint');
-
-        await expect(lint).toMatchExitCode(1);
-        fixture.rm();
+        lint = await withSrcFixture(
+          {
+            'typeError.ts': typeErrorFile,
+            'prettierError.js': prettierErrorFile,
+            'esLintError.test.ts': esLintErrorFile,
+          },
+          async () => {
+            const result = await sku('lint');
+            await expect(result).toMatchExitCode(1);
+            return result;
+          },
+        );
       });
 
       it('should run every linter before failing', async () => {
@@ -254,9 +264,10 @@ describe('lint-format', () => {
       let lint: RenderResult;
 
       beforeAll(async () => {
-        await using fixture = await createSrcFixture({
-          // only fails vitest rules (correctly formatted)
-          'vitestRules.test.ts': dedent /* ts */ `
+        lint = await withSrcFixture(
+          {
+            // only fails vitest rules (correctly formatted)
+            'vitestRules.test.ts': dedent /* ts */ `
             import { it, expect } from 'vitest';
             console.log('foo');
 
@@ -266,12 +277,16 @@ describe('lint-format', () => {
               expect(mutable).toBe(true);
             });
           `,
-        });
-
-        lint = await sku('lint', ['--config', 'sku.config.vitest.ts']);
-
-        await expect(lint).toMatchExitCode(1);
-        fixture.rm();
+          },
+          async () => {
+            const result = await sku('lint', [
+              '--config',
+              'sku.config.vitest.ts',
+            ]);
+            await expect(result).toMatchExitCode(1);
+            return result;
+          },
+        );
       });
 
       it('should use vitest lint rules', async () => {

@@ -51,15 +51,30 @@ The bundler that sku uses to build the application.
 `vite` is currently only supported for static apps.
 See [Vite support](./vite) for details.
 
+**Experimental** - Vite supports SSR with experimental Managed Data Mode. See [SSR](./ssr/).
+
+## buildType
+
+Type: `'ssr' | 'static'`
+
+Default: 'static'
+
+Selects request-time SSR or static generation.
+
+- `'ssr'` for SSR applications. **Experimental — not for production** (see [SSR](./ssr/)).
+- `'static'` for Static applications.
+
 ## clientEntry
 
 Type: `string`
 
-Default: `'./src/client.js'`
+Default: `./src/client.tsx`
 
-The client entry point to the app. The client entry is the file that executes your browser code.
+The client entry point to the app. Path may be `.tsx`, `.ts`, or `.js`.
 
-Each `route` can also specify a client entry, if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
+**Static / Webpack SSR:** the file that executes your browser code. Each `route` can also specify a client entry; if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
+
+**Static only:** Each `route` can also specify a client entry, if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
 
 ## compilePackages
 
@@ -79,13 +94,11 @@ Default: `false`
 
 Enable content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
 
-## cspDelivery
+## cspDelivery <Badge type="info" text="Vite Static only" />
 
 Type: `'tag' | 'header'`
 
 Default: `'tag'`
-
-Bundler: `vite`
 
 The way the content security policy is delivered. Only relevant if `cspEnabled` is set to `true`.
 
@@ -104,6 +117,8 @@ Type: `string | [string, string]`
 Bundler: `vite`
 
 Where to report content security policy violations. Only relevant if `cspEnabled` is set to `true` and `cspDelivery` is set to `'header'`.
+
+SSR ignores `cspDelivery` and always uses HTTP headers, so this applies whenever `cspEnabled` is `true`.
 
 ## cspReportOnlyEnabled
 
@@ -229,14 +244,14 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## dangerouslySetViteConfig
+## dangerouslySetViteConfig <Badge type="info" text="Vite Static Only" />
 
 Type: `function`
 
-Bundler: `vite`
-
 This function provides a way to modify sku's Vite configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+
+**Not supported for SSR**. Providing `dangerouslySetViteConfig` with SSR fails config validation. Raise exceptional customisation needs via the [support page] with your use-case.
 
 Before customizing your Vite configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
 
@@ -288,11 +303,9 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## dangerouslySetWebpackConfig
+## dangerouslySetWebpackConfig <Badge type="info" text="Webpack only" />
 
 Type: `function`
-
-Bundler: `webpack`
 
 This function provides a way to modify sku's Webpack configuration.
 It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
@@ -343,6 +356,28 @@ Default: `false`
 
 Adds static `displayName` properties to React components in production. This setting is designed for usage on sites that generate React code snippets, e.g. [Braid](https://seek-oss.github.io/braid-design-system/).
 
+## expressTrustProxy <Badge type="info" text="SSR only" />
+
+Type: `boolean`
+
+Default: `false`
+
+Bundler: `vite` · `buildType: 'ssr'`
+
+When `true`, sku sets Express `app.set('trust proxy', 1)` (hop count **`1`**, not Express boolean `true`) before listen — the common single reverse-proxy case.
+
+Omit or `false` leaves Express’s default (`false`). This is opt-in via config (not a silent sku default). The create `ssr` template sets `expressTrustProxy: true`.
+
+For any other trust-proxy value (`false`, `2`, an IP list, …), override in server-entry [`onListen`](./ssr/entries.md#onlisten) via `app.set('trust proxy', …)`.
+
+```ts
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  expressTrustProxy: true,
+} satisfies SkuConfig;
+```
+
 Example:
 
 ```ts
@@ -351,9 +386,7 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## environments
-
-**Only for static apps**
+## environments <Badge type="info" text="Static only" />
 
 Type: `Array<string>`
 
@@ -400,6 +433,8 @@ Default: `false`
 
 Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`, and remains available for Safari and similar environments that still need a secure context over HTTPS even when using `*.localhost` hostnames.
 
+Supported for Static, webpack, and SSR via `sku start`.
+
 ## initialPath
 
 Type: `string`
@@ -416,11 +451,9 @@ The languages your application supports.
 
 See [Multi-language support](./multi-language.md) for details.
 
-## libraryEntry
+## libraryEntry <Badge type="info" text="Library-mode only" />
 
 Type: `string`
-
-**Only for libraries**
 
 The entry file for the library. If set, sku will assume the project is a library. Must export its API from this file.
 
@@ -432,19 +465,15 @@ export default () => {
 };
 ```
 
-## libraryName
+## libraryName <Badge type="info" text="Library-mode only" />
 
 Type: `string`
-
-**Only for libraries**
 
 The global name of the library. Will be added to the `window` object under `window[libraryName]`.
 
-## libraryFile
+## libraryFile <Badge type="info" text="Library-mode only" />
 
 Type: `string`
-
-**Only for libraries**
 
 The file name of the library. The main bundle of the library will be output to `dist/${libraryFile}.js` - note that the
 `.js` extension will be added automatically and should not be included in the configuration option itself.
@@ -518,6 +547,8 @@ Default: `8080`
 
 The port the app is hosted on when running `sku start`.
 
+**SSR**: also the baked production default listen port (`node dist/server/server.js`). Override at runtime with `PORT`. SSR does not use [`serverPort`](#serverport).
+
 ## public
 
 Type: `string`
@@ -525,6 +556,8 @@ Type: `string`
 Default: `'public'`
 
 A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
+
+**Not supported for SSR**
 
 ## publicPath
 
@@ -534,21 +567,21 @@ Default: `'/'`
 
 The URL all the static assets of the app are accessible under.
 
-## renderEntry
+For SSR the `publicPath` must be relative (e.g. `/` or `/static/`). Absolute `http(s)` / CDN URLs are not supported.
+
+For SSR, `publicPath` applies to `sku build` / production. `sku start` serves the Vite module graph from `/`.
+
+## renderEntry <Badge type="info" text="Library and Static only" />
 
 Type: `string`
 
-**Only for static apps and libraries**
-
-Default: `'./src/render.js'`
+Default: `./src/render.js`
 
 The render entry file to the app. This file should export the required functions for static rendering. See [static-rendering](./static-rendering.md) for more info.
 
-## routes
+## routes <Badge type="info" text="Static only" />
 
 Type: `Array<string | {route: string, name: string, entry: string, languages: Array<string>}>`
-
-**Only for static apps**
 
 Default: `['/']`
 
@@ -564,29 +597,41 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## serverEntry
+## serverEntry <Badge type="info" text="SSR only" />
 
 Type: `string`
 
-Bundler: `webpack`
+Default: `./src/server.tsx`
 
-**Only for SSR apps**
+Path may be `.tsx`, `.ts`, or `.js`.
 
-Default: `'./src/server.js'`
+Default-export a `defineServerEntry` object with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext` / `getRouterContext`) and optional `middleware`.
+`getSite` is required only when config [`sites`](#sites) has more than one entry.
+Routes live on [`routesEntry`](#routesentry), not here.
 
-The entry file for the server.
+See [Request entries](./ssr/entries.md).
 
-## serverPort
+## routesEntry <Badge type="info" text="SSR only" />
+
+Type: `string`
+
+Default: `./src/routes.tsx`
+
+Path may be `.tsx`, `.ts`, or `.js`.
+
+Module that exports named `routes` (`SkuRouteObject[]`) for both the server and client graphs.
+
+See [Routing](./ssr/routing.md).
+
+## serverPort <Badge type="info" text="Webpack SSR only" />
 
 Type: `number`
 
 Bundler: `webpack`
 
-**Only for SSR apps**
-
 Default: `8181`
 
-The port the server is hosted on when running `sku start-ssr`.
+The port the server is hosted on when running `sku start-ssr`, and the default listen port for the webpack production server.
 
 ## setupTests
 
@@ -611,10 +656,8 @@ See [Multi site](./multi-site#switching-site-by-host) for more info.
 Can be used to limit the languages rendered for a specific site.
 Any listed language must exist in the [top level languages attribute](#languages).
 
-**SSR apps**
-
-Only affects which hosts the development server responds to.
-For simplicitly, it's recommended to configure [`hosts`](#hosts) instead.
+`sites[].host` / [`hosts`](#hosts) are for local-dev listen / setup-hosts only — they do not select the route tree.
+See [Routing → Multi-site](./ssr/routing.md#multi-site-routes).
 
 ## skipPackageCompatibilityCompilation
 
@@ -702,11 +745,9 @@ Default: `'jest'`
 
 The test runner that sku uses to run the tests.
 
-## transformOutputPath
+## transformOutputPath <Badge type="info" text="Static only" />
 
 Type: `function`
-
-**Only for static apps**
 
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
@@ -724,7 +765,9 @@ Bundler: `vite`
 
 Provides a way to add additional Vite plugins to the Vite config.
 
-## \_\_UNSAFE_EXPERIMENTAL\_\_cjsInteropDependencies
+**Not supported for SSR**. Providing `vitePlugins` with SSR fails config validation. Raise exceptional customisation needs via the [support page] with your use-case.
+
+## \_\_UNSAFE_EXPERIMENTAL\_\_cjsInteropDependencies <Badge type="info" text="Vite only" />
 
 Type: `string[]`
 
@@ -738,5 +781,7 @@ Bundler: `vite`
 An array of cjs import paths that have both a default and named exports.
 
 This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+
+Packages that resolve to a module namespace object under `sku start` (React error “Element type is invalid … got: object”) often need an entry here — see [Server rendering → CJS default-export interop](./ssr/troubleshooting.md#cjs-default-export-interop).
 
 See https://github.com/cyco130/vite-plugin-cjs-interop for more information.

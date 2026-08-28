@@ -21,7 +21,7 @@ It provides a number of commands to help you develop, test and build your applic
 
 ### `start`
 
-Start the `sku` development server for a [statically-rendered application][static rendering].
+Start the `sku` development server for a [Static](./static-rendering.md) or [SSR](./ssr/) app (`sku start`).
 
 ```sh
 sku start
@@ -36,11 +36,12 @@ This command supports the following options:
 | `--strict-port`   | Will make sku throw an error if the given port is already in use.                                   | `false`     |
 | `--list-urls, -l` | Lists all dev server urls the app can be accessed on. If false, only displays the first found host. | `false`     |
 
-[static rendering]: ./building-the-app.md#render
-
 ### `start-ssr`
 
-Start the `sku` development server for a [server-rendered application][server rendering].
+**Webpack SSR Only**
+
+Start the development server for a [Webpack SSR](./ssr/webpack-ssr.md) app (`renderCallback` path).
+[SSR](./ssr/) apps (`buildType: 'ssr'`) use [`start`](#start) instead.
 
 ```sh
 sku start-ssr
@@ -53,11 +54,10 @@ This command supports the following options:
 | `--stats, -s`     | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only`        | `summary`   |
 | `--list-urls, -l` | Lists all dev server urls the app can be accessed on. If false, only displays the first found host. | `false`     |
 
-[server rendering]: ./building-the-app.md#server
-
 ### `build`
 
-Create a production build of a [statically-rendered application][static rendering].
+Create a production build of a [Static](./static-rendering.md) or [SSR](./ssr/) app (`sku build`).
+Webpack static apps also use this command.
 
 ```sh
 sku build
@@ -69,11 +69,12 @@ This command supports the following options:
 | ------------- | -------------------------------------------------------------------------------------------- | ------------- |
 | `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `errors-only` |
 
-[static rendering]: ./building-the-app.md#render
-
 ### `build-ssr`
 
-Create a production build of a [server-rendered application][server rendering].
+**Webpack SSR Only**
+
+Create a production build of a [Webpack SSR](./ssr/webpack-ssr.md) app.
+[SSR](./ssr/) apps (`buildType: 'ssr'`) use [`build`](#build) instead.
 
 ```sh
 sku build-ssr
@@ -85,11 +86,9 @@ This command supports the following options:
 | ------------- | -------------------------------------------------------------------------------------------- | ------------- |
 | `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `errors-only` |
 
-[server rendering]: ./building-the-app.md#server
-
 ### `serve`
 
-Serve a production build of a [statically-rendered application][static rendering] from your local machine.
+Serve a production build of a [Static](./static-rendering.md) app from your local machine.
 Requires [`sku build`] to be run first.
 
 ```sh

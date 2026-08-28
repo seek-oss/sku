@@ -25,6 +25,7 @@ See Decision 27.
 - First-class `routesEntry` with a named `routes` export.
 - First-class request-entry contracts.
 - First-class multi-site route trees via `routes`, optional `sites`, and `getSite`.
+- `SkuRouteObject<Site>` and `SiteOf<typeof server>` type `sites` from `getSite`.
 - Optional `routesEntry` `mapRoutePath` so apps map one logical path to per-site concrete paths.
 - Sku owns preload-safe duplication.
 - Apps own path policy (no sku-owned localisation rules).
@@ -207,7 +208,14 @@ Add first-class config `routesEntry` (default `src/routes.tsx`) for the route tr
 Sku resolves it via `__sku_alias__routesEntry` into **both** the server and client Vite graphs (same alias pattern as `__sku_alias__serverEntry` / `__sku_alias__clientEntry`).
 
 `routesEntry` MUST export named `routes: SkuRouteObject[]`.
-`SkuRouteObject` is a sku type helper only: `RouteObject & { sites?: string[] }`.
+`SkuRouteObject` is a sku type helper only: `SkuRouteObject<Site extends string = string>` with `sites?: Site[]` and recursive `children?: SkuRouteObject<Site>[]`.
+Omitting the generic leaves `sites` as `string[]`.
+Sku MUST export `SiteOf<ServerEntry>` from `sku/runtime`.
+It is the same extractor `createSkuContexts` and `defineClientEntry` use for `Site`.
+When `getSite` is omitted, `SiteOf` is `string`.
+Multi-site apps type `routes` as `SkuRouteObject<SiteOf<typeof server>>[]` so `sites` is checked against the server entry’s `getSite` return.
+The generic types against `getSite`, not config `sites`.
+Runtime membership matching remains exact string match against resolved config site names.
 Sku MUST NOT re-export a wrapped React Router `RouteObject` as the product API.
 Consumers still import route primitives from `react-router` and may use `SkuRouteObject` for the optional `sites` field.
 
@@ -221,8 +229,8 @@ Sku reads that default export and calls optional properties.
 
 The server object exposes optional sync `getSite` / `getLanguage` / `getClientContext` / `getReactContext`, plus optional `middleware`, `onListen`, `getRouterContext`, and `instrumentations`.
 The client object exposes optional `onHydrate`, `getReactContext`, `getRouterContext`, and `instrumentations`.
-`getSite` is required **only** when config `sites` has more than one entry.
-A missing property then hard-errors at init (same class as missing `routes` on `routesEntry`).
+`getSite` is typed as a function when present.
+Sku does not hard-error at init if it is omitted.
 
 Optional properties omitted mean noops / defaults.
 No consumer middleware, no hydrate side effects, sole resolved site name when `getSite` is omitted on a 0–1 site app (empty config soft-defaults to `'default'`), and `clientContext` / `reactContext` `undefined`.
@@ -282,7 +290,8 @@ Route membership is declared on routes themselves.
 
 **Sku owns:**
 
-- Typing `SkuRouteObject.sites`.
+- Typing `SkuRouteObject.sites` as `Site[]` (`Site` defaults to `string`).
+- Exporting `SiteOf<ServerEntry>` from `sku/runtime` so apps bind that `Site` to `getSite`.
 - Loading `routes` from `routesEntry`.
 - Pre-building per-site trees from config site names.
 - Defaulting `caseSensitive` to `true` when a route leaves it undefined (React Router itself defaults to `false`).
@@ -296,8 +305,13 @@ Route membership is declared on routes themselves.
 **Route membership:**
 
 - `routesEntry` exports named `routes: SkuRouteObject[]`.
-- Optional `sites?: string[]` on a route. Omit or `undefined` ⇒ route is included for **every** config site.
+- Multi-site apps type that array as `SkuRouteObject<SiteOf<typeof server>>[]`.
+- Optional `sites?: Site[]` on a route. Omit or `undefined` ⇒ route is included for **every** config site.
 - Present `sites` ⇒ route is included **only** for those site names (exact string match against config site names).
+- The TypeScript generic checks `sites` against `getSite`’s return.
+- It does not read config `sites`.
+- Extra config names can still reach pre-build at runtime.
+- Runtime still fail-closes on an unknown `getSite` return.
 - No parent → child inheritance of `sites`. Site-specific deviation MUST set `sites` explicitly on each divergent route. Friction is intentional.
 - The tree walk stays recursive: if a parent is excluded for a site, that parent’s subtree is absent from that site’s tree (structure, not field inheritance).
 
@@ -317,7 +331,7 @@ Route membership is declared on routes themselves.
 SSR does **not** require a non-empty config `sites` array.
 Empty or omitted `sites` soft-defaults to a single synthetic site name `'default'` for pre-build + allowlist (same class as other sku empty-config soft paths).
 Apps that care about site names declare real ones.
-Multi-site still needs ≥2 configured names + `getSite`.
+Multi-site apps still provide `getSite` (typed on the server entry).
 
 **Pre-build:**
 At init (not per request), for each resolved site name (config names, or `['default']` when empty), sku deep-filters `routes` by `sites` membership, optionally maps paths via `mapRoutePath` (Decision 4c), defaults undefined `caseSensitive` to `true`, and strips `sites` from the objects passed to React Router.
@@ -325,8 +339,8 @@ The client needs the same site-name list (bake from config for production client
 
 **Resolve site:**
 
-- Zero configured sites (soft-default `'default'`) or one configured site ⇒ sku uses that sole resolved name when `getSite` is omitted. If `getSite` is exported, sku still calls it and validates the return against the resolved name list.
-- Multiple configured sites ⇒ missing `getSite` export is a **hard error at init** (names the export; same treatment as missing `routes` on `routesEntry`).
+- When `getSite` is omitted, sku uses the sole resolved name (the one config site, or `'default'` when config `sites` is empty).
+- When `getSite` is present, sku calls it and validates the return against the resolved name list.
 - Non-string `site` from `getSite`, or a `site` not among resolved site names / no pre-built entry ⇒ **fail closed** per request (hard error).
 
 **Select tree / handler:** the pre-built tree (and server `createStaticHandler`) for that `site`.
@@ -571,6 +585,70 @@ Optional `handle.waitForAll` waits for `onAllReady`.
 Abort on client disconnect.
 Client hydrates via `hydrateRoot(document, …)`.
 
+### 9a. Document render attempt lifecycle
+
+Two objects own streaming, not a shared `{ pipe, abort }` handle.
+
+**Attempt** is one `renderToPipeableStream` call.
+It settles at most once: ready to commit, or reject.
+Late React callbacks after settle MUST no-op.
+`abort()` always stops that React stream, including after settle, so a deadline or disconnect can still tear it down.
+
+**Policy** (`render` + `streamDocument`) owns retry, cancellation, and the deadline.
+`render()` MUST reject with the abort reason when the signal is already aborted, before `query()`.
+It MUST reject again if the signal aborts before a document is ready to commit.
+Loaders and actions MUST NOT run after abort.
+
+At most one ErrorBoundary recovery pass, via a fresh attempt (`getStaticContextFromError`).
+The failed attempt is aborted so its callbacks cannot settle the policy promise.
+Recovery is for real render failures only.
+Cancellation, timeout, and a throw from recovery setup MUST NOT start or continue recovery.
+A recovery-setup throw MUST reject `render()`.
+
+**Commit** is the only HTTP seam.
+HTML middleware MUST NOT call React `pipe` / `abort` directly.
+`commit(destination, { signal, beforePipe })` MUST:
+
+1. Subscribe `signal` → abort React before any write.
+2. No-op the body when `signal` is already aborted.
+3. Run `beforePipe` (route headers, CSP, status).
+4. Recheck `signal` after `beforePipe` and skip `pipe` when aborted.
+5. Wrap `pipe` with the insert-html transform.
+
+**Deadline:** 10s from the start of `streamDocument`, shared across the recovery attempt.
+Not a public config knob.
+Timeout before commit rejects (Express error path while connected).
+Timeout after commit aborts remaining React work only.
+Webpack’s string renderer already aborts at 5s.
+Streaming uses 10s so shell-first responses can flush deferred content.
+
+**Cancellation** (render `AbortSignal` aborted):
+
+- Reject with the abort reason.
+- Abort the React stream.
+- MUST NOT start the ErrorBoundary recovery pass.
+- MUST NOT leave the render promise hanging.
+
+Aborting React alone is not enough.
+React’s `onError` does not settle sku’s promise, and after the shell `abort()` may not call `onError` at all.
+
+**Insert / pipe transform failure** after commit has started the body:
+
+- Abort the React stream.
+- Error the Node response stream.
+- Correctness is the aborted React work plus the failed destination stream.
+- Calling React `onError` for logging is optional and MUST NOT be the success criterion.
+- Partial HTML may already have been sent.
+
+Rejected approaches:
+
+| Approach                                   | Why not                                                                    |
+| ------------------------------------------ | -------------------------------------------------------------------------- |
+| Abort via `stream.abort()` only            | Promise can hang; `waitForAll` `onError` can start ErrorBoundary retry     |
+| Require post-shell abort to call `onError` | React does not guarantee that; Node stream failure is the contract         |
+| Expose `{ pipe, abort }` to middleware     | Abort/pipe protocol splits across files and misses the header-write window |
+| Recursive `streamDocument` + phase enum    | Retry policy mixed into one React attempt                                  |
+
 ### 10. No `transformIndexHtml` on the SSR path
 
 The React Refresh preamble is loaded via the client entry.
@@ -634,13 +712,26 @@ Static writes the same value to `metadata.reportingEndpoints` instead.
 ### 12. Request-entry and routesEntry shapes
 
 ```ts
-// sku public type (lighter option — not a wrapped RR re-export)
-type SkuRouteObject = RouteObject & { sites?: string[] };
+// sku public types (lighter option — not a wrapped RR re-export)
+type SiteOf<ServerEntry> = /* getSite return, or string when omitted */;
+type SkuRouteObject<Site extends string = string> = Omit<
+  RouteObject,
+  'children'
+> & {
+  sites?: Site[];
+  children?: SkuRouteObject<Site>[];
+};
+type MapRoutePath = (args: {
+  path: string;
+  site: string;
+  parentSegments: string[];
+}) => string[];
 
 // routesEntry (config `routesEntry`, default `src/routes.tsx`)
-export const routes: SkuRouteObject[];
+export const routes: SkuRouteObject<SiteOf<typeof server>>[];
+// single-site / omitted getSite: SkuRouteObject[] (Site = string)
 
-// serverEntry — default export; getSite required only when config has >1 site
+// serverEntry — default export
 import { defineServerEntry } from 'sku/runtime';
 
 export default defineServerEntry({
@@ -862,15 +953,29 @@ const client = defineClientEntry<typeof server>()({
 });
 export default client;
 
-// ssrContext.ts — type-only imports; no runtime cycle with entries
+// skuContext.ts — type-only imports; no runtime cycle with entries
 import type server from './server';
 import type client from './client';
-import { createSkuContexts } from 'sku/runtime';
+import {
+  createSkuContexts,
+  type SiteOf,
+  type SkuRouteObject,
+} from 'sku/runtime';
 
 export const { useSite, useClientContext, useReactContext } = createSkuContexts<
   typeof server,
   typeof client
 >();
+
+export type AppRouteObject = SkuRouteObject<SiteOf<typeof server>>;
+
+// routes.tsx — same Site as useSite, via alias from skuContext
+import type { AppRouteObject } from './skuContext';
+
+export const routes: AppRouteObject[] = [
+  { path: 'au-only', sites: ['au'] },
+  { path: 'nz-only', sites: ['nz'] },
+];
 ```
 
 `createSkuContexts` is a typed facade over one well-known React context module that sku’s render also uses.
@@ -887,6 +992,12 @@ It extracts:
 
 `useSite()` returns that `Site` union.
 No consumer cast is required.
+The same `Site` types `SkuRouteObject.sites`.
+Apps alias that type next to `createSkuContexts` in `src/skuContext.ts`.
+`routesEntry` imports the alias.
+It does not import the server entry.
+`createSkuContexts` MUST NOT return a `defineRoutes` helper.
+`routesEntry` MUST NOT take a runtime import from the hooks module solely to type `sites`.
 Language is not extracted into a React hook (see Non-Goals / Deferred).
 Hand-written `ClientContext` / `ReactContext` / site aliases remain optional style when an app prefers them.
 They are not required.
@@ -897,10 +1008,11 @@ Rejected alternatives:
 - Per-property `defineGet*` helpers (ugly; one entry object is enough).
 - Requiring apps to declare context interfaces before writing getters.
 - Per-getter named exports (splits one contract; worse typing ergonomics).
-- Declaring `sites` on the server entry object or importing `sku.config` into the React graph for typing. Duplicates config and creates a layering smell. Apps narrow in `getSite` instead.
+- Declaring `sites` on the server entry object or importing `sku.config` into the React graph for typing. Duplicates config and creates a layering smell. Apps narrow in `getSite` instead. `SiteOf` reads that narrowed return.
 - Expecting `defineClientEntry` to infer `ClientContext` from client callback parameters alone. Inputs are not inference sources. Pass `typeof server`.
 - Hand-rolling a `ClientContext` type alias solely for `defineClientEntry<ClientContext>` when `typeof server` already carries it (optional style only; not required).
-- Generic `SkuRouteObject<S>` for route membership in this pass (follow-on).
+- Documenting a handwritten `SkuRouteObject<'au' | 'nz'>` as the happy path. That union can drift from `getSite`. It remains valid TypeScript. `SiteOf<typeof server>` is the documented source of truth.
+- Returning a `defineRoutes` identity from `createSkuContexts`. That couples `routesEntry` to the hooks module at runtime.
 
 React Router `createContext` keys for loaders remain a separate typing layer (RR already types `context.get(key)`).
 They are not fields extracted from the entry objects.
@@ -957,7 +1069,8 @@ That forces injected imports (including ones `@vocab/vite` injects into `.vocab`
 The alias is project-wide.
 It also covers bare `@vocab/vite/runtime` from shared React packages (e.g. Header/Footer with `.vocab`) when those modules are in the Vite graph — the usual sku path via `compilePackages` (SSR `noExternal`).
 Vocab’s compile ignore already skips only `node_modules/sku/**` and `node_modules/vocab/**`, so dependency `.vocab` folders remain discoverable.
-Sku separately compiles configured `compilePackages` roots because Vocab’s own compile ignores `node_modules`.
+Translated `compilePackages` MUST publish compiled `.vocab` output from **their own** vocab/sku config.
+Sku does not recompile those packages with the consumer’s language list.
 
 Out of scope / does not help: packages left as true SSR externals where Node resolves `@vocab/vite/runtime` at runtime outside Vite (uncommon for sku shared UI).
 If a consumer also installs `@vocab/vite`, the alias still prefers sku’s copy.
@@ -1040,8 +1153,18 @@ Loader-data prefetch stays out of scope.
 
 ### 18. Shared HTML middleware + loader/action headers
 
-Dev/prod share abort-before-write.
-On streamed HTML, forward `loaderHeaders` / `actionHeaders` (append; preserve `Set-Cookie`), then sku `Content-Type` / CSP.
+Dev/prod share the same HTML middleware and disconnect handling.
+
+Wire an `AbortController` to client disconnect for the request.
+Skip starting render when the request is already disconnected.
+After `render` resolves to a short-circuit `Response`, if cancelled: write nothing.
+After `render` resolves to a document, always `commit` with that signal.
+`commit` aborts React and skips the body when the client is gone, including during `beforePipe` header writes.
+
+On streamed HTML, `beforePipe` forwards `loaderHeaders` / `actionHeaders` (append; preserve `Set-Cookie`), then sku `Content-Type` / CSP.
+
+Cancellation rejections MUST NOT reach Express `next` or the render-error hook.
+Genuine failures on a connected request still do, including the document render deadline.
 
 ### 19. Hydration payload safety
 
@@ -1050,13 +1173,17 @@ Production route errors omit `Error.stack`.
 
 ### 20. Create template + Migrating docs
 
-Template `ssr` MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config` (visible Melways/SEEK-shaped trust proxy — see Decision 25), a `routesEntry` + `routes` scaffold (optional route-level `sites` only when membership differs), and `defineServerEntry` / `defineClientEntry` + `createSkuContexts<typeof …>` + optional `getClientContext` / `getReactContext` / `onHydrate` properties.
+Template `ssr` MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config` (visible single reverse-proxy trust proxy — see Decision 25), a `routesEntry` + `routes` scaffold (optional route-level `sites` only when membership differs), and `defineServerEntry` / `defineClientEntry` + `createSkuContexts<typeof …>` + optional `getClientContext` / `getReactContext` / `onHydrate` properties.
 The template omits `getSite` (sku uses the sole resolved site name).
 Multi-site examples declare ≥2 config sites and include `getSite` on the server entry object.
 Request entries do not re-export `routes`.
 
 The template’s `routesEntry` scaffolds an app-owned pathless root layout (`src/RootLayout.tsx`) so router-aware wrapping (and Apollo-style provider mounts) have an idiomatic home.
-Typed hooks live in `src/ssrContext.ts`.
+Typed hooks live in `src/skuContext.ts`.
+The template omits `getSite`, so it keeps unparameterized `SkuRouteObject[]` (`Site` is `string`).
+Multi-site examples alias `SkuRouteObject` next to `createSkuContexts`.
+`routesEntry` imports that alias.
+It does not import the server entry.
 The home page calls `useSite()` (soft-default `'default'` when config `sites` is omitted).
 There is no `src/App/` shell — page content lives in per-page folders under `src/pages/` (for example `src/pages/home/home.tsx`).
 
@@ -1071,7 +1198,7 @@ Migrating docs cover Static App and Older / Webpack SSR App, not under `docs/mig
 Migrating MUST cover:
 
 - Named `Component` on lazy pages.
-- `routesEntry` + `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site).
+- `routesEntry` + `routes` + optional `sites` + `getSite` (fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site).
 - Optional `mapRoutePath` for per-site multi-path pages (Decision 4c).
 - Multi-site membership via `sites` on routes.
 - Webpack dual-port → SSR single `port` (reject `serverPort`; `PORT` still overrides prod).
@@ -1237,6 +1364,7 @@ Module identity (sku `render` via private `#` imports + consumer `sku/runtime` �
 - Sku renders queued nodes to static markup and writes them into the response **before the next React chunk**, and flushes any remainder at stream end. Injection therefore lands after the shell but before hydration runs.
 - Anywhere there is no sku SSR render around it — including the client graph — it is a silent no-op. It MUST NOT throw. Apollo’s Next.js implementation throws on a missing context; sku’s must not.
 - Under `handle.waitForAll`, injection still happens; the whole document is buffered to `onAllReady` and written in order.
+- If an insert callback or the flush transform throws after pipe has started, sku aborts the React stream and errors the Node response stream (Decision 9a). Partial HTML may already be on the wire.
 
 **CSP:**
 Injected script bodies are not known when headers are derived from the shell, so they cannot be hashed — they MUST carry the nonce.
@@ -1327,7 +1455,7 @@ Jest support for React Router 8 (if ever needed for webpack) is a separate conce
 Webpack SSR’s `onStart({ app })` was the post-listen hook for server setup (logging, timeouts, Express knobs).
 Migration spikes (CBS was the only app still on webpack `onStart`) showed the real gaps were:
 
-1. Express `trust proxy` behind Melways / reverse proxies.
+1. Express `trust proxy` behind reverse proxies.
 2. `httpServer.keepAliveTimeout` (webpack only passed `app`, so timeouts never applied).
 3. Readiness logging with the **bound** port.
 
@@ -1356,18 +1484,18 @@ Wire the call from shared production `listen` and `createDevSsrServer` (start).
 - When `true`, sku sets `app.set('trust proxy', 1)` (hop count **`1`**, despite the boolean name — safer single-hop than Express boolean `true`).
 - When omitted / `false`: leave Express default (`false`). Not magically on.
 - Not a silent sku default — opt-in via config.
-- Create template MUST set `expressTrustProxy: true` so new apps get SEEK/Melways-shaped behaviour visibly in config.
+- Create template MUST set `expressTrustProxy: true` so new apps get single reverse-proxy behaviour visibly in config.
 - Any other trust-proxy value (`false`, `2`, IP list, …) → override in `onListen` via `app.set('trust proxy', …)`.
 
 Rejected alternatives:
 
-| Approach                                  | Why not                                                                                  |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Invisible sku default for `trust proxy`   | Hides Melways behaviour; hard to discover; rejected in favour of named config + template |
-| Express `app.set('trust proxy', true)`    | Boolean `true` trusts all hops; hop count `1` is the common SEEK case                    |
-| `onBeforeListen` hook                     | Module top-level already covers process-wide setup before bind                           |
-| Sku-owned listen logging                  | Apps own logging; `onListen` + bound `port` is enough                                    |
-| Pass only `app` (webpack `onStart` shape) | Blocks `httpServer.keepAliveTimeout`; migrants need the server handle                    |
+| Approach                                  | Why not                                                                                        |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Invisible sku default for `trust proxy`   | Hides reverse-proxy behaviour; hard to discover; rejected in favour of named config + template |
+| Express `app.set('trust proxy', true)`    | Boolean `true` trusts all hops; hop count `1` is the common SEEK case                          |
+| `onBeforeListen` hook                     | Module top-level already covers process-wide setup before bind                                 |
+| Sku-owned listen logging                  | Apps own logging; `onListen` + bound `port` is enough                                          |
+| Pass only `app` (webpack `onStart` shape) | Blocks `httpServer.keepAliveTimeout`; migrants need the server handle                          |
 
 Example:
 
@@ -1485,15 +1613,16 @@ Update identity comments on the four shared modules + `ssr.ts`:
 
 Separate naming layers — do not collapse them into one word:
 
-| Layer                          | Name                              | Role                                                                                                                                                                                                 |
-| ------------------------------ | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OpenSpec change / git branch   | `vite-ssr`                        | Historical workstream id only — do **not** use in product docs, templates, public APIs, or user-facing copy                                                                                          |
-| Living OpenSpec capabilities   | `managed-data-mode`, `ssr`, `csp` | Product-surface specs synced into `openspec/specs/`. Fixture / e2e proof stays in proposal Impact and `tasks.md` — not a living capability. `vite-ssr` / `vite-ssr-csp` are not capability names.    |
-| Architecture / docs descriptor | **Managed Data Mode**             | Sku-owned Document + React Router Data Mode contract (Decision 3). Use when describing the kind of API, comparing to webpack SSR / today’s static, or noting what SSR and a future Static path share |
-| Render strategy                | **SSR** / **Static**              | Selected by `buildType`. Product copy says “SSR”, never “Vite SSR”                                                                                                                                   |
-| Create template                | **`ssr`**                         | `@sku-lib/create --template ssr` (not `vite-ssr`)                                                                                                                                                    |
-| Public import                  | **`sku/runtime`**                 | Browser-safe Managed Data Mode consumer entry (Decision 26: public contract + `optimizeDeps.exclude` target)                                                                                         |
-| Public types / symbols         | Drop `Ssr`                        | e.g. `createSkuContexts`, `SkuRouteObject`, `SkuServerEntry` / `SkuClientEntry`, `SkuGetSite`, … (`SkuProvider` stays a sku-internal mount name, not a public `sku/runtime` export)                  |
+| Layer                          | Name                              | Role                                                                                                                                                                                                                                                                                                                                              |
+| ------------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OpenSpec change / git branch   | `vite-ssr`                        | Historical workstream id only — do **not** use in product docs, templates, public APIs, or user-facing copy                                                                                                                                                                                                                                       |
+| Living OpenSpec capabilities   | `managed-data-mode`, `ssr`, `csp` | Product-surface specs synced into `openspec/specs/`. Fixture / e2e proof stays in proposal Impact and `tasks.md` — not a living capability. `vite-ssr` / `vite-ssr-csp` are not capability names.                                                                                                                                                 |
+| Architecture / docs descriptor | **Managed Data Mode**             | Sku-owned Document + React Router Data Mode contract (Decision 3). Use when describing the kind of API, comparing to webpack SSR / today’s static, or noting what SSR and a future Static path share                                                                                                                                              |
+| Render strategy                | **SSR** / **Static**              | Selected by `buildType`. Product copy says “SSR”, never “Vite SSR”                                                                                                                                                                                                                                                                                |
+| Create template                | **`ssr`**                         | `@sku-lib/create --template ssr` (not `vite-ssr`)                                                                                                                                                                                                                                                                                                 |
+| Public import                  | **`sku/runtime`**                 | Browser-safe Managed Data Mode consumer entry (Decision 26: public contract + `optimizeDeps.exclude` target)                                                                                                                                                                                                                                      |
+| Public types / symbols         | Drop `Ssr`                        | `createSkuContexts`, `SkuRouteObject`, `SiteOf`, `SkuServerEntry` / `SkuClientEntry`, `MapRoutePath` / `MapRoutePathArgs`, `SkuMiddleware`, `SkuOnListen`, `SkuOnHydrate`, `JsonValue` (`SkuProvider` stays a sku-internal mount name, not a public `sku/runtime` export). Do not export getter aliases (`SkuGetSite`, …) — they widen inference. |
+| Consumer typed-hooks module    | **`src/skuContext.ts`**           | App file that calls `createSkuContexts`. Not sku’s resolved-config `SkuContext`. Product docs, the create template, and fixtures use this name.                                                                                                                                                                                                   |
 
 **Why not `sku/ssr` (or another strategy-branded subpath):**
 The import carries contract APIs that are not SSR-specific (`define*Entry`, `createSkuContexts`, `useSite`, …).
@@ -1556,7 +1685,7 @@ Client instrumentations MAY include `router` and `route` levels.
 | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Dual `routes` hydration mismatch                  | Eliminated by first-class `routesEntry` (one module in both graphs). No runtime tree checker.                                                                                                                   |
 | Wrong-site tree / foreign path match              | Pre-filter `sites` into per-site trees before RR. `getSite` (or sole resolved site) selects. Serialize `site` for client. Fail closed on invalid or unknown site.                                               |
-| App omits or invents `site`                       | Empty config `sites` soft-defaults to `'default'`. Multi-site requires `getSite` at init. Hard-error if return is non-string or not a resolved site name. 0–1 site uses sole name when getter omitted.          |
+| App omits or invents `site`                       | Empty config `sites` soft-defaults to `'default'`. Multi-site apps provide typed `getSite`. Hard-error if return is non-string or not a resolved site name. 0–1 site uses sole name when getter omitted.        |
 | Duplicate parse across getters                    | Accepted. Docs say keep getters sync/pure. Shared libs memoise on `req`.                                                                                                                                        |
 | Accidental site splits                            | No `sites` inheritance. Site-specific routes must set `sites` explicitly.                                                                                                                                       |
 | Hand-duplicated language paths / shared `lazy`    | Optional `mapRoutePath` clones after membership filter and copies `handle.moduleId`. Docs forbid shared `pageLazy` across hand copies.                                                                          |
@@ -1595,6 +1724,13 @@ Client instrumentations MAY include `router` and `route` levels.
 | Duplicate queries after hydration                 | Fixture asserts server-run queries are served from the transported cache and that a post-hydration query still fetches.                                                                                         |
 | Wrong transport build resolved                    | Apollo ships separate `browser` / `node` condition builds and asserts on mismatch. Fixture exercises both `sku start` and production.                                                                           |
 | Injection lost under `waitForAll`                 | Buffer to `onAllReady` and write injected nodes in stream order. Covered by tests.                                                                                                                              |
+| Hung render promise on abort                      | Decision 9a: policy rejects with the abort reason. Do not rely on React `onError` alone to settle.                                                                                                              |
+| ErrorBoundary retry after disconnect              | Decision 9a: cancellation MUST NOT start recovery. Middleware swallows cancel rejections (Decision 18).                                                                                                         |
+| Abort during header writes still pipes            | `commit` subscribes to abort before `beforePipe` and rechecks before `pipe`.                                                                                                                                    |
+| Already-aborted POST still runs the action        | `render()` rejects before `query()` when the signal is already aborted.                                                                                                                                         |
+| Recovery setup throw hangs the promise            | Policy catches `getStaticContextFromError` and rejects.                                                                                                                                                         |
+| Hung `waitForAll` / Suspense holds the socket     | 10s sku-owned deadline from `streamDocument` start. Uncommitted → reject. After commit → abort remaining React work.                                                                                            |
+| Insert flush throws mid-stream                    | Abort React and error the destination stream. Do not leave React writing into a dead transform. Covered by tests.                                                                                               |
 | Transport module duplicated in graph              | Decision 26 (same as `getCspNonce` / preload / `SkuProvider`). Exclude stops `.vite/deps` clone. Public + private `#` paths share physical modules via `unbundle`.                                              |
 | Dual path under published install                 | `optimizeDeps.exclude` for `sku` + `sku/runtime` keeps app imports and sku `#` mounts on the same unbundled modules. Skip dedicated tarball e2e this pass.                                                      |
 | Trust proxy off unless configured                 | Opt-in `expressTrustProxy`. Template sets `true`. Other values via `onListen`.                                                                                                                                  |

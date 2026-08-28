@@ -17,10 +17,13 @@
         // Optional peer deps
         "@storybook/react-webpack5",
         "@storybook/react-vite",
+        // Needed so `declare module 'express-serve-static-core'` resolves under pnpm
+        "@types/express-serve-static-core",
       ],
       "ignoreUnresolved": [
         "__sku_alias__clientEntry",
         "__sku_alias__renderEntry",
+        "__sku_alias__routesEntry",
         "__sku_alias__serverEntry",
         "__sku_alias__webpackStats",
       ],
@@ -137,17 +140,20 @@
     "fixtures/suspense": {
       "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
     },
+    "fixtures/stream-insert-html": {
+      "entry": ["src/server.tsx", "src/client.tsx", "sku.config.*"],
+    },
     "fixtures/translations": {
       "entry": [
         "src/client.tsx",
         "src/ssr-client.tsx",
         "src/render.tsx",
-        "src/render.tsx",
+        "src/vite-ssr/client.tsx",
+        "src/vite-ssr/server.tsx",
         "sku.config.*",
       ],
       "ignoreDependencies": [
-        // Used by their respective bundlers
-        "@vocab/vite",
+        // Used by webpack bundler path
         "@vocab/webpack",
         // Used in translation files, but these aren't generated on CI during linting so knip
         // doesn't see the usage
@@ -177,6 +183,45 @@
     },
     "fixtures/vite-render-error": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+    },
+    "fixtures/ssr-document": {
+      "entry": [
+        "src/server.tsx",
+        "src/client.tsx",
+        "src/routes.tsx",
+        "sku.config.*",
+      ],
+    },
+    "fixtures/ssr-data": {
+      "entry": [
+        "src/server.tsx",
+        "src/client.tsx",
+        "src/routes.tsx",
+        "sku.config.*",
+        "dev-middleware.js",
+      ],
+      "ignoreDependencies": [
+        // Needed so `declare module 'express-serve-static-core'` resolves under pnpm
+        "@types/express-serve-static-core",
+      ],
+    },
+    "fixtures/ssr-sites": {
+      "entry": [
+        "src/server.tsx",
+        "src/client.tsx",
+        "src/routes.tsx",
+        "sku.config.*",
+      ],
+    },
+    "fixtures/logging": {
+      "entry": [
+        "src/server/server.tsx",
+        "src/client/client.tsx",
+        "src/routes.tsx",
+        "src/client/tracing.ts",
+        "src/server/tracing.ts",
+        "sku.config.*",
+      ],
     },
     "fixtures/vite-compile-package-styles": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],

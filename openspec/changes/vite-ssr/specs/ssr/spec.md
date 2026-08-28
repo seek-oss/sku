@@ -161,16 +161,119 @@ When a matched route sets `handle.waitForAll: true`, sku MUST wait for `onAllRea
 - **WHEN** a matched route has `handle.waitForAll: true`
 - **THEN** sku pipes the HTML body only after `onAllReady`
 
-### Requirement: Client disconnect aborts render before write
+### Requirement: Client disconnect aborts document work
 
-When the client disconnects before HTML headers are committed, sku MUST abort the stream and MUST NOT write the document body.
+When the client disconnects, sku MUST stop document work for that request.
 
-Dev and production MUST share this abort-before-write behaviour.
+Dev and production MUST share this behaviour.
+
+Disconnect after `render` has a document ready, including during header writes, MUST abort React and MUST NOT start the HTML body.
 
 #### Scenario: Disconnect before headers
 
 - **WHEN** the client disconnects before HTML headers are committed
 - **THEN** sku aborts the stream and does not write the document body
+
+#### Scenario: Disconnect during header writes
+
+- **WHEN** the client disconnects while sku is writing HTML headers
+- **THEN** sku aborts the React stream
+- **AND** sku does not start the HTML body
+
+#### Scenario: Disconnect before a short-circuit Response is written
+
+- **WHEN** render resolves to a loader or action `Response` after the client has disconnected
+- **THEN** sku does not write that response
+
+#### Scenario: Disconnect while buffering waitForAll
+
+- **WHEN** the client disconnects while sku is still waiting for `onAllReady`
+- **THEN** sku aborts the render
+- **AND** sku MUST NOT start an ErrorBoundary recovery pass for that cancellation
+
+#### Scenario: Disconnect after piping starts
+
+- **WHEN** the client disconnects after the HTML body has started piping
+- **THEN** sku aborts the React stream
+
+### Requirement: Render attempts settle once
+
+Each `renderToPipeableStream` call is one attempt.
+An attempt settles at most once by becoming ready to commit or by rejecting.
+
+`render()` MUST honour the render `AbortSignal` before `query()` and before starting a document attempt.
+When the signal is already aborted, or aborts before the document is ready to commit, `render()` MUST reject with the abort reason.
+It MUST NOT run loaders or actions after the signal has aborted.
+It MUST NOT hang unsettled after cancellation.
+
+Cancellation MUST NOT trigger the ErrorBoundary recovery pass.
+
+A failed ErrorBoundary recovery setup MUST reject `render()`.
+It MUST NOT leave the render promise hanging.
+
+#### Scenario: Already-aborted signal rejects promptly
+
+- **WHEN** render starts with an already-aborted signal
+- **THEN** the render promise rejects with the abort reason
+- **AND** sku does not run loaders or actions for that request
+- **AND** sku does not resolve a document ready to commit
+
+#### Scenario: Abort during pending waitForAll does not retry
+
+- **WHEN** a `waitForAll` render is still pending
+- **AND** the render signal aborts
+- **THEN** the render promise rejects with the abort reason
+- **AND** sku does not render an ErrorBoundary recovery pass for that abort
+
+#### Scenario: Recovery setup failure rejects
+
+- **WHEN** the first document attempt fails with a recoverable render error
+- **AND** sku cannot build an ErrorBoundary recovery context
+- **THEN** the render promise rejects with that error
+- **AND** sku does not leave the render promise hanging
+
+### Requirement: Uncommitted document renders have a deadline
+
+Sku MUST abort a document render that stays uncommitted past a sku-owned deadline.
+
+That timeout is not a client disconnect.
+When the client is still connected, the rejection MUST reach Express error handling.
+
+The same deadline MUST abort remaining React work after the body has started so a hung Suspense boundary cannot hold the socket open.
+
+Timeout MUST NOT start an ErrorBoundary recovery pass.
+
+#### Scenario: waitForAll exceeds the deadline
+
+- **WHEN** a `waitForAll` render is still waiting for `onAllReady`
+- **AND** the sku-owned deadline elapses
+- **THEN** the render promise rejects
+- **AND** sku does not render an ErrorBoundary recovery pass for that timeout
+- **AND** sku passes the error to Express error handling while the client is connected
+
+#### Scenario: Deadline after piping starts
+
+- **WHEN** the HTML body has started piping
+- **AND** the sku-owned deadline elapses
+- **THEN** sku aborts the React stream
+
+### Requirement: Cancellation is not an Express render error
+
+When HTML middleware cancels because the client disconnected, sku MUST NOT forward that cancellation through Express error handling.
+
+Genuine render failures on a still-connected request MUST still reach Express error handling.
+
+#### Scenario: Disconnect suppresses cancel rejection
+
+- **WHEN** render rejects because the client disconnected
+- **THEN** sku does not call the render-error hook
+- **AND** sku does not pass the error to Express `next`
+
+#### Scenario: Connected render failure reaches Express
+
+- **WHEN** render rejects while the client is still connected
+- **THEN** sku invokes the render-error hook when configured
+- **AND** sku passes the error to Express `next`
 
 ### Requirement: Loader and action Responses are forwarded
 
@@ -582,28 +685,20 @@ Production remains HTTP.
 
 ### Requirement: Teams can scaffold an SSR app via create
 
-`@sku-lib/create` MUST offer a `ssr` template that MAY omit config `sites` (sku soft-defaults to `'default'`), with `expressTrustProxy: true` in `sku.config`, `routesEntry` configured, a `routes` scaffold with an app-owned pathless root layout at `src/RootLayout.tsx` (optional route-level `sites` only when membership differs), `defineServerEntry` / `defineClientEntry<typeof server>` + `createSkuContexts<typeof server, typeof client>` wiring in `src/ssrContext.ts`, a home page that calls `useSite()`, and realistic default-exported request-entry objects (`middleware`, optional `onListen` / context getters, `onHydrate` — no `routes` re-export, no `Providers`, no `src/App/` shell).
-
-A template with zero or one resolved site MUST omit `getSite` (sku uses the sole resolved site name).
-Multi-site examples MUST declare ≥2 config sites and export `getSite`.
-
-Lazy route page modules in the template MUST use the React Router Data Mode named `Component` export (not `export default`).
-
-The create template id MUST be `ssr` (not `vite-ssr`).
-
-The static `vite` template MUST remain unchanged.
+`@sku-lib/create` MUST offer a template with id `ssr`.
 
 #### Scenario: Create ssr template
 
 - **WHEN** a user runs `@sku-lib/create --template ssr`
 - **THEN** the project is SSR with `expressTrustProxy: true` and `routesEntry` exporting named `routes`
-- **AND** config `sites` may be omitted (soft-default `'default'`) or declare real site names
+- **AND** config `sites` may be omitted or declare real site names
 - **AND** the server entry exports `middleware` (and may export `onListen` / context getters)
 - **AND** the client entry exports `onHydrate` (and may export context getters)
-- **AND** the template wires `createSkuContexts` in `src/ssrContext.ts` and has no `Providers` export
+- **AND** the template wires `createSkuContexts` in `src/skuContext.ts` and has no `Providers` export
 - **AND** the template has `src/RootLayout.tsx` and no `src/App/` directory
 - **AND** the home page calls `useSite()` (and does not use `import.meta.env` for site/environment demo)
 - **AND** a 0–1 site template omits `getSite`
+- **AND** a 0–1 site template keeps unparameterized `SkuRouteObject[]`
 - **AND** request entries do not re-export `routes`
 - **AND** lazy page modules export named `Component`
 - **AND** can `sku start` without further entry setup
@@ -694,11 +789,12 @@ Sku MUST NOT add a runtime experimental gate.
 SSR product docs MUST describe Managed Data Mode vs SSR and the core app contract:
 
 - `routesEntry` + `routes` with optional `sites` membership
+- `SkuRouteObject<SiteOf<typeof server>>` for multi-site `sites` typing (same `Site` as `useSite`)
 - optional `mapRoutePath` for per-site multi-path pages, including index homes via `path: ''` (and correct preload-safe examples)
 - case-sensitive path matching by default (`caseSensitive: true` when omitted) and per-route `caseSensitive: false` opt-out
-- `getSite` tree selection (required when config has >1 site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
+- `getSite` tree selection (sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
 - default-exported request entries via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters and sibling projection
-- always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()`
+- always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()` in `src/skuContext.ts`
 - optional `middleware` / `onListen` / `onHydrate` / dual-entry `instrumentations` and config `expressTrustProxy`
 - the three value channels vs the app-owned root layout route
 - middleware layers (production: request-context → optional `express.static(publicPath)` when sibling `client/` exists → server-entry `middleware` → HTML, plus the existing `sku start` order)
@@ -717,7 +813,7 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 #### Scenario: Primary SSR docs have topic coverage
 
 - **WHEN** a reader opens SSR product docs
-- **THEN** docs cover `routesEntry`, `SkuProvider` / `createSkuContexts`, the three value channels, the app-owned root layout route, named `routes`, optional `sites`, optional `mapRoutePath`, case-sensitive path matching by default with per-route opt-out, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onListen` / `onHydrate` / `instrumentations`, `expressTrustProxy`, CSP, and response headers
+- **THEN** docs cover `routesEntry`, `SkuProvider` / `createSkuContexts` in `src/skuContext.ts`, the three value channels, the app-owned root layout route, named `routes`, optional `sites`, `SkuRouteObject<SiteOf<typeof server>>`, optional `mapRoutePath`, case-sensitive path matching by default with per-route opt-out, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onListen` / `onHydrate` / `instrumentations`, `expressTrustProxy`, CSP, and response headers
 - **AND** docs steer page content toward render-time data loading with clients from `useReactContext` / `useClientContext` (not loaders as the default)
 - **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext`
 - **AND** docs document optional dual-entry `getRouterContext` and Data Mode vs Framework Mode seeding
@@ -773,7 +869,8 @@ SSR MUST include Migrating docs for Static App and Older / Webpack SSR App.
 Migrating docs MUST cover:
 
 - named `Component` (not default export) for lazy routes
-- `routesEntry` + `routes` + optional `sites` + `getSite` (required when config has >1 site; fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
+- `routesEntry` + `routes` + optional `sites` + `getSite` (fail closed on unknown / non-string site; sole resolved site — soft-default `'default'` when config `sites` is empty — when omitted on 0–1 site)
+- `SkuRouteObject<SiteOf<typeof server>>` for multi-site `sites` typing
 - optional `mapRoutePath` for per-site multi-path pages
 - case-sensitive path matching by default and per-route `caseSensitive: false` opt-out
 - default-exported request-entry objects via `defineServerEntry` / `defineClientEntry<typeof server>` instead of an `onRequest` value return bag; optional `middleware` / `onListen` / `onHydrate` / `instrumentations`

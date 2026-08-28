@@ -96,6 +96,7 @@ The OpenSpec change / branch name remains `vite-ssr` as a historical workstream 
 - `buildType`
 - `routesEntry` and request entries via `defineServerEntry` / `defineClientEntry`
 - `sku/runtime` hooks: `createSkuContexts`, `useInsertHtml`, `usePreloadRoute`, `getCspNonce`
+- `sku/runtime` types: `SkuRouteObject<Site>`, `SiteOf`, `MapRoutePath`, `MapRoutePathArgs`, `SkuServerEntry`, `SkuClientEntry`, `SkuMiddleware`, `SkuOnListen`, `SkuOnHydrate`, `JsonValue`
 - `onListen` and `expressTrustProxy`
 - create template `ssr`
 

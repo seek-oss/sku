@@ -87,7 +87,7 @@ export const createSkuContext = async ({
     ...appSkuConfig,
   } satisfies SkuConfig;
 
-  validateConfig(skuConfig);
+  validateConfig(skuConfig, appSkuConfig);
 
   validatePathAliases(skuConfig.pathAliases);
 
@@ -183,6 +183,7 @@ export const createSkuContext = async ({
       ? getPathFromCwd(skuConfig.libraryEntry)
       : null,
     serverEntry: getPathFromCwd(skuConfig.serverEntry),
+    routesEntry: getPathFromCwd(skuConfig.routesEntry),
     public: getPathFromCwd(skuConfig.public),
     target: getPathFromCwd(skuConfig.target),
     relativeTarget: skuConfig.target,
@@ -254,6 +255,7 @@ export const createSkuContext = async ({
 
   return {
     bundler: skuConfig.bundler,
+    buildType: skuConfig.buildType,
     testRunner: skuConfig.testRunner,
     configPath: appConfigPath,
     publicPath,
@@ -285,6 +287,7 @@ export const createSkuContext = async ({
     cspReportOnlyEnabled,
     cspReportOnlyExtraScriptSrcHosts,
     cspReportOnlyReportTo,
+    expressTrustProxy: Boolean(skuConfig.expressTrustProxy),
     httpsDevServer,
     languages,
     initialPath,

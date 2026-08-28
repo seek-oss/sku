@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { writeFile, mkdir } from 'node:fs/promises';
 import { fdir as Fdir } from 'fdir';
@@ -15,6 +16,31 @@ import type { Template } from '../types/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+/** Base files incompatible with SSR (static render / #app hydrate / App shell). */
+const BASE_FILES_SKIPPED_FOR_SSR = new Set([
+  'src/render.tsx',
+  'src/client.tsx',
+  'src/types.ts',
+  'src/App/App.tsx',
+  'src/App/NextSteps.tsx',
+  'src/App/NextSteps.css.ts',
+]);
+
+/** Resolve `templates/` from dist (`../templates`) or src (`../../templates`). */
+const resolveTemplatesRoot = (): string => {
+  const candidates = [
+    join(__dirname, '../templates'),
+    join(__dirname, '../../templates'),
+  ];
+  const found = candidates.find((candidate) => existsSync(candidate));
+  if (!found) {
+    throw new Error(
+      `Could not find @sku-lib/create templates directory (tried ${candidates.join(', ')})`,
+    );
+  }
+  return found;
+};
 
 export interface TemplateOptions {
   projectName: string;
@@ -36,13 +62,16 @@ export const generateTemplateFiles = async (
   targetPath: string,
   { projectName, template }: TemplateOptions,
 ) => {
-  const templatesRoot = join(__dirname, '../templates');
+  const templatesRoot = resolveTemplatesRoot();
   const baseTemplateDir = join(templatesRoot, 'base');
   const bundlerTemplateDir = join(templatesRoot, template);
 
   const templateData = createTemplateData(projectName);
 
-  await copyTemplateFiles(baseTemplateDir, targetPath, templateData);
+  await copyTemplateFiles(baseTemplateDir, targetPath, templateData, {
+    skipRelativePaths:
+      template === 'ssr' ? BASE_FILES_SKIPPED_FOR_SSR : undefined,
+  });
   await copyTemplateFiles(bundlerTemplateDir, targetPath, templateData);
 };
 
@@ -77,6 +106,7 @@ const copyTemplateFiles = async (
   templateDir: string,
   targetPath: string,
   templateData: TemplateData,
+  options?: { skipRelativePaths?: Set<string> },
 ) => {
   const templateFiles = await new Fdir()
     .withBasePath()
@@ -94,6 +124,10 @@ const copyTemplateFiles = async (
     templateFiles.map(async (file) => {
       try {
         const relativePath = relative(templateDir, file);
+        if (options?.skipRelativePaths?.has(relativePath)) {
+          return;
+        }
+
         const destinationPath = join(
           targetPath,
           normalizeFileName(relativePath),

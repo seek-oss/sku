@@ -30,9 +30,13 @@ if (pathname === docsPrefix || pathname.startsWith(`${docsPrefix}/`)) {
 }
 
 // Redirect specific removed docs pages
-const redirects = [['faq', 'support']];
+const redirects = [
+  ['faq', 'support'],
+  ['server-rendering', 'ssr'],
+];
+
 redirects.forEach(([from, to]) => {
-  if (pathname === `/sku/${from}`) {
+  if (pathname === `/sku/${from}` || pathname === `/sku/${from}/`) {
     window.location.replace(`/sku/${to}${search}${hash}`);
   }
 });

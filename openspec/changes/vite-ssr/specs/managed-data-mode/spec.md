@@ -32,7 +32,18 @@ Sku MUST resolve `routesEntry` into both the server and client graphs via `__sku
 
 `routesEntry` MUST export named `routes` as `SkuRouteObject[]`.
 
-`SkuRouteObject` MUST be a sku type helper `RouteObject & { sites?: string[] }` (not a wrapped React Router re-export).
+`SkuRouteObject` MUST be a sku type helper `SkuRouteObject<Site extends string = string>` with `sites?: Site[]` and recursive `children?: SkuRouteObject<Site>[]` (not a wrapped React Router re-export).
+
+Omitting the generic MUST leave `sites` as `string[]`.
+
+Sku MUST export `SiteOf<ServerEntry>` from `sku/runtime`.
+It MUST be the same extractor `createSkuContexts` and `defineClientEntry` use for `Site`.
+When `getSite` is omitted, `SiteOf` MUST be `string`.
+
+Apps MAY write `SkuRouteObject<SiteOf<typeof server>>[]` so `sites` is checked against the server entry’s `getSite` return.
+Apps MAY alias `SkuRouteObject` next to `createSkuContexts` in `src/skuContext.ts`.
+Product docs and fixtures MUST import that alias into `routesEntry`.
+They MUST NOT import the server entry into `routesEntry` for that typing.
 
 Missing or non-array `routes` on `routesEntry` MUST hard-error.
 
@@ -52,9 +63,22 @@ Config `routes` (static prerender path lists) MUST NOT be used as the Managed Da
 - **THEN** sku fails with a hard error naming the entry/export
 - **AND** does not use `default` or soft-skip
 
+#### Scenario: sites membership is typed from SiteOf
+
+- **WHEN** `getSite` returns `'au' | 'nz'`
+- **AND** the app types `routes` as `SkuRouteObject<SiteOf<typeof server>>[]`
+- **THEN** `sites: ['au']` type-checks
+- **AND** `sites: ['uk']` is a type error
+
+#### Scenario: omitted getSite leaves sites as string
+
+- **WHEN** the server entry omits `getSite`
+- **AND** the app types `routes` as `SkuRouteObject[]`
+- **THEN** `sites` is typed as `string[]`
+
 ### Requirement: Optional sites membership and getSite select site-scoped route tree
 
-Optional `sites?: string[]` on a `SkuRouteObject` declares membership:
+Optional `sites?: Site[]` on a `SkuRouteObject<Site>` declares membership:
 
 - Omit / undefined ⇒ the route is included for **every** resolved site
 - Present ⇒ the route is included **only** for those site names (exact match against resolved site names)
@@ -73,8 +97,8 @@ Empty or omitted `sites` MUST soft-default to a single synthetic site name `'def
 
 **Resolve `site`:**
 
-- Zero configured sites (soft-default `'default'`) or one configured site ⇒ when `getSite` is omitted, sku MUST use that sole resolved site name; when `getSite` is present on the server entry object, sku MUST call it and validate the return against the resolved name list.
-- Multiple configured sites ⇒ missing `getSite` property MUST hard-error at init (naming the property; same class as missing `routes` on `routesEntry`).
+- When `getSite` is omitted, sku MUST use the sole resolved site name (the one config site, or `'default'` when config `sites` is empty).
+- When `getSite` is present on the server entry object, sku MUST call it and validate the return against the resolved name list.
 - Non-string `site` from `getSite`, or a `site` that is not a resolved site name / has no pre-built tree, MUST fail closed per request (hard error).
 
 Sku MUST serialize that `site` into the hydrate bootstrap and select the same pre-built tree for client `createBrowserRouter`.
@@ -130,12 +154,6 @@ Config `sites[].routes` (static prerender path lists) MUST NOT drive Managed Dat
 - **WHEN** a Managed Data Mode app serves multiple document requests for the same site
 - **THEN** sku reuses the static handler built for that site at init
 - **AND** does not call `createStaticHandler` on the request path
-
-#### Scenario: Multi-site missing getSite hard-errors at init
-
-- **WHEN** config defines more than one site
-- **AND** the server entry omits `getSite`
-- **THEN** sku fails with a hard error at init naming the `getSite` property
 
 #### Scenario: Non-string getSite fails closed
 
@@ -296,12 +314,12 @@ Server entry object MAY include sync getters `getSite`, `getLanguage`, `getClien
 
 Client entry object MAY include optional `onHydrate`, `getReactContext`, `getRouterContext`, and `instrumentations`.
 
-`getSite` is required **only** when config `sites` has more than one entry (init hard-error when missing — see the site-selection requirement).
-All other listed properties are optional.
+All listed properties are optional.
+When `getSite` is omitted, sku uses the sole resolved site name (see the site-selection requirement).
 
 Sku MUST NOT specially gate on entry file existence; a missing file fails via normal module resolution.
 
-Sku MUST call getters in this order before `query()`: `getSite` (when present or required) → `getLanguage` → `getClientContext` → `getReactContext` → optional server `getRouterContext`.
+Sku MUST call getters in this order before `query()`: `getSite` (when present) → `getLanguage` → `getClientContext` → `getReactContext` → optional server `getRouterContext`.
 
 Later getters MUST receive already-resolved sibling values so apps can project without re-deriving:
 
@@ -334,6 +352,11 @@ Sku MUST always render `SkuProvider` outside the router — `Document` → `SkuP
 Sku MUST export `createSkuContexts<typeof server, typeof client>()` from `sku/runtime` so apps can obtain typed `useSite` / `useClientContext` / `useReactContext` bound to that provider.
 `createSkuContexts` MUST extract `Site` from the server entry’s `getSite` return (`string` when `getSite` is omitted), `ClientContext` from `getClientContext`, and `ReactContext` from both entries’ `getReactContext` returns (union when they differ).
 `useSite()` MUST return that `Site` type.
+That same `Site` MUST type `SkuRouteObject.sites` when apps write `SkuRouteObject<SiteOf<typeof server>>`.
+Apps MAY alias that type next to `createSkuContexts` in `src/skuContext.ts`.
+Product docs and fixtures MUST import that alias into `routesEntry`.
+They MUST NOT import the server entry into `routesEntry` for that typing.
+`createSkuContexts` MUST NOT return a `defineRoutes` helper.
 `createSkuContexts` MUST NOT extract a language React hook from `getLanguage` in this change.
 Apps MUST NOT be required to declare hand-written `ClientContext` / `ReactContext` / site aliases.
 `createSkuContexts` MUST NOT ship per-property `defineGet*` helpers.
@@ -468,6 +491,13 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 - **AND** later server sibling getters receive `site` typed as that union
 - **AND** `defineClientEntry<typeof server>` client sibling `site` args are typed as that union
 
+#### Scenario: SkuRouteObject sites typed from the same SiteOf
+
+- **WHEN** `getSite` returns `'au' | 'nz'`
+- **AND** the app types `routes` as `SkuRouteObject<SiteOf<typeof server>>[]` next to `createSkuContexts`
+- **THEN** `sites` is typed as `('au' | 'nz')[]`
+- **AND** `useSite()` is typed as `'au' | 'nz'`
+
 #### Scenario: Omitting getSite leaves useSite as string
 
 - **WHEN** the server entry omits `getSite` (single-site)
@@ -569,6 +599,13 @@ Sku MUST NOT ship a dependency on, or configuration for, any specific data-trans
 
 - **WHEN** a matched route sets `handle.waitForAll` and the app injects nodes
 - **THEN** the buffered document still contains the injected markup in stream order
+
+#### Scenario: Insert callback failure fails the stream
+
+- **WHEN** an `insertHtml` callback throws while sku flushes markup into the response
+- **THEN** sku aborts the React stream
+- **AND** the response stream errors
+- **AND** partial HTML already written MAY remain on the wire
 
 ### Requirement: Intent route preloading is a sku API
 

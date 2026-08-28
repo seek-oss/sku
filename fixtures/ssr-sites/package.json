@@ -1,0 +1,22 @@
+{
+  "name": "@sku-fixtures/ssr-sites",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "sku build",
+    "start": "sku start",
+    "start:prod": "node dist/server/server.js"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:"
+  },
+  "devDependencies": {
+    "@types/express-serve-static-core": "4.19.8",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

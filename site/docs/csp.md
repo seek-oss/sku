@@ -1,6 +1,7 @@
 # Content Security Policy (CSP)
 
-[CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app. For statically rendered apps, a `script-src` policy can be automatically generated for you. SSR apps have an extra step.
+[CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app.
+For statically rendered apps, a `script-src` policy can be automatically generated for you. SSR apps have an extra step.
 
 > [!NOTE]
 > This feature is not available to libraries
@@ -11,7 +12,7 @@ Set `cspEnabled: true` in your `sku.config.js`.
 
 ### Delivery
 
-The `cspDelivery` option controls how the CSP is delivered and can be set to one of two values:
+For **static apps**, the `cspDelivery` option controls how the enforcing CSP is delivered and can be set to one of two values:
 
 - `tag`: The CSP will be embedded directly in the rendered HTML content via a `<meta http-equiv="Content-Security-Policy" …>` tag.
   No further action will be required to enable the CSP.
@@ -19,11 +20,12 @@ The `cspDelivery` option controls how the CSP is delivered and can be set to one
 - `header`: The CSP will be written to a JSON file alongside the rendered HTML content (e.g. `index.html.json`) in the `metadata.csp` property, and no `<meta http-equiv="Content-Security-Policy" …>` tag will be generated.
   Extra steps will be required at deployment and/or request time to ensure the value of this property is returned as a `Content-Security-Policy` header in the response for the rendered HTML content.
 
-The `cspDelivery` option is only available when using Vite.
+`cspDelivery` applies to **Static** only (`buildType` unset / `'static'`).
+SSR always emits real HTTP CSP headers and ignores `cspDelivery`.
 
 ### Extra Hosts
 
-If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraScriptSrcHosts` array in `sku.config.js`.
+If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraScriptSrcHosts` array in your `sku.config.js`.
 
 ### Report To
 
@@ -34,8 +36,7 @@ This option can be configured either as an _endpoint name_, a _URL_, or as a tup
 - If only a _URL_ is specified, then an endpoint name will be generated automatically and included in the CSP as the value of the [`report-to`] directive, and a [`Reporting-Endpoints`] header will be emitted containing the generated endpoint name and the provided URL.
 - If both an _endpoint name_ and a _URL_ is specified, then the provided endpoint name will be included in the CSP as the value of the [`report-to`] directive, and a [`Reporting-Endpoints`] header will be emitted containing both the provided endpoint name and URL.
 
-The `cspReportTo` option is only effective when using the `header` [delivery option](#delivery).
-If a [`Reporting-Endpoints`] header is emitted it will be written to same JSON file in the `metadata.reportingEndpoints` property.
+For **static apps**, the `cspReportTo` option is only effective when using the `header` [delivery option](#delivery), and an emitted [`Reporting-Endpoints`] header is written to the same JSON file in the `metadata.reportingEndpoints` property.
 
 [Reporting API]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
 [`report-to`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/report-to
@@ -44,7 +45,6 @@ If a [`Reporting-Endpoints`] header is emitted it will be written to same JSON f
 ### Nonce Values
 
 [Nonce] values can be used to permit inline scripts that are generated client side.
-Nonce values are created by calling `createUnsafeNonce` during render.
 
 > [!NOTE]
 > The [Content Security Policy (CSP)] requires that scripts be declared ahead of time.
@@ -56,6 +56,23 @@ Nonce values are created by calling `createUnsafeNonce` during render.
 > [!WARNING]
 > Nonces are less safe than content hashes.
 > Please consider if other options are available and whether the risks are acceptable for your use-case.
+
+#### SSR - Managed Data Mode <Badge type="tip" text="SSR" /> <Badge type="warning" text="experimental" />
+
+SSR uses **at most one** CSP nonce per HTML response, minted **only when explicitly requested**, and included in the CSP header **only if requested**.
+
+A nonce is requested by:
+
+- sku itself, when attaching a `nonce` to React stream scripts (post-shell inline scripts that cannot be pre-hashed)
+- Express middleware: `req.getCspNonce()` (mint-on-read; later calls return the same value)
+- React Router loaders/actions: `getCspNonce()` from `sku/runtime` (same store while sku is rendering)
+
+All of those share one value for the response.
+Known bootstrap script bodies are still allowed via sha256 hashes.
+
+A `nonce` is not available in client code. The result of `getCspNonce` will be an empty string if called from the browser. This allows it to be safely used isomorphic rendering.
+
+#### Webpack SSR / static apps <Badge type="info" text="Webpack SSR" />
 
 `createUnsafeNonce`: Generates a random nonce value and returns it for use by the client. The nonce value is added to the generated [Content Security Policy (CSP)] Tags.
 
@@ -96,9 +113,9 @@ export default ({ dynamicScriptNonce }) => {
 [nonce]: https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/nonce
 [Content Security Policy (CSP)]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
 
-### Extra SSR Setup
+### Extra SSR Setup (Webpack)
 
-As sku doesn't handle the returned HTML in SSR apps, any extra scripts (scripts not created by sku) must be registered.
+As sku doesn't handle the returned HTML in Webpack SSR apps, any extra scripts (scripts not created by sku) must be registered.
 
 In the `renderCallback` function, register all extra script tags (inline and external) via the `registerScript` function.
 

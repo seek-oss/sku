@@ -1,0 +1,24 @@
+{
+  "name": "@sku-fixtures/ssr-data",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "sku build",
+    "start": "sku start",
+    "start:prod": "node dist/server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.22.1",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-router": "catalog:"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/express-serve-static-core": "4.19.8",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "sku": "workspace:*"
+  },
+  "skuSkipValidatePeerDeps": true
+}

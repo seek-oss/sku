@@ -113,9 +113,16 @@ export type SkuLanguage = string | { name: string; extends?: string };
 
 export interface SkuConfigBase {
   /**
+   * Selects request-time SSR or the static generation behavior.
+   *
+   * `'ssr'` (SSR) is experimental and not for production use.
+   */
+  buildType?: 'ssr' | 'static';
+
+  /**
    * The bundler that sku uses to build the application.
    *
-   * `vite` is currently only supported for static apps.
+   * Vite supports static apps and experimental SSR via `buildType: 'ssr'`.
    *
    * @default "webpack"
    */
@@ -129,9 +136,9 @@ export interface SkuConfigBase {
   testRunner?: 'vitest' | 'jest';
 
   /**
-   * The client entry point to the app. The client entry is the file that executes your browser code.
+   * The client entry point to the app.
    *
-   * @default "./src/client.js"
+   * @default "./src/client.tsx"
    * @link https://seek-oss.github.io/sku/configuration#cliententry
    */
   clientEntry?: string;
@@ -342,6 +349,9 @@ export interface SkuConfigBase {
   /**
    * The port the app is hosted on when running `sku start`.
    *
+   * For SSR (`buildType: 'ssr'`), this is also the baked production default
+   * listen port (`__SKU_DEFAULT_SERVER_PORT__`), overridable via `process.env.PORT`.
+   *
    * @default 8080
    * @link https://seek-oss.github.io/sku/configuration#port
    */
@@ -349,6 +359,9 @@ export interface SkuConfigBase {
 
   /**
    * A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
+   *
+   * Not supported for SSR (`buildType: 'ssr'`): if this directory exists on disk,
+   * `sku start` / `sku build` fail. Import assets from modules instead.
    *
    * @default 'public'
    * @link https://seek-oss.github.io/sku/configuration#public
@@ -386,6 +399,16 @@ export interface SkuConfigBase {
   routes?: readonly SkuRoute[];
 
   /**
+   * **Only for SSR apps**
+   *
+   * The entry file for the server.
+   *
+   * @default "./src/server.tsx"
+   * @link https://seek-oss.github.io/sku/configuration#serverentry
+   */
+  serverEntry?: string;
+
+  /**
    * Point to a JS file that will run before your tests to setup the testing environment.
    *
    * @link https://seek-oss.github.io/sku/configuration#setuptests
@@ -393,9 +416,13 @@ export interface SkuConfigBase {
   setupTests?: string | string[];
 
   /**
-   * **Only for static apps**
-   *
    * An array of sites the app supports. These usually correspond to each domain the app is hosted under.
+   *
+   * **SSR:** optional. Empty or omitted soft-defaults to a single synthetic site name `'default'`.
+   * Sku pre-builds a route tree per resolved site name from
+   * [`routesEntry`](https://seek-oss.github.io/sku/configuration#routesentry); apps select via `getSite`
+   * (required when >1 site; sole resolved name when omitted on 0–1 site).
+   * `sites[].host` remains local-dev listen / setup-hosts only.
    *
    * @default []
    * @link https://seek-oss.github.io/sku/configuration#sites
@@ -470,19 +497,12 @@ export interface SkuConfigBase {
 
 export interface WebpackSkuConfig {
   /**
-   * **Only for SSR apps**
+   * **Webpack SSR only** (`sku start-ssr` / `sku build-ssr`)
    *
-   * The entry file for the server.
+   * The port the server is hosted on when running `sku start-ssr`, and the
+   * default listen port for the webpack production server.
    *
-   * @default "./src/server.js"
-   * @link https://seek-oss.github.io/sku/configuration#serverentry
-   */
-  serverEntry?: string;
-
-  /**
-   * **Only for SSR apps**
-   *
-   * The port the server is hosted on when running `sku start-ssr`.
+   * Not valid for SSR (`buildType: 'ssr'`) — use {@link SkuConfigBase.port}.
    *
    * @default 8181
    * @link https://seek-oss.github.io/sku/configuration#serverport
@@ -519,6 +539,21 @@ export interface WebpackSkuConfig {
 
 export interface ViteSkuConfig {
   /**
+   * **Only for Managed Data Mode**
+   *
+   * Module that exports named `routes` (`SkuRouteObject[]`) for both
+   * the server and client graphs. Optional `sites` on routes declares
+   * multi-site membership; apps select the tree via `getSite` (required when
+   * config has more than one site; sole config site when omitted on single-site).
+   * Optional named `mapRoutePath` maps one logical path (including index
+   * homes via `path: ''`) to concrete paths while sku pre-builds each site tree.
+   *
+   * @default "./src/routes.tsx"
+   * @link https://seek-oss.github.io/sku/configuration#routesentry
+   */
+  routesEntry?: string;
+
+  /**
    * An array of cjs import paths that have both a default and named exports.
    * This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
    * See https://github.com/cyco130/vite-plugin-cjs-interop for more information.
@@ -535,12 +570,31 @@ export interface ViteSkuConfig {
    *
    * Note: This option is only relevant when using the `vite` bundler.
    *
+   * Not supported for SSR (`buildType: 'ssr'`): providing this option fails config validation.
+   * Raise exceptional customisation needs via the [support page](https://seek-oss.github.io/sku/support) with your use-case.
+   *
    * @default: []
    */
   vitePlugins?: PluginOption[];
 
   /**
-   * The way the content security policy is delivered. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   * **SSR only** (`buildType: 'ssr'`)
+   *
+   * When `true`, sku sets Express `app.set('trust proxy', 1)` (hop count `1`)
+   * before listen — the common single reverse-proxy case.
+   * Omit or `false` leaves Express’s default (`false`).
+   * Other trust-proxy values (`false`, `2`, IP lists, …) override in server-entry
+   * [`onListen`](https://seek-oss.github.io/sku/ssr/entries#onlisten).
+   *
+   * @default false
+   * @link https://seek-oss.github.io/sku/configuration#expresstrustproxy
+   */
+  expressTrustProxy?: boolean;
+
+  /**
+   * The way the enforcing content security policy is delivered for **static Vite** apps.
+   * Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
+   * Ignored for SSR (`buildType: 'ssr'`), which always uses HTTP CSP headers.
    *
    * @default 'tag'
    * @link https://seek-oss.github.io/sku/configuration#cspdelivery
@@ -549,6 +603,7 @@ export interface ViteSkuConfig {
 
   /**
    * Where to report content security policy violations. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true` and {@link cspDelivery} is set to `'header'`.
+   * For SSR (`buildType: 'ssr'`) {@link cspDelivery} is ignored, so this applies whenever {@link SkuConfigBase#cspEnabled} is `true`.
    *
    * @link https://seek-oss.github.io/sku/docs/configuration#cspreportto
    */
@@ -583,6 +638,9 @@ export interface ViteSkuConfig {
   /**
    * This function provides a way to modify sku's Vite configuration.
    * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+   *
+   * Not supported for SSR (`buildType: 'ssr'`): providing this option fails config validation.
+   * Raise exceptional customisation needs via the [support page](https://seek-oss.github.io/sku/support) with your use-case.
    *
    * Before customizing your Vite configuration, please reach out via the [support page](https://seek-oss.github.io/sku/support) to discuss your requirements and potential alternative solutions.
    *

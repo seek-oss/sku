@@ -23,11 +23,22 @@ export default defineConfig([
       'config/storybook': './src/config/storybook/config.ts',
       'entries/vite-client': 'src/services/vite/entries/vite-client.tsx',
       'entries/vite-render': 'src/services/vite/entries/vite-render.tsx',
+      'entries/ssr-client': 'src/services/vite/entries/ssr-client.tsx',
+      'entries/ssr-client.dev': 'src/services/vite/entries/ssr-client.dev.tsx',
+      'entries/ssr-server': 'src/services/vite/entries/ssr-server.tsx',
       'jest/file-mock': 'src/config/jest/fileMock.ts',
       'jest-preset': 'src/config/jest/preset.ts',
       'jest/js-transform': 'src/config/jest/jsBabelTransform.ts',
       'jest/ts-transform': 'src/config/jest/tsBabelTransform.ts',
       postinstall: './src/postinstall.ts',
+      runtime: 'src/runtime.ts',
+      // Shared MDM modules are entries so sku-only mounts survive when public
+      // `sku/runtime` only re-exports consumer hooks via neverBundled `#runtime/*`.
+      'services/vite/ssr/skuContext': 'src/services/vite/ssr/skuContext.tsx',
+      'services/vite/ssr/insertHtml': 'src/services/vite/ssr/insertHtml.tsx',
+      'services/vite/ssr/preloadRoute': 'src/services/vite/ssr/preloadRoute.ts',
+      'services/vite/ssr/requestContext':
+        'src/services/vite/ssr/requestContext.ts',
       'vite/prerender-worker':
         'src/services/vite/helpers/prerender/prerenderWorker.ts',
       'webpack-plugin':
@@ -43,9 +54,19 @@ export default defineConfig([
         '__sku_alias__renderEntry',
         '__sku_alias__clientEntry',
         '__sku_alias__serverEntry',
+        '__sku_alias__routesEntry',
         '__sku_alias__webpackStats',
         'virtual:sku/polyfills',
         '@vanilla-extract/css/adapter',
+        // Self-import via package exports — kept external so dist retains the
+        // `sku/runtime` specifier (shared module identity with app code).
+        'sku/runtime',
+        // Private package imports for sku-only shared-state mounts — same
+        // physical modules as public `sku/runtime` re-exports.
+        '#runtime/skuContext',
+        '#runtime/insertHtml',
+        '#runtime/preloadRoute',
+        '#runtime/requestContext',
       ],
     },
   },

@@ -46,9 +46,9 @@ export const createConfig = (
   return {
     plugins: [
       /**
-       * user added plugins
+       * user added plugins (Disabled for SSR)
        */
-      skuContext.vitePlugins,
+      skuContext.buildType !== 'ssr' && skuContext.vitePlugins,
 
       /**
        * vendor plugins

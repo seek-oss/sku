@@ -21,7 +21,6 @@ import type { RenderAssets, SkuMiddleware } from './types.js';
 const log = createDebug('sku:vite-ssr:dev-server');
 const require = createRequire(import.meta.url);
 
-/** Start mount order: request-context → Vite → optional devServerMiddleware → server-entry → HTML. */
 export const mountStartSsrMiddleware = ({
   app,
   viteMiddlewares,

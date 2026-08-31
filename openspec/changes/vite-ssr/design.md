@@ -66,7 +66,7 @@ See Decision 27.
 - Three value channels: `getClientContext`, dual-entry `getReactContext`, and dual-entry `getRouterContext`.
 - `getClientContext` is the serialised isomorphic React seed.
 - `getReactContext` may differ per environment.
-- `getRouterContext` supplies values for React Router loaders and actions.
+- `getRouterContext` supplies values for React Router loaders, actions, and route middleware.
 - Later getters receive already-resolved sibling values.
 - `defineServerEntry` infers types from getter returns.
 - Maybe-Promise getters unwrap with `Awaited` so hooks see the resolved value.
@@ -273,7 +273,11 @@ Do not load them into the Node server entry.
 - **Production:** optional server-entry Express/Connect `middleware`. Omitted ⇒ no consumer middleware layer (not an error). Mounted in start and production when present.
 - **Dev-only:** optional config `devServerMiddleware`. Start only, never in the production server graph.
 - **Production order:** request-context → optional `express.static(publicPath)` (only when a sibling `client/` exists) → server-entry `middleware` (if any) → HTML.
-- **Dev order:** request-context → `devServerMiddleware` → server-entry `middleware` (if any) → Vite → HTML.
+- **Dev order:** request-context → Vite (HMR / module graph) → `devServerMiddleware` → server-entry `middleware` (if any) → HTML.
+
+Vite in `sku start` is the analogue of production `express.static(publicPath)`.
+Asset, HMR, and module-graph requests MUST NOT run `devServerMiddleware` or server-entry `middleware`.
+Catch-all consumer handlers therefore cannot eat Vite URLs, matching production static-before-middleware.
 
 Document is sku-owned (React document metadata).
 No consumer Document override in v1.
@@ -854,8 +858,19 @@ Its return type is still inferred as `L` on the server entry object for typed en
 It does not reach `SkuProvider` or `createSkuContexts`.
 
 `clientContext` from `getClientContext` reaches the hydrate bootstrap and `useClientContext` (same value on both sides).
-Omitted / `undefined` MUST serialise as JS `undefined` in the bootstrap (not JSON `null`).
+Omitted / top-level `undefined` MUST serialise as JS `undefined` in the bootstrap (not JSON `null`).
 An explicit `null` return stays `null`.
+
+`JsonValue` object values MAY be `JsonValue | undefined`.
+Optional fields and unions such as `'dark' | undefined` therefore type-check.
+Dates, Maps, and functions stay out of `JsonValue`.
+
+After `getClientContext` resolves, sku MUST walk the value once in JSON.stringify order.
+Drop object keys whose value is `undefined`.
+Replace `undefined` array elements with `null`.
+That normalised value is what sibling getters, `SkuProvider`, and the hydrate bootstrap all see.
+The walk is one pass over a small seed.
+The cost is negligible.
 
 `reactContext` from dual-entry `getReactContext` reaches `useReactContext` and MAY differ per environment (not serialised).
 
@@ -875,15 +890,18 @@ Fixtures showed apps reinventing React context solely to pipe `site` / `clientCo
 Sku now owns the isomorphic React bag, env-differing **values** come from dual-entry getters, and isomorphic **wrapping** lives in the root layout.
 
 **Three channels.**
-Docs MUST diagram this.
+Docs MUST diagram this in a canonical section near the top of the data-loading page.
+Place it after the two-path orientation (render-time vs loaders) and before “Prefer render-time”.
 Prefer a Markdown table or nested list.
 VitePress has no built-in Mermaid, and the site does not ship a Mermaid plugin today.
+`providers.md` and `entries.md` MUST link that section rather than re-teaching the taxonomy.
+That section MUST link `createSkuContexts` / `useClientContext()`.
 
-| Channel                      | Entry export       | React / RR consumer        | Same on server & client?           | Serialised?             |
-| ---------------------------- | ------------------ | -------------------------- | ---------------------------------- | ----------------------- |
-| Wire / isomorphic React seed | `getClientContext` | `useClientContext()`       | Yes (by construction)              | Yes → hydrate bootstrap |
-| Env-differing React values   | `getReactContext`  | `useReactContext()`        | **May differ**                     | No                      |
-| Loader / action context      | `getRouterContext` | `context.get()` in loaders | Same keys; construction may differ | No                      |
+| Channel                      | Entry export       | React / RR consumer                                       | Same on server & client?           | Serialised?             |
+| ---------------------------- | ------------------ | --------------------------------------------------------- | ---------------------------------- | ----------------------- |
+| Wire / isomorphic React seed | `getClientContext` | `useClientContext()`                                      | Yes (by construction)              | Yes → hydrate bootstrap |
+| Env-differing React values   | `getReactContext`  | `useReactContext()`                                       | **May differ**                     | No                      |
+| Router query context         | `getRouterContext` | `context.get()` in loaders, actions, and route middleware | Same keys; construction may differ | No                      |
 
 ```
 Document
@@ -1069,6 +1087,7 @@ Omit either property ⇒ empty/default context behaviour.
 The three channels cannot collapse into one.
 React Router 8 exposes no public hook for reading `RouterContextProvider` from components, and serialisable wire state must not be forced to carry non-JSON clients.
 Docs MUST state which channel to use for which consumer.
+The data-loading page is the teaching home for that choice.
 
 Do **not** teach consumer-authored Async Local Storage, module-level mutable state, or “return a wrapper component from a request-entry export” as the way to pass request-scoped values into React.
 
@@ -1299,9 +1318,17 @@ Migrating MUST point at `pathAliases` + the existing `migrate-root-resolution` c
 
 ### 21. Data loading guidance (docs-led)
 
+Product docs MUST open the data-loading page with the two-path orientation, then the three-channel section from Decision 12a, then “Prefer render-time”.
+That section is the canonical explanation of client context vs React context vs router context.
+It MUST link `createSkuContexts` / `useClientContext()` for reading the serialised seed.
+
 Prefer **render-time** data loading in React for page content:
 
-- Inject an env-specific API / Experience / Apollo client via dual-entry `getReactContext` and read it with `useReactContext()` (serialisable seeds via `getClientContext` / `useClientContext`; `site` via `useSite()` — not a component returned from a getter, not consumer-authored Async Local Storage).
+- Inject an env-specific API / Experience / Apollo client via dual-entry `getReactContext` and read it with `useReactContext()`.
+- Pass serialisable seeds via `getClientContext` / `useClientContext`.
+- Read `site` via `useSite()`.
+- Do not return a component from a getter.
+- Do not teach consumer-authored Async Local Storage.
 - Fetch in the React tree with Suspense (e.g. `useQuery`) so the same components work on SSR and client navigations.
 - When the client has a cache that must survive the stream (Apollo), pair it with a streaming transport over `useInsertHtml` — see Decision 21a.
 
@@ -1311,7 +1338,10 @@ Reach for React Router **loaders** when you need to:
 
 - Start work before the suspending subtree renders (waterfall / parallelisation).
 - Issue a real **document** `redirect()` / response headers (`Cache-Control`, `Set-Cookie`, …).
-- Use advanced loader/action context via optional dual-entry `getRouterContext` (same `createContext` keys on both sides; project from `clientContext` / `reactContext` when possible).
+- Use optional dual-entry `getRouterContext` for loader, action, and route-middleware values.
+
+When using `getRouterContext`, use the same `createContext` keys on both sides.
+Project from `clientContext` / `reactContext` when possible.
 
 `<Navigate />` on static initial render is a no-op — it is not a document HTTP redirect.
 Loaders receive a Fetch `Request`, not Express `req`.
@@ -1719,8 +1749,7 @@ Client instrumentations MAY include `router` and `route` levels.
 | Dual `routes` hydration mismatch                  | Eliminated by first-class `routesEntry` (one module in both graphs). No runtime tree checker.                                                                                                                   |
 | Wrong-site tree / foreign path match              | Pre-filter `sites` into per-site trees before RR. `getSite` (or sole resolved site) selects. Serialize `site` for client. Fail closed on invalid or unknown site.                                               |
 | App omits or invents `site`                       | Empty config `sites` soft-defaults to `'default'`. Multi-site apps provide typed `getSite`. Hard-error if return is non-string or not a resolved site name. 0–1 site uses sole name when getter omitted.        |
-| Duplicate parse across getters                    | Accepted. Docs say keep `getSite` / `getLanguage` sync/pure. Shared libs memoise on `req`.                                                                                                                      |
-| Async getter I/O delays TTFB / hydrate            | Await `getClientContext` / `getReactContext` only when that bag needs I/O. Prefer middleware for shared `req` attach. Page data stays in loaders / Suspense.                                                    |
+| Duplicate parse across getters                    | Accepted. Docs say keep getters sync/pure. Shared libs memoise on `req`.                                                                                                                                        |
 | Accidental site splits                            | No `sites` inheritance. Site-specific routes must set `sites` explicitly.                                                                                                                                       |
 | Hand-duplicated language paths / shared `lazy`    | Optional `mapRoutePath` clones after membership filter and copies `handle.moduleId`. Docs forbid shared `pageLazy` across hand copies.                                                                          |
 | Shell-only CSP / late scripts                     | Lazy single nonce. Hash known bootstrap bodies.                                                                                                                                                                 |

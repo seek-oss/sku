@@ -43,11 +43,13 @@ You’re set up when the file default-exports a `defineServerEntry({ … })` obj
 Add getters when you need them.
 They run after consumer Express middleware and before React Router handles the document request:
 
-1. `getSite`
-2. `getLanguage`
-3. `getClientContext`
-4. `getReactContext`
-5. optional `getRouterContext`
+1. [`getSite`](#getsite)
+2. [`getLanguage`](#getlanguage)
+3. [`getClientContext`](#getclientcontext)
+4. [`getReactContext`](#getreactcontext)
+5. optional [`getRouterContext`](#getroutercontext)
+
+Which channel to use is documented under [Data loading → Three value channels](./data-loading.md#three-value-channels).
 
 Early getters (`getSite`, `getLanguage`, `getClientContext`) receive `{ req }` (the Express request).
 Later getters also receive already-resolved sibling values so you can project instead of re-deriving.
@@ -89,7 +91,8 @@ See [Multi-language](./multi-language.md).
 
 ### getClientContext
 
-JSON-serialisable content sent to the client and available via `useClientContext()`.
+JSON-serialisable content sent to the client and available via [`useClientContext()`](./providers.md#typed-hooks).
+See [Three value channels](./data-loading.md#three-value-channels) for serialisation and nested `undefined` rules.
 
 ```ts
 getClientContext?: (args: { req: ExpressRequest }) => ClientContext | Promise<ClientContext>;
@@ -116,7 +119,7 @@ getReactContext?: (args: {
 }) => ReactContext | Promise<ReactContext>;
 ```
 
-Pair with a client `getReactContext` when values differ by environment — see [Providers](./providers.md#pass-values-into-react).
+Pair with a client `getReactContext` when values differ by environment — see [Providers](./providers.md#pass-values-into-react) and [Three value channels](./data-loading.md#three-value-channels).
 
 ### middleware
 
@@ -232,8 +235,8 @@ getReactContext?: (args: {
 
 ## Advanced: router context
 
-Optional dual-entry `getRouterContext` seeds React Router’s `RouterContextProvider` for loader/action dependency injection.
-Prefer projecting isomorphic values both server and client can supply — see [Data loading → Router context](./data-loading.md#router-context).
+Optional dual-entry `getRouterContext` seeds React Router’s `RouterContextProvider` for loader, action, and route-middleware dependency injection.
+Prefer projecting isomorphic values both server and client can supply — see [Data loading → Router context](./data-loading.md#router-context) and [Three value channels](./data-loading.md#three-value-channels).
 
 ### getRouterContext
 

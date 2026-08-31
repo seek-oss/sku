@@ -99,6 +99,18 @@ describe('ssr-data', () => {
       await page.close();
     });
 
+    it('serves Vite module-graph URLs before catch-all server-entry middleware', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      const viteClient = await fetch(`${url}/@vite/client`);
+      const body = await viteClient.text();
+      expect(viteClient.ok).toBe(true);
+      expect(viteClient.headers.get('content-type')).toMatch(/javascript/);
+      expect(body).not.toContain('middleware-handled');
+      expect(body).not.toContain('<!DOCTYPE html>');
+    });
+
     it('serves config devServerMiddleware before server-entry middleware', async ({
       task,
     }) => {

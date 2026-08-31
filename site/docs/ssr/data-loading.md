@@ -10,18 +10,47 @@ sku supports two data-loading paths for Managed Data Mode SSR:
 - **Render-time** fetching in the React tree (Suspense, client libraries such as Apollo) during document SSR and after hydration
 - React Router **loaders** and **actions** on page modules, including document `redirect()`, response headers, and optional dual-entry [`getRouterContext`](#router-context)
 
-## Prefer render-time for page content
+## Request Context
 
-Prefer **render-time** data loading in React for page content.
+sku has three channels for including request-scoped values into your app.
+
+### Client Context
+
+Serializable context shared between Server and Client
+
+Define using [`getClientContext`](./entries.md#getclientcontext).
+Read with [`useClientContext()`](./providers.md#typed-hooks).
+
+Context must be JSON-serialisable and is automatically passed from server to client.
+
+> [!TIP] Initial Context Only
+> The client context serves as the initial context for your app.
+> It does **not** update as users navigate between pages or load new data.
+
+### React Context
+
+The server/client specific context for React rendering.
+
+Define using [`getReactContext`](./entries.md#getreactcontext).
+Read with [`useReactContext()`](./providers.md#typed-hooks).
+
+For example, an API client that differs between server and client.
+
+### Router Context
+
+Context provided to React Router loaders, actions, and route middleware.
+
+Define using [`getRouterContext`](./entries.md#getroutercontext).
+Read with [`context.get()`](#router-context).
+
+## Render-time for page content
+
+Use **render-time** data loading in React for page content.
 That keeps shared UI portable without per-app loader wiring.
 
-1. Pass env-specific clients via dual-entry [`getReactContext`](./providers.md#pass-values-into-react) (and serialisable seeds via `getClientContext`).
-2. Mount isomorphic providers in your [root layout](./providers.md#root-layout-for-providers) and read values with `useReactContext()` / `useClientContext()`.
+1. Pass env-specific clients via dual-entry [`getReactContext`](./providers.md#pass-values-into-react) (and serialisable seeds via [`getClientContext`](./entries.md#getclientcontext)).
+2. Mount isomorphic providers in your [root layout](./providers.md#root-layout-for-providers) and read values with [`useReactContext()`](./providers.md#typed-hooks) / [`useClientContext()`](./providers.md#typed-hooks).
 3. Fetch in the React tree with Suspense (for example `useQuery`) so the same components work on SSR and client navigations.
-
-[`getClientContext`](./entries.md#getclientcontext) and [`getReactContext`](./entries.md#getreactcontext) may be async when the serialisable seed or env-differing values need I/O.
-Do not load per-route page data there.
-Use loaders or Suspense instead.
 
 sku does not support React Server Components.
 React [`cache()`](https://react.dev/reference/react/cache) can still memoize work per request during document SSR.
@@ -55,11 +84,11 @@ Express `req` is available to [entry getters](./entries.md) and optional server 
 
 Need a complex server-only loader experience? Reach out via [support](../support.md) to discuss the use case.
 
-## Router context
+## Using router context
 
-Optional dual-entry `getRouterContext` seeds React Router’s `RouterContextProvider` for loader/action DI.
+Use [getRouterContext](./entries.md#getroutercontext) to provide context to React Router loaders, actions and route middleware.
 
-If you use it, define it on **both** server and client entries with the same `createContext` keys — client navigations have no Express request:
+If you use it, define it on **both** server and client entries with the same `createContext` keys:
 
 ```tsx
 // src/userIdContext.ts
@@ -121,13 +150,9 @@ export async function loader({ context }: LoaderFunctionArgs) {
 }
 ```
 
-:::warning Never put Express `req` in `RouterContextProvider`
-Prefer values both sides can supply.
-Raw `req` is not available on client navigations.
-:::
-
-Export shapes: [Request entries](./entries.md#getroutercontext).
-Express middleware for attaching values to `req`: [Middleware](./middleware.md).
+> [!WARNING] Avoid putting Express req in RouterContextProvider
+> Try to resolve values to something both server and client can supply.  
+> Raw request objects are not available on client navigations.
 
 ## Response headers
 
@@ -249,7 +274,8 @@ Drop two-pass `getDataFromTree`; it is incompatible with streaming Document SSR.
 
 ## See also
 
-- [Providers](./providers.md) — `getReactContext` and root layout
+- [Three value channels](#three-value-channels) — `getClientContext` vs `getReactContext` vs `getRouterContext`
+- [Providers](./providers.md) — `createSkuContexts` / `useClientContext()` and root layout
 - [Request entries](./entries.md#getroutercontext) — `getRouterContext` shapes
 - [Routing](./routing.md#when-to-use-loaders) — loaders on page modules
 - [Runtime API](./runtime-api.md#useinserthtml) — `useInsertHtml`

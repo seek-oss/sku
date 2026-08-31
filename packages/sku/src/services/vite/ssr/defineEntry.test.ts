@@ -208,7 +208,39 @@ describe('async getClientContext / getReactContext inference', () => {
     expect(server.getClientContext).toBeTypeOf('function');
   });
 
-  it('keeps getSite and getLanguage synchronous', () => {
+  it('allows optional fields and undefined unions on JsonValue objects', () => {
+    const server = defineServerEntry({
+      getClientContext() {
+        return {
+          theme: Math.random() > 0.5 ? ('dark' as const) : undefined,
+          userId: 'fixture-user' as const,
+        };
+      },
+    });
+
+    const { useClientContext } = createSkuContexts<typeof server>();
+    expectTypeOf(useClientContext).returns.toEqualTypeOf<{
+      theme: 'dark' | undefined;
+      userId: 'fixture-user';
+    }>();
+    expect(server.getClientContext).toBeTypeOf('function');
+  });
+
+  it('rejects Dates and functions in JsonValue', () => {
+    const serverWithDate = defineServerEntry({
+      // @ts-expect-error Dates are not JsonValue
+      getClientContext: () => ({ now: new Date() }),
+    });
+    const serverWithFn = defineServerEntry({
+      // @ts-expect-error functions are not JsonValue
+      getClientContext: () => ({ run: () => undefined }),
+    });
+
+    expect(serverWithDate.getClientContext).toBeTypeOf('function');
+    expect(serverWithFn.getClientContext).toBeTypeOf('function');
+  });
+
+  it('keeps getSite, getLanguage, and client getRouterContext synchronous', () => {
     const serverWithAsyncSite = defineServerEntry({
       // @ts-expect-error getSite must be synchronous
       getSite: async () => 'au' as const,

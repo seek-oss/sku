@@ -311,7 +311,12 @@ Sku MUST scrub Promises from loader/action data before bootstrap stringify.
 
 Sku MUST omit `Error.stack` from production hydration error payloads.
 
-When `clientContext` is omitted or `undefined`, the hydrate bootstrap MUST assign `window.__SKU_CLIENT_CONTEXT__=undefined` (JS `undefined`, not JSON `null`) so SSR and hydrate agree with the typed omit contract. An explicit `null` `clientContext` MUST still serialise as JSON `null`.
+When `clientContext` is omitted or `undefined`, the hydrate bootstrap MUST assign `window.__SKU_CLIENT_CONTEXT__=undefined` (JS `undefined`, not JSON `null`) so SSR and hydrate agree with the typed omit contract.
+An explicit `null` `clientContext` MUST still serialise as JSON `null`.
+
+When `getClientContext` returns a non-`undefined` value, sku MUST normalise it before sibling getters, `SkuProvider`, and bootstrap serialisation.
+Object keys whose value is `undefined` MUST be dropped.
+`undefined` array elements MUST become `null`.
 
 #### Scenario: Promises do not break serialization
 
@@ -328,6 +333,17 @@ When `clientContext` is omitted or `undefined`, the hydrate bootstrap MUST assig
 - **WHEN** `getClientContext` is omitted or returns `undefined`
 - **THEN** the bootstrap emits `window.__SKU_CLIENT_CONTEXT__=undefined`
 - **AND** SSR and hydrate `SkuProvider` both receive `undefined` (not `null`)
+
+#### Scenario: Nested undefined object keys are dropped on both sides
+
+- **WHEN** `getClientContext` returns `{ theme: 'dark', userId: undefined }`
+- **THEN** sibling getters, SSR `SkuProvider`, and the hydrate bootstrap all receive `{ theme: 'dark' }`
+- **AND** the browser `SkuProvider` receives the same object after hydrate
+
+#### Scenario: Nested undefined array elements become null
+
+- **WHEN** `getClientContext` returns `{ tags: [undefined, 'a'] }`
+- **THEN** sibling getters, SSR `SkuProvider`, and the hydrate bootstrap all receive `{ tags: [null, 'a'] }`
 
 ### Requirement: Server-entry onListen runs after successful listen
 
@@ -418,16 +434,37 @@ Omitting `middleware` MUST NOT be an error.
 - **THEN** sku mounts no consumer middleware layer
 - **AND** HTML render still succeeds
 
-### Requirement: Dev middleware mounts first and stays out of production
+### Requirement: Start mounts Vite before consumer middleware
 
-When config `devServerMiddleware` is set, `sku start` MUST mount it before server-entry `middleware`, and MUST NOT include that module in the production server bundle.
+On `sku start`, sku MUST mount middleware in this order: request-context → Vite middlewares → optional config `devServerMiddleware` → optional server-entry `middleware` → HTML render.
+
+Vite-handled requests MUST NOT run `devServerMiddleware` or server-entry `middleware`.
+That includes HMR, `/@vite/client`, `/@fs/`, and module-graph assets.
+
+When config `devServerMiddleware` is set, sku MUST still mount it before server-entry `middleware`.
+Sku MUST NOT include that module in the production server bundle.
 
 `devServerMiddleware` MUST remain optional.
 
-#### Scenario: Dev middleware first and out of production
+#### Scenario: Vite handles assets before consumer middleware
+
+- **WHEN** the user runs `sku start`
+- **AND** the server entry includes `middleware` that handles every request without calling `next`
+- **AND** the browser requests a Vite module-graph URL such as `/@vite/client`
+- **THEN** Vite serves that asset
+- **AND** server-entry `middleware` does not handle that request
+
+#### Scenario: Unhandled start requests still reach consumer middleware
+
+- **WHEN** the user runs `sku start`
+- **AND** the browser requests a document path Vite does not handle
+- **THEN** optional `devServerMiddleware` and server-entry `middleware` still run
+- **AND** HTML render still runs if they call `next`
+
+#### Scenario: Dev middleware stays before server-entry and out of production
 
 - **WHEN** config sets `devServerMiddleware` and the user runs `sku start`
-- **THEN** that middleware runs before server-entry `middleware`
+- **THEN** that middleware runs after Vite middlewares and before server-entry `middleware`
 - **AND** the production server build does not include that module
 
 ### Requirement: Per-route async chunks are supported
@@ -797,7 +834,8 @@ SSR product docs MUST describe Managed Data Mode vs SSR and the core app contrac
 - always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()` in `src/skuContext.ts`
 - optional `middleware` / `onListen` / `onHydrate` / dual-entry `instrumentations` and config `expressTrustProxy`
 - the three value channels vs the app-owned root layout route
-- middleware layers (production: request-context → optional `express.static(publicPath)` when sibling `client/` exists → server-entry `middleware` → HTML, plus the existing `sku start` order)
+- production middleware order: request-context → optional `express.static(publicPath)` when sibling `client/` exists → server-entry `middleware` → HTML
+- `sku start` middleware order: request-context → Vite → optional `devServerMiddleware` → server-entry `middleware` → HTML
 - CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`
 
 Docs MUST briefly document optional dual-entry `instrumentations` pass-through to `createStaticHandler` / `createBrowserRouter`.
@@ -902,7 +940,7 @@ Migrating docs MUST cover:
 - that later getters receive already-resolved sibling values
 - optional dual-entry `getRouterContext` (Data Mode vs Framework Mode; server seeds from middleware bag + Fetch `request` + siblings; client seeds from browser-visible state + siblings; same `createContext` keys; different construction; cadence: once per document `query` vs every client nav/fetcher)
 - how to type Express `req` fields appended by middleware (module augmentation of `express-serve-static-core` `Request`, shared by `middleware` / getters / server `getRouterContext`; same pattern as sku’s `getCspNonce` from `sku/runtime`)
-- relation of Express `middleware` vs RR route `middleware` vs entry `getRouterContext`, and of `getClientContext` / `getReactContext` / `SkuProvider` hooks vs the app’s root layout route vs `getRouterContext` (loader/action context)
+- relation of Express `middleware` vs RR route `middleware` vs entry `getRouterContext`, and of `getClientContext` / `getReactContext` / `SkuProvider` hooks vs the app’s root layout route vs `getRouterContext` (loaders, actions, and route middleware)
 - that wrapping which needs React Router hooks or loader data belongs in the app’s own root layout route in `routesEntry`
 - a **red warning** that apps MUST NOT put Express `req` (or other non-isomorphic platform objects) into `RouterContextProvider` — project values both sides can supply
 - a client-navigation example where context is re-seeded without Express for a location different from the initial SSR location

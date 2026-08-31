@@ -530,7 +530,6 @@ describe('security-controls', () => {
 
   describe('build-ssr', async () => {
     const port = await getPort();
-    const assetPort = await getPort();
     const url = `http://localhost:${port}`;
 
     beforeAll(async () => {
@@ -540,11 +539,7 @@ describe('security-controls', () => {
 
     it('should start a server with content-security-policies', async () => {
       await node(['dist/server.cjs', `--port=${port}`]);
-      const assetServer = await exec('pnpm', [
-        'run',
-        'serve:assets',
-        `--port=${assetPort}`,
-      ]);
+      const assetServer = await exec('pnpm', ['run', 'serve:assets']);
       expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 
       const app = await getAppSnapshot({ url });

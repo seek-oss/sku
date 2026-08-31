@@ -1,4 +1,5 @@
 import { VocabProvider } from '@vocab/react';
+import { useEffect, useState } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
 import App from './App';
@@ -6,9 +7,16 @@ import type { RenderContext } from './types';
 
 export default ({ language: skuLanguage }: RenderContext) => {
   const Client = () => {
-    const urlParameters = new URLSearchParams(window.location.search);
-    const isPseudo = Boolean(urlParameters.get('pseudo'));
-    const language = isPseudo ? 'en-PSEUDO' : skuLanguage;
+    const [language, setLanguage] = useState(skuLanguage);
+
+    useEffect(() => {
+      const isPseudo = Boolean(
+        new URLSearchParams(window.location.search).get('pseudo'),
+      );
+      if (isPseudo) {
+        setLanguage('en-PSEUDO');
+      }
+    }, []);
 
     return (
       <VocabProvider language={language}>

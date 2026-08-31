@@ -53,8 +53,8 @@ catalogs:
       specifier: ^2.3.26
       version: 2.3.27
     '@vocab/vite':
-      specifier: ^1.0.4
-      version: 1.0.5
+      specifier: ^1.0.6
+      version: 1.0.6
     braid-design-system:
       specifier: ^34.0.0
       version: 34.6.1
@@ -1497,7 +1497,7 @@ importers:
         version: 1.0.2
       '@vocab/vite':
         specifier: 'catalog:'
-        version: 1.0.5(supports-color@8.1.1)(vite@8.2.0)
+        version: 1.0.6(supports-color@8.1.1)(vite@8.2.0)
       '@vocab/webpack':
         specifier: ^1.2.9
         version: 1.2.25(supports-color@8.1.1)(webpack@5.109.2)
@@ -5573,8 +5573,8 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
 
-  '@vocab/vite@1.0.5':
-    resolution: {integrity: sha512-Muh2OvCKn5uVk8W37d/X+BESr7rSxoFhgfzz1ByjGjIp6IMbgt0CK5Kf7c4PVOVh2u7RvUwhvYcyZzeP6dW+oA==}
+  '@vocab/vite@1.0.6':
+    resolution: {integrity: sha512-fP2/XOkVBqjGvCBq5eyoxuNaCn1ev/NeCgf6d+wgzHYt7npO/isX2cKXnuXWu95UQpWoaVVpS6Kg2xQ7+u6uaA==}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0 || ^8.0.0
 
@@ -15021,7 +15021,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vocab/vite@1.0.5(supports-color@8.1.1)(vite@8.2.0)':
+  '@vocab/vite@1.0.6(supports-color@8.1.1)(vite@8.2.0)':
     dependencies:
       '@vocab/core': 1.8.2(supports-color@8.1.1)
       cjs-module-lexer: 2.2.0

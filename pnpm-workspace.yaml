@@ -35,7 +35,7 @@ catalog:
   '@vanilla-extract/jest-transform': '^1.1.21'
   '@vanilla-extract/vite-plugin': ^5.2.5
   '@vanilla-extract/webpack-plugin': '^2.3.26'
-  '@vocab/vite': ^1.0.4
+  '@vocab/vite': ^1.0.6
   braid-design-system: ^34.0.0
   cli-testing-library: ^4.0.0
   commander: ^14.0.1

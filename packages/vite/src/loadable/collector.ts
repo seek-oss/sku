@@ -9,7 +9,6 @@ import {
 import {
   createScriptTag,
   type InjectableScript,
-  sortInjectableScript,
 } from './helpers/scriptUtils.js';
 import { createDebug } from 'obug';
 
@@ -21,6 +20,7 @@ export class Collector {
   moduleIds = new Set<string>();
   preloadIds = new Map<string, Preload>();
   scriptIds = new Map<string, InjectableScript>();
+  private clientEntryFile: string | undefined;
 
   constructor(
     private manifest: Manifest,
@@ -32,11 +32,17 @@ export class Collector {
     this.manifest = manifest;
     this.nonce = nonce;
 
+    const entryPoint = entry || 'index.html';
+    this.clientEntryFile = resolveChunkFile({
+      manifest,
+      entry: entryPoint,
+      base,
+    });
+
     if (externalJsFiles) {
       for (const file of externalJsFiles) {
         this.scriptIds.set(file, {
           src: file,
-          isEntry: false,
           nonce,
         });
       }
@@ -44,11 +50,12 @@ export class Collector {
 
     parseManifestForEntry({
       manifest,
-      entry: entry || 'index.html',
+      entry: entryPoint,
       preloads: this.preloadIds,
       scripts: this.scriptIds,
       nonce,
       base,
+      clientEntryFile: this.clientEntryFile,
     });
   }
 
@@ -61,6 +68,8 @@ export class Collector {
       scripts: this.scriptIds,
       nonce: this.nonce,
       base: this.base,
+      clientEntryFile: this.clientEntryFile,
+      markAsRequiredChunk: true,
     });
   }
   public getAllPreloads() {
@@ -72,9 +81,7 @@ export class Collector {
     return preloadHtml;
   }
   public getAllScripts() {
-    const scriptHtml = [...this.scriptIds.values()]
-      .sort(sortInjectableScript)
-      .map(createScriptTag);
+    const scriptHtml = [...this.scriptIds.values()].map(createScriptTag);
     log('getAllScripts', scriptHtml);
     return scriptHtml;
   }
@@ -89,6 +96,35 @@ export class Collector {
   }
 }
 
+const findManifestChunk = (manifest: Manifest, entry: string) =>
+  manifest[entry] ??
+  Object.values(manifest).find((chunk) => chunk.name === entry);
+
+const parseEntryChunk = (
+  entryChunk: ManifestChunk,
+  { base = '/' }: { base?: string },
+) => ({
+  ...entryChunk,
+  // Overriding the path urls to include the base path.
+  css: entryChunk.css?.map((path) => `${base}${path}`),
+  assets: entryChunk.assets?.map((path) => `${base}${path}`),
+  file: `${base}${entryChunk.file}`,
+});
+
+const resolveChunkFile = ({
+  manifest,
+  entry,
+  base,
+}: {
+  manifest: Manifest;
+  entry: string;
+  base?: string;
+}) => {
+  const foundChunk = findManifestChunk(manifest, entry);
+
+  return foundChunk ? parseEntryChunk(foundChunk, { base }).file : undefined;
+};
+
 const parseManifestForEntry = ({
   manifest,
   entry,
@@ -96,7 +132,9 @@ const parseManifestForEntry = ({
   preloads,
   scripts,
   base,
+  clientEntryFile,
   seenChunks = new Set<string>(),
+  markAsRequiredChunk = false,
 }: {
   manifest: Manifest;
   entry: string;
@@ -104,11 +142,11 @@ const parseManifestForEntry = ({
   preloads: Map<string, Preload>;
   scripts: Map<string, InjectableScript>;
   base?: string;
+  clientEntryFile?: string;
   seenChunks?: Set<string>;
+  markAsRequiredChunk?: boolean;
 }) => {
-  const foundChunk =
-    manifest[entry] ??
-    Object.values(manifest).find((chunk) => chunk.name === entry);
+  const foundChunk = findManifestChunk(manifest, entry);
 
   if (!foundChunk) {
     return;
@@ -138,6 +176,7 @@ const parseManifestForEntry = ({
         preloads,
         scripts,
         base,
+        clientEntryFile,
         seenChunks,
       });
     }
@@ -156,23 +195,22 @@ const parseManifestForEntry = ({
 
   addFileToPreloads({ preloads, entry, entryChunk, nonce });
 
+  const isClientEntry = Boolean(
+    clientEntryFile && entryChunk.file === clientEntryFile,
+  );
+  const existing = scripts.get(entry);
+
   scripts.set(entry, {
     src: entryChunk.file,
-    isEntry: Boolean(entryChunk.isEntry),
     nonce,
+    // Tag register() roots, including standalone Vite-entry chunks. Never tag
+    // the client-entry file (awaiting it deadlocks hydration). Do not use Vite
+    // `isEntry` as the exclusion.
+    isRequiredChunk: Boolean(
+      (markAsRequiredChunk || existing?.isRequiredChunk) && !isClientEntry,
+    ),
   });
 };
-
-const parseEntryChunk = (
-  entryChunk: ManifestChunk,
-  { base = '/' }: { base?: string },
-) => ({
-  ...entryChunk,
-  // Overriding the path urls to include the base path.
-  css: entryChunk.css?.map((path) => `${base}${path}`),
-  assets: entryChunk.assets?.map((path) => `${base}${path}`),
-  file: `${base}${entryChunk.file}`,
-});
 
 const addFileToPreloads = ({
   preloads,

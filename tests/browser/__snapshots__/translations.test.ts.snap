@@ -4,63 +4,62 @@ exports[`translations > bundler vite > should render en 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,47 +1,46 @@
- <!DOCTYPE html>
- <html>
-   <head>
-     <meta charset="UTF-8">
-     <title>
-       My Awesome Project
-     </title>
-     <meta
-       name="viewport"
-       content="width=device-width, initial-scale=1"
-     >
-     <link
-       rel="modulepreload"
-       href="/vite-client.js"
-       crossorigin
-     >
-     <link
-       rel="modulepreload"
-       href="/en-translations.js"
-       crossorigin
-     >
-   </head>
-   <body>
-     <div id="app">
-       <div>
--        Hello sku
--        Company name
-+        Hello sku Company name
-       </div>
-     </div>
-     <script
-       id="__SKU_CLIENT_CONTEXT__"
-       type="application/json"
-     >
-       {"language":"en"}
-     </script>
-     <script
-       type="module"
-       src="/en-translations.js"
-     >
-     </script>
-     <script
-       type="module"
-       src="/vite-client.js"
-     >
-     </script>
-   </body>
- </html>
-\\ No newline at end of file
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="/vite-client.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/en-translations.js"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello sku
+        Company name
+      </div>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"language":"en"}
+    </script>
+    <script
+      type="module"
+      src="/vite-client.js"
+    >
+    </script>
+    <script
+      type="module"
+      async
+      data-required-chunk
+      src="/en-translations.js"
+    >
+    </script>
+  </body>
+</html>
 `;
 
 exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,47 +1,46 @@
+@@ -1,49 +1,49 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -88,7 +87,8 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
        <div>
 -        Hello sku
 -        Company name
-+        [Ḩẽẽẽƚƚööö šķǚǚǚ] [Çööm̂ƥăăกี้ýý กี้ăăm̂ẽẽ]
++        [Ḩẽẽẽƚƚööö šķǚǚǚ]
++        [Çööm̂ƥăăกี้ýý กี้ăăm̂ẽẽ]
        </div>
      </div>
      <script
@@ -99,12 +99,14 @@ exports[`translations > bundler vite > should render en-PSEUDO post-hydration 1`
      </script>
      <script
        type="module"
-       src="/en-translations.js"
+       src="/vite-client.js"
      >
      </script>
      <script
        type="module"
-       src="/vite-client.js"
+       async
+       data-required-chunk
+       src="/en-translations.js"
      >
      </script>
    </body>
@@ -116,112 +118,110 @@ exports[`translations > bundler vite > should render fr 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,47 +1,46 @@
- <!DOCTYPE html>
- <html>
-   <head>
-     <meta charset="UTF-8">
-     <title>
-       My Awesome Project
-     </title>
-     <meta
-       name="viewport"
-       content="width=device-width, initial-scale=1"
-     >
-     <link
-       rel="modulepreload"
-       href="/vite-client.js"
-       crossorigin
-     >
-     <link
-       rel="modulepreload"
-       href="/fr-translations.js"
-       crossorigin
-     >
-   </head>
-   <body>
-     <div id="app">
-       <div>
--        Bonjour sku
--        บริษัท
-+        Bonjour sku บริษัท
-       </div>
-     </div>
-     <script
-       id="__SKU_CLIENT_CONTEXT__"
-       type="application/json"
-     >
-       {"language":"fr"}
-     </script>
-     <script
-       type="module"
-       src="/fr-translations.js"
-     >
-     </script>
-     <script
-       type="module"
-       src="/vite-client.js"
-     >
-     </script>
-   </body>
- </html>
-\\ No newline at end of file
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="/vite-client.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/fr-translations.js"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Bonjour sku
+        บริษัท
+      </div>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"language":"fr"}
+    </script>
+    <script
+      type="module"
+      src="/vite-client.js"
+    >
+    </script>
+    <script
+      type="module"
+      async
+      data-required-chunk
+      src="/fr-translations.js"
+    >
+    </script>
+  </body>
+</html>
 `;
 
 exports[`translations > bundler vite > should support query parameters 1`] = `
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,47 +1,46 @@
- <!DOCTYPE html>
- <html>
-   <head>
-     <meta charset="UTF-8">
-     <title>
-       My Awesome Project
-     </title>
-     <meta
-       name="viewport"
-       content="width=device-width, initial-scale=1"
-     >
-     <link
-       rel="modulepreload"
-       href="/vite-client.js"
-       crossorigin
-     >
-     <link
-       rel="modulepreload"
-       href="/en-translations.js"
-       crossorigin
-     >
-   </head>
-   <body>
-     <div id="app">
-       <div>
--        Hello sku
--        Company name
-+        Hello sku Company name
-       </div>
-     </div>
-     <script
-       id="__SKU_CLIENT_CONTEXT__"
-       type="application/json"
-     >
-       {"language":"en"}
-     </script>
-     <script
-       type="module"
-       src="/en-translations.js"
-     >
-     </script>
-     <script
-       type="module"
-       src="/vite-client.js"
-     >
-     </script>
-   </body>
- </html>
-\\ No newline at end of file
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      My Awesome Project
+    </title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <link
+      rel="modulepreload"
+      href="/vite-client.js"
+      crossorigin
+    >
+    <link
+      rel="modulepreload"
+      href="/en-translations.js"
+      crossorigin
+    >
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        Hello sku
+        Company name
+      </div>
+    </div>
+    <script
+      id="__SKU_CLIENT_CONTEXT__"
+      type="application/json"
+    >
+      {"language":"en"}
+    </script>
+    <script
+      type="module"
+      src="/vite-client.js"
+    >
+    </script>
+    <script
+      type="module"
+      async
+      data-required-chunk
+      src="/en-translations.js"
+    >
+    </script>
+  </body>
+</html>
 `;
 
 exports[`translations > bundler webpack > should render en 1`] = `
@@ -321,7 +321,7 @@ exports[`translations > bundler webpack > should render en-PSEUDO post-hydration
 ===================================================================
 --- sourceHtml
 +++ clientHtml
-@@ -1,87 +1,86 @@
+@@ -1,87 +1,87 @@
  <!DOCTYPE html>
  <html>
    <head>
@@ -363,7 +363,8 @@ exports[`translations > bundler webpack > should render en-PSEUDO post-hydration
        <div>
 -        Hello sku
 -        Company name
-+        [Ḩẽẽẽƚƚööö šķǚǚǚ] [Çööm̂ƥăăกี้ýý กี้ăăm̂ẽẽ]
++        [Ḩẽẽẽƚƚööö šķǚǚǚ]
++        [Çööm̂ƥăăกี้ýý กี้ăăm̂ẽẽ]
        </div>
      </div>
      <script

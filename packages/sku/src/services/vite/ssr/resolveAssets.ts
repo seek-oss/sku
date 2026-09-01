@@ -46,8 +46,8 @@ export const findManifestChunk = (
   manifest[keyOrName] ??
   Object.values(manifest).find((chunk) => chunk.name === keyOrName);
 
-/** Rolldown `[name]` for `#entries/ssr-client` (`entryFileNames: '[name]-[hash].js'`). */
-const SSR_CLIENT_CHUNK_NAME = 'ssr-client';
+/** Rolldown `input` object key for `#entries/ssr-client` (`entryFileNames: '[name]-[hash].js'`). */
+export const SSR_CLIENT_CHUNK_NAME = 'ssr-client';
 
 export const findEntryChunk = (manifest: ClientManifest) => {
   const entry = findManifestChunk(manifest, SSR_CLIENT_CHUNK_NAME);

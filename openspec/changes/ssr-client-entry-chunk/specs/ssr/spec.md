@@ -4,7 +4,7 @@
 
 Production SSR MUST use the Vite client manifest chunk named `ssr-client` as the Document bootstrap module.
 
-Sku MUST NOT select the bootstrap module by taking the first `isEntry` chunk.
+Sku MUST author that chunk name as the client Rolldown input key. Sku MUST NOT select the bootstrap module by taking the first `isEntry` chunk.
 
 #### Scenario: Other isEntry chunks do not become bootstrap
 

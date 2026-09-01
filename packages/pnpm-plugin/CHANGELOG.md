@@ -1,5 +1,15 @@
 # pnpm-plugin-sku
 
+## 0.2.1
+
+### Patch Changes
+
+- Stop writing pnpm 10-only settings into `pnpm-workspace.yaml` ([#1699](https://github.com/seek-oss/sku/pull/1699))
+
+  `ignorePatchFailures` and `packageManagerStrictVersion` were removed in pnpm 11, which is what `@sku-lib/create` pins for new apps. Leaving them in the default config made pnpm warn that the settings were unrecognized.
+
+- Add `'@parcel/watcher': true` to `allowBuilds` ([#1710](https://github.com/seek-oss/sku/pull/1710))
+
 ## 0.2.0
 
 ### Minor Changes

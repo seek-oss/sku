@@ -1,5 +1,44 @@
 # sku
 
+## 16.2.0
+
+### Minor Changes
+
+- Add experimental Managed Data Mode SSR via `buildType: 'ssr'` ([#1687](https://github.com/seek-oss/sku/pull/1687))
+
+  **Experimental — not for production.**
+  Managed Data Mode SSR is available for evaluation and testing.
+  Do not use it in production yet; the API and behaviour may change.
+
+  **Managed Data Mode** enables sku to own the HTML Document, streaming/hydration, the Node server, and CSP.
+  sku wires React Router Data Mode for routing and data.
+  Apps own routes, data, and providers.
+
+  Scaffold a new app with `@sku-lib/create`:
+
+  ```sh
+  pnpm dlx @sku-lib/create my-app --template ssr
+  ```
+
+  Docs: [Server rendering](https://seek-oss.github.io/sku/#/./docs/ssr/)
+
+### Patch Changes
+
+- Update `@vocab/vite` dependency to `^1.0.6` ([#1707](https://github.com/seek-oss/sku/pull/1707))
+
+- `csp`: Update `sku serve` command to include CSP headers in response. ([#1700](https://github.com/seek-oss/sku/pull/1700))
+
+- `build|start (vite)`: Fail `sku build` when a `sku/@loadable/component` import remains in the module graph, and warn on `sku start` ([#1696](https://github.com/seek-oss/sku/pull/1696))
+
+  Webpack loadable imports now warn on `sku start` and fail `sku build`, whether or not `--convert-loadable` is set. The flag still converts default imports to `@sku-lib/vite/loadable`; any leftover (e.g. `loadableReady`) must be removed manually. Previously these imports were only logged on `sku start` for app source, potentially letting unsupported code ship to production.
+
+- `vite`: Fix SSG hydration racing ahead of loadable chunks ([#1707](https://github.com/seek-oss/sku/pull/1707))
+
+  The client entrypoint now waits for registered chunk scripts to evaluate before hydrating. This prevents hydration mismatches in multi-language SSG apps when the vocab language chunk has not run yet.
+
+- Updated dependencies [[`c3b0df4`](https://github.com/seek-oss/sku/commit/c3b0df4b84d63df72cc263e812c19f176893f2d1)]:
+  - @sku-lib/vite@2.0.3
+
 ## 16.1.1
 
 ### Patch Changes

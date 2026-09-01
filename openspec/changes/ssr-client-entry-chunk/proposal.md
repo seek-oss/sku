@@ -4,7 +4,7 @@ Production SSR picks Document `bootstrapModules` from the first `isEntry` chunk 
 
 ## What Changes
 
-- Identify the production client bootstrap as the manifest chunk named `ssr-client` (sku’s SSR client entry).
+- Identify the production client bootstrap as the manifest chunk named `ssr-client` via `findManifestChunk` (manifest key, then `chunk.name`).
 - Stop treating “first `isEntry`” (or any exclusion of other chunk names) as the client entry.
 - Fail production server start if that chunk is missing.
 
@@ -12,6 +12,7 @@ Production SSR picks Document `bootstrapModules` from the first `isEntry` chunk 
 
 - Changing `sku start` bootstrap (`/@vite/client` + `ssr-client.dev`).
 - Renaming the packaged SSR client entry.
+- Switching Vite `input` to a named object.
 
 ## Capabilities
 
@@ -27,4 +28,3 @@ Production SSR picks Document `bootstrapModules` from the first `isEntry` chunk 
 
 - `findEntryChunk` / production SSR server start, plus unit tests.
 - No public API, docs, or config change.
-- Patch changeset if this ships in a sku release (wrong bootstrap is user-visible whenever extra `isEntry` chunks exist).

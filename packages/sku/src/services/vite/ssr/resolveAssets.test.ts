@@ -83,13 +83,13 @@ describe('resolveAssets', () => {
 });
 
 describe('findEntryChunk', () => {
-  it('picks the ssr-client entry when other chunks are also isEntry', () => {
-    const ssrClient = {
-      file: 'ssr-client-ccc.js',
-      name: 'ssr-client',
-      isEntry: true,
-      css: ['assets/client.css'],
-    };
+  const ssrClient = {
+    file: 'ssr-client-ccc.js',
+    name: 'ssr-client',
+    css: ['assets/client.css'],
+  };
+
+  it('picks the ssr-client chunk when other chunks are also isEntry', () => {
     const extraEntriesFirst: ClientManifest = {
       'virtual:other-entry.js': {
         file: 'other-entry-aaa.js',
@@ -99,7 +99,15 @@ describe('findEntryChunk', () => {
       'packages/sku/dist/entries/ssr-client.mjs': ssrClient,
     };
 
-    expect(findEntryChunk(extraEntriesFirst)).toEqual(ssrClient);
+    expect(findEntryChunk(extraEntriesFirst)).toStrictEqual(ssrClient);
+  });
+
+  it('finds ssr-client by manifest key', () => {
+    const keyed: ClientManifest = {
+      'ssr-client': ssrClient,
+    };
+
+    expect(findEntryChunk(keyed)).toStrictEqual(ssrClient);
   });
 
   it('throws when the ssr-client entry is missing', () => {

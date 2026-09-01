@@ -4,6 +4,8 @@ Production SSR loads Document `bootstrapModules` from the baked Vite client mani
 
 The client environment’s Rolldown `input` is a **string path**: `require.resolve('#entries/ssr-client')`. Other plugins or split points can also emit `isEntry` chunks. `Object.values(manifest).find(chunk => chunk.isEntry)` returns whichever of those appears first, which is not an identification of sku’s client entry.
 
+`isEntry` means “this chunk was an entry or `emitFile`,” not “this is sku’s SSR client.”
+
 ### Where `ssr-client` comes from
 
 The string is the packaged filename stem, not an app `clientEntry` and not a Vite `input` object key.
@@ -12,7 +14,7 @@ The string is the packaged filename stem, not an app `clientEntry` and not a Vit
 2. **Package import** (`packages/sku/package.json`): `"#entries/*": "./dist/entries/*.mjs"` so `#entries/ssr-client` resolves to that file.
 3. **SSR client build** (`plugins/ssr.ts`): `rolldownOptions.input` is `require.resolve('#entries/ssr-client')` — a path string, not `{ 'ssr-client': path }`.
 4. **Output pattern** (`plugins/build.ts`): `entryFileNames: '[name]-[hash].js'`. For a file input, Rolldown `[name]` is the basename without extension: `ssr-client.mjs` → **`ssr-client`**.
-5. **Manifest**: that `[name]` is `ManifestChunk.name`. Production lookup matches `chunk.isEntry && chunk.name === 'ssr-client'`.
+5. **Manifest**: that `[name]` is `ManifestChunk.name`. Production lookup is `findManifestChunk(manifest, 'ssr-client')` (manifest key, then `chunk.name`). It does not filter on `isEntry`.
 
 `sku start` does not use this path. It bootstraps `/@vite/client` plus `#entries/ssr-client.dev`.
 
@@ -31,9 +33,9 @@ The string is the packaged filename stem, not an app `clientEntry` and not a Vit
 
 ## Decisions
 
-### Match `chunk.name === 'ssr-client'`
+### Reuse `findManifestChunk` for `'ssr-client'`
 
-Positive identification of the known sku entry. Alternatives: first `isEntry` (wrong whenever extra entries exist); exclude other chunk names by convention (not an identification of sku’s entry); match manifest **key** (absolute path to `ssr-client.mjs`, environment-dependent).
+Positive identification of the known sku entry via the same key-then-name lookup used for route `moduleId`s. Alternatives: first `isEntry` (wrong whenever extra entries exist); exclude other chunk names by convention (not an identification of sku’s entry); require `isEntry` in addition to the name (`isEntry` is not identity). Matching the absolute-path manifest key is unnecessary: the filename stem already appears as `chunk.name`, and a later named `input` would hit the key path.
 
 ### Keep string `input` (name implied by filename)
 

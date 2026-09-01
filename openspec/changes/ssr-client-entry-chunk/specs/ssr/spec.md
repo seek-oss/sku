@@ -4,6 +4,8 @@
 
 Production SSR MUST use the Vite client manifest chunk named `ssr-client` as the Document bootstrap module.
 
+Sku MUST NOT select the bootstrap module by taking the first `isEntry` chunk.
+
 #### Scenario: Other isEntry chunks do not become bootstrap
 
 - **WHEN** the production client manifest contains additional chunks marked as entries

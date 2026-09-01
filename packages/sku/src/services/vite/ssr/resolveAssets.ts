@@ -38,14 +38,6 @@ export const warnUnknownModuleIdsWithoutManifest = (
   }
 };
 
-export const findEntryChunk = (manifest: ClientManifest) => {
-  const entry = Object.values(manifest).find((chunk) => chunk.isEntry);
-  if (!entry) {
-    throw new Error('No entry chunk found in the Vite client manifest.');
-  }
-  return entry;
-};
-
 /** Resolve a manifest entry by key or by chunk `name` (e.g. `en-translations`). */
 export const findManifestChunk = (
   manifest: ClientManifest,
@@ -53,6 +45,19 @@ export const findManifestChunk = (
 ): ManifestChunk | undefined =>
   manifest[keyOrName] ??
   Object.values(manifest).find((chunk) => chunk.name === keyOrName);
+
+/** Rolldown `input` object key for `#entries/ssr-client` (`entryFileNames: '[name]-[hash].js'`). */
+export const SSR_CLIENT_CHUNK_NAME = 'ssr-client';
+
+export const findEntryChunk = (manifest: ClientManifest) => {
+  const entry = findManifestChunk(manifest, SSR_CLIENT_CHUNK_NAME);
+  if (!entry) {
+    throw new Error(
+      `No "${SSR_CLIENT_CHUNK_NAME}" entry chunk found in the Vite client manifest.`,
+    );
+  }
+  return entry;
+};
 
 export const resolveAssets = ({
   manifest,

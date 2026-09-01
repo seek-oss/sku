@@ -1,6 +1,7 @@
 import { createFixture } from 'fs-fixture';
 import { describe, expect, it, vi, afterEach } from 'vitest';
 import {
+  findEntryChunk,
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,
   type ClientManifest,
@@ -78,6 +79,47 @@ describe('resolveAssets', () => {
     });
 
     expect(warn).not.toHaveBeenCalled();
+  });
+});
+
+describe('findEntryChunk', () => {
+  const ssrClient = {
+    file: 'ssr-client-ccc.js',
+    name: 'ssr-client',
+    css: ['assets/client.css'],
+  };
+
+  it('picks the ssr-client chunk when other chunks are also isEntry', () => {
+    const extraEntriesFirst: ClientManifest = {
+      'virtual:other-entry.js': {
+        file: 'other-entry-aaa.js',
+        name: 'other-entry',
+        isEntry: true,
+      },
+      'packages/sku/dist/entries/ssr-client.mjs': ssrClient,
+    };
+
+    expect(findEntryChunk(extraEntriesFirst)).toStrictEqual(ssrClient);
+  });
+
+  it('finds ssr-client by manifest key', () => {
+    const keyed: ClientManifest = {
+      'ssr-client': ssrClient,
+    };
+
+    expect(findEntryChunk(keyed)).toStrictEqual(ssrClient);
+  });
+
+  it('throws when the ssr-client entry is missing', () => {
+    expect(() =>
+      findEntryChunk({
+        'virtual:other-entry.js': {
+          file: 'other-entry-aaa.js',
+          name: 'other-entry',
+          isEntry: true,
+        },
+      }),
+    ).toThrow('No "ssr-client" entry chunk found');
   });
 });
 

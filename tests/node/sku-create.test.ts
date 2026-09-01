@@ -163,59 +163,55 @@ describe.concurrent('sku-create', () => {
     );
   });
 
-  for (const template of templates) {
-    describe(`${template}`, () => {
-      const ssrFiles = [
-        'src/routes.tsx',
-        'src/server.tsx',
-        'src/client.tsx',
-        'src/skuContext.ts',
-        'src/RootLayout.tsx',
-        'src/ErrorBoundary.tsx',
-        'src/pages/home/home.tsx',
-        'src/pages/about/about.tsx',
-      ];
-      const viteFiles = ['src/vite.env.d.ts'];
+  describe.for(templates)('%s', (template) => {
+    const ssrFiles = [
+      'src/routes.tsx',
+      'src/server.tsx',
+      'src/client.tsx',
+      'src/skuContext.ts',
+      'src/RootLayout.tsx',
+      'src/ErrorBoundary.tsx',
+      'src/pages/home/home.tsx',
+      'src/pages/about/about.tsx',
+    ];
+    const viteFiles = ['src/vite.env.d.ts'];
 
-      // eslint-disable-next-line vitest/expect-expect
-      it('should create package.json', async (ctx) => {
-        const contents = await fs.readFile(
-          fixturePath(projectName(template), 'package.json'),
-          'utf-8',
-        );
-        const packageJson = JSON.parse(contents);
+    // eslint-disable-next-line vitest/expect-expect
+    it('should create package.json', async (ctx) => {
+      const contents = await fs.readFile(
+        fixturePath(projectName(template), 'package.json'),
+        'utf-8',
+      );
+      const packageJson = JSON.parse(contents);
 
-        ctx.expect(replaceDependencyVersions(packageJson)).toMatchSnapshot();
-      });
-
-      // eslint-disable-next-line vitest/expect-expect
-      it.for([
-        'sku.config.ts',
-        '.gitignore',
-        'eslint.config.mjs',
-        'README.md',
-        '.prettierignore',
-        ...(template === 'ssr' ? ssrFiles : ['src/App/NextSteps.tsx']),
-        ...(template === 'vite' ? viteFiles : []),
-        'pnpm-workspace.yaml',
-      ])(`should create %s`, async (file, ctx) => {
-        const contents = await fs.readFile(
-          fixturePath(projectName(template), file),
-          'utf-8',
-        );
-
-        ctx.expect(stripYamlVersions(contents)).toMatchSnapshot();
-      });
-
-      it(`should pass lint`, async () => {
-        const { sku } = scopeToSkuFixture(
-          `sku-create/${projectName(template)}`,
-        );
-        const result = await sku('lint');
-        await expect(result).toMatchExitCode(0);
-      });
+      ctx.expect(replaceDependencyVersions(packageJson)).toMatchSnapshot();
     });
-  }
+
+    // eslint-disable-next-line vitest/expect-expect
+    it.for([
+      'sku.config.ts',
+      '.gitignore',
+      'eslint.config.mjs',
+      'README.md',
+      '.prettierignore',
+      ...(template === 'ssr' ? ssrFiles : ['src/App/NextSteps.tsx']),
+      ...(template === 'vite' ? viteFiles : []),
+      'pnpm-workspace.yaml',
+    ])(`should create %s`, async (file, ctx) => {
+      const contents = await fs.readFile(
+        fixturePath(projectName(template), file),
+        'utf-8',
+      );
+
+      ctx.expect(stripYamlVersions(contents)).toMatchSnapshot();
+    });
+
+    it(`should pass lint`, async () => {
+      const { sku } = scopeToSkuFixture(`sku-create/${projectName(template)}`);
+      const result = await sku('lint');
+      await expect(result).toMatchExitCode(0);
+    });
+  });
 
   it('should omit static-app files from the SSR template', async () => {
     await expect(

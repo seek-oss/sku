@@ -16,8 +16,6 @@ export const renderWithEnvironment = (
       env: {
         ...process.env,
         ...opts.spawnOpts?.env,
-        // Speed up repeat runs by preferring cached registry metadata. Mainly affects CI.
-        npm_config_prefer_offline: 'true',
       },
     },
   });

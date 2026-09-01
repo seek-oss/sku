@@ -17,6 +17,14 @@ export const scopeToFixture = (dir: string) => {
     ) =>
       renderWithEnvironment(createSkuBin, [projectName, ...args], {
         ...options,
+        spawnOpts: {
+          ...options.spawnOpts,
+          env: {
+            ...options.spawnOpts?.env,
+            // Speed up repeat runs by preferring cached registry metadata. Mainly affects CI.
+            npm_config_prefer_offline: 'true',
+          },
+        },
         cwd: fixturePath(options.cwd ?? ''),
       }),
     fixturePath,

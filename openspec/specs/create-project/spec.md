@@ -13,23 +13,26 @@ When creating a project without a test override, create SHALL install the `sku` 
 #### Scenario: No override set
 
 - **WHEN** a user runs create and `SKU_CREATE_SKU_SPECIFIER` is unset
-- **THEN** create installs `sku` without a `file:` tarball specifier
+- **THEN** create installs `sku` without a `link:` or `file:` specifier
 
 ### Requirement: Test-only sku specifier override
 
 Create SHALL support an internal environment variable `SKU_CREATE_SKU_SPECIFIER` whose value is a full dependency specifier for `sku`. When set, create MUST install sku using that specifier as-is (no copy or path normalisation in create). When unset, create MUST install unversioned `sku`.
 
-#### Scenario: Override installs packed local sku
+Create integration tests MUST pin this commit’s sku with `sku@link:<absolute-path-to-packages/sku>`. They MUST NOT pack sku and MUST NOT install a `file:` tarball for that purpose. Packing rewrites `workspace:` ranges to local semver that may not exist on the registry yet (for example on a changesets release branch), and it is slower and heavier than `link:`.
 
-- **WHEN** `SKU_CREATE_SKU_SPECIFIER` is set to a valid `sku@file:<absolute-path-to-.tgz>` for a packed local sku
+#### Scenario: Override installs linked local sku
+
+- **WHEN** `SKU_CREATE_SKU_SPECIFIER` is set to a valid `sku@link:<absolute-path-to-packages/sku>`
 - **THEN** the new project’s installed `sku` dependency resolves from that specifier
 - **AND** installation MUST NOT rely on parent workspace `linkWorkspacePackages` or `workspace:*` to resolve sku
+- **AND** installation MUST NOT require packing sku or fetching sku’s workspace dependencies from the registry
 
 #### Scenario: Nested project workspace does not block override
 
 - **WHEN** create writes a `pnpm-workspace.yaml` inside the new project
-- **AND** `SKU_CREATE_SKU_SPECIFIER` is set to an absolute `sku@file:…` tarball specifier
-- **THEN** sku still installs from that file specifier
+- **AND** `SKU_CREATE_SKU_SPECIFIER` is set to an absolute `sku@link:…` specifier
+- **THEN** sku still installs from that link specifier
 
 ### Requirement: Format is soft by default
 
@@ -49,5 +52,5 @@ After a successful create in integration tests that use the sku specifier overri
 #### Scenario: Post-create lint passes
 
 - **WHEN** create finishes successfully for a project under the sku-create integration suite
-- **AND** the suite uses `SKU_CREATE_SKU_SPECIFIER` to install packed local sku
+- **AND** the suite uses `SKU_CREATE_SKU_SPECIFIER` to install linked local sku
 - **THEN** running the new project’s lint step succeeds

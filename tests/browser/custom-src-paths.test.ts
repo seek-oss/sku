@@ -70,13 +70,13 @@ describe('custom-src-paths', () => {
 describe('format', () => {
   it('should format successfully', async () => {
     const format = await sku('format');
-    expect(await format.findByText('Formatting complete')).toBeInTheConsole();
+    await expect(format).toMatchExitCode(0);
   });
 });
 
 describe('lint', () => {
   it('should lint successfully', async () => {
     const lint = await sku('lint');
-    expect(await lint.findByText('Linting complete')).toBeInTheConsole();
+    await expect(lint).toMatchExitCode(0);
   });
 });

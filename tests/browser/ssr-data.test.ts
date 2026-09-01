@@ -188,7 +188,7 @@ describe('ssr-data', () => {
   describe('build', () => {
     beforeAll(async () => {
       const build = await sku('build', ['--config=sku.config.ts']);
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
     });
 
     it('keeps config devServerMiddleware out of the production server', async ({

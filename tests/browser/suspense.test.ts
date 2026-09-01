@@ -23,7 +23,7 @@ describe('suspense', () => {
     describe('build and serve', () => {
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        await build.findByText('Sku build complete');
+        await expect(build).toMatchExitCode(0);
       });
 
       it('should return home page', async () => {

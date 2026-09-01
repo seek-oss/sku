@@ -24,7 +24,7 @@ describe('translations', () => {
 
     beforeAll(async () => {
       const build = await sku('build', args[bundler]);
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
 
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
       await serve.findByText('Server started');
@@ -135,7 +135,7 @@ describe('vite ssr translations build', () => {
     await rm(distDir, { recursive: true, force: true });
 
     const build = await sku('build', ['--config=sku.config.vite-ssr.ts']);
-    await build.findByText('Sku build complete');
+    await expect(build).toMatchExitCode(0);
   });
 
   it('emits named vocab language chunks', async () => {

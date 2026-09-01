@@ -48,7 +48,7 @@ describe('public assets', () => {
       it('should copy public assets to dist and serve them in the app', async () => {
         const build = await sku('build', args[bundler]);
 
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await expect(build).toMatchExitCode(0);
         expect(
           await build.findByText(
             'Copying public assets from "assets" to "dist"',

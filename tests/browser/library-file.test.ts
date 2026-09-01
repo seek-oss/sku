@@ -9,7 +9,7 @@ describe('library-file', () => {
   describe('build', () => {
     it('should generate the expected files', async () => {
       const build = await sku('build');
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await expect(build).toMatchExitCode(0);
 
       const files = await dirContentsToObject(fixturePath('dist'));
       expect(files).toMatchSnapshot();

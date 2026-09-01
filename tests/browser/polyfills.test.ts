@@ -22,7 +22,7 @@ describe('polyfills', () => {
     describe('build', () => {
       it('should create valid app', async () => {
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await expect(build).toMatchExitCode(0);
 
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
         expect(await serve.findByText('Server started')).toBeInTheConsole();

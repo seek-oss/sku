@@ -10,3 +10,4 @@ tsconfig.json
 # end managed by sku
 
 src/
+fs-fixture-*

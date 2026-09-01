@@ -19,7 +19,6 @@ describe('vite loadable CSS ordering', () => {
     const build = await sku('build');
 
     await expect(build).toMatchExitCode(0);
-    expect(await build.findByText('Sku build complete')).toBeInTheConsole();
 
     const distFiles = await dirContentsToObject(fixturePath('dist'), [
       'css',

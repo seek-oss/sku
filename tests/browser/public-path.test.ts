@@ -23,7 +23,7 @@ describe('public path', () => {
         expect,
       }) => {
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await expect(build).toMatchExitCode(0);
 
         const serve = await sku('serve', portArgs);
         expect(await serve.findByText('Server started')).toBeInTheConsole();

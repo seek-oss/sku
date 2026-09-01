@@ -23,7 +23,7 @@ describe('assertion-removal', () => {
         const url = `http://localhost:${port}`;
 
         const build = await sku('build', args[bundler]);
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await expect(build).toMatchExitCode(0);
 
         const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
         expect(await serve.findByText('Server started')).toBeInTheConsole();
@@ -44,7 +44,7 @@ describe('assertion-removal', () => {
       const backendUrl = `http://localhost:8011`;
 
       const build = await sku('build-ssr');
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await expect(build).toMatchExitCode(0);
 
       const server = await node(['dist/server.cjs']);
       expect(

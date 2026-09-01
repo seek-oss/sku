@@ -227,7 +227,7 @@ describe('ssr-document', () => {
   describe('build', () => {
     beforeAll(async () => {
       const build = await sku('build', ['--config=sku.config.ts']);
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
     });
 
     it('emits sibling client/ and server/ under the build target', async () => {

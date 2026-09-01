@@ -111,7 +111,7 @@ describe('ssr-sites', () => {
   describe('build', () => {
     beforeAll(async () => {
       const build = await sku('build', ['--config=sku.config.ts']);
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
     });
 
     it('serialises site into the bootstrap', async ({ task }) => {

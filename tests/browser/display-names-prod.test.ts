@@ -19,7 +19,7 @@ describe('display-names-prod', () => {
     describe('build', () => {
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
-        await build.findByText('Sku build complete');
+        await expect(build).toMatchExitCode(0);
       });
 
       it('should create build output', async () => {

@@ -1,3 +1,4 @@
+import 'virtual:sku/entry-side-effects';
 import 'virtual:sku/polyfills';
 import { hydrateRoot } from 'react-dom/client';
 import { createBrowserRouter, matchRoutes, RouterProvider } from 'react-router';

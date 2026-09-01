@@ -5,6 +5,7 @@ declare module '__sku_alias__libraryEntry';
 declare module '__sku_alias__renderEntry';
 declare module '__sku_alias__webpackStats';
 declare module 'virtual:sku/polyfills';
+declare module 'virtual:sku/entry-side-effects';
 
 declare const __SKU_DEFAULT_SERVER_PORT__: string;
 

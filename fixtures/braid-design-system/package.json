@@ -2,24 +2,27 @@
   "name": "@sku-fixtures/braid-design-system",
   "private": true,
   "type": "module",
+  "scripts": {
+    "build": "sku build",
+    "build:ssr": "sku build --config sku.config.ssr.ts",
+    "build:vite": "sku build --config sku.config.vite.ts",
+    "serve": "sku serve",
+    "start": "sku start",
+    "start:ssr": "sku start --config sku.config.ssr.ts",
+    "start:vite": "sku start --config sku.config.vite.ts"
+  },
   "dependencies": {
     "braid-design-system": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
   },
-  "scripts": {
-    "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.ts",
-    "build:vite": "sku build --config sku.config.vite.ts",
-    "build": "sku build",
-    "serve": "sku serve"
-  },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "@sku-private/test-utils": "workspace:*",
+    "@types/jest": "^30.0.0",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vanilla-extract/css": "^1.0.0",
+    "react-router": "catalog:",
     "sku": "workspace:*"
   }
 }

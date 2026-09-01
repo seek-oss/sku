@@ -6,6 +6,7 @@ import { CLIENT_MANIFEST_RELATIVE_PATH } from '../ssr/clientManifestPath.js';
 import { SSR_CLIENT_CHUNK_NAME } from '../ssr/resolveAssets.js';
 import { resolveConfigSiteNames } from '../ssr/resolveConfigSiteNames.js';
 import { lazyRouteModuleIdPlugin } from './lazyRouteModuleId/lazyRouteModuleIdPlugin.js';
+import { ENTRY_SIDE_EFFECTS_VIRTUAL_ID } from './entrySideEffects.js';
 import { vitePluginSsrCss } from './ssrCss/plugin.js';
 import { telemetryPlugin } from './telemetry.js';
 import { createRequire } from 'node:module';
@@ -36,6 +37,7 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
             skuContext.paths.clientEntry,
             skuContext.paths.routesEntry,
             ssrClientDevEntry,
+            ssrClientEntry,
             ssrServerEntry,
           ],
         },
@@ -97,6 +99,7 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
     // Serve-only: Document `assets.css` + client entry own injection.
     vitePluginSsrCss({
       entries: [
+        ENTRY_SIDE_EFFECTS_VIRTUAL_ID,
         skuContext.paths.serverEntry,
         skuContext.paths.routesEntry,
         ssrServerEntry,

@@ -138,10 +138,13 @@ Any `node_modules` marked as a `compilePackage` will be compiled through webpack
 
 ## Polyfills
 
-Since sku injects its own code into your bundle in development mode, it's important for polyfills that modify the global environment to be loaded before all other code. To address this, the `polyfills` option allows you to provide an array of modules to import before any other code is executed.
+Since sku injects its own code into your bundle in development mode, it's important for polyfills that modify the global environment to be loaded before all other code.
+To address this, the [`polyfills`](./configuration.md#polyfills) option allows you to provide an array of modules to import before any other **browser** code is executed.
 
 > [!NOTE]
-> Polyfills are only loaded in a browser context. This feature can't be used to modify the global environment in Node.
+> Polyfills are only loaded in a browser context.
+> This feature can't be used to modify the global environment in Node.
+> For isomorphic modules that must run first on both the browser and the Node server (for example Braid reset), use [`entrySideEffects`](./configuration.md#entrysideeffects).
 
 ```ts
 export default {
@@ -152,6 +155,28 @@ export default {
   ],
 } satisfies SkuConfig;
 ```
+
+## Entry side effects
+
+Sku owns the client and SSR entries.
+Putting a module first in `App.tsx` or a root layout does not make it first in the graph.
+
+[`entrySideEffects`](./configuration.md#entrysideeffects) lists isomorphic modules that sku imports before any consumer module on Vite static and Vite SSR graphs.
+That includes the browser client, the Node server, and `sku start` CSS collection.
+
+This is the supported way to apply Braid’s CSS reset.
+
+```ts
+import type { SkuConfig } from 'sku';
+
+export default {
+  bundler: 'vite',
+  entrySideEffects: ['braid-design-system/reset'],
+} satisfies SkuConfig;
+```
+
+Use [`polyfills`](./configuration.md#polyfills) for browser-only globals.
+Do not put `window` code in `entrySideEffects`.
 
 ## Caching
 

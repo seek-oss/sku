@@ -46,7 +46,14 @@
       ],
     },
     "fixtures/braid-design-system": {
-      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      "entry": [
+        "src/client.tsx",
+        "src/render.tsx",
+        "src/ssr/client.tsx",
+        "src/ssr/server.tsx",
+        "src/ssr/routes.tsx",
+        "sku.config.*",
+      ],
     },
     "fixtures/custom-output-target": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],

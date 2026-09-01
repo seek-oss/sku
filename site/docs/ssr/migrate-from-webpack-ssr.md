@@ -78,7 +78,7 @@ Router-aware wrapping moves into your root layout route.
 
 Vocab: `getLanguage` on the server entry and `VocabProvider` in the root layout — see [Multi-language](./multi-language.md).
 
-**Braid:** ensure `braid-design-system/reset` runs before any Braid-touching server module — see [Providers → Braid reset](./providers.md#braid-reset).
+**Braid:** add `braid-design-system/reset` to [`entrySideEffects`](../configuration.md#entrysideeffects) — see [Providers → Braid reset](./providers.md#braid-reset).
 
 ## Data loading and middleware
 

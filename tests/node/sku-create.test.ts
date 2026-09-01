@@ -88,8 +88,6 @@ aroundAll(async (runSuite) => {
   try {
     createEnv = {
       SKU_CREATE_SKU_SPECIFIER: `sku@file:${pack.tarballPath}`,
-      // Speed up repeat runs by preferring cached registry metadata.
-      npm_config_prefer_offline: 'true',
     };
 
     await runSuite();

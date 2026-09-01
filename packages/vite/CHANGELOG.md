@@ -1,5 +1,11 @@
 # @sku-lib/vite
 
+## 2.0.3
+
+### Patch Changes
+
+- Mark required chunks with `data-required-chunk` ([#1707](https://github.com/seek-oss/sku/pull/1707))
+
 ## 2.0.2
 
 ### Patch Changes

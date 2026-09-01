@@ -1,5 +1,36 @@
 # @sku-lib/create
 
+## 1.4.0
+
+### Minor Changes
+
+- Add experimental Managed Data Mode SSR via `buildType: 'ssr'` ([#1687](https://github.com/seek-oss/sku/pull/1687))
+
+  **Experimental — not for production.**
+  Managed Data Mode SSR is available for evaluation and testing.
+  Do not use it in production yet; the API and behaviour may change.
+
+  **Managed Data Mode** enables sku to own the HTML Document, streaming/hydration, the Node server, and CSP.
+  sku wires React Router Data Mode for routing and data.
+  Apps own routes, data, and providers.
+
+  Scaffold a new app with `@sku-lib/create`:
+
+  ```sh
+  pnpm dlx @sku-lib/create my-app --template ssr
+  ```
+
+  Docs: [Server rendering](https://seek-oss.github.io/sku/#/./docs/ssr/)
+
+### Patch Changes
+
+- Stop writing pnpm 10-only settings into `pnpm-workspace.yaml` ([#1699](https://github.com/seek-oss/sku/pull/1699))
+
+  `ignorePatchFailures` and `packageManagerStrictVersion` were removed in pnpm 11, which is what `@sku-lib/create` pins for new apps. Leaving them in the default config made pnpm warn that the settings were unrecognized.
+
+- Updated dependencies [[`1f00a84`](https://github.com/seek-oss/sku/commit/1f00a844dd40a675c27bab56169e4caed48d37b2), [`091e21a`](https://github.com/seek-oss/sku/commit/091e21afd8c7aec5c20e4588cf94adf24eb9992a)]:
+  - pnpm-plugin-sku@0.2.1
+
 ## 1.3.3
 
 ### Patch Changes

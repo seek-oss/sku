@@ -15,7 +15,6 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 
 import {
-  bundlers,
   configure,
   scopeToFixture as scopeToSkuFixture,
 } from '@sku-private/testing-library';
@@ -37,7 +36,8 @@ vi.setConfig({
   testTimeout: timeout + 1000,
 });
 
-type Template = (typeof bundlers)[number];
+const templates = ['vite', 'webpack', 'ssr'] as const;
+type Template = (typeof templates)[number];
 
 const projectName = (template: Template) => `new-project-${template}`;
 const projectDirectory = (template: Template) =>
@@ -73,32 +73,38 @@ const packSku = async () => {
   };
 };
 
+const removeProjects = async () => {
+  await Promise.all(
+    templates.map((template) =>
+      // using native os cleanup since its much faster than fs.rm for large numbers of files
+      execFileAsync('rm', ['-rf', projectDirectory(template)]),
+    ),
+  );
+};
+
 aroundAll(async (runSuite) => {
   const pack = await packSku();
 
-  createEnv = {
-    SKU_CREATE_SKU_SPECIFIER: `sku@file:${pack.tarballPath}`,
-    // Speed up repeat runs by preferring cached registry metadata.
-    npm_config_prefer_offline: 'true',
-  };
+  try {
+    createEnv = {
+      SKU_CREATE_SKU_SPECIFIER: `sku@file:${pack.tarballPath}`,
+      // Speed up repeat runs by preferring cached registry metadata.
+      npm_config_prefer_offline: 'true',
+    };
 
-  await runSuite();
-
-  await pack.remove();
+    await runSuite();
+  } finally {
+    // clean up even if project creation fails in beforeAll
+    await pack.remove();
+    await removeProjects();
+  }
 });
 
 afterAll(async () => {
-  await Promise.all(
-    bundlers.map((template) =>
-      fs.rm(projectDirectory(template), {
-        recursive: true,
-        force: true,
-      }),
-    ),
-  );
+  await removeProjects();
 });
 
-describe('template prompt', () => {
+describe('interactive prompt', () => {
   // These tests only assert on the interactive prompt, so they skip the
   // dependency installation entirely.
   const skipInstallEnv = () => ({
@@ -106,42 +112,71 @@ describe('template prompt', () => {
     SKU_CREATE_SKIP_INSTALL: 'true',
   });
 
-  it.each(bundlers)(
-    'should create a %s project via the interactive prompt',
-    async (template) => {
-      const result = await create(projectName(template), [], {
-        spawnOpts: { env: skipInstallEnv() },
-      });
-      expect(
-        await result.findByText(
-          'Which template would you like to use?',
-          {},
-          { timeout },
-        ),
-      ).toBeInTheConsole();
+  it('should create a vite project via the interactive prompt', async () => {
+    const result = await create(projectName('vite'), [], {
+      spawnOpts: { env: skipInstallEnv() },
+    });
+    expect(
+      await result.findByText('Which template would you like to use?'),
+    ).toBeInTheConsole();
 
-      // Vite is the default selection; webpack requires moving down.
-      if (template === 'webpack') {
-        await result.userEvent.keyboard('[ArrowDown]');
-      }
-      const selectedOption = template === 'webpack' ? '❯ Webpack' : '❯ Vite';
-      expect(await result.findByText(selectedOption)).toBeInTheConsole();
+    expect(await result.findByText('❯ Vite')).toBeInTheConsole();
+    await result.userEvent.keyboard('[Enter]');
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName('vite')} with vite template`,
+      ),
+    ).toBeInTheConsole();
+  });
 
-      await result.userEvent.keyboard('[Enter]');
-      expect(
-        await result.findByText(
-          `Creating new sku project: ${projectName(template)} with ${template} template`,
-        ),
-      ).toBeInTheConsole();
-    },
-  );
+  it('should create a webpack project via the interactive prompt', async () => {
+    const result = await create(projectName('webpack'), [], {
+      spawnOpts: { env: skipInstallEnv() },
+    });
+    expect(
+      await result.findByText('Which template would you like to use?'),
+    ).toBeInTheConsole();
+
+    // Vite → SSR → Webpack
+    await result.userEvent.keyboard('[ArrowDown]');
+    await result.userEvent.keyboard('[ArrowDown]');
+
+    expect(await result.findByText('❯ Webpack')).toBeInTheConsole();
+    await result.userEvent.keyboard('[Enter]');
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName('webpack')} with webpack template`,
+      ),
+    ).toBeInTheConsole();
+  });
+
+  it('should create a ssr project via the interactive prompt', async () => {
+    const result = await create(projectName('ssr'), [], {
+      spawnOpts: { env: skipInstallEnv() },
+    });
+    expect(
+      await result.findByText('Which template would you like to use?'),
+    ).toBeInTheConsole();
+
+    // Vite → SSR
+    await result.userEvent.keyboard('[ArrowDown]');
+
+    expect(await result.findByText('❯ SSR')).toBeInTheConsole();
+    await result.userEvent.keyboard('[Enter]');
+    expect(
+      await result.findByText(
+        `Creating new sku project: ${projectName('ssr')} with ssr template`,
+      ),
+    ).toBeInTheConsole();
+  });
 });
 
-describe('sku-create', () => {
+describe.concurrent('sku-create', () => {
   beforeAll(async () => {
     // Create projects simultaneously to save time.
+    // this does use more system resources, but it's much faster than creating projects sequentially
     await Promise.all(
-      bundlers.map(async (template) => {
+      templates.map(async (template) => {
         const result = await create(
           projectName(template),
           ['--template', template],
@@ -161,10 +196,22 @@ describe('sku-create', () => {
     );
   });
 
-  for (const template of bundlers) {
-    describe.concurrent(`${template}`, () => {
+  for (const template of templates) {
+    describe(`${template}`, () => {
+      const ssrFiles = [
+        'src/routes.tsx',
+        'src/server.tsx',
+        'src/client.tsx',
+        'src/skuContext.ts',
+        'src/RootLayout.tsx',
+        'src/ErrorBoundary.tsx',
+        'src/pages/home/home.tsx',
+        'src/pages/about/about.tsx',
+      ];
+      const viteFiles = ['src/vite.env.d.ts'];
+
       // eslint-disable-next-line vitest/expect-expect
-      it(`should create package.json`, async (ctx) => {
+      it('should create package.json', async (ctx) => {
         const contents = await fs.readFile(
           fixturePath(projectName(template), 'package.json'),
           'utf-8',
@@ -181,8 +228,8 @@ describe('sku-create', () => {
         'eslint.config.mjs',
         'README.md',
         '.prettierignore',
-        'src/App/NextSteps.tsx',
-        ...(template !== 'webpack' ? ['src/vite.env.d.ts'] : []),
+        ...(template === 'ssr' ? ssrFiles : ['src/App/NextSteps.tsx']),
+        ...(template === 'vite' ? viteFiles : []),
         'pnpm-workspace.yaml',
       ])(`should create %s`, async (file, ctx) => {
         const contents = await fs.readFile(
@@ -202,6 +249,18 @@ describe('sku-create', () => {
       });
     });
   }
+
+  it('should omit static-app files from the SSR template', async () => {
+    await expect(
+      fs.access(fixturePath(projectName('ssr'), 'src/pages/home/route.ts')),
+    ).rejects.toThrow();
+    await expect(
+      fs.access(fixturePath(projectName('ssr'), 'src/App')),
+    ).rejects.toThrow();
+    await expect(
+      fs.access(fixturePath(projectName('ssr'), 'src/render.tsx')),
+    ).rejects.toThrow();
+  });
 });
 
 /**

@@ -22,6 +22,12 @@ export const installDependencies = async (
   projectPath: string,
   { template }: { template: Template },
 ): Promise<void> => {
+  // Internal/test-only: skip installation entirely
+  if (process.env.SKU_CREATE_SKIP_INSTALL) {
+    console.log('⏭️ Skipping dependency installation');
+    return;
+  }
+
   console.log('📦 Installing dependencies...');
 
   if (isAtLeastPnpmV10()) {

@@ -38,10 +38,17 @@ export const warnUnknownModuleIdsWithoutManifest = (
   }
 };
 
+/** Rolldown `[name]` for `#entries/ssr-client` (`entryFileNames: '[name]-[hash].js'`). */
+const SSR_CLIENT_CHUNK_NAME = 'ssr-client';
+
 export const findEntryChunk = (manifest: ClientManifest) => {
-  const entry = Object.values(manifest).find((chunk) => chunk.isEntry);
+  const entry = Object.values(manifest).find(
+    (chunk) => chunk.isEntry && chunk.name === SSR_CLIENT_CHUNK_NAME,
+  );
   if (!entry) {
-    throw new Error('No entry chunk found in the Vite client manifest.');
+    throw new Error(
+      `No "${SSR_CLIENT_CHUNK_NAME}" entry chunk found in the Vite client manifest.`,
+    );
   }
   return entry;
 };

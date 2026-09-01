@@ -1,6 +1,7 @@
 import { createFixture } from 'fs-fixture';
 import { describe, expect, it, vi, afterEach } from 'vitest';
 import {
+  findEntryChunk,
   resolveAssets,
   warnUnknownModuleIdsWithoutManifest,
   type ClientManifest,
@@ -78,6 +79,39 @@ describe('resolveAssets', () => {
     });
 
     expect(warn).not.toHaveBeenCalled();
+  });
+});
+
+describe('findEntryChunk', () => {
+  it('picks the ssr-client entry when other chunks are also isEntry', () => {
+    const ssrClient = {
+      file: 'ssr-client-ccc.js',
+      name: 'ssr-client',
+      isEntry: true,
+      css: ['assets/client.css'],
+    };
+    const extraEntriesFirst: ClientManifest = {
+      'virtual:other-entry.js': {
+        file: 'other-entry-aaa.js',
+        name: 'other-entry',
+        isEntry: true,
+      },
+      'packages/sku/dist/entries/ssr-client.mjs': ssrClient,
+    };
+
+    expect(findEntryChunk(extraEntriesFirst)).toEqual(ssrClient);
+  });
+
+  it('throws when the ssr-client entry is missing', () => {
+    expect(() =>
+      findEntryChunk({
+        'virtual:other-entry.js': {
+          file: 'other-entry-aaa.js',
+          name: 'other-entry',
+          isEntry: true,
+        },
+      }),
+    ).toThrow('No "ssr-client" entry chunk found');
   });
 });
 

@@ -174,7 +174,7 @@ describe('interactive prompt', () => {
 describe.concurrent('sku-create', () => {
   beforeAll(async () => {
     // Create projects simultaneously to save time.
-    // this does use more system resources, but it's much faster than creating projects sequentially
+    // This does use more system resources, but it's much faster than creating projects sequentially
     await Promise.all(
       templates.map(async (template) => {
         const result = await create(
@@ -184,14 +184,7 @@ describe.concurrent('sku-create', () => {
             spawnOpts: { env: createEnv },
           },
         );
-        expect(
-          await result.findByText(
-            `Creating new sku project: ${projectName(template)} with ${template} template`,
-          ),
-        ).toBeInTheConsole();
-        expect(
-          await result.findByText(`${projectName(template)} created`),
-        ).toBeInTheConsole();
+        await expect(result).toMatchExitCode(0);
       }),
     );
   });

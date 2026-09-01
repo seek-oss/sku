@@ -122,7 +122,6 @@ exports[`sku-create > ssr > should create pnpm-workspace.yaml 1`] = `
   core-js-pure: false
   esbuild: true
   sku: true
-  sku@file: VERSION_IGNORED
   unrs-resolver: true
 blockExoticSubdeps: true
 configDependencies:
@@ -657,7 +656,6 @@ exports[`sku-create > vite > should create pnpm-workspace.yaml 1`] = `
   core-js-pure: false
   esbuild: true
   sku: true
-  sku@file: VERSION_IGNORED
   unrs-resolver: true
 blockExoticSubdeps: true
 configDependencies:
@@ -1045,7 +1043,6 @@ exports[`sku-create > webpack > should create pnpm-workspace.yaml 1`] = `
   core-js-pure: false
   esbuild: true
   sku: true
-  sku@file: VERSION_IGNORED
   unrs-resolver: true
 blockExoticSubdeps: true
 configDependencies:

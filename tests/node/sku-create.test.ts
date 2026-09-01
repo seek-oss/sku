@@ -9,7 +9,6 @@ import {
 } from 'vitest';
 
 import fs from 'node:fs/promises';
-import os from 'node:os';
 import path from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -46,32 +45,12 @@ const projectDirectory = (template: Template) =>
 let createEnv: NodeJS.ProcessEnv;
 
 /**
- * Packs the local `packages/sku` workspace into a temporary `.tgz` so create
- * tests can install sku via `SKU_CREATE_SKU_SPECIFIER` (`sku@file:…`) instead
- * of the published registry package.
+ * Links the local `packages/sku` workspace so create tests exercise this
+ * commit's sku via `SKU_CREATE_SKU_SPECIFIER` instead of the published
+ * registry package. A specifier (rather than workspace config) is required
+ * because create writes a nested `pnpm-workspace.yaml` into the new project.
  */
-const packSku = async () => {
-  const packDestination = await fs.mkdtemp(
-    path.join(os.tmpdir(), 'sku-create-pack-'),
-  );
-  const skuPackageDir = path.resolve(__dirname, '../../packages/sku');
-
-  await execFileAsync('pnpm', ['pack', '--pack-destination', packDestination], {
-    cwd: skuPackageDir,
-  });
-
-  const packedFiles = await fs.readdir(packDestination);
-  const tarball = packedFiles.find((file) => file.endsWith('.tgz'));
-
-  if (!tarball) {
-    throw new Error('Expected sku pack to produce a .tgz file');
-  }
-
-  return {
-    tarballPath: path.join(packDestination, tarball),
-    remove: () => fs.rm(packDestination, { recursive: true, force: true }),
-  };
-};
+const skuPackageDir = path.resolve(__dirname, '../../packages/sku');
 
 const removeProjects = async () => {
   await Promise.all(
@@ -83,17 +62,14 @@ const removeProjects = async () => {
 };
 
 aroundAll(async (runSuite) => {
-  const pack = await packSku();
-
   try {
     createEnv = {
-      SKU_CREATE_SKU_SPECIFIER: `sku@file:${pack.tarballPath}`,
+      SKU_CREATE_SKU_SPECIFIER: `sku@link:${skuPackageDir}`,
     };
 
     await runSuite();
   } finally {
     // clean up even if project creation fails in beforeAll
-    await pack.remove();
     await removeProjects();
   }
 });
@@ -284,10 +260,8 @@ function replaceDependencyVersions(packageJson: Record<string, any>) {
  * This function strips version numbers from YAML content.
  */
 function stripYamlVersions(yamlContent: string): string {
-  return yamlContent
-    .replace(
-      /(?<!minimumReleaseAge):\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
-      ': VERSION_IGNORED',
-    )
-    .replace(/sku@file:\s*.+/g, 'sku@file: VERSION_IGNORED');
+  return yamlContent.replace(
+    /(?<!minimumReleaseAge):\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
+    ': VERSION_IGNORED',
+  );
 }

@@ -103,7 +103,7 @@ describe('stream-insert-html', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
     });
 
     it('passes Apollo hydration on the production browser/node builds', async ({

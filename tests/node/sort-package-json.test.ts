@@ -50,7 +50,7 @@ describe('sort-package-json', () => {
 
     it('should sort package.json', async () => {
       const format = await sku('format');
-      expect(await format.findByText('Formatting complete')).toBeInTheConsole();
+      await expect(format).toMatchExitCode(0);
 
       const packageJson = await fs.readFile(fixturePath('package.json'), {
         encoding: 'utf-8',

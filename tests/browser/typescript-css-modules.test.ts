@@ -17,7 +17,7 @@ describe('typescript-css-modules', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
     });
 
     afterAll(async () => {
@@ -44,7 +44,7 @@ describe('typescript-css-modules', () => {
 
     beforeAll(async () => {
       const buildSsr = await sku('build-ssr', ['--config=sku-ssr.config.ts']);
-      await buildSsr.findByText('Sku build complete');
+      await expect(buildSsr).toMatchExitCode(0);
     });
 
     afterAll(async () => {
@@ -93,10 +93,9 @@ describe('typescript-css-modules', () => {
     it('should handle tsc and eslint', async () => {
       // run build first to ensure typescript declarations are generated
       const build = await sku('build');
-      expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+      await expect(build).toMatchExitCode(0);
 
       const lint = await sku('lint');
-      expect(await lint.findByText('Linting complete')).toBeInTheConsole();
       await expect(lint).toMatchExitCode(0);
     });
   });

@@ -26,7 +26,7 @@ describe('source-maps', () => {
             },
           },
         });
-        expect(await build.findByText('Sku build complete')).toBeInTheConsole();
+        await expect(build).toMatchExitCode(0);
 
         const files = await dirContentsToObject(fixturePath('./dist'));
         expect(files).toMatchSnapshot();

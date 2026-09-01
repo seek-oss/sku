@@ -88,7 +88,7 @@ describe('sku-with-https', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
 
       const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
       await serve.findByText('Server started');

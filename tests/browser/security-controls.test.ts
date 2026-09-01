@@ -45,7 +45,7 @@ describe('security-controls', () => {
 
       beforeAll(async () => {
         const build = await sku('build', [...args[bundler]]);
-        await build.findByText('Sku build complete');
+        await expect(build).toMatchExitCode(0);
 
         const indexPath = fixturePath('dist/index.html');
         const content = await readFile(indexPath, 'utf-8');
@@ -82,7 +82,7 @@ describe('security-controls', () => {
 
       beforeAll(async () => {
         const build = await sku('build', [...args[bundler]]);
-        await build.findByText('Sku build complete');
+        await expect(build).toMatchExitCode(0);
 
         const serve = await sku('serve', [`--port=${port}`]);
         await serve.findByText('Server started');
@@ -95,8 +95,10 @@ describe('security-controls', () => {
         expect(app).toMatchSnapshot();
       });
     });
+  });
 
-    describe.runIf(bundler === 'vite')('csp-delivery', () => {
+  describe('vite-only', () => {
+    describe('csp-delivery', () => {
       describe('start', async () => {
         const port = await getPort();
         const url = `http://localhost:${port}`;
@@ -125,7 +127,7 @@ describe('security-controls', () => {
           const build = await sku('build', [
             '--config=sku.config.vite.csp-delivery.ts',
           ]);
-          await build.findByText('Sku build complete');
+          await expect(build).toMatchExitCode(0);
 
           const indexJsonPath = fixturePath('dist/index.html.json');
           const content = await readFile(indexJsonPath, 'utf-8');
@@ -160,7 +162,7 @@ describe('security-controls', () => {
           const build = await sku('build', [
             '--config=sku.config.vite.csp-delivery.ts',
           ]);
-          await build.findByText('Sku build complete');
+          await expect(build).toMatchExitCode(0);
 
           const serve = await sku('serve', [`--port=${port}`]);
           await serve.findByText('Server started');
@@ -175,7 +177,7 @@ describe('security-controls', () => {
       });
     });
 
-    describe.runIf(bundler === 'vite')('csp-report-only', () => {
+    describe('csp-report-only', () => {
       describe('start', async () => {
         const port = await getPort();
         const url = `http://localhost:${port}`;
@@ -204,7 +206,7 @@ describe('security-controls', () => {
           const build = await sku('build', [
             '--config=sku.config.vite.csp-report-only.ts',
           ]);
-          await build.findByText('Sku build complete');
+          await expect(build).toMatchExitCode(0);
 
           const indexJsonPath = fixturePath('dist/index.html.json');
           const content = await readFile(indexJsonPath, 'utf-8');
@@ -241,7 +243,7 @@ describe('security-controls', () => {
           const build = await sku('build', [
             '--config=sku.config.vite.csp-report-only.ts',
           ]);
-          await build.findByText('Sku build complete');
+          await expect(build).toMatchExitCode(0);
 
           const serve = await sku('serve', [`--port=${port}`]);
           await serve.findByText('Server started');
@@ -256,7 +258,7 @@ describe('security-controls', () => {
       });
     });
 
-    describe.runIf(bundler === 'vite')('csp-report-to', () => {
+    describe('csp-report-to', () => {
       describe('endpoint', () => {
         describe('start', async () => {
           const port = await getPort();
@@ -288,7 +290,7 @@ describe('security-controls', () => {
             const build = await sku('build', [
               '--config=sku.config.vite.csp-report-to.endpoint.ts',
             ]);
-            await build.findByText('Sku build complete');
+            await expect(build).toMatchExitCode(0);
 
             const indexJsonPath = fixturePath('dist/index.html.json');
             const content = await readFile(indexJsonPath, 'utf-8');
@@ -322,7 +324,7 @@ describe('security-controls', () => {
             const build = await sku('build', [
               '--config=sku.config.vite.csp-report-to.endpoint.ts',
             ]);
-            await build.findByText('Sku build complete');
+            await expect(build).toMatchExitCode(0);
 
             const serve = await sku('serve', [`--port=${port}`]);
             await serve.findByText('Server started');
@@ -370,7 +372,7 @@ describe('security-controls', () => {
             const build = await sku('build', [
               '--config=sku.config.vite.csp-report-to.url.ts',
             ]);
-            await build.findByText('Sku build complete');
+            await expect(build).toMatchExitCode(0);
 
             const indexJsonPath = fixturePath('dist/index.html.json');
             const content = await readFile(indexJsonPath, 'utf-8');
@@ -419,7 +421,7 @@ describe('security-controls', () => {
             const build = await sku('build', [
               '--config=sku.config.vite.csp-report-to.url.ts',
             ]);
-            await build.findByText('Sku build complete');
+            await expect(build).toMatchExitCode(0);
 
             const serve = await sku('serve', [`--port=${port}`]);
             await serve.findByText('Server started');
@@ -465,7 +467,7 @@ describe('security-controls', () => {
             const build = await sku('build', [
               '--config=sku.config.vite.csp-report-to.tuple.ts',
             ]);
-            await build.findByText('Sku build complete');
+            await expect(build).toMatchExitCode(0);
 
             const indexJsonPath = fixturePath('dist/index.html.json');
             const content = await readFile(indexJsonPath, 'utf-8');
@@ -511,7 +513,7 @@ describe('security-controls', () => {
             const build = await sku('build', [
               '--config=sku.config.vite.csp-report-to.tuple.ts',
             ]);
-            await build.findByText('Sku build complete');
+            await expect(build).toMatchExitCode(0);
 
             const serve = await sku('serve', [`--port=${port}`]);
             await serve.findByText('Server started');
@@ -534,7 +536,7 @@ describe('security-controls', () => {
 
     beforeAll(async () => {
       const build = await sku('build-ssr', ['--config=sku-server.config.ts']);
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
     });
 
     it('should start a server with content-security-policies', async () => {

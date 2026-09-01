@@ -19,7 +19,7 @@ describe('styling', () => {
   describe('build', () => {
     beforeAll(async () => {
       const build = await sku('build');
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
     });
 
     it('should create valid app', async () => {

@@ -363,7 +363,7 @@ describe('logging production', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
     });
 
     it('records loader errors on the production server', async ({ task }) => {

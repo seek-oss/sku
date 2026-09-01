@@ -33,7 +33,7 @@ describe('vite-cjs-interop-apollo-client-v4', () => {
 
     beforeAll(async () => {
       const build = await sku('build');
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
 
       const serve = await sku('serve', portArgs);
       await serve.findByText('Server started');

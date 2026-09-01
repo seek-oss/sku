@@ -75,7 +75,7 @@ describe('ssr-hello-world', () => {
 
     beforeAll(async () => {
       const build = await sku('build-ssr', ['--config=sku-build.config.ts']);
-      await build.findByText('Sku build complete');
+      await expect(build).toMatchExitCode(0);
     });
 
     describe('default port', () => {

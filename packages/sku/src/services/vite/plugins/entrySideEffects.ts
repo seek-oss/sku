@@ -20,7 +20,7 @@ export const loadEntrySideEffectsModule = (specifiers: string[]): string =>
       const resolved = require.resolve(specifier, { paths: [cwd()] });
 
       const importTarget = isFileSpecifier(specifier) ? resolved : specifier;
-      return `import '${importTarget}';`;
+      return `import "${importTarget}";`;
     })
     .join('\n');
 

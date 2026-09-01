@@ -117,6 +117,7 @@ exports[`sku-create ssr > should create package.json 1`] = `
 
 exports[`sku-create ssr > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
+  '@parcel/watcher': true
   '@swc/core': true
   core-js-pure: false
   esbuild: true
@@ -651,6 +652,7 @@ exports[`sku-create vite > should create package.json 1`] = `
 
 exports[`sku-create vite > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
+  '@parcel/watcher': true
   '@swc/core': true
   core-js-pure: false
   esbuild: true
@@ -1038,6 +1040,7 @@ exports[`sku-create webpack > should create package.json 1`] = `
 
 exports[`sku-create webpack > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
+  '@parcel/watcher': true
   '@swc/core': true
   core-js-pure: false
   esbuild: true

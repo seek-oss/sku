@@ -2,6 +2,7 @@ import type { Config } from '@pnpm/config';
 
 export const defaultConfig = {
   allowBuilds: {
+    '@parcel/watcher': true,
     '@swc/core': true,
     'core-js-pure': false,
     esbuild: true,

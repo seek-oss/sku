@@ -339,8 +339,7 @@ export interface SkuConfigBase {
   libraryFile?: string;
 
   /**
-   * An array of isomorphic modules to import before any consumer module on Vite
-   * client, SSR server, and static start render graphs.
+   * An array of isomorphic modules to import before any consumer module.
    *
    * Use this for CSS resets (for example `braid-design-system/reset`) that must
    * evaluate first. Specifiers resolve from the app, in array order.

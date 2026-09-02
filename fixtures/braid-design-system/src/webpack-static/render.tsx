@@ -3,7 +3,7 @@ import 'braid-design-system/reset';
 import { renderToString } from 'react-dom/server';
 import type { Render } from 'sku';
 
-import App from './App';
+import App from '../App';
 
 export default {
   renderApp: ({ site, SkuProvider }) =>

@@ -42,11 +42,16 @@ describe('braid-design-system', () => {
       const args: BundlerValues<string[]> = {
         vite: [
           '--config',
-          'sku.config.vite.ts',
+          'sku.config.static.ts',
           '--strict-port',
           `--port=${port}`,
         ],
-        webpack: ['--strict-port', `--port=${port}`],
+        webpack: [
+          '--config',
+          'sku.config.webpack-static.ts',
+          '--strict-port',
+          `--port=${port}`,
+        ],
       };
 
       beforeAll(async () => {
@@ -75,15 +80,19 @@ describe('braid-design-system', () => {
     describe('build', async () => {
       const port = await getPort();
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.ts'],
-        webpack: [],
+        vite: ['--config', 'sku.config.static.ts'],
+        webpack: ['--config', 'sku.config.webpack-static.ts'],
       };
 
       beforeAll(async () => {
         const build = await sku('build', args[bundler]);
         await expect(build).toMatchExitCode(0);
 
-        const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
+        const serve = await sku('serve', [
+          ...args[bundler],
+          '--strict-port',
+          `--port=${port}`,
+        ]);
         await serve.findByText('Server started');
 
         return cleanup;

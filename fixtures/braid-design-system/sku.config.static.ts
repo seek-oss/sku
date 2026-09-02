@@ -1,3 +1,4 @@
+import { makeStableViteHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 import baseConfig from './sku.config.base.js';
@@ -5,12 +6,13 @@ import baseConfig from './sku.config.base.js';
 export default {
   ...baseConfig,
   bundler: 'vite',
-  buildType: 'ssr',
-
-  clientEntry: 'src/ssr/client.tsx',
-  serverEntry: 'src/ssr/server.tsx',
-  routesEntry: 'src/ssr/routes.tsx',
 
   entrySideEffects: ['braid-design-system/reset'],
-  port: 8219,
+
+  clientEntry: 'src/static/client.tsx',
+  renderEntry: 'src/static/render.tsx',
+
+  port: 8200,
+
+  dangerouslySetViteConfig: makeStableViteHashes,
 } satisfies SkuConfig;

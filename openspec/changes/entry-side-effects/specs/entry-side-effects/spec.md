@@ -9,18 +9,11 @@ Lets Vite apps list isomorphic modules that sku evaluates before any consumer mo
 Vite apps MUST be able to set `entrySideEffects` to an array of module specifiers.
 The default MUST be an empty array.
 An empty array MUST be a no-op.
-Webpack MUST ignore the option.
 
 #### Scenario: Default is empty
 
 - **WHEN** an app omits `entrySideEffects`
 - **THEN** sku injects no extra entry side-effect modules
-
-#### Scenario: Webpack does not apply the option
-
-- **WHEN** `bundler` is `webpack`
-- **AND** `entrySideEffects` is non-empty
-- **THEN** those modules are not prepended to webpack entries
 
 ### Requirement: Listed modules evaluate first on Vite graphs
 

@@ -6,7 +6,7 @@ Import order in `routes.tsx` is not a reliable contract because eslint sorts loc
 
 ## What Changes
 
-- Add config `entrySideEffects: string[]` (default `[]`).
+- Add Vite config `entrySideEffects: string[]` (default `[]`).
 - Sku evaluates those modules first on Vite static and Vite SSR graphs (client, Node render/SSR, and start CSS collection).
 - Specifiers resolve from the app, in array order.
 - The SSR create template sets `entrySideEffects: ['braid-design-system/reset']`.
@@ -17,7 +17,6 @@ Import order in `routes.tsx` is not a reliable contract because eslint sorts loc
 
 - Auto-detecting Braid or a `braidReset` boolean.
 - A public sku plugin API.
-- Webpack (the option has no effect there).
 - Changing `polyfills` behaviour.
 - Storybook preview injection.
 
@@ -29,7 +28,7 @@ Import order in `routes.tsx` is not a reliable contract because eslint sorts loc
 
 ## Impact
 
-- Public config (`SkuConfig`, schema, `configuration.md`).
+- Public config (`ViteSkuConfig`, schema, `configuration.md`).
 - Sku Vite entries, the polyfills-style virtual module, and start CSS collection order.
 - SSR create template and Braid reset docs.
 - Changeset (minor).

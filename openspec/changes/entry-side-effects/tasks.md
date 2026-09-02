@@ -1,6 +1,6 @@
 ## 1. Config
 
-- [x] 1.1 Add `entrySideEffects?: string[]` to `SkuConfig` (default `[]`) and the config schema
+- [x] 1.1 Add `entrySideEffects?: string[]` to `ViteSkuConfig` (default `[]`) and the config schema
 - [x] 1.2 Thread it through `defaultSkuConfig` and `skuContext`
 
 ## 2. Vite injection

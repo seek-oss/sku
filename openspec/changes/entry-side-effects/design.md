@@ -16,7 +16,6 @@ Start CSS collection (`collectStyle`) walks a separate entry list and can emit c
 
 **Non-Goals:**
 
-- Webpack prepend (document Vite-only).
 - Changing the static production SSG Rolldown input (shipped CSS comes from the client build).
 - Auto-detecting Braid.
 - A public plugin hook.
@@ -58,13 +57,10 @@ Visited-set collection then emits reset CSS before CSS reached only through late
 Production static CSS is the client bundle, whose entry is already `vite-client.tsx`.
 Wrapping SSG `input` would be a larger behaviour change for a graph that does not ship CSS.
 
-### Webpack ignores a non-empty list
+### ViteSkuConfig field
 
-No prepend, no hard-error.
-Shared webpack/Vite fixture configs can list the option without failing webpack runs.
-Document that only `bundler: 'vite'` applies it.
-
-Alternative: hard-error on webpack. Rejected as noisy for dual-config fixtures.
+Put `entrySideEffects` on `ViteSkuConfig`.
+It is a Vite graph feature, so it belongs with the other Vite config fields.
 
 ### Create template opts in
 

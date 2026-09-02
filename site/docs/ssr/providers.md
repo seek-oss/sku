@@ -151,10 +151,8 @@ See [Multi-language](./multi-language.md) and [Apollo streaming hydration](./dat
 ## Braid reset
 
 Braid’s CSS reset must evaluate before any Braid component.
-sku owns the Vite client and SSR entries.
-A reset import only in the root layout is not enough when other route modules import Braid first.
 
-Set [`entrySideEffects`](../configuration.md#entrysideeffects) so sku imports the reset before any consumer module:
+When using Braid, set [`entrySideEffects`](../configuration.md#entrysideeffects) so sku imports the reset before any consumer module:
 
 ```ts
 import type { SkuConfig } from 'sku';
@@ -165,9 +163,6 @@ export default {
   entrySideEffects: ['braid-design-system/reset'],
 } satisfies SkuConfig;
 ```
-
-A reset import in the root layout is harmless (ESM singleton) but is not the graph guarantee.
-[`polyfills`](../configuration.md#polyfills) is browser-only and is the wrong place for reset.
 
 ## Browser-only libraries
 

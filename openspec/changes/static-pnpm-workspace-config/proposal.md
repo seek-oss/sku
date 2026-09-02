@@ -1,10 +1,16 @@
 ## Why
 
-Sku manages recommended pnpm settings via `pnpm-plugin-sku`, a pnpm config dependency that merges defaults into pnpm's config at runtime.
-Runtime-injected config is invisible to tooling that reads `pnpm-workspace.yaml` statically (including Renovate).
-The plugin mechanism also forces version-gated install logic (`isAtLeastPnpmV10`, `pnpm add --config`), a runtime detection workaround (`pnpm config get --json`, pnpm#9797), and a persistent validation banner.
-And it splits ownership of the settings across two packages: when sku changes its recommended settings, consumers must update the pinned `pnpm-plugin-sku` config dependency separately from sku itself.
-Writing the config statically into `pnpm-workspace.yaml` makes it visible to all tooling and lets sku own the file's sync directly, so updating sku is the only upgrade step.
+Sku injects its recommended pnpm settings at runtime via `pnpm-plugin-sku`, a pnpm config dependency.
+This causes several problems:
+
+- Runtime-injected config is invisible to tooling that reads `pnpm-workspace.yaml` statically.
+- Renovate can't handle the lockfile checksums config plugins generate, so every Renovate branch needs a manual `pnpm install`.
+- The plugin forces version-gated install logic (`isAtLeastPnpmV10`, `pnpm add --config`) and a runtime detection workaround (`pnpm config get --json`, pnpm#9797).
+- The plugin-missing warning misfires in monorepos, so it always shows and users learn to ignore it.
+- Settings are owned across two packages: consumers must update the pinned `pnpm-plugin-sku` separately from sku.
+
+Writing the config statically into `pnpm-workspace.yaml` fixes all of this: tooling can see it, sku owns the sync directly, and updating sku is the only upgrade step.
+It also makes sku's recommended values visible in the project's own config, so users won't unknowingly add conflicting values.
 
 ## What Changes
 

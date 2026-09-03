@@ -1,3 +1,4 @@
+import 'virtual:sku/entry-side-effects';
 import 'virtual:sku/polyfills';
 import client from '__sku_alias__clientEntry';
 import dedent from 'dedent';

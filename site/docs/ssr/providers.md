@@ -109,8 +109,6 @@ The same root layout can be used for shared UI such as a header or footer.
 ::: code-group
 
 ```tsx [RootLayout.tsx]
-import 'braid-design-system/reset';
-
 import { BraidProvider } from 'braid-design-system';
 import seekJobs from 'braid-design-system/themes/seekJobs';
 import { Outlet, useLocation } from 'react-router';
@@ -152,9 +150,19 @@ See [Multi-language](./multi-language.md) and [Apollo streaming hydration](./dat
 
 ## Braid reset
 
-Import `braid-design-system/reset` before any module that touches Braid on the **server** graph (for example at the top of the root layout).
-On `sku start`, Vite’s SSR evaluation order can differ from production.
-sku does not auto-inject Braid reset.
+Braid’s CSS reset must evaluate before any Braid component.
+
+When using Braid, set [`entrySideEffects`](../configuration.md#entrysideeffects) so sku imports the reset before any consumer module:
+
+```ts
+import type { SkuConfig } from 'sku';
+
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  entrySideEffects: ['braid-design-system/reset'],
+} satisfies SkuConfig;
+```
 
 ## Browser-only libraries
 

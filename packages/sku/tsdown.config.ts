@@ -57,6 +57,7 @@ export default defineConfig([
         '__sku_alias__routesEntry',
         '__sku_alias__webpackStats',
         'virtual:sku/polyfills',
+        'virtual:sku/entry-side-effects',
         '@vanilla-extract/css/adapter',
         // Self-import via package exports — kept external so dist retains the
         // `sku/runtime` specifier (shared module identity with app code).

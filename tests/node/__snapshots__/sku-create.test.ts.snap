@@ -157,6 +157,7 @@ const skuConfig = {
   publicPath: '/',
   expressTrustProxy: true,
   testRunner: 'vitest',
+  entrySideEffects: ['braid-design-system/reset'],
   pathAliases: {
     '#src/*': './src/*',
   },
@@ -692,6 +693,7 @@ const skuConfig = {
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
   testRunner: 'vitest',
   bundler: 'vite',
+  entrySideEffects: ['braid-design-system/reset'],
   pathAliases: {
     '#src/*': './src/*',
   },

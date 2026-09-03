@@ -1,3 +1,4 @@
+import 'virtual:sku/entry-side-effects';
 import { createCollector } from '@sku-lib/vite/collector';
 import { createDebug } from 'obug';
 import { createPreRenderedHtml } from '../helpers/html/createPreRenderedHtml.js';

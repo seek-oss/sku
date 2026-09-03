@@ -118,6 +118,7 @@ export default [
             '__sku_alias__routesEntry',
             '__sku_alias__webpackStats',
             'virtual:sku/polyfills',
+            'virtual:sku/entry-side-effects',
           ],
         },
       ],

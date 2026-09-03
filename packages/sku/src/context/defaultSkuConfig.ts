@@ -29,6 +29,7 @@ export default {
   public: 'public',
   publicPath: '/',
   polyfills: [],
+  entrySideEffects: [],
   libraryName: undefined,
   libraryFile: undefined,
   sourceMapsProd: true,

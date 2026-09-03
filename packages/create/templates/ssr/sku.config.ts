@@ -6,6 +6,7 @@ const skuConfig = {
   publicPath: '/',
   expressTrustProxy: true,
   testRunner: 'vitest',
+  entrySideEffects: ['braid-design-system/reset'],
   pathAliases: {
     '#src/*': './src/*',
   },

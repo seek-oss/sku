@@ -21,6 +21,11 @@ import type { SsrRequestContextStore } from './requestContext.js';
 export interface DocumentAssets {
   css: string[];
   modulePreloads: string[];
+  /**
+   * Start-only virtual stylesheet href. `HeadAssets` marks this URL with
+   * `data-ssr-css` so the client can drop it after HMR.
+   */
+  ssrCssHref?: string;
 }
 
 export interface RenderAssets extends DocumentAssets {

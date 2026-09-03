@@ -96,7 +96,7 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
       }),
     },
     lazyRouteModuleIdPlugin(),
-    // Serve-only: Document `assets.css` + client entry own injection.
+    // Serve-only: HeadAssets `assets.css` + client entry own injection.
     vitePluginSsrCss({
       entries: [
         ENTRY_SIDE_EFFECTS_VIRTUAL_ID,

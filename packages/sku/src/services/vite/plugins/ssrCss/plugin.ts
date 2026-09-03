@@ -10,14 +10,14 @@ const PLUGIN_NAME = 'vite-plugin-ssr-css';
  * This plugin provides virtual:ssr-css.css to collect styles reachable from entries.
  * When `injectHtml` is true (static Vite), ViteDevServer.transformIndexHtml injects
  * the stylesheet link plus HMR cleanup. SSR sets `injectHtml: false` and puts
- * `SSR_CSS_VIRTUAL_HREF` in Document `assets.css` instead.
+ * `SSR_CSS_VIRTUAL_HREF` in HeadAssets `assets.css` instead.
  *
  * This plugin has been forked from `hi-ogawa/vite-plugins`, with some adjustments to make it work with Sku + Braid.
  * @see https://github.com/hi-ogawa/vite-plugins/blob/main/packages/ssr-css/README.md
  */
 export function vitePluginSsrCss(pluginOpts: {
   entries: string[];
-  /** When false, skip transformIndexHtml injection (SSR Document path). Default true. */
+  /** When false, skip transformIndexHtml injection (SSR HeadAssets path). Default true. */
   injectHtml?: boolean;
 }): Plugin {
   let server: ViteDevServer;

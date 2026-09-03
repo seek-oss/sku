@@ -1,15 +1,17 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
-import { HeadAssets, HeadAssetsProvider } from './headAssets.js';
-import { SSR_CSS_VIRTUAL_HREF } from '../plugins/ssrCss/constants.js';
+import { HeadAssets } from 'sku/runtime';
+import { HeadAssetsProvider } from '#runtime/headAssets';
 
 describe('HeadAssets', () => {
   it('renders modulepreload and stylesheet links when provider is present', () => {
+    const ssrCssHref = '/virtual-ssr.css';
     const html = renderToStaticMarkup(
       <HeadAssetsProvider
         assets={{
           modulePreloads: ['/module-1.js', '/module-2.js'],
-          css: ['/style.css', SSR_CSS_VIRTUAL_HREF],
+          css: ['/style.css', ssrCssHref],
+          ssrCssHref,
         }}
       >
         <head>
@@ -22,7 +24,7 @@ describe('HeadAssets', () => {
     expect(html).toContain('<link rel="modulepreload" href="/module-2.js"/>');
     expect(html).toContain('<link rel="stylesheet" href="/style.css"/>');
     expect(html).toContain(
-      `<link rel="stylesheet" href="${SSR_CSS_VIRTUAL_HREF}" data-ssr-css="true"/>`,
+      `<link rel="stylesheet" href="${ssrCssHref}" data-ssr-css="true"/>`,
     );
   });
 
@@ -37,5 +39,11 @@ describe('HeadAssets', () => {
     }).not.toThrow();
 
     expect(html).toBe('<head></head>');
+  });
+
+  it('does not export HeadAssetsProvider from sku/runtime', async () => {
+    expect(await import('sku/runtime')).not.toHaveProperty(
+      'HeadAssetsProvider',
+    );
   });
 });

@@ -3,7 +3,7 @@ import '@vitejs/plugin-react/preamble';
 // Start-only: page-load + HMR telemetry clients (static uses transformIndexHtml).
 import '../plugins/telemetryClients.js';
 
-// Start-only: clear the Document-injected SSR-CSS link after HMR so
+// Start-only: clear the HeadAssets-injected SSR-CSS link after HMR so
 // client CSS takes over.
 if (import.meta.hot) {
   import.meta.hot.on('vite:afterUpdate', () => {

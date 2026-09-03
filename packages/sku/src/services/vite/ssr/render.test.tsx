@@ -14,7 +14,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
 import { createSkuContexts, HeadAssets } from 'sku/runtime';
 import { render } from './render.js';
-import type { RenderAssets } from './types.js';
+import type { RenderAssets, RenderSuccess } from './types.js';
 
 const neverResolving = () => new Promise<string>(() => {});
 
@@ -68,6 +68,26 @@ const getSite = () => 'au';
 const getClientContext = () => ({ userId: 'user-1' });
 const getReactContext = () => ({ api: 'server-api' });
 
+const commitToHtml = async (result: RenderSuccess) => {
+  const chunks: Buffer[] = [];
+  await new Promise<void>((resolve, reject) => {
+    const writable = new Writable({
+      write(chunk, _encoding, callback) {
+        chunks.push(Buffer.from(chunk));
+        callback();
+      },
+      final(callback) {
+        callback();
+        resolve();
+      },
+    });
+    writable.on('error', reject);
+    result.commit(writable);
+  });
+
+  return Buffer.concat(chunks).toString('utf-8');
+};
+
 const renderToHtml = async ({
   includeClientContext = true,
   includeReactContext = true,
@@ -89,23 +109,7 @@ const renderToHtml = async ({
     throw new Error('Expected a streamed document, not a Response');
   }
 
-  const chunks: Buffer[] = [];
-  await new Promise<void>((resolve, reject) => {
-    const writable = new Writable({
-      write(chunk, _encoding, callback) {
-        chunks.push(Buffer.from(chunk));
-        callback();
-      },
-      final(callback) {
-        callback();
-        resolve();
-      },
-    });
-    writable.on('error', reject);
-    result.commit(writable);
-  });
-
-  return Buffer.concat(chunks).toString('utf-8');
+  return commitToHtml(result);
 };
 
 describe('render', () => {
@@ -173,23 +177,7 @@ describe('render', () => {
       throw new Error('Expected a streamed document, not a Response');
     }
 
-    const chunks: Buffer[] = [];
-    await new Promise<void>((resolve, reject) => {
-      const writable = new Writable({
-        write(chunk, _encoding, callback) {
-          chunks.push(Buffer.from(chunk));
-          callback();
-        },
-        final(callback) {
-          callback();
-          resolve();
-        },
-      });
-      writable.on('error', reject);
-      result.commit(writable);
-    });
-
-    const html = Buffer.concat(chunks).toString('utf-8');
+    const html = await commitToHtml(result);
     const expected = { theme: 'dark', tags: [null, 'a'] };
 
     expect(siblingContext).toEqual(expected);
@@ -398,23 +386,7 @@ describe('render', () => {
       throw new Error('Expected a streamed document, not a Response');
     }
 
-    const chunks: Buffer[] = [];
-    await new Promise<void>((resolve, reject) => {
-      const writable = new Writable({
-        write(chunk, _encoding, callback) {
-          chunks.push(Buffer.from(chunk));
-          callback();
-        },
-        final(callback) {
-          callback();
-          resolve();
-        },
-      });
-      writable.on('error', reject);
-      result.commit(writable);
-    });
-
-    const html = Buffer.concat(chunks).toString('utf-8');
+    const html = await commitToHtml(result);
     expect(html).toContain('>async-user<');
     expect(html).toContain('>async-api<');
   });
@@ -437,6 +409,7 @@ describe('render', () => {
     expect(streamSource).not.toContain('createStaticHandler');
     expect(attemptSource).not.toContain('createStaticHandler');
     expect(attemptSource).toContain('SkuProvider');
+    expect(attemptSource).toContain('HeadAssetsProvider');
   });
 
   it('uses the sole config site when getSite is omitted', async () => {
@@ -452,23 +425,7 @@ describe('render', () => {
       throw new Error('Expected a streamed document, not a Response');
     }
 
-    const chunks: Buffer[] = [];
-    await new Promise<void>((resolve, reject) => {
-      const writable = new Writable({
-        write(chunk, _encoding, callback) {
-          chunks.push(Buffer.from(chunk));
-          callback();
-        },
-        final(callback) {
-          callback();
-          resolve();
-        },
-      });
-      writable.on('error', reject);
-      result.commit(writable);
-    });
-
-    const html = Buffer.concat(chunks).toString('utf-8');
+    const html = await commitToHtml(result);
     expect(html).toContain('__SKU_SITE__');
     expect(html).toContain('"au"');
   });
@@ -522,23 +479,7 @@ describe('render', () => {
 
     expect(result.statusCode).toBe(500);
 
-    const chunks: Buffer[] = [];
-    await new Promise<void>((resolve, reject) => {
-      const writable = new Writable({
-        write(chunk, _encoding, callback) {
-          chunks.push(Buffer.from(chunk));
-          callback();
-        },
-        final(callback) {
-          callback();
-          resolve();
-        },
-      });
-      writable.on('error', reject);
-      result.commit(writable);
-    });
-
-    const html = Buffer.concat(chunks).toString('utf-8');
+    const html = await commitToHtml(result);
     expect(html).toContain('data-testid="error-boundary"');
     expect(html).toContain('Boom recovered');
   });
@@ -597,23 +538,7 @@ describe('render', () => {
 
     expect(result.statusCode).toBe(500);
 
-    const chunks: Buffer[] = [];
-    await new Promise<void>((resolve, reject) => {
-      const writable = new Writable({
-        write(chunk, _encoding, callback) {
-          chunks.push(Buffer.from(chunk));
-          callback();
-        },
-        final(callback) {
-          callback();
-          resolve();
-        },
-      });
-      writable.on('error', reject);
-      result.commit(writable);
-    });
-
-    const html = Buffer.concat(chunks).toString('utf-8');
+    const html = await commitToHtml(result);
     expect(html).toContain('data-testid="error-boundary"');
     expect(html).toContain('Suspense recovered');
   });
@@ -849,9 +774,10 @@ describe('render', () => {
         request: new Request('http://localhost/'),
         req: { path: '/' } as ExpressRequest,
         assets: {
-          css: ['/app.css'],
+          css: ['/app.css', '/virtual-ssr.css'],
           modulePreloads: ['/vendor.js'],
           bootstrapModules: [],
+          ssrCssHref: '/virtual-ssr.css',
         },
         getSite,
       });
@@ -860,23 +786,7 @@ describe('render', () => {
         throw new Error('Expected streamed document');
       }
 
-      const chunks: Buffer[] = [];
-      await new Promise<void>((resolve, reject) => {
-        const writable = new Writable({
-          write(chunk, _encoding, callback) {
-            chunks.push(Buffer.from(chunk));
-            callback();
-          },
-          final(callback) {
-            callback();
-            resolve();
-          },
-        });
-        writable.on('error', reject);
-        result.commit(writable);
-      });
-
-      const html = Buffer.concat(chunks).toString('utf-8');
+      const html = await commitToHtml(result);
 
       // Emits root layout's html with attributes
       expect(html).toContain('<html lang="en" data-custom-root="true">');
@@ -886,6 +796,9 @@ describe('render', () => {
       const headStart = html.indexOf('<head>');
       const headEnd = html.indexOf('</head>');
       const cssLink = html.indexOf('<link rel="stylesheet" href="/app.css"/>');
+      const ssrCssLink = html.indexOf(
+        '<link rel="stylesheet" href="/virtual-ssr.css" data-ssr-css="true"/>',
+      );
       const preloadLink = html.indexOf(
         '<link rel="modulepreload" href="/vendor.js"/>',
       );
@@ -894,6 +807,8 @@ describe('render', () => {
       expect(headEnd).toBeGreaterThan(headStart);
       expect(cssLink).toBeGreaterThan(headStart);
       expect(cssLink).toBeLessThan(headEnd);
+      expect(ssrCssLink).toBeGreaterThan(headStart);
+      expect(ssrCssLink).toBeLessThan(headEnd);
       expect(preloadLink).toBeGreaterThan(headStart);
       expect(preloadLink).toBeLessThan(headEnd);
     });
@@ -949,23 +864,7 @@ describe('render', () => {
         throw new Error('Expected streamed document');
       }
 
-      const chunks: Buffer[] = [];
-      await new Promise<void>((resolve, reject) => {
-        const writable = new Writable({
-          write(chunk, _encoding, callback) {
-            chunks.push(Buffer.from(chunk));
-            callback();
-          },
-          final(callback) {
-            callback();
-            resolve();
-          },
-        });
-        writable.on('error', reject);
-        result.commit(writable);
-      });
-
-      const html = Buffer.concat(chunks).toString('utf-8');
+      const html = await commitToHtml(result);
       const headStart = html.indexOf('<head>');
       const headEnd = html.indexOf('</head>');
       const styleIndex = html.indexOf('data-testid="brand-style"');
@@ -1012,23 +911,7 @@ describe('render', () => {
         throw new Error('Expected streamed document');
       }
 
-      const chunks: Buffer[] = [];
-      await new Promise<void>((resolve, reject) => {
-        const writable = new Writable({
-          write(chunk, _encoding, callback) {
-            chunks.push(Buffer.from(chunk));
-            callback();
-          },
-          final(callback) {
-            callback();
-            resolve();
-          },
-        });
-        writable.on('error', reject);
-        result.commit(writable);
-      });
-
-      const html = Buffer.concat(chunks).toString('utf-8');
+      const html = await commitToHtml(result);
       expect(html).toContain('<title>No Assets</title>');
       expect(html).not.toContain('/app.css');
       expect(html).not.toContain('/vendor.js');
@@ -1081,23 +964,7 @@ describe('render', () => {
 
       expect(result.statusCode).toBe(500);
 
-      const chunks: Buffer[] = [];
-      await new Promise<void>((resolve, reject) => {
-        const writable = new Writable({
-          write(chunk, _encoding, callback) {
-            chunks.push(Buffer.from(chunk));
-            callback();
-          },
-          final(callback) {
-            callback();
-            resolve();
-          },
-        });
-        writable.on('error', reject);
-        result.commit(writable);
-      });
-
-      const html = Buffer.concat(chunks).toString('utf-8');
+      const html = await commitToHtml(result);
       expect(html).toContain('<html lang="en" data-layout="root">');
       expect(html).toContain('<head>');
       expect(html).toContain('<body>');

@@ -1,5 +1,11 @@
 # @sku-lib/create
 
+## 1.4.1
+
+### Patch Changes
+
+- Make use of `entrySideEffects` on the Vite SSR and Vite SSG templates ([#1717](https://github.com/seek-oss/sku/pull/1717))
+
 ## 1.4.0
 
 ### Minor Changes

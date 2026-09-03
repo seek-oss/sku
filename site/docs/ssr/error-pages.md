@@ -14,7 +14,9 @@ Attach an `ErrorBoundary` on a layout route so every child under it shares the s
 
 Without a route `ErrorBoundary`, React Router hydrates its default error UI over the SSR error HTML.
 That can briefly flash a stack trace before the default “Hey developer” page.
-Provide an `ErrorBoundary` on the root route to provide a nicer user experience.
+
+Because [`RootLayout`](./providers.md#root-layout-for-providers-and-document) renders `<html>`, attaching `ErrorBoundary` to the root route itself replaces that layout on failure and drops `<html>` from the response.
+Instead, attach `ErrorBoundary` to a child route under `RootLayout` so the document shell stays mounted.
 
 sku uses [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary):
 
@@ -29,8 +31,12 @@ import { RootLayout } from './RootLayout';
 export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
-    ErrorBoundary, // [!code highlight]
-    children: [{ index: true, lazy: () => import('./pages/home/home') }],
+    children: [
+      {
+        ErrorBoundary, // [!code highlight]
+        children: [{ index: true, lazy: () => import('./pages/home/home') }],
+      },
+    ],
   },
 ];
 ```
@@ -74,7 +80,7 @@ That includes:
 - `405` when a mutation hits a route without an `action`
 - sync `Component` throws
 
-Put the boundary high enough in the tree (often the root layout) so nested pages inherit it.
+Put the boundary on a child route under the root layout so nested pages inherit it while preserving `<html>`.
 You can also nest boundaries when a section needs its own failure UI.
 
 ### Suspense failures during document SSR

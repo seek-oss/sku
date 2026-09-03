@@ -7,7 +7,7 @@ import * as clientEntry from '__sku_alias__clientEntry';
 import * as routesEntry from '__sku_alias__routesEntry';
 import { SkuProvider } from '#runtime/skuContext';
 import { registerSiteRouteTree } from '#runtime/preloadRoute';
-import { Document } from '../ssr/Document.js';
+import { HeadAssetsProvider } from '#runtime/headAssets';
 import { buildSiteRouteTrees } from '../ssr/buildSiteRouteTrees.js';
 import { readRoutesEntry } from '../ssr/readRoutesEntry.js';
 import { assertSiteName, selectForSite } from '../ssr/selectForSite.js';
@@ -64,7 +64,7 @@ const hydrate = async () => {
 
   hydrateRoot(
     document,
-    <Document
+    <HeadAssetsProvider
       assets={
         window.__SKU_DOCUMENT_ASSETS__ ?? {
           css: [],
@@ -79,7 +79,7 @@ const hydrate = async () => {
       >
         <RouterProvider router={router} />
       </SkuProvider>
-    </Document>,
+    </HeadAssetsProvider>,
   );
 };
 

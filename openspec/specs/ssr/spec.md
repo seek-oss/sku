@@ -4,7 +4,8 @@
 
 How sku runs Vite SSR apps.
 SSR is selected with `bundler: 'vite'` and `buildType: 'ssr'`.
-Sku owns the HTML Document, streaming, hydration, the Node server, and the production client/server layout.
+Sku owns streaming, hydration, the Node server, and the production client/server layout.
+The app root layout owns the HTML document element tree.
 
 ## Requirements
 

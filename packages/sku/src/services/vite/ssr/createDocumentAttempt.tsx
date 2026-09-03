@@ -7,11 +7,11 @@ import {
 } from 'react-router';
 import { createInsertHtmlQueue, InsertHtmlProvider } from '#runtime/insertHtml';
 import { SkuProvider } from '#runtime/skuContext';
+import { HeadAssetsProvider } from '#runtime/headAssets';
 
 import { abortReason } from './abortReason.js';
 import { bindCommit } from './bindCommit.js';
 import { buildBootstrapScriptContent } from './bootstrap.js';
-import { Document } from './Document.js';
 import type {
   DocumentAssets,
   JsonValue,
@@ -123,7 +123,7 @@ export const createDocumentAttempt = ({
 
   streamRef.current = renderToPipeableStream(
     <InsertHtmlProvider insertHtml={insertHtmlQueue.insertHtml}>
-      <Document assets={documentAssets}>
+      <HeadAssetsProvider assets={documentAssets}>
         <SkuProvider
           site={site}
           clientContext={clientContext}
@@ -135,7 +135,7 @@ export const createDocumentAttempt = ({
             hydrate={false}
           />
         </SkuProvider>
-      </Document>
+      </HeadAssetsProvider>
     </InsertHtmlProvider>,
     {
       bootstrapModules: assets.bootstrapModules,

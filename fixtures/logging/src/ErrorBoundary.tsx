@@ -1,7 +1,6 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router';
 import { context, trace } from '@opentelemetry/api';
 
-import { AppNav } from './AppNav.js';
 import { log } from './shared/log.js';
 
 export function ErrorBoundary() {
@@ -25,17 +24,14 @@ export function ErrorBoundary() {
     });
 
     return (
-      <div>
-        <AppNav />
-        <main data-testid="error-boundary">
-          <h1>
-            {error.status} {error.statusText}
-          </h1>
-          <p data-testid="error-message">
-            {typeof error.data === 'string' ? error.data : 'Request failed'}
-          </p>
-        </main>
-      </div>
+      <main data-testid="error-boundary">
+        <h1>
+          {error.status} {error.statusText}
+        </h1>
+        <p data-testid="error-message">
+          {typeof error.data === 'string' ? error.data : 'Request failed'}
+        </p>
+      </main>
     );
   }
 
@@ -47,12 +43,9 @@ export function ErrorBoundary() {
   activeSpan?.addEvent('route.error', { message });
 
   return (
-    <div>
-      <AppNav />
-      <main data-testid="error-boundary">
-        <h1>Something went wrong</h1>
-        <p data-testid="error-message">{message}</p>
-      </main>
-    </div>
+    <main data-testid="error-boundary">
+      <h1>Something went wrong</h1>
+      <p data-testid="error-message">{message}</p>
+    </main>
   );
 }

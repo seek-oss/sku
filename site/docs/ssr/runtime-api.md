@@ -12,10 +12,19 @@ Most helpers are documented on the topic pages that use them.
 | --------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | [`defineServerEntry` / `defineClientEntry`](./entries.md)                         | Typed server and client entry objects                    |
 | [`createSkuContexts`](./providers.md#typed-hooks)                                 | Typed `useSite` / `useClientContext` / `useReactContext` |
+| [`HeadAssets`](#headassets)                                                       | Emit sku stylesheet and modulepreload links in `<head>`  |
 | [`SkuRouteObject` / `SiteOf`](./routing.md#strictly-typed-sites-in-route-objects) | Type `sites` from `getSite`                              |
 | [`usePreloadRoute`](./routing.md#intent-preloading-with-usepreloadroute)          | Warm lazy route chunks on intent                         |
 | [`useInsertHtml`](#useinserthtml)                                                 | Queue React nodes into the SSR response stream           |
 | [`getCspNonce`](#getcspnonce)                                                     | Request a CSP nonce for inline / injected scripts        |
+
+## `HeadAssets`
+
+A component that emits Document CSS `<link rel="stylesheet">` and `modulepreload` `<link>` elements from sku-owned asset URLs for the document.
+
+Render `<HeadAssets />` inside `<head>` in your app’s root layout.
+Omitting `HeadAssets` does not throw, but leaves the document unstyled.
+See [Root layout for providers and document](./providers.md#root-layout-for-providers-and-document).
 
 ## `useInsertHtml`
 
@@ -40,7 +49,7 @@ See [CSP](./csp.md#nonces).
 ## See also
 
 - [Request entries](./entries.md) — `defineServerEntry` / `defineClientEntry`
-- [Providers](./providers.md) — `createSkuContexts`
+- [Providers](./providers.md) — `createSkuContexts` and `HeadAssets`
 - [Routing](./routing.md#intent-preloading-with-usepreloadroute) — `usePreloadRoute`
 - [Data loading](./data-loading.md#apollo-streaming-hydration) — Apollo + `useInsertHtml`
 - [CSP](./csp.md) — headers and nonces

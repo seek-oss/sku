@@ -3,7 +3,8 @@
 ## Purpose
 
 How sku wires React Router Data Mode for apps that own routes, data, and providers.
-Sku owns the Document, SkuProvider, streaming seams, and site-scoped route trees.
+Sku owns SkuProvider, streaming seams, and site-scoped route trees.
+The root layout owns the HTML document element tree.
 Public APIs live on `sku/runtime`.
 
 ## Requirements

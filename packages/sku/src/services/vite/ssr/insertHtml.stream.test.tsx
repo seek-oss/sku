@@ -1,11 +1,12 @@
 import { Writable } from 'node:stream';
 import { Suspense, use } from 'react';
 import type { Request as ExpressRequest } from 'express';
+import { Outlet } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
 import { render } from './render.js';
-import { useInsertHtml } from 'sku/runtime';
+import { HeadAssets, useInsertHtml } from 'sku/runtime';
 import type { RenderAssets } from './types.js';
 
 const assets: RenderAssets = {
@@ -16,13 +17,28 @@ const assets: RenderAssets = {
 
 const getSite = () => 'au';
 
+const RootLayout = () => (
+  <html lang="en">
+    <head>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <HeadAssets />
+    </head>
+    <body>
+      <Outlet />
+    </body>
+  </html>
+);
+
 const renderToHtml = async ({
   routes,
 }: {
   routes: Parameters<typeof buildSiteStaticHandlers>[0]['au'];
 }) => {
   const result = await render({
-    siteStaticHandlers: buildSiteStaticHandlers({ au: routes }),
+    siteStaticHandlers: buildSiteStaticHandlers({
+      au: [{ Component: RootLayout, children: routes }],
+    }),
     request: new Request('http://localhost/'),
     req: { path: '/' } as ExpressRequest,
     assets,
@@ -135,7 +151,12 @@ describe('insertHtml stream injection', () => {
     const store = createSsrRequestContextStore();
     const result = await render({
       siteStaticHandlers: buildSiteStaticHandlers({
-        au: [{ path: '/', Component: NonceInjectingPage }],
+        au: [
+          {
+            Component: RootLayout,
+            children: [{ path: '/', Component: NonceInjectingPage }],
+          },
+        ],
       }),
       request: new Request('http://localhost/'),
       req: { path: '/' } as ExpressRequest,

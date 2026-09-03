@@ -1,12 +1,18 @@
 import { readFile } from 'node:fs/promises';
 import { Writable } from 'node:stream';
 import type { Request as ExpressRequest } from 'express';
-import { Suspense, use } from 'react';
+import {
+  createContext,
+  useContext,
+  Suspense,
+  use,
+  type ReactNode,
+} from 'react';
 import { Outlet, RouterContextProvider } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
-import { createSkuContexts } from 'sku/runtime';
+import { createSkuContexts, HeadAssets } from 'sku/runtime';
 import { render } from './render.js';
 import type { RenderAssets } from './types.js';
 
@@ -22,6 +28,19 @@ const { useSite, useClientContext, useReactContext } = createSkuContexts<
   }
 >();
 
+const RootLayout = () => (
+  <html lang="en">
+    <head>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <HeadAssets />
+    </head>
+    <body>
+      <Outlet />
+    </body>
+  </html>
+);
+
 const Page = () => (
   <main>
     <p data-testid="site">{useSite()}</p>
@@ -31,7 +50,12 @@ const Page = () => (
 );
 
 const siteStaticHandlers = buildSiteStaticHandlers({
-  au: [{ path: '/', Component: Page }],
+  au: [
+    {
+      Component: RootLayout,
+      children: [{ path: '/', Component: Page }],
+    },
+  ],
 });
 
 const assets: RenderAssets = {
@@ -111,14 +135,19 @@ describe('render', () => {
     const nestedHandlers = buildSiteStaticHandlers({
       au: [
         {
-          path: '/',
-          Component: () => (
-            <main>
-              <p data-testid="keys">
-                {Object.keys(useClientContext() ?? {}).join(',')}
-              </p>
-            </main>
-          ),
+          Component: RootLayout,
+          children: [
+            {
+              path: '/',
+              Component: () => (
+                <main>
+                  <p data-testid="keys">
+                    {Object.keys(useClientContext() ?? {}).join(',')}
+                  </p>
+                </main>
+              ),
+            },
+          ],
         },
       ],
     });
@@ -465,13 +494,16 @@ describe('render', () => {
     const ErrorBoundary = () => (
       <main data-testid="error-boundary">Boom recovered</main>
     );
-    const Layout = () => <Outlet />;
     const handlers = buildSiteStaticHandlers({
       au: [
         {
-          Component: Layout,
-          ErrorBoundary,
-          children: [{ index: true, Component: Boom }],
+          Component: RootLayout,
+          children: [
+            {
+              ErrorBoundary,
+              children: [{ index: true, Component: Boom }],
+            },
+          ],
         },
       ],
     });
@@ -527,21 +559,24 @@ describe('render', () => {
     const ErrorBoundary = () => (
       <main data-testid="error-boundary">Suspense recovered</main>
     );
-    const Layout = () => <Outlet />;
     const handlers = buildSiteStaticHandlers({
       au: [
         {
-          Component: Layout,
-          ErrorBoundary,
+          Component: RootLayout,
           children: [
             {
-              index: true,
-              Component: () => (
-                <Suspense fallback={<p>Loading</p>}>
-                  <DeferredBoom />
-                </Suspense>
-              ),
-              handle: { waitForAll: true },
+              ErrorBoundary,
+              children: [
+                {
+                  index: true,
+                  Component: () => (
+                    <Suspense fallback={<p>Loading</p>}>
+                      <DeferredBoom />
+                    </Suspense>
+                  ),
+                  handle: { waitForAll: true },
+                },
+              ],
             },
           ],
         },
@@ -606,7 +641,6 @@ describe('render', () => {
       errorBoundaryRendered = true;
       return <main data-testid="error-boundary">should-not-render</main>;
     };
-    const Layout = () => <Outlet />;
     let markPendingStarted!: () => void;
     const pendingStarted = new Promise<void>((resolve) => {
       markPendingStarted = resolve;
@@ -618,17 +652,21 @@ describe('render', () => {
     const handlers = buildSiteStaticHandlers({
       au: [
         {
-          Component: Layout,
-          ErrorBoundary,
+          Component: RootLayout,
           children: [
             {
-              index: true,
-              Component: () => (
-                <Suspense fallback={<p>Loading</p>}>
-                  <Pending />
-                </Suspense>
-              ),
-              handle: { waitForAll: true },
+              ErrorBoundary,
+              children: [
+                {
+                  index: true,
+                  Component: () => (
+                    <Suspense fallback={<p>Loading</p>}>
+                      <Pending />
+                    </Suspense>
+                  ),
+                  handle: { waitForAll: true },
+                },
+              ],
             },
           ],
         },
@@ -692,21 +730,24 @@ describe('render', () => {
       errorBoundaryRendered = true;
       return <main data-testid="error-boundary">should-not-render</main>;
     };
-    const Layout = () => <Outlet />;
     const handlers = buildSiteStaticHandlers({
       au: [
         {
-          Component: Layout,
-          ErrorBoundary,
+          Component: RootLayout,
           children: [
             {
-              index: true,
-              Component: () => (
-                <Suspense fallback={<p>Loading</p>}>
-                  <p>{use(neverResolving())}</p>
-                </Suspense>
-              ),
-              handle: { waitForAll: true },
+              ErrorBoundary,
+              children: [
+                {
+                  index: true,
+                  Component: () => (
+                    <Suspense fallback={<p>Loading</p>}>
+                      <p>{use(neverResolving())}</p>
+                    </Suspense>
+                  ),
+                  handle: { waitForAll: true },
+                },
+              ],
             },
           ],
         },
@@ -743,17 +784,20 @@ describe('render', () => {
         <PendingRecovery />
       </Suspense>
     );
-    const Layout = () => <Outlet />;
     const handlers = buildSiteStaticHandlers({
       au: [
         {
-          Component: Layout,
-          ErrorBoundary,
+          Component: RootLayout,
           children: [
             {
-              index: true,
-              Component: Boom,
-              handle: { waitForAll: true },
+              ErrorBoundary,
+              children: [
+                {
+                  index: true,
+                  Component: Boom,
+                  handle: { waitForAll: true },
+                },
+              ],
             },
           ],
         },
@@ -775,5 +819,290 @@ describe('render', () => {
     controller.abort(reason);
 
     await expect(pending).rejects.toBe(reason);
+  });
+
+  describe('document head contribution', () => {
+    it('streams root-layout html with HeadAssets links inside head and no wrapping sku html', async () => {
+      const CustomRootLayout = () => (
+        <html lang="en" data-custom-root="true">
+          <head>
+            <title>Custom Title</title>
+            <HeadAssets />
+          </head>
+          <body>
+            <Outlet />
+          </body>
+        </html>
+      );
+
+      const handlers = buildSiteStaticHandlers({
+        au: [
+          {
+            Component: CustomRootLayout,
+            children: [{ index: true, Component: () => <p>Content</p> }],
+          },
+        ],
+      });
+
+      const result = await render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets: {
+          css: ['/app.css'],
+          modulePreloads: ['/vendor.js'],
+          bootstrapModules: [],
+        },
+        getSite,
+      });
+
+      if ('response' in result) {
+        throw new Error('Expected streamed document');
+      }
+
+      const chunks: Buffer[] = [];
+      await new Promise<void>((resolve, reject) => {
+        const writable = new Writable({
+          write(chunk, _encoding, callback) {
+            chunks.push(Buffer.from(chunk));
+            callback();
+          },
+          final(callback) {
+            callback();
+            resolve();
+          },
+        });
+        writable.on('error', reject);
+        result.commit(writable);
+      });
+
+      const html = Buffer.concat(chunks).toString('utf-8');
+
+      // Emits root layout's html with attributes
+      expect(html).toContain('<html lang="en" data-custom-root="true">');
+      // No double/wrapping html tag
+      expect(html.match(/<html/g)).toHaveLength(1);
+      // HeadAssets links appear inside head
+      const headStart = html.indexOf('<head>');
+      const headEnd = html.indexOf('</head>');
+      const cssLink = html.indexOf('<link rel="stylesheet" href="/app.css"/>');
+      const preloadLink = html.indexOf(
+        '<link rel="modulepreload" href="/vendor.js"/>',
+      );
+
+      expect(headStart).toBeGreaterThan(-1);
+      expect(headEnd).toBeGreaterThan(headStart);
+      expect(cssLink).toBeGreaterThan(headStart);
+      expect(cssLink).toBeLessThan(headEnd);
+      expect(preloadLink).toBeGreaterThan(headStart);
+      expect(preloadLink).toBeLessThan(headEnd);
+    });
+
+    it('renders a non-hoistable style in head under an app provider that wraps html', async () => {
+      const BrandContext = createContext('default-brand');
+
+      const BrandProvider = ({ children }: { children: ReactNode }) => (
+        <BrandContext.Provider value="seek-jobs">
+          {children}
+        </BrandContext.Provider>
+      );
+
+      const BrandStyle = () => {
+        const brand = useContext(BrandContext);
+        return (
+          <style data-testid="brand-style">{`@font-face { font-family: ${brand}; }`}</style>
+        );
+      };
+
+      const WrappedRootLayout = () => (
+        <BrandProvider>
+          <html lang="en">
+            <head>
+              <BrandStyle />
+              <HeadAssets />
+            </head>
+            <body>
+              <Outlet />
+            </body>
+          </html>
+        </BrandProvider>
+      );
+
+      const handlers = buildSiteStaticHandlers({
+        au: [
+          {
+            Component: WrappedRootLayout,
+            children: [{ index: true, Component: () => <p>Content</p> }],
+          },
+        ],
+      });
+
+      const result = await render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+      });
+
+      if ('response' in result) {
+        throw new Error('Expected streamed document');
+      }
+
+      const chunks: Buffer[] = [];
+      await new Promise<void>((resolve, reject) => {
+        const writable = new Writable({
+          write(chunk, _encoding, callback) {
+            chunks.push(Buffer.from(chunk));
+            callback();
+          },
+          final(callback) {
+            callback();
+            resolve();
+          },
+        });
+        writable.on('error', reject);
+        result.commit(writable);
+      });
+
+      const html = Buffer.concat(chunks).toString('utf-8');
+      const headStart = html.indexOf('<head>');
+      const headEnd = html.indexOf('</head>');
+      const styleIndex = html.indexOf('data-testid="brand-style"');
+
+      expect(styleIndex).toBeGreaterThan(headStart);
+      expect(styleIndex).toBeLessThan(headEnd);
+      expect(html).toContain('font-family: seek-jobs');
+    });
+
+    it('does not throw when HeadAssets is omitted and omits sku asset links', async () => {
+      const RootLayoutWithoutHeadAssets = () => (
+        <html lang="en">
+          <head>
+            <title>No Assets</title>
+          </head>
+          <body>
+            <Outlet />
+          </body>
+        </html>
+      );
+
+      const handlers = buildSiteStaticHandlers({
+        au: [
+          {
+            Component: RootLayoutWithoutHeadAssets,
+            children: [{ index: true, Component: () => <p>Content</p> }],
+          },
+        ],
+      });
+
+      const result = await render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets: {
+          css: ['/app.css'],
+          modulePreloads: ['/vendor.js'],
+          bootstrapModules: [],
+        },
+        getSite,
+      });
+
+      if ('response' in result) {
+        throw new Error('Expected streamed document');
+      }
+
+      const chunks: Buffer[] = [];
+      await new Promise<void>((resolve, reject) => {
+        const writable = new Writable({
+          write(chunk, _encoding, callback) {
+            chunks.push(Buffer.from(chunk));
+            callback();
+          },
+          final(callback) {
+            callback();
+            resolve();
+          },
+        });
+        writable.on('error', reject);
+        result.commit(writable);
+      });
+
+      const html = Buffer.concat(chunks).toString('utf-8');
+      expect(html).toContain('<title>No Assets</title>');
+      expect(html).not.toContain('/app.css');
+      expect(html).not.toContain('/vendor.js');
+    });
+
+    it('retains root-layout html when an ErrorBoundary on a child route catches an error', async () => {
+      const CustomDocLayout = () => (
+        <html lang="en" data-layout="root">
+          <head>
+            <HeadAssets />
+          </head>
+          <body>
+            <Outlet />
+          </body>
+        </html>
+      );
+
+      const ErrorBoundary = () => (
+        <div data-testid="error-message">Route error caught</div>
+      );
+      const Boom = () => {
+        throw new Error('Child route explosion');
+      };
+
+      const handlers = buildSiteStaticHandlers({
+        au: [
+          {
+            Component: CustomDocLayout,
+            children: [
+              {
+                ErrorBoundary,
+                children: [{ index: true, Component: Boom }],
+              },
+            ],
+          },
+        ],
+      });
+
+      const result = await render({
+        siteStaticHandlers: handlers,
+        request: new Request('http://localhost/'),
+        req: { path: '/' } as ExpressRequest,
+        assets,
+        getSite,
+      });
+
+      if ('response' in result) {
+        throw new Error('Expected streamed document');
+      }
+
+      expect(result.statusCode).toBe(500);
+
+      const chunks: Buffer[] = [];
+      await new Promise<void>((resolve, reject) => {
+        const writable = new Writable({
+          write(chunk, _encoding, callback) {
+            chunks.push(Buffer.from(chunk));
+            callback();
+          },
+          final(callback) {
+            callback();
+            resolve();
+          },
+        });
+        writable.on('error', reject);
+        result.commit(writable);
+      });
+
+      const html = Buffer.concat(chunks).toString('utf-8');
+      expect(html).toContain('<html lang="en" data-layout="root">');
+      expect(html).toContain('<head>');
+      expect(html).toContain('<body>');
+      expect(html).toContain('data-testid="error-message"');
+      expect(html).toContain('Route error caught');
+    });
   });
 });

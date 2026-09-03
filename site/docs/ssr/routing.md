@@ -29,7 +29,7 @@ Use React Router’s [lazy factory](https://reactrouter.com/start/data/route-obj
 ```tsx [routes.tsx]
 import type { SkuRouteObject } from 'sku/runtime';
 
-import { RootLayout } from './App/RootLayout';
+import { RootLayout } from './RootLayout';
 
 export const routes: SkuRouteObject[] = [
   {
@@ -44,8 +44,20 @@ export const routes: SkuRouteObject[] = [
 
 ```tsx [RootLayout.tsx]
 import { Outlet } from 'react-router';
+import { HeadAssets } from 'sku/runtime';
 
-export const RootLayout = () => <Outlet />;
+export const RootLayout = () => (
+  <html lang="en">
+    <head>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <HeadAssets />
+    </head>
+    <body>
+      <Outlet />
+    </body>
+  </html>
+);
 ```
 
 ```tsx [home.tsx]
@@ -108,7 +120,7 @@ Resolve the active site in the server entry with [`getSite`](./entries.md#getsit
 ```tsx [routes.tsx]
 import type { SkuRouteObject } from 'sku/runtime';
 
-import { RootLayout } from './App/RootLayout';
+import { RootLayout } from './RootLayout';
 
 export const routes: SkuRouteObject[] = [
   {

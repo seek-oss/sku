@@ -9,9 +9,10 @@
 Server-side rendering builds an isomorphic React app that renders on the server for each request, then hydrates in the browser.
 
 This path uses **Managed Data Mode**.
-sku owns the HTTP server, HTML document, streaming, hydration, and CSP headers.
+sku owns streaming, hydration, the HTTP server, and CSP headers.
 It wires [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing and data.
-You own pages, data, and providers.
+The app root layout owns the HTML document (`<html>`, `<head>`, `<body>`).
+You own routes, data, providers, and the Document element tree.
 
 > [!CAUTION]
 > Experimental — not for production.
@@ -43,7 +44,7 @@ After scaffolding you get three app entries:
 - `src/client.tsx` — hydrate-time setup
 - `src/routes.tsx` — your React Router route tree
 
-The template also sets up a root layout (for providers like Braid), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md#typed-hooks) from `sku/runtime`.
+The template also sets up a root layout (rendering `<html>`, `<head>`, `<body>`, and [`HeadAssets`](./providers.md#root-layout-for-providers)), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md#typed-hooks) from `sku/runtime`.
 
 ## Configuration
 

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router';
+import { HeadAssets } from 'sku/runtime';
 
 import { AppNav } from './AppNav.js';
 
@@ -17,9 +18,18 @@ export const RootLayout = () => {
   }, []);
 
   return (
-    <div>
-      <AppNav />
-      <Outlet />
-    </div>
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <HeadAssets />
+      </head>
+      <body>
+        <div>
+          <AppNav />
+          <Outlet />
+        </div>
+      </body>
+    </html>
   );
 };

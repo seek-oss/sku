@@ -664,7 +664,7 @@ exports[`vite ssr translations > should render en-PSEUDO 1`] = `
 --- sourceHtml
 +++ clientHtml
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-PSEUDO">
   <head>
     <meta charset="utf-8">
     <meta
@@ -723,7 +723,7 @@ exports[`vite ssr translations > should render fr 1`] = `
 --- sourceHtml
 +++ clientHtml
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <meta

@@ -1,9 +1,23 @@
 import { StrictMode } from 'react';
-import type { SkuRouteObject } from 'sku/runtime';
+import { Outlet } from 'react-router';
+import { HeadAssets, type SkuRouteObject } from 'sku/runtime';
 
 import App from '../App.js';
 
 import { useSite } from './skuContext.js';
+
+const RootLayout = () => (
+  <html lang="en">
+    <head>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <HeadAssets />
+    </head>
+    <body>
+      <Outlet />
+    </body>
+  </html>
+);
 
 const IndexPage = () => {
   const site = useSite();
@@ -17,7 +31,12 @@ const IndexPage = () => {
 
 export const routes: SkuRouteObject[] = [
   {
-    index: true,
-    Component: IndexPage,
+    Component: RootLayout,
+    children: [
+      {
+        index: true,
+        Component: IndexPage,
+      },
+    ],
   },
 ];

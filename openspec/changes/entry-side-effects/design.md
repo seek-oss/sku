@@ -64,12 +64,12 @@ It is a Vite graph feature, so it belongs with the other Vite config fields.
 
 ### Create template opts in
 
-SSR `sku.config.ts` sets `entrySideEffects: ['braid-design-system/reset']`.
-RootLayout may keep a local reset import (harmless ESM singleton).
+SSR and Vite static `sku.config.ts` set `entrySideEffects: ['braid-design-system/reset']`.
+SSR RootLayout may keep a local reset import (harmless ESM singleton).
 Docs state that config is the graph guarantee.
 
-Vite static create template MAY set the same list for consistency.
-`App.tsx` can keep its existing first-line reset.
+The Vite static template overlays `App.tsx` without the reset import.
+Webpack keeps the base `App.tsx` first-line reset.
 
 ### Published import order
 
@@ -85,6 +85,6 @@ Confirm published `ssr-server.mjs` / `ssr-client.mjs` / `vite-client.mjs` keep t
 
 ## Migration Plan
 
-New SSR apps get the option from create.
-Existing Vite SSR Braid apps add `entrySideEffects: ['braid-design-system/reset']`.
+New Vite SSR and Vite SSG apps get the option from create.
+Existing Vite Braid apps add `entrySideEffects: ['braid-design-system/reset']`.
 Rollback is omit the key (empty default).

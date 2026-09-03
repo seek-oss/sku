@@ -9,7 +9,8 @@ Import order in `routes.tsx` is not a reliable contract because eslint sorts loc
 - Add Vite config `entrySideEffects: string[]` (default `[]`).
 - Sku evaluates those modules first on Vite static and Vite SSR graphs (client, Node render/SSR, and start CSS collection).
 - Specifiers resolve from the app, in array order.
-- The SSR create template sets `entrySideEffects: ['braid-design-system/reset']`.
+- Both Vite create templates set `entrySideEffects: ['braid-design-system/reset']`.
+- The Vite SSG template overlays `App.tsx` without a local reset import.
 - Docs teach this option as the way to apply Braid reset (and any other isomorphic entry side effect).
 - Docs contrast it with `polyfills` (browser-only).
 
@@ -30,5 +31,5 @@ Import order in `routes.tsx` is not a reliable contract because eslint sorts loc
 
 - Public config (`ViteSkuConfig`, schema, `configuration.md`).
 - Sku Vite entries, the polyfills-style virtual module, and start CSS collection order.
-- SSR create template and Braid reset docs.
-- Changeset (minor).
+- Vite SSR and Vite SSG create templates, and Braid reset docs.
+- Changesets (sku minor, create patch).

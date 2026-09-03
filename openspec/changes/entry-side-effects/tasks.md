@@ -13,7 +13,8 @@
 
 ## 3. Template
 
-- [x] 3.1 Set `entrySideEffects: ['braid-design-system/reset']` on the SSR create template sku config
+- [x] 3.1 Set `entrySideEffects: ['braid-design-system/reset']` on the SSR and Vite SSG create template sku configs
+- [x] 3.2 Overlay Vite SSG `App.tsx` without the reset import (webpack keeps the base file)
 
 ## 4. Tests
 
@@ -25,4 +26,4 @@
 
 - [x] 5.1 Document `entrySideEffects` in `configuration.md` and contrast it with `polyfills` in extra-features
 - [x] 5.2 Rewrite SSR provider and migrating Braid reset docs to the config option
-- [x] 5.3 Add a minor changeset
+- [x] 5.3 Add a sku minor changeset and a create patch changeset

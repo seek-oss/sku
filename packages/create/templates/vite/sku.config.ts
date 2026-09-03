@@ -7,6 +7,7 @@ const skuConfig = {
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
   testRunner: 'vitest',
   bundler: 'vite',
+  entrySideEffects: ['braid-design-system/reset'],
   pathAliases: {
     '#src/*': './src/*',
   },

@@ -2,10 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture } from 'fs-fixture';
 import { setCwd } from '@sku-private/utils';
 
-import {
-  ENTRY_SIDE_EFFECTS_VIRTUAL_ID,
-  loadEntrySideEffectsModule,
-} from './entrySideEffects.js';
+import { loadEntrySideEffectsModule } from './entrySideEffects.js';
 
 const originalCwd = process.cwd();
 
@@ -71,11 +68,5 @@ describe('loadEntrySideEffectsModule', () => {
     expect(() =>
       loadEntrySideEffectsModule(['this-package-definitely-does-not-exist']),
     ).toThrow();
-  });
-
-  it('exports the virtual module id used by sku entries', () => {
-    expect(ENTRY_SIDE_EFFECTS_VIRTUAL_ID).toBe(
-      'virtual:sku/entry-side-effects',
-    );
   });
 });

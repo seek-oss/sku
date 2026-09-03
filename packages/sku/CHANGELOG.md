@@ -1,5 +1,11 @@
 # sku
 
+## 16.3.0
+
+### Minor Changes
+
+- Add `entrySideEffects` so apps can import isomorphic modules (such as Braid reset) before any consumer module. ([#1717](https://github.com/seek-oss/sku/pull/1717))
+
 ## 16.2.0
 
 ### Minor Changes

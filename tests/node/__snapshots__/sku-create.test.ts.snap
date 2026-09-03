@@ -117,34 +117,32 @@ exports[`sku-create > ssr > should create package.json 1`] = `
 
 exports[`sku-create > ssr > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
-  '@parcel/watcher': true
-  '@swc/core': true
-  core-js-pure: false
-  esbuild: true
-  sku: true
-  unrs-resolver: true
-blockExoticSubdeps: true
-configDependencies:
-  pnpm-plugin-sku: VERSION_IGNORED
-minimumReleaseAge: 4320 # 3 days
+  '@parcel/watcher': true # managed by sku
+  '@swc/core': true # managed by sku
+  core-js-pure: false # managed by sku
+  esbuild: true # managed by sku
+  sku: true # managed by sku
+  unrs-resolver: true # managed by sku
+blockExoticSubdeps: true # managed by sku
+minimumReleaseAge: 4320 # 3 days # managed by sku
 minimumReleaseAgeExclude:
-  - '@braid-design-system/*'
-  - '@capsizecss/*'
-  - '@seek/*'
-  - '@sku-lib/*'
-  - '@vanilla-extract/*'
-  - '@vocab/*'
-  - braid-design-system
-  - browserslist-config-seek
-  - eslint-config-seek
-  - sku
+  - '@braid-design-system/*' # managed by sku
+  - '@capsizecss/*' # managed by sku
+  - '@seek/*' # managed by sku
+  - '@sku-lib/*' # managed by sku
+  - '@vanilla-extract/*' # managed by sku
+  - '@vocab/*' # managed by sku
+  - braid-design-system # managed by sku
+  - browserslist-config-seek # managed by sku
+  - eslint-config-seek # managed by sku
+  - sku # managed by sku
 publicHoistPattern:
-  - eslint
-  - prettier
-strictDepBuilds: false
-trustPolicy: off
+  - eslint # managed by sku
+  - prettier # managed by sku
+strictDepBuilds: false # managed by sku
+trustPolicy: off # managed by sku
 trustPolicyExclude:
-  - semver@6.3.1 # dependency of eslint-plugin-react
+  - semver@6.3.1 # dependency of eslint-plugin-react # managed by sku
 "
 `;
 
@@ -651,34 +649,32 @@ exports[`sku-create > vite > should create package.json 1`] = `
 
 exports[`sku-create > vite > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
-  '@parcel/watcher': true
-  '@swc/core': true
-  core-js-pure: false
-  esbuild: true
-  sku: true
-  unrs-resolver: true
-blockExoticSubdeps: true
-configDependencies:
-  pnpm-plugin-sku: VERSION_IGNORED
-minimumReleaseAge: 4320 # 3 days
+  '@parcel/watcher': true # managed by sku
+  '@swc/core': true # managed by sku
+  core-js-pure: false # managed by sku
+  esbuild: true # managed by sku
+  sku: true # managed by sku
+  unrs-resolver: true # managed by sku
+blockExoticSubdeps: true # managed by sku
+minimumReleaseAge: 4320 # 3 days # managed by sku
 minimumReleaseAgeExclude:
-  - '@braid-design-system/*'
-  - '@capsizecss/*'
-  - '@seek/*'
-  - '@sku-lib/*'
-  - '@vanilla-extract/*'
-  - '@vocab/*'
-  - braid-design-system
-  - browserslist-config-seek
-  - eslint-config-seek
-  - sku
+  - '@braid-design-system/*' # managed by sku
+  - '@capsizecss/*' # managed by sku
+  - '@seek/*' # managed by sku
+  - '@sku-lib/*' # managed by sku
+  - '@vanilla-extract/*' # managed by sku
+  - '@vocab/*' # managed by sku
+  - braid-design-system # managed by sku
+  - browserslist-config-seek # managed by sku
+  - eslint-config-seek # managed by sku
+  - sku # managed by sku
 publicHoistPattern:
-  - eslint
-  - prettier
-strictDepBuilds: false
-trustPolicy: off
+  - eslint # managed by sku
+  - prettier # managed by sku
+strictDepBuilds: false # managed by sku
+trustPolicy: off # managed by sku
 trustPolicyExclude:
-  - semver@6.3.1 # dependency of eslint-plugin-react
+  - semver@6.3.1 # dependency of eslint-plugin-react # managed by sku
 "
 `;
 
@@ -1038,34 +1034,32 @@ exports[`sku-create > webpack > should create package.json 1`] = `
 
 exports[`sku-create > webpack > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
-  '@parcel/watcher': true
-  '@swc/core': true
-  core-js-pure: false
-  esbuild: true
-  sku: true
-  unrs-resolver: true
-blockExoticSubdeps: true
-configDependencies:
-  pnpm-plugin-sku: VERSION_IGNORED
-minimumReleaseAge: 4320 # 3 days
+  '@parcel/watcher': true # managed by sku
+  '@swc/core': true # managed by sku
+  core-js-pure: false # managed by sku
+  esbuild: true # managed by sku
+  sku: true # managed by sku
+  unrs-resolver: true # managed by sku
+blockExoticSubdeps: true # managed by sku
+minimumReleaseAge: 4320 # 3 days # managed by sku
 minimumReleaseAgeExclude:
-  - '@braid-design-system/*'
-  - '@capsizecss/*'
-  - '@seek/*'
-  - '@sku-lib/*'
-  - '@vanilla-extract/*'
-  - '@vocab/*'
-  - braid-design-system
-  - browserslist-config-seek
-  - eslint-config-seek
-  - sku
+  - '@braid-design-system/*' # managed by sku
+  - '@capsizecss/*' # managed by sku
+  - '@seek/*' # managed by sku
+  - '@sku-lib/*' # managed by sku
+  - '@vanilla-extract/*' # managed by sku
+  - '@vocab/*' # managed by sku
+  - braid-design-system # managed by sku
+  - browserslist-config-seek # managed by sku
+  - eslint-config-seek # managed by sku
+  - sku # managed by sku
 publicHoistPattern:
-  - eslint
-  - prettier
-strictDepBuilds: false
-trustPolicy: off
+  - eslint # managed by sku
+  - prettier # managed by sku
+strictDepBuilds: false # managed by sku
+trustPolicy: off # managed by sku
 trustPolicyExclude:
-  - semver@6.3.1 # dependency of eslint-plugin-react
+  - semver@6.3.1 # dependency of eslint-plugin-react # managed by sku
 "
 `;
 

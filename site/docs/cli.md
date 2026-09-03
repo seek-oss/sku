@@ -154,12 +154,32 @@ sudo sku setup-hosts
 
 ### `configure`
 
-Emit and update configuration files for your project.
-This command is run before most other `sku` CLI commands, so you shouldn't need to run it manually.
+Emit and update configuration files for your project (`tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, `.gitignore`, `.prettierignore`, and `pnpm-workspace.yaml`).
+
+This command runs before most `sku` CLI commands and on `postinstall`, so you rarely need to run it manually.
 
 ```sh
 sku configure
 ```
+
+#### `pnpm-workspace.yaml` synchronization
+
+In pnpm projects, sku manages recommended workspace settings (such as `allowBuilds`, `minimumReleaseAge`, and hoisted package patterns) directly in `pnpm-workspace.yaml` using comment-preserving edits. Sku tracks entries it manages with `# managed by sku` comments.
+
+The sync operates in two modes:
+
+- **Additive sync (automatic)**: Runs before regular sku commands (e.g. `sku start`, `sku test`) and during `postinstall`. It adds missing recommended settings and `allowBuilds` keys, and unions/deduplicates array settings like `publicHoistPattern`. It never overwrites existing values or removes entries. If any managed settings differ from sku defaults, sku logs a drift warning suggesting `sku configure`.
+- **Enforce mode (manual via `sku configure`)**: Overwrites managed single-value settings and sku-owned `allowBuilds` keys to match current sku defaults. It also removes retired sku settings that still carry a `# managed by sku` marker.
+
+#### Keeping retired settings
+
+If sku retires a setting or allow-build entry and you want to keep it, delete its `# managed by sku` comment marker. Entries without this marker are considered user-managed and will never be removed by `sku configure`.
+
+#### Opt-outs
+
+- Set `"skuSkipConfigure": true` in `package.json` to skip configuration during regular sku commands.
+- Set `"skuSkipPostInstall": true` in `package.json` to skip configuration during `postinstall`.
+- Invoking `sku configure` directly always runs the configuration sync, even if `skuSkipConfigure` is enabled.
 
 ## Translations
 

@@ -8,21 +8,26 @@ packages:
 allowBuilds:
   # Postinstall only prints an optional completions tip; dist/ ships in the package.
   '@fission-ai/openspec': false
-  '@swc/core': true
-  core-js-pure: false
-  esbuild: true
-  unrs-resolver: true
+  '@swc/core': true # managed by sku
+  core-js-pure: false # managed by sku
+  esbuild: true # managed by sku
+  unrs-resolver: true # managed by sku
+  '@parcel/watcher': true # managed by sku
+  sku: true # managed by sku
 
 minimumReleaseAgeExclude:
-  - '@braid-design-system/*'
-  - '@capsizecss/*'
-  - '@vanilla-extract/*'
-  - '@vocab/*'
-  - 'braid-design-system'
-  - 'browserslist-config-seek'
+  - '@braid-design-system/*' # managed by sku
+  - '@capsizecss/*' # managed by sku
+  - '@vanilla-extract/*' # managed by sku
+  - '@vocab/*' # managed by sku
+  - 'braid-design-system' # managed by sku
+  - 'browserslist-config-seek' # managed by sku
   - 'ensure-gitignore'
-  - 'eslint-config-seek'
+  - 'eslint-config-seek' # managed by sku
   - 'renovate-config-seek'
+  - '@seek/*' # managed by sku
+  - '@sku-lib/*' # managed by sku
+  - sku # managed by sku
 
 dedupePeers: true
 
@@ -53,9 +58,6 @@ catalog:
   webpack-dev-server: ^5.2.4
   webpack: ^5.109.0
 
-configDependencies:
-  pnpm-plugin-sku: 0.0.3+sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==
-
 ignoredBuiltDependencies:
   - core-js-pure
 
@@ -70,5 +72,13 @@ preferWorkspacePackages: true
 
 publicHoistPattern:
   - '@babel/*'
+  - eslint # managed by sku
+  - prettier # managed by sku
 
 verifyDepsBeforeRun: warn
+blockExoticSubdeps: true # managed by sku
+minimumReleaseAge: 4320 # 3 days # managed by sku
+strictDepBuilds: false # managed by sku
+trustPolicy: off # managed by sku
+trustPolicyExclude:
+  - semver@6.3.1 # dependency of eslint-plugin-react # managed by sku

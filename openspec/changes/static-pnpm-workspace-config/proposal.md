@@ -14,40 +14,46 @@ It also makes sku's recommended values visible in the project's own config, so u
 
 ## What Changes
 
-- Sku syncs its recommended pnpm settings directly into the project's `pnpm-workspace.yaml` whenever `configureApp` runs (every sku command, postinstall, and `sku configure`), using comment-preserving YAML edits:
-  - Managed scalar/enum values (`blockExoticSubdeps`, `minimumReleaseAge`, `strictDepBuilds`, `trustPolicy`) are always overwritten with sku's current defaults, in both directions.
-    There are no never-downgrade or strength-ordering special cases: managed means enforced.
-  - Managed `allowBuilds` keys that sku owns are reconciled (added when new, overwritten, removed when retired).
-    User-added keys are preserved.
-  - Array values (`minimumReleaseAgeExclude`, `publicHoistPattern`, `trustPolicyExclude`) are reconciled for sku-owned entries and unioned for user entries.
-    Sku-owned entries are added when new and removed when retired.
-    User-added entries are always preserved, and the result is deduped.
+This is a non-breaking feature release.
+The automatic sync is strictly additive: it never overwrites or removes existing values, and never creates `pnpm-workspace.yaml`.
+
+- Sku syncs its recommended pnpm settings into the project's existing `pnpm-workspace.yaml` whenever `configureApp` runs (every sku command and postinstall), using comment-preserving YAML edits:
+  - Missing managed scalars (`blockExoticSubdeps`, `minimumReleaseAge`, `strictDepBuilds`, `trustPolicy`) are added with sku's current defaults.
+    Existing values are never overwritten by the automatic sync.
+  - Missing sku-owned `allowBuilds` keys are added.
+    Existing keys keep their values.
+  - Array values (`minimumReleaseAgeExclude`, `publicHoistPattern`, `trustPolicyExclude`) are unioned: missing sku entries are appended, user entries are preserved, and the result is deduped.
   - Ownership is tracked with trailing `# managed by sku` comment markers on sku-written values and sku-owned collection entries.
-    Unmarked entries that exactly match sku's current defaults are always adopted (marked) on sync, so cleanup works for projects created before markers existed.
-    If sku retires an entry a user wants to keep, they can add it back: it no longer matches a default, so it stays user-owned and is never reconciled again.
+    Unmarked entries that exactly match sku's current defaults are adopted (marked) on sync, so cleanup works for projects created before markers existed.
+  - When an existing value drifts from sku's defaults — a differing managed scalar or `allowBuilds` value, or a marked entry sku has retired — the sync logs a warning naming the key and both values and points at `sku configure`.
   - Each change is logged.
     An already-aligned file is left untouched and silent.
-- **BREAKING**: `pnpm-plugin-sku` is no longer installed as a config dependency.
-  The sync removes `pnpm-plugin-sku` from `configDependencies` in `pnpm-workspace.yaml` when present (migration for existing projects).
+- `sku configure` runs the full enforcing sync: managed scalars are overwritten with sku's current defaults in both directions (managed means enforced; no never-downgrade or strength-ordering special cases), sku-owned `allowBuilds` keys are reconciled, and retired sku-owned entries are removed.
+  Manual invocation is intentional, so enforcement only happens on explicit request.
+  Removal is scoped strictly to entries still carrying a `# managed by sku` marker: if the user deletes an entry's marker it becomes user-owned, and because a retired entry no longer matches a default it is never re-adopted, so it is never removed.
+  If the enforcing sync removes a retired entry a user wants to keep, they can add it back unmarked and it is preserved thereafter.
+- The sync never creates `pnpm-workspace.yaml`.
+  Config dependencies can only be declared in `pnpm-workspace.yaml`, so a project without the file never had `pnpm-plugin-sku`; creating the file would impose sku's pnpm policy on projects that never opted in and would newly mark the directory as a workspace root.
+- `pnpm-plugin-sku` is removed from `configDependencies` in `pnpm-workspace.yaml` when present (migration for existing projects).
+  This is behaviour-preserving: the static values the sync writes are the values the plugin injected at runtime, so the effective pnpm config is unchanged.
   The package itself stays in the monorepo and on npm; it may return once tooling works with it better.
 - The pnpm v10 plugin gate in create's `installDependencies` is removed.
-  Create no longer has its own `pnpm-workspace.yaml` writer; it runs the same sync used at configure time, before dependency installation.
+  Create no longer has its own `pnpm-workspace.yaml` writer; it runs the same sync used at configure time — with file creation enabled, since scaffolding a new project is an explicit opt-in — before dependency installation.
 - The runtime merge validation (`validatePnpmConfig`, `getPnpmConfigDependencies`) is removed.
   No pnpm version gate replaces it: pnpm 9 and 10 silently ignore unknown keys in `pnpm-workspace.yaml`, and pnpm 11 and 12 print a warning naming unrecognized settings before ignoring them.
   Settings take effect when the project's pnpm understands them.
-- If a pnpm project has no `pnpm-workspace.yaml`, the sync creates it, consistent with configure creating `.gitignore` and `.prettierignore`.
 
 ## Capabilities
 
 ### New Capabilities
 
 - `pnpm-workspace-config`: How sku keeps a project's `pnpm-workspace.yaml` aligned with its recommended pnpm settings.
-  Covers the sync trigger points and skip conditions, the managed/reconciled/unioned merge policies, marker-based ownership and adoption, change logging, and the `pnpm-plugin-sku` config dependency migration.
+  Covers the sync trigger points and skip conditions, the additive automatic mode and enforcing `sku configure` mode, marker-based ownership and adoption, drift warnings, change logging, and the `pnpm-plugin-sku` config dependency migration.
 
 ### Modified Capabilities
 
 - `create-project`: Create no longer installs `pnpm-plugin-sku` as a config dependency and no longer gates on pnpm v10 during install.
-  The generated `pnpm-workspace.yaml` is written by the same sync that runs at configure time.
+  The generated `pnpm-workspace.yaml` is written by the same sync that runs at configure time, with file creation enabled for the new project.
 
 ## Impact
 
@@ -61,14 +67,15 @@ It also makes sku's recommended values visible in the project's own config, so u
   `@sku-lib/create` drops its `pnpm-plugin-sku` dependency.
 - Package lifecycle: `pnpm-plugin-sku` stays in the monorepo and remains published, but is no longer installed into projects.
   No npm deprecation or unpublish in this change.
-- Consumer projects: on first run of an upgraded sku, `pnpm-workspace.yaml` gains the static settings block and loses the `configDependencies` entry.
-  This is a one-time, git-reviewable diff.
+- Consumer projects: on first run of an upgraded sku, `pnpm-workspace.yaml` gains any missing static settings and markers and loses the `configDependencies` entry.
+  No existing values are changed.
+  This is a one-time, git-reviewable diff, released as a minor.
 - Escape hatches:
   - `skuSkipConfigure` in package.json disables the sync on regular sku commands.
   - `skuSkipPostInstall` disables the postinstall run.
-  - `sku configure` always syncs (manual invocation is intentional).
-  - A retired entry that was removed can be re-added by the user; it is then preserved.
+  - `sku configure` always syncs, in enforcing mode (manual invocation is intentional).
+  - A retired entry is only removed while it carries its marker; delete the marker (or re-add the entry afterwards) to keep it.
 - Tests:
   - `tests/node/sku-create.test.ts` snapshots lose the `configDependencies` entry.
   - `pnpmConfig.test.ts` and its snapshots are removed.
-  - New unit tests cover the sync merge policies and marker handling.
+  - New unit tests cover both sync modes, the merge policies, marker handling, and drift warnings.

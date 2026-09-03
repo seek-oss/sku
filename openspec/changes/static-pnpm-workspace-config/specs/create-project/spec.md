@@ -2,7 +2,7 @@
 
 ### Requirement: Created pnpm projects get static workspace settings
 
-When creating a pnpm project, create SHALL write the project's `pnpm-workspace.yaml` by running the same sync used at configure time, before dependency installation.
+When creating a pnpm project, create SHALL write the project's `pnpm-workspace.yaml` by running the same sync used at configure time — with file creation enabled, since scaffolding a new project is an explicit opt-in — before dependency installation.
 Create MUST NOT maintain its own workspace-file writer; create and configure share one writer, so identical output is guaranteed by construction.
 Writing the file before install ensures sku's settings apply to the first install and marks the project as its own workspace root.
 

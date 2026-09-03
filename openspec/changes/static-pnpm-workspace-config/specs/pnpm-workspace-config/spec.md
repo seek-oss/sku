@@ -41,9 +41,11 @@ A manual `sku configure` invocation MUST always run the sync.
 ### Requirement: Automatic sync is additive-only
 
 The sync that runs on regular sku commands and postinstall MUST NOT overwrite existing values and MUST NOT remove entries.
-Missing managed scalars (`blockExoticSubdeps`, `minimumReleaseAge`, `strictDepBuilds`, `trustPolicy`) SHALL be added with sku's current defaults.
-Missing sku-owned `allowBuilds` keys SHALL be added; existing keys MUST keep their values.
-Array settings (`minimumReleaseAgeExclude`, `publicHoistPattern`, `trustPolicyExclude`) SHALL be unioned: missing sku entries are appended, existing entries are preserved, and the result is deduped.
+Missing managed single-value settings SHALL be added with sku's current defaults.
+A single-value setting is one whose value is a string, number, or boolean — not an array or an object.
+Missing sku-owned keys in object settings SHALL be added; existing keys MUST keep their values.
+An object setting is one whose value is a flat map of keys to single values (currently only `allowBuilds`).
+Array settings SHALL be unioned: missing sku entries are appended, existing entries are preserved, and the result is deduped.
 Retired sku-owned entries MUST NOT be removed by the automatic sync.
 
 #### Scenario: Missing managed value is added
@@ -73,7 +75,7 @@ When the automatic sync finds an existing managed value that differs from sku's 
 For retired entries, the warning SHALL state that the entry is no longer a sku default and present both resolutions: run `sku configure` to remove it, or delete its `# managed by sku` marker to keep it as a user-managed entry.
 The sync MUST NOT warn when values align with sku's defaults.
 
-#### Scenario: Differing managed scalar warns
+#### Scenario: Differing managed value warns
 
 - **WHEN** a project's `pnpm-workspace.yaml` has `minimumReleaseAge: 1440` and sku's current default is `4320`
 - **THEN** the sync logs a warning naming the key, both values, and `sku configure`
@@ -90,10 +92,11 @@ The sync MUST NOT warn when values align with sku's defaults.
 
 ### Requirement: sku configure enforces managed values
 
-On `sku configure`, scalar and enum settings classified as managed (`blockExoticSubdeps`, `minimumReleaseAge`, `strictDepBuilds`, `trustPolicy`) SHALL be overwritten with sku's current defaults.
+`sku configure` is the only entry point that enforces managed values; the automatic sync on regular commands and postinstall MUST NOT overwrite or remove anything.
+On `sku configure`, the single-value settings classified as managed SHALL be overwritten with sku's current defaults.
 This applies regardless of the existing value and in both directions.
 There is no never-downgrade or strength-ordering special case: managed means enforced.
-Sku-owned `allowBuilds` keys SHALL be reconciled to sku's current defaults.
+Sku-owned keys in object settings SHALL be aligned with sku's current defaults.
 Retired sku-owned entries — entries that no longer match sku's current defaults but still carry a `# managed by sku` marker — SHALL be removed.
 Entries whose marker has been removed MUST NOT be removed.
 
@@ -119,11 +122,11 @@ Entries whose marker has been removed MUST NOT be removed.
 
 - **WHEN** a project's file contains an entry that sku has retired
 - **AND** the entry does not carry a `# managed by sku` marker
-- **THEN** the sync, in either mode, leaves the entry in place
+- **THEN** the sync leaves the entry in place, both on automatic runs and on `sku configure`
 
-### Requirement: Collection entries are reconciled by ownership
+### Requirement: Collection entries are managed by ownership
 
-For `allowBuilds` and the array settings (`minimumReleaseAgeExclude`, `publicHoistPattern`, `trustPolicyExclude`), entries owned by sku SHALL be reconciled.
+For object and array settings, entries owned by sku SHALL be aligned with sku's defaults.
 Sku-owned entries are added when new and aligned with current defaults on every sync; they are removed when sku retires them on `sku configure` only.
 User-added entries MUST always be preserved.
 Array results MUST be deduped.
@@ -142,12 +145,12 @@ Because a retired entry no longer matches a default, an unmarked copy is never r
 #### Scenario: User entries are never removed
 
 - **WHEN** a project's `publicHoistPattern` or `allowBuilds` contains an unmarked user-added entry
-- **THEN** every sync, in either mode, leaves that entry in place
+- **THEN** every sync leaves that entry in place, both on automatic runs and on `sku configure`
 
 #### Scenario: Unmarked entry matching a default is adopted
 
 - **WHEN** a project's `minimumReleaseAgeExclude` contains an unmarked entry that exactly matches one of sku's current defaults
-- **THEN** the sync marks it `# managed by sku` so it is reconciled as sku-owned from then on
+- **THEN** the sync marks it `# managed by sku` so it is managed as sku-owned from then on
 
 #### Scenario: Deleted marker on a current default is re-adopted
 
@@ -163,14 +166,14 @@ Because a retired entry no longer matches a default, an unmarked copy is never r
 ### Requirement: Managed keys are annotated
 
 Values written by the sync SHALL carry a trailing `# managed by sku` comment marker.
-This applies to managed scalars and to each sku-owned entry within merged collections, so user-added entries stay visually distinct.
+This applies to managed single-value settings and to each sku-owned entry within merged collections, so user-added entries stay visually distinct.
 Markers MUST NOT replace existing user comments.
 An entry carrying a user comment is never marked, so it is never adopted.
 A file whose values and markers already match sku's defaults MUST NOT be rewritten.
 
-#### Scenario: Managed scalar is marked
+#### Scenario: Managed value is marked
 
-- **WHEN** the sync adds or overwrites a managed scalar such as `minimumReleaseAge`
+- **WHEN** the sync adds or overwrites a managed value such as `minimumReleaseAge`
 - **THEN** the written line carries a trailing `# managed by sku` marker (combined with any explanatory comment)
 
 #### Scenario: User comment on an entry is preserved
@@ -196,7 +199,7 @@ The sync MUST NOT rewrite the file when its content is already aligned with sku'
 ### Requirement: Changes are logged
 
 The sync SHALL log each mutation it makes.
-This covers additions, overwrites with old and new values (enforce mode), removals of retired sku-owned entries (enforce mode), and removal of the `pnpm-plugin-sku` config dependency.
+This covers additions, overwrites with old and new values (`sku configure` only), removals of retired sku-owned entries (`sku configure` only), and removal of the `pnpm-plugin-sku` config dependency.
 The sync MUST NOT produce output when no changes are made.
 
 #### Scenario: Addition is announced

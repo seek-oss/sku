@@ -18,17 +18,17 @@ This is a non-breaking feature release.
 The automatic sync is strictly additive: it never overwrites or removes existing values, and never creates `pnpm-workspace.yaml`.
 
 - Sku syncs its recommended pnpm settings into the project's existing `pnpm-workspace.yaml` whenever `configureApp` runs (every sku command and postinstall), using comment-preserving YAML edits:
-  - Missing managed scalars (`blockExoticSubdeps`, `minimumReleaseAge`, `strictDepBuilds`, `trustPolicy`) are added with sku's current defaults.
+  - Missing managed single-value settings are added with sku's current defaults.
     Existing values are never overwritten by the automatic sync.
-  - Missing sku-owned `allowBuilds` keys are added.
+  - Missing sku-owned keys in object settings (currently only `allowBuilds`) are added.
     Existing keys keep their values.
-  - Array values (`minimumReleaseAgeExclude`, `publicHoistPattern`, `trustPolicyExclude`) are unioned: missing sku entries are appended, user entries are preserved, and the result is deduped.
+  - Array values are unioned: missing sku entries are appended, user entries are preserved, and the result is deduped.
   - Ownership is tracked with trailing `# managed by sku` comment markers on sku-written values and sku-owned collection entries.
     Unmarked entries that exactly match sku's current defaults are adopted (marked) on sync, so cleanup works for projects created before markers existed.
-  - When an existing value drifts from sku's defaults — a differing managed scalar or `allowBuilds` value, or a marked entry sku has retired — the sync logs a warning naming the key and both values and points at `sku configure`.
+  - When an existing value drifts from sku's defaults — a differing managed setting or object-setting value, or a marked entry sku has retired — the sync logs a warning naming the key and both values and points at `sku configure`.
   - Each change is logged.
     An already-aligned file is left untouched and silent.
-- `sku configure` runs the full enforcing sync: managed scalars are overwritten with sku's current defaults in both directions (managed means enforced; no never-downgrade or strength-ordering special cases), sku-owned `allowBuilds` keys are reconciled, and retired sku-owned entries are removed.
+- `sku configure` runs the full enforcing sync: managed single-value settings are overwritten with sku's current defaults in both directions (managed means enforced; no never-downgrade or strength-ordering special cases), sku-owned keys in object settings are aligned with sku's defaults, and retired sku-owned entries are removed.
   Manual invocation is intentional, so enforcement only happens on explicit request.
   Removal is scoped strictly to entries still carrying a `# managed by sku` marker: if the user deletes an entry's marker it becomes user-owned, and because a retired entry no longer matches a default it is never re-adopted, so it is never removed.
   If the enforcing sync removes a retired entry a user wants to keep, they can add it back unmarked and it is preserved thereafter.
@@ -73,7 +73,7 @@ The automatic sync is strictly additive: it never overwrites or removes existing
 - Escape hatches:
   - `skuSkipConfigure` in package.json disables the sync on regular sku commands.
   - `skuSkipPostInstall` disables the postinstall run.
-  - `sku configure` always syncs, in enforcing mode (manual invocation is intentional).
+  - `sku configure` always syncs, and is the only entry point that enforces (manual invocation is intentional).
   - A retired entry is only removed while it carries its marker; delete the marker (or re-add the entry afterwards) to keep it.
 - Tests:
   - `tests/node/sku-create.test.ts` snapshots lose the `configDependencies` entry.

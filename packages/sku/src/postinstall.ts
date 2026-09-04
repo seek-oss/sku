@@ -1,7 +1,7 @@
 import { createDebug } from 'obug';
 import { setCwd } from '@sku-private/utils';
 import { createSkuContext } from './context/createSkuContext.js';
-import configureApp from './utils/configureApp.js';
+import { configureApp } from './utils/configureApp.js';
 import { banner, strong } from '@sku-private/utils/console';
 
 /**

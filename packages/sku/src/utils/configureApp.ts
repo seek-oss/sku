@@ -36,10 +36,10 @@ const convertToForwardSlashPaths = (pathStr: string) =>
 
 const addSep = (p: string) => `${p}${path.sep}`;
 
-export default async (
+export async function configureApp(
   skuContext: SkuContext,
   options?: ConfigureAppOptions,
-) => {
+) {
   const { paths, httpsDevServer, languages, hosts } = skuContext;
 
   validateSkuConfigFormat(paths.appSkuConfigPath);
@@ -132,4 +132,4 @@ export default async (
   }
 
   warnOnLegacyReact();
-};
+}

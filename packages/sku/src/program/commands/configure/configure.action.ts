@@ -1,4 +1,4 @@
-import configure from '../../../utils/configureApp.js';
+import { configureApp } from '../../../utils/configureApp.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 
 export const configureAction = async ({
@@ -6,5 +6,5 @@ export const configureAction = async ({
 }: {
   skuContext: SkuContext;
 }) => {
-  await configure(skuContext, { mode: 'enforce' });
+  await configureApp(skuContext, { mode: 'enforce' });
 };

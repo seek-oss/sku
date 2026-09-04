@@ -15,12 +15,11 @@ import { rootDir } from './packageManager.ts';
 import {
   arraySettings,
   defaultPnpmWorkspaceConfig,
-  explanatoryComments,
   MANAGED_BY_SKU_MARKER,
   MANAGED_BY_SKU_COMMENT,
   objectSettings,
   singleValueSettings,
-  type PnpmWorkspaceConfig,
+  type ArrayEntry,
 } from './pnpmWorkspaceDefaults.ts';
 
 export type SyncMode = 'additive' | 'enforce';
@@ -56,29 +55,10 @@ const hasManagedMarker = (comment?: string | null): boolean => {
   );
 };
 
-const formatComment = (explanatory?: string): string => {
-  if (!explanatory) {
-    return ` ${MANAGED_BY_SKU_MARKER}`;
-  }
-  const cleanExp = explanatory.replace(/^#\s*/, '').trim();
-  return ` ${cleanExp} # ${MANAGED_BY_SKU_MARKER}`;
-};
-
-const getExplanatoryComment = (
-  key: keyof PnpmWorkspaceConfig,
-): string | undefined => {
-  const comment = explanatoryComments[key as keyof typeof explanatoryComments];
-  return typeof comment === 'string' ? comment : undefined;
-};
-
-const getExplanatoryComments = (
-  key: keyof PnpmWorkspaceConfig,
-): Record<string, string> | undefined => {
-  const comments = explanatoryComments[key as keyof typeof explanatoryComments];
-  return comments && typeof comments === 'object' && !Array.isArray(comments)
-    ? (comments as Record<string, string>)
-    : undefined;
-};
+const formatComment = (explanatory?: string): string =>
+  explanatory
+    ? ` ${explanatory} # ${MANAGED_BY_SKU_MARKER}`
+    : ` ${MANAGED_BY_SKU_MARKER}`;
 
 const clearCommentBefore = (node: unknown): boolean => {
   if (!isScalar(node) || !node.commentBefore) {
@@ -237,29 +217,26 @@ const updateExistingSingleValue = (
 };
 
 const syncSingleValue = (
-  key: (typeof singleValueSettings)[number],
+  { key, value: defaultValue, comment }: (typeof singleValueSettings)[number],
   context: SyncContext,
 ): boolean => {
   const { doc, logMutation } = context;
-  const defaultValue: string | number | boolean =
-    defaultPnpmWorkspaceConfig[key];
-  const explanatory = getExplanatoryComment(key);
 
   if (!doc.has(key)) {
     const node = doc.createNode(defaultValue);
-    setManagedComment(node, explanatory);
+    setManagedComment(node, comment);
     doc.set(key, node);
     logMutation(`added ${key}: ${defaultValue} to pnpm-workspace.yaml`);
     return true;
   }
 
-  return updateExistingSingleValue(key, defaultValue, explanatory, context);
+  return updateExistingSingleValue(key, defaultValue, comment, context);
 };
 
 const syncSingleValueSettings = (context: SyncContext): boolean => {
   let modified = false;
-  for (const key of singleValueSettings) {
-    if (syncSingleValue(key, context)) {
+  for (const setting of singleValueSettings) {
+    if (syncSingleValue(setting, context)) {
       modified = true;
     }
   }
@@ -335,7 +312,7 @@ const syncObjectPair = (
 const cleanRetiredObjectKeys = (
   mapNode: YAMLMap,
   key: string,
-  defaultObj: Record<string, boolean>,
+  defaultObj: Readonly<Record<string, boolean>>,
   context: SyncContext,
 ): boolean => {
   const { mode, logMutation, warn } = context;
@@ -371,12 +348,7 @@ const syncObjectSettings = (context: SyncContext): boolean => {
   const { doc } = context;
   let modified = false;
 
-  for (const key of objectSettings) {
-    const defaultObj = defaultPnpmWorkspaceConfig[key] as Record<
-      string,
-      boolean
-    >;
-
+  for (const { key, entries } of objectSettings) {
     if (!doc.has(key)) {
       doc.set(key, doc.createNode({}));
       context.logMutation(`added ${key} to pnpm-workspace.yaml`);
@@ -388,13 +360,13 @@ const syncObjectSettings = (context: SyncContext): boolean => {
       continue;
     }
 
-    for (const [subKey, defaultVal] of Object.entries(defaultObj)) {
+    for (const [subKey, defaultVal] of Object.entries(entries)) {
       if (syncObjectPair(mapNode, key, subKey, defaultVal, context)) {
         modified = true;
       }
     }
 
-    if (cleanRetiredObjectKeys(mapNode, key, defaultObj, context)) {
+    if (cleanRetiredObjectKeys(mapNode, key, entries, context)) {
       modified = true;
     }
   }
@@ -442,8 +414,7 @@ const deduplicateArrayItems = (
 
 const processSingleArrayItem = (
   item: unknown,
-  defaultList: readonly string[],
-  explanatory: string | undefined,
+  defaultComments: ReadonlyMap<string, string | undefined>,
   key: string,
   context: SyncContext,
 ): { modified: boolean; remove: boolean } => {
@@ -452,8 +423,8 @@ const processSingleArrayItem = (
   }
 
   const val = item.value;
-  if (defaultList.includes(val)) {
-    if (setManagedComment(item, explanatory)) {
+  if (defaultComments.has(val)) {
+    if (setManagedComment(item, defaultComments.get(val))) {
       context.logMutation(`adopted ${val} in ${key} in pnpm-workspace.yaml`);
       return { modified: true, remove: false };
     }
@@ -475,8 +446,7 @@ const processSingleArrayItem = (
 
 const processExistingArrayItems = (
   seqNode: YAMLSeq,
-  defaultList: readonly string[],
-  explanatoryMap: Record<string, string> | undefined,
+  defaultComments: ReadonlyMap<string, string | undefined>,
   key: string,
   context: SyncContext,
 ): boolean => {
@@ -484,14 +454,9 @@ const processExistingArrayItems = (
   const indicesToRemove: number[] = [];
 
   for (let i = 0; i < seqNode.items.length; i++) {
-    const item = seqNode.items[i];
-    const val =
-      isScalar(item) && typeof item.value === 'string' ? item.value : undefined;
-    const explanatory = val ? explanatoryMap?.[val] : undefined;
     const result = processSingleArrayItem(
-      item,
-      defaultList,
-      explanatory,
+      seqNode.items[i],
+      defaultComments,
       key,
       context,
     );
@@ -518,8 +483,7 @@ const processExistingArrayItems = (
 
 const appendMissingArrayDefaults = (
   seqNode: YAMLSeq,
-  defaultList: readonly string[],
-  explanatoryMap: Record<string, string> | undefined,
+  entries: readonly ArrayEntry[],
   key: string,
   context: SyncContext,
 ): boolean => {
@@ -532,16 +496,13 @@ const appendMissingArrayDefaults = (
     }
   }
 
-  for (const defaultItem of defaultList) {
-    if (!existingValues.has(defaultItem)) {
-      const explanatory = explanatoryMap?.[defaultItem];
-      const newItem = context.doc.createNode(defaultItem);
-      setManagedComment(newItem, explanatory);
+  for (const { value, comment } of entries) {
+    if (!existingValues.has(value)) {
+      const newItem = context.doc.createNode(value);
+      setManagedComment(newItem, comment);
       seqNode.items.push(newItem);
-      existingValues.add(defaultItem);
-      context.logMutation(
-        `added ${defaultItem} to ${key} in pnpm-workspace.yaml`,
-      );
+      existingValues.add(value);
+      context.logMutation(`added ${value} to ${key} in pnpm-workspace.yaml`);
       modified = true;
     }
   }
@@ -552,9 +513,10 @@ const appendMissingArrayDefaults = (
 const syncArraySettings = (context: SyncContext): boolean => {
   let modified = false;
 
-  for (const key of arraySettings) {
-    const defaultList = defaultPnpmWorkspaceConfig[key] as readonly string[];
-    const explanatoryMap = getExplanatoryComments(key);
+  for (const { key, entries } of arraySettings) {
+    const defaultComments = new Map(
+      entries.map(({ value, comment }) => [value, comment] as const),
+    );
 
     if (!context.doc.has(key)) {
       context.doc.set(key, context.doc.createNode([]));
@@ -570,26 +532,10 @@ const syncArraySettings = (context: SyncContext): boolean => {
     if (deduplicateArrayItems(seqNode, key, context)) {
       modified = true;
     }
-    if (
-      processExistingArrayItems(
-        seqNode,
-        defaultList,
-        explanatoryMap,
-        key,
-        context,
-      )
-    ) {
+    if (processExistingArrayItems(seqNode, defaultComments, key, context)) {
       modified = true;
     }
-    if (
-      appendMissingArrayDefaults(
-        seqNode,
-        defaultList,
-        explanatoryMap,
-        key,
-        context,
-      )
-    ) {
+    if (appendMissingArrayDefaults(seqNode, entries, key, context)) {
       modified = true;
     }
   }

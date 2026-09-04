@@ -1,7 +1,7 @@
 ## 1. Shared defaults module
 
-- [x] 1.1 Create `private/utils/src/packageManager/pnpmWorkspaceDefaults.ts` exporting sku's recommended settings, ported from `packages/pnpm-plugin/src/config.ts`. Include values, setting groups (managed single-value settings, object settings as flat maps, unioned arrays), explanatory comments (`# 3 days`, `# dependency of eslint-plugin-react`), and the `# sku_managed` marker constant
-- [x] 1.2 Add unit tests for the defaults module (shape, setting groups, marker constant)
+- [x] 1.1 Create `private/utils/src/packageManager/pnpmWorkspaceDefaults.ts` exporting sku's recommended settings, ported from `packages/pnpm-plugin/src/config.ts`. Declare each setting once, carrying its own value, merge policy (managed single-value setting, object setting as a flat map, unioned array) and explanatory comment (`3 days`, `dependency of eslint-plugin-react`), and derive the setting groups and plain-value config from that. Include the `sku_managed` marker constant
+- [x] 1.2 Add unit tests for the defaults module (derived values, setting groups, co-located comments, marker constant)
 
 ## 2. Sync engine
 

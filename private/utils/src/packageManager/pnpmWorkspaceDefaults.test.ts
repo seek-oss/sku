@@ -3,11 +3,10 @@ import {
   MANAGED_BY_SKU_MARKER,
   MANAGED_BY_SKU_COMMENT,
   defaultPnpmWorkspaceConfig,
-  defaultConfig,
+  pnpmWorkspaceSettings,
   singleValueSettings,
   objectSettings,
   arraySettings,
-  explanatoryComments,
 } from './pnpmWorkspaceDefaults.ts';
 
 describe('pnpmWorkspaceDefaults', () => {
@@ -17,7 +16,6 @@ describe('pnpmWorkspaceDefaults', () => {
   });
 
   it('exports default config matching the pnpm-plugin recommended settings', () => {
-    expect(defaultConfig).toBe(defaultPnpmWorkspaceConfig);
     expect(defaultPnpmWorkspaceConfig).toMatchInlineSnapshot(`
       {
         "allowBuilds": {
@@ -56,36 +54,45 @@ describe('pnpmWorkspaceDefaults', () => {
   });
 
   it('classifies every setting exactly once', () => {
-    const configKeys = Object.keys(defaultPnpmWorkspaceConfig).sort();
     const classifiedKeys = [
       ...singleValueSettings,
       ...objectSettings,
       ...arraySettings,
-    ].sort();
+    ]
+      .map(({ key }) => key)
+      .sort();
 
     expect(new Set(classifiedKeys).size).toBe(classifiedKeys.length);
-    expect(classifiedKeys).toEqual(configKeys);
+    expect(classifiedKeys).toEqual(Object.keys(pnpmWorkspaceSettings).sort());
+  });
 
-    for (const key of singleValueSettings) {
-      expect(['string', 'number', 'boolean']).toContain(
-        typeof defaultPnpmWorkspaceConfig[key],
+  it('derives plain values from each setting group', () => {
+    for (const { key, value } of singleValueSettings) {
+      expect(defaultPnpmWorkspaceConfig[key]).toBe(value);
+      expect(['string', 'number', 'boolean']).toContain(typeof value);
+    }
+
+    for (const { key, entries } of objectSettings) {
+      expect(defaultPnpmWorkspaceConfig[key]).toEqual(entries);
+    }
+
+    for (const { key, entries } of arraySettings) {
+      expect(defaultPnpmWorkspaceConfig[key]).toEqual(
+        entries.map(({ value }) => value),
       );
-    }
-
-    for (const key of objectSettings) {
-      expect(typeof defaultPnpmWorkspaceConfig[key]).toBe('object');
-      expect(Array.isArray(defaultPnpmWorkspaceConfig[key])).toBe(false);
-    }
-
-    for (const key of arraySettings) {
-      expect(Array.isArray(defaultPnpmWorkspaceConfig[key])).toBe(true);
     }
   });
 
-  it('exports explanatory comments for specific settings', () => {
-    expect(explanatoryComments.minimumReleaseAge).toBe('# 3 days');
-    expect(explanatoryComments.trustPolicyExclude['semver@6.3.1']).toBe(
-      '# dependency of eslint-plugin-react',
-    );
+  it('keeps explanatory comments alongside the values they describe', () => {
+    expect(pnpmWorkspaceSettings.minimumReleaseAge).toEqual({
+      kind: 'value',
+      value: 4320,
+      comment: '3 days',
+    });
+
+    expect(pnpmWorkspaceSettings.trustPolicyExclude.entries).toContainEqual({
+      value: 'semver@6.3.1',
+      comment: 'dependency of eslint-plugin-react',
+    });
   });
 });

@@ -4,7 +4,6 @@ import {
   MANAGED_BY_SKU_COMMENT,
   defaultPnpmWorkspaceConfig,
   defaultConfig,
-  settingPolicies,
   singleValueSettings,
   objectSettings,
   arraySettings,
@@ -13,8 +12,8 @@ import {
 
 describe('pnpmWorkspaceDefaults', () => {
   it('exports marker constants', () => {
-    expect(MANAGED_BY_SKU_MARKER).toBe('managed by sku');
-    expect(MANAGED_BY_SKU_COMMENT).toBe('# managed by sku');
+    expect(MANAGED_BY_SKU_MARKER).toBe('sku_managed');
+    expect(MANAGED_BY_SKU_COMMENT).toBe('# sku_managed');
   });
 
   it('exports default config matching the pnpm-plugin recommended settings', () => {
@@ -56,27 +55,29 @@ describe('pnpmWorkspaceDefaults', () => {
     `);
   });
 
-  it('classifies every setting with a valid policy', () => {
+  it('classifies every setting exactly once', () => {
     const configKeys = Object.keys(defaultPnpmWorkspaceConfig).sort();
-    const policyKeys = Object.keys(settingPolicies).sort();
+    const classifiedKeys = [
+      ...singleValueSettings,
+      ...objectSettings,
+      ...arraySettings,
+    ].sort();
 
-    expect(policyKeys).toEqual(configKeys);
+    expect(new Set(classifiedKeys).size).toBe(classifiedKeys.length);
+    expect(classifiedKeys).toEqual(configKeys);
 
     for (const key of singleValueSettings) {
-      expect(settingPolicies[key]).toBe('single-value');
       expect(['string', 'number', 'boolean']).toContain(
         typeof defaultPnpmWorkspaceConfig[key],
       );
     }
 
     for (const key of objectSettings) {
-      expect(settingPolicies[key]).toBe('object');
       expect(typeof defaultPnpmWorkspaceConfig[key]).toBe('object');
       expect(Array.isArray(defaultPnpmWorkspaceConfig[key])).toBe(false);
     }
 
     for (const key of arraySettings) {
-      expect(settingPolicies[key]).toBe('array');
       expect(Array.isArray(defaultPnpmWorkspaceConfig[key])).toBe(true);
     }
   });

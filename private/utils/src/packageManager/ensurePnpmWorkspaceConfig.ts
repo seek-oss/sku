@@ -17,8 +17,10 @@ import {
   defaultPnpmWorkspaceConfig,
   explanatoryComments,
   MANAGED_BY_SKU_MARKER,
+  MANAGED_BY_SKU_COMMENT,
   objectSettings,
   singleValueSettings,
+  type PnpmWorkspaceConfig,
 } from './pnpmWorkspaceDefaults.ts';
 
 export type SyncMode = 'additive' | 'enforce';
@@ -39,36 +41,19 @@ interface SyncContext {
   warn: Warn;
 }
 
-const isKnownExplanatoryComment = (
-  comment: string,
-  explanatory?: string,
-): boolean => {
-  if (!explanatory) {
-    return false;
-  }
-  const cleanExp = explanatory.replace(/^#\s*/, '').trim();
-  const cleanComment = comment.replace(/^#\s*/, '').trim();
-  return cleanComment === cleanExp;
-};
+const getNodeKey = (node: unknown): string =>
+  isScalar(node) ? String(node.value) : String(node);
 
-const hasUserComment = (
-  comment?: string | null,
-  explanatory?: string,
-): boolean => {
-  if (!comment) {
-    return false;
-  }
-  const trimmed = comment.trim();
+const hasManagedMarker = (comment?: string | null): boolean => {
+  const trimmed = comment?.trim();
   if (!trimmed) {
     return false;
   }
-  if (trimmed.includes(MANAGED_BY_SKU_MARKER)) {
-    return false;
-  }
-  if (isKnownExplanatoryComment(trimmed, explanatory)) {
-    return false;
-  }
-  return true;
+
+  return (
+    trimmed === MANAGED_BY_SKU_MARKER ||
+    trimmed.endsWith(`# ${MANAGED_BY_SKU_MARKER}`)
+  );
 };
 
 const formatComment = (explanatory?: string): string => {
@@ -79,6 +64,70 @@ const formatComment = (explanatory?: string): string => {
   return ` ${cleanExp} # ${MANAGED_BY_SKU_MARKER}`;
 };
 
+const getExplanatoryComment = (
+  key: keyof PnpmWorkspaceConfig,
+): string | undefined => {
+  const comment = explanatoryComments[key as keyof typeof explanatoryComments];
+  return typeof comment === 'string' ? comment : undefined;
+};
+
+const getExplanatoryComments = (
+  key: keyof PnpmWorkspaceConfig,
+): Record<string, string> | undefined => {
+  const comments = explanatoryComments[key as keyof typeof explanatoryComments];
+  return comments && typeof comments === 'object' && !Array.isArray(comments)
+    ? (comments as Record<string, string>)
+    : undefined;
+};
+
+const clearCommentBefore = (node: unknown): boolean => {
+  if (!isScalar(node) || !node.commentBefore) {
+    return false;
+  }
+
+  node.commentBefore = undefined;
+  return true;
+};
+
+const setManagedComment = (node: unknown, explanatory?: string): boolean => {
+  if (!isScalar(node)) {
+    return false;
+  }
+
+  const comment = formatComment(explanatory);
+  const modified = node.comment !== comment || Boolean(node.commentBefore);
+  node.comment = comment;
+  node.commentBefore = undefined;
+  return modified;
+};
+
+const findMapPair = (doc: Document, key: string) => {
+  if (!isMap(doc.contents)) {
+    return undefined;
+  }
+
+  return doc.contents.items.find((pair) => getNodeKey(pair.key) === key);
+};
+
+const markPairAsManaged = (
+  pair: { key: unknown; value: unknown },
+  explanatory?: string,
+): boolean => {
+  const modified = setManagedComment(pair.value, explanatory);
+  return clearCommentBefore(pair.key) || modified;
+};
+
+const markSingleValueAsManaged = (
+  node: unknown,
+  explanatory: string | undefined,
+  doc: Document,
+  key: string,
+): boolean => {
+  const modified = setManagedComment(node, explanatory);
+  const pair = findMapPair(doc, key);
+  return (pair ? clearCommentBefore(pair.key) : false) || modified;
+};
+
 const migrateConfigDependencies = (
   doc: Document,
   logMutation: LogMutation,
@@ -87,35 +136,32 @@ const migrateConfigDependencies = (
     return false;
   }
 
-  let modified = false;
   const cd = doc.get('configDependencies', true);
+  let modified = false;
 
   if (isMap(cd)) {
-    if (cd.has('pnpm-plugin-sku')) {
-      cd.delete('pnpm-plugin-sku');
-      logMutation(
-        'removed pnpm-plugin-sku from configDependencies in pnpm-workspace.yaml',
-      );
-      modified = true;
-    }
-    if (cd.items.length === 0) {
-      doc.delete('configDependencies');
-      modified = true;
-    }
-  } else if (isSeq(cd)) {
-    const idx = cd.items.findIndex(
-      (item) => isScalar(item) && item.value === 'pnpm-plugin-sku',
+    const remainingItems = cd.items.filter(
+      (pair) => getNodeKey(pair.key) !== 'pnpm-plugin-sku',
     );
-    if (idx !== -1) {
-      cd.items.splice(idx, 1);
-      logMutation(
-        'removed pnpm-plugin-sku from configDependencies in pnpm-workspace.yaml',
-      );
-      modified = true;
-    }
-    if (cd.items.length === 0) {
-      doc.delete('configDependencies');
-      modified = true;
+    modified = remainingItems.length !== cd.items.length;
+    cd.items = remainingItems;
+  } else if (isSeq(cd)) {
+    const remainingItems = cd.items.filter(
+      (item) => getNodeKey(item) !== 'pnpm-plugin-sku',
+    );
+    modified = remainingItems.length !== cd.items.length;
+    cd.items = remainingItems;
+  }
+
+  if (modified) {
+    logMutation(
+      'removed pnpm-plugin-sku from configDependencies in pnpm-workspace.yaml',
+    );
+
+    if (isMap(cd) || isSeq(cd)) {
+      if (cd.items.length === 0) {
+        doc.delete('configDependencies');
+      }
     }
   }
 
@@ -128,23 +174,24 @@ const handleMatchingSingleValue = (
   currentValue: unknown,
   doc: Document,
   key: string,
+  context: SyncContext,
 ): boolean => {
   if (isScalar(node)) {
-    if (
-      !hasUserComment(node.comment, explanatory) &&
-      !node.comment?.includes(MANAGED_BY_SKU_MARKER)
-    ) {
-      node.comment = formatComment(explanatory);
+    if (markSingleValueAsManaged(node, explanatory, doc, key)) {
+      context.logMutation(
+        `adopted ${key}: ${String(currentValue)} in pnpm-workspace.yaml`,
+      );
       return true;
     }
     return false;
   }
 
   const wrapped = doc.createNode(currentValue);
-  if (isScalar(wrapped)) {
-    wrapped.comment = formatComment(explanatory);
-  }
+  setManagedComment(wrapped, explanatory);
   doc.set(key, wrapped);
+  context.logMutation(
+    `adopted ${key}: ${String(currentValue)} in pnpm-workspace.yaml`,
+  );
   return true;
 };
 
@@ -159,18 +206,24 @@ const updateExistingSingleValue = (
   const currentValue = isScalar(node) ? node.value : doc.get(key);
 
   if (currentValue === defaultValue) {
-    return handleMatchingSingleValue(node, explanatory, currentValue, doc, key);
+    return handleMatchingSingleValue(
+      node,
+      explanatory,
+      currentValue,
+      doc,
+      key,
+      context,
+    );
   }
 
   if (mode === 'enforce') {
-    const oldComment = node && isScalar(node) ? node.comment : undefined;
     const updatedNode = doc.createNode(defaultValue);
-    if (isScalar(updatedNode)) {
-      updatedNode.comment = hasUserComment(oldComment, explanatory)
-        ? oldComment
-        : formatComment(explanatory);
-    }
+    setManagedComment(updatedNode, explanatory);
     doc.set(key, updatedNode);
+    const pair = findMapPair(doc, key);
+    if (pair) {
+      clearCommentBefore(pair.key);
+    }
     logMutation(
       `updated ${key}: ${String(currentValue)} → ${defaultValue} in pnpm-workspace.yaml`,
     );
@@ -190,15 +243,11 @@ const syncSingleValue = (
   const { doc, logMutation } = context;
   const defaultValue: string | number | boolean =
     defaultPnpmWorkspaceConfig[key];
-  const explanatory = (
-    explanatoryComments as unknown as Record<string, string | undefined>
-  )[key];
+  const explanatory = getExplanatoryComment(key);
 
   if (!doc.has(key)) {
     const node = doc.createNode(defaultValue);
-    if (isScalar(node)) {
-      node.comment = formatComment(explanatory);
-    }
+    setManagedComment(node, explanatory);
     doc.set(key, node);
     logMutation(`added ${key}: ${defaultValue} to pnpm-workspace.yaml`);
     return true;
@@ -227,32 +276,28 @@ const syncExistingObjectPair = (
   const { doc, mode, logMutation, warn } = context;
 
   if (!isScalar(pair.value)) {
-    pair.value = doc.createNode(pair.value);
-  }
-  if (!isScalar(pair.value)) {
     return false;
   }
 
   const currentVal = pair.value.value;
   if (currentVal === defaultVal) {
-    if (
-      !hasUserComment(pair.value.comment) &&
-      !pair.value.comment?.includes(MANAGED_BY_SKU_MARKER)
-    ) {
-      pair.value.comment = formatComment();
+    if (markPairAsManaged(pair)) {
+      logMutation(
+        `adopted ${key}.${subKey}: ${String(currentVal)} in pnpm-workspace.yaml`,
+      );
       return true;
     }
     return false;
   }
 
+  if (!hasManagedMarker(pair.value.comment)) {
+    return false;
+  }
+
   if (mode === 'enforce') {
-    const oldComment = pair.value.comment;
     pair.value = doc.createNode(defaultVal);
-    if (isScalar(pair.value)) {
-      pair.value.comment = hasUserComment(oldComment)
-        ? oldComment
-        : formatComment();
-    }
+    setManagedComment(pair.value);
+    clearCommentBefore(pair.key);
     logMutation(
       `updated ${key}.${subKey}: ${String(currentVal)} → ${defaultVal} in pnpm-workspace.yaml`,
     );
@@ -272,17 +317,11 @@ const syncObjectPair = (
   defaultVal: boolean,
   context: SyncContext,
 ): boolean => {
-  const pair = mapNode.items.find((item) =>
-    isScalar(item.key)
-      ? String(item.key.value) === subKey
-      : String(item.key) === subKey,
-  );
+  const pair = mapNode.items.find((item) => getNodeKey(item.key) === subKey);
 
   if (!pair) {
     const valNode = context.doc.createNode(defaultVal);
-    if (isScalar(valNode)) {
-      valNode.comment = formatComment();
-    }
+    setManagedComment(valNode);
     mapNode.set(subKey, valNode);
     context.logMutation(
       `added ${key}.${subKey}: ${defaultVal} to pnpm-workspace.yaml`,
@@ -302,19 +341,16 @@ const cleanRetiredObjectKeys = (
   const { mode, logMutation, warn } = context;
   const itemsToRemove: string[] = [];
   for (const pair of mapNode.items) {
-    const subKey = isScalar(pair.key)
-      ? String(pair.key.value)
-      : String(pair.key);
+    const subKey = getNodeKey(pair.key);
     if (!(subKey in defaultObj)) {
       const isMarked =
-        isScalar(pair.value) &&
-        pair.value.comment?.includes(MANAGED_BY_SKU_MARKER);
+        isScalar(pair.value) && hasManagedMarker(pair.value.comment);
       if (isMarked) {
         if (mode === 'enforce') {
           itemsToRemove.push(subKey);
         } else {
           warn(
-            `pnpm-workspace.yaml: "${subKey}" in ${key} is marked as managed by sku, but is no longer a sku default. Run "sku configure" to remove it, or delete its "# managed by sku" marker to keep it as a user-managed entry.`,
+            `pnpm-workspace.yaml: "${subKey}" in ${key} is marked with "${MANAGED_BY_SKU_COMMENT}", but is no longer a sku default. Run "sku configure" to remove it, or delete its "${MANAGED_BY_SKU_COMMENT}" marker to keep it as a user-managed entry.`,
           );
         }
       }
@@ -343,6 +379,7 @@ const syncObjectSettings = (context: SyncContext): boolean => {
 
     if (!doc.has(key)) {
       doc.set(key, doc.createNode({}));
+      context.logMutation(`added ${key} to pnpm-workspace.yaml`);
       modified = true;
     }
 
@@ -365,18 +402,34 @@ const syncObjectSettings = (context: SyncContext): boolean => {
   return modified;
 };
 
-const deduplicateArrayItems = (seqNode: YAMLSeq): boolean => {
-  const seenValues = new Set<string>();
+const deduplicateArrayItems = (
+  seqNode: YAMLSeq,
+  key: string,
+  context: SyncContext,
+): boolean => {
+  const seenValues = new Map<string, number>();
   const deduplicatedItems: typeof seqNode.items = [];
   let modified = false;
 
   for (const item of seqNode.items) {
     if (isScalar(item) && typeof item.value === 'string') {
-      if (seenValues.has(item.value)) {
+      const existingIndex = seenValues.get(item.value);
+      if (existingIndex !== undefined) {
+        const existingItem = deduplicatedItems[existingIndex];
+        if (
+          isScalar(existingItem) &&
+          hasManagedMarker(existingItem.comment) &&
+          !hasManagedMarker(item.comment)
+        ) {
+          deduplicatedItems[existingIndex] = item;
+        }
+        context.logMutation(
+          `removed duplicate ${item.value} from ${key} in pnpm-workspace.yaml`,
+        );
         modified = true;
         continue;
       }
-      seenValues.add(item.value);
+      seenValues.set(item.value, deduplicatedItems.length);
       deduplicatedItems.push(item);
     } else {
       deduplicatedItems.push(item);
@@ -400,23 +453,20 @@ const processSingleArrayItem = (
 
   const val = item.value;
   if (defaultList.includes(val)) {
-    if (
-      !hasUserComment(item.comment, explanatory) &&
-      !item.comment?.includes(MANAGED_BY_SKU_MARKER)
-    ) {
-      item.comment = formatComment(explanatory);
+    if (setManagedComment(item, explanatory)) {
+      context.logMutation(`adopted ${val} in ${key} in pnpm-workspace.yaml`);
       return { modified: true, remove: false };
     }
     return { modified: false, remove: false };
   }
 
-  const isMarked = item.comment?.includes(MANAGED_BY_SKU_MARKER);
+  const isMarked = hasManagedMarker(item.comment);
   if (isMarked) {
     if (context.mode === 'enforce') {
       return { modified: true, remove: true };
     }
     context.warn(
-      `pnpm-workspace.yaml: "${val}" in ${key} is marked as managed by sku, but is no longer a sku default. Run "sku configure" to remove it, or delete its "# managed by sku" marker to keep it as a user-managed entry.`,
+      `pnpm-workspace.yaml: "${val}" in ${key} is marked with "${MANAGED_BY_SKU_COMMENT}", but is no longer a sku default. Run "sku configure" to remove it, or delete its "${MANAGED_BY_SKU_COMMENT}" marker to keep it as a user-managed entry.`,
     );
   }
 
@@ -486,9 +536,7 @@ const appendMissingArrayDefaults = (
     if (!existingValues.has(defaultItem)) {
       const explanatory = explanatoryMap?.[defaultItem];
       const newItem = context.doc.createNode(defaultItem);
-      if (isScalar(newItem)) {
-        newItem.comment = formatComment(explanatory);
-      }
+      setManagedComment(newItem, explanatory);
       seqNode.items.push(newItem);
       existingValues.add(defaultItem);
       context.logMutation(
@@ -506,11 +554,11 @@ const syncArraySettings = (context: SyncContext): boolean => {
 
   for (const key of arraySettings) {
     const defaultList = defaultPnpmWorkspaceConfig[key] as readonly string[];
-    const explanatoryMap = (explanatoryComments as Record<string, any>)[key] as
-      Record<string, string> | undefined;
+    const explanatoryMap = getExplanatoryComments(key);
 
     if (!context.doc.has(key)) {
       context.doc.set(key, context.doc.createNode([]));
+      context.logMutation(`added ${key} to pnpm-workspace.yaml`);
       modified = true;
     }
 
@@ -519,7 +567,7 @@ const syncArraySettings = (context: SyncContext): boolean => {
       continue;
     }
 
-    if (deduplicateArrayItems(seqNode)) {
+    if (deduplicateArrayItems(seqNode, key, context)) {
       modified = true;
     }
     if (
@@ -550,14 +598,8 @@ const syncArraySettings = (context: SyncContext): boolean => {
 };
 
 export async function ensurePnpmWorkspaceConfig(
-  targetDirOrOptions?: string | EnsurePnpmWorkspaceConfigOptions,
-  maybeOptions?: EnsurePnpmWorkspaceConfigOptions,
+  options: EnsurePnpmWorkspaceConfigOptions = {},
 ): Promise<void> {
-  const options =
-    typeof targetDirOrOptions === 'string'
-      ? { targetDir: targetDirOrOptions, ...maybeOptions }
-      : { ...targetDirOrOptions };
-
   const mode = options.mode ?? 'additive';
   const shouldCreate = options.create ?? false;
   const targetDir = options.targetDir ?? rootDir ?? process.cwd();
@@ -574,8 +616,12 @@ export async function ensurePnpmWorkspaceConfig(
   if (fileExisted) {
     originalContent = await readFile(filePath, 'utf-8');
     doc = parseDocument(originalContent);
-    if (!doc.contents || !isMap(doc.contents)) {
+    if (!doc.contents) {
       doc.contents = doc.createNode({});
+    } else if (!isMap(doc.contents)) {
+      throw new Error(
+        `Cannot sync ${filePath}: the document must contain a YAML mapping`,
+      );
     }
   } else {
     doc = new Document(structuredClone(defaultPnpmWorkspaceConfig));
@@ -583,11 +629,11 @@ export async function ensurePnpmWorkspaceConfig(
 
   let modified = !fileExisted;
 
-  const logMutation: LogMutation = (message) => {
-    if (fileExisted) {
-      console.log(message);
-    }
-  };
+  const logMutation: LogMutation = (message) => console.log(message);
+
+  if (!fileExisted) {
+    logMutation('created pnpm-workspace.yaml');
+  }
 
   const warn: Warn = (message) => {
     console.warn(caution(message));

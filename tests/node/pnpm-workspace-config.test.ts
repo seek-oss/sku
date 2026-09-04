@@ -49,10 +49,10 @@ allowBuilds:
     expect(content).toContain('minimumReleaseAge: 1440');
 
     // Missing defaults added with markers
-    expect(content).toContain('blockExoticSubdeps: true # managed by sku');
-    expect(content).toContain('trustPolicy: off # managed by sku');
+    expect(content).toContain('blockExoticSubdeps: true # sku_managed');
+    expect(content).toContain('trustPolicy: off # sku_managed');
     expect(content).toContain(
-      'semver@6.3.1 # dependency of eslint-plugin-react # managed by sku',
+      'semver@6.3.1 # dependency of eslint-plugin-react # sku_managed',
     );
 
     // Drift warning logged
@@ -68,9 +68,7 @@ allowBuilds:
     await expect(configureRun).toMatchExitCode(0);
 
     content = await readFile(workspaceYamlPath, 'utf-8');
-    expect(content).toContain(
-      'minimumReleaseAge: 4320 # 3 days # managed by sku',
-    );
+    expect(content).toContain('minimumReleaseAge: 4320 # 3 days # sku_managed');
 
     // Steady-state silence on subsequent runs
     const secondRun = await sku('format', [], {
@@ -100,32 +98,32 @@ allowBuilds:
         'pnpm-workspace.yaml': `packages:
   - .
 allowBuilds:
-  '@parcel/watcher': true # managed by sku
-  '@swc/core': true # managed by sku
-  core-js-pure: false # managed by sku
-  esbuild: true # managed by sku
-  sku: true # managed by sku
-  unrs-resolver: true # managed by sku
-blockExoticSubdeps: true # managed by sku
-minimumReleaseAge: 4320 # 3 days # managed by sku
+  '@parcel/watcher': true # sku_managed
+  '@swc/core': true # sku_managed
+  core-js-pure: false # sku_managed
+  esbuild: true # sku_managed
+  sku: true # sku_managed
+  unrs-resolver: true # sku_managed
+blockExoticSubdeps: true # sku_managed
+minimumReleaseAge: 4320 # 3 days # sku_managed
 minimumReleaseAgeExclude:
-  - '@braid-design-system/*' # managed by sku
-  - '@capsizecss/*' # managed by sku
-  - '@seek/*' # managed by sku
-  - '@sku-lib/*' # managed by sku
-  - '@vanilla-extract/*' # managed by sku
-  - '@vocab/*' # managed by sku
-  - braid-design-system # managed by sku
-  - browserslist-config-seek # managed by sku
-  - eslint-config-seek # managed by sku
-  - sku # managed by sku
+  - '@braid-design-system/*' # sku_managed
+  - '@capsizecss/*' # sku_managed
+  - '@seek/*' # sku_managed
+  - '@sku-lib/*' # sku_managed
+  - '@vanilla-extract/*' # sku_managed
+  - '@vocab/*' # sku_managed
+  - braid-design-system # sku_managed
+  - browserslist-config-seek # sku_managed
+  - eslint-config-seek # sku_managed
+  - sku # sku_managed
 publicHoistPattern:
-  - eslint # managed by sku
-  - prettier # managed by sku
-strictDepBuilds: false # managed by sku
-trustPolicy: off # managed by sku
+  - eslint # sku_managed
+  - prettier # sku_managed
+strictDepBuilds: false # sku_managed
+trustPolicy: off # sku_managed
 trustPolicyExclude:
-  - semver@6.3.1 # dependency of eslint-plugin-react # managed by sku
+  - semver@6.3.1 # dependency of eslint-plugin-react # sku_managed
 `,
       },
       { tempDir: fixturePath() },

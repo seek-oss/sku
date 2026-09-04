@@ -28,13 +28,14 @@ Enforcement is therefore opt-in via `sku configure`; the automatic sync only eve
 
 **Goals:**
 
-- Sku's recommended pnpm settings are written statically into existing `pnpm-workspace.yaml` files and kept in sync on every sku command and postinstall, through a single code path.
+- Sku's recommended pnpm settings are written statically into existing `pnpm-workspace.yaml` files and kept in sync on configuration-enabled sku commands and postinstall, through a single code path.
 - The automatic sync is non-breaking: strictly additive, never overwrites or removes existing values, and never creates the file.
 - New defaults propagate to existing projects automatically on sku upgrades, as additions only.
 - Drift from sku's defaults (differing managed values, retired sku-owned entries) is surfaced via warnings that point at `sku configure`.
 - `sku configure` runs the enforcing sync: managed values overwritten, retired sku-owned entries removed.
 - All changes are logged. An already-aligned file is untouched and silent.
-- Existing comments and unrelated keys in `pnpm-workspace.yaml` are preserved.
+- Unmanaged keys and user-owned entries in `pnpm-workspace.yaml` are preserved.
+  Comments on entries that become sku-managed are replaced by the sku marker.
 - `pnpm-plugin-sku` is removed from consumer projects (`configDependencies` entry stripped) and the v10/plugin validation machinery is deleted.
 - No new runtime dependencies beyond `yaml` (already used by `@sku-lib/create`).
 
@@ -62,11 +63,11 @@ Write settings directly into `pnpm-workspace.yaml` rather than injecting them vi
 
 ### Decision: Two-tier sync — additive automatic, enforcing on `sku configure`
 
-The same sync runs from `configureProject` (every command), `postinstall`, and the `sku configure` command, in two modes:
+The same sync runs from `configureProject` (configuration-enabled commands), `postinstall`, and the `sku configure` command, in two modes:
 
-- **Additive mode** (every command, postinstall): adds missing managed single-value settings, missing sku-owned keys in object settings, and missing array entries; unions and dedupes arrays; adopts unmarked default-matching entries (marking is additive metadata).
-  It never overwrites an existing value, never removes an entry, and never creates the file.
-- **Enforce mode** (`sku configure` only): everything additive mode does, plus overwriting managed single-value settings in both directions, per-key alignment of object settings, and removal of retired sku-owned entries.
+- **Additive mode** (configuration-enabled commands, postinstall): adds missing managed single-value settings, missing sku-owned keys in object settings, and missing array entries; unions and dedupes arrays; adopts unmarked default-matching entries.
+  It never overwrites an existing config value, never removes a user-owned entry, and never creates the file.
+- **Enforce mode** (`sku configure` only): everything additive mode does, plus overwriting managed single-value settings in both directions, alignment of marked object entries, and removal of retired sku-owned entries.
   Manual invocation is intentional, so enforcement only happens on explicit request.
 
 - Over enforce-everywhere (the original design): under the plugin, single-value settings were write-if-absent, so the user's file value always won.
@@ -86,7 +87,7 @@ On `sku configure` — the only enforcing entry point — managed single-value s
 
 ### Decision: Marker-based ownership for collections
 
-Everything sku writes carries a trailing `# managed by sku` comment: on managed single-value settings (informational), and on each sku-owned entry within object and array settings (load-bearing).
+Everything sku writes carries a trailing `# sku_managed` comment: on managed single-value settings (informational), and on each sku-owned entry within object and array settings (load-bearing).
 
 - Collections are managed by ownership.
   Sku-owned (marked) entries are added when new and aligned with current defaults on every sync; they are removed when sku retires them, and only on `sku configure`.
@@ -99,7 +100,7 @@ Everything sku writes carries a trailing `# managed by sku` comment: on managed 
   Removal is scoped strictly to marked entries: if the user deletes an entry's marker, the entry is user-owned, and because a retired entry no longer matches a default it is never re-adopted — so it is never removed.
   If the user wants to keep a removed entry, they add it back unmarked, and it is preserved thereafter.
   Deleting a marker from an entry that still matches a current default does nothing: the next sync re-marks it.
-- Markers never replace existing user comments, so an entry with a user comment is never adopted.
+- When an entry is adopted or overwritten, its existing comments are replaced with the sku marker (and any sku explanatory comment).
   A file whose values and markers already match sku's defaults is never rewritten.
 - Over union-always (never remove): union-always leaks retired sku entries into consumer files forever.
   Markers make ownership explicit, which makes safe removal possible when the user asks for it.
@@ -117,7 +118,7 @@ Added as a runtime dependency of `sku`.
 
 ### Decision: Defaults live in `@sku-private/utils`
 
-The defaults module (values, per-key policies, marker handling) moves from `pnpm-plugin-sku` into `@sku-private/utils`.
+The defaults module (values, setting groups, marker handling) moves from `pnpm-plugin-sku` into `@sku-private/utils`.
 It is bundled into both `sku` and `@sku-lib/create` at build time: a single source of truth for create-time file generation and runtime sync.
 
 - Create does not keep its own `pnpm-workspace.yaml` writer.
@@ -153,8 +154,8 @@ Removing the plugin alongside additive static writes preserves the effective pnp
 
 ### Decision: Drift warnings
 
-When the automatic sync finds an existing managed value that differs from sku's current default (a managed single-value setting or a sku-owned key in an object setting), or a marked entry that sku has retired, it logs a warning naming the key, the current value, the recommended value, and suggesting `sku configure`.
-For retired entries, the warning presents both resolutions: run `sku configure` to remove the entry, or delete its `# managed by sku` marker to keep it as a user-managed entry.
+When the automatic sync finds an existing managed value that differs from sku's current default (a managed single-value setting or a marked sku-owned key in an object setting), or a marked entry that sku has retired, it logs a warning naming the key, the current value, the recommended value, and suggesting `sku configure`.
+For retired entries, the warning presents both resolutions: run `sku configure` to remove the entry, or delete its `# sku_managed` marker to keep it as a user-managed entry.
 No warning when values align.
 
 - Over silence: drift would otherwise be invisible forever, and enforcement would never discoverable.
@@ -172,7 +173,7 @@ Out of scope for this change.
 
 ### Decision: Logging
 
-Every mutation is logged as it happens (for example `added minimumReleaseAge: 4320 to pnpm-workspace.yaml`, `updated minimumReleaseAge: 1440 → 4320`, `removed pnpm-plugin-sku from configDependencies`).
+Every mutation is logged as it happens (for example `created pnpm-workspace.yaml`, `added minimumReleaseAge: 4320 to pnpm-workspace.yaml`, `adopted eslint in publicHoistPattern`, `updated minimumReleaseAge: 1440 → 4320`, `removed duplicate eslint from publicHoistPattern`, and `removed pnpm-plugin-sku from configDependencies`).
 No output when the file is already aligned.
 
 ## Risks / Trade-offs
@@ -183,7 +184,7 @@ No output when the file is already aligned.
   The conservative freeze matches the non-breaking goal.
 - Object-setting conflict flip after plugin removal (`allowBuilds` today) → Affects only projects that deliberately overrode a sku-owned key, and flips behaviour toward the user's stated intent.
   Documented in the changeset.
-- Sync writes to a committed file on every command → Write only when changed and log every change, so the diff is never a surprise.
+- Sync writes to a committed file on every configuration-enabled command → Write only when changed and log every change, so the diff is never a surprise.
   Precedent: `.gitignore`/`.prettierignore` management.
 - Adoption marks a user's hand-added entry that duplicates a sku default → Removal only happens on `sku configure`, and only while the entry still carries its marker; deleting the marker or re-adding the entry preserves it.
   Documented in the changeset.
@@ -205,4 +206,4 @@ The static keys are harmless alongside the plugin (the plugin's single-value mer
 
 ## Open Questions
 
-None. The two-tier modes, policy table, marker semantics, adoption, drift warnings, no-create rule, and entry-point gating are all decided above.
+None. The two-tier modes, setting groups, marker semantics, adoption, drift warnings, no-create rule, and entry-point gating are all decided above.

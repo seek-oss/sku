@@ -33,8 +33,23 @@ describe('ensurePnpmWorkspaceConfig', () => {
     });
   });
 
+  it('does not overwrite a non-map workspace document', async () => {
+    await withTempDir(async (dir) => {
+      const filePath = join(dir, 'pnpm-workspace.yaml');
+      const content = '- this is not a workspace config map\n';
+      await writeFile(filePath, content, 'utf-8');
+
+      await expect(
+        ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'additive' }),
+      ).rejects.toThrow('the document must contain a YAML mapping');
+      expect(await readFile(filePath, 'utf-8')).toBe(content);
+    });
+  });
+
   it('creates file with all default settings and markers when create is true', async () => {
     await withTempDir(async (dir) => {
+      const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
       await ensurePnpmWorkspaceConfig({ targetDir: dir, create: true });
 
       const filePath = join(dir, 'pnpm-workspace.yaml');
@@ -42,14 +57,17 @@ describe('ensurePnpmWorkspaceConfig', () => {
 
       const content = await readFile(filePath, 'utf-8');
       expect(content).toContain(
-        'minimumReleaseAge: 4320 # 3 days # managed by sku',
+        'minimumReleaseAge: 4320 # 3 days # sku_managed',
       );
       expect(content).toContain(
-        'semver@6.3.1 # dependency of eslint-plugin-react # managed by sku',
+        'semver@6.3.1 # dependency of eslint-plugin-react # sku_managed',
       );
-      expect(content).toContain('blockExoticSubdeps: true # managed by sku');
-      expect(content).toContain('trustPolicy: off # managed by sku');
+      expect(content).toContain('blockExoticSubdeps: true # sku_managed');
+      expect(content).toContain('trustPolicy: off # sku_managed');
       expect(content).not.toContain('configDependencies');
+      expect(logSpy).toHaveBeenCalledWith('created pnpm-workspace.yaml');
+
+      logSpy.mockRestore();
     });
   });
 
@@ -62,9 +80,9 @@ describe('ensurePnpmWorkspaceConfig', () => {
 packages:
   - site
 allowBuilds:
-  '@swc/core': true # managed by sku
+  '@swc/core': true # sku_managed
 publicHoistPattern:
-  - eslint # managed by sku
+  - eslint # sku_managed
 `,
         'utf-8',
       );
@@ -76,13 +94,11 @@ publicHoistPattern:
       const content = await readFile(filePath, 'utf-8');
       expect(content).toContain('packages:');
       expect(content).toContain(
-        'minimumReleaseAge: 4320 # 3 days # managed by sku',
+        'minimumReleaseAge: 4320 # 3 days # sku_managed',
       );
-      expect(content).toContain('blockExoticSubdeps: true # managed by sku');
-      expect(content).toMatch(
-        /['"]@parcel\/watcher['"]:\s*true # managed by sku/,
-      );
-      expect(content).toContain('prettier # managed by sku');
+      expect(content).toContain('blockExoticSubdeps: true # sku_managed');
+      expect(content).toMatch(/['"]@parcel\/watcher['"]:\s*true # sku_managed/);
+      expect(content).toContain('prettier # sku_managed');
 
       expect(logSpy).toHaveBeenCalledWith(
         expect.stringContaining(
@@ -107,7 +123,7 @@ publicHoistPattern:
         `
 minimumReleaseAge: 1440 # custom setting
 allowBuilds:
-  '@swc/core': false
+  '@swc/core': false # sku_managed
 `,
         'utf-8',
       );
@@ -143,10 +159,10 @@ allowBuilds:
       await writeFile(
         filePath,
         `
-minimumReleaseAge: 1440 # managed by sku
-trustPolicy: no-downgrade # managed by sku
+minimumReleaseAge: 1440 # sku_managed
+trustPolicy: no-downgrade # sku_managed
 allowBuilds:
-  '@swc/core': false # managed by sku
+  '@swc/core': false # sku_managed
 `,
         'utf-8',
       );
@@ -157,10 +173,10 @@ allowBuilds:
 
       const content = await readFile(filePath, 'utf-8');
       expect(content).toContain(
-        'minimumReleaseAge: 4320 # 3 days # managed by sku',
+        'minimumReleaseAge: 4320 # 3 days # sku_managed',
       );
-      expect(content).toContain('trustPolicy: off # managed by sku');
-      expect(content).toMatch(/['"]@swc\/core['"]:\s*true # managed by sku/);
+      expect(content).toContain('trustPolicy: off # sku_managed');
+      expect(content).toMatch(/['"]@swc\/core['"]:\s*true # sku_managed/);
 
       expect(logSpy).toHaveBeenCalledWith(
         expect.stringContaining(
@@ -176,6 +192,32 @@ allowBuilds:
         expect.stringContaining(
           'updated allowBuilds.@swc/core: false → true in pnpm-workspace.yaml',
         ),
+      );
+
+      logSpy.mockRestore();
+    });
+  });
+
+  it('preserves unmarked allowBuilds overrides in enforce mode', async () => {
+    await withTempDir(async (dir) => {
+      const filePath = join(dir, 'pnpm-workspace.yaml');
+      await writeFile(
+        filePath,
+        `
+allowBuilds:
+  '@swc/core': false # custom override
+`,
+        'utf-8',
+      );
+
+      const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+      await ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'enforce' });
+
+      const content = await readFile(filePath, 'utf-8');
+      expect(content).toMatch(/['"]@swc\/core['"]:\s*false # custom override/);
+      expect(logSpy).not.toHaveBeenCalledWith(
+        expect.stringContaining('updated allowBuilds.@swc/core'),
       );
 
       logSpy.mockRestore();
@@ -215,9 +257,9 @@ publicHoistPattern:
         filePath,
         `
 allowBuilds:
-  old-retired-build: true # managed by sku
+  old-retired-build: true # sku_managed
 publicHoistPattern:
-  - old-retired-hoist # managed by sku
+  - old-retired-hoist # sku_managed
 `,
         'utf-8',
       );
@@ -227,16 +269,16 @@ publicHoistPattern:
       // Additive mode: retained and warns
       await ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'additive' });
       let content = await readFile(filePath, 'utf-8');
-      expect(content).toContain('old-retired-build: true # managed by sku');
-      expect(content).toContain('old-retired-hoist # managed by sku');
+      expect(content).toContain('old-retired-build: true # sku_managed');
+      expect(content).toContain('old-retired-hoist # sku_managed');
       expect(warnSpy).toHaveBeenCalledWith(
         expect.stringContaining(
-          'pnpm-workspace.yaml: "old-retired-build" in allowBuilds is marked as managed by sku, but is no longer a sku default. Run "sku configure" to remove it, or delete its "# managed by sku" marker to keep it as a user-managed entry.',
+          'pnpm-workspace.yaml: "old-retired-build" in allowBuilds is marked with "# sku_managed", but is no longer a sku default. Run "sku configure" to remove it, or delete its "# sku_managed" marker to keep it as a user-managed entry.',
         ),
       );
       expect(warnSpy).toHaveBeenCalledWith(
         expect.stringContaining(
-          'pnpm-workspace.yaml: "old-retired-hoist" in publicHoistPattern is marked as managed by sku, but is no longer a sku default. Run "sku configure" to remove it, or delete its "# managed by sku" marker to keep it as a user-managed entry.',
+          'pnpm-workspace.yaml: "old-retired-hoist" in publicHoistPattern is marked with "# sku_managed", but is no longer a sku default. Run "sku configure" to remove it, or delete its "# sku_managed" marker to keep it as a user-managed entry.',
         ),
       );
 
@@ -245,7 +287,7 @@ publicHoistPattern:
         filePath,
         `
 allowBuilds:
-  old-retired-build: true # managed by sku
+  old-retired-build: true # sku_managed
 publicHoistPattern:
   - old-retired-hoist
 `,
@@ -289,10 +331,10 @@ publicHoistPattern:
 
       const content = await readFile(filePath, 'utf-8');
       expect(content).toContain(
-        'minimumReleaseAge: 4320 # 3 days # managed by sku',
+        'minimumReleaseAge: 4320 # 3 days # sku_managed',
       );
-      expect(content).toMatch(/['"]@swc\/core['"]:\s*true # managed by sku/);
-      expect(content).toContain('eslint # managed by sku');
+      expect(content).toMatch(/['"]@swc\/core['"]:\s*true # sku_managed/);
+      expect(content).toContain('eslint # sku_managed');
     });
   });
 
@@ -309,19 +351,15 @@ blockExoticSubdeps: true
 
       await ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'additive' });
       let content = await readFile(filePath, 'utf-8');
-      expect(content).toContain('blockExoticSubdeps: true # managed by sku');
+      expect(content).toContain('blockExoticSubdeps: true # sku_managed');
 
       // User manually deletes the marker
-      await writeFile(
-        filePath,
-        content.replace('# managed by sku', ''),
-        'utf-8',
-      );
+      await writeFile(filePath, content.replace('# sku_managed', ''), 'utf-8');
 
       // Next sync re-adopts
       await ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'additive' });
       content = await readFile(filePath, 'utf-8');
-      expect(content).toContain('blockExoticSubdeps: true # managed by sku');
+      expect(content).toContain('blockExoticSubdeps: true # sku_managed');
     });
   });
 
@@ -342,11 +380,63 @@ publicHoistPattern:
 
       const content = await readFile(filePath, 'utf-8');
       expect(content).toContain('old-retired-entry');
-      expect(content).not.toContain('old-retired-entry # managed by sku');
+      expect(content).not.toContain('old-retired-entry # sku_managed');
     });
   });
 
-  it('comment preservation: user comments are preserved and entries with user comments are not marked', async () => {
+  it('only treats exact markers as sku ownership', async () => {
+    await withTempDir(async (dir) => {
+      const filePath = join(dir, 'pnpm-workspace.yaml');
+      await writeFile(
+        filePath,
+        `
+allowBuilds:
+  old-retired-build: true # not sku_managed
+publicHoistPattern:
+  - old-retired-hoist # not sku_managed
+`,
+        'utf-8',
+      );
+
+      await ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'enforce' });
+
+      const content = await readFile(filePath, 'utf-8');
+      expect(content).toContain('old-retired-build: true # not sku_managed');
+      expect(content).toContain('old-retired-hoist # not sku_managed');
+    });
+  });
+
+  it('preserves an unmarked duplicate over a marked retired entry', async () => {
+    await withTempDir(async (dir) => {
+      const filePath = join(dir, 'pnpm-workspace.yaml');
+      await writeFile(
+        filePath,
+        `
+publicHoistPattern:
+  - old-retired-entry # sku_managed
+  - old-retired-entry # keep this entry
+`,
+        'utf-8',
+      );
+
+      const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+      await ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'enforce' });
+
+      const content = await readFile(filePath, 'utf-8');
+      expect(content).toContain('old-retired-entry # keep this entry');
+      expect(content).not.toContain('old-retired-entry # sku_managed');
+      expect(logSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'removed duplicate old-retired-entry from publicHoistPattern in pnpm-workspace.yaml',
+        ),
+      );
+
+      logSpy.mockRestore();
+    });
+  });
+
+  it('replaces comments on adopted managed entries', async () => {
     await withTempDir(async (dir) => {
       const filePath = join(dir, 'pnpm-workspace.yaml');
       await writeFile(
@@ -355,12 +445,18 @@ publicHoistPattern:
 # Top level workspace comment
 packages:
   - site # comment on packages
+# comment before minimumReleaseAge
 minimumReleaseAge: 4320 # critical for security
 allowBuilds:
-  '@parcel/watcher': true # keep this fast
+  # comment before allowBuilds entry
+  '@parcel/watcher':
+    # comment before value
+    true
 `,
         'utf-8',
       );
+
+      const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
       await ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'additive' });
 
@@ -369,13 +465,25 @@ allowBuilds:
       expect(content).toContain('packages:');
       expect(content).toContain('# comment on packages');
       expect(content).toContain(
-        'minimumReleaseAge: 4320 # critical for security',
+        'minimumReleaseAge: 4320 # 3 days # sku_managed',
       );
-      expect(content).toMatch(
-        /['"]@parcel\/watcher['"]:\s*true # keep this fast/,
+      expect(content).toMatch(/['"]@parcel\/watcher['"]:\s*true # sku_managed/);
+      expect(content).not.toContain('critical for security');
+      expect(content).not.toContain('comment before minimumReleaseAge');
+      expect(content).toContain('comment before allowBuilds entry');
+      expect(content).not.toContain('comment before value');
+      expect(logSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'adopted minimumReleaseAge: 4320 in pnpm-workspace.yaml',
+        ),
       );
-      expect(content).not.toContain('# critical for security # managed by sku');
-      expect(content).not.toContain('# keep this fast # managed by sku');
+      expect(logSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'adopted allowBuilds.@parcel/watcher: true in pnpm-workspace.yaml',
+        ),
+      );
+
+      logSpy.mockRestore();
     });
   });
 
@@ -453,6 +561,40 @@ configDependencies:
       expect(content).toContain('configDependencies:');
       expect(content).toContain('other-plugin: ^1.0.0');
       expect(content).not.toContain('pnpm-plugin-sku');
+    });
+  });
+
+  it('plugin migration: removes every duplicate sequence entry', async () => {
+    await withTempDir(async (dir) => {
+      const filePath = join(dir, 'pnpm-workspace.yaml');
+      await writeFile(
+        filePath,
+        `
+configDependencies:
+  - pnpm-plugin-sku
+  - other-plugin
+  - pnpm-plugin-sku
+`,
+        'utf-8',
+      );
+
+      await ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'additive' });
+
+      const content = await readFile(filePath, 'utf-8');
+      expect(content).not.toContain('pnpm-plugin-sku');
+      expect(content).toContain('other-plugin');
+    });
+  });
+
+  it('preserves an empty configDependencies key without the sku plugin', async () => {
+    await withTempDir(async (dir) => {
+      const filePath = join(dir, 'pnpm-workspace.yaml');
+      await writeFile(filePath, 'configDependencies: {}\n', 'utf-8');
+
+      await ensurePnpmWorkspaceConfig({ targetDir: dir, mode: 'additive' });
+
+      const content = await readFile(filePath, 'utf-8');
+      expect(content).toContain('configDependencies: {}');
     });
   });
 

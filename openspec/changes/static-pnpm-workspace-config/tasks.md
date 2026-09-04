@@ -1,17 +1,17 @@
 ## 1. Shared defaults module
 
-- [x] 1.1 Create `private/utils/src/packageManager/pnpmWorkspaceDefaults.ts` exporting sku's recommended settings, ported from `packages/pnpm-plugin/src/config.ts`. Include values, per-key policy classification (managed single-value settings, object settings as flat maps, unioned arrays), explanatory comments (`# 3 days`, `# dependency of eslint-plugin-react`), and the `# managed by sku` marker constant
-- [x] 1.2 Add unit tests for the defaults module (shape, policies, marker constant)
+- [x] 1.1 Create `private/utils/src/packageManager/pnpmWorkspaceDefaults.ts` exporting sku's recommended settings, ported from `packages/pnpm-plugin/src/config.ts`. Include values, setting groups (managed single-value settings, object settings as flat maps, unioned arrays), explanatory comments (`# 3 days`, `# dependency of eslint-plugin-react`), and the `# sku_managed` marker constant
+- [x] 1.2 Add unit tests for the defaults module (shape, setting groups, marker constant)
 
 ## 2. Sync engine
 
 - [x] 2.1 Add `yaml` as a runtime dependency of `sku` (and `private/utils` if needed for the sync module's types)
-- [x] 2.2 Create `private/utils/src/packageManager/ensurePnpmWorkspaceConfig.ts` with comment-preserving YAML sync of `pnpm-workspace.yaml`, taking a mode option (`additive` vs `enforce`) and a file-creation flag (create only)
-- [x] 2.3 Implement the merge policies for both modes: additive (missing managed single-value settings, object-setting keys, and array entries added; arrays unioned and deduped; no overwrites or removals) and enforce, run only by the `sku configure` command (managed single-value overwrites in both directions, per-key object-setting alignment, retired-entry removal)
-- [x] 2.4 Implement marker-based ownership: adoption of unmarked default-matching entries on every sync, re-adoption of unmarked entries that still match a default; retired-entry removal only on `sku configure`, scoped to entries still carrying a marker
-- [x] 2.5 Implement drift warnings: differing managed single-value settings and object-setting values (naming the key, both values, and `sku configure`), and retired marked entries (offering both resolutions: `sku configure` removes it, or delete the marker to keep it user-managed)
-- [x] 2.6 Implement `configDependencies` migration, per-change logging, and no write when aligned
-- [x] 2.7 Add unit tests covering each spec scenario: additive additions, existing-value preservation, overwrites in both directions on `sku configure`, user-entry preservation, retired-entry removal on `sku configure` only (and preservation once the marker is deleted), adoption, re-adoption, re-added retired entries, comment preservation, aligned-file silence, plugin migration, missing file left untouched, drift warnings
+- [x] 2.2 Create `private/utils/src/packageManager/ensurePnpmWorkspaceConfig.ts` with YAML sync of `pnpm-workspace.yaml`, taking a mode option (`additive` vs `enforce`) and a file-creation flag (create only)
+- [x] 2.3 Implement the merge policies for both modes: additive (missing managed single-value settings, object-setting keys, and array entries added; arrays unioned and deduped; no config-value overwrites or user-entry removals) and enforce, run only by the `sku configure` command (managed single-value overwrites in both directions, marked object-setting alignment, retired-entry removal)
+- [x] 2.4 Implement marker-based ownership: adoption of unmarked default-matching entries on every sync, comment replacement with `# sku_managed`, re-adoption of unmarked entries that still match a default; retired-entry removal only on `sku configure`, scoped to entries still carrying a marker
+- [x] 2.5 Implement drift warnings: differing managed single-value settings and marked object-setting values (naming the key, both values, and `sku configure`), and retired marked entries (offering both resolutions: `sku configure` removes it, or delete the marker to keep it user-managed)
+- [x] 2.6 Implement `configDependencies` migration, per-change logging (including file creation, adoption, and duplicate removal), and no write when aligned
+- [x] 2.7 Add unit tests covering each spec scenario: additive additions, existing-value preservation, overwrites in both directions on `sku configure`, unmarked object overrides, user-entry preservation, retired-entry removal on `sku configure` only (and preservation once the marker is deleted), adoption, re-adoption, re-added retired entries, marker detection, comment replacement, aligned-file silence, plugin migration, missing file left untouched, malformed files, drift warnings, and duplicate handling
 
 ## 3. Wire into sku
 

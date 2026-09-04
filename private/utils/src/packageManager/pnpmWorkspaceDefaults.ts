@@ -1,5 +1,5 @@
-export const MANAGED_BY_SKU_MARKER = 'managed by sku';
-export const MANAGED_BY_SKU_COMMENT = '# managed by sku';
+export const MANAGED_BY_SKU_MARKER = 'sku_managed';
+export const MANAGED_BY_SKU_COMMENT = '# sku_managed';
 
 export const defaultPnpmWorkspaceConfig = {
   allowBuilds: {
@@ -34,38 +34,25 @@ export const defaultConfig = defaultPnpmWorkspaceConfig;
 
 export type PnpmWorkspaceConfig = typeof defaultPnpmWorkspaceConfig;
 
-export type SettingPolicy = 'single-value' | 'object' | 'array';
-
-export const settingPolicies: Record<keyof PnpmWorkspaceConfig, SettingPolicy> =
-  {
-    allowBuilds: 'object',
-    blockExoticSubdeps: 'single-value',
-    minimumReleaseAge: 'single-value',
-    minimumReleaseAgeExclude: 'array',
-    publicHoistPattern: 'array',
-    strictDepBuilds: 'single-value',
-    trustPolicy: 'single-value',
-    trustPolicyExclude: 'array',
-  };
+type PnpmWorkspaceSettingKey = keyof PnpmWorkspaceConfig;
 
 export const singleValueSettings = [
   'blockExoticSubdeps',
   'minimumReleaseAge',
   'strictDepBuilds',
   'trustPolicy',
-] as const;
+] as const satisfies readonly PnpmWorkspaceSettingKey[];
 
-export const objectSettings = ['allowBuilds'] as const;
+export const objectSettings = [
+  'allowBuilds',
+] as const satisfies readonly PnpmWorkspaceSettingKey[];
 
 export const arraySettings = [
   'minimumReleaseAgeExclude',
   'publicHoistPattern',
   'trustPolicyExclude',
-] as const;
+] as const satisfies readonly PnpmWorkspaceSettingKey[];
 
 export const explanatoryComments = {
   minimumReleaseAge: '# 3 days',
-  trustPolicyExclude: {
-    'semver@6.3.1': '# dependency of eslint-plugin-react',
-  },
-} as const;
+} as const satisfies Partial<Record<PnpmWorkspaceSettingKey, string>>;

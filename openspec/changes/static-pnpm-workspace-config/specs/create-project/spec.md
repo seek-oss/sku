@@ -9,7 +9,7 @@ Writing the file before install ensures sku's settings apply to the first instal
 #### Scenario: New project file matches sync output
 
 - **WHEN** a user creates a new pnpm project
-- **AND** any sku command subsequently runs in that project
+- **AND** a configuration-enabled sku command subsequently runs in that project
 - **THEN** the sync finds `pnpm-workspace.yaml` already aligned and produces no diff
 
 ### Requirement: Create does not install a pnpm config dependency

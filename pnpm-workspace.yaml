@@ -8,26 +8,26 @@ packages:
 allowBuilds:
   # Postinstall only prints an optional completions tip; dist/ ships in the package.
   '@fission-ai/openspec': false
-  '@swc/core': true # managed by sku
-  core-js-pure: false # managed by sku
-  esbuild: true # managed by sku
-  unrs-resolver: true # managed by sku
-  '@parcel/watcher': true # managed by sku
-  sku: true # managed by sku
+  '@swc/core': true # sku_managed
+  core-js-pure: false # sku_managed
+  esbuild: true # sku_managed
+  unrs-resolver: true # sku_managed
+  '@parcel/watcher': true # sku_managed
+  sku: true # sku_managed
 
 minimumReleaseAgeExclude:
-  - '@braid-design-system/*' # managed by sku
-  - '@capsizecss/*' # managed by sku
-  - '@vanilla-extract/*' # managed by sku
-  - '@vocab/*' # managed by sku
-  - 'braid-design-system' # managed by sku
-  - 'browserslist-config-seek' # managed by sku
+  - '@braid-design-system/*' # sku_managed
+  - '@capsizecss/*' # sku_managed
+  - '@vanilla-extract/*' # sku_managed
+  - '@vocab/*' # sku_managed
+  - 'braid-design-system' # sku_managed
+  - 'browserslist-config-seek' # sku_managed
   - 'ensure-gitignore'
-  - 'eslint-config-seek' # managed by sku
+  - 'eslint-config-seek' # sku_managed
   - 'renovate-config-seek'
-  - '@seek/*' # managed by sku
-  - '@sku-lib/*' # managed by sku
-  - sku # managed by sku
+  - '@seek/*' # sku_managed
+  - '@sku-lib/*' # sku_managed
+  - sku # sku_managed
 
 dedupePeers: true
 
@@ -72,13 +72,13 @@ preferWorkspacePackages: true
 
 publicHoistPattern:
   - '@babel/*'
-  - eslint # managed by sku
-  - prettier # managed by sku
+  - eslint # sku_managed
+  - prettier # sku_managed
 
 verifyDepsBeforeRun: warn
-blockExoticSubdeps: true # managed by sku
-minimumReleaseAge: 4320 # 3 days # managed by sku
-strictDepBuilds: false # managed by sku
-trustPolicy: off # managed by sku
+blockExoticSubdeps: true # sku_managed
+minimumReleaseAge: 4320 # 3 days # sku_managed
+strictDepBuilds: false # sku_managed
+trustPolicy: off # sku_managed
 trustPolicyExclude:
-  - semver@6.3.1 # dependency of eslint-plugin-react # managed by sku
+  - semver@6.3.1 # dependency of eslint-plugin-react # sku_managed

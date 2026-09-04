@@ -101,8 +101,6 @@ catalogs:
 overrides:
   esbuild: ~0.28.0
 
-pnpmfileChecksum: sha256-BJdU5A0PR48f+qVWdlca0zjt2m4OSJwKkKWHz8OgDE0=
-
 importers:
 
   .:
@@ -1353,9 +1351,6 @@ importers:
       fdir:
         specifier: ^6.1.1
         version: 6.5.0(picomatch@4.0.5)
-      pnpm-plugin-sku:
-        specifier: workspace:*
-        version: link:../pnpm-plugin
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
@@ -1675,6 +1670,9 @@ importers:
       webpack-node-externals:
         specifier: ^3.0.0
         version: 3.0.0
+      yaml:
+        specifier: ^2.8.3
+        version: 2.9.0
     devDependencies:
       '@sku-private/tsdown':
         specifier: workspace:*
@@ -1901,16 +1899,13 @@ importers:
       package-manager-detector:
         specifier: ^0.2.11
         version: 0.2.11
-      semver:
-        specifier: ^7.6.3
-        version: 7.8.5
       wrap-ansi:
         specifier: ^9.0.0
         version: 9.0.2
+      yaml:
+        specifier: ^2.8.3
+        version: 2.9.0
     devDependencies:
-      '@types/semver':
-        specifier: ^7.5.8
-        version: 7.8.0
       typescript:
         specifier: 'catalog:'
         version: 6.0.3

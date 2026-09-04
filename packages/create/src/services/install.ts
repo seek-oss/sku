@@ -1,7 +1,6 @@
-import { getAddCommand, isAtLeastPnpmV10 } from '@sku-private/utils';
+import { getAddCommand } from '@sku-private/utils';
 import { spawn } from 'node:child_process';
 import { type Template, isViteBasedTemplate } from '../types/index.js';
-import { execAsync } from '../utils/execAsync.js';
 
 const DEPENDENCIES = [
   'braid-design-system@latest',
@@ -29,10 +28,6 @@ export const installDependencies = async (
   }
 
   console.log('📦 Installing dependencies...');
-
-  if (isAtLeastPnpmV10()) {
-    await execAsync('pnpm add --config pnpm-plugin-sku', { cwd: projectPath });
-  }
 
   const deps = [...DEPENDENCIES];
   if (template === 'ssr') {

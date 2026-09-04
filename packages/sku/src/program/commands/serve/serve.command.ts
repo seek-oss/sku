@@ -14,7 +14,7 @@ export const serveCommand = new Command('serve')
   .action(async ({ site, skuContext }, command) => {
     const { serveAction } = await import('./serve.action.js');
     const { environment } = command.optsWithGlobals();
-    serveAction({
+    await serveAction({
       site,
       environment,
       skuContext,

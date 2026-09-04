@@ -26,7 +26,6 @@
     "dedent": "^1.5.1",
     "eta": "^4.5.0",
     "fdir": "^6.1.1",
-    "pnpm-plugin-sku": "workspace:*",
     "prompts": "^2.4.2",
     "yaml": "^2.8.3"
   },

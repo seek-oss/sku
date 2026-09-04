@@ -33,7 +33,7 @@ export const postinstall = async ({
   try {
     log('postinstall', 'running configure');
     const skuContext = await createSkuContext({});
-    configureApp(skuContext);
+    await configureApp(skuContext);
   } catch (error) {
     console.error(
       'An error occurred running postinstall script. Please check that sku.config.js is correct and try again.',

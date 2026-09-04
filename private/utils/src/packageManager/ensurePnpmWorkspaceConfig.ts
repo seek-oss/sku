@@ -30,13 +30,13 @@ export interface EnsurePnpmWorkspaceConfigOptions {
   create?: boolean;
 }
 
-type LogMutation = (message: string) => void;
+type RecordMutation = (message: string) => void;
 type Warn = (message: string) => void;
 
 interface SyncContext {
   doc: Document;
   mode: SyncMode;
-  logMutation: LogMutation;
+  recordMutation: RecordMutation;
   warn: Warn;
 }
 
@@ -110,10 +110,10 @@ const markSingleValueAsManaged = (
 
 const migrateConfigDependencies = (
   doc: Document,
-  logMutation: LogMutation,
-): boolean => {
+  recordMutation: RecordMutation,
+): void => {
   if (!doc.has('configDependencies')) {
-    return false;
+    return;
   }
 
   const cd = doc.get('configDependencies', true);
@@ -134,7 +134,7 @@ const migrateConfigDependencies = (
   }
 
   if (modified) {
-    logMutation(
+    recordMutation(
       'removed pnpm-plugin-sku from configDependencies in pnpm-workspace.yaml',
     );
 
@@ -144,8 +144,6 @@ const migrateConfigDependencies = (
       }
     }
   }
-
-  return modified;
 };
 
 const handleMatchingSingleValue = (
@@ -155,24 +153,22 @@ const handleMatchingSingleValue = (
   doc: Document,
   key: string,
   context: SyncContext,
-): boolean => {
+): void => {
   if (isScalar(node)) {
     if (markSingleValueAsManaged(node, explanatory, doc, key)) {
-      context.logMutation(
+      context.recordMutation(
         `adopted ${key}: ${String(currentValue)} in pnpm-workspace.yaml`,
       );
-      return true;
     }
-    return false;
+    return;
   }
 
   const wrapped = doc.createNode(currentValue);
   setManagedComment(wrapped, explanatory);
   doc.set(key, wrapped);
-  context.logMutation(
+  context.recordMutation(
     `adopted ${key}: ${String(currentValue)} in pnpm-workspace.yaml`,
   );
-  return true;
 };
 
 const updateExistingSingleValue = (
@@ -180,13 +176,13 @@ const updateExistingSingleValue = (
   defaultValue: string | number | boolean,
   explanatory: string | undefined,
   context: SyncContext,
-): boolean => {
-  const { doc, mode, logMutation, warn } = context;
+): void => {
+  const { doc, mode, recordMutation, warn } = context;
   const node = doc.get(key, true);
   const currentValue = isScalar(node) ? node.value : doc.get(key);
 
   if (currentValue === defaultValue) {
-    return handleMatchingSingleValue(
+    handleMatchingSingleValue(
       node,
       explanatory,
       currentValue,
@@ -194,6 +190,7 @@ const updateExistingSingleValue = (
       key,
       context,
     );
+    return;
   }
 
   if (mode === 'enforce') {
@@ -204,43 +201,38 @@ const updateExistingSingleValue = (
     if (pair) {
       clearCommentBefore(pair.key);
     }
-    logMutation(
+    recordMutation(
       `updated ${key}: ${String(currentValue)} → ${defaultValue} in pnpm-workspace.yaml`,
     );
-    return true;
+    return;
   }
 
   warn(
     `pnpm-workspace.yaml: "${key}" has value ${String(currentValue)}, recommended is ${defaultValue}. Run "sku configure" to align.`,
   );
-  return false;
 };
 
 const syncSingleValue = (
   { key, value: defaultValue, comment }: (typeof singleValueSettings)[number],
   context: SyncContext,
-): boolean => {
-  const { doc, logMutation } = context;
+): void => {
+  const { doc, recordMutation } = context;
 
   if (!doc.has(key)) {
     const node = doc.createNode(defaultValue);
     setManagedComment(node, comment);
     doc.set(key, node);
-    logMutation(`added ${key}: ${defaultValue} to pnpm-workspace.yaml`);
-    return true;
+    recordMutation(`added ${key}: ${defaultValue} to pnpm-workspace.yaml`);
+    return;
   }
 
-  return updateExistingSingleValue(key, defaultValue, comment, context);
+  updateExistingSingleValue(key, defaultValue, comment, context);
 };
 
-const syncSingleValueSettings = (context: SyncContext): boolean => {
-  let modified = false;
+const syncSingleValueSettings = (context: SyncContext): void => {
   for (const setting of singleValueSettings) {
-    if (syncSingleValue(setting, context)) {
-      modified = true;
-    }
+    syncSingleValue(setting, context);
   }
-  return modified;
 };
 
 const syncExistingObjectPair = (
@@ -249,42 +241,40 @@ const syncExistingObjectPair = (
   subKey: string,
   defaultVal: boolean,
   context: SyncContext,
-): boolean => {
-  const { doc, mode, logMutation, warn } = context;
+): void => {
+  const { doc, mode, recordMutation, warn } = context;
 
   if (!isScalar(pair.value)) {
-    return false;
+    return;
   }
 
   const currentVal = pair.value.value;
   if (currentVal === defaultVal) {
     if (markPairAsManaged(pair)) {
-      logMutation(
+      recordMutation(
         `adopted ${key}.${subKey}: ${String(currentVal)} in pnpm-workspace.yaml`,
       );
-      return true;
     }
-    return false;
+    return;
   }
 
   if (!hasManagedMarker(pair.value.comment)) {
-    return false;
+    return;
   }
 
   if (mode === 'enforce') {
     pair.value = doc.createNode(defaultVal);
     setManagedComment(pair.value);
     clearCommentBefore(pair.key);
-    logMutation(
+    recordMutation(
       `updated ${key}.${subKey}: ${String(currentVal)} → ${defaultVal} in pnpm-workspace.yaml`,
     );
-    return true;
+    return;
   }
 
   warn(
     `pnpm-workspace.yaml: "${key}.${subKey}" has value ${String(currentVal)}, recommended is ${defaultVal}. Run "sku configure" to align.`,
   );
-  return false;
 };
 
 const syncObjectPair = (
@@ -293,20 +283,20 @@ const syncObjectPair = (
   subKey: string,
   defaultVal: boolean,
   context: SyncContext,
-): boolean => {
+): void => {
   const pair = mapNode.items.find((item) => getNodeKey(item.key) === subKey);
 
   if (!pair) {
     const valNode = context.doc.createNode(defaultVal);
     setManagedComment(valNode);
     mapNode.set(subKey, valNode);
-    context.logMutation(
+    context.recordMutation(
       `added ${key}.${subKey}: ${defaultVal} to pnpm-workspace.yaml`,
     );
-    return true;
+    return;
   }
 
-  return syncExistingObjectPair(pair, key, subKey, defaultVal, context);
+  syncExistingObjectPair(pair, key, subKey, defaultVal, context);
 };
 
 const cleanRetiredObjectKeys = (
@@ -314,8 +304,8 @@ const cleanRetiredObjectKeys = (
   key: string,
   defaultObj: Readonly<Record<string, boolean>>,
   context: SyncContext,
-): boolean => {
-  const { mode, logMutation, warn } = context;
+): void => {
+  const { mode, recordMutation, warn } = context;
   const itemsToRemove: string[] = [];
   for (const pair of mapNode.items) {
     const subKey = getNodeKey(pair.key);
@@ -336,23 +326,19 @@ const cleanRetiredObjectKeys = (
 
   for (const subKey of itemsToRemove) {
     mapNode.delete(subKey);
-    logMutation(
+    recordMutation(
       `removed retired entry ${key}.${subKey} from pnpm-workspace.yaml`,
     );
   }
-
-  return itemsToRemove.length > 0;
 };
 
-const syncObjectSettings = (context: SyncContext): boolean => {
+const syncObjectSettings = (context: SyncContext): void => {
   const { doc } = context;
-  let modified = false;
 
   for (const { key, entries } of objectSettings) {
     if (!doc.has(key)) {
       doc.set(key, doc.createNode({}));
-      context.logMutation(`added ${key} to pnpm-workspace.yaml`);
-      modified = true;
+      context.recordMutation(`added ${key} to pnpm-workspace.yaml`);
     }
 
     const mapNode = doc.get(key, true);
@@ -361,27 +347,20 @@ const syncObjectSettings = (context: SyncContext): boolean => {
     }
 
     for (const [subKey, defaultVal] of Object.entries(entries)) {
-      if (syncObjectPair(mapNode, key, subKey, defaultVal, context)) {
-        modified = true;
-      }
+      syncObjectPair(mapNode, key, subKey, defaultVal, context);
     }
 
-    if (cleanRetiredObjectKeys(mapNode, key, entries, context)) {
-      modified = true;
-    }
+    cleanRetiredObjectKeys(mapNode, key, entries, context);
   }
-
-  return modified;
 };
 
 const deduplicateArrayItems = (
   seqNode: YAMLSeq,
   key: string,
   context: SyncContext,
-): boolean => {
+): void => {
   const seenValues = new Map<string, number>();
   const deduplicatedItems: typeof seqNode.items = [];
-  let modified = false;
 
   for (const item of seqNode.items) {
     if (isScalar(item) && typeof item.value === 'string') {
@@ -395,10 +374,9 @@ const deduplicateArrayItems = (
         ) {
           deduplicatedItems[existingIndex] = item;
         }
-        context.logMutation(
+        context.recordMutation(
           `removed duplicate ${item.value} from ${key} in pnpm-workspace.yaml`,
         );
-        modified = true;
         continue;
       }
       seenValues.set(item.value, deduplicatedItems.length);
@@ -409,39 +387,42 @@ const deduplicateArrayItems = (
   }
 
   seqNode.items = deduplicatedItems;
-  return modified;
 };
 
+/**
+ * Adopts default entries and flags retired ones in an existing array.
+ *
+ * @returns Whether the item should be removed from the sequence.
+ */
 const processSingleArrayItem = (
   item: unknown,
   defaultComments: ReadonlyMap<string, string | undefined>,
   key: string,
   context: SyncContext,
-): { modified: boolean; remove: boolean } => {
+): boolean => {
   if (!isScalar(item) || typeof item.value !== 'string') {
-    return { modified: false, remove: false };
+    return false;
   }
 
   const val = item.value;
   if (defaultComments.has(val)) {
     if (setManagedComment(item, defaultComments.get(val))) {
-      context.logMutation(`adopted ${val} in ${key} in pnpm-workspace.yaml`);
-      return { modified: true, remove: false };
+      context.recordMutation(`adopted ${val} in ${key} in pnpm-workspace.yaml`);
     }
-    return { modified: false, remove: false };
+    return false;
   }
 
   const isMarked = hasManagedMarker(item.comment);
   if (isMarked) {
     if (context.mode === 'enforce') {
-      return { modified: true, remove: true };
+      return true;
     }
     context.warn(
       `pnpm-workspace.yaml: "${val}" in ${key} is marked with "${MANAGED_BY_SKU_COMMENT}", but is no longer a sku default. Run "sku configure" to remove it, or delete its "${MANAGED_BY_SKU_COMMENT}" marker to keep it as a user-managed entry.`,
     );
   }
 
-  return { modified: false, remove: false };
+  return false;
 };
 
 const processExistingArrayItems = (
@@ -449,21 +430,17 @@ const processExistingArrayItems = (
   defaultComments: ReadonlyMap<string, string | undefined>,
   key: string,
   context: SyncContext,
-): boolean => {
-  let modified = false;
+): void => {
   const indicesToRemove: number[] = [];
 
   for (let i = 0; i < seqNode.items.length; i++) {
-    const result = processSingleArrayItem(
+    const shouldRemove = processSingleArrayItem(
       seqNode.items[i],
       defaultComments,
       key,
       context,
     );
-    if (result.modified) {
-      modified = true;
-    }
-    if (result.remove) {
+    if (shouldRemove) {
       indicesToRemove.push(i);
     }
   }
@@ -473,12 +450,10 @@ const processExistingArrayItems = (
     const item = seqNode.items[idx];
     const val = isScalar(item) ? String(item.value) : '';
     seqNode.items.splice(idx, 1);
-    context.logMutation(
+    context.recordMutation(
       `removed retired entry ${val} from ${key} in pnpm-workspace.yaml`,
     );
   }
-
-  return modified;
 };
 
 const appendMissingArrayDefaults = (
@@ -486,8 +461,7 @@ const appendMissingArrayDefaults = (
   entries: readonly ArrayEntry[],
   key: string,
   context: SyncContext,
-): boolean => {
-  let modified = false;
+): void => {
   const existingValues = new Set<string>();
 
   for (const item of seqNode.items) {
@@ -502,17 +476,12 @@ const appendMissingArrayDefaults = (
       setManagedComment(newItem, comment);
       seqNode.items.push(newItem);
       existingValues.add(value);
-      context.logMutation(`added ${value} to ${key} in pnpm-workspace.yaml`);
-      modified = true;
+      context.recordMutation(`added ${value} to ${key} in pnpm-workspace.yaml`);
     }
   }
-
-  return modified;
 };
 
-const syncArraySettings = (context: SyncContext): boolean => {
-  let modified = false;
-
+const syncArraySettings = (context: SyncContext): void => {
   for (const { key, entries } of arraySettings) {
     const defaultComments = new Map(
       entries.map(({ value, comment }) => [value, comment] as const),
@@ -520,8 +489,7 @@ const syncArraySettings = (context: SyncContext): boolean => {
 
     if (!context.doc.has(key)) {
       context.doc.set(key, context.doc.createNode([]));
-      context.logMutation(`added ${key} to pnpm-workspace.yaml`);
-      modified = true;
+      context.recordMutation(`added ${key} to pnpm-workspace.yaml`);
     }
 
     const seqNode = context.doc.get(key, true);
@@ -529,18 +497,10 @@ const syncArraySettings = (context: SyncContext): boolean => {
       continue;
     }
 
-    if (deduplicateArrayItems(seqNode, key, context)) {
-      modified = true;
-    }
-    if (processExistingArrayItems(seqNode, defaultComments, key, context)) {
-      modified = true;
-    }
-    if (appendMissingArrayDefaults(seqNode, entries, key, context)) {
-      modified = true;
-    }
+    deduplicateArrayItems(seqNode, key, context);
+    processExistingArrayItems(seqNode, defaultComments, key, context);
+    appendMissingArrayDefaults(seqNode, entries, key, context);
   }
-
-  return modified;
 };
 
 export async function ensurePnpmWorkspaceConfig(
@@ -573,32 +533,27 @@ export async function ensurePnpmWorkspaceConfig(
     doc = new Document(structuredClone(defaultPnpmWorkspaceConfig));
   }
 
-  let modified = !fileExisted;
+  let modified = false;
 
-  const logMutation: LogMutation = (message) => console.log(message);
+  const recordMutation: RecordMutation = (message) => {
+    modified = true;
+    console.log(message);
+  };
 
   if (!fileExisted) {
-    logMutation('created pnpm-workspace.yaml');
+    recordMutation('created pnpm-workspace.yaml');
   }
 
   const warn: Warn = (message) => {
     console.warn(caution(message));
   };
 
-  const context: SyncContext = { doc, mode, logMutation, warn };
+  const context: SyncContext = { doc, mode, recordMutation, warn };
 
-  if (migrateConfigDependencies(doc, logMutation)) {
-    modified = true;
-  }
-  if (syncSingleValueSettings(context)) {
-    modified = true;
-  }
-  if (syncObjectSettings(context)) {
-    modified = true;
-  }
-  if (syncArraySettings(context)) {
-    modified = true;
-  }
+  migrateConfigDependencies(doc, recordMutation);
+  syncSingleValueSettings(context);
+  syncObjectSettings(context);
+  syncArraySettings(context);
 
   if (modified) {
     const newContent = doc.toString();

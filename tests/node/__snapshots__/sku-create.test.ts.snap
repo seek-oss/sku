@@ -117,32 +117,32 @@ exports[`sku-create > ssr > should create package.json 1`] = `
 
 exports[`sku-create > ssr > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
-  '@parcel/watcher': true # sku_managed
-  '@swc/core': true # sku_managed
-  core-js-pure: false # sku_managed
-  esbuild: true # sku_managed
-  sku: true # sku_managed
-  unrs-resolver: true # sku_managed
-blockExoticSubdeps: true # sku_managed
-minimumReleaseAge: 4320 # 3 days # sku_managed
+  '@parcel/watcher': true # [sku_managed]
+  '@swc/core': true # [sku_managed]
+  core-js-pure: false # [sku_managed]
+  esbuild: true # [sku_managed]
+  sku: true # [sku_managed]
+  unrs-resolver: true # [sku_managed]
+blockExoticSubdeps: true # [sku_managed]
+minimumReleaseAge: 4320 # 3 days [sku_managed]
 minimumReleaseAgeExclude:
-  - '@braid-design-system/*' # sku_managed
-  - '@capsizecss/*' # sku_managed
-  - '@seek/*' # sku_managed
-  - '@sku-lib/*' # sku_managed
-  - '@vanilla-extract/*' # sku_managed
-  - '@vocab/*' # sku_managed
-  - braid-design-system # sku_managed
-  - browserslist-config-seek # sku_managed
-  - eslint-config-seek # sku_managed
-  - sku # sku_managed
+  - '@braid-design-system/*' # [sku_managed]
+  - '@capsizecss/*' # [sku_managed]
+  - '@seek/*' # [sku_managed]
+  - '@sku-lib/*' # [sku_managed]
+  - '@vanilla-extract/*' # [sku_managed]
+  - '@vocab/*' # [sku_managed]
+  - braid-design-system # [sku_managed]
+  - browserslist-config-seek # [sku_managed]
+  - eslint-config-seek # [sku_managed]
+  - sku # [sku_managed]
 publicHoistPattern:
-  - eslint # sku_managed
-  - prettier # sku_managed
-strictDepBuilds: false # sku_managed
-trustPolicy: off # sku_managed
+  - eslint # [sku_managed]
+  - prettier # [sku_managed]
+strictDepBuilds: false # [sku_managed]
+trustPolicy: off # [sku_managed]
 trustPolicyExclude:
-  - semver@6.3.1 # dependency of eslint-plugin-react # sku_managed
+  - semver@6.3.1 # dependency of eslint-plugin-react [sku_managed]
 "
 `;
 
@@ -649,32 +649,32 @@ exports[`sku-create > vite > should create package.json 1`] = `
 
 exports[`sku-create > vite > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
-  '@parcel/watcher': true # sku_managed
-  '@swc/core': true # sku_managed
-  core-js-pure: false # sku_managed
-  esbuild: true # sku_managed
-  sku: true # sku_managed
-  unrs-resolver: true # sku_managed
-blockExoticSubdeps: true # sku_managed
-minimumReleaseAge: 4320 # 3 days # sku_managed
+  '@parcel/watcher': true # [sku_managed]
+  '@swc/core': true # [sku_managed]
+  core-js-pure: false # [sku_managed]
+  esbuild: true # [sku_managed]
+  sku: true # [sku_managed]
+  unrs-resolver: true # [sku_managed]
+blockExoticSubdeps: true # [sku_managed]
+minimumReleaseAge: 4320 # 3 days [sku_managed]
 minimumReleaseAgeExclude:
-  - '@braid-design-system/*' # sku_managed
-  - '@capsizecss/*' # sku_managed
-  - '@seek/*' # sku_managed
-  - '@sku-lib/*' # sku_managed
-  - '@vanilla-extract/*' # sku_managed
-  - '@vocab/*' # sku_managed
-  - braid-design-system # sku_managed
-  - browserslist-config-seek # sku_managed
-  - eslint-config-seek # sku_managed
-  - sku # sku_managed
+  - '@braid-design-system/*' # [sku_managed]
+  - '@capsizecss/*' # [sku_managed]
+  - '@seek/*' # [sku_managed]
+  - '@sku-lib/*' # [sku_managed]
+  - '@vanilla-extract/*' # [sku_managed]
+  - '@vocab/*' # [sku_managed]
+  - braid-design-system # [sku_managed]
+  - browserslist-config-seek # [sku_managed]
+  - eslint-config-seek # [sku_managed]
+  - sku # [sku_managed]
 publicHoistPattern:
-  - eslint # sku_managed
-  - prettier # sku_managed
-strictDepBuilds: false # sku_managed
-trustPolicy: off # sku_managed
+  - eslint # [sku_managed]
+  - prettier # [sku_managed]
+strictDepBuilds: false # [sku_managed]
+trustPolicy: off # [sku_managed]
 trustPolicyExclude:
-  - semver@6.3.1 # dependency of eslint-plugin-react # sku_managed
+  - semver@6.3.1 # dependency of eslint-plugin-react [sku_managed]
 "
 `;
 
@@ -1034,32 +1034,32 @@ exports[`sku-create > webpack > should create package.json 1`] = `
 
 exports[`sku-create > webpack > should create pnpm-workspace.yaml 1`] = `
 "allowBuilds:
-  '@parcel/watcher': true # sku_managed
-  '@swc/core': true # sku_managed
-  core-js-pure: false # sku_managed
-  esbuild: true # sku_managed
-  sku: true # sku_managed
-  unrs-resolver: true # sku_managed
-blockExoticSubdeps: true # sku_managed
-minimumReleaseAge: 4320 # 3 days # sku_managed
+  '@parcel/watcher': true # [sku_managed]
+  '@swc/core': true # [sku_managed]
+  core-js-pure: false # [sku_managed]
+  esbuild: true # [sku_managed]
+  sku: true # [sku_managed]
+  unrs-resolver: true # [sku_managed]
+blockExoticSubdeps: true # [sku_managed]
+minimumReleaseAge: 4320 # 3 days [sku_managed]
 minimumReleaseAgeExclude:
-  - '@braid-design-system/*' # sku_managed
-  - '@capsizecss/*' # sku_managed
-  - '@seek/*' # sku_managed
-  - '@sku-lib/*' # sku_managed
-  - '@vanilla-extract/*' # sku_managed
-  - '@vocab/*' # sku_managed
-  - braid-design-system # sku_managed
-  - browserslist-config-seek # sku_managed
-  - eslint-config-seek # sku_managed
-  - sku # sku_managed
+  - '@braid-design-system/*' # [sku_managed]
+  - '@capsizecss/*' # [sku_managed]
+  - '@seek/*' # [sku_managed]
+  - '@sku-lib/*' # [sku_managed]
+  - '@vanilla-extract/*' # [sku_managed]
+  - '@vocab/*' # [sku_managed]
+  - braid-design-system # [sku_managed]
+  - browserslist-config-seek # [sku_managed]
+  - eslint-config-seek # [sku_managed]
+  - sku # [sku_managed]
 publicHoistPattern:
-  - eslint # sku_managed
-  - prettier # sku_managed
-strictDepBuilds: false # sku_managed
-trustPolicy: off # sku_managed
+  - eslint # [sku_managed]
+  - prettier # [sku_managed]
+strictDepBuilds: false # [sku_managed]
+trustPolicy: off # [sku_managed]
 trustPolicyExclude:
-  - semver@6.3.1 # dependency of eslint-plugin-react # sku_managed
+  - semver@6.3.1 # dependency of eslint-plugin-react [sku_managed]
 "
 `;
 

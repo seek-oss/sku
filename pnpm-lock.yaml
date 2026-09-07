@@ -1903,6 +1903,12 @@ importers:
         specifier: ^2.8.3
         version: 2.9.0
     devDependencies:
+      dedent:
+        specifier: ^1.5.1
+        version: 1.7.2(babel-plugin-macros@3.1.0)
+      fs-fixture:
+        specifier: ^2.6.0
+        version: 2.14.0
       typescript:
         specifier: 'catalog:'
         version: 6.0.3

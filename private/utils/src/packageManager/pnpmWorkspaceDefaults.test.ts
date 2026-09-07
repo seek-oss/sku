@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
   MANAGED_BY_SKU_MARKER,
-  MANAGED_BY_SKU_COMMENT,
   defaultPnpmWorkspaceConfig,
   pnpmWorkspaceSettings,
   singleValueSettings,
@@ -10,9 +9,8 @@ import {
 } from './pnpmWorkspaceDefaults.ts';
 
 describe('pnpmWorkspaceDefaults', () => {
-  it('exports marker constants', () => {
-    expect(MANAGED_BY_SKU_MARKER).toBe('sku_managed');
-    expect(MANAGED_BY_SKU_COMMENT).toBe('# sku_managed');
+  it('exports the marker constant', () => {
+    expect(MANAGED_BY_SKU_MARKER).toBe('[sku_managed]');
   });
 
   it('exports default config matching the pnpm-plugin recommended settings', () => {

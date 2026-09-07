@@ -87,7 +87,8 @@ On `sku configure` — the only enforcing entry point — managed single-value s
 
 ### Decision: Marker-based ownership for collections
 
-Everything sku writes carries a trailing `# sku_managed` comment: on managed single-value settings (informational), and on each sku-owned entry within object and array settings (load-bearing).
+Everything sku writes carries a `[sku_managed]` marker at the end of its comment, after any explanatory text (`# 3 days [sku_managed]`): on managed single-value settings (informational), and on each sku-owned entry within object and array settings (load-bearing).
+Detection matches the marker anywhere in a comment, so a user can annotate a marked entry without losing sku ownership.
 
 - Collections are managed by ownership.
   Sku-owned (marked) entries are added when new and aligned with current defaults on every sync; they are removed when sku retires them, and only on `sku configure`.
@@ -155,7 +156,7 @@ Removing the plugin alongside additive static writes preserves the effective pnp
 ### Decision: Drift warnings
 
 When the automatic sync finds an existing managed value that differs from sku's current default (a managed single-value setting or a marked sku-owned key in an object setting), or a marked entry that sku has retired, it logs a warning naming the key, the current value, the recommended value, and suggesting `sku configure`.
-For retired entries, the warning presents both resolutions: run `sku configure` to remove the entry, or delete its `# sku_managed` marker to keep it as a user-managed entry.
+For retired entries, the warning presents both resolutions: run `sku configure` to remove the entry, or delete its `[sku_managed]` marker to keep it as a user-managed entry.
 No warning when values align.
 
 - Over silence: drift would otherwise be invisible forever, and enforcement would never discoverable.

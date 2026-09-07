@@ -1,6 +1,6 @@
 import { isMap, isScalar, type YAMLMap } from 'yaml';
 import {
-  MANAGED_BY_SKU_COMMENT,
+  MANAGED_BY_SKU_MARKER,
   objectSettings,
 } from './pnpmWorkspaceDefaults.ts';
 import {
@@ -101,7 +101,7 @@ const cleanRetiredObjectKeys = (
           itemsToRemove.push(subKey);
         } else {
           warn(
-            `pnpm-workspace.yaml: "${subKey}" in ${key} is marked with "${MANAGED_BY_SKU_COMMENT}", but is no longer a sku default. Run "sku configure" to remove it, or delete its "${MANAGED_BY_SKU_COMMENT}" marker to keep it as a user-managed entry.`,
+            `pnpm-workspace.yaml: "${subKey}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default. Run "sku configure" to remove it, or delete its "${MANAGED_BY_SKU_MARKER}" marker to keep it as a user-managed entry.`,
           );
         }
       }

@@ -1,7 +1,7 @@
 import { isScalar, isSeq, type YAMLSeq } from 'yaml';
 import {
   arraySettings,
-  MANAGED_BY_SKU_COMMENT,
+  MANAGED_BY_SKU_MARKER,
   type ArrayEntry,
 } from './pnpmWorkspaceDefaults.ts';
 import {
@@ -74,7 +74,7 @@ const processSingleArrayItem = (
       return true;
     }
     context.warn(
-      `pnpm-workspace.yaml: "${val}" in ${key} is marked with "${MANAGED_BY_SKU_COMMENT}", but is no longer a sku default. Run "sku configure" to remove it, or delete its "${MANAGED_BY_SKU_COMMENT}" marker to keep it as a user-managed entry.`,
+      `pnpm-workspace.yaml: "${val}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default. Run "sku configure" to remove it, or delete its "${MANAGED_BY_SKU_MARKER}" marker to keep it as a user-managed entry.`,
     );
   }
 

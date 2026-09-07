@@ -1,5 +1,4 @@
-export const MANAGED_BY_SKU_MARKER = 'sku_managed';
-export const MANAGED_BY_SKU_COMMENT = `# ${MANAGED_BY_SKU_MARKER}`;
+export const MANAGED_BY_SKU_MARKER = '[sku_managed]';
 
 type SingleValue = string | number | boolean;
 

@@ -16,21 +16,12 @@ export interface SyncContext {
 export const getNodeKey = (node: unknown): string =>
   isScalar(node) ? String(node.value) : String(node);
 
-export const hasManagedMarker = (comment?: string | null): boolean => {
-  const trimmed = comment?.trim();
-  if (!trimmed) {
-    return false;
-  }
-
-  return (
-    trimmed === MANAGED_BY_SKU_MARKER ||
-    trimmed.endsWith(`# ${MANAGED_BY_SKU_MARKER}`)
-  );
-};
+export const hasManagedMarker = (comment?: string | null): boolean =>
+  Boolean(comment?.includes(MANAGED_BY_SKU_MARKER));
 
 const formatComment = (explanatory?: string): string =>
   explanatory
-    ? ` ${explanatory} # ${MANAGED_BY_SKU_MARKER}`
+    ? ` ${explanatory} ${MANAGED_BY_SKU_MARKER}`
     : ` ${MANAGED_BY_SKU_MARKER}`;
 
 export const clearCommentBefore = (node: unknown): boolean => {

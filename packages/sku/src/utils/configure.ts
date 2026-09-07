@@ -23,8 +23,8 @@ export const configureProject = async (skuContext: SkuContext) => {
     return;
   }
 
-  const { default: configure } = await import('../utils/configureApp.js');
-  await configure(skuContext);
+  const { configureApp } = await import('../utils/configureApp.js');
+  await configureApp(skuContext);
 };
 
 export const validatePeerDeps = (skuContext: SkuContext) => {

@@ -2,8 +2,6 @@ export {
   rootDir,
   packageManager,
   packageManagerVersion,
-  isAtLeastPnpmV10,
-  isAtLeastRecommendedPnpmVersion,
   getCommand,
   isYarn,
   isPnpm,
@@ -17,3 +15,6 @@ export {
   type GetAddCommandOptions,
   type SupportedPackageManager,
 } from './packageManager.ts';
+
+export * from './pnpmWorkspaceDefaults.ts';
+export * from './ensurePnpmWorkspaceConfig.ts';

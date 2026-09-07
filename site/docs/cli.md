@@ -164,19 +164,17 @@ sku configure
 
 #### `pnpm-workspace.yaml` synchronization
 
-In pnpm projects, sku manages recommended workspace settings (such as `allowBuilds`, `minimumReleaseAge`, and hoisted package patterns) directly in `pnpm-workspace.yaml`. Sku tracks entries it manages with a `[sku_managed]` comment marker, which can sit alongside an explanatory comment (for example `minimumReleaseAge: 4320 # 3 days [sku_managed]`).
+In pnpm projects, sku manages recommended workspace settings directly in `pnpm-workspace.yaml`. Sku tracks entries it manages with a `[sku_managed]` comment marker, which can sit alongside an explanatory comment (for example `minimumReleaseAge: 4320 # 3 days [sku_managed]`).
 The sync does not create `pnpm-workspace.yaml` in an existing project; `@sku-lib/create` creates it for newly scaffolded projects.
 
 The sync operates in two modes:
 
-- **Additive sync (automatic)**: Runs before configuration-enabled sku commands (e.g. `sku start`, `sku test`) and during `postinstall`. It adds missing recommended settings and `allowBuilds` keys, and unions/deduplicates array settings like `publicHoistPattern`. It never overwrites config values or removes user-owned entries. If managed settings drift from sku defaults, sku logs a warning suggesting `sku configure`.
-- **Enforce mode (manual via `sku configure`)**: Overwrites managed single-value settings and marked `allowBuilds` keys to match current sku defaults. Unmarked `allowBuilds` overrides are preserved. It also removes retired sku settings that still carry a `[sku_managed]` marker.
+- **Additive sync (automatic)**: Runs before sku commands and during `postinstall`. It adds missing recommended settings without overwriting existing values or removing user-owned entries. If sku-managed settings drift from sku defaults, sku logs a warning suggesting `sku configure`.
+- **Enforce mode (manual via `sku configure`)**: Overwrites or removes sku-managed settings to match current defaults.
 
-#### Keeping retired settings
+#### User-managed settings
 
-If sku retires a setting or allow-build entry and you want to keep it, delete its `[sku_managed]` comment marker. Entries without this marker are considered user-managed and will never be removed by `sku configure`.
-
-Comments on entries adopted or overwritten by sku are replaced with the sku marker. Comments on user-owned entries and unmanaged keys are preserved.
+If sku retires or updates a setting you want to keep, delete its `[sku_managed]` comment marker. Entries without this marker are considered user-managed and will never be removed by `sku configure`.
 
 #### Opt-outs
 

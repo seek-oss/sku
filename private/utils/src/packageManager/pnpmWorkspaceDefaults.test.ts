@@ -90,7 +90,6 @@ describe('pnpmWorkspaceDefaults', () => {
 
     expect(pnpmWorkspaceSettings.trustPolicyExclude.entries).toContainEqual({
       value: 'semver@6.3.1',
-      comment: 'dependency of eslint-plugin-react',
     });
   });
 });

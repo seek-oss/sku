@@ -1,17 +1,34 @@
 import dedent from 'dedent';
 import { createFixture } from 'fs-fixture';
-import { describe, expect, it, vi } from 'vitest';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  type MockInstance,
+  vi,
+} from 'vitest';
 import { parseDocument } from 'yaml';
 import { ensurePnpmWorkspaceConfig } from './ensurePnpmWorkspaceConfig.ts';
 
 const workspaceFile = 'pnpm-workspace.yaml';
 
 describe('ensurePnpmWorkspaceConfig', () => {
+  let logSpy: MockInstance<typeof console.log>;
+  let warnSpy: MockInstance<typeof console.warn>;
+
+  beforeEach(() => {
+    logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it('leaves missing file untouched when create is false', async () => {
     await using fixture = await createFixture({});
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
       mode: 'additive',
@@ -24,9 +41,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
     expect(await fixture.exists(workspaceFile)).toBe(false);
     expect(logSpy).not.toHaveBeenCalled();
     expect(warnSpy).not.toHaveBeenCalled();
-
-    logSpy.mockRestore();
-    warnSpy.mockRestore();
   });
 
   it('does not overwrite a non-map workspace document', async () => {
@@ -41,23 +55,17 @@ describe('ensurePnpmWorkspaceConfig', () => {
 
   it('creates file with all default settings and markers when create is true', async () => {
     await using fixture = await createFixture({});
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-
     await ensurePnpmWorkspaceConfig({ targetDir: fixture.path, create: true });
 
     expect(await fixture.exists(workspaceFile)).toBe(true);
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('minimumReleaseAge: 4320 # 3 days [sku_managed]');
-    expect(content).toContain(
-      'semver@6.3.1 # dependency of eslint-plugin-react [sku_managed]',
-    );
+    expect(content).toContain('semver@6.3.1 # [sku_managed]');
     expect(content).toContain('blockExoticSubdeps: true # [sku_managed]');
     expect(content).toContain('trustPolicy: off # [sku_managed]');
     expect(content).not.toContain('configDependencies');
     expect(logSpy).toHaveBeenCalledWith('created pnpm-workspace.yaml');
-
-    logSpy.mockRestore();
   });
 
   it('additive additions: adds missing single-value settings, object setting keys, and array entries with markers', async () => {
@@ -71,8 +79,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
           - eslint # [sku_managed]
       `,
     });
-
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
@@ -96,8 +102,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
         'added prettier to publicHoistPattern in pnpm-workspace.yaml',
       ),
     );
-
-    logSpy.mockRestore();
   });
 
   it('existing-value preservation: leaves existing values untouched in additive mode', async () => {
@@ -108,9 +112,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
           '@swc/core': false # [sku_managed]
       `,
     });
-
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
@@ -131,9 +132,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
         'pnpm-workspace.yaml: "allowBuilds.@swc/core" has value false, recommended is true. Run "sku configure" to align.',
       ),
     );
-
-    logSpy.mockRestore();
-    warnSpy.mockRestore();
   });
 
   it('overwrites in both directions on sku configure (enforce mode)', async () => {
@@ -145,8 +143,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
           '@swc/core': false # [sku_managed]
       `,
     });
-
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
@@ -173,8 +169,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
         'updated allowBuilds.@swc/core: false → true in pnpm-workspace.yaml',
       ),
     );
-
-    logSpy.mockRestore();
   });
 
   it('value-level ownership: preserves an unmarked override of a key sku manages, even in enforce mode', async () => {
@@ -184,8 +178,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
           '@swc/core': false # custom override
       `,
     });
-
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
@@ -197,8 +189,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
     expect(logSpy).not.toHaveBeenCalledWith(
       expect.stringContaining('updated allowBuilds.@swc/core'),
     );
-
-    logSpy.mockRestore();
   });
 
   it('entry-level ownership: leaves entries sku does not manage in place in both modes', async () => {
@@ -238,8 +228,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-
     // Additive mode: retained and warns
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
@@ -271,7 +259,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
     );
 
     // Enforce mode: old-retired-build removed, but unmarked old-retired-hoist preserved
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
       mode: 'enforce',
@@ -285,9 +272,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
         'removed retired entry allowBuilds.old-retired-build from pnpm-workspace.yaml',
       ),
     );
-
-    warnSpy.mockRestore();
-    logSpy.mockRestore();
   });
 
   it('adoption: unmarked default-matching entries are adopted on every sync', async () => {
@@ -388,8 +372,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
       mode: 'enforce',
@@ -403,8 +385,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
         'removed duplicate old-retired-entry from publicHoistPattern in pnpm-workspace.yaml',
       ),
     );
-
-    logSpy.mockRestore();
   });
 
   it('replaces comments on adopted managed entries', async () => {
@@ -422,8 +402,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
             true
       `,
     });
-
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
@@ -454,8 +432,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
         'adopted allowBuilds.@parcel/watcher: true in pnpm-workspace.yaml',
       ),
     );
-
-    logSpy.mockRestore();
   });
 
   it('aligned-file silence: already aligned file produces no write and no output', async () => {
@@ -464,8 +440,9 @@ describe('ensurePnpmWorkspaceConfig', () => {
 
     const contentBefore = await fixture.readFile(workspaceFile, 'utf8');
 
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    // Ignore output from the initial sync that created the file
+    logSpy.mockClear();
+    warnSpy.mockClear();
 
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
@@ -481,9 +458,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
 
     expect(logSpy).not.toHaveBeenCalled();
     expect(warnSpy).not.toHaveBeenCalled();
-
-    logSpy.mockRestore();
-    warnSpy.mockRestore();
   });
 
   it('plugin migration: removes pnpm-plugin-sku from configDependencies and cleans up key', async () => {
@@ -495,8 +469,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
           pnpm-plugin-sku: 0.0.3+sha512-test
       `,
     });
-
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await ensurePnpmWorkspaceConfig({
       targetDir: fixture.path,
@@ -511,8 +483,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
         'removed pnpm-plugin-sku from configDependencies in pnpm-workspace.yaml',
       ),
     );
-
-    logSpy.mockRestore();
   });
 
   it('plugin migration: preserves other plugins in configDependencies', async () => {

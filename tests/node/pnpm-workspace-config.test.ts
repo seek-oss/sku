@@ -51,9 +51,7 @@ allowBuilds:
     // Missing defaults added with markers
     expect(content).toContain('blockExoticSubdeps: true # [sku_managed]');
     expect(content).toContain('trustPolicy: off # [sku_managed]');
-    expect(content).toContain(
-      'semver@6.3.1 # dependency of eslint-plugin-react [sku_managed]',
-    );
+    expect(content).toContain('semver@6.3.1 # [sku_managed]');
 
     // Drift warning logged
     const firstRunStdout = firstRun.getStdallStr();
@@ -123,7 +121,7 @@ publicHoistPattern:
 strictDepBuilds: false # [sku_managed]
 trustPolicy: off # [sku_managed]
 trustPolicyExclude:
-  - semver@6.3.1 # dependency of eslint-plugin-react [sku_managed]
+  - semver@6.3.1 # [sku_managed]
 `,
       },
       { tempDir: fixturePath() },

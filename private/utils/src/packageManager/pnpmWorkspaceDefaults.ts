@@ -83,9 +83,7 @@ export const pnpmWorkspaceSettings = {
   publicHoistPattern: arraySetting(['eslint', 'prettier']),
   strictDepBuilds: singleValueSetting(false),
   trustPolicy: singleValueSetting('off'),
-  trustPolicyExclude: arraySetting([
-    { value: 'semver@6.3.1', comment: 'dependency of eslint-plugin-react' },
-  ]),
+  trustPolicyExclude: arraySetting([{ value: 'semver@6.3.1' }]),
 } satisfies Record<string, PnpmWorkspaceSetting>;
 
 export type PnpmWorkspaceSettingKey = keyof typeof pnpmWorkspaceSettings;

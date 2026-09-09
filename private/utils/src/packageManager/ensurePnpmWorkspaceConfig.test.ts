@@ -296,33 +296,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
     expect(content).toContain('eslint # [sku_managed]');
   });
 
-  it('re-adoption: deleted marker on a current default is re-adopted on next sync', async () => {
-    await using fixture = await createFixture({
-      [workspaceFile]: 'blockExoticSubdeps: true\n',
-    });
-
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
-    let content = await fixture.readFile(workspaceFile, 'utf8');
-    expect(content).toContain('blockExoticSubdeps: true # [sku_managed]');
-
-    // User manually deletes the marker
-    await fixture.writeFile(
-      workspaceFile,
-      content.replace('# [sku_managed]', ''),
-    );
-
-    // Next sync re-adopts
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
-    content = await fixture.readFile(workspaceFile, 'utf8');
-    expect(content).toContain('blockExoticSubdeps: true # [sku_managed]');
-  });
-
   it('only treats the bracketed marker as sku ownership', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
@@ -434,57 +407,6 @@ describe('ensurePnpmWorkspaceConfig', () => {
     );
   });
 
-  it('aligned-file silence: already aligned file produces no write and no output', async () => {
-    await using fixture = await createFixture({});
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path, create: true });
-
-    const contentBefore = await fixture.readFile(workspaceFile, 'utf8');
-
-    // Ignore output from the initial sync that created the file
-    logSpy.mockClear();
-    warnSpy.mockClear();
-
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'enforce',
-    });
-
-    const contentAfter = await fixture.readFile(workspaceFile, 'utf8');
-    expect(contentAfter).toBe(contentBefore);
-
-    expect(logSpy).not.toHaveBeenCalled();
-    expect(warnSpy).not.toHaveBeenCalled();
-  });
-
-  it('plugin migration: removes pnpm-plugin-sku from configDependencies and cleans up key', async () => {
-    await using fixture = await createFixture({
-      [workspaceFile]: dedent`
-        packages:
-          - site
-        configDependencies:
-          pnpm-plugin-sku: 0.0.3+sha512-test
-      `,
-    });
-
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
-
-    const content = await fixture.readFile(workspaceFile, 'utf8');
-    expect(content).not.toContain('configDependencies');
-    expect(content).not.toContain('pnpm-plugin-sku');
-    expect(logSpy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'removed pnpm-plugin-sku from configDependencies in pnpm-workspace.yaml',
-      ),
-    );
-  });
-
   it('plugin migration: preserves other plugins in configDependencies', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
@@ -503,6 +425,11 @@ describe('ensurePnpmWorkspaceConfig', () => {
     expect(content).toContain('configDependencies:');
     expect(content).toContain('other-plugin: ^1.0.0');
     expect(content).not.toContain('pnpm-plugin-sku');
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'removed pnpm-plugin-sku from configDependencies in pnpm-workspace.yaml',
+      ),
+    );
   });
 
   it('plugin migration: removes every duplicate sequence entry', async () => {

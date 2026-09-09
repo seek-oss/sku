@@ -39,6 +39,8 @@ const templates = ['vite', 'webpack', 'ssr'] as const;
 type Template = (typeof templates)[number];
 
 const projectName = (template: Template) => `new-project-${template}`;
+const interactiveProjectName = (template: Template) =>
+  `interactive-${template}`;
 const projectDirectory = (template: Template) =>
   fixturePath(projectName(template));
 
@@ -54,10 +56,14 @@ const skuPackageDir = path.resolve(__dirname, '../../packages/sku');
 
 const removeProjects = async () => {
   await Promise.all(
-    templates.map((template) =>
+    templates.flatMap((template) => [
       // using native os cleanup since its much faster than fs.rm for large numbers of files
       execFileAsync('rm', ['-rf', projectDirectory(template)]),
-    ),
+      execFileAsync('rm', [
+        '-rf',
+        fixturePath(interactiveProjectName(template)),
+      ]),
+    ]),
   );
 };
 
@@ -80,14 +86,15 @@ afterAll(async () => {
 
 describe('interactive prompt', () => {
   // These tests only assert on the interactive prompt, so they skip the
-  // dependency installation entirely.
+  // dependency installation entirely. Distinct directory names avoid racing
+  // the full-install suite below (`new-project-*`).
   const skipInstallEnv = () => ({
     ...createEnv,
     SKU_CREATE_SKIP_INSTALL: 'true',
   });
 
   it('should create a vite project via the interactive prompt', async () => {
-    const result = await create(projectName('vite'), [], {
+    const result = await create(interactiveProjectName('vite'), [], {
       spawnOpts: { env: skipInstallEnv() },
     });
     expect(
@@ -98,13 +105,13 @@ describe('interactive prompt', () => {
     await result.userEvent.keyboard('[Enter]');
     expect(
       await result.findByText(
-        `Creating new sku project: ${projectName('vite')} with vite template`,
+        `Creating new sku project: ${interactiveProjectName('vite')} with vite template`,
       ),
     ).toBeInTheConsole();
   });
 
   it('should create a webpack project via the interactive prompt', async () => {
-    const result = await create(projectName('webpack'), [], {
+    const result = await create(interactiveProjectName('webpack'), [], {
       spawnOpts: { env: skipInstallEnv() },
     });
     expect(
@@ -119,13 +126,13 @@ describe('interactive prompt', () => {
     await result.userEvent.keyboard('[Enter]');
     expect(
       await result.findByText(
-        `Creating new sku project: ${projectName('webpack')} with webpack template`,
+        `Creating new sku project: ${interactiveProjectName('webpack')} with webpack template`,
       ),
     ).toBeInTheConsole();
   });
 
   it('should create a ssr project via the interactive prompt', async () => {
-    const result = await create(projectName('ssr'), [], {
+    const result = await create(interactiveProjectName('ssr'), [], {
       spawnOpts: { env: skipInstallEnv() },
     });
     expect(
@@ -139,7 +146,7 @@ describe('interactive prompt', () => {
     await result.userEvent.keyboard('[Enter]');
     expect(
       await result.findByText(
-        `Creating new sku project: ${projectName('ssr')} with ssr template`,
+        `Creating new sku project: ${interactiveProjectName('ssr')} with ssr template`,
       ),
     ).toBeInTheConsole();
   });

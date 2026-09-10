@@ -20,9 +20,9 @@ Bootstrap scripts MAY still be passed to `renderToPipeableStream`.
 - **THEN** sku does not mount a sku-owned `<html>` around the router
 - **AND** sku still hoists document CSS and modulepreload links from hydrate bootstrap assets
 
-### Requirement: Docs cover root-layout document without HeadAssets
+### Requirement: Docs cover root-layout document
 
-SSR product docs MUST show a root layout that renders `<html>`, `<head>`, and `<body>` without `HeadAssets`.
+SSR product docs MUST show a root layout that renders `<html>`, `<head>`, and `<body>`.
 
 Docs MUST state that app providers that head nodes need MUST wrap `<html>`.
 
@@ -53,13 +53,11 @@ Getting-started docs MUST NOT claim sku owns the HTML document element tree.
 - **WHEN** a reader opens SSR providers docs
 - **THEN** the tree is `SkuProvider` → router → root layout `<html>`
 - **AND** docs state that sku hoists stylesheet and modulepreload links
-- **AND** the example does not render `HeadAssets`
 
 #### Scenario: Migrating docs drop Document-not-overridable
 
 - **WHEN** a reader opens SSR Migrating docs
 - **THEN** docs tell apps to render `<html>` in the root layout
-- **AND** docs do not tell apps to render `HeadAssets`
 - **AND** docs tell apps to nest `ErrorBoundary` under that layout
 - **AND** docs do not say the Document shell is not overridable
 
@@ -78,7 +76,7 @@ Getting-started docs MUST NOT claim sku owns the HTML document element tree.
 - **AND** the client entry exports `onHydrate` (and may export context getters)
 - **AND** the template wires `createSkuContexts` in `src/skuContext.ts` and has no `Providers` export
 - **AND** the template has `src/RootLayout.tsx` and no `src/App/` directory
-- **AND** `RootLayout` renders `<html>`, `<head>`, and `<body>` without `HeadAssets`
+- **AND** `RootLayout` renders `<html>`, `<head>`, and `<body>`
 - **AND** `ErrorBoundary` is on a child route under that layout, not on the html route
 - **AND** the home page calls `useSite()` (and does not use `import.meta.env` for site/environment demo)
 - **AND** a 0–1 site template omits `getSite`

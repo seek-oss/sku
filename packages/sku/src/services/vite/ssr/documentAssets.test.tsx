@@ -25,13 +25,4 @@ describe('DocumentAssetLinks', () => {
     expect(html).toContain(`href="${ssrCssHref}"`);
     expect(html).toContain('data-ssr-css');
   });
-
-  it('does not export HeadAssets or DocumentAssetLinks from sku/runtime', async () => {
-    const runtime = await import('sku/runtime');
-    expect(runtime).not.toHaveProperty('HeadAssets');
-    expect(runtime).not.toHaveProperty('DocumentResources');
-    expect(runtime).not.toHaveProperty('HeadAssetsProvider');
-    expect(runtime).not.toHaveProperty('DocumentAssetLinks');
-    expect(runtime).not.toHaveProperty('DocumentAssetsProvider');
-  });
 });

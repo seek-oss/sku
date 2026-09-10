@@ -12,7 +12,7 @@ See proposal.md for why.
 
 **Non-Goals:**
 
-- Public `HeadAssets` / `Document` / `documentRoute`.
+- A public document-asset component / `Document` / `documentRoute`.
 - Development warnings for missing `<html>`, missing sku asset hrefs, or `ErrorBoundary` on the html route (see `document-head-error-warnings`).
 - Auto-throw in production.
 - React Router Framework Mode.
@@ -36,14 +36,12 @@ InsertHtmlProvider
             Outlet
 ```
 
-### Sku hoists assets; no public HeadAssets
+### Sku hoists assets
 
 `DocumentAssetLinks` is private (`#runtime/documentAssets`).
 Stylesheets use `rel="stylesheet"` + `href` + `precedence="sku"` so React hoists them into the app `<head>` on SSR and hydrate.
 `modulepreload` hoists as a normal `<link>`.
 Dev virtual CSS still sets `data-ssr-css`.
-
-Public `sku/runtime` MUST NOT export `HeadAssets` or `DocumentAssetLinks`.
 
 Charset, viewport, and `html lang` stay app-owned.
 
@@ -62,6 +60,6 @@ Docs warn. Sku does not export a route helper in this change.
 
 ## Migration Plan
 
-Existing MDM apps move `<html>` into the root layout, drop any `HeadAssets` import, and move `ErrorBoundary` off the html route.
+Existing MDM apps move `<html>` into the root layout and move `ErrorBoundary` off the html route.
 Hoistable metadata stays in the tree.
 Non-hoistable tags go in that `<head>`, under providers that wrap `<html>`.

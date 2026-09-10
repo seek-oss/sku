@@ -28,7 +28,6 @@ Stylesheet links MUST set `precedence` so React hoists them into the app `<head>
 Dev SSR CSS MUST still mark the virtual stylesheet href with `data-ssr-css`.
 
 Sku MUST mount those links outside the router on server stream and client hydrate.
-Public `sku/runtime` MUST NOT export `HeadAssets` or `DocumentAssetLinks`.
 
 Charset, viewport, and `html lang` are app-owned.
 
@@ -42,7 +41,7 @@ Omitting sku links from the app tree MUST NOT throw.
 - **AND** stylesheet links have a `precedence` attribute
 - **AND** the hydrate tree mounts the same sku resource nodes
 
-#### Scenario: App omits HeadAssets and still gets sku links
+#### Scenario: App does not render sku asset links and still gets them
 
 - **WHEN** the root layout renders `<html>` and does not render a sku asset component
 - **THEN** sku still streams the document
@@ -88,7 +87,6 @@ Product docs, templates, and public APIs MUST NOT use the label `vite-ssr` (that
 
 - **WHEN** an app imports Managed Data Mode helpers (`defineServerEntry`, `createSkuContexts`, `useInsertHtml`, …)
 - **THEN** the import specifier is `sku/runtime`
-- **AND** the public surface does not include `HeadAssets`
 
 ### Requirement: Optional server and client request exports
 

@@ -5,21 +5,20 @@ Sku’s Document owns `<html>`, so `<head>` sits above the root layout and canno
 Forge inline `@font-face` and other non-hoistable head nodes need those providers.
 
 Apps should own `<html>` / `<head>` / `<body>` so they control the head.
-Sku must still inject CSS and `modulepreload` without a consumer `<HeadAssets />`.
+Sku must still inject CSS and `modulepreload`.
 
 ## What Changes
 
 - The root layout owns `<html>`, `<head>`, and `<body>`.
 - Sku stops wrapping a sku-owned `<html>` around the router.
 - Sku mounts document stylesheet and `modulepreload` links in its own tree (`precedence` on stylesheets) so React hoists them into the app `<head>`.
-- Public `sku/runtime` does not export `HeadAssets`.
 - Hoistable route-tree metadata stays the path for `<title>`, `<meta>`, and `<link>`.
 - Non-hoistable tags go in the root layout `<head>` under providers that wrap `<html>`.
 - The SSR template nests `ErrorBoundary` on an inner route so a boundary does not drop `<html>`.
 
 ## Non-goals
 
-- A public `HeadAssets` or app `Document` helper.
+- A public document-asset component or app `Document` helper.
 - A dual-entry `getDocumentHead` getter.
 - String `renderDocument` templates.
 - Switching Managed Data Mode to React Router Framework Mode.
@@ -37,7 +36,7 @@ Sku must still inject CSS and `modulepreload` without a consumer `<HeadAssets />
 ### Modified Capabilities
 
 - `managed-data-mode`: The root layout owns the Document element tree. Sku owns asset URLs and hoists them.
-- `ssr`: Stream and hydrate the app’s `<html>`. Docs and the SSR template teach the root layout and inner error boundary, not `HeadAssets`.
+- `ssr`: Stream and hydrate the app’s `<html>`. Docs and the SSR template teach the root layout and inner error boundary.
 
 ## Impact
 

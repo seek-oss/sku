@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
-    "module": "node18",
+    "module": "node20",
     "allowImportingTsExtensions": true,
     "allowJs": true,
     "jsx": "react-jsx",
@@ -17,9 +17,15 @@
     "node_modules",
     "fixtures",
     // exclude any reference projects so we don't type-check them twice
-    "packages"
+    "packages",
+    "private/utils",
+    "private/tsdown",
+    "private/test-utils"
   ],
   "references": [
+    { "path": "./private/utils" },
+    { "path": "./private/tsdown" },
+    { "path": "./private/test-utils" },
     { "path": "./packages/sku" },
     { "path": "./packages/codemod" },
     { "path": "./packages/create" },

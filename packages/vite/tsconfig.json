@@ -7,5 +7,6 @@
     "types": ["node"],
     "lib": ["ESNext", "DOM"]
   },
-  "include": ["./src/**/*", "./tsdown.config.ts"]
+  "include": ["./src/**/*", "./tsdown.config.ts"],
+  "references": [{ "path": "../../private/tsdown" }]
 }

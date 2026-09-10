@@ -4,5 +4,10 @@
     "rootDir": "."
   },
   "include": ["./src/**/*", "./tsdown.config.ts", "./package.json"],
-  "exclude": ["./templates"]
+  "exclude": ["./templates"],
+  "references": [
+    { "path": "../../private/utils" },
+    { "path": "../../private/tsdown" },
+    { "path": "../../private/test-utils" }
+  ]
 }

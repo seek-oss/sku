@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.package.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "allowJs": true,
+    "types": ["node"]
+  }
+}

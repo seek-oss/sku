@@ -13,5 +13,9 @@
     "./tsdown.config.ts",
     "./package.json"
   ],
-  "exclude": ["**/@loadable"]
+  "exclude": ["**/@loadable"],
+  "references": [
+    { "path": "../../private/utils" },
+    { "path": "../../private/tsdown" }
+  ]
 }

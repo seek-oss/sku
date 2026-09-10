@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
 import { render } from './render.js';
-import { HeadAssets, useInsertHtml } from 'sku/runtime';
+import { useInsertHtml } from 'sku/runtime';
 import type { RenderAssets } from './types.js';
 
 const assets: RenderAssets = {
@@ -22,7 +22,6 @@ const RootLayout = () => (
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <HeadAssets />
     </head>
     <body>
       <Outlet />

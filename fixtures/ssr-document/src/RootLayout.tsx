@@ -1,5 +1,4 @@
 import { Link, Outlet } from 'react-router';
-import { HeadAssets } from 'sku/runtime';
 
 import * as styles from './layout.css';
 
@@ -12,7 +11,6 @@ export const RootLayout = () => (
         rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>"
       />
-      <HeadAssets />
     </head>
     <body>
       <div className={styles.root}>

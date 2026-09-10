@@ -18,13 +18,15 @@ Bootstrap scripts MAY still be passed to `renderToPipeableStream`.
 
 - **WHEN** the client hydrates
 - **THEN** sku does not mount a sku-owned `<html>` around the router
-- **AND** `HeadAssets` still receives the document asset URLs from hydrate bootstrap
+- **AND** sku still hoists document CSS and modulepreload links from hydrate bootstrap assets
 
-### Requirement: Docs cover root-layout document and HeadAssets
+### Requirement: Docs cover root-layout document without HeadAssets
 
-SSR product docs MUST show a root layout that renders `<html>`, `<head>`, `<body>`, and `HeadAssets` in `<head>`.
+SSR product docs MUST show a root layout that renders `<html>`, `<head>`, and `<body>` without `HeadAssets`.
 
 Docs MUST state that app providers that head nodes need MUST wrap `<html>`.
+
+Multi-language docs MUST show `VocabProvider` wrapping `<html lang>` when locale is in the path, not wrapping only `<Outlet />`.
 
 Docs MUST state that hoistable tags (`<title>`, `<meta>`, `<link>`, and `<style href precedence>`) still work from anywhere in the route tree.
 
@@ -39,17 +41,25 @@ Apps that interpolated tags into `renderDocument` put hoistable SEO in the route
 
 Getting-started docs MUST NOT claim sku owns the HTML document element tree.
 
+#### Scenario: Multi-language docs wrap html with VocabProvider
+
+- **WHEN** a reader opens SSR multi-language docs
+- **THEN** the root-layout example wraps `<html>` with `VocabProvider`
+- **AND** `<html>` sets `lang` from that language
+- **AND** the example does not wrap only `<Outlet />`
+
 #### Scenario: Providers docs show html in the root layout
 
 - **WHEN** a reader opens SSR providers docs
 - **THEN** the tree is `SkuProvider` → router → root layout `<html>`
-- **AND** an example renders `HeadAssets` in `<head>`
+- **AND** docs state that sku hoists stylesheet and modulepreload links
+- **AND** the example does not render `HeadAssets`
 
 #### Scenario: Migrating docs drop Document-not-overridable
 
 - **WHEN** a reader opens SSR Migrating docs
 - **THEN** docs tell apps to render `<html>` in the root layout
-- **AND** docs tell apps to put `HeadAssets` in `<head>`
+- **AND** docs do not tell apps to render `HeadAssets`
 - **AND** docs tell apps to nest `ErrorBoundary` under that layout
 - **AND** docs do not say the Document shell is not overridable
 
@@ -68,13 +78,14 @@ Getting-started docs MUST NOT claim sku owns the HTML document element tree.
 - **AND** the client entry exports `onHydrate` (and may export context getters)
 - **AND** the template wires `createSkuContexts` in `src/skuContext.ts` and has no `Providers` export
 - **AND** the template has `src/RootLayout.tsx` and no `src/App/` directory
-- **AND** `RootLayout` renders `<html>`, `<head>`, `<body>`, and `HeadAssets` in `<head>`
+- **AND** `RootLayout` renders `<html>`, `<head>`, and `<body>` without `HeadAssets`
 - **AND** `ErrorBoundary` is on a child route under that layout, not on the html route
 - **AND** the home page calls `useSite()` (and does not use `import.meta.env` for site/environment demo)
 - **AND** a 0–1 site template omits `getSite`
 - **AND** a 0–1 site template keeps unparameterized `SkuRouteObject[]`
 - **AND** request entries do not re-export `routes`
 - **AND** lazy page modules export named `Component`
+- **AND** the template does not depend on Vocab
 - **AND** can `sku start` without further entry setup
 
 #### Scenario: Create template is ssr

@@ -1,5 +1,6 @@
 ---
 'sku': minor
+'@sku-lib/create': patch
 ---
 
-Managed Data Mode root layouts now own the HTML document element tree (`<html>`, `<head>`, `<body>`). Sku no longer wraps documents in an internal `Document` shell. Document stylesheet and `modulepreload` links are emitted via `<HeadAssets />` from `sku/runtime`.
+Managed Data Mode root layouts now own `<html>`, `<head>`, and `<body>`. Sku hoists stylesheet and `modulepreload` links into that `<head>` — there is no consumer `HeadAssets` component. The SSR create template matches this: `RootLayout` owns the document without `HeadAssets` and nests `ErrorBoundary` on a child route.

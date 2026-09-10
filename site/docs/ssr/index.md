@@ -44,7 +44,7 @@ After scaffolding you get three app entries:
 - `src/client.tsx` — hydrate-time setup
 - `src/routes.tsx` — your React Router route tree
 
-The template also sets up a root layout (rendering `<html>`, `<head>`, `<body>`, and [`HeadAssets`](./providers.md#root-layout-for-providers)), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md#typed-hooks) from `sku/runtime`.
+The template also sets up a root layout (rendering `<html>`, `<head>`, and `<body>`), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md#typed-hooks) from `sku/runtime`. Sku hoists stylesheet and `modulepreload` links into that `<head>`.
 
 ## Configuration
 

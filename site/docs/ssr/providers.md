@@ -13,7 +13,7 @@ sku mounts a `SkuProvider` outside the router:
 ```
 SkuProvider   ← site, clientContext, reactContext
  └── Router
-      └── root layout route   ← <html>, <head> (<HeadAssets />), <body>, providers, shared UI
+      └── root layout route   ← <html>, <head>, <body>, providers, shared UI
            └── child route   ← ErrorBoundary
                 └── pages
 ```
@@ -103,7 +103,7 @@ For loader/action/route-middleware dependency injection, see [Data loading → R
 ## Root layout for providers and document
 
 In Managed Data Mode, your root layout owns the HTML document structure: `<html>`, `<head>`, and `<body>`.
-Mount [`HeadAssets`](./runtime-api.md#headassets) in `<head>` so sku can inject stylesheet and `modulepreload` links for the document.
+Sku hoists stylesheet and `modulepreload` links into that `<head>` — you do not render a sku asset component.
 Wrapping that needs React Router hooks or shared UI belongs in this layout too.
 
 ::: code-group
@@ -112,14 +112,12 @@ Wrapping that needs React Router hooks or shared UI belongs in this layout too.
 import { BraidProvider } from 'braid-design-system';
 import seekJobs from 'braid-design-system/themes/seekJobs';
 import { Outlet } from 'react-router';
-import { HeadAssets } from 'sku/runtime';
 
 export const RootLayout = () => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <HeadAssets />
     </head>
     <body>
       <BraidProvider theme={seekJobs}>

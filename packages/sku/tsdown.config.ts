@@ -39,7 +39,8 @@ export default defineConfig([
       'services/vite/ssr/preloadRoute': 'src/services/vite/ssr/preloadRoute.ts',
       'services/vite/ssr/requestContext':
         'src/services/vite/ssr/requestContext.ts',
-      'services/vite/ssr/headAssets': 'src/services/vite/ssr/headAssets.tsx',
+      'services/vite/ssr/documentAssets':
+        'src/services/vite/ssr/documentAssets.tsx',
       'vite/prerender-worker':
         'src/services/vite/helpers/prerender/prerenderWorker.ts',
       'webpack-plugin':
@@ -69,7 +70,7 @@ export default defineConfig([
         '#runtime/insertHtml',
         '#runtime/preloadRoute',
         '#runtime/requestContext',
-        '#runtime/headAssets',
+        '#runtime/documentAssets',
       ],
     },
   },

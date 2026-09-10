@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { Outlet } from 'react-router';
-import { HeadAssets, type SkuRouteObject } from 'sku/runtime';
+import { type SkuRouteObject } from 'sku/runtime';
 
 import App from '../App.js';
 
@@ -11,7 +11,6 @@ const RootLayout = () => (
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <HeadAssets />
     </head>
     <body>
       <Outlet />

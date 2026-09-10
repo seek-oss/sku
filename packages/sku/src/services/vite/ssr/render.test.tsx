@@ -12,7 +12,7 @@ import { Outlet, RouterContextProvider } from 'react-router';
 import { describe, expect, it, vi } from 'vitest';
 
 import { buildSiteStaticHandlers } from './buildSiteStaticHandlers.js';
-import { createSkuContexts, HeadAssets } from 'sku/runtime';
+import { createSkuContexts } from 'sku/runtime';
 import { render } from './render.js';
 import type { RenderAssets, RenderSuccess } from './types.js';
 
@@ -33,7 +33,6 @@ const RootLayout = () => (
     <head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <HeadAssets />
     </head>
     <body>
       <Outlet />
@@ -409,7 +408,7 @@ describe('render', () => {
     expect(streamSource).not.toContain('createStaticHandler');
     expect(attemptSource).not.toContain('createStaticHandler');
     expect(attemptSource).toContain('SkuProvider');
-    expect(attemptSource).toContain('HeadAssetsProvider');
+    expect(attemptSource).toContain('DocumentAssetLinks');
   });
 
   it('uses the sole config site when getSite is omitted', async () => {
@@ -747,12 +746,11 @@ describe('render', () => {
   });
 
   describe('document head contribution', () => {
-    it('streams root-layout html with HeadAssets links inside head and no wrapping sku html', async () => {
+    it('streams root-layout html with sku-hoisted links inside head and no wrapping sku html', async () => {
       const CustomRootLayout = () => (
         <html lang="en" data-custom-root="true">
           <head>
             <title>Custom Title</title>
-            <HeadAssets />
           </head>
           <body>
             <Outlet />
@@ -792,16 +790,11 @@ describe('render', () => {
       expect(html).toContain('<html lang="en" data-custom-root="true">');
       // No double/wrapping html tag
       expect(html.match(/<html/g)).toHaveLength(1);
-      // HeadAssets links appear inside head
       const headStart = html.indexOf('<head>');
       const headEnd = html.indexOf('</head>');
-      const cssLink = html.indexOf('<link rel="stylesheet" href="/app.css"/>');
-      const ssrCssLink = html.indexOf(
-        '<link rel="stylesheet" href="/virtual-ssr.css" data-ssr-css="true"/>',
-      );
-      const preloadLink = html.indexOf(
-        '<link rel="modulepreload" href="/vendor.js"/>',
-      );
+      const cssLink = html.indexOf('href="/app.css"');
+      const ssrCssLink = html.indexOf('href="/virtual-ssr.css"');
+      const preloadLink = html.indexOf('href="/vendor.js"');
 
       expect(headStart).toBeGreaterThan(-1);
       expect(headEnd).toBeGreaterThan(headStart);
@@ -811,6 +804,8 @@ describe('render', () => {
       expect(ssrCssLink).toBeLessThan(headEnd);
       expect(preloadLink).toBeGreaterThan(headStart);
       expect(preloadLink).toBeLessThan(headEnd);
+      expect(html).toContain('precedence="sku"');
+      expect(html).toContain('data-ssr-css');
     });
 
     it('renders a non-hoistable style in head under an app provider that wraps html', async () => {
@@ -834,7 +829,6 @@ describe('render', () => {
           <html lang="en">
             <head>
               <BrandStyle />
-              <HeadAssets />
             </head>
             <body>
               <Outlet />
@@ -874,8 +868,8 @@ describe('render', () => {
       expect(html).toContain('font-family: seek-jobs');
     });
 
-    it('does not throw when HeadAssets is omitted and omits sku asset links', async () => {
-      const RootLayoutWithoutHeadAssets = () => (
+    it('still emits sku asset links when the app does not render an asset component', async () => {
+      const AppOnlyHead = () => (
         <html lang="en">
           <head>
             <title>No Assets</title>
@@ -889,7 +883,7 @@ describe('render', () => {
       const handlers = buildSiteStaticHandlers({
         au: [
           {
-            Component: RootLayoutWithoutHeadAssets,
+            Component: AppOnlyHead,
             children: [{ index: true, Component: () => <p>Content</p> }],
           },
         ],
@@ -913,16 +907,14 @@ describe('render', () => {
 
       const html = await commitToHtml(result);
       expect(html).toContain('<title>No Assets</title>');
-      expect(html).not.toContain('/app.css');
-      expect(html).not.toContain('/vendor.js');
+      expect(html).toContain('/app.css');
+      expect(html).toContain('/vendor.js');
     });
 
     it('retains root-layout html when an ErrorBoundary on a child route catches an error', async () => {
       const CustomDocLayout = () => (
         <html lang="en" data-layout="root">
-          <head>
-            <HeadAssets />
-          </head>
+          <head />
           <body>
             <Outlet />
           </body>

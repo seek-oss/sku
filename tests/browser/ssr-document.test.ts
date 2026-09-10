@@ -67,7 +67,7 @@ describe('ssr-document', () => {
       const response = await fetch(url);
       const html = await response.text();
 
-      // HeadAssets assets.css emits the virtual stylesheet (not transformIndexHtml).
+      // Sku-hoisted assets.css emits the virtual stylesheet (not transformIndexHtml).
       expect(html).toContain('/@id/__x00__virtual:ssr-css.css');
       expect(html).toContain('data-ssr-css');
       // transformIndexHtml artifacts from static Vite must not appear inline.

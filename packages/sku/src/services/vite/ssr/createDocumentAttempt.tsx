@@ -7,7 +7,7 @@ import {
 } from 'react-router';
 import { createInsertHtmlQueue, InsertHtmlProvider } from '#runtime/insertHtml';
 import { SkuProvider } from '#runtime/skuContext';
-import { HeadAssetsProvider } from '#runtime/headAssets';
+import { DocumentAssetLinks } from '#runtime/documentAssets';
 
 import { abortReason } from './abortReason.js';
 import { bindCommit } from './bindCommit.js';
@@ -123,19 +123,18 @@ export const createDocumentAttempt = ({
 
   streamRef.current = renderToPipeableStream(
     <InsertHtmlProvider insertHtml={insertHtmlQueue.insertHtml}>
-      <HeadAssetsProvider assets={documentAssets}>
-        <SkuProvider
-          site={site}
-          clientContext={clientContext}
-          reactContext={reactContext}
-        >
-          <StaticRouterProvider
-            router={router}
-            context={renderContext}
-            hydrate={false}
-          />
-        </SkuProvider>
-      </HeadAssetsProvider>
+      <DocumentAssetLinks assets={documentAssets} />
+      <SkuProvider
+        site={site}
+        clientContext={clientContext}
+        reactContext={reactContext}
+      >
+        <StaticRouterProvider
+          router={router}
+          context={renderContext}
+          hydrate={false}
+        />
+      </SkuProvider>
     </InsertHtmlProvider>,
     {
       bootstrapModules: assets.bootstrapModules,

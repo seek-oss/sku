@@ -21,30 +21,32 @@ App providers MAY wrap `<html>` so nodes in `<head>` see the same context as the
 - **THEN** that `<style>` is a descendant of `<head>` in the SSR HTML
 - **AND** it can read that provider
 
-### Requirement: HeadAssets emits sku document links
+### Requirement: Sku hoists document links
 
-Sku MUST export `HeadAssets` from `sku/runtime`.
-`HeadAssets` MUST emit Document CSS `<link rel="stylesheet">` and `modulepreload` `<link>` elements from sku-owned asset URLs for that document.
+Sku MUST emit Document CSS `<link rel="stylesheet">` and `modulepreload` `<link>` elements from sku-owned asset URLs.
+Stylesheet links MUST set `precedence` so React hoists them into the app `<head>`.
 Dev SSR CSS MUST still mark the virtual stylesheet href with `data-ssr-css`.
 
-Sku MUST mount the asset context outside the router on server stream and client hydrate.
-Public `sku/runtime` MUST NOT export that provider.
+Sku MUST mount those links outside the router on server stream and client hydrate.
+Public `sku/runtime` MUST NOT export `HeadAssets` or `DocumentAssetLinks`.
 
-Omitting `HeadAssets` from the tree MUST NOT throw.
 Charset, viewport, and `html lang` are app-owned.
 
-#### Scenario: HeadAssets in head emits css and modulepreload
+Omitting sku links from the app tree MUST NOT throw.
 
-- **WHEN** the root layout renders `HeadAssets` inside `<head>`
+#### Scenario: Sku links appear in app head
+
+- **WHEN** the root layout renders `<html>` and `<head>`
 - **AND** the document has CSS and modulepreload URLs
 - **THEN** those `<link>`s appear inside `<head>` in the SSR HTML
-- **AND** the hydrate tree renders the same component
+- **AND** stylesheet links have a `precedence` attribute
+- **AND** the hydrate tree mounts the same sku resource nodes
 
-#### Scenario: Omitting HeadAssets does not throw
+#### Scenario: App omits HeadAssets and still gets sku links
 
-- **WHEN** the root layout renders `<html>` and omits `HeadAssets`
+- **WHEN** the root layout renders `<html>` and does not render a sku asset component
 - **THEN** sku still streams the document
-- **AND** sku-owned CSS and modulepreload links are absent
+- **AND** sku-owned CSS and modulepreload links still appear in `<head>`
 
 ### Requirement: ErrorBoundary must not replace the html layout
 
@@ -84,8 +86,9 @@ Product docs, templates, and public APIs MUST NOT use the label `vite-ssr` (that
 
 #### Scenario: Public import is sku/runtime
 
-- **WHEN** an app imports Managed Data Mode helpers (`defineServerEntry`, `createSkuContexts`, `useInsertHtml`, `HeadAssets`, …)
+- **WHEN** an app imports Managed Data Mode helpers (`defineServerEntry`, `createSkuContexts`, `useInsertHtml`, …)
 - **THEN** the import specifier is `sku/runtime`
+- **AND** the public surface does not include `HeadAssets`
 
 ### Requirement: Optional server and client request exports
 
@@ -353,7 +356,7 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 
 ### Requirement: Shared Managed Data Mode modules keep one identity under Vite
 
-App code that imports shared Managed Data Mode state from `sku/runtime` (hooks from `createSkuContexts`, `useInsertHtml`, `usePreloadRoute`, `HeadAssets`, CSP nonce helpers) and sku’s own Managed Data Mode runtime (`SkuProvider`, insert-html queue/provider, HeadAssets provider, preload registry, request-context runner) MUST observe the **same** module instances.
+App code that imports shared Managed Data Mode state from `sku/runtime` (hooks from `createSkuContexts`, `useInsertHtml`, `usePreloadRoute`, CSP nonce helpers) and sku’s own Managed Data Mode runtime (`SkuProvider`, insert-html queue/provider, document asset links, preload registry, request-context runner) MUST observe the **same** module instances.
 
 Sku MUST:
 
@@ -365,7 +368,7 @@ Public `sku/runtime` modules MUST re-export from the same physical shared files 
 tsdown `unbundle: true` alone MUST NOT be treated as sufficient for published-package identity.
 
 Sku MUST NOT require consumers to inject their own Vite `optimizeDeps` config for this identity.
-Sku MUST NOT export sku-only shared-state symbols (`SkuProvider`, insert-html queue/provider, HeadAssets provider, site route registration, request-context runner) from public `sku/runtime`.
+Sku MUST NOT export sku-only shared-state symbols (`SkuProvider`, insert-html queue/provider, document asset links, site route registration, request-context runner) from public `sku/runtime`.
 
 #### Scenario: Hooks read values from SkuProvider
 
@@ -380,5 +383,5 @@ Sku MUST NOT export sku-only shared-state symbols (`SkuProvider`, insert-html qu
 #### Scenario: Public runtime does not export sku-only mounts
 
 - **WHEN** an app imports from `sku/runtime`
-- **THEN** the public surface does not include `SkuProvider`, insert-html queue/provider helpers, HeadAssets provider, site route registration, or the request-context runner
+- **THEN** the public surface does not include `SkuProvider`, insert-html queue/provider helpers, document asset links, site route registration, or the request-context runner
 - **AND** those symbols remain reachable only through sku’s private package `imports`

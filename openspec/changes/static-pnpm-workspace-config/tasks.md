@@ -31,3 +31,18 @@
 - [x] 5.2 Add an integration test (e.g. `tests/node/pnpm-workspace-config.test.ts`) covering first-run migration of a plugin-era project (additive only, existing values untouched) and steady-state silence
 - [x] 5.3 Add a changeset (minor) describing the additive sync, the drift warnings, the enforcing `sku configure` mode, the `configDependencies` migration, the object-setting conflict flip, the `skuSkipConfigure` escape hatch, and how to keep a retired entry (delete its marker, or add it back)
 - [x] 5.4 Update docs (`site/docs/cli.md` or relevant page) with the two sync modes, the managed-settings behaviour, and opt-outs
+
+## 6. Major rework: lint/format enforcement
+
+Sections 1–5 shipped the two-tier minor design; this section reworks it into the major design before release: enforcement as the only behaviour, `sku lint`/`sku format` as the only entry points, and uniform marker ownership.
+
+- [ ] 6.1 Remove the `SyncMode` type and mode plumbing from the sync engine: enforcement becomes the only behaviour (delete the additive branches and the warn channel from `syncSingleValueSettings`, `syncObjectSettings`, `syncArraySettings`, and `syncShared`)
+- [ ] 6.2 Split the sync into computing required changes and applying them, so `sku lint` can report without writing; the computed result carries two channels: required managed changes (lint failures) and user-managed drift advisories (unmarked values differing from defaults, info-level)
+- [ ] 6.3 Make markers load-bearing for single-value settings: an unmarked single-value setting that differs from the default is user-managed (preserved by format, info-logged by lint); adoption still marks unmarked values matching defaults
+- [ ] 6.4 Remove the sync from `configureApp` (including `ConfigureAppOptions.mode` and the `mode` argument in the `sku configure` action), so no command other than lint/format syncs and postinstall goes quiet
+- [ ] 6.5 Add a "pnpm workspace" check to `sku lint` via `runLintChecks`: fails on missing managed keys, differing marked values, retired marked entries, unmarked values pending adoption, and `pnpm-plugin-sku` in `configDependencies`, directing users to `sku format`; logs user-managed drift as info; passes silently when aligned, for non-pnpm projects, and when the file is absent
+- [ ] 6.6 Add the enforcing sync to `sku format`
+- [ ] 6.7 Rework the sync unit tests: delete additive-mode and drift-warning cases; add check-mode cases (fail vs info vs silent), uniform-ownership cases for single-value settings (unmarked differing value preserved by format and info-logged by lint), and format enforcement cases
+- [ ] 6.8 Rework `tests/node/pnpm-workspace-config.test.ts` around lint/format: lint fails on managed drift and passes after `sku format`; differing unmarked values are preserved and info-logged; `sku configure` and other commands no longer touch the file
+- [ ] 6.9 Rewrite the changeset as a major: breaking entry-point change (lint/format only, no longer configure/postinstall), unconditional enforcement of managed values, uniform marker ownership, marker deletion as the only opt-out, `skuSkipConfigure`/`skuSkipPostInstall` no longer gating the sync, and the one-time `sku format` migration diff
+- [ ] 6.10 Update docs (`site/docs/cli.md` or relevant page): lint check and format write behaviour, failure/info semantics, opt-out via marker deletion, and migration guidance

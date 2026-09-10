@@ -2,15 +2,15 @@
 
 ### Requirement: Created pnpm projects get static workspace settings
 
-When creating a pnpm project, create SHALL write the project's `pnpm-workspace.yaml` by running the same sync used at configure time — with file creation enabled, since scaffolding a new project is an explicit opt-in — before dependency installation.
-Create MUST NOT maintain its own workspace-file writer; create and configure share one writer, so identical output is guaranteed by construction.
+When creating a pnpm project, create SHALL write the project's `pnpm-workspace.yaml` by running the same sync that `sku format` uses — with file creation enabled, since scaffolding a new project is an explicit opt-in — before dependency installation.
+Create MUST NOT maintain its own workspace-file writer; create and `sku format` share one writer, so identical output is guaranteed by construction.
 Writing the file before install ensures sku's settings apply to the first install and marks the project as its own workspace root.
 
 #### Scenario: New project file matches sync output
 
 - **WHEN** a user creates a new pnpm project
-- **AND** a configuration-enabled sku command subsequently runs in that project
-- **THEN** the sync finds `pnpm-workspace.yaml` already aligned and produces no diff
+- **AND** `sku lint` subsequently runs in that project
+- **THEN** the pnpm workspace check passes, finding `pnpm-workspace.yaml` already aligned
 
 ### Requirement: Create does not install a pnpm config dependency
 

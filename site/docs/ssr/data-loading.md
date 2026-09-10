@@ -49,7 +49,7 @@ Use **render-time** data loading in React for page content.
 That keeps shared UI portable without per-app loader wiring.
 
 1. Pass env-specific clients via dual-entry [`getReactContext`](./providers.md#pass-values-into-react) (and serialisable seeds via [`getClientContext`](./entries.md#getclientcontext)).
-2. Mount isomorphic providers in your [root layout](./providers.md#root-layout-for-providers) and read values with [`useReactContext()`](./providers.md#typed-hooks) / [`useClientContext()`](./providers.md#typed-hooks).
+2. Mount isomorphic providers in your [root layout](./providers.md#root-layout-for-providers-and-document) and read values with [`useReactContext()`](./providers.md#typed-hooks) / [`useClientContext()`](./providers.md#typed-hooks).
 3. Fetch in the React tree with Suspense (for example `useQuery`) so the same components work on SSR and client navigations.
 
 sku does not support React Server Components.

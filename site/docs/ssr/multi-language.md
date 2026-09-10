@@ -30,7 +30,7 @@ If [`getLanguage`](./entries.md#getlanguage) is omitted, no language chunk is pr
 
 ## VocabProvider in the root layout
 
-Wrap `VocabProvider` around `<html>` in the [root layout](./providers.md#root-layout-for-providers), and pass the active language so `html lang` and any non-hoistable head nodes stay in sync on client navigation.
+Wrap `VocabProvider` around `<html>` in the [root layout](./providers.md#root-layout-for-providers-and-document), and pass the active language so `html lang` and any non-hoistable head nodes stay in sync on client navigation.
 
 If language is in the path, derive it from the router (as in the example below). If it comes from a cookie or other context, read that in the layout the same way.
 
@@ -108,7 +108,7 @@ For nested routes, index homes, and per-site mapping, see [Routing → Multiple 
 
 ## See also
 
-- [Providers](./providers.md#root-layout-for-providers) — pathless root layout
+- [Providers](./providers.md#root-layout-for-providers-and-document) — pathless root layout
 - [Request entries](./entries.md#getlanguage) — `getLanguage`
 - [Routing](./routing.md) — route composition
 - [Multiple languages](../multi-language.md) — Vocab config and workflow

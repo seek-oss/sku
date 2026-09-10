@@ -97,7 +97,7 @@ It does not catch errors thrown above the router, including inside sku’s alway
 Failures at that level fall through to Express.
 They are hard to turn into a stylised error page for readers — your route `ErrorBoundary` never gets a chance to render.
 
-Mount isomorphic and fallible providers in your [root layout](./providers.md#root-layout-for-providers) so the route boundary can cover them.
+Mount isomorphic and fallible providers in your [root layout](./providers.md#root-layout-for-providers-and-document) so the route boundary can cover them.
 
 ## See also
 

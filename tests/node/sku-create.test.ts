@@ -18,7 +18,6 @@ import {
   scopeToFixture as scopeToSkuFixture,
 } from '@sku-private/testing-library';
 import { scopeToFixture } from '@sku-private/testing-library/create';
-import { normalizePackageManagerVersion } from '@sku-private/test-utils';
 
 const execFileAsync = promisify(execFile);
 
@@ -247,12 +246,6 @@ function replaceDependencyVersions(packageJson: Record<string, any>) {
   // eslint-disable-next-line guard-for-in
   for (const dep in newPackageJson.devDependencies) {
     newPackageJson.devDependencies[dep] = 'VERSION_IGNORED';
-  }
-
-  if ('packageManager' in newPackageJson) {
-    newPackageJson.packageManager = normalizePackageManagerVersion(
-      newPackageJson.packageManager,
-    );
   }
 
   return newPackageJson;

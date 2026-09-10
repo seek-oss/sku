@@ -15,7 +15,7 @@ Attach an `ErrorBoundary` on a layout route so every child under it shares the s
 Without a route `ErrorBoundary`, React Router hydrates its default error UI over the SSR error HTML.
 That can briefly flash a stack trace before the default “Hey developer” page.
 
-Because [`RootLayout`](./providers.md#root-layout-for-providers-and-document) renders `<html>`, attaching `ErrorBoundary` to the root route itself replaces that layout on failure and drops `<html>` from the response.
+Because [`RootLayout`](./providers.md#root-layout-for-providers) renders `<html>`, attaching `ErrorBoundary` to the root route itself replaces that layout on failure and drops `<html>` from the response.
 Instead, attach `ErrorBoundary` to a child route under `RootLayout` so the document shell stays mounted.
 
 sku uses [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary):
@@ -97,7 +97,7 @@ It does not catch errors thrown above the router, including inside sku’s alway
 Failures at that level fall through to Express.
 They are hard to turn into a stylised error page for readers — your route `ErrorBoundary` never gets a chance to render.
 
-Mount isomorphic and fallible providers in your [root layout](./providers.md#root-layout-for-providers-and-document) so the route boundary can cover them.
+Mount isomorphic and fallible providers in your [root layout](./providers.md#root-layout-for-providers) so the route boundary can cover them.
 
 ## See also
 

@@ -40,7 +40,7 @@ See [CSP](./csp.md#nonces).
 ## See also
 
 - [Request entries](./entries.md) — `defineServerEntry` / `defineClientEntry`
-- [Providers](./providers.md) — `createSkuContexts` and the root-layout document
+- [Providers](./providers.md) — `createSkuContexts`
 - [Routing](./routing.md#intent-preloading-with-usepreloadroute) — `usePreloadRoute`
 - [Data loading](./data-loading.md#apollo-streaming-hydration) — Apollo + `useInsertHtml`
 - [CSP](./csp.md) — headers and nonces

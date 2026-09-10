@@ -100,11 +100,10 @@ Anything that must track navigation (for example locale from the URL) belongs in
 
 For loader/action/route-middleware dependency injection, see [Data loading → Router context](./data-loading.md#router-context).
 
-## Root layout for providers and document
+## Root layout for providers
 
-In Managed Data Mode, your root layout owns the HTML document structure: `<html>`, `<head>`, and `<body>`.
-Sku hoists stylesheet and `modulepreload` links into that `<head>` — you do not render a sku asset component.
-Wrapping that needs React Router hooks or shared UI belongs in this layout too.
+In Managed Data Mode, your root layout renders the HTML document structure: `<html>`, `<head>`, and `<body>`.
+Your Root Layout is rendered inside sku's context and React Router, so you can make use of their hooks such as [`useSite()`](#typed-hooks) and [`useLocation()`](https://reactrouter.com/api/hooks/useLocation).
 
 ::: code-group
 
@@ -158,27 +157,6 @@ export const routes: SkuRouteObject[] = [
 
 App providers that `<head>` nodes need must wrap `<html>` in your root layout.
 For example, if an inline font stylesheet reads brand or locale context, wrap `<html>` in that provider so `<head>` can consume it.
-
-### Hoistable vs non-hoistable head tags
-
-Hoistable tags (`<title>`, `<meta>`, `<link>`, and `<style href precedence>`) work from anywhere in the route tree via [React document metadata](https://react.dev/reference/react-dom/components/title).
-Child routes and pages can declare their own titles and meta tags directly.
-
-Non-hoistable nodes (such as inline `<style>` blocks for fonts or brand styles) belong in the root layout `<head>`.
-
-Note that [`useInsertHtml`](./runtime-api.md#useinserthtml) is reserved for streaming data transports (such as Apollo), not for Document head tags.
-
-### Error boundaries and html
-
-An `ErrorBoundary` must not sit on the route that renders `<html>`.
-React Router replaces a failing route’s component with its `ErrorBoundary`.
-If the boundary sits on the route rendering `<html>`, catching an error removes `<html>` from the response.
-Nest `ErrorBoundary` on a child route under the root layout so the document shell stays mounted.
-See [Error pages](./error-pages.md#add-an-errorboundary).
-
-Env-specific **values** (API clients, etc.) come from dual-entry `getReactContext`.
-Isomorphic **provider components** mount in the root layout and read those values with hooks — for example Vocab keyed on the URL, or Apollo via `useReactContext()`.
-See [Multi-language](./multi-language.md) and [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
 
 ## Braid reset
 

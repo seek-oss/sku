@@ -4,7 +4,7 @@ export const SKU_STYLESHEET_PRECEDENCE = 'sku';
 
 /**
  * Sku-owned CSS and modulepreload links. Mounted beside the router so React
- * hoists them into the app `<head>`. Not a public `sku/runtime` export.
+ * hoists them into the app `<head>`.
  */
 export const DocumentAssetLinks = ({ assets }: { assets: DocumentAssets }) => (
   <>

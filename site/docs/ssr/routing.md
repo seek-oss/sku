@@ -74,13 +74,13 @@ export function Component() {
 
 Lazy page modules must export a named `Component` (not `export default`).
 
-Use a **pathless** root layout for shared UI and providers (see [Providers](./providers.md)).
+Use a **pathless** root layout to render `<html>`, `<head>`, and `<body>`, plus shared UI and providers (see [Providers](./providers.md)).
 
 You’re set up when:
 
 - Pages load via `lazy: () => import(...)` (not static imports into `routes.tsx`)
 - Each page module exports a named `Component`
-- Shared UI lives on a pathless root layout
+- The pathless root layout renders `<html>`, `<head>`, and `<body>`
 
 ### Keep pages lazy
 

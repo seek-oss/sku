@@ -9,10 +9,10 @@
 Server-side rendering builds an isomorphic React app that renders on the server for each request, then hydrates in the browser.
 
 This path uses **Managed Data Mode**.
-sku owns streaming, hydration, the HTTP server, and CSP headers.
+sku streams and hydrates the app, and provides the HTTP server and CSP headers.
 It wires [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing and data.
-The app root layout owns the HTML document (`<html>`, `<head>`, `<body>`).
-You own routes, data, providers, and the Document element tree.
+The app root layout renders `<html>`, `<head>`, and `<body>`.
+You provide routes, data, and providers.
 
 > [!CAUTION]
 > Experimental — not for production.
@@ -65,7 +65,7 @@ See [Configuration](../configuration.md) for all options.
 
 ### Unsupported configuration
 
-Because sku owns more of the server and build in Managed Data Mode SSR, these options are not supported and are not planned:
+Because sku provides the server and build in Managed Data Mode SSR, these options are not supported and are not planned:
 
 - Absolute `publicPath` (for example `https://seekcdn.com/*`)
 - [`public`](../configuration.md#public) assets folder

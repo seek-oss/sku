@@ -1,6 +1,6 @@
 ## ADDED Requirements
 
-### Requirement: Root layout owns the HTML document
+### Requirement: Root layout renders the HTML document
 
 The root layout route MUST render `<html>`, `<head>`, and `<body>`.
 Sku MUST NOT wrap the router in a sku-owned `<html>`.
@@ -29,7 +29,7 @@ Dev SSR CSS MUST still mark the virtual stylesheet href with `data-ssr-css`.
 
 Sku MUST mount those links outside the router on server stream and client hydrate.
 
-Charset, viewport, and `html lang` are app-owned.
+Charset, viewport, and `html lang` come from the app.
 
 Omitting sku links from the app tree MUST NOT throw.
 
@@ -64,9 +64,9 @@ Apps MUST put `ErrorBoundary` on a descendant route so the document layout stays
 ### Requirement: Managed Data Mode naming
 
 Product docs and public APIs MUST describe this architecture as **Managed Data Mode**.
-Sku owns streaming, hydration, and React Router Data Mode wiring.
-The root layout owns `<html>`.
-Apps own routes, data, providers, and the Document element tree.
+Sku streams and hydrates, and wires React Router Data Mode.
+The root layout renders `<html>`, `<head>`, and `<body>`.
+Apps provide routes, data, and providers.
 
 **SSR** MUST refer only to the render strategy selected by `buildType: 'ssr'`.
 
@@ -157,7 +157,7 @@ SSR defines `onListen` call timing and failure behaviour.
 
 Sku MUST always render `SkuProvider` outside the router, with `site`, `clientContext`, and `reactContext` for that document.
 The tree is `SkuProvider` → router → root layout.
-The root layout owns `<html>`, `<head>`, and `<body>`.
+The root layout renders `<html>`, `<head>`, and `<body>`.
 Sku MUST NOT wrap the router in a sku-owned `<html>`.
 
 Sku MUST export `createSkuContexts<typeof server, typeof client>()` from `sku/runtime` so apps can obtain typed `useSite` / `useClientContext` / `useReactContext` bound to that provider.

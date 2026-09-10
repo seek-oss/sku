@@ -103,6 +103,7 @@ For loader/action/route-middleware dependency injection, see [Data loading → R
 ## Root layout for providers
 
 In Managed Data Mode, your root layout renders the HTML document structure: `<html>`, `<head>`, and `<body>`.
+Sku hoists stylesheet and `modulepreload` links into that `<head>`.
 Your Root Layout is rendered inside sku's context and React Router, so you can make use of their hooks such as [`useSite()`](#typed-hooks) and [`useLocation()`](https://reactrouter.com/api/hooks/useLocation).
 
 ::: code-group
@@ -232,7 +233,7 @@ Mount `<Analytics />` in the root layout.
 ## See also
 
 - [Request entries](./entries.md) — getters and entry shapes
-- [Routing](./routing.md) — pathless root layout and pages
+- [Routing](./routing.md) — root layout and pages
 - [Data loading](./data-loading.md) — render-time fetch and router context
 - [Multi-language](./multi-language.md) — Vocab in the root layout
 - [Error pages → Errors above the router](./error-pages.md#errors-above-the-router) — route boundaries do not cover `SkuProvider`

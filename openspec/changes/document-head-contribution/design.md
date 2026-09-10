@@ -6,7 +6,7 @@ See proposal.md for why.
 
 **Goals:**
 
-- Stream and hydrate an `<html>` the root layout owns.
+- Stream and hydrate an `<html>` the root layout renders.
 - Let app providers wrap `<html>` so non-hoistable head nodes see locale and site.
 - Keep sku-owned CSS and `modulepreload` in the React tree on both sides without a consumer component.
 
@@ -43,7 +43,7 @@ Stylesheets use `rel="stylesheet"` + `href` + `precedence="sku"` so React hoists
 `modulepreload` hoists as a normal `<link>`.
 Dev virtual CSS still sets `data-ssr-css`.
 
-Charset, viewport, and `html lang` stay app-owned.
+Charset, viewport, and `html lang` come from the app.
 
 ### Inner ErrorBoundary
 

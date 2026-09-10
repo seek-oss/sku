@@ -1,15 +1,15 @@
 ## Why
 
 Managed Data Mode tells apps to put head and SEO in the route tree as React document metadata.
-Sku’s Document owns `<html>`, so `<head>` sits above the root layout and cannot see app providers.
+Sku’s Document wraps `<html>`, so `<head>` sits above the root layout and cannot see app providers.
 Forge inline `@font-face` and other non-hoistable head nodes need those providers.
 
-Apps should own `<html>` / `<head>` / `<body>` so they control the head.
+Apps should render `<html>` / `<head>` / `<body>` so they control the head.
 Sku must still inject CSS and `modulepreload`.
 
 ## What Changes
 
-- The root layout owns `<html>`, `<head>`, and `<body>`.
+- The root layout renders `<html>`, `<head>`, and `<body>`.
 - Sku stops wrapping a sku-owned `<html>` around the router.
 - Sku mounts document stylesheet and `modulepreload` links in its own tree (`precedence` on stylesheets) so React hoists them into the app `<head>`.
 - Hoistable route-tree metadata stays the path for `<title>`, `<meta>`, and `<link>`.
@@ -35,7 +35,7 @@ Sku must still inject CSS and `modulepreload`.
 
 ### Modified Capabilities
 
-- `managed-data-mode`: The root layout owns the Document element tree. Sku owns asset URLs and hoists them.
+- `managed-data-mode`: The root layout renders the Document element tree. Sku provides asset URLs and hoists them.
 - `ssr`: Stream and hydrate the app’s `<html>`. Docs and the SSR template teach the root layout and inner error boundary.
 
 ## Impact

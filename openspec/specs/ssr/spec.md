@@ -4,8 +4,8 @@
 
 How sku runs Vite SSR apps.
 SSR is selected with `bundler: 'vite'` and `buildType: 'ssr'`.
-Sku owns streaming, hydration, the Node server, and the production client/server layout.
-The app root layout owns the HTML document element tree.
+Sku streams and hydrates, and provides the Node server and the production client/server layout.
+The app root layout renders the HTML document element tree.
 
 ## Requirements
 
@@ -896,7 +896,7 @@ SSR product docs MUST describe Managed Data Mode vs SSR and the core app contrac
 - default-exported request entries via `defineServerEntry` / `defineClientEntry<typeof server>` with optional getters and sibling projection
 - always-on `SkuProvider` + `createSkuContexts<typeof server, typeof client>()` in `src/skuContext.ts`
 - optional `middleware` / `onListen` / `onHydrate` / dual-entry `instrumentations` and config `expressTrustProxy`
-- the three value channels vs the app-owned root layout route
+- the three value channels vs the root layout route
 - production middleware order: request-context → optional `express.static(publicPath)` when sibling `client/` exists → server-entry `middleware` → HTML
 - `sku start` middleware order: request-context → Vite → optional `devServerMiddleware` → server-entry `middleware` → HTML
 - CSP, response headers, data-loading hierarchy, and optional dual-entry `getRouterContext`
@@ -914,7 +914,7 @@ Docs MUST NOT tell consumers to install `@vocab/vite` solely so `@vocab/vite/run
 #### Scenario: Primary SSR docs have topic coverage
 
 - **WHEN** a reader opens SSR product docs
-- **THEN** docs cover `routesEntry`, `SkuProvider` / `createSkuContexts` in `src/skuContext.ts`, the three value channels, the app-owned root layout route, named `routes`, optional `sites`, `SkuRouteObject<SiteOf<typeof server>>`, optional `mapRoutePath`, case-sensitive path matching by default with per-route opt-out, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onListen` / `onHydrate` / `instrumentations`, `expressTrustProxy`, CSP, and response headers
+- **THEN** docs cover `routesEntry`, `SkuProvider` / `createSkuContexts` in `src/skuContext.ts`, the three value channels, the root layout route, named `routes`, optional `sites`, `SkuRouteObject<SiteOf<typeof server>>`, optional `mapRoutePath`, case-sensitive path matching by default with per-route opt-out, `getSite`, `defineServerEntry` / `defineClientEntry<typeof server>`, optional `middleware` / `onListen` / `onHydrate` / `instrumentations`, `expressTrustProxy`, CSP, and response headers
 - **AND** docs steer page content toward render-time data loading with clients from `useReactContext` / `useClientContext` (not loaders as the default)
 - **AND** docs describe loaders as opt-in for deeply-nested waterfalls, document redirects, response headers, or opt-in `getRouterContext`
 - **AND** docs document optional dual-entry `getRouterContext` and Data Mode vs Framework Mode seeding
@@ -944,7 +944,8 @@ Docs MUST state that `useInsertHtml` is for streaming data transports, not for D
 Migrating docs MUST replace “the Document shell is not overridable” with this contract.
 Apps that interpolated tags into `renderDocument` put hoistable SEO in the route tree and non-hoistable tags in the root layout `<head>`.
 
-Getting-started docs MUST NOT claim sku owns the HTML document element tree.
+Getting-started docs MUST describe the root layout as rendering `<html>`, `<head>`, and `<body>`.
+Docs MUST NOT claim sku renders the HTML document element tree.
 
 #### Scenario: Multi-language docs wrap html with VocabProvider
 

@@ -39,7 +39,8 @@ Docs MUST state that `useInsertHtml` is for streaming data transports, not for D
 Migrating docs MUST replace “the Document shell is not overridable” with this contract.
 Apps that interpolated tags into `renderDocument` put hoistable SEO in the route tree and non-hoistable tags in the root layout `<head>`.
 
-Getting-started docs MUST NOT claim sku owns the HTML document element tree.
+Getting-started docs MUST describe the root layout as rendering `<html>`, `<head>`, and `<body>`.
+Docs MUST NOT claim sku renders the HTML document element tree.
 
 #### Scenario: Multi-language docs wrap html with VocabProvider
 

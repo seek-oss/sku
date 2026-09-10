@@ -4,7 +4,7 @@
 - [x] 1.2 Emit CSS with `precedence="sku"` and `modulepreload` links, including `data-ssr-css` on the dev virtual stylesheet
 - [x] 1.3 Mount `DocumentAssetLinks` beside the router on stream and hydrate
 
-## 2. App-owned html
+## 2. App html
 
 - [x] 2.1 Stop wrapping `createDocumentAttempt` and `ssr-client` in sku `Document`
 - [x] 2.2 Template and fixtures render `<html>` / `<head>` / `<body>`

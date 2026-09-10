@@ -108,7 +108,7 @@ For nested routes, index homes, and per-site mapping, see [Routing → Multiple 
 
 ## See also
 
-- [Providers](./providers.md#root-layout-for-providers) — pathless root layout
+- [Providers](./providers.md#root-layout-for-providers) — root layout
 - [Request entries](./entries.md#getlanguage) — `getLanguage`
 - [Routing](./routing.md) — route composition
 - [Multiple languages](../multi-language.md) — Vocab config and workflow

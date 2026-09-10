@@ -1,6 +1,7 @@
 import { describe, it } from 'vitest';
 import { createFixture } from 'fs-fixture';
 import { generatePackageJson } from './packageJson.js';
+import { skuPackageManager } from '@sku-private/utils';
 import { normalizePackageManagerVersion } from '@sku-private/test-utils';
 
 describe('generatePackageJson', () => {
@@ -128,7 +129,9 @@ describe('generatePackageJson', () => {
     await fixture.rm();
   });
 
-  it('should add pnpm-specific config when using pnpm', async ({ expect }) => {
+  it("should pin the sku monorepo's pnpm version when using pnpm", async ({
+    expect,
+  }) => {
     const fixture = await createFixture({});
 
     await generatePackageJson(fixture.path, {
@@ -140,6 +143,8 @@ describe('generatePackageJson', () => {
     const packageJsonContent = JSON.parse(
       await fixture.readFile('package.json', 'utf8'),
     );
+
+    expect(packageJsonContent.packageManager).toBe(skuPackageManager);
 
     packageJsonContent.packageManager = normalizePackageManagerVersion(
       packageJsonContent.packageManager,

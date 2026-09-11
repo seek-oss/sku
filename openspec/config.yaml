@@ -11,6 +11,7 @@ context: |
   - Prefer Lite mode (short behavior-first specs); scale rigor only for high-risk work
   - Invoke the CLI via `pnpm openspec` (not bare `openspec`)
   - AI tool adapters are local-only; never commit them
+  - Describes what something does, rather than what it "owns"
 
 rules:
   proposal:
@@ -24,6 +25,7 @@ rules:
     - Prefer ADDED/MODIFIED/REMOVED deltas; reuse existing domains
     - Happy path plus the failure/edge cases that would hurt if missed — not exhaustive matrices
     - Put how/why in design.md or tasks.md, not in requirements
+    - Do not restore public APIs or names a change already dropped
   design:
     - Skip unless architecture is non-obvious; keep short when present
     - On update: integrate new decisions into the current design narrative;

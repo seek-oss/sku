@@ -9,10 +9,9 @@
 Server-side rendering builds an isomorphic React app that renders on the server for each request, then hydrates in the browser.
 
 This path uses **Managed Data Mode**.
-sku streams and hydrates the app, and provides the HTTP server and CSP headers.
+sku provides the HTTP server, HTML document, streaming, hydration, and CSP headers.
 It wires [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing and data.
-The app root layout renders `<html>`, `<head>`, and `<body>`.
-You provide routes, data, and providers.
+You provide pages, data, and providers.
 
 > [!CAUTION]
 > Experimental — not for production.
@@ -44,7 +43,7 @@ After scaffolding you get three app entries:
 - `src/client.tsx` — hydrate-time setup
 - `src/routes.tsx` — your React Router route tree
 
-The template also sets up a root layout (rendering `<html>`, `<head>`, and `<body>`), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md#typed-hooks) from `sku/runtime`. Sku hoists stylesheet and `modulepreload` links into that `<head>`.
+The template also sets up a root layout (for providers like Braid), page modules under `src/pages/`, and typed hooks via [`createSkuContexts`](./providers.md#typed-hooks) from `sku/runtime`.
 
 ## Configuration
 
@@ -65,7 +64,7 @@ See [Configuration](../configuration.md) for all options.
 
 ### Unsupported configuration
 
-Because sku provides the server and build in Managed Data Mode SSR, these options are not supported and are not planned:
+Because sku handles more of the server and build in Managed Data Mode SSR, these options are not supported and are not planned:
 
 - Absolute `publicPath` (for example `https://seekcdn.com/*`)
 - [`public`](../configuration.md#public) assets folder

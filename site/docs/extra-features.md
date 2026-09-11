@@ -158,7 +158,7 @@ export default {
 
 ## Entry side effects
 
-Sku owns the client and SSR entries.
+Sku provides the client and SSR entries.
 Putting a module first in `App.tsx` or a root layout does not make it first in the graph.
 
 [`entrySideEffects`](./configuration.md#entrysideeffects) lists isomorphic modules that sku imports before any consumer module on Vite static and Vite SSR graphs.

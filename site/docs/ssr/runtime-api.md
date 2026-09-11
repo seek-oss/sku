@@ -2,7 +2,9 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
 Import browser-safe Managed Data Mode helpers from `sku/runtime`.
@@ -36,7 +38,8 @@ Returns the request-scoped CSP nonce, minting one on first read.
 Call it only when you need a nonce for inline or injected scripts (for example Apollo `extraScriptProps`).
 In the browser it returns `undefined` so isomorphic code can call it safely.
 
-Express middleware can use `req.getCspNonce()` instead. That method uses the same store for the response.
+Express middleware can use `req.getCspNonce()` instead.
+That method uses the same store for the response.
 See [CSP](./csp.md#nonces).
 
 ## See also

@@ -14,7 +14,8 @@ export default {
 } satisfies SkuConfig;
 ```
 
-By default the file name of the library is based on the `libraryName` option. Provide a `libraryFile` option to set a different library file name:
+By default the file name of the library is based on the `libraryName` option.
+Provide a `libraryFile` option to set a different library file name:
 
 ```ts
 export default {

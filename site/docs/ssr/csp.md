@@ -2,7 +2,9 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
 A Content Security Policy (CSP) tells the browser which scripts and other resources it may load.
@@ -52,7 +54,8 @@ const server = defineServerEntry({
 export default server;
 ```
 
-Streaming data transports that inject `<script>` tags via [`useInsertHtml`](./runtime-api.md#useinserthtml) (for example Apollo) must put that nonce on the injected scripts. Their bodies are not known when sku derives headers from the shell.
+Streaming data transports that inject `<script>` tags via [`useInsertHtml`](./runtime-api.md#useinserthtml) (for example Apollo) must put that nonce on the injected scripts.
+Their bodies are not known when sku derives headers from the shell.
 
 See [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
 

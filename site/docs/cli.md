@@ -29,12 +29,13 @@ sku start
 
 This command supports the following options:
 
-| Option            | Description                                                                               | Defaults to |
-| ----------------- | ----------------------------------------------------------------------------------------- | ----------- |
-| `--stats, -s`     | Override the default webpack [stats preset] <br> `sku build --stats=errors-only`          | `summary`   |
-| `--port`          | The port for the development server.                                                      |             |
-| `--strict-port`   | Make sku throw an error if the given port is already in use.                              | `false`     |
-| `--list-urls, -l` | List all dev server URLs that can open the app. If false, show only the first found host. | `false`     |
+| Option                                    | Description                                                                      | Defaults to |
+| ----------------------------------------- | -------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s`                             | Override the default webpack [stats preset] <br> `sku build --stats=errors-only` | `summary`   |
+| `--port`                                  | The port for the development server.                                             |             |
+| `--strict-port`                           | Make sku throw an error if the given port is already in use.                     | `false`     |
+| `--list-urls, -l`                         | List all dev server URLs that can open the app.                                  |
+| If false, show only the first found host. | `false`                                                                          |
 
 ### `start-ssr`
 
@@ -49,10 +50,11 @@ sku start-ssr
 
 This command supports the following options:
 
-| Option            | Description                                                                               | Defaults to |
-| ----------------- | ----------------------------------------------------------------------------------------- | ----------- |
-| `--stats, -s`     | Override the default webpack [stats preset] <br> `sku build --stats=errors-only`          | `summary`   |
-| `--list-urls, -l` | List all dev server URLs that can open the app. If false, show only the first found host. | `false`     |
+| Option                                    | Description                                                                      | Defaults to |
+| ----------------------------------------- | -------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s`                             | Override the default webpack [stats preset] <br> `sku build --stats=errors-only` | `summary`   |
+| `--list-urls, -l`                         | List all dev server URLs that can open the app.                                  |
+| If false, show only the first found host. | `false`                                                                          |
 
 ### `build`
 
@@ -97,11 +99,12 @@ sku serve
 
 This command supports the following options:
 
-| Option            | Description                                                                               | Defaults to |
-| ----------------- | ----------------------------------------------------------------------------------------- | ----------- |
-| `--port`          | The `port` to serve the application on <br> `sku serve --port=8080`                       |
-| `--site`          | The `site` to serve the application on <br> `sku serve --site=seekAnz`                    |
-| `--list-urls, -l` | List all dev server URLs that can open the app. If false, show only the first found host. | `false`     |
+| Option                                    | Description                                                            | Defaults to |
+| ----------------------------------------- | ---------------------------------------------------------------------- | ----------- |
+| `--port`                                  | The `port` to serve the application on <br> `sku serve --port=8080`    |
+| `--site`                                  | The `site` to serve the application on <br> `sku serve --site=seekAnz` |
+| `--list-urls, -l`                         | List all dev server URLs that can open the app.                        |
+| If false, show only the first found host. | `false`                                                                |
 
 [`sku build`]: #sku-build
 
@@ -142,9 +145,12 @@ sku format
 
 Update your hosts file so configured [`hosts`] point to your local machine.
 
-We recommend `*.localhost` hostnames for local development. They usually resolve automatically. They also act as a secure context for browsers.
+We recommend `*.localhost` hostnames for local development.
+They usually resolve automatically.
+They also act as a secure context for browsers.
 
-Run `setup-hosts` for other custom hosts. You can also run it if you still want explicit `.localhost` entries.
+Run `setup-hosts` for other custom hosts.
+You can also run it if you still want explicit `.localhost` entries.
 
 ```sh
 sudo sku setup-hosts
@@ -155,7 +161,8 @@ sudo sku setup-hosts
 ### `configure`
 
 Emit and update configuration files for your project.
-Sku runs this command before most other `sku` CLI commands. You should not need to run it by hand.
+Sku runs this command before most other `sku` CLI commands.
+You should not need to run it by hand.
 
 ```sh
 sku configure

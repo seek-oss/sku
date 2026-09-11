@@ -2,10 +2,14 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
-sku converts route failures to document responses. The nearest React Router `ErrorBoundary` renders the UI. The streamed response uses the matching HTTP status code.
+sku converts route failures to document responses.
+The nearest React Router `ErrorBoundary` renders the UI.
+The streamed response uses the matching HTTP status code.
 
 ## Add an ErrorBoundary
 
@@ -95,7 +99,8 @@ A root route `ErrorBoundary` only covers work inside the router.
 It does not catch errors thrown above the router, including inside sku’s always-on `SkuProvider` (see the tree on [Providers](./providers.md)).
 
 Failures at that level pass to Express.
-They are hard to convert to a stylised error page for readers. Your route `ErrorBoundary` never gets a chance to render.
+They are hard to convert to a stylised error page for readers.
+Your route `ErrorBoundary` never gets a chance to render.
 
 Mount isomorphic and fallible providers in your [root layout](./providers.md#root-layout-for-providers) so the route boundary can cover them.
 

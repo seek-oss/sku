@@ -17,12 +17,14 @@ You provide pages, data, and providers.
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, use [Webpack SSR](./webpack-ssr.md).
 
 ## Scaffold a new app
 
-```bash
+```sh
 $ pnpm dlx @sku-lib/create my-app --template=ssr
 $ cd my-app
 $ pnpm start
@@ -30,7 +32,7 @@ $ pnpm start
 
 Create the app in the current directory:
 
-```bash
+```sh
 $ pnpm dlx @sku-lib/create . --template=ssr
 $ pnpm start
 ```

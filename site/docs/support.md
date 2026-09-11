@@ -1,12 +1,15 @@
 # Support
 
-sku is open source. Its primary purpose is to improve consistency, cross-team collaboration, and code quality at SEEK.
+sku is open source.
+Its primary purpose is to improve consistency, cross-team collaboration, and code quality at SEEK.
 
 If you are not building a SEEK UI, consider alternatives such as [Vite] or [Remix].
 
 ## Getting help
 
-sku is actively supported. Contact us early. Do not wait until an issue becomes a blocker.
+sku is actively supported.
+Contact us early.
+Do not wait until an issue becomes a blocker.
 
 That includes:
 

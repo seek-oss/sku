@@ -2,13 +2,18 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
-SSR has three places to run middleware. Pick the one that matches the job:
+SSR has three places to run middleware.
+Pick the one that matches the job:
 
-1. **[Server `middleware`](#server-entry-middleware)** — production and start. Request context before HTML render
-2. **[Config `devServerMiddleware`](#dev-only-mocks-devservermiddleware)** — `sku start` only. Local mocks and proxies
+1. **[Server `middleware`](#server-entry-middleware)** — production and start.
+   Request context before HTML render
+2. **[Config `devServerMiddleware`](#dev-only-mocks-devservermiddleware)** — `sku start` only.
+   Local mocks and proxies
 3. **[React Router middleware](#react-router-route-middleware)** — isomorphic behaviour on matched routes
 
 ## Server-entry middleware
@@ -36,9 +41,11 @@ const server = defineServerEntry({
 export default server;
 ```
 
-Use this for production request handlers. Also use it to attach values on `req` that [entry getters](./entries.md) (or server `getRouterContext`) will read.
+Use this for production request handlers.
+Also use it to attach values on `req` that [entry getters](./entries.md) (or server `getRouterContext`) will read.
 
-Do not put raw Express `req` into React Router context. Project values via dual-entry [`getRouterContext`](./data-loading.md#router-context).
+Do not put raw Express `req` into React Router context.
+Project values via dual-entry [`getRouterContext`](./data-loading.md#router-context).
 
 ## Typing middleware-attached fields on `req`
 

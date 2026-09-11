@@ -31,13 +31,12 @@ import type { SkuConfig } from 'sku';
 
 export default {
   testRunner: 'vitest', // [!code ++]
-  ...
 } satisfies SkuConfig;
 ```
 
 `sku` then invokes [the `vitest` CLI][Vitest CLI] instead of the `jest` CLI when you run `sku test`.
 
-#### Key differences between Vitest and Jest
+### Key differences between Vitest and Jest
 
 Vitest has strong compatibility with the Jest API.
 It still has differences that may affect your tests.

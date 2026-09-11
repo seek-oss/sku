@@ -56,8 +56,10 @@ export default (): Server => ({
 
 These differ from Managed Data Mode SSR and Static apps:
 
-- `sku start-ssr` — development. Uses both `port` and `serverPort`
-- `sku build-ssr` — production assets. Run with `node ./dist/server.js` (listens on `serverPort`)
+- `sku start-ssr` — development.
+  Uses both `port` and `serverPort`
+- `sku build-ssr` — production assets.
+  Run with `node ./dist/server.js` (listens on `serverPort`)
 - `sku test` — tests
 
 ## Multi-part response
@@ -107,7 +109,8 @@ export default (): Server => ({
 
 ## Multi-language support
 
-When you use multiple languages, the browser downloads the language as needed. That download can delay first paint.
+When you use multiple languages, the browser downloads the language as needed.
+That download can delay first paint.
 To ensure translations are available immediately, call `addLanguageChunk` from your render params:
 
 ```jsx
@@ -127,7 +130,8 @@ export async function serverRender({ SkuProvider, addLanguageChunk, appPath }) {
 ```
 
 Static rendering registers language chunks automatically.
-Managed Data Mode SSR uses server-entry `getLanguage` instead. See [Multi-language](./multi-language.md).
+Managed Data Mode SSR uses server-entry `getLanguage` instead.
+See [Multi-language](./multi-language.md).
 
 ## Development server entrypoint
 
@@ -136,7 +140,10 @@ On the Webpack SSR path, `sku start-ssr` starts two services:
 - A dev server for static assets
 - An SSR service running your app’s server code
 
-The dev server is the single entrypoint. It proxies non-asset requests to the SSR service. That pattern is similar to a production reverse proxy. It also avoids CORS for client requests.
+The dev server is the single entrypoint.
+It proxies non-asset requests to the SSR service.
+That pattern is similar to a production reverse proxy.
+It also avoids CORS for client requests.
 Managed Data Mode SSR uses a single port instead.
 
 To proxy other traffic (for example APIs), use [Dev Server Middleware](../extra-features.md#devserver-middleware).

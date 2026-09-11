@@ -2,7 +2,9 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, use [Webpack SSR](./webpack-ssr.md).
 
 sku supports two data-loading paths for Managed Data Mode SSR:
@@ -51,8 +53,10 @@ Use **render-time** data loading in React for page content.
 Shared UI stays portable.
 You do not configure loaders in each app for that UI.
 
-1. Pass environment-specific clients via dual-entry [`getReactContext`](./providers.md#pass-values-into-react). Pass serialisable seeds via [`getClientContext`](./entries.md#getclientcontext).
-2. Mount isomorphic providers (same on server and client) in your [root layout](./providers.md#root-layout-for-providers). Read values with [`useReactContext()`](./providers.md#typed-hooks) or [`useClientContext()`](./providers.md#typed-hooks).
+1. Pass environment-specific clients via dual-entry [`getReactContext`](./providers.md#pass-values-into-react).
+   Pass serialisable seeds via [`getClientContext`](./entries.md#getclientcontext).
+2. Mount isomorphic providers (same on server and client) in your [root layout](./providers.md#root-layout-for-providers).
+   Read values with [`useReactContext()`](./providers.md#typed-hooks) or [`useClientContext()`](./providers.md#typed-hooks).
 3. Fetch in the React tree with Suspense (for example `useQuery`) so the same components work on SSR and client navigations.
 
 sku does not support React Server Components.

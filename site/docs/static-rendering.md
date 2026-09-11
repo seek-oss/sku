@@ -2,7 +2,8 @@
 
 ## Scaffold a new app
 
-Create a new Static app. Then start a local development environment:
+Create a new Static app.
+Then start a local development environment:
 
 ::: code-group
 
@@ -21,7 +22,12 @@ $ pnpm start
 
 ## What is a sku static app?
 
-A client-side app cannot show content until the browser downloads, parses, and runs the JavaScript. The user sees a blank white screen until that work finishes. A loading indicator often follows while the app fetches data from the network. To improve perceived performance, sku renders all static content of your app at build time. Static content is everything that does not need an API call. We call this static rendering.
+A client-side app cannot show content until the browser downloads, parses, and runs the JavaScript.
+The user sees a blank white screen until that work finishes.
+A loading indicator often follows while the app fetches data from the network.
+To improve perceived performance, sku renders all static content of your app at build time.
+Static content is everything that does not need an API call.
+We call this static rendering.
 
 ## Configuration
 
@@ -37,11 +43,12 @@ export default {
 ```
 
 > [!NOTE]
-> `sku start` opens the first listed route by default. To change this, set the `initialPath` option.
+> `sku start` opens the first listed route by default.
+> To change this, set the `initialPath` option.
 
 `sku build` with the above config creates the following output in your target directory.
 
-```
+```text
 ├── development
 │   ├── australia
 │   │   ├── index.html
@@ -63,14 +70,19 @@ export default {
 ├── [static-asset].{css,js,jpg,etc}
 ```
 
-`environments`, `sites`, and `routes` are all optional. They do not appear in the build output if you omit them.
+`environments`, `sites`, and `routes` are all optional.
+They do not appear in the build output if you omit them.
 
 > [!NOTE]
-> `sku start` defaults to the first `environment` and `site` in your config if you provide them. You can select any environment with the `--environment` argument. Example: `sku start --environment production`
+> `sku start` defaults to the first `environment` and `site` in your config if you provide them.
+> You can select any environment with the `--environment` argument.
+> Example: `sku start --environment production`
 
 ## Rendering
 
-After you configure sku, the render entry must return the HTML that creates all the files above. Set the render entry with `renderEntry`. The default is `src/render.js`.
+After you configure sku, the render entry must return the HTML that creates all the files above.
+Set the render entry with `renderEntry`.
+The default is `src/render.js`.
 
 **Example render entry**
 
@@ -109,25 +121,38 @@ export default {
 
 ### renderApp
 
-The `renderApp` function should return your application as an HTML string. Apps usually call `React.renderToString` for this. It can also return other values. Examples include extracted meta information and CSS styles.
+The `renderApp` function should return your application as an HTML string.
+Apps usually call `React.renderToString` for this.
+It can also return other values.
+Examples include extracted meta information and CSS styles.
 
-`renderDocument` receives anything `renderApp` returns. Do not render the whole HTML document in `renderApp`. Return only the HTML that React generates.
+`renderDocument` receives anything `renderApp` returns.
+Do not render the whole HTML document in `renderApp`.
+Return only the HTML that React generates.
 
 > [!IMPORTANT]
-> Wrap your app with the `SkuProvider`. This is **required** for the app to work.
+> Wrap your app with the `SkuProvider`.
+> This is **required** for the app to work.
 
-Sku calls `renderApp` once for each combination of settings in sku config. The settings are `environment`, `site`, and `route`.
+Sku calls `renderApp` once for each combination of settings in sku config.
+The settings are `environment`, `site`, and `route`.
 
 > [!NOTE]
-> The `SkuProvider` watches your render for dynamic imports. Sku can then provide all the script tags this page needs on the client.
+> The `SkuProvider` watches your render for dynamic imports.
+> Sku can then provide all the script tags this page needs on the client.
 
 > [!NOTE]
-> **Experimental:** `renderApp` provides a `renderToStringAsync` function parameter. You can use it instead of calling `React.renderToString`.
+> **Experimental:** `renderApp` provides a `renderToStringAsync` function parameter.
+> You can use it instead of calling `React.renderToString`.
 > See [Supporting React Suspense].
 
 ### provideClientContext
 
-`provideClientContext` is an optional function that runs after `renderApp`. It passes context from the static render to the client code. Use it for config values such as API endpoints and feature switches. Use it for state such as redux state. Sku passes the object this function returns to the client entry.
+`provideClientContext` is an optional function that runs after `renderApp`.
+It passes context from the static render to the client code.
+Use it for config values such as API endpoints and feature switches.
+Use it for state such as redux state.
+Sku passes the object this function returns to the client entry.
 
 The function receives `environment`, `site`, and the result of `renderApp`.
 
@@ -205,7 +230,9 @@ export default ({ site, analyticsEnabled, appLength }: ClientContext) => {
 
 ### renderDocument
 
-Sku calls `renderDocument` after `renderApp`. It receives all the same values as `renderApp`, plus the following. It must return a full HTML document.
+Sku calls `renderDocument` after `renderApp`.
+It receives all the same values as `renderApp`, plus the following.
+It must return a full HTML document.
 
 - `app` - the value returned from the `renderApp` function
 - `headTags` - html tags to be placed in the head of the html
@@ -213,16 +240,24 @@ Sku calls `renderDocument` after `renderApp`. It receives all the same values as
 
 ## Supporting React Suspense
 
-[React Suspense][react suspense documentation] lets renders finish asynchronously. The render waits for modules or data to become available.
+[React Suspense][react suspense documentation] lets renders finish asynchronously.
+The render waits for modules or data to become available.
 If this happens during static rendering, [renderToString] throws an error. [renderToString] expects the render to finish immediately.
 To avoid this error you have a few options:
 
-1. Never suspend a component during an initial render. One option is to skip React Suspense. The other option is to wait until after hydration before you use suspended components.
-2. Use [renderToPipeableStream] in your `renderApp` function. Wait for the stream to end. Then return all the HTML at once.
-3. **Experimental:** sku provides a `renderToStringAsync` function to your `renderApp` function. It performs option 2 for you.
+1. Never suspend a component during an initial render.
+   One option is to skip React Suspense.
+   The other option is to wait until after hydration before you use suspended components.
+2. Use [renderToPipeableStream] in your `renderApp` function.
+   Wait for the stream to end.
+   Then return all the HTML at once.
+3. **Experimental:** sku provides a `renderToStringAsync` function to your `renderApp` function.
+   It performs option 2 for you.
 
 Regardless of how you support it, consider that [Suspense][react suspense documentation] is a new feature for React.
-Its APIs and use are changing quickly. It is partially undocumented. See [Note on Suspense-enabled data sources].
+Its APIs and use are changing quickly.
+It is partially undocumented.
+See [Note on Suspense-enabled data sources].
 
 ::: details Quote from the React Suspense documentation
 "Suspense-enabled data fetching without the use of an opinionated framework is not yet supported.
@@ -310,7 +345,10 @@ export default {
 
 ### React Helmet
 
-[React Helmet](https://github.com/nfl/react-helmet) needs extra work after React finishes rendering. That work extracts static meta information. Some other libraries use the same pattern. Examples include [react-loadable](https://github.com/jamiebuilds/react-loadable) and [emotion](https://emotion.sh/docs/ssr).
+[React Helmet](https://github.com/nfl/react-helmet) needs extra work after React finishes rendering.
+That work extracts static meta information.
+Some other libraries use the same pattern.
+Examples include [react-loadable](https://github.com/jamiebuilds/react-loadable) and [emotion](https://emotion.sh/docs/ssr).
 
 ```tsx
 import React from 'react';
@@ -361,7 +399,9 @@ export default {
 
 ### Dynamic routes
 
-Apps can also use params in their path. `/job/[12345]` is one example. In sku, write these params as `/job/$id`. The `$` marks that part of the path as dynamic.
+Apps can also use params in their path. `/job/[12345]` is one example.
+In sku, write these params as `/job/$id`.
+The `$` marks that part of the path as dynamic.
 
 ```ts
 export default {
@@ -371,7 +411,7 @@ export default {
 
 When you run `sku start`, a request to `/job/123` returns the rendered HTML for `/job/$id`. `sku build` writes the following folder structure.
 
-```
+```text
 ├── index.html
 ├── job
 │   ├── $id
@@ -380,4 +420,6 @@ When you run `sku start`, a request to `/job/123` returns the rendered HTML for 
 ```
 
 > [!WARNING]
-> Sku supports this behaviour. Your web server must also route dynamic paths to the correct static file for that route. Because of this, some teams skip static rendering for these routes to reduce complexity.
+> Sku supports this behaviour.
+> Your web server must also route dynamic paths to the correct static file for that route.
+> Because of this, some teams skip static rendering for these routes to reduce complexity.

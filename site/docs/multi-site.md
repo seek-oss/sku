@@ -54,7 +54,8 @@ The following example uses this feature with [Braid](https://github.com/seek-oss
 You can use this approach to vary your sites in any way.
 
 > [!NOTE]
-> Currently this example is for static rendering projects only. SSR projects can follow the same pattern.
+> Currently this example is for static rendering projects only.
+> SSR projects can follow the same pattern.
 
 ### Config
 
@@ -62,7 +63,8 @@ First, add a [`sites`](./configuration#sites) option to your `sku.config.js`.
 This tells sku to render a version of your app for each site you specify.
 
 > [!NOTE]
-> For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes). You could also map the theme name from your site.
+> For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes).
+> You could also map the theme name from your site.
 
 ```ts
 export default {

@@ -2,7 +2,9 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, use [Webpack SSR](./webpack-ssr.md).
 
 Pass request-scoped values into React with typed hooks.
@@ -11,7 +13,7 @@ Mount shared UI in your **root layout** route.
 
 sku mounts a `SkuProvider` outside the router:
 
-```
+```text
 SkuProvider   ← site, clientContext, reactContext
  └── Router
       └── root layout route   ← <html>, <head>, <body>, providers, shared UI
@@ -96,7 +98,8 @@ export default client;
 
 :::
 
-sku sets `clientContext` and `reactContext` for the page load. They do not change across client navigations.
+sku sets `clientContext` and `reactContext` for the page load.
+They do not change across client navigations.
 Anything that must track navigation (for example locale from the URL) belongs in the route tree.
 
 For loader/action/route-middleware dependency injection, see [Data loading → Router context](./data-loading.md#router-context).

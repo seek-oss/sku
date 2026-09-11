@@ -1,6 +1,7 @@
 # Getting Started
 
-sku is a front-end toolkit for SEEK apps. It provides builds, local development, testing, and linting that follow SEEK practice.
+sku is a front-end toolkit for SEEK apps.
+It provides builds, local development, testing, and linting that follow SEEK practice.
 
 To start, choose a project type:
 
@@ -29,30 +30,37 @@ We will **stop supporting Webpack**. sku will **remove** Webpack and Webpack SSR
 
 ## What sku does
 
-sku configures a local development environment. It includes a fast development server, [linting](./linting) and [testing](./testing.md) frameworks, and a production build.
+sku configures a local development environment.
+It includes a fast development server, [linting](./linting) and [testing](./testing.md) frameworks, and a production build.
 
 It also integrates [styling](./styling.md) with [Vanilla Extract CSS](https://vanilla-extract.style/) and [localisation](./multi-language.md) with [Vocab](https://github.com/seek-oss/vocab).
 
 ## What sku doesn't do
 
-sku builds a production bundle. After that, you host static assets or you serve Node.js code with common practices.
+sku builds a production bundle.
+After that, you host static assets or you serve Node.js code with common practices.
 
 See the instructions for your project type to deploy the app.
 
 ## Static vs Server-Side Rendering (SSR)
 
-When you start a new sku project, you choose how the site is rendered and served: **Static Rendering** or **Server-Side Rendering (SSR)**. Each method fits different app needs.
+When you start a new sku project, you choose how the site is rendered and served: **Static Rendering** or **Server-Side Rendering (SSR)**.
+Each method fits different app needs.
 
 ### Static Rendering
 
-- **Fast and Simple**: sku generates HTML, CSS, and JS at build time. A CDN or server then serves those files.
-- **Low Maintenance**: You do not need a custom server. You can deploy anywhere that supports static files.
+- **Fast and Simple**: sku generates HTML, CSS, and JS at build time.
+  A CDN or server then serves those files.
+- **Low Maintenance**: You do not need a custom server.
+  You can deploy anywhere that supports static files.
 - **Modern Features**: The app can use client-side routing, code splitting, and dynamic imports.
 
 ### Server-Side Rendering (SSR)
 
-- **Personalized Initial Loads**: The server can generate each page request per user. This fits personalisation, authenticated content, or A/B testing.
-- **SEO and Performance**: The server renders content for each request. This can improve SEO and first-contentful paint, especially for dynamic pages.
+- **Personalized Initial Loads**: The server can generate each page request per user.
+  This fits personalisation, authenticated content, or A/B testing.
+- **SEO and Performance**: The server renders content for each request.
+  This can improve SEO and first-contentful paint, especially for dynamic pages.
 - **Advanced Use Cases**: The server can run computation, API calls, or user-specific data at page load.
 
 Choose the rendering method that fits the app. sku applies its standard configuration for either method.

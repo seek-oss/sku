@@ -63,4 +63,5 @@ export const MyComponent = () => {
 ```
 
 > [!NOTE]
-> Use this only when you import CSS from a third-party package in `node_modules`. If you write custom CSS, see the [Vanilla Extract](#vanilla-extract) section.
+> Use this only when you import CSS from a third-party package in `node_modules`.
+> If you write custom CSS, see the [Vanilla Extract](#vanilla-extract) section.

@@ -2,7 +2,9 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
 Your app controls logging.
@@ -19,18 +21,23 @@ For whole-request access logs, use Express [middleware](./middleware.md#server-e
 
 ## React Router instrumentations
 
-Optional React Router [instrumentations](https://reactrouter.com/how-to/instrumentation) are callbacks that wrap route work such as loaders. They attach to each request entry.
+Optional React Router [instrumentations](https://reactrouter.com/how-to/instrumentation) are callbacks that wrap route work such as loaders.
+They attach to each request entry.
 
 Static handlers accept **route-level** instrumentations only:
 
 ```ts
-instrumentations?: Pick<ServerInstrumentation, 'route'>[];
+type ServerEntry = {
+  instrumentations?: Array<Pick<ServerInstrumentation, 'route'>>;
+};
 ```
 
 Client instrumentations forward into `createBrowserRouter`:
 
 ```ts
-instrumentations?: ClientInstrumentation[];
+type ClientEntry = {
+  instrumentations?: ClientInstrumentation[];
+};
 ```
 
 Minimal server example that logs loader failures:

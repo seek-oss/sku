@@ -80,7 +80,8 @@ sku includes it in the CSP header **only if requested**.
 The following request a nonce:
 
 - sku itself, when attaching a `nonce` to React stream scripts (post-shell inline scripts that cannot be pre-hashed)
-- Express middleware: `req.getCspNonce()` (mint-on-read. Later calls return the same value)
+- Express middleware: `req.getCspNonce()` (mint-on-read.
+  Later calls return the same value)
 - React Router loaders/actions: `getCspNonce()` from `sku/runtime` (same store while sku is rendering)
 
 All of those share one value for the response.

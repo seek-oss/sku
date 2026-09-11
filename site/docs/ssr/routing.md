@@ -2,7 +2,9 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, use [Webpack SSR](./webpack-ssr.md).
 
 This page covers the route tree, page modules, multi-site membership, and intent preloading.
@@ -118,7 +120,8 @@ sku only includes that route when the active site is in the list.
 If you omit `sites`, the route is available on every configured site.
 
 Resolve the active site in the server entry with [`getSite`](./entries.md#getsite).
-Provide `getSite` when config has more than one site. Omit it on single-site apps:
+Provide `getSite` when config has more than one site.
+Omit it on single-site apps:
 
 ::: code-group
 
@@ -251,7 +254,11 @@ So `/about` matches a route with `path: 'about'`, and `/About` does not.
 Set `caseSensitive: false` on a specific route when you need case-insensitive matching:
 
 ```tsx
-{ path: 'about', caseSensitive: false, lazy: () => import('./pages/about/about') },
+const route = {
+  path: 'about',
+  caseSensitive: false,
+  lazy: () => import('./pages/about/about'),
+};
 ```
 
 ## Intent preloading with `usePreloadRoute`

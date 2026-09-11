@@ -2,7 +2,9 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
 High-level guide for moving a **static** sku app (webpack or Vite static site generation) to Managed Data Mode SSR.
@@ -11,9 +13,13 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 ## Requirements
 
 - SSR is Vite-only: `bundler: 'vite'` and `buildType: 'ssr'`
-- Relative `publicPath` (for example `/`). Absolute and CDN URLs are not supported
-- Stop using the config [`public`](../configuration.md#public) assets folder. Import assets from modules instead
-- Remove [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins). SSR does not support them. Report use-cases via [support](../support.md)
+- Relative `publicPath` (for example `/`).
+  Absolute and CDN URLs are not supported
+- Stop using the config [`public`](../configuration.md#public) assets folder.
+  Import assets from modules instead
+- Remove [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins).
+  SSR does not support them.
+  Report use-cases via [support](../support.md)
 
 ## Config and commands
 
@@ -34,25 +40,32 @@ export default {
 ## Routes and request entries
 
 Compose routes with `path` (or `index`) and `lazy` in [`routesEntry`](../configuration.md#routesentry).
-Put `loader`, `action`, and `Component` on page modules. See [Routing](./routing.md).
-Optional `mapRoutePath` maps one logical path to per-site concrete paths. See [Multi-language](./multi-language.md#maproutepath).
+Put `loader`, `action`, and `Component` on page modules.
+See [Routing](./routing.md).
+Optional `mapRoutePath` maps one logical path to per-site concrete paths.
+See [Multi-language](./multi-language.md#maproutepath).
 
-Default-export request entries from `defineServerEntry` and `defineClientEntry`. See [Request entries](./entries.md).
+Default-export request entries from `defineServerEntry` and `defineClientEntry`.
+See [Request entries](./entries.md).
 
-Export `getSite` when config has more than one site. Omit `getSite` on single-site apps.
+Export `getSite` when config has more than one site.
+Omit `getSite` on single-site apps.
 Lazy page modules must export a named `Component` (not `export default`).
 
 ## Providers and data
 
-Wire [`createSkuContexts`](./providers.md#typed-hooks). Mount isomorphic providers in your root layout.
+Wire [`createSkuContexts`](./providers.md#typed-hooks).
+Mount isomorphic providers in your root layout.
 Prefer [render-time data loading](./data-loading.md) for page content.
 
 Production Express handlers go on server-entry `middleware`.
-Local mocks stay in [`devServerMiddleware`](../configuration.md#devservermiddleware). See [Middleware](./middleware.md).
+Local mocks stay in [`devServerMiddleware`](../configuration.md#devservermiddleware).
+See [Middleware](./middleware.md).
 
 ## CSP and hydration
 
-SSR emits **HTTP header** CSP, not meta `http-equiv`. See [CSP](./csp.md).
+SSR emits **HTTP header** CSP, not meta `http-equiv`.
+See [CSP](./csp.md).
 
 Replace `#app` `hydrateRoot` and `renderDocument` with sku’s full-document stream and `hydrateRoot(document)`.
 Render `<html>`, `<head>`, and `<body>` in your root layout.

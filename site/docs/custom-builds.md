@@ -18,7 +18,8 @@ export default {
 };
 ```
 
-If you want to consume sku packages, pass an array of [`compilePackages`](./configuration#compilepackages). For example, to import a sku package called `my-sku-package`:
+If you want to consume sku packages, pass an array of [`compilePackages`](./configuration#compilepackages).
+For example, to import a sku package called `my-sku-package`:
 
 ```js
 export default {

@@ -16,7 +16,8 @@ yarn sku start --debug
 
 ## Webpack Stats
 
-Use the `--stats` CLI argument for more detail about webpack warnings and errors. This overrides the default [webpack stats preset]:
+Use the `--stats` CLI argument for more detail about webpack warnings and errors.
+This overrides the default [webpack stats preset]:
 
 ```sh
 yarn sku start --stats=detailed

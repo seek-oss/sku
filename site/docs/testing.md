@@ -2,9 +2,11 @@
 
 via [Jest](https://facebook.github.io/jest/)
 
-The `sku test` command invokes Jest. Jest runs tests in files named `*.test.js`, `*.spec.js`, or in a `__tests__` folder.
+The `sku test` command invokes Jest.
+Jest runs tests in files named `*.test.js`, `*.spec.js`, or in a `__tests__` folder.
 
-sku uses Jest as a testing framework. Read the [Jest documentation](https://facebook.github.io/jest/) for more information on writing compatible tests.
+sku uses Jest as a testing framework.
+Read the [Jest documentation](https://facebook.github.io/jest/) for more information on writing compatible tests.
 
 > [!NOTE]
 > `sku` forwards all command line args to `jest`.
@@ -38,4 +40,5 @@ module.exports = {
 };
 ```
 
-This lets you debug tests in VS Code with the [Jest extension](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest). Follow the instructions in the [Jest documentation](https://jestjs.io/docs/en/troubleshooting#debugging-in-vs-code).
+This lets you debug tests in VS Code with the [Jest extension](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest).
+Follow the instructions in the [Jest documentation](https://jestjs.io/docs/en/troubleshooting#debugging-in-vs-code).

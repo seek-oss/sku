@@ -25,7 +25,8 @@ export default {
 } satisfies SkuConfig;
 ```
 
-3. Create your first .vocab folder. See [Usage](#usage).
+3. Create your first .vocab folder.
+   See [Usage](#usage).
 
 ## Usage
 
@@ -38,14 +39,17 @@ This folder can be anywhere in your source code.
 In the file, add translations in the form of `translationKey: { message: "The english translation" }`.
 
 > [!TIP]
-> You can use any key that you like. We recommend a copy, or a simplified version, of the English translation.
+> You can use any key that you like.
+> We recommend a copy, or a simplified version, of the English translation.
 
 Once created, when you run `yarn start` or `yarn build`, sku creates the files that let you import the translations into your code.
 
 **E.g.** `./App.vocab/index.ts`
 
 > [!TIP]
-> You can add translations files anywhere in your source code. We recommend co-locating components with their translations. When you want to re-use a translation in multiple places you can move the `translations.json` as needed.
+> You can add translations files anywhere in your source code.
+> We recommend co-locating components with their translations.
+> When you want to re-use a translation in multiple places you can move the `translations.json` as needed.
 
 Now with the appropriate files created you can start importing your translations.
 
@@ -190,7 +194,8 @@ $ sku translations push --auto-translate
 ### Delete Unused Keys
 
 When uploading translations, Phrase identifies keys that exist in the Phrase project, but were not referenced in the upload.
-These keys can be deleted from Phrase by providing the `--delete-unused-keys` flag to `sku translations push`. E.g.
+These keys can be deleted from Phrase by providing the `--delete-unused-keys` flag to `sku translations push`.
+E.g.
 
 ```sh
 $ sku translations push --delete-unused-keys

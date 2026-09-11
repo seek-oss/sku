@@ -2,7 +2,9 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
 > Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
 `sku build` emits sibling directories under the build target (for example `dist/`):
@@ -16,12 +18,14 @@ node dist/server/server.js
 # optional: PORT=8080 node dist/server/server.js
 ```
 
-Production listens on `process.env.PORT` when you set that variable. Otherwise it uses the config [`port`](../configuration.md#port) (default `8080`).
+Production listens on `process.env.PORT` when you set that variable.
+Otherwise it uses the config [`port`](../configuration.md#port) (default `8080`).
 
 ## Stand-alone server
 
 When a sibling `client/` directory exists next to `server/`, sku mounts `express.static` for `publicPath` **before** server-entry middleware so Node can serve hashed assets itself.
-That lets you run `dist/server/` + `dist/client/` as a stand-alone server. This is useful for local production smoke tests and simple demos.
+That lets you run `dist/server/` + `dist/client/` as a stand-alone server.
+This is useful for local production smoke tests and simple demos.
 
 This is **not** recommended for production deployments.
 
@@ -29,7 +33,8 @@ See [Middleware → Mount order in production](./middleware.md#mount-order-in-pr
 
 ## Behind reverse proxy
 
-sku builds hashed client assets under `dist/client/` for persistent object storage (for example AWS S3, GCS, or Azure Blob). A reverse proxy or CDN in front of Node then serves those assets.
+sku builds hashed client assets under `dist/client/` for persistent object storage (for example AWS S3, GCS, or Azure Blob).
+A reverse proxy or CDN in front of Node then serves those assets.
 
 Typical layout:
 
@@ -38,7 +43,8 @@ Typical layout:
 3. Deploy `dist/server/` **plus production `node_modules`**.
 4. Put a reverse proxy or CDN in front that serves `publicPath` from that storage and forwards everything else to the Node server.
 
-You are ready when storage or a CDN serves the hashed assets. In that layout, only document requests reach Node.
+You are ready when storage or a CDN serves the hashed assets.
+In that layout, only document requests reach Node.
 
 ## See also
 

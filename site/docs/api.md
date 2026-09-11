@@ -1,6 +1,7 @@
 # API
 
-`sku` exports configuration, utilities, and types from several entrypoints. Use them alongside your application.
+`sku` exports configuration, utilities, and types from several entrypoints.
+Use them alongside your application.
 
 ## `sku`
 
@@ -48,7 +49,8 @@ module.exports = {
 Exports `sku`'s custom eslint config based on [`eslint-config-seek`].
 
 > [!NOTE]
-> Sku configures eslint for you. You should not need to use this export directly.
+> Sku configures eslint for you.
+> You should not need to use this export directly.
 
 Example:
 

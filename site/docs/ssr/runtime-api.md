@@ -2,11 +2,11 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
 Import browser-safe Managed Data Mode helpers from `sku/runtime`.
-Most helpers are documented on the topic pages that use them.
+Topic pages that use these helpers document most of them.
 
 | Export                                                                            | Use for                                                  |
 | --------------------------------------------------------------------------------- | -------------------------------------------------------- |
@@ -24,7 +24,9 @@ Returns `(callback: () => ReactNode) => void`.
 During document SSR, sku writes queued nodes into the response stream (first batch before `</head>`, then before later React chunks).
 In the browser it is a silent no-op.
 
-Use it for streaming data transports such as Apollo’s `buildManualDataTransport`, not for Document head tags — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
+Use it for streaming data transports such as Apollo’s `buildManualDataTransport`.
+Do not use it for Document head tags.
+See [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
 
 Injected script bodies carry the [CSP nonce](./csp.md#nonces) if enabled.
 
@@ -32,9 +34,9 @@ Injected script bodies carry the [CSP nonce](./csp.md#nonces) if enabled.
 
 Returns the request-scoped CSP nonce, minting one on first read.
 Call it only when you need a nonce for inline or injected scripts (for example Apollo `extraScriptProps`).
-In the browser it returns an empty string so isomorphic code can call it safely.
+In the browser it returns `undefined` so isomorphic code can call it safely.
 
-Express middleware can use `req.getCspNonce()` instead — same store for the response.
+Express middleware can use `req.getCspNonce()` instead. That method uses the same store for the response.
 See [CSP](./csp.md#nonces).
 
 ## See also

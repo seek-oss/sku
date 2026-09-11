@@ -1,6 +1,6 @@
 # API
 
-`sku` provides a number of entrypoints that export configuration, utilities and types for use alongside your application.
+`sku` exports configuration, utilities, and types from several entrypoints. Use them alongside your application.
 
 ## `sku`
 
@@ -27,7 +27,7 @@ import { loadableReady } from 'sku/@loadable/component';
 
 ## `sku/jest-preset`
 
-A [jest preset] for consuming `sku`'s Jest configuration.
+A [jest preset] that uses `sku`'s Jest configuration.
 See the [testing documentation] for more information.
 
 Example:
@@ -48,7 +48,7 @@ module.exports = {
 Exports `sku`'s custom eslint config based on [`eslint-config-seek`].
 
 > [!NOTE]
-> Sku configures eslint for you, so you shouldn't need to use this directly
+> Sku configures eslint for you. You should not need to use this export directly.
 
 Example:
 
@@ -62,7 +62,7 @@ export default eslintConfigSku;
 
 ## `sku/config/storybook`
 
-Exports `sku`-compatible Storybook configuration for use within your `.storybook/main.ts` file.
+Exports `sku`-compatible Storybook configuration for use in your `.storybook/main.ts` file.
 See the [Storybook documentation] for more information.
 
 Example:
@@ -75,7 +75,7 @@ import { babel, webpackFinal } from 'sku/config/storybook';
 
 ## `sku/webpack-plugin`
 
-A plugin that provides `sku` functionality to custom webpack builds.
+A plugin that adds `sku` behaviour to custom webpack builds.
 See the [custom builds documentation] for more information.
 
 Example:

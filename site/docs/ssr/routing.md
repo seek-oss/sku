@@ -2,14 +2,14 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Until then, use [Webpack SSR](./webpack-ssr.md).
 
 This page covers the route tree, page modules, multi-site membership, and intent preloading.
 
 SSR uses [React Router Data Mode](https://reactrouter.com/start/modes#data) for routing.
 Export a `routes` array from [`routesEntry`](../configuration.md#routesentry) (default `src/routes.tsx`).
-sku wires that tree into React Router on the server and in the browser.
+sku connects that tree to React Router on the server and in the browser.
 
 :::tip Prerequisite
 Install **React Router** in your app (`react-router@^8`).
@@ -21,7 +21,8 @@ For route API details (layouts, loaders, error boundaries), see [React Router Da
 ### Compose the route tree
 
 Each route can set a path (or `index`), optional site membership, and a lazy page import.
-Put `loader`, `action`, `Component`, and `ErrorBoundary` on the lazily imported page module — not on the route object in `routes.tsx`.
+Put `loader`, `action`, `Component`, and `ErrorBoundary` on the lazily imported page module.
+Do not put them on the route object in `routes.tsx`.
 Use React Router’s [lazy factory](https://reactrouter.com/start/data/route-object#lazy) so each page is a separate chunk:
 
 ::: code-group
@@ -74,9 +75,10 @@ export function Component() {
 
 Lazy page modules must export a named `Component` (not `export default`).
 
-Use a **pathless** root layout to render `<html>`, `<head>`, and `<body>`, plus shared UI and providers (see [Providers](./providers.md)).
+Use a **pathless** root layout to render `<html>`, `<head>`, and `<body>`, plus shared UI and providers.
+See [Providers](./providers.md).
 
-You’re set up when:
+The route tree is complete when:
 
 - Pages load via `lazy: () => import(...)` (not static imports into `routes.tsx`)
 - Each page module exports a named `Component`
@@ -84,7 +86,8 @@ You’re set up when:
 
 ### Keep pages lazy
 
-Do not statically import page modules into `routes.tsx`, or you lose per-route chunking.
+Do not statically import page modules into `routes.tsx`.
+Static imports remove per-route chunking.
 Prefer the idiomatic form so sku can derive production [`modulepreload`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#modulepreload) links automatically:
 
 ```tsx
@@ -94,15 +97,18 @@ lazy: () => import('./pages/about/about');
 ### Automatic modulepreload
 
 Idiomatic `lazy: () => import(...)` lets sku set `handle.moduleId` to the Vite client manifest key (for example `src/pages/about/about.tsx`).
-That is how production document responses emit [`modulepreload`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#modulepreload) links for the matched route.
+The manifest key is the module path Vite records in the client manifest.
+Production document responses then emit [`modulepreload`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link#modulepreload) links for the matched route.
 
 If you use another `lazy` shape, set `handle.moduleId` yourself to that same manifest key.
-sku warns in development when a lazy route is missing `moduleId`, and skips that route’s production preloads.
+sku warns in development when a lazy route is missing `moduleId`.
+It skips that route’s production preloads.
 
 ### When to use loaders
 
 For page content, prefer [render-time data loading](./data-loading.md).
-Use loaders when you need document redirects, response headers, or to start work above a suspending tree.
+Use loaders when you need document redirects or response headers.
+Use loaders to start work above a suspending tree.
 Export those loaders from the same page module as `Component`.
 
 ## Multi-site routes
@@ -111,7 +117,8 @@ When different sites need different path sets, set optional `sites` on a route.
 sku only includes that route when the active site is in the list.
 If you omit `sites`, the route is available on every configured site.
 
-Resolve the active site in the server entry with [`getSite`](./entries.md#getsite) (required when config has more than one site; omit on single-site apps):
+Resolve the active site in the server entry with [`getSite`](./entries.md#getsite).
+Provide `getSite` when config has more than one site. Omit it on single-site apps:
 
 ::: code-group
 
@@ -156,11 +163,12 @@ export default server;
 
 ### Strictly typed sites in route objects
 
-When defining `sites` in a route, you can narrow down the type of sites by defining `SiteName` in `SkuRouteObject<SiteName>`.
+When you set `sites` on a route, you can narrow the site type with `SkuRouteObject<SiteName>`.
 
-You can get the site name directly from the return of your [`getSite`](./entries.md#getsite) method using `SkuRouteObject<SiteOf<typeof server>>`.
+You can take the site name from the return type of [`getSite`](./entries.md#getsite) with `SkuRouteObject<SiteOf<typeof server>>`.
 
-A good practice is to export route types from the same file as `createSkuContexts`, then import them wherever you define routes.
+Export route types from the same file as `createSkuContexts`.
+Import them wherever you define routes.
 Do not import the server entry into those files.
 
 ::: code-group
@@ -196,9 +204,14 @@ export const routes: AppRouteObject[] = [
 
 ## Multiple paths with `mapRoutePath`
 
-When the same page should match more than one concrete path (for example `/about` and `/fr/about`, or `/` and `/fr`), export optional `mapRoutePath` from `routesEntry`.
-sku calls it while pre-building each site tree and clones the route for each returned path.
-Index homes are called with `path: ''` — return `''` to keep `index: true`, or a non-empty string for a prefixed home without `index`.
+When the same page should match more than one concrete path, export optional `mapRoutePath` from `routesEntry`.
+Examples include `/about` and `/fr/about`, or `/` and `/fr`.
+sku calls it while it pre-builds each site tree.
+It clones the route for each returned path.
+
+sku calls index homes with `path: ''`.
+Return `''` to keep `index: true`.
+Return a non-empty string for a prefixed home without `index`.
 
 ```tsx
 import type { MapRoutePath, SkuRouteObject } from 'sku/runtime';
@@ -232,10 +245,10 @@ See [Multi-language → Languages in the path](./multi-language.md#languages-in-
 ## Case-sensitive paths
 
 By default, sku matches route paths case-sensitively.
-If a route omits React Router’s [`caseSensitive`](https://reactrouter.com/api/data-routers/RouteObject#casesensitive), sku sets `caseSensitive: true` while pre-building the site tree.
+If a route omits React Router’s [`caseSensitive`](https://reactrouter.com/api/data-routers/RouteObject#casesensitive), sku sets `caseSensitive: true` while it pre-builds the site tree.
 So `/about` matches a route with `path: 'about'`, and `/About` does not.
 
-Opt out on a specific route when you need case-insensitive matching:
+Set `caseSensitive: false` on a specific route when you need case-insensitive matching:
 
 ```tsx
 { path: 'about', caseSensitive: false, lazy: () => import('./pages/about/about') },
@@ -266,13 +279,19 @@ export function PreloadingLink({ to, ...rest }: LinkProps) {
 ```
 
 Calling the returned function loads matched lazy route modules for the current site.
-It is fire-and-forget — a failed warm-up never throws; navigation reports the real error.
-Loader data is not prefetched — only route modules.
+The call is fire-and-forget.
+A failed warm-up never throws.
+Navigation reports the real error.
+sku does not prefetch loader data.
+It loads route modules only.
 
 ## React Router route middleware
 
-React Router Data Mode supports a `middleware` array on routes for isomorphic behaviour on matched routes.
-That is separate from Express middleware on the server entry: use Express for HTTP-level work, and route `middleware` for behaviour tied to the matched route tree.
+React Router Data Mode supports a `middleware` array on routes.
+That behaviour is isomorphic (same on server and client) for matched routes.
+That is separate from Express middleware on the server entry.
+Use Express for HTTP-level work.
+Use route `middleware` for behaviour tied to the matched route tree.
 See [Middleware](./middleware.md#react-router-route-middleware) for when to use each.
 
 ## See also

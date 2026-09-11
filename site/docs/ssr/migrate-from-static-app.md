@@ -2,18 +2,18 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
-High-level guide for moving a **static** sku app (webpack or Vite SSG) to Managed Data Mode SSR.
+High-level guide for moving a **static** sku app (webpack or Vite static site generation) to Managed Data Mode SSR.
 For day-to-day API detail, prefer the [Getting started](./) topic pages.
 
 ## Requirements
 
 - SSR is Vite-only: `bundler: 'vite'` and `buildType: 'ssr'`
-- Relative `publicPath` (for example `/`) — absolute / CDN URLs are not supported
-- Move off the config [`public`](../configuration.md#public) assets folder — import assets from modules instead
-- Drop [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins) — unsupported for SSR; raise use-cases via [support](../support.md)
+- Relative `publicPath` (for example `/`). Absolute and CDN URLs are not supported
+- Stop using the config [`public`](../configuration.md#public) assets folder. Import assets from modules instead
+- Remove [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins). SSR does not support them. Report use-cases via [support](../support.md)
 
 ## Config and commands
 
@@ -28,37 +28,38 @@ export default {
 } satisfies SkuConfig;
 ```
 
-- Drop static-only config such as `renderEntry` / `src/render.tsx` and environments-driven static HTML generation
+- Remove static-only config such as `renderEntry` and `src/render.tsx`, and environments-driven static HTML generation
 - Remove or empty the [`public`](../configuration.md#public) assets folder
 
 ## Routes and request entries
 
 Compose routes with `path` (or `index`) and `lazy` in [`routesEntry`](../configuration.md#routesentry).
-Put `loader`, `action`, and `Component` on page modules — see [Routing](./routing.md).
-Optional `mapRoutePath` maps one logical path to per-site concrete paths — see [Multi-language](./multi-language.md#maproutepath).
+Put `loader`, `action`, and `Component` on page modules. See [Routing](./routing.md).
+Optional `mapRoutePath` maps one logical path to per-site concrete paths. See [Multi-language](./multi-language.md#maproutepath).
 
-Default-export request entries via `defineServerEntry` / `defineClientEntry` — see [Request entries](./entries.md).
+Default-export request entries from `defineServerEntry` and `defineClientEntry`. See [Request entries](./entries.md).
 
-Export `getSite` when config has more than one site; omit on single-site apps.
+Export `getSite` when config has more than one site. Omit `getSite` on single-site apps.
 Lazy page modules must export a named `Component` (not `export default`).
 
 ## Providers and data
 
-Wire [`createSkuContexts`](./providers.md#typed-hooks) and mount isomorphic providers in your root layout.
+Wire [`createSkuContexts`](./providers.md#typed-hooks). Mount isomorphic providers in your root layout.
 Prefer [render-time data loading](./data-loading.md) for page content.
 
 Production Express handlers go on server-entry `middleware`.
-Local mocks stay in [`devServerMiddleware`](../configuration.md#devservermiddleware) — see [Middleware](./middleware.md).
+Local mocks stay in [`devServerMiddleware`](../configuration.md#devservermiddleware). See [Middleware](./middleware.md).
 
 ## CSP and hydration
 
-SSR emits **HTTP header** CSP, not meta `http-equiv` — see [CSP](./csp.md).
+SSR emits **HTTP header** CSP, not meta `http-equiv`. See [CSP](./csp.md).
 
 Replace `#app` `hydrateRoot` and `renderDocument` with sku’s full-document stream and `hydrateRoot(document)`.
 Render `<html>`, `<head>`, and `<body>` in your root layout.
 Sku hoists stylesheet and `modulepreload` links into `<head>`.
 Nest `ErrorBoundary` on a child route under that layout so the HTML document stays mounted on failure.
-Move hoistable SEO tags (`<title>`, `<meta>`, `<link>`) into routes/layouts as React document metadata, and non-hoistable tags into the root layout `<head>`.
+Move hoistable SEO tags (`<title>`, `<meta>`, `<link>`) into routes and layouts as React document metadata.
+Put non-hoistable tags in the root layout `<head>`.
 
 ## See also
 

@@ -2,20 +2,20 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet. The API and behaviour may change.
+> Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
-sku turns route failures into document responses: the nearest React Router `ErrorBoundary` renders the UI, and the streamed response uses the matching HTTP status code.
+sku converts route failures to document responses. The nearest React Router `ErrorBoundary` renders the UI. The streamed response uses the matching HTTP status code.
 
 ## Add an ErrorBoundary
 
 When a loader fails, a route throws, or the URL does not match, readers should see your UI rather than a blank document.
-Attach an `ErrorBoundary` on a layout route so every child under it shares the same failure UI.
+Add an `ErrorBoundary` on a layout route so every child under it shares the same failure UI.
 
 Without a route `ErrorBoundary`, React Router hydrates its default error UI over the SSR error HTML.
 That can briefly flash a stack trace before the default “Hey developer” page.
-
-Because [`RootLayout`](./providers.md#root-layout-for-providers) renders `<html>`, attaching `ErrorBoundary` to the root route itself replaces that layout on failure and drops `<html>` from the response.
+[`RootLayout`](./providers.md#root-layout-for-providers) renders `<html>`.
+Attaching `ErrorBoundary` to the root route itself replaces that layout on failure and drops `<html>` from the response.
 Instead, attach `ErrorBoundary` to a child route under `RootLayout` so the document shell stays mounted.
 
 sku uses [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary):
@@ -86,7 +86,7 @@ You can also nest boundaries when a section needs its own failure UI.
 ### Suspense failures during document SSR
 
 Render-time data loading can reject a Suspense boundary while sku is still streaming the document.
-When that happens, sku aborts the first stream and re-renders with the error on the static handler context.
+When that happens, sku aborts the first stream. sku then re-renders with the error on the static handler context.
 The nearest `ErrorBoundary` then produces the HTML response (status `500` unless the error is a route error response).
 
 ## Errors above the router
@@ -94,8 +94,8 @@ The nearest `ErrorBoundary` then produces the HTML response (status `500` unless
 A root route `ErrorBoundary` only covers work inside the router.
 It does not catch errors thrown above the router, including inside sku’s always-on `SkuProvider` (see the tree on [Providers](./providers.md)).
 
-Failures at that level fall through to Express.
-They are hard to turn into a stylised error page for readers — your route `ErrorBoundary` never gets a chance to render.
+Failures at that level pass to Express.
+They are hard to convert to a stylised error page for readers. Your route `ErrorBoundary` never gets a chance to render.
 
 Mount isomorphic and fallible providers in your [root layout](./providers.md#root-layout-for-providers) so the route boundary can cover them.
 

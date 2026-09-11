@@ -1,7 +1,8 @@
 # Content Security Policy (CSP)
 
-[CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds an extra layer of security to your app.
-For statically rendered apps, a `script-src` policy can be automatically generated for you. SSR apps have an extra step.
+[CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) adds a security policy to your app.
+For statically rendered apps, sku can generate a `script-src` policy for you automatically.
+SSR apps have an extra step.
 
 > [!NOTE]
 > This feature is not available to libraries
@@ -12,31 +13,41 @@ Set `cspEnabled: true` in your `sku.config.js`.
 
 ### Delivery
 
-For **static apps**, the `cspDelivery` option controls how the enforcing CSP is delivered and can be set to one of two values:
+For **static apps**, the `cspDelivery` option controls how sku delivers the enforcing CSP.
+Set it to one of two values:
 
-- `tag`: The CSP will be embedded directly in the rendered HTML content via a `<meta http-equiv="Content-Security-Policy" …>` tag.
-  No further action will be required to enable the CSP.
-  This is the default behaviour if no `cspDelivery` option is specified.
-- `header`: The CSP will be written to a JSON file alongside the rendered HTML content (e.g. `index.html.json`) in the `metadata.csp` property, and no `<meta http-equiv="Content-Security-Policy" …>` tag will be generated.
-  Extra steps will be required at deployment and/or request time to ensure the value of this property is returned as a `Content-Security-Policy` header in the response for the rendered HTML content.
+- `tag`: sku embeds the CSP in the rendered HTML via a `<meta http-equiv="Content-Security-Policy" …>` tag.
+  You do not need further action to enable the CSP.
+  This is the default if you do not set `cspDelivery`.
+- `header`: sku writes the CSP to a JSON file next to the rendered HTML (e.g. `index.html.json`) in the `metadata.csp` property.
+  sku does not generate a `<meta http-equiv="Content-Security-Policy" …>` tag.
+  You must take extra steps at deployment and/or request time.
+  Those steps must return this property as a `Content-Security-Policy` header on the response for the rendered HTML.
 
-`cspDelivery` applies to **Static** only (`buildType` unset / `'static'`).
+`cspDelivery` applies to **Static** Vite apps only (`buildType` unset / `'static'`).
 SSR always emits real HTTP CSP headers and ignores `cspDelivery`.
 
 ### Extra Hosts
 
-If you need to allow scripts that are only known client side (e.g. scripts loaded by tag managers) you can add their URLs to the `cspExtraScriptSrcHosts` array in your `sku.config.js`.
+If you need to allow scripts that are only known on the client, add their URLs to the `cspExtraScriptSrcHosts` array in your `sku.config.js`.
+This includes scripts loaded by tag managers.
 
 ### Report To
 
-The `cspReportTo` option allows reports of CSP violations to be captured via the browser [Reporting API].
-This option can be configured either as an _endpoint name_, a _URL_, or as a tuple of both, with the following outcome:
+The `cspReportTo` option lets the browser capture CSP violation reports via the [Reporting API].
+You can set this option as an _endpoint name_, a _URL_, or a tuple of both.
+The outcome is:
 
-- If only an _endpoint name_ is specified, then this value will be included in the CSP as the value of the [`report-to`] directive, and no [`Reporting-Endpoints`] header will be emitted.
-- If only a _URL_ is specified, then an endpoint name will be generated automatically and included in the CSP as the value of the [`report-to`] directive, and a [`Reporting-Endpoints`] header will be emitted containing the generated endpoint name and the provided URL.
-- If both an _endpoint name_ and a _URL_ is specified, then the provided endpoint name will be included in the CSP as the value of the [`report-to`] directive, and a [`Reporting-Endpoints`] header will be emitted containing both the provided endpoint name and URL.
+- If you set only an _endpoint name_, sku includes that value in the CSP as the [`report-to`] directive.
+  sku does not emit a [`Reporting-Endpoints`] header.
+- If you set only a _URL_, sku generates an endpoint name automatically.
+  sku includes that name in the CSP as the [`report-to`] directive.
+  sku emits a [`Reporting-Endpoints`] header with the generated endpoint name and the URL you provided.
+- If you set both an _endpoint name_ and a _URL_, sku includes the provided endpoint name in the CSP as the [`report-to`] directive.
+  sku emits a [`Reporting-Endpoints`] header with both the provided endpoint name and URL.
 
-For **static apps**, the `cspReportTo` option is only effective when using the `header` [delivery option](#delivery), and an emitted [`Reporting-Endpoints`] header is written to the same JSON file in the `metadata.reportingEndpoints` property.
+For **static apps**, the `cspReportTo` option is only effective when you use the `header` [delivery option](#delivery).
+sku writes an emitted [`Reporting-Endpoints`] header to the same JSON file in the `metadata.reportingEndpoints` property.
 
 [Reporting API]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
 [`report-to`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/report-to
@@ -44,37 +55,44 @@ For **static apps**, the `cspReportTo` option is only effective when using the `
 
 ### Nonce Values
 
-[Nonce] values can be used to permit inline scripts that are generated client side.
+You can use [Nonce] values to permit inline scripts that the client generates.
 
 > [!NOTE]
 > The [Content Security Policy (CSP)] requires that scripts be declared ahead of time.
-> For inline scripts this is typically done automatically by calculating a hash of their content when they are created during the initial render.
-> This ensures only authorised scripts are run in client environments.
+> For inline scripts this is typically done automatically.
+> A hash of their content is calculated when they are created during the initial render.
+> This ensures client environments run only authorised scripts.
 >
-> When a script is created dynamically on the client it may not be possible to predict the required hash, in this case a nonce can be used.
+> When the client creates a script dynamically it may not be possible to predict the required hash.
+> In this case you can use a nonce.
 
 > [!WARNING]
 > Nonces are less safe than content hashes.
-> Please consider if other options are available and whether the risks are acceptable for your use-case.
+> Consider whether other options are available.
+> Consider whether the risks are acceptable for your use-case.
 
 #### SSR - Managed Data Mode <Badge type="tip" text="SSR" /> <Badge type="warning" text="experimental" />
 
-SSR uses **at most one** CSP nonce per HTML response, minted **only when explicitly requested**, and included in the CSP header **only if requested**.
+SSR uses **at most one** CSP nonce per HTML response.
+sku mints a nonce **only when explicitly requested**.
+sku includes it in the CSP header **only if requested**.
 
-A nonce is requested by:
+The following request a nonce:
 
 - sku itself, when attaching a `nonce` to React stream scripts (post-shell inline scripts that cannot be pre-hashed)
-- Express middleware: `req.getCspNonce()` (mint-on-read; later calls return the same value)
+- Express middleware: `req.getCspNonce()` (mint-on-read. Later calls return the same value)
 - React Router loaders/actions: `getCspNonce()` from `sku/runtime` (same store while sku is rendering)
 
 All of those share one value for the response.
 Known bootstrap script bodies are still allowed via sha256 hashes.
 
-A `nonce` is not available in client code. The result of `getCspNonce` will be an empty string if called from the browser. This allows it to be safely used isomorphic rendering.
+A `nonce` is not available in client code.
+`getCspNonce` returns `undefined` if you call it from the browser.
+Isomorphic code can still call it safely.
 
 #### Webpack SSR / static apps <Badge type="info" text="Webpack SSR" />
 
-`createUnsafeNonce`: Generates a random nonce value and returns it for use by the client. The nonce value is added to the generated [Content Security Policy (CSP)] Tags.
+`createUnsafeNonce`: Generates a random nonce value and returns it for use by the client. sku adds the nonce value to the generated [Content Security Policy (CSP)] tags.
 
 **Example: Using `createUnsafeNonce` to create a nonce value and use it client side**
 
@@ -115,12 +133,13 @@ export default ({ dynamicScriptNonce }) => {
 
 ### Extra SSR Setup (Webpack)
 
-As sku doesn't handle the returned HTML in Webpack SSR apps, any extra scripts (scripts not created by sku) must be registered.
+sku does not handle the returned HTML in Webpack SSR apps.
+You must register any extra scripts (scripts not created by sku).
 
 In the `renderCallback` function, register all extra script tags (inline and external) via the `registerScript` function.
 
 > [!IMPORTANT]
-> If you are using multi-part responses via the `flushHeadTags` API, all scripts must be registered before sending the the initial response.
+> If you use multi-part responses via the `flushHeadTags` API, register all scripts before you send the initial response.
 
 ```tsx
 import type { Server } from 'sku';
@@ -163,16 +182,20 @@ const renderCallback: Server['renderCallback'] = (
 
 ### Report-only Content Security Policy
 
-A "report-only" Content Security Policy can be enabled by setting `cspReportOnlyEnabled: true` in your `sku.config.js`.
-This will cause a [`Content-Security-Policy-Report-Only`] header to be generated.
+You can enable a "report-only" Content Security Policy by setting `cspReportOnlyEnabled: true` in your `sku.config.js`.
+This causes sku to generate a [`Content-Security-Policy-Report-Only`] header.
 
-By default the report-only CSP will have the same content as the standard CSP, including the same [extra hosts](#extra-hosts).
-This can be changed by setting the `cspReportOnlyExtraScriptSrcHosts` array in `sku.config.js` to contain the script URLs for the report-only CSP.
-Similarly, the report-only CSP will share the same [reporting](#report-to) configuration as the standard CSP, and this also can be changed by setting the `cspReportOnlyReportTo` option.
+By default the report-only CSP has the same content as the standard CSP, including the same [extra hosts](#extra-hosts).
+You can change this by setting the `cspReportOnlyExtraScriptSrcHosts` array in `sku.config.js` to the script URLs for the report-only CSP.
+The report-only CSP also shares the same [reporting](#report-to) configuration as the standard CSP.
+You can change that by setting the `cspReportOnlyReportTo` option.
 
-Unlike the standard CSP, a report-only CSP can only be delivered via an HTTP header and not via a `<meta http-equiv>` tag.
-As such there is no explicit [delivery option](#delivery) for a report-only CSP and the behaviour matches that of `header` CSP delivery, with the policy being written to the `metadata.cspReportOnly` property.
-As a consequence, and like the delivery option itself, a report-only CSP is only available when using Vite.
+Unlike the standard CSP, a report-only CSP can only be delivered via an HTTP header, not via a `<meta http-equiv>` tag.
+There is no explicit [delivery option](#delivery) for a report-only CSP.
+The behaviour matches `header` CSP delivery.
+sku writes the policy to the `metadata.cspReportOnly` property.
+As a consequence, a report-only CSP is only available when using Vite.
+The same limit applies to the delivery option itself.
 
 A report-only CSP can be enabled or disabled independently of the standard CSP, and vice versa.
 

@@ -1,10 +1,10 @@
 # Libraries
 
-If you need to build a UMD library instead of a web site, you can provide a `libraryEntry` and `libraryName` option instead:
+If you need to build a UMD library instead of a web site, provide a `libraryEntry` and `libraryName` option instead:
 
 > [!TIP]
-> If you are creating a package to share between multiple sku apps, then you probably want [compile packages](./extra-features#compile-packages) instead.
-> Libraries should only be used when you have very little control over the target environment (e.g. legacy applications, externally hosted solutions like Auth0).
+> If you are creating a package to share between multiple sku apps, use [compile packages](./extra-features#compile-packages) instead.
+> Use a library only when you have little control over the target environment (for example legacy applications, or an externally hosted solution such as Auth0).
 
 ```ts
 export default {
@@ -14,7 +14,7 @@ export default {
 } satisfies SkuConfig;
 ```
 
-By default the file name of the library will be based on the `libraryName` option. A distinct library file name may be specified by providing a `libraryFile` option:
+By default the file name of the library is based on the `libraryName` option. Provide a `libraryFile` option to set a different library file name:
 
 ```ts
 export default {
@@ -24,7 +24,7 @@ export default {
 ```
 
 > [!NOTE]
-> `libraryFile` should _not_ include a `.js` extension as this will be added to the library file name automatically.
+> `libraryFile` should _not_ include a `.js` extension. sku adds that extension to the library file name automatically.
 
 Your `library` entry must export its public API via a default export:
 
@@ -35,4 +35,4 @@ export default () => {
 ```
 
 > [!NOTE]
-> In this scenario, the `render` entry is only used to provide a development environment. No HTML will be generated when running `sku build`.
+> In this scenario, the `render` entry only provides a development environment. `sku build` does not generate HTML.

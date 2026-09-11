@@ -2,19 +2,18 @@
 
 [Vite]: https://vite.dev/
 
-[Vite] describes itself as "a blazing fast frontend build tool powering the next generation of web applications".
-It has on demand file serving over native ESM and lightning fast hot module reloading.
-Sku supports Vite as an alternate to the Webpack bundler since v15.
+[Vite] is a frontend build tool. It serves files on demand over native ESM. It also provides hot module reloading.
+Sku supports Vite as an alternative to the Webpack bundler since v15.
 
 ## Limitations
 
-Vite support is currently only available for [static applications (SSG)][SSG].
-This means that only [`sku start`] and [`sku build`] are supported.
-[`sku serve`] is also available as it is bundler agnostic.
+Vite support is currently available only for [static applications (SSG)][SSG]. Static applications render HTML at build time.
+This means only [`sku start`] and [`sku build`] are supported.
+[`sku serve`] is also available. It does not depend on the bundler.
 
 > **Experimental — SSR Support.**
-> A new Vite-based Managed Data Mode SSR is available for evaluation and testing using the new Managed Data Mode.
-> Do not use it in production yet; the API and behaviour may change. See [SSR].
+> A Vite-based Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet. The API and behaviour may change. See [SSR].
 
 [`sku start`]: ./cli.md#start
 [`sku build`]: ./cli.md#build
@@ -22,9 +21,9 @@ This means that only [`sku start`] and [`sku build`] are supported.
 
 ### Planned deprecation of library mode
 
-Building [libraries] with webpack is currently supported by `sku`.
-However, this feature is planned for deprecation and will not be supported with Vite.
-A migration guide for `sku` libraries will be provided in the future once the deprecation is finalised.
+`sku` currently supports building [libraries] with webpack.
+This feature is planned for deprecation. Vite will not support it.
+A migration guide for `sku` libraries will be provided after the deprecation is final.
 
 [SSG]: ./static-rendering.md
 [SSR]: ./ssr/
@@ -33,16 +32,16 @@ A migration guide for `sku` libraries will be provided in the future once the de
 ## Prerequisites
 
 > [!WARNING]
-> Before making any changes to your application, please ensure you have read this document in its entirety.
+> Before you change your application, read this document in full.
 
-There are two critical prerequisites for migrating to Vite:
+Migrating to Vite has two required prerequisites:
 
 1. [Applications must be written in ESM][Migrating to ESM]
 2. [Applications must use Vitest for running tests][Migrating to Vitest]
 
-Given [Jest's current limitations with ESM], it is highly likely that both these prerequisites will need to be implemented at the same time.
+Given [Jest's current limitations with ESM], you will likely need to implement both prerequisites at the same time.
 
-**It is highly recommended to implement, test and release these changes independently from the changes necessary to [migrate to Vite][Migrating to Vite].**
+**We recommend that you implement, test, and release these changes separately from the changes that [migrate to Vite][Migrating to Vite].**
 
 [Migrating to ESM]: #migrating-to-esm
 [Migrating to Vitest]: #migrating-to-vitest
@@ -50,11 +49,11 @@ Given [Jest's current limitations with ESM], it is highly likely that both these
 
 ### Migrating to Vitest
 
-[Vitest] is a testing framework that supports ESM out-of-the-box, integrates with the Vite ecosystem and has a similar API to Jest.
-These features make it a great replacement for Jest in `sku` applications, especially given [Jest's current limitations with ESM].
-**Due to these limitations, it's likely that you'll need to migrate to Vitest at the same time as (or prior to) migrating to ESM.**
+[Vitest] is a testing framework. It supports ESM without extra setup. It integrates with the Vite ecosystem. Its API is similar to Jest.
+These features make it a replacement for Jest in `sku` applications, especially given [Jest's current limitations with ESM].
+**Because of these limitations, you will likely need to migrate to Vitest at the same time as migrating to ESM, or before that.**
 
-See [sku's vitest documentation](./vitest.md) for how to migrate to vitest.
+See [sku's vitest documentation](./vitest.md) for how to migrate to Vitest.
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
@@ -76,7 +75,7 @@ Migrating to ESM involves two steps:
 
 #### Declaring an ES module
 
-Declaring your package as an ES module involves adding `"type": "module"` to your `package.json` file:
+To declare your package as an ES module, add `"type": "module"` to your `package.json` file:
 
 ```json
 {
@@ -89,37 +88,37 @@ Declaring your package as an ES module involves adding `"type": "module"` to you
 }
 ```
 
-While this change may seem small, it has a significant impact on how Node.js and TypeScript interpret your code: it signals that **any code written in `.js` or `.ts` files should be treated as ESM**.
+This change tells Node.js and TypeScript that **any code in `.js` or `.ts` files should be treated as ESM**.
 
-You may have non-application code such as Node.js scripts or configuration files that will also be affected by this change.
-If these files contain [CommonJS (CJS)][CommonJS] syntax and you do not wish to convert them to ESM, you can keep them as CommonJS by using the `.cjs` or `.cts` file extensions.
-However, **it is highly recommended to convert all code to ESM if possible**.
+You may also have non-application code that this change affects. Examples include Node.js scripts and configuration files.
+If these files contain [CommonJS (CJS)][CommonJS] syntax and you do not want to convert them to ESM, keep them as CommonJS. Use the `.cjs` or `.cts` file extensions.
+**We recommend that you convert all code to ESM if you can.**
 
 #### Finding ESM code changes
 
-After changing the repo to `type: module`, the [eslint-cjs-to-esm](https://github.com/azu/eslint-cjs-to-esm) package can be used to check for potential ESM code changes needed:
+After you set the repo to `type: module`, you can use the [eslint-cjs-to-esm](https://github.com/azu/eslint-cjs-to-esm) package to check for ESM code changes:
 
 ```bash
 npx eslint-cjs-to-esm "./src/**/*.{js,ts}" --rule "node/file-extension-in-import: off, file-extension-in-import-ts/file-extension-in-import-ts: off, import/extensions: off"
 ```
 
-Common files that may need to be updated include:
+Common files that may need updates include:
 
 - [Dev server middleware][devServerMiddleware]
 - [Polyfills][polyfills]
 - Configuration for external tooling
 
-The following sections detail changes that may be required to migrate CJS code to ESM.
+The following sections describe changes that may be required to migrate CJS code to ESM.
 
 [devServerMiddleware]: ./configuration.md#devservermiddleware
 [polyfills]: ./configuration.md#polyfills
 
 #### ESM syntax
 
-Most application code at SEEK is already written using ESM syntax, so it's unlikely you'll need to make many changes to your application.
-However, if you _do_ need to convert some code to ESM, the primary change will be to ensure you are using the correct import syntax.
+Most application code at SEEK already uses ESM syntax. You are unlikely to need many changes in your application.
+If you _do_ need to convert some code to ESM, the main change is to use the correct import syntax.
 
-In ESM, modules are imported using the `import` keyword and exported using the `export` keyword:
+In ESM, import modules with the `import` keyword. Export modules with the `export` keyword:
 
 ```ts
 // named imports
@@ -143,13 +142,13 @@ export default ANOTHER_CONSTANT; // [!code ++]
 
 #### Import path file extensions
 
-Typically, [ESM resolution dictates][explicit file extensions] that relative and absolute import specifiers must include a file extension, and that directory indexes (`index.js` files) must also be fully specified.
+[ESM resolution][explicit file extensions] usually requires a file extension on relative and absolute import specifiers. Directory indexes (`index.js` files) must also be fully specified.
 
-However, Vite can resolve these imports for you, so it is only necessary to include file extensions in import paths within non-application code.
+Vite can resolve these imports for you. You only need file extensions in import paths in non-application code.
 
 > [!TIP]
-> By default, `sku` configures `allowImportingTsExtensions: true` in your `tsconfig.json` file.
-> In situations where an explicit file extension is required, such as in a Node.js script, this setting allows you to import TypeScript files with a `.ts` extension instead of a `.js` extension, which can be a source of confusion for those new to ESM codebases.
+> By default, `sku` sets `allowImportingTsExtensions: true` in your `tsconfig.json` file.
+> When an explicit file extension is required, such as in a Node.js script, this setting lets you import TypeScript files with a `.ts` extension instead of a `.js` extension. That difference can confuse people who are new to ESM codebases.
 
 [ESM]: https://nodejs.org/api/esm.html
 [CommonJS]: https://nodejs.org/api/modules.html
@@ -157,7 +156,7 @@ However, Vite can resolve these imports for you, so it is only necessary to incl
 
 ## Migrating to Vite
 
-To configure `sku` to bundle your applications with Vite, configure [`bundler`][bundler] in your `sku` config:
+To bundle your applications with Vite, set [`bundler`][bundler] in your `sku` config:
 
 ```typescript
 // sku.config.ts
@@ -169,33 +168,33 @@ export default {
 } satisfies SkuConfig;
 ```
 
-Depending on your application, you may need no further changes to your codebase after this point in order to run your application with Vite.
+Depending on your application, you may need no further codebase changes after this point to run with Vite.
 
-Documented below is a list of differences between `sku` with `webpack` and `sku` with Vite.
+The list below documents differences between `sku` with `webpack` and `sku` with Vite.
 
 > [!TIP]
-> If you encounter issues during migration that aren't listed below, please reach out via the [support page] so we can update this document.
+> If you find issues during migration that this list does not cover, contact us via the [support page] so we can update this document.
 
 [bundler]: ./configuration.md#bundler
 [support page]: /support
 
 ### Code splitting
 
-Routes and components that take advantage of `sku`'s [code splitting] API will need to update imports from `sku/@loadable/component` to `@sku-lib/vite/loadable`.
-A codemod is available to help with this migration:
+Routes and components that use `sku`'s [code splitting] API must update imports from `sku/@loadable/component` to `@sku-lib/vite/loadable`.
+A codemod can help with this migration:
 
 ```bash
 pnpm dlx @sku-lib/codemod transform-vite-loadable .
 ```
 
-You will also need to install a separate library that provides Vite-compatible loadable APIs:
+You also need to install a separate library that provides Vite-compatible loadable APIs:
 
 ```bash
 pnpm add @sku-lib/vite
 ```
 
-`@sku-lib/vite/loadable` relies on React's [`<Suspense />`][suspense] component to load a fallback state.
-You can wrap a `loadable` component in a `<Suspense />` component or provide a `fallback` option to the `loadable` function which will wrap it inside a `<Suspense />` component for you:
+`@sku-lib/vite/loadable` uses React's [`<Suspense />`][suspense] component to load a fallback state.
+You can wrap a `loadable` component in a `<Suspense />` component. You can also pass a `fallback` option to the `loadable` function. That option wraps the component in a `<Suspense />` component for you:
 
 ```tsx
 import { Suspense } from 'react';
@@ -213,7 +212,7 @@ export default () => (
 ```
 
 > [!NOTE]
-> In order to use `loadable` with a `fallback`, your application must use the `renderToStringAsync` API.
+> To use `loadable` with a `fallback`, your application must use the `renderToStringAsync` API.
 > See the [supporting react suspense] documentation for more information.
 
 [Code splitting]: ./code-splitting.md
@@ -222,10 +221,10 @@ export default () => (
 
 ### Dev server middleware
 
-The Vite dev server uses [`Connect`](https://github.com/senchalabs/connect) as its server framework, as opposed to `webpack` which uses [`Express`](https://expressjs.com/).
-As a result, the middleware API has changed - the middleware function now receives a `Connect.Server` instance that can be used to add middleware to the dev server.
+The Vite dev server uses [`Connect`](https://github.com/senchalabs/connect) as its server framework. `webpack` uses [`Express`](https://expressjs.com/).
+The middleware API has changed. The middleware function now receives a `Connect.Server` instance. Use that instance to add middleware to the dev server.
 
-Middleware can be added to the dev server via the [`use`] method on the server instance:
+Add middleware to the dev server with the [`use`] method on the server instance:
 
 ```javascript
 // devMiddleware.js
@@ -250,7 +249,7 @@ export default function (server) {
 
 ### CJS named imports
 
-Importing named exports from CJS dependencies may result in an error:
+Importing named exports from CJS dependencies may produce an error:
 
 ```
 SyntaxError: [vite] Named export 'someFunction' not found. The requested module 'someDependency' is a CommonJS module, which may not support all module.exports as named exports.
@@ -260,14 +259,14 @@ import pkg from 'someDependency';
 const {someFunction} = pkg;
 ```
 
-There are a few options to resolve this issue:
+You have a few options to resolve this issue:
 
 - Replace the dependency with native APIs
 - Upgrade the dependency to a version that supports ESM
 - Replace the dependency with an alternative that supports ESM
 
-Failing those solutions, `sku` provides a [`compilePackages`][compilePackages] option that will compile the given modules as if they were part of your source code.
-This may affect build time, but allows Vite to handle certain CJS dependencies without throwing the error above.
+If those options fail, `sku` provides a [`compilePackages`][compilePackages] option. Sku compiles the given modules as if they are part of your source code.
+This may affect build time. It can let Vite handle certain CJS dependencies without throwing the error above.
 _Use this option as a last resort_:
 
 ```ts
@@ -286,7 +285,7 @@ export default {
 
 ### Vite client types
 
-If you require [types for Vite's client-side APIs], such as [`import.meta.glob`], or types for [imported image assets], create a `.d.ts` file in your codebase:
+If you need [types for Vite's client-side APIs], such as [`import.meta.glob`], or types for [imported image assets], create a `.d.ts` file in your codebase:
 
 ```ts
 // src/vite-env.d.ts
@@ -307,18 +306,18 @@ See [the importing image assets docs] for more info.
 #### Migrating SVG imports
 
 Importing SVG files with no query parameters has different behaviour in webpack and Vite.
-SVG imports within your application will need to be updated in order to function correctly with Vite.
+You will need to update SVG imports in your application so they work with Vite.
 
 > [!IMPORTANT]
 > Your application must be on at least [sku v15.13.0] in order to use the `raw`, `url` and `inline` query parameters described below.
 
-The simplest way to migrate is to add the `raw` query parameter to all SVG imports in your codebase, which will import the raw SVG markup as a string in both webpack and Vite. This can be done automatically with the `svg-import-query-param` codemod:
+The simplest migration is to add the `raw` query parameter to all SVG imports in your codebase. That imports the raw SVG markup as a string in both webpack and Vite. You can do this automatically with the `svg-import-query-param` codemod:
 
 ```sh
 pnpm dlx @sku-lib/codemod svg-import-query-param .
 ```
 
-If you were manually constructing [`data:` URLs] from the imported SVG markup, you can instead use the `url` or `inline` query parameters to import the SVG as a URL or data URL respectively, removing the need to construct a data URL yourself:
+If you constructed [`data:` URLs] by hand from the imported SVG markup, use the `url` or `inline` query parameters instead. `url` imports the SVG as a URL. `inline` imports it as a data URL. You then do not need to construct a data URL yourself:
 
 ```ts
 import { style } from '@vanilla-extract/css';
@@ -336,13 +335,13 @@ export const svgBackground = style({
 });
 ```
 
-Similar changes will need to be made in any libraries you consume that import SVG files.
-Consumers of these libraries may see inconsistent results when importing SVG files, depending on the query parameters used by the library and the version of `sku` they are using.
-Ensure changes made to libraries for the purpose of Vite compatibility are communicated clearly in the release notes.
+You will also need to make similar changes in any libraries you consume that import SVG files.
+Consumers of these libraries may see inconsistent results when they import SVG files. The result depends on the query parameters the library uses and the version of `sku` they use.
+If you change libraries for Vite compatibility, state those changes clearly in the release notes.
 
 ### Storybook
 
-If your repo uses `sku`'s Storybook config (via the [`sku/config/storybook`] entrypoint), it's recommended to convert your Storybook to use Vite instead of webpack.
+If your repo uses `sku`'s Storybook config (via the [`sku/config/storybook`] entrypoint), we recommend Vite for Storybook instead of webpack.
 See [sku's Storybook documentation] for more information.
 
 [sku v15.13.0]: https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md#15130

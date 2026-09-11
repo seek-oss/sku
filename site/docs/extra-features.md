@@ -2,9 +2,9 @@
 
 ## Importing image assets
 
-The following image types are supported in sku: `bmp`, `gif`, `jpg`, `jpeg`, `png`, `svg`, `webp` and `avif`.
+Sku supports these image types: `bmp`, `gif`, `jpg`, `jpeg`, `png`, `svg`, `webp` and `avif`.
 
-Using an image in your application is as simple as importing it:
+Import an image to use it in your application:
 
 ```tsx
 import heroImageUrl from './heroImage.png';
@@ -12,11 +12,11 @@ import heroImageUrl from './heroImage.png';
 const HeroImage = () => <img src={heroImageUrl} alt="A hero image" />;
 ```
 
-All supported image types (except [SVG]) will be imported as strings you can pass to a `src` attribute.
-The imported string is typically a URL, however files smaller than 10,000 bytes will be inlined as a base64-encoded [`data:` URL].
+All supported image types except [SVG] import as strings. You can pass those strings to a `src` attribute.
+The imported string is typically a URL. Files smaller than 10,000 bytes are inlined as a base64-encoded [`data:` URL].
 
 > [!TIP]
-> Browser support for `webp` and `avif` varies. To ensure compatibility across browsers, consider providing fallback image formats using the [`picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
+> Browser support for `webp` and `avif` varies. To keep compatibility across browsers, consider fallback image formats with the [`picture`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) element.
 
 ```tsx
 import avifImageUrl from './image.avif';
@@ -32,7 +32,7 @@ const ImageWithFallbacks = () => (
 );
 ```
 
-If you want to use a currently unsupported format feel free to submit a PR or contact [support].
+If you want a format that sku does not support yet, submit a PR or contact [support].
 
 [SVG]: #SVGs
 [`data:` URL]: https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Schemes/data
@@ -41,11 +41,11 @@ If you want to use a currently unsupported format feel free to submit a PR or co
 ### SVGs
 
 > [!TIP]
-> Importing SVGs without query parameters is handled differently in webpack and Vite. See [bundler-specific behaviour] for more information.
+> Webpack and Vite handle SVG imports without query parameters differently. See [bundler-specific behaviour] for more information.
 
-SVGs are handled differently to other image formats.
-Imported SVGs are raw strings representing optimized (via [SVGO]) markup, not URLs.
-These markup strings can then be passed to an HTML element in React:
+Sku handles SVGs differently from other image formats.
+Imported SVGs are raw strings of markup that [SVGO] optimized. They are not URLs.
+You can pass these markup strings to an HTML element in React:
 
 ```tsx
 import svgMarkup from './icon.svg';
@@ -56,11 +56,11 @@ const MySvgComponent = () => {
 ```
 
 > [!TIP]
-> Importing optimized SVG markup from files is recommended over rendering SVG elements with React.
-> SVG elements rendered by React are not optimized by sku.
+> Prefer importing optimized SVG markup from files over rendering SVG elements with React.
+> Sku does not optimize SVG elements that React renders.
 
-Importing SVGs may not be possible in all use cases, such as when the SVG elements require user-configurable props.
-In those cases you can render SVG elements directly in React:
+Importing SVGs may not work in every case. One example is SVG elements that need user-configurable props.
+In those cases, render SVG elements directly in React:
 
 ```tsx
 const SvgComponent = ({ tone }: { tone: 'critical' }) => {
@@ -93,13 +93,15 @@ const SvgComponent = ({ tone }: { tone: 'critical' }) => {
 #### Bundler-specific behaviour
 
 Importing SVG files with no query parameters has different behaviour in webpack and Vite.
-Webpack imports the optimized contents of the SVG file, while Vite handles SVGs like any other image asset: inlining small assets as data URLs and returning asset URLs for larger assets.
+Webpack imports the optimized contents of the SVG file.
+Vite handles SVGs like any other image asset. It inlines small assets as data URLs. It returns asset URLs for larger assets.
 
-Rather than changing the default SVG behaviour in webpack to address these inconsistencies, which could break existing apps, as of [sku v15.13.0] webpack apps now support the same `url`, `raw` and `inline` query parameters that Vite provides for importing assets, **but only when importing SVG files**.
-This allows applications and libraries to opt-in to consistent behaviour for both bundlers.
+Sku does not change the default SVG behaviour in webpack. A change could break existing apps.
+As of [sku v15.13.0], webpack apps support the same `url`, `raw`, and `inline` query parameters that Vite provides for importing assets. These parameters work **only when you import SVG files**.
+Applications and libraries can choose the same behaviour on both bundlers.
 See [the vite docs] for more details on these query parameters.
 
-To guarantee consistent behaviour across bundlers, it's recommended to include a query parameter when importing SVG files in both applications and libraries.
+To keep the same behaviour across bundlers, include a query parameter when you import SVG files in applications and libraries.
 See [sku's Vite migration guide] for more details.
 
 [sku v15.13.0]: https://github.com/seek-oss/sku/blob/master/packages/sku/CHANGELOG.md#15130
@@ -108,16 +110,16 @@ See [sku's Vite migration guide] for more details.
 
 ## Source maps
 
-Source maps are enabled by default when running both `sku start` and `sku build`.
-If you want to disable source map generation for production builds, you can set [`sourceMapsProd`](./configuration#sourcemapsprod) to `false`.
+Source maps are enabled by default when you run `sku start` and when you run `sku build`.
+To disable source map generation for production builds, set [`sourceMapsProd`](./configuration#sourcemapsprod) to `false`.
 
 ## Compile packages
 
-Sometimes you might want to extract and share code between sku projects, but this code is likely to rely on the same tooling and language features that sku provides.
-sku supports loading packages as if they were part of your app via the `compilePackages` feature.
+You may want to extract and share code between sku projects. That code is likely to use the same tooling and language features that sku provides.
+Sku can load packages as if they are part of your app. Use the `compilePackages` feature.
 
-The best way to configure a package as a `compilePackage` is to set `"skuCompilePackage": true` in the **package's** `package.json`.
-This method only works for `@seek` scoped packages.
+The preferred way to mark a package as a `compilePackage` is to set `"skuCompilePackage": true` in the **package's** `package.json`.
+This method works only for `@seek` scoped packages.
 
 ```json
 {
@@ -126,7 +128,7 @@ This method only works for `@seek` scoped packages.
 }
 ```
 
-Alternatively, you can add any packages you like to the `compilePackages` option in the **consuming app's** sku config file.
+You can also add any packages to the `compilePackages` option in the **consuming app's** sku config file.
 
 ```ts
 export default {
@@ -134,17 +136,17 @@ export default {
 } satisfies SkuConfig;
 ```
 
-Any `node_modules` marked as a `compilePackage` will be compiled through webpack as if they are part of your app.
+Sku compiles any `node_modules` marked as a `compilePackage` through webpack as if they are part of your app.
 
 ## Polyfills
 
-Since sku injects its own code into your bundle in development mode, it's important for polyfills that modify the global environment to be loaded before all other code.
-To address this, the [`polyfills`](./configuration.md#polyfills) option allows you to provide an array of modules to import before any other **browser** code is executed.
+In development mode, sku injects its own code into your bundle. Polyfills that modify the global environment must load before all other code.
+Use the [`polyfills`](./configuration.md#polyfills) option to list modules to import before any other **browser** code runs.
 
 > [!NOTE]
-> Polyfills are only loaded in a browser context.
-> This feature can't be used to modify the global environment in Node.
-> For isomorphic modules that must run first on both the browser and the Node server (for example Braid reset), use [`entrySideEffects`](./configuration.md#entrysideeffects).
+> Sku loads polyfills only in a browser context.
+> You cannot use this feature to modify the global environment in Node.
+> Isomorphic modules run on both the browser and the Node server. For isomorphic modules that must run first on both, use [`entrySideEffects`](./configuration.md#entrysideffects). Braid reset is one example.
 
 ```ts
 export default {
@@ -161,7 +163,7 @@ export default {
 Sku provides the client and SSR entries.
 Putting a module first in `App.tsx` or a root layout does not make it first in the graph.
 
-[`entrySideEffects`](./configuration.md#entrysideeffects) lists isomorphic modules that sku imports before any consumer module on Vite static and Vite SSR graphs.
+[`entrySideEffects`](./configuration.md#entrysideffects) lists isomorphic modules that sku imports before any consumer module on Vite static and Vite SSR graphs.
 That includes the browser client, the Node server, and `sku start` CSS collection.
 
 This is the supported way to apply Braid’s CSS reset.
@@ -180,39 +182,39 @@ Do not put `window` code in `entrySideEffects`.
 
 ## Caching
 
-`sku` emits two different caches that can help speed up local and production builds.
+`sku` emits two caches. They can reduce the time of local and production builds.
 
 ### [Webpack filesystem cache]
 
 This cache stores generated webpack modules and chunks.
-It is only emitted during local development.
-Its purpose is to reduce the time it takes to start the local development server.
+Sku emits it only during local development.
+It reduces the time to start the local development server.
 
 > [!NOTE]
-> This cache is stored in `node_modules/.cache/webpack` and can be safely deleted at any time.
+> This cache is stored in `node_modules/.cache/webpack`. You can delete it at any time.
 
 [webpack filesystem cache]: https://webpack.js.org/configuration/cache/#cachetype
 
 ### [`babel-loader` cache]
 
-This cache stores the result of module transpilation performed by `babel-loader`.
-It is emitted during both local development and production builds.
-Its purpose is to speed up transpilation of TypeScript/JavaScript code.
-This can benefit both local development (when the webpack cache is invalidated) and production builds.
-For applications with a large number of source files and/or dependencies, this cache can significantly reduce build times.
+This cache stores the result of module transpilation by `babel-loader`.
+Sku emits it during local development and during production builds.
+It can reduce the time to transpile TypeScript and JavaScript.
+This can help local development when the webpack cache is invalid. It can also help production builds.
+For applications with many source files or dependencies, this cache can reduce build times.
 
 > [!NOTE]
-> This cache is stored in `node_modules/.cache/babel-loader` and can be safely deleted at any time.
+> This cache is stored in `node_modules/.cache/babel-loader`. You can delete it at any time.
 
 [`babel-loader` cache]: https://github.com/babel/babel-loader?tab=readme-ov-file#options
 
 ### Utilizing the `babel-loader` cache in CI
 
-To utilize the `babel-loader` cache in CI, cache the `node_modules/.cache/babel-loader` directory using your CI provider's cache mechanism — for example the Buildkite [cache plugin] or the GitHub Actions [cache action].
+To use the `babel-loader` cache in CI, cache the `node_modules/.cache/babel-loader` directory with your CI provider's cache mechanism. Examples include the Buildkite [cache plugin] and the GitHub Actions [cache action].
 
 > [!TIP]
 > The Buildkite example below stores the cache in an S3 bucket.
-> It is recommended to add a [lifecycle configuration] to your bucket in order to automatically delete old cache files.
+> Add a [lifecycle configuration] to your bucket so it deletes old cache files automatically.
 
 ::: code-group
 
@@ -253,15 +255,15 @@ steps:
 
 ## Bundle analysis
 
-`sku` comes with bundle analysis built in via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer).
-A report is generated in the `/report` directory when `sku build` is run.
+`sku` includes bundle analysis via [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer).
+Sku generates a report in the `/report` directory when you run `sku build`.
 
 ## Pre-commit hook
 
 > [!NOTE]
-> The `sku pre-commit` command was removed in v16. It saw very little use and bundled `lint-staged` (and its many transitive dependencies) into every `sku` install. Setting this up yourself is straightforward and gives you full control over which commands run before each commit.
+> The `sku pre-commit` command was removed in v16. It had little use. It also bundled `lint-staged` and its many transitive dependencies into every `sku` install. Configure the hook yourself. You then control which commands run before each commit.
 
-To speed up the feedback loop on linting and formatting errors, you can run `sku format` and `sku lint` against staged files before they're committed. We recommend pairing [nano-staged] (a tiny, zero-dependency alternative to `lint-staged`) with [husky].
+To get lint and format errors before you commit, run `sku format` and `sku lint` on staged files. We recommend [nano-staged] with [husky]. nano-staged is a small alternative to `lint-staged` with no dependencies.
 
 1. Install both tools as development dependencies:
 
@@ -269,7 +271,7 @@ To speed up the feedback loop on linting and formatting errors, you can run `sku
 pnpm install --dev nano-staged husky
 ```
 
-2. Add the `nano-staged` config and husky's `prepare` script to your `package.json`. Adjust the nano-staged config to your project's needs - an example is provided below:
+2. Add the `nano-staged` config and husky's `prepare` script to your `package.json`. Adjust the nano-staged config to your project's needs. An example is below:
 
 ```json
 // package.json
@@ -297,8 +299,8 @@ For more details, see the [nano-staged] and [husky] documentation.
 
 ## Assertion removal
 
-By default, sku will remove assertions in your production builds with [`babel-plugin-unassert`].
-This allows you to perform more expensive checks during development without worrying about the perfomance impacts on users.
+By default, sku removes assertions in your production builds with [`babel-plugin-unassert`].
+You can then run more expensive checks during development. Those checks do not affect production performance for users.
 
 For example:
 
@@ -337,7 +339,7 @@ export const Rating = ({ rating }) => <div>...</div>;
 - `node:assert` ([Node.js built-in])
 
 Any combination of function name and library name is supported.
-[`tiny-invariant`] is recommended over [`assert`][browser port] due to its simplicity and size.
+Prefer [`tiny-invariant`] over [`assert`][browser port] because it is smaller and simpler.
 
 [`tiny-invariant`]: https://www.npmjs.com/package/tiny-invariant
 [Node.js built-in]: https://nodejs.org/api/assert.html
@@ -345,11 +347,11 @@ Any combination of function name and library name is supported.
 
 ## Environment-specific code
 
-`sku` [configures][nodeEnv optimization] webpack to replace all instances of `process.env.NODE_ENV` with its actual value.
-During the `start` and `start-ssr` commands, `process.env.NODE_ENV` is replaced with `'development'`.
-During the `build` and `build-ssr` commands, `process.env.NODE_ENV` is replaced with `'production'`.
+`sku` [configures][nodeEnv optimization] webpack to replace every `process.env.NODE_ENV` with its actual value.
+During the `start` and `start-ssr` commands, sku replaces `process.env.NODE_ENV` with `'development'`.
+During the `build` and `build-ssr` commands, sku replaces `process.env.NODE_ENV` with `'production'`.
 
-Combined with dead code elimination during minification, this allows you to write environment-specific code that is removed in production.
+Minification also removes dead code. You can write environment-specific code that production builds remove.
 
 For example:
 
@@ -389,19 +391,19 @@ someProdOnlyFunction();
 
 :::
 
-In development, both `if` statements are still present, but clearly only `someDevOnlyFunction` will be called.
+In development, both `if` statements remain. Only `someDevOnlyFunction` runs.
 
-In production, the first `if` block is removed entirely as its condition is always `false`.
-This allows the `someDevOnlyFunction` import to be removed as well.
-The second `if` block is removed, however the contents of the block are kept as its condition is always `true`.
+In production, the first `if` block is removed. Its condition is always `false`.
+The `someDevOnlyFunction` import is removed as well.
+The second `if` block is removed. The contents of the block stay because the condition is always `true`.
 
 [nodeEnv optimization]: https://webpack.js.org/configuration/optimization/#optimizationnodeenv
 
 ## DevServer Middleware
 
-Supply a [`devServerMiddleware`] path in your sku config to extend the **development** server with local-only routes, mocks, or proxies.
+Set a [`devServerMiddleware`] path in your sku config. The development server can then add local-only routes, mocks, or proxies.
 
-The file must export a function that will receive the express server:
+The file must export a function. That function receives the Express server:
 
 ```js
 export default (app) => {
@@ -411,7 +413,7 @@ export default (app) => {
 };
 ```
 
-This runs in `sku start` only and is never bundled into the production server. For **SSR** production request handlers belong on the server entry’s named `middleware` export — see [Server rendering → Middleware](./ssr/middleware.md) and [`devServerMiddleware`].
+This runs in `sku start` only. Sku never bundles it into the production server. For **SSR**, put production request handlers on the server entry’s named `middleware` export. See [Server rendering → Middleware](./ssr/middleware.md) and [`devServerMiddleware`].
 
 [`devServerMiddleware`]: ./configuration#devservermiddleware
 [express]: http://expressjs.com/

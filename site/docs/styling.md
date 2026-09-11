@@ -2,13 +2,14 @@
 
 ## Vanilla Extract
 
-The `@vanilla-extract/css` package is not available out of the box so it needs to be installed.
+The `@vanilla-extract/css` package is not included by default.
+Install it.
 
 ```sh
 $ pnpm install @vanilla-extract/css
 ```
 
-Now you can create `.css.ts` files in your project.
+You can then create `.css.ts` files in your project.
 
 ```ts
 // BigBox.css.ts
@@ -33,21 +34,23 @@ See [Vanilla Extract](https://vanilla-extract.style/documentation/getting-starte
 
 ## Locally Scoped CSS
 
-As of sku v13, [LESS] support has been removed in favour of [Vanilla Extract].
+As of sku v13, sku removed [LESS] support in favour of [Vanilla Extract].
 
 [LESS]: http://lesscss.org/
 [vanilla extract]: #vanilla-extract
 
 ## treat
 
-As of sku v12, [treat] support has been removed in favour of [Vanilla Extract].
+As of sku v12, sku removed [treat] support in favour of [Vanilla Extract].
 
 [treat]: https://seek-oss.github.io/treat/
 [vanilla extract]: #vanilla-extract
 
 ## External CSS
 
-CSS from third-party dependencies can be loaded using a side-effect import, e.g.
+You can load CSS from third-party dependencies with a side-effect import.
+
+For example:
 
 ```tsx
 import { SomeComponent } from 'some-package';
@@ -60,4 +63,5 @@ export const MyComponent = () => {
 ```
 
 > [!NOTE]
-> This should only be used when importing CSS dependencies from a third-party package in `node_modules`. If you are writing custom CSS, please see the [Vanilla Extract](#vanilla-extract) section above.
+> Use this only when you import CSS from a third-party package in `node_modules`.
+> If you write custom CSS, see the [Vanilla Extract](#vanilla-extract) section.

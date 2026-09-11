@@ -13,11 +13,14 @@ site/.vitepress/cache
 site/.vitepress/dist
 
 # AI Agents specific instructions are local-only for now. This may change in the future.
+.agents/
 .cursor/
 .claude/
 .continue/
 .windsurf/
 .gemini/
+
+skills-lock.json
 
 # OpenSpec AI tool adapters are local-only
 .cursor/skills/openspec-*/

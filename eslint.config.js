@@ -1,4 +1,5 @@
 // @ts-check
+import plugin from '@eslint/markdown';
 import seek from 'eslint-config-seek/vitest';
 import * as jsdocModule from 'eslint-plugin-jsdoc';
 import * as nodePluginModule from 'eslint-plugin-n';
@@ -139,6 +140,51 @@ export default [
     rules: {
       // `toMatchExitCode` is frequently asserted from `beforeAll`/`beforeEach` hooks when testing `sku start` functionality.
       'vitest/no-standalone-expect': 'off',
+    },
+  },
+  {
+    plugins: {
+      markdown: plugin,
+    },
+  },
+  {
+    files: ['site/docs/**/*.md'],
+    processor: 'markdown/markdown',
+  },
+  {
+    files: ['site/docs/**/*.md/**'],
+    languageOptions: {
+      parserOptions: {
+        ecmaFeatures: { impliedStrict: true },
+        project: false,
+        projectService: false,
+      },
+    },
+    rules: {
+      'eol-last': 'off',
+      'no-undef': 'off',
+      'no-unused-expressions': 'off',
+      'no-unused-vars': 'off',
+      'padded-blocks': 'off',
+      strict: 'off',
+      'unicode-bom': 'off',
+      'import-x/no-unresolved': 'off',
+      'import-x/no-extraneous-dependencies': 'off',
+      'n/prefer-node-protocol': 'off',
+      'no-console': 'off',
+      'arrow-body-style': 'off',
+      'new-cap': 'off',
+      'no-labels': 'off',
+      'no-self-compare': 'off',
+      'react/jsx-no-undef': 'off',
+      'react/no-unknown-property': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+      // sku enables type-aware rules; snippets have no tsconfig.
+      '@typescript-eslint/consistent-type-exports': 'off',
+      '@typescript-eslint/naming-convention': 'off',
     },
   },
 ];

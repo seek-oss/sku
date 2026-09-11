@@ -1,7 +1,7 @@
 # CLI
 
 The `sku` command line interface (CLI) is the primary way to interact with your project.
-It provides a number of commands to help you develop, test and build your application.
+Use it to develop, test, and build your application.
 
 ## CLI Options
 
@@ -29,12 +29,13 @@ sku start
 
 This command supports the following options:
 
-| Option            | Description                                                                                         | Defaults to |
-| ----------------- | --------------------------------------------------------------------------------------------------- | ----------- |
-| `--stats, -s`     | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only`        | `summary`   |
-| `--port`          | The port to serve the dev server on.                                                                |             |
-| `--strict-port`   | Will make sku throw an error if the given port is already in use.                                   | `false`     |
-| `--list-urls, -l` | Lists all dev server urls the app can be accessed on. If false, only displays the first found host. | `false`     |
+| Option                                    | Description                                                                      | Defaults to |
+| ----------------------------------------- | -------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s`                             | Override the default webpack [stats preset] <br> `sku build --stats=errors-only` | `summary`   |
+| `--port`                                  | The port for the development server.                                             |             |
+| `--strict-port`                           | Make sku throw an error if the given port is already in use.                     | `false`     |
+| `--list-urls, -l`                         | List all dev server URLs that can open the app.                                  |
+| If false, show only the first found host. | `false`                                                                          |
 
 ### `start-ssr`
 
@@ -49,10 +50,11 @@ sku start-ssr
 
 This command supports the following options:
 
-| Option            | Description                                                                                         | Defaults to |
-| ----------------- | --------------------------------------------------------------------------------------------------- | ----------- |
-| `--stats, -s`     | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only`        | `summary`   |
-| `--list-urls, -l` | Lists all dev server urls the app can be accessed on. If false, only displays the first found host. | `false`     |
+| Option                                    | Description                                                                      | Defaults to |
+| ----------------------------------------- | -------------------------------------------------------------------------------- | ----------- |
+| `--stats, -s`                             | Override the default webpack [stats preset] <br> `sku build --stats=errors-only` | `summary`   |
+| `--list-urls, -l`                         | List all dev server URLs that can open the app.                                  |
+| If false, show only the first found host. | `false`                                                                          |
 
 ### `build`
 
@@ -65,9 +67,9 @@ sku build
 
 This command supports the following options:
 
-| Option        | Description                                                                                  | Defaults to   |
-| ------------- | -------------------------------------------------------------------------------------------- | ------------- |
-| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `errors-only` |
+| Option        | Description                                                                      | Defaults to   |
+| ------------- | -------------------------------------------------------------------------------- | ------------- |
+| `--stats, -s` | Override the default webpack [stats preset] <br> `sku build --stats=errors-only` | `errors-only` |
 
 ### `build-ssr`
 
@@ -82,14 +84,14 @@ sku build-ssr
 
 This command supports the following options:
 
-| Option        | Description                                                                                  | Defaults to   |
-| ------------- | -------------------------------------------------------------------------------------------- | ------------- |
-| `--stats, -s` | The webpack [stats preset] used to override the default <br> `sku build --stats=errors-only` | `errors-only` |
+| Option        | Description                                                                      | Defaults to   |
+| ------------- | -------------------------------------------------------------------------------- | ------------- |
+| `--stats, -s` | Override the default webpack [stats preset] <br> `sku build --stats=errors-only` | `errors-only` |
 
 ### `serve`
 
 Serve a production build of a [Static](./static-rendering.md) app from your local machine.
-Requires [`sku build`] to be run first.
+Run [`sku build`] first.
 
 ```sh
 sku serve
@@ -97,11 +99,12 @@ sku serve
 
 This command supports the following options:
 
-| Option            | Description                                                                                         | Defaults to |
-| ----------------- | --------------------------------------------------------------------------------------------------- | ----------- |
-| `--port`          | The `port` to serve the application on <br> `sku serve --port=8080`                                 |
-| `--site`          | The `site` to serve the application on <br> `sku serve --site=seekAnz`                              |
-| `--list-urls, -l` | Lists all dev server urls the app can be accessed on. If false, only displays the first found host. | `false`     |
+| Option                                    | Description                                                            | Defaults to |
+| ----------------------------------------- | ---------------------------------------------------------------------- | ----------- |
+| `--port`                                  | The `port` to serve the application on <br> `sku serve --port=8080`    |
+| `--site`                                  | The `site` to serve the application on <br> `sku serve --site=seekAnz` |
+| `--list-urls, -l`                         | List all dev server URLs that can open the app.                        |
+| If false, show only the first found host. | `false`                                                                |
 
 [`sku build`]: #sku-build
 
@@ -118,7 +121,7 @@ sku test
 
 ### `lint`
 
-Run lint tooling over your code.
+Run lint tools on your code.
 See the [linting/formatting documentation] for more information.
 
 ```sh
@@ -140,11 +143,14 @@ sku format
 
 ### `setup-hosts`
 
-Update your hosts file to point any configured [`hosts`] to your local machine.
+Update your hosts file so configured [`hosts`] point to your local machine.
 
-We recommend `*.localhost` hostnames for local development; they usually resolve automatically and act as a secure context for browsers.
+We recommend `*.localhost` hostnames for local development.
+They usually resolve automatically.
+They also act as a secure context for browsers.
 
-Run `setup-hosts` for other custom hosts, or if you still want explicit `.localhost` entries.
+Run `setup-hosts` for other custom hosts.
+You can also run it if you still want explicit `.localhost` entries.
 
 ```sh
 sudo sku setup-hosts
@@ -155,7 +161,8 @@ sudo sku setup-hosts
 ### `configure`
 
 Emit and update configuration files for your project.
-This command is run before most other `sku` CLI commands, so you shouldn't need to run it manually.
+Sku runs this command before most other `sku` CLI commands.
+You should not need to run it by hand.
 
 ```sh
 sku configure
@@ -164,7 +171,7 @@ sku configure
 ## Translations
 
 Translation-specific commands.
-These commands are only useful if your application is configured to be a [multi-language application].
+These commands are useful only if your application is a [multi-language application].
 
 [multi-language application]: ./multi-language.md
 
@@ -178,9 +185,9 @@ sku translations compile
 
 This command supports the following options:
 
-| Option        | Description                                                                                    |
-| ------------- | ---------------------------------------------------------------------------------------------- |
-| `--watch, -w` | Re-compile translations whenever changes are detected <br> `sku translations compile  --watch` |
+| Option        | Description                                                                           |
+| ------------- | ------------------------------------------------------------------------------------- |
+| `--watch, -w` | Compile translations again when files change <br> `sku translations compile  --watch` |
 
 ### `translations push`
 
@@ -193,10 +200,10 @@ sku translations push
 
 This command supports the following options:
 
-| Option                 | Description                                                                                                                      |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `--auto-translate`     | Instructs Phrase to automatically translate any missing keys using machine translation. `sku translations push --auto-translate` |
-| `--delete-unused-keys` | Deletes keys that were not referenced in the upload <br> `sku translations push --delete-unused-keys`                            |
+| Option                 | Description                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `--auto-translate`     | Tell Phrase to translate any missing keys with machine translation. `sku translations push --auto-translate` |
+| `--delete-unused-keys` | Delete keys that the upload did not reference <br> `sku translations push --delete-unused-keys`              |
 
 ### `translations pull`
 

@@ -2,22 +2,31 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
+> Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
 High-level guide for moving from **Webpack SSR** (`sku start-ssr` / `sku build-ssr` / `renderCallback`) to Managed Data Mode SSR.
 
-Webpack SSR was lower-level and often required bespoke app behaviour, so migration details will depend on your solution.
+Webpack SSR was lower-level and often required custom app behaviour.
+Migration details will depend on your solution.
 For day-to-day API detail, prefer the [Getting started](./) topic pages.
 
 ## Requirements
 
 - `bundler: 'vite'` and `buildType: 'ssr'`
 - Relative `publicPath` only
-- Move off the config [`public`](../configuration.md#public) assets folder — import assets from modules instead
-- Drop [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins) — unsupported for SSR; raise use-cases via [support](../support.md)
-- Treat Jest → [Vitest](../vitest.md) as a prerequisite (`testRunner: 'vitest'`). Prefer a separate PR; use [`@sku-lib/codemod jest-to-vitest`](../vitest.md#migrating-to-vitest)
-- Replace webpack `baseUrl: '.'` / bare `src/…` imports with `#` subpath imports via [`pathAliases`](../configuration.md#pathaliases). Run `pnpm dlx @sku-lib/codemod migrate-root-resolution .`
+- Stop using the config [`public`](../configuration.md#public) assets folder.
+  Import assets from modules instead
+- Remove [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins).
+  SSR does not support them.
+  Report use-cases via [support](../support.md)
+- Treat Jest → [Vitest](../vitest.md) as a prerequisite (`testRunner: 'vitest'`).
+  Prefer a separate PR.
+  Use [`@sku-lib/codemod jest-to-vitest`](../vitest.md#migrating-to-vitest)
+- Replace webpack `baseUrl: '.'` and bare `src/…` imports with `#` subpath imports via [`pathAliases`](../configuration.md#pathaliases).
+  Run `pnpm dlx @sku-lib/codemod migrate-root-resolution .`
 
 ## Config and commands
 
@@ -47,61 +56,79 @@ export default {
 ```
 
 - Export `getSite` when more than one site
-- **Ports:** Webpack SSR used dual ports (`port` + `serverPort`). Managed Data Mode is single-port — use [`port`](../configuration.md#port) (or `PORT` at runtime). Drop `serverPort`
-- **Deploy layout:** `node dist/server/server.js` with sibling `client/` + `server/` — not webpack’s single `dist/server.js`
-- Type server-entry `middleware` for Express 4; install React Router 8 in the app
+- **Ports:** Webpack SSR used dual ports (`port` + `serverPort`).
+  Managed Data Mode is single-port.
+  Use [`port`](../configuration.md#port) (or `PORT` at runtime).
+  Remove `serverPort`
+- **Deploy layout:** `node dist/server/server.js` with sibling `client/` + `server/`.
+  This is not webpack’s single `dist/server.js`
+- Type server-entry `middleware` for Express 4. Install React Router 8 in the app
 
 ## Routes and request entries
 
 Compose routes with `path` (or `index`) and `lazy` in [`routesEntry`](../configuration.md#routesentry).
-Put `loader`, `action`, and `Component` on page modules — see [Routing](./routing.md).
-Optional `mapRoutePath` maps one logical path to per-site concrete paths — see [Multi-language](./multi-language.md#maproutepath).
+Put `loader`, `action`, and `Component` on page modules.
+See [Routing](./routing.md).
+Optional `mapRoutePath` maps one logical path to per-site concrete paths.
+See [Multi-language](./multi-language.md#maproutepath).
 
-Replace `{ renderCallback, middleware, onStart }` with `defineServerEntry` / `defineClientEntry` — see [Request entries](./entries.md).
+Replace `{ renderCallback, middleware, onStart }` with `defineServerEntry` and `defineClientEntry`.
+See [Request entries](./entries.md).
 
 Lazy page modules must export a named `Component` (not `export default`).
 
-sku streams the Document — put isomorphic wrapping in the root layout and env-differing values in `getReactContext`.
+sku streams the Document.
+Put isomorphic wrapping in the root layout.
+Put env-differing values in `getReactContext`.
 
 Map webpack `onStart({ app })` to server-entry [`onListen({ app, httpServer, port })`](./entries.md#onlisten) (bound port + `httpServer` for keep-alive timeouts).
 
 Trust proxy is opt-in via config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (sets hop count `1`), not via `onStart` / `onListen`.
 Other trust-proxy values go in `onListen` via `app.set('trust proxy', …)`.
 
-Keep server-only construction in server `getReactContext` (or server-only helpers) and consume via `useReactContext()`.
+Keep server-only construction in server `getReactContext` (or server-only helpers).
+Consume those values via `useReactContext()`.
 
 ## App-level providers
 
-Wire [`createSkuContexts`](./providers.md#typed-hooks) — there is no app `Providers` export.
+Wire [`createSkuContexts`](./providers.md#typed-hooks).
+There is no app `Providers` export.
 
-Router-aware wrapping moves into your root layout route.
+Move router-aware wrapping into your root layout route.
 
-Vocab: `getLanguage` on the server entry and `VocabProvider` in the root layout — see [Multi-language](./multi-language.md).
+Vocab: `getLanguage` on the server entry and `VocabProvider` in the root layout.
+See [Multi-language](./multi-language.md).
 
-**Braid:** add `braid-design-system/reset` to [`entrySideEffects`](../configuration.md#entrysideeffects) — see [Providers → Braid reset](./providers.md#braid-reset).
+**Braid:** add `braid-design-system/reset` to [`entrySideEffects`](../configuration.md#entrysideeffects).
+See [Providers → Braid reset](./providers.md#braid-reset).
 
 ## Data loading and middleware
 
 Prefer [render-time data loading](./data-loading.md) for page content.
-Use loaders for redirects, headers, or waterfalls.
+Use loaders for redirects, headers, or waterfalls (serial fetches).
 
-**Apollo:** replace `getDataFromTree` with streaming transport over [`useInsertHtml`](./runtime-api.md#useinserthtml) — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
+**Apollo:** replace `getDataFromTree` with streaming transport over [`useInsertHtml`](./runtime-api.md#useinserthtml).
+See [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
 
-Keep production handlers on server-entry `middleware`; keep local mocks in `devServerMiddleware` — see [Middleware](./middleware.md).
+Keep production handlers on server-entry `middleware`.
+Keep local mocks in `devServerMiddleware`.
+See [Middleware](./middleware.md).
 
-When sibling `client/` is present, production mounts Node static under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware so catch-all URL-pattern middleware cannot eat hashed assets.
-Productionised deploys host those assets outside Node instead.
+When sibling `client/` is present, production mounts Node static under [`publicPath`](../configuration.md#publicpath) **before** server-entry middleware so catch-all URL-pattern middleware cannot intercept hashed assets.
+Production deployments host those assets outside Node instead.
 
 :::danger Never put Express `req` in `RouterContextProvider`
-Prefer values both sides can supply.
-Raw `req` is bot available on client navigations — see [Data loading → Router context](./data-loading.md#router-context).
+Prefer values that the server and the client can both supply.
+Raw `req` is not available on client navigations.
+See [Data loading → Router context](./data-loading.md#router-context).
 :::
 
 ## CSP and hydration
 
-Use header CSP and the single request-scoped nonce (`getCspNonce` / `req.getCspNonce`) — see [CSP](./csp.md).
+Use header CSP and the single request-scoped nonce (`getCspNonce` / `req.getCspNonce`).
+See [CSP](./csp.md).
 
-Drop hand-rolled HTML templates / `getHeadTags` / `getBodyTags`.
+Drop hand-rolled HTML templates, `getHeadTags`, and `getBodyTags`.
 Render `<html>`, `<head>`, and `<body>` in your root layout.
 Sku hoists stylesheet and `modulepreload` links into `<head>`.
 Nest `ErrorBoundary` on a child route under that layout so the HTML document stays mounted on failure.

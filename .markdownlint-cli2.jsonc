@@ -1,0 +1,29 @@
+{
+  "globs": ["site/docs/**/*.md"],
+  "config": {
+    // Sentence-per-line produces long lines on purpose.
+    "MD013": false,
+    // Docs show `$ cmd` prompts without capturing output.
+    "MD014": false,
+    // Same heading text is reused (e.g. server vs client `getReactContext`).
+    "MD024": false,
+    // GFM alerts and consecutive `>` callouts use blank lines.
+    "MD028": false,
+    // Intentionally numbered lists (not 1/1/1).
+    "MD029": false,
+    // VitePress `<Badge>`, `<br>`, and HTML in getting-started.
+    "MD033": false,
+    // Bare URLs appear in examples and notes.
+    "MD034": false,
+    // Bold labels are used as callouts, not headings.
+    "MD036": false,
+    // VitePress lowercases heading slugs; markdownlint does not.
+    "MD051": false,
+    // Some pages keep unused or duplicate reference definitions.
+    "MD053": false,
+    // CLI option tables wrap descriptions with `<br>` and split pipes.
+    "MD055": false,
+    "MD056": false,
+    "MD060": false,
+  },
+}

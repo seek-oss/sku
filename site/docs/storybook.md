@@ -1,7 +1,8 @@
 # Storybook
 
-This page will guide you through the process of setting up [Storybook] in your project.
-The configuration outlined on this page should work for most projects, but you may customize it further to suit your needs.
+This page guides you through configuring [Storybook] in your project.
+The configuration on this page should work for most projects.
+You may customize it further to suit your needs.
 
 [Storybook]: https://storybook.js.org/
 
@@ -25,15 +26,16 @@ pnpm install -D storybook @storybook/react @storybook/react-webpack5 @storybook/
 
 ## Configuring Storybook
 
-Storybook can be configured by creating specially-named files inside a `.storybook` folder within your repo.
-Take a look at the [Storybook configuration documentation] for all the ways to customize Storybook.
+You can configure Storybook by creating specially-named files inside a `.storybook` folder within your repo.
+See the [Storybook configuration documentation] for all the ways to customize Storybook.
 
 > [!IMPORTANT]
 > We strongly recommend using the `babel` + `webpackFinal`/`viteFinal` configurations provided by `sku`.
-> These configurations are tested as part of `sku`'s integration tests in order to ensure they function correctly.
-> While you are free to use alternative configurations, we cannot provide any guarantees that Storybook will work correctly in such cases.
+> sku tests these configurations in its integration tests.
+> You are free to use alternative configurations.
+> We cannot provide any guarantees that Storybook will work correctly in such cases.
 
-Here's an example of a minimal, sku-compatible Storybook configuration:
+Here is an example of a minimal, sku-compatible Storybook configuration:
 
 ::: code-group
 
@@ -79,10 +81,11 @@ export default {
 
 ### Type-checking the `.storybook` directory
 
-If you want to type-check the files within the `.storybook` directory, you will need to add them to your [`tsconfig.json`'s `include`][tsconfig include] field.
-This is necessary because the implicit default value of `include` is `['**/*']` which does not include any directories prefixed with `.`, such as `.storybook`.
+If you want to type-check the files within the `.storybook` directory, add them to your [`tsconfig.json`'s `include`][tsconfig include] field.
+This is necessary because the implicit default value of `include` is `['**/*']`.
+That default does not include any directories prefixed with `.`, such as `.storybook`.
 
-This can be done via [`sku`'s `dangerouslySetTSConfig` configuration option][dangerouslySetTSConfig]:
+You can do this via [`sku`'s `dangerouslySetTSConfig` configuration option][dangerouslySetTSConfig]:
 
 ```ts
 // sku.config.ts
@@ -105,26 +108,28 @@ export default {
 
 ## Developing and Building Your Storybook
 
-To serve a development version of your Storybook, run:
+To start a development version of your Storybook, run:
 
 ```sh
 pnpm storybook dev
 ```
 
-To build a deployable, production version of your Storybook, run:
+To build a production version of your Storybook that you can deploy, run:
 
 ```sh
 pnpm storybook build
 ```
 
-If you have a [multi-language] application, you will want to compile your translations before running the Storybook CLI:
+If you have a [multi-language] application, compile your translations before you run the Storybook CLI:
 
 ```sh
 pnpm sku translations compile && pnpm storybook dev # or pnpm storybook build
 ```
 
-If you want to run a development Storybook and see Vocab translations update in real time, you can run the [`sku translations compile --watch`][translations compile watch] command at the same time as `storybook dev`.
-This can be achieved via a package such as [`concurrently`], or if you are using `pnpm` you can use `pnpm`'s built-in support for [running multiple scripts] in parallel.
+You can run a development Storybook and see Vocab translations update as they change.
+Run the [`sku translations compile --watch`][translations compile watch] command at the same time as `storybook dev`.
+You can do this with a package such as [`concurrently`].
+If you use `pnpm`, you can use `pnpm`'s built-in support for [running multiple scripts] in parallel.
 
 Please read the [Storybook CLI documentation] for more information.
 
@@ -136,7 +141,9 @@ Please read the [Storybook CLI documentation] for more information.
 
 ## DevServer Middleware
 
-When running `storybook dev`, if you want to run your [`devServerMiddleware`][devserver middleware] at the same time, add a `middleware.js` file to the `.storybook` folder and re-export your middleware inside it:
+When you run `storybook dev`, you can also run your [`devServerMiddleware`][devserver middleware].
+Add a `middleware.js` file to the `.storybook` folder.
+Re-export your middleware inside it:
 
 ```js
 // .storybook/middleware.js

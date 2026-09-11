@@ -1,17 +1,18 @@
 # Getting Started
 
-sku is a front-end toolkit for SEEK apps: best-practice builds, local development, testing, and linting.
+sku is a front-end toolkit for SEEK apps.
+It provides builds, local development, testing, and linting that follow SEEK practice.
 
-To get started, choose a project type:
+To start, choose a project type:
 
 <div class="project-types" role="group" aria-label="sku project types">
   <a class="project-types__cell " href="./static-rendering">
     <span class="project-types__name"><span class="project-types__status project-types__status--stable">Stable</span> Static</span>
-    <span class="project-types__meta">Fast, Simple, Modern. Built on Vite</span>
+    <span class="project-types__meta">Build-time HTML. Uses Vite</span>
   </a>
   <a class="project-types__cell" href="./ssr/">
     <span class="project-types__name"><span class="project-types__status project-types__status--experimental">Experimental</span> Managed Data Mode SSR</span>
-    <span class="project-types__meta">Personalised, Powerful. Built on Vite</span>
+    <span class="project-types__meta">Request-time HTML. Uses Vite</span>
   </a>
   <a class="project-types__cell" href="./static-rendering">
     <span class="project-types__name"><span class="project-types__status project-types__status--deprecated">Deprecated</span> Webpack Static</span>
@@ -24,38 +25,45 @@ To get started, choose a project type:
 </div>
 
 :::warning 👋 Goodbye Webpack
-We are **migrating away from Webpack**. Support for Webpack and Webpack SSR project types will be **removed once Vite-based solutions are fully supported**.
+We will **stop supporting Webpack**. sku will **remove** Webpack and Webpack SSR project types **when Vite-based solutions have full support**.
 :::
 
 ## What sku does
 
-sku sets up your local development environment with a fast dev server, out-of-the-box [linting](./linting) and [testing](./testing.md) frameworks, and an optimised production build process.
+sku configures a local development environment.
+It includes a fast development server, [linting](./linting) and [testing](./testing.md) frameworks, and a production build.
 
-It integrates [styling](./styling.md) with [Vanilla Extract CSS](https://vanilla-extract.style/) and [localisation](./multi-language.md) with [Vocab](https://github.com/seek-oss/vocab).
+It also integrates [styling](./styling.md) with [Vanilla Extract CSS](https://vanilla-extract.style/) and [localisation](./multi-language.md) with [Vocab](https://github.com/seek-oss/vocab).
 
 ## What sku doesn't do
 
-sku's scope covers building an optimised productionised bundle. After this you'll use common practices for hosting static assets or serving Node JS code.
+sku builds a production bundle.
+After that, you host static assets or you serve Node.js code with common practices.
 
-See project type specific instructions on how to deploy your app.
+See the instructions for your project type to deploy the app.
 
 ## Static vs Server-Side Rendering (SSR)
 
-When starting a new project with sku, you have two main approaches for how your site is rendered and served: **Static Rendering** and **Server-Side Rendering (SSR)**. Each offers unique strengths to fit different app requirements.
+When you start a new sku project, you choose how the site is rendered and served: **Static Rendering** or **Server-Side Rendering (SSR)**.
+Each method fits different app needs.
 
 ### Static Rendering
 
-- **Fast and Simple**: Generates your site at build time into static HTML/CSS/JS, then serves those files directly from a CDN or server.
-- **Low Maintenance**: No custom server required — deploy anywhere static files are supported.
-- **Modern Features**: Supports client-side routing, code splitting, and dynamic imports for a full-featured app experience.
+- **Fast and Simple**: sku generates HTML, CSS, and JS at build time.
+  A CDN or server then serves those files.
+- **Low Maintenance**: You do not need a custom server.
+  You can deploy anywhere that supports static files.
+- **Modern Features**: The app can use client-side routing, code splitting, and dynamic imports.
 
 ### Server-Side Rendering (SSR)
 
-- **Personalized Initial Loads**: Each page request can be dynamically generated per user — ideal for personalisation, authenticated content, or A/B testing.
-- **SEO and Performance**: Content is rendered on the server for each request, offering improved SEO and faster first-contentful paint, especially for dynamic pages.
-- **Advanced Use Cases**: Supports scenarios where on-the-fly computation, API calls, or user-specific data are needed at the moment of page load.
+- **Personalized Initial Loads**: The server can generate each page request per user.
+  This fits personalisation, authenticated content, or A/B testing.
+- **SEO and Performance**: The server renders content for each request.
+  This can improve SEO and first-contentful paint, especially for dynamic pages.
+- **Advanced Use Cases**: The server can run computation, API calls, or user-specific data at page load.
 
-Choose the rendering strategy that best fits your app’s needs. sku's best-practice setup ensures you get best practices for either approach out-of-the-box.
+Choose the rendering method that fits the app. sku applies its standard configuration for either method.
 
 ## Creating a new project
 
@@ -74,4 +82,4 @@ $ pnpm start
 
 :::
 
-By default, a new project's dependencies will be installed using the package manager it was run with.
+By default, a new project installs dependencies with the package manager that you used to run the command.

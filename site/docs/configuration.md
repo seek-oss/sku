@@ -1,12 +1,13 @@
 # Configuration
 
-If you need to configure sku, first create a `sku.config.ts` file in your project root:
+To configure sku, create a `sku.config.ts` file in your project root:
 
 ```sh
 $ touch sku.config.ts
 ```
 
-While sku has a zero configuration mode, the equivalent manual configuration would look like this:
+Sku has a zero-configuration mode.
+The equivalent manual configuration looks like this:
 
 ```ts
 import type { SkuConfig } from 'sku';
@@ -20,23 +21,24 @@ export default {
 } satisfies SkuConfig;
 ```
 
-If you need to specify a different config file you can do so with the `--config` parameter.
+To use a different config file, pass the `--config` parameter.
 
 ```sh
 $ sku start --config sku.custom.config.ts
 ```
 
 > [!NOTE]
-> When using the `--config` parameter, the specified file must exist. Sku will exit with an error if the file cannot be found.
+> If you pass `--config`, the specified file must exist.
+> Sku exits with an error if it cannot find the file.
 > Config files can use either TypeScript or JavaScript.
 
-When **no** `--config` parameter is provided, sku will automatically look for config files in this order:
+When you omit `--config`, sku searches for config files in this order:
 
 1. `sku.config.ts`
 2. `sku.config.js`
 3. `sku.config.mjs`
 
-If none of these files exist, sku will use its built-in default configuration.
+If none of these files exist, sku uses its built-in default configuration.
 
 Config files can use either TypeScript or JavaScript.
 
@@ -48,10 +50,12 @@ Default: `'webpack'`
 
 The bundler that sku uses to build the application.
 
-`vite` is currently only supported for static apps.
+`vite` currently supports static apps only.
 See [Vite support](./vite) for details.
 
-**Experimental** - Vite supports SSR with experimental Managed Data Mode. See [SSR](./ssr/).
+**Experimental** - Vite supports SSR with experimental Managed Data Mode.
+SSR is server-side rendering at request time.
+See [SSR](./ssr/).
 
 ## buildType
 
@@ -70,11 +74,17 @@ Type: `string`
 
 Default: `./src/client.tsx`
 
-The client entry point to the app. Path may be `.tsx`, `.ts`, or `.js`.
+The client entry point to the app.
+Path may be `.tsx`, `.ts`, or `.js`.
 
-**Static / Webpack SSR:** the file that executes your browser code. Each `route` can also specify a client entry; if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
+**Static / Webpack SSR:** the file that runs your browser code.
+Each `route` can also specify a client entry.
+If none is specified, sku uses `clientEntry`.
+See [`routes`](#routes) for more info.
 
-**Static only:** Each `route` can also specify a client entry, if none is specified the `clientEntry` is used. See [`routes`](#routes) for more info.
+**Static only:** Each `route` can also specify a client entry.
+If none is specified, sku uses `clientEntry`.
+See [`routes`](#routes) for more info.
 
 ## compilePackages
 
@@ -82,7 +92,10 @@ Type: `Array<string>`
 
 Default: `[]`
 
-An array of `node_modules` to be compiled as if they were part of your source code. This allows the use of packages that make use of CSS Modules or TypeScript without having them be pre compiled. Ideally, this setting should only be used for internally controlled packages. Many modules added to this array may affect build time.
+An array of `node_modules` that sku compiles as if they are part of your source code.
+Use this for packages that use CSS Modules or TypeScript and are not pre-compiled.
+Use this setting only for internally controlled packages.
+Many modules in this array may increase build time.
 
 ## cspEnabled
 
@@ -92,7 +105,8 @@ Type: `boolean`
 
 Default: `false`
 
-Enable content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
+Enable the content security policy feature.
+See [`Content Security Policy`](./csp.md) for more info.
 
 ## cspDelivery <Badge type="info" text="Vite Static only" />
 
@@ -100,7 +114,8 @@ Type: `'tag' | 'header'`
 
 Default: `'tag'`
 
-The way the content security policy is delivered. Only relevant if `cspEnabled` is set to `true`.
+The way the content security policy is delivered.
+Only relevant if `cspEnabled` is set to `true`.
 
 ## cspExtraScriptSrcHosts
 
@@ -108,7 +123,8 @@ Type: `Array<string>`
 
 Default: `[]`
 
-Extra external hosts to allow in your `script-src` [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspEnabled` is set to `true`.
+Extra external hosts to allow in your `script-src` [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
+Only relevant if `cspEnabled` is set to `true`.
 
 ## cspReportTo
 
@@ -116,9 +132,12 @@ Type: `string | [string, string]`
 
 Bundler: `vite`
 
-Where to report content security policy violations. Only relevant if `cspEnabled` is set to `true` and `cspDelivery` is set to `'header'`.
+Where to report content security policy violations.
+Only relevant if `cspEnabled` is set to `true` and `cspDelivery` is set to `'header'`.
 
-SSR ignores `cspDelivery` and always uses HTTP headers, so this applies whenever `cspEnabled` is `true`.
+SSR ignores `cspDelivery`.
+SSR always uses HTTP headers.
+This option applies whenever `cspEnabled` is `true`.
 
 ## cspReportOnlyEnabled
 
@@ -130,7 +149,8 @@ Default: `false`
 
 Bundler: `vite`
 
-Enable report-only content security policy feature. See [`Content Security Policy`](./csp.md) for more info.
+Enable the report-only content security policy feature.
+See [`Content Security Policy`](./csp.md) for more info.
 
 ## cspReportOnlyExtraScriptSrcHosts
 
@@ -140,7 +160,8 @@ Default: `cspExtraScriptSrcHosts`
 
 Bundler: `vite`
 
-Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Only relevant if `cspReportOnlyEnabled` is set to `true`.
+Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
+Only relevant if `cspReportOnlyEnabled` is set to `true`.
 
 ## cspReportOnlyReportTo
 
@@ -150,26 +171,29 @@ Default: `cspReportTo`
 
 Bundler: `vite`
 
-Where to report report-only content security policy violations. Only relevant if `cspReportOnlyEnabled` is set to `true`.
+Where to report report-only content security policy violations.
+Only relevant if `cspReportOnlyEnabled` is set to `true`.
 
 ## dangerouslySetESLintConfig
 
 Type: `(skuESLintConfig: Linter.Config[]) => Linter.Config[]`
 
-This function provides a way to modify sku's ESLint configuration.
-It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+This function lets you modify sku's ESLint configuration.
+Use it only in exceptional cases where standard configuration options cannot solve the problem.
 
-Before customizing your ESLint configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
+Before you modify your ESLint configuration, contact us via the [support page] to discuss your requirements and possible alternatives.
 
-ESLint rules help to maintain code quality and consistency.
-Some rules even prevent potential bugs in your code, e.g. React rules.
-Rather than disabling a rule purely because it causes frequent errors, consider whether these errors may be a symptom of a larger problem in your codebase.
+ESLint rules help maintain code quality and consistency.
+Some rules can prevent bugs in your code.
+React rules are one example.
+Do not disable a rule only because it reports frequent errors.
+Those errors may be a symptom of a larger problem in your codebase.
 
-If you believe other consumers would benefit from the addition/removal/modificaton of a rule, consider contributing the change to [`eslint-config-seek`](https://github.com/seek-oss/eslint-config-seek).
+If other consumers would benefit from adding, removing, or changing a rule, consider contributing the change to [`eslint-config-seek`](https://github.com/seek-oss/eslint-config-seek).
 
 > [!WARNING]
-> Sku provides no guarantees that its ESLint configuration will remain compatible with any customizations made within this function.
-> It is the responsibility of the user to ensure that their customizations are compatible with sku.
+> Sku does not guarantee that its ESLint configuration will stay compatible with customizations in this function.
+> You must keep your customizations compatible with sku.
 
 Example:
 
@@ -195,16 +219,16 @@ export default {
 
 Type: `function`
 
-This function provides a way to modify sku's Jest configuration.
-It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+This function lets you modify sku's Jest configuration.
+Use it only in exceptional cases where standard configuration options cannot solve the problem.
 
-Make sure [`setupTests`] definitely doesn’t cover your needs before using.
+Check that [`setupTests`] does not already cover your needs before you use this function.
 
-Before customizing your Jest configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
+Before you modify your Jest configuration, contact us via the [support page] to discuss your requirements and possible alternatives.
 
 > [!WARNING]
-> Sku provides no guarantees that its Jest configuration will remain compatible with any customizations made within this function.
-> It is the responsibility of the user to ensure that their customizations are compatible with sku.
+> Sku does not guarantee that its Jest configuration will stay compatible with customizations in this function.
+> You must keep your customizations compatible with sku.
 
 Example:
 
@@ -223,14 +247,14 @@ export default {
 
 Type: `function`
 
-This function provides a way to modify sku's TypeScript configuration.
-It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+This function lets you modify sku's TypeScript configuration.
+Use it only in exceptional cases where standard configuration options cannot solve the problem.
 
-Before customizing your TypeScript configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
+Before you modify your TypeScript configuration, contact us via the [support page] to discuss your requirements and possible alternatives.
 
 > [!WARNING]
-> Sku provides no guarantees that its TypeScript configuration will remain compatible with any customizations made within this function.
-> It is the responsibility of the user to ensure that their customizations are compatible with sku.
+> Sku does not guarantee that its TypeScript configuration will stay compatible with customizations in this function.
+> You must keep your customizations compatible with sku.
 
 Example:
 
@@ -248,21 +272,27 @@ export default {
 
 Type: `function`
 
-This function provides a way to modify sku's Vite configuration.
-It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+This function lets you modify sku's Vite configuration.
+Use it only in exceptional cases where standard configuration options cannot solve the problem.
 
-**Not supported for SSR**. Providing `dangerouslySetViteConfig` with SSR fails config validation. Raise exceptional customisation needs via the [support page] with your use-case.
+**Not supported for SSR**.
+If you set `dangerouslySetViteConfig` with SSR, config validation fails.
+Contact us via the [support page] with your use case.
 
-Before customizing your Vite configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
+Before you modify your Vite configuration, contact us via the [support page] to discuss your requirements and possible alternatives.
 
-As sku creates two Vite configs (`client` & `render`), this function will actually run twice.
-If you only need to modify one of these configs, then you can check `env.mode` from the second argument within.
+Sku creates two Vite configs (`client` and `render`).
+This function runs twice.
+If you need to modify only one config, check `env.mode` on the second argument.
 
-This function can return a partial config object that will be deeply merged into existing config (recommended), or directly mutate the config (if the default merging cannot achieve the desired result).
+This function can return a partial config object.
+Sku then deep-merges it into the existing config.
+That is the recommended path.
+You can also mutate the config directly if the default merge cannot produce the result you need.
 
 > [!WARNING]
-> Sku provides no guarantees that its Vite configuration will remain compatible with any customizations made within this function.
-> It is the responsibility of the user to ensure that their customizations are compatible with sku.
+> Sku does not guarantee that its Vite configuration will stay compatible with customizations in this function.
+> You must keep your customizations compatible with sku.
 
 Example:
 
@@ -283,14 +313,14 @@ export default {
 
 Type: `function`
 
-This function provides a way to modify sku's Vitest configuration.
-It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+This function lets you modify sku's Vitest configuration.
+Use it only in exceptional cases where standard configuration options cannot solve the problem.
 
-Before customizing your Vitest configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
+Before you modify your Vitest configuration, contact us via the [support page] to discuss your requirements and possible alternatives.
 
 > [!WARNING]
-> Sku provides no guarantees that its Vitest configuration will remain compatible with any customizations made within this function.
-> It is the responsibility of the user to ensure that their customizations are compatible with sku.
+> Sku does not guarantee that its Vitest configuration will stay compatible with customizations in this function.
+> You must keep your customizations compatible with sku.
 
 Example:
 
@@ -307,17 +337,18 @@ export default {
 
 Type: `function`
 
-This function provides a way to modify sku's Webpack configuration.
-It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
+This function lets you modify sku's Webpack configuration.
+Use it only in exceptional cases where standard configuration options cannot solve the problem.
 
-Before customizing your Webpack configuration, please reach out via the [support page] to discuss your requirements and potential alternative solutions.
+Before you modify your Webpack configuration, contact us via the [support page] to discuss your requirements and possible alternatives.
 
-As sku creates two webpack configs (`client` & `server|render`), this function will actually run twice.
-If you only need to modify one of these configs, then you can check `config.name`.
+Sku creates two webpack configs (`client` and `server|render`).
+This function runs twice.
+If you need to modify only one config, check `config.name`.
 
 > [!WARNING]
-> Sku provides no guarantees that its Webpack configuration will remain compatible with any customizations made within this function.
-> It is the responsibility of the user to ensure that their customizations are compatible with sku.
+> Sku does not guarantee that its Webpack configuration will stay compatible with customizations in this function.
+> You must keep your customizations compatible with sku.
 
 Example:
 
@@ -334,9 +365,10 @@ export default {
 
 Type: `string`
 
-Path to a file in your project that exports a function that can receive the Express server.
+Path to a file in your project.
+The file must export a function that receives the Express server.
 
-This can be used to extend to the dev server middleware.
+You can use this function to extend the dev server middleware.
 
 Example:
 
@@ -354,7 +386,8 @@ Type: `boolean`
 
 Default: `false`
 
-Adds static `displayName` properties to React components in production. This setting is designed for usage on sites that generate React code snippets, e.g. [Braid](https://seek-oss.github.io/braid-design-system/).
+Adds static `displayName` properties to React components in production.
+Use this on sites that generate React code snippets. [Braid](https://seek-oss.github.io/braid-design-system/) is one example.
 
 ## expressTrustProxy <Badge type="info" text="SSR only" />
 
@@ -364,11 +397,16 @@ Default: `false`
 
 Bundler: `vite` · `buildType: 'ssr'`
 
-When `true`, sku sets Express `app.set('trust proxy', 1)` (hop count **`1`**, not Express boolean `true`) before listen — the common single reverse-proxy case.
+When `true`, sku sets Express `app.set('trust proxy', 1)` before listen.
+That value is hop count **`1`**, not Express boolean `true`.
+Use this for a single reverse proxy.
 
-Omit or `false` leaves Express’s default (`false`). This is opt-in via config (not a silent sku default). The create `ssr` template sets `expressTrustProxy: true`.
+If you omit the option or set `false`, Express keeps its default (`false`).
+This option is off unless you set it in config.
+Sku does not set it as a silent default.
+The create `ssr` template sets `expressTrustProxy: true`.
 
-For any other trust-proxy value (`false`, `2`, an IP list, …), override in server-entry [`onListen`](./ssr/entries.md#onlisten) via `app.set('trust proxy', …)`.
+For any other trust-proxy value (`false`, `2`, an IP list, …), override it in server-entry [`onListen`](./ssr/entries.md#onlisten) with `app.set('trust proxy', …)`.
 
 ```ts
 export default {
@@ -392,7 +430,12 @@ Type: `Array<string>`
 
 Default: `[]`
 
-An array of environments the app supports. Apps should have one environment for local development plus one for each environment they're deployed to. Use this value to drive app config (e.g. `analyticsEnabled` or `apiEndpoint`). See [static-rendering](./static-rendering.md) for more info.
+An array of environments the app supports.
+Include one environment for local development.
+Include one environment for each deployment target.
+Use this value to drive app config.
+Examples include `analyticsEnabled` and `apiEndpoint`.
+See [static-rendering](./static-rendering.md) for more info.
 
 ## externalizeNodeModules
 
@@ -400,7 +443,8 @@ Type: `boolean`
 
 Default: `false`
 
-By default, sku compiles all node_modules in builds that target node. Setting this option to `true` will instead externalize all node_modules, excluding `compilePackages`.
+By default, sku compiles all `node_modules` in builds that target Node.
+Set this option to `true` to externalize all `node_modules` except `compilePackages`.
 
 ## eslintIgnore
 
@@ -408,8 +452,8 @@ Type: `Array<string>`
 
 Default: `[]`
 
-Sku ignores [a number of files and directories][default ignores] by default when running ESLint.
-This option allows you to add additional files and directories to be ignored.
+When sku runs ESLint, it ignores [a number of files and directories][default ignores] by default.
+Use this option to ignore extra files and directories.
 
 [default ignores]: ./linting
 
@@ -419,11 +463,15 @@ Type: `Array<string>`
 
 Default: `['localhost']`
 
-An array of custom hosts the app can be served off when running `sku start` or `sku start-ssr`.
+An array of custom hosts that can serve the app when you run `sku start` or `sku start-ssr`.
 
-We recommend hostnames ending in `.localhost` (for example `au.seek.com.localhost`). These usually resolve to your machine automatically, and sku will not warn when they are missing from your [hosts file](https://en.wikipedia.org/wiki/Hosts_%28file%29). Exact `localhost` is also exempt from that warning.
+We recommend hostnames that end in `.localhost`. `au.seek.com.localhost` is one example.
+These hostnames usually resolve to your machine automatically.
+Sku does not warn when they are missing from your [hosts file](https://en.wikipedia.org/wiki/Hosts_%28file%29).
+Exact `localhost` is also exempt from that warning.
 
-For other custom hosts, your hosts file must point them to `localhost`. This can be done automatically by running [`sudo sku setup-hosts`](./cli.md#setup-hosts). `setup-hosts` will still write `.localhost` entries if you choose to run it.
+For other custom hosts, your hosts file must point them to `localhost`.
+You can do this automatically by running [`sudo sku setup-hosts`](./cli.md#setup-hosts). `setup-hosts` still writes `.localhost` entries if you run it.
 
 ## httpsDevServer
 
@@ -431,7 +479,9 @@ Type: `boolean`
 
 Default: `false`
 
-Whether or not to use `https` for the local development server with a self-signed certificate. This is useful when testing authentication flows that require access to `window.crypto`, and remains available for Safari and similar environments that still need a secure context over HTTPS even when using `*.localhost` hostnames.
+Whether to use `https` for the local development server with a self-signed certificate.
+Use this when you test authentication flows that need `window.crypto`.
+It also remains available for Safari and similar environments that still need a secure context over HTTPS, even with `*.localhost` hostnames.
 
 Supported for Static, webpack, and SSR via `sku start`.
 
@@ -441,7 +491,8 @@ Type: `string`
 
 Default: `routes[0].route`
 
-The browser URL to open when running `sku start` or `sku start-ssr`. It will default to the first `route` in the [`routes`](#routes) array.
+The browser URL to open when you run `sku start` or `sku start-ssr`.
+The default is the first `route` in the [`routes`](#routes) array.
 
 ## languages
 
@@ -455,7 +506,9 @@ See [Multi-language support](./multi-language.md) for details.
 
 Type: `string`
 
-The entry file for the library. If set, sku will assume the project is a library. Must export its API from this file.
+The entry file for the library.
+If you set this option, sku treats the project as a library.
+The file must export the library API.
 
 Example:
 
@@ -469,16 +522,19 @@ export default () => {
 
 Type: `string`
 
-The global name of the library. Will be added to the `window` object under `window[libraryName]`.
+The global name of the library.
+Sku adds it to the `window` object as `window[libraryName]`.
 
 ## libraryFile <Badge type="info" text="Library-mode only" />
 
 Type: `string`
 
-The file name of the library. The main bundle of the library will be output to `dist/${libraryFile}.js` - note that the
-`.js` extension will be added automatically and should not be included in the configuration option itself.
+The file name of the library.
+Sku writes the main bundle to `dist/${libraryFile}.js`.
+Sku adds the `.js` extension automatically.
+Do not include `.js` in this option.
 
-If `libraryFile` is not specified then `libraryName` will be used instead.
+If you omit `libraryFile`, sku uses `libraryName` instead.
 
 ## pathAliases
 
@@ -486,19 +542,22 @@ Type: `Record<string, string>`
 
 Default: `{}`
 
-Custom path alias mappings for module resolution. Each alias pattern maps to a destination path relative to the project root.
+Custom path alias mappings for module resolution.
+Each alias pattern maps to a destination path relative to the project root.
 
-This option generates `tsconfig.json#paths` so TypeScript can resolve these imports, and `sku` mirrors it into your `package.json#imports` field so the aliases resolve natively at build time.
+This option generates `tsconfig.json#paths` so TypeScript can resolve these imports.
+Sku also writes the same mappings to your `package.json#imports` field so the aliases resolve natively at build time.
 
-Subpath import specifiers must be prefixed with `#`.
+Prefix subpath import specifiers with `#`.
 
 > [!WARNING]
-> Because `sku` fully manages the `imports` field, any entries you add manually will be removed.
+> Sku fully manages the `imports` field.
+> Sku removes any entries you add by hand.
 > Declare all of your subpath imports via `pathAliases` instead.
 
 **Example:**
 
-```typescript
+```ts
 export default {
   pathAliases: {
     '#components/*': './src/components/*', // [!code highlight]
@@ -518,17 +577,17 @@ export default {
 }
 ```
 
-This enables clean imports like:
+You can then write imports like:
 
-```typescript
+```ts
 import { Button } from '#components/Button';
 import { formatDate } from '#utils/date';
 ```
 
 **Best practices:**
 
-- Prefer organizing code within a well-structured `src/` directory over extensive path aliasing
-- For complex projects requiring high levels of code organization, consider using a monorepo structure instead of relying heavily on path aliases
+- Prefer a well-structured `src/` directory over many path aliases
+- For complex projects that need more organization, consider a monorepo instead of many path aliases
 - Path aliases cannot point to `node_modules` directories
 
 ## entrySideEffects <Badge type="info" text="Vite only" />
@@ -540,6 +599,7 @@ Default: `[]`
 Bundler: `vite`
 
 An array of isomorphic modules that sku imports before any consumer module on Vite static and Vite SSR graphs.
+Isomorphic modules run on both the browser and the Node server.
 
 Use this for CSS resets and other side effects that must run first on both the browser and the Node server.
 Specifiers resolve from your app, in array order.
@@ -562,7 +622,7 @@ Type: `Array<string>`
 
 Default: `[]`
 
-An array of polyfills to be included into all client entry points.
+An array of polyfills to include in all client entry points.
 
 These load in the browser only.
 For isomorphic first-on-the-graph modules such as Braid reset, use [`entrySideEffects`](#entrysideeffects).
@@ -573,9 +633,11 @@ Type: `number`
 
 Default: `8080`
 
-The port the app is hosted on when running `sku start`.
+The port that hosts the app when you run `sku start`.
 
-**SSR**: also the baked production default listen port (`node dist/server/server.js`). Override at runtime with `PORT`. SSR does not use [`serverPort`](#serverport).
+**SSR**: this is also the baked production default listen port (`node dist/server/server.js`).
+Override it at runtime with `PORT`.
+SSR does not use [`serverPort`](#serverport).
 
 ## public
 
@@ -583,7 +645,8 @@ Type: `string`
 
 Default: `'public'`
 
-A folder of public assets to be copied into the `target` directory after `sku build` or `sku build-ssr`.
+A folder of public assets.
+Sku copies it into the `target` directory after `sku build` or `sku build-ssr`.
 
 **Not supported for SSR**
 
@@ -593,11 +656,13 @@ Type: `string`
 
 Default: `'/'`
 
-The URL all the static assets of the app are accessible under.
+The URL that serves all static assets of the app.
 
-For SSR the `publicPath` must be relative (e.g. `/` or `/static/`). Absolute `http(s)` / CDN URLs are not supported.
+For SSR, `publicPath` must be relative.
+Examples: `/` or `/static/`.
+Absolute `http(s)` and CDN URLs are not supported.
 
-For SSR, `publicPath` applies to `sku build` / production. `sku start` serves the Vite module graph from `/`.
+For SSR, `publicPath` applies to `sku build` and production. `sku start` serves the Vite module graph from `/`.
 
 ## renderEntry <Badge type="info" text="Library and Static only" />
 
@@ -605,7 +670,9 @@ Type: `string`
 
 Default: `./src/render.js`
 
-The render entry file to the app. This file should export the required functions for static rendering. See [static-rendering](./static-rendering.md) for more info.
+The render entry file for the app.
+This file must export the functions that static rendering needs.
+See [static-rendering](./static-rendering.md) for more info.
 
 ## routes <Badge type="info" text="Static only" />
 
@@ -613,9 +680,14 @@ Type: `Array<string | {route: string, name: string, entry: string, languages: Ar
 
 Default: `['/']`
 
-An array of routes for the app. Each route must specify a name and a route corresponding to the path it is hosted under. Each route may also have a custom client entry, which can help with bundle splitting. See [static-rendering](./static-rendering) for more info.
+An array of routes for the app.
+You can pass path strings, or objects with a name and a route for the path.
+Each route may also have a custom client entry.
+A custom client entry can help with bundle splitting.
+See [static-rendering](./static-rendering) for more info.
 
-Can be used to limit the languages rendered for a specific route. Any listed language must exist in the [top level languages attribute](#languages).
+You can also limit the languages rendered for a specific route.
+Any listed language must exist in the [top level languages attribute](#languages).
 
 Example:
 
@@ -633,7 +705,8 @@ Default: `./src/server.tsx`
 
 Path may be `.tsx`, `.ts`, or `.js`.
 
-Default-export a `defineServerEntry` object with optional getters (`getSite` / `getLanguage` / `getClientContext` / `getReactContext` / `getRouterContext`) and optional `middleware`.
+Default-export a `defineServerEntry` object.
+Optional getters are `getSite`, `getLanguage`, `getClientContext`, `getReactContext`, and `getRouterContext`. `middleware` is also optional.
 `getSite` is required only when config [`sites`](#sites) has more than one entry.
 Routes live on [`routesEntry`](#routesentry), not here.
 
@@ -659,13 +732,14 @@ Bundler: `webpack`
 
 Default: `8181`
 
-The port the server is hosted on when running `sku start-ssr`, and the default listen port for the webpack production server.
+The port that hosts the server when you run `sku start-ssr`.
+This is also the default listen port for the webpack production server.
 
 ## setupTests
 
 Type: `string`
 
-Point to a JS file that will run before your tests to setup the testing environment.
+Point to a JS file that runs before your tests to configure the testing environment.
 
 ## sites
 
@@ -674,17 +748,18 @@ Type: `Array<string | { name: string, host: string, languages: Array<string>, ro
 Default: `[]`
 
 An array of sites the app supports.
-These usually correspond to each domain the app is hosted under.
+These usually match each domain that hosts the app.
 
-Can be an array of site names, or objects with a site name and corresponding host.
+You can pass an array of site names, or objects with a site name and a host.
 See [Multi site](./multi-site#switching-site-by-host) for more info.
 
 **Static apps**
 
-Can be used to limit the languages rendered for a specific site.
+You can also limit the languages rendered for a specific site.
 Any listed language must exist in the [top level languages attribute](#languages).
 
-`sites[].host` / [`hosts`](#hosts) are for local-dev listen / setup-hosts only — they do not select the route tree.
+`sites[].host` and [`hosts`](#hosts) are for local-dev listen and setup-hosts only.
+They do not select the route tree.
 See [Routing → Multi-site](./ssr/routing.md#multi-site-routes).
 
 ## skipPackageCompatibilityCompilation
@@ -693,10 +768,13 @@ Type: `Array<string>`
 
 Default: `[]`
 
-When running `sku build`, sku will compile all your external packages (`node_modules`) through `@babel/preset-env`. This is to ensure external packages satisfy the browser support policy. However, this can cause very slow builds when large packages are processed. The `skipPackageCompatibilityCompilation` option allows you to pass a list of trusted packages to skip this behaviour.
+When you run `sku build`, sku compiles all your external packages (`node_modules`) through `@babel/preset-env`.
+Sku does this so external packages satisfy the browser support policy.
+Large packages can make this step very slow.
+Pass a list of trusted packages to `skipPackageCompatibilityCompilation` to skip this behaviour.
 
 > [!NOTE]
-> `react` & `react-dom` are skipped by default.
+> `react` and `react-dom` are skipped by default.
 
 Example:
 
@@ -712,8 +790,8 @@ Type: `boolean`
 
 Default: `true`
 
-Source maps are always generated for development builds.
-It is recommended to enable source maps for production builds in order to aid debugging.
+Sku always generates source maps for development builds.
+Keep source maps enabled for production builds so you can debug production.
 To disable source maps for production builds, set this option to `false`.
 
 Example:
@@ -725,8 +803,10 @@ export default {
 ```
 
 > [!WARNING]
-> Production source maps can increase memory usage during builds to the point where the Node process exhausts its heap memory.
-> If this occurs, you can increase the memory limit for the Node process by setting the `NODE_OPTIONS` environment variable to `--max-old-space-size=4096` (or a higher value) before running the build command.
+> Production source maps can increase memory usage during builds.
+> The Node process may exhaust its heap memory.
+> If this occurs, increase the memory limit for the Node process.
+> Set the `NODE_OPTIONS` environment variable to `--max-old-space-size=4096` (or a higher value) before you run the build command.
 
 For example:
 
@@ -736,8 +816,10 @@ NODE_OPTIONS=--max-old-space-size=4096 sku build
 
 ### When to disable `sourceMapsProd`
 
-Production source maps can be expensive.
-If your application does not utilize production source maps, e.g. you have no tracking of production errors, you can disable them to potentially reduce build times and memory usage.
+Production source maps can use a lot of memory and time.
+If your app does not use production source maps, you can disable them.
+For example, you have no tracking of production errors.
+Disabling them may reduce build times and memory usage.
 
 ## srcPaths
 
@@ -747,7 +829,9 @@ Default: `['./src']`
 
 Bundler: `webpack`
 
-An array of directories holding your app's source code. By default, sku expects your source code to be in a directory named `src` in the root of your project. Use this option if your source code needs to be arranged differently.
+An array of directories that hold your app's source code.
+By default, sku expects source code in a `src` directory at the project root.
+Use this option if you arrange source code differently.
 
 ## supportedBrowsers
 
@@ -763,7 +847,7 @@ Type: `string`
 
 Default: `dist`
 
-The directory to build your assets into when running `sku build` or `sku build-ssr`
+The directory that receives your assets when you run `sku build` or `sku build-ssr`
 
 ## testRunner
 
@@ -779,7 +863,9 @@ Type: `function`
 
 Default: `({ environment = '', site = '', route = '' }) => path.join(environment, site, route)`
 
-This function returns the output path within [`target`](#target) for each rendered page. Generally, this value should be sufficient. If you think you need to modify this setting, please reach out via the [support page] first to discuss.
+This function returns the output path within [`target`](#target) for each rendered page.
+The default is usually enough.
+If you think you need to change this setting, contact us via the [support page] first.
 
 [support page]: /support
 
@@ -791,9 +877,11 @@ Default: `[]`
 
 Bundler: `vite`
 
-Provides a way to add additional Vite plugins to the Vite config.
+Adds extra Vite plugins to the Vite config.
 
-**Not supported for SSR**. Providing `vitePlugins` with SSR fails config validation. Raise exceptional customisation needs via the [support page] with your use-case.
+**Not supported for SSR**.
+If you set `vitePlugins` with SSR, config validation fails.
+Contact us via the [support page] with your use case.
 
 ## \_\_UNSAFE_EXPERIMENTAL\_\_cjsInteropDependencies <Badge type="info" text="Vite only" />
 
@@ -804,12 +892,15 @@ Default: `[]`
 Bundler: `vite`
 
 > [!WARNING]
-> This is an experimental option that may change or be removed without notice.
+> This is an experimental option.
+> It may change or be removed without notice.
 
-An array of cjs import paths that have both a default and named exports.
+An array of CJS import paths that have both a default export and named exports.
 
-This is used to enable CommonJS interop for these dependencies when using the `vite` bundler.
+Sku uses this list to enable CommonJS interop for these dependencies when the bundler is `vite`.
 
-Packages that resolve to a module namespace object under `sku start` (React error “Element type is invalid … got: object”) often need an entry here — see [Server rendering → CJS default-export interop](./ssr/troubleshooting.md#cjs-default-export-interop).
+Packages that resolve to a module namespace object under `sku start` often need an entry here.
+The React error is “Element type is invalid … got: object”.
+See [Server rendering → CJS default-export interop](./ssr/troubleshooting.md#cjs-default-export-interop).
 
 See https://github.com/cyco130/vite-plugin-cjs-interop for more information.

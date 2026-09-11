@@ -11,10 +11,10 @@ Mount isomorphic providers (Braid, Vocab, Apollo) and shared UI in your **root l
 sku mounts a `SkuProvider` outside the router:
 
 ```
-Document
- └── SkuProvider   ← site, clientContext, reactContext
-      └── Router
-           └── root layout route   ← Vocab, Apollo, shared UI
+SkuProvider   ← site, clientContext, reactContext
+ └── Router
+      └── root layout route   ← <html>, <head>, <body>, providers, shared UI
+           └── child route   ← ErrorBoundary
                 └── pages
 ```
 
@@ -102,41 +102,51 @@ For loader/action/route-middleware dependency injection, see [Data loading → R
 
 ## Root layout for providers
 
-Wrapping that needs React Router hooks belongs in your own root layout in `routes.tsx`.
-You can add a **pathless** layout to wrap child routes without adding a URL segment.
-The same root layout can be used for shared UI such as a header or footer.
+In Managed Data Mode, your root layout renders the HTML document structure: `<html>`, `<head>`, and `<body>`.
+Sku hoists stylesheet and `modulepreload` links into that `<head>`.
+Your Root Layout is rendered inside sku's context and React Router, so you can make use of their hooks such as [`useSite()`](#typed-hooks) and [`useLocation()`](https://reactrouter.com/api/hooks/useLocation).
 
 ::: code-group
 
 ```tsx [RootLayout.tsx]
 import { BraidProvider } from 'braid-design-system';
 import seekJobs from 'braid-design-system/themes/seekJobs';
-import { Outlet, useLocation } from 'react-router';
+import { Outlet } from 'react-router';
 
-export const RootLayout = () => {
-  const language = useLanguage();
-
-  return (
-    <BraidProvider theme={seekJobs}>
-      <Header />
-      <Outlet />
-      <Footer />
-    </BraidProvider>
-  );
-};
+export const RootLayout = () => (
+  <html lang="en">
+    <head>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+      <BraidProvider theme={seekJobs}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </BraidProvider>
+    </body>
+  </html>
+);
 ```
 
 ```tsx [routes.tsx]
 import type { SkuRouteObject } from 'sku/runtime';
 
+import { ErrorBoundary } from './ErrorBoundary';
 import { RootLayout } from './RootLayout';
 
 export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
     children: [
-      { index: true, lazy: () => import('./pages/home/home') },
-      { path: 'about', lazy: () => import('./pages/about/about') },
+      {
+        ErrorBoundary,
+        children: [
+          { index: true, lazy: () => import('./pages/home/home') },
+          { path: 'about', lazy: () => import('./pages/about/about') },
+        ],
+      },
     ],
   },
 ];
@@ -144,9 +154,10 @@ export const routes: SkuRouteObject[] = [
 
 :::
 
-Env-specific **values** (API clients, etc.) come from dual-entry `getReactContext`.
-Isomorphic **provider components** mount in the root layout and read those values with hooks — for example Vocab keyed on the URL, or Apollo via `useReactContext()`.
-See [Multi-language](./multi-language.md) and [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
+### Providers wrapping html
+
+App providers that `<head>` nodes need must wrap `<html>` in your root layout.
+For example, if an inline font stylesheet reads brand or locale context, wrap `<html>` in that provider so `<head>` can consume it.
 
 ## Braid reset
 
@@ -222,7 +233,7 @@ Mount `<Analytics />` in the root layout.
 ## See also
 
 - [Request entries](./entries.md) — getters and entry shapes
-- [Routing](./routing.md) — pathless root layout and pages
+- [Routing](./routing.md) — root layout and pages
 - [Data loading](./data-loading.md) — render-time fetch and router context
 - [Multi-language](./multi-language.md) — Vocab in the root layout
 - [Error pages → Errors above the router](./error-pages.md#errors-above-the-router) — route boundaries do not cover `SkuProvider`

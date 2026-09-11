@@ -29,7 +29,7 @@ Use React Router’s [lazy factory](https://reactrouter.com/start/data/route-obj
 ```tsx [routes.tsx]
 import type { SkuRouteObject } from 'sku/runtime';
 
-import { RootLayout } from './App/RootLayout';
+import { RootLayout } from './RootLayout';
 
 export const routes: SkuRouteObject[] = [
   {
@@ -45,7 +45,17 @@ export const routes: SkuRouteObject[] = [
 ```tsx [RootLayout.tsx]
 import { Outlet } from 'react-router';
 
-export const RootLayout = () => <Outlet />;
+export const RootLayout = () => (
+  <html lang="en">
+    <head>
+      <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+      <Outlet />
+    </body>
+  </html>
+);
 ```
 
 ```tsx [home.tsx]
@@ -64,13 +74,13 @@ export function Component() {
 
 Lazy page modules must export a named `Component` (not `export default`).
 
-Use a **pathless** root layout for shared UI and providers (see [Providers](./providers.md)).
+Use a **pathless** root layout to render `<html>`, `<head>`, and `<body>`, plus shared UI and providers (see [Providers](./providers.md)).
 
 You’re set up when:
 
 - Pages load via `lazy: () => import(...)` (not static imports into `routes.tsx`)
 - Each page module exports a named `Component`
-- Shared UI lives on a pathless root layout
+- The pathless root layout renders `<html>`, `<head>`, and `<body>`
 
 ### Keep pages lazy
 
@@ -108,7 +118,7 @@ Resolve the active site in the server entry with [`getSite`](./entries.md#getsit
 ```tsx [routes.tsx]
 import type { SkuRouteObject } from 'sku/runtime';
 
-import { RootLayout } from './App/RootLayout';
+import { RootLayout } from './RootLayout';
 
 export const routes: SkuRouteObject[] = [
   {

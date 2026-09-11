@@ -24,7 +24,7 @@ Returns `(callback: () => ReactNode) => void`.
 During document SSR, sku writes queued nodes into the response stream (first batch before `</head>`, then before later React chunks).
 In the browser it is a silent no-op.
 
-Use it for streaming data transports such as Apollo’s `buildManualDataTransport` — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
+Use it for streaming data transports such as Apollo’s `buildManualDataTransport`, not for Document head tags — see [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
 
 Injected script bodies carry the [CSP nonce](./csp.md#nonces) if enabled.
 

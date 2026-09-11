@@ -2,8 +2,9 @@
 
 ## Purpose
 
-How sku wires React Router Data Mode for apps that own routes, data, and providers.
-Sku owns the Document, SkuProvider, streaming seams, and site-scoped route trees.
+How sku wires React Router Data Mode for apps that provide routes, data, and providers.
+Sku provides SkuProvider, streaming seams, and site-scoped route trees.
+The root layout renders the HTML document element tree.
 Public APIs live on `sku/runtime`.
 
 ## Requirements
@@ -11,8 +12,9 @@ Public APIs live on `sku/runtime`.
 ### Requirement: Managed Data Mode naming
 
 Product docs and public APIs MUST describe this architecture as **Managed Data Mode**.
-Sku owns the Document and React Router Data Mode wiring.
-Apps own routes, data, and providers.
+Sku streams and hydrates, and wires React Router Data Mode.
+The root layout renders `<html>`, `<head>`, and `<body>`.
+Apps provide routes, data, and providers.
 
 **SSR** MUST refer only to the render strategy selected by `buildType: 'ssr'`.
 
@@ -33,6 +35,65 @@ Product docs, templates, and public APIs MUST NOT use the label `vite-ssr` (that
 
 - **WHEN** an app imports Managed Data Mode helpers (`defineServerEntry`, `createSkuContexts`, `useInsertHtml`, …)
 - **THEN** the import specifier is `sku/runtime`
+
+### Requirement: Root layout renders the HTML document
+
+The root layout route MUST render `<html>`, `<head>`, and `<body>`.
+Sku MUST NOT wrap the router in a sku-owned `<html>`.
+
+App providers MAY wrap `<html>` so nodes in `<head>` see the same context as the rest of the document.
+
+#### Scenario: Root layout supplies html
+
+- **WHEN** sku streams a document
+- **AND** the root layout renders `<html>`, `<head>`, and `<body>`
+- **THEN** the response HTML’s `<html>` comes from that layout
+- **AND** sku does not emit a second wrapping `<html>`
+
+#### Scenario: Providers can wrap html
+
+- **WHEN** the root layout wraps `<html>` with an app provider
+- **AND** a non-hoistable `<style>` is a child of `<head>`
+- **THEN** that `<style>` is a descendant of `<head>` in the SSR HTML
+- **AND** it can read that provider
+
+### Requirement: Sku hoists document links
+
+Sku MUST emit Document CSS `<link rel="stylesheet">` and `modulepreload` `<link>` elements from sku-owned asset URLs.
+Stylesheet links MUST set `precedence` so React hoists them into the app `<head>`.
+Dev SSR CSS MUST still mark the virtual stylesheet href with `data-ssr-css`.
+
+Sku MUST mount those links outside the router on server stream and client hydrate.
+
+Charset, viewport, and `html lang` come from the app.
+
+Omitting sku links from the app tree MUST NOT throw.
+
+#### Scenario: Sku links appear in app head
+
+- **WHEN** the root layout renders `<html>` and `<head>`
+- **AND** the document has CSS and modulepreload URLs
+- **THEN** those `<link>`s appear inside `<head>` in the SSR HTML
+- **AND** stylesheet links have a `precedence` attribute
+- **AND** the hydrate tree mounts the same sku resource nodes
+
+#### Scenario: App does not render sku asset links and still gets them
+
+- **WHEN** the root layout renders `<html>` and does not render a sku asset component
+- **THEN** sku still streams the document
+- **AND** sku-owned CSS and modulepreload links still appear in `<head>`
+
+### Requirement: ErrorBoundary must not replace the html layout
+
+An `ErrorBoundary` on the route that renders `<html>` replaces that layout on failure.
+Apps MUST put `ErrorBoundary` on a descendant route so the document layout stays mounted.
+
+#### Scenario: Child route ErrorBoundary keeps html
+
+- **WHEN** the root layout renders `<html>`
+- **AND** `ErrorBoundary` is on a child route
+- **AND** that child fails
+- **THEN** the response still includes the root layout’s `<html>`
 
 ### Requirement: routesEntry exports routes
 
@@ -379,7 +440,9 @@ Omitting `onListen` MUST mean no post-listen callback (not an error).
 SSR defines `onListen` call timing and failure behaviour.
 
 Sku MUST always render `SkuProvider` outside the router, with `site`, `clientContext`, and `reactContext` for that document.
-The tree is `Document` → `SkuProvider` → router.
+The tree is `SkuProvider` → router → root layout.
+The root layout renders `<html>`, `<head>`, and `<body>`.
+Sku MUST NOT wrap the router in a sku-owned `<html>`.
 
 Sku MUST export `createSkuContexts<typeof server, typeof client>()` from `sku/runtime` so apps can obtain typed `useSite` / `useClientContext` / `useReactContext` bound to that provider.
 `createSkuContexts` MUST extract `Site` from the server entry’s `getSite` return (`string` when `getSite` is omitted), `ClientContext` from `getClientContext`, and `ReactContext` from both entries’ `getReactContext` returns (union when they differ).
@@ -508,7 +571,8 @@ Sku MUST NOT make Express `req` the loader `request` argument (`query()` continu
 #### Scenario: SkuProvider always wraps the router
 
 - **WHEN** sku renders an SSR document (server or client)
-- **THEN** it renders `SkuProvider` between `Document` and the router provider
+- **THEN** it renders `SkuProvider` around the router provider
+- **AND** it does not wrap the router in a sku-owned `<html>`
 - **AND** the route tree is unchanged
 - **AND** apps can read `site` / `clientContext` / `reactContext` via `createSkuContexts` hooks
 
@@ -611,7 +675,7 @@ Sku MUST NOT require a shared array across entries.
 
 ### Requirement: Shared Managed Data Mode modules keep one identity under Vite
 
-App code that imports shared Managed Data Mode state from `sku/runtime` (hooks from `createSkuContexts`, `useInsertHtml`, `usePreloadRoute`, CSP nonce helpers) and sku’s own Managed Data Mode runtime (`SkuProvider`, insert-html queue/provider, preload registry, request-context runner) MUST observe the **same** module instances.
+App code that imports shared Managed Data Mode state from `sku/runtime` (hooks from `createSkuContexts`, `useInsertHtml`, `usePreloadRoute`, CSP nonce helpers) and sku’s own Managed Data Mode runtime (`SkuProvider`, insert-html queue/provider, document asset links, preload registry, request-context runner) MUST observe the **same** module instances.
 
 Sku MUST:
 
@@ -623,7 +687,7 @@ Public `sku/runtime` modules MUST re-export from the same physical shared files 
 tsdown `unbundle: true` alone MUST NOT be treated as sufficient for published-package identity.
 
 Sku MUST NOT require consumers to inject their own Vite `optimizeDeps` config for this identity.
-Sku MUST NOT export sku-only shared-state symbols (`SkuProvider`, insert-html queue/provider, site route registration, request-context runner) from public `sku/runtime`.
+Sku MUST NOT export sku-only shared-state symbols (`SkuProvider`, insert-html queue/provider, document asset links, site route registration, request-context runner) from public `sku/runtime`.
 
 #### Scenario: Hooks read values from SkuProvider
 
@@ -638,7 +702,7 @@ Sku MUST NOT export sku-only shared-state symbols (`SkuProvider`, insert-html qu
 #### Scenario: Public runtime does not export sku-only mounts
 
 - **WHEN** an app imports from `sku/runtime`
-- **THEN** the public surface does not include `SkuProvider`, insert-html queue/provider helpers, site route registration, or the request-context runner
+- **THEN** the public surface does not include `SkuProvider`, insert-html queue/provider helpers, document asset links, site route registration, or the request-context runner
 - **AND** those symbols remain reachable only through sku’s private package `imports`
 
 ### Requirement: Apps can insert HTML into the response stream

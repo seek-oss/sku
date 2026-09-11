@@ -102,6 +102,10 @@ Raw `req` is bot available on client navigations — see [Data loading → Route
 Use header CSP and the single request-scoped nonce (`getCspNonce` / `req.getCspNonce`) — see [CSP](./csp.md).
 
 Drop hand-rolled HTML templates / `getHeadTags` / `getBodyTags`.
+Render `<html>`, `<head>`, and `<body>` in your root layout.
+Sku hoists stylesheet and `modulepreload` links into `<head>`.
+Nest `ErrorBoundary` on a child route under that layout so the HTML document stays mounted on failure.
+Put hoistable SEO tags (`<title>`, `<meta>`, `<link>`) in the route tree and non-hoistable tags in the root layout `<head>`.
 
 Hydration is full-document (`hydrateRoot(document)`), not a partial mount inside markup from `renderCallback`.
 

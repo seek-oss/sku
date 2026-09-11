@@ -5,7 +5,7 @@
 > Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
 > In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
 
-Your app provides logging.
+Your app controls logging.
 Wire it where the event happens:
 
 | Layer                     | Where                     | For                                                |

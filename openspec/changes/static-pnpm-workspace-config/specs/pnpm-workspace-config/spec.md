@@ -2,16 +2,20 @@
 
 ### Requirement: Sync runs on lint and format only
 
-Sku SHALL sync its recommended pnpm settings into the project's `pnpm-workspace.yaml` through exactly two entry points: a read-only check on `sku lint` and an enforcing write on `sku format`.
+Sku SHALL sync its recommended pnpm settings into the project's `pnpm-workspace.yaml` through exactly two entry points. A read-only check on `sku lint`. An enforcing write on `sku format`.
+
 The sync MUST NOT run on any other sku command, on postinstall, or on `sku configure`.
-The sync MUST NOT be gated by `skuSkipConfigure` or `skuSkipPostInstall`; those flags do not apply to the lint check or the format write.
+
+The sync MUST NOT be gated by `skuSkipConfigure` or `skuSkipPostInstall`. Those flags do not apply to the lint check or the format write.
+
 The sync MUST only run for pnpm projects with a resolved project root and an existing `pnpm-workspace.yaml`.
+
 The sync MUST NOT create `pnpm-workspace.yaml` when it is missing.
 
 #### Scenario: Lint checks without writing
 
 - **WHEN** a user runs `sku lint` in a pnpm project with an existing `pnpm-workspace.yaml`
-- **THEN** the file is checked against sku's recommended settings and is never modified
+- **THEN** the file is checked against sku's recommended settings and is never changed
 
 #### Scenario: Format enforces
 
@@ -21,36 +25,44 @@ The sync MUST NOT create `pnpm-workspace.yaml` when it is missing.
 #### Scenario: Other commands do not sync
 
 - **WHEN** a user runs a configuration-enabled sku command other than lint or format (for example `sku start`, `sku build`, or `sku test`)
-- **THEN** `pnpm-workspace.yaml` is neither checked nor modified
+- **THEN** `pnpm-workspace.yaml` is neither checked nor changed
 
 #### Scenario: Configure does not sync
 
 - **WHEN** a user runs `sku configure`
-- **THEN** `pnpm-workspace.yaml` is neither checked nor modified
+- **THEN** `pnpm-workspace.yaml` is neither checked nor changed
 
 #### Scenario: Postinstall does not sync
 
 - **WHEN** sku's postinstall runs
-- **THEN** `pnpm-workspace.yaml` is neither checked nor modified
+- **THEN** `pnpm-workspace.yaml` is neither checked nor changed
 
 #### Scenario: Skipped for non-pnpm projects
 
 - **WHEN** a user runs `sku lint` or `sku format` in a yarn or npm project
-- **THEN** no `pnpm-workspace.yaml` is created, checked, or modified, and the lint check passes
+- **THEN** no `pnpm-workspace.yaml` is created, checked, or changed
+- **AND** the lint check passes
 
 #### Scenario: Missing file is left untouched
 
 - **WHEN** a pnpm project has no `pnpm-workspace.yaml`
 - **AND** a user runs `sku lint` or `sku format`
-- **THEN** no file is created, no settings are written, and the lint check passes
+- **THEN** no file is created
+- **AND** no settings are written
+- **AND** the lint check passes
 
 ### Requirement: Values are managed by uniform marker ownership
 
-Every value in the synced settings is either sku-managed or user-managed, tracked by a `[sku_managed]` marker in the value's comment.
-A value counts as sku-managed when its comment contains the marker anywhere; sku writes the marker at the end of the comment, after any explanatory text (for example `# 3 days [sku_managed]`).
-This rule applies uniformly to single-value settings, keys within object settings, and array entries: no setting kind has a fixed owner, and no marker is informational only.
+Every value in the synced settings is either sku-managed or user-managed. A `[sku_managed]` marker in the value's comment tracks ownership.
+
+A value counts as sku-managed when its comment contains the marker anywhere. Sku writes the marker at the end of the comment, after any explanatory text (for example `# 3 days [sku_managed]`).
+
+This rule applies uniformly to single-value settings, keys within object settings, and array entries. No setting kind has a fixed owner. No marker is informational only.
+
 Unmarked values MUST be treated as user-managed and MUST always be preserved.
-Deleting a value's marker SHALL make it user-managed; this is the only per-value opt-out.
+
+Removing a value's marker SHALL make it user-managed. This is the only per-value opt-out.
+
 The one exception: unmarked values exactly matching sku's current defaults SHALL be adopted (marked) by `sku format`.
 
 #### Scenario: Marked single-value setting is sku-managed
@@ -60,17 +72,18 @@ The one exception: unmarked values exactly matching sku's current defaults SHALL
 
 #### Scenario: Unmarked single-value setting is user-managed
 
-- **WHEN** a user deletes the `[sku_managed]` marker from `minimumReleaseAge` and sets a non-default value
-- **THEN** `sku format` leaves the value unchanged and `sku lint` treats it as user-managed drift
+- **WHEN** a user removes the `[sku_managed]` marker from `minimumReleaseAge` and sets a non-default value
+- **THEN** `sku format` leaves the value unchanged
+- **AND** `sku lint` treats it as user-managed drift
 
 #### Scenario: Unmarked collection entries are user-managed
 
 - **WHEN** a project's `publicHoistPattern` or `allowBuilds` contains an unmarked user-added entry
 - **THEN** every sync leaves that entry in place
 
-#### Scenario: Deleted marker on a current default is re-adopted
+#### Scenario: Removed marker on a current default is re-adopted
 
-- **WHEN** a user deletes the `[sku_managed]` marker from a value that still matches a current sku default
+- **WHEN** a user removes the `[sku_managed]` marker from a value that still matches a current sku default
 - **AND** the user runs `sku format`
 - **THEN** the value is re-marked as `[sku_managed]`
 
@@ -81,9 +94,12 @@ The one exception: unmarked values exactly matching sku's current defaults SHALL
 
 ### Requirement: Lint fails on managed drift
 
-`sku lint` SHALL fail when the file requires managed changes: a managed setting or entry is missing, a marked value differs from sku's current default, a marked entry has been retired by sku, an unmarked value exactly matches a sku default but has not been adopted, or `pnpm-plugin-sku` is still present in `configDependencies`.
+`sku lint` SHALL fail when the file requires managed changes. A managed setting or entry is missing. A marked value differs from sku's current default. Sku retired a marked entry. An unmarked value exactly matches a sku default but has not been adopted. Or `pnpm-plugin-sku` is still present in `configDependencies`.
+
 Failures SHALL name the key, the current and recommended states, and direct the user to run `sku format`.
-The lint check MUST NOT modify the file.
+
+The lint check MUST NOT change the file.
+
 A file whose values and markers already match sku's defaults SHALL pass silently.
 
 #### Scenario: Missing managed setting fails
@@ -123,15 +139,18 @@ A file whose values and markers already match sku's defaults SHALL pass silently
 
 ### Requirement: Lint logs user-managed drift as info
 
-When `sku lint` finds an unmarked (user-managed) value that differs from sku's current default, it SHALL log an info message naming the key, the current value, the recommended value, and the two re-alignment paths: edit the value to match sku's default, or delete it and let the next `sku format` re-add it as sku-managed.
+When `sku lint` finds an unmarked (user-managed) value that differs from sku's current default, it SHALL log an info message. The message names the key, the current value, the recommended value, and the two re-alignment paths. Edit the value to match sku's default. Or remove it and let the next `sku format` add it again as sku-managed.
+
 User-managed drift MUST NOT fail the lint run.
+
 No info SHALL be logged for user-managed entries that have no corresponding sku default.
 
 #### Scenario: Differing user-managed value is info-only
 
 - **WHEN** a project's `pnpm-workspace.yaml` has `minimumReleaseAge: 1440` without a marker and sku's current default is `4320`
 - **AND** the user runs `sku lint`
-- **THEN** an info message names the key, both values, and the re-alignment paths, and the lint run does not fail on it
+- **THEN** an info message names the key, both values, and the re-alignment paths
+- **AND** the lint run does not fail on it
 
 #### Scenario: User's own entries are silent
 
@@ -141,11 +160,15 @@ No info SHALL be logged for user-managed entries that have no corresponding sku 
 
 ### Requirement: Format enforces managed values
 
-`sku format` SHALL enforce sku's current defaults for all sku-managed values: missing managed single-value settings, object keys, and array entries are added with the `[sku_managed]` marker; marked values that differ from defaults are rewritten in both directions; marked entries that sku has retired are removed.
-There is no never-downgrade or strength-ordering special case: managed means enforced.
+`sku format` SHALL enforce sku's current defaults for all sku-managed values. It adds missing managed single-value settings, object keys, and array entries with the `[sku_managed]` marker. It rewrites marked values that differ from defaults, in both directions. It removes marked entries that sku retired.
+
+There is no never-downgrade or strength-ordering special case. Managed means enforced.
+
 User-managed values MUST always be preserved.
-Unmarked values exactly matching sku's current defaults SHALL be adopted (marked), with their existing comments replaced by the marker and any sku explanatory comment.
-Array results MUST be deduped; when duplicate values have different ownership, the unmarked user-owned entry MUST be retained.
+
+Unmarked values exactly matching sku's current defaults SHALL be adopted (marked). Their existing comments SHALL be replaced by the marker and any sku explanatory comment.
+
+Array results MUST be deduped. When duplicate values have different ownership, the unmarked user-owned entry MUST be retained.
 
 #### Scenario: Missing managed value is added
 
@@ -153,7 +176,7 @@ Array results MUST be deduped; when duplicate values have different ownership, t
 - **AND** the user runs `sku format`
 - **THEN** the sync adds it with sku's current default and a `[sku_managed]` marker, and logs the addition
 
-#### Scenario: Outdated managed value is corrected
+#### Scenario: Format rewrites an outdated managed value
 
 - **WHEN** a project's `pnpm-workspace.yaml` has `minimumReleaseAge: 1440` with a `[sku_managed]` marker and sku's current default is `4320`
 - **AND** the user runs `sku format`
@@ -177,11 +200,11 @@ Array results MUST be deduped; when duplicate values have different ownership, t
 - **AND** the user runs `sku format`
 - **THEN** the value is left at `1440`
 
-#### Scenario: User re-aligns by deleting a value
+#### Scenario: User re-aligns by removing a value
 
 - **WHEN** a project has a user-managed value that differs from sku's default
-- **AND** the user deletes the value and runs `sku format`
-- **THEN** the sync re-adds the setting with sku's current default and a `[sku_managed]` marker
+- **AND** the user removes the value and runs `sku format`
+- **THEN** the sync adds the setting again with sku's current default and a `[sku_managed]` marker
 
 #### Scenario: Unmarked entry matching a default is adopted
 
@@ -198,9 +221,13 @@ Array results MUST be deduped; when duplicate values have different ownership, t
 ### Requirement: Managed values are annotated
 
 Values written by the sync SHALL carry a comment ending in the `[sku_managed]` marker.
-This applies to managed single-value settings and to each sku-managed entry within merged collections, so user-managed entries stay visually distinct.
-When the sync adopts or overwrites a managed value, its existing inline or preceding comments MUST be replaced with the sku marker and any sku explanatory comment.
+
+This applies to managed single-value settings and to each sku-managed entry within merged collections. User-managed entries then stay visually distinct.
+
+When the sync adopts or overwrites a managed value, it MUST replace existing inline or preceding comments. The replacement is the sku marker and any sku explanatory comment.
+
 Comments on user-managed entries and unmanaged keys MUST be preserved.
+
 A file whose values and markers already match sku's defaults MUST NOT be rewritten.
 
 #### Scenario: Managed value is marked
@@ -217,6 +244,7 @@ A file whose values and markers already match sku's defaults MUST NOT be rewritt
 ### Requirement: Existing file content is preserved
 
 The sync MUST preserve comments on user-managed entries, the `packages` field, and any keys sku does not manage.
+
 The sync MUST NOT rewrite the file when its content is already aligned with sku's defaults.
 
 #### Scenario: Comments survive sync
@@ -234,7 +262,9 @@ The sync MUST NOT rewrite the file when its content is already aligned with sku'
 ### Requirement: Changes are logged
 
 The format sync SHALL log each mutation it makes.
+
 This covers additions, adoptions, duplicate removal, overwrites with old and new values, removals of retired sku-managed entries, and removal of the `pnpm-plugin-sku` config dependency.
+
 The sync MUST NOT produce output when no changes are made.
 
 #### Scenario: Addition is announced
@@ -250,15 +280,25 @@ The sync MUST NOT produce output when no changes are made.
 ### Requirement: pnpm-plugin-sku config dependency is migrated away
 
 When `sku format` finds `pnpm-plugin-sku` in `configDependencies`, it SHALL remove the entry and log the migration.
+
 If the entry is repeated, all occurrences SHALL be removed.
+
 If `configDependencies` becomes empty, the key itself MUST be removed.
+
 An already-empty `configDependencies` key without `pnpm-plugin-sku` MUST be preserved.
+
 The presence of `pnpm-plugin-sku` in `configDependencies` SHALL fail `sku lint`.
+
 Projects MUST NOT require `pnpm add --config pnpm-plugin-sku` at any point.
+
 The `pnpm-plugin-sku` package itself remains in the sku monorepo and published.
 
 #### Scenario: Existing plugin project migrates
 
 - **WHEN** a project's `pnpm-workspace.yaml` contains `configDependencies` with `pnpm-plugin-sku`
 - **AND** the user runs `sku format` after upgrading sku
-- **THEN** the sync removes the entry, adds any missing managed settings, adopts matching unmarked values, preserves differing unmarked values as user-managed, and logs the migration
+- **THEN** the sync removes the entry
+- **AND** it adds any missing managed settings
+- **AND** it adopts matching unmarked values
+- **AND** it preserves differing unmarked values as user-managed
+- **AND** it logs the migration

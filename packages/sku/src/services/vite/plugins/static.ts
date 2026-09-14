@@ -2,6 +2,7 @@ import type { PluginOption } from 'vite';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { renderEntryChunkName, createOutDir } from '../helpers/bundleConfig.js';
 import { makePluginName } from '../helpers/makePluginName.js';
+import { ENTRY_SIDE_EFFECTS_VIRTUAL_ID } from './entrySideEffects.js';
 import { vitePluginSsrCss } from './ssrCss/plugin.js';
 import { middlewarePlugin } from './middleware.js';
 import { telemetryPlugin } from './telemetry.js';
@@ -72,7 +73,7 @@ export const staticPlugins = ({
       }),
     },
     vitePluginSsrCss({
-      entries: [skuContext.paths.renderEntry],
+      entries: [ENTRY_SIDE_EFFECTS_VIRTUAL_ID, skuContext.paths.renderEntry],
     }),
     environment !== undefined && middlewarePlugin({ skuContext, environment }),
     telemetryPlugin({

@@ -2,14 +2,16 @@ import {
   ListExternalsWebpackPlugin,
   makeStableHashes,
 } from '@sku-private/test-utils';
+import type { SkuConfig } from 'sku';
+
+import baseConfig from './sku.config.base.js';
 
 export default {
-  sites: [
-    { name: 'seekAnz', host: 'au.seek.com.localhost' },
-    { name: 'jobStreet', host: 'jobstreet.com.localhost' },
-  ],
-  publicPath: '/',
-  port: 8200,
+  ...baseConfig,
+
+  clientEntry: 'src/webpack-static/client.tsx',
+  renderEntry: 'src/webpack-static/render.tsx',
+
   dangerouslySetWebpackConfig: (config) => {
     if (config.name === 'render') {
       config.plugins.push(new ListExternalsWebpackPlugin());
@@ -19,5 +21,4 @@ export default {
 
     return config;
   },
-  setupTests: './jestSetup.js',
-};
+} satisfies SkuConfig;

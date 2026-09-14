@@ -55,7 +55,10 @@ Local mocks stay in [`devServerMiddleware`](../configuration.md#devservermiddlew
 SSR emits **HTTP header** CSP, not meta `http-equiv` — see [CSP](./csp.md).
 
 Replace `#app` `hydrateRoot` and `renderDocument` with sku’s full-document stream and `hydrateRoot(document)`.
-Use React document metadata in routes/layouts for head/SEO; the Document shell is not overridable.
+Render `<html>`, `<head>`, and `<body>` in your root layout.
+Sku hoists stylesheet and `modulepreload` links into `<head>`.
+Nest `ErrorBoundary` on a child route under that layout so the HTML document stays mounted on failure.
+Move hoistable SEO tags (`<title>`, `<meta>`, `<link>`) into routes/layouts as React document metadata, and non-hoistable tags into the root layout `<head>`.
 
 ## See also
 

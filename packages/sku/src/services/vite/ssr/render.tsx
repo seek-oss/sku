@@ -81,6 +81,7 @@ const renderDocument = async ({
   let documentAssets: DocumentAssets = {
     css: assets.css,
     modulePreloads: assets.modulePreloads,
+    ssrCssHref: assets.ssrCssHref,
   };
   if (renderManifest) {
     documentAssets = resolveAssets({

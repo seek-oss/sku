@@ -1,8 +1,10 @@
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { type Template, isViteBasedTemplate } from '../types/index.js';
-import type { SupportedPackageManager } from '@sku-private/utils';
-import { execAsync } from '../utils/execAsync.js';
+import {
+  skuPackageManager,
+  type SupportedPackageManager,
+} from '@sku-private/utils';
 
 export interface PackageJsonOptions {
   projectName: string;
@@ -16,8 +18,6 @@ export const generatePackageJson = async (
 ) => {
   const isVite = isViteBasedTemplate(template);
   const testFlag = isVite ? ' --run' : '';
-  const resolvedPackageManager =
-    await resolvePackageManagerField(packageManager);
 
   const packageJson = {
     name: projectName,
@@ -31,34 +31,13 @@ export const generatePackageJson = async (
       format: 'sku format',
       lint: 'sku lint',
     },
-    ...(resolvedPackageManager
-      ? { packageManager: resolvedPackageManager }
-      : {}),
+    // Pin to sku's pnpm. The running CLI or a registry tag can disagree
+    // with this version and make install try to switch.
+    ...(packageManager === 'pnpm' ? { packageManager: skuPackageManager } : {}),
   };
 
   const packageJsonPath = join(targetPath, 'package.json');
   const packageJsonContent = `${JSON.stringify(packageJson, null, 2)}\n`;
 
   await writeFile(packageJsonPath, packageJsonContent, 'utf8');
-};
-
-const resolvePackageManagerField = async (
-  packageManager: SupportedPackageManager,
-): Promise<string | null> => {
-  if (packageManager !== 'pnpm') {
-    return null;
-  }
-
-  const latestPnpmV11Version =
-    // The `latest-*` tag controls what major version of PNPM is configured in new apps.
-    // When updating it in the future, ensure that the sku repo itself also updates to the
-    // same major version. Not doing this can result in inconsistent test behaviour.
-    // See https://github.com/seek-oss/sku/pull/1586.
-    (await execAsync(`pnpm view pnpm dist-tags.latest-11`)).trim();
-
-  if (!latestPnpmV11Version) {
-    return null;
-  }
-
-  return `pnpm@${latestPnpmV11Version}`;
 };

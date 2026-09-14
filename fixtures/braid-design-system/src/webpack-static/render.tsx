@@ -1,15 +1,17 @@
-import { renderToString } from 'react-dom/server';
+import 'braid-design-system/reset';
 
-import App from './App';
+import { renderToString } from 'react-dom/server';
+import type { Render } from 'sku';
+
+import App from '../App';
 
 export default {
-  renderApp: ({ site, SkuProvider }) => {
-    return renderToString(
+  renderApp: ({ site, SkuProvider }) =>
+    renderToString(
       <SkuProvider>
         <App themeName={site} />
       </SkuProvider>,
-    );
-  },
+    ),
 
   provideClientContext: ({ site }) => ({
     site,
@@ -33,4 +35,4 @@ export default {
       </body>
     </html>
   `,
-};
+} satisfies Render;

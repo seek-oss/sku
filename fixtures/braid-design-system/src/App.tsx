@@ -1,5 +1,3 @@
-import 'braid-design-system/reset';
-import { useState, useEffect } from 'react';
 import {
   BraidProvider,
   Text,
@@ -9,12 +7,17 @@ import {
   Box,
 } from 'braid-design-system';
 import theme from 'braid-design-system/themes/seekJobs';
+import { useState, useEffect } from 'react';
 
 import { vanillaBox } from './App.css';
 
+interface AppProps {
+  themeName: string;
+}
+
 const noop = () => {};
 
-function Stuff({ themeName }) {
+function Stuff({ themeName }: AppProps) {
   const [renderLabel, setRenderLabel] = useState('Initial');
 
   useEffect(() => {
@@ -39,7 +42,7 @@ function Stuff({ themeName }) {
   );
 }
 
-export default function App({ themeName }) {
+export default function App({ themeName }: AppProps) {
   return (
     <BraidProvider theme={theme}>
       <Stuff themeName={themeName} />

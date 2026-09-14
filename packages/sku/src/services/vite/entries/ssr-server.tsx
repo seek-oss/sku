@@ -1,3 +1,5 @@
+import 'virtual:sku/entry-side-effects';
+
 // Resolved by sku's Vite config plugin to the consumer server / routes entries.
 
 import type { Request as ExpressRequest } from 'express';

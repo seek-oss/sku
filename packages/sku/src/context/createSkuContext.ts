@@ -201,6 +201,7 @@ export const createSkuContext = async ({
   const libraryFile = skuConfig.libraryFile;
   const isLibrary = Boolean(skuConfig.libraryEntry);
   const polyfills = skuConfig.polyfills;
+  const entrySideEffects = skuConfig.entrySideEffects;
   const webpackDecorator = skuConfig.dangerouslySetWebpackConfig;
   const jestDecorator = skuConfig.dangerouslySetJestConfig;
   const eslintDecorator = skuConfig.dangerouslySetESLintConfig;
@@ -266,6 +267,7 @@ export const createSkuContext = async ({
     libraryFile,
     isLibrary,
     polyfills,
+    entrySideEffects,
     webpackDecorator,
     jestDecorator,
     eslintDecorator,

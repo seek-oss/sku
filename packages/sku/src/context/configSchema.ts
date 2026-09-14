@@ -154,6 +154,10 @@ export default validator.compile({
     type: 'array',
     items: 'string',
   },
+  entrySideEffects: {
+    type: 'array',
+    items: 'string',
+  },
   libraryName: {
     type: 'string',
     optional: true,

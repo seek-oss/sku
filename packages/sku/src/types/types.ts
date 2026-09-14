@@ -578,6 +578,17 @@ export interface ViteSkuConfig {
   vitePlugins?: PluginOption[];
 
   /**
+   * An array of isomorphic modules to import before any consumer module.
+   *
+   * Use this for CSS resets (for example `braid-design-system/reset`) that must
+   * evaluate first. Specifiers resolve from the app, in array order.
+   *
+   * @default []
+   * @link https://seek-oss.github.io/sku/configuration#entrysideeffects
+   */
+  entrySideEffects?: string[];
+
+  /**
    * **SSR only** (`buildType: 'ssr'`)
    *
    * When `true`, sku sets Express `app.set('trust proxy', 1)` (hop count `1`)

@@ -156,7 +156,7 @@ export async function loader({ context }: LoaderFunctionArgs) {
 
 ## Response headers
 
-When sku streams HTML (not a short-circuit redirect), it forwards loader/action headers onto the Express response, then applies sku-owned headers (`Content-Type`, CSP).
+When sku streams HTML (not a short-circuit redirect), it forwards loader/action headers onto the Express response, then applies sku headers (`Content-Type`, CSP).
 
 Set caching and cookies with React Router’s `data()` / header APIs:
 
@@ -179,7 +179,7 @@ export async function loader() {
 ## Apollo streaming hydration
 
 When a client cache must survive the stream (Apollo Client), pair render-time queries with a streaming data transport over [`useInsertHtml`](./runtime-api.md#useinserthtml) from `sku/runtime`.
-sku owns the injection seam; your app owns the client and transport — sku ships no Apollo dependency.
+sku provides the injection seam; your app provides the client and transport — sku ships no Apollo dependency.
 
 ```tsx
 // src/ApolloProvider.tsx — transport only (isomorphic)
@@ -260,7 +260,15 @@ export const RootLayout = () => {
           : undefined
       }
     >
-      <Outlet />
+      <html lang="en">
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body>
+          <Outlet />
+        </body>
+      </html>
     </ApolloProvider>
   );
 };

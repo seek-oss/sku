@@ -531,6 +531,31 @@ import { formatDate } from '#utils/date';
 - For complex projects requiring high levels of code organization, consider using a monorepo structure instead of relying heavily on path aliases
 - Path aliases cannot point to `node_modules` directories
 
+## entrySideEffects <Badge type="info" text="Vite only" />
+
+Type: `Array<string>`
+
+Default: `[]`
+
+Bundler: `vite`
+
+An array of isomorphic modules that sku imports before any consumer module on Vite static and Vite SSR graphs.
+
+Use this for CSS resets and other side effects that must run first on both the browser and the Node server.
+Specifiers resolve from your app, in array order.
+
+Do not put `window`-only code here.
+Use [`polyfills`](#polyfills) for browser-only globals.
+
+```ts
+import type { SkuConfig } from 'sku';
+
+export default {
+  bundler: 'vite',
+  entrySideEffects: ['braid-design-system/reset'],
+} satisfies SkuConfig;
+```
+
 ## polyfills
 
 Type: `Array<string>`
@@ -538,6 +563,9 @@ Type: `Array<string>`
 Default: `[]`
 
 An array of polyfills to be included into all client entry points.
+
+These load in the browser only.
+For isomorphic first-on-the-graph modules such as Braid reset, use [`entrySideEffects`](#entrysideeffects).
 
 ## port
 

@@ -4,6 +4,7 @@ import { httpsDevServerPlugin } from './plugins/httpsDevServer.js';
 import { preloadPlugin } from './plugins/preloadPlugin/preloadPlugin.js';
 import { setNoExternalPlugin } from './plugins/setNoExternal.js';
 import { polyfillsPlugin } from './plugins/polyfills.js';
+import { entrySideEffectsPlugin } from './plugins/entrySideEffects.js';
 import { dangerouslySetViteConfigPlugin } from './plugins/dangerouslySetViteConfig.js';
 import { configPlugin } from './plugins/config.js';
 import { buildPlugin } from './plugins/build.js';
@@ -45,6 +46,8 @@ export const skuPlugin = ({
         convertFromWebpack: skuContext.convertLoadable,
         commandName: skuContext.commandName,
       }),
+
+    entrySideEffectsPlugin(skuContext),
 
     polyfillsPlugin(skuContext),
 

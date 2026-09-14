@@ -1,6 +1,6 @@
 import { VocabProvider } from '@vocab/react';
 import { Outlet, useLocation } from 'react-router';
-import type { MapRoutePath, SkuRouteObject } from 'sku/runtime';
+import { type MapRoutePath, type SkuRouteObject } from 'sku/runtime';
 
 import App from '../App.js';
 
@@ -8,10 +8,19 @@ import { resolveLanguage } from './resolveLanguage.js';
 
 const RootLayout = () => {
   const { pathname, search } = useLocation();
+  const language = resolveLanguage(pathname, search);
 
   return (
-    <VocabProvider language={resolveLanguage(pathname, search)}>
-      <Outlet />
+    <VocabProvider language={language}>
+      <html lang={language}>
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body>
+          <Outlet />
+        </body>
+      </html>
     </VocabProvider>
   );
 };

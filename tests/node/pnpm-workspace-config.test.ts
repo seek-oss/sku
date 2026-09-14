@@ -53,7 +53,7 @@ describe('pnpm-workspace-config', () => {
     expect(lintInitialStdout).toContain('To fix this issue, run');
     // User-managed drift advisory (info-level) is logged
     expect(lintInitialStdout).toContain(
-      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
+      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320.',
     );
 
     // 2. sku configure does NOT touch pnpm-workspace.yaml
@@ -96,7 +96,7 @@ describe('pnpm-workspace-config', () => {
 
     const lintSecondStdout = lintSecondRun.getStdallStr();
     expect(lintSecondStdout).toContain(
-      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
+      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320.',
     );
     expect(lintSecondStdout).not.toContain('pnpm-plugin-sku');
     expect(lintSecondStdout).not.toContain('is missing');
@@ -227,7 +227,7 @@ describe('pnpm-workspace-config', () => {
     });
     await expect(lintRun).toMatchExitCode(1);
     expect(lintRun.getStdallStr()).toContain(
-      'the document must contain a YAML mapping',
+      'pnpm-workspace.yaml must contain a YAML mapping',
     );
 
     const formatRun = await sku('format', [], {
@@ -235,7 +235,7 @@ describe('pnpm-workspace-config', () => {
     });
     await expect(formatRun).toMatchExitCode(1);
     expect(formatRun.getStdallStr()).toContain(
-      'the document must contain a YAML mapping',
+      'pnpm-workspace.yaml must contain a YAML mapping',
     );
     await expect(formatRun).toMatchExitCode(1);
 

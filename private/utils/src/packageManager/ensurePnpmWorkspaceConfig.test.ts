@@ -147,6 +147,7 @@ describe('checkPnpmWorkspaceConfig', () => {
   it('fails when a marked entry is retired', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
+        oldRetiredSetting: 123 # [sku_managed]
         allowBuilds:
           old-retired-build: true # [sku_managed]
         publicHoistPattern:
@@ -158,10 +159,13 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     expect(result.hasFailure).toBe(true);
     expect(result.failures).toContain(
-      'pnpm-workspace.yaml: "old-retired-build" in allowBuilds is marked with "[sku_managed]", but is no longer a sku default. Delete its "[sku_managed]" marker to keep it as a user-managed entry.',
+      'pnpm-workspace.yaml: "oldRetiredSetting" is marked with "[sku_managed]", but is no longer a sku default.',
     );
     expect(result.failures).toContain(
-      'pnpm-workspace.yaml: "old-retired-hoist" in publicHoistPattern is marked with "[sku_managed]", but is no longer a sku default. Delete its "[sku_managed]" marker to keep it as a user-managed entry.',
+      'pnpm-workspace.yaml: "old-retired-build" in allowBuilds is marked with "[sku_managed]", but is no longer a sku default.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "old-retired-hoist" in publicHoistPattern is marked with "[sku_managed]", but is no longer a sku default.',
     );
   });
 
@@ -219,19 +223,20 @@ describe('checkPnpmWorkspaceConfig', () => {
     expect(result.hasFailure).toBe(false);
     expect(result.failures).toEqual([]);
     expect(result.advisories).toContain(
-      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
+      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320.',
     );
     expect(result.advisories).toContain(
-      'pnpm-workspace.yaml: "trustPolicy" has value no-downgrade, recommended is off. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
+      'pnpm-workspace.yaml: "trustPolicy" has value no-downgrade, recommended is off.',
     );
     expect(result.advisories).toContain(
-      'pnpm-workspace.yaml: "allowBuilds.@swc/core" has value false, recommended is true. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
+      'pnpm-workspace.yaml: "allowBuilds.@swc/core" has value false, recommended is true.',
     );
   });
 
   it('stays silent for user-owned custom entries with no corresponding sku default', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
+        customSetting: true
         allowBuilds:
           custom-pkg: true
         publicHoistPattern:
@@ -241,6 +246,9 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
 
+    expect(result.failures).not.toContain(
+      expect.stringContaining('customSetting'),
+    );
     expect(result.advisories).not.toContain(
       expect.stringContaining('custom-pkg'),
     );
@@ -256,7 +264,7 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     await expect(
       checkPnpmWorkspaceConfig({ targetDir: fixture.path }),
-    ).rejects.toThrow('the document must contain a YAML mapping');
+    ).rejects.toThrow('pnpm-workspace.yaml must contain a YAML mapping');
   });
 
   it('throws when the workspace document has YAML parse errors', async () => {
@@ -266,7 +274,7 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     await expect(
       checkPnpmWorkspaceConfig({ targetDir: fixture.path }),
-    ).rejects.toThrow(/Cannot check /);
+    ).rejects.toThrow(/pnpm-workspace\.yaml is invalid/);
   });
 });
 
@@ -295,7 +303,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
 
     await expect(
       ensurePnpmWorkspaceConfig({ targetDir: fixture.path }),
-    ).rejects.toThrow('the document must contain a YAML mapping');
+    ).rejects.toThrow('pnpm-workspace.yaml must contain a YAML mapping');
     expect(await fixture.readFile(workspaceFile, 'utf8')).toBe(original);
   });
 
@@ -305,7 +313,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
 
     await expect(
       ensurePnpmWorkspaceConfig({ targetDir: fixture.path }),
-    ).rejects.toThrow(/Cannot sync /);
+    ).rejects.toThrow(/pnpm-workspace\.yaml is invalid/);
     expect(await fixture.readFile(workspaceFile, 'utf8')).toBe(original);
   });
 
@@ -438,6 +446,8 @@ describe('ensurePnpmWorkspaceConfig', () => {
   it('removes retired marked entries and preserves unmarked retired entries', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
+        oldRetiredSetting: 123 # [sku_managed]
+        customSetting: true
         allowBuilds:
           old-retired-build: true # [sku_managed]
         publicHoistPattern:
@@ -448,8 +458,15 @@ describe('ensurePnpmWorkspaceConfig', () => {
     await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
+    expect(content).not.toContain('oldRetiredSetting');
+    expect(content).toContain('customSetting: true');
     expect(content).not.toContain('old-retired-build');
     expect(content).toContain('old-retired-hoist');
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'removed retired entry oldRetiredSetting from pnpm-workspace.yaml',
+      ),
+    );
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
         'removed retired entry allowBuilds.old-retired-build from pnpm-workspace.yaml',

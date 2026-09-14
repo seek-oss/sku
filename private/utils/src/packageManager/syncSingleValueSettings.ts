@@ -1,13 +1,38 @@
-import { isScalar } from 'yaml';
-import { singleValueSettings } from './pnpmWorkspaceDefaults.ts';
+import { isMap, isScalar, type Document } from 'yaml';
+import {
+  MANAGED_BY_SKU_MARKER,
+  pnpmWorkspaceSettings,
+  singleValueSettings,
+} from './pnpmWorkspaceDefaults.ts';
 import {
   clearDocKeyComment,
   createManagedNode,
+  getNodeKey,
   hasManagedMarker,
   setManagedComment,
   type CheckContext,
   type SyncContext,
 } from './syncShared.ts';
+
+/** Top-level keys that still carry the managed marker but are no longer sku defaults. */
+const findRetiredSingleValueKeys = (doc: Document): string[] => {
+  if (!isMap(doc.contents)) {
+    return [];
+  }
+
+  const retiredKeys: string[] = [];
+  for (const pair of doc.contents.items) {
+    const key = getNodeKey(pair.key);
+    if (key in pnpmWorkspaceSettings) {
+      continue;
+    }
+
+    if (isScalar(pair.value) && hasManagedMarker(pair.value.comment)) {
+      retiredKeys.push(key);
+    }
+  }
+  return retiredKeys;
+};
 
 export const checkSingleValueSettings = (context: CheckContext): void => {
   const { doc, failures, advisories } = context;
@@ -36,9 +61,15 @@ export const checkSingleValueSettings = (context: CheckContext): void => {
       );
     } else {
       advisories.push(
-        `pnpm-workspace.yaml: "${key}" has value ${String(currentValue)}, recommended is ${defaultValue}. To re-align, edit the value to match sku's default, or delete it and run "sku format" to re-add it as sku-managed.`,
+        `pnpm-workspace.yaml: "${key}" has value ${String(currentValue)}, recommended is ${defaultValue}.`,
       );
     }
+  }
+
+  for (const key of findRetiredSingleValueKeys(doc)) {
+    failures.push(
+      `pnpm-workspace.yaml: "${key}" is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default.`,
+    );
   }
 };
 
@@ -93,6 +124,15 @@ const updateExistingSingleValue = (
   }
 };
 
+const cleanRetiredSingleValueKeys = (context: SyncContext): void => {
+  const { doc, recordMutation } = context;
+
+  for (const key of findRetiredSingleValueKeys(doc)) {
+    doc.delete(key);
+    recordMutation(`removed retired entry ${key} from pnpm-workspace.yaml`);
+  }
+};
+
 export const syncSingleValueSettings = (context: SyncContext): void => {
   const { doc, recordMutation } = context;
 
@@ -105,4 +145,6 @@ export const syncSingleValueSettings = (context: SyncContext): void => {
 
     updateExistingSingleValue(key, defaultValue, comment, context);
   }
+
+  cleanRetiredSingleValueKeys(context);
 };

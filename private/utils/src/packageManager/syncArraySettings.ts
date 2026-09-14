@@ -55,7 +55,7 @@ export const checkArraySettings = (context: CheckContext): void => {
         }
       } else if (hasManagedMarker(item.comment)) {
         failures.push(
-          `pnpm-workspace.yaml: "${val}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default. Delete its "${MANAGED_BY_SKU_MARKER}" marker to keep it as a user-managed entry.`,
+          `pnpm-workspace.yaml: "${val}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default.`,
         );
       }
     }

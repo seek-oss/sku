@@ -4,7 +4,7 @@ import {
   isPnpm,
   rootDir,
 } from '@sku-private/utils';
-import { critical, info } from '@sku-private/utils/console';
+import { accentLight, critical, info } from '@sku-private/utils/console';
 import { suggestScript } from '../utils/suggestScript.js';
 import {
   FAILURE_EXIT_CODE,
@@ -19,6 +19,8 @@ const lintFailure = (error: unknown): LintResult => {
 };
 
 export const pnpmWorkspaceCheck = async (): Promise<LintResult> => {
+  console.log(accentLight(`Checking pnpm workspace configuration`));
+
   if (!isPnpm || !rootDir) {
     return { exitCode: SUCCESS_EXIT_CODE };
   }
@@ -49,6 +51,8 @@ export const pnpmWorkspaceCheck = async (): Promise<LintResult> => {
 };
 
 export const pnpmWorkspaceSync = async (): Promise<LintResult> => {
+  console.log(accentLight(`Syncing pnpm workspace configuration`));
+
   if (!isPnpm || !rootDir) {
     return { exitCode: SUCCESS_EXIT_CODE };
   }

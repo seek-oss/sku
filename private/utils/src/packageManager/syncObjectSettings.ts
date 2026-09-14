@@ -58,7 +58,7 @@ export const checkObjectSettings = (context: CheckContext): void => {
         );
       } else {
         advisories.push(
-          `pnpm-workspace.yaml: "${key}.${subKey}" has value ${String(currentVal)}, recommended is ${defaultVal}. To re-align, edit the value to match sku's default, or delete it and run "sku format" to re-add it as sku-managed.`,
+          `pnpm-workspace.yaml: "${key}.${subKey}" has value ${String(currentVal)}, recommended is ${defaultVal}.`,
         );
       }
     }
@@ -70,7 +70,7 @@ export const checkObjectSettings = (context: CheckContext): void => {
           isScalar(pair.value) && hasManagedMarker(pair.value.comment);
         if (isMarked) {
           failures.push(
-            `pnpm-workspace.yaml: "${subKey}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default. Delete its "${MANAGED_BY_SKU_MARKER}" marker to keep it as a user-managed entry.`,
+            `pnpm-workspace.yaml: "${subKey}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default.`,
           );
         }
       }

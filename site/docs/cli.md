@@ -154,7 +154,7 @@ sudo sku setup-hosts
 
 ### `configure`
 
-Emit and update configuration files for your project (`tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, `.gitignore`, `.prettierignore`, and `pnpm-workspace.yaml`).
+Emit and update configuration files for your project (`tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, `.gitignore`, and `.prettierignore`).
 
 This command runs before most `sku` CLI commands and on `postinstall`, so you rarely need to run it manually.
 
@@ -162,25 +162,29 @@ This command runs before most `sku` CLI commands and on `postinstall`, so you ra
 sku configure
 ```
 
-#### `pnpm-workspace.yaml` synchronization
-
-In pnpm projects, sku manages recommended workspace settings directly in `pnpm-workspace.yaml`. Sku tracks entries it manages with a `[sku_managed]` comment marker, which can sit alongside an explanatory comment (for example `minimumReleaseAge: 4320 # 3 days [sku_managed]`).
-The sync does not create `pnpm-workspace.yaml` in an existing project; `@sku-lib/create` creates it for newly scaffolded projects.
-
-The sync operates in two modes:
-
-- **Additive sync (automatic)**: Runs before sku commands and during `postinstall`. It adds missing recommended settings without overwriting existing values or removing user-owned entries. If sku-managed settings drift from sku defaults, sku logs a warning suggesting `sku configure`.
-- **Enforce mode (manual via `sku configure`)**: Overwrites or removes sku-managed settings to match current defaults.
-
-#### User-managed settings
-
-If sku retires or updates a setting you want to keep, delete its `[sku_managed]` comment marker. Entries without this marker are considered user-managed and will never be removed by `sku configure`.
-
 #### Opt-outs
 
 - Set `"skuSkipConfigure": true` in `package.json` to skip configuration during regular sku commands.
 - Set `"skuSkipPostInstall": true` in `package.json` to skip configuration during `postinstall`.
-- Invoking `sku configure` directly always runs the configuration sync, even if `skuSkipConfigure` is enabled.
+- Invoking `sku configure` directly always runs the configuration step, even if `skuSkipConfigure` is enabled.
+
+#### `pnpm-workspace.yaml` synchronization
+
+In pnpm projects with an existing `pnpm-workspace.yaml`, sku manages recommended workspace settings statically. Sku tracks entries it manages with a `[sku_managed]` comment marker, which can sit alongside an explanatory comment (for example `minimumReleaseAge: 4320 # 3 days [sku_managed]`).
+
+The sync does not create `pnpm-workspace.yaml` in an existing project (absence of the file serves as an opt-out); `@sku-lib/create` creates it for newly scaffolded projects.
+
+- **Lint check (`sku lint`)**: Performs a read-only check. Fails if managed settings are missing, marked values differ from defaults, marked retired entries remain, matching values are pending adoption, or `pnpm-plugin-sku` is present in `configDependencies`. Differing user-managed (unmarked) settings are logged as informational advisories without failing the run.
+- **Enforcing format (`sku format`)**: Applies and enforces sku's recommended settings: adds missing managed settings, rewrites outdated marked values in both directions, adopts matching unmarked values, removes retired marked entries, and removes `pnpm-plugin-sku` from `configDependencies`.
+
+#### User-managed settings and opt-outs
+
+To manage a setting yourself or retain an entry sku has retired, delete its `[sku_managed]` comment marker. Unmarked entries are considered user-managed and are preserved by `sku format`.
+
+To re-align a user-managed setting with sku's recommendations:
+
+- Edit the value to match sku's default (the next `sku format` adopts it), or
+- Delete the setting entirely and run `sku format` to re-add it as sku-managed.
 
 ## Translations
 

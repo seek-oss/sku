@@ -2,30 +2,90 @@ import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { Document, isMap, parseDocument } from 'yaml';
-import { caution } from '../console/styles.ts';
-import { removePnpmPluginSku } from './removePnpmPluginSku.ts';
+import {
+  checkPnpmPluginSku,
+  removePnpmPluginSku,
+} from './removePnpmPluginSku.ts';
 import { rootDir } from './packageManager.ts';
 import { defaultPnpmWorkspaceConfig } from './pnpmWorkspaceDefaults.ts';
-import { syncArraySettings } from './syncArraySettings.ts';
-import { syncObjectSettings } from './syncObjectSettings.ts';
+import { checkArraySettings, syncArraySettings } from './syncArraySettings.ts';
+import {
+  checkObjectSettings,
+  syncObjectSettings,
+} from './syncObjectSettings.ts';
 import type {
+  CheckContext,
   RecordMutation,
   SyncContext,
-  SyncMode,
-  Warn,
 } from './syncShared.ts';
-import { syncSingleValueSettings } from './syncSingleValueSettings.ts';
+import {
+  checkSingleValueSettings,
+  syncSingleValueSettings,
+} from './syncSingleValueSettings.ts';
 
-export type { SyncMode } from './syncShared.ts';
+export interface CheckPnpmWorkspaceConfigOptions {
+  targetDir?: string;
+}
+
+export interface PnpmWorkspaceCheckResult {
+  hasFailure: boolean;
+  failures: string[];
+  advisories: string[];
+}
+
+const assertValidWorkspaceDocument = (doc: Document): void => {
+  if (doc.errors.length > 0) {
+    throw new Error(
+      `pnpm-workspace.yaml is invalid: ${doc.errors.map((error) => error.message).join('; ')}`,
+    );
+  }
+
+  if (!doc.contents) {
+    doc.contents = doc.createNode({});
+    return;
+  }
+
+  if (!isMap(doc.contents)) {
+    throw new Error(`pnpm-workspace.yaml must contain a YAML mapping`);
+  }
+};
+
+export async function checkPnpmWorkspaceConfig({
+  targetDir = rootDir ?? process.cwd(),
+}: CheckPnpmWorkspaceConfigOptions = {}): Promise<PnpmWorkspaceCheckResult> {
+  const filePath = join(targetDir, 'pnpm-workspace.yaml');
+  if (!existsSync(filePath)) {
+    return { hasFailure: false, failures: [], advisories: [] };
+  }
+
+  const content = await readFile(filePath, 'utf-8');
+  const doc: Document = parseDocument(content);
+  assertValidWorkspaceDocument(doc);
+
+  const checkContext: CheckContext = {
+    doc,
+    failures: [],
+    advisories: [],
+  };
+
+  checkPnpmPluginSku(checkContext);
+  checkSingleValueSettings(checkContext);
+  checkObjectSettings(checkContext);
+  checkArraySettings(checkContext);
+
+  return {
+    hasFailure: checkContext.failures.length > 0,
+    failures: checkContext.failures,
+    advisories: checkContext.advisories,
+  };
+}
 
 export interface EnsurePnpmWorkspaceConfigOptions {
   targetDir?: string;
-  mode?: SyncMode;
   create?: boolean;
 }
 
 export async function ensurePnpmWorkspaceConfig({
-  mode = 'additive',
   create = false,
   targetDir = rootDir ?? process.cwd(),
 }: EnsurePnpmWorkspaceConfigOptions = {}): Promise<void> {
@@ -42,13 +102,7 @@ export async function ensurePnpmWorkspaceConfig({
   if (fileExisted) {
     originalContent = await readFile(filePath, 'utf-8');
     doc = parseDocument(originalContent);
-    if (!doc.contents) {
-      doc.contents = doc.createNode({});
-    } else if (!isMap(doc.contents)) {
-      throw new Error(
-        `Cannot sync ${filePath}: the document must contain a YAML mapping`,
-      );
-    }
+    assertValidWorkspaceDocument(doc);
   } else {
     doc = new Document(structuredClone(defaultPnpmWorkspaceConfig));
   }
@@ -64,13 +118,9 @@ export async function ensurePnpmWorkspaceConfig({
     recordMutation('created pnpm-workspace.yaml');
   }
 
-  const warn: Warn = (message) => {
-    console.warn(caution(message));
-  };
+  const context: SyncContext = { doc, recordMutation };
 
-  const context: SyncContext = { doc, mode, recordMutation, warn };
-
-  removePnpmPluginSku(doc, recordMutation);
+  removePnpmPluginSku(context);
   syncSingleValueSettings(context);
   syncObjectSettings(context);
   syncArraySettings(context);

@@ -5,6 +5,9 @@ export type LintCheck = {
   run: () => Promise<LintResult>;
 };
 
+export const FAILURE_EXIT_CODE = 1;
+export const SUCCESS_EXIT_CODE = 0;
+
 /**
  * Runs the provided lint checks sequentially, returning `true` if any
  * check exits with a non-zero exit code.
@@ -14,7 +17,7 @@ export const runLintChecks = async (checks: LintCheck[]): Promise<boolean> => {
 
   for (const { run } of checks) {
     const { exitCode } = await run();
-    if (exitCode !== 0) {
+    if (exitCode !== SUCCESS_EXIT_CODE) {
       hasFailure = true;
     }
   }

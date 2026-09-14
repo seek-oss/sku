@@ -1,14 +1,72 @@
-import { isScalar, isSeq, type YAMLSeq } from 'yaml';
+import { isSeq, type YAMLSeq } from 'yaml';
 import {
   arraySettings,
   MANAGED_BY_SKU_MARKER,
   type ArrayEntry,
 } from './pnpmWorkspaceDefaults.ts';
 import {
+  createManagedNode,
+  ensureCollection,
   hasManagedMarker,
+  isStringScalar,
   setManagedComment,
+  type CheckContext,
   type SyncContext,
 } from './syncShared.ts';
+
+const toCommentMap = (entries: readonly ArrayEntry[]) =>
+  new Map(entries.map(({ value, comment }) => [value, comment] as const));
+
+export const checkArraySettings = (context: CheckContext): void => {
+  const { doc, failures } = context;
+
+  for (const { key, entries } of arraySettings) {
+    const defaultComments = toCommentMap(entries);
+
+    if (!doc.has(key)) {
+      failures.push(`pnpm-workspace.yaml: "${key}" is missing.`);
+      continue;
+    }
+
+    const seqNode = doc.get(key, true);
+    if (!isSeq(seqNode)) {
+      continue;
+    }
+
+    const stringItems = seqNode.items.filter(isStringScalar);
+
+    const seenValues = new Set<string>();
+    for (const item of stringItems) {
+      if (seenValues.has(item.value)) {
+        failures.push(
+          `pnpm-workspace.yaml: duplicate "${item.value}" in ${key}.`,
+        );
+      }
+      seenValues.add(item.value);
+    }
+
+    for (const item of stringItems) {
+      const val = item.value;
+      if (defaultComments.has(val)) {
+        if (!hasManagedMarker(item.comment)) {
+          failures.push(
+            `pnpm-workspace.yaml: "${val}" in ${key} matches sku's default but is missing the "[sku_managed]" marker.`,
+          );
+        }
+      } else if (hasManagedMarker(item.comment)) {
+        failures.push(
+          `pnpm-workspace.yaml: "${val}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default. Delete its "${MANAGED_BY_SKU_MARKER}" marker to keep it as a user-managed entry.`,
+        );
+      }
+    }
+
+    for (const { value } of entries) {
+      if (!seenValues.has(value)) {
+        failures.push(`pnpm-workspace.yaml: "${value}" in ${key} is missing.`);
+      }
+    }
+  }
+};
 
 const deduplicateArrayItems = (
   seqNode: YAMLSeq,
@@ -19,12 +77,12 @@ const deduplicateArrayItems = (
   const deduplicatedItems: typeof seqNode.items = [];
 
   for (const item of seqNode.items) {
-    if (isScalar(item) && typeof item.value === 'string') {
+    if (isStringScalar(item)) {
       const existingIndex = seenValues.get(item.value);
       if (existingIndex !== undefined) {
         const existingItem = deduplicatedItems[existingIndex];
         if (
-          isScalar(existingItem) &&
+          isStringScalar(existingItem) &&
           hasManagedMarker(existingItem.comment) &&
           !hasManagedMarker(item.comment)
         ) {
@@ -46,7 +104,7 @@ const deduplicateArrayItems = (
 };
 
 /**
- * Adopts default entries and flags retired ones in an existing array.
+ * Adopts default entries and removes retired ones in an existing array.
  *
  * @returns Whether the item should be removed from the sequence.
  */
@@ -56,7 +114,7 @@ const processSingleArrayItem = (
   key: string,
   context: SyncContext,
 ): boolean => {
-  if (!isScalar(item) || typeof item.value !== 'string') {
+  if (!isStringScalar(item)) {
     return false;
   }
 
@@ -70,12 +128,7 @@ const processSingleArrayItem = (
 
   const isMarked = hasManagedMarker(item.comment);
   if (isMarked) {
-    if (context.mode === 'enforce') {
-      return true;
-    }
-    context.warn(
-      `pnpm-workspace.yaml: "${val}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default. Run "sku configure" to remove it, or delete its "${MANAGED_BY_SKU_MARKER}" marker to keep it as a user-managed entry.`,
-    );
+    return true;
   }
 
   return false;
@@ -104,7 +157,7 @@ const processExistingArrayItems = (
   // reversing the array so .splice() doesn't shift later indexes.
   for (const idx of indicesToRemove.toReversed()) {
     const item = seqNode.items[idx];
-    const val = isScalar(item) ? String(item.value) : '';
+    const val = isStringScalar(item) ? item.value : '';
     seqNode.items.splice(idx, 1);
     context.recordMutation(
       `removed retired entry ${val} from ${key} in pnpm-workspace.yaml`,
@@ -118,19 +171,13 @@ const appendMissingArrayDefaults = (
   key: string,
   context: SyncContext,
 ): void => {
-  const existingValues = new Set<string>();
-
-  for (const item of seqNode.items) {
-    if (isScalar(item) && typeof item.value === 'string') {
-      existingValues.add(item.value);
-    }
-  }
+  const existingValues = new Set(
+    seqNode.items.filter(isStringScalar).map((item) => item.value),
+  );
 
   for (const { value, comment } of entries) {
     if (!existingValues.has(value)) {
-      const newItem = context.doc.createNode(value);
-      setManagedComment(newItem, comment);
-      seqNode.items.push(newItem);
+      seqNode.items.push(createManagedNode(context.doc, value, comment));
       existingValues.add(value);
       context.recordMutation(`added ${value} to ${key} in pnpm-workspace.yaml`);
     }
@@ -139,17 +186,10 @@ const appendMissingArrayDefaults = (
 
 export const syncArraySettings = (context: SyncContext): void => {
   for (const { key, entries } of arraySettings) {
-    const defaultComments = new Map(
-      entries.map(({ value, comment }) => [value, comment] as const),
-    );
+    const defaultComments = toCommentMap(entries);
 
-    if (!context.doc.has(key)) {
-      context.doc.set(key, context.doc.createNode([]));
-      context.recordMutation(`added ${key} to pnpm-workspace.yaml`);
-    }
-
-    const seqNode = context.doc.get(key, true);
-    if (!isSeq(seqNode)) {
+    const seqNode = ensureCollection(context, key, 'array');
+    if (!seqNode) {
       continue;
     }
 

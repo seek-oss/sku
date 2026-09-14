@@ -5,11 +5,78 @@ import {
 } from './pnpmWorkspaceDefaults.ts';
 import {
   clearCommentBefore,
+  createManagedNode,
+  ensureCollection,
+  findPair,
   getNodeKey,
   hasManagedMarker,
   setManagedComment,
+  type CheckContext,
   type SyncContext,
 } from './syncShared.ts';
+
+export const checkObjectSettings = (context: CheckContext): void => {
+  const { doc, failures, advisories } = context;
+
+  for (const { key, entries } of objectSettings) {
+    if (!doc.has(key)) {
+      failures.push(`pnpm-workspace.yaml: "${key}" is missing.`);
+      continue;
+    }
+
+    const mapNode = doc.get(key, true);
+    if (!isMap(mapNode)) {
+      continue;
+    }
+
+    for (const [subKey, defaultVal] of Object.entries(entries)) {
+      const pair = findPair(mapNode, subKey);
+
+      if (!pair) {
+        failures.push(
+          `pnpm-workspace.yaml: "${key}.${subKey}" is missing, recommended is ${defaultVal}.`,
+        );
+        continue;
+      }
+
+      if (!isScalar(pair.value)) {
+        continue;
+      }
+
+      const currentVal = pair.value.value;
+      const isMarked = hasManagedMarker(pair.value.comment);
+
+      if (isMarked) {
+        if (currentVal !== defaultVal) {
+          failures.push(
+            `pnpm-workspace.yaml: "${key}.${subKey}" has value ${String(currentVal)}, recommended is ${defaultVal}.`,
+          );
+        }
+      } else if (currentVal === defaultVal) {
+        failures.push(
+          `pnpm-workspace.yaml: "${key}.${subKey}" matches sku's default but is missing the "[sku_managed]" marker.`,
+        );
+      } else {
+        advisories.push(
+          `pnpm-workspace.yaml: "${key}.${subKey}" has value ${String(currentVal)}, recommended is ${defaultVal}. To re-align, edit the value to match sku's default, or delete it and run "sku format" to re-add it as sku-managed.`,
+        );
+      }
+    }
+
+    for (const pair of mapNode.items) {
+      const subKey = getNodeKey(pair.key);
+      if (!(subKey in entries)) {
+        const isMarked =
+          isScalar(pair.value) && hasManagedMarker(pair.value.comment);
+        if (isMarked) {
+          failures.push(
+            `pnpm-workspace.yaml: "${subKey}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default. Delete its "${MANAGED_BY_SKU_MARKER}" marker to keep it as a user-managed entry.`,
+          );
+        }
+      }
+    }
+  }
+};
 
 const markPairAsManaged = (
   pair: { key: unknown; value: unknown },
@@ -26,7 +93,7 @@ const syncExistingObjectPair = (
   defaultVal: boolean,
   context: SyncContext,
 ): void => {
-  const { doc, mode, recordMutation, warn } = context;
+  const { doc, recordMutation } = context;
 
   if (!isScalar(pair.value)) {
     return;
@@ -46,18 +113,10 @@ const syncExistingObjectPair = (
     return;
   }
 
-  if (mode === 'enforce') {
-    pair.value = doc.createNode(defaultVal);
-    setManagedComment(pair.value);
-    clearCommentBefore(pair.key);
-    recordMutation(
-      `updated ${key}.${subKey}: ${String(currentVal)} → ${defaultVal} in pnpm-workspace.yaml`,
-    );
-    return;
-  }
-
-  warn(
-    `pnpm-workspace.yaml: "${key}.${subKey}" has value ${String(currentVal)}, recommended is ${defaultVal}. Run "sku configure" to align.`,
+  pair.value = createManagedNode(doc, defaultVal);
+  clearCommentBefore(pair.key);
+  recordMutation(
+    `updated ${key}.${subKey}: ${String(currentVal)} → ${defaultVal} in pnpm-workspace.yaml`,
   );
 };
 
@@ -68,12 +127,10 @@ const syncObjectPair = (
   defaultVal: boolean,
   context: SyncContext,
 ): void => {
-  const pair = mapNode.items.find((item) => getNodeKey(item.key) === subKey);
+  const pair = findPair(mapNode, subKey);
 
   if (!pair) {
-    const valNode = context.doc.createNode(defaultVal);
-    setManagedComment(valNode);
-    mapNode.set(subKey, valNode);
+    mapNode.set(subKey, createManagedNode(context.doc, defaultVal));
     context.recordMutation(
       `added ${key}.${subKey}: ${defaultVal} to pnpm-workspace.yaml`,
     );
@@ -89,7 +146,7 @@ const cleanRetiredObjectKeys = (
   defaultObj: Readonly<Record<string, boolean>>,
   context: SyncContext,
 ): void => {
-  const { mode, recordMutation, warn } = context;
+  const { recordMutation } = context;
   const itemsToRemove: string[] = [];
   for (const pair of mapNode.items) {
     const subKey = getNodeKey(pair.key);
@@ -97,13 +154,7 @@ const cleanRetiredObjectKeys = (
       const isMarked =
         isScalar(pair.value) && hasManagedMarker(pair.value.comment);
       if (isMarked) {
-        if (mode === 'enforce') {
-          itemsToRemove.push(subKey);
-        } else {
-          warn(
-            `pnpm-workspace.yaml: "${subKey}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default. Run "sku configure" to remove it, or delete its "${MANAGED_BY_SKU_MARKER}" marker to keep it as a user-managed entry.`,
-          );
-        }
+        itemsToRemove.push(subKey);
       }
     }
   }
@@ -117,16 +168,9 @@ const cleanRetiredObjectKeys = (
 };
 
 export const syncObjectSettings = (context: SyncContext): void => {
-  const { doc } = context;
-
   for (const { key, entries } of objectSettings) {
-    if (!doc.has(key)) {
-      doc.set(key, doc.createNode({}));
-      context.recordMutation(`added ${key} to pnpm-workspace.yaml`);
-    }
-
-    const mapNode = doc.get(key, true);
-    if (!isMap(mapNode)) {
+    const mapNode = ensureCollection(context, key, 'object');
+    if (!mapNode) {
       continue;
     }
 

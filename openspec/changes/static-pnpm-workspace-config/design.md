@@ -125,7 +125,7 @@ Detection matches the marker anywhere in a comment. A user can annotate a marked
 - An unmarked value matches a default but has not been adopted.
 - `pnpm-plugin-sku` is present in `configDependencies`.
 
-Failures name the key, the current and recommended states, and direct the user to `sku format`.
+Failures name the key and the current and recommended states. The lint output directs the user to `sku format` once at the end of the run, so individual failure messages stay free of fix instructions.
 
 Lint logs unmarked values that differ from sku's defaults as info. The log names the key, both values, and the re-alignment paths. These logs never fail the run.
 

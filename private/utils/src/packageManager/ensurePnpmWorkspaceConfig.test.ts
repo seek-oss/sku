@@ -10,17 +10,271 @@ import {
   vi,
 } from 'vitest';
 import { parseDocument } from 'yaml';
-import { ensurePnpmWorkspaceConfig } from './ensurePnpmWorkspaceConfig.ts';
+import {
+  checkPnpmWorkspaceConfig,
+  ensurePnpmWorkspaceConfig,
+} from './ensurePnpmWorkspaceConfig.ts';
 
 const workspaceFile = 'pnpm-workspace.yaml';
 
+describe('checkPnpmWorkspaceConfig', () => {
+  it('returns silent success when file is missing', async () => {
+    await using fixture = await createFixture({});
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result).toEqual({
+      hasFailure: false,
+      failures: [],
+      advisories: [],
+    });
+  });
+
+  it('returns silent success when workspace config is already aligned', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        packages:
+          - site
+        allowBuilds:
+          '@parcel/watcher': true # [sku_managed]
+          '@swc/core': true # [sku_managed]
+          core-js-pure: false # [sku_managed]
+          esbuild: true # [sku_managed]
+          sku: true # [sku_managed]
+          unrs-resolver: true # [sku_managed]
+        blockExoticSubdeps: true # [sku_managed]
+        minimumReleaseAge: 4320 # 3 days [sku_managed]
+        minimumReleaseAgeExclude:
+          - '@braid-design-system/*' # [sku_managed]
+          - '@capsizecss/*' # [sku_managed]
+          - '@seek/*' # [sku_managed]
+          - '@sku-lib/*' # [sku_managed]
+          - '@vanilla-extract/*' # [sku_managed]
+          - '@vocab/*' # [sku_managed]
+          - braid-design-system # [sku_managed]
+          - browserslist-config-seek # [sku_managed]
+          - eslint-config-seek # [sku_managed]
+          - sku # [sku_managed]
+        publicHoistPattern:
+          - eslint # [sku_managed]
+          - prettier # [sku_managed]
+        strictDepBuilds: false # [sku_managed]
+        trustPolicy: off # [sku_managed]
+        trustPolicyExclude:
+          - semver@6.3.1 # [sku_managed]
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result).toEqual({
+      hasFailure: false,
+      failures: [],
+      advisories: [],
+    });
+  });
+
+  it('fails when managed settings or entries are missing', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        packages:
+          - site
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result.hasFailure).toBe(true);
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "minimumReleaseAge" is missing, recommended is 4320.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "allowBuilds" is missing.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "publicHoistPattern" is missing.',
+    );
+  });
+
+  it('fails when a marked value differs from default', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        minimumReleaseAge: 1440 # [sku_managed]
+        trustPolicy: no-downgrade # [sku_managed]
+        allowBuilds:
+          '@swc/core': false # [sku_managed]
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result.hasFailure).toBe(true);
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "trustPolicy" has value no-downgrade, recommended is off.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "allowBuilds.@swc/core" has value false, recommended is true.',
+    );
+  });
+
+  it('fails when an unmarked value matches a default (pending adoption)', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        minimumReleaseAge: 4320
+        allowBuilds:
+          '@swc/core': true
+        publicHoistPattern:
+          - eslint
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result.hasFailure).toBe(true);
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "minimumReleaseAge" matches sku\'s default but is missing the "[sku_managed]" marker.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "allowBuilds.@swc/core" matches sku\'s default but is missing the "[sku_managed]" marker.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "eslint" in publicHoistPattern matches sku\'s default but is missing the "[sku_managed]" marker.',
+    );
+  });
+
+  it('fails when a marked entry is retired', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        allowBuilds:
+          old-retired-build: true # [sku_managed]
+        publicHoistPattern:
+          - old-retired-hoist # [sku_managed]
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result.hasFailure).toBe(true);
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "old-retired-build" in allowBuilds is marked with "[sku_managed]", but is no longer a sku default. Delete its "[sku_managed]" marker to keep it as a user-managed entry.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "old-retired-hoist" in publicHoistPattern is marked with "[sku_managed]", but is no longer a sku default. Delete its "[sku_managed]" marker to keep it as a user-managed entry.',
+    );
+  });
+
+  it('fails when pnpm-plugin-sku is present in configDependencies', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        configDependencies:
+          pnpm-plugin-sku: ^0.0.3
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result.hasFailure).toBe(true);
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "pnpm-plugin-sku" is present in configDependencies.',
+    );
+  });
+
+  it('logs user-managed drift as info and does not fail', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        minimumReleaseAge: 1440 # user customized
+        trustPolicy: no-downgrade # user customized
+        allowBuilds:
+          '@swc/core': false # user customized
+          '@parcel/watcher': true # [sku_managed]
+          core-js-pure: false # [sku_managed]
+          esbuild: true # [sku_managed]
+          sku: true # [sku_managed]
+          unrs-resolver: true # [sku_managed]
+        blockExoticSubdeps: true # [sku_managed]
+        minimumReleaseAgeExclude:
+          - '@braid-design-system/*' # [sku_managed]
+          - '@capsizecss/*' # [sku_managed]
+          - '@seek/*' # [sku_managed]
+          - '@sku-lib/*' # [sku_managed]
+          - '@vanilla-extract/*' # [sku_managed]
+          - '@vocab/*' # [sku_managed]
+          - braid-design-system # [sku_managed]
+          - browserslist-config-seek # [sku_managed]
+          - eslint-config-seek # [sku_managed]
+          - sku # [sku_managed]
+        publicHoistPattern:
+          - eslint # [sku_managed]
+          - prettier # [sku_managed]
+        strictDepBuilds: false # [sku_managed]
+        trustPolicyExclude:
+          - semver@6.3.1 # [sku_managed]
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result.hasFailure).toBe(false);
+    expect(result.failures).toEqual([]);
+    expect(result.advisories).toContain(
+      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
+    );
+    expect(result.advisories).toContain(
+      'pnpm-workspace.yaml: "trustPolicy" has value no-downgrade, recommended is off. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
+    );
+    expect(result.advisories).toContain(
+      'pnpm-workspace.yaml: "allowBuilds.@swc/core" has value false, recommended is true. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
+    );
+  });
+
+  it('stays silent for user-owned custom entries with no corresponding sku default', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        allowBuilds:
+          custom-pkg: true
+        publicHoistPattern:
+          - my-custom-dep
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result.advisories).not.toContain(
+      expect.stringContaining('custom-pkg'),
+    );
+    expect(result.advisories).not.toContain(
+      expect.stringContaining('my-custom-dep'),
+    );
+  });
+
+  it('throws when the workspace document is not a mapping', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: '- this is not a workspace config map\n',
+    });
+
+    await expect(
+      checkPnpmWorkspaceConfig({ targetDir: fixture.path }),
+    ).rejects.toThrow('the document must contain a YAML mapping');
+  });
+
+  it('throws when the workspace document has YAML parse errors', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: 'packages: [\n',
+    });
+
+    await expect(
+      checkPnpmWorkspaceConfig({ targetDir: fixture.path }),
+    ).rejects.toThrow(/Cannot check /);
+  });
+});
+
 describe('ensurePnpmWorkspaceConfig', () => {
   let logSpy: MockInstance<typeof console.log>;
-  let warnSpy: MockInstance<typeof console.warn>;
 
   beforeEach(() => {
     logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-    warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -29,18 +283,10 @@ describe('ensurePnpmWorkspaceConfig', () => {
 
   it('leaves missing file untouched when create is false', async () => {
     await using fixture = await createFixture({});
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'enforce',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     expect(await fixture.exists(workspaceFile)).toBe(false);
     expect(logSpy).not.toHaveBeenCalled();
-    expect(warnSpy).not.toHaveBeenCalled();
   });
 
   it('does not overwrite a non-map workspace document', async () => {
@@ -48,8 +294,18 @@ describe('ensurePnpmWorkspaceConfig', () => {
     await using fixture = await createFixture({ [workspaceFile]: original });
 
     await expect(
-      ensurePnpmWorkspaceConfig({ targetDir: fixture.path, mode: 'additive' }),
+      ensurePnpmWorkspaceConfig({ targetDir: fixture.path }),
     ).rejects.toThrow('the document must contain a YAML mapping');
+    expect(await fixture.readFile(workspaceFile, 'utf8')).toBe(original);
+  });
+
+  it('does not overwrite a document with YAML parse errors', async () => {
+    const original = 'packages: [\n';
+    await using fixture = await createFixture({ [workspaceFile]: original });
+
+    await expect(
+      ensurePnpmWorkspaceConfig({ targetDir: fixture.path }),
+    ).rejects.toThrow(/Cannot sync /);
     expect(await fixture.readFile(workspaceFile, 'utf8')).toBe(original);
   });
 
@@ -68,7 +324,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
     expect(logSpy).toHaveBeenCalledWith('created pnpm-workspace.yaml');
   });
 
-  it('additive additions: adds missing single-value settings, object setting keys, and array entries with markers', async () => {
+  it('adds missing settings, object keys, and array entries with markers', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
         packages:
@@ -80,10 +336,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('packages:');
@@ -104,37 +357,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
     );
   });
 
-  it('existing-value preservation: leaves existing values untouched in additive mode', async () => {
-    await using fixture = await createFixture({
-      [workspaceFile]: dedent`
-        minimumReleaseAge: 1440 # custom setting
-        allowBuilds:
-          '@swc/core': false # [sku_managed]
-      `,
-    });
-
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
-
-    const content = await fixture.readFile(workspaceFile, 'utf8');
-    expect(content).toContain('minimumReleaseAge: 1440 # custom setting');
-    expect(content).toContain("'@swc/core': false");
-
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320. Run "sku configure" to align.',
-      ),
-    );
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'pnpm-workspace.yaml: "allowBuilds.@swc/core" has value false, recommended is true. Run "sku configure" to align.',
-      ),
-    );
-  });
-
-  it('overwrites in both directions on sku configure (enforce mode)', async () => {
+  it('overwrites marked values in both directions', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
         minimumReleaseAge: 1440 # [sku_managed]
@@ -144,10 +367,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'enforce',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('minimumReleaseAge: 4320 # 3 days [sku_managed]');
@@ -171,27 +391,34 @@ describe('ensurePnpmWorkspaceConfig', () => {
     );
   });
 
-  it('value-level ownership: preserves an unmarked override of a key sku manages, even in enforce mode', async () => {
+  it('uniform ownership: preserves unmarked single-value and object overrides', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
+        minimumReleaseAge: 1440 # custom override
+        trustPolicy: no-downgrade # custom override
         allowBuilds:
           '@swc/core': false # custom override
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'enforce',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
+    expect(content).toContain('minimumReleaseAge: 1440 # custom override');
+    expect(content).toContain('trustPolicy: no-downgrade # custom override');
     expect(content).toContain("'@swc/core': false # custom override");
+    expect(logSpy).not.toHaveBeenCalledWith(
+      expect.stringContaining('updated minimumReleaseAge'),
+    );
+    expect(logSpy).not.toHaveBeenCalledWith(
+      expect.stringContaining('updated trustPolicy'),
+    );
     expect(logSpy).not.toHaveBeenCalledWith(
       expect.stringContaining('updated allowBuilds.@swc/core'),
     );
   });
 
-  it('entry-level ownership: leaves entries sku does not manage in place in both modes', async () => {
+  it('entry-level ownership: leaves entries sku does not manage in place', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
         allowBuilds:
@@ -201,70 +428,26 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
-    let content = await fixture.readFile(workspaceFile, 'utf8');
-    expect(content).toContain('my-custom-package: true');
-    expect(content).toContain('my-hoisted-dep');
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'enforce',
-    });
-    content = await fixture.readFile(workspaceFile, 'utf8');
+    const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('my-custom-package: true');
     expect(content).toContain('my-hoisted-dep');
   });
 
-  it('retired-entry removal on sku configure only, and preservation once marker is deleted', async () => {
+  it('removes retired marked entries and preserves unmarked retired entries', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
         allowBuilds:
           old-retired-build: true # [sku_managed]
         publicHoistPattern:
-          - old-retired-hoist # [sku_managed]
-      `,
-    });
-
-    // Additive mode: retained and warns
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
-    let content = await fixture.readFile(workspaceFile, 'utf8');
-    expect(content).toContain('old-retired-build: true # [sku_managed]');
-    expect(content).toContain('old-retired-hoist # [sku_managed]');
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'pnpm-workspace.yaml: "old-retired-build" in allowBuilds is marked with "[sku_managed]", but is no longer a sku default. Run "sku configure" to remove it, or delete its "[sku_managed]" marker to keep it as a user-managed entry.',
-      ),
-    );
-    expect(warnSpy).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'pnpm-workspace.yaml: "old-retired-hoist" in publicHoistPattern is marked with "[sku_managed]", but is no longer a sku default. Run "sku configure" to remove it, or delete its "[sku_managed]" marker to keep it as a user-managed entry.',
-      ),
-    );
-
-    // Now delete the marker from old-retired-hoist so it becomes user-managed
-    await fixture.writeFile(
-      workspaceFile,
-      dedent`
-        allowBuilds:
-          old-retired-build: true # [sku_managed]
-        publicHoistPattern:
           - old-retired-hoist
       `,
-    );
-
-    // Enforce mode: old-retired-build removed, but unmarked old-retired-hoist preserved
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'enforce',
     });
 
-    content = await fixture.readFile(workspaceFile, 'utf8');
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).not.toContain('old-retired-build');
     expect(content).toContain('old-retired-hoist');
     expect(logSpy).toHaveBeenCalledWith(
@@ -274,7 +457,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
     );
   });
 
-  it('adoption: unmarked default-matching entries are adopted on every sync', async () => {
+  it('adoption: unmarked default-matching entries are adopted on sync', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
         minimumReleaseAge: 4320
@@ -285,10 +468,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('minimumReleaseAge: 4320 # 3 days [sku_managed]');
@@ -306,10 +486,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'enforce',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('old-retired-build: true # not sku_managed');
@@ -326,10 +503,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'enforce',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).not.toContain('old-retired-build');
@@ -345,10 +519,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'enforce',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('old-retired-entry # keep this entry');
@@ -376,13 +547,8 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
-    // Asserted as an exact prefix, since where each comment lands matters as
-    // much as whether it survives. Sku appends its other defaults below.
     const expectedHead = dedent`
       # Top level workspace comment
       packages:
@@ -416,10 +582,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('configDependencies:');
@@ -442,10 +605,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).not.toContain('pnpm-plugin-sku');
@@ -457,10 +617,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       [workspaceFile]: 'configDependencies: {}\n',
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('configDependencies: {}');
@@ -476,10 +633,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({
-      targetDir: fixture.path,
-      mode: 'additive',
-    });
+    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     const doc = parseDocument(content);

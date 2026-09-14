@@ -43,7 +43,7 @@ It runs only as a read-only check on `sku lint`. It runs as an enforcing write o
     - marked retired entries
     - unmarked values that match defaults but are not yet adopted
     - `pnpm-plugin-sku` still present in `configDependencies`
-      Failures name the key and the current and recommended states. They direct the user to `sku format`.
+      Failures name the key and the current and recommended states. The lint output directs the user to `sku format` once at the end of the run.
   - Sku logs user-managed values that differ from its defaults as info. The log names the key, the current value, and the recommended value. It names the two re-alignment paths: edit the value manually, or remove it and let the next `sku format` add it again as managed. These logs never fail the run.
   - An aligned file passes silently.
 - The sync never creates `pnpm-workspace.yaml`.

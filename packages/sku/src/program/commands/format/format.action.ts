@@ -1,6 +1,7 @@
 import { configureProject } from '../../../utils/configure.js';
 import { fix as esLintFix } from '../../../services/eslint/runESLint.js';
 import { write as prettierWrite } from '../../../services/prettier.js';
+import { pnpmWorkspaceSync } from '../../../services/pnpmWorkspace.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { accentLight, critical } from '@sku-private/utils/console';
 import { type LintCheck, runLintChecks } from '../../../utils/runLintChecks.js';
@@ -15,6 +16,10 @@ export const formatAction = async (
   console.log(accentLight('Formatting'));
 
   const checks: LintCheck[] = [
+    {
+      name: 'pnpm workspace',
+      run: () => pnpmWorkspaceSync(),
+    },
     {
       name: 'ESLint',
       run: () => esLintFix({ paths: pathsToCheck }),

@@ -1,11 +1,4 @@
-import {
-  ensurePnpmWorkspaceConfig,
-  getPathFromCwd,
-  isPnpm,
-  rootDir,
-  writeFileToCWD,
-  type SyncMode,
-} from '@sku-private/utils';
+import { getPathFromCwd, writeFileToCWD } from '@sku-private/utils';
 
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
@@ -25,10 +18,6 @@ import { validateSkuConfigFormat } from './validateSkuConfigFormat.js';
 import type { SkuContext } from '../context/createSkuContext.js';
 import { warnOnLegacyReact } from './warnOnLegacyReact.js';
 
-export interface ConfigureAppOptions {
-  mode?: SyncMode;
-}
-
 const coverageFolder = 'coverage';
 
 const convertToForwardSlashPaths = (pathStr: string) =>
@@ -36,10 +25,7 @@ const convertToForwardSlashPaths = (pathStr: string) =>
 
 const addSep = (p: string) => `${p}${path.sep}`;
 
-export async function configureApp(
-  skuContext: SkuContext,
-  options?: ConfigureAppOptions,
-) {
+export async function configureApp(skuContext: SkuContext) {
   const { paths, httpsDevServer, languages, hosts } = skuContext;
 
   validateSkuConfigFormat(paths.appSkuConfigPath);
@@ -122,14 +108,6 @@ export async function configureApp(
     comment: 'managed by sku',
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
-
-  // If there's no rootDir, we're either inside `@sku-lib/create`, or we can't determine the user's package manager
-  if (rootDir && isPnpm) {
-    await ensurePnpmWorkspaceConfig({
-      targetDir: rootDir,
-      mode: options?.mode ?? 'additive',
-    });
-  }
 
   warnOnLegacyReact();
 }

@@ -96,7 +96,7 @@ The one exception: unmarked values exactly matching sku's current defaults SHALL
 
 `sku lint` SHALL fail when the file requires managed changes. A managed setting or entry is missing. A marked value differs from sku's current default. Sku retired a marked entry. An unmarked value exactly matches a sku default but has not been adopted. Or `pnpm-plugin-sku` is still present in `configDependencies`.
 
-Failures SHALL name the key, the current and recommended states, and direct the user to run `sku format`.
+Failures SHALL name the key and the current and recommended states. The lint output SHALL direct the user to run `sku format`, once at the end of the run rather than in every failure message.
 
 The lint check MUST NOT change the file.
 

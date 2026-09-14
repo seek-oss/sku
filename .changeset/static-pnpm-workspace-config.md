@@ -1,21 +1,24 @@
 ---
-'sku': minor
-'@sku-lib/create': minor
+'sku': major
+'@sku-lib/create': major
 ---
 
-Migrate from `pnpm-plugin-sku` to static `pnpm-workspace.yaml` configuration.
+**BREAKING**: Migrate from `pnpm-plugin-sku` runtime configuration to static `pnpm-workspace.yaml` synchronization via `sku lint` and `sku format`.
+
+### Breaking Changes
+
+- **Lint and Format Entry Points Only**: Sku no longer syncs or checks `pnpm-workspace.yaml` during `sku configure`, `postinstall`, or configuration-enabled commands (`sku start`, `sku build`, `sku test`). Syncing runs exclusively as a read-only check in `sku lint` and an enforcing write in `sku format`.
+- **`skuSkipConfigure` and `skuSkipPostInstall` No Longer Gate Sync**: Because configuration no longer runs from those paths, `skuSkipConfigure` and `skuSkipPostInstall` in `package.json` do not apply to workspace configuration.
+- **Unconditional Enforcement for Managed Values**: `sku format` forcefully aligns all sku-managed values with sku's recommended defaults: missing managed settings are added, marked values differing from defaults are rewritten in both directions, and retired marked entries are removed.
+- **Lint Gating**: `sku lint` fails if `pnpm-workspace.yaml` requires managed changes (missing settings, outdated marked values, retired marked entries, unmarked values matching defaults pending adoption, or `pnpm-plugin-sku` present in `configDependencies`), directing you to run `sku format`.
+- **`allowBuilds` Conflict Flip**: In earlier versions, `pnpm-plugin-sku` merged `allowBuilds` at runtime such that plugin defaults overrode user overrides. With static configuration, user-managed entries in `pnpm-workspace.yaml` win.
 
 ### Summary of Changes
 
 - **Static Workspace Configuration**: Sku's recommended pnpm settings are now written directly into `pnpm-workspace.yaml` with `[sku_managed]` comment markers instead of being injected at runtime via `pnpm-plugin-sku`.
-- **Automatic Migration**: On the first run of a configuration-enabled sku command or postinstall, `pnpm-plugin-sku` is removed from `configDependencies` in `pnpm-workspace.yaml` (and the `configDependencies` field is deleted if empty).
-- **Two Sync Modes**:
-  - **Additive Sync (configuration-enabled sku commands & postinstall)**: Adds missing managed single-value settings and `allowBuilds` keys, unions and deduplicates array settings (`publicHoistPattern`, `minimumReleaseAgeExclude`, `trustPolicyExclude`), and never overwrites existing config values or removes user-owned entries.
-  - **Enforce Mode (`sku configure`)**: Overwrites managed single-value settings and marked `allowBuilds` keys to match sku defaults in both directions. Unmarked `allowBuilds` overrides are preserved. Removes retired sku defaults that still carry a `[sku_managed]` marker.
-  - **Managed Comments**: Comments on entries adopted or overwritten by sku are replaced with the `[sku_managed]` marker, alongside any explanatory comment sku provides (for example `# 3 days [sku_managed]`).
-- **Mutation Logging**: File creation, additions, adoptions, duplicate removal, migrations, updates, and retirements are logged; aligned files remain silent.
-- **Drift Warnings**: Regular sku commands warn when managed values differ from sku defaults or when retired entries still have a `[sku_managed]` marker, suggesting `sku configure` to align.
-- **Opt-outs and Escape Hatches**:
-  - `skuSkipConfigure: true` in `package.json` disables the sync on regular sku commands (`skuSkipPostInstall: true` disables it on postinstall). Manual `sku configure` always syncs.
-  - To keep an entry that sku has retired, delete its `[sku_managed]` marker (or re-add it without a marker) to designate it as user-managed.
-- **New Project Scaffolding**: `@sku-lib/create` now uses the shared sync engine to emit `pnpm-workspace.yaml` on project creation, without installing `pnpm-plugin-sku` or gating on pnpm versions.
+- **Uniform Marker Ownership**: Every value is either sku-managed (carries a `[sku_managed]` comment marker) or user-managed (unmarked). This applies uniformly across single-value settings (`minimumReleaseAge`, `trustPolicy`, etc.), object setting keys (`allowBuilds`), and array entries (`publicHoistPattern`, `minimumReleaseAgeExclude`, `trustPolicyExclude`).
+- **Adoption**: Unmarked values that match sku's current defaults are adopted (marked with `[sku_managed]`) on `sku format`.
+- **User-Managed Drift Advisories**: Unmarked values that differ from sku defaults are preserved by `sku format` and surfaced as info-level advisories in `sku lint` detailing the two re-alignment paths: edit the value to match sku's default, or delete it and run `sku format` to re-add it as sku-managed.
+- **Opt-outs**: Deleting the `[sku_managed]` comment marker from any setting or entry makes it user-managed so `sku format` will never rewrite or remove it.
+- **One-Time Upgrade Migration**: On upgrading, run `sku format` to generate the one-time, git-reviewable diff removing `pnpm-plugin-sku` from `configDependencies`, adding missing defaults, and adopting matching values.
+- **New Project Scaffolding**: `@sku-lib/create` creates new projects with static `pnpm-workspace.yaml` files and no longer installs `pnpm-plugin-sku`.

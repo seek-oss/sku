@@ -6,5 +6,5 @@ export const configureAction = async ({
 }: {
   skuContext: SkuContext;
 }) => {
-  await configureApp(skuContext, { mode: 'enforce' });
+  await configureApp(skuContext);
 };

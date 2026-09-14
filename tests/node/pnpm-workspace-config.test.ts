@@ -7,7 +7,7 @@ import { createFixture, scopeToFixture } from '@sku-private/testing-library';
 const { sku, fixturePath } = scopeToFixture('configure');
 
 describe('pnpm-workspace-config', () => {
-  it('updates a workspace config, leaving existing values untouched', async () => {
+  it('lint fails on managed drift, format enforces fixes while preserving unmarked values, and configure does not sync', async () => {
     await using fixture = await createFixture(
       {
         'package.json': JSON.stringify({
@@ -16,7 +16,7 @@ describe('pnpm-workspace-config', () => {
           type: 'module',
           skuSkipValidatePeerDeps: true,
         }),
-        'sku.config.ts': 'export default {};',
+        'sku.config.ts': 'export default {};\n',
         'src/App.tsx': 'export default () => null;\n',
         'pnpm-lock.yaml': 'lockfileVersion: "9.0"\n',
         'pnpm-workspace.yaml': dedent`
@@ -32,55 +32,87 @@ describe('pnpm-workspace-config', () => {
     );
 
     const relativeCwd = path.relative(fixturePath(), fixture.path);
+    const workspaceYamlPath = path.join(fixture.path, 'pnpm-workspace.yaml');
 
-    const firstRun = await sku('format', [], {
+    // 1. Initial lint fails due to managed drift (plugin presence, missing defaults, pending adoption)
+    const lintInitialRun = await sku('lint', [], {
       cwd: relativeCwd,
     });
+    await expect(lintInitialRun).toMatchExitCode(1);
 
-    await expect(firstRun).toMatchExitCode(0);
+    const lintInitialStdout = lintInitialRun.getStdallStr();
+    expect(lintInitialStdout).toContain(
+      'pnpm-workspace.yaml: "pnpm-plugin-sku" is present in configDependencies.',
+    );
+    expect(lintInitialStdout).toContain(
+      'pnpm-workspace.yaml: "blockExoticSubdeps" is missing, recommended is true.',
+    );
+    expect(lintInitialStdout).toContain(
+      'pnpm-workspace.yaml: "allowBuilds.@parcel/watcher" matches sku\'s default but is missing the "[sku_managed]" marker.',
+    );
+    expect(lintInitialStdout).toContain('To fix this issue, run');
+    // User-managed drift advisory (info-level) is logged
+    expect(lintInitialStdout).toContain(
+      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
+    );
 
-    const workspaceYamlPath = path.join(fixture.path, 'pnpm-workspace.yaml');
+    // 2. sku configure does NOT touch pnpm-workspace.yaml
+    const configureRun = await sku('configure', [], {
+      cwd: relativeCwd,
+    });
+    await expect(configureRun).toMatchExitCode(0);
+
     let content = await readFile(workspaceYamlPath, 'utf-8');
+    expect(content).toContain('pnpm-plugin-sku');
+    expect(content).not.toContain('blockExoticSubdeps');
 
+    // 3. sku format applies enforcing mutations: removes plugin, adds missing defaults, adopts matching values, preserves unmarked drift
+    const formatRun = await sku('format', [], {
+      cwd: relativeCwd,
+    });
+    await expect(formatRun).toMatchExitCode(0);
+
+    content = await readFile(workspaceYamlPath, 'utf-8');
     // configDependencies should be removed
     expect(content).not.toContain('configDependencies');
     expect(content).not.toContain('pnpm-plugin-sku');
 
-    // Existing values untouched (additive mode)
+    // Unmarked differing value preserved as user-managed
     expect(content).toContain('minimumReleaseAge: 1440');
+
+    // Matching value adopted with marker
+    expect(content).toContain("'@parcel/watcher': true # [sku_managed]");
 
     // Missing defaults added with markers
     expect(content).toContain('blockExoticSubdeps: true # [sku_managed]');
     expect(content).toContain('trustPolicy: off # [sku_managed]');
     expect(content).toContain('semver@6.3.1 # [sku_managed]');
 
-    // Drift warning logged
-    const firstRunStdout = firstRun.getStdallStr();
-    expect(firstRunStdout).toContain(
-      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320. Run "sku configure" to align.',
+    // 4. Subsequent sku lint now passes (with info logged for user-managed drift)
+    const lintSecondRun = await sku('lint', [], {
+      cwd: relativeCwd,
+    });
+    await expect(lintSecondRun).toMatchExitCode(0);
+
+    const lintSecondStdout = lintSecondRun.getStdallStr();
+    expect(lintSecondStdout).toContain(
+      'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320. To re-align, edit the value to match sku\'s default, or delete it and run "sku format" to re-add it as sku-managed.',
     );
+    expect(lintSecondStdout).not.toContain('pnpm-plugin-sku');
+    expect(lintSecondStdout).not.toContain('is missing');
 
-    // sku configure aligns the drifted setting
-    const configureRun = await sku('configure', [], {
+    // 5. Subsequent format is silent
+    const secondFormatRun = await sku('format', [], {
       cwd: relativeCwd,
     });
-    await expect(configureRun).toMatchExitCode(0);
+    await expect(secondFormatRun).toMatchExitCode(0);
 
-    content = await readFile(workspaceYamlPath, 'utf-8');
-    expect(content).toContain('minimumReleaseAge: 4320 # 3 days [sku_managed]');
-
-    // Steady-state silence on subsequent runs
-    const secondRun = await sku('format', [], {
-      cwd: relativeCwd,
-    });
-    await expect(secondRun).toMatchExitCode(0);
-
-    const secondRunStdout = secondRun.getStdallStr();
-    expect(secondRunStdout).not.toContain('pnpm-workspace.yaml:');
-    expect(secondRunStdout).not.toContain('added ');
-    expect(secondRunStdout).not.toContain('updated ');
-    expect(secondRunStdout).not.toContain('removed ');
-  });
+    const secondFormatStdout = secondFormatRun.getStdallStr();
+    expect(secondFormatStdout).not.toContain('pnpm-workspace.yaml:');
+    expect(secondFormatStdout).not.toContain('added ');
+    expect(secondFormatStdout).not.toContain('updated ');
+    expect(secondFormatStdout).not.toContain('removed ');
+  }, 60000);
 
   it('produces no warnings or mutations when workspace config is already aligned', async () => {
     await using fixture = await createFixture(
@@ -91,7 +123,7 @@ describe('pnpm-workspace-config', () => {
           type: 'module',
           skuSkipValidatePeerDeps: true,
         }),
-        'sku.config.ts': 'export default {};',
+        'sku.config.ts': 'export default {};\n',
         'src/App.tsx': 'export default () => null;\n',
         'pnpm-lock.yaml': 'lockfileVersion: "9.0"\n',
         'pnpm-workspace.yaml': dedent`
@@ -133,10 +165,18 @@ describe('pnpm-workspace-config', () => {
     const workspaceYamlPath = path.join(fixture.path, 'pnpm-workspace.yaml');
     const contentBefore = await readFile(workspaceYamlPath, 'utf-8');
 
+    // Lint is completely silent on aligned config
+    const lintRun = await sku('lint', [], {
+      cwd: relativeCwd,
+    });
+    await expect(lintRun).toMatchExitCode(0);
+    const lintStdout = lintRun.getStdallStr();
+    expect(lintStdout).not.toContain('pnpm-workspace.yaml:');
+
+    // Format is silent on aligned config
     const formatRun = await sku('format', [], {
       cwd: relativeCwd,
     });
-
     await expect(formatRun).toMatchExitCode(0);
 
     const formatStdout = formatRun.getStdallStr();
@@ -145,11 +185,10 @@ describe('pnpm-workspace-config', () => {
     expect(formatStdout).not.toContain('updated ');
     expect(formatStdout).not.toContain('removed ');
 
-    // Enforce mode (sku configure) on an already-aligned file is just as silent
+    // Configure does not touch the file
     const configureRun = await sku('configure', [], {
       cwd: relativeCwd,
     });
-
     await expect(configureRun).toMatchExitCode(0);
 
     const configureStdout = configureRun.getStdallStr();
@@ -160,5 +199,46 @@ describe('pnpm-workspace-config', () => {
 
     const contentAfter = await readFile(workspaceYamlPath, 'utf-8');
     expect(contentAfter).toBe(contentBefore);
+  }, 60000);
+
+  it('lint and format fail when pnpm-workspace.yaml is not a mapping', async () => {
+    const original = '- this is not a workspace config map\n';
+    await using fixture = await createFixture(
+      {
+        'package.json': JSON.stringify({
+          name: 'invalid-workspace-yaml-test',
+          private: true,
+          type: 'module',
+          skuSkipValidatePeerDeps: true,
+        }),
+        'sku.config.ts': 'export default {};\n',
+        'src/App.tsx': 'export default () => null;\n',
+        'pnpm-lock.yaml': 'lockfileVersion: "9.0"\n',
+        'pnpm-workspace.yaml': original,
+      },
+      { tempDir: fixturePath() },
+    );
+
+    const relativeCwd = path.relative(fixturePath(), fixture.path);
+    const workspaceYamlPath = path.join(fixture.path, 'pnpm-workspace.yaml');
+
+    const lintRun = await sku('lint', [], {
+      cwd: relativeCwd,
+    });
+    await expect(lintRun).toMatchExitCode(1);
+    expect(lintRun.getStdallStr()).toContain(
+      'the document must contain a YAML mapping',
+    );
+
+    const formatRun = await sku('format', [], {
+      cwd: relativeCwd,
+    });
+    await expect(formatRun).toMatchExitCode(1);
+    expect(formatRun.getStdallStr()).toContain(
+      'the document must contain a YAML mapping',
+    );
+    await expect(formatRun).toMatchExitCode(1);
+
+    expect(await readFile(workspaceYamlPath, 'utf-8')).toBe(original);
   });
 });

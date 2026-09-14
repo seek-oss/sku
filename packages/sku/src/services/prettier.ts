@@ -3,7 +3,7 @@ import { runBin } from '../utils/runBin.js';
 import { getPathFromCwd } from '@sku-private/utils';
 import { suggestScript } from '../utils/suggestScript.js';
 import { accentLight, critical, secondary } from '@sku-private/utils/console';
-import type { LintResult } from '../utils/runLintChecks.js';
+import { FAILURE_EXIT_CODE, type LintResult } from '../utils/runLintChecks.js';
 
 const prettierIgnorePath = getPathFromCwd('.prettierignore');
 const prettierConfigPath = import.meta.resolve('sku/config/prettier');
@@ -46,7 +46,7 @@ const runPrettier = async ({
     args: prettierArgs,
     options: { stdio: 'inherit' },
   });
-  if (listDifferent && exitCode === 1) {
+  if (listDifferent && exitCode === FAILURE_EXIT_CODE) {
     console.error(
       critical('Error: The file(s) listed above failed the prettier check'),
     );

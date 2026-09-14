@@ -1,10 +1,4 @@
-import {
-  getPathFromCwd,
-  isAtLeastPnpmV10,
-  isAtLeastRecommendedPnpmVersion,
-  writeFileToCWD,
-  rootDir,
-} from '@sku-private/utils';
+import { getPathFromCwd, writeFileToCWD } from '@sku-private/utils';
 
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
@@ -22,8 +16,6 @@ import { syncPathAliasImports } from './pathAliasImports.js';
 import { validateSkuConfigFormat } from './validateSkuConfigFormat.js';
 
 import type { SkuContext } from '../context/createSkuContext.js';
-import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
-import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
 import { warnOnLegacyReact } from './warnOnLegacyReact.js';
 
 const coverageFolder = 'coverage';
@@ -33,7 +25,7 @@ const convertToForwardSlashPaths = (pathStr: string) =>
 
 const addSep = (p: string) => `${p}${path.sep}`;
 
-export default async (skuContext: SkuContext) => {
+export async function configureApp(skuContext: SkuContext) {
   const { paths, httpsDevServer, languages, hosts } = skuContext;
 
   validateSkuConfigFormat(paths.appSkuConfigPath);
@@ -117,20 +109,5 @@ export default async (skuContext: SkuContext) => {
     patterns: gitIgnorePatterns.map(convertToForwardSlashPaths),
   });
 
-  // If there's no rootDir, we're either inside `@sku-lib/create`, or we can't determine the user's package manager
-  if (rootDir && isAtLeastPnpmV10()) {
-    const pnpmConfigDependencies = await getPnpmConfigDependencies();
-
-    const hasRecommendedPnpmVersionInstalled =
-      isAtLeastRecommendedPnpmVersion();
-    const pnpmPluginSkuInstalled =
-      pnpmConfigDependencies.includes('pnpm-plugin-sku');
-
-    await validatePnpmConfig({
-      hasRecommendedPnpmVersionInstalled,
-      pnpmPluginSkuInstalled,
-    });
-  }
-
   warnOnLegacyReact();
-};
+}

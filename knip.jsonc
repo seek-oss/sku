@@ -28,6 +28,10 @@
         "__sku_alias__webpackStats",
       ],
     },
+    "packages/create": {
+      // Bundled through @sku-private/utils by the shared workspace config writer
+      "ignoreDependencies": ["yaml"],
+    },
     "packages/babel-plugin-display-name": {
       // Dep is referenced as a string
       "ignoreDependencies": ["@babel/preset-react"],

@@ -154,12 +154,37 @@ sudo sku setup-hosts
 
 ### `configure`
 
-Emit and update configuration files for your project.
-This command is run before most other `sku` CLI commands, so you shouldn't need to run it manually.
+Emit and update configuration files for your project (`tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, `.gitignore`, and `.prettierignore`).
+
+This command runs before most `sku` CLI commands and on `postinstall`, so you rarely need to run it manually.
 
 ```sh
 sku configure
 ```
+
+#### Opt-outs
+
+- Set `"skuSkipConfigure": true` in `package.json` to skip configuration during regular sku commands.
+- Set `"skuSkipPostInstall": true` in `package.json` to skip configuration during `postinstall`.
+- Invoking `sku configure` directly always runs the configuration step, even if `skuSkipConfigure` is enabled.
+
+#### `pnpm-workspace.yaml` synchronization
+
+In pnpm projects with an existing `pnpm-workspace.yaml`, sku manages recommended workspace settings statically. Sku tracks entries it manages with a `[sku_managed]` comment marker, which can sit alongside an explanatory comment (for example `minimumReleaseAge: 4320 # 3 days [sku_managed]`).
+
+The sync does not create `pnpm-workspace.yaml` in an existing project (absence of the file serves as an opt-out); `@sku-lib/create` creates it for newly scaffolded projects.
+
+- **Lint check (`sku lint`)**: Performs a read-only check. Fails if managed settings are missing, marked values differ from defaults, marked retired entries remain, matching values are pending adoption, or `pnpm-plugin-sku` is present in `configDependencies`. Differing user-managed (unmarked) settings are logged as informational advisories without failing the run.
+- **Enforcing format (`sku format`)**: Applies and enforces sku's recommended settings: adds missing managed settings, rewrites outdated marked values in both directions, adopts matching unmarked values, removes retired marked entries, and removes `pnpm-plugin-sku` from `configDependencies`.
+
+#### User-managed settings and opt-outs
+
+To manage a setting yourself or retain an entry sku has retired, delete its `[sku_managed]` comment marker. Unmarked entries are considered user-managed and are preserved by `sku format`.
+
+To re-align a user-managed setting with sku's recommendations:
+
+- Edit the value to match sku's default (the next `sku format` adopts it), or
+- Delete the setting entirely and run `sku format` to re-add it as sku-managed.
 
 ## Translations
 

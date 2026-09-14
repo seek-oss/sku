@@ -1,5 +1,6 @@
 import { check as esLintCheck } from '../../../services/eslint/runESLint.js';
 import { check as prettierCheck } from '../../../services/prettier.js';
+import { pnpmWorkspaceCheck } from '../../../services/pnpmWorkspace.js';
 import { runTsc } from '../../../services/typescript/runTsc.js';
 
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
@@ -20,6 +21,10 @@ export const lintAction = async (
   await runVocabCompile(skuContext);
 
   const checks: LintCheck[] = [
+    {
+      name: 'pnpm workspace',
+      run: () => pnpmWorkspaceCheck(),
+    },
     {
       name: 'TypeScript',
       run: () => runTsc(pathsToCheck),

@@ -47,8 +47,10 @@
     },
     "fixtures/braid-design-system": {
       "entry": [
-        "src/client.tsx",
-        "src/render.tsx",
+        "src/static/client.tsx",
+        "src/static/render.tsx",
+        "src/webpack-static/client.tsx",
+        "src/webpack-static/render.tsx",
         "src/ssr/client.tsx",
         "src/ssr/server.tsx",
         "src/ssr/routes.tsx",

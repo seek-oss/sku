@@ -2,11 +2,11 @@
 
 ### Requirement: ErrorBoundary must not replace the html layout
 
-An `ErrorBoundary` on the route that renders `<html>` replaces that layout on failure.
+An `ErrorBoundary` or `errorElement` on the route that renders `<html>` replaces that layout on failure.
 Apps MUST put `ErrorBoundary` on a descendant route so the document layout stays mounted.
 
-`SkuRouteObject` MUST forbid `ErrorBoundary` on the top-level `routes` array.
-A child of a `SkuRouteObject` MAY set `ErrorBoundary`.
+`SkuRouteObject` MUST forbid `ErrorBoundary` and `errorElement` on the top-level `routes` array, including via `lazy`.
+A child of a `SkuRouteObject` MAY set `ErrorBoundary` or `errorElement`.
 
 #### Scenario: Child route ErrorBoundary keeps html
 
@@ -18,15 +18,15 @@ A child of a `SkuRouteObject` MAY set `ErrorBoundary`.
 #### Scenario: Top-level ErrorBoundary is a type error
 
 - **WHEN** an app types `routes` as `SkuRouteObject[]`
-- **AND** a top-level route sets `ErrorBoundary`
+- **AND** a top-level route sets `ErrorBoundary` or `errorElement` (including via `lazy`)
 - **THEN** TypeScript reports a type error
-- **AND** a child route may set `ErrorBoundary`
+- **AND** a child route may set `ErrorBoundary` or `errorElement`
 
 ### Requirement: routesEntry exports routes
 
 `routesEntry` MUST export named `routes` as `SkuRouteObject[]`.
 
-`SkuRouteObject` MUST be a sku type helper `SkuRouteObject<Site extends string = string>` with `sites?: Site[]`, `ErrorBoundary` forbidden, and children that MAY set `ErrorBoundary` (not a wrapped React Router re-export).
+`SkuRouteObject` MUST be a sku type helper `SkuRouteObject<Site extends string = string>` with `sites?: Site[]`, `ErrorBoundary` and `errorElement` forbidden, and children that MAY set `ErrorBoundary` or `errorElement` (not a wrapped React Router re-export).
 
 Sku MUST NOT export a separate public type for nested routes.
 

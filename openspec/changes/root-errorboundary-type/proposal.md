@@ -1,12 +1,12 @@
 ## Why
 
-An `ErrorBoundary` on the html/root route replaces `<html>` on failure.
+An `ErrorBoundary` or `errorElement` on the html/root route replaces `<html>` on failure.
 Apps already type `routes` as `SkuRouteObject[]`, but that type accepts the mistake.
 
 ## What Changes
 
-- `SkuRouteObject` forbids `ErrorBoundary` on the top-level `routes` array.
-- Children of `SkuRouteObject` still allow `ErrorBoundary` (no extra public type).
+- `SkuRouteObject` forbids `ErrorBoundary` and `errorElement` on the top-level `routes` array, including via `lazy`.
+- Children of `SkuRouteObject` still allow both (no extra public type).
 - Docs state the type error and point at the child-route pattern.
 - Sku patch changeset.
 
@@ -25,10 +25,10 @@ Apps already type `routes` as `SkuRouteObject[]`, but that type accepts the mist
 
 ### Modified Capabilities
 
-- `managed-data-mode`: `SkuRouteObject` rejects a top-level `ErrorBoundary`.
+- `managed-data-mode`: `SkuRouteObject` rejects a top-level `ErrorBoundary` or `errorElement`, including via `lazy`.
 
 ## Impact
 
 - Public `sku/runtime` type `SkuRouteObject` (no new export).
-- Type-only break for apps that put `ErrorBoundary` on a `SkuRouteObject` literal.
+- Type-only break for apps that put `ErrorBoundary` or `errorElement` on a `SkuRouteObject` literal or its `lazy` result.
 - Docs and a sku patch changeset.

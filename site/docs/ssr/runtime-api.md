@@ -8,14 +8,14 @@
 Import browser-safe Managed Data Mode helpers from `sku/runtime`.
 Most helpers are documented on the topic pages that use them.
 
-| Export                                                                            | Use for                                                  |
-| --------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| [`defineServerEntry` / `defineClientEntry`](./entries.md)                         | Typed server and client entry objects                    |
-| [`createSkuContexts`](./providers.md#typed-hooks)                                 | Typed `useSite` / `useClientContext` / `useReactContext` |
-| [`SkuRouteObject` / `SiteOf`](./routing.md#strictly-typed-sites-in-route-objects) | Type `sites` from `getSite`                              |
-| [`usePreloadRoute`](./routing.md#intent-preloading-with-usepreloadroute)          | Warm lazy route chunks on intent                         |
-| [`useInsertHtml`](#useinserthtml)                                                 | Queue React nodes into the SSR response stream           |
-| [`getCspNonce`](#getcspnonce)                                                     | Request a CSP nonce for inline / injected scripts        |
+| Export                                                                            | Use for                                                                    |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| [`defineServerEntry` / `defineClientEntry`](./entries.md)                         | Typed server and client entry objects                                      |
+| [`createSkuContexts`](./providers.md#typed-hooks)                                 | Typed `useSite` / `useClientContext` / `useReactContext`                   |
+| [`SkuRouteObject` / `SiteOf`](./routing.md#strictly-typed-sites-in-route-objects) | Type `sites` from `getSite`. Do not set `ErrorBoundary` on the root route. |
+| [`usePreloadRoute`](./routing.md#intent-preloading-with-usepreloadroute)          | Warm lazy route chunks on intent                                           |
+| [`useInsertHtml`](#useinserthtml)                                                 | Queue React nodes into the SSR response stream                             |
+| [`getCspNonce`](#getcspnonce)                                                     | Request a CSP nonce for inline / injected scripts                          |
 
 ## `useInsertHtml`
 

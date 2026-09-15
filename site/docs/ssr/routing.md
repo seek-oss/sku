@@ -75,6 +75,8 @@ export function Component() {
 Lazy page modules must export a named `Component` (not `export default`).
 
 Use a **pathless** root layout to render `<html>`, `<head>`, and `<body>`, plus shared UI and providers (see [Providers](./providers.md)).
+Do not set `ErrorBoundary` on that root route.
+See [Error pages](./error-pages.md).
 
 You’re set up when:
 

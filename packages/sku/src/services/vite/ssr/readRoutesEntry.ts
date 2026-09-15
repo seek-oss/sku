@@ -1,9 +1,9 @@
-import type { MapRoutePath, SkuRouteObject } from './types.js';
+import type { MapRoutePath, SkuChildRouteObject } from './types.js';
 
 export const readRoutesEntry = (
   mod: object,
 ): {
-  routes: SkuRouteObject[];
+  routes: SkuChildRouteObject[];
   mapRoutePath?: MapRoutePath;
 } => {
   const { routes, mapRoutePath } = mod as Record<string, unknown>;
@@ -21,7 +21,7 @@ export const readRoutesEntry = (
   }
 
   return {
-    routes: routes as SkuRouteObject[],
+    routes: routes as SkuChildRouteObject[],
     mapRoutePath: mapRoutePath as MapRoutePath | undefined,
   };
 };

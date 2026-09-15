@@ -75,6 +75,8 @@ export function Component() {
 Lazy page modules must export a named `Component` (not `export default`).
 
 Use a **pathless** root layout to render `<html>`, `<head>`, and `<body>`, plus shared UI and providers (see [Providers](./providers.md)).
+Do not set `ErrorBoundary` on that root route. TypeScript does not permit it on `SkuRouteObject`.
+Set the boundary on a child route. Refer to [Error pages](./error-pages.md).
 
 You’re set up when:
 

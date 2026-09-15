@@ -1,5 +1,5 @@
 import type { RouteObject } from 'react-router';
-import type { MapRoutePath, SkuRouteObject } from './types.js';
+import type { MapRoutePath, SkuChildRouteObject } from './types.js';
 
 function assertMapRoutePathReturn(
   value: unknown,
@@ -17,7 +17,7 @@ function assertMapRoutePathReturn(
 }
 
 function cloneMappedRoute(
-  rest: Omit<SkuRouteObject, 'sites' | 'children'>,
+  rest: Omit<SkuChildRouteObject, 'sites' | 'children'>,
   mappedPath: string,
   isIndexSource: boolean,
 ): RouteObject {
@@ -35,7 +35,7 @@ function cloneMappedRoute(
 }
 
 export const buildRoutesForSite = (
-  routes: SkuRouteObject[],
+  routes: SkuChildRouteObject[],
   site: string,
   mapRoutePath?: MapRoutePath,
   parentSegments: readonly string[] = [],
@@ -108,7 +108,7 @@ export const buildRoutesForSite = (
  * module init and nothing here touches the per-request path.
  */
 export const buildSiteRouteTrees = (
-  routes: SkuRouteObject[],
+  routes: SkuChildRouteObject[],
   siteNames: readonly string[],
   mapRoutePath?: MapRoutePath,
 ): Record<string, RouteObject[]> =>

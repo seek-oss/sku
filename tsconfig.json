@@ -20,12 +20,14 @@
     "packages",
     "private/utils",
     "private/tsdown",
-    "private/test-utils"
+    "private/test-utils",
+    "private/testing-library"
   ],
   "references": [
     { "path": "./private/utils" },
     { "path": "./private/tsdown" },
     { "path": "./private/test-utils" },
+    { "path": "./private/testing-library" },
     { "path": "./packages/sku" },
     { "path": "./packages/codemod" },
     { "path": "./packages/create" },

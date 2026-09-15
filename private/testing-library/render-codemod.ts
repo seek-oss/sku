@@ -1,9 +1,10 @@
 import type { RenderOptions } from 'cli-testing-library';
+import 'cli-testing-library/vitest';
 import { createRequire } from 'node:module';
 import fs from 'node:fs/promises';
 import { describe, it, expect } from 'vitest';
 import { createFixture } from 'fs-fixture';
-import type { CodemodName } from '../../packages/codemod/src/utils/constants.js';
+import type { CodemodName } from '@sku-lib/codemod';
 import { renderWithEnvironment } from './utils.ts';
 
 const require = createRequire(import.meta.url);

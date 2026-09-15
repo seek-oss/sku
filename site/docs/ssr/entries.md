@@ -331,7 +331,8 @@ export const mapRoutePath?: MapRoutePath;
 ```
 
 `SkuRouteObject` is a React Router `RouteObject` plus optional `sites` for multi-site membership.
-Do not set `ErrorBoundary` on a top-level route. Set it on a child route.
+Do not set `ErrorBoundary` on a top-level route.
+Set the boundary on a child route.
 
 Optional `mapRoutePath` clones path-bearing and index routes for alternate paths (index homes use `path: ''`) — see [Multi-language](./multi-language.md#maproutepath).
 

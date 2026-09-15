@@ -88,12 +88,22 @@ Omitting sku links from the app tree MUST NOT throw.
 An `ErrorBoundary` on the route that renders `<html>` replaces that layout on failure.
 Apps MUST put `ErrorBoundary` on a descendant route so the document layout stays mounted.
 
+`SkuRouteObject` MUST forbid `ErrorBoundary` on the top-level `routes` array.
+A child of a `SkuRouteObject` MAY set `ErrorBoundary`.
+
 #### Scenario: Child route ErrorBoundary keeps html
 
 - **WHEN** the root layout renders `<html>`
 - **AND** `ErrorBoundary` is on a child route
 - **AND** that child fails
 - **THEN** the response still includes the root layout’s `<html>`
+
+#### Scenario: Top-level ErrorBoundary is a type error
+
+- **WHEN** an app types `routes` as `SkuRouteObject[]`
+- **AND** a top-level route sets `ErrorBoundary`
+- **THEN** TypeScript reports a type error
+- **AND** a child route may set `ErrorBoundary`
 
 ### Requirement: routesEntry exports routes
 
@@ -103,7 +113,7 @@ Sku MUST resolve `routesEntry` into both the server and client graphs via `__sku
 
 `routesEntry` MUST export named `routes` as `SkuRouteObject[]`.
 
-`SkuRouteObject` MUST be a sku type helper `SkuRouteObject<Site extends string = string>` with `sites?: Site[]` and recursive `children?: SkuRouteObject<Site>[]` (not a wrapped React Router re-export).
+`SkuRouteObject` MUST be a sku type helper `SkuRouteObject<Site extends string = string>` with `sites?: Site[]`, `ErrorBoundary` forbidden, and children that MAY set `ErrorBoundary` (not a wrapped React Router re-export).
 
 Omitting the generic MUST leave `sites` as `string[]`.
 

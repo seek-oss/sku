@@ -21,6 +21,7 @@ That can briefly flash a stack trace before the default “Hey developer” page
 [`RootLayout`](./providers.md#root-layout-for-providers) renders `<html>`.
 Attaching `ErrorBoundary` to the root route itself replaces that layout on failure and drops `<html>` from the response.
 Instead, attach `ErrorBoundary` to a child route under `RootLayout` so the document shell stays mounted.
+A top-level [`SkuRouteObject`](./routing.md) does not permit `ErrorBoundary`. This rule is enforced.
 
 sku uses [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary):
 

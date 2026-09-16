@@ -12,8 +12,8 @@ import {
 import { parseDocument } from 'yaml';
 import {
   checkPnpmWorkspaceConfig,
-  ensurePnpmWorkspaceConfig,
-} from './ensurePnpmWorkspaceConfig.ts';
+  syncPnpmWorkspaceConfig,
+} from './syncPnpmWorkspaceConfig.ts';
 
 const workspaceFile = 'pnpm-workspace.yaml';
 
@@ -278,7 +278,7 @@ describe('checkPnpmWorkspaceConfig', () => {
   });
 });
 
-describe('ensurePnpmWorkspaceConfig', () => {
+describe('syncPnpmWorkspaceConfig', () => {
   let logSpy: MockInstance<typeof console.log>;
 
   beforeEach(() => {
@@ -291,7 +291,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
 
   it('leaves missing file untouched when create is false', async () => {
     await using fixture = await createFixture({});
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     expect(await fixture.exists(workspaceFile)).toBe(false);
     expect(logSpy).not.toHaveBeenCalled();
@@ -302,7 +302,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
     await using fixture = await createFixture({ [workspaceFile]: original });
 
     await expect(
-      ensurePnpmWorkspaceConfig({ targetDir: fixture.path }),
+      syncPnpmWorkspaceConfig({ targetDir: fixture.path }),
     ).rejects.toThrow('pnpm-workspace.yaml must contain a YAML mapping');
     expect(await fixture.readFile(workspaceFile, 'utf8')).toBe(original);
   });
@@ -312,14 +312,14 @@ describe('ensurePnpmWorkspaceConfig', () => {
     await using fixture = await createFixture({ [workspaceFile]: original });
 
     await expect(
-      ensurePnpmWorkspaceConfig({ targetDir: fixture.path }),
+      syncPnpmWorkspaceConfig({ targetDir: fixture.path }),
     ).rejects.toThrow(/pnpm-workspace\.yaml is invalid/);
     expect(await fixture.readFile(workspaceFile, 'utf8')).toBe(original);
   });
 
   it('creates file with all default settings and markers when create is true', async () => {
     await using fixture = await createFixture({});
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path, create: true });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path, create: true });
 
     expect(await fixture.exists(workspaceFile)).toBe(true);
 
@@ -344,7 +344,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('packages:');
@@ -375,7 +375,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('minimumReleaseAge: 4320 # 3 days [sku_managed]');
@@ -409,7 +409,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('minimumReleaseAge: 1440 # custom override');
@@ -436,7 +436,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('my-custom-package: true');
@@ -455,7 +455,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).not.toContain('oldRetiredSetting');
@@ -485,7 +485,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('minimumReleaseAge: 4320 # 3 days [sku_managed]');
@@ -503,7 +503,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('old-retired-build: true # not sku_managed');
@@ -520,7 +520,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).not.toContain('old-retired-build');
@@ -536,7 +536,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('old-retired-entry # keep this entry');
@@ -564,7 +564,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const expectedHead = dedent`
       # Top level workspace comment
@@ -599,7 +599,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('configDependencies:');
@@ -622,7 +622,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).not.toContain('pnpm-plugin-sku');
@@ -634,7 +634,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       [workspaceFile]: 'configDependencies: {}\n',
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     expect(content).toContain('configDependencies: {}');
@@ -650,7 +650,7 @@ describe('ensurePnpmWorkspaceConfig', () => {
       `,
     });
 
-    await ensurePnpmWorkspaceConfig({ targetDir: fixture.path });
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     const content = await fixture.readFile(workspaceFile, 'utf8');
     const doc = parseDocument(content);

@@ -1,7 +1,7 @@
-import { ensurePnpmWorkspaceConfig } from '@sku-private/utils';
+import { syncPnpmWorkspaceConfig } from '@sku-private/utils';
 
 export const generatePnpmWorkspaceYaml = async (targetPath: string) => {
-  await ensurePnpmWorkspaceConfig({
+  await syncPnpmWorkspaceConfig({
     targetDir: targetPath,
     create: true,
   });

@@ -6,7 +6,7 @@
 ## 2. Sync engine
 
 - [x] 2.1 Add `yaml` as a runtime dependency of `sku` (and `private/utils` if needed for the sync module's types)
-- [x] 2.2 Create `private/utils/src/packageManager/ensurePnpmWorkspaceConfig.ts` with YAML sync of `pnpm-workspace.yaml`. It takes a mode option (`additive` vs `enforce`) and a file-creation flag (create only)
+- [x] 2.2 Create `private/utils/src/packageManager/syncPnpmWorkspaceConfig.ts` with YAML sync of `pnpm-workspace.yaml`. It takes a mode option (`additive` vs `enforce`) and a file-creation flag (create only)
 - [x] 2.3 Implement the merge policies for both modes. Additive mode adds missing managed single-value settings, object-setting keys, and array entries. Arrays are unioned and deduped. Additive mode does not overwrite config values or remove user entries. Enforce mode runs only on the `sku configure` command. It overwrites managed single-value settings in both directions, aligns marked object-settings, and removes retired entries
 - [x] 2.4 Implement marker-based ownership. Adopt unmarked default-matching entries on every sync. Replace comments with `[sku_managed]`. Re-adopt unmarked entries that still match a default. Remove retired entries only on `sku configure`, scoped to entries still carrying a marker
 - [x] 2.5 Implement drift warnings. Warn on differing managed single-value settings and marked object-setting values (naming the key, both values, and `sku configure`). Warn on retired marked entries (offering both resolutions: `sku configure` removes it, or remove the marker to keep it user-managed)
@@ -31,7 +31,7 @@
 
 ## 4. Update create
 
-- [x] 4.1 Replace `packages/create/src/generators/pnpmWorkspace.ts` with a call to the shared sync (`ensurePnpmWorkspaceConfig`, file creation enabled) before `installDependencies`, so create and configure share one writer
+- [x] 4.1 Replace `packages/create/src/generators/pnpmWorkspace.ts` with a call to the shared sync (`syncPnpmWorkspaceConfig`, file creation enabled) before `installDependencies`, so create and configure share one writer
 - [x] 4.2 Remove the pnpm v10 gate and `pnpm add --config pnpm-plugin-sku` from `packages/create/src/services/install.ts`
 - [x] 4.3 Drop the `pnpm-plugin-sku` dependency from `packages/create/package.json`
 

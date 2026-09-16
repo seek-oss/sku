@@ -6,7 +6,6 @@ import {
   checkPnpmPluginSku,
   removePnpmPluginSku,
 } from './removePnpmPluginSku.ts';
-import { rootDir } from './packageManager.ts';
 import { defaultPnpmWorkspaceConfig } from './pnpmWorkspaceDefaults.ts';
 import { checkArraySettings, syncArraySettings } from './syncArraySettings.ts';
 import {
@@ -51,7 +50,7 @@ const assertValidWorkspaceDocument = (doc: Document): void => {
 };
 
 export async function checkPnpmWorkspaceConfig({
-  targetDir = rootDir ?? process.cwd(),
+  targetDir = process.cwd(),
 }: CheckPnpmWorkspaceConfigOptions = {}): Promise<PnpmWorkspaceCheckResult> {
   const filePath = join(targetDir, 'pnpm-workspace.yaml');
   if (!existsSync(filePath)) {
@@ -80,15 +79,15 @@ export async function checkPnpmWorkspaceConfig({
   };
 }
 
-export interface EnsurePnpmWorkspaceConfigOptions {
+export interface SyncPnpmWorkspaceConfigOptions {
   targetDir?: string;
   create?: boolean;
 }
 
-export async function ensurePnpmWorkspaceConfig({
+export async function syncPnpmWorkspaceConfig({
   create = false,
-  targetDir = rootDir ?? process.cwd(),
-}: EnsurePnpmWorkspaceConfigOptions = {}): Promise<void> {
+  targetDir = process.cwd(),
+}: SyncPnpmWorkspaceConfigOptions = {}): Promise<void> {
   const filePath = join(targetDir, 'pnpm-workspace.yaml');
   const fileExisted = existsSync(filePath);
 

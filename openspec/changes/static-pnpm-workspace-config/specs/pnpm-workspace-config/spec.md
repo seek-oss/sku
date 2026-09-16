@@ -10,6 +10,8 @@ The sync MUST NOT be gated by `skuSkipConfigure` or `skuSkipPostInstall`. Those 
 
 The sync MUST only run for pnpm projects with a resolved project root and an existing `pnpm-workspace.yaml`.
 
+The `pnpm-workspace.yaml` is resolved in the directory sku runs in. The sync MUST NOT walk up to an ancestor directory's file, such as a monorepo root's.
+
 The sync MUST NOT create `pnpm-workspace.yaml` when it is missing.
 
 #### Scenario: Lint checks without writing
@@ -49,6 +51,14 @@ The sync MUST NOT create `pnpm-workspace.yaml` when it is missing.
 - **AND** a user runs `sku lint` or `sku format`
 - **THEN** no file is created
 - **AND** no settings are written
+- **AND** the lint check passes
+
+#### Scenario: Monorepo package without its own file is left untouched
+
+- **WHEN** a user runs `sku lint` or `sku format` from a package inside a monorepo
+- **AND** the package directory has no `pnpm-workspace.yaml`
+- **AND** an ancestor directory, such as the monorepo root, has one
+- **THEN** the ancestor's file is neither checked nor changed
 - **AND** the lint check passes
 
 ### Requirement: Values are managed by uniform marker ownership

@@ -162,7 +162,10 @@ The sync only runs when `pnpm-workspace.yaml` already exists.
 - Config dependencies can only be declared in `pnpm-workspace.yaml`. A project without the file never had `pnpm-plugin-sku`.
   Creating the file would impose sku's pnpm policy on projects that never opted into it.
 - Creating the file also newly marks the directory as a workspace root. That changes how pnpm resolves the project.
+- The sync targets the directory sku runs in, not the lockfile root. In monorepos the lockfile root can be an ancestor directory shared by many packages.
+  Targeting it would check — and on `sku format`, rewrite — a parent workspace's file the package does not own.
 - This makes "no file" the de-facto full opt-out. The lint check passes silently. Format writes nothing.
+  A package without its own file stays opted out even inside a parent workspace.
 - Create still writes the file for new projects. Scaffolding is an explicit opt-in. Create needs the file before the first install.
 
 ### Decision: Plugin migration is part of the sync

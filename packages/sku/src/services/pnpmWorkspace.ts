@@ -1,6 +1,6 @@
 import {
   checkPnpmWorkspaceConfig,
-  ensurePnpmWorkspaceConfig,
+  syncPnpmWorkspaceConfig,
   isPnpm,
   rootDir,
 } from '@sku-private/utils';
@@ -28,7 +28,8 @@ export const pnpmWorkspaceCheck = async (): Promise<LintResult> => {
   try {
     const { hasFailure, failures, advisories } = await checkPnpmWorkspaceConfig(
       {
-        targetDir: rootDir,
+        // Target the project directory, not the root so monorepo root pnpm-workspace.yaml file is not checked.
+        targetDir: process.cwd(),
       },
     );
 
@@ -58,7 +59,8 @@ export const pnpmWorkspaceSync = async (): Promise<LintResult> => {
   }
 
   try {
-    await ensurePnpmWorkspaceConfig({ targetDir: rootDir });
+    // Target the project directory, not the root so monorepo root pnpm-workspace.yaml file is not checked.
+    await syncPnpmWorkspaceConfig({ targetDir: process.cwd() });
     return { exitCode: SUCCESS_EXIT_CODE };
   } catch (error) {
     return lintFailure(error);

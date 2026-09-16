@@ -17,4 +17,4 @@ export {
 } from './packageManager.ts';
 export { skuPackageManager } from './skuPackageManager.ts';
 export * from './pnpmWorkspaceDefaults.ts';
-export * from './ensurePnpmWorkspaceConfig.ts';
+export * from './syncPnpmWorkspaceConfig.ts';

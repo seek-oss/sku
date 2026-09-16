@@ -44,7 +44,7 @@
 
 ## 6. Major rework: lint/format enforcement
 
-Sections 1–5 shipped the two-tier minor design. This section reworks it into the major design before release. Enforcement is the only behaviour. `sku lint` and `sku format` are the only entry points. Marker ownership is uniform.
+Sections 1-5 implemented the two-tier minor design. This section reworks it into the major design before release. Enforcement is the only behaviour. `sku lint` and `sku format` are the only entry points. Marker ownership is uniform.
 
 - [x] 6.1 Remove the `SyncMode` type and mode plumbing from the sync engine. Enforcement becomes the only behaviour. Remove the additive branches and the warn channel from `syncSingleValueSettings`, `syncObjectSettings`, `syncArraySettings`, and `syncShared`
 - [x] 6.2 Split the sync into computing required changes and applying them, so `sku lint` can report without writing. The computed result carries two channels: required managed changes (lint failures) and user-managed drift advisories (unmarked values differing from defaults, info-level)
@@ -54,5 +54,20 @@ Sections 1–5 shipped the two-tier minor design. This section reworks it into t
 - [x] 6.6 Add the enforcing sync to `sku format`
 - [x] 6.7 Rework the sync unit tests. Remove additive-mode and drift-warning cases. Add check-mode cases (fail vs info vs silent). Add uniform-ownership cases for single-value settings (unmarked differing value preserved by format and info-logged by lint). Add format enforcement cases
 - [x] 6.8 Rework `tests/node/pnpm-workspace-config.test.ts` around lint/format. Lint fails on managed drift and passes after `sku format`. Differing unmarked values are preserved and info-logged. `sku configure` and other commands no longer touch the file
-- [x] 6.9 Rewrite the changeset as a major. Cover the breaking entry-point change (lint/format only, no longer configure/postinstall). Cover unconditional enforcement of managed values and uniform marker ownership. Cover marker removal as the only opt-out, `skuSkipConfigure`/`skuSkipPostInstall` no longer gating the sync, and the one-time `sku format` migration diff
+- [x] 6.9 Rewrite the changeset as a major. Cover the breaking change: `sku lint` gains a workspace-config check that fails on drift, and `sku format` enforces the settings and migrates away from `pnpm-plugin-sku`. Cover unconditional enforcement of managed values and uniform marker ownership. Cover marker removal as the only opt-out, `skuSkipConfigure`/`skuSkipPostInstall` not gating the sync, and the one-time `sku format` migration diff
 - [x] 6.10 Update docs (`site/docs/cli.md` or relevant page). Cover lint check and format write behaviour, failure/info semantics, opt-out via marker removal, and migration guidance
+
+## 7. Workspace subcommand
+
+- [ ] 7.1 Add a `workspace` subcommand under `sku configure` (`packages/sku/src/program/commands/configure/commands/workspace/`, following the `translations` subcommand structure). Its action runs the enforcing sync with `targetDir: rootDir` from `@sku-private/utils`. It does not run `configureApp` and does not read a sku config file, so it works under `pnpm dlx`
+- [ ] 7.2 Gate the subcommand on `isPnpm` and a resolved `rootDir`. Never pass `create`. When the workspace root has no `pnpm-workspace.yaml`, report that no file was found and exit successfully
+- [ ] 7.3 Add a `--check` flag that runs `checkPnpmWorkspaceConfig` against the workspace root instead of writing. Failures name the key and the current and recommended states, and direct the user to `sku configure workspace` (not `sku format`). User-managed drift logs as info. Aligned files pass silently. Missing files pass with the no-file report
+- [ ] 7.4 Add integration tests (e.g. in `tests/node/pnpm-workspace-config.test.ts`) covering:
+  - running from a nested package directory syncs the root file and leaves package files untouched
+  - running from the workspace root
+  - running without a sku config file
+  - missing root file reports and exits successfully
+  - non-pnpm projects no-op
+  - `--check` fails on managed drift, passes silently when aligned, and never writes
+- [ ] 7.5 Update the changeset (`.changeset/static-pnpm-workspace-config.md`) with the `sku configure workspace` subcommand: workspace-root targeting, `--check` mode, `pnpm dlx` usage, and that package-level lint/format still never touch ancestor files
+- [ ] 7.6 Update `site/docs/cli.md`: document `sku configure workspace` and `--check` under the configure section, including monorepo and `pnpm dlx` usage

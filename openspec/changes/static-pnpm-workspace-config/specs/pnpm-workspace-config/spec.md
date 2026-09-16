@@ -1,56 +1,60 @@
 ## ADDED Requirements
 
-### Requirement: Sync runs on lint and format only
+### Requirement: Sync runs on lint, format, and the workspace subcommand
 
-Sku SHALL sync its recommended pnpm settings into the project's `pnpm-workspace.yaml` through exactly two entry points. A read-only check on `sku lint`. An enforcing write on `sku format`.
+Sku SHALL sync its recommended pnpm settings into the project's `pnpm-workspace.yaml` through exactly three entry points:
 
-The sync MUST NOT run on any other sku command, on postinstall, or on `sku configure`.
+- A read-only check on `sku lint`.
+- An enforcing write on `sku format`.
+- The explicit `sku configure workspace` subcommand, which runs an enforcing write by default and a read-only check with its `--check` flag.
 
-The sync MUST NOT be gated by `skuSkipConfigure` or `skuSkipPostInstall`. Those flags do not apply to the lint check or the format write.
+The sync MUST NOT run on any other sku command, on postinstall, or on bare `sku configure`.
+
+The sync MUST NOT be gated by `skuSkipConfigure` or `skuSkipPostInstall`. Those flags do not apply to the lint check, the format write, or the workspace subcommand.
 
 The sync MUST only run for pnpm projects with a resolved project root and an existing `pnpm-workspace.yaml`.
 
-The `pnpm-workspace.yaml` is resolved in the directory sku runs in. The sync MUST NOT walk up to an ancestor directory's file, such as a monorepo root's.
+On `sku lint` and `sku format`, sku resolves the `pnpm-workspace.yaml` in the directory it runs in. These entry points MUST NOT walk up to an ancestor directory's file, such as a monorepo root's. The `sku configure workspace` subcommand resolves the file at the workspace root instead.
 
-The sync MUST NOT create `pnpm-workspace.yaml` when it is missing.
+The sync MUST NOT create `pnpm-workspace.yaml` when it is missing. This applies to every entry point, including `sku configure workspace`.
 
 #### Scenario: Lint checks without writing
 
 - **WHEN** a user runs `sku lint` in a pnpm project with an existing `pnpm-workspace.yaml`
-- **THEN** the file is checked against sku's recommended settings and is never changed
+- **THEN** sku checks the file against its recommended settings and never changes it
 
 #### Scenario: Format enforces
 
 - **WHEN** a user runs `sku format` in a pnpm project with an existing `pnpm-workspace.yaml`
-- **THEN** the file's sku-managed values are aligned with sku's recommended settings before the command completes
+- **THEN** sku aligns the file's sku-managed values with its recommended settings before the command completes
 
 #### Scenario: Other commands do not sync
 
-- **WHEN** a user runs a configuration-enabled sku command other than lint or format (for example `sku start`, `sku build`, or `sku test`)
-- **THEN** `pnpm-workspace.yaml` is neither checked nor changed
+- **WHEN** a user runs a configuration-enabled sku command other than lint, format, or the workspace subcommand (for example `sku start`, `sku build`, or `sku test`)
+- **THEN** sku neither checks nor changes `pnpm-workspace.yaml`
 
-#### Scenario: Configure does not sync
+#### Scenario: Bare configure does not sync
 
-- **WHEN** a user runs `sku configure`
-- **THEN** `pnpm-workspace.yaml` is neither checked nor changed
+- **WHEN** a user runs `sku configure` without the `workspace` subcommand
+- **THEN** sku neither checks nor changes `pnpm-workspace.yaml`
 
 #### Scenario: Postinstall does not sync
 
 - **WHEN** sku's postinstall runs
-- **THEN** `pnpm-workspace.yaml` is neither checked nor changed
+- **THEN** sku neither checks nor changes `pnpm-workspace.yaml`
 
 #### Scenario: Skipped for non-pnpm projects
 
 - **WHEN** a user runs `sku lint` or `sku format` in a yarn or npm project
-- **THEN** no `pnpm-workspace.yaml` is created, checked, or changed
+- **THEN** sku does not create, check, or change any `pnpm-workspace.yaml`
 - **AND** the lint check passes
 
 #### Scenario: Missing file is left untouched
 
 - **WHEN** a pnpm project has no `pnpm-workspace.yaml`
 - **AND** a user runs `sku lint` or `sku format`
-- **THEN** no file is created
-- **AND** no settings are written
+- **THEN** sku creates no file
+- **AND** sku writes no settings
 - **AND** the lint check passes
 
 #### Scenario: Monorepo package without its own file is left untouched
@@ -58,8 +62,91 @@ The sync MUST NOT create `pnpm-workspace.yaml` when it is missing.
 - **WHEN** a user runs `sku lint` or `sku format` from a package inside a monorepo
 - **AND** the package directory has no `pnpm-workspace.yaml`
 - **AND** an ancestor directory, such as the monorepo root, has one
-- **THEN** the ancestor's file is neither checked nor changed
+- **THEN** sku neither checks nor changes the ancestor's file
 - **AND** the lint check passes
+
+### Requirement: Workspace subcommand syncs the workspace root file
+
+The `sku configure workspace` subcommand SHALL run the enforcing sync against the `pnpm-workspace.yaml` at the workspace root. All enforcement, ownership, annotation, preservation, logging, and plugin-migration behaviour of the enforcing sync applies unchanged.
+
+The subcommand SHALL resolve the workspace root as the project's lockfile root, found by walking up from the current directory. The subcommand SHALL work identically from the workspace root and from any package directory within the workspace.
+
+The subcommand SHALL be self-contained so it can run through `pnpm dlx`. It MUST NOT require sku as a project dependency. It MUST NOT require a sku config file. It MUST NOT emit or update any other configuration files (such as `tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, or ignore files).
+
+The subcommand MUST NOT create `pnpm-workspace.yaml`. When no file exists at the workspace root, the subcommand SHALL report that it found no file and exit successfully without changes.
+
+The subcommand MUST NOT run for non-pnpm projects.
+
+The subcommand SHALL accept a `--check` flag that runs the read-only check against the workspace root's file instead of writing. The check MUST NOT change the file.
+
+The `--check` mode SHALL fail when the workspace root's file requires managed changes, under the same failure conditions as the `sku lint` check. Failures SHALL name the key and the current and recommended states, and SHALL direct the user to run `sku configure workspace`. They MUST NOT direct the user to `sku format`, which does not target the workspace root from a package directory.
+
+The `--check` mode SHALL log user-managed drift as info, under the same rules as the `sku lint` check. User-managed drift MUST NOT fail the run.
+
+A workspace root file whose values and markers already match sku's defaults SHALL pass the check silently. A missing file MUST NOT fail the check.
+
+#### Scenario: Run from a monorepo package directory
+
+- **WHEN** a user runs `sku configure workspace` from a package directory inside a pnpm monorepo
+- **AND** the workspace root has a `pnpm-workspace.yaml`
+- **THEN** the subcommand syncs the workspace root's file with sku's recommended settings
+- **AND** it changes no files in the package directory
+
+#### Scenario: Run from the workspace root
+
+- **WHEN** a user runs `sku configure workspace` from the workspace root of a pnpm monorepo
+- **THEN** the subcommand syncs the root's `pnpm-workspace.yaml` with sku's recommended settings
+
+#### Scenario: Runnable through pnpm dlx
+
+- **WHEN** a user runs `pnpm dlx sku configure workspace` in a pnpm project that has no sku dependency and no sku config file
+- **THEN** the subcommand syncs the workspace root's existing `pnpm-workspace.yaml`
+- **AND** it creates or changes no other files
+
+#### Scenario: Missing workspace file is not created
+
+- **WHEN** a user runs `sku configure workspace` in a pnpm project whose workspace root has no `pnpm-workspace.yaml`
+- **THEN** the subcommand creates no file
+- **AND** it reports that it found no `pnpm-workspace.yaml` at the workspace root
+- **AND** it exits successfully
+
+#### Scenario: Skipped for non-pnpm projects
+
+- **WHEN** a user runs `sku configure workspace` in a yarn or npm project
+- **THEN** the subcommand does not create, check, or change any `pnpm-workspace.yaml`
+
+#### Scenario: Check mode does not write
+
+- **WHEN** a user runs `sku configure workspace --check`
+- **AND** the workspace root has a `pnpm-workspace.yaml`
+- **THEN** the subcommand checks the file against sku's recommended settings and never changes it
+
+#### Scenario: Check mode fails on managed drift
+
+- **WHEN** the workspace root's `pnpm-workspace.yaml` requires managed changes
+- **AND** a user runs `sku configure workspace --check`
+- **THEN** the subcommand exits non-zero
+- **AND** the output names the key and the current and recommended states
+- **AND** the output directs the user to run `sku configure workspace`
+
+#### Scenario: Check mode logs user-managed drift as info
+
+- **WHEN** the workspace root's file contains an unmarked value that differs from sku's current default
+- **AND** a user runs `sku configure workspace --check`
+- **THEN** an info message names the key, both values, and the re-alignment paths
+- **AND** the subcommand does not fail on it
+
+#### Scenario: Aligned file passes check silently
+
+- **WHEN** the workspace root's file already matches sku's defaults
+- **AND** a user runs `sku configure workspace --check`
+- **THEN** the check passes and produces no output
+
+#### Scenario: Missing file passes check
+
+- **WHEN** a user runs `sku configure workspace --check` in a pnpm project whose workspace root has no `pnpm-workspace.yaml`
+- **THEN** the check does not fail
+- **AND** the subcommand reports that it found no `pnpm-workspace.yaml` at the workspace root
 
 ### Requirement: Values are managed by uniform marker ownership
 
@@ -69,11 +156,11 @@ A value counts as sku-managed when its comment contains the marker anywhere. Sku
 
 This rule applies uniformly to single-value settings, keys within object settings, and array entries. No setting kind has a fixed owner. No marker is informational only.
 
-Unmarked values MUST be treated as user-managed and MUST always be preserved.
+Sku MUST treat unmarked values as user-managed and MUST always preserve them.
 
 Removing a value's marker SHALL make it user-managed. This is the only per-value opt-out.
 
-The one exception: unmarked values exactly matching sku's current defaults SHALL be adopted (marked) by `sku format`.
+The one exception: `sku format` SHALL adopt (mark) unmarked values that exactly match sku's current defaults.
 
 #### Scenario: Marked single-value setting is sku-managed
 
@@ -95,7 +182,7 @@ The one exception: unmarked values exactly matching sku's current defaults SHALL
 
 - **WHEN** a user removes the `[sku_managed]` marker from a value that still matches a current sku default
 - **AND** the user runs `sku format`
-- **THEN** the value is re-marked as `[sku_managed]`
+- **THEN** sku re-marks the value as `[sku_managed]`
 
 #### Scenario: Unmarked retired entry is never touched
 
@@ -104,7 +191,13 @@ The one exception: unmarked values exactly matching sku's current defaults SHALL
 
 ### Requirement: Lint fails on managed drift
 
-`sku lint` SHALL fail when the file requires managed changes. A managed setting or entry is missing. A marked value differs from sku's current default. Sku retired a marked entry. An unmarked value exactly matches a sku default but has not been adopted. Or `pnpm-plugin-sku` is still present in `configDependencies`.
+`sku lint` SHALL fail when the file requires managed changes:
+
+- A managed setting or entry is missing.
+- A marked value differs from sku's current default.
+- Sku retired a marked entry.
+- An unmarked value exactly matches a sku default but is not yet adopted.
+- `pnpm-plugin-sku` is still present in `configDependencies`.
 
 Failures SHALL name the key and the current and recommended states. The lint output SHALL direct the user to run `sku format`, once at the end of the run rather than in every failure message.
 
@@ -149,11 +242,14 @@ A file whose values and markers already match sku's defaults SHALL pass silently
 
 ### Requirement: Lint logs user-managed drift as info
 
-When `sku lint` finds an unmarked (user-managed) value that differs from sku's current default, it SHALL log an info message. The message names the key, the current value, the recommended value, and the two re-alignment paths. Edit the value to match sku's default. Or remove it and let the next `sku format` add it again as sku-managed.
+When `sku lint` finds an unmarked (user-managed) value that differs from sku's current default, it SHALL log an info message. The message names the key, the current value, and the recommended value. It also names the two re-alignment paths:
+
+- Edit the value to match sku's default.
+- Remove it and let the next `sku format` add it again as sku-managed.
 
 User-managed drift MUST NOT fail the lint run.
 
-No info SHALL be logged for user-managed entries that have no corresponding sku default.
+Sku SHALL NOT log info for user-managed entries that have no corresponding sku default.
 
 #### Scenario: Differing user-managed value is info-only
 
@@ -166,7 +262,7 @@ No info SHALL be logged for user-managed entries that have no corresponding sku 
 
 - **WHEN** a project's file contains unmarked entries with no corresponding sku default
 - **AND** the user runs `sku lint`
-- **THEN** nothing is logged about them
+- **THEN** sku logs nothing about them
 
 ### Requirement: Format enforces managed values
 
@@ -176,9 +272,9 @@ There is no never-downgrade or strength-ordering special case. Managed means enf
 
 User-managed values MUST always be preserved.
 
-Unmarked values exactly matching sku's current defaults SHALL be adopted (marked). Their existing comments SHALL be replaced by the marker and any sku explanatory comment.
+The sync SHALL adopt (mark) unmarked values that exactly match sku's current defaults. It SHALL replace their existing comments with the marker and any sku explanatory comment.
 
-Array results MUST be deduped. When duplicate values have different ownership, the unmarked user-owned entry MUST be retained.
+The sync MUST dedupe array results. When duplicate values have different ownership, it MUST retain the unmarked user-owned entry.
 
 #### Scenario: Missing managed value is added
 
@@ -208,7 +304,7 @@ Array results MUST be deduped. When duplicate values have different ownership, t
 
 - **WHEN** a project's `pnpm-workspace.yaml` has `minimumReleaseAge: 1440` without a marker and sku's current default is `4320`
 - **AND** the user runs `sku format`
-- **THEN** the value is left at `1440`
+- **THEN** the sync leaves the value at `1440`
 
 #### Scenario: User re-aligns by removing a value
 
@@ -226,7 +322,7 @@ Array results MUST be deduped. When duplicate values have different ownership, t
 
 - **WHEN** a project's array setting contains the same value both marked and unmarked
 - **AND** the user runs `sku format`
-- **THEN** the duplicate is removed and the unmarked user-owned entry is retained
+- **THEN** the sync removes the duplicate and retains the unmarked user-owned entry
 
 ### Requirement: Managed values are annotated
 
@@ -236,7 +332,7 @@ This applies to managed single-value settings and to each sku-managed entry with
 
 When the sync adopts or overwrites a managed value, it MUST replace existing inline or preceding comments. The replacement is the sku marker and any sku explanatory comment.
 
-Comments on user-managed entries and unmanaged keys MUST be preserved.
+The sync MUST preserve comments on user-managed entries and unmanaged keys.
 
 A file whose values and markers already match sku's defaults MUST NOT be rewritten.
 
@@ -271,11 +367,11 @@ The sync MUST NOT rewrite the file when its content is already aligned with sku'
 
 ### Requirement: Changes are logged
 
-The format sync SHALL log each mutation it makes.
+The enforcing sync SHALL log each mutation it makes, on both `sku format` and `sku configure workspace`.
 
 This covers additions, adoptions, duplicate removal, overwrites with old and new values, removals of retired sku-managed entries, and removal of the `pnpm-plugin-sku` config dependency.
 
-The sync MUST NOT produce output when no changes are made.
+The sync MUST NOT produce output when it makes no changes.
 
 #### Scenario: Addition is announced
 
@@ -291,13 +387,13 @@ The sync MUST NOT produce output when no changes are made.
 
 When `sku format` finds `pnpm-plugin-sku` in `configDependencies`, it SHALL remove the entry and log the migration.
 
-If the entry is repeated, all occurrences SHALL be removed.
+If the entry appears more than once, the sync SHALL remove all occurrences.
 
-If `configDependencies` becomes empty, the key itself MUST be removed.
+If `configDependencies` becomes empty, the sync MUST remove the key itself.
 
-An already-empty `configDependencies` key without `pnpm-plugin-sku` MUST be preserved.
+The sync MUST preserve an already-empty `configDependencies` key without `pnpm-plugin-sku`.
 
-The presence of `pnpm-plugin-sku` in `configDependencies` SHALL fail `sku lint`.
+`pnpm-plugin-sku` in `configDependencies` SHALL fail `sku lint`.
 
 Projects MUST NOT require `pnpm add --config pnpm-plugin-sku` at any point.
 

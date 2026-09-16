@@ -11,4 +11,3 @@ Sku-managed settings are marked with a `[sku_managed]` comment. `sku lint` now c
 Values can be user-managed by removing the `[sku_managed]` comment from any setting or entry. However, user settings that match sku's defaults will always be re-adopted with the marker.
 
 To migrate an existing project, run `sku format` and commit the resulting diff.
-z

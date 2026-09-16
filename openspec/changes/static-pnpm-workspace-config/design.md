@@ -25,17 +25,17 @@ It stays in the monorepo and on npm. Projects no longer install it.
 
 The constraint that shapes the whole design: this ships as a **major, breaking release**.
 
-This change was originally planned as a non-breaking minor with a two-tier sync. Additive on every command. Enforcing only on `sku configure`. The plan changed in place before release.
+None of the sync machinery exists in a released sku version. The plugin is the whole mechanism today. The sync, its entry points, and the marker system are all new in this change.
 
-The two-tier split existed only to avoid silently rewriting user-set values on a minor upgrade. The major removes that constraint.
+The change ships as a major because enforcement is breaking: `sku lint` gains a check that fails on drift, and `sku format` rewrites a committed config file. A minor could only offer an additive, opt-in sync that never rewrites user-set values. Enforcement was chosen over that split, so a major it is.
 
-Enforcement is therefore unconditional for sku-managed values. The sync's only entry points are `sku lint` (check) and `sku format` (write). These are the commands users already expect to check and fix their repos.
+Enforcement is therefore unconditional for sku-managed values. The sync's entry points are `sku lint` (check), `sku format` (write), and the explicit `sku configure workspace` subcommand for monorepo workspace roots. Lint and format are the commands users already expect to check and fix their repos.
 
 ## Goals / Non-Goals
 
 **Goals:**
 
-- Sku writes its recommended pnpm settings statically into existing `pnpm-workspace.yaml` files. It keeps them in sync through a single code path. Users reach that path only through `sku lint` (read-only check) and `sku format` (enforcing write).
+- Sku writes its recommended pnpm settings statically into existing `pnpm-workspace.yaml` files. It keeps them in sync through a single code path. Users reach that path through `sku lint` (read-only check), `sku format` (enforcing write), and `sku configure workspace` (enforcing write, or read-only check with `--check`, targeted at the workspace root).
 - Enforcement is unconditional for sku-managed values. Sku adds missing values. It rewrites drifted marked values in both directions. It removes retired marked entries, on every `sku format`.
 - `sku lint` fails on any managed drift. This includes missing managed keys, pending adoptions, retired marked entries, and a lingering `pnpm-plugin-sku` config dependency. Failures direct users to `sku format`.
 - Uniform ownership: the `[sku_managed]` marker is load-bearing for every value kind, including single-value settings.
@@ -49,8 +49,8 @@ Enforcement is therefore unconditional for sku-managed values. The sync's only e
 
 **Non-Goals:**
 
-- Syncing on any command other than `sku lint` and `sku format`.
-  Postinstall and `sku configure` no longer run the sync.
+- Syncing on any command other than `sku lint`, `sku format`, and the `sku configure workspace` subcommand.
+  Postinstall and bare `sku configure` no longer run the sync.
 - Never-downgrade or strength ordering for `trustPolicy` or `minimumReleaseAge`. Rejected. Managed means enforced, full stop.
 - Wholesale skip flags for the sync. `skuSkipConfigure` and `skuSkipPostInstall` gated the old configure-time path and no longer apply. The per-value marker is the only opt-out.
 - A negative marker (for example `[user_managed]`) to pre-emptively pin values that currently match sku's defaults.
@@ -81,8 +81,9 @@ This mirrors the check/write mental model Prettier already gives users.
 
 - Over sync-on-every-command (the original minor design): lint and format already run in CI and locally, so they are the natural enforcement surface.
   Other commands should not mutate a committed config file as a side effect. Postinstall writes are effectively invisible, because users do not expect file changes during install.
-- Over keeping enforcement on `sku configure`: a manual command nobody runs cannot enforce anything.
+- Over enforcing on `sku configure` instead: a manual command nobody runs cannot enforce anything.
   A lint failure forces the issue exactly once per drift event, in the place CI already gates.
+  This rationale is about enforcement. The `sku configure workspace` subcommand added below is an explicit bootstrap path for a file lint and format cannot reach, not an enforcement surface.
 - The engine splits into computing required changes (pure) and applying them. Lint's check is then the same logic as format's write. No mode threads through the sync helpers.
   The check reports two channels: required managed changes (fail) and user-managed drift advisories (info).
 - Consequence, accepted: every sku release that changes defaults fails CI lint fleet-wide until each project runs `sku format` and commits.
@@ -101,7 +102,7 @@ Detection matches the marker anywhere in a comment. A user can annotate a marked
   Removing a value's marker is the only per-value opt-out.
 - Adoption: sku marks unmarked values that exactly match its current defaults on `sku format`. Their pending adoption fails `sku lint`.
   Without adoption, projects created by the marker-less writer would keep every value user-managed forever. Default changes would never propagate to them.
-  The rule is deliberately stateless. The sync never asks who added a value. It only asks whether the value is marked and whether it matches a default.
+  The rule is deliberately stateless. The sync never asks who added a value. It only asks whether the value carries the marker and whether it matches a default.
 - Re-alignment path for user-managed drift: edit the value to match sku's default (the next format adopts it). Or remove the value entirely and let the next `sku format` add it again as managed.
 - Accepted trap (silent pins): a value matching today's default cannot be pre-emptively pinned. Adoption marks it. A future default change rewrites it forcefully.
   Pinning is only possible after sku diverges, by removing the marker then.
@@ -110,7 +111,7 @@ Detection matches the marker anywhere in a comment. A user can annotate a marked
   An unmarked retired entry no longer matches a default. Sku never adopts it again and never removes it. It is pure user data. Lint stays silent about it.
 - When sku adopts or overwrites a value, it replaces existing comments with the sku marker (and any sku explanatory comment).
   Sku never rewrites a file whose values and markers already match sku's defaults.
-- Over fixed ownership per setting kind (the minor design, where single-value markers were informational): one rule for everything is simpler to reason about. It is what makes user-managed single values — and therefore lint's info channel — coherent.
+- Over fixed ownership per setting kind (the minor design, where single-value markers were informational): one rule for everything is simpler to reason about. It is what makes user-managed single values, and therefore lint's info channel, coherent.
 - Over block-level markers: per-value marking keeps user-added entries in a merged list visually distinct and untouched.
 - The object policy assumes a flat map (key → single value), which is all `allowBuilds` is.
   A future nested object setting would need its own merge policy. Per-entry markers cannot express ownership of a subtree.
@@ -122,7 +123,7 @@ Detection matches the marker anywhere in a comment. A user can annotate a marked
 - A managed setting or entry is missing.
 - A marked value differs from sku's current default.
 - Sku retired a marked entry.
-- An unmarked value matches a default but has not been adopted.
+- An unmarked value matches a default but is not yet adopted.
 - `pnpm-plugin-sku` is present in `configDependencies`.
 
 Failures name the key and the current and recommended states. The lint output directs the user to `sku format` once at the end of the run, so individual failure messages stay free of fix instructions.
@@ -133,7 +134,7 @@ Lint logs unmarked values that differ from sku's defaults as info. The log names
   A lint failure is unignorable because it gates CI.
 - Over failing on user-managed drift: sku advises on values it does not own but never blocks on them.
   The ownership boundary stays honest. Enforcement applies exactly to the marked set.
-- Pending adoption fails lint (rather than passing silently) so that adoption actually happens. Otherwise marker-less files pass forever. Future default changes would only ever info. The org policy would never land on those projects.
+- Pending adoption fails lint (rather than passing silently) so that adoption happens. Otherwise marker-less files pass forever. Future default changes would only ever produce info logs. The org policy would never land on those projects.
 
 ### Decision: `yaml` (eemeli) for file manipulation
 
@@ -162,8 +163,9 @@ The sync only runs when `pnpm-workspace.yaml` already exists.
 - Config dependencies can only be declared in `pnpm-workspace.yaml`. A project without the file never had `pnpm-plugin-sku`.
   Creating the file would impose sku's pnpm policy on projects that never opted into it.
 - Creating the file also newly marks the directory as a workspace root. That changes how pnpm resolves the project.
-- The sync targets the directory sku runs in, not the lockfile root. In monorepos the lockfile root can be an ancestor directory shared by many packages.
-  Targeting it would check — and on `sku format`, rewrite — a parent workspace's file the package does not own.
+- On `sku lint` and `sku format`, the sync targets the directory sku runs in, not the lockfile root. In monorepos the lockfile root can be an ancestor directory shared by many packages.
+  Targeting it would check, and on `sku format` rewrite, a parent workspace's file the package does not own.
+  The explicit `sku configure workspace` subcommand is the exception: it targets the lockfile root because the user has explicitly asked to configure the workspace.
 - This makes "no file" the de-facto full opt-out. The lint check passes silently. Format writes nothing.
   A package without its own file stays opted out even inside a parent workspace.
 - Create still writes the file for new projects. Scaffolding is an explicit opt-in. Create needs the file before the first install.
@@ -205,13 +207,28 @@ Out of scope for this change.
 
 ### Decision: Entry-point gating
 
-Sku removes the sync from `configureApp`. No configuration-enabled command, postinstall, or `sku configure` runs it.
+The sync never runs from `configureApp`. No configuration-enabled command, postinstall, or bare `sku configure` runs it.
+The `sku configure workspace` subcommand is the single explicit exception. See the next decision.
 
-`skuSkipConfigure` and `skuSkipPostInstall` gated that path and no longer apply to the sync. No new skip flag replaces them.
+Released sku's configure and postinstall paths carried the plugin validation machinery. This change removes that machinery rather than replacing it. `skuSkipConfigure` and `skuSkipPostInstall` gated that old path and do not apply to the sync. No new skip flag replaces them.
 
 - Per-value marker removal is the documented opt-out. Removing the whole file is the de-facto full opt-out (the sync never creates it).
 - The `rootDir` and pnpm-project gates move from `configureApp` into the lint check and format step themselves.
 - `sku lint` and `sku format` still run `configureProject` for their other needs (eslint config, tsconfig, ignore files). Only the pnpm-workspace sync leaves `configureApp`.
+
+### Decision: Workspace subcommand for monorepo roots
+
+A new `sku configure workspace` subcommand runs the sync against the `pnpm-workspace.yaml` at the workspace root (the lockfile root). This makes the sync accessible to monorepos, where the file lives above the package directories that sku commands usually run in.
+
+- Over a `sku configure --workspace` flag: the flag could not mean "run full configure at the root". `configureApp` emits app-centric config (tsconfig entry paths, `.ssl` certs) that is incoherent at a monorepo root. It could only mean "run just the pnpm sync". That is a mode flag: a flag that selects a different job rather than changing how the command does its job. CLI convention puts different jobs in subcommands (cf. `git checkout` splitting into `git switch` and `git restore`). The repo already has the `sku translations <command>` precedent.
+- Over `--workspace` flags on lint and format: those commands run project-level checks (tsc, Prettier, ESLint) alongside the pnpm check. A flag that narrows them to only the workspace check is the same mode-flag smell. A flag that merely retargets the pnpm check at the root makes `pnpm -r lint` check the same root file once per package.
+- Over config-driven retargeting (an option in each package's sku config): each package would declare the org policy separately. New packages can forget it. Removing it from one package silently un-gates the root file.
+- Over walking up to the nearest `pnpm-workspace.yaml` on lint and format: rejected in the never-create decision. Walking up would force-enrol every package in a monorepo into a parent file it does not own, removing the per-package opt-out.
+- The subcommand targets the lockfile root (`rootDir`), which is the workspace root in a pnpm monorepo. It works identically from the root and from any package directory.
+- The subcommand is self-contained so it can run through `pnpm dlx`. It does not run `configureApp`, does not require a sku config file, and does not require sku as a project dependency. Monorepo roots therefore do not need to become sku projects to use it.
+- The subcommand never creates the file. The never-create decision stands: absence of the file remains the opt-out. An explicit command is not a licence to impose sku's pnpm policy on a project that has no `pnpm-workspace.yaml`.
+- Bootstrap, not enforcement: the subcommand does not replace lint and format as the enforcement mechanism. It is the reachability fix for a file those commands cannot see. Its `--check` flag gives monorepos the CI gate that package-level lint cannot provide: `pnpm dlx sku configure workspace --check`.
+- Check failures direct the user to `sku configure workspace`, never `sku format`. From a package directory, `sku format` cannot fix the workspace root's file, so the lint-style fix instruction would strand users.
 
 ### Decision: Logging
 
@@ -243,7 +260,7 @@ The lint check produces no output on success.
 ## Migration Plan
 
 1. Release sku with the sync as a major (breaking).
-   The changeset notes: the lint/format-only entry points. Unconditional enforcement of managed values. Uniform marker ownership (including single-value settings). Lint failure semantics and info advisories. The `configDependencies` migration. Marker removal as the only opt-out (and remove-the-value re-alignment). And that `skuSkipConfigure`/`skuSkipPostInstall` no longer gate the sync.
+   The changeset notes: the new lint check and format write entry points, and the `sku configure workspace` subcommand for monorepo workspace roots. Unconditional enforcement of managed values. Uniform marker ownership (including single-value settings). Lint failure semantics and info advisories. The `configDependencies` migration. Marker removal as the only opt-out (and remove-the-value re-alignment). And that `skuSkipConfigure`/`skuSkipPostInstall` do not gate the sync.
 2. On upgrade, the first `sku lint` fails for plugin-era projects.
    Running `sku format` produces the one-time, git-reviewable diff. Sku adds missing settings with markers. Sku adopts matching unmarked values. Sku removes the `configDependencies` entry.
    Sku preserves differing unmarked values as user-managed. Lint logs them as info until the user re-aligns them (edit to match, or remove and let format add them again).
@@ -256,6 +273,12 @@ The static keys are harmless alongside the plugin (the plugin's single-value mer
 
 ## Open Questions
 
-None.
+None. The following are all decided above:
 
-The following are all decided above: the lint/format entry points. Uniform marker ownership (including single-value settings). Lint failure semantics (missing keys, pending adoptions, retired entries, and plugin presence all fail). Info-only user-managed drift with the remove-and-re-add re-alignment path. Marker removal as the only opt-out. The accepted silent-pin trap. And the quiet postinstall.
+- The lint/format entry points.
+- Uniform marker ownership (including single-value settings).
+- Lint failure semantics (missing keys, pending adoptions, retired entries, and plugin presence all fail).
+- Info-only user-managed drift with the remove-and-re-add re-alignment path.
+- Marker removal as the only opt-out.
+- The accepted silent-pin trap.
+- The quiet postinstall.

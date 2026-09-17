@@ -1,7 +1,7 @@
 import { createDebug } from 'obug';
 import { setCwd } from '@sku-private/utils';
 import { createSkuContext } from './context/createSkuContext.js';
-import configureApp from './utils/configureApp.js';
+import { configureApp } from './utils/configureApp.js';
 import { banner, strong } from '@sku-private/utils/console';
 
 /**
@@ -33,7 +33,7 @@ export const postinstall = async ({
   try {
     log('postinstall', 'running configure');
     const skuContext = await createSkuContext({});
-    configureApp(skuContext);
+    await configureApp(skuContext);
   } catch (error) {
     console.error(
       'An error occurred running postinstall script. Please check that sku.config.js is correct and try again.',

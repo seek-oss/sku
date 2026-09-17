@@ -7,7 +7,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./console": "./src/console/index.ts"
+    "./console": "./src/console/index.ts",
+    "./pnpm-workspace": "./src/packageManager/syncPnpmWorkspaceConfig.ts"
   },
   "repository": {
     "type": "git",
@@ -21,11 +22,12 @@
     "empathic": "^2.0.1",
     "indent-string": "^5.0.0",
     "package-manager-detector": "^0.2.11",
-    "semver": "^7.6.3",
-    "wrap-ansi": "^9.0.0"
+    "wrap-ansi": "^9.0.0",
+    "yaml": "^2.8.3"
   },
   "devDependencies": {
-    "typescript": "catalog:",
-    "@types/semver": "^7.5.8"
+    "dedent": "^1.5.1",
+    "fs-fixture": "^2.6.0",
+    "typescript": "catalog:"
   }
 }

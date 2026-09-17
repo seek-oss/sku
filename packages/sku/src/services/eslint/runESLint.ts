@@ -2,7 +2,11 @@ import { loadESLint } from 'eslint';
 import { lintExtensions } from './lint.js';
 import assert from 'node:assert';
 import { accentLight, caution, secondary } from '@sku-private/utils/console';
-import type { LintResult } from '../../utils/runLintChecks.js';
+import {
+  FAILURE_EXIT_CODE,
+  SUCCESS_EXIT_CODE,
+  type LintResult,
+} from '../../utils/runLintChecks.js';
 
 const extensions = lintExtensions.map((ext) => `.${ext}`);
 
@@ -36,7 +40,7 @@ const runESLint = async ({
 
   if (filteredFilePaths.length === 0) {
     console.log(secondary(`No files to lint`));
-    return { exitCode: 0 };
+    return { exitCode: SUCCESS_EXIT_CODE };
   }
 
   console.log(secondary(`Paths: ${filteredFilePaths.join(' ')}`));
@@ -60,11 +64,11 @@ const runESLint = async ({
       }
 
       if (errorCount > 0) {
-        return { exitCode: 1 };
+        return { exitCode: FAILURE_EXIT_CODE };
       }
     }
 
-    return { exitCode: 0 };
+    return { exitCode: SUCCESS_EXIT_CODE };
   } catch (e) {
     assert(e instanceof Error);
 
@@ -75,7 +79,7 @@ const runESLint = async ({
       console.log(e.message);
     }
 
-    return { exitCode: 1 };
+    return { exitCode: FAILURE_EXIT_CODE };
   }
 };
 

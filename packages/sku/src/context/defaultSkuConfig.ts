@@ -32,6 +32,7 @@ export default {
   entrySideEffects: [],
   libraryName: undefined,
   libraryFile: undefined,
+  managedWorkspace: true,
   sourceMapsProd: true,
   displayNamesProd: false,
   dangerouslySetJestConfig: defaultDecorator,

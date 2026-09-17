@@ -339,6 +339,19 @@ export interface SkuConfigBase {
   libraryFile?: string;
 
   /**
+   * Whether sku manages the project's `pnpm-workspace.yaml`, keeping it aligned with sku's recommended pnpm settings.
+   *
+   * When `true`, `sku lint` checks the file against sku's recommended settings and `sku format` syncs them into it.
+   * Set to `false` to skip both, e.g. if your project keeps the file but manages its own pnpm settings.
+   *
+   * Does not affect the explicit `sku configure workspace` subcommand.
+   *
+   * @default true
+   * @link https://seek-oss.github.io/sku/configuration#managedworkspace
+   */
+  managedWorkspace?: boolean;
+
+  /**
    * An array of polyfills to be included into all client entry points.
    *
    * @default []

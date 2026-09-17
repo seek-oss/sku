@@ -2,5 +2,4 @@
 'sku': patch
 ---
 
-Do not set `ErrorBoundary` on a `SkuRouteObject` html root route.
-Set the boundary on a child route.
+`SkuRouteObject` now forbids `ErrorBoundary` and `errorElement` on the top-level html route, including via `lazy`.

@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { readFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import dedent from 'dedent';
 import { createFixture, scopeToFixture } from '@sku-private/testing-library';
@@ -240,5 +241,287 @@ describe('pnpm-workspace-config', () => {
     await expect(formatRun).toMatchExitCode(1);
 
     expect(await readFile(workspaceYamlPath, 'utf-8')).toBe(original);
+  });
+
+  describe('configure workspace', () => {
+    it('syncs the workspace root file from a nested package directory, leaving package files untouched', async () => {
+      await using fixture = await createFixture(
+        {
+          'package.json': JSON.stringify({
+            name: 'monorepo-root',
+            private: true,
+            type: 'module',
+          }),
+          'pnpm-lock.yaml': 'lockfileVersion: "9.0"\n',
+          'pnpm-workspace.yaml': dedent`
+            packages:
+              - 'packages/*'
+            minimumReleaseAge: 1440`,
+          'packages/app/package.json': JSON.stringify({
+            name: 'app',
+            private: true,
+            type: 'module',
+          }),
+          'packages/app/src/App.tsx': 'export default () => null;\n',
+        },
+        { tempDir: fixturePath() },
+      );
+
+      const rootWorkspaceYamlPath = path.join(
+        fixture.path,
+        'pnpm-workspace.yaml',
+      );
+      const appDir = path.join(fixture.path, 'packages/app');
+      const appFilesBefore = await readdir(appDir, { recursive: true });
+
+      // Runs without a sku config file, from a nested package directory
+      const packageRun = await sku('configure', ['workspace'], {
+        cwd: path.relative(fixturePath(), appDir),
+      });
+      await expect(packageRun).toMatchExitCode(0);
+
+      const content = await readFile(rootWorkspaceYamlPath, 'utf-8');
+      // Missing managed defaults are added to the root file
+      expect(content).toContain('blockExoticSubdeps: true # [sku_managed]');
+      expect(content).toContain('trustPolicy: off # [sku_managed]');
+      // Unmarked differing value is preserved as user-managed
+      expect(content).toContain('minimumReleaseAge: 1440');
+
+      // Package directory is untouched: no workspace file, no emitted config
+      expect(await readdir(appDir, { recursive: true })).toEqual(
+        appFilesBefore,
+      );
+
+      // Running from the workspace root works identically (and is silent once aligned)
+      const rootRun = await sku('configure', ['workspace'], {
+        cwd: path.relative(fixturePath(), fixture.path),
+      });
+      await expect(rootRun).toMatchExitCode(0);
+
+      const rootStdout = rootRun.getStdallStr();
+      expect(rootStdout).not.toContain('added ');
+      expect(rootStdout).not.toContain('updated ');
+      expect(rootStdout).not.toContain('removed ');
+    }, 60000);
+
+    it('creates the workspace root file when missing, while --check fails until it exists', async () => {
+      await using fixture = await createFixture(
+        {
+          'package.json': JSON.stringify({
+            name: 'no-workspace-file-test',
+            private: true,
+            type: 'module',
+          }),
+          'pnpm-lock.yaml': 'lockfileVersion: "9.0"\n',
+        },
+        { tempDir: fixturePath() },
+      );
+
+      const relativeCwd = path.relative(fixturePath(), fixture.path);
+      const workspaceYamlPath = path.join(fixture.path, 'pnpm-workspace.yaml');
+
+      // --check fails when the file is missing, directing to `sku configure workspace`
+      const checkRun = await sku('configure', ['workspace', '--check'], {
+        cwd: relativeCwd,
+      });
+      await expect(checkRun).toMatchExitCode(1);
+
+      const checkStdout = checkRun.getStdallStr();
+      expect(checkStdout).toContain('No pnpm-workspace.yaml found');
+      expect(checkStdout).toContain('sku configure workspace');
+
+      // --check never writes
+      expect(existsSync(workspaceYamlPath)).toBe(false);
+
+      // Write mode creates the file with sku's managed settings
+      const syncRun = await sku('configure', ['workspace'], {
+        cwd: relativeCwd,
+      });
+      await expect(syncRun).toMatchExitCode(0);
+      expect(syncRun.getStdallStr()).toContain('created pnpm-workspace.yaml');
+
+      const content = await readFile(workspaceYamlPath, 'utf-8');
+      expect(content).toContain('blockExoticSubdeps: true # [sku_managed]');
+      expect(content).toContain(
+        'minimumReleaseAge: 4320 # 3 days [sku_managed]',
+      );
+
+      // --check passes silently once the file exists and is aligned
+      const alignedCheckRun = await sku('configure', ['workspace', '--check'], {
+        cwd: relativeCwd,
+      });
+      await expect(alignedCheckRun).toMatchExitCode(0);
+      expect(alignedCheckRun.getStdallStr()).not.toContain(
+        'pnpm-workspace.yaml:',
+      );
+    }, 60000);
+
+    it('no-ops in non-pnpm projects', async () => {
+      await using fixture = await createFixture(
+        {
+          'package.json': JSON.stringify({
+            name: 'yarn-project-test',
+            private: true,
+            type: 'module',
+            packageManager: 'yarn@4.5.0',
+          }),
+          'yarn.lock': '',
+        },
+        { tempDir: fixturePath() },
+      );
+
+      const run = await sku('configure', ['workspace'], {
+        cwd: path.relative(fixturePath(), fixture.path),
+      });
+      await expect(run).toMatchExitCode(0);
+
+      expect(existsSync(path.join(fixture.path, 'pnpm-workspace.yaml'))).toBe(
+        false,
+      );
+    }, 60000);
+
+    it('--check fails on managed drift without writing, and passes silently once aligned', async () => {
+      await using fixture = await createFixture(
+        {
+          'package.json': JSON.stringify({
+            name: 'workspace-check-test',
+            private: true,
+            type: 'module',
+          }),
+          'pnpm-lock.yaml': 'lockfileVersion: "9.0"\n',
+          'pnpm-workspace.yaml': dedent`
+            packages:
+              - .
+            minimumReleaseAge: 1440 # [sku_managed]`,
+        },
+        { tempDir: fixturePath() },
+      );
+
+      const relativeCwd = path.relative(fixturePath(), fixture.path);
+      const workspaceYamlPath = path.join(fixture.path, 'pnpm-workspace.yaml');
+      const contentBefore = await readFile(workspaceYamlPath, 'utf-8');
+
+      // --check fails on managed drift, directing to `sku configure workspace`
+      const checkRun = await sku('configure', ['workspace', '--check'], {
+        cwd: relativeCwd,
+      });
+      await expect(checkRun).toMatchExitCode(1);
+
+      const checkStdout = checkRun.getStdallStr();
+      expect(checkStdout).toContain(
+        'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320.',
+      );
+      expect(checkStdout).toContain(
+        'pnpm-workspace.yaml: "blockExoticSubdeps" is missing, recommended is true.',
+      );
+      expect(checkStdout).toContain('sku configure workspace');
+      expect(checkStdout).not.toContain('sku format');
+
+      // --check never writes
+      expect(await readFile(workspaceYamlPath, 'utf-8')).toBe(contentBefore);
+
+      // Write mode enforces the defaults
+      const syncRun = await sku('configure', ['workspace'], {
+        cwd: relativeCwd,
+      });
+      await expect(syncRun).toMatchExitCode(0);
+      expect(await readFile(workspaceYamlPath, 'utf-8')).toContain(
+        'minimumReleaseAge: 4320 # 3 days [sku_managed]',
+      );
+
+      // --check passes silently once aligned
+      const alignedCheckRun = await sku('configure', ['workspace', '--check'], {
+        cwd: relativeCwd,
+      });
+      await expect(alignedCheckRun).toMatchExitCode(0);
+      expect(alignedCheckRun.getStdallStr()).not.toContain(
+        'pnpm-workspace.yaml:',
+      );
+    }, 60000);
+  });
+
+  describe('managedWorkspace: false', () => {
+    it('skips the lint check and format sync entirely, including plugin migration', async () => {
+      const workspaceYaml = dedent`
+        packages:
+          - .
+        configDependencies:
+          pnpm-plugin-sku: ^0.0.3
+        minimumReleaseAge: 1440\n
+      `;
+      await using fixture = await createFixture(
+        {
+          'package.json': JSON.stringify({
+            name: 'managed-workspace-opt-out-test',
+            private: true,
+            type: 'module',
+            skuSkipValidatePeerDeps: true,
+          }),
+          'sku.config.ts': 'export default { managedWorkspace: false };\n',
+          'src/App.tsx': 'export default () => null;\n',
+          'pnpm-lock.yaml': 'lockfileVersion: "9.0"\n',
+          'pnpm-workspace.yaml': workspaceYaml,
+        },
+        { tempDir: fixturePath() },
+      );
+
+      const relativeCwd = path.relative(fixturePath(), fixture.path);
+      const workspaceYamlPath = path.join(fixture.path, 'pnpm-workspace.yaml');
+
+      // Lint passes despite managed drift and plugin presence, with no workspace output
+      const lintRun = await sku('lint', [], {
+        cwd: relativeCwd,
+      });
+      await expect(lintRun).toMatchExitCode(0);
+
+      const lintStdout = lintRun.getStdallStr();
+      expect(lintStdout).not.toContain('pnpm-workspace.yaml');
+      expect(lintStdout).not.toContain('pnpm-plugin-sku');
+
+      // Format writes nothing
+      const formatRun = await sku('format', [], {
+        cwd: relativeCwd,
+      });
+      await expect(formatRun).toMatchExitCode(0);
+
+      const formatStdout = formatRun.getStdallStr();
+      expect(formatStdout).not.toContain('pnpm-workspace.yaml:');
+      expect(formatStdout).not.toContain('added ');
+      expect(formatStdout).not.toContain('updated ');
+      expect(formatStdout).not.toContain('removed ');
+      expect(await readFile(workspaceYamlPath, 'utf-8')).toBe(workspaceYaml);
+    }, 60000);
+
+    it('does not gate the configure workspace subcommand', async () => {
+      await using fixture = await createFixture(
+        {
+          'package.json': JSON.stringify({
+            name: 'managed-workspace-subcommand-test',
+            private: true,
+            type: 'module',
+            skuSkipValidatePeerDeps: true,
+          }),
+          'sku.config.ts': 'export default { managedWorkspace: false };\n',
+          'src/App.tsx': 'export default () => null;\n',
+          'pnpm-lock.yaml': 'lockfileVersion: "9.0"\n',
+          'pnpm-workspace.yaml': dedent`
+            packages:
+              - .
+            minimumReleaseAge: 1440`,
+        },
+        { tempDir: fixturePath() },
+      );
+
+      const relativeCwd = path.relative(fixturePath(), fixture.path);
+      const workspaceYamlPath = path.join(fixture.path, 'pnpm-workspace.yaml');
+
+      const syncRun = await sku('configure', ['workspace'], {
+        cwd: relativeCwd,
+      });
+      await expect(syncRun).toMatchExitCode(0);
+
+      const content = await readFile(workspaceYamlPath, 'utf-8');
+      expect(content).toContain('blockExoticSubdeps: true # [sku_managed]');
+    }, 60000);
   });
 });

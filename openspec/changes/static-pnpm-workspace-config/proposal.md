@@ -46,10 +46,11 @@ The sync itself is new. It runs as a read-only check on `sku lint` and as an enf
   - An aligned file passes silently.
 - A new `sku configure workspace` subcommand syncs the `pnpm-workspace.yaml` at the workspace root (the lockfile root). This makes the sync accessible to monorepos, where the file lives above the package directory.
   It works identically from the workspace root and from any package directory within the workspace. It is self-contained, so it runs through `pnpm dlx`. It needs no sku project dependency and no sku config file, and it emits no other configuration files.
-  It never creates `pnpm-workspace.yaml`. When the workspace root has no file, it reports that and exits successfully.
-  Its `--check` flag runs the read-only check against the workspace root, giving monorepos a CI gate. Check failures direct the user to `sku configure workspace`, not `sku format`.
-- The sync never creates `pnpm-workspace.yaml`.
-  Config dependencies can only be declared in `pnpm-workspace.yaml`. A project without the file never had `pnpm-plugin-sku`. Creating the file would impose sku's pnpm policy on projects that never opted in. It would also newly mark the directory as a workspace root.
+  When the workspace root has no file, it creates one with sku's recommended settings — explicitly configuring a workspace is an opt-in, unlike the implicit lint and format entry points.
+  Its `--check` flag runs the read-only check against the workspace root, giving monorepos a CI gate. Check failures direct the user to `sku configure workspace`, not `sku format`. The check fails when the file is missing, since the write mode would create it.
+- On `sku lint` and `sku format`, the sync never creates `pnpm-workspace.yaml`.
+  Config dependencies can only be declared in `pnpm-workspace.yaml`. A project without the file never had `pnpm-plugin-sku`. Creating the file from an implicit entry point would impose sku's pnpm policy on projects that never opted in. It would also newly mark the directory as a workspace root.
+  The explicit `sku configure workspace` subcommand is the exception: it creates the file at the workspace root, because explicitly configuring a workspace is an opt-in.
 - `sku format` removes `pnpm-plugin-sku` from `configDependencies` in `pnpm-workspace.yaml` when it is present. This migrates existing projects. Its presence fails `sku lint`.
   The package itself stays in the monorepo and on npm. It may return once tooling works with it better.
 - Sku removes the pnpm v10 plugin gate in create's `installDependencies`.
@@ -58,14 +59,14 @@ The sync itself is new. It runs as a read-only check on `sku lint` and as an enf
   No pnpm version gate replaces it. pnpm 9 and 10 silently ignore unknown keys in `pnpm-workspace.yaml`. pnpm 11 and 12 print a warning that names unrecognized settings, then ignore them.
   Settings take effect when the project's pnpm understands them.
 - The new sync is not gated by `skuSkipConfigure` or `skuSkipPostInstall`. Those flags gated the old configure-time plugin validation, which this change removes.
-  The per-value marker is the only escape hatch.
+  A new `managedWorkspace` sku config option (default `true`) is the wholesale opt-out: `false` skips the lint check and format write entirely, for projects that keep their `pnpm-workspace.yaml` but self-manage it. It does not gate the `sku configure workspace` subcommand. Otherwise, the per-value marker is the escape hatch.
 
 ## Capabilities
 
 ### New Capabilities
 
 - `pnpm-workspace-config`: How sku keeps a project's `pnpm-workspace.yaml` aligned with its recommended pnpm settings.
-  This covers the lint check, format write, and `sku configure workspace` entry points. It covers uniform marker-based ownership, enforcement, and adoption. It covers lint failure and info behaviour, change logging, and the `pnpm-plugin-sku` config dependency migration.
+  This covers the lint check, format write, and `sku configure workspace` entry points. It covers uniform marker-based ownership, enforcement, and adoption. It covers lint failure and info behaviour, change logging, the `pnpm-plugin-sku` config dependency migration, and the `managedWorkspace` config opt-out.
 
 ### Modified Capabilities
 
@@ -90,8 +91,8 @@ The sync itself is new. It runs as a read-only check on `sku lint` and as an enf
 - Consumer projects (**breaking**): after upgrading sku, the first `sku lint` fails until the user runs `sku format` and commits the resulting diff. The diff adds missing settings and markers. It adopts matching values. It removes retired marked entries. It removes the `configDependencies` entry.
   This is a one-time, git-reviewable diff per project. Every future sku release that changes defaults propagates the same way: lint fails, format fixes.
   The migration never rewrites existing unmarked values that differ from sku's defaults. They become user-managed drift. Lint logs them as info.
-- Escape hatch: removing a value's `[sku_managed]` marker makes it user-managed. Sku never writes or removes user-managed values. Lint only logs them as info when they differ from sku's defaults.
-  There is no wholesale skip flag for the sync. A project with no `pnpm-workspace.yaml` is never touched. The sync never creates the file.
+- Escape hatches: removing a value's `[sku_managed]` marker makes it user-managed. Sku never writes or removes user-managed values. Lint only logs them as info when they differ from sku's defaults.
+  A project with no `pnpm-workspace.yaml` is never touched by lint or format. Setting `managedWorkspace: false` in sku config skips the lint check and format write entirely, for projects that keep the file but self-manage it.
 - Monorepos: `sku configure workspace` (optionally via `pnpm dlx`) syncs the workspace root's `pnpm-workspace.yaml`, and `sku configure workspace --check` gates on drift in CI. Package-level `sku lint` and `sku format` are unchanged: they never touch an ancestor directory's file.
 - Tests:
   - `tests/node/sku-create.test.ts` snapshots lose the `configDependencies` entry.

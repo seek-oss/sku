@@ -12,11 +12,13 @@ The sync MUST NOT run on any other sku command, on postinstall, or on bare `sku 
 
 The sync MUST NOT be gated by `skuSkipConfigure` or `skuSkipPostInstall`. Those flags do not apply to the lint check, the format write, or the workspace subcommand.
 
-The sync MUST only run for pnpm projects with a resolved project root and an existing `pnpm-workspace.yaml`.
+The lint check and the format write are gated by the `managedWorkspace` config option. The workspace subcommand is not.
+
+The sync MUST only run for pnpm projects with a resolved project root. On `sku lint` and `sku format`, the sync additionally requires an existing `pnpm-workspace.yaml`.
 
 On `sku lint` and `sku format`, sku resolves the `pnpm-workspace.yaml` in the directory it runs in. These entry points MUST NOT walk up to an ancestor directory's file, such as a monorepo root's. The `sku configure workspace` subcommand resolves the file at the workspace root instead.
 
-The sync MUST NOT create `pnpm-workspace.yaml` when it is missing. This applies to every entry point, including `sku configure workspace`.
+On `sku lint` and `sku format`, the sync MUST NOT create `pnpm-workspace.yaml` when it is missing. The `sku configure workspace` subcommand creates the file when it is missing, because explicitly configuring a workspace is an opt-in.
 
 #### Scenario: Lint checks without writing
 
@@ -65,6 +67,43 @@ The sync MUST NOT create `pnpm-workspace.yaml` when it is missing. This applies 
 - **THEN** sku neither checks nor changes the ancestor's file
 - **AND** the lint check passes
 
+### Requirement: Workspace sync is gated by the `managedWorkspace` config option
+
+Sku config SHALL support a `managedWorkspace` boolean option, defaulting to `true`.
+
+When `managedWorkspace` is `false`, the `sku lint` pnpm workspace check and the `sku format` sync MUST be skipped entirely. A skipped lint check passes and produces no output. A skipped sync writes nothing. The skip covers every failure condition, including `pnpm-plugin-sku` presence in `configDependencies`: an opted-out project is not required to migrate.
+
+The option MUST NOT gate the `sku configure workspace` subcommand. The subcommand is an explicit invocation and does not read a sku config file.
+
+The option MUST NOT gate create-time file generation.
+
+The option is the only wholesale gate on the sync. `skuSkipConfigure` and `skuSkipPostInstall` still do not apply.
+
+#### Scenario: Default behaviour is unchanged
+
+- **WHEN** a project's sku config does not set `managedWorkspace`
+- **THEN** `sku lint` and `sku format` run the pnpm workspace check and sync
+
+#### Scenario: Lint check is skipped
+
+- **WHEN** a project's sku config sets `managedWorkspace: false`
+- **AND** the user runs `sku lint`
+- **THEN** the pnpm workspace check does not run
+- **AND** the lint run cannot fail on workspace drift
+- **AND** no workspace output is produced
+
+#### Scenario: Format sync is skipped
+
+- **WHEN** a project's sku config sets `managedWorkspace: false`
+- **AND** the user runs `sku format`
+- **THEN** sku neither checks nor changes `pnpm-workspace.yaml`
+
+#### Scenario: Subcommand is not gated
+
+- **WHEN** a project's sku config sets `managedWorkspace: false`
+- **AND** the user runs `sku configure workspace`
+- **THEN** the subcommand still syncs the workspace root's file
+
 ### Requirement: Workspace subcommand syncs the workspace root file
 
 The `sku configure workspace` subcommand SHALL run the enforcing sync against the `pnpm-workspace.yaml` at the workspace root. All enforcement, ownership, annotation, preservation, logging, and plugin-migration behaviour of the enforcing sync applies unchanged.
@@ -73,7 +112,7 @@ The subcommand SHALL resolve the workspace root as the project's lockfile root, 
 
 The subcommand SHALL be self-contained so it can run through `pnpm dlx`. It MUST NOT require sku as a project dependency. It MUST NOT require a sku config file. It MUST NOT emit or update any other configuration files (such as `tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, or ignore files).
 
-The subcommand MUST NOT create `pnpm-workspace.yaml`. When no file exists at the workspace root, the subcommand SHALL report that it found no file and exit successfully without changes.
+When no file exists at the workspace root, the subcommand SHALL create it with sku's recommended settings and log the creation. Explicitly configuring a workspace is an opt-in, so creating the file is part of the subcommand's job — unlike the implicit lint and format entry points, which never create it.
 
 The subcommand MUST NOT run for non-pnpm projects.
 
@@ -83,7 +122,7 @@ The `--check` mode SHALL fail when the workspace root's file requires managed ch
 
 The `--check` mode SHALL log user-managed drift as info, under the same rules as the `sku lint` check. User-managed drift MUST NOT fail the run.
 
-A workspace root file whose values and markers already match sku's defaults SHALL pass the check silently. A missing file MUST NOT fail the check.
+A workspace root file whose values and markers already match sku's defaults SHALL pass the check silently. A missing file SHALL fail the check and direct the user to `sku configure workspace`, because the write mode would have created it. The check MUST NOT create the file.
 
 #### Scenario: Run from a monorepo package directory
 
@@ -103,12 +142,11 @@ A workspace root file whose values and markers already match sku's defaults SHAL
 - **THEN** the subcommand syncs the workspace root's existing `pnpm-workspace.yaml`
 - **AND** it creates or changes no other files
 
-#### Scenario: Missing workspace file is not created
+#### Scenario: Missing workspace file is created
 
 - **WHEN** a user runs `sku configure workspace` in a pnpm project whose workspace root has no `pnpm-workspace.yaml`
-- **THEN** the subcommand creates no file
-- **AND** it reports that it found no `pnpm-workspace.yaml` at the workspace root
-- **AND** it exits successfully
+- **THEN** the subcommand creates the file with sku's recommended settings
+- **AND** it logs the creation
 
 #### Scenario: Skipped for non-pnpm projects
 
@@ -142,11 +180,13 @@ A workspace root file whose values and markers already match sku's defaults SHAL
 - **AND** a user runs `sku configure workspace --check`
 - **THEN** the check passes and produces no output
 
-#### Scenario: Missing file passes check
+#### Scenario: Missing file fails check
 
 - **WHEN** a user runs `sku configure workspace --check` in a pnpm project whose workspace root has no `pnpm-workspace.yaml`
-- **THEN** the check does not fail
-- **AND** the subcommand reports that it found no `pnpm-workspace.yaml` at the workspace root
+- **THEN** the subcommand exits non-zero
+- **AND** it reports that it found no `pnpm-workspace.yaml` at the workspace root
+- **AND** it directs the user to run `sku configure workspace`
+- **AND** it creates no file
 
 ### Requirement: Values are managed by uniform marker ownership
 

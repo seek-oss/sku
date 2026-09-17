@@ -480,6 +480,30 @@ The file name of the library. The main bundle of the library will be output to `
 
 If `libraryFile` is not specified then `libraryName` will be used instead.
 
+## managedWorkspace
+
+Type: `boolean`
+
+Default: `true`
+
+Whether sku manages the project's `pnpm-workspace.yaml`, keeping it aligned with sku's recommended pnpm settings.
+
+When `true`, `sku lint` checks the file against sku's recommended settings and `sku format` syncs them into it (see [`pnpm-workspace.yaml` synchronization](./cli.md#pnpm-workspaceyaml-synchronization)).
+Set to `false` to skip both — for example, if your project keeps the file but manages its own pnpm settings.
+The skip is total, including the `pnpm-plugin-sku` migration check.
+
+This option does not affect the explicit [`sku configure workspace`](./cli.md#configure-workspace) subcommand, which does not read a sku config file.
+
+**Example:**
+
+```typescript
+import type { SkuConfig } from 'sku';
+
+export default {
+  managedWorkspace: false, // [!code highlight]
+} satisfies SkuConfig;
+```
+
 ## pathAliases
 
 Type: `Record<string, string>`

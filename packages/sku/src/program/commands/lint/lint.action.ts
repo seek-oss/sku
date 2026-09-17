@@ -23,7 +23,8 @@ export const lintAction = async (
   const checks: LintCheck[] = [
     {
       name: 'pnpm workspace',
-      run: () => pnpmWorkspaceCheck(),
+      run: pnpmWorkspaceCheck,
+      skip: skuContext.managedWorkspace === false,
     },
     {
       name: 'TypeScript',

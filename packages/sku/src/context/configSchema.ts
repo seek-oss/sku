@@ -166,6 +166,9 @@ export default validator.compile({
     type: 'string',
     optional: true,
   },
+  managedWorkspace: {
+    type: 'boolean',
+  },
   dangerouslySetWebpackConfig: {
     type: 'function',
   },

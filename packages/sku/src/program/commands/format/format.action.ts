@@ -18,7 +18,8 @@ export const formatAction = async (
   const checks: LintCheck[] = [
     {
       name: 'pnpm workspace',
-      run: () => pnpmWorkspaceSync(),
+      run: pnpmWorkspaceSync,
+      skip: skuContext.managedWorkspace === false,
     },
     {
       name: 'ESLint',

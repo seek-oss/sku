@@ -59,15 +59,23 @@ Sections 1-5 implemented the two-tier minor design. This section reworks it into
 
 ## 7. Workspace subcommand
 
-- [ ] 7.1 Add a `workspace` subcommand under `sku configure` (`packages/sku/src/program/commands/configure/commands/workspace/`, following the `translations` subcommand structure). Its action runs the enforcing sync with `targetDir: rootDir` from `@sku-private/utils`. It does not run `configureApp` and does not read a sku config file, so it works under `pnpm dlx`
-- [ ] 7.2 Gate the subcommand on `isPnpm` and a resolved `rootDir`. Never pass `create`. When the workspace root has no `pnpm-workspace.yaml`, report that no file was found and exit successfully
-- [ ] 7.3 Add a `--check` flag that runs `checkPnpmWorkspaceConfig` against the workspace root instead of writing. Failures name the key and the current and recommended states, and direct the user to `sku configure workspace` (not `sku format`). User-managed drift logs as info. Aligned files pass silently. Missing files pass with the no-file report
-- [ ] 7.4 Add integration tests (e.g. in `tests/node/pnpm-workspace-config.test.ts`) covering:
+- [x] 7.1 Add a `workspace` subcommand under `sku configure` (`packages/sku/src/program/commands/configure/commands/workspace/`, following the `translations` subcommand structure). Its action runs the enforcing sync with `targetDir: rootDir` from `@sku-private/utils`. It does not run `configureApp` and does not read a sku config file, so it works under `pnpm dlx`
+- [x] 7.2 Gate the subcommand on `isPnpm` and a resolved `rootDir`. Pass `create` so the subcommand creates the file when the workspace root has none — explicitly configuring a workspace is an opt-in
+- [x] 7.3 Add a `--check` flag that runs `checkPnpmWorkspaceConfig` against the workspace root instead of writing. Failures name the key and the current and recommended states, and direct the user to `sku configure workspace` (not `sku format`). User-managed drift logs as info. Aligned files pass silently. Missing files fail the check, directing the user to `sku configure workspace`, since the write mode would create the file
+- [x] 7.4 Add integration tests (e.g. in `tests/node/pnpm-workspace-config.test.ts`) covering:
   - running from a nested package directory syncs the root file and leaves package files untouched
   - running from the workspace root
   - running without a sku config file
-  - missing root file reports and exits successfully
-  - non-pnpm projects no-op
+  - a missing root file is created on write, and fails `--check` with a direction to `sku configure workspace`
+    - non-pnpm projects no-op
   - `--check` fails on managed drift, passes silently when aligned, and never writes
-- [ ] 7.5 Update the changeset (`.changeset/static-pnpm-workspace-config.md`) with the `sku configure workspace` subcommand: workspace-root targeting, `--check` mode, `pnpm dlx` usage, and that package-level lint/format still never touch ancestor files
-- [ ] 7.6 Update `site/docs/cli.md`: document `sku configure workspace` and `--check` under the configure section, including monorepo and `pnpm dlx` usage
+- [x] 7.5 Update the changeset (`.changeset/static-pnpm-workspace-config.md`) with the `sku configure workspace` subcommand: workspace-root targeting, `--check` mode, `pnpm dlx` usage, and that package-level lint/format still never touch ancestor files
+- [x] 7.6 Update `site/docs/cli.md`: document `sku configure workspace` and `--check` under the configure section, including monorepo and `pnpm dlx` usage
+
+## 8. `managedWorkspace` config opt-out
+
+- [x] 8.1 Add `managedWorkspace?: boolean` to `SkuConfigBase` in `packages/sku/src/types/types.ts`, defaulting to `true`. JSDoc covers that `false` skips the `sku lint` pnpm workspace check and the `sku format` sync
+- [x] 8.2 Gate the "pnpm workspace" check in `packages/sku/src/program/commands/lint/lint.action.ts` and the sync in `packages/sku/src/program/commands/format/format.action.ts` on the sku config's `managedWorkspace !== false` (available via `skuContext`). The skip is silent: no output, no write, no failure — including no `pnpm-plugin-sku` migration failure
+- [x] 8.3 Add integration coverage in `tests/node/pnpm-workspace-config.test.ts`: opted-out lint passes on a drifted file (including `pnpm-plugin-sku` presence) with no workspace output; opted-out format writes nothing; default (unset) behaviour is unchanged; `sku configure workspace` is not gated by the option
+- [x] 8.4 Update the changeset (`.changeset/static-pnpm-workspace-config.md`) with the `managedWorkspace` opt-out: lint/format-only scope, default `true`, and that the subcommand is not gated
+- [x] 8.5 Update docs (`site/docs/cli.md` and the configuration page) with the `managedWorkspace` option

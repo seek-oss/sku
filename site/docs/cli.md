@@ -172,7 +172,7 @@ sku configure
 
 In pnpm projects with an existing `pnpm-workspace.yaml`, sku manages recommended workspace settings statically. Sku tracks entries it manages with a `[sku_managed]` comment marker, which can sit alongside an explanatory comment (for example `minimumReleaseAge: 4320 # 3 days [sku_managed]`).
 
-The sync does not create `pnpm-workspace.yaml` in an existing project (absence of the file serves as an opt-out); `@sku-lib/create` creates it for newly scaffolded projects.
+On `sku lint` and `sku format`, the sync does not create `pnpm-workspace.yaml` in an existing project (absence of the file serves as an opt-out); `@sku-lib/create` creates it for newly scaffolded projects, and [`sku configure workspace`](#configure-workspace) creates it at the workspace root on demand.
 
 - **Lint check (`sku lint`)**: Performs a read-only check. Fails if managed settings are missing, marked values differ from defaults, marked retired entries remain, matching values are pending adoption, or `pnpm-plugin-sku` is present in `configDependencies`. Differing user-managed (unmarked) settings are logged as informational advisories without failing the run.
 - **Enforcing format (`sku format`)**: Applies and enforces sku's recommended settings: adds missing managed settings, rewrites outdated marked values in both directions, adopts matching unmarked values, removes retired marked entries, and removes `pnpm-plugin-sku` from `configDependencies`.
@@ -185,6 +185,34 @@ To re-align a user-managed setting with sku's recommendations:
 
 - Edit the value to match sku's default (the next `sku format` adopts it), or
 - Delete the setting entirely and run `sku format` to re-add it as sku-managed.
+
+To opt out of workspace management entirely set [`managedWorkspace: false`](./configuration.md#managedworkspace) in your sku config. This skips the `sku lint` check and the `sku format` sync. It does not affect the explicit `sku configure workspace` subcommand.
+
+### `configure workspace`
+
+Sync sku's recommended pnpm settings into the `pnpm-workspace.yaml` at the workspace root.
+
+While `sku lint` and `sku format` only ever check or write the `pnpm-workspace.yaml` in the directory they run in, this subcommand targets the workspace root, making the sync accessible to monorepos where the file lives above the package directories. It works identically from the workspace root and from any package directory within the workspace.
+
+```sh
+sku configure workspace
+```
+
+When the workspace root has no `pnpm-workspace.yaml`, the subcommand creates it with sku's recommended settings.
+
+Monorepos can run it via `pnpm dlx` to avoid adding sku to the root package.json:
+
+```sh
+pnpm dlx sku configure workspace
+```
+
+#### `--check`
+
+Perform a read-only check of the workspace root's `pnpm-workspace.yaml`. The check fails on any drift from sku's recommended settings or when the file is missing entirely, and directs you to `sku configure workspace` to fix it.
+
+```sh
+sku configure workspace --check
+```
 
 ## Translations
 

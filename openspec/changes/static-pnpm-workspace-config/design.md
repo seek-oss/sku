@@ -52,7 +52,8 @@ Enforcement is therefore unconditional for sku-managed values. The sync's entry 
 - Syncing on any command other than `sku lint`, `sku format`, and the `sku configure workspace` subcommand.
   Postinstall and bare `sku configure` no longer run the sync.
 - Never-downgrade or strength ordering for `trustPolicy` or `minimumReleaseAge`. Rejected. Managed means enforced, full stop.
-- Wholesale skip flags for the sync. `skuSkipConfigure` and `skuSkipPostInstall` gated the old configure-time path and no longer apply. The per-value marker is the only opt-out.
+- Reviving `skuSkipConfigure` or `skuSkipPostInstall` as gates for the sync. Those flags gated the old configure-time path and no longer apply.
+  The `managedWorkspace` config option is the single deliberate wholesale opt-out (see its decision below). Beyond it, the per-value marker is the only opt-out.
 - A negative marker (for example `[user_managed]`) to pre-emptively pin values that currently match sku's defaults.
   See the silent-pin trade-off in the ownership decision.
 - Removing, deprecating, or unpublishing `pnpm-plugin-sku`. The package stays in the monorepo and on npm.
@@ -154,21 +155,25 @@ Build bundles it into both `sku` and `@sku-lib/create` at build time. That is a 
 - Create does not keep its own `pnpm-workspace.yaml` writer.
   It calls the same sync function `sku format` uses. Create permits file creation, because scaffolding is an explicit opt-in. Create and `sku format` then produce the same output by construction rather than by keeping two writers in agreement.
 - Create still writes the file before dependency installation, for two reasons. Sku's settings should apply to the very first install. The file also marks the new project as its own workspace root so pnpm does not resolve it against a parent workspace.
-- The sync function therefore takes two call-site options. Only create may create the file. The other option is check versus write, for lint versus format.
+- The sync function therefore takes two call-site options. Only create and the `sku configure workspace` subcommand may create the file. The other option is check versus write, for lint versus format.
 
-### Decision: Never create `pnpm-workspace.yaml` in existing projects
+### Decision: Lint and format never create `pnpm-workspace.yaml` in existing projects
 
-The sync only runs when `pnpm-workspace.yaml` already exists.
+On `sku lint` and `sku format`, the sync only runs when `pnpm-workspace.yaml` already exists.
 
 - Config dependencies can only be declared in `pnpm-workspace.yaml`. A project without the file never had `pnpm-plugin-sku`.
-  Creating the file would impose sku's pnpm policy on projects that never opted into it.
+  Creating the file from an implicit entry point would impose sku's pnpm policy on projects that never opted into it.
 - Creating the file also newly marks the directory as a workspace root. That changes how pnpm resolves the project.
 - On `sku lint` and `sku format`, the sync targets the directory sku runs in, not the lockfile root. In monorepos the lockfile root can be an ancestor directory shared by many packages.
   Targeting it would check, and on `sku format` rewrite, a parent workspace's file the package does not own.
   The explicit `sku configure workspace` subcommand is the exception: it targets the lockfile root because the user has explicitly asked to configure the workspace.
-- This makes "no file" the de-facto full opt-out. The lint check passes silently. Format writes nothing.
+- This makes "no file" the de-facto full opt-out for lint and format. The lint check passes silently. Format writes nothing.
   A package without its own file stays opted out even inside a parent workspace.
+  For projects that keep the file but self-manage it, `managedWorkspace: false` is the explicit opt-out.
 - Create still writes the file for new projects. Scaffolding is an explicit opt-in. Create needs the file before the first install.
+- The `sku configure workspace` subcommand is the other explicit exception: it creates the file at the workspace root when missing.
+  Running an explicit "configure my workspace" command is the same kind of opt-in as scaffolding — the user has directly asked sku to set the workspace up.
+  Its `--check` flag correspondingly fails when the file is missing, since the write mode would have created it.
 
 ### Decision: Plugin migration is part of the sync
 
@@ -210,11 +215,26 @@ Out of scope for this change.
 The sync never runs from `configureApp`. No configuration-enabled command, postinstall, or bare `sku configure` runs it.
 The `sku configure workspace` subcommand is the single explicit exception. See the next decision.
 
-Released sku's configure and postinstall paths carried the plugin validation machinery. This change removes that machinery rather than replacing it. `skuSkipConfigure` and `skuSkipPostInstall` gated that old path and do not apply to the sync. No new skip flag replaces them.
+Released sku's configure and postinstall paths carried the plugin validation machinery. This change removes that machinery rather than replacing it. `skuSkipConfigure` and `skuSkipPostInstall` gated that old path and do not apply to the sync. No package.json skip flag replaces them.
 
-- Per-value marker removal is the documented opt-out. Removing the whole file is the de-facto full opt-out (the sync never creates it).
+- Per-value marker removal is the documented per-value opt-out. Removing the whole file remains a full opt-out (the sync never creates it).
+  The `managedWorkspace` config option is the full opt-out for projects that keep the file. See the next decision.
 - The `rootDir` and pnpm-project gates move from `configureApp` into the lint check and format step themselves.
 - `sku lint` and `sku format` still run `configureProject` for their other needs (eslint config, tsconfig, ignore files). Only the pnpm-workspace sync leaves `configureApp`.
+
+### Decision: `managedWorkspace` config opt-out
+
+Sku config gains a `managedWorkspace` boolean option, defaulting to `true`. When `false`, the `sku lint` pnpm workspace check and the `sku format` sync are skipped entirely.
+
+This reverses the earlier "no wholesale skip flag" position. The gap it fills: a project that keeps its `pnpm-workspace.yaml` but wants to fully self-manage its pnpm config.
+Deleting the file is not always acceptable (the project may have its own settings, or need the workspace-root marker), and per-value marker removal cannot express full self-management: any unmarked value that exactly matches a sku default fails lint as pending adoption, so a self-managing project would have to keep every value different from sku's defaults.
+
+- Scope is lint and format only. The `sku configure workspace` subcommand is not gated: it is an explicit invocation, and it does not read a sku config file, so gating it would break its `pnpm dlx` self-containment.
+  Create-time file generation is not gated either.
+- The skip is total and silent. Lint passes with no workspace output, including no `pnpm-plugin-sku` migration failure. Format writes nothing.
+  An opted-out project keeps runtime plugin injection by choice; a half-gate that still forces the migration would be neither honest opt-out nor coherent enforcement.
+- Default `true` preserves the breaking-change story: projects that never set the option get full enforcement.
+- Granularity is per package. Each package's own sku config gates its own lint and format runs. The workspace root's file is only reachable through the ungated subcommand, so a monorepo opts out package by package and by simply not running `sku configure workspace --check` in CI.
 
 ### Decision: Workspace subcommand for monorepo roots
 
@@ -226,7 +246,7 @@ A new `sku configure workspace` subcommand runs the sync against the `pnpm-works
 - Over walking up to the nearest `pnpm-workspace.yaml` on lint and format: rejected in the never-create decision. Walking up would force-enrol every package in a monorepo into a parent file it does not own, removing the per-package opt-out.
 - The subcommand targets the lockfile root (`rootDir`), which is the workspace root in a pnpm monorepo. It works identically from the root and from any package directory.
 - The subcommand is self-contained so it can run through `pnpm dlx`. It does not run `configureApp`, does not require a sku config file, and does not require sku as a project dependency. Monorepo roots therefore do not need to become sku projects to use it.
-- The subcommand never creates the file. The never-create decision stands: absence of the file remains the opt-out. An explicit command is not a licence to impose sku's pnpm policy on a project that has no `pnpm-workspace.yaml`.
+- The subcommand creates the file when the workspace root has none. Lint and format run uninvited as part of broader checks, so they never create it; an explicit `configure workspace` command is the user opting in to sku's pnpm policy, so creating the file is part of doing what was asked.
 - Bootstrap, not enforcement: the subcommand does not replace lint and format as the enforcement mechanism. It is the reachability fix for a file those commands cannot see. Its `--check` flag gives monorepos the CI gate that package-level lint cannot provide: `pnpm dlx sku configure workspace --check`.
 - Check failures direct the user to `sku configure workspace`, never `sku format`. From a package directory, `sku format` cannot fix the workspace root's file, so the lint-style fix instruction would strand users.
 

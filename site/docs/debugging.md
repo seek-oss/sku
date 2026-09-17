@@ -1,12 +1,12 @@
 # Debugging
 
-Below are some strategies for debugging issues in your sku app.
+Use these methods to debug issues in a sku app.
 
 ## Enable sku Logs
 
 By default, sku's [debug] logs are disabled.
-These logs can offer insights into sku's config resolution, package resolution, dev server routing, and more.
-They can be enabled by passing the `--debug` flag to the `sku` CLI:
+These logs can show sku's config resolution, package resolution, development-server routing, and more.
+Pass the `--debug` flag to the `sku` CLI to enable them:
 
 ```sh
 yarn sku start --debug
@@ -16,7 +16,8 @@ yarn sku start --debug
 
 ## Webpack Stats
 
-For more detailed information about webpack warnings/errors, the `--stats` CLI argument can be used to override the default [webpack stats preset]:
+Use the `--stats` CLI argument for more detail about webpack warnings and errors.
+This overrides the default [webpack stats preset]:
 
 ```sh
 yarn sku start --stats=detailed

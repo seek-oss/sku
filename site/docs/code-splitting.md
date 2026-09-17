@@ -1,8 +1,11 @@
 # Code Splitting
 
-Code splitting is a great way to ensure each page of your app is as light as possible. sku uses [loadable-components](https://www.smooth-code.com/open-source/loadable-components/) for code splitting modules and React components. All of the features of [`@loadable/component`](https://www.smooth-code.com/open-source/loadable-components/docs/api-loadable-component/) are supported in sku without any extra configuration.
+Code splitting keeps each page of your app small.
+A chunk is a separate file the bundler creates for a split module.
+With the webpack bundler, sku uses [loadable-components](https://www.smooth-code.com/open-source/loadable-components/) for code splitting modules and React components.
+sku supports all features of [`@loadable/component`](https://www.smooth-code.com/open-source/loadable-components/docs/api-loadable-component/) without extra configuration.
 
-Here's an example of splitting out a React component into a separate chunk.
+Here is an example that splits a React component into a separate chunk.
 
 ```js
 // Make sure to import @loadable/component through sku
@@ -19,11 +22,15 @@ const MyComponent = () => (
 
 ## Static/Server Rendering
 
-If sku encounters an async component (`loadable-component`) during render, it will still render the component just like any other. This will also tell sku to include the required chunk for this import to work synchronously client side. This is great as it allows you to use many async components without showing loading indicators everywhere on your page.
+If sku finds an async component (`loadable-component`) during render, it still renders the component like any other.
+This also tells sku to include the required chunk so the import can run synchronously on the client.
+You can then use many async components without loading indicators on every part of the page.
 
 ## Code splitting by route
 
-The most common use case for code splitting is splitting out each top level route component in your app. The following is an example of how to do this with [`react-router`](https://reacttraining.com/react-router/) but the concepts should apply to any routing solution.
+The most common use of code splitting is to split each top-level route component in your app.
+The following example uses [`react-router`](https://reacttraining.com/react-router/).
+The same concepts should apply to any routing solution.
 
 ::: code-group
 

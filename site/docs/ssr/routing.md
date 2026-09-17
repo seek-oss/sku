@@ -79,6 +79,7 @@ Lazy page modules must export a named `Component` (not `export default`).
 
 Use a **pathless** root layout to render `<html>`, `<head>`, and `<body>`, plus shared UI and providers.
 See [Providers](./providers.md).
+See [Error pages](./error-pages.md#do-not-set-errorboundary-on-the-html-route) for `ErrorBoundary` on that route.
 
 The route tree is complete when:
 

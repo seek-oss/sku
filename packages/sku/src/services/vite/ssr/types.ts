@@ -57,18 +57,68 @@ export type JsonValue =
 export type { SiteOf } from './entryTypeExtractors.js';
 
 /**
- * Route object for `routesEntry`: React Router `RouteObject` plus optional
- * `sites` membership. Omit `sites` ⇒ route is on every config site; present ⇒
- * only those names. Sku type helper only — not a wrapped RR re-export.
- * `children` are also `SkuRouteObject` so nested routes may set `sites`
- * (no parent→child inheritance — each route declares membership explicitly).
+ * Child route in a `routesEntry` tree.
+ * This type lets you set `ErrorBoundary` and `errorElement`.
+ * This type is not a public `sku/runtime` export.
  */
-export type SkuRouteObject<Site extends string = string> = Omit<
+export type SkuChildRouteObject<Site extends string = string> = Omit<
   RouteObject,
   'children'
 > & {
   sites?: Site[];
-  children?: Array<SkuRouteObject<Site>>;
+  children?: Array<SkuChildRouteObject<Site>>;
+};
+
+type RouteObjectLazy = NonNullable<RouteObject['lazy']>;
+type RouteObjectLazyFunction = Extract<
+  RouteObjectLazy,
+  (...args: never[]) => unknown
+>;
+type RouteObjectLazyObject = Exclude<RouteObjectLazy, RouteObjectLazyFunction>;
+
+type SkuRootLazyResult = Omit<
+  Awaited<ReturnType<RouteObjectLazyFunction>>,
+  'ErrorBoundary' | 'errorElement'
+> & {
+  ErrorBoundary?: never;
+  errorElement?: never;
+};
+
+/**
+ * Root `lazy` from `RouteObject['lazy']`.
+ * Do not set `ErrorBoundary` or `errorElement` on the result.
+ */
+type SkuRootLazy =
+  | ((
+      ...args: Parameters<RouteObjectLazyFunction>
+    ) => Promise<SkuRootLazyResult>)
+  | (Omit<RouteObjectLazyObject, 'ErrorBoundary' | 'errorElement'> & {
+      ErrorBoundary?: never;
+      errorElement?: never;
+    });
+
+/**
+ * Route object for `routesEntry`. This type is a React Router `RouteObject`
+ * with optional `sites`.
+ * If you do not set `sites`, the route is on all config sites.
+ * If you set `sites`, the route is only on those site names.
+ * This is a sku type helper. It is not a React Router re-export.
+ * Nested routes can also set `sites`. A child does not get `sites` from a parent.
+ * Each route must set its site list.
+ * Do not set `ErrorBoundary` or `errorElement` on the top-level html route.
+ * Do not set `ErrorBoundary` or `errorElement` through `lazy`.
+ * React Router replaces the route `Component` when that route fails.
+ * This includes the `<html>` element.
+ * Set the boundary on a child route.
+ */
+export type SkuRouteObject<Site extends string = string> = Omit<
+  SkuChildRouteObject<Site>,
+  'ErrorBoundary' | 'errorElement' | 'children' | 'lazy'
+> & {
+  ErrorBoundary?: never;
+  errorElement?: never;
+  lazy?: SkuRootLazy;
+  children?: Array<SkuChildRouteObject<Site>>;
 };
 
 /**

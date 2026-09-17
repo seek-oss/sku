@@ -378,6 +378,8 @@ export type RoutesEntry = {
 ```
 
 `SkuRouteObject` is a React Router `RouteObject` plus optional `sites` for multi-site membership.
+The type forbids `ErrorBoundary` and `errorElement` on a top-level html route, including via `lazy`.
+See [Error pages](./error-pages.md#do-not-set-errorboundary-on-the-html-route).
 
 Optional `mapRoutePath` clones path-bearing routes and index routes for alternate paths.
 Index homes use `path: ''`.

@@ -4,7 +4,8 @@
 
 (via [Babel](https://babeljs.io/))
 
-Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with class properties, [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) and all their friends in your code. It'll all just work, thanks to the following Babel plugins:
+You can use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with class properties, and [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) in your code.
+Babel compiles them with these plugins:
 
 - [@babel/preset-env](https://babeljs.io/docs/en/babel-preset-env/)
 - [@babel/preset-react](https://babeljs.io/docs/en/babel-preset-react/)
@@ -13,15 +14,21 @@ Use `import`, `const`, `=>`, rest/spread operators, destructuring, classes with 
 - [@babel/plugin-proposal-class-properties](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties)
 - [babel-preset-react-optimize](https://github.com/thejameskyle/babel-react-optimize)
 
-If you'd like use a package that requires adding a Babel plugin, try [Babel Macros](https://github.com/kentcdodds/babel-plugin-macros). Macros allow packages to apply the configuration changes for you when they are imported. For example, to use [Emotion](https://emotion.sh/):
+If you want to use a package that needs a Babel plugin, try [Babel Macros](https://github.com/kentcdodds/babel-plugin-macros).
+Macros apply the configuration changes for you when you import the package.
+For example, to use [Emotion](https://emotion.sh/):
 
 ```ts
 import styled from 'react-emotion/macro';
 import { css } from 'emotion/macro';
 ```
 
-Lots of packages support macros, and their documentation is best place to look for help.
+Many packages support macros.
+Check the package documentation for help.
 
 ## TypeScript
 
-TypeScript files (`.ts` and `.tsx`) are supported as part of your source code. You can also mix JavaScript with TypeScript allowing you to slowly convert your project to TypeScript over time. The `sku lint` script will report any type errors in your code.
+TypeScript files (`.ts` and `.tsx`) are supported as part of your source code.
+You can also mix JavaScript with TypeScript.
+This lets you convert the project to TypeScript over time.
+The `sku lint` script reports type errors in your code.

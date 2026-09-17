@@ -12,71 +12,62 @@ import {
   checkObjectSettings,
   syncObjectSettings,
 } from './syncObjectSettings.ts';
-import type {
-  CheckContext,
-  RecordMutation,
-  SyncContext,
+import {
+  pnpmWorkspaceFileName,
+  type CheckContext,
+  type RecordMutation,
+  type SyncContext,
 } from './syncShared.ts';
+
+export { pnpmWorkspaceFileName } from './syncShared.ts';
 import {
   checkSingleValueSettings,
   syncSingleValueSettings,
 } from './syncSingleValueSettings.ts';
 
-export interface CheckPnpmWorkspaceConfigOptions {
-  targetDir?: string;
-}
-
 export interface PnpmWorkspaceCheckResult {
-  hasFailure: boolean;
   failures: string[];
   advisories: string[];
 }
 
-const assertValidWorkspaceDocument = (doc: Document): void => {
+const parseWorkspaceDocument = (content: string): Document => {
+  // Widened from `Document.Parsed` so an empty document's contents can be set.
+  const doc: Document = parseDocument(content);
+
   if (doc.errors.length > 0) {
-    throw new Error(
-      `pnpm-workspace.yaml is invalid: ${doc.errors.map((error) => error.message).join('; ')}`,
-    );
+    const reasons = doc.errors.map(({ message }) => message).join('; ');
+    throw new Error(`${pnpmWorkspaceFileName} is invalid: ${reasons}`);
   }
 
   if (!doc.contents) {
     doc.contents = doc.createNode({});
-    return;
+  } else if (!isMap(doc.contents)) {
+    throw new Error(`${pnpmWorkspaceFileName} must contain a YAML mapping`);
   }
 
-  if (!isMap(doc.contents)) {
-    throw new Error(`pnpm-workspace.yaml must contain a YAML mapping`);
-  }
+  return doc;
 };
 
 export async function checkPnpmWorkspaceConfig({
   targetDir = process.cwd(),
-}: CheckPnpmWorkspaceConfigOptions = {}): Promise<PnpmWorkspaceCheckResult> {
-  const filePath = join(targetDir, 'pnpm-workspace.yaml');
+}: { targetDir?: string } = {}): Promise<PnpmWorkspaceCheckResult> {
+  const filePath = join(targetDir, pnpmWorkspaceFileName);
   if (!existsSync(filePath)) {
-    return { hasFailure: false, failures: [], advisories: [] };
+    return { failures: [], advisories: [] };
   }
 
-  const content = await readFile(filePath, 'utf-8');
-  const doc: Document = parseDocument(content);
-  assertValidWorkspaceDocument(doc);
-
-  const checkContext: CheckContext = {
-    doc,
+  const context: CheckContext = {
+    doc: parseWorkspaceDocument(await readFile(filePath, 'utf-8')),
     failures: [],
     advisories: [],
   };
 
-  checkPnpmPluginSku(checkContext);
-  checkSingleValueSettings(checkContext);
-  checkObjectSettings(checkContext);
-  checkArraySettings(checkContext);
+  checkPnpmPluginSku(context);
+  checkSingleValueSettings(context);
+  checkObjectSettings(context);
+  checkArraySettings(context);
 
-  return {
-    hasFailure: checkContext.failures.length > 0,
-    failures: checkContext.failures,
-    advisories: checkContext.advisories,
-  };
+  return { failures: context.failures, advisories: context.advisories };
 }
 
 export interface SyncPnpmWorkspaceConfigOptions {
@@ -88,33 +79,30 @@ export async function syncPnpmWorkspaceConfig({
   create = false,
   targetDir = process.cwd(),
 }: SyncPnpmWorkspaceConfigOptions = {}): Promise<void> {
-  const filePath = join(targetDir, 'pnpm-workspace.yaml');
+  const filePath = join(targetDir, pnpmWorkspaceFileName);
   const fileExisted = existsSync(filePath);
 
   if (!fileExisted && !create) {
     return;
   }
 
-  let originalContent = '';
-  let doc: Document;
+  const originalContent = fileExisted ? await readFile(filePath, 'utf-8') : '';
+  const doc = fileExisted
+    ? parseWorkspaceDocument(originalContent)
+    : new Document(structuredClone(defaultPnpmWorkspaceConfig));
 
-  if (fileExisted) {
-    originalContent = await readFile(filePath, 'utf-8');
-    doc = parseDocument(originalContent);
-    assertValidWorkspaceDocument(doc);
-  } else {
-    doc = new Document(structuredClone(defaultPnpmWorkspaceConfig));
-  }
-
-  let modified = false;
-
+  let modified = !fileExisted;
   const recordMutation: RecordMutation = (message) => {
     modified = true;
-    console.log(message);
+    // A file written from the defaults needs no narration: the sync passes below
+    // only attach ownership markers, so `created ...` already says everything.
+    if (fileExisted) {
+      console.log(message);
+    }
   };
 
   if (!fileExisted) {
-    recordMutation('created pnpm-workspace.yaml');
+    console.log(`created ${pnpmWorkspaceFileName}`);
   }
 
   const context: SyncContext = { doc, recordMutation };
@@ -124,6 +112,8 @@ export async function syncPnpmWorkspaceConfig({
   syncObjectSettings(context);
   syncArraySettings(context);
 
+  // Serialise only after a real mutation: a round-trip through `yaml` can
+  // reformat an untouched document, which would rewrite the user's file.
   if (modified) {
     const newContent = doc.toString();
     if (newContent !== originalContent) {

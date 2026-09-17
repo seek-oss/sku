@@ -2,12 +2,6 @@ export const MANAGED_BY_SKU_MARKER = '[sku_managed]';
 
 type SingleValue = string | number | boolean;
 
-/** An entry in an array setting, with its explanatory comment if it has one. */
-export interface ArrayEntry {
-  value: string;
-  comment?: string;
-}
-
 interface SingleValueSetting {
   kind: 'value';
   value: SingleValue;
@@ -21,7 +15,7 @@ interface ObjectSetting {
 
 interface ArraySetting {
   kind: 'array';
-  entries: readonly ArrayEntry[];
+  entries: readonly string[];
 }
 
 type PnpmWorkspaceSetting = SingleValueSetting | ObjectSetting | ArraySetting;
@@ -38,13 +32,9 @@ const objectSetting = (
 ): ObjectSetting => ({ kind: 'object', entries });
 
 /** Unioned and deduped. Marked entries are sku-owned, the rest are the user's. */
-const arraySetting = (
-  entries: ReadonlyArray<string | ArrayEntry>,
-): ArraySetting => ({
+const arraySetting = (entries: readonly string[]): ArraySetting => ({
   kind: 'array',
-  entries: entries.map((entry) =>
-    typeof entry === 'string' ? { value: entry } : entry,
-  ),
+  entries,
 });
 
 const minutesPerDay = 24 * 60;
@@ -83,20 +73,16 @@ export const pnpmWorkspaceSettings = {
   publicHoistPattern: arraySetting(['eslint', 'prettier']),
   strictDepBuilds: singleValueSetting(false),
   trustPolicy: singleValueSetting('off'),
-  trustPolicyExclude: arraySetting([{ value: 'semver@6.3.1' }]),
+  trustPolicyExclude: arraySetting(['semver@6.3.1']),
 } satisfies Record<string, PnpmWorkspaceSetting>;
 
-export type PnpmWorkspaceSettingKey = keyof typeof pnpmWorkspaceSettings;
+type PnpmWorkspaceSettingKey = keyof typeof pnpmWorkspaceSettings;
 
 type Keyed<TSetting> = TSetting & { key: PnpmWorkspaceSettingKey };
 
-const settingKeys = Object.keys(
-  pnpmWorkspaceSettings,
-) as PnpmWorkspaceSettingKey[];
-
-const keyedSettings: Array<Keyed<PnpmWorkspaceSetting>> = settingKeys.map(
-  (key) => ({ key, ...pnpmWorkspaceSettings[key] }),
-);
+const keyedSettings: Array<Keyed<PnpmWorkspaceSetting>> = (
+  Object.keys(pnpmWorkspaceSettings) as PnpmWorkspaceSettingKey[]
+).map((key) => ({ key, ...pnpmWorkspaceSettings[key] }));
 
 export const singleValueSettings = keyedSettings.filter(
   (setting): setting is Keyed<SingleValueSetting> => setting.kind === 'value',
@@ -117,16 +103,11 @@ const settingValue = (setting: PnpmWorkspaceSetting) => {
     case 'object':
       return { ...setting.entries };
     case 'array':
-      return setting.entries.map(({ value }) => value);
+      return [...setting.entries];
   }
 };
-
-export type PnpmWorkspaceConfig = Record<
-  PnpmWorkspaceSettingKey,
-  ReturnType<typeof settingValue>
->;
 
 /** The settings as plain values, for scaffolding a `pnpm-workspace.yaml` from scratch. */
 export const defaultPnpmWorkspaceConfig = Object.fromEntries(
   keyedSettings.map((setting) => [setting.key, settingValue(setting)]),
-) as PnpmWorkspaceConfig;
+) as Record<PnpmWorkspaceSettingKey, ReturnType<typeof settingValue>>;

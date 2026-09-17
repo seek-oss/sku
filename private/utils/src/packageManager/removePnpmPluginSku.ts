@@ -1,6 +1,7 @@
 import { isMap, isPair, isSeq, type Document } from 'yaml';
 import {
   getNodeKey,
+  pnpmWorkspaceFileName,
   type CheckContext,
   type SyncContext,
 } from './syncShared.ts';
@@ -8,11 +9,8 @@ import {
 const CONFIG_DEPENDENCIES_KEY = 'configDependencies';
 const PNPM_PLUGIN_SKU = 'pnpm-plugin-sku';
 
+/** `configDependencies` accepts either a map of versions or a plain sequence. */
 const getConfigDependencies = (doc: Document) => {
-  if (!doc.has(CONFIG_DEPENDENCIES_KEY)) {
-    return undefined;
-  }
-
   const node = doc.get(CONFIG_DEPENDENCIES_KEY, true);
   return isMap(node) || isSeq(node) ? node : undefined;
 };
@@ -21,23 +19,15 @@ const isPluginSkuEntry = (item: unknown): boolean =>
   getNodeKey(isPair(item) ? item.key : item) === PNPM_PLUGIN_SKU;
 
 export const checkPnpmPluginSku = (context: CheckContext): void => {
-  const configDependencies = getConfigDependencies(context.doc);
+  const items: unknown[] = getConfigDependencies(context.doc)?.items ?? [];
 
-  if (!configDependencies) {
-    return;
-  }
-
-  const items: unknown[] = configDependencies.items;
   if (items.some(isPluginSkuEntry)) {
     context.failures.push(
-      'pnpm-workspace.yaml: "pnpm-plugin-sku" is present in configDependencies.',
+      `${pnpmWorkspaceFileName}: "${PNPM_PLUGIN_SKU}" is present in ${CONFIG_DEPENDENCIES_KEY}.`,
     );
   }
 };
 
-/**
- * Removes the pnpm-plugin-sku from the configDependencies in pnpm-workspace.yaml
- */
 export const removePnpmPluginSku = (context: SyncContext): void => {
   const { doc, recordMutation } = context;
 
@@ -54,9 +44,12 @@ export const removePnpmPluginSku = (context: SyncContext): void => {
     return;
   }
 
-  configDependencies.items = remainingItems as typeof configDependencies.items;
+  // Replaced in place: `items` is typed per collection kind, so the narrowed
+  // union cannot be reassigned without a cast.
+  items.splice(0, items.length, ...remainingItems);
+
   recordMutation(
-    'removed pnpm-plugin-sku from configDependencies in pnpm-workspace.yaml',
+    `removed ${PNPM_PLUGIN_SKU} from ${CONFIG_DEPENDENCIES_KEY} in ${pnpmWorkspaceFileName}`,
   );
 
   if (remainingItems.length === 0) {

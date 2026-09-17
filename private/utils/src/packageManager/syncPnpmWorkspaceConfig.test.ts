@@ -23,7 +23,6 @@ describe('checkPnpmWorkspaceConfig', () => {
     const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     expect(result).toEqual({
-      hasFailure: false,
       failures: [],
       advisories: [],
     });
@@ -67,7 +66,6 @@ describe('checkPnpmWorkspaceConfig', () => {
     const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
 
     expect(result).toEqual({
-      hasFailure: false,
       failures: [],
       advisories: [],
     });
@@ -83,7 +81,6 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
 
-    expect(result.hasFailure).toBe(true);
     expect(result.failures).toContain(
       'pnpm-workspace.yaml: "minimumReleaseAge" is missing, recommended is 4320.',
     );
@@ -107,7 +104,6 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
 
-    expect(result.hasFailure).toBe(true);
     expect(result.failures).toContain(
       'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320.',
     );
@@ -132,7 +128,6 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
 
-    expect(result.hasFailure).toBe(true);
     expect(result.failures).toContain(
       'pnpm-workspace.yaml: "minimumReleaseAge" matches sku\'s default but is missing the "[sku_managed]" marker.',
     );
@@ -157,7 +152,6 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
 
-    expect(result.hasFailure).toBe(true);
     expect(result.failures).toContain(
       'pnpm-workspace.yaml: "oldRetiredSetting" is marked with "[sku_managed]", but is no longer a sku default.',
     );
@@ -179,7 +173,6 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
 
-    expect(result.hasFailure).toBe(true);
     expect(result.failures).toContain(
       'pnpm-workspace.yaml: "pnpm-plugin-sku" is present in configDependencies.',
     );
@@ -220,7 +213,6 @@ describe('checkPnpmWorkspaceConfig', () => {
 
     const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
 
-    expect(result.hasFailure).toBe(false);
     expect(result.failures).toEqual([]);
     expect(result.advisories).toContain(
       'pnpm-workspace.yaml: "minimumReleaseAge" has value 1440, recommended is 4320.',

@@ -1,26 +1,30 @@
 import { isMap, isScalar, type YAMLMap } from 'yaml';
+import { objectSettings } from './pnpmWorkspaceDefaults.ts';
 import {
-  MANAGED_BY_SKU_MARKER,
-  objectSettings,
-} from './pnpmWorkspaceDefaults.ts';
-import {
+  checkManagedScalar,
+  checkMessage,
   clearCommentBefore,
   createManagedNode,
-  ensureCollection,
+  ensureMap,
+  entrySubject,
   findPair,
   getNodeKey,
-  hasManagedMarker,
+  isManaged,
+  pnpmWorkspaceFileName,
   setManagedComment,
+  settingSubject,
   type CheckContext,
   type SyncContext,
 } from './syncShared.ts';
 
+type ObjectEntries = Readonly<Record<string, boolean>>;
+
 export const checkObjectSettings = (context: CheckContext): void => {
-  const { doc, failures, advisories } = context;
+  const { doc, failures } = context;
 
   for (const { key, entries } of objectSettings) {
     if (!doc.has(key)) {
-      failures.push(`pnpm-workspace.yaml: "${key}" is missing.`);
+      failures.push(checkMessage.missing(settingSubject(key)));
       continue;
     }
 
@@ -29,155 +33,111 @@ export const checkObjectSettings = (context: CheckContext): void => {
       continue;
     }
 
-    for (const [subKey, defaultVal] of Object.entries(entries)) {
+    for (const [subKey, defaultValue] of Object.entries(entries)) {
       const pair = findPair(mapNode, subKey);
+      const subject = settingSubject(`${key}.${subKey}`);
 
       if (!pair) {
-        failures.push(
-          `pnpm-workspace.yaml: "${key}.${subKey}" is missing, recommended is ${defaultVal}.`,
-        );
+        failures.push(checkMessage.missingWithDefault(subject, defaultValue));
         continue;
       }
 
-      if (!isScalar(pair.value)) {
-        continue;
-      }
-
-      const currentVal = pair.value.value;
-      const isMarked = hasManagedMarker(pair.value.comment);
-
-      if (isMarked) {
-        if (currentVal !== defaultVal) {
-          failures.push(
-            `pnpm-workspace.yaml: "${key}.${subKey}" has value ${String(currentVal)}, recommended is ${defaultVal}.`,
-          );
-        }
-      } else if (currentVal === defaultVal) {
-        failures.push(
-          `pnpm-workspace.yaml: "${key}.${subKey}" matches sku's default but is missing the "[sku_managed]" marker.`,
-        );
-      } else {
-        advisories.push(
-          `pnpm-workspace.yaml: "${key}.${subKey}" has value ${String(currentVal)}, recommended is ${defaultVal}.`,
-        );
+      if (isScalar(pair.value)) {
+        checkManagedScalar(context, {
+          subject,
+          node: pair.value,
+          defaultValue,
+        });
       }
     }
 
     for (const pair of mapNode.items) {
       const subKey = getNodeKey(pair.key);
-      if (!(subKey in entries)) {
-        const isMarked =
-          isScalar(pair.value) && hasManagedMarker(pair.value.comment);
-        if (isMarked) {
-          failures.push(
-            `pnpm-workspace.yaml: "${subKey}" in ${key} is marked with "${MANAGED_BY_SKU_MARKER}", but is no longer a sku default.`,
-          );
-        }
+      if (!(subKey in entries) && isManaged(pair.value)) {
+        failures.push(checkMessage.retiredMarker(entrySubject(subKey, key)));
       }
     }
   }
-};
-
-const markPairAsManaged = (
-  pair: { key: unknown; value: unknown },
-  explanatory?: string,
-): boolean => {
-  const modified = setManagedComment(pair.value, explanatory);
-  return clearCommentBefore(pair.key) || modified;
-};
-
-const syncExistingObjectPair = (
-  pair: { key: unknown; value: unknown },
-  key: string,
-  subKey: string,
-  defaultVal: boolean,
-  context: SyncContext,
-): void => {
-  const { doc, recordMutation } = context;
-
-  if (!isScalar(pair.value)) {
-    return;
-  }
-
-  const currentVal = pair.value.value;
-  if (currentVal === defaultVal) {
-    if (markPairAsManaged(pair)) {
-      recordMutation(
-        `adopted ${key}.${subKey}: ${String(currentVal)} in pnpm-workspace.yaml`,
-      );
-    }
-    return;
-  }
-
-  if (!hasManagedMarker(pair.value.comment)) {
-    return;
-  }
-
-  pair.value = createManagedNode(doc, defaultVal);
-  clearCommentBefore(pair.key);
-  recordMutation(
-    `updated ${key}.${subKey}: ${String(currentVal)} → ${defaultVal} in pnpm-workspace.yaml`,
-  );
 };
 
 const syncObjectPair = (
   mapNode: YAMLMap,
   key: string,
   subKey: string,
-  defaultVal: boolean,
+  defaultValue: boolean,
   context: SyncContext,
 ): void => {
+  const { doc, recordMutation } = context;
   const pair = findPair(mapNode, subKey);
 
   if (!pair) {
-    mapNode.set(subKey, createManagedNode(context.doc, defaultVal));
-    context.recordMutation(
-      `added ${key}.${subKey}: ${defaultVal} to pnpm-workspace.yaml`,
+    mapNode.set(subKey, createManagedNode(doc, defaultValue));
+    recordMutation(
+      `added ${key}.${subKey}: ${defaultValue} to ${pnpmWorkspaceFileName}`,
     );
     return;
   }
 
-  syncExistingObjectPair(pair, key, subKey, defaultVal, context);
+  if (!isScalar(pair.value)) {
+    return;
+  }
+
+  const currentValue = pair.value.value;
+
+  if (currentValue === defaultValue) {
+    // Both comment sites must be cleared, so neither call may be short-circuited.
+    const markerAdded = setManagedComment(pair.value);
+    const leadingCommentCleared = clearCommentBefore(pair.key);
+
+    if (markerAdded || leadingCommentCleared) {
+      recordMutation(
+        `adopted ${key}.${subKey}: ${String(currentValue)} in ${pnpmWorkspaceFileName}`,
+      );
+    }
+    return;
+  }
+
+  if (!isManaged(pair.value)) {
+    return;
+  }
+
+  pair.value = createManagedNode(doc, defaultValue);
+  clearCommentBefore(pair.key);
+  recordMutation(
+    `updated ${key}.${subKey}: ${String(currentValue)} → ${defaultValue} in ${pnpmWorkspaceFileName}`,
+  );
 };
 
-const cleanRetiredObjectKeys = (
+const removeRetiredObjectKeys = (
   mapNode: YAMLMap,
   key: string,
-  defaultObj: Readonly<Record<string, boolean>>,
+  entries: ObjectEntries,
   context: SyncContext,
 ): void => {
-  const { recordMutation } = context;
-  const itemsToRemove: string[] = [];
-  for (const pair of mapNode.items) {
+  mapNode.items = mapNode.items.filter((pair) => {
     const subKey = getNodeKey(pair.key);
-    if (!(subKey in defaultObj)) {
-      const isMarked =
-        isScalar(pair.value) && hasManagedMarker(pair.value.comment);
-      if (isMarked) {
-        itemsToRemove.push(subKey);
-      }
+    if (subKey in entries || !isManaged(pair.value)) {
+      return true;
     }
-  }
 
-  for (const subKey of itemsToRemove) {
-    mapNode.delete(subKey);
-    recordMutation(
-      `removed retired entry ${key}.${subKey} from pnpm-workspace.yaml`,
+    context.recordMutation(
+      `removed retired entry ${key}.${subKey} from ${pnpmWorkspaceFileName}`,
     );
-  }
+    return false;
+  });
 };
 
 export const syncObjectSettings = (context: SyncContext): void => {
   for (const { key, entries } of objectSettings) {
-    const mapNode = ensureCollection(context, key, 'object');
+    const mapNode = ensureMap(context, key);
     if (!mapNode) {
       continue;
     }
 
-    for (const [subKey, defaultVal] of Object.entries(entries)) {
-      syncObjectPair(mapNode, key, subKey, defaultVal, context);
+    for (const [subKey, defaultValue] of Object.entries(entries)) {
+      syncObjectPair(mapNode, key, subKey, defaultValue, context);
     }
 
-    cleanRetiredObjectKeys(mapNode, key, entries, context);
+    removeRetiredObjectKeys(mapNode, key, entries, context);
   }
 };

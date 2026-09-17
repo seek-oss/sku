@@ -75,21 +75,15 @@ describe('pnpmWorkspaceDefaults', () => {
     }
 
     for (const { key, entries } of arraySettings) {
-      expect(defaultPnpmWorkspaceConfig[key]).toEqual(
-        entries.map(({ value }) => value),
-      );
+      expect(defaultPnpmWorkspaceConfig[key]).toEqual([...entries]);
     }
   });
 
-  it('keeps explanatory comments alongside the values they describe', () => {
+  it('keeps the explanatory comment alongside the value it describes', () => {
     expect(pnpmWorkspaceSettings.minimumReleaseAge).toEqual({
       kind: 'value',
       value: 4320,
       comment: '3 days',
-    });
-
-    expect(pnpmWorkspaceSettings.trustPolicyExclude.entries).toContainEqual({
-      value: 'semver@6.3.1',
     });
   });
 });

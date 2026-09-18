@@ -35,6 +35,7 @@
   },
   "types": "./dist/index.d.mts",
   "exports": {
+    ".": "./dist/index.mjs",
     "./codemods/jest-to-vitest": "./dist/codemods/jest-to-vitest.mjs",
     "./codemods/jest-to-vitest-failing": "./dist/codemods/jest-to-vitest-failing.mjs",
     "./codemods/jest-to-vitest-fn-generics": "./dist/codemods/jest-to-vitest-fn-generics.mjs",

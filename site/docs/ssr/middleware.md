@@ -2,13 +2,18 @@
 
 > [!CAUTION]
 > Experimental — not for production.
-> Managed Data Mode SSR is available for evaluation and testing. Do not use it in production yet; the API and behaviour may change.
-> In the meantime, continue using [Webpack SSR](./webpack-ssr.md).
+> Managed Data Mode SSR is available for evaluation and testing.
+> Do not use it in production yet.
+> The API and behaviour may change.
+> Until then, continue using [Webpack SSR](./webpack-ssr.md).
 
-SSR has three places to run middleware — pick the one that matches the job:
+SSR has three places to run middleware.
+Pick the one that matches the job:
 
-1. **[Server `middleware`](#server-entry-middleware)** — production and start; request context before HTML render
-2. **[Config `devServerMiddleware`](#dev-only-mocks-devservermiddleware)** — `sku start` only; local mocks and proxies
+1. **[Server `middleware`](#server-entry-middleware)** — production and start.
+   Request context before HTML render
+2. **[Config `devServerMiddleware`](#dev-only-mocks-devservermiddleware)** — `sku start` only.
+   Local mocks and proxies
 3. **[React Router middleware](#react-router-route-middleware)** — isomorphic behaviour on matched routes
 
 ## Server-entry middleware
@@ -36,9 +41,11 @@ const server = defineServerEntry({
 export default server;
 ```
 
-Use this for production request handlers and for attaching values on `req` that [entry getters](./entries.md) (or server `getRouterContext`) will read.
+Use this for production request handlers.
+Also use it to attach values on `req` that [entry getters](./entries.md) (or server `getRouterContext`) will read.
 
-Do not put raw Express `req` into React Router context — project values via dual-entry [`getRouterContext`](./data-loading.md#router-context).
+Do not put raw Express `req` into React Router context.
+Project values via dual-entry [`getRouterContext`](./data-loading.md#router-context).
 
 ## Typing middleware-attached fields on `req`
 
@@ -57,11 +64,13 @@ declare module 'express-serve-static-core' {
 }
 ```
 
-That augmentation is shared by `middleware`, the getters, and server `getRouterContext`.
+`middleware`, the getters, and server `getRouterContext` share that augmentation.
 
 ## Dev-only mocks (`devServerMiddleware`)
 
-Use config [`devServerMiddleware`](../configuration.md#devservermiddleware) for local mocks and proxies that production never serves from the Node app (for example `/api` traffic a reverse proxy handles when deployed).
+Use config [`devServerMiddleware`](../configuration.md#devservermiddleware) for local mocks and proxies.
+Production never serves those from the Node app.
+One example is `/api` traffic that a reverse proxy handles when deployed.
 sku mounts that file only in SSR `sku start`, never in the production server.
 
 ::: code-group
@@ -89,23 +98,25 @@ export default (app) => {
 ## React Router route middleware
 
 React Router Data Mode supports a `middleware` array on routes for isomorphic behaviour on matched routes.
-That is separate from Express middleware on the server entry — use Express for HTTP-level work, and route `middleware` for behaviour tied to the matched route tree.
+That is separate from Express middleware on the server entry.
+Use Express for HTTP-level work.
+Use route `middleware` for behaviour tied to the matched route tree.
 
 See [Routing → React Router route middleware](./routing.md#react-router-route-middleware) and React Router’s [middleware docs](https://reactrouter.com/how-to/middleware).
 
 ## Mount order in production
 
-1. Request-context (sku; CSP nonce store, etc.)
+1. Request-context (sku, CSP nonce store, etc.)
 2. `express.static` for client assets under [`publicPath`](../configuration.md#publicpath)
 3. Server-entry `middleware` (optional)
 4. HTML render
 
-Static mounts **before** server-entry middleware so catch-all URL-pattern handlers cannot eat hashed client assets under `publicPath`.
+Static mounts **before** server-entry middleware so catch-all URL-pattern handlers cannot intercept hashed client assets under `publicPath`.
 App routes outside that prefix still reach middleware and HTML as usual.
 
 ## Mount order in `sku start`
 
-1. Request-context (sku; CSP nonce store, etc.)
+1. Request-context (sku, CSP nonce store, etc.)
 2. Vite middlewares (HMR / module graph)
 3. Config `devServerMiddleware` (optional)
 4. Server-entry `middleware`
@@ -113,8 +124,10 @@ App routes outside that prefix still reach middleware and HTML as usual.
 
 Document paths Vite does not handle still reach `devServerMiddleware`, server-entry `middleware`, and HTML.
 Dev-only mocks still mount before production middleware so they can intercept traffic that would never reach the app in production.
-`sku start` does not mount `express.static` under `publicPath` — Vite serves the module graph from `/`.
-Put anything that must ship in production on the server-entry export; keep stubs and local-only routes in `devServerMiddleware`.
+`sku start` does not mount `express.static` under `publicPath`.
+Vite serves the module graph from `/`.
+Put anything that must exist in production on the server-entry export.
+Keep stubs and local-only routes in `devServerMiddleware`.
 
 ## See also
 

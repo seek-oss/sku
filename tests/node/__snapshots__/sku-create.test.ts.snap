@@ -101,7 +101,7 @@ exports[`sku-create > ssr > should create package.json 1`] = `
     "#src/*": "./src/*",
   },
   "name": "new-project-ssr",
-  "packageManager": "pnpm@11.VERSION_IGNORED",
+  "packageManager": "pnpm@11.24.0",
   "private": true,
   "scripts": {
     "build": "sku build",
@@ -205,12 +205,22 @@ import { Outlet } from 'react-router';
  * Your app's root layout route. Mount isomorphic providers here (Braid, Vocab,
  * Apollo via \`useReactContext()\`, …). Env-differing *values* come from dual-entry
  * \`getReactContext\`; serialisable content from \`getClientContext\` / \`useClientContext\`.
+ *
+ * Providers that \`<head>\` nodes need must wrap \`<html>\`. Braid stays inside \`<body>\`.
  */
 export const RootLayout = () => (
   <StrictMode>
-    <BraidProvider theme={seekJobs}>
-      <Outlet />
-    </BraidProvider>
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body>
+        <BraidProvider theme={seekJobs}>
+          <Outlet />
+        </BraidProvider>
+      </body>
+    </html>
   </StrictMode>
 );
 "
@@ -489,10 +499,14 @@ import { RootLayout } from './RootLayout';
 export const routes: SkuRouteObject[] = [
   {
     Component: RootLayout,
-    ErrorBoundary,
     children: [
-      { index: true, lazy: () => import('./pages/home/home') },
-      { path: 'about', lazy: () => import('./pages/about/about') },
+      {
+        ErrorBoundary,
+        children: [
+          { index: true, lazy: () => import('./pages/home/home') },
+          { path: 'about', lazy: () => import('./pages/about/about') },
+        ],
+      },
     ],
   },
 ];
@@ -636,7 +650,7 @@ exports[`sku-create > vite > should create package.json 1`] = `
     "#src/*": "./src/*",
   },
   "name": "new-project-vite",
-  "packageManager": "pnpm@11.VERSION_IGNORED",
+  "packageManager": "pnpm@11.24.0",
   "private": true,
   "scripts": {
     "build": "sku build",
@@ -1025,7 +1039,7 @@ exports[`sku-create > webpack > should create package.json 1`] = `
     "#src/*": "./src/*",
   },
   "name": "new-project-webpack",
-  "packageManager": "pnpm@11.VERSION_IGNORED",
+  "packageManager": "pnpm@11.24.0",
   "private": true,
   "scripts": {
     "build": "sku build",

@@ -1,10 +1,11 @@
 # Multi site (Theming)
 
-One of the features that makes sku unique, is it can handle a multi site/brand application out of the box using the [`sites`](./configuration#sites) option.
+sku can run a multi-site or multi-brand application using the [`sites`](./configuration#sites) option.
 
 ## Switching site by host
 
-By default, sku will render the first site in the [`sites`](./configuration#sites) array when using `sku start`. However, if you want to be able to switch between sites without restarting the server, you can do so by setting a `host` for each site.
+By default, sku renders the first site in the [`sites`](./configuration#sites) array when you use `sku start`.
+If you want to switch between sites without restarting the server, set a `host` for each site.
 
 ```ts
 export default {
@@ -15,15 +16,20 @@ export default {
 } satisfies SkuConfig;
 ```
 
-Now, if you request `http://au.seek.com.localhost`, you will receive the `seekAnz` version of the app, and `http://jobstreet.com.localhost` will return the `jobStreet` one.
+If you request `http://au.seek.com.localhost`, you receive the `seekAnz` version of the app.
+`http://jobstreet.com.localhost` returns the `jobStreet` version.
 
-Prefer hostnames ending in `.localhost` for local development. They resolve to your machine automatically in most environments, so you usually do not need `/etc/hosts` entries.
+Prefer hostnames that end in `.localhost` for local development.
+They resolve to your machine automatically in most environments.
+You usually do not need `/etc/hosts` entries.
 
 ### Setup hosts
 
-For hostnames that do not end in `.localhost`, switching site by host requires that the hosts are configured on your system to point to localhost. sku can do this for you. You can also run `setup-hosts` for `.localhost` names if you want explicit hosts-file entries.
+For hostnames that do not end in `.localhost`, switching site by host requires hosts that resolve to localhost.
+sku can configure this for you.
+You can also run `setup-hosts` for `.localhost` names if you want explicit hosts-file entries.
 
-First add the following script to your `package.json`.
+First add this script to your `package.json`.
 
 ```json
 {
@@ -33,28 +39,32 @@ First add the following script to your `package.json`.
 }
 ```
 
-Then you can run the script to configure you machine with the required hosts.
+Then run the script to configure your machine with the required hosts.
 
 ```sh
 $ sudo npm run setup-hosts
 ```
 
 > [!NOTE]
-> Modifying hosts configuration needs root privileges.
+> Changing hosts configuration needs root privileges.
 
 ## Braid example
 
-The following is an example of how you would use this feature with [Braid](https://github.com/seek-oss/braid-design-system), but you can use this approach to vary your sites in any way.
+The following example uses this feature with [Braid](https://github.com/seek-oss/braid-design-system).
+You can use this approach to vary your sites in any way.
 
 > [!NOTE]
-> Currently this example is for static rendering projects only but SSR projects can follow the same pattern.
+> Currently this example is for static rendering projects only.
+> SSR projects can follow the same pattern.
 
 ### Config
 
-Firstly, add a [`sites`](./configuration#sites) option to your `sku.config.js`. This tells sku to render a version of your app for each site you specify.
+First, add a [`sites`](./configuration#sites) option to your `sku.config.js`.
+This tells sku to render a version of your app for each site you specify.
 
 > [!NOTE]
-> For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes), however, you could just as easily map the theme name from your site.
+> For this example to work, your sites need to match the available [themes in Braid](https://github.com/seek-oss/braid-design-system/tree/master/lib/themes).
+> You could also map the theme name from your site.
 
 ```ts
 export default {
@@ -64,7 +74,7 @@ export default {
 
 ### Rendering the site
 
-Now handle the site variable in our render and client entries.
+Handle the site variable in the render and client entries.
 
 ```tsx
 // render.tsx
@@ -121,7 +131,8 @@ export default ({ site }: { site: string }) =>
 
 ### Loading the theme
 
-Now the site is available in our `App` component, we use `BraidLoadableProvider` (which uses [loadable-components](./code-splitting) internally) to configure the specified theme.
+The site is now available in the `App` component.
+Use `BraidLoadableProvider` (which uses [loadable-components](./code-splitting) internally) to configure the specified theme.
 
 ```tsx
 // App.tsx

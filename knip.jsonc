@@ -4,7 +4,11 @@
   "workspaces": {
     ".": {
       // Used in the renovate config
-      "ignoreDependencies": ["renovate-config-seek"],
+      "ignoreDependencies": [
+        "renovate-config-seek",
+        // Loaded via string specifier in site/docs/.prettierrc.js (experimental Prettier CLI)
+        "prettier-plugin-sentences-per-line",
+      ],
     },
     "packages/sku": {
       "ignoreDependencies": [

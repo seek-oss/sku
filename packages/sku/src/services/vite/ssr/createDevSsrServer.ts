@@ -100,6 +100,7 @@ export const createDevSsrServer = async ({
     // Start-only virtual stylesheet (production uses client-manifest CSS).
     css: [SSR_CSS_VIRTUAL_HREF],
     modulePreloads: [],
+    ssrCssHref: SSR_CSS_VIRTUAL_HREF,
   };
 
   const render: SsrServerModule['render'] = async (...args) => {

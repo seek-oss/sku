@@ -94,10 +94,9 @@ export async function syncPnpmWorkspaceConfig({
   let modified = !fileExisted;
   const recordMutation: RecordMutation = (message) => {
     modified = true;
-    // A file written from the defaults needs no narration: the sync passes below
-    // only attach ownership markers, so `created ...` already says everything.
+    // Only print changes for existing files
     if (fileExisted) {
-      console.log(message);
+      console.log(`${pnpmWorkspaceFileName}: ${message}`);
     }
   };
 

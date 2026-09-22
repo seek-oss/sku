@@ -10,7 +10,6 @@ import {
   createManagedNode,
   getNodeKey,
   isManaged,
-  pnpmWorkspaceFileName,
   scalarValue,
   setManagedComment,
   settingSubject,
@@ -63,7 +62,7 @@ const syncSingleValue = (
 
   if (!doc.has(key)) {
     doc.set(key, createManagedNode(doc, defaultValue, comment));
-    recordMutation(`added ${key}: ${defaultValue} to ${pnpmWorkspaceFileName}`);
+    recordMutation(`added ${key}: ${defaultValue}`);
     return;
   }
 
@@ -77,9 +76,7 @@ const syncSingleValue = (
     const leadingCommentCleared = clearDocKeyComment(doc, key);
 
     if (markerAdded || leadingCommentCleared) {
-      recordMutation(
-        `adopted ${key}: ${String(currentValue)} in ${pnpmWorkspaceFileName}`,
-      );
+      recordMutation(`adopted ${key}: ${String(currentValue)}`);
     }
     return;
   }
@@ -90,9 +87,7 @@ const syncSingleValue = (
 
   doc.set(key, createManagedNode(doc, defaultValue, comment));
   clearDocKeyComment(doc, key);
-  recordMutation(
-    `updated ${key}: ${String(currentValue)} → ${defaultValue} in ${pnpmWorkspaceFileName}`,
-  );
+  recordMutation(`updated ${key}: ${String(currentValue)} → ${defaultValue}`);
 };
 
 export const syncSingleValueSettings = (context: SyncContext): void => {
@@ -104,8 +99,6 @@ export const syncSingleValueSettings = (context: SyncContext): void => {
 
   for (const key of findRetiredSingleValueKeys(doc)) {
     doc.delete(key);
-    recordMutation(
-      `removed retired entry ${key} from ${pnpmWorkspaceFileName}`,
-    );
+    recordMutation(`removed retired entry ${key}`);
   }
 };

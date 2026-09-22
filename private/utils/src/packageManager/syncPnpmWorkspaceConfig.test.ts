@@ -178,6 +178,44 @@ describe('checkPnpmWorkspaceConfig', () => {
     );
   });
 
+  it('fails when a setting holds a single value where a collection belongs', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        allowBuilds: esbuild
+        publicHoistPattern: eslint
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "allowBuilds" should be a map, but is a single value.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "publicHoistPattern" should be a list, but is a single value.',
+    );
+  });
+
+  it('fails when a setting holds the wrong collection kind', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        allowBuilds:
+          - esbuild
+        publicHoistPattern:
+          eslint: true
+      `,
+    });
+
+    const result = await checkPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "allowBuilds" should be a map, but is a list.',
+    );
+    expect(result.failures).toContain(
+      'pnpm-workspace.yaml: "publicHoistPattern" should be a list, but is a map.',
+    );
+  });
+
   it('logs user-managed drift as info and does not fail', async () => {
     await using fixture = await createFixture({
       [workspaceFile]: dedent`
@@ -347,12 +385,12 @@ describe('syncPnpmWorkspaceConfig', () => {
 
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'added minimumReleaseAge: 4320 to pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: added minimumReleaseAge: 4320',
       ),
     );
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'added prettier to publicHoistPattern in pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: added prettier to publicHoistPattern',
       ),
     );
   });
@@ -376,17 +414,17 @@ describe('syncPnpmWorkspaceConfig', () => {
 
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'updated minimumReleaseAge: 1440 → 4320 in pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: updated minimumReleaseAge: 1440 → 4320',
       ),
     );
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'updated trustPolicy: no-downgrade → off in pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: updated trustPolicy: no-downgrade → off',
       ),
     );
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'updated allowBuilds.@swc/core: false → true in pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: updated allowBuilds.@swc/core: false → true',
       ),
     );
   });
@@ -456,12 +494,12 @@ describe('syncPnpmWorkspaceConfig', () => {
     expect(content).toContain('old-retired-hoist');
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'removed retired entry oldRetiredSetting from pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: removed retired entry oldRetiredSetting',
       ),
     );
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'removed retired entry allowBuilds.old-retired-build from pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: removed retired entry allowBuilds.old-retired-build',
       ),
     );
   });
@@ -535,7 +573,7 @@ describe('syncPnpmWorkspaceConfig', () => {
     expect(content).not.toContain('old-retired-entry # [sku_managed]');
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'removed duplicate old-retired-entry from publicHoistPattern in pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: removed duplicate old-retired-entry from publicHoistPattern',
       ),
     );
   });
@@ -572,12 +610,12 @@ describe('syncPnpmWorkspaceConfig', () => {
     expect(content.slice(0, expectedHead.length)).toBe(expectedHead);
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'adopted minimumReleaseAge: 4320 in pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: adopted minimumReleaseAge: 4320',
       ),
     );
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'adopted allowBuilds.@parcel/watcher: true in pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: adopted allowBuilds.@parcel/watcher: true',
       ),
     );
   });
@@ -599,7 +637,7 @@ describe('syncPnpmWorkspaceConfig', () => {
     expect(content).not.toContain('pnpm-plugin-sku');
     expect(logSpy).toHaveBeenCalledWith(
       expect.stringContaining(
-        'removed pnpm-plugin-sku from configDependencies in pnpm-workspace.yaml',
+        'pnpm-workspace.yaml: removed pnpm-plugin-sku from configDependencies',
       ),
     );
   });
@@ -649,5 +687,64 @@ describe('syncPnpmWorkspaceConfig', () => {
     const items = (doc.toJS() as any).publicHoistPattern;
 
     expect(items).toEqual(['eslint', 'my-dep', 'prettier']);
+  });
+
+  it('normalises a single value into a one-entry list or map', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        allowBuilds: esbuild
+        publicHoistPattern: eslint
+      `,
+    });
+
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    const content = await fixture.readFile(workspaceFile, 'utf8');
+    expect(content).toContain('- eslint # [sku_managed]');
+    expect(content).toContain('- prettier # [sku_managed]');
+    expect(content).toContain('esbuild: true # [sku_managed]');
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(
+        'pnpm-workspace.yaml: normalised publicHoistPattern',
+      ),
+    );
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('pnpm-workspace.yaml: normalised allowBuilds'),
+    );
+  });
+
+  it('preserves comments and ownership when normalising custom entries', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        allowBuilds: my-pkg # needed for legacy
+        publicHoistPattern: my-dep # needed for legacy
+      `,
+    });
+
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    const content = await fixture.readFile(workspaceFile, 'utf8');
+    expect(content).toContain('my-pkg: true # needed for legacy');
+    expect(content).toContain('- my-dep # needed for legacy');
+  });
+
+  it('leaves non-string values and wrong collection kinds untouched', async () => {
+    await using fixture = await createFixture({
+      [workspaceFile]: dedent`
+        allowBuilds:
+          - esbuild
+        publicHoistPattern: 5
+      `,
+    });
+
+    await syncPnpmWorkspaceConfig({ targetDir: fixture.path });
+
+    const content = await fixture.readFile(workspaceFile, 'utf8');
+    expect(content).toContain('- esbuild');
+    expect(content).toContain('publicHoistPattern: 5');
+    expect(logSpy).not.toHaveBeenCalledWith(
+      expect.stringContaining('normalised'),
+    );
   });
 });

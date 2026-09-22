@@ -10,7 +10,7 @@ import {
   findPair,
   getNodeKey,
   isManaged,
-  pnpmWorkspaceFileName,
+  nodeKind,
   setManagedComment,
   settingSubject,
   type CheckContext,
@@ -30,6 +30,13 @@ export const checkObjectSettings = (context: CheckContext): void => {
 
     const mapNode = doc.get(key, true);
     if (!isMap(mapNode)) {
+      failures.push(
+        checkMessage.kindMismatch(
+          settingSubject(key),
+          'a map',
+          nodeKind(mapNode),
+        ),
+      );
       continue;
     }
 
@@ -72,9 +79,7 @@ const syncObjectPair = (
 
   if (!pair) {
     mapNode.set(subKey, createManagedNode(doc, defaultValue));
-    recordMutation(
-      `added ${key}.${subKey}: ${defaultValue} to ${pnpmWorkspaceFileName}`,
-    );
+    recordMutation(`added ${key}.${subKey}: ${defaultValue}`);
     return;
   }
 
@@ -90,9 +95,7 @@ const syncObjectPair = (
     const leadingCommentCleared = clearCommentBefore(pair.key);
 
     if (markerAdded || leadingCommentCleared) {
-      recordMutation(
-        `adopted ${key}.${subKey}: ${String(currentValue)} in ${pnpmWorkspaceFileName}`,
-      );
+      recordMutation(`adopted ${key}.${subKey}: ${String(currentValue)}`);
     }
     return;
   }
@@ -104,7 +107,7 @@ const syncObjectPair = (
   pair.value = createManagedNode(doc, defaultValue);
   clearCommentBefore(pair.key);
   recordMutation(
-    `updated ${key}.${subKey}: ${String(currentValue)} → ${defaultValue} in ${pnpmWorkspaceFileName}`,
+    `updated ${key}.${subKey}: ${String(currentValue)} → ${defaultValue}`,
   );
 };
 
@@ -120,9 +123,7 @@ const removeRetiredObjectKeys = (
       return true;
     }
 
-    context.recordMutation(
-      `removed retired entry ${key}.${subKey} from ${pnpmWorkspaceFileName}`,
-    );
+    context.recordMutation(`removed retired entry ${key}.${subKey}`);
     return false;
   });
 };

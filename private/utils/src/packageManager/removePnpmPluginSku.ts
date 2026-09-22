@@ -48,9 +48,7 @@ export const removePnpmPluginSku = (context: SyncContext): void => {
   // union cannot be reassigned without a cast.
   items.splice(0, items.length, ...remainingItems);
 
-  recordMutation(
-    `removed ${PNPM_PLUGIN_SKU} from ${CONFIG_DEPENDENCIES_KEY} in ${pnpmWorkspaceFileName}`,
-  );
+  recordMutation(`removed ${PNPM_PLUGIN_SKU} from ${CONFIG_DEPENDENCIES_KEY}`);
 
   if (remainingItems.length === 0) {
     doc.delete(CONFIG_DEPENDENCIES_KEY);

@@ -7,6 +7,7 @@ import {
   entrySubject,
   isManaged,
   isStringScalar,
+  nodeKind,
   pnpmWorkspaceFileName,
   setManagedComment,
   settingSubject,
@@ -31,6 +32,13 @@ export const checkArraySettings = (context: CheckContext): void => {
 
     const seqNode = doc.get(key, true);
     if (!isSeq(seqNode)) {
+      failures.push(
+        checkMessage.kindMismatch(
+          settingSubject(key),
+          'a list',
+          nodeKind(seqNode),
+        ),
+      );
       continue;
     }
 
@@ -93,9 +101,7 @@ const dedupeEntries = (
       kept[existingIndex] = item;
     }
 
-    context.recordMutation(
-      `removed duplicate ${item.value} from ${key} in ${pnpmWorkspaceFileName}`,
-    );
+    context.recordMutation(`removed duplicate ${item.value} from ${key}`);
   }
 
   seqNode.items = kept;
@@ -116,9 +122,7 @@ const adoptAndRetireEntries = (
     const { value } = item;
     if (defaults.has(value)) {
       if (setManagedComment(item)) {
-        context.recordMutation(
-          `adopted ${value} in ${key} in ${pnpmWorkspaceFileName}`,
-        );
+        context.recordMutation(`adopted ${value} in ${key}`);
       }
       return true;
     }
@@ -127,9 +131,7 @@ const adoptAndRetireEntries = (
       return true;
     }
 
-    context.recordMutation(
-      `removed retired entry ${value} from ${key} in ${pnpmWorkspaceFileName}`,
-    );
+    context.recordMutation(`removed retired entry ${value} from ${key}`);
     return false;
   });
 };
@@ -150,9 +152,7 @@ const appendMissingDefaults = (
     }
 
     seqNode.items.push(createManagedNode(context.doc, value));
-    context.recordMutation(
-      `added ${value} to ${key} in ${pnpmWorkspaceFileName}`,
-    );
+    context.recordMutation(`added ${value} to ${key}`);
   }
 };
 

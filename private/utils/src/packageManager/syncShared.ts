@@ -91,7 +91,7 @@ const ensureNode = (context: SyncContext, key: string, empty: unknown) => {
 
   if (!doc.has(key)) {
     doc.set(key, doc.createNode(empty));
-    context.recordMutation(`added ${key} to ${pnpmWorkspaceFileName}`);
+    context.recordMutation(`added ${key}`);
   }
 
   return doc.get(key, true);
@@ -103,7 +103,22 @@ export const ensureSeq = (
   key: string,
 ): YAMLSeq | undefined => {
   const node = ensureNode(context, key, []);
-  return isSeq(node) ? node : undefined;
+
+  if (isSeq(node)) {
+    return node;
+  }
+
+  if (isStringScalar(node)) {
+    // pnpm's matcher wraps a scalar in a one-entry list, so this keeps the
+    // value's meaning while giving check and sync a list to work with.
+    const seq = context.doc.createNode([]) as YAMLSeq;
+    seq.items.push(node);
+    context.doc.set(key, seq);
+    context.recordMutation(`normalised ${key}`);
+    return seq;
+  }
+
+  return undefined;
 };
 
 /** Ensures a top-level key holds a map, adding an empty one if missing. */
@@ -112,7 +127,34 @@ export const ensureMap = (
   key: string,
 ): YAMLMap | undefined => {
   const node = ensureNode(context, key, {});
-  return isMap(node) ? node : undefined;
+
+  if (isMap(node)) {
+    return node;
+  }
+
+  if (isStringScalar(node)) {
+    const value = context.doc.createNode(true);
+    value.comment = node.comment;
+
+    const map = context.doc.createNode({}) as YAMLMap;
+    map.set(node.value, value);
+    context.doc.set(key, map);
+    context.recordMutation(`normalised ${key}`);
+    return map;
+  }
+
+  return undefined;
+};
+
+/** Describes a node's YAML kind for check messages, e.g. `"a list"`. */
+export const nodeKind = (node: unknown): string => {
+  if (isSeq(node)) {
+    return 'a list';
+  }
+  if (isMap(node)) {
+    return 'a map';
+  }
+  return node == null ? 'empty' : 'a single value';
 };
 
 const prefixed = (message: string) => `${pnpmWorkspaceFileName}: ${message}`;
@@ -132,6 +174,8 @@ export const checkMessage = {
     prefixed(
       `${subject} has value ${String(current)}, recommended is ${recommended}.`,
     ),
+  kindMismatch: (subject: string, expected: string, actual: string) =>
+    prefixed(`${subject} should be ${expected}, but is ${actual}.`),
   missingMarker: (subject: string) =>
     prefixed(
       `${subject} matches sku's default but is missing the "${MANAGED_BY_SKU_MARKER}" marker.`,

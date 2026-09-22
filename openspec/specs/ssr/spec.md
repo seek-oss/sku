@@ -937,7 +937,12 @@ Docs MUST state that hoistable tags (`<title>`, `<meta>`, `<link>`, and `<style 
 
 Docs MUST state that non-hoistable nodes belong in the root layout `<head>`.
 
-Docs MUST state that `ErrorBoundary` MUST NOT sit on the route that renders `<html>`.
+Docs MUST state that `ErrorBoundary` on the route that renders `<html>` replaces that layout.
+
+Docs MUST recommend a child-route `ErrorBoundary` for page failures so the flushed document shell stays mounted.
+
+Docs MUST state that an `ErrorBoundary` on the html route is allowed when the fallback renders a full `<html>` document.
+That fallback covers failures before sku pipes the document shell.
 
 Docs MUST state that `useInsertHtml` is for streaming data transports, not for Document head.
 
@@ -964,7 +969,8 @@ Docs MUST NOT claim sku renders the HTML document element tree.
 
 - **WHEN** a reader opens SSR Migrating docs
 - **THEN** docs tell apps to render `<html>` in the root layout
-- **AND** docs tell apps to nest `ErrorBoundary` under that layout
+- **AND** docs tell apps to nest `ErrorBoundary` under that layout for page failures
+- **AND** docs state that an html-route `ErrorBoundary` is allowed when the fallback renders a full `<html>` document
 - **AND** docs do not say the Document shell is not overridable
 
 #### Scenario: Docs discourage public assets folder for SSR

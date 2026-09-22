@@ -131,7 +131,8 @@ See [CSP](./csp.md).
 Drop hand-rolled HTML templates, `getHeadTags`, and `getBodyTags`.
 Render `<html>`, `<head>`, and `<body>` in your root layout.
 Sku hoists stylesheet and `modulepreload` links into `<head>`.
-Nest `ErrorBoundary` on a child route under that layout so the HTML document stays mounted on failure.
+Nest `ErrorBoundary` on a child route under that layout so page failures keep the HTML document mounted.
+You MAY also set `ErrorBoundary` on the html route if the fallback renders a full `<html>` document.
 Put hoistable SEO tags (`<title>`, `<meta>`, `<link>`) in the route tree and non-hoistable tags in the root layout `<head>`.
 
 Hydration is full-document (`hydrateRoot(document)`), not a partial mount inside markup from `renderCallback`.

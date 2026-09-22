@@ -62,6 +62,9 @@ export type { SiteOf } from './entryTypeExtractors.js';
  * only those names. Sku type helper only — not a wrapped RR re-export.
  * `children` are also `SkuRouteObject` so nested routes may set `sites`
  * (no parent→child inheritance — each route declares membership explicitly).
+ * On the html route, `ErrorBoundary` and `errorElement` replace `Component`,
+ * so that fallback must render a full `<html>` document. Prefer a
+ * child-route boundary so page failures keep the flushed document shell.
  */
 export type SkuRouteObject<Site extends string = string> = Omit<
   RouteObject,

@@ -17,8 +17,8 @@
 
 - [x] 3.1 Run the create integration tests and confirm a newly created project contains `tsconfig.json`, `eslint.config.mjs`, and `.prettierrc` after `sku create` completes (via the `sku format` run after install)
 - [x] 3.2 Confirm a fresh clone with no generated files is fully configured by the first command that runs configure (`sku lint` or `sku start`)
-- [ ] 3.3 Run the sku test suite (`pnpm test`) and fix any snapshots or fixtures referencing postinstall
+- [x] 3.3 Run the sku test suite (`pnpm test`) and fix any snapshots or fixtures referencing postinstall
 
 ## 4. Release
 
-- [ ] 4.1 Add a sku minor changeset describing the removal, the window between install and the first command, and the `sku configure` migration path for automation that reads generated configs before running a sku command
+- [x] 4.1 Add a sku minor changeset describing the removal, the window between install and the first command, and the `sku configure` migration path for automation that reads generated configs before running a sku command

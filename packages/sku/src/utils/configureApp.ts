@@ -35,8 +35,6 @@ const convertToForwardSlashPaths = (pathStr: string) =>
 
 const addSep = (p: string) => `${p}${path.sep}`;
 
-// sku should always be a dev dependency now that @sku-lib/create installs it
-// as one, but some repos may still have it as a regular dependency
 const warnOnSkuDependency = () => {
   const packageJsonPath = getPathFromCwd('package.json');
 

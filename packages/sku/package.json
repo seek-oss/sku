@@ -34,13 +34,11 @@
   },
   "files": [
     "dist",
-    "scripts",
     "CHANGELOG.md",
     "bin"
   ],
   "type": "module",
   "scripts": {
-    "postinstall": "node ./scripts/postinstall.js",
     "lint:tsc": "tsc --noEmit"
   },
   "repository": {

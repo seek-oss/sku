@@ -21,20 +21,7 @@ const { port } = values;
 
 let server: http.Server;
 
-if (__SKU_DEV_HTTPS__) {
-  const pems = fs.readFileSync('.ssl/self-signed.pem');
-  server = https.createServer(
-    {
-      cert: pems,
-      key: pems,
-    },
-    app,
-  );
-} else {
-  server = http.createServer(app);
-}
-
-server.listen(port, async () => {
+const startCallback = async () => {
   console.log('sku SSR server started on port', port);
 
   if (typeof onStart !== 'function') {
@@ -50,7 +37,22 @@ server.listen(port, async () => {
     console.error(error);
     process.exit(1);
   }
-});
+};
+
+if (__SKU_DEV_HTTPS__) {
+  const pems = fs.readFileSync('.ssl/self-signed.pem');
+  server = https.createServer(
+    {
+      cert: pems,
+      key: pems,
+    },
+    app,
+  );
+} else {
+  server = http.createServer(app);
+}
+
+server.listen(port, startCallback);
 
 if (import.meta.webpackHot) {
   process.on('message', () => {

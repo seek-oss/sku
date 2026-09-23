@@ -19,16 +19,6 @@ const { values } = parseArgs({
 
 const { port } = values;
 
-const boundPort = (listeningServer: http.Server) => {
-  const address = listeningServer.address();
-
-  if (!address || typeof address === 'string') {
-    throw new Error('sku SSR server is not listening on a TCP port');
-  }
-
-  return address.port;
-};
-
 let server: http.Server;
 
 if (__SKU_DEV_HTTPS__) {
@@ -54,7 +44,7 @@ server.listen(port, async () => {
   try {
     await onStart(app, {
       httpServer: server,
-      port: boundPort(server),
+      port: Number(port),
     });
   } catch (error) {
     console.error(error);

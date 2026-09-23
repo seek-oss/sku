@@ -13,7 +13,7 @@ Production `node ./dist/server.js` registers no shutdown handler.
 **Goals:**
 
 - Pass the server instance that called `listen`, including HTTPS.
-- Pass the bound port from that server, not the raw CLI string.
+- Pass the listen port as a number.
 - Accept `onStart` callbacks that take only the Express app.
 - Await `onStart` and fail startup on throw or rejection.
 
@@ -40,9 +40,9 @@ onStart?: (
 ) => void | Promise<void>;
 ```
 
-Call it as `await onStart(app, { httpServer: server, port })` inside the listen callback.
-Read `port` from `server.address()` when that value is an `AddressInfo`.
-Webpack SSR always listens on TCP, so a missing address is a startup failure.
+Call it as `await onStart(app, { httpServer: server, port: Number(port) })` inside the listen callback.
+`port` is the `--port` string passed to `listen`.
+Webpack SSR does not listen on port `0`, so that number is the bound port.
 
 A callback typed as `(app: Express) => void` is assignable.
 At runtime, extra arguments are ignored.

@@ -21,7 +21,7 @@ onStart?: (
 
 Sku MUST pass the Express app as `app`.
 `httpServer` MUST be the `http.Server` or `https.Server` that called `listen`.
-`port` MUST be the bound port.
+`port` MUST be the port passed to `listen`, as a number.
 If `onStart` returns a promise, sku MUST await it.
 
 #### Scenario: HTTP listen

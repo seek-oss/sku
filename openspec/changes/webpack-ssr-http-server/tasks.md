@@ -1,7 +1,7 @@
 ## 1. onStart arguments
 
 - [x] 1.1 Change `Server['onStart']` to `(app, { httpServer, port })` returning `void | Promise<void>`
-- [x] 1.2 Pass the Express app first and `{ httpServer, port }` second, with `port` from `server.address()`
+- [x] 1.2 Pass the Express app first and `{ httpServer, port }` second, with `port` as the number passed to `listen`
 - [x] 1.3 Await `onStart` and exit 1 on throw or rejection
 
 ## 2. Tests

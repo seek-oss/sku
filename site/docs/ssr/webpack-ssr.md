@@ -25,7 +25,11 @@ export default {
 ```
 
 sku provides an [Express](https://expressjs.com/) server.
-The `serverEntry` default export may provide `renderCallback`, optional `middleware`, and optional `onStart`:
+The `serverEntry` default export may provide `renderCallback`, optional `middleware`, and optional `onStart`.
+sku calls `onStart` once after `listen` succeeds.
+The first argument is the Express app.
+The second argument carries `httpServer` and the bound port.
+Use `httpServer` for keep-alive timeouts and to close the server on `SIGTERM`.
 
 ```tsx
 import type { Server } from 'sku';
@@ -45,9 +49,14 @@ export default (): Server => ({
     );
   },
   middleware,
-  onStart: (app) => {
-    console.log('My app started');
-    app.keepAliveTimeout = 20_000;
+  onStart: (app, { httpServer, port }) => {
+    httpServer.keepAliveTimeout = 20_000;
+    console.log('My app started on port', port);
+    process.on('SIGTERM', () => {
+      httpServer.close(() => {
+        process.exit(0);
+      });
+    });
   },
 });
 ```
@@ -100,9 +109,14 @@ export default (): Server => ({
     res.end();
   },
   middleware,
-  onStart: (app) => {
-    console.log('My app started');
-    app.keepAliveTimeout = 20_000;
+  onStart: (app, { httpServer, port }) => {
+    httpServer.keepAliveTimeout = 20_000;
+    console.log('My app started on port', port);
+    process.on('SIGTERM', () => {
+      httpServer.close(() => {
+        process.exit(0);
+      });
+    });
   },
 });
 ```

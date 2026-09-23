@@ -13,6 +13,7 @@ import {
 const { sku, fixturePath } = scopeToFixture('sku-with-https');
 
 const serverPort = 8120;
+const nodeServerPort = 9843;
 
 describe('sku-with-https', () => {
   describe.each(bundlers)('bundler: %s', async (bundler) => {
@@ -74,6 +75,11 @@ describe('sku-with-https', () => {
     it('should support the supplied middleware', async () => {
       const start = await sku('start-ssr', ['--config=sku-server.config.ts']);
       expect(await start.findByText('Server started')).toBeInTheConsole();
+      expect(
+        await start.findByText(
+          `Server ran the onStart callback via https on port ${nodeServerPort}`,
+        ),
+      ).toBeInTheConsole();
 
       const snapshot = await getAppSnapshot({
         url: `${url}/test-middleware`,

@@ -1,3 +1,4 @@
+import https from 'node:https';
 import { renderToString } from 'react-dom/server';
 
 import App from './App';
@@ -49,10 +50,11 @@ export default () => ({
     );
     res.end();
   },
-  onStart: async () => {
-    if (process.env.NODE_ENV === 'production') {
-      // eslint-disable-next-line no-console
-      console.log('Server ran the onStart callback');
-    }
+  onStart: async (_app, { httpServer, port }) => {
+    const protocol = httpServer instanceof https.Server ? 'https' : 'http';
+    // eslint-disable-next-line no-console
+    console.log(
+      `Server ran the onStart callback via ${protocol} on port ${port}`,
+    );
   },
 });

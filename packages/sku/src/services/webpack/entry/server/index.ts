@@ -19,15 +19,17 @@ const { values } = parseArgs({
 
 const { port } = values;
 
-const startCallback = () => {
-  console.log('sku SSR server started on port', port);
+const boundPort = (listeningServer: http.Server) => {
+  const address = listeningServer.address();
 
-  if (typeof onStart === 'function') {
-    onStart(app);
+  if (!address || typeof address === 'string') {
+    throw new Error('sku SSR server is not listening on a TCP port');
   }
+
+  return address.port;
 };
 
-let server;
+let server: http.Server;
 
 if (__SKU_DEV_HTTPS__) {
   const pems = fs.readFileSync('.ssl/self-signed.pem');
@@ -42,7 +44,23 @@ if (__SKU_DEV_HTTPS__) {
   server = http.createServer(app);
 }
 
-server.listen(port, startCallback);
+server.listen(port, async () => {
+  console.log('sku SSR server started on port', port);
+
+  if (typeof onStart !== 'function') {
+    return;
+  }
+
+  try {
+    await onStart(app, {
+      httpServer: server,
+      port: boundPort(server),
+    });
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+});
 
 if (import.meta.webpackHot) {
   process.on('message', () => {

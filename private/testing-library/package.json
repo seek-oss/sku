@@ -10,6 +10,7 @@
     "./matchers": "./matchers.ts"
   },
   "devDependencies": {
+    "@sku-lib/codemod": "workspace:*",
     "cli-testing-library": "catalog:",
     "fs-fixture": "^2.6.0",
     "@sku-private/test-utils": "workspace:*"

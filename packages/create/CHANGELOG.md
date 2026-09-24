@@ -1,5 +1,17 @@
 # @sku-lib/create
 
+## 1.4.1
+
+### Patch Changes
+
+- `@sku-lib/create` version now tracks the `pnpm` version it was released with, so scaffolded apps always get a consistent, repeatable result. ([#1721](https://github.com/seek-oss/sku/pull/1721))
+
+- Update the SSR create template so `RootLayout` renders `<html>`, `<head>`, and `<body>`, and nest `ErrorBoundary` on a child route. ([#1720](https://github.com/seek-oss/sku/pull/1720))
+
+- Managed Data Mode root layouts now need to render the full `<html>`, `<head>`, and `<body>`, not just inside the `<body>`. Allowing it to render into any part of document. ([#1720](https://github.com/seek-oss/sku/pull/1720))
+
+- Make use of `entrySideEffects` on the Vite SSR and Vite SSG templates ([#1717](https://github.com/seek-oss/sku/pull/1717))
+
 ## 1.4.0
 
 ### Minor Changes

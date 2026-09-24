@@ -5,7 +5,9 @@ import {
   writeFileToCWD,
   rootDir,
 } from '@sku-private/utils';
+import { banner, strong } from '@sku-private/utils/console';
 
+import { existsSync, readFileSync } from 'node:fs';
 import { rm } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -32,10 +34,31 @@ const convertToForwardSlashPaths = (pathStr: string) =>
 
 const addSep = (p: string) => `${p}${path.sep}`;
 
+const warnOnSkuDependency = () => {
+  const packageJsonPath = getPathFromCwd('package.json');
+
+  if (!existsSync(packageJsonPath)) {
+    return;
+  }
+
+  const { dependencies } = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
+
+  if (dependencies?.sku) {
+    banner('caution', 'sku dependency detected', [
+      `${strong('sku')} is installed as a ${strong('dependency')} in ${strong(
+        packageJsonPath,
+      )}.`,
+      `${strong('sku')} should be installed in ${strong('devDependencies')}.`,
+    ]);
+  }
+};
+
 export default async (skuContext: SkuContext) => {
   const { paths, httpsDevServer, languages, hosts } = skuContext;
 
   validateSkuConfigFormat(paths.appSkuConfigPath);
+
+  warnOnSkuDependency();
 
   // Ignore target directories (active config target)
   const targetDirectories = [...new Set([addSep(paths.relativeTarget)])];

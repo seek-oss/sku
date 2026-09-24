@@ -1,5 +1,11 @@
 import { describe, beforeAll, afterAll, it, expect } from 'vitest';
-import { readFile, copyFile, mkdir as makeDir, rm } from 'node:fs/promises';
+import {
+  readFile,
+  copyFile,
+  mkdir as makeDir,
+  rm,
+  writeFile,
+} from 'node:fs/promises';
 import path from 'node:path';
 import * as jsonc from 'jsonc-parser';
 
@@ -157,6 +163,46 @@ describe('configure', () => {
       await expect(configure).toMatchExitCode(0);
 
       expect(configure.getStdallStr()).toMatchInlineSnapshot(``);
+    });
+  });
+
+  describe('app with sku as a dependency', () => {
+    const appFolder = fixturePath('DepApp');
+
+    beforeAll(async () => {
+      await removeAppDir(appFolder);
+      await makeDir(appFolder);
+      await makeDir(path.join(appFolder, './src'));
+      await copyToApp('src/App.tsx', appFolder);
+      await writeFile(
+        path.join(appFolder, 'package.json'),
+        JSON.stringify({
+          name: '@sku-fixtures/configure-dep-app',
+          private: true,
+          dependencies: {
+            sku: 'workspace:*',
+          },
+          skuSkipValidatePeerDeps: true,
+        }),
+      );
+    });
+
+    afterAll(async () => {
+      await removeAppDir(appFolder);
+    });
+
+    it('should warn that sku should be a devDependency without failing', async () => {
+      const configure = await sku('configure', [], {
+        cwd: './DepApp',
+      });
+
+      await expect(configure).toMatchExitCode(0);
+      expect(
+        await configure.findByText('sku dependency detected'),
+      ).toBeInTheConsole();
+      expect(
+        await configure.findByText('should be installed in'),
+      ).toBeInTheConsole();
     });
   });
 });

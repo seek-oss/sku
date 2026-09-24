@@ -85,7 +85,6 @@
     "node": ">=22.19.0"
   },
   "packageManager": "pnpm@11.24.0",
-  "skuSkipPostInstall": true,
   "skuSkipConfigure": true,
   "skuSkipValidatePeerDeps": true
 }

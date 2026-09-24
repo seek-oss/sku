@@ -1,5 +1,15 @@
 # sku
 
+## 16.4.0
+
+### Minor Changes
+
+- Remove the `postinstall` hook ([#1729](https://github.com/seek-oss/sku/pull/1729))
+
+  Sku no longer runs a script at install time. Generated project files (`tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, etc.) are no longer created during `install` and instead are written by running any sku command or by running `sku configure` explicitly.
+
+  The `skuSkipPostInstall`/`skuSkipPostinstall` package.json fields are no longer read and can be removed from projects. `skuSkipConfigure` is unaffected.
+
 ## 16.3.0
 
 ### Minor Changes

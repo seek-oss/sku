@@ -18,9 +18,21 @@ Add an `ErrorBoundary` on a layout route so every child under it shares the same
 
 Without a route `ErrorBoundary`, React Router hydrates its default error UI over the SSR error HTML.
 That can briefly flash a stack trace before the default “Hey developer” page.
+
+### ErrorBoundary on the html route
+
 [`RootLayout`](./providers.md#root-layout-for-providers) renders `<html>`.
-Attaching `ErrorBoundary` to the root route itself replaces that layout on failure and drops `<html>` from the response.
-Instead, attach `ErrorBoundary` to a child route under `RootLayout` so the document shell stays mounted.
+`ErrorBoundary` or `errorElement` on the same route replaces that `Component` on failure.
+This includes those keys on the route’s `lazy` result.
+
+For page failures, set `ErrorBoundary` on a child route under `RootLayout`.
+The document shell then stays mounted after sku pipes the head.
+
+You MAY also set `ErrorBoundary` on the html route.
+That fallback MUST render a full `<html>` document.
+It covers failures before sku pipes the document shell.
+React Router sets status `500` unless the error is a route error response.
+It cannot take back the head after sku has sent it.
 
 sku uses [React Router Error Boundaries](https://reactrouter.com/how-to/error-boundary):
 
@@ -84,14 +96,16 @@ That includes:
 - `405` when a mutation hits a route without an `action`
 - sync `Component` throws
 
-Put the boundary on a child route under the root layout so nested pages inherit it while preserving `<html>`.
+Put the page boundary on a child route under the root layout so nested pages inherit it while preserving `<html>`.
 You can also nest boundaries when a section needs its own failure UI.
+Set a second `ErrorBoundary` on the html route only if that fallback renders a full `<html>` document.
 
 ### Suspense failures during document SSR
 
 Render-time data loading can reject a Suspense boundary while sku is still streaming the document.
 When that happens, sku aborts the first stream. sku then re-renders with the error on the static handler context.
-The nearest `ErrorBoundary` then produces the HTML response (status `500` unless the error is a route error response).
+The nearest `ErrorBoundary` then produces the HTML response.
+React Router sets status `500` unless the error is a route error response.
 
 ## Errors above the router
 

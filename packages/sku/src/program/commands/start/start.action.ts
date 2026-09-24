@@ -8,6 +8,7 @@ import {
 import { watchVocabCompile } from '../../../services/vocab/runVocab.js';
 import { checkHosts, withHostile } from '../../../context/hosts.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
+import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import { resolveEnvironment } from '../../../context/resolveEnvironment.js';
 import { accent } from '@sku-private/utils/console';
 
@@ -28,6 +29,8 @@ export const startAction = async (
     environment: environmentOption,
     skuContext,
   });
+
+  await assertPathAliasImports(skuContext.pathAliases);
 
   await Promise.all([
     configureProject(skuContext),

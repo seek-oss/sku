@@ -18,7 +18,6 @@ import { createTSConfig } from '../services/typescript/tsconfig.js';
 import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
 
 import getCertificate from './certificate.js';
-import { syncPathAliasImports } from './pathAliasImports.js';
 import { validateSkuConfigFormat } from './validateSkuConfigFormat.js';
 
 import type { SkuContext } from '../context/createSkuContext.js';
@@ -77,8 +76,6 @@ export default async (skuContext: SkuContext) => {
   const tsConfigFileName = 'tsconfig.json';
   await writeFileToCWD(tsConfigFileName, createTSConfig(skuContext));
   gitIgnorePatterns.push(tsConfigFileName);
-
-  await syncPathAliasImports(skuContext.pathAliases);
 
   const prettierIgnorePatterns = [...gitIgnorePatterns, 'pnpm-lock.yaml'];
 

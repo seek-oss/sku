@@ -14,6 +14,7 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
+import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
@@ -42,6 +43,7 @@ export const buildSsrAction = async ({
   process.env.NODE_ENV = 'production';
   const { port, cspEnabled } = skuContext;
   await configureProject(skuContext);
+  await assertPathAliasImports(skuContext.pathAliases);
   validatePeerDeps(skuContext);
   validatePolyfills(skuContext.polyfills);
 

@@ -45,7 +45,7 @@ This includes: `test` (vitest/jest resolution), `start`/`start-ssr` (dev server 
 ### Decision 3: Three flavours over one shared core in `pathAliasImports.ts`
 
 - `syncPathAliasImports(pathAliases)`: unchanged behavior, used by `format`.
-- `checkPathAliasImports(pathAliases): Promise<LintResult>`: prints the drifted entries plus `suggestScript('format')`, returns `{ exitCode: 0 | 1 }`, used by `lint`.
+- `checkPathAliasImports(pathAliases): Promise<LintResult>`: prints an out-of-sync message plus `suggestScript('format')`, returns `{ exitCode: 0 | 1 }`, used by `lint`.
 - `assertPathAliasImports(pathAliases)`: throws on drift with the same message, used by gated commands.
 
 All three skip silently when no `package.json` exists in the cwd.

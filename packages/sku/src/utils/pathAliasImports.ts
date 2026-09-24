@@ -6,7 +6,7 @@ import { hasErrorMessage } from './error-guards.js';
 import type { LintResult } from './runLintChecks.js';
 import { suggestScript } from './suggestScript.js';
 import { createDebug } from 'obug';
-import { secondary } from '@sku-private/utils/console';
+import { accentLight, secondary } from '@sku-private/utils/console';
 
 const debug = createDebug('sku:path-alias-imports');
 
@@ -53,6 +53,7 @@ const outOfSyncMessage =
 export const syncPathAliasImports = async (
   pathAliases: PathAliases = {},
 ): Promise<LintResult> => {
+  console.log(accentLight(`Syncing package.json with path aliases`));
   const result = await makeSyncedPackageJson(pathAliases);
   if (!result) {
     return { exitCode: 0 };
@@ -80,6 +81,7 @@ export const syncPathAliasImports = async (
 export const checkPathAliasImports = async (
   pathAliases: PathAliases = {},
 ): Promise<LintResult> => {
+  console.log(accentLight(`Checking package.json for path alias imports`));
   const result = await makeSyncedPackageJson(pathAliases);
   if (!result || result.isAlreadyInSync) {
     return { exitCode: 0 };

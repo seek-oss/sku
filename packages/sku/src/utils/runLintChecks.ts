@@ -1,9 +1,17 @@
+import { createDebug } from 'obug';
+
+const debug = createDebug('sku:lintChecks');
+
 export type LintResult = { exitCode: number | undefined };
 
 export type LintCheck = {
   name: string;
   run: () => Promise<LintResult>;
+  skip?: boolean;
 };
+
+export const FAILURE_EXIT_CODE = 1;
+export const SUCCESS_EXIT_CODE = 0;
 
 /**
  * Runs the provided lint checks sequentially, returning `true` if any
@@ -12,9 +20,14 @@ export type LintCheck = {
 export const runLintChecks = async (checks: LintCheck[]): Promise<boolean> => {
   let hasFailure = false;
 
-  for (const { run } of checks) {
+  for (const { name, run, skip = false } of checks) {
+    if (skip) {
+      debug(`Skipping ${name} check`);
+      continue;
+    }
+
     const { exitCode } = await run();
-    if (exitCode !== 0) {
+    if (exitCode !== SUCCESS_EXIT_CODE) {
       hasFailure = true;
     }
   }

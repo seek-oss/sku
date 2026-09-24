@@ -297,6 +297,7 @@ export const createSkuContext = async ({
     sites,
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
+    managedWorkspace: skuConfig.managedWorkspace,
     defaultClientEntry,
     serveCjsInteropDependencies,
     buildCjsInteropDependencies,

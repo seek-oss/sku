@@ -1,4 +1,6 @@
 import type { JSX, ReactNode } from 'react';
+import type { Server as HttpServer } from 'node:http';
+import type { Server as HttpsServer } from 'node:https';
 import type { Express, RequestHandler } from 'express';
 import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
@@ -35,7 +37,13 @@ export interface Server {
     params: RenderCallbackParams,
     ...requestHandlerParams: Parameters<RequestHandler>
   ) => void;
-  onStart?: (app: Express) => void;
+  onStart?: (
+    app: Express,
+    server: {
+      httpServer: HttpServer | HttpsServer;
+      port: number;
+    },
+  ) => void | Promise<void>;
   middleware?: RequestHandler | RequestHandler[];
 }
 

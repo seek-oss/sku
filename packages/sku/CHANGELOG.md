@@ -1,5 +1,33 @@
 # sku
 
+## 16.3.0
+
+### Minor Changes
+
+- Managed Data Mode root layouts now need to render the full `<html>`, `<head>`, and `<body>`, not just inside the `<body>`. Allowing it to render into any part of document. ([#1720](https://github.com/seek-oss/sku/pull/1720))
+
+- Add `entrySideEffects` so apps can import isomorphic modules (such as Braid reset) before any consumer module. ([#1717](https://github.com/seek-oss/sku/pull/1717))
+
+- Webpack SSR: Pass the listening server and port to `onStart` ([#1730](https://github.com/seek-oss/sku/pull/1730))
+
+  `onStart` still receives the Express app as its first argument. A new second argument carries `{ httpServer, port }`, so apps can set keep-alive timeouts and close the server on shutdown.
+
+  ```tsx
+  import type { Server } from 'sku';
+
+  export default (): Server => ({
+    renderCallback,
+    onStart: (app, { httpServer, port }) => {
+      httpServer.keepAliveTimeout = 20_000;
+      process.on('SIGTERM', () => {
+        httpServer.close(() => process.exit(0));
+      });
+    },
+  });
+  ```
+
+  See the [Webpack SSR](https://seek-oss.github.io/sku/ssr/webpack-ssr) docs for more details.
+
 ## 16.2.0
 
 ### Minor Changes

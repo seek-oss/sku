@@ -97,7 +97,9 @@ describe('ssr-hello-world', () => {
       it("should invoke the provided 'onStart' callback", async () => {
         const server = await node(['dist/server.cjs']);
         expect(
-          await server.findByText('Server ran the onStart callback'),
+          await server.findByText(
+            `Server ran the onStart callback on port ${BUILD_SERVER_PORT} (listening, express function)`,
+          ),
         ).toBeInTheConsole();
       });
     });

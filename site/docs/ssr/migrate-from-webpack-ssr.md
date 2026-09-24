@@ -81,7 +81,8 @@ sku streams the Document.
 Put isomorphic wrapping in the root layout.
 Put env-differing values in `getReactContext`.
 
-Map webpack `onStart({ app })` to server-entry [`onListen({ app, httpServer, port })`](./entries.md#onlisten) (bound port + `httpServer` for keep-alive timeouts).
+Map webpack `onStart(app, { httpServer, port })` to server-entry [`onListen({ app, httpServer, port })`](./entries.md#onlisten).
+Both hooks receive the bound port and `httpServer` for keep-alive timeouts.
 
 Trust proxy is opt-in via config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (sets hop count `1`), not via `onStart` / `onListen`.
 Other trust-proxy values go in `onListen` via `app.set('trust proxy', …)`.

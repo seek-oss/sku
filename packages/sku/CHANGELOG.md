@@ -1,5 +1,23 @@
 # sku
 
+## 16.4.0
+
+### Minor Changes
+
+- `pathAliases` syncing has moved to `sku format`, and `sku lint` fails when out of sync. ([#1733](https://github.com/seek-oss/sku/pull/1733))
+
+  Sku previously forced syncing of `package.json#imports` on install and before every command, but now only runs on `sku format` (to sync) and `sku lint` (to check).
+
+  Commands that resolve `#` imports run the lint check so missed entries are detected, rather than silently modifying the file.
+
+  Since syncing was forced previously on every command, no breaking changes are expected.
+
+- Remove the `postinstall` hook ([#1729](https://github.com/seek-oss/sku/pull/1729))
+
+  Sku no longer runs a script at install time. Generated project files (`tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, etc.) are no longer created during `install` and instead are written by running any sku command or by running `sku configure` explicitly.
+
+  The `skuSkipPostInstall`/`skuSkipPostinstall` package.json fields are no longer read and can be removed from projects. `skuSkipConfigure` is unaffected.
+
 ## 16.3.0
 
 ### Minor Changes

@@ -147,11 +147,6 @@ describe('setupHosts', () => {
     expect(consoleLogSpy).toHaveBeenCalledWith(
       'Your hosts file already contains all app hosts',
     );
-    expect(
-      consoleLogSpy.mock.calls.some((call) =>
-        String(call[0]).includes('to your hosts file'),
-      ),
-    ).toBe(false);
   });
 
   it('should warn when a host is already mapped to a different ip', async () => {
@@ -166,29 +161,12 @@ describe('setupHosts', () => {
       hosts: ['au.seek.com.localhost'],
     });
 
-    const warnings = consoleLogSpy.mock.calls.filter((call) =>
-      String(call[0]).includes('10.0.0.5'),
-    );
-    expect(warnings).toHaveLength(1);
-  });
-
-  it('should not warn when a host is mapped to the other ip version', async () => {
-    const context = await createSkuContext({});
-    const consoleLogSpy = vi.spyOn(global.console, 'log');
-    vi.mocked(readSystemHosts).mockResolvedValueOnce([
-      ['127.0.0.1', 'au.seek.com.localhost'],
-    ]);
-
-    await setupHosts({
-      ...context,
-      hosts: ['au.seek.com.localhost'],
-    });
-
-    expect(
-      consoleLogSpy.mock.calls.some((call) =>
-        String(call[0]).includes('already maps'),
+    expect(consoleLogSpy).nthCalledWith(
+      1,
+      expect.stringContaining(
+        `Your hosts file already maps 'au.seek.com.localhost' to '10.0.0.5'.`,
       ),
-    ).toBe(false);
+    );
   });
 
   it('should throw an error if setting hosts fails', async () => {

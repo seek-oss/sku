@@ -156,6 +156,8 @@ You can also run it if you still want explicit `.localhost` entries.
 sudo sku setup-hosts
 ```
 
+On Windows, run `sku setup-hosts` without `sudo` from a terminal opened with "Run as administrator".
+
 [`hosts`]: ./configuration.md#hosts
 
 ### `configure`

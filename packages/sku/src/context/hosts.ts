@@ -44,6 +44,9 @@ const warnIfAlreadyMapped = (
   }
 };
 
+const isPermissionError = (e: unknown) =>
+  hasErrorCode(e) && (e.code === 'EACCES' || e.code === 'EPERM');
+
 export const setupHosts = async (skuContext: SkuContext): Promise<void> => {
   const appHosts = [
     ...new Set(
@@ -73,10 +76,12 @@ export const setupHosts = async (skuContext: SkuContext): Promise<void> => {
       console.log(`Added '${strong(line)}' to your hosts file`);
     }
   } catch (e: unknown) {
-    if (hasErrorCode(e) && e.code === 'EACCES') {
-      console.log(
-        critical('Error: setup-hosts must be run with root privileges'),
-      );
+    if (isPermissionError(e)) {
+      const privileges =
+        process.platform === 'win32'
+          ? 'from an Administrator terminal'
+          : 'with root privileges';
+      console.log(critical(`Error: setup-hosts must be run ${privileges}`));
     } else {
       console.error(e);
     }

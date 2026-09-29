@@ -4,11 +4,7 @@ import exists from '../../../utils/exists.js';
 import express from 'express';
 import handler from 'serve-handler';
 import { closest } from 'fastest-levenshtein';
-import {
-  checkHosts,
-  getAppHosts,
-  withHostile,
-} from '../../../context/hosts.js';
+import { checkHosts, getAppHosts } from '../../../context/hosts.js';
 import allocatePort from '../../../utils/allocatePort.js';
 import { openBrowser } from '../../../openBrowser.js';
 import { getSiteForHost } from '../../../context/getSiteForHost.js';
@@ -93,7 +89,7 @@ export const serveAction = async ({
     process.exit(1);
   }
 
-  await withHostile(checkHosts)(skuContext);
+  await checkHosts(skuContext);
 
   const appHosts = getAppHosts(skuContext);
 

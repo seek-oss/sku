@@ -1,5 +1,6 @@
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { configureProject } from '../../../utils/configure.js';
+import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { runJestTests } from './jest-test-handler.js';
 import { vitestHandler } from './vitest-test-handler.js';
@@ -13,6 +14,7 @@ export const testAction = async (
   { args = [] }: { args: string[] },
 ) => {
   await configureProject(skuContext);
+  await assertPathAliasImports(skuContext.pathAliases);
   await runVocabCompile(skuContext);
 
   if (skuContext.testRunner === 'vitest') {

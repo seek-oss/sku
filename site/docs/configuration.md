@@ -546,7 +546,9 @@ Custom path alias mappings for module resolution.
 Each alias pattern maps to a destination path relative to the project root.
 
 This option generates `tsconfig.json#paths` so TypeScript can resolve these imports.
-Sku also writes the same mappings to your `package.json#imports` field so the aliases resolve natively at build time.
+Sku also writes the same mappings to your `package.json#imports` field during `sku format` so the aliases resolve natively at build time.
+`sku lint` fails when the field drifts out of sync.
+See the [linting/formatting documentation](./linting.md#path-alias-imports) for more information.
 
 Prefix subpath import specifiers with `#`.
 

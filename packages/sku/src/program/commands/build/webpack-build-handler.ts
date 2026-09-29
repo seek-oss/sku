@@ -16,6 +16,7 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
+import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { critical, success } from '@sku-private/utils/console';
@@ -32,6 +33,7 @@ export const webpackBuildHandler = async ({
   process.env.NODE_ENV = 'production';
   const { isLibrary, cspEnabled, paths } = skuContext;
   await configureProject(skuContext);
+  await assertPathAliasImports(skuContext.pathAliases);
   validatePeerDeps(skuContext);
   try {
     await runVocabCompile(skuContext);

@@ -26,6 +26,7 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
+import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { requireFromCwd, serverUrls } from '@sku-private/utils';
@@ -71,6 +72,7 @@ export const webpackStartSsrHandler = async ({
   const { port, initialPath, paths, httpsDevServer, hosts } = skuContext;
   const { type } = requireFromCwd('./package.json');
   await configureProject(skuContext);
+  await assertPathAliasImports(skuContext.pathAliases);
   validatePeerDeps(skuContext);
   await watchVocabCompile(skuContext);
 

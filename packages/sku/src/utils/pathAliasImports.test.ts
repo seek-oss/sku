@@ -1,10 +1,17 @@
-import { describe, it, afterEach } from 'vitest';
+import { describe, it, afterEach, vi } from 'vitest';
 import { createFixture } from 'fs-fixture';
 import { setCwd } from '@sku-private/utils';
 
-import { syncPathAliasImports } from './pathAliasImports.js';
+import {
+  assertPathAliasImports,
+  checkPathAliasImports,
+  syncPathAliasImports,
+} from './pathAliasImports.js';
 
 const originalCwd = process.cwd();
+
+const toPackageJson = (contents: Record<string, unknown>) =>
+  `${JSON.stringify(contents, null, 2)}\n`;
 
 describe('syncPathAliasImports', () => {
   afterEach(() => {
@@ -99,6 +106,154 @@ describe('syncPathAliasImports', () => {
 
     await expect(
       syncPathAliasImports({ '#utils/*': './src/utils/*' }),
+    ).resolves.toEqual({ exitCode: 0 });
+  });
+});
+
+describe('checkPathAliasImports', () => {
+  afterEach(() => {
+    setCwd(originalCwd);
+    vi.restoreAllMocks();
+  });
+
+  it('passes when imports are in sync', async ({ expect }) => {
+    const contents = toPackageJson({
+      name: 'my-app',
+      imports: { '#utils/*': './src/utils/*' },
+    });
+    await using fixture = await createFixture({ 'package.json': contents });
+    setCwd(fixture.path);
+
+    await expect(
+      checkPathAliasImports({ '#utils/*': './src/utils/*' }),
+    ).resolves.toEqual({ exitCode: 0 });
+
+    expect(await fixture.readFile('package.json', 'utf8')).toBe(contents);
+  });
+
+  it('fails when an entry is missing, without writing', async ({ expect }) => {
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    const contents = toPackageJson({ name: 'my-app', private: true });
+    await using fixture = await createFixture({ 'package.json': contents });
+    setCwd(fixture.path);
+
+    await expect(
+      checkPathAliasImports({ '#utils/*': './src/utils/*' }),
+    ).resolves.toEqual({ exitCode: 1 });
+
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('package.json#imports is out of sync'),
+    );
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('To fix this issue, run'),
+    );
+    expect(await fixture.readFile('package.json', 'utf8')).toBe(contents);
+  });
+
+  it('fails when an entry is stale', async ({ expect }) => {
+    const contents = toPackageJson({
+      name: 'my-app',
+      imports: { '#stale/*': './stale/*' },
+    });
+    await using fixture = await createFixture({ 'package.json': contents });
+    setCwd(fixture.path);
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    await expect(checkPathAliasImports({})).resolves.toEqual({ exitCode: 1 });
+
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('package.json#imports is out of sync'),
+    );
+    expect(await fixture.readFile('package.json', 'utf8')).toBe(contents);
+  });
+
+  it('fails when entries are reordered', async ({ expect }) => {
+    const contents = toPackageJson({
+      name: 'my-app',
+      imports: {
+        '#utils/*': './src/utils/*',
+        '#components/*': './src/components/*',
+      },
+    });
+    await using fixture = await createFixture({ 'package.json': contents });
+    setCwd(fixture.path);
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+
+    await expect(
+      checkPathAliasImports({
+        '#components/*': './src/components/*',
+        '#utils/*': './src/utils/*',
+      }),
+    ).resolves.toEqual({ exitCode: 1 });
+
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('package.json#imports is out of sync'),
+    );
+    expect(await fixture.readFile('package.json', 'utf8')).toBe(contents);
+  });
+
+  it('passes when there is no package.json', async ({ expect }) => {
+    await using fixture = await createFixture({});
+    setCwd(fixture.path);
+
+    await expect(
+      checkPathAliasImports({ '#utils/*': './src/utils/*' }),
+    ).resolves.toEqual({ exitCode: 0 });
+  });
+});
+
+describe('assertPathAliasImports', () => {
+  afterEach(() => {
+    setCwd(originalCwd);
+    vi.restoreAllMocks();
+  });
+
+  it('exits with a non-zero exit code when out of sync', async ({ expect }) => {
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+    const exitSpy = vi
+      .spyOn(process, 'exit')
+      .mockImplementation(() => undefined as never);
+
+    const contents = toPackageJson({ name: 'my-app', private: true });
+    await using fixture = await createFixture({ 'package.json': contents });
+    setCwd(fixture.path);
+
+    await assertPathAliasImports({ '#utils/*': './src/utils/*' });
+
+    expect(errorSpy).toHaveBeenCalledWith(
+      expect.stringContaining('package.json#imports is out of sync'),
+    );
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining('To fix this issue, run'),
+    );
+    expect(exitSpy).toHaveBeenCalledWith(1);
+    expect(await fixture.readFile('package.json', 'utf8')).toBe(contents);
+  });
+
+  it('is a no-op when imports are in sync', async ({ expect }) => {
+    const contents = toPackageJson({
+      name: 'my-app',
+      imports: { '#utils/*': './src/utils/*' },
+    });
+    await using fixture = await createFixture({ 'package.json': contents });
+    setCwd(fixture.path);
+
+    await expect(
+      assertPathAliasImports({ '#utils/*': './src/utils/*' }),
+    ).resolves.toBeUndefined();
+  });
+
+  it('is a no-op when there is no package.json', async ({ expect }) => {
+    await using fixture = await createFixture({});
+    setCwd(fixture.path);
+
+    await expect(
+      assertPathAliasImports({ '#utils/*': './src/utils/*' }),
     ).resolves.toBeUndefined();
   });
 });

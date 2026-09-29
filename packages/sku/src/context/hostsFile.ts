@@ -24,26 +24,30 @@ export const readSystemHosts = async (
   filePath = getHostsFilePath(),
 ): Promise<HostEntry[]> => parseHostsFile(await readFile(filePath, 'utf8'));
 
+const toLine = ([ip, host]: HostEntry) => `${ip} ${host}`;
+
 /**
- * Appends `ip host` to the hosts file unless that exact entry already exists.
- * Existing lines are never rewritten, so user formatting and comments are preserved.
+ * Appends each entry that the hosts file does not already contain, and returns the appended lines.
+ * Existing lines are never rewritten, so user formatting and comments stay intact.
  */
-export const addSystemHost = async (
-  ip: string,
-  host: string,
+export const addSystemHosts = async (
+  entries: HostEntry[],
   filePath = getHostsFilePath(),
-): Promise<void> => {
+): Promise<string[]> => {
   const contents = await readFile(filePath, 'utf8');
 
-  const exists = parseHostsFile(contents).some(
-    ([entryIp, entryHost]) => entryIp === ip && entryHost === host,
+  const existingLines = new Set(parseHostsFile(contents).map(toLine));
+  const missingLines = [...new Set(entries.map(toLine))].filter(
+    (line) => !existingLines.has(line),
   );
-  if (exists) {
-    return;
+  if (missingLines.length === 0) {
+    return [];
   }
 
   const eol = contents.includes('\r\n') ? '\r\n' : '\n';
   const separator = contents === '' || contents.endsWith('\n') ? '' : eol;
 
-  await appendFile(filePath, `${separator}${ip} ${host}${eol}`);
+  await appendFile(filePath, `${separator}${missingLines.join(eol)}${eol}`);
+
+  return missingLines;
 };

@@ -2,7 +2,11 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { addSystemHost, parseHostsFile, readSystemHosts } from './hostsFile.js';
+import {
+  addSystemHosts,
+  parseHostsFile,
+  readSystemHosts,
+} from './hostsFile.js';
 
 describe('parseHostsFile', () => {
   it('should ignore comments and blank lines', () => {
@@ -74,8 +78,13 @@ describe('hosts file access', () => {
     ].join('\n');
     await writeFile(hostsFile, original);
 
-    await addSystemHost('127.0.0.1', 'new.test', hostsFile);
-    await addSystemHost('::1', 'new.test', hostsFile);
+    await addSystemHosts(
+      [
+        ['127.0.0.1', 'new.test'],
+        ['::1', 'new.test'],
+      ],
+      hostsFile,
+    );
 
     expect(await readFile(hostsFile, 'utf8')).toMatchInlineSnapshot(`
       "##
@@ -93,15 +102,48 @@ describe('hosts file access', () => {
     const original = '127.0.0.1\ta.test b.test\n';
     await writeFile(hostsFile, original);
 
-    await addSystemHost('127.0.0.1', 'b.test', hostsFile);
+    const added = await addSystemHosts([['127.0.0.1', 'b.test']], hostsFile);
 
+    expect(added).toEqual([]);
     expect(await readFile(hostsFile, 'utf8')).toBe(original);
+  });
+
+  it('should only append the entries that are missing', async () => {
+    await writeFile(hostsFile, '127.0.0.1 a.test\n');
+
+    const added = await addSystemHosts(
+      [
+        ['127.0.0.1', 'a.test'],
+        ['127.0.0.1', 'b.test'],
+      ],
+      hostsFile,
+    );
+
+    expect(added).toEqual(['127.0.0.1 b.test']);
+    expect(await readFile(hostsFile, 'utf8')).toBe(
+      '127.0.0.1 a.test\n127.0.0.1 b.test\n',
+    );
+  });
+
+  it('should append a duplicated entry once', async () => {
+    await writeFile(hostsFile, '');
+
+    const added = await addSystemHosts(
+      [
+        ['127.0.0.1', 'a.test'],
+        ['127.0.0.1', 'a.test'],
+      ],
+      hostsFile,
+    );
+
+    expect(added).toEqual(['127.0.0.1 a.test']);
+    expect(await readFile(hostsFile, 'utf8')).toBe('127.0.0.1 a.test\n');
   });
 
   it('should append when the host is only mapped to a different ip', async () => {
     await writeFile(hostsFile, '127.0.0.1 a.test\n');
 
-    await addSystemHost('::1', 'a.test', hostsFile);
+    await addSystemHosts([['::1', 'a.test']], hostsFile);
 
     expect(await readFile(hostsFile, 'utf8')).toBe(
       '127.0.0.1 a.test\n::1 a.test\n',
@@ -111,7 +153,7 @@ describe('hosts file access', () => {
   it('should add a line break when the file does not end with one', async () => {
     await writeFile(hostsFile, '127.0.0.1 localhost');
 
-    await addSystemHost('127.0.0.1', 'a.test', hostsFile);
+    await addSystemHosts([['127.0.0.1', 'a.test']], hostsFile);
 
     expect(await readFile(hostsFile, 'utf8')).toBe(
       '127.0.0.1 localhost\n127.0.0.1 a.test\n',
@@ -121,10 +163,16 @@ describe('hosts file access', () => {
   it('should match CRLF line endings', async () => {
     await writeFile(hostsFile, '127.0.0.1 localhost\r\n');
 
-    await addSystemHost('127.0.0.1', 'a.test', hostsFile);
+    await addSystemHosts(
+      [
+        ['127.0.0.1', 'a.test'],
+        ['::1', 'a.test'],
+      ],
+      hostsFile,
+    );
 
     expect(await readFile(hostsFile, 'utf8')).toBe(
-      '127.0.0.1 localhost\r\n127.0.0.1 a.test\r\n',
+      '127.0.0.1 localhost\r\n127.0.0.1 a.test\r\n::1 a.test\r\n',
     );
   });
 });

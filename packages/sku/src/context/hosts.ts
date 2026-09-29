@@ -2,7 +2,11 @@ import { suggestScript } from '../utils/suggestScript.js';
 import { hasErrorCode } from '../utils/error-guards.js';
 import type { SkuContext } from './createSkuContext.js';
 import { isIP } from 'node:net';
-import { addSystemHost, readSystemHosts, type HostEntry } from './hostsFile.js';
+import {
+  addSystemHosts,
+  readSystemHosts,
+  type HostEntry,
+} from './hostsFile.js';
 import { caution, critical, strong } from '@sku-private/utils/console';
 
 const isLocalhostHost = (host: string) => {
@@ -20,10 +24,11 @@ export const getAppHosts = ({ sites: configuredSites, hosts }: SkuContext) =>
     }, [])
     .concat(hosts);
 
-const warnConflictingHosts = (
+const LOOPBACK_IPS = ['127.0.0.1', '::1'];
+
+const warnIfAlreadyMapped = (
   systemHosts: HostEntry[],
-  ip: string,
-  host: string,
+  [ip, host]: HostEntry,
 ) => {
   const conflict = systemHosts.find(
     ([entryIp, entryHost]) =>
@@ -33,29 +38,39 @@ const warnConflictingHosts = (
   if (conflict) {
     console.log(
       caution(
-        `Host '${strong(host)}' is already mapped to '${conflict[0]}' in your hosts file. Remove that entry if '${host}' should resolve to '${ip}'.`,
+        `Your hosts file already maps '${strong(host)}' to '${conflict[0]}'. To make '${host}' resolve to '${ip}', remove that entry.`,
       ),
     );
   }
 };
 
 export const setupHosts = async (skuContext: SkuContext): Promise<void> => {
+  const appHosts = [
+    ...new Set(
+      getAppHosts(skuContext).filter((host) => host && host !== 'localhost'),
+    ),
+  ];
+  if (appHosts.length === 0) {
+    return;
+  }
+
+  const entries = appHosts.flatMap((host) =>
+    LOOPBACK_IPS.map((ip): HostEntry => [ip, host]),
+  );
+
   try {
-    const appHosts = getAppHosts(skuContext).filter(
-      (host) => host !== 'localhost',
-    );
     const systemHosts = await readSystemHosts();
+    for (const entry of entries) {
+      warnIfAlreadyMapped(systemHosts, entry);
+    }
 
-    for (const host of appHosts) {
-      if (!host) {
-        continue;
-      }
+    const addedLines = await addSystemHosts(entries);
 
-      for (const ip of ['127.0.0.1', '::1']) {
-        warnConflictingHosts(systemHosts, ip, host);
-        await addSystemHost(ip, host);
-      }
-      console.log(`Successfully added '${strong(host)}' to your hosts file`);
+    if (addedLines.length === 0) {
+      console.log('Your hosts file already contains all app hosts');
+    }
+    for (const line of addedLines) {
+      console.log(`Added '${strong(line)}' to your hosts file`);
     }
   } catch (e: unknown) {
     if (hasErrorCode(e) && e.code === 'EACCES') {
@@ -71,11 +86,11 @@ export const setupHosts = async (skuContext: SkuContext): Promise<void> => {
 };
 
 export const checkHosts = async (skuContext: SkuContext): Promise<void> => {
-  const systemHosts = await readSystemHosts();
+  const systemHostNames = new Set(
+    (await readSystemHosts()).map(([_, host]) => host),
+  );
   const missingHosts = getAppHosts(skuContext).filter(
-    (appHost) =>
-      !isLocalhostHost(appHost) &&
-      !systemHosts.find(([_, host]) => appHost === host),
+    (appHost) => !isLocalhostHost(appHost) && !systemHostNames.has(appHost),
   );
 
   try {

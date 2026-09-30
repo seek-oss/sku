@@ -6,7 +6,7 @@ import {
   validatePeerDeps,
 } from '../../../utils/configure.js';
 import { watchVocabCompile } from '../../../services/vocab/runVocab.js';
-import { checkHosts, withHostile } from '../../../context/hosts.js';
+import { checkHosts } from '../../../context/hosts.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
 import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import { resolveEnvironment } from '../../../context/resolveEnvironment.js';
@@ -37,7 +37,7 @@ export const startAction = async (
     watchVocabCompile(skuContext),
   ]);
 
-  withHostile(checkHosts)(skuContext);
+  await checkHosts(skuContext);
   validatePeerDeps(skuContext);
   validatePolyfills(skuContext.polyfills);
 

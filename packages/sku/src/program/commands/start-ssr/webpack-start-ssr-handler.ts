@@ -10,11 +10,7 @@ import {
   ensureTargetDirectory,
   cleanTargetDirectory,
 } from '../../../utils/buildFileUtils.js';
-import {
-  checkHosts,
-  getAppHosts,
-  withHostile,
-} from '../../../context/hosts.js';
+import { checkHosts, getAppHosts } from '../../../context/hosts.js';
 import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.ssr.js';
 import getStatsConfig from '../../../services/webpack/config/statsConfig.js';
 import allocatePort from '../../../utils/allocatePort.js';
@@ -96,7 +92,7 @@ export const webpackStartSsrHandler = async ({
     skuContext,
   });
 
-  await withHostile(checkHosts)(skuContext);
+  await checkHosts(skuContext);
 
   const appHosts = getAppHosts(skuContext);
 

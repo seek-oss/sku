@@ -1,5 +1,15 @@
 # sku
 
+## 16.4.1
+
+### Patch Changes
+
+- `setup-hosts`: Append missing entries to the hosts file instead of rewriting it ([#1734](https://github.com/seek-oss/sku/pull/1734))
+
+  `setup-hosts` no longer changes existing lines in the hosts file, including comments and whitespace. It also warns when the hosts file already maps a host to a different IP address, because that entry may take precedence.
+
+  sku no longer depends on `hostile`.
+
 ## 16.4.0
 
 ### Minor Changes

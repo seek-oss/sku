@@ -1,7 +1,5 @@
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
-import path from 'node:path';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { createFixture } from 'fs-fixture';
+import { describe, expect, it } from 'vitest';
 import {
   addSystemHosts,
   parseHostsFile,
@@ -49,44 +47,37 @@ describe('parseHostsFile', () => {
 });
 
 describe('hosts file access', () => {
-  let dir: string;
-  let hostsFile: string;
-
-  beforeEach(async () => {
-    dir = await mkdtemp(path.join(tmpdir(), 'sku-hosts-'));
-    hostsFile = path.join(dir, 'hosts');
-  });
-
-  afterEach(async () => {
-    await rm(dir, { recursive: true, force: true });
-  });
-
   it('should read entries from the hosts file', async () => {
-    await writeFile(hostsFile, '# comment\n127.0.0.1 a.test\n');
+    await using fixture = await createFixture({
+      hosts: '# comment\n127.0.0.1 a.test\n',
+    });
 
-    expect(await readSystemHosts(hostsFile)).toEqual([['127.0.0.1', 'a.test']]);
+    expect(await readSystemHosts(fixture.getPath('hosts'))).toEqual([
+      ['127.0.0.1', 'a.test'],
+    ]);
   });
 
   it('should append missing entries without changing existing content', async () => {
-    const original = [
-      '##',
-      '# Host Database',
-      '##',
-      '127.0.0.1\tlocalhost',
-      '127.0.0.1 a.test # inline comment',
-      '',
-    ].join('\n');
-    await writeFile(hostsFile, original);
+    await using fixture = await createFixture({
+      hosts: [
+        '##',
+        '# Host Database',
+        '##',
+        '127.0.0.1\tlocalhost',
+        '127.0.0.1 a.test # inline comment',
+        '',
+      ].join('\n'),
+    });
 
     await addSystemHosts(
       [
         ['127.0.0.1', 'new.test'],
         ['::1', 'new.test'],
       ],
-      hostsFile,
+      fixture.getPath('hosts'),
     );
 
-    expect(await readFile(hostsFile, 'utf8')).toMatchInlineSnapshot(`
+    expect(await fixture.readFile('hosts', 'utf8')).toMatchInlineSnapshot(`
       "##
       # Host Database
       ##
@@ -100,78 +91,85 @@ describe('hosts file access', () => {
 
   it('should not append an entry that already exists', async () => {
     const original = '127.0.0.1\ta.test b.test\n';
-    await writeFile(hostsFile, original);
+    await using fixture = await createFixture({ hosts: original });
 
-    const added = await addSystemHosts([['127.0.0.1', 'b.test']], hostsFile);
+    const added = await addSystemHosts(
+      [['127.0.0.1', 'b.test']],
+      fixture.getPath('hosts'),
+    );
 
     expect(added).toEqual([]);
-    expect(await readFile(hostsFile, 'utf8')).toBe(original);
+    expect(await fixture.readFile('hosts', 'utf8')).toBe(original);
   });
 
   it('should only append the entries that are missing', async () => {
-    await writeFile(hostsFile, '127.0.0.1 a.test\n');
+    await using fixture = await createFixture({ hosts: '127.0.0.1 a.test\n' });
 
     const added = await addSystemHosts(
       [
         ['127.0.0.1', 'a.test'],
         ['127.0.0.1', 'b.test'],
       ],
-      hostsFile,
+      fixture.getPath('hosts'),
     );
 
     expect(added).toEqual(['127.0.0.1 b.test']);
-    expect(await readFile(hostsFile, 'utf8')).toBe(
+    expect(await fixture.readFile('hosts', 'utf8')).toBe(
       '127.0.0.1 a.test\n127.0.0.1 b.test\n',
     );
   });
 
   it('should append a duplicated entry once', async () => {
-    await writeFile(hostsFile, '');
+    await using fixture = await createFixture({ hosts: '' });
 
     const added = await addSystemHosts(
       [
         ['127.0.0.1', 'a.test'],
         ['127.0.0.1', 'a.test'],
       ],
-      hostsFile,
+      fixture.getPath('hosts'),
     );
 
     expect(added).toEqual(['127.0.0.1 a.test']);
-    expect(await readFile(hostsFile, 'utf8')).toBe('127.0.0.1 a.test\n');
+    expect(await fixture.readFile('hosts', 'utf8')).toBe('127.0.0.1 a.test\n');
   });
 
   it('should append when the host is only mapped to a different ip', async () => {
-    await writeFile(hostsFile, '127.0.0.1 a.test\n');
+    await using fixture = await createFixture({ hosts: '127.0.0.1 a.test\n' });
 
-    await addSystemHosts([['::1', 'a.test']], hostsFile);
+    await addSystemHosts([['::1', 'a.test']], fixture.getPath('hosts'));
 
-    expect(await readFile(hostsFile, 'utf8')).toBe(
+    expect(await fixture.readFile('hosts', 'utf8')).toBe(
       '127.0.0.1 a.test\n::1 a.test\n',
     );
   });
 
   it('should add a line break when the file does not end with one', async () => {
-    await writeFile(hostsFile, '127.0.0.1 localhost');
+    await using fixture = await createFixture({
+      hosts: '127.0.0.1 localhost',
+    });
 
-    await addSystemHosts([['127.0.0.1', 'a.test']], hostsFile);
+    await addSystemHosts([['127.0.0.1', 'a.test']], fixture.getPath('hosts'));
 
-    expect(await readFile(hostsFile, 'utf8')).toBe(
+    expect(await fixture.readFile('hosts', 'utf8')).toBe(
       '127.0.0.1 localhost\n127.0.0.1 a.test\n',
     );
   });
 
   it('should match CRLF line endings', async () => {
-    await writeFile(hostsFile, '127.0.0.1 localhost\r\n');
+    await using fixture = await createFixture({
+      hosts: '127.0.0.1 localhost\r\n',
+    });
 
     await addSystemHosts(
       [
         ['127.0.0.1', 'a.test'],
         ['::1', 'a.test'],
       ],
-      hostsFile,
+      fixture.getPath('hosts'),
     );
 
-    expect(await readFile(hostsFile, 'utf8')).toBe(
+    expect(await fixture.readFile('hosts', 'utf8')).toBe(
       '127.0.0.1 localhost\r\n127.0.0.1 a.test\r\n::1 a.test\r\n',
     );
   });

@@ -70,7 +70,8 @@ See [CSP](./csp.md).
 Replace `#app` `hydrateRoot` and `renderDocument` with sku’s full-document stream and `hydrateRoot(document)`.
 Render `<html>`, `<head>`, and `<body>` in your root layout.
 Sku hoists stylesheet and `modulepreload` links into `<head>`.
-Nest `ErrorBoundary` on a child route under that layout so the HTML document stays mounted on failure.
+Nest `ErrorBoundary` on a child route under that layout so page failures keep the HTML document mounted.
+You MAY also set `ErrorBoundary` on the html route if the fallback renders a full `<html>` document.
 Move hoistable SEO tags (`<title>`, `<meta>`, `<link>`) into routes and layouts as React document metadata.
 Put non-hoistable tags in the root layout `<head>`.
 

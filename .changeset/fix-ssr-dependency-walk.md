@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Fix Vanilla Extract packages missing from the server build
+Fix rare cases where Vanilla Extract packages are missing from the server build

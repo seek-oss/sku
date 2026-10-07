@@ -84,7 +84,7 @@
   "engines": {
     "node": ">=22.19.0"
   },
-  "packageManager": "pnpm@11.24.0",
+  "packageManager": "pnpm@11.28.4",
   "skuSkipConfigure": true,
   "skuSkipValidatePeerDeps": true
 }

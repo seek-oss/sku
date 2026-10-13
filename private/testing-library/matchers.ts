@@ -2,7 +2,16 @@ import { waitFor, type RenderResult } from 'cli-testing-library';
 import { expect } from 'vitest';
 
 declare module 'vitest' {
-  interface Matchers {
+  // `cli-testing-library/vitest` declares `Matchers<T = any>`, which conflicts with
+  // vitest v5's `Matchers<R, T>`. Use vitest's signature and ignore the resulting error
+  // until cli-testing-library updates its types.
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  // @ts-expect-error TS2428
+  interface Matchers<
+    R extends void | Promise<void> = void | Promise<void>,
+    T = unknown,
+  > {
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     /**
      * Waits for the command to exit, then asserts that it exited with the given code.
      * Includes the command's output in the failure message.

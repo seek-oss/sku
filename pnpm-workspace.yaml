@@ -49,7 +49,7 @@ catalog:
   react-router: '^8.3.0'
   typescript: ~6.0.3
   vite: ^8.0.1
-  vitest: ^4.1.0
+  vitest: ^5.0.3
   webpack-dev-server: ^5.2.4
   webpack: ^5.109.0
 

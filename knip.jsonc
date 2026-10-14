@@ -2,13 +2,35 @@
   "$schema": "https://unpkg.com/knip@6/schema-jsonc.json",
   "tags": ["-knipignore"],
   "workspaces": {
+    "fixtures/configure": {
+      "entry": ["sku.config.ts", "src/App.tsx"],
+    },
+    "fixtures/jest-test": {
+      "entry": ["sku.config.ts"],
+    },
+    "fixtures/lint-format": {
+      "entry": ["sku.config*.ts"],
+    },
+    "fixtures/storybook-config": {
+      "entry": [
+        "sku.config.ts",
+        "dev-middleware.js",
+        ".storybook*/**/*.{ts,tsx,js}",
+      ],
+    },
+    "packages/create": {
+      // Project templates are copied verbatim, never imported
+      "ignore": ["templates/**"],
+    },
+    "site": {
+      "entry": ["docs/.prettierrc.js", "public/redirects.js"],
+    },
+    "packages/pnpm-plugin": {
+      "entry": ["pnpmfile.cjs", "pnpmfile.mjs"],
+    },
     ".": {
       // Used in the renovate config
-      "ignoreDependencies": [
-        "renovate-config-seek",
-        // Loaded via string specifier in site/docs/.prettierrc.js (experimental Prettier CLI)
-        "prettier-plugin-sentences-per-line",
-      ],
+      "ignoreDependencies": ["renovate-config-seek"],
     },
     "packages/sku": {
       "ignoreDependencies": [
@@ -43,7 +65,13 @@
       "ignoreDependencies": ["webpack", "webpack-dev-server", "webpack-cli"],
     },
     "fixtures/assertion-removal": {
-      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      "entry": [
+        "src/client.tsx",
+        "src/render.tsx",
+        "sku.config.*",
+        "jestSetup.js",
+        "src/server.tsx",
+      ],
       "ignoreDependencies": [
         // It definitely is used, not sure why knip thinks otherwise
         "assert",
@@ -59,6 +87,7 @@
         "src/ssr/server.tsx",
         "src/ssr/routes.tsx",
         "sku.config.*",
+        "jestSetup.js",
       ],
     },
     "fixtures/custom-output-target": {
@@ -71,16 +100,36 @@
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },
     "fixtures/library-build": {
-      "entry": ["src/library.js", "src/render.js", "sku.config.*"],
+      "entry": [
+        "src/library.js",
+        "src/render.js",
+        "sku.config.*",
+        "src/dynamicImports/*.js",
+      ],
     },
     "fixtures/library-file": {
-      "entry": ["src/library.js", "src/render.js", "sku.config.*"],
+      "entry": [
+        "src/library.js",
+        "src/render.js",
+        "sku.config.*",
+        "src/dynamicImports/*.js",
+      ],
     },
     "fixtures/list-urls": {
-      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      "entry": [
+        "src/client.tsx",
+        "src/render.tsx",
+        "sku.config.*",
+        "src/server.tsx",
+      ],
     },
     "fixtures/multiple-routes": {
-      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
+      "entry": [
+        "src/client.jsx",
+        "src/render.jsx",
+        "sku.config.*",
+        "setupTests.js",
+      ],
       // Used by the `--convert-loadable` flag
       "ignoreDependencies": ["@sku-lib/vite"],
     },
@@ -104,13 +153,28 @@
       "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
     },
     "fixtures/public-assets": {
-      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      // Resolved from the public directory at build time
+      "ignoreUnresolved": ["/nested/icon.png?url"],
+      "entry": [
+        "src/client.tsx",
+        "src/render.tsx",
+        "src/viteClient.tsx",
+        "src/viteRender.tsx",
+        "sku.config.*",
+      ],
     },
     "fixtures/report-generation": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },
     "fixtures/security-controls": {
-      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
+      "entry": [
+        "src/client.jsx",
+        "src/render.jsx",
+        "sku.config.*",
+        "sku-server.config.ts",
+        "src/server.jsx",
+        "src/serverClient.jsx",
+      ],
     },
     "fixtures/sku-create": {
       // Used in tests
@@ -124,11 +188,21 @@
       "ignoreDependencies": ["webpack-dev-server"],
     },
     "fixtures/sku-with-https": {
-      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
+      "entry": [
+        "src/client.jsx",
+        "src/render.jsx",
+        "src/server.jsx",
+        "src/serverClient.jsx",
+        "sku.config.*",
+        "sku-server.config.ts",
+        "dev-middleware.*",
+      ],
     },
     "fixtures/sort-package-json": {
       // Used in gitignored eslint config
       "ignoreDependencies": ["sku"],
+      // Sample file for linting tests
+      "ignore": ["src/foo.ts"],
     },
     "fixtures/source-maps": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
@@ -144,6 +218,7 @@
     },
     "fixtures/styling": {
       "entry": [
+        "src/components/BlueBlock.css.ts",
         "src/client.tsx",
         "src/render.tsx",
         "src/server.tsx",
@@ -151,10 +226,20 @@
       ],
     },
     "fixtures/suspense": {
-      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
+      "entry": [
+        "src/client.jsx",
+        "src/render.jsx",
+        "sku.config.*",
+        "setupTests.js",
+      ],
     },
     "fixtures/stream-insert-html": {
-      "entry": ["src/server.tsx", "src/client.tsx", "sku.config.*"],
+      "entry": [
+        "src/server.tsx",
+        "src/client.tsx",
+        "src/**/*.{ts,tsx}",
+        "sku.config.*",
+      ],
     },
     "fixtures/translations": {
       "entry": [
@@ -164,6 +249,9 @@
         "src/vite-ssr/client.tsx",
         "src/vite-ssr/server.tsx",
         "sku.config.*",
+        "sku-ssr.config.ts",
+        "src/server.tsx",
+        "src/vite-ssr/routes.tsx",
       ],
       "ignoreDependencies": [
         // Used by webpack bundler path
@@ -178,8 +266,10 @@
         "src/client.tsx",
         "src/client-ssr.tsx",
         "src/render.tsx",
-        "src/render.tsx",
-        "sku.config.*",
+        "src/server.tsx",
+        "src/setupTests.ts",
+        "src/components/**/*.{ts,tsx}",
+        "sku*.config.*",
       ],
     },
     "fixtures/vite-cjs-interop-apollo-client-v3": {
@@ -192,10 +282,20 @@
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },
     "fixtures/vite-plugins": {
-      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      "entry": [
+        "src/client.tsx",
+        "src/render.tsx",
+        "src/App.tsx",
+        "sku.config.*",
+      ],
     },
     "fixtures/vite-render-error": {
-      "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
+      "entry": [
+        "src/client.tsx",
+        "src/render.tsx",
+        "sku.config.*",
+        "src/renderError.tsx",
+      ],
     },
     "fixtures/ssr-document": {
       "entry": [
@@ -228,6 +328,8 @@
     },
     "fixtures/logging": {
       "entry": [
+        "src/server/middleware.ts",
+        "src/shared/tracing.ts",
         "src/server/server.tsx",
         "src/client/client.tsx",
         "src/routes.tsx",

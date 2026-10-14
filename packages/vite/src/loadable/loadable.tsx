@@ -12,7 +12,7 @@ import { useRegisterComponent } from './PreloadContext.js';
 
 let preloads: Array<() => Promise<any>> = [];
 
-export type PreloadableComponent<T extends ComponentType<any>> = T & {
+type PreloadableComponent<T extends ComponentType<any>> = T & {
   preload: () => Promise<T>;
 };
 

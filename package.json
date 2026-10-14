@@ -8,7 +8,7 @@
     "prepare": "husky",
     "lint": "pnpm run '/^lint:.*/'",
     "lint:eslint": "eslint --cache --cache-location 'node_modules/.cache/eslint/.eslintcache' .",
-    "lint:knip": "knip --dependencies",
+    "lint:knip": "knip",
     "lint:markdown": "markdownlint-cli2",
     "lint:prettier": "prettier --cache --experimental-cli --list-different .",
     "lint:tsc": "tsc --build",

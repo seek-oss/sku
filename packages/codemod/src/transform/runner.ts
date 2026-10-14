@@ -15,8 +15,6 @@ import {
 
 const debugLog = createDebug('sku:codemod');
 
-export { transformerPathsForJestSubsteps } from './interactive-selection.js';
-
 type Options = {
   dry?: boolean;
   print?: boolean;

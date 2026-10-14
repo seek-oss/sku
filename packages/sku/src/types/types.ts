@@ -14,7 +14,7 @@ export type ViteRenderFunction = (
   } & SharedRenderProps,
 ) => Promise<string>;
 
-export type SkuProvider = ({ children }: { children: ReactNode }) => ReactNode;
+type SkuProvider = ({ children }: { children: ReactNode }) => ReactNode;
 
 export interface RenderCallbackParams {
   SkuProvider: SkuProvider;
@@ -107,6 +107,7 @@ export interface SkuSiteObject {
 
 type SkuSite = string | SkuSiteObject;
 
+/** @knipignore Must be exported for declaration emit of the default config */
 export interface TransformOutputPathFunctionParams {
   environment: string | undefined;
   site: string | undefined;
@@ -119,7 +120,7 @@ type TransformOutputPathFunction = (
 
 export type SkuLanguage = string | { name: string; extends?: string };
 
-export interface SkuConfigBase {
+interface SkuConfigBase {
   /**
    * Selects request-time SSR or the static generation behavior.
    *
@@ -503,7 +504,7 @@ export interface SkuConfigBase {
   pathAliases?: Record<string, string>;
 }
 
-export interface WebpackSkuConfig {
+interface WebpackSkuConfig {
   /**
    * **Webpack SSR only** (`sku start-ssr` / `sku build-ssr`)
    *
@@ -545,7 +546,7 @@ export interface WebpackSkuConfig {
   dangerouslySetWebpackConfig?: (skuWebpackConfig: any) => any;
 }
 
-export interface ViteSkuConfig {
+interface ViteSkuConfig {
   /**
    * **Only for Managed Data Mode**
    *

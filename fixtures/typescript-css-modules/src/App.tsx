@@ -16,6 +16,7 @@ interface Props {
 
 // This is a test for ensuring typescript-specific keywords are stripped out
 // by babel during transpilation, in this case the `protected` keyword
+/** @knipignore */
 export class MyClass {
   constructor(protected foo: number) {}
 }

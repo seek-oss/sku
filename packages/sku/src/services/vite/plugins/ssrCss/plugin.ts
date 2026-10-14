@@ -2,8 +2,6 @@ import type { Plugin, ViteDevServer } from 'vite';
 import { collectStyle } from './collect.js';
 import { SSR_CSS_VIRTUAL_ENTRY, SSR_CSS_VIRTUAL_HREF } from './constants.js';
 
-export { SSR_CSS_VIRTUAL_ENTRY, SSR_CSS_VIRTUAL_HREF } from './constants.js';
-
 const PLUGIN_NAME = 'vite-plugin-ssr-css';
 
 /**

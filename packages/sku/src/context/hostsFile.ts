@@ -3,7 +3,7 @@ import path from 'node:path';
 
 export type HostEntry = [ip: string, host: string];
 
-export const getHostsFilePath = () =>
+const getHostsFilePath = () =>
   process.platform === 'win32'
     ? path.win32.join(
         process.env.SystemRoot ?? 'C:\\Windows',

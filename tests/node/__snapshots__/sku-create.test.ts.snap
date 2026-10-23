@@ -594,6 +594,7 @@ exports[`sku-create > ssr > should create tsconfig.json 1`] = `
     ]
   },
   "exclude": [
+    "node_modules",
     "dist",
     "coverage",
     "report"
@@ -1035,6 +1036,7 @@ exports[`sku-create > vite > should create tsconfig.json 1`] = `
     ]
   },
   "exclude": [
+    "node_modules",
     "dist",
     "coverage",
     "report"
@@ -1465,6 +1467,7 @@ exports[`sku-create > webpack > should create tsconfig.json 1`] = `
     ]
   },
   "exclude": [
+    "node_modules",
     "dist",
     "coverage",
     "report"

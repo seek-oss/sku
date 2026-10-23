@@ -152,6 +152,7 @@ describe('configure', () => {
         'exclude',
       ]);
       expect(tsconfigContents.exclude).toEqual([
+        'node_modules',
         'foo/bar',
         'coverage',
         'report',

@@ -102,13 +102,7 @@ export const createTSConfig = ({
       types: makeTypes(),
     },
     // `allowJs` would otherwise include sku's generated JS output in type checking.
-    // Setting `exclude` replaces TypeScript's default, so `node_modules` must be listed too.
-    exclude: [
-      'node_modules',
-      paths.relativeTarget,
-      coverageFolder,
-      bundleReportFolder,
-    ],
+    exclude: [paths.relativeTarget, coverageFolder, bundleReportFolder],
   };
 
   return tsconfigDecorator(config);

@@ -1,5 +1,13 @@
 # sku
 
+## 16.5.1
+
+### Patch Changes
+
+- `sku lint`: Exclude sku's generated output from TypeScript type checking ([#1744](https://github.com/seek-oss/sku/pull/1744))
+
+  The generated `tsconfig.json` now excludes the build `target` directory, `coverage` and `report`.
+
 ## 16.5.0
 
 ### Minor Changes

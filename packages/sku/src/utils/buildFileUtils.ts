@@ -27,8 +27,11 @@ export const cleanTargetDirectory = async (
 
 export const copyPublicFiles = async ({
   paths,
+  destination = paths.target,
 }: {
   paths: SkuContext['paths'];
+  /** Defaults to the build target. */
+  destination?: string;
 }) => {
   if (!(await exists(paths.public))) {
     return;
@@ -36,10 +39,10 @@ export const copyPublicFiles = async ({
 
   const currentCwd = cwd();
   console.log(
-    `Copying public assets from "${relative(currentCwd, paths.public)}" to "${relative(currentCwd, paths.target)}"`,
+    `Copying public assets from "${relative(currentCwd, paths.public)}" to "${relative(currentCwd, destination)}"`,
   );
 
-  await copyDirContents(join(paths.public), join(paths.target));
+  await copyDirContents(join(paths.public), join(destination));
 };
 
 export const ensureTargetDirectory = async (target: string) => {
@@ -59,5 +62,33 @@ export const cleanStaticRenderEntry = async ({
 
   for (const file of files) {
     await rm(file);
+  }
+};
+
+/**
+ * Throws if the public folder (including nested folders) contains any `.html` files.
+ */
+export const assertNoPublicHtmlFiles = async ({
+  paths,
+}: {
+  paths: SkuContext['paths'];
+}) => {
+  if (!(await exists(paths.public))) {
+    return;
+  }
+
+  const htmlFiles = await new Fdir()
+    .withRelativePaths()
+    .filter((file) => /\.html$/i.test(file))
+    .crawl(paths.public)
+    .withPromise();
+
+  if (htmlFiles.length > 0) {
+    const relativePublic = relative(cwd(), paths.public);
+    throw new Error(
+      `HTML files must not be in the public folder when 'distSubfolders' is enabled, but found: ${htmlFiles
+        .map((file) => `"${join(relativePublic, file)}"`)
+        .join(', ')}`,
+    );
   }
 };

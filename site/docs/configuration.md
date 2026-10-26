@@ -389,6 +389,38 @@ Default: `false`
 Adds static `displayName` properties to React components in production.
 Use this on sites that generate React code snippets. [Braid](https://seek-oss.github.io/braid-design-system/) is one example.
 
+## distSubfolders
+
+Type: `boolean`
+
+Default: `false`
+
+When `true`, build output is split into a subfolder per kind of file, instead of writing everything to the root of the [`target`](#target) directory.
+This makes it possible to deploy each kind of file separately without guessing which files are which.
+
+For static apps, `sku build` writes:
+
+- `dist/rendered/`: the rendered HTML documents, and the metadata files that `sku serve` uses for response headers.
+  Paths inside `rendered/` match the paths the default layout writes directly under `dist/`, for example `rendered/<environment>/<site>/<route>/index.html`.
+- `dist/client/`: every other file, including JS, CSS and files copied from [`public`](#public).
+
+For [webpack SSR](./ssr/webpack-ssr.md) apps, `sku build-ssr` writes:
+
+- `dist/client/`: JS, CSS and files copied from [`public`](#public).
+- `dist/server/`: the server bundle and the stats it reads at runtime.
+
+`sku serve` serves both static layouts.
+`sku start` and `sku start-ssr` are unaffected.
+
+Restrictions:
+
+- Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+  SSR output is always split into `dist/client/` and `dist/server/`.
+- `sku build` fails when the [`public`](#public) folder contains `.html` files, because they would be deployed as client files.
+
+> [!NOTE]
+> `distSubfolders` will default to `true` in a future major release.
+
 ## expressTrustProxy <Badge type="info" text="SSR only" />
 
 Type: `boolean`
@@ -431,6 +463,7 @@ Type: `Array<string>`
 Default: `[]`
 
 An array of environments the app supports.
+`client`, `rendered` and `server` are reserved and can't be used as environment names.
 Include one environment for local development.
 Include one environment for each deployment target.
 Use this value to drive app config.

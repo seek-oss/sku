@@ -254,9 +254,15 @@ export const createSkuContext = async ({
       cjsInteropDependencies,
     });
 
+  // SSR output is always split into `client/` and `server/`, and libraries don't render HTML,
+  // so the option only applies to static apps.
+  const distSubfolders =
+    skuConfig.buildType !== 'ssr' && !isLibrary && skuConfig.distSubfolders;
+
   return {
     bundler: skuConfig.bundler,
     buildType: skuConfig.buildType,
+    distSubfolders,
     testRunner: skuConfig.testRunner,
     configPath: appConfigPath,
     publicPath,

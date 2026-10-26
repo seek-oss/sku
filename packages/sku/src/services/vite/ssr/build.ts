@@ -15,5 +15,7 @@ export const buildSsr = async (skuContext: SkuContext) => {
   const builder = await createBuilder(createConfig(skuContext));
   await builder.buildApp();
 
-  await moveClientManifestToServer(createOutDir(skuContext.paths.target));
+  await moveClientManifestToServer(
+    createOutDir({ targetPath: skuContext.paths.target, useSubfolders: true }),
+  );
 };

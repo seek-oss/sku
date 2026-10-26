@@ -2,11 +2,13 @@ import webpack from 'webpack';
 import { performance } from 'node:perf_hooks';
 
 import {
+  assertNoPublicHtmlFiles,
   copyPublicFiles,
   cleanTargetDirectory,
   ensureTargetDirectory,
   cleanStaticRenderEntry,
 } from '../../../utils/buildFileUtils.js';
+import { getDistDirectories } from '../../../utils/distDirectories.js';
 import { run } from '../../../services/webpack/runWebpack.js';
 import createHtmlRenderPlugin from '../../../services/webpack/config/plugins/createHtmlRenderPlugin.js';
 import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.js';
@@ -31,11 +33,15 @@ export const webpackBuildHandler = async ({
 }) => {
   // First, ensure the build is running in production mode
   process.env.NODE_ENV = 'production';
-  const { isLibrary, cspEnabled, paths } = skuContext;
+  const { isLibrary, cspEnabled, paths, distSubfolders } = skuContext;
   await configureProject(skuContext);
   await assertPathAliasImports(skuContext.pathAliases);
   validatePeerDeps(skuContext);
   try {
+    if (distSubfolders) {
+      await assertNoPublicHtmlFiles(skuContext);
+    }
+
     await runVocabCompile(skuContext);
     await ensureTargetDirectory(paths.target);
     await cleanTargetDirectory(paths.target);
@@ -58,7 +64,14 @@ export const webpackBuildHandler = async ({
 
     await run(compiler, { stats });
     await cleanStaticRenderEntry({ paths });
-    await copyPublicFiles({ paths });
+    const { distClient } = getDistDirectories({
+      targetPath: paths.target,
+      useSubfolders: distSubfolders,
+    });
+    await copyPublicFiles({
+      paths,
+      destination: distClient,
+    });
 
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {

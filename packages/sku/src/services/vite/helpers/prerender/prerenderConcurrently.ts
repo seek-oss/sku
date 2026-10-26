@@ -7,6 +7,7 @@ import type { ReportingEndpoint } from '../../../../utils/csp.js';
 import type { Manifest } from 'vite';
 import { readFile } from 'node:fs/promises';
 import { success } from '@sku-private/utils/console';
+import { createOutDir } from '../bundleConfig.js';
 
 export type Job = {
   filePath: string;
@@ -27,6 +28,7 @@ export type SharedWorkerData = {
   cspReportOnlyExtraScriptSrcHosts: string[];
   cspReportOnlyReportTo: ReportingEndpoint | undefined;
   targetPath: string;
+  distSubfolders: boolean;
   manifest: Manifest;
 };
 
@@ -75,12 +77,13 @@ const getFileName = (
   skuContext: SkuContext,
   skuRoute: ReturnType<typeof getBuildRoutes>[0],
 ) => {
-  let renderDirectory = skuContext.paths.target;
+  const { distRendered } = createOutDir({
+    targetPath: skuContext.paths.target,
+    useSubfolders: skuContext.distSubfolders,
+  });
+  const renderDirectory = path.resolve(distRendered);
   const relativeFilePath = skuContext.transformOutputPath(skuRoute);
   const includesHtmlInFilePath = relativeFilePath.endsWith('.html');
-  if (!path.isAbsolute(renderDirectory)) {
-    renderDirectory = path.resolve(renderDirectory);
-  }
   return includesHtmlInFilePath
     ? path.join(renderDirectory, relativeFilePath)
     : path.join(renderDirectory, relativeFilePath, 'index.html');
@@ -90,6 +93,10 @@ export const prerenderConcurrently = async (skuContext: SkuContext) => {
   const routes = getBuildRoutes(skuContext);
 
   const targetPath = skuContext.paths.target;
+  const { distClient } = createOutDir({
+    targetPath,
+    useSubfolders: skuContext.distSubfolders,
+  });
 
   const jobs = routes.map((route) => ({
     route: route.route,
@@ -101,7 +108,7 @@ export const prerenderConcurrently = async (skuContext: SkuContext) => {
   }));
 
   const rawManifest = await readFile(
-    path.resolve(path.join(targetPath, '.vite/manifest.json')),
+    path.resolve(path.join(distClient, '.vite/manifest.json')),
     'utf-8',
   );
 
@@ -116,6 +123,7 @@ export const prerenderConcurrently = async (skuContext: SkuContext) => {
       skuContext.cspReportOnlyExtraScriptSrcHosts,
     cspReportOnlyReportTo: skuContext.cspReportOnlyReportTo,
     targetPath,
+    distSubfolders: skuContext.distSubfolders,
     manifest: JSON.parse(rawManifest) as Manifest,
   };
 

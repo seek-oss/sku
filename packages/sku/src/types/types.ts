@@ -257,6 +257,20 @@ interface SkuConfigBase {
   /**
    * **Only for static apps**
    *
+   * When `true`, `sku build` writes rendered HTML documents to `<target>/rendered` and
+   * all other output (including files from `public`) to `<target>/client`,
+   * instead of writing everything to the root of `<target>`.
+   *
+   * When enabled, `public` must not contain `.html` files.
+   *
+   * @default false
+   * @link https://seek-oss.github.io/sku/configuration#distsubfolders
+   */
+  distSubfolders?: boolean;
+
+  /**
+   * **Only for static apps**
+   *
    * An array of environments the app supports.
    * Apps should have one environment for local development plus one for each environment they’re deployed to.
    *

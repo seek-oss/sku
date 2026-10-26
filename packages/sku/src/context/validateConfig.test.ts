@@ -317,3 +317,76 @@ describe('validateConfig — SSR sites', () => {
     expect(exitSpy).not.toHaveBeenCalled();
   });
 });
+
+describe('validateConfig — distSubfolders', () => {
+  let exitSpy: ReturnType<typeof vi.spyOn>;
+  let logSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    exitSpy = vi.spyOn(process, 'exit').mockImplementation((code) => {
+      throw new Error(`process.exit: ${code}`);
+    });
+    logSpy = vi.spyOn(globalThis.console, 'log').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('rejects the option with buildType ssr', () => {
+    expect(() =>
+      validateConfig({
+        ...defaultSkuConfig,
+        bundler: 'vite',
+        buildType: 'ssr',
+        sites: ['default'],
+        distSubfolders: true,
+      }),
+    ).toThrow('process.exit: 1');
+
+    expect(exitSpy).toHaveBeenCalledWith(1);
+    const logged = logSpy.mock.calls.join('\n');
+    expect(logged).toContain('distSubfolders');
+    expect(logged).toContain('buildType: ssr');
+  });
+
+  it.each(['vite', 'webpack'] as const)(
+    'accepts the option with static %s',
+    (bundler) => {
+      expect(() =>
+        validateConfig({
+          ...defaultSkuConfig,
+          bundler,
+          buildType: 'static',
+          distSubfolders: true,
+        }),
+      ).not.toThrow();
+
+      expect(exitSpy).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([
+    { reservedName: 'client', distSubfolders: true },
+    { reservedName: 'rendered', distSubfolders: true },
+    { reservedName: 'server', distSubfolders: true },
+    { reservedName: 'client', distSubfolders: false },
+    { reservedName: 'rendered', distSubfolders: false },
+    { reservedName: 'server', distSubfolders: false },
+  ])(
+    'rejects a `$reservedName` environment when distSubfolders is $distSubfolders',
+    ({ reservedName, distSubfolders }) => {
+      expect(() =>
+        validateConfig({
+          ...defaultSkuConfig,
+          environments: ['production', reservedName],
+          distSubfolders,
+        }),
+      ).toThrow('process.exit: 1');
+
+      const logged = logSpy.mock.calls.join('\n');
+      expect(logged).toContain(reservedName);
+      expect(logged).toContain('reserved');
+    },
+  );
+});

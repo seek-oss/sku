@@ -6,6 +6,7 @@ import {
   cleanTargetDirectory,
   ensureTargetDirectory,
 } from '../../../utils/buildFileUtils.js';
+import { getDistDirectories } from '../../../utils/distDirectories.js';
 import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.ssr.js';
 import provider from '../../../services/telemetry/index.js';
 
@@ -69,7 +70,14 @@ export const buildSsrAction = async ({
 
     await run(clientCompiler, { stats });
     await run(serverCompiler, { stats });
-    await copyPublicFiles(skuContext);
+    const { distClient } = getDistDirectories({
+      targetPath: skuContext.paths.target,
+      useSubfolders: skuContext.distSubfolders,
+    });
+    await copyPublicFiles({
+      paths: skuContext.paths,
+      destination: distClient,
+    });
 
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {

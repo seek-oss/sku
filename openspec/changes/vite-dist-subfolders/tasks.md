@@ -18,6 +18,8 @@
 
 - [ ] 3.1 Resolve webpack asset output to `distClient` and HTML/metadata output to `distRendered` when the option is on, sharing the directory helper with Vite
 - [ ] 3.2 Copy `public/` into `distClient` and fail the build before bundling when `public/` contains `.html` files and the option is on
+- [ ] 3.3 For `sku build-ssr` with the option on, set the webpack SSR client output to `distClient` and server output to `distServer`, and have `LoadablePlugin` write its stats to `distServer`
+- [ ] 3.4 Copy `public/` into `distClient` in `sku build-ssr`
 
 ## 4. `sku serve`
 
@@ -30,8 +32,10 @@
 - [ ] 5.2 Add a static webpack test with the option on asserting `rendered/` and `client/` contents
 - [ ] 5.3 Assert `sku serve` works for the subfolder layout (route, asset, `publicPath` set) for both bundlers, and still works for the legacy layout
 - [ ] 5.4 Assert a build with HTML in `public/` fails with the option on, for both bundlers
+- [ ] 5.5 Add a webpack SSR build test with the option on asserting `client/` and `server/` contents, and that the server bundle in `server/` serves a page
 
 ## 6. Docs and release
 
 - [ ] 6.1 Document `distSubfolders` in `site/docs/configuration.md`
-- [ ] 6.2 Add a sku minor changeset noting the new `distSubfolders` option
+- [ ] 6.2 Document the `dist/server/server.js` entry with the option on in `site/docs/ssr/webpack-ssr.md`
+- [ ] 6.3 Add a sku minor changeset noting the new `distSubfolders` option

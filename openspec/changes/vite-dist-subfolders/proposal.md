@@ -15,7 +15,8 @@ Deployments can work with a flat structure that combines both, but that means gu
 - `client`, `rendered` and `server` are always reserved environment names.
 - A static build with the option on fails before building if `public/` contains `.html` files.
 - `sku serve` serves both layouts: the legacy layout unchanged and the subfolder layout through `rendered/` and `client/`.
-- SSR output is unchanged: it already emits sibling `client/` and `server/`.
+- Webpack SSR (`sku build-ssr`) with the option on writes client assets and `public/` files to `dist/client/`, and the server bundle and its loadable stats to `dist/server/`.
+- Vite SSR (`buildType: 'ssr'`) output is unchanged: it already emits sibling `client/` and `server/`.
 - The option fails config validation with `buildType: 'ssr'`.
 
 ## Non-goals
@@ -24,12 +25,13 @@ Deployments can work with a flat structure that combines both, but that means gu
 - Validating `transformOutputPath` results.
 - Requiring changes to deployment tools.
 - Replacing `serve-handler` in `sku serve`.
+- Changing `sku start` / `sku start-ssr` output.
 
 ## Capabilities
 
 ### New Capabilities
 
-- `static-output-layout`: Static builds can emit `rendered/` and `client/` subfolders behind the `distSubfolders` option, and `sku serve` serves both layouts.
+- `dist-subfolders`: Behind the `distSubfolders` option, static builds emit `rendered/` and `client/` subfolders, webpack SSR builds emit `client/` and `server/` subfolders, and `sku serve` serves both static layouts.
 
 ### Modified Capabilities
 
@@ -40,7 +42,8 @@ None.
 - `sku` config schema, types and context.
 - Vite `createOutDir`, static plugins, prerender and public file copying.
 - Webpack output paths, HTML emission and public file copying.
+- Webpack SSR config (client and server output paths, loadable stats location) and the `build-ssr` action.
 - `sku serve` rewrites.
-- Docs: configuration page.
+- Docs: configuration page and webpack SSR page.
 - Browser and node tests that assert on `dist/` paths.
 - Sku minor changeset.

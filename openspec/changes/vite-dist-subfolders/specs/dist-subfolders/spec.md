@@ -1,6 +1,11 @@
 ## Purpose
 
-Lets static apps (Vite or webpack) emit a build output that separates rendered HTML documents from client assets, so each can be deployed on its own from `dist/rendered/<environment>` and `dist/client`. The layout is opt-in via `distSubfolders`, and is intended to become the default in a future breaking change.
+Lets apps emit a build output that separates each kind of file into its own folder under `dist`, so each can be deployed on its own:
+
+- static apps (Vite or webpack): rendered HTML documents in `dist/rendered/<environment>` and client assets in `dist/client`
+- webpack SSR apps: client assets in `dist/client` and the server bundle in `dist/server`
+
+The layout is opt-in via `distSubfolders`, and is intended to become the default in a future breaking change.
 
 ## ADDED Requirements
 
@@ -10,9 +15,9 @@ Sku MUST accept `distSubfolders` as a boolean that defaults to `false`.
 
 The option MUST be available with both the `vite` and `webpack` bundlers.
 
-Config validation MUST fail when the option is set with `buildType: 'ssr'`.
+Config validation MUST fail when the option is set with `buildType: 'ssr'` (Vite SSR), whose output is already split into `client/` and `server/`.
 
-#### Scenario: Option rejected for SSR
+#### Scenario: Option rejected for Vite SSR
 
 - **WHEN** `distSubfolders` is set and `buildType` is `'ssr'`
 - **THEN** config validation fails stating SSR output is always split into `client/` and `server/`
@@ -93,3 +98,28 @@ Metadata-driven response headers MUST apply to documents in both layouts.
 
 - **WHEN** an app was built with the option unset and the user runs `sku serve`
 - **THEN** serving behaves as before
+
+### Requirement: Webpack SSR build separates client and server output
+
+When the option is `true`, `sku build-ssr` MUST write client assets and files from `public/` under `client/` in the build target, and the server bundle and the loadable stats it reads at runtime under `server/`.
+
+`sku start-ssr` MUST be unchanged.
+
+When the option is `false` or unset, `sku build-ssr` output MUST be unchanged.
+
+#### Scenario: Webpack SSR build with the option on
+
+- **WHEN** the option is `true` and the user runs `sku build-ssr`
+- **THEN** JS, CSS and `public/` files are under `client/`
+- **AND** `server.js` (or `server.cjs`) and `webpackStats.json` are under `server/`
+- **AND** `client/` contains no `webpackStats.json`
+
+#### Scenario: Webpack SSR server runs from the server folder
+
+- **WHEN** the option is `true`, the user runs `sku build-ssr`, and then runs the server bundle from `server/`
+- **THEN** the server starts and renders a page that references client assets under `publicPath`
+
+#### Scenario: Webpack SSR option off keeps the legacy layout
+
+- **WHEN** the option is unset and the user runs `sku build-ssr`
+- **THEN** client assets, `public/` files and the server bundle are written to the build target as before

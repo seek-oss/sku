@@ -1,16 +1,16 @@
 ## Context
 
-Vite output locations come from one helper, `createOutDir(target)`. It maps the Vite client build to `target` (static) or `target/client` (SSR), the SSR server build to `target/server`, and the prerender bundle to `target/render`. HTML is written by the prerender worker relative to `target`. Webpack writes assets and HTML to `target` through its own output config and plugins.
+Vite output locations come from one helper, `createOutDir(target)`. It maps the Vite client build to `target` (static) or `target/client` (SSR), the SSR server build to `target/server`, and the prerender bundle to `target/render`. HTML is written by the prerender worker relative to `target`. Webpack writes assets and HTML to `target` through its own output config and plugins. Webpack SSR (`sku build-ssr`) writes client assets, `webpackStats.json` (loadable stats) and the server bundle to `target`; the server bundle requires `./webpackStats.json` at runtime.
 
 `sku serve` is bundler-agnostic. Webpack SSG and Vite SSG both go through it, using `serve-handler` with a single `public` root.
 
-See `proposal.md` for motivation and the `static-output-layout` delta spec for requirements.
+See `proposal.md` for motivation and the `dist-subfolders` delta spec for requirements.
 
 ## Goals / Non-Goals
 
 **Goals:**
 
-- One layout switch that every static build path reads, so Vite, webpack and `sku serve` cannot disagree.
+- One layout switch that every build path writing `dist` reads, so Vite, webpack, webpack SSR and `sku serve` cannot disagree.
 - Zero behaviour change for any build with `distSubfolders` off.
 - Naming: variables and properties that hold these directories are prefixed with `dist` (`distClient`, `distRendered`, `distServer`).
 
@@ -40,6 +40,14 @@ Alternative: a separate `createOutDir` per mode. Rejected because callers (prere
 ### Webpack follows the same switch
 
 With the option on, webpack's output path for assets becomes `distClient`, and HTML and metadata are emitted relative to `distRendered`. `public/` files are copied to `distClient`. The helper is shared with Vite so both bundlers resolve the same directories.
+
+### Webpack SSR follows the same switch
+
+With the option on, `sku build-ssr` sets the client `output.path` to `distClient` and the server `output.path` to `distServer`. `LoadablePlugin` writes the stats directly into `distServer` (via `writeToDisk.filename`), so the server bundle's `./webpackStats.json` external still resolves and the stats aren't deployed with client assets. `public/` files are copied to `distClient`.
+
+The production webpack SSR server has no static mount, so nothing else changes at runtime. The dev server (`sku start-ssr`) keeps its current layout.
+
+Alternative: move the stats into `server/` after the build, as Vite SSR does with its manifest. Rejected because writing them in place is simpler and leaves no window where they sit in `client/`.
 
 ### Clean the target explicitly for static subfolder builds
 

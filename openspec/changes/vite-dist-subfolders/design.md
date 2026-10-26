@@ -1,69 +1,73 @@
 ## Context
 
-Vite output locations come from one helper, `createOutDir(target)`. It maps the Vite client build to `target` (static) or `target/client` (SSR), the SSR server build to `target/server`, and the prerender bundle to `target/render`. HTML is written by the prerender worker relative to `target`.
+Vite output locations come from one helper, `createOutDir(target)`. It maps the Vite client build to `target` (static) or `target/client` (SSR), the SSR server build to `target/server`, and the prerender bundle to `target/render`. HTML is written by the prerender worker relative to `target`. Webpack writes assets and HTML to `target` through its own output config and plugins.
 
 `sku serve` is bundler-agnostic. Webpack SSG and Vite SSG both go through it, using `serve-handler` with a single `public` root.
 
-See `proposal.md` for motivation and the `static-output-layout` and `ssr` delta specs for requirements.
+See `proposal.md` for motivation and the `static-output-layout` delta spec for requirements.
 
 ## Goals / Non-Goals
 
 **Goals:**
 
-- One layout switch that every Vite path reads, so static, SSR and `sku serve` cannot disagree.
-- Zero behaviour change for webpack and for Vite static with the option off.
+- One layout switch that every static build path reads, so Vite, webpack and `sku serve` cannot disagree.
+- Zero behaviour change for any build with `distSubfolders` off.
+- Naming: variables and properties that hold these directories are prefixed with `dist` (`distClient`, `distRendered`, `distServer`).
 
 **Non-Goals:**
 
-- Any changes to our deployment tool or detection of the layout from disk at build time.
+- Requiring changes to deployment tools, or detecting the layout from disk at build time.
+- Changing SSR output, which is already `client/` and `server/`.
 
 ## Decisions
 
 ### Layout-aware `createOutDir`
 
-`createOutDir` takes whether subfolders are in use and returns `documents` and `resources` alongside the existing `ssr`, `ssg` and `join`.
+`createOutDir` takes whether subfolders are in use and returns `distClient`, `distRendered` and `distServer` alongside the existing `ssg` and `join`.
 
-| Mode | `resources` | `documents` |
-| --- | --- | --- |
-| Static, option off | `target` | `target` |
-| Static, option on | `target/resources` | `target/documents` |
-| SSR (always) | `target/resources` | not used |
+| Mode                | `distClient`    | `distRendered`    |
+| ------------------- | --------------- | ----------------- |
+| Static, option off  | `target`        | `target`          |
+| Static, option on   | `target/client` | `target/rendered` |
+| SSR (option unused) | `target/client` | not used          |
 
-The resolved boolean lives on `skuContext` (true for Vite SSR, or Vite static with the option on). The old `client` and `ssrClient` keys are replaced by `resources`, so unconverted call sites fail type-checking.
+SSR's server build keeps writing to `target/server`, now exposed as `distServer`.
+
+The resolved boolean lives on `skuContext.distSubfolders` (the config value for static builds; always `false` for SSR, where it is rejected). The old `client`, `ssrClient` and `ssr` keys are replaced by `distClient` and `distServer`, so unconverted call sites fail type-checking.
 
 Alternative: a separate `createOutDir` per mode. Rejected because callers (prerender worker, plugins, serve) would each need to pick one.
 
+### Webpack follows the same switch
+
+With the option on, webpack's output path for assets becomes `distClient`, and HTML and metadata are emitted relative to `distRendered`. `public/` files are copied to `distClient`. The helper is shared with Vite so both bundlers resolve the same directories.
+
 ### Clean the target explicitly for static subfolder builds
 
-With the option off, Vite's client build writes to `target`, so its default `emptyOutDir` clears everything. With the option on it only clears `resources/`, so a stale `documents/` (or a stale `render/`) would survive. The static build handler therefore cleans the target before building when the option is on, as the SSR handler already does.
+With the option off, the build writes to `target`, so the default clean clears everything. With the option on only `client/` is cleared by the bundler, so a stale `rendered/` (or a stale `render/`) would survive. The static build handler therefore cleans the target before building when the option is on.
 
 ### Prerender and cleanup follow `createOutDir`
 
-- Prerender writes HTML relative to `outDir.documents` and reads the Vite manifest from `outDir.resources`.
-- Post-build cleanup removes the manifest directory from `outDir.resources` and `render/` from the target.
-- Public files are copied to `outDir.resources`.
+- Prerender writes HTML relative to `distRendered` and reads the Vite manifest from `distClient`.
+- Post-build cleanup removes the manifest directory from `distClient` and `render/` from the target.
+- Public files are copied to `distClient`.
 
 ### Validation lives in `validateConfig`
 
-The new option's rejections (webpack, SSR) and the reserved `resources` environment name go through `validateConfig`, next to the existing SSR option checks. The reserved-name check only runs when the option is on, so existing webpack apps are unaffected.
+The rejection of `distSubfolders` with SSR goes through `validateConfig`, next to the existing SSR option checks. The reserved environment names (`client`, `rendered`, `server`) are rejected unconditionally: this keeps validation simple, and no known consumer uses these names.
 
-The public-HTML check runs at the start of the Vite static build handler, before `createBuilder`, so it fails fast. It matches `/\.html$/i`, the same pattern our deployment tool excludes in its legacy mode.
+The public-HTML check runs at the start of each static build handler (Vite and webpack), before the bundler runs, so it fails fast. It matches `/\.html$/i`.
 
 ### `sku serve` keeps `serve-handler`
 
 Replacing it with `express.static` would change serving for webpack SSG too. Instead, when the layout is subfolders:
 
-- Route rewrites target `documents/<env>/<site>/<route>/index.html`.
-- Metadata is globbed under `documents/`, and header `source` paths gain the `documents/` prefix.
-- A final rewrite maps `publicPath/**` to `resources/**`. It comes after all route rewrites so routes win. The existing "`publicPath` is not `/`" rewrite is folded into this one.
-
-### SSR production server
-
-`startProductionSsrServer` resolves the optional static directory from sibling `resources/` instead of `client/`. The manifest move into `server/` is unchanged apart from reading from `outDir.resources`.
+- Route rewrites target `rendered/<env>/<site>/<route>/index.html`.
+- Metadata is globbed under `rendered/`, and header `source` paths gain the `rendered/` prefix.
+- Requests under `publicPath` that match a file in `client/` are served by a second `serve-handler` call rooted at `client/`. `serve-handler` rewrites URL-encode slashes in the destination, so a `publicPath/**` to `client/**` rewrite cannot reach nested files. Anything that is not an existing client file falls through to the rendered handler and its route rewrites.
 
 ## Risks / Trade-offs
 
 - [`serve-handler` may match headers before or after rewriting] → Cover with a `sku serve` test that asserts a CSP header-delivered route in the subfolder layout.
-- [A catch-all `publicPath/**` rewrite could shadow routes when `publicPath` is `/`] → Order rewrites so route rewrites come first, and test a route plus an asset under `publicPath: '/'`.
+- [Client file lookup could shadow routes when `publicPath` is `/`] → Only existing files in `client/` are served from there, so routes without a matching file still resolve to rendered documents. Test a route plus an asset under `publicPath: '/'`.
 - [Custom `transformOutputPath` can drop the environment segment] → Out of scope. It is an escape hatch with no validation.
-- [Renaming `client/` breaks the experimental SSR deploy contract] → Accepted, since there are no production SSR consumers. Called out in the changeset.
+- [Always reserving `client`, `rendered` and `server` breaks an app using one as an environment name] → Accepted as an edge case with no known consumers.

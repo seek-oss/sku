@@ -4,7 +4,7 @@
 
 Add `distSubfolders` option
 
-When set to `true`, build output is split into a subfolder per kind of file, instead of writing everything to the root of `dist`:
+When set to `true`, build output is split into a subfolder per intended use, instead of writing everything to the root of `dist`:
 
 - Static apps (Vite or webpack): `sku build` writes HTML documents to `dist/rendered` and every other file (including files from `public`) to `dist/client`.
 - Webpack SSR apps: `sku build-ssr` writes client assets (including files from `public`) to `dist/client` and the server bundle to `dist/server`.

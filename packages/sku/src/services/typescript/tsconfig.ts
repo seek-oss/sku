@@ -1,6 +1,8 @@
 import type { SkuContext } from '../../context/createSkuContext.js';
 import { requireFromCwd } from '@sku-private/utils';
 import type { PackageJson, TsConfigJson } from 'type-fest';
+import { bundleReportFolder } from '../webpack/config/plugins/bundleAnalyzer.js';
+import { coverageFolder } from '../../utils/coverageFolder.js';
 
 const generateTypeScriptPaths = (
   pathAliases?: Record<string, string>,
@@ -35,6 +37,7 @@ export const createTSConfig = ({
   tsconfigDecorator,
   testRunner,
   pathAliases,
+  paths,
 }: SkuContext) => {
   const tsPaths = generateTypeScriptPaths(pathAliases);
   const makeTypes = () => {
@@ -48,7 +51,10 @@ export const createTSConfig = ({
     return types;
   };
 
-  const config: { compilerOptions: TsConfigJson.CompilerOptions } = {
+  const config: {
+    compilerOptions: TsConfigJson.CompilerOptions;
+    exclude: string[];
+  } = {
     compilerOptions: {
       // Don't compile anything, only perform type checking
       noEmit: true,
@@ -95,6 +101,14 @@ export const createTSConfig = ({
       // TS 6 no longer auto-discovers @types packages
       types: makeTypes(),
     },
+    // `allowJs` would otherwise include sku's generated JS output in type checking.
+    // Setting `exclude` replaces TypeScript's default, so `node_modules` must be listed too.
+    exclude: [
+      'node_modules',
+      paths.relativeTarget,
+      coverageFolder,
+      bundleReportFolder,
+    ],
   };
 
   return tsconfigDecorator(config);

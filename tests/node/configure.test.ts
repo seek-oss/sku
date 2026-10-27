@@ -147,7 +147,16 @@ describe('configure', () => {
     it('should generate tsconfig config', async () => {
       const tsconfigContents = await readJsonC(appFolderTS, 'tsconfig.json');
 
-      expect(Object.keys(tsconfigContents).sort()).toEqual(['compilerOptions']);
+      expect(Object.keys(tsconfigContents).sort()).toEqual([
+        'compilerOptions',
+        'exclude',
+      ]);
+      expect(tsconfigContents.exclude).toEqual([
+        'node_modules',
+        'foo/bar',
+        'coverage',
+        'report',
+      ]);
     });
 
     it.for(['.prettierignore', '.gitignore'])(

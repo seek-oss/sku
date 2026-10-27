@@ -22,6 +22,7 @@ import modules from './resolveModules.js';
 import targets from '../../../config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
 import { resolvePolyfills } from '../../../utils/resolvePolyfills.js';
+import { getDistDirectories } from '../../../utils/distDirectories.js';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -55,8 +56,13 @@ export const makeWebpackConfig = async ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     sourceMapsProd,
+    distSubfolders,
   } = skuContext;
   const isProductionBuild = process.env.NODE_ENV === 'production';
+  const { distClient } = getDistDirectories({
+    targetPath: paths.target,
+    useSubfolders: distSubfolders && !isStartScript,
+  });
 
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
@@ -119,7 +125,7 @@ export const makeWebpackConfig = async ({
       },
       devtool: getSourceMapSetting({ isDevServer, sourceMapsProd }),
       output: {
-        path: paths.target,
+        path: distClient,
         publicPath: isStartScript ? '/' : paths.publicPath,
         filename: jsFileMask,
         chunkFilename: jsChunkFileMask,

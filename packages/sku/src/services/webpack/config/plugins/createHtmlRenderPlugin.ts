@@ -11,6 +11,7 @@ import type { Stats } from 'webpack';
 import type { SkuContext } from '../../../../context/createSkuContext.js';
 import { join } from 'node:path';
 import type { RenderableRoute } from '../../../../types/types.js';
+import { getDistDirectories } from '../../../../utils/distDirectories.js';
 
 const log = createDebug('sku:html-render-plugin');
 
@@ -157,6 +158,7 @@ const createHtmlRenderPlugin = ({
     transformOutputPath,
     publicPath,
     languages,
+    distSubfolders,
   } = skuContext;
   // html-render-webpack-plugin accepts an array of routes to render
   // we create these routes differently for start/build mode
@@ -174,8 +176,13 @@ const createHtmlRenderPlugin = ({
         languages,
       });
 
+  const { distRendered } = getDistDirectories({
+    targetPath: paths.target,
+    useSubfolders: distSubfolders && !isStartScript,
+  });
+
   return new HtmlRenderPlugin({
-    renderDirectory: paths.target,
+    renderDirectory: distRendered,
     routes: allRoutes,
     skipAssets: isStartScript,
     transformFilePath: isStartScript ? startTransformPath : transformOutputPath,

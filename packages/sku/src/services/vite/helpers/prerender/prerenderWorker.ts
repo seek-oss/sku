@@ -40,6 +40,7 @@ const {
     manifest,
     publicPath,
     targetPath,
+    distSubfolders,
   },
   jobs,
 } = typedWorkerData;
@@ -48,7 +49,7 @@ if (!targetPath) {
   throw new Error('targetPath is required in workerData');
 }
 
-const outDir = createOutDir(targetPath);
+const outDir = createOutDir({ targetPath, useSubfolders: distSubfolders });
 
 let render: Render;
 try {

@@ -13,6 +13,8 @@ import { getPathFromCwd } from '@sku-private/utils';
 
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 
+const reservedEnvironmentNames = ['client', 'rendered', 'server'];
+
 const exitWithErrors = (errors: string[]) => {
   console.log(strong(critical('Errors in sku config:')));
   errors.forEach((e) => {
@@ -67,6 +69,24 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
         'buildType: ssr',
       )}' is only supported with the Vite bundler.`,
     );
+  }
+
+  if (skuConfig.distSubfolders && skuConfig.buildType === 'ssr') {
+    errors.push(
+      `🚫 '${strong('distSubfolders')}' is not supported with '${strong(
+        'buildType: ssr',
+      )}'. SSR output is always split into 'client' and 'server'.`,
+    );
+  }
+
+  for (const reservedName of reservedEnvironmentNames) {
+    if (skuConfig.environments?.includes(reservedName)) {
+      errors.push(
+        `🚫 '${strong(
+          reservedName,
+        )}' is reserved and cannot be used as an environment name.`,
+      );
+    }
   }
 
   if (

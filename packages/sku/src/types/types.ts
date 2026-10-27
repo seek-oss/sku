@@ -255,6 +255,23 @@ interface SkuConfigBase {
   displayNamesProd?: boolean;
 
   /**
+   * When `true`, build output is split into subfolders of `<target>` instead of being written to its root:
+   *
+   * - Static apps: `sku build` writes rendered HTML documents to `<target>/rendered`,
+   *   and all other output (including files from `public`) to `<target>/client`.
+   *   `public` must not contain `.html` files.
+   * - Webpack SSR apps: `sku build-ssr` writes client assets (including files from `public`) to `<target>/client`,
+   *   and the server bundle to `<target>/server`.
+   *
+   * Managed Data Mode output is always split into `<target>/client` and `<target>/server`,
+   * so this option isn't needed.
+   *
+   * @default false
+   * @link https://seek-oss.github.io/sku/configuration#distsubfolders
+   */
+  distSubfolders?: boolean;
+
+  /**
    * **Only for static apps**
    *
    * An array of environments the app supports.

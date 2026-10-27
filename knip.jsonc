@@ -99,6 +99,15 @@
     "fixtures/display-names-prod": {
       "entry": ["src/client.tsx", "src/render.tsx", "sku.config.*"],
     },
+    "fixtures/dist-subfolders": {
+      "entry": [
+        "src/client.tsx",
+        "src/render.tsx",
+        "src/server.tsx",
+        "src/ssrClient.tsx",
+        "sku.config.*",
+      ],
+    },
     "fixtures/library-build": {
       "entry": [
         "src/library.js",

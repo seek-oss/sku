@@ -4,6 +4,24 @@ import { scopeToFixture } from '@sku-private/testing-library';
 
 const { sku } = scopeToFixture('vite-render-error');
 
+// Line numbers in built sku code and dependencies change with unrelated edits and upgrades.
+// Fixture source locations are kept, as they verify stack traces map back to source.
+const unstableFrameLocation =
+  /(\/(?:packages\/sku\/dist|node_modules)\/[^\s)]+):\d+:\d+/g;
+
+expect.addSnapshotSerializer({
+  test: (val) =>
+    typeof val === 'string' && val.search(unstableFrameLocation) !== -1,
+  serialize: (val: string, config, indentation, depth, refs, printer) =>
+    printer(
+      val.replaceAll(unstableFrameLocation, '$1:{line}:{column}'),
+      config,
+      indentation,
+      depth,
+      refs,
+    ),
+});
+
 const filterNodeInternalStackFrames = (stack: string) =>
   stack
     .split('\n')
@@ -29,15 +47,15 @@ describe('vite render error', () => {
       "Error rendering HTML for route "/"
       Error: Home page error
           at HomePage ({cwd}/fixtures/vite-render-error/src/HomePage.tsx:2:9)
-          at renderWithHooks ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:4196:18)
-          at renderElement ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:4334:14)
-          at retryNode ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:5040:16)
-          at renderNodeDestructive ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:4843:7)
-          at finishFunctionComponent ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:4237:9)
-          at renderElement ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:4336:7)
-          at retryNode ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:5040:16)
-          at renderNodeDestructive ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:4843:7)
-          at renderElement ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:4777:11)"
+          at renderWithHooks ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})
+          at renderElement ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})
+          at retryNode ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})
+          at renderNodeDestructive ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})
+          at finishFunctionComponent ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})
+          at renderElement ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})
+          at retryNode ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})
+          at renderNodeDestructive ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})
+          at renderElement ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})"
     `);
   });
 
@@ -52,7 +70,7 @@ describe('vite render error', () => {
       "Error importing sku render entrypoint
       Error: Render entrypoint error
           at <anonymous> ({cwd}/fixtures/vite-render-error/src/renderError.tsx:7:7)
-          at async file://{cwd}/packages/sku/dist/vite/prerender-worker.mjs:20:12"
+          at async file://{cwd}/packages/sku/dist/vite/prerender-worker.mjs:{line}:{column}"
     `);
   });
 });

@@ -226,6 +226,9 @@ export default validator.compile({
     type: 'boolean',
     optional: true,
   },
+  distSubfolders: {
+    type: 'boolean',
+  },
   httpsDevServer: {
     type: 'boolean',
   },

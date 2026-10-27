@@ -68,7 +68,8 @@ These differ from Managed Data Mode SSR and Static apps:
 - `sku start-ssr` — development.
   Uses both `port` and `serverPort`
 - `sku build-ssr` — production assets.
-  Run with `node ./dist/server.js` (listens on `serverPort`)
+  Run with `node ./dist/server.js` (listens on `serverPort`).
+  With [`distSubfolders`](../configuration.md#distsubfolders) enabled, client assets are written to `dist/client/` and the server to `dist/server/`, so run `node ./dist/server/server.js` instead.
 - `sku test` — tests
 
 ## Multi-part response

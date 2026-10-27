@@ -18,7 +18,10 @@ const ssrClientDevEntry = require.resolve('#entries/ssr-client.dev');
 const ssrServerEntry = require.resolve('#entries/ssr-server');
 
 export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
-  const outDir = createOutDir(skuContext.paths.target);
+  const outDir = createOutDir({
+    targetPath: skuContext.paths.target,
+    useSubfolders: true,
+  });
   const siteNames = resolveConfigSiteNames(skuContext.sites);
 
   return [
@@ -70,7 +73,7 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
         environments: {
           client: {
             build: {
-              outDir: outDir.ssrClient,
+              outDir: outDir.distClient,
               manifest: CLIENT_MANIFEST_RELATIVE_PATH,
               sourcemap: skuContext.sourceMapsProd,
               rolldownOptions: {
@@ -83,7 +86,7 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
               // Sourcemaps are necessary to get useful stack traces for errors
               sourcemap: 'inline',
               ssr: true,
-              outDir: outDir.ssr,
+              outDir: outDir.distServer,
               rolldownOptions: {
                 input: ssrServerEntry,
                 output: {

@@ -17,14 +17,15 @@ const promiseMap = async <T, K>(
   fn: (item: T) => Promise<K>,
 ): Promise<K[]> => Promise.all(items.map(fn));
 
-interface Dependency {
+interface DepGraphEntry {
+  name: string;
   version: PackageJson['version'];
+  /** Directories of the dependencies that depend on this package, or `ROOT` for the app */
   dependents: string[];
-  dependencies: string[];
-  peerDependencies: string[];
 }
 
-type DepGraph = Map<string, Dependency>;
+/** Every copy of every package in the walk, keyed by package directory */
+type DepGraph = Map<string, DepGraphEntry>;
 
 const loadPackage = async (packageJsonPath: string) =>
   fs
@@ -40,52 +41,33 @@ const analyseDependency = async (
   const packageJsonPath = require.resolve(`${dep}/package.json`, {
     paths: [rootDir],
   });
+  const packageDir = path.dirname(packageJsonPath);
   const packageJson = await loadPackage(packageJsonPath);
+
+  // Checks if the package is already in the graph. If so, add it to the list of dependents.
+  const depGraphEntry = depGraph.get(packageDir);
+
+  if (depGraphEntry) {
+    depGraphEntry.dependents.push(dependent);
+    return;
+  }
+
+  depGraph.set(packageDir, {
+    name: dep,
+    version: packageJson.version,
+    dependents: [dependent],
+  });
 
   const dependencies = Object.keys(packageJson.dependencies ?? {});
   const peerDependencies = Object.keys(packageJson.peerDependencies ?? {});
 
-  const dependency = depGraph.get(dep);
-
-  if (dependency) {
-    if (dependency.version !== packageJson.version) {
-      throw new Error(
-        `Found dependency "${dep}" with multiple versions:\n${JSON.stringify(
-          dependency,
-          null,
-          2,
-        )}\n${JSON.stringify({
-          version: packageJson.version,
-          dependencies,
-        })}`,
-      );
+  await promiseMap([...dependencies, ...peerDependencies], async (childDep) => {
+    try {
+      await analyseDependency(packageDir, childDep, packageDir, depGraph);
+    } catch (e) {
+      log(`Error analysing dependency ${childDep} for ${dep}.`, e);
     }
-
-    dependency.dependents.push(dependent);
-  } else {
-    depGraph.set(dep, {
-      version: packageJson.version,
-      dependents: [dependent],
-      dependencies,
-      peerDependencies,
-    });
-
-    await promiseMap(
-      [...dependencies, ...peerDependencies],
-      async (childDep) => {
-        try {
-          await analyseDependency(
-            dep,
-            childDep,
-            path.dirname(packageJsonPath),
-            depGraph,
-          );
-        } catch (e) {
-          log(`Error analysing dependency ${childDep} for ${dep}.`, e);
-        }
-      },
-    );
-  }
+  });
 };
 
 export const extractDependencyGraph = async (rootDir: string) => {
@@ -96,14 +78,11 @@ export const extractDependencyGraph = async (rootDir: string) => {
 
   const deps = Object.keys(packageJson.dependencies ?? {});
 
-  const dependency: Dependency = {
+  depGraph.set(ROOT, {
+    name: ROOT,
     version: packageJson.version,
     dependents: [],
-    dependencies: deps,
-    peerDependencies: [],
-  };
-
-  depGraph.set(ROOT, dependency);
+  });
 
   await promiseMap(deps, async (childDep) => {
     try {
@@ -121,22 +100,18 @@ export const getSsrExternalsForCompiledDependency = (
   depName: string,
   depGraph: DepGraph,
 ): { noExternal: string[] } => {
-  const dependency = depGraph.get(depName);
-
-  if (!dependency) {
-    return {
-      noExternal: [],
-    };
-  }
-
   const noExternals = new Set<string>();
-  const dependents = new Set(dependency.dependents);
+  const dependents = new Set(
+    [...depGraph.values()]
+      .filter((depGraphEntry) => depGraphEntry.name === depName)
+      .flatMap((depGraphEntry) => depGraphEntry.dependents),
+  );
 
-  for (const dependentName of dependents) {
-    const dependent = depGraph.get(dependentName);
+  for (const dependentDir of dependents) {
+    const dependent = depGraph.get(dependentDir);
     assert(dependent);
 
-    noExternals.add(dependentName);
+    noExternals.add(dependent.name);
     dependent.dependents.forEach((dep) => dependents.add(dep));
   }
 

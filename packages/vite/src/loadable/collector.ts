@@ -280,6 +280,14 @@ const addAssetToPreloads = ({
       break;
   }
 
+  // Only preload assets we know how to describe. Vite 8.3+ also lists chunks
+  // referenced via `import.meta.ROLLUP_FILE_URL_*` (e.g. Vocab language chunks)
+  // in `assets`, and preloading those would emit invalid `as="undefined"` tags.
+  // See https://github.com/vitejs/vite/pull/22888.
+  if (!as) {
+    return;
+  }
+
   preloads.set(chunk, {
     rel: 'preload',
     href: chunk,

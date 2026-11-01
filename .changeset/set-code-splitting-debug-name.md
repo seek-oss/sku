@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Fix rolldown warning `codeSplitting` warning
+Fix rolldown `codeSplitting` warning

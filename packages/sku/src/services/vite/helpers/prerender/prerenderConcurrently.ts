@@ -9,7 +9,7 @@ import { readFile } from 'node:fs/promises';
 import { success } from '@sku-private/utils/console';
 import { createOutDir } from '../bundleConfig.js';
 
-export type Job = {
+type Job = {
   filePath: string;
   environment: string;
   language: string;
@@ -18,7 +18,7 @@ export type Job = {
   site: string;
 };
 
-export type SharedWorkerData = {
+type SharedWorkerData = {
   publicPath: string;
   cspEnabled: boolean;
   cspDelivery: 'tag' | 'header';

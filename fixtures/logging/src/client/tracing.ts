@@ -2,7 +2,8 @@ import {
   context,
   propagation,
   trace,
-  type Context, type Span,
+  type Context,
+  type Span,
 } from '@opentelemetry/api';
 import { resourceFromAttributes } from '@opentelemetry/resources';
 import {

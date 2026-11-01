@@ -8,6 +8,7 @@ packages:
 allowBuilds:
   # Postinstall only prints an optional completions tip; dist/ ships in the package.
   '@fission-ai/openspec': false
+  '@parcel/watcher': true
   '@swc/core': true
   core-js-pure: false
   esbuild: true
@@ -56,9 +57,6 @@ catalog:
 
 configDependencies:
   pnpm-plugin-sku: 0.0.3+sha512-XPcqT+jnn4oGgkUCMLSmlj3R367WTD6O8TlIufxAej7TfE28h4IOVWaJdqVWIq2QRqGoJxjCCXUhlT5Y0vIHaQ==
-
-ignoredBuiltDependencies:
-  - core-js-pure
 
 linkWorkspacePackages: deep
 

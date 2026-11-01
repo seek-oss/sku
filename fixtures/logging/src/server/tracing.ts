@@ -1,6 +1,7 @@
+import { context, propagation, trace } from '@opentelemetry/api';
+import { AsyncLocalStorageContextManager } from '@opentelemetry/context-async-hooks';
 import { resourceFromAttributes } from '@opentelemetry/resources';
-import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
-import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node';
+import { SimpleSpanProcessor, TracerProvider } from '@opentelemetry/sdk-trace';
 import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
 
 import { RecordingSpanExporter, w3cPropagator } from '../shared/tracing.js';
@@ -13,18 +14,22 @@ export const startServerTracing = (): void => {
   }
   started = true;
 
-  const provider = new NodeTracerProvider({
+  const provider = new TracerProvider({
     resource: resourceFromAttributes({
       [ATTR_SERVICE_NAME]: 'sku-fixtures-logging-server',
     }),
     spanProcessors: [
-      new SimpleSpanProcessor(new RecordingSpanExporter('server')),
+      new SimpleSpanProcessor({
+        exporter: new RecordingSpanExporter('server'),
+      }),
     ],
   });
 
-  provider.register({
-    propagator: w3cPropagator(),
-  });
+  trace.setGlobalTracerProvider(provider);
+  context.setGlobalContextManager(
+    new AsyncLocalStorageContextManager().enable(),
+  );
+  propagation.setGlobalPropagator(w3cPropagator());
 };
 
 export {

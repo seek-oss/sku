@@ -1,10 +1,16 @@
-import { context, trace, type Context, type Span } from '@opentelemetry/api';
-import { resourceFromAttributes } from '@opentelemetry/resources';
-import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import {
+  context,
+  propagation,
+  trace,
+  type Context,
+  type Span,
+} from '@opentelemetry/api';
+import { resourceFromAttributes } from '@opentelemetry/resources';
+import {
+  SimpleSpanProcessor,
   StackContextManager,
-  WebTracerProvider,
-} from '@opentelemetry/sdk-trace-web';
+  TracerProvider,
+} from '@opentelemetry/sdk-trace';
 import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
 
 import {
@@ -56,21 +62,18 @@ export const startClientTracing = (): void => {
   }
   started = true;
 
-  const contextManager = new StackContextManager();
-  contextManager.enable();
-  context.setGlobalContextManager(contextManager);
-
-  const provider = new WebTracerProvider({
+  const provider = new TracerProvider({
     resource: resourceFromAttributes({
       [ATTR_SERVICE_NAME]: 'sku-fixtures-logging-client',
     }),
-    spanProcessors: [new SimpleSpanProcessor(new ClientSpanExporter())],
+    spanProcessors: [
+      new SimpleSpanProcessor({ exporter: new ClientSpanExporter() }),
+    ],
   });
 
-  provider.register({
-    propagator: w3cPropagator(),
-    contextManager,
-  });
+  trace.setGlobalTracerProvider(provider);
+  context.setGlobalContextManager(new StackContextManager().enable());
+  propagation.setGlobalPropagator(w3cPropagator());
 };
 
 export const beginNavigationSpan = (span: Span): Context => {

@@ -11,7 +11,7 @@ import {
   type ExportResult,
   W3CTraceContextPropagator,
 } from '@opentelemetry/core';
-import type { ReadableSpan, SpanExporter } from '@opentelemetry/sdk-trace-base';
+import type { ReadableSpan, SpanExporter } from '@opentelemetry/sdk-trace';
 
 export type SerializedSpan = {
   name: string;

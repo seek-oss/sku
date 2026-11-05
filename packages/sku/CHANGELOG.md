@@ -1,5 +1,13 @@
 # sku
 
+## 16.6.1
+
+### Patch Changes
+
+- `start`: Bind the Vite dev server explicitly to IPv4 due to lack of IPv6 support in some CI environments ([#1749](https://github.com/seek-oss/sku/pull/1749))
+
+- `vite`: Ignore `.pnpm-store` from being watched during `sku start` ([#1749](https://github.com/seek-oss/sku/pull/1749))
+
 ## 16.6.0
 
 ### Minor Changes

@@ -21,6 +21,20 @@ node dist/server/server.js
 Production listens on `process.env.PORT` when you set that variable.
 Otherwise it uses the config [`port`](../configuration.md#port) (default `8080`).
 
+## Server output
+
+`dist/server/` is self-contained.
+sku bundles your dependencies into it, so it starts with `node server.js` without `node_modules` or a package install.
+
+Deploy tools can rely on:
+
+- `dist/server/server.js` as the entry point
+- the client manifest that sku writes inside `dist/server/`
+- the `PORT` environment variable
+
+> [!NOTE]
+> APM agents that patch `require`, such as `dd-trace`, can't instrument packages that are bundled into `dist/server/`.
+
 ## Stand-alone server
 
 When a sibling `client/` directory exists next to `server/`, sku mounts `express.static` for `publicPath` **before** server-entry middleware so Node can serve hashed assets itself.
@@ -40,7 +54,8 @@ Typical layout:
 
 1. Run `sku build`.
 2. Upload the contents of `dist/client/` to your bucket or origin (often under a key prefix that matches `publicPath`, for example `static/`).
-3. Deploy `dist/server/` **plus production `node_modules`**.
+3. Deploy `dist/server/`.
+   It doesn't need `node_modules`.
 4. Put a reverse proxy or CDN in front that serves `publicPath` from that storage and forwards everything else to the Node server.
 
 You are ready when storage or a CDN serves the hashed assets.

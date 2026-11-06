@@ -8,7 +8,7 @@ This plugin applies to `sku start` and `sku build`.
 
 Facts that make full bundling cheap here:
 
-- Rolldown already emits a `createRequire(import.meta.url)` shim in `server.js` for CommonJS `require` of built-ins.
+- Rolldown already emits a `createRequire(import.meta.url)` shim in the server entry for CommonJS `require` of built-ins.
 - `config.ts` bakes `process.env.NODE_ENV` at build time, so bundled React uses its production build.
 - `startProductionSsrServer` finds the manifest with `import.meta.url` relative to `server/`, so it keeps working if chunks stay in `server/`.
 - SSR rejects `dangerouslySetViteConfig` and `vitePlugins`, so sku controls the whole SSR plugin graph.
@@ -45,6 +45,16 @@ sku's own `ssr.external: ['vite']` and `@vanilla-extract/vite-plugin`'s `ssr.ext
 The SSR build plugin clears the SSR environment's `resolve.external` in `configEnvironment`, after all `config` hooks have run.
 vanilla-extract only needs `@vanilla-extract/css` external for `sku start`, where `.css.ts` files are evaluated at runtime; the build already compiles them away.
 
+### Emit `.mjs` server files
+
+The SSR build names the entry `server.mjs` and chunks `[name]-[hash].chunk.mjs`.
+With `.js`, Node only ran the output as ESM through module syntax detection, so a parent `package.json` with `"type": "commonjs"` broke it once `server/` was copied into a deploy directory.
+The `.mjs` extension makes the module type independent of where `server/` lands.
+Chunks need it too, because the entry imports them and Node resolves each file's type separately.
+
+Alternative considered: **emit `server/package.json` with `"type": "module"`**. It keeps `server.js`, but adds a file deploy tools must copy and keep alongside the bundle.
+Vite SSR is experimental, so renaming the entry is acceptable.
+
 ### Dedupe React singletons
 
 With externals, Node resolved `react`, `react-dom` and `react-router` from `server/`, so the app and sku's runtime always shared one copy.
@@ -69,10 +79,10 @@ Consumers do not get an option for this, which matches the SSR escape-hatch poli
 - [pino transports use worker threads and need extra files when bundled] → pino without transports logs to stdout and bundles fine. A transport configured by an app is a known exception that gets documented.
 - [APM agents that patch `require`, such as `dd-trace`, can't instrument bundled packages] → Out of scope. The deploy tool owns agent preload (`--import`), and the docs say bundled packages are not auto-instrumented.
 - [A larger server bundle and a slower `sku build`] → This is acceptable for a deploy artifact. Inline sourcemaps grow with it; we'll measure the size on the smoke-test app.
-- [Node runs `server.js` as ESM only through module syntax detection; a parent `package.json` with `"type": "commonjs"` would break it] → Deploy tools put `server/` in its own directory. Emit `server/package.json` if a consumer hits this.
+- [The entry moves from `server.js` to `server.mjs`, so start scripts that run `node dist/server/server.js` break] → The changeset and docs call out the new path. Vite SSR is experimental.
 
 ## Migration Plan
 
-This does not need a migration for consumers.
+Consumers change their start command from `node dist/server/server.js` to `node dist/server/server.mjs`.
 Deploys that copy `node_modules` keep working and can drop that step after upgrading.
 To roll back, revert the release. The output layout is otherwise unchanged.

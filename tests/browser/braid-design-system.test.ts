@@ -202,7 +202,7 @@ describe('braid-design-system ssr', () => {
         recursive: true,
       });
 
-      await node([path.join(isolatedServerDir, 'server.js')], {
+      await node([path.join(isolatedServerDir, 'server.mjs')], {
         spawnOpts: {
           env: { ...process.env, PORT: String(port) },
         },

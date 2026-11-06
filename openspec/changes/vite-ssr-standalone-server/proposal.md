@@ -7,16 +7,17 @@ Deploy tools that ship `dist/server` on its own in a container image, without a 
 
 - `sku build` for SSR bundles all dependencies into `dist/server`. Node built-ins stay external.
 - `sku start` is unchanged: dependencies stay external in development.
-- The deploy contract is documented: `dist/client`, `dist/server/server.js` run with `node server.js` and nothing installed, the baked manifest inside `dist/server`, and `PORT`.
+- The server entry becomes `dist/server/server.mjs`, and its chunks use `.chunk.mjs`, so Node loads them as ESM wherever `server/` is deployed.
+- The deploy contract is documented: `dist/client`, `dist/server/server.mjs` run with `node server.mjs` and nothing installed, the baked manifest inside `dist/server`, and `PORT`.
 - Docs no longer tell consumers that production needs runtime `node_modules`.
 
-SSR is experimental, so this is not marked breaking. Deploys that still ship `node_modules` keep working; the bundled server ignores them.
+SSR is experimental, so this is not marked breaking, including the entry rename. Deploys that still ship `node_modules` keep working; the bundled server ignores them.
 
 ## Non-goals
 
 - A consumer option to externalise packages. Exceptions belong to sku and are raised through sku-support.
 - A build-time check that fails on leftover package imports. Consumers can't add externals, so the isolated-server test covers sku's own config. Add the check if sku ever ships an exception.
-- Writing `dist/server/package.json` with `"type": "module"`. Node runs `server.js` as ESM through module syntax detection.
+- Writing `dist/server/package.json` with `"type": "module"`. The `.mjs` extension already fixes the module type.
 - Copying externalised packages into `dist/server/node_modules`. This waits until sku has a real exception that needs it.
 - Building native addons for a target platform such as `linux/arm64`.
 - APM agents that patch `require` (for example `dd-trace`). Their preload setup belongs to the deploy tool.
@@ -34,7 +35,8 @@ None.
 
 ## Impact
 
-- `ssr` Vite plugin: for the SSR build environment, `resolve.noExternal: true`, cleared explicit externals, and `resolve.dedupe` for React singletons.
+- `ssr` Vite plugin: for the SSR build environment, `resolve.noExternal: true`, cleared explicit externals, `resolve.dedupe` for React singletons, and `.mjs` output file names.
+- Fixture `start:prod` scripts and browser tests move to `dist/server/server.mjs`.
 - `dist/server` gets bigger (all of React, React Router, Express and app dependencies).
 - Docs: SSR deploy-to-production and Migrating pages.
 - Tests: `ssr-data` and Braid SSR fixture tests that start `dist/server` from a copy with no `node_modules`.

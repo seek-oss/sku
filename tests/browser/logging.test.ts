@@ -368,7 +368,7 @@ describe('logging production', () => {
 
     it('records loader errors on the production server', async ({ task }) => {
       skipCleanup(task.id);
-      await node(['dist/server/server.js'], {
+      await node(['dist/server/server.mjs'], {
         spawnOpts: {
           env: { ...process.env, PORT: '8213' },
         },

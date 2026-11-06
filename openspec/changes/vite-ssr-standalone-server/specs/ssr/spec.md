@@ -4,19 +4,27 @@
 
 ### Requirement: Production server output runs without the app's node_modules
 
-`sku build` for an SSR app MUST produce a `server/` directory that starts with `node server.js` when no `node_modules` directory is reachable from it.
+`sku build` for an SSR app MUST produce a `server/` directory that starts with `node server.mjs` when no `node_modules` directory is reachable from it.
 
 Node.js built-in modules MAY stay external.
 
 `sku start` MUST keep dependencies external.
 
+The server entry MUST be `server/server.mjs`, and every JavaScript file in `server/` MUST use the `.mjs` extension, so Node loads them as ES modules regardless of any `package.json` above `server/`.
+
 #### Scenario: Server starts from an isolated copy
 
 - **WHEN** a consumer runs `sku build` for an SSR app
 - **AND** copies `server/` to a directory with no `node_modules` in it or any parent directory
-- **AND** runs `node server.js` there with `PORT` set
+- **AND** runs `node server.mjs` there with `PORT` set
 - **THEN** the process listens on `PORT`
 - **AND** a document request returns a streamed HTML response
+
+#### Scenario: Server starts under a CommonJS package.json
+
+- **WHEN** a consumer copies `server/` into a directory whose parent has a `package.json` with `"type": "commonjs"`
+- **AND** runs `node server.mjs` there with `PORT` set
+- **THEN** the process listens on `PORT`
 
 #### Scenario: Dependencies that are not compile packages are included
 
@@ -47,9 +55,9 @@ Node.js built-in modules MAY stay external.
 
 Deploy-to-production docs MUST cover:
 
-- production entry `node dist/server/server.js` and sibling build `client/` + `server/` layout
-- that `server/` is self-contained: it starts with `node server.js` without `node_modules` or a package install
-- that `server/server.js`, the baked server-local manifest inside `server/`, and the `PORT` environment variable are the stable deploy contract
+- production entry `node dist/server/server.mjs` and sibling build `client/` + `server/` layout
+- that `server/` is self-contained: it starts with `node server.mjs` without `node_modules` or a package install
+- that `server/server.mjs`, the baked server-local manifest inside `server/`, and the `PORT` environment variable are the stable deploy contract
 - that Document asset URLs come from a baked server-local Vite client manifest (server starts without sibling `client/`)
 - that productionised services SHOULD host hashed `client/` assets via reverse proxy or persistent storage, not from the Node process
 - that shipping sibling `client/` so Node can `express.static` them is standalone / experimentation only
@@ -58,8 +66,8 @@ Deploy-to-production docs MUST cover:
 #### Scenario: Deploy docs cover runtime package and asset hosting
 
 - **WHEN** a reader opens SSR deploy-to-production docs
-- **THEN** docs state that `server/` starts with `node server.js` without `node_modules` or a package install
-- **AND** docs list `server/server.js`, the server-local manifest, and `PORT` as the deploy contract
+- **THEN** docs state that `server/` starts with `node server.mjs` without `node_modules` or a package install
+- **AND** docs list `server/server.mjs`, the server-local manifest, and `PORT` as the deploy contract
 - **AND** docs recommend reverse proxy / persistent storage for hashed `client/` assets
 - **AND** docs describe sibling `client/` + Node `express.static` as standalone / experimentation only
 - **AND** docs state the server starts without sibling `client/` once the baked manifest is present
@@ -87,7 +95,7 @@ Migrating docs MUST cover:
 - webpack dual-port (`port` + `serverPort`) vs SSR single `port`
 - `serverPort` is rejected for SSR
 - production still honours `PORT`
-- production entry path `node dist/server/server.js` and sibling `client/` + `server/` layout
+- production entry path `node dist/server/server.mjs` and sibling `client/` + `server/` layout
 - that Document assets resolve from a baked server-local manifest (no sibling `client/` required to start)
 - that productionised deploys host `client/` via reverse proxy / persistent storage
 - Node `express.static` of sibling `client/` is standalone / experimentation only
@@ -152,7 +160,7 @@ Migrating docs MUST cover:
 - **THEN** docs explain webpack dual-port → SSR single `port`
 - **AND** docs state to drop `serverPort`
 - **AND** docs state `PORT` still overrides production
-- **AND** docs state the production server entry is `dist/server/server.js` with sibling `client/` and `server/` build outputs
+- **AND** docs state the production server entry is `dist/server/server.mjs` with sibling `client/` and `server/` build outputs
 - **AND** docs state Document assets resolve from a baked server-local manifest
 - **AND** docs state the production deploy needs only `server/`, without runtime `node_modules`
 - **AND** docs recommend hosting hashed assets outside Node for productionised deploys

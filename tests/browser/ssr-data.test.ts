@@ -198,13 +198,13 @@ describe('ssr-data', () => {
     }) => {
       skipCleanup(task.id);
       const serverEntry = await fs.readFile(
-        path.join(fixturePath('dist'), 'server', 'server.js'),
+        path.join(fixturePath('dist'), 'server', 'server.mjs'),
         'utf8',
       );
       expect(serverEntry).not.toContain('sku-ssr-data-dev-mock');
       expect(serverEntry).not.toContain('dev-middleware');
 
-      await node(['dist/server/server.js'], {
+      await node(['dist/server/server.mjs'], {
         spawnOpts: {
           env: { ...process.env, PORT: '8215' },
         },
@@ -263,14 +263,19 @@ describe('ssr-data', () => {
     it('runs the server output without node_modules', async ({ task }) => {
       skipCleanup(task.id);
       const port = await getPort();
-      const isolatedServerDir = await fs.mkdtemp(
+      const isolatedDir = await fs.mkdtemp(
         path.join(os.tmpdir(), 'sku-ssr-standalone-'),
       );
+      await fs.writeFile(
+        path.join(isolatedDir, 'package.json'),
+        JSON.stringify({ type: 'commonjs' }),
+      );
+      const isolatedServerDir = path.join(isolatedDir, 'server');
       await fs.cp(path.join(fixturePath('dist'), 'server'), isolatedServerDir, {
         recursive: true,
       });
 
-      await node([path.join(isolatedServerDir, 'server.js')], {
+      await node([path.join(isolatedServerDir, 'server.mjs')], {
         spawnOpts: {
           env: { ...process.env, PORT: String(port) },
         },

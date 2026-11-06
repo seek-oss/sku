@@ -10,12 +10,12 @@
 `sku build` emits sibling directories under the build target (for example `dist/`):
 
 - `client/` — hashed browser assets
-- `server/` — runnable Node server (`server.js`) and SSR bundle
+- `server/` — runnable Node server (`server.mjs`) and SSR bundle
 
 ```sh
 sku build
-node dist/server/server.js
-# optional: PORT=8080 node dist/server/server.js
+node dist/server/server.mjs
+# optional: PORT=8080 node dist/server/server.mjs
 ```
 
 Production listens on `process.env.PORT` when you set that variable.
@@ -24,11 +24,12 @@ Otherwise it uses the config [`port`](../configuration.md#port) (default `8080`)
 ## Server output
 
 `dist/server/` is self-contained.
-sku bundles your dependencies into it, so it starts with `node server.js` without `node_modules` or a package install.
+sku bundles your dependencies into it, so it starts with `node server.mjs` without `node_modules` or a package install.
+Its files use the `.mjs` extension, so Node loads them as ES modules regardless of any `package.json` above the deploy directory.
 
 Deploy tools can rely on:
 
-- `dist/server/server.js` as the entry point
+- `dist/server/server.mjs` as the entry point
 - the client manifest that sku writes inside `dist/server/`
 - the `PORT` environment variable
 

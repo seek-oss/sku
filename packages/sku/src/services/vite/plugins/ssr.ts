@@ -82,6 +82,13 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
             },
           },
           ssr: {
+            resolve: {
+              // The production server must run without the app's node_modules
+              noExternal: true,
+              // Bundling resolves from each importer, so sku's runtime could
+              // otherwise bundle a second copy of these singletons
+              dedupe: ['react', 'react-dom', 'react-router'],
+            },
             build: {
               // Sourcemaps are necessary to get useful stack traces for errors
               sourcemap: 'inline',
@@ -89,14 +96,29 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
               outDir: outDir.distServer,
               rolldownOptions: {
                 input: ssrServerEntry,
+                // `.mjs` so Node loads the server as ESM regardless of any
+                // `package.json` "type" above wherever it is deployed
                 output: {
-                  entryFileNames: 'server.js',
+                  entryFileNames: 'server.mjs',
+                  chunkFileNames: '[name]-[hash].chunk.mjs',
                 },
               },
             },
           },
         },
       }),
+      configEnvironment(name, config) {
+        if (name === 'ssr' && config.resolve) {
+          // Drop every explicit SSR external so the server bundle is
+          // self-contained. Explicit externals take precedence over
+          // `noExternal: true`, and plugins add them in their `config` hooks
+          // (e.g. vanilla-extract adds `@vanilla-extract/css` to
+          // `ssr.external`). Config merging concatenates arrays, so they can
+          // only be removed here, after every `config` hook has run. This
+          // plugin is build-only, so `sku start` keeps those externals.
+          config.resolve.external = [];
+        }
+      },
     },
     lazyRouteModuleIdPlugin(),
     // Serve-only: sku-hoisted `assets.css` + client entry own injection.

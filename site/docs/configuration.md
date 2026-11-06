@@ -670,7 +670,7 @@ Default: `8080`
 
 The port that hosts the app when you run `sku start`.
 
-**SSR**: this is also the baked production default listen port (`node dist/server/server.js`).
+**SSR**: this is also the baked production default listen port (`node dist/server/server.mjs`).
 Override it at runtime with `PORT`.
 SSR does not use [`serverPort`](#serverport).
 

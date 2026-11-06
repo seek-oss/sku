@@ -235,7 +235,7 @@ describe('ssr-document', () => {
       const clientDir = path.join(dist, 'client');
       const serverDir = path.join(dist, 'server');
       const bakedManifest = path.join(serverDir, 'manifest.json');
-      const serverEntry = path.join(serverDir, 'server.js');
+      const serverEntry = path.join(serverDir, 'server.mjs');
 
       expect((await fs.stat(clientDir)).isDirectory()).toBe(true);
       expect((await fs.stat(serverDir)).isDirectory()).toBe(true);
@@ -268,7 +268,7 @@ describe('ssr-document', () => {
 
     it('produces a runnable production server', async ({ task }) => {
       skipCleanup(task.id);
-      await node(['dist/server/server.js'], {
+      await node(['dist/server/server.mjs'], {
         spawnOpts: {
           env: { ...process.env, PORT: '8201' },
         },

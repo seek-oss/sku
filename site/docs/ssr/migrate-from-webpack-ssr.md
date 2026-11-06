@@ -61,7 +61,8 @@ export default {
   Use [`port`](../configuration.md#port) (or `PORT` at runtime).
   Remove `serverPort`
 - **Deploy layout:** `node dist/server/server.js` with sibling `client/` + `server/`.
-  This is not webpack’s single `dist/server.js`
+  This is not webpack’s single `dist/server.js`.
+  Deploy only `dist/server/`: it doesn't need `node_modules`
 - Type server-entry `middleware` for Express 4. Install React Router 8 in the app
 
 ## Routes and request entries

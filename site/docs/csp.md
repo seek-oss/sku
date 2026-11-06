@@ -32,6 +32,77 @@ SSR always emits real HTTP CSP headers and ignores `cspDelivery`.
 If you need to allow scripts that are only known on the client, add their URLs to the `cspExtraScriptSrcHosts` array in your `sku.config.js`.
 This includes scripts loaded by tag managers.
 
+SSR apps use [`cspExtraSources`](#extra-sources-ssr) instead.
+Config validation fails if an SSR app sets `cspExtraScriptSrcHosts`.
+
+### Extra sources (SSR) <Badge type="tip" text="SSR" /> <Badge type="warning" text="experimental" />
+
+SSR apps can add sources to individual directives with the `cspExtraSources` option.
+It is a map from directive name to an array of sources:
+
+```ts
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  cspEnabled: true,
+  cspExtraSources: {
+    'script-src': ['https://cdn.example.com'],
+    'connect-src': ['https://browser-intake-datadoghq.com'],
+    'frame-src': ['https://www.youtube.com'],
+  },
+} satisfies SkuConfig;
+```
+
+The supported directives are:
+
+- `script-src`
+- `style-src`
+- `img-src`
+- `font-src`
+- `connect-src`
+- `frame-src`
+- `media-src`
+- `worker-src`
+- `manifest-src`
+- `form-action`
+
+sku keeps its own sources for every directive, including `script-src` nonces and hashes, and appends your sources after them.
+Some directives aren't in sku's default policy, for example `frame-src`.
+If you configure one of those, sku emits it as `'self'` followed by your sources.
+This matches the browser's fallback to `default-src 'self'`, so same-origin requests keep working.
+
+Each directive is a separate permission, so list a host under every directive that needs it.
+For example, a CDN that serves stylesheets, fonts and images, but no scripts:
+
+```ts
+const assetCdn = ['https://assets.example.com'];
+
+export default {
+  // ...
+  cspExtraSources: {
+    'style-src': assetCdn,
+    'font-src': assetCdn,
+    'img-src': assetCdn,
+  },
+} satisfies SkuConfig;
+```
+
+Sources can be origins (`https://cdn.example.com`), wildcard hosts (`https://*.example.com`) or schemes (`https:`, `data:`, `blob:`).
+Config validation fails for:
+
+- directives not in the list above, such as `default-src`, `base-uri` and `frame-ancestors`
+- quoted sources, such as `'unsafe-inline'`, nonces and hashes
+- a bare `*`
+- schemes in `script-src`, such as `https:` or `data:`, which would allow scripts from any origin using that scheme
+
+> [!WARNING]
+> Every source you allow is a place the page may load from or send data to.
+> This matters most for `connect-src`.
+> If an attacker injects a script, it can send data to any `connect-src` origin.
+> Allow specific origins rather than broad wildcards or schemes, and only the ones your app needs.
+
+[Report-only](#report-only-content-security-policy) policies use the same sources unless you set `cspReportOnlyExtraSources`.
+
 ### Report To
 
 The `cspReportTo` option lets the browser capture CSP violation reports via the [Reporting API].
@@ -188,6 +259,7 @@ This causes sku to generate a [`Content-Security-Policy-Report-Only`] header.
 
 By default the report-only CSP has the same content as the standard CSP, including the same [extra hosts](#extra-hosts).
 You can change this by setting the `cspReportOnlyExtraScriptSrcHosts` array in `sku.config.js` to the script URLs for the report-only CSP.
+SSR apps set `cspReportOnlyExtraSources` instead, which accepts the same directives as [`cspExtraSources`](#extra-sources-ssr).
 The report-only CSP also shares the same [reporting](#report-to) configuration as the standard CSP.
 You can change that by setting the `cspReportOnlyReportTo` option.
 

@@ -45,7 +45,7 @@ export const startProductionSsrServer = async ({
     ? siblingClientDirectory
     : undefined;
 
-  const csp = __SKU_CSP__;
+  const csp = __SKU_SSR_CSP__;
 
   return listen({
     port: Number(process.env.PORT) || Number(__SKU_DEFAULT_SERVER_PORT__),
@@ -58,10 +58,10 @@ export const startProductionSsrServer = async ({
     clientDirectory,
     manifest: { manifest, publicPath, entry },
     cspEnabled: csp.enabled,
-    cspExtraScriptSrcHosts: csp.extraHosts,
+    cspExtraSources: csp.extraSources,
     cspReportTo: csp.reportTo,
-    cspReportOnlyEnabled: csp.reportOnlyEnabled ?? false,
-    cspReportOnlyExtraScriptSrcHosts: csp.reportOnlyExtraHosts ?? [],
+    cspReportOnlyEnabled: csp.reportOnlyEnabled,
+    cspReportOnlyExtraSources: csp.reportOnlyExtraSources,
     cspReportOnlyReportTo: csp.reportOnlyReportTo,
   });
 };

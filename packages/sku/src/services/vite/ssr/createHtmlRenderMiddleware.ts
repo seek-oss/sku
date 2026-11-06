@@ -1,5 +1,5 @@
 import type { Request, RequestHandler, Response } from 'express';
-import type { ReportingEndpoint } from '../../../utils/csp.js';
+import type { CspExtraSources, ReportingEndpoint } from '../../../utils/csp.js';
 import { buildCspHeaders } from './csp.js';
 import { getRequestContextStore } from './ssrRequestContextMiddleware.js';
 import { createSsrRequestContextStore } from './createSsrRequestContextStore.js';
@@ -35,10 +35,10 @@ export const createHtmlRenderMiddleware =
     assets,
     manifest,
     cspEnabled,
-    cspExtraScriptSrcHosts,
+    cspExtraSources,
     cspReportTo,
     cspReportOnlyEnabled,
-    cspReportOnlyExtraScriptSrcHosts,
+    cspReportOnlyExtraSources,
     cspReportOnlyReportTo,
     development = false,
     onRenderError,
@@ -47,10 +47,10 @@ export const createHtmlRenderMiddleware =
     assets: RenderAssets;
     manifest?: RenderManifest;
     cspEnabled: boolean;
-    cspExtraScriptSrcHosts: string[];
+    cspExtraSources: CspExtraSources;
     cspReportTo?: ReportingEndpoint;
     cspReportOnlyEnabled: boolean;
-    cspReportOnlyExtraScriptSrcHosts: string[];
+    cspReportOnlyExtraSources: CspExtraSources;
     cspReportOnlyReportTo?: ReportingEndpoint;
     development?: boolean;
     onRenderError?: (error: Error) => void;
@@ -108,9 +108,9 @@ export const createHtmlRenderMiddleware =
               reportOnlyEnabled: cspReportOnlyEnabled,
               inlineScripts: result.inlineScripts,
               nonce: requestContextStore.peekCspNonce(),
-              extraHosts: cspExtraScriptSrcHosts,
+              extraSources: cspExtraSources,
               reportTo: cspReportTo,
-              reportOnlyExtraHosts: cspReportOnlyExtraScriptSrcHosts,
+              reportOnlyExtraSources: cspReportOnlyExtraSources,
               reportOnlyReportTo: cspReportOnlyReportTo,
               development,
             }),

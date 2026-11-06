@@ -17,6 +17,8 @@ declare const __SKU_SITES__: string[];
 
 declare const __SKU_CSP__: SkuCSP;
 
+declare const __SKU_SSR_CSP__: SkuSsrCSP;
+
 declare const __SKU_EXPRESS_TRUST_PROXY__: boolean;
 
 declare const __SKU_DEV_MIDDLEWARE_PATH__: string;
@@ -32,10 +34,16 @@ type SkuReportingEndpoint = { endpoint: string; url?: string };
 type SkuCSP = {
   enabled: boolean;
   extraHosts: string[];
-  /** SSR `report-to` reporting endpoint (optional; unused by webpack SSR). */
+};
+
+/** Mirrors `CspExtraSources` from `utils/csp.ts`. */
+type SkuCspExtraSources = Partial<Record<string, string[]>>;
+
+type SkuSsrCSP = {
+  enabled: boolean;
+  extraSources: SkuCspExtraSources;
   reportTo?: SkuReportingEndpoint;
-  /** SSR Report-Only CSP (optional; unused by webpack SSR). */
-  reportOnlyEnabled?: boolean;
-  reportOnlyExtraHosts?: string[];
+  reportOnlyEnabled: boolean;
+  reportOnlyExtraSources: SkuCspExtraSources;
   reportOnlyReportTo?: SkuReportingEndpoint;
 };

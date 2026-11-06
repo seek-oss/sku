@@ -51,8 +51,8 @@ describe('buildCspHeaders nonce inclusion', () => {
       enabled: true,
       reportOnlyEnabled: false,
       inlineScripts: ['console.log(1)'],
-      extraHosts: [],
-      reportOnlyExtraHosts: [],
+      extraSources: {},
+      reportOnlyExtraSources: {},
       development: false,
     });
 
@@ -80,8 +80,8 @@ describe('buildCspHeaders report-to', () => {
       enabled: true,
       reportOnlyEnabled: true,
       inlineScripts: [],
-      extraHosts: [],
-      reportOnlyExtraHosts: [],
+      extraSources: {},
+      reportOnlyExtraSources: {},
       reportOnlyReportTo: { endpoint: 'csp-endpoint' },
       development: false,
     });
@@ -97,9 +97,9 @@ describe('buildCspHeaders report-to', () => {
       enabled: true,
       reportOnlyEnabled: false,
       inlineScripts: [],
-      extraHosts: [],
+      extraSources: {},
       reportTo: { endpoint: 'csp-endpoint' },
-      reportOnlyExtraHosts: [],
+      reportOnlyExtraSources: {},
       development: false,
     });
 
@@ -113,8 +113,8 @@ describe('buildCspHeaders report-to', () => {
       enabled: false,
       reportOnlyEnabled: true,
       inlineScripts: [],
-      extraHosts: [],
-      reportOnlyExtraHosts: [],
+      extraSources: {},
+      reportOnlyExtraSources: {},
       reportOnlyReportTo: undefined,
       development: false,
     });
@@ -131,9 +131,9 @@ describe('buildCspHeaders Reporting-Endpoints', () => {
       enabled: true,
       reportOnlyEnabled: true,
       inlineScripts: [],
-      extraHosts: [],
+      extraSources: {},
       reportTo: { endpoint: 'csp-endpoint', url: 'https://example.com/csp' },
-      reportOnlyExtraHosts: [],
+      reportOnlyExtraSources: {},
       reportOnlyReportTo: {
         endpoint: 'csp-report-only-endpoint',
         url: 'https://example.com/csp-report-only',
@@ -151,9 +151,9 @@ describe('buildCspHeaders Reporting-Endpoints', () => {
       enabled: true,
       reportOnlyEnabled: true,
       inlineScripts: [],
-      extraHosts: [],
+      extraSources: {},
       reportTo: { endpoint: 'csp-endpoint' },
-      reportOnlyExtraHosts: [],
+      reportOnlyExtraSources: {},
       reportOnlyReportTo: { endpoint: 'csp-endpoint' },
       development: false,
     });

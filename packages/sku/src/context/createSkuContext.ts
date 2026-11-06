@@ -1,5 +1,5 @@
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
-import { parseCspReportTo } from '../utils/csp.js';
+import { type CspExtraSources, parseCspReportTo } from '../utils/csp.js';
 import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
@@ -224,6 +224,9 @@ export const createSkuContext = async ({
     skuConfig.cspReportOnlyExtraScriptSrcHosts ?? cspExtraScriptSrcHosts;
   const cspReportOnlyReportTo =
     parseCspReportTo(skuConfig.cspReportOnlyReportTo) ?? cspReportTo;
+  const cspExtraSources: CspExtraSources = skuConfig.cspExtraSources ?? {};
+  const cspReportOnlyExtraSources: CspExtraSources =
+    skuConfig.cspReportOnlyExtraSources ?? cspExtraSources;
   const httpsDevServer = skuConfig.httpsDevServer;
   const languages = normalizedLanguages;
   const skipPackageCompatibilityCompilation =
@@ -295,6 +298,8 @@ export const createSkuContext = async ({
     cspReportOnlyEnabled,
     cspReportOnlyExtraScriptSrcHosts,
     cspReportOnlyReportTo,
+    cspExtraSources,
+    cspReportOnlyExtraSources,
     expressTrustProxy: Boolean(skuConfig.expressTrustProxy),
     httpsDevServer,
     languages,

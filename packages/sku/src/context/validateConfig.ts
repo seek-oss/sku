@@ -7,6 +7,10 @@ import defaultSkuConfig from './defaultSkuConfig.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import type { SkuConfig } from '../types/types.js';
 import { hasErrorMessage } from '../utils/error-guards.js';
+import {
+  cspExtraSourceDirectives,
+  isCspExtraSourceDirective,
+} from '../utils/csp.js';
 import type { ValidationError } from 'fastest-validator';
 import { caution, critical, strong } from '@sku-private/utils/console';
 import { getPathFromCwd } from '@sku-private/utils';
@@ -159,6 +163,79 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
         'vitePlugins',
       )}'. Raise exceptional Vite customisation needs in #sku-support with your use-case.`,
     );
+  }
+
+  const cspOptionReplacements = [
+    ['cspExtraScriptSrcHosts', 'cspExtraSources'],
+    ['cspReportOnlyExtraScriptSrcHosts', 'cspReportOnlyExtraSources'],
+  ] as const;
+
+  // Check the consumer file (pre-defaults merge): defaults set both host options and extra sources.
+  for (const [hostsOption, sourcesOption] of cspOptionReplacements) {
+    if (
+      skuConfig.buildType === 'ssr' &&
+      Object.prototype.hasOwnProperty.call(appSkuConfig, hostsOption)
+    ) {
+      errors.push(
+        `🚫 SSR does not support '${strong(hostsOption)}'. Use '${strong(
+          `${sourcesOption}['script-src']`,
+        )}' instead.`,
+      );
+    }
+
+    if (
+      skuConfig.buildType !== 'ssr' &&
+      Object.prototype.hasOwnProperty.call(appSkuConfig, sourcesOption)
+    ) {
+      errors.push(
+        `🚫 '${strong(sourcesOption)}' is only supported with '${strong(
+          'buildType: ssr',
+        )}'. Use '${strong(hostsOption)}' instead.`,
+      );
+    }
+
+    const extraSources = (skuConfig as Record<string, unknown>)[sourcesOption];
+    if (typeof extraSources === 'object' && extraSources !== null) {
+      for (const [directive, sources] of Object.entries(extraSources)) {
+        const field = `${sourcesOption}['${directive}']`;
+
+        if (!isCspExtraSourceDirective(directive)) {
+          errors.push(
+            `🚫 '${strong(field)}' is not a supported directive. Supported directives: ${cspExtraSourceDirectives.join(', ')}.`,
+          );
+        }
+
+        if (!Array.isArray(sources)) {
+          continue;
+        }
+
+        for (const source of sources) {
+          if (typeof source !== 'string') {
+            continue;
+          }
+
+          if (source.includes("'")) {
+            errors.push(
+              `🚫 '${strong(field)}' contains ${strong(
+                source,
+              )}. Quoted sources (keywords, nonces and hashes) are not supported.`,
+            );
+          } else if (source === '*') {
+            errors.push(
+              `🚫 '${strong(field)}' contains a bare ${strong(
+                '*',
+              )}, which allows any origin. List specific origins instead.`,
+            );
+          } else if (/[\s;,]/.test(source)) {
+            errors.push(
+              `🚫 '${strong(field)}' contains ${strong(
+                source,
+              )}. Each source must be a single value without whitespace, ';' or ','.`,
+            );
+          }
+        }
+      }
+    }
   }
 
   // Ensure defaultClientEntry is not configured as a route name

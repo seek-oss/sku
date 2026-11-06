@@ -126,6 +126,35 @@ Default: `[]`
 Extra external hosts to allow in your `script-src` [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
 Only relevant if `cspEnabled` is set to `true`.
 
+Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+Use [`cspExtraSources`](#cspextrasources) `['script-src']` instead.
+
+## cspExtraSources <Badge type="info" text="SSR only" />
+
+Type: `Partial<Record<Directive, Array<string>>>`
+
+Default: `{}`
+
+Bundler: `vite` · `buildType: 'ssr'`
+
+Extra sources to append to directives of the [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP), keyed by directive name.
+Only relevant if `cspEnabled` is set to `true`.
+See [Extra sources (SSR)](./csp.md#extra-sources-ssr) for the supported directives and the rules for sources.
+
+Config validation fails when the option is used without `buildType: 'ssr'`.
+Use [`cspExtraScriptSrcHosts`](#cspextrascriptsrchosts) instead.
+
+```ts
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  cspEnabled: true,
+  cspExtraSources: {
+    'connect-src': ['https://browser-intake-datadoghq.com'],
+  },
+} satisfies SkuConfig;
+```
+
 ## cspReportTo
 
 Type: `string | [string, string]`
@@ -162,6 +191,24 @@ Bundler: `vite`
 
 Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
 Only relevant if `cspReportOnlyEnabled` is set to `true`.
+
+Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+Use [`cspReportOnlyExtraSources`](#cspreportonlyextrasources) `['script-src']` instead.
+
+## cspReportOnlyExtraSources <Badge type="info" text="SSR only" />
+
+Type: `Partial<Record<Directive, Array<string>>>`
+
+Default: `cspExtraSources`
+
+Bundler: `vite` · `buildType: 'ssr'`
+
+Extra sources to append to directives of the report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP), keyed by directive name.
+Only relevant if `cspReportOnlyEnabled` is set to `true`.
+Accepts the same directives and sources as [`cspExtraSources`](#cspextrasources).
+
+Config validation fails when the option is used without `buildType: 'ssr'`.
+Use [`cspReportOnlyExtraScriptSrcHosts`](#cspreportonlyextrascriptsrchosts) instead.
 
 ## cspReportOnlyReportTo
 

@@ -39,6 +39,9 @@ Extending `default-src` silently widens every directive that falls back to it.
 The option is for allowing origins. Keywords, nonces and hashes would let apps weaken the policy in ways sku can't reason about, and sku already manages its own `script-src` nonces and hashes. A bare `*` turns the directive into an open allowance.
 Schemes (`https:`, `data:`, `blob:`) and wildcard hosts (`https://*.example.com`) stay allowed, because they have legitimate uses.
 
+**Reject schemes in `script-src`.**
+sku's policy doesn't use `'strict-dynamic'`, so a scheme such as `https:` in `script-src` allows scripts from any origin using it and cancels the protection of sku's nonces and hashes, the same as a bare `*`. Workers that need `blob:` use `worker-src`, which still accepts schemes.
+
 **Missing directives are emitted as `'self'` plus the extras.**
 Without an explicit directive the browser falls back to `default-src 'self'`, so `'self'` keeps same-origin behaviour unchanged when an app adds a cross-origin source.
 

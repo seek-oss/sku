@@ -232,6 +232,15 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
                 source,
               )}. Each source must be a single value without whitespace, ';' or ','.`,
             );
+          } else if (
+            directive === 'script-src' &&
+            /^[a-z][a-z0-9+.-]*:$/i.test(source)
+          ) {
+            errors.push(
+              `🚫 '${strong(field)}' contains the scheme ${strong(
+                source,
+              )}, which allows scripts from any origin using it. List specific origins instead.`,
+            );
           }
         }
       }

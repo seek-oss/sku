@@ -93,6 +93,7 @@ Config validation fails for:
 - directives not in the list above, such as `default-src`, `base-uri` and `frame-ancestors`
 - quoted sources, such as `'unsafe-inline'`, nonces and hashes
 - a bare `*`
+- schemes in `script-src`, such as `https:` or `data:`, which would allow scripts from any origin using that scheme
 
 > [!WARNING]
 > Every source you allow is a place the page may load from or send data to.

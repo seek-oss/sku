@@ -414,6 +414,33 @@ describe('validateConfig — CSP extra sources', () => {
     expect(logged).toContain('allows any origin');
   });
 
+  it.each(['https:', 'data:', 'blob:'])(
+    'rejects the scheme-only script-src source %s',
+    (source) => {
+      expect(() =>
+        validateSsr({
+          bundler: 'vite',
+          cspReportOnlyExtraSources: { 'script-src': [source] },
+        }),
+      ).toThrow('process.exit: 1');
+
+      const logged = logSpy.mock.calls.join('\n');
+      expect(logged).toContain("cspReportOnlyExtraSources['script-src']");
+      expect(logged).toContain('allows scripts from any origin');
+    },
+  );
+
+  it('accepts scheme-only sources outside script-src', () => {
+    expect(() =>
+      validateSsr({
+        bundler: 'vite',
+        cspExtraSources: { 'worker-src': ['blob:'], 'img-src': ['data:'] },
+      }),
+    ).not.toThrow();
+
+    expect(exitSpy).not.toHaveBeenCalled();
+  });
+
   it.each(['https://a.com https://b.com', 'https://a.com; img-src *'])(
     'rejects the multi-value source %s',
     (source) => {

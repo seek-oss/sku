@@ -3,7 +3,7 @@
 ## 1. Config surface
 
 - [x] 1.1 Add `cspExtraSources` and `cspReportOnlyExtraSources` to `types.ts` (with JSDoc noting SSR only, and marking the script-host options as non-SSR only), `configSchema.ts` and `defaultSkuConfig.ts`, and verify `pnpm --filter sku typecheck` passes
-- [x] 1.2 Validate supported directive names, and reject quoted sources and bare `*`; verify with new cases in `validateConfig.test.ts`
+- [x] 1.2 Validate supported directive names, and reject quoted sources, bare `*` and schemes in `script-src`; verify with new cases in `validateConfig.test.ts`
 - [x] 1.3 In `validateConfig.ts`, reject the script-host options for SSR apps and the extra-sources options for non-SSR apps, with errors naming the replacement; verify with `validateConfig.test.ts` cases for both directions
 - [x] 1.4 Resolve both maps in `createSkuContext.ts`, with Report-Only defaulting to enforcing, and verify with a context unit test
 

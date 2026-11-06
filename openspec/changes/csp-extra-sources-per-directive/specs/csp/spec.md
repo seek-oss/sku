@@ -39,7 +39,7 @@ Sku MUST keep its own sources for every directive (including `script-src` nonces
 
 ### Requirement: Invalid extra sources are rejected
 
-Sku MUST fail config validation when `cspExtraSources` or `cspReportOnlyExtraSources` contains an unsupported directive name, a quoted source (such as `'unsafe-inline'`, a nonce or a hash), or a bare `*`.
+Sku MUST fail config validation when `cspExtraSources` or `cspReportOnlyExtraSources` contains an unsupported directive name, a quoted source (such as `'unsafe-inline'`, a nonce or a hash), a bare `*`, or a scheme-only source (such as `https:`) under `script-src`.
 
 #### Scenario: Unsupported directive
 
@@ -50,6 +50,16 @@ Sku MUST fail config validation when `cspExtraSources` or `cspReportOnlyExtraSou
 
 - **WHEN** a config sets `cspExtraSources: { 'style-src': ["'unsafe-eval'"] }`
 - **THEN** sku reports a config validation error
+
+#### Scenario: Scheme in script-src
+
+- **WHEN** a config sets `cspExtraSources: { 'script-src': ['https:'] }`
+- **THEN** sku reports a config validation error
+
+#### Scenario: Scheme outside script-src
+
+- **WHEN** a config sets `cspExtraSources: { 'worker-src': ['blob:'] }`
+- **THEN** config validation passes
 
 ### Requirement: CSP extension options match the build type
 

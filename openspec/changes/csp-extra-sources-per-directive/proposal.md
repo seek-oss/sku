@@ -12,7 +12,7 @@ This blocks common needs such as posting Datadog RUM batches, loading images fro
 - Add `cspReportOnlyExtraSources`, defaulting to `cspExtraSources`, for the Report-Only policy.
 - `script-src` is one of the map's keys, so SSR apps extend every directive through the same option.
 - When a supported directive that sku does not currently emit is configured (for example `frame-src`), sku emits it as `'self'` plus the extras.
-- Config validation rejects unsupported directive names, quoted keyword/nonce/hash sources, and bare `*`.
+- Config validation rejects unsupported directive names, quoted keyword/nonce/hash sources, bare `*`, and scheme-only sources in `script-src`.
 - **BREAKING (experimental SSR only):** `cspExtraScriptSrcHosts` and `cspReportOnlyExtraScriptSrcHosts` become a config error for Managed Data Mode SSR apps. They migrate to `cspExtraSources['script-src']` and `cspReportOnlyExtraSources['script-src']`.
 - `cspExtraSources` and `cspReportOnlyExtraSources` are a config error for static Vite and webpack apps. Those apps keep using `cspExtraScriptSrcHosts` unchanged.
 

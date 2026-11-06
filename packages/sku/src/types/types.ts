@@ -676,7 +676,7 @@ interface ViteSkuConfig {
    * Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
    *
    * A supported directive that sku doesn't emit by default is emitted as `'self'` plus the configured sources.
-   * Quoted sources (keywords, nonces and hashes) and a bare `*` are not allowed.
+   * Quoted sources (keywords, nonces and hashes), a bare `*` and schemes in `script-src` (such as `https:`) are not allowed.
    *
    * @example
    * { 'connect-src': ['https://browser-intake-datadoghq.com'] }

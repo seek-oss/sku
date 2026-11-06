@@ -2,7 +2,7 @@
 'sku': minor
 ---
 
-Vite SSR: Add `cspExtraSources` and `cspReportOnlyExtraSources` options to extend individual CSP directives
+Managed Data Mode SSR: Add `cspExtraSources` and `cspReportOnlyExtraSources` options to extend individual CSP directives
 
 Each option is a map from directive name to extra sources.
 The supported directives are `script-src`, `style-src`, `img-src`, `font-src`, `connect-src`, `frame-src`, `media-src`, `worker-src`, `manifest-src` and `form-action`.

@@ -745,6 +745,41 @@ describe('render', () => {
     await expect(pending).rejects.toBe(reason);
   });
 
+  it('serialises the modules the page was rendered with as required modules', async () => {
+    const entry = { file: 'ssr-client.js', name: 'ssr-client', isEntry: true };
+    const result = await render({
+      siteStaticHandlers,
+      request: new Request('http://localhost/'),
+      req: { path: '/' } as ExpressRequest,
+      assets,
+      getSite,
+      getLanguage: () => 'en',
+      renderManifest: {
+        manifest: {
+          'ssr-client': entry,
+          'virtual:vocab-en.json': {
+            file: 'en-translations.js',
+            name: 'en-translations',
+          },
+        },
+        publicPath: '/static/',
+        entry,
+      },
+    });
+
+    if ('response' in result) {
+      throw new Error('Expected a streamed document, not a Response');
+    }
+
+    const html = await commitToHtml(result);
+    expect(html).toContain(
+      'rel="modulepreload" href="/static/en-translations.js"',
+    );
+    expect(html).toContain(
+      '"requiredModules":["\\u002Fstatic\\u002Fen-translations.js"]',
+    );
+  });
+
   describe('document head contribution', () => {
     it('streams root-layout html with sku-hoisted links inside head and no wrapping sku html', async () => {
       const CustomRootLayout = () => (

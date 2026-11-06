@@ -7,17 +7,17 @@
 
 ## 2. Server: record the modules the page was rendered with
 
-- [ ] 2.1 Add optional `requiredModules: string[]` to `DocumentAssets`. Have `resolveAssets` fill it with the `publicPath` file of each `moduleIds` entry it resolves, excluding manifest imports and the client entry. Verify with new cases in `resolveAssets.test.ts`: a route module and `en-translations` are listed, their imports are not, and unknown ids are skipped.
-- [ ] 2.2 Pass `requiredModules` through `render` into the serialised `__SKU_DOCUMENT_ASSETS__`. Verify a `render.test.tsx` case shows it in the bootstrap script and that `modulePreloads` is unchanged.
+- [x] 2.1 Add optional `requiredModules: string[]` to `DocumentAssets`. Have `resolveAssets` fill it with the `publicPath` file of each `moduleIds` entry it resolves, excluding manifest imports and the client entry. Verify with new cases in `resolveAssets.test.ts`: a route module and `en-translations` are listed, their imports are not, and unknown ids are skipped.
+- [x] 2.2 Pass `requiredModules` through `render` into the serialised `__SKU_DOCUMENT_ASSETS__`. Verify a `render.test.tsx` case shows it in the bootstrap script and that `modulePreloads` is unchanged.
 
 ## 3. Client: wait before hydrating
 
-- [ ] 3.1 In `entries/ssr-client.tsx`, start `import()` of every `requiredModules` URL when `hydrate` begins, and await them with the lazy route modules before `createBrowserRouter`. Verify task 1.1's test passes.
-- [ ] 3.2 Verify nothing regressed in the other Vite SSR browser tests: `pnpm test tests/browser/ssr-document.test.ts tests/browser/ssr-data.test.ts tests/browser/ssr-sites.test.ts tests/browser/translations.test.ts`.
+- [x] 3.1 In `entries/ssr-client.tsx`, start `import()` of every `requiredModules` URL when `hydrate` begins, and await them with the lazy route modules before `createBrowserRouter`. Verify task 1.1's test passes.
+- [x] 3.2 Verify nothing regressed in the other Vite SSR browser tests: `pnpm test tests/browser/ssr-document.test.ts tests/browser/ssr-data.test.ts tests/browser/ssr-sites.test.ts tests/browser/translations.test.ts`.
 
 ## 4. Release
 
-- [ ] 4.1 Add a `patch` changeset for `sku`, saying that production Vite SSR now runs the language chunk and route modules before hydrating, which fixes React #418 on translated pages. Verify with `pnpm changeset status`.
+- [x] 4.1 Add a `patch` changeset for `sku`, saying that production Vite SSR now runs the language chunk and route modules before hydrating, which fixes React #418 on translated pages. Verify with `pnpm changeset status`.
 
 ## Workflow follow-up
 

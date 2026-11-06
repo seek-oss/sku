@@ -22,6 +22,11 @@ export interface DocumentAssets {
   css: string[];
   modulePreloads: string[];
   /**
+   * Modules the page was rendered with (route `handle.moduleId`s and the
+   * language chunk). The client imports these before hydrating.
+   */
+  requiredModules?: string[];
+  /**
    * Start-only virtual stylesheet href. Sku document asset links mark this URL
    * with `data-ssr-css` so the client can drop it after HMR.
    */

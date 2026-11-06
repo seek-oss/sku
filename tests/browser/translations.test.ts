@@ -1,5 +1,5 @@
 import { describe, beforeAll, it, expect } from 'vitest';
-import { getAppSnapshot } from '@sku-private/playwright';
+import { createPage, getAppSnapshot } from '@sku-private/playwright';
 import { getPort } from '@sku-private/test-utils';
 import {
   bundlers,
@@ -8,7 +8,8 @@ import {
   skipCleanup,
   waitFor,
 } from '@sku-private/testing-library';
-import { readFile, rm } from 'node:fs/promises';
+import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 
 const { sku, node, fixturePath } = scopeToFixture('translations');
@@ -178,6 +179,73 @@ describe('vite ssr translations build', () => {
         expect(html).toMatch(/en-translations[^"]*\.js/);
       },
       { timeout: 15000 },
+    );
+  });
+
+  describe('standalone production server', () => {
+    let standaloneUrl: string;
+
+    beforeAll(async () => {
+      const port = await getPort();
+      standaloneUrl = `http://127.0.0.1:${port}`;
+
+      const isolatedDir = await mkdtemp(
+        path.join(os.tmpdir(), 'sku-translations-standalone-'),
+      );
+      await writeFile(
+        path.join(isolatedDir, 'package.json'),
+        JSON.stringify({ type: 'commonjs' }),
+      );
+      await cp(fixturePath('dist'), isolatedDir, { recursive: true });
+
+      await node([path.join(isolatedDir, 'server', 'server.mjs')], {
+        spawnOpts: {
+          env: { ...process.env, PORT: String(port) },
+        },
+      });
+
+      await waitFor(
+        async () => {
+          const response = await fetch(`${standaloneUrl}/en`);
+          expect(response.ok).toBe(true);
+        },
+        { timeout: 15000 },
+      );
+    });
+
+    it.for([
+      { language: 'en', text: 'Hello sku' },
+      { language: 'fr', text: 'Bonjour sku' },
+    ])(
+      'hydrates /$language without hydration errors',
+      async ({ language, text }, { task }) => {
+        skipCleanup(task.id);
+        const page = await createPage();
+        const errors: string[] = [];
+        page.on('pageerror', (error) => errors.push(error.message));
+        page.on('console', (message) => {
+          if (message.type() === 'error') {
+            errors.push(message.text());
+          }
+        });
+
+        await page.goto(`${standaloneUrl}/${language}`, {
+          waitUntil: 'networkidle',
+        });
+        await page.waitForFunction(() => {
+          const app = document.body.querySelector('div');
+          return (
+            app !== null &&
+            Object.keys(app).some((key) => key.startsWith('__reactFiber$'))
+          );
+        });
+
+        expect(
+          await page.locator('body > div').first().textContent(),
+        ).toContain(text);
+        expect(errors).toEqual([]);
+        await page.close();
+      },
     );
   });
 });

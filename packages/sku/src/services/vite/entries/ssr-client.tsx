@@ -33,6 +33,16 @@ const hydrate = async () => {
   const siteRoutes = selectForSite(siteRouteTrees, site, 'hydrate bootstrap');
   // `usePreloadRoute` matches against the same tree the router navigates.
   registerSiteRouteTree(siteRoutes);
+  const documentAssets = window.__SKU_DOCUMENT_ASSETS__ ?? {
+    css: [],
+    modulePreloads: [],
+  };
+  const requiredModules = Promise.all(
+    (documentAssets.requiredModules ?? []).map(
+      (href) => import(/* @vite-ignore */ href),
+    ),
+  );
+
   const clientContext = window.__SKU_CLIENT_CONTEXT__;
   onHydrate?.({ clientContext });
 
@@ -42,15 +52,16 @@ const hydrate = async () => {
     ({ route }) => route.lazy,
   );
 
-  await Promise.all(
-    lazyMatches?.map(async ({ route }) => {
+  await Promise.all([
+    requiredModules,
+    ...(lazyMatches?.map(async ({ route }) => {
       const lazy = route.lazy;
       if (typeof lazy !== 'function') {
         return;
       }
       Object.assign(route, await lazy(), { lazy: undefined });
-    }) ?? [],
-  );
+    }) ?? []),
+  ]);
 
   const router = createBrowserRouter(siteRoutes, {
     ...(getRouterContext
@@ -65,14 +76,7 @@ const hydrate = async () => {
   hydrateRoot(
     document,
     <>
-      <DocumentAssetLinks
-        assets={
-          window.__SKU_DOCUMENT_ASSETS__ ?? {
-            css: [],
-            modulePreloads: [],
-          }
-        }
-      />
+      <DocumentAssetLinks assets={documentAssets} />
       <SkuProvider
         site={site}
         clientContext={clientContext}

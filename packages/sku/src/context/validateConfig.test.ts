@@ -319,7 +319,7 @@ describe('validateConfig — SSR sites', () => {
   });
 });
 
-describe('validateConfig — CSP extra sources', () => {
+describe('validateConfig — SSR csp', () => {
   let exitSpy: ReturnType<typeof vi.spyOn>;
   let logSpy: ReturnType<typeof vi.spyOn>;
 
@@ -351,16 +351,37 @@ describe('validateConfig — CSP extra sources', () => {
       },
     );
 
-  it.each(['cspExtraSources', 'cspReportOnlyExtraSources'] as const)(
-    'accepts supported directives and sources in %s for SSR',
-    (option) => {
+  const getValidationErrors = (appSkuConfig: SkuConfig) => {
+    expect(() => validateSsr(appSkuConfig)).toThrow('process.exit: 1');
+
+    return logSpy.mock.calls.join('\n');
+  };
+
+  it.each([
+    { enforced: true },
+    { reportOnly: true },
+    { enforced: true, reportOnly: true },
+  ] as const)('accepts the policies %j', (csp) => {
+    expect(() => validateSsr({ bundler: 'vite', csp })).not.toThrow();
+
+    expect(exitSpy).not.toHaveBeenCalled();
+  });
+
+  it.each(['enforced', 'reportOnly'] as const)(
+    'accepts supported directives, sources and a reportTo URL in csp.%s',
+    (policy) => {
       expect(() =>
         validateSsr({
           bundler: 'vite',
-          [option]: {
-            'connect-src': ['https://browser-intake-datadoghq.com'],
-            'frame-src': ['https://www.youtube.com'],
-            'img-src': ['https://*.example.com', 'blob:'],
+          csp: {
+            [policy]: {
+              extraSources: {
+                'connect-src': ['https://browser-intake-datadoghq.com'],
+                'frame-src': ['https://www.youtube.com'],
+                'img-src': ['https://*.example.com', 'blob:'],
+              },
+              reportTo: 'https://csp.example.com/report',
+            },
           },
         }),
       ).not.toThrow();
@@ -369,64 +390,107 @@ describe('validateConfig — CSP extra sources', () => {
     },
   );
 
-  it.each(['cspExtraSources', 'cspReportOnlyExtraSources'] as const)(
-    'rejects an unsupported directive in %s',
-    (option) => {
-      expect(() =>
-        validateSsr({
-          bundler: 'vite',
-          [option]: { 'default-src': ['https://example.com'] },
-        } as SkuConfig),
-      ).toThrow('process.exit: 1');
+  it.each([
+    ['csp', 'csp.enforced.reportTo', "'csp'"],
+    ['csp-report-only', 'csp.reportOnly.reportTo', "'csp-report-only'"],
+  ] as const)(
+    'rejects the endpoint name %s as reportTo in %s',
+    (reportTo, field, endpoint) => {
+      const policy = field.split('.')[1] as 'enforced' | 'reportOnly';
 
-      const logged = logSpy.mock.calls.join('\n');
-      expect(logged).toContain(`${option}['default-src']`);
-      expect(logged).toContain('not a supported directive');
+      const errors = getValidationErrors({
+        bundler: 'vite',
+        csp: { [policy]: { reportTo } },
+      });
+      expect(errors).toContain(field);
+      expect(errors).toContain('absolute http: or https: URL');
+      expect(errors).toContain(`sku names the endpoint ${endpoint}`);
     },
   );
+
+  it('rejects a reportTo URL that is not http or https', () => {
+    const errors = getValidationErrors({
+      bundler: 'vite',
+      csp: { enforced: { reportTo: 'ftp://example.com' } },
+    });
+    expect(errors).toContain('csp.enforced.reportTo');
+  });
+
+  it('rejects a policy that is not true or an object', () => {
+    const errors = getValidationErrors({
+      bundler: 'vite',
+      csp: { enforced: false },
+    } as unknown as SkuConfig);
+    expect(errors).toContain('csp.enforced');
+    expect(errors).toContain('must be true or an object');
+  });
+
+  it('rejects unknown keys in csp and in a policy', () => {
+    const errors = getValidationErrors({
+      bundler: 'vite',
+      csp: { enforce: true, reportOnly: { delivery: 'header' } },
+    } as unknown as SkuConfig);
+    expect(errors).toContain('csp.enforce');
+    expect(errors).toContain('csp.reportOnly.delivery');
+  });
+
+  it.each(['enforced', 'reportOnly'] as const)(
+    'rejects an unsupported directive in csp.%s',
+    (policy) => {
+      const errors = getValidationErrors({
+        bundler: 'vite',
+        csp: {
+          [policy]: {
+            extraSources: { 'default-src': ['https://example.com'] },
+          },
+        },
+      } as SkuConfig);
+      expect(errors).toContain(`csp.${policy}.extraSources['default-src']`);
+      expect(errors).toContain('not a supported directive');
+    },
+  );
+
+  it('rejects sources that are not an array of strings', () => {
+    const errors = getValidationErrors({
+      bundler: 'vite',
+      csp: {
+        enforced: { extraSources: { 'img-src': 'https://example.com' } },
+      },
+    } as unknown as SkuConfig);
+    expect(errors).toContain("csp.enforced.extraSources['img-src']");
+    expect(errors).toContain('must be an array of strings');
+  });
 
   it.each(["'unsafe-eval'", "'nonce-abc'", "'sha256-abc='"])(
     'rejects the quoted source %s',
     (source) => {
-      expect(() =>
-        validateSsr({
-          bundler: 'vite',
-          cspExtraSources: { 'style-src': [source] },
-        }),
-      ).toThrow('process.exit: 1');
-
-      const logged = logSpy.mock.calls.join('\n');
-      expect(logged).toContain("cspExtraSources['style-src']");
-      expect(logged).toContain('Quoted sources');
+      const errors = getValidationErrors({
+        bundler: 'vite',
+        csp: { enforced: { extraSources: { 'style-src': [source] } } },
+      });
+      expect(errors).toContain("csp.enforced.extraSources['style-src']");
+      expect(errors).toContain('Quoted sources');
     },
   );
 
   it('rejects a bare *', () => {
-    expect(() =>
-      validateSsr({
-        bundler: 'vite',
-        cspExtraSources: { 'img-src': ['*'] },
-      }),
-    ).toThrow('process.exit: 1');
-
-    const logged = logSpy.mock.calls.join('\n');
-    expect(logged).toContain("cspExtraSources['img-src']");
-    expect(logged).toContain('allows any origin');
+    const errors = getValidationErrors({
+      bundler: 'vite',
+      csp: { enforced: { extraSources: { 'img-src': ['*'] } } },
+    });
+    expect(errors).toContain("csp.enforced.extraSources['img-src']");
+    expect(errors).toContain('allows any origin');
   });
 
   it.each(['https:', 'data:', 'blob:'])(
     'rejects the scheme-only script-src source %s',
     (source) => {
-      expect(() =>
-        validateSsr({
-          bundler: 'vite',
-          cspReportOnlyExtraSources: { 'script-src': [source] },
-        }),
-      ).toThrow('process.exit: 1');
-
-      const logged = logSpy.mock.calls.join('\n');
-      expect(logged).toContain("cspReportOnlyExtraSources['script-src']");
-      expect(logged).toContain('allows scripts from any origin');
+      const errors = getValidationErrors({
+        bundler: 'vite',
+        csp: { reportOnly: { extraSources: { 'script-src': [source] } } },
+      });
+      expect(errors).toContain("csp.reportOnly.extraSources['script-src']");
+      expect(errors).toContain('allows scripts from any origin');
     },
   );
 
@@ -434,7 +498,11 @@ describe('validateConfig — CSP extra sources', () => {
     expect(() =>
       validateSsr({
         bundler: 'vite',
-        cspExtraSources: { 'worker-src': ['blob:'], 'img-src': ['data:'] },
+        csp: {
+          enforced: {
+            extraSources: { 'worker-src': ['blob:'], 'img-src': ['data:'] },
+          },
+        },
       }),
     ).not.toThrow();
 
@@ -444,47 +512,60 @@ describe('validateConfig — CSP extra sources', () => {
   it.each(['https://a.com https://b.com', 'https://a.com; img-src *'])(
     'rejects the multi-value source %s',
     (source) => {
-      expect(() =>
-        validateSsr({
-          bundler: 'vite',
-          cspExtraSources: { 'connect-src': [source] },
-        }),
-      ).toThrow('process.exit: 1');
-
-      const logged = logSpy.mock.calls.join('\n');
-      expect(logged).toContain('single value');
+      const errors = getValidationErrors({
+        bundler: 'vite',
+        csp: { enforced: { extraSources: { 'connect-src': [source] } } },
+      });
+      expect(errors).toContain('single value');
     },
   );
 
   it.each([
-    ['cspExtraScriptSrcHosts', "cspExtraSources['script-src']"],
+    ['cspEnabled', true, 'csp.enforced'],
+    [
+      'cspExtraScriptSrcHosts',
+      ['https://cdn.example.com'],
+      "csp.enforced.extraSources['script-src']",
+    ],
+    ['cspReportTo', 'https://csp.example.com/report', 'csp.enforced.reportTo'],
+    ['cspReportOnlyEnabled', true, 'csp.reportOnly'],
     [
       'cspReportOnlyExtraScriptSrcHosts',
-      "cspReportOnlyExtraSources['script-src']",
+      ['https://cdn.example.com'],
+      "csp.reportOnly.extraSources['script-src']",
     ],
-  ] as const)('rejects %s for SSR and points to %s', (option, replacement) => {
-    expect(() =>
-      validateSsr({
+    [
+      'cspReportOnlyReportTo',
+      'https://csp.example.com/report',
+      'csp.reportOnly.reportTo',
+    ],
+  ] as const)(
+    'rejects %s for SSR and points to %s',
+    (option, value, replacement) => {
+      const errors = getValidationErrors({
         bundler: 'vite',
-        [option]: ['https://cdn.example.com'],
-      }),
-    ).toThrow('process.exit: 1');
+        [option]: value,
+      } as SkuConfig);
+      expect(errors).toContain(`SSR does not support '${option}'`);
+      expect(errors).toContain(`Use '${replacement}' instead`);
+    },
+  );
 
-    const logged = logSpy.mock.calls.join('\n');
-    expect(logged).toContain(`SSR does not support '${option}'`);
-    expect(logged).toContain(replacement);
+  it('rejects cspDelivery for SSR', () => {
+    const errors = getValidationErrors({
+      bundler: 'vite',
+      cspDelivery: 'header',
+    });
+    expect(errors).toContain("SSR does not support 'cspDelivery'");
+    expect(errors).toContain('remove it');
   });
 
-  it.each([
-    ['vite', 'cspExtraSources', 'cspExtraScriptSrcHosts'],
-    ['vite', 'cspReportOnlyExtraSources', 'cspReportOnlyExtraScriptSrcHosts'],
-    ['webpack', 'cspExtraSources', 'cspExtraScriptSrcHosts'],
-  ] as const)(
-    'rejects %s static apps setting %s and points to %s',
-    (bundler, option, replacement) => {
+  it.each(['vite', 'webpack'] as const)(
+    'rejects csp for static %s apps',
+    (bundler) => {
       const appSkuConfig = {
         bundler,
-        [option]: { 'script-src': ['https://cdn.example.com'] },
+        csp: { enforced: true },
       } as SkuConfig;
 
       expect(() =>
@@ -492,17 +573,19 @@ describe('validateConfig — CSP extra sources', () => {
       ).toThrow('process.exit: 1');
 
       const logged = logSpy.mock.calls.join('\n');
-      expect(logged).toContain(`'${option}' is only supported with`);
-      expect(logged).toContain(`Use '${replacement}' instead`);
+      expect(logged).toContain("'csp' is only supported with");
+      expect(logged).toContain('csp*');
     },
   );
 
   it.each(['vite', 'webpack'] as const)(
-    'accepts cspExtraScriptSrcHosts for static %s apps',
+    'accepts the flat CSP options for static %s apps',
     (bundler) => {
       const appSkuConfig = {
         bundler,
+        cspEnabled: true,
         cspExtraScriptSrcHosts: ['https://cdn.example.com'],
+        cspReportOnlyEnabled: true,
         cspReportOnlyExtraScriptSrcHosts: ['https://cdn.example.com'],
       } as SkuConfig;
 

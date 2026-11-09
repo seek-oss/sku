@@ -11,6 +11,8 @@ SSR apps have an extra step.
 
 Set `cspEnabled: true` in your `sku.config.js`.
 
+SSR apps set [`csp`](#ssr-policies) instead.
+
 ### Delivery
 
 For **static apps**, the `cspDelivery` option controls how sku delivers the enforcing CSP.
@@ -25,33 +27,78 @@ Set it to one of two values:
   Those steps must return this property as a `Content-Security-Policy` header on the response for the rendered HTML.
 
 `cspDelivery` applies to **Static** Vite apps only (`buildType` unset / `'static'`).
-SSR always emits real HTTP CSP headers and ignores `cspDelivery`.
+SSR always emits real HTTP CSP headers, and config validation fails if an SSR app sets `cspDelivery`.
 
 ### Extra Hosts
 
 If you need to allow scripts that are only known on the client, add their URLs to the `cspExtraScriptSrcHosts` array in your `sku.config.js`.
 This includes scripts loaded by tag managers.
 
-SSR apps use [`cspExtraSources`](#extra-sources-ssr) instead.
+SSR apps use [`extraSources`](#extra-sources) in `csp` instead.
 Config validation fails if an SSR app sets `cspExtraScriptSrcHosts`.
 
-### Extra sources (SSR) <Badge type="tip" text="SSR" /> <Badge type="warning" text="experimental" />
+### SSR policies <Badge type="tip" text="SSR" /> <Badge type="warning" text="experimental" />
 
-SSR apps can add sources to individual directives with the `cspExtraSources` option.
-It is a map from directive name to an array of sources:
+SSR apps configure CSP with the `csp` option.
+It has two peer policies:
+
+- `enforced` sets the `Content-Security-Policy` header.
+- `reportOnly` sets the [`Content-Security-Policy-Report-Only`] header.
 
 ```ts
 export default {
   bundler: 'vite',
   buildType: 'ssr',
-  cspEnabled: true,
-  cspExtraSources: {
-    'script-src': ['https://cdn.example.com'],
-    'connect-src': ['https://browser-intake-datadoghq.com'],
-    'frame-src': ['https://www.youtube.com'],
+  csp: {
+    enforced: {
+      extraSources: {
+        'script-src': ['https://cdn.example.com'],
+        'connect-src': ['https://browser-intake-datadoghq.com'],
+      },
+      reportTo: 'https://csp.example.com/report',
+    },
+    reportOnly: true,
   },
 } satisfies SkuConfig;
 ```
+
+Each policy is `true` or an object with `extraSources` and `reportTo`.
+`true` turns the policy on with sku's directives and nothing extra.
+Leave a policy out to turn it off.
+
+The policies don't inherit from each other.
+In the example above, the report-only policy doesn't include `https://cdn.example.com` or report anywhere.
+To use the same values in both, share a constant:
+
+```ts
+const policy = {
+  extraSources: { 'connect-src': ['https://browser-intake-datadoghq.com'] },
+  reportTo: 'https://csp.example.com/report',
+};
+
+export default {
+  // ...
+  csp: { enforced: policy, reportOnly: policy },
+} satisfies SkuConfig;
+```
+
+The flat `csp*` options are not supported for SSR, and config validation fails if an SSR app sets one.
+Each one has a replacement in `csp`:
+
+| Flat option                        | `csp` replacement                           |
+| ---------------------------------- | ------------------------------------------- |
+| `cspEnabled`                       | `csp.enforced`                              |
+| `cspExtraScriptSrcHosts`           | `csp.enforced.extraSources['script-src']`   |
+| `cspReportTo`                      | `csp.enforced.reportTo`                     |
+| `cspReportOnlyEnabled`             | `csp.reportOnly`                            |
+| `cspReportOnlyExtraScriptSrcHosts` | `csp.reportOnly.extraSources['script-src']` |
+| `cspReportOnlyReportTo`            | `csp.reportOnly.reportTo`                   |
+| `cspDelivery`                      | none: SSR always uses headers               |
+
+#### Extra sources
+
+`extraSources` adds sources to individual directives of a policy.
+It is a map from directive name to an array of sources.
 
 The supported directives are:
 
@@ -79,10 +126,14 @@ const assetCdn = ['https://assets.example.com'];
 
 export default {
   // ...
-  cspExtraSources: {
-    'style-src': assetCdn,
-    'font-src': assetCdn,
-    'img-src': assetCdn,
+  csp: {
+    enforced: {
+      extraSources: {
+        'style-src': assetCdn,
+        'font-src': assetCdn,
+        'img-src': assetCdn,
+      },
+    },
   },
 } satisfies SkuConfig;
 ```
@@ -101,7 +152,19 @@ Config validation fails for:
 > If an attacker injects a script, it can send data to any `connect-src` origin.
 > Allow specific origins rather than broad wildcards or schemes, and only the ones your app needs.
 
-[Report-only](#report-only-content-security-policy) policies use the same sources unless you set `cspReportOnlyExtraSources`.
+#### Reporting
+
+`reportTo` is the absolute `http:` or `https:` URL that the browser sends a policy's violation reports to.
+sku names the endpoints itself: `csp` for the enforced policy and `csp-report-only` for the report-only policy.
+For each policy that sets `reportTo`, sku adds a [`report-to`] directive and an entry in the [`Reporting-Endpoints`] header:
+
+```http
+Content-Security-Policy: …; report-to csp
+Content-Security-Policy-Report-Only: …; report-to csp-report-only
+Reporting-Endpoints: csp="https://csp.example.com/report", csp-report-only="https://csp.example.com/report"
+```
+
+Each report says which policy it came from, so both policies can use the same URL.
 
 ### Report To
 
@@ -119,6 +182,8 @@ The outcome is:
 
 For **static apps**, the `cspReportTo` option is only effective when you use the `header` [delivery option](#delivery).
 sku writes an emitted [`Reporting-Endpoints`] header to the same JSON file in the `metadata.reportingEndpoints` property.
+
+SSR apps set [`reportTo`](#reporting) on each policy in `csp` instead, as a URL only.
 
 [Reporting API]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
 [`report-to`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/report-to
@@ -259,9 +324,11 @@ This causes sku to generate a [`Content-Security-Policy-Report-Only`] header.
 
 By default the report-only CSP has the same content as the standard CSP, including the same [extra hosts](#extra-hosts).
 You can change this by setting the `cspReportOnlyExtraScriptSrcHosts` array in `sku.config.js` to the script URLs for the report-only CSP.
-SSR apps set `cspReportOnlyExtraSources` instead, which accepts the same directives as [`cspExtraSources`](#extra-sources-ssr).
 The report-only CSP also shares the same [reporting](#report-to) configuration as the standard CSP.
 You can change that by setting the `cspReportOnlyReportTo` option.
+
+SSR apps set `csp.reportOnly` instead, which doesn't share anything with the enforced policy.
+See [SSR policies](#ssr-policies).
 
 Unlike the standard CSP, a report-only CSP can only be delivered via an HTTP header, not via a `<meta http-equiv>` tag.
 There is no explicit [delivery option](#delivery) for a report-only CSP.

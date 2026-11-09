@@ -21,14 +21,14 @@ export default {
   bundler: 'vite',
   buildType: 'ssr',
   publicPath: '/',
-  cspEnabled: true,
+  csp: { enforced: true },
 } satisfies SkuConfig;
 ```
 
 SSR requires a relative `publicPath`.
 
-See [CSP](../csp.md) and [Configuration](../configuration.md) for report-only options and extra script hosts.
-`cspReportTo` and `cspReportOnlyReportTo` behave as documented there. sku sends any generated `Reporting-Endpoints` as a response header.
+See [SSR policies](../csp.md#ssr-policies) for the report-only policy, extra sources and reporting.
+The flat `csp*` options, such as `cspEnabled`, are not supported for SSR.
 
 ## Nonces
 
@@ -61,7 +61,7 @@ See [Apollo streaming hydration](./data-loading.md#apollo-streaming-hydration).
 
 ## See also
 
-- [CSP](../csp.md) — shared CSP options and report-to behaviour
+- [CSP](../csp.md#ssr-policies) — the `csp` option, extra sources and reporting
 - [Runtime API](./runtime-api.md#getcspnonce) — `getCspNonce`
 - [Data loading](./data-loading.md#apollo-streaming-hydration) — nonce on Apollo scripts
 - [Middleware](./middleware.md) — `req.getCspNonce()`

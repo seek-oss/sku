@@ -6,7 +6,7 @@ import type { ChunkExtractor } from '@loadable/server';
 import type { Linter } from 'eslint';
 import type { Plugin, PluginOption } from 'vite';
 import type { TestUserConfig } from 'vitest/node';
-import type { CspExtraSources } from '../utils/csp.js';
+import type { CspConfig } from '../utils/csp.js';
 
 export type ViteRenderFunction = (
   options: {
@@ -168,6 +168,8 @@ interface SkuConfigBase {
    *
    * Enable content security policy feature. More info at https://seek-oss.github.io/sku/csp
    *
+   * Not supported for SSR (`buildType: 'ssr'`): use {@link ViteSkuConfig#csp} `.enforced` instead.
+   *
    * @default false
    * @link https://seek-oss.github.io/sku/configuration#cspenabled
    */
@@ -176,7 +178,7 @@ interface SkuConfigBase {
   /**
    * Extra external hosts to allow in your `script-src` content security policy. Only relevant if {@link cspEnabled} is set to `true`.
    *
-   * Not supported for SSR (`buildType: 'ssr'`): use {@link ViteSkuConfig#cspExtraSources} `['script-src']` instead.
+   * Not supported for SSR (`buildType: 'ssr'`): use {@link ViteSkuConfig#csp} `.enforced.extraSources['script-src']` instead.
    *
    * @default []
    * @link https://seek-oss.github.io/sku/configuration#cspextrascriptsrchosts
@@ -634,7 +636,8 @@ interface ViteSkuConfig {
   /**
    * The way the enforcing content security policy is delivered for **static Vite** apps.
    * Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
-   * Ignored for SSR (`buildType: 'ssr'`), which always uses HTTP CSP headers.
+   *
+   * Not supported for SSR (`buildType: 'ssr'`), which always uses HTTP CSP headers.
    *
    * @default 'tag'
    * @link https://seek-oss.github.io/sku/configuration#cspdelivery
@@ -643,7 +646,8 @@ interface ViteSkuConfig {
 
   /**
    * Where to report content security policy violations. Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true` and {@link cspDelivery} is set to `'header'`.
-   * For SSR (`buildType: 'ssr'`) {@link cspDelivery} is ignored, so this applies whenever {@link SkuConfigBase#cspEnabled} is `true`.
+   *
+   * Not supported for SSR (`buildType: 'ssr'`): use {@link csp} `.enforced.reportTo` instead.
    *
    * @link https://seek-oss.github.io/sku/docs/configuration#cspreportto
    */
@@ -654,6 +658,8 @@ interface ViteSkuConfig {
    *
    * Enable report-only content security policy feature. More info at https://seek-oss.github.io/sku/csp
    *
+   * Not supported for SSR (`buildType: 'ssr'`): use {@link csp} `.reportOnly` instead.
+   *
    * @default false
    * @link https://seek-oss.github.io/sku/configuration#cspreportonlyenabled
    */
@@ -662,7 +668,7 @@ interface ViteSkuConfig {
   /**
    * Extra external hosts to allow in your `script-src` report-only content security policy. Only relevant if {@link cspReportOnlyEnabled} is set to `true`.
    *
-   * Not supported for SSR (`buildType: 'ssr'`): use {@link cspReportOnlyExtraSources} `['script-src']` instead.
+   * Not supported for SSR (`buildType: 'ssr'`): use {@link csp} `.reportOnly.extraSources['script-src']` instead.
    *
    * @default {@link SkuConfigBase#cspExtraScriptSrcHosts}
    * @link https://seek-oss.github.io/sku/configuration#cspreportonlyextrascriptsrchosts
@@ -670,40 +676,36 @@ interface ViteSkuConfig {
   cspReportOnlyExtraScriptSrcHosts?: string[];
 
   /**
-   * **SSR only** (`buildType: 'ssr'`)
-   *
-   * Extra sources to append to directives of the content security policy, keyed by directive name.
-   * Only relevant if {@link SkuConfigBase#cspEnabled} is set to `true`.
-   *
-   * A supported directive that sku doesn't emit by default is emitted as `'self'` plus the configured sources.
-   * Quoted sources (keywords, nonces and hashes), a bare `*` and schemes in `script-src` (such as `https:`) are not allowed.
-   *
-   * @example
-   * { 'connect-src': ['https://browser-intake-datadoghq.com'] }
-   *
-   * @default {}
-   * @link https://seek-oss.github.io/sku/configuration#cspextrasources
-   */
-  cspExtraSources?: CspExtraSources;
-
-  /**
-   * **SSR only** (`buildType: 'ssr'`)
-   *
-   * Extra sources to append to directives of the report-only content security policy, keyed by directive name.
-   * Only relevant if {@link cspReportOnlyEnabled} is set to `true`.
-   *
-   * @default {@link cspExtraSources}
-   * @link https://seek-oss.github.io/sku/configuration#cspreportonlyextrasources
-   */
-  cspReportOnlyExtraSources?: CspExtraSources;
-
-  /**
    * Where to report report-only content security policy violations. Only relevant if {@link cspReportOnlyEnabled} is set to `true`.
+   *
+   * Not supported for SSR (`buildType: 'ssr'`): use {@link csp} `.reportOnly.reportTo` instead.
    *
    * @default {@link cspReportTo}
    * @link https://seek-oss.github.io/sku/docs/configuration#cspreportonlyreportto
    */
   cspReportOnlyReportTo?: string | [string, string];
+
+  /**
+   * **SSR only** (`buildType: 'ssr'`)
+   *
+   * Content security policy, with the enforced and report-only policies as peers.
+   * Each policy is `true` (sku's policy with nothing extra) or an object with `extraSources` and `reportTo`.
+   * Leave a policy out to turn it off. The policies don't inherit from each other.
+   *
+   * A supported directive that sku doesn't emit by default is emitted as `'self'` plus the configured sources.
+   * Quoted sources (keywords, nonces and hashes), a bare `*` and schemes in `script-src` (such as `https:`) are not allowed.
+   *
+   * @example
+   * {
+   *   enforced: {
+   *     extraSources: { 'connect-src': ['https://browser-intake-datadoghq.com'] },
+   *     reportTo: 'https://csp.example.com/report',
+   *   },
+   * }
+   *
+   * @link https://seek-oss.github.io/sku/configuration#csp
+   */
+  csp?: CspConfig;
 
   /**
    * This function provides a way to modify sku's Vite configuration.

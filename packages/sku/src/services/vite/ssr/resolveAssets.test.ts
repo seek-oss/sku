@@ -51,6 +51,48 @@ describe('resolveAssets', () => {
     expect(assets.modulePreloads).toContain('/assets/en-translations.js');
   });
 
+  it('lists resolved moduleIds as required modules, without their imports', () => {
+    const assets = resolveAssets({
+      manifest: {
+        ...manifest,
+        'src/pages/home/home.tsx': {
+          file: 'assets/home.js',
+          imports: ['_shared.js'],
+          css: ['assets/home.css'],
+        },
+        '_shared.js': { file: 'assets/shared.js' },
+        'virtual:vocab-en.json': {
+          file: 'assets/en-translations.js',
+          name: 'en-translations',
+        },
+      },
+      publicPath: '/static/',
+      entry: manifest['src/entry.tsx'],
+      moduleIds: [
+        'src/pages/home/home.tsx',
+        'en-translations',
+        'src/pages/missing/missing.tsx',
+      ],
+    });
+
+    expect(assets.requiredModules).toStrictEqual([
+      '/static/assets/home.js',
+      '/static/assets/en-translations.js',
+    ]);
+    expect(assets.modulePreloads).toContain('/static/assets/shared.js');
+  });
+
+  it('does not list the client entry as a required module', () => {
+    const assets = resolveAssets({
+      manifest,
+      publicPath: '/',
+      entry: manifest['src/entry.tsx'],
+      moduleIds: ['src/entry.tsx'],
+    });
+
+    expect(assets.requiredModules).toStrictEqual([]);
+  });
+
   it('warns in development for unknown moduleIds', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
 

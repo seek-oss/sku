@@ -104,8 +104,17 @@ export const resolveAssets = ({
   entry.imports?.forEach(visit);
   moduleIds.forEach(visit);
 
+  const requiredModules = new Set<string>();
+  for (const moduleId of moduleIds) {
+    const chunk = findManifestChunk(manifest, moduleId);
+    if (chunk && !chunk.file.endsWith('.css') && chunk.file !== entry.file) {
+      requiredModules.add(joinPublicPath(publicPath, chunk.file));
+    }
+  }
+
   return {
     css: [...css],
     modulePreloads: [...modulePreloads],
+    requiredModules: [...requiredModules],
   };
 };

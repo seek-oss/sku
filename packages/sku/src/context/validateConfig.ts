@@ -7,6 +7,12 @@ import defaultSkuConfig from './defaultSkuConfig.js';
 import defaultClientEntry from './defaultClientEntry.js';
 import type { SkuConfig } from '../types/types.js';
 import { hasErrorMessage } from '../utils/error-guards.js';
+import {
+  cspEndpointNames,
+  cspExtraSourceDirectives,
+  cspPolicyNames,
+  isCspExtraSourceDirective,
+} from '../utils/csp.js';
 import type { ValidationError } from 'fastest-validator';
 import { caution, critical, strong } from '@sku-private/utils/console';
 import { getPathFromCwd } from '@sku-private/utils';
@@ -14,6 +20,22 @@ import { getPathFromCwd } from '@sku-private/utils';
 const availableConfigKeys = Object.keys(defaultSkuConfig);
 
 const reservedEnvironmentNames = ['client', 'rendered', 'server'];
+
+// `null` means there is no replacement, because SSR always delivers CSP as headers.
+const flatCspOptionReplacements: Record<string, string | null> = {
+  cspEnabled: 'csp.enforced',
+  cspExtraScriptSrcHosts: "csp.enforced.extraSources['script-src']",
+  cspReportTo: 'csp.enforced.reportTo',
+  cspReportOnlyEnabled: 'csp.reportOnly',
+  cspReportOnlyExtraScriptSrcHosts: "csp.reportOnly.extraSources['script-src']",
+  cspReportOnlyReportTo: 'csp.reportOnly.reportTo',
+  cspDelivery: null,
+};
+
+const isHttpUrl = (value: unknown) =>
+  typeof value === 'string' &&
+  URL.canParse(value) &&
+  ['http:', 'https:'].includes(new URL(value).protocol);
 
 const exitWithErrors = (errors: string[]) => {
   console.log(strong(critical('Errors in sku config:')));
@@ -159,6 +181,162 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
         'vitePlugins',
       )}'. Raise exceptional Vite customisation needs in #sku-support with your use-case.`,
     );
+  }
+
+  // Check the consumer file (pre-defaults merge): defaults set every flat CSP option.
+  if (skuConfig.buildType === 'ssr') {
+    for (const [option, replacement] of Object.entries(
+      flatCspOptionReplacements,
+    )) {
+      if (Object.prototype.hasOwnProperty.call(appSkuConfig, option)) {
+        errors.push(
+          replacement
+            ? `🚫 SSR does not support '${strong(option)}'. Use '${strong(
+                replacement,
+              )}' instead.`
+            : `🚫 SSR does not support '${strong(
+                option,
+              )}'. SSR always delivers CSP as HTTP headers, so remove it.`,
+        );
+      }
+    }
+  } else if (Object.prototype.hasOwnProperty.call(appSkuConfig, 'csp')) {
+    errors.push(
+      `🚫 '${strong('csp')}' is only supported with '${strong(
+        'buildType: ssr',
+      )}'. Use the flat '${strong('csp*')}' options instead, such as '${strong(
+        'cspEnabled',
+      )}'.`,
+    );
+  }
+
+  const csp = (skuConfig as Record<string, unknown>).csp;
+  const cspPolicies =
+    typeof csp === 'object' && csp !== null
+      ? (csp as Record<string, unknown>)
+      : {};
+
+  for (const key of Object.keys(cspPolicies)) {
+    if (!(cspPolicyNames as readonly string[]).includes(key)) {
+      errors.push(
+        `🚫 '${strong(`csp.${key}`)}' is not supported. Use '${strong(
+          'csp.enforced',
+        )}' or '${strong('csp.reportOnly')}'.`,
+      );
+    }
+  }
+
+  for (const policyName of cspPolicyNames) {
+    const policy = cspPolicies[policyName];
+    const policyField = `csp.${policyName}`;
+
+    if (policy === undefined || policy === true) {
+      continue;
+    }
+
+    if (
+      typeof policy !== 'object' ||
+      policy === null ||
+      Array.isArray(policy)
+    ) {
+      errors.push(
+        `🚫 '${strong(policyField)}' must be ${strong(
+          'true',
+        )} or an object with '${strong('extraSources')}' and '${strong(
+          'reportTo',
+        )}'.`,
+      );
+      continue;
+    }
+
+    const { extraSources, reportTo, ...unknownKeys } = policy as Record<
+      string,
+      unknown
+    >;
+
+    for (const key of Object.keys(unknownKeys)) {
+      errors.push(
+        `🚫 '${strong(`${policyField}.${key}`)}' is not supported. Use '${strong(
+          'extraSources',
+        )}' or '${strong('reportTo')}'.`,
+      );
+    }
+
+    if (reportTo !== undefined && !isHttpUrl(reportTo)) {
+      errors.push(
+        `🚫 '${strong(
+          `${policyField}.reportTo`,
+        )}' must be an absolute http: or https: URL. sku names the endpoint '${strong(
+          cspEndpointNames[policyName],
+        )}'.`,
+      );
+    }
+
+    if (extraSources === undefined) {
+      continue;
+    }
+
+    if (
+      typeof extraSources !== 'object' ||
+      extraSources === null ||
+      Array.isArray(extraSources)
+    ) {
+      errors.push(
+        `🚫 '${strong(
+          `${policyField}.extraSources`,
+        )}' must be an object keyed by directive name.`,
+      );
+      continue;
+    }
+
+    for (const [directive, sources] of Object.entries(extraSources)) {
+      const field = `${policyField}.extraSources['${directive}']`;
+
+      if (!isCspExtraSourceDirective(directive)) {
+        errors.push(
+          `🚫 '${strong(field)}' is not a supported directive. Supported directives: ${cspExtraSourceDirectives.join(', ')}.`,
+        );
+      }
+
+      if (
+        !Array.isArray(sources) ||
+        sources.some((source) => typeof source !== 'string')
+      ) {
+        errors.push(`🚫 '${strong(field)}' must be an array of strings.`);
+        continue;
+      }
+
+      for (const source of sources as string[]) {
+        if (source.includes("'")) {
+          errors.push(
+            `🚫 '${strong(field)}' contains ${strong(
+              source,
+            )}. Quoted sources (keywords, nonces and hashes) are not supported.`,
+          );
+        } else if (source === '*') {
+          errors.push(
+            `🚫 '${strong(field)}' contains a bare ${strong(
+              '*',
+            )}, which allows any origin. List specific origins instead.`,
+          );
+        } else if (/[\s;,]/.test(source)) {
+          errors.push(
+            `🚫 '${strong(field)}' contains ${strong(
+              source,
+            )}. Each source must be a single value without whitespace, ';' or ','.`,
+          );
+        } else if (
+          directive === 'script-src' &&
+          /^[a-z][a-z0-9+.-]*:$/i.test(source)
+        ) {
+          errors.push(
+            `🚫 '${strong(field)}' contains the scheme ${strong(
+              source,
+            )}, which allows scripts from any origin using it. List specific origins instead.`,
+          );
+        }
+      }
+    }
   }
 
   // Ensure defaultClientEntry is not configured as a route name

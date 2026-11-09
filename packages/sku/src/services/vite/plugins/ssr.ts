@@ -58,14 +58,14 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
             String(skuContext.port.client),
           ),
           __SKU_PUBLIC_PATH__: JSON.stringify(skuContext.publicPath),
-          __SKU_CSP__: JSON.stringify({
+          __SKU_SSR_CSP__: JSON.stringify({
             enabled: skuContext.cspEnabled,
-            extraHosts: skuContext.cspExtraScriptSrcHosts,
+            extraSources: skuContext.cspExtraSources,
             reportTo: skuContext.cspReportTo,
             reportOnlyEnabled: skuContext.cspReportOnlyEnabled,
-            reportOnlyExtraHosts: skuContext.cspReportOnlyExtraScriptSrcHosts,
+            reportOnlyExtraSources: skuContext.cspReportOnlyExtraSources,
             reportOnlyReportTo: skuContext.cspReportOnlyReportTo,
-          }),
+          } satisfies SkuSsrCSP),
           __SKU_EXPRESS_TRUST_PROXY__: JSON.stringify(
             Boolean(skuContext.expressTrustProxy),
           ),

@@ -48,12 +48,20 @@ describe('ssr-document', () => {
       expect(csp).toBeTruthy();
       expect(cspReportOnly).toBeTruthy();
       expect(csp).toContain('https://cdn.example.com');
+      expect(csp).toContain(
+        "connect-src 'self' ws: wss: https://browser-intake-datadoghq.com",
+      );
+      expect(csp).not.toContain('frame-src');
       expect(cspReportOnly).toContain('https://report-only.example.com');
-      expect(csp).toContain('report-to csp-endpoint');
-      expect(cspReportOnly).toContain('report-to csp-report-only-endpoint');
-      // Only `cspReportTo` carries a URL, so only it appears in the header.
+      expect(cspReportOnly).not.toContain('https://cdn.example.com');
+      expect(cspReportOnly).toContain("connect-src 'self' ws: wss:;");
+      expect(cspReportOnly).toContain(
+        "frame-src 'self' https://www.youtube.com",
+      );
+      expect(csp).toMatch(/report-to csp$/);
+      expect(cspReportOnly).toMatch(/report-to csp-report-only$/);
       expect(response.headers.get('reporting-endpoints')).toBe(
-        'csp-endpoint="https://report.example.com/csp"',
+        'csp="https://report.example.com/csp", csp-report-only="https://report.example.com/csp-report-only"',
       );
       // sku mints a nonce when attaching it to React stream scripts.
       expect(csp).toMatch(/'nonce-/);
@@ -282,15 +290,22 @@ describe('ssr-document', () => {
           expect(html).toContain('SSR Home');
           expect(html).toContain('<!DOCTYPE html>');
           expect(html).toContain('/static/ssr-document/');
-          expect(response.headers.get('content-security-policy')).toContain(
-            'report-to csp-endpoint',
+          const csp = response.headers.get('content-security-policy');
+          expect(csp).toMatch(/report-to csp$/);
+          expect(csp).toContain('https://cdn.example.com');
+          expect(csp).toContain(
+            "connect-src 'self' https://browser-intake-datadoghq.com;",
           );
           const cspReportOnly = response.headers.get(
             'content-security-policy-report-only',
           );
-          expect(cspReportOnly).toContain('report-to csp-report-only-endpoint');
+          expect(cspReportOnly).toMatch(/report-to csp-report-only$/);
+          expect(cspReportOnly).toContain('https://report-only.example.com');
+          expect(cspReportOnly).toContain(
+            "frame-src 'self' https://www.youtube.com",
+          );
           expect(response.headers.get('reporting-endpoints')).toBe(
-            'csp-endpoint="https://report.example.com/csp"',
+            'csp="https://report.example.com/csp", csp-report-only="https://report.example.com/csp-report-only"',
           );
         },
         { timeout: 15000 },

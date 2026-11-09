@@ -1,6 +1,8 @@
 import { createHash, randomBytes } from 'node:crypto';
 import {
+  type CspExtraSources,
   type ReportingEndpoint,
+  cspExtraSourceDirectives,
   stringifyReportingEndpoints,
 } from '../../../utils/csp.js';
 
@@ -13,44 +15,56 @@ const hashScript = (body: string) =>
 export const buildContentSecurityPolicy = ({
   inlineScripts,
   nonce,
-  extraHosts = [],
+  extraSources = {},
   development = false,
   reportTo,
 }: {
   inlineScripts: string[];
   nonce?: string;
-  extraHosts?: string[];
+  extraSources?: CspExtraSources;
   development?: boolean;
   reportTo?: ReportingEndpoint;
 }) => {
   // Relative publicPath only: Document assets are covered by `'self'`.
-  // Third-party scripts use `extraHosts` (`cspExtraScriptSrcHosts`).
   // Include `'nonce-…'` only when a nonce was requested for this response.
-  const scriptSrc = [
-    "'self'",
-    ...(nonce ? [`'nonce-${nonce}'`] : []),
-    ...inlineScripts.map(hashScript),
-    ...extraHosts,
-    ...(development ? ["'unsafe-eval'"] : []),
-  ];
+  const directives = new Map<string, string[]>([
+    ['default-src', ["'self'"]],
+    [
+      'script-src',
+      [
+        "'self'",
+        ...(nonce ? [`'nonce-${nonce}'`] : []),
+        ...inlineScripts.map(hashScript),
+        ...(development ? ["'unsafe-eval'"] : []),
+      ],
+    ],
+    ['style-src', ["'self'", "'unsafe-inline'"]],
+    ['img-src', ["'self'", 'data:']],
+    ['font-src', ["'self'"]],
+    ['connect-src', ["'self'", ...(development ? ['ws:', 'wss:'] : [])]],
+    ['base-uri', ["'self'"]],
+    ['form-action', ["'self'"]],
+    ['frame-ancestors', ["'none'"]],
+  ]);
 
-  const directives = [
-    "default-src 'self'",
-    `script-src ${scriptSrc.join(' ')}`,
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data:",
-    "font-src 'self'",
-    `connect-src 'self'${development ? ' ws: wss:' : ''}`,
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'none'",
-  ];
-
-  if (reportTo) {
-    directives.push(`report-to ${reportTo.endpoint}`);
+  for (const directive of cspExtraSourceDirectives) {
+    const sources = extraSources[directive];
+    if (sources?.length) {
+      const ownSources = directives.get(directive) ?? ["'self'"];
+      directives.set(directive, [...new Set([...ownSources, ...sources])]);
+    }
   }
 
-  return directives.join('; ');
+  const policy = Array.from(
+    directives,
+    ([directive, sources]) => `${directive} ${sources.join(' ')}`,
+  );
+
+  if (reportTo) {
+    policy.push(`report-to ${reportTo.endpoint}`);
+  }
+
+  return policy.join('; ');
 };
 
 export const buildCspHeaders = ({
@@ -58,9 +72,9 @@ export const buildCspHeaders = ({
   reportOnlyEnabled,
   inlineScripts,
   nonce,
-  extraHosts,
+  extraSources,
   reportTo,
-  reportOnlyExtraHosts,
+  reportOnlyExtraSources,
   reportOnlyReportTo,
   development,
 }: {
@@ -68,9 +82,9 @@ export const buildCspHeaders = ({
   reportOnlyEnabled: boolean;
   inlineScripts: string[];
   nonce?: string;
-  extraHosts: string[];
+  extraSources: CspExtraSources;
   reportTo?: ReportingEndpoint;
-  reportOnlyExtraHosts: string[];
+  reportOnlyExtraSources: CspExtraSources;
   reportOnlyReportTo?: ReportingEndpoint;
   development: boolean;
 }) => {
@@ -81,7 +95,7 @@ export const buildCspHeaders = ({
     headers['Content-Security-Policy'] = buildContentSecurityPolicy({
       inlineScripts,
       nonce,
-      extraHosts,
+      extraSources,
       development,
       reportTo,
     });
@@ -95,7 +109,7 @@ export const buildCspHeaders = ({
       {
         inlineScripts,
         nonce,
-        extraHosts: reportOnlyExtraHosts,
+        extraSources: reportOnlyExtraSources,
         development,
         reportTo: reportOnlyReportTo,
       },

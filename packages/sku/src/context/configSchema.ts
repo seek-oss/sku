@@ -62,12 +62,6 @@ const cspReportTo = [cspReportToTuple, ...cspReportToTuple.items].map(
   (schema) => ({ ...schema, optional: true }),
 );
 
-const cspExtraSources = {
-  type: 'record',
-  key: { type: 'string' },
-  value: { type: 'array', items: { type: 'string' } },
-};
-
 export default validator.compile({
   buildType: {
     type: 'enum',
@@ -228,8 +222,7 @@ export default validator.compile({
     optional: true,
   },
   cspReportOnlyReportTo: cspReportTo,
-  cspExtraSources,
-  cspReportOnlyExtraSources: { ...cspExtraSources, optional: true },
+  csp: { type: 'object', optional: true },
   expressTrustProxy: {
     type: 'boolean',
     optional: true,

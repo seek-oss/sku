@@ -1,0 +1,26 @@
+## Why
+
+Duplicate versions of `react`, `react-dom`, `braid-design-system`, or `@vanilla-extract/css` can break rendering, hooks/context, styling, or compile-package behaviour. sku's existing duplicate detection does not run under pnpm, and its start/build warnings are easy to miss; dependency problems are better surfaced where developers already expect project-health errors: `sku lint`.
+
+## What Changes
+
+- Add a warn-only duplicate-package check to full `sku lint` runs. It reports distinct versions of the four packages above that are reachable from the app's dependency graph, plus a `react`/`react-dom` version mismatch.
+- Reuse the existing dependency-graph walk, extended to record package versions. The walk is package-manager agnostic, so it works with pnpm, npm, and yarn.
+- Keep `skuSkipValidatePeerDeps` as the opt-out.
+- **BREAKING**: Remove `validatePeerDeps` and its start/build/serve invocations. Its broader compile-package coverage and peer-range checks are dropped; the lint check becomes sku's only duplicate detection.
+- Non-goals: no hard lint/build failure, no `@seek` scope coverage, no bundler/import-graph analysis, and no change to the graph's root-dependency-only walk (a documented known limitation).
+
+## Capabilities
+
+### New Capabilities
+
+- `duplicate-package-detection`: warn-only lint detection of duplicate versions of watched packages in the app's dependency graph.
+
+### Modified Capabilities
+
+<!-- None. -->
+
+## Impact
+
+- Affected code: `packages/sku` lint command, dependency-graph helper (moved to a shared location), `validatePeerDeps` and its call sites in start/build/serve handlers, and the `configure` wrapper.
+- No new dependencies. Requires a changeset; docs only if the skip flag's documentation needs updating.

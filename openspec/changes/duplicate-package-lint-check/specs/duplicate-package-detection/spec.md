@@ -1,0 +1,61 @@
+## ADDED Requirements
+
+### Requirement: Duplicate watched package versions are reported at lint
+
+When a full `sku lint` run resolves `react`, `react-dom`, `braid-design-system`, or `@vanilla-extract/css` at more than one distinct version in the app's dependency graph, sku SHALL print a warning naming the package, each resolved version, and how each copy is reached, and SHALL still exit lint successfully.
+
+#### Scenario: Duplicate versions under pnpm
+
+- **WHEN** an app using pnpm has two versions of `react` reachable from its dependencies and `sku lint` runs without path arguments
+- **THEN** a warning identifies both versions and their dependency chains, and the lint exit code is unaffected
+
+#### Scenario: Duplicate versions under npm or yarn
+
+- **WHEN** an app using npm or yarn has two versions of `@vanilla-extract/css` in nested `node_modules` and `sku lint` runs without path arguments
+- **THEN** the same style of warning is printed, and the lint exit code is unaffected
+
+#### Scenario: Same version in multiple directories
+
+- **WHEN** a watched package is present in multiple directories at the same version
+- **THEN** no user-facing warning is printed for that package
+
+### Requirement: React and react-dom version mismatch is reported at lint
+
+When both `react` and `react-dom` are resolved in the app's dependency graph and their resolved version sets differ, sku SHALL print a warning identifying the mismatched versions and SHALL still exit lint successfully.
+
+#### Scenario: Mismatched pair
+
+- **WHEN** an app resolves `react` at one version and `react-dom` at a different version and `sku lint` runs without path arguments
+- **THEN** a warning identifies the mismatched versions, and the lint exit code is unaffected
+
+#### Scenario: Matching pair
+
+- **WHEN** an app resolves `react` and `react-dom` at the same version
+- **THEN** no pair-mismatch warning is printed
+
+### Requirement: The check is scoped, skippable, and non-fatal
+
+The duplicate-package check SHALL run only on full `sku lint` runs, SHALL be skipped when the app sets `skuSkipValidatePeerDeps`, and MUST NOT make lint fail or throw when dependencies cannot be resolved.
+
+#### Scenario: Scoped lint run
+
+- **WHEN** `sku lint` is invoked with path arguments in an app with duplicate watched package versions
+- **THEN** no duplicate-package warning is printed
+
+#### Scenario: Opted out
+
+- **WHEN** an app's `package.json` sets `skuSkipValidatePeerDeps` and `sku lint` runs without path arguments
+- **THEN** no duplicate-package warning is printed
+
+#### Scenario: Dependencies not installed
+
+- **WHEN** `sku lint` runs in an app whose dependencies cannot be resolved
+- **THEN** no duplicate-package warning is printed and lint proceeds with its other checks
+
+## REMOVED Requirements
+
+### Requirement: Start and build duplicate package warnings
+
+**Reason**: Replaced by the lint-time duplicate-package check, which covers pnpm as well as npm and yarn; the legacy detection did not run under pnpm, and start/build warnings were easy to miss.
+
+**Migration**: Run `sku lint` to see duplicate-package warnings. Set `skuSkipValidatePeerDeps` in `package.json` to suppress them.

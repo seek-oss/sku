@@ -34,21 +34,17 @@ describe('getSsrExternalsForCompiledDependency', () => {
       },
       'node_modules/lib-a': {
         name: 'lib-a',
-        version: '1.0.0',
         dependencies: { 'lib-b': '*' },
       },
       'node_modules/lib-b': {
         name: 'lib-b',
-        version: '1.0.0',
         dependencies: { '@vanilla-extract/css': '*' },
       },
       'node_modules/@vanilla-extract/css': {
         name: '@vanilla-extract/css',
-        version: '1.21.2',
       },
       'node_modules/unrelated': {
         name: 'unrelated',
-        version: '1.0.0',
       },
     });
 
@@ -63,21 +59,17 @@ describe('getSsrExternalsForCompiledDependency', () => {
       },
       'node_modules/lib-a': {
         name: 'lib-a',
-        version: '1.0.0',
         dependencies: { '@vanilla-extract/css': '*' },
       },
       'node_modules/@vanilla-extract/css': {
         name: '@vanilla-extract/css',
-        version: '1.21.2',
       },
       'node_modules/lib-b': {
         name: 'lib-b',
-        version: '1.0.0',
         dependencies: { '@vanilla-extract/css': '*' },
       },
       'node_modules/lib-b/node_modules/@vanilla-extract/css': {
         name: '@vanilla-extract/css',
-        version: '1.20.0',
       },
     });
 
@@ -92,21 +84,17 @@ describe('getSsrExternalsForCompiledDependency', () => {
       },
       'node_modules/lib-c': {
         name: 'lib-c',
-        version: '1.0.0',
       },
       'node_modules/lib-d': {
         name: 'lib-d',
-        version: '1.0.0',
         dependencies: { 'lib-c': '*' },
       },
       'node_modules/lib-d/node_modules/lib-c': {
         name: 'lib-c',
-        version: '2.0.0',
         dependencies: { '@vanilla-extract/css': '*' },
       },
       'node_modules/@vanilla-extract/css': {
         name: '@vanilla-extract/css',
-        version: '1.21.2',
       },
     });
 

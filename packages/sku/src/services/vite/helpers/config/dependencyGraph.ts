@@ -19,7 +19,6 @@ const promiseMap = async <T, K>(
 
 interface DepGraphEntry {
   name: string;
-  version: PackageJson['version'];
   /** Directories of the dependencies that depend on this package, or `ROOT` for the app */
   dependents: string[];
 }
@@ -54,7 +53,6 @@ const analyseDependency = async (
 
   depGraph.set(packageDir, {
     name: dep,
-    version: packageJson.version,
     dependents: [dependent],
   });
 
@@ -80,7 +78,6 @@ export const extractDependencyGraph = async (rootDir: string) => {
 
   depGraph.set(ROOT, {
     name: ROOT,
-    version: packageJson.version,
     dependents: [],
   });
 

@@ -22,6 +22,11 @@ export interface DocumentAssets {
   css: string[];
   modulePreloads: string[];
   /**
+   * Modules the page was rendered with (route `handle.moduleId`s and the
+   * language chunk). The client imports these before hydrating.
+   */
+  requiredModules?: string[];
+  /**
    * Start-only virtual stylesheet href. Sku document asset links mark this URL
    * with `data-ssr-css` so the client can drop it after HMR.
    */
@@ -104,7 +109,7 @@ export type MapRoutePath = (args: MapRoutePathArgs) => string[];
  * Required when config `sites` has more than one entry; optional on single-site
  * (sku uses the sole config site name when omitted).
  */
-export type SkuGetSite = (args: {
+type SkuGetSite = (args: {
   /** Express request after consumer middleware (not Fetch `Request`). */
   req: ExpressRequest;
 }) => string;
@@ -113,15 +118,13 @@ export type SkuGetSite = (args: {
  * Sync server-entry getter — configured language name (or `en-PSEUDO`) for
  * Document vocab chunk registration. Omit or return `undefined` ⇒ no chunk.
  */
-export type SkuGetLanguage = (args: {
-  req: ExpressRequest;
-}) => string | undefined;
+type SkuGetLanguage = (args: { req: ExpressRequest }) => string | undefined;
 
 /**
  * Server-entry getter — shell-time JSON seed serialised into the hydrate
  * bootstrap and passed to always-on `SkuProvider` as `clientContext`.
  */
-export type SkuGetClientContext = (args: {
+type SkuGetClientContext = (args: {
   req: ExpressRequest;
 }) => JsonValue | undefined | Promise<JsonValue | undefined>;
 
@@ -129,7 +132,7 @@ export type SkuGetClientContext = (args: {
  * Dual-entry getter — values that MAY differ on server vs client (e.g.
  * `makeClient`, `apiClient`). Not serialised; reaches React via `useReactContext`.
  */
-export type SkuServerGetReactContext<
+type SkuServerGetReactContext<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = (args: {
@@ -138,7 +141,7 @@ export type SkuServerGetReactContext<
   clientContext: C | undefined;
 }) => R | Promise<R>;
 
-export type SkuClientGetReactContext<
+type SkuClientGetReactContext<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = (args: { site: string; clientContext: C | undefined }) => R | Promise<R>;
@@ -147,7 +150,7 @@ export type SkuClientGetReactContext<
  * Optional server-entry `getRouterContext` — seeds React Router `requestContext`
  * for document `query()` / loaders. Receives already-resolved sibling values.
  */
-export type SkuServerGetRouterContext<
+type SkuServerGetRouterContext<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = (args: {
@@ -170,7 +173,7 @@ export type SkuOnHydrate = (args: {
  * native `createBrowserRouter({ getContext })` (zero-arg) and injects hydrate
  * sibling values (`site`, `clientContext`, `reactContext`).
  */
-export type SkuClientGetRouterContext<
+type SkuClientGetRouterContext<
   C extends JsonValue | undefined = JsonValue | undefined,
   R = unknown,
 > = (args: {
@@ -246,7 +249,7 @@ export interface RenderArgs {
 
 export type DocumentDestination = Parameters<PipeableStream['pipe']>[0];
 
-export type CommitDocumentOptions = {
+type CommitDocumentOptions = {
   signal?: AbortSignal;
   beforePipe?: (destination: DocumentDestination) => void;
 };

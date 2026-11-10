@@ -1,6 +1,6 @@
 {
   "name": "sku",
-  "version": "16.4.0",
+  "version": "16.6.1",
   "description": "Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest",
   "types": "./dist/index.d.mts",
   "bin": {
@@ -59,7 +59,7 @@
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",
     "react-router": "^8",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.0 || ^5.0.0"
   },
   "peerDependenciesMeta": {
     "@storybook/react-vite": {

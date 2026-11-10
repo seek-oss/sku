@@ -87,9 +87,9 @@ const baseListenOptions = {
   }) as RenderFunction,
   assets: { bootstrapModules: [], css: [], modulePreloads: [] },
   cspEnabled: false,
-  cspExtraScriptSrcHosts: [] as string[],
+  cspExtraSources: {},
   cspReportOnlyEnabled: false,
-  cspReportOnlyExtraScriptSrcHosts: [] as string[],
+  cspReportOnlyExtraSources: {},
 };
 
 describe('createWebRequest', () => {
@@ -189,9 +189,9 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
   const htmlMiddlewareOptions = {
     assets: { bootstrapModules: [], css: [], modulePreloads: [] },
     cspEnabled: false,
-    cspExtraScriptSrcHosts: [] as string[],
+    cspExtraSources: {},
     cspReportOnlyEnabled: false,
-    cspReportOnlyExtraScriptSrcHosts: [] as string[],
+    cspReportOnlyExtraSources: {},
     development: true,
   };
 
@@ -413,9 +413,9 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
         }).result,
       assets: { bootstrapModules: [], css: [], modulePreloads: [] },
       cspEnabled: true,
-      cspExtraScriptSrcHosts: [],
+      cspExtraSources: {},
       cspReportOnlyEnabled: false,
-      cspReportOnlyExtraScriptSrcHosts: [],
+      cspReportOnlyExtraSources: {},
       development: false,
     });
 
@@ -445,9 +445,9 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
         }).result,
       assets: { bootstrapModules: [], css: [], modulePreloads: [] },
       cspEnabled: false,
-      cspExtraScriptSrcHosts: [],
+      cspExtraSources: {},
       cspReportOnlyEnabled: false,
-      cspReportOnlyExtraScriptSrcHosts: [],
+      cspReportOnlyExtraSources: {},
       development: false,
     });
 
@@ -478,9 +478,9 @@ describe('createHtmlRenderMiddleware abort-before-write', () => {
       render,
       assets: { bootstrapModules: [], css: [], modulePreloads: [] },
       cspEnabled: false,
-      cspExtraScriptSrcHosts: [],
+      cspExtraSources: {},
       cspReportOnlyEnabled: false,
-      cspReportOnlyExtraScriptSrcHosts: [],
+      cspReportOnlyExtraSources: {},
       development: true,
     });
 

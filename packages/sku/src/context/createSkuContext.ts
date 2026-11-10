@@ -1,5 +1,9 @@
 import type { SkuConfig, SkuRoute, SkuRouteObject } from '../types/types.js';
-import { parseCspReportTo } from '../utils/csp.js';
+import {
+  type CspExtraSources,
+  parseCspReportTo,
+  resolveCspConfig,
+} from '../utils/csp.js';
 import { getPathFromCwd, requireFromCwd } from '@sku-private/utils';
 import { existsSync } from 'node:fs';
 import defaultSkuConfig from './defaultSkuConfig.js';
@@ -215,15 +219,27 @@ export const createSkuContext = async ({
   const supportedBrowsers = skuConfig.supportedBrowsers;
   const sourceMapsProd = Boolean(skuConfig.sourceMapsProd);
   const displayNamesProd = Boolean(skuConfig.displayNamesProd);
-  const cspEnabled = skuConfig.cspEnabled;
+  // SSR apps configure CSP through `csp`; other build types use the flat options.
+  const ssrCsp =
+    skuConfig.bundler === 'vite' && skuConfig.buildType === 'ssr'
+      ? resolveCspConfig(skuConfig.csp)
+      : undefined;
+  const flatCspReportTo = parseCspReportTo(skuConfig.cspReportTo);
+  const cspEnabled = ssrCsp ? ssrCsp.enforced.enabled : skuConfig.cspEnabled;
   const cspDelivery = skuConfig.cspDelivery;
   const cspExtraScriptSrcHosts = skuConfig.cspExtraScriptSrcHosts;
-  const cspReportTo = parseCspReportTo(skuConfig.cspReportTo);
-  const cspReportOnlyEnabled = skuConfig.cspReportOnlyEnabled;
+  const cspReportTo = ssrCsp ? ssrCsp.enforced.reportTo : flatCspReportTo;
+  const cspReportOnlyEnabled = ssrCsp
+    ? ssrCsp.reportOnly.enabled
+    : skuConfig.cspReportOnlyEnabled;
   const cspReportOnlyExtraScriptSrcHosts =
     skuConfig.cspReportOnlyExtraScriptSrcHosts ?? cspExtraScriptSrcHosts;
-  const cspReportOnlyReportTo =
-    parseCspReportTo(skuConfig.cspReportOnlyReportTo) ?? cspReportTo;
+  const cspReportOnlyReportTo = ssrCsp
+    ? ssrCsp.reportOnly.reportTo
+    : (parseCspReportTo(skuConfig.cspReportOnlyReportTo) ?? flatCspReportTo);
+  const cspExtraSources: CspExtraSources = ssrCsp?.enforced.extraSources ?? {};
+  const cspReportOnlyExtraSources: CspExtraSources =
+    ssrCsp?.reportOnly.extraSources ?? {};
   const httpsDevServer = skuConfig.httpsDevServer;
   const languages = normalizedLanguages;
   const skipPackageCompatibilityCompilation =
@@ -254,9 +270,15 @@ export const createSkuContext = async ({
       cjsInteropDependencies,
     });
 
+  // SSR output is always split into `client/` and `server/`, and libraries don't render HTML,
+  // so the option only applies to static apps.
+  const distSubfolders =
+    skuConfig.buildType !== 'ssr' && !isLibrary && skuConfig.distSubfolders;
+
   return {
     bundler: skuConfig.bundler,
     buildType: skuConfig.buildType,
+    distSubfolders,
     testRunner: skuConfig.testRunner,
     configPath: appConfigPath,
     publicPath,
@@ -289,6 +311,8 @@ export const createSkuContext = async ({
     cspReportOnlyEnabled,
     cspReportOnlyExtraScriptSrcHosts,
     cspReportOnlyReportTo,
+    cspExtraSources,
+    cspReportOnlyExtraSources,
     expressTrustProxy: Boolean(skuConfig.expressTrustProxy),
     httpsDevServer,
     languages,

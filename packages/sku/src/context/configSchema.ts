@@ -222,9 +222,13 @@ export default validator.compile({
     optional: true,
   },
   cspReportOnlyReportTo: cspReportTo,
+  csp: { type: 'object', optional: true },
   expressTrustProxy: {
     type: 'boolean',
     optional: true,
+  },
+  distSubfolders: {
+    type: 'boolean',
   },
   httpsDevServer: {
     type: 'boolean',

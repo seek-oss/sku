@@ -97,6 +97,40 @@ Use this for packages that use CSS Modules or TypeScript and are not pre-compile
 Use this setting only for internally controlled packages.
 Many modules in this array may increase build time.
 
+## csp <Badge type="info" text="SSR only" />
+
+Type: `{ enforced?: true | CspPolicy; reportOnly?: true | CspPolicy }`, where `CspPolicy` is `{ extraSources?: Partial<Record<Directive, Array<string>>>; reportTo?: string }`
+
+Bundler: `vite` · `buildType: 'ssr'`
+
+The [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) for SSR apps.
+`enforced` sets the `Content-Security-Policy` header, and `reportOnly` sets the `Content-Security-Policy-Report-Only` header.
+Each policy is `true` (sku's directives with nothing extra) or an object, and leaving one out turns it off.
+The policies don't inherit from each other.
+
+- `extraSources` appends sources to directives of the policy, keyed by directive name.
+- `reportTo` is the absolute `http:` or `https:` URL that the browser sends violation reports to.
+
+See [SSR policies](./csp.md#ssr-policies) for the supported directives, the rules for sources and the reporting endpoint names.
+
+Config validation fails when the option is used without `buildType: 'ssr'`.
+Use the flat `csp*` options instead, such as [`cspEnabled`](#cspenabled).
+
+```ts
+export default {
+  bundler: 'vite',
+  buildType: 'ssr',
+  csp: {
+    enforced: {
+      extraSources: {
+        'connect-src': ['https://browser-intake-datadoghq.com'],
+      },
+      reportTo: 'https://csp.example.com/report',
+    },
+  },
+} satisfies SkuConfig;
+```
+
 ## cspEnabled
 
 Type: `boolean`
@@ -108,6 +142,9 @@ Default: `false`
 Enable the content security policy feature.
 See [`Content Security Policy`](./csp.md) for more info.
 
+Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+Use [`csp`](#csp) `.enforced` instead.
+
 ## cspDelivery <Badge type="info" text="Vite Static only" />
 
 Type: `'tag' | 'header'`
@@ -116,6 +153,8 @@ Default: `'tag'`
 
 The way the content security policy is delivered.
 Only relevant if `cspEnabled` is set to `true`.
+
+Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype), which always uses HTTP headers.
 
 ## cspExtraScriptSrcHosts
 
@@ -126,6 +165,9 @@ Default: `[]`
 Extra external hosts to allow in your `script-src` [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
 Only relevant if `cspEnabled` is set to `true`.
 
+Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+Use [`csp`](#csp) `.enforced.extraSources['script-src']` instead.
+
 ## cspReportTo
 
 Type: `string | [string, string]`
@@ -135,9 +177,8 @@ Bundler: `vite`
 Where to report content security policy violations.
 Only relevant if `cspEnabled` is set to `true` and `cspDelivery` is set to `'header'`.
 
-SSR ignores `cspDelivery`.
-SSR always uses HTTP headers.
-This option applies whenever `cspEnabled` is `true`.
+Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+Use [`csp`](#csp) `.enforced.reportTo` instead.
 
 ## cspReportOnlyEnabled
 
@@ -152,6 +193,9 @@ Bundler: `vite`
 Enable the report-only content security policy feature.
 See [`Content Security Policy`](./csp.md) for more info.
 
+Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+Use [`csp`](#csp) `.reportOnly` instead.
+
 ## cspReportOnlyExtraScriptSrcHosts
 
 Type: `Array<string>`
@@ -163,6 +207,9 @@ Bundler: `vite`
 Extra external hosts to allow in your `script-src` report-only [content security policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
 Only relevant if `cspReportOnlyEnabled` is set to `true`.
 
+Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+Use [`csp`](#csp) `.reportOnly.extraSources['script-src']` instead.
+
 ## cspReportOnlyReportTo
 
 Type: `string | [string, string]`
@@ -173,6 +220,9 @@ Bundler: `vite`
 
 Where to report report-only content security policy violations.
 Only relevant if `cspReportOnlyEnabled` is set to `true`.
+
+Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+Use [`csp`](#csp) `.reportOnly.reportTo` instead.
 
 ## dangerouslySetESLintConfig
 
@@ -389,6 +439,38 @@ Default: `false`
 Adds static `displayName` properties to React components in production.
 Use this on sites that generate React code snippets. [Braid](https://seek-oss.github.io/braid-design-system/) is one example.
 
+## distSubfolders
+
+Type: `boolean`
+
+Default: `false`
+
+When `true`, build output is split into a subfolder per kind of file, instead of writing everything to the root of the [`target`](#target) directory.
+This makes it possible to deploy each kind of file separately without guessing which files are which.
+
+For static apps, `sku build` writes:
+
+- `dist/rendered/`: the rendered HTML documents, and the metadata files that `sku serve` uses for response headers.
+  Paths inside `rendered/` match the paths the default layout writes directly under `dist/`, for example `rendered/<environment>/<site>/<route>/index.html`.
+- `dist/client/`: every other file, including JS, CSS and files copied from [`public`](#public).
+
+For [webpack SSR](./ssr/webpack-ssr.md) apps, `sku build-ssr` writes:
+
+- `dist/client/`: JS, CSS and files copied from [`public`](#public).
+- `dist/server/`: the server bundle and the stats it reads at runtime.
+
+`sku serve` serves both static layouts.
+`sku start` and `sku start-ssr` are unaffected.
+
+Restrictions:
+
+- Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
+  SSR output is always split into `dist/client/` and `dist/server/`.
+- `sku build` fails when the [`public`](#public) folder contains `.html` files, because they would be deployed as client files.
+
+> [!NOTE]
+> `distSubfolders` will default to `true` in a future major release.
+
 ## expressTrustProxy <Badge type="info" text="SSR only" />
 
 Type: `boolean`
@@ -431,6 +513,7 @@ Type: `Array<string>`
 Default: `[]`
 
 An array of environments the app supports.
+`client`, `rendered` and `server` are reserved and can't be used as environment names.
 Include one environment for local development.
 Include one environment for each deployment target.
 Use this value to drive app config.
@@ -637,7 +720,7 @@ Default: `8080`
 
 The port that hosts the app when you run `sku start`.
 
-**SSR**: this is also the baked production default listen port (`node dist/server/server.js`).
+**SSR**: this is also the baked production default listen port (`node dist/server/server.mjs`).
 Override it at runtime with `PORT`.
 SSR does not use [`serverPort`](#serverport).
 

@@ -12,14 +12,14 @@ export const CLIENT_MANIFEST_RELATIVE_PATH = 'manifest.json';
  * resolve Document assets without sibling client/
  */
 export const moveClientManifestToServer = async ({
-  ssrClient,
-  ssr,
+  distClient,
+  distServer,
 }: {
-  ssrClient: string;
-  ssr: string;
+  distClient: string;
+  distServer: string;
 }) => {
   await rename(
-    path.join(ssrClient, CLIENT_MANIFEST_RELATIVE_PATH),
-    path.join(ssr, CLIENT_MANIFEST_RELATIVE_PATH),
+    path.join(distClient, CLIENT_MANIFEST_RELATIVE_PATH),
+    path.join(distServer, CLIENT_MANIFEST_RELATIVE_PATH),
   );
 };

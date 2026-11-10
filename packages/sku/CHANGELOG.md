@@ -1,5 +1,58 @@
 # sku
 
+## 16.6.1
+
+### Patch Changes
+
+- `start`: Bind the Vite dev server explicitly to IPv4 due to lack of IPv6 support in some CI environments ([#1749](https://github.com/seek-oss/sku/pull/1749))
+
+- `vite`: Ignore `.pnpm-store` from being watched during `sku start` ([#1749](https://github.com/seek-oss/sku/pull/1749))
+
+## 16.6.0
+
+### Minor Changes
+
+- Add `distSubfolders` option ([#1742](https://github.com/seek-oss/sku/pull/1742))
+
+  When set to `true`, build output is split into a subfolder per intended use, instead of writing everything to the root of `dist`:
+
+  - Static apps (Vite or webpack): `sku build` writes HTML documents to `dist/rendered` and every other file (including files from `public`) to `dist/client`.
+  - Webpack SSR apps: `sku build-ssr` writes client assets (including files from `public`) to `dist/client` and the server bundle to `dist/server`.
+
+  `sku serve` serves both the default and subfolder static layouts.
+
+  The option is rejected with `buildType: 'ssr'`, whose output is already split into `dist/client` and `dist/server`.
+  When it is enabled, `public` must not contain `.html` files.
+
+  This option defaults to `false`, and will default to `true` in a future major release.
+
+  `client`, `rendered` and `server` are now reserved and can't be used as `environments` names, regardless of whether the option is enabled.
+
+### Patch Changes
+
+- Fix rolldown `codeSplitting` warning ([#1746](https://github.com/seek-oss/sku/pull/1746))
+
+- `sku lint`: Exclude sku's generated output from TypeScript type checking ([#1744](https://github.com/seek-oss/sku/pull/1744))
+
+  The generated `tsconfig.json` now excludes the build `target` directory, `coverage` and `report`.
+
+- Updated dependencies [[`abd8fc6`](https://github.com/seek-oss/sku/commit/abd8fc66510267f05b644ecbf2e0a88d9f93812c)]:
+  - @sku-lib/vite@2.0.4
+
+## 16.5.0
+
+### Minor Changes
+
+- Add support for Vitest v5 ([#1739](https://github.com/seek-oss/sku/pull/1739))
+
+### Patch Changes
+
+- `setup-hosts`: Append missing entries to the hosts file instead of rewriting it ([#1734](https://github.com/seek-oss/sku/pull/1734))
+
+  `setup-hosts` no longer changes existing lines in the hosts file, including comments and whitespace. It also warns when the hosts file already maps a host to a different IP address, because that entry may take precedence.
+
+  sku no longer depends on `hostile`.
+
 ## 16.4.0
 
 ### Minor Changes

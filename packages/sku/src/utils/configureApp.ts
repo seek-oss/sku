@@ -20,14 +20,13 @@ import { createTSConfig } from '../services/typescript/tsconfig.js';
 import { bundleReportFolder } from '../services/webpack/config/plugins/bundleAnalyzer.js';
 
 import getCertificate from './certificate.js';
+import { coverageFolder } from './coverageFolder.js';
 import { validateSkuConfigFormat } from './validateSkuConfigFormat.js';
 
 import type { SkuContext } from '../context/createSkuContext.js';
 import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
 import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
 import { warnOnLegacyReact } from './warnOnLegacyReact.js';
-
-const coverageFolder = 'coverage';
 
 const convertToForwardSlashPaths = (pathStr: string) =>
   pathStr.replace(/\\/g, '/');

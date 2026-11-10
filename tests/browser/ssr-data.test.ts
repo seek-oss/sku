@@ -1,5 +1,6 @@
 import { describe, beforeAll, it, expect } from 'vitest';
 import fs from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import {
   scopeToFixture,
@@ -7,6 +8,7 @@ import {
   waitFor,
 } from '@sku-private/testing-library';
 import { createPage } from '@sku-private/playwright';
+import { getPort } from '@sku-private/test-utils';
 
 const { sku, node, fixturePath } = scopeToFixture('ssr-data');
 
@@ -196,13 +198,13 @@ describe('ssr-data', () => {
     }) => {
       skipCleanup(task.id);
       const serverEntry = await fs.readFile(
-        path.join(fixturePath('dist'), 'server', 'server.js'),
+        path.join(fixturePath('dist'), 'server', 'server.mjs'),
         'utf8',
       );
       expect(serverEntry).not.toContain('sku-ssr-data-dev-mock');
       expect(serverEntry).not.toContain('dev-middleware');
 
-      await node(['dist/server/server.js'], {
+      await node(['dist/server/server.mjs'], {
         spawnOpts: {
           env: { ...process.env, PORT: '8215' },
         },
@@ -253,6 +255,37 @@ describe('ssr-data', () => {
               ? setCookie.join('\n')
               : (response.headers.get('set-cookie') ?? '');
           expect(cookieHeader).toContain('sku-ssr-data=1');
+        },
+        { timeout: 15000 },
+      );
+    });
+
+    it('runs the server output without node_modules', async ({ task }) => {
+      skipCleanup(task.id);
+      const port = await getPort();
+      const isolatedDir = await fs.mkdtemp(
+        path.join(os.tmpdir(), 'sku-ssr-standalone-'),
+      );
+      await fs.writeFile(
+        path.join(isolatedDir, 'package.json'),
+        JSON.stringify({ type: 'commonjs' }),
+      );
+      const isolatedServerDir = path.join(isolatedDir, 'server');
+      await fs.cp(path.join(fixturePath('dist'), 'server'), isolatedServerDir, {
+        recursive: true,
+      });
+
+      await node([path.join(isolatedServerDir, 'server.mjs')], {
+        spawnOpts: {
+          env: { ...process.env, PORT: String(port) },
+        },
+      });
+
+      await waitFor(
+        async () => {
+          const response = await fetch(`http://127.0.0.1:${port}/`);
+          expect(response.ok).toBe(true);
+          expect(await response.text()).toContain('"userId":"fixture-user"');
         },
         { timeout: 15000 },
       );

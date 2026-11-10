@@ -24,6 +24,7 @@ import modules from './resolveModules.js';
 import targets from '../../../config/targets.json' with { type: 'json' };
 import type { MakeWebpackConfigOptions } from './types.js';
 import { resolvePolyfills } from '../../../utils/resolvePolyfills.js';
+import { getDistDirectories } from '../../../utils/distDirectories.js';
 
 const require = createRequire(import.meta.url);
 
@@ -49,8 +50,13 @@ export const makeWebpackConfig = async ({
     skipPackageCompatibilityCompilation,
     externalizeNodeModules,
     sourceMapsProd,
+    distSubfolders,
   } = skuContext;
   const isProductionBuild = process.env.NODE_ENV === 'production';
+  const { distClient, distServer } = getDistDirectories({
+    targetPath: paths.target,
+    useSubfolders: distSubfolders && !isStartScript,
+  });
   const webpackMode = isProductionBuild ? 'production' : 'development';
 
   const vocabOptions = getVocabConfig(skuContext);
@@ -88,7 +94,7 @@ export const makeWebpackConfig = async ({
       entry: clientEntry,
       devtool: getSourceMapSetting({ isDevServer, sourceMapsProd }),
       output: {
-        path: paths.target,
+        path: distClient,
         publicPath,
         filename: `${fileMask}.js`,
         chunkFilename: `${fileMask}.js`,
@@ -173,7 +179,8 @@ export const makeWebpackConfig = async ({
       plugins: [
         new LoadablePlugin({
           filename: webpackStatsFilename,
-          writeToDisk: true,
+          // The server bundle requires the stats from its own directory.
+          writeToDisk: { filename: distServer },
           outputAsset: false,
         }),
         new MiniCssExtractPlugin({
@@ -240,7 +247,7 @@ export const makeWebpackConfig = async ({
         __dirname: false,
       },
       output: {
-        path: paths.target,
+        path: distServer,
         publicPath,
         filename: `server.${type === 'module' ? 'c' : ''}js`,
         hotUpdateChunkFilename: `[id].[fullhash].hot-update.${type === 'module' ? 'c' : ''}js`,

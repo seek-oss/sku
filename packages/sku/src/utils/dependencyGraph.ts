@@ -19,12 +19,24 @@ const promiseMap = async <T, K>(
 
 interface DepGraphEntry {
   name: string;
+  /** Version from the package's `package.json`, if it declares one. The `ROOT` sentinel carries no version. */
+  version?: string;
+  /** `peerDependencies` declared in the package's `package.json` (name → range) */
+  peerDependencies?: Record<string, string>;
+  /** Whether the package's `package.json` sets `skuCompilePackage` */
+  skuCompilePackage?: boolean;
+  /**
+   * Directories this package's dependencies resolved to, keyed by dependency
+   * name, as resolved from this package's directory. Lets consumers tell
+   * which copy of a peer a given copy of a package actually resolves.
+   */
+  resolutions?: Record<string, string>;
   /** Directories of the dependencies that depend on this package, or `ROOT` for the app */
   dependents: string[];
 }
 
 /** Every copy of every package in the walk, keyed by package directory */
-type DepGraph = Map<string, DepGraphEntry>;
+export type DepGraph = Map<string, DepGraphEntry>;
 
 const loadPackage = async (packageJsonPath: string) =>
   fs
@@ -43,6 +55,15 @@ const analyseDependency = async (
   const packageDir = path.dirname(packageJsonPath);
   const packageJson = await loadPackage(packageJsonPath);
 
+  // Record which copy the dependent actually resolves for this dependency.
+  const dependentEntry = depGraph.get(dependent);
+  if (dependentEntry) {
+    dependentEntry.resolutions = {
+      ...dependentEntry.resolutions,
+      [dep]: packageDir,
+    };
+  }
+
   // Checks if the package is already in the graph. If so, add it to the list of dependents.
   const depGraphEntry = depGraph.get(packageDir);
 
@@ -53,6 +74,17 @@ const analyseDependency = async (
 
   depGraph.set(packageDir, {
     name: dep,
+    version: packageJson.version,
+    peerDependencies: packageJson.peerDependencies
+      ? Object.fromEntries(
+          Object.entries(packageJson.peerDependencies).filter(
+            (entry): entry is [string, string] => typeof entry[1] === 'string',
+          ),
+        )
+      : undefined,
+    skuCompilePackage:
+      (packageJson as { skuCompilePackage?: unknown }).skuCompilePackage ===
+      true,
     dependents: [dependent],
   });
 
@@ -68,6 +100,14 @@ const analyseDependency = async (
   });
 };
 
+/**
+ * Walks the dependency graph starting from the root package.
+ *
+ * Known limitation: only the root package's `dependencies` are walked (plus
+ * transitive `dependencies`/`peerDependencies`). Packages reachable only via
+ * the root `devDependencies` or via `optionalDependencies` are not represented
+ * in the returned graph.
+ */
 export const extractDependencyGraph = async (rootDir: string) => {
   log('starting to extract dependency graph...');
   const depGraph: DepGraph = new Map();

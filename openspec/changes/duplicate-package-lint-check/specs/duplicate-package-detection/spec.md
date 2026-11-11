@@ -33,6 +33,44 @@ When both `react` and `react-dom` are resolved in the app's dependency graph and
 - **WHEN** an app resolves `react` and `react-dom` at the same version
 - **THEN** no pair-mismatch warning is printed
 
+### Requirement: Duplicate compile package versions are reported at lint
+
+When a full `sku lint` run resolves any of the app's compile packages — detected `@seek` packages flagged `skuCompilePackage`, sku's default compile packages, user-configured `compilePackages`, or any graph package flagged `skuCompilePackage` — at more than one distinct version in the app's dependency graph, sku SHALL print a warning naming the package, each resolved version, and how each copy is reached, and SHALL still exit lint successfully.
+
+#### Scenario: Duplicate `@seek` compile package versions under pnpm
+
+- **WHEN** an app using pnpm has two versions of an `@seek` package flagged `skuCompilePackage` reachable from its dependencies and `sku lint` runs without path arguments
+- **THEN** a warning identifies both versions and their dependency chains, and the lint exit code is unaffected
+
+#### Scenario: Duplicate user-configured compile package versions
+
+- **WHEN** an app lists a package in its `compilePackages` sku config and two versions of it are reachable from its dependencies and `sku lint` runs without path arguments
+- **THEN** a warning identifies both versions and their dependency chains, and the lint exit code is unaffected
+
+#### Scenario: Unflagged `@seek` package duplicated
+
+- **WHEN** an app has two versions of an `@seek` package that is not flagged `skuCompilePackage`, is not a default compile package, and is not in its `compilePackages` config
+- **THEN** no duplicate warning is printed for that package
+
+### Requirement: Peer version mismatches of candidate packages are reported at lint
+
+When a copy of a candidate package (watched or compile package) declares a peer dependency on another candidate package and the peer copy it actually resolves falls outside the declared semver range, sku SHALL print a warning identifying the declaring package, the expected range, and the resolved version, and SHALL still exit lint successfully. The check is evaluated per declaring copy, non-semver ranges are ignored, and the `react-dom` peer on `react` is reported only by the react pair requirement above.
+
+#### Scenario: Resolved peer outside declared range
+
+- **WHEN** a compile package declares a peer dependency on `braid-design-system` at `^31.0.0` and resolves `braid-design-system` at `32.0.0` and `sku lint` runs without path arguments
+- **THEN** a warning identifies the expected range and the resolved version, and the lint exit code is unaffected
+
+#### Scenario: Resolved peer satisfies declared range
+
+- **WHEN** a compile package declares a peer dependency on another candidate package and the copy it resolves satisfies the declared range
+- **THEN** no peer-mismatch warning is printed for that declaration, even if other copies of the peer exist in the graph
+
+#### Scenario: Non-semver peer range
+
+- **WHEN** a candidate package declares a peer dependency with a non-semver range such as `workspace:*`
+- **THEN** no peer-mismatch warning is printed for that declaration
+
 ### Requirement: The check is scoped, skippable, and non-fatal
 
 The duplicate-package check SHALL run only on full `sku lint` runs, SHALL be skipped when the app sets `skuSkipValidatePeerDeps`, and MUST NOT make lint fail or throw when dependencies cannot be resolved.

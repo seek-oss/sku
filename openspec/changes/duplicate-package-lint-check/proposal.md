@@ -5,10 +5,11 @@ Duplicate versions of `react`, `react-dom`, `braid-design-system`, or `@vanilla-
 ## What Changes
 
 - Add a warn-only duplicate-package check to full `sku lint` runs. It reports distinct versions of the four packages above that are reachable from the app's dependency graph, plus a `react`/`react-dom` version mismatch.
-- Reuse the existing dependency-graph walk, extended to record package versions. The walk is package-manager agnostic, so it works with pnpm, npm, and yarn.
+- Extend the candidate set beyond the fixed watchlist to the app's compile packages — detected `@seek` packages flagged `skuCompilePackage`, sku's default compile packages, and user-configured `compilePackages` — and warn when a candidate package's peer dependency on another candidate resolves outside its declared range, restoring (and improving on) the legacy compile-package coverage.
+- Reuse the existing dependency-graph walk, extended to record package versions, peer dependencies, the `skuCompilePackage` flag, and per-package resolutions. The walk is package-manager agnostic, so it works with pnpm, npm, and yarn.
 - Keep `skuSkipValidatePeerDeps` as the opt-out.
-- **BREAKING**: Remove `validatePeerDeps` and its start/build/serve invocations. Its broader compile-package coverage and peer-range checks are dropped; the lint check becomes sku's only duplicate detection.
-- Non-goals: no hard lint/build failure, no `@seek` scope coverage, no bundler/import-graph analysis, and no change to the graph's root-dependency-only walk (a documented known limitation).
+- **BREAKING**: Remove `validatePeerDeps` and its start/build/serve invocations; the lint check becomes sku's only duplicate detection, with broader coverage than the legacy check (it also runs under pnpm).
+- Non-goals: no hard lint/build failure, no bundler/import-graph analysis, and no change to the graph's root-dependency-only walk (a documented known limitation).
 
 ## Capabilities
 

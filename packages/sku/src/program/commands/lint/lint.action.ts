@@ -5,6 +5,7 @@ import { runTsc } from '../../../services/typescript/runTsc.js';
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { configureProject } from '../../../utils/configure.js';
 import { checkPathAliasImports } from '../../../utils/pathAliasImports.js';
+import { checkDuplicatePackages } from '../../../utils/duplicatePackages.js';
 import { runLintChecks, type LintCheck } from '../../../utils/runLintChecks.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { accentLight, critical } from '@sku-private/utils/console';
@@ -37,6 +38,19 @@ export const lintAction = async (
       name: 'ESLint',
       run: () => esLintCheck({ paths: pathsToCheck }),
     },
+    // Duplicate-package state only changes when dependencies change, so only
+    // run this (warn-only) check on full lint runs.
+    ...(paths.length === 0
+      ? [
+          {
+            name: 'Duplicate packages',
+            run: async () =>
+              checkDuplicatePackages({
+                candidatePackages: await skuContext.paths.compilePackages(),
+              }),
+          },
+        ]
+      : []),
   ];
 
   const hasFailure = await runLintChecks(checks);

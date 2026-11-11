@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import path from 'node:path';
 import fs from 'node:fs/promises';
+import { existsSync, realpathSync } from 'node:fs';
 
 import type { PackageJson } from 'type-fest';
 import { createDebug } from 'obug';
@@ -8,29 +9,18 @@ import { createRequire } from 'node:module';
 
 const log = createDebug('sku:dependency-graph');
 
-const require = createRequire(import.meta.url);
-
-const ROOT = 'ROOT';
+export const ROOT = 'ROOT';
 
 const promiseMap = async <T, K>(
   items: T[],
   fn: (item: T) => Promise<K>,
 ): Promise<K[]> => Promise.all(items.map(fn));
 
-interface DepGraphEntry {
+export interface DepGraphEntry {
   name: string;
-  /** Version from the package's `package.json`, if it declares one. The `ROOT` sentinel carries no version. */
+  /** `undefined` for `ROOT` */
   version?: string;
-  /** `peerDependencies` declared in the package's `package.json` (name → range) */
-  peerDependencies?: Record<string, string>;
-  /** Whether the package's `package.json` sets `skuCompilePackage` */
-  skuCompilePackage?: boolean;
-  /**
-   * Directories this package's dependencies resolved to, keyed by dependency
-   * name, as resolved from this package's directory. Lets consumers tell
-   * which copy of a peer a given copy of a package actually resolves.
-   */
-  resolutions?: Record<string, string>;
+  peerDependencies?: PackageJson['peerDependencies'];
   /** Directories of the dependencies that depend on this package, or `ROOT` for the app */
   dependents: string[];
 }
@@ -43,26 +33,39 @@ const loadPackage = async (packageJsonPath: string) =>
     .readFile(packageJsonPath, 'utf-8')
     .then(JSON.parse) as Promise<PackageJson>;
 
+/**
+ * Finds the directory of the copy of `dep` that Node would load from `fromDir`.
+ *
+ * Searches Node's `node_modules` lookup paths directly, because resolving
+ * `${dep}/package.json` throws for packages whose `exports` omit it.
+ * Asking for the lookup paths of `${dep}/package.json` rather than `dep` keeps
+ * them for packages named after Node builtins, e.g. `punycode`.
+ */
+const resolvePackageDir = (dep: string, fromDir: string) => {
+  const lookupPaths =
+    createRequire(path.join(fromDir, 'package.json')).resolve.paths(
+      `${dep}/package.json`,
+    ) ?? [];
+
+  for (const lookupPath of lookupPaths) {
+    const packageDir = path.join(lookupPath, dep);
+    if (existsSync(path.join(packageDir, 'package.json'))) {
+      // pnpm symlinks copies out of its store, so key each copy by its real path
+      return realpathSync(packageDir);
+    }
+  }
+
+  throw new Error(`Cannot find package "${dep}" from ${fromDir}`);
+};
+
 const analyseDependency = async (
   dependent: string,
   dep: string,
   rootDir: string,
   depGraph: DepGraph,
 ) => {
-  const packageJsonPath = require.resolve(`${dep}/package.json`, {
-    paths: [rootDir],
-  });
-  const packageDir = path.dirname(packageJsonPath);
-  const packageJson = await loadPackage(packageJsonPath);
-
-  // Record which copy the dependent actually resolves for this dependency.
-  const dependentEntry = depGraph.get(dependent);
-  if (dependentEntry) {
-    dependentEntry.resolutions = {
-      ...dependentEntry.resolutions,
-      [dep]: packageDir,
-    };
-  }
+  const packageDir = resolvePackageDir(dep, rootDir);
+  const packageJson = await loadPackage(path.join(packageDir, 'package.json'));
 
   // Checks if the package is already in the graph. If so, add it to the list of dependents.
   const depGraphEntry = depGraph.get(packageDir);
@@ -75,16 +78,7 @@ const analyseDependency = async (
   depGraph.set(packageDir, {
     name: dep,
     version: packageJson.version,
-    peerDependencies: packageJson.peerDependencies
-      ? Object.fromEntries(
-          Object.entries(packageJson.peerDependencies).filter(
-            (entry): entry is [string, string] => typeof entry[1] === 'string',
-          ),
-        )
-      : undefined,
-    skuCompilePackage:
-      (packageJson as { skuCompilePackage?: unknown }).skuCompilePackage ===
-      true,
+    peerDependencies: packageJson.peerDependencies,
     dependents: [dependent],
   });
 
@@ -101,20 +95,26 @@ const analyseDependency = async (
 };
 
 /**
- * Walks the dependency graph starting from the root package.
+ * Walks the dependency graph starting from the root package's `dependencies`
+ * (and `devDependencies` with `includeDevDependencies`), following each
+ * package's `dependencies` and `peerDependencies`.
  *
- * Known limitation: only the root package's `dependencies` are walked (plus
- * transitive `dependencies`/`peerDependencies`). Packages reachable only via
- * the root `devDependencies` or via `optionalDependencies` are not represented
- * in the returned graph.
+ * Known limitation: `optionalDependencies` are not walked, so packages
+ * reachable only through them are not represented in the returned graph.
  */
-export const extractDependencyGraph = async (rootDir: string) => {
+export const extractDependencyGraph = async (
+  rootDir: string,
+  { includeDevDependencies = false } = {},
+) => {
   log('starting to extract dependency graph...');
   const depGraph: DepGraph = new Map();
 
   const packageJson = await loadPackage(`${rootDir}/package.json`);
 
-  const deps = Object.keys(packageJson.dependencies ?? {});
+  const deps = Object.keys({
+    ...packageJson.dependencies,
+    ...(includeDevDependencies ? packageJson.devDependencies : {}),
+  });
 
   depGraph.set(ROOT, {
     name: ROOT,

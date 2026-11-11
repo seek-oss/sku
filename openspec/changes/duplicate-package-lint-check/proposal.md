@@ -4,12 +4,13 @@ Duplicate versions of `react`, `react-dom`, `braid-design-system`, or `@vanilla-
 
 ## What Changes
 
-- Add a warn-only duplicate-package check to full `sku lint` runs. It reports distinct versions of the four packages above that are reachable from the app's dependency graph, plus a `react`/`react-dom` version mismatch.
-- Extend the candidate set beyond the fixed watchlist to the app's compile packages — detected `@seek` packages flagged `skuCompilePackage`, sku's default compile packages, and user-configured `compilePackages` — and warn when a candidate package's peer dependency on another candidate resolves outside its declared range, restoring (and improving on) the legacy compile-package coverage.
-- Reuse the existing dependency-graph walk, extended to record package versions, peer dependencies, the `skuCompilePackage` flag, and per-package resolutions. The walk is package-manager agnostic, so it works with pnpm, npm, and yarn.
+- Add a warn-only duplicate-package check to full `sku lint` runs. It reports distinct versions of the four packages above that are reachable from the app's dependencies or devDependencies, plus a `react-dom` copy that resolves a different `react` version.
+- Extend the candidate set beyond the fixed watchlist to the app's compile packages (`skuContext.paths.compilePackages()`: detected `@seek` packages flagged `skuCompilePackage`, sku's default compile packages, and user-configured `compilePackages`). Warn when a candidate package's peer dependency on another candidate resolves outside its declared range, restoring (and improving on) the legacy compile-package coverage.
+- Reuse the existing dependency-graph walk, extended to record package versions and peer dependencies. The walk is package-manager agnostic, so it works with pnpm, npm, and yarn. The lint check also seeds it with the root `devDependencies`, because `sku init` installs `@vanilla-extract/css` as one.
+- Fix the walk skipping packages whose `exports` field doesn't include `./package.json`. This also fixes missing Vite `noExternal` entries for Vanilla Extract dependents.
 - Keep `skuSkipValidatePeerDeps` as the opt-out.
-- **BREAKING**: Remove `validatePeerDeps` and its start/build/serve invocations; the lint check becomes sku's only duplicate detection, with broader coverage than the legacy check (it also runs under pnpm).
-- Non-goals: no hard lint/build failure, no bundler/import-graph analysis, and no change to the graph's root-dependency-only walk (a documented known limitation).
+- Remove `validatePeerDeps` and its start/build/serve invocations; the lint check becomes sku's only duplicate detection, with broader coverage than the legacy check (it also runs under pnpm).
+- Non-goals: no hard lint/build failure, and no bundler/import-graph analysis.
 
 ## Capabilities
 
@@ -23,5 +24,5 @@ Duplicate versions of `react`, `react-dom`, `braid-design-system`, or `@vanilla-
 
 ## Impact
 
-- Affected code: `packages/sku` lint command, dependency-graph helper (moved to a shared location), `validatePeerDeps` and its call sites in start/build/serve handlers, and the `configure` wrapper.
-- No new dependencies. Requires a changeset; docs only if the skip flag's documentation needs updating.
+- Affected code: `packages/sku` lint command, dependency-graph helper (moved to a shared location; its resolution fix also changes Vite `noExternal`), `validatePeerDeps` and its call sites in start/build/serve handlers, and the `configure` wrapper.
+- No new dependencies. Requires a minor changeset for the lint check and a patch changeset for the `noExternal` fix; docs only if the skip flag's documentation needs updating.

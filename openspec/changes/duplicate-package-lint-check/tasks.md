@@ -50,3 +50,17 @@
 - [x] 8.4 Pass `skuContext.paths.compilePackages()` from `lint.action.ts` into the duplicate-package check as extra candidates
 - [x] 8.5 Unit/integration-test: flagged `@seek` duplicates, caller-supplied candidates, unflagged `@seek` ignored, peer satisfied/mismatched per copy, non-semver ranges ignored, and graph recording of the new entry fields
 - [x] 8.6 Update the proposal, design, spec delta, and changeset for the restored compile-package coverage
+
+## 9. Review follow-ups
+
+See `review.md` for the findings behind these tasks. They supersede parts of 1.2, 2.3, 3.2, 3.3, 4.1, 8.1, and 8.2.
+
+- [x] 9.1 Find package directories through Node's `node_modules` lookup paths and their real paths, so packages whose `exports` omit `./package.json` stay in the graph
+- [x] 9.2 Add an `includeDevDependencies` option to the walk and pass it from the lint check; `setNoExternal` keeps walking `dependencies` only
+- [x] 9.3 Drop `resolutions` and the `skuCompilePackage` flag from `DepGraphEntry`; derive the resolved copy of a peer from `dependents`, and take compile-package candidates from `compilePackages()` only
+- [x] 9.4 Replace the `react`/`react-dom` version-set check with a per-copy exact-version peer check
+- [x] 9.5 Treat prereleases within a peer range as satisfying it, and stop logging same-version copies
+- [x] 9.6 Read `skuSkipValidatePeerDeps` in the check itself and delete the shared helper
+- [x] 9.7 Sort copies so warnings print in a stable order
+- [x] 9.8 Test packages that hide `package.json`, devDependency walking, pnpm store symlinks, and the per-copy react check
+- [x] 9.9 Update the proposal, design, spec delta, and changeset; add a patch changeset for the Vite `noExternal` fix

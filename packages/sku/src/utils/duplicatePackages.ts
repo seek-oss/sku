@@ -1,417 +1,190 @@
-import { getWhyCommand } from '@sku-private/utils';
+import { readFile } from 'node:fs/promises';
+import path from 'node:path';
+
+import { cwd, getWhyCommand } from '@sku-private/utils';
 import { accent, banner, caution, strong } from '@sku-private/utils/console';
 import { createDebug } from 'obug';
 import semver from 'semver';
 
-import { extractDependencyGraph, type DepGraph } from './dependencyGraph.js';
-import { shouldSkipValidatePeerDeps } from './skipValidatePeerDeps.js';
+import {
+  extractDependencyGraph,
+  ROOT,
+  type DepGraph,
+  type DepGraphEntry,
+} from './dependencyGraph.js';
 import type { LintResult } from './runLintChecks.js';
 import provider from '../services/telemetry/index.js';
 
 const debug = createDebug('sku:duplicate-packages');
 
-/**
- * Packages always checked for duplicates, regardless of app configuration.
- * The candidate set is extended at lint time with the app's compile packages
- * (detected `@seek` packages flagged `skuCompilePackage`, sku's defaults, and
- * user-configured `compilePackages`), restoring the coverage the legacy
- * `validatePeerDeps` check had.
- */
-const baseWatchedPackages = [
+/** Always checked, in addition to the app's compile packages */
+const watchedPackages = [
   'react',
   'react-dom',
   'braid-design-system',
   '@vanilla-extract/css',
-] as const;
+];
 
-interface DuplicatePackageCopy {
-  version: string;
-  directory: string;
-  /** Dependency chain from the app to this copy, e.g. `['your app', 'lib-a', 'react']` */
-  chain: string[];
-}
+const semverOptions = { includePrerelease: true };
 
-interface DuplicatePackageFinding {
-  packageName: string;
-  copies: DuplicatePackageCopy[];
-  whyCommand: string;
-}
+type PackageCopy = DepGraphEntry & { directory: string; version: string };
 
-interface ReactPairMismatch {
-  reactVersions: string[];
-  reactDomVersions: string[];
-  copies: DuplicatePackageCopy[];
-  whyCommand: string;
-}
-
-interface SameVersionDuplicate {
-  packageName: string;
-  version: string;
-  directories: string[];
-}
-
-interface PeerVersionMismatch {
-  /** Package that declares the peer dependency */
-  packageName: string;
-  packageVersion?: string;
-  packageDirectory: string;
-  /** Candidate package the peer dependency points at */
-  peerName: string;
-  peerVersionRange: string;
-  /** Version of the peer copy this package copy actually resolves */
-  resolvedPeerVersion: string;
-  resolvedPeerDirectory: string;
-  /** `true` when the resolved peer is ahead of the declared range (the declaring package's range is behind) */
-  resolvedPeerIsAhead: boolean;
-  chain: string[];
-  whyCommand: string;
-}
-
-interface DuplicatePackageReport {
-  findings: DuplicatePackageFinding[];
-  pairMismatch?: ReactPairMismatch;
-  peerMismatches: PeerVersionMismatch[];
-  sameVersionDuplicates: SameVersionDuplicate[];
-}
-
-interface ClassifyOptions {
-  whyCommand?: string;
-  /**
-   * Extra packages to check (e.g. the app's compile packages). Graph entries
-   * flagged `skuCompilePackage` are always included as candidates as well.
-   */
-  candidatePackages?: string[];
-}
-
-const ROOT = 'ROOT';
-
-const buildChain = (directory: string, depGraph: DepGraph): string[] => {
-  const chain: string[] = [];
-  const visited = new Set<string>();
-  let current: string | undefined = directory;
-
-  while (current && current !== ROOT && !visited.has(current)) {
-    visited.add(current);
-    const entry = depGraph.get(current);
-    if (!entry) {
-      break;
-    }
-    chain.unshift(entry.name);
-    current = entry.dependents[0];
-  }
-
-  if (current === ROOT) {
-    chain.unshift('your app');
-  }
-
-  return chain;
-};
-
-type WatchedEntry = { directory: string; version: string };
-
-const getCandidatePackages = (
-  depGraph: DepGraph,
-  extraCandidates: string[] = [],
-) => {
-  const candidates = new Set<string>([
-    ...baseWatchedPackages,
-    ...extraCandidates,
-  ]);
-
-  // Any package flagged as a sku compile package in its own `package.json`
-  // is a candidate, even if compile-package detection didn't surface it.
-  for (const entry of depGraph.values()) {
-    if (entry.skuCompilePackage) {
-      candidates.add(entry.name);
-    }
-  }
-
-  return candidates;
-};
-
-const groupCandidateEntries = (depGraph: DepGraph, candidates: Set<string>) => {
-  const byName = new Map<string, WatchedEntry[]>();
-
-  for (const [directory, entry] of depGraph) {
-    if (directory === ROOT || !entry.version) {
-      continue;
-    }
-    if (!candidates.has(entry.name)) {
-      continue;
-    }
-    const list = byName.get(entry.name) ?? [];
-    list.push({ directory, version: entry.version });
-    byName.set(entry.name, list);
-  }
-
-  return byName;
-};
-
-const toCopy = (
-  depGraph: DepGraph,
-  { directory, version }: WatchedEntry,
-): DuplicatePackageCopy => ({
-  version,
-  directory,
-  chain: buildChain(directory, depGraph),
-});
+/** `react-dom` only works with the exact same version of `react` */
+const requiresExactVersion = (name: string, peerName: string) =>
+  name === 'react-dom' && peerName === 'react';
 
 /**
- * Finds candidate packages whose declared peer dependency on another
- * candidate resolves to a copy outside the declared range, per declaring
- * copy. The `react-dom` → `react` peer is excluded: it is reported by the
- * dedicated react pair check instead.
- */
-const findPeerMismatches = (
-  depGraph: DepGraph,
-  candidates: Set<string>,
-  whyCommand: string,
-): PeerVersionMismatch[] => {
-  const mismatches: PeerVersionMismatch[] = [];
-  const seen = new Set<string>();
-
-  for (const [directory, entry] of depGraph) {
-    if (directory === ROOT || !candidates.has(entry.name)) {
-      continue;
-    }
-
-    for (const [peerName, range] of Object.entries(
-      entry.peerDependencies ?? {},
-    )) {
-      if (!candidates.has(peerName)) {
-        continue;
-      }
-      if (entry.name === 'react-dom' && peerName === 'react') {
-        continue;
-      }
-      if (!semver.validRange(range)) {
-        continue;
-      }
-
-      const resolvedDirectory = entry.resolutions?.[peerName];
-      const resolved = resolvedDirectory
-        ? depGraph.get(resolvedDirectory)
-        : undefined;
-      if (
-        !resolvedDirectory ||
-        !resolved?.version ||
-        !semver.valid(resolved.version)
-      ) {
-        continue;
-      }
-      if (semver.satisfies(resolved.version, range)) {
-        continue;
-      }
-
-      const key = `${directory}:${peerName}:${range}:${resolved.version}`;
-      if (seen.has(key)) {
-        continue;
-      }
-      seen.add(key);
-
-      mismatches.push({
-        packageName: entry.name,
-        packageVersion: entry.version,
-        packageDirectory: directory,
-        peerName,
-        peerVersionRange: range,
-        resolvedPeerVersion: resolved.version,
-        resolvedPeerDirectory: resolvedDirectory,
-        resolvedPeerIsAhead: semver.gtr(resolved.version, range),
-        chain: buildChain(directory, depGraph),
-        whyCommand,
-      });
-    }
-  }
-
-  return mismatches.toSorted((a, b) =>
-    `${a.packageName}:${a.peerName}`.localeCompare(
-      `${b.packageName}:${b.peerName}`,
-    ),
-  );
-};
-
-/**
- * Pure classifier over a dependency graph. Emits a finding when a candidate
- * package resolves to two or more distinct versions, a pair mismatch when
- * the resolved `react` and `react-dom` version sets differ, and a peer
- * mismatch when a candidate's declared peer range is not satisfied by the
- * peer copy it actually resolves.
+ * Finds candidate packages (the watchlist plus `candidatePackages`) that
+ * resolve to more than one version, and candidate copies whose peer
+ * dependency on another candidate resolves to a version outside the
+ * declared range.
  */
 export const classifyDuplicatePackages = (
   depGraph: DepGraph,
-  { whyCommand = getWhyCommand(), candidatePackages }: ClassifyOptions = {},
-): DuplicatePackageReport => {
-  const candidates = getCandidatePackages(depGraph, candidatePackages);
-  const byName = groupCandidateEntries(depGraph, candidates);
-  const findings: DuplicatePackageFinding[] = [];
-  const sameVersionDuplicates: SameVersionDuplicate[] = [];
+  candidatePackages: string[] = [],
+) => {
+  const candidates = new Set([...watchedPackages, ...candidatePackages]);
 
-  for (const [packageName, entries] of byName) {
-    const byVersion = new Map<string, WatchedEntry[]>();
-    for (const entry of entries) {
-      const list = byVersion.get(entry.version) ?? [];
-      list.push(entry);
-      byVersion.set(entry.version, list);
-    }
+  const copies = [...depGraph]
+    .flatMap(([directory, entry]): PackageCopy[] =>
+      entry.version && candidates.has(entry.name)
+        ? [{ ...entry, directory, version: entry.version }]
+        : [],
+    )
+    .sort(
+      (a, b) =>
+        a.name.localeCompare(b.name) ||
+        a.version.localeCompare(b.version, undefined, { numeric: true }) ||
+        a.directory.localeCompare(b.directory),
+    );
+  const copiesByName = Map.groupBy(copies, (copy) => copy.name);
 
-    for (const [version, versionEntries] of byVersion) {
-      if (versionEntries.length > 1) {
-        const duplicate: SameVersionDuplicate = {
-          packageName,
-          version,
-          directories: versionEntries.map((e) => e.directory),
-        };
-        sameVersionDuplicates.push(duplicate);
-        debug(
-          `Multiple directories resolve ${packageName}@${version} (same version, not a finding):`,
-          duplicate.directories,
-        );
+  const duplicates = [...copiesByName.values()].filter(
+    (group) => new Set(group.map((copy) => copy.version)).size > 1,
+  );
+
+  const versionMismatches = copies.flatMap((copy) =>
+    Object.entries(copy.peerDependencies ?? {}).flatMap(([peerName, range]) => {
+      const peer = copiesByName
+        .get(peerName)
+        ?.find((peerCopy) => peerCopy.dependents.includes(copy.directory));
+      const expectedRange = requiresExactVersion(copy.name, peerName)
+        ? copy.version
+        : range;
+
+      if (
+        !peer ||
+        !expectedRange ||
+        !semver.valid(peer.version) ||
+        !semver.validRange(expectedRange) ||
+        semver.satisfies(peer.version, expectedRange, semverOptions)
+      ) {
+        return [];
       }
-    }
 
-    if (byVersion.size >= 2) {
-      findings.push({
-        packageName,
-        copies: entries
-          .map((entry) => toCopy(depGraph, entry))
-          .toSorted((a, b) => a.version.localeCompare(b.version)),
-        whyCommand,
-      });
-    }
-  }
+      return [{ copy, peer, expectedRange }];
+    }),
+  );
 
-  findings.sort((a, b) => a.packageName.localeCompare(b.packageName));
-
-  let pairMismatch: ReactPairMismatch | undefined;
-  const reactEntries = byName.get('react');
-  const reactDomEntries = byName.get('react-dom');
-
-  if (reactEntries && reactDomEntries) {
-    const reactVersions = [
-      ...new Set(reactEntries.map((e) => e.version)),
-    ].toSorted();
-    const reactDomVersions = [
-      ...new Set(reactDomEntries.map((e) => e.version)),
-    ].toSorted();
-
-    if (
-      reactVersions.length !== reactDomVersions.length ||
-      reactVersions.some((version, i) => version !== reactDomVersions[i])
-    ) {
-      pairMismatch = {
-        reactVersions,
-        reactDomVersions,
-        copies: [...reactEntries, ...reactDomEntries]
-          .map((entry) => toCopy(depGraph, entry))
-          .toSorted((a, b) => a.version.localeCompare(b.version)),
-        whyCommand,
-      };
-    }
-  }
-
-  return {
-    findings,
-    pairMismatch,
-    peerMismatches: findPeerMismatches(depGraph, candidates, whyCommand),
-    sameVersionDuplicates,
-  };
+  return { duplicates, versionMismatches };
 };
 
-const formatCopy = ({ version, directory, chain }: DuplicatePackageCopy) =>
-  `${strong(version)} at ${directory} (via ${chain.join(' > ')})`;
+/**
+ * One dependency path from the app to `directory`. Following `dependents[0]`
+ * always leads back to `ROOT`, because it is the package the walk first
+ * reached this one through.
+ */
+const formatChain = (directory: string, depGraph: DepGraph) => {
+  const chain: string[] = [];
+  for (
+    let entry = depGraph.get(directory);
+    entry;
+    entry = depGraph.get(entry.dependents[0])
+  ) {
+    chain.unshift(entry.name === ROOT ? 'your app' : entry.name);
+  }
+  return chain.join(' > ');
+};
+
+const formatWhyHint = (packageName: string) =>
+  `Try running "${accent(getWhyCommand())} ${accent(packageName)}" to diagnose the issue`;
+
+const formatFixAdvice = (
+  copy: PackageCopy,
+  peer: PackageCopy,
+  expectedRange: string,
+) => {
+  if (requiresExactVersion(copy.name, peer.name)) {
+    return `${strong('react')} and ${strong('react-dom')} must be installed at the same version.`;
+  }
+
+  return semver.gtr(peer.version, expectedRange, semverOptions)
+    ? `The best way to fix this is for ${strong(copy.name)} to update its peer dependency on ${strong(peer.name)}.`
+    : `The best way to fix this is to update your dependency on ${strong(peer.name)}.`;
+};
 
 /**
- * Lint check for duplicate versions of watched packages. Warn-only: it always
+ * Warn-only lint check for duplicate and mismatched package versions. Always
  * resolves with `exitCode: 0`, is skipped when the app sets
  * `skuSkipValidatePeerDeps`, and swallows dependency-resolution errors.
  */
-interface CheckDuplicatePackagesOptions {
+export const checkDuplicatePackages = async ({
+  rootDir = cwd(),
+  candidatePackages = [],
+}: {
   rootDir?: string;
-  /** Extra packages to check, e.g. the app's compile packages from sku context */
+  /** Packages to check in addition to the watchlist, e.g. the app's compile packages */
   candidatePackages?: string[];
-}
-
-export const checkDuplicatePackages = async (
-  rootDirOrOptions?: string | CheckDuplicatePackagesOptions,
-): Promise<LintResult> => {
-  const { rootDir, candidatePackages } =
-    typeof rootDirOrOptions === 'string'
-      ? { rootDir: rootDirOrOptions, candidatePackages: undefined }
-      : (rootDirOrOptions ?? {});
-  if (shouldSkipValidatePeerDeps(rootDir)) {
-    debug('skuSkipValidatePeerDeps set, skipping duplicate package check');
-    return { exitCode: 0 };
-  }
-
+} = {}): Promise<LintResult> => {
   try {
-    const depGraph = await extractDependencyGraph(rootDir ?? process.cwd());
-    const { findings, pairMismatch, peerMismatches, sameVersionDuplicates } =
-      classifyDuplicatePackages(depGraph, { candidatePackages });
-
-    for (const duplicate of sameVersionDuplicates) {
-      debug(
-        `Same-version duplicate (no warning): ${duplicate.packageName}@${duplicate.version}`,
-        duplicate.directories,
-      );
-    }
-
-    if (findings.length === 0 && !pairMismatch && peerMismatches.length === 0) {
+    const { skuSkipValidatePeerDeps } = JSON.parse(
+      await readFile(path.join(rootDir, 'package.json'), 'utf-8'),
+    );
+    if (skuSkipValidatePeerDeps) {
+      debug('skuSkipValidatePeerDeps set, skipping duplicate package check');
       return { exitCode: 0 };
     }
 
+    const depGraph = await extractDependencyGraph(rootDir, {
+      includeDevDependencies: true,
+    });
+    const { duplicates, versionMismatches } = classifyDuplicatePackages(
+      depGraph,
+      candidatePackages,
+    );
     const messages: string[] = [];
 
-    for (const finding of findings) {
-      provider.count('duplicate_compile_package', {
-        compile_package: finding.packageName,
-      });
+    for (const group of duplicates) {
+      const { name } = group[0];
+      provider.count('duplicate_compile_package', { compile_package: name });
       messages.push(
         [
-          `${strong(finding.packageName)} is resolved in your dependency graph at more than one version:`,
-          ...finding.copies.map(
-            (copy) => `- ${strong(finding.packageName)}@${formatCopy(copy)}`,
+          `${strong(name)} is resolved in your dependency graph at more than one version:`,
+          ...group.map(
+            (copy) =>
+              `- ${strong(name)}@${strong(copy.version)} at ${copy.directory} (via ${formatChain(copy.directory, depGraph)})`,
           ),
-          `Try running "${accent(finding.whyCommand)} ${accent(finding.packageName)}" to diagnose the issue`,
+          formatWhyHint(name),
         ].join('\n'),
       );
     }
 
-    if (pairMismatch) {
+    for (const { copy, peer, expectedRange } of versionMismatches) {
       provider.count('peer_dep_version_mismatch', {
-        compile_package: 'react-dom',
+        compile_package: copy.name,
       });
       messages.push(
         [
-          `${strong('react')} and ${strong('react-dom')} are resolved in your dependency graph at mismatched versions:`,
-          ...pairMismatch.copies.map((copy) => {
-            const name = copy.chain.at(-1) ?? 'react';
-            return `- ${strong(name)}@${formatCopy(copy)}`;
-          }),
-          `Try running "${accent(pairMismatch.whyCommand)} ${accent('react')}" and "${accent(pairMismatch.whyCommand)} ${accent('react-dom')}" to diagnose the issue`,
+          `${strong(`${copy.name}@${copy.version}`)} expected to find ${strong(peer.name)} ${caution(expectedRange)} but resolved ${caution(peer.version)} at ${peer.directory} (via ${formatChain(copy.directory, depGraph)}).`,
+          formatFixAdvice(copy, peer, expectedRange),
+          formatWhyHint(peer.name),
         ].join('\n'),
       );
     }
 
-    for (const mismatch of peerMismatches) {
-      provider.count('peer_dep_version_mismatch', {
-        compile_package: mismatch.packageName,
-      });
-      const declarer = mismatch.packageVersion
-        ? `${mismatch.packageName}@${mismatch.packageVersion}`
-        : mismatch.packageName;
-      messages.push(
-        [
-          `${strong(declarer)} expected to find ${strong(mismatch.peerName)} ${caution(mismatch.peerVersionRange)} but resolved ${caution(mismatch.resolvedPeerVersion)} at ${mismatch.resolvedPeerDirectory} (via ${mismatch.chain.join(' > ')}).`,
-          mismatch.resolvedPeerIsAhead
-            ? `The best way to fix this is for ${strong(mismatch.packageName)} to update its peer dependency on ${strong(mismatch.peerName)}.`
-            : `The best way to fix this is to update your dependency on ${strong(mismatch.peerName)}.`,
-          `Try running "${accent(mismatch.whyCommand)} ${accent(mismatch.peerName)}" to diagnose the issue`,
-        ].join('\n'),
-      );
+    if (messages.length > 0) {
+      banner('caution', 'Warning: Duplicate packages detected', messages);
     }
-
-    banner('caution', 'Warning: Duplicate packages detected', messages);
   } catch (e) {
     debug('Duplicate package check failed, skipping', e);
   }

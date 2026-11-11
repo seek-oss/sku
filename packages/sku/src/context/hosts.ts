@@ -1,18 +1,13 @@
 import { suggestScript } from '../utils/suggestScript.js';
 import { hasErrorCode } from '../utils/error-guards.js';
 import type { SkuContext } from './createSkuContext.js';
-import { promisify } from 'node:util';
-import { set, get } from 'hostile';
+import { isIP } from 'node:net';
+import {
+  addSystemHosts,
+  readSystemHosts,
+  type HostEntry,
+} from './hostsFile.js';
 import { caution, critical, strong } from '@sku-private/utils/console';
-
-type Line = string | [string, /* host */ string /* ip */];
-type SetSystemHostFunction = (ip: string, host: string) => Promise<void>;
-type GetSystemHostFunction = (preserveFormatting: boolean) => Promise<Line[]>;
-
-type HostSystemActions = {
-  setSystemHost: SetSystemHostFunction;
-  getSystemHosts: GetSystemHostFunction;
-};
 
 const isLocalhostHost = (host: string) => {
   const normalised = host.toLowerCase();
@@ -29,68 +24,93 @@ export const getAppHosts = ({ sites: configuredSites, hosts }: SkuContext) =>
     }, [])
     .concat(hosts);
 
-export const setupHosts =
-  ({ setSystemHost }: HostSystemActions) =>
-  async (skuContext: SkuContext): Promise<void> => {
-    try {
-      const appHosts = getAppHosts(skuContext).filter(
-        (host) => host !== 'localhost',
-      );
+const LOOPBACK_IPS = ['127.0.0.1', '::1'];
 
-      for (const host of appHosts) {
-        if (host) {
-          await setSystemHost('127.0.0.1', host);
-          await setSystemHost('::1', host);
-          console.log(
-            `Successfully added '${strong(host)}' to your hosts file`,
-          );
-        }
-      }
-    } catch (e: unknown) {
-      if (hasErrorCode(e) && e.code === 'EACCES') {
-        console.log(
-          critical('Error: setup-hosts must be run with root privileges'),
-        );
-      } else {
-        console.error(e);
-      }
+const warnIfAlreadyMapped = (
+  systemHosts: HostEntry[],
+  [ip, host]: HostEntry,
+) => {
+  const conflict = systemHosts.find(
+    ([entryIp, entryHost]) =>
+      entryHost === host && entryIp !== ip && isIP(entryIp) === isIP(ip),
+  );
 
-      throw e;
-    }
-  };
-
-export const checkHosts =
-  ({ getSystemHosts }: HostSystemActions) =>
-  async (skuContext: SkuContext): Promise<void> => {
-    const systemHosts = await getSystemHosts(false);
-    const missingHosts = getAppHosts(skuContext).filter(
-      (appHost) =>
-        !isLocalhostHost(appHost) &&
-        !systemHosts.find(([_, host]) => appHost === host),
+  if (conflict) {
+    console.log(
+      caution(
+        `Your hosts file already maps '${strong(host)}' to '${conflict[0]}'. To make '${host}' resolve to '${ip}', remove that entry.`,
+      ),
     );
+  }
+};
 
-    try {
-      if (missingHosts.length > 0) {
-        missingHosts.forEach((appHost) => {
-          console.log(
-            caution(
-              `Host '${strong(appHost)}' is not configured in your hosts file`,
-            ),
-          );
-        });
+const isPermissionError = (e: unknown) =>
+  hasErrorCode(e) && (e.code === 'EACCES' || e.code === 'EPERM');
 
-        suggestScript('setup-hosts', { sudo: true });
-      }
-    } catch {
-      // swallow error as this just a warning check
+export const setupHosts = async (skuContext: SkuContext): Promise<void> => {
+  const appHosts = [
+    ...new Set(
+      getAppHosts(skuContext).filter((host) => host && host !== 'localhost'),
+    ),
+  ];
+  if (appHosts.length === 0) {
+    return;
+  }
+
+  const entries = appHosts.flatMap((host) =>
+    LOOPBACK_IPS.map((ip): HostEntry => [ip, host]),
+  );
+
+  try {
+    const systemHosts = await readSystemHosts();
+    for (const entry of entries) {
+      warnIfAlreadyMapped(systemHosts, entry);
     }
-  };
 
-/**
- * Inject `hostile` actions into a function that requires host file manipulation.
- */
-export const withHostile = <T>(fn: (system: HostSystemActions) => T): T =>
-  fn({
-    getSystemHosts: promisify(get),
-    setSystemHost: promisify(set),
-  });
+    const addedLines = await addSystemHosts(entries);
+
+    if (addedLines.length === 0) {
+      console.log('Your hosts file already contains all app hosts');
+    }
+    for (const line of addedLines) {
+      console.log(`Added '${strong(line)}' to your hosts file`);
+    }
+  } catch (e: unknown) {
+    if (isPermissionError(e)) {
+      const privileges =
+        process.platform === 'win32'
+          ? 'from an Administrator terminal'
+          : 'with root privileges';
+      console.log(critical(`Error: setup-hosts must be run ${privileges}`));
+    } else {
+      console.error(e);
+    }
+
+    throw e;
+  }
+};
+
+export const checkHosts = async (skuContext: SkuContext): Promise<void> => {
+  const systemHostNames = new Set(
+    (await readSystemHosts()).map(([_, host]) => host),
+  );
+  const missingHosts = getAppHosts(skuContext).filter(
+    (appHost) => !isLocalhostHost(appHost) && !systemHostNames.has(appHost),
+  );
+
+  try {
+    if (missingHosts.length > 0) {
+      missingHosts.forEach((appHost) => {
+        console.log(
+          caution(
+            `Host '${strong(appHost)}' is not configured in your hosts file`,
+          ),
+        );
+      });
+
+      suggestScript('setup-hosts', { sudo: true });
+    }
+  } catch {
+    // swallow error as this just a warning check
+  }
+};

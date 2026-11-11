@@ -3,6 +3,7 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
+import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { performance } from 'node:perf_hooks';
 import provider from '../../../services/telemetry/index.js';
@@ -21,6 +22,7 @@ export const viteBuildHandler = async ({
 
   const { cspEnabled } = skuContext;
   await configureProject(skuContext);
+  await assertPathAliasImports(skuContext.pathAliases);
   validatePeerDeps(skuContext);
 
   try {

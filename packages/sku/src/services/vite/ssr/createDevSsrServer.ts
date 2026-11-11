@@ -119,11 +119,10 @@ export const createDevSsrServer = async ({
       render,
       assets,
       cspEnabled: skuContext.cspEnabled,
-      cspExtraScriptSrcHosts: skuContext.cspExtraScriptSrcHosts,
+      cspExtraSources: skuContext.cspExtraSources,
       cspReportTo: skuContext.cspReportTo,
       cspReportOnlyEnabled: skuContext.cspReportOnlyEnabled,
-      cspReportOnlyExtraScriptSrcHosts:
-        skuContext.cspReportOnlyExtraScriptSrcHosts,
+      cspReportOnlyExtraSources: skuContext.cspReportOnlyExtraSources,
       cspReportOnlyReportTo: skuContext.cspReportOnlyReportTo,
       development: true,
       onRenderError: (error) => {

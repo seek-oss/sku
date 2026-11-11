@@ -19,15 +19,25 @@ const { values } = parseArgs({
 
 const { port } = values;
 
-const startCallback = () => {
+let server: http.Server;
+
+const startCallback = async () => {
   console.log('sku SSR server started on port', port);
 
-  if (typeof onStart === 'function') {
-    onStart(app);
+  if (typeof onStart !== 'function') {
+    return;
+  }
+
+  try {
+    await onStart(app, {
+      httpServer: server,
+      port: Number(port),
+    });
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
   }
 };
-
-let server;
 
 if (__SKU_DEV_HTTPS__) {
   const pems = fs.readFileSync('.ssl/self-signed.pem');

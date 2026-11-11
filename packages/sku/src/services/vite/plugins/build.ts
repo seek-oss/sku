@@ -27,6 +27,7 @@ export const buildPlugin = ({
           codeSplitting: {
             groups: [
               {
+                debugName: 'vocab-language-chunks',
                 // Vocab language chunks (`en-translations`, …)
                 name: (id, ctx) => {
                   const languageChunkName = createVocabChunks(id, ctx);

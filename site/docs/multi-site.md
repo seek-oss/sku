@@ -47,6 +47,7 @@ $ sudo npm run setup-hosts
 
 > [!NOTE]
 > Changing hosts configuration needs root privileges.
+> Mac users must use `sudo` and Windows users must use an Administrator terminal.
 
 ## Braid example
 

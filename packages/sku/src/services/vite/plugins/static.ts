@@ -20,7 +20,10 @@ export const staticPlugins = ({
   skuContext: SkuContext;
   environment?: string;
 }): PluginOption[] => {
-  const outDir = createOutDir(skuContext.paths.target);
+  const outDir = createOutDir({
+    targetPath: skuContext.paths.target,
+    useSubfolders: skuContext.distSubfolders,
+  });
 
   return [
     {
@@ -46,7 +49,7 @@ export const staticPlugins = ({
         environments: {
           client: {
             build: {
-              outDir: outDir.client,
+              outDir: outDir.distClient,
               manifest: true,
               sourcemap: skuContext.sourceMapsProd,
               rolldownOptions: {

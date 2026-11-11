@@ -1,4 +1,7 @@
 import { describe, beforeAll, it, vi, expect } from 'vitest';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
 import { dirContentsToObject, getPort } from '@sku-private/test-utils';
 
 import { getAppSnapshot } from '@sku-private/playwright';
@@ -10,6 +13,7 @@ import {
   skipCleanup,
   scopeToFixture,
   configure,
+  waitFor,
 } from '@sku-private/testing-library';
 
 const timeout = 50_000;
@@ -32,7 +36,7 @@ function getLocalUrl(site: 'seekAnz' | 'jobStreet', port: number) {
 
 const stripReactComments = (html: string) => html.replaceAll('<!-- -->', '');
 
-const { sku, fixturePath } = scopeToFixture('braid-design-system');
+const { sku, node, fixturePath } = scopeToFixture('braid-design-system');
 
 describe('braid-design-system', () => {
   describe.for(bundlers)('bundler %s', (bundler) => {
@@ -177,6 +181,42 @@ describe('braid-design-system ssr', () => {
 
       expect(stripReactComments(snapshot.clientRenderContent)).toContain(
         'Vanilla content Client',
+      );
+    });
+  });
+
+  describe('build', async () => {
+    const port = await getPort();
+
+    beforeAll(async () => {
+      const build = await sku('build', ['--config', 'sku.config.ssr.ts']);
+      await expect(build).toMatchExitCode(0);
+    });
+
+    it('runs the server output without node_modules', async ({ task }) => {
+      skipCleanup(task.id);
+      const isolatedServerDir = await fs.mkdtemp(
+        path.join(os.tmpdir(), 'sku-braid-ssr-standalone-'),
+      );
+      await fs.cp(path.join(fixturePath('dist'), 'server'), isolatedServerDir, {
+        recursive: true,
+      });
+
+      await node([path.join(isolatedServerDir, 'server.mjs')], {
+        spawnOpts: {
+          env: { ...process.env, PORT: String(port) },
+        },
+      });
+
+      await waitFor(
+        async () => {
+          const response = await fetch(getLocalUrl('seekAnz', port));
+          expect(response.ok).toBe(true);
+          const html = stripReactComments(await response.text());
+          expect(html).toContain('Hello seekAnz');
+          expect(html).toContain('Vanilla content');
+        },
+        { timeout },
       );
     });
   });

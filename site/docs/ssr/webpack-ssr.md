@@ -25,7 +25,11 @@ export default {
 ```
 
 sku provides an [Express](https://expressjs.com/) server.
-The `serverEntry` default export may provide `renderCallback`, optional `middleware`, and optional `onStart`:
+The `serverEntry` default export may provide `renderCallback`, optional `middleware`, and optional `onStart`.
+sku calls `onStart` once after `listen` succeeds.
+The first argument is the Express app.
+The second argument carries `httpServer` and the bound port.
+Use `httpServer` for keep-alive timeouts and to close the server on `SIGTERM`.
 
 ```tsx
 import type { Server } from 'sku';
@@ -45,9 +49,14 @@ export default (): Server => ({
     );
   },
   middleware,
-  onStart: (app) => {
-    console.log('My app started');
-    app.keepAliveTimeout = 20_000;
+  onStart: (app, { httpServer, port }) => {
+    httpServer.keepAliveTimeout = 20_000;
+    console.log('My app started on port', port);
+    process.on('SIGTERM', () => {
+      httpServer.close(() => {
+        process.exit(0);
+      });
+    });
   },
 });
 ```
@@ -59,7 +68,8 @@ These differ from Managed Data Mode SSR and Static apps:
 - `sku start-ssr` — development.
   Uses both `port` and `serverPort`
 - `sku build-ssr` — production assets.
-  Run with `node ./dist/server.js` (listens on `serverPort`)
+  Run with `node ./dist/server.js` (listens on `serverPort`).
+  With [`distSubfolders`](../configuration.md#distsubfolders) enabled, client assets are written to `dist/client/` and the server to `dist/server/`, so run `node ./dist/server/server.js` instead.
 - `sku test` — tests
 
 ## Multi-part response
@@ -100,9 +110,14 @@ export default (): Server => ({
     res.end();
   },
   middleware,
-  onStart: (app) => {
-    console.log('My app started');
-    app.keepAliveTimeout = 20_000;
+  onStart: (app, { httpServer, port }) => {
+    httpServer.keepAliveTimeout = 20_000;
+    console.log('My app started on port', port);
+    process.on('SIGTERM', () => {
+      httpServer.close(() => {
+        process.exit(0);
+      });
+    });
   },
 });
 ```

@@ -6,6 +6,7 @@ import {
   cleanTargetDirectory,
   ensureTargetDirectory,
 } from '../../../utils/buildFileUtils.js';
+import { getDistDirectories } from '../../../utils/distDirectories.js';
 import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.ssr.js';
 import provider from '../../../services/telemetry/index.js';
 
@@ -14,6 +15,7 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
+import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
@@ -42,6 +44,7 @@ export const buildSsrAction = async ({
   process.env.NODE_ENV = 'production';
   const { port, cspEnabled } = skuContext;
   await configureProject(skuContext);
+  await assertPathAliasImports(skuContext.pathAliases);
   validatePeerDeps(skuContext);
   validatePolyfills(skuContext.polyfills);
 
@@ -67,7 +70,14 @@ export const buildSsrAction = async ({
 
     await run(clientCompiler, { stats });
     await run(serverCompiler, { stats });
-    await copyPublicFiles(skuContext);
+    const { distClient } = getDistDirectories({
+      targetPath: skuContext.paths.target,
+      useSubfolders: skuContext.distSubfolders,
+    });
+    await copyPublicFiles({
+      paths: skuContext.paths,
+      destination: distClient,
+    });
 
     const timeTaken = performance.now();
     provider.timing('build', timeTaken, {

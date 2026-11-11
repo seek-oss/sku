@@ -6,5 +6,5 @@ export default {
   publicPath: '/static/stream-insert-html/',
   port: 8210,
   target: 'dist',
-  cspEnabled: true,
+  csp: { enforced: true },
 } satisfies SkuConfig;

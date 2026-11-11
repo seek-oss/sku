@@ -200,6 +200,8 @@ describe.concurrent('sku-create', () => {
       'eslint.config.mjs',
       'README.md',
       '.prettierignore',
+      'tsconfig.json',
+      '.prettierrc',
       ...(template === 'ssr' ? ssrFiles : ['src/App/NextSteps.tsx']),
       ...(template === 'vite' ? viteFiles : []),
       'pnpm-workspace.yaml',
@@ -209,7 +211,10 @@ describe.concurrent('sku-create', () => {
         'utf-8',
       );
 
-      ctx.expect(stripYamlVersions(contents)).toMatchSnapshot();
+      const isYaml = file.endsWith('.yaml') || file.endsWith('.yml');
+      ctx
+        .expect(isYaml ? stripYamlVersions(contents) : contents)
+        .toMatchSnapshot();
     });
 
     it(`should pass lint`, async () => {

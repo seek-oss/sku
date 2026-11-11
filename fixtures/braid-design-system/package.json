@@ -3,13 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "sku build",
+    "build": "sku build --config sku.config.webpack-static.ts",
     "build:ssr": "sku build --config sku.config.ssr.ts",
-    "build:vite": "sku build --config sku.config.vite.ts",
+    "build:vite": "sku build --config sku.config.static.ts",
     "serve": "sku serve",
-    "start": "sku start",
+    "start": "sku start --config sku.config.webpack-static.ts",
     "start:ssr": "sku start --config sku.config.ssr.ts",
-    "start:vite": "sku start --config sku.config.vite.ts"
+    "start:vite": "sku start --config sku.config.static.ts"
   },
   "dependencies": {
     "braid-design-system": "catalog:",

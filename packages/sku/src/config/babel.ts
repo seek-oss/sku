@@ -12,7 +12,7 @@ type BabelConfigOptions = {
   hot?: boolean;
 };
 
-export type SkuBabelConfig = {
+type SkuBabelConfig = {
   babelrc: boolean;
   sourceType: 'unambiguous' | 'module';
   cacheDirectory?: boolean;

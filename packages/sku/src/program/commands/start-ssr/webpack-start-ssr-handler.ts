@@ -10,11 +10,7 @@ import {
   ensureTargetDirectory,
   cleanTargetDirectory,
 } from '../../../utils/buildFileUtils.js';
-import {
-  checkHosts,
-  getAppHosts,
-  withHostile,
-} from '../../../context/hosts.js';
+import { checkHosts, getAppHosts } from '../../../context/hosts.js';
 import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.ssr.js';
 import getStatsConfig from '../../../services/webpack/config/statsConfig.js';
 import allocatePort from '../../../utils/allocatePort.js';
@@ -26,6 +22,7 @@ import {
   configureProject,
   validatePeerDeps,
 } from '../../../utils/configure.js';
+import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { requireFromCwd, serverUrls } from '@sku-private/utils';
@@ -71,6 +68,7 @@ export const webpackStartSsrHandler = async ({
   const { port, initialPath, paths, httpsDevServer, hosts } = skuContext;
   const { type } = requireFromCwd('./package.json');
   await configureProject(skuContext);
+  await assertPathAliasImports(skuContext.pathAliases);
   validatePeerDeps(skuContext);
   await watchVocabCompile(skuContext);
 
@@ -94,7 +92,7 @@ export const webpackStartSsrHandler = async ({
     skuContext,
   });
 
-  await withHostile(checkHosts)(skuContext);
+  await checkHosts(skuContext);
 
   const appHosts = getAppHosts(skuContext);
 

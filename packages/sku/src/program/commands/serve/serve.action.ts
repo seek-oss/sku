@@ -1,14 +1,11 @@
-import { glob, readFile } from 'node:fs/promises';
-import { join } from 'node:path';
+import { glob, readFile, stat } from 'node:fs/promises';
+import { join, relative, resolve, sep } from 'node:path';
 import exists from '../../../utils/exists.js';
+import { getDistDirectories } from '../../../utils/distDirectories.js';
 import express from 'express';
 import handler from 'serve-handler';
 import { closest } from 'fastest-levenshtein';
-import {
-  checkHosts,
-  getAppHosts,
-  withHostile,
-} from '../../../context/hosts.js';
+import { checkHosts, getAppHosts } from '../../../context/hosts.js';
 import allocatePort from '../../../utils/allocatePort.js';
 import { openBrowser } from '../../../openBrowser.js';
 import { getSiteForHost } from '../../../context/getSiteForHost.js';
@@ -52,6 +49,7 @@ export const serveAction = async ({
     httpsDevServer,
     hosts,
     languages,
+    distSubfolders,
   } = skuContext;
   await configureProject(skuContext);
   validatePeerDeps(skuContext);
@@ -93,7 +91,7 @@ export const serveAction = async ({
     process.exit(1);
   }
 
-  await withHostile(checkHosts)(skuContext);
+  await checkHosts(skuContext);
 
   const appHosts = getAppHosts(skuContext);
 
@@ -122,16 +120,24 @@ export const serveAction = async ({
     },
   ];
 
+  const { distClient, distRendered } = getDistDirectories({
+    targetPath: paths.target,
+    useSubfolders: distSubfolders,
+  });
+  // Relative to `paths.target`, which is the served root. Empty for the legacy layout.
+  const distRenderedSubPath = relative(paths.target, distRendered);
+
   const metadataFilesPattern = join(environment, '**/index.html.json');
-  const metadataFiles = glob(metadataFilesPattern, { cwd: paths.target });
+  const metadataFiles = glob(metadataFilesPattern, { cwd: distRendered });
 
   for await (const metadataFile of metadataFiles) {
     const { metadata } = JSON.parse(
-      await readFile(join(paths.target, metadataFile), 'utf-8'),
+      await readFile(join(distRendered, metadataFile), 'utf-8'),
     ) as { metadata: Metadata };
 
     headers.push({
-      source: metadataFile.slice(0, -5), // Remove '.json' extension.
+      // Header sources match the served file path, so they include `rendered/`.
+      source: join(distRenderedSubPath, metadataFile.slice(0, -5)), // Remove '.json' extension.
       headers: (Object.entries(metadata) as Array<[keyof Metadata, string]>)
         .filter(([key]) => key in metadataHeaderMap)
         .map(([key, value]) => ({ key: metadataHeaderMap[key], value })),
@@ -148,7 +154,48 @@ export const serveAction = async ({
     }
   }
 
-  app.use((request, response) => {
+  // With the subfolder layout, assets under `publicPath` live in `client/`.
+  // `serve-handler` rewrites can't map to nested paths (it URL-encodes the
+  // slashes), so these requests are served by a `client/`-rooted handler.
+  const getClientFilePath = async (pathname: string) => {
+    if (!pathname.startsWith(paths.publicPath)) {
+      return undefined;
+    }
+
+    try {
+      const relativePath = decodeURIComponent(
+        pathname.slice(paths.publicPath.length),
+      );
+      const absolutePath = resolve(distClient, relativePath);
+
+      if (
+        absolutePath.startsWith(resolve(distClient) + sep) &&
+        (await stat(absolutePath)).isFile()
+      ) {
+        return `/${relativePath}`;
+      }
+    } catch {
+      // Not a client file, so treat the request as a document request.
+    }
+
+    return undefined;
+  };
+
+  app.use(async (request, response) => {
+    if (distSubfolders) {
+      const clientFilePath = await getClientFilePath(request.path);
+
+      if (clientFilePath) {
+        request.url = clientFilePath;
+
+        return handler(request, response, {
+          public: distClient,
+          directoryListing: false,
+          headers,
+        });
+      }
+    }
+
     const [hostname] = request.headers.host?.split(':') || [];
 
     const site = getSiteForHost(hostname, preferredSite, sites) || '';
@@ -179,6 +226,7 @@ export const serveAction = async ({
         return {
           source: normalisedSourceRoute,
           destination: join(
+            distRenderedSubPath,
             environment,
             site,
             normalisedDestinationRoute,
@@ -188,7 +236,7 @@ export const serveAction = async ({
       }),
     );
 
-    if (paths.publicPath !== '/') {
+    if (paths.publicPath !== '/' && !distSubfolders) {
       rewrites.push({
         source: join(paths.publicPath, ':asset+.:extension'),
         destination: '/:asset.:extension',

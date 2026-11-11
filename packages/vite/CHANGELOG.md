@@ -1,5 +1,13 @@
 # @sku-lib/vite
 
+## 2.0.4
+
+### Patch Changes
+
+- Skip preload links for manifest assets that aren't images or fonts ([#1746](https://github.com/seek-oss/sku/pull/1746))
+
+  Fixes malformed `<link rel="preload" as="undefined" type="undefined">` tags for Vocab language chunks when using Vite 8.3 or later.
+
 ## 2.0.3
 
 ### Patch Changes

@@ -1,0 +1,1 @@
+nested public asset

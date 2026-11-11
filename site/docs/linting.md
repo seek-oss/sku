@@ -29,4 +29,14 @@ Run `sku format` after you upgrade `sku`.
 
 Add paths to the `.prettierignore` file to exclude files from formatting.
 
+## Path alias imports
+
+When you configure the [`pathAliases`] sku option, sku mirrors the aliases to your `package.json#imports` field so Node resolves them natively.
+
+`sku lint` fails when `package.json#imports` is out of sync with `pathAliases`, reporting the drift without modifying the file.
+`sku format` fixes the drift by rewriting `package.json#imports` to match `pathAliases`, removing the field when no aliases are configured.
+
+Commands that resolve `#` imports at runtime will fail when out of sync with `pathAliases` and direct you to run `sku format`.
+
 [`eslintIgnore`]: ./configuration#eslintignore
+[`pathAliases`]: ./configuration#pathaliases

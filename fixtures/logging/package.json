@@ -5,15 +5,14 @@
   "scripts": {
     "build": "sku build",
     "start": "sku start",
-    "start:prod": "node dist/server/server.js"
+    "start:prod": "node dist/server/server.mjs"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.1",
-    "@opentelemetry/core": "^2.10.0",
-    "@opentelemetry/resources": "^2.10.0",
-    "@opentelemetry/sdk-trace-base": "^2.10.0",
-    "@opentelemetry/sdk-trace-node": "^2.10.0",
-    "@opentelemetry/sdk-trace-web": "^2.10.0",
+    "@opentelemetry/context-async-hooks": "^3.0.0",
+    "@opentelemetry/core": "^3.0.0",
+    "@opentelemetry/resources": "^3.0.0",
+    "@opentelemetry/sdk-trace": "^3.0.0",
     "@opentelemetry/semantic-conventions": "^1.43.0",
     "express": "^4.22.1",
     "react": "catalog:",

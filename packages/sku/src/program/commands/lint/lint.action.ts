@@ -4,6 +4,7 @@ import { runTsc } from '../../../services/typescript/runTsc.js';
 
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { configureProject } from '../../../utils/configure.js';
+import { checkPathAliasImports } from '../../../utils/pathAliasImports.js';
 import { runLintChecks, type LintCheck } from '../../../utils/runLintChecks.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { accentLight, critical } from '@sku-private/utils/console';
@@ -20,6 +21,10 @@ export const lintAction = async (
   await runVocabCompile(skuContext);
 
   const checks: LintCheck[] = [
+    {
+      name: 'Path alias imports',
+      run: () => checkPathAliasImports(skuContext.pathAliases),
+    },
     {
       name: 'TypeScript',
       run: () => runTsc(pathsToCheck),

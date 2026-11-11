@@ -9,7 +9,7 @@ jobs:
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
-      - uses: fkirc/skip-duplicate-actions@f75f66ce1886f00957d99748a42c724f4330bdcf # v5
+      - uses: fkirc/skip-duplicate-actions@b974a9395958c231af965b70070979a577efa578 # v5.3.2
         id: skip_check
         with:
           concurrent_skipping: same_content_newer
@@ -46,7 +46,7 @@ jobs:
 
       - name: Cache babel-loader
         id: babel-loader-cache
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
           path: 'fixtures/*/node_modules/.cache/babel-loader'
           key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}

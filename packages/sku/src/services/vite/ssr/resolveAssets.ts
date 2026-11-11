@@ -13,7 +13,7 @@ export const joinPublicPath = (publicPath: string, file: string) =>
 const isPathLikeModuleId = (moduleId: string) =>
   moduleId.includes('/') || /\.[cm]?[jt]sx?$/.test(moduleId);
 
-export const warnUnknownModuleId = (moduleId: string) => {
+const warnUnknownModuleId = (moduleId: string) => {
   console.warn(
     `[sku] Unknown route handle.moduleId "${moduleId}" — not found in the Vite client manifest. Production modulepreloads for this route will be skipped.`,
   );
@@ -39,7 +39,7 @@ export const warnUnknownModuleIdsWithoutManifest = (
 };
 
 /** Resolve a manifest entry by key or by chunk `name` (e.g. `en-translations`). */
-export const findManifestChunk = (
+const findManifestChunk = (
   manifest: ClientManifest,
   keyOrName: string,
 ): ManifestChunk | undefined =>
@@ -104,8 +104,17 @@ export const resolveAssets = ({
   entry.imports?.forEach(visit);
   moduleIds.forEach(visit);
 
+  const requiredModules = new Set<string>();
+  for (const moduleId of moduleIds) {
+    const chunk = findManifestChunk(manifest, moduleId);
+    if (chunk && !chunk.file.endsWith('.css') && chunk.file !== entry.file) {
+      requiredModules.add(joinPublicPath(publicPath, chunk.file));
+    }
+  }
+
   return {
     css: [...css],
     modulePreloads: [...modulePreloads],
+    requiredModules: [...requiredModules],
   };
 };

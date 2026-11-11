@@ -8,7 +8,7 @@ import {
 } from './telemetryEvents.js';
 
 /** Measure initial page load and notify the Vite server over HMR. */
-export const installSkuPageLoadTelemetry = (): void => {
+const installSkuPageLoadTelemetry = (): void => {
   addEventListener('load', () => {
     if (import.meta.hot) {
       import.meta.hot.send(SKU_INITIAL_PAGE_LOAD_EVENT);
@@ -17,7 +17,7 @@ export const installSkuPageLoadTelemetry = (): void => {
 };
 
 /** Measure HMR update duration and notify the Vite server. */
-export const installSkuHmrTelemetry = (): void => {
+const installSkuHmrTelemetry = (): void => {
   const hot = import.meta.hot;
   if (!hot) {
     return;

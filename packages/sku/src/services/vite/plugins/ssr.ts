@@ -18,7 +18,10 @@ const ssrClientDevEntry = require.resolve('#entries/ssr-client.dev');
 const ssrServerEntry = require.resolve('#entries/ssr-server');
 
 export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
-  const outDir = createOutDir(skuContext.paths.target);
+  const outDir = createOutDir({
+    targetPath: skuContext.paths.target,
+    useSubfolders: true,
+  });
   const siteNames = resolveConfigSiteNames(skuContext.sites);
 
   return [
@@ -55,14 +58,14 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
             String(skuContext.port.client),
           ),
           __SKU_PUBLIC_PATH__: JSON.stringify(skuContext.publicPath),
-          __SKU_CSP__: JSON.stringify({
+          __SKU_SSR_CSP__: JSON.stringify({
             enabled: skuContext.cspEnabled,
-            extraHosts: skuContext.cspExtraScriptSrcHosts,
+            extraSources: skuContext.cspExtraSources,
             reportTo: skuContext.cspReportTo,
             reportOnlyEnabled: skuContext.cspReportOnlyEnabled,
-            reportOnlyExtraHosts: skuContext.cspReportOnlyExtraScriptSrcHosts,
+            reportOnlyExtraSources: skuContext.cspReportOnlyExtraSources,
             reportOnlyReportTo: skuContext.cspReportOnlyReportTo,
-          }),
+          } satisfies SkuSsrCSP),
           __SKU_EXPRESS_TRUST_PROXY__: JSON.stringify(
             Boolean(skuContext.expressTrustProxy),
           ),
@@ -70,7 +73,7 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
         environments: {
           client: {
             build: {
-              outDir: outDir.ssrClient,
+              outDir: outDir.distClient,
               manifest: CLIENT_MANIFEST_RELATIVE_PATH,
               sourcemap: skuContext.sourceMapsProd,
               rolldownOptions: {
@@ -79,21 +82,43 @@ export const ssrPlugins = (skuContext: SkuContext): PluginOption[] => {
             },
           },
           ssr: {
+            resolve: {
+              // The production server must run without the app's node_modules
+              noExternal: true,
+              // Bundling resolves from each importer, so sku's runtime could
+              // otherwise bundle a second copy of these singletons
+              dedupe: ['react', 'react-dom', 'react-router'],
+            },
             build: {
               // Sourcemaps are necessary to get useful stack traces for errors
               sourcemap: 'inline',
               ssr: true,
-              outDir: outDir.ssr,
+              outDir: outDir.distServer,
               rolldownOptions: {
                 input: ssrServerEntry,
+                // `.mjs` so Node loads the server as ESM regardless of any
+                // `package.json` "type" above wherever it is deployed
                 output: {
-                  entryFileNames: 'server.js',
+                  entryFileNames: 'server.mjs',
+                  chunkFileNames: '[name]-[hash].chunk.mjs',
                 },
               },
             },
           },
         },
       }),
+      configEnvironment(name, config) {
+        if (name === 'ssr' && config.resolve) {
+          // Drop every explicit SSR external so the server bundle is
+          // self-contained. Explicit externals take precedence over
+          // `noExternal: true`, and plugins add them in their `config` hooks
+          // (e.g. vanilla-extract adds `@vanilla-extract/css` to
+          // `ssr.external`). Config merging concatenates arrays, so they can
+          // only be removed here, after every `config` hook has run. This
+          // plugin is build-only, so `sku start` keeps those externals.
+          config.resolve.external = [];
+        }
+      },
     },
     lazyRouteModuleIdPlugin(),
     // Serve-only: sku-hoisted `assets.css` + client entry own injection.

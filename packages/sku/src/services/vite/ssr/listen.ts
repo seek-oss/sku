@@ -4,7 +4,7 @@ import {
 } from 'node:http';
 import type { Server as HttpsServer } from 'node:https';
 import express, { type Express, type RequestHandler } from 'express';
-import type { ReportingEndpoint } from '../../../utils/csp.js';
+import type { CspExtraSources, ReportingEndpoint } from '../../../utils/csp.js';
 import { createSsrRequestContextMiddleware } from './ssrRequestContextMiddleware.js';
 import {
   createHtmlRenderMiddleware,
@@ -32,10 +32,10 @@ export interface SsrServerOptions {
   manifest?: RenderManifest;
   clientDirectory?: string;
   cspEnabled: boolean;
-  cspExtraScriptSrcHosts: string[];
+  cspExtraSources: CspExtraSources;
   cspReportTo?: ReportingEndpoint;
   cspReportOnlyEnabled: boolean;
-  cspReportOnlyExtraScriptSrcHosts: string[];
+  cspReportOnlyExtraSources: CspExtraSources;
   cspReportOnlyReportTo?: ReportingEndpoint;
   development?: boolean;
   onRenderError?: (error: Error) => void;
@@ -95,11 +95,10 @@ export const listen = async (
       assets: options.assets,
       manifest: options.manifest,
       cspEnabled: options.cspEnabled,
-      cspExtraScriptSrcHosts: options.cspExtraScriptSrcHosts,
+      cspExtraSources: options.cspExtraSources,
       cspReportTo: options.cspReportTo,
       cspReportOnlyEnabled: options.cspReportOnlyEnabled,
-      cspReportOnlyExtraScriptSrcHosts:
-        options.cspReportOnlyExtraScriptSrcHosts,
+      cspReportOnlyExtraSources: options.cspReportOnlyExtraSources,
       cspReportOnlyReportTo: options.cspReportOnlyReportTo,
       development: options.development,
       onRenderError: options.onRenderError,

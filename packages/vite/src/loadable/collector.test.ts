@@ -76,3 +76,55 @@ describe('Collector script tags', () => {
     expect(collector.getAllScripts()).toEqual([]);
   });
 });
+
+describe('Collector asset preloads', () => {
+  it('preloads known image and font assets', () => {
+    const collector = createCollector({
+      manifest: {
+        'index.html': {
+          file: 'vite-client.js',
+          name: 'vite-client',
+          isEntry: true,
+          assets: ['logo.svg', 'font.woff2'],
+        },
+      } satisfies Manifest,
+    });
+
+    expect(collector.getAllPreloads()).toMatchInlineSnapshot(`
+      [
+        "<link rel="preload" href="/font.woff2" as="font" type="font/woff2" crossorigin />
+      ",
+        "<link rel="modulepreload" href="/vite-client.js" crossorigin />
+      ",
+        "<link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
+      ",
+      ]
+    `);
+  });
+
+  it('skips assets that are not images or fonts, e.g. chunks referenced via ROLLUP_FILE_URL', () => {
+    const collector = createCollector({
+      manifest: {
+        'index.html': {
+          file: 'vite-client.js',
+          name: 'vite-client',
+          isEntry: true,
+          assets: [
+            'en-translations-!~{002}~.chunk.js',
+            'logo.svg',
+            'data.json',
+          ],
+        },
+      } satisfies Manifest,
+    });
+
+    expect(collector.getAllPreloads()).toMatchInlineSnapshot(`
+      [
+        "<link rel="modulepreload" href="/vite-client.js" crossorigin />
+      ",
+        "<link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
+      ",
+      ]
+    `);
+  });
+});

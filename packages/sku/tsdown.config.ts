@@ -30,7 +30,6 @@ export default defineConfig([
       'jest-preset': 'src/config/jest/preset.ts',
       'jest/js-transform': 'src/config/jest/jsBabelTransform.ts',
       'jest/ts-transform': 'src/config/jest/tsBabelTransform.ts',
-      postinstall: './src/postinstall.ts',
       runtime: 'src/runtime.ts',
       // Shared MDM modules are entries so sku-only mounts survive when public
       // `sku/runtime` only re-exports consumer hooks via neverBundled `#runtime/*`.

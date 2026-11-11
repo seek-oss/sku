@@ -1,5 +1,104 @@
 # sku
 
+## 16.6.1
+
+### Patch Changes
+
+- `start`: Bind the Vite dev server explicitly to IPv4 due to lack of IPv6 support in some CI environments ([#1749](https://github.com/seek-oss/sku/pull/1749))
+
+- `vite`: Ignore `.pnpm-store` from being watched during `sku start` ([#1749](https://github.com/seek-oss/sku/pull/1749))
+
+## 16.6.0
+
+### Minor Changes
+
+- Add `distSubfolders` option ([#1742](https://github.com/seek-oss/sku/pull/1742))
+
+  When set to `true`, build output is split into a subfolder per intended use, instead of writing everything to the root of `dist`:
+
+  - Static apps (Vite or webpack): `sku build` writes HTML documents to `dist/rendered` and every other file (including files from `public`) to `dist/client`.
+  - Webpack SSR apps: `sku build-ssr` writes client assets (including files from `public`) to `dist/client` and the server bundle to `dist/server`.
+
+  `sku serve` serves both the default and subfolder static layouts.
+
+  The option is rejected with `buildType: 'ssr'`, whose output is already split into `dist/client` and `dist/server`.
+  When it is enabled, `public` must not contain `.html` files.
+
+  This option defaults to `false`, and will default to `true` in a future major release.
+
+  `client`, `rendered` and `server` are now reserved and can't be used as `environments` names, regardless of whether the option is enabled.
+
+### Patch Changes
+
+- Fix rolldown `codeSplitting` warning ([#1746](https://github.com/seek-oss/sku/pull/1746))
+
+- `sku lint`: Exclude sku's generated output from TypeScript type checking ([#1744](https://github.com/seek-oss/sku/pull/1744))
+
+  The generated `tsconfig.json` now excludes the build `target` directory, `coverage` and `report`.
+
+- Updated dependencies [[`abd8fc6`](https://github.com/seek-oss/sku/commit/abd8fc66510267f05b644ecbf2e0a88d9f93812c)]:
+  - @sku-lib/vite@2.0.4
+
+## 16.5.0
+
+### Minor Changes
+
+- Add support for Vitest v5 ([#1739](https://github.com/seek-oss/sku/pull/1739))
+
+### Patch Changes
+
+- `setup-hosts`: Append missing entries to the hosts file instead of rewriting it ([#1734](https://github.com/seek-oss/sku/pull/1734))
+
+  `setup-hosts` no longer changes existing lines in the hosts file, including comments and whitespace. It also warns when the hosts file already maps a host to a different IP address, because that entry may take precedence.
+
+  sku no longer depends on `hostile`.
+
+## 16.4.0
+
+### Minor Changes
+
+- `pathAliases` syncing has moved to `sku format`, and `sku lint` fails when out of sync. ([#1733](https://github.com/seek-oss/sku/pull/1733))
+
+  Sku previously forced syncing of `package.json#imports` on install and before every command, but now only runs on `sku format` (to sync) and `sku lint` (to check).
+
+  Commands that resolve `#` imports run the lint check so missed entries are detected, rather than silently modifying the file.
+
+  Since syncing was forced previously on every command, no breaking changes are expected.
+
+- Remove the `postinstall` hook ([#1729](https://github.com/seek-oss/sku/pull/1729))
+
+  Sku no longer runs a script at install time. Generated project files (`tsconfig.json`, `eslint.config.mjs`, `.prettierrc`, etc.) are no longer created during `install` and instead are written by running any sku command or by running `sku configure` explicitly.
+
+  The `skuSkipPostInstall`/`skuSkipPostinstall` package.json fields are no longer read and can be removed from projects. `skuSkipConfigure` is unaffected.
+
+## 16.3.0
+
+### Minor Changes
+
+- Managed Data Mode root layouts now need to render the full `<html>`, `<head>`, and `<body>`, not just inside the `<body>`. Allowing it to render into any part of document. ([#1720](https://github.com/seek-oss/sku/pull/1720))
+
+- Add `entrySideEffects` so apps can import isomorphic modules (such as Braid reset) before any consumer module. ([#1717](https://github.com/seek-oss/sku/pull/1717))
+
+- Webpack SSR: Pass the listening server and port to `onStart` ([#1730](https://github.com/seek-oss/sku/pull/1730))
+
+  `onStart` still receives the Express app as its first argument. A new second argument carries `{ httpServer, port }`, so apps can set keep-alive timeouts and close the server on shutdown.
+
+  ```tsx
+  import type { Server } from 'sku';
+
+  export default (): Server => ({
+    renderCallback,
+    onStart: (app, { httpServer, port }) => {
+      httpServer.keepAliveTimeout = 20_000;
+      process.on('SIGTERM', () => {
+        httpServer.close(() => process.exit(0));
+      });
+    },
+  });
+  ```
+
+  See the [Webpack SSR](https://seek-oss.github.io/sku/ssr/webpack-ssr) docs for more details.
+
 ## 16.2.0
 
 ### Minor Changes

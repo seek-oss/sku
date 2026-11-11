@@ -6,10 +6,20 @@ export default {
   publicPath: '/static/ssr-document/',
   port: 8200,
   target: 'dist',
-  cspEnabled: true,
-  cspExtraScriptSrcHosts: ['https://cdn.example.com'],
-  cspReportTo: ['csp-endpoint', 'https://report.example.com/csp'],
-  cspReportOnlyEnabled: true,
-  cspReportOnlyExtraScriptSrcHosts: ['https://report-only.example.com'],
-  cspReportOnlyReportTo: 'csp-report-only-endpoint',
+  csp: {
+    enforced: {
+      extraSources: {
+        'script-src': ['https://cdn.example.com'],
+        'connect-src': ['https://browser-intake-datadoghq.com'],
+      },
+      reportTo: 'https://report.example.com/csp',
+    },
+    reportOnly: {
+      extraSources: {
+        'script-src': ['https://report-only.example.com'],
+        'frame-src': ['https://www.youtube.com'],
+      },
+      reportTo: 'https://report.example.com/csp-report-only',
+    },
+  },
 } satisfies SkuConfig;

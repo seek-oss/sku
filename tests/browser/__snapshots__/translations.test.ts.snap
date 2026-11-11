@@ -630,6 +630,10 @@ exports[`vite ssr translations > should render en 1`] = `
       nonce="RANDOM_NONCE"
       href="/@fs/{cwd}/packages/sku/dist/entries/ssr-client.dev.mjs"
     >
+    <link
+      rel="icon"
+      href="data:,"
+    >
   </head>
   <body>
     <div>
@@ -690,6 +694,10 @@ exports[`vite ssr translations > should render en-PSEUDO 1`] = `
       nonce="RANDOM_NONCE"
       href="/@fs/{cwd}/packages/sku/dist/entries/ssr-client.dev.mjs"
     >
+    <link
+      rel="icon"
+      href="data:,"
+    >
   </head>
   <body>
     <div>
@@ -749,6 +757,10 @@ exports[`vite ssr translations > should render fr 1`] = `
       fetchpriority="low"
       nonce="RANDOM_NONCE"
       href="/@fs/{cwd}/packages/sku/dist/entries/ssr-client.dev.mjs"
+    >
+    <link
+      rel="icon"
+      href="data:,"
     >
   </head>
   <body>

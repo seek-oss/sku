@@ -58,9 +58,11 @@ export default () => ({
     );
     res.end();
   },
-  onStart: async () => {
+  onStart: async (app, { httpServer, port }) => {
     if (process.env.NODE_ENV === 'production') {
-      console.log('Server ran the onStart callback');
+      console.log(
+        `Server ran the onStart callback on port ${port} (${httpServer.listening ? 'listening' : 'not listening'}, express ${typeof app.use})`,
+      );
     }
   },
 });

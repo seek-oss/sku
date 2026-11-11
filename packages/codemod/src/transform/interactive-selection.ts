@@ -57,7 +57,7 @@ export const transformerPathsForJestSubsteps = (
   return ordered.map((slug) => resolveCodemodModule(slug));
 };
 
-export const exitCancel = (): never => {
+const exitCancel = (): never => {
   process.exit(1);
 };
 

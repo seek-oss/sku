@@ -17,8 +17,8 @@ import provider from '../services/telemetry/index.js';
 
 const debug = createDebug('sku:duplicate-packages');
 
-/** Always checked, in addition to the app's compile packages */
-const watchedPackages = [
+/** Always checked, in addition to any `extraPackages` the caller passes */
+const watchlist = [
   'react',
   'react-dom',
   'braid-design-system',
@@ -34,20 +34,19 @@ const requiresExactVersion = (name: string, peerName: string) =>
   name === 'react-dom' && peerName === 'react';
 
 /**
- * Finds candidate packages (the watchlist plus `candidatePackages`) that
- * resolve to more than one version, and candidate copies whose peer
- * dependency on another candidate resolves to a version outside the
- * declared range.
+ * Finds watched and caller-supplied packages that resolve to more than one
+ * version, and copies whose peer dependency on such a package resolves to a
+ * version outside the declared range.
  */
 export const classifyDuplicatePackages = (
   depGraph: DepGraph,
-  candidatePackages: string[] = [],
+  { extraPackages = [] }: { extraPackages?: Iterable<string> } = {},
 ) => {
-  const candidates = new Set([...watchedPackages, ...candidatePackages]);
+  const packagesToCheck = new Set([...watchlist, ...extraPackages]);
 
   const copies = [...depGraph]
     .flatMap(([directory, entry]): PackageCopy[] =>
-      entry.version && candidates.has(entry.name)
+      entry.version && packagesToCheck.has(entry.name)
         ? [{ ...entry, directory, version: entry.version }]
         : [],
     )
@@ -130,11 +129,11 @@ const formatFixAdvice = (
  */
 export const checkDuplicatePackages = async ({
   rootDir = cwd(),
-  candidatePackages = [],
+  extraPackages = [],
 }: {
   rootDir?: string;
-  /** Packages to check in addition to the watchlist, e.g. the app's compile packages */
-  candidatePackages?: string[];
+  /** e.g. the app's compile packages */
+  extraPackages?: Iterable<string>;
 } = {}): Promise<LintResult> => {
   try {
     const { skuSkipValidatePeerDeps } = JSON.parse(
@@ -150,7 +149,7 @@ export const checkDuplicatePackages = async ({
     });
     const { duplicates, versionMismatches } = classifyDuplicatePackages(
       depGraph,
-      candidatePackages,
+      { extraPackages },
     );
     const messages: string[] = [];
 

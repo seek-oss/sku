@@ -57,9 +57,9 @@ When a full `sku lint` run resolves any of the app's compile packages — detect
 - **WHEN** an app has two versions of an `@seek` package that is not flagged `skuCompilePackage`, is not a default compile package, and is not in its `compilePackages` config
 - **THEN** no duplicate warning is printed for that package
 
-### Requirement: Peer version mismatches of candidate packages are reported at lint
+### Requirement: Peer version mismatches of checked packages are reported at lint
 
-When a copy of a candidate package (watched or compile package) declares a peer dependency on another candidate package and the peer copy it actually resolves falls outside the declared semver range, sku SHALL print a warning identifying the declaring package, the expected range, and the resolved version, and SHALL still exit lint successfully. The check is evaluated per declaring copy, non-semver ranges are ignored, prerelease versions satisfy a range they fall within, and the `react-dom` peer on `react` is reported only by the react pair requirement above.
+When a copy of a package being checked declares a peer dependency on another package being checked and the peer copy it resolves falls outside the declared semver range, sku SHALL warn with the declaring package, the expected range, and the resolved version, and SHALL still exit lint successfully. The check runs per declaring copy: non-semver ranges are ignored, prereleases satisfy a range they fall within, and the `react-dom` peer on `react` is covered by the react pair requirement.
 
 #### Scenario: Resolved peer outside declared range
 
@@ -68,17 +68,17 @@ When a copy of a candidate package (watched or compile package) declares a peer 
 
 #### Scenario: Resolved peer satisfies declared range
 
-- **WHEN** a compile package declares a peer dependency on another candidate package and the copy it resolves satisfies the declared range
+- **WHEN** a compile package declares a peer dependency on another package being checked and the copy it resolves satisfies the declared range
 - **THEN** no peer-mismatch warning is printed for that declaration, even if other copies of the peer exist in the graph
 
 #### Scenario: Non-semver peer range
 
-- **WHEN** a candidate package declares a peer dependency with a non-semver range such as `workspace:*`
+- **WHEN** a package being checked declares a peer dependency with a non-semver range such as `workspace:*`
 - **THEN** no peer-mismatch warning is printed for that declaration
 
 #### Scenario: Prerelease peer within range
 
-- **WHEN** a candidate package declares a peer dependency on `react` at `^19.0.0` and resolves `react` at `19.1.0-canary-abc`
+- **WHEN** a package being checked declares a peer dependency on `react` at `^19.0.0` and resolves `react` at `19.1.0-canary-abc`
 - **THEN** no peer-mismatch warning is printed for that declaration
 
 ### Requirement: The check is scoped, skippable, and non-fatal

@@ -45,10 +45,10 @@
 ## 8. Compile-package parity (follow-up)
 
 - [x] 8.1 Record `peerDependencies`, the `skuCompilePackage` flag, and per-package `resolutions` (which copy each dependency resolved to) on `DepGraphEntry`, populated during the existing graph walk
-- [x] 8.2 Generalise the classifier to a candidate set: the fixed watchlist plus caller-supplied candidates plus any graph entry flagged `skuCompilePackage`
-- [x] 8.3 Add the per-copy peer-version mismatch pass (candidates only, semver ranges only, `react-dom` → `react` excluded in favour of the pair check) with direction-aware fix advice and `peer_dep_version_mismatch` telemetry
-- [x] 8.4 Pass `skuContext.paths.compilePackages()` from `lint.action.ts` into the duplicate-package check as extra candidates
-- [x] 8.5 Unit/integration-test: flagged `@seek` duplicates, caller-supplied candidates, unflagged `@seek` ignored, peer satisfied/mismatched per copy, non-semver ranges ignored, and graph recording of the new entry fields
+- [x] 8.2 Generalise the classifier beyond the fixed watchlist: the watchlist plus caller-supplied `extraPackages` plus any graph entry flagged `skuCompilePackage`
+- [x] 8.3 Add the per-copy peer-version mismatch pass (checked packages only, semver ranges only, `react-dom` → `react` excluded in favour of the pair check) with direction-aware fix advice and `peer_dep_version_mismatch` telemetry
+- [x] 8.4 Pass `skuContext.paths.compilePackages()` from `lint.action.ts` into the duplicate-package check as `extraPackages`
+- [x] 8.5 Unit/integration-test: flagged `@seek` duplicates, caller-supplied `extraPackages`, unflagged `@seek` ignored, peer satisfied/mismatched per copy, non-semver ranges ignored, and graph recording of the new entry fields
 - [x] 8.6 Update the proposal, design, spec delta, and changeset for the restored compile-package coverage
 
 ## 9. Review follow-ups
@@ -57,7 +57,7 @@ See `review.md` for the findings behind these tasks. They supersede parts of 1.2
 
 - [x] 9.1 Find package directories through Node's `node_modules` lookup paths and their real paths, so packages whose `exports` omit `./package.json` stay in the graph
 - [x] 9.2 Add an `includeDevDependencies` option to the walk and pass it from the lint check; `setNoExternal` keeps walking `dependencies` only
-- [x] 9.3 Drop `resolutions` and the `skuCompilePackage` flag from `DepGraphEntry`; derive the resolved copy of a peer from `dependents`, and take compile-package candidates from `compilePackages()` only
+- [x] 9.3 Drop `resolutions` and the `skuCompilePackage` flag from `DepGraphEntry`; derive the resolved copy of a peer from `dependents`, and take compile packages from `compilePackages()` only
 - [x] 9.4 Replace the `react`/`react-dom` version-set check with a per-copy exact-version peer check
 - [x] 9.5 Treat prereleases within a peer range as satisfying it, and stop logging same-version copies
 - [x] 9.6 Read `skuSkipValidatePeerDeps` in the check itself and delete the shared helper

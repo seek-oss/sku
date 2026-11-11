@@ -10,7 +10,7 @@ Duplicate versions of `react`, `react-dom`, `braid-design-system`, and `@vanilla
 
 - `sku lint` warns when the app's dependency graph resolves any of `react`, `react-dom`, `braid-design-system`, or `@vanilla-extract/css` at more than one distinct version, under pnpm, npm, or yarn.
 - `sku lint` warns on the same condition for the app's compile packages (detected `@seek` packages flagged `skuCompilePackage`, sku's default compile packages, and user-configured `compilePackages`), restoring the legacy check's compile-package coverage.
-- `sku lint` warns when a `react-dom` copy resolves a `react` copy at a different version, and when a candidate package's peer dependency on another candidate resolves outside its declared range (both checked per copy, against the copy that package actually resolves).
+- `sku lint` warns when a `react-dom` copy resolves a `react` copy at a different version, and when a watched or compile package's peer dependency on another package being checked resolves outside its declared range (both checked per copy, against the copy that package actually resolves).
 - Warnings are actionable: versions, locations, and the dependency chain that pulled each copy in, plus a `why` command hint.
 - One detection mechanism for all package managers and both bundlers; the pnpm gap and the npm/yarn-only legacy check both disappear.
 
@@ -36,17 +36,17 @@ The walk finds each package directory by searching Node's `node_modules` lookup 
 
 The graph needs no separate record of which copy a package resolves: every resolved edge from package A to package B adds A to B's `dependents`, so the copy of peer P that a package resolves is the P entry whose `dependents` include that package's directory.
 
-A pure classifier groups candidate copies by package name and emits findings:
+A pure classifier groups copies of packages being checked by package name and emits findings:
 
-- **Duplicate versions**: a candidate package resolves to two or more distinct versions. Distinct directories with the _same_ version (pnpm peer variants) are not reported.
-- **Peer version mismatch**: for each copy of a candidate package, each declared peer dependency on another candidate is checked against the version of the copy that package actually resolves; a mismatch is reported per declaring copy with direction-aware advice. Non-semver ranges (e.g. `workspace:*`) are skipped, and prereleases count as within a range (`includePrerelease`). This improves on the legacy check, which keyed duplicated packages by name in a `Map` (collapsing copies) and only fired when both sides were already duplicated.
+- **Duplicate versions**: a package being checked resolves to two or more distinct versions. Distinct directories with the _same_ version (pnpm peer variants) are not reported.
+- **Peer version mismatch**: for each copy of a package being checked, each declared peer dependency on another package being checked is checked against the version of the copy that package actually resolves; a mismatch is reported per declaring copy with direction-aware advice. Non-semver ranges (e.g. `workspace:*`) are skipped, and prereleases count as within a range (`includePrerelease`). This improves on the legacy check, which keyed duplicated packages by name in a `Map` (collapsing copies) and only fired when both sides were already duplicated.
 - **React pair mismatch**: a special case of the peer check. React requires `react-dom` and the `react` it loads to be the same version, so a `react-dom` copy's `react` peer must resolve exactly that `react-dom` copy's version, whatever its declared range. Comparing per copy, rather than comparing all resolved `react` versions with all resolved `react-dom` versions, avoids reporting a mismatch when an unrelated duplicate `react` exists; that duplicate is reported on its own.
 
 The classifier is a pure function over graph entries so it is unit-testable without a filesystem.
 
-### 3. Candidate set: fixed watchlist plus compile packages
+### 3. Packages checked: fixed watchlist plus compile packages
 
-The base watchlist is `react`, `react-dom`, `braid-design-system`, `@vanilla-extract/css`, defined as a constant in the new check module. The candidate set extends it with the app's compile packages, passed from `lint.action.ts` via `skuContext.paths.compilePackages()`: detected `@seek` packages flagged `skuCompilePackage`, sku's defaults (`sku`, `braid-design-system`), and user-configured `compilePackages`.
+The base watchlist is `react`, `react-dom`, `braid-design-system`, `@vanilla-extract/css`, defined as a constant in the new check module. The watchlist is extended with the app's compile packages, passed from `lint.action.ts` via `skuContext.paths.compilePackages()` as `extraPackages`: detected `@seek` packages flagged `skuCompilePackage`, sku's defaults (`sku`, `braid-design-system`), and user-configured `compilePackages`.
 
 This restores the legacy check's compile-package scope using the same source of truth sku uses to decide what to compile. A flagged package that compile-package detection doesn't find isn't compiled by sku either, so the graph doesn't record the flag separately.
 
@@ -70,7 +70,7 @@ Delete `utils/validatePeerDeps.ts`, its wrapper in `utils/configure.ts`, and all
 
 ## Risks / Trade-offs
 
-- [Graph-reachable ≠ bundled, so some warnings will name copies that tree-shaking or externalisation would have excluded] → Narrow candidate set (fixed watchlist plus compile packages), distinct-versions-only rule, precise wording, and telemetry during a warning-only period before any banner promotion.
+- [Graph-reachable ≠ bundled, so some warnings will name copies that tree-shaking or externalisation would have excluded] → Narrow set of checked packages (fixed watchlist plus compile packages), distinct-versions-only rule, precise wording, and telemetry during a warning-only period before any banner promotion.
 - [Compile-package coverage widens the warning surface to `@seek` libraries with long-standing duplicates or loose peer ranges] → Same mitigations: warn-only, per-copy peer checking (no warning when the resolved copy satisfies the range), the `skuSkipValidatePeerDeps` opt-out, and `duplicate_compile_package`/`peer_dep_version_mismatch` telemetry to measure finding rates per package.
 - [Under pnpm, a symlinked path rather than the `.pnpm` real path would collapse distinct copies into one graph key] → The walk takes the real path of every package directory it finds; a symlinked fixture test covers it.
 - [Walking `devDependencies` also walks sku's own tree, which has its own `@vanilla-extract/css` through `@vanilla-extract/integration`, so a version that differs from the app's is reported] → It's a real second copy, and the legacy check reported it too. It's lower-risk than an app/braid mismatch, because the integration binds the CSS adapter from inside each evaluated file, so the adapter uses whichever copy that file resolves.

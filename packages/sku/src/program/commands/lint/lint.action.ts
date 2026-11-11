@@ -38,19 +38,15 @@ export const lintAction = async (
       name: 'ESLint',
       run: () => esLintCheck({ paths: pathsToCheck }),
     },
-    // Duplicate-package state only changes when dependencies change, so only
-    // run this (warn-only) check on full lint runs.
-    ...(paths.length === 0
-      ? [
-          {
-            name: 'Duplicate packages',
-            run: async () =>
-              checkDuplicatePackages({
-                candidatePackages: await skuContext.paths.compilePackages(),
-              }),
-          },
-        ]
-      : []),
+    {
+      name: 'Duplicate packages',
+      // Only run on full lint runs
+      skip: pathsToCheck !== undefined,
+      run: async () =>
+        checkDuplicatePackages({
+          extraPackages: await skuContext.paths.compilePackages(),
+        }),
+    },
   ];
 
   const hasFailure = await runLintChecks(checks);

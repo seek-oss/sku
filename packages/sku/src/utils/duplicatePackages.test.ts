@@ -46,7 +46,7 @@ describe('classifyDuplicatePackages', () => {
     });
   });
 
-  it('ignores same-version copies, copies without a version, and packages that are not candidates', () => {
+  it('ignores same-version copies, copies without a version, and packages not in the set', () => {
     const report = classifyDuplicatePackages(
       graph({
         '/a/react': { name: 'react', version: '19.0.0', dependents: ['ROOT'] },
@@ -71,7 +71,7 @@ describe('classifyDuplicatePackages', () => {
     });
   });
 
-  it('checks candidate packages passed by the caller', () => {
+  it('checks extra packages passed by the caller', () => {
     const report = classifyDuplicatePackages(
       graph({
         '/a/@seek/lib': {
@@ -85,7 +85,7 @@ describe('classifyDuplicatePackages', () => {
           dependents: ['ROOT'],
         },
       }),
-      ['@seek/lib'],
+      { extraPackages: ['@seek/lib'] },
     );
 
     expect(summarise(report).duplicates).toEqual([
@@ -119,7 +119,7 @@ describe('classifyDuplicatePackages', () => {
           dependents: ['ROOT'],
         },
       }),
-      ['@seek/lib'],
+      { extraPackages: ['@seek/lib'] },
     );
 
     expect(summarise(report).versionMismatches).toEqual([
@@ -150,7 +150,7 @@ describe('classifyDuplicatePackages', () => {
           dependents: ['/@seek/lib'],
         },
       }),
-      ['@seek/lib'],
+      { extraPackages: ['@seek/lib'] },
     );
 
     expect(summarise(report).versionMismatches).toEqual([]);
@@ -280,7 +280,7 @@ describe('checkDuplicatePackages', () => {
     expect(output).toContain('1.18.0');
   });
 
-  it('warns on duplicate compile package versions passed as candidates', async () => {
+  it('warns on duplicate compile package versions passed as extra packages', async () => {
     const getOutput = captureOutput();
     await using fixture = await createFixture({
       'package.json': JSON.stringify({
@@ -307,7 +307,7 @@ describe('checkDuplicatePackages', () => {
 
     await checkDuplicatePackages({
       rootDir: fixture.path,
-      candidatePackages: ['@seek/lib'],
+      extraPackages: ['@seek/lib'],
     });
 
     const output = getOutput();
@@ -345,7 +345,7 @@ describe('checkDuplicatePackages', () => {
     await expect(
       checkDuplicatePackages({
         rootDir: fixture.path,
-        candidatePackages: ['@seek/lib'],
+        extraPackages: ['@seek/lib'],
       }),
     ).resolves.toEqual({ exitCode: 0 });
 

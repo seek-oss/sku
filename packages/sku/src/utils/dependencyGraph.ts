@@ -34,14 +34,10 @@ const loadPackage = async (packageJsonPath: string) =>
     .then(JSON.parse) as Promise<PackageJson>;
 
 /**
- * Finds the directory of the copy of `dep` that Node would load from `fromDir`.
- *
- * Searches Node's `node_modules` lookup paths directly, because resolving
- * `${dep}/package.json` throws for packages whose `exports` omit it.
- * Asking for the lookup paths of `${dep}/package.json` rather than `dep` keeps
- * them for packages named after Node builtins, e.g. `punycode`.
+ * Returns the directory of `dep` as Node would resolve it from `fromDir`.
  */
 const resolvePackageDir = (dep: string, fromDir: string) => {
+  // Avoids `require.resolve`, which throws for packages whose `exports` omit `./package.json`.
   const lookupPaths =
     createRequire(path.join(fromDir, 'package.json')).resolve.paths(
       `${dep}/package.json`,

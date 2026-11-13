@@ -109,7 +109,7 @@ exports[`sku-create > ssr > should create package.json 1`] = `
     "#src/*": "./src/*",
   },
   "name": "new-project-ssr",
-  "packageManager": "pnpm@11.24.0",
+  "packageManager": "pnpm@12.20.0",
   "private": true,
   "scripts": {
     "build": "sku build",
@@ -710,7 +710,7 @@ exports[`sku-create > vite > should create package.json 1`] = `
     "#src/*": "./src/*",
   },
   "name": "new-project-vite",
-  "packageManager": "pnpm@11.24.0",
+  "packageManager": "pnpm@12.20.0",
   "private": true,
   "scripts": {
     "build": "sku build",
@@ -1151,7 +1151,7 @@ exports[`sku-create > webpack > should create package.json 1`] = `
     "#src/*": "./src/*",
   },
   "name": "new-project-webpack",
-  "packageManager": "pnpm@11.24.0",
+  "packageManager": "pnpm@12.20.0",
   "private": true,
   "scripts": {
     "build": "sku build",

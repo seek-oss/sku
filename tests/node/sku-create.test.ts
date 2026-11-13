@@ -261,8 +261,11 @@ function replaceDependencyVersions(packageJson: Record<string, any>) {
  * This function strips version numbers from YAML content.
  */
 function stripYamlVersions(yamlContent: string): string {
+  // Matches an exact version (`1.2.3`), an integrity-pinned one
+  // (`1.2.3+sha512-…`), and a range such as `^1.2.3` — pnpm 12's
+  // `pnpm add --config` saves a range rather than an exact version.
   return yamlContent.replace(
-    /(?<!minimumReleaseAge):\s*[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
+    /(?<!minimumReleaseAge):\s*[\^~]?[\d.]+(?:\+sha\d+-[a-f0-9]+)?.*/g,
     ': VERSION_IGNORED',
   );
 }

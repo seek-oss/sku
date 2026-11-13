@@ -246,7 +246,7 @@ describe('checkDuplicatePackages', () => {
     ).resolves.toEqual({ exitCode: 0 });
 
     const output = getOutput();
-    expect(output).toContain('Duplicate packages detected');
+    expect(output).toContain('Dependency issues detected');
     expect(output).toContain('18.3.1');
     expect(output).toContain('19.0.0');
     expect(output).toContain('your app > lib-a > react');
@@ -312,7 +312,7 @@ describe('checkDuplicatePackages', () => {
     });
 
     const output = getOutput();
-    expect(output).toContain('Duplicate packages detected');
+    expect(output).toContain('Dependency issues detected');
     expect(output).toContain('@seek/lib');
   });
 
@@ -364,7 +364,7 @@ describe('checkDuplicatePackages', () => {
 
     await checkDuplicatePackages({ rootDir: fixture.path });
 
-    expect(getOutput()).not.toContain('Duplicate packages detected');
+    expect(getOutput()).not.toContain('Dependency issues detected');
   });
 
   it('does not warn for a single version of each watched package', async () => {
@@ -387,7 +387,7 @@ describe('checkDuplicatePackages', () => {
 
     await checkDuplicatePackages({ rootDir: fixture.path });
 
-    expect(getOutput()).not.toContain('Duplicate packages detected');
+    expect(getOutput()).not.toContain('Dependency issues detected');
   });
 
   it('does not throw or warn when dependencies are not installed', async () => {
@@ -403,6 +403,6 @@ describe('checkDuplicatePackages', () => {
       checkDuplicatePackages({ rootDir: fixture.path }),
     ).resolves.toEqual({ exitCode: 0 });
 
-    expect(getOutput()).not.toContain('Duplicate packages detected');
+    expect(getOutput()).not.toContain('Dependency issues detected');
   });
 });

@@ -2,6 +2,6 @@
 'sku': patch
 ---
 
-Fix more cases where Vanilla Extract packages are missing from the server build.
+Fix more cases where Vanilla Extract packages are missing from the server build
 
-Packages whose `exports` field doesn't include `./package.json` were skipped when working out which dependencies to bundle.
+When sku chooses which dependencies to bundle, it now includes packages whose `exports` field leaves out `./package.json`.

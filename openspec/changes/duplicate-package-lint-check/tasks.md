@@ -20,8 +20,8 @@
 ## 4. Lint integration
 
 - [x] 4.1 Extract the `skuSkipValidatePeerDeps` read from `configure.ts` into a shared helper usable from the lint path
-- [x] 4.2 Implement the lint check: skip when opted out or dependencies are unresolvable (errors swallowed to debug log); otherwise run the graph walk, classify, print a warning banner, and count findings in telemetry; always resolve with `exitCode: 0`
-- [x] 4.3 Register the check in `lint.action.ts`, gated to full runs (`paths.length === 0`)
+- [x] 4.2 Implement the lint check: skip when opted out; report nothing for unresolvable dependencies (logged to debug by the walk) and print an error for any other failure; otherwise run the graph walk, classify, print a warning banner, and count findings in telemetry; always resolve with `exitCode: 0`
+- [x] 4.3 Register the check in `lint.action.ts`, gated to full runs with a new `skip` flag on `LintCheck`
 - [x] 4.4 Add/extend graph tests for version recording and for npm/yarn-style nested layouts vs pnpm-style symlinked layouts producing equivalent findings
 
 ## 5. Remove legacy validation
@@ -32,14 +32,14 @@
 
 ## 6. End-to-end coverage
 
-- [x] 6.1 Add a lint test fixture/app state with duplicate `react` versions and assert the warning appears in `sku lint` output while lint succeeds
-- [x] 6.2 Assert no duplicate warning appears for: a scoped lint run (`sku lint <path>`), an app with `skuSkipValidatePeerDeps`, and an app with a single version of each watched package
+- [x] 6.1 Add a fixture with duplicate `react` versions and assert `checkDuplicatePackages` prints the warning and resolves with `exitCode: 0`
+- [x] 6.2 Assert no duplicate warning appears for an app with `skuSkipValidatePeerDeps` and an app with a single version of each watched package; the scoped-run gate in `lint.action.ts` has no automated test
 - [x] 6.3 Run sku's own lint/test suites to check fixtures that set `skuSkipValidatePeerDeps` still behave, and fix any fixture fallout
 
 ## 7. Release
 
 - [x] 7.1 Add a changeset (minor) describing the new lint warning, pnpm support, and the removal of start/build duplicate warnings
-- [x] 7.2 Check site docs for `validatePeerDeps`/`skuSkipValidatePeerDeps` mentions and update only if the documented behaviour changed
+- [x] 7.2 Add a "Dependency issues" section to `site/docs/linting.md` that describes the warnings and the `skuSkipValidatePeerDeps` opt-out
 - [x] 7.3 Run `pnpm openspec validate duplicate-package-lint-check` and the targeted test suites; note any full-suite failures unrelated to this change
 
 ## 8. Compile-package parity (follow-up)
@@ -53,7 +53,7 @@
 
 ## 9. Review follow-ups
 
-See `review.md` for the findings behind these tasks. They supersede parts of 1.2, 2.3, 3.2, 3.3, 4.1, 8.1, and 8.2.
+These tasks supersede parts of 1.2, 2.3, 3.2, 3.3, 4.1, 8.1, and 8.2.
 
 - [x] 9.1 Find package directories through Node's `node_modules` lookup paths and their real paths, so packages whose `exports` omit `./package.json` stay in the graph
 - [x] 9.2 Add an `includeDevDependencies` option to the walk and pass it from the lint check; `setNoExternal` keeps walking `dependencies` only

@@ -1,109 +1,105 @@
 ## ADDED Requirements
 
-### Requirement: Duplicate watched package versions are reported at lint
+### Requirement: Lint warns about duplicate versions of checked packages
 
-When a full `sku lint` run resolves `react`, `react-dom`, `braid-design-system`, or `@vanilla-extract/css` at more than one distinct version in the app's dependency graph (everything reachable from its `dependencies` and `devDependencies`), sku SHALL print a warning naming the package, each resolved version, and how each copy is reached, and SHALL still exit lint successfully.
+When more than one version of a checked package is reachable from the app's `dependencies` or `devDependencies`, `sku lint` SHALL print a warning. The checked packages are `react`, `react-dom`, `braid-design-system`, `@vanilla-extract/css`, and the app's compile packages. The warning names the package, each version, and the dependency chain to each copy.
 
-#### Scenario: Duplicate versions under pnpm
+#### Scenario: Two versions with pnpm
 
-- **WHEN** an app using pnpm has two versions of `react` reachable from its dependencies and `sku lint` runs without path arguments
-- **THEN** a warning identifies both versions and their dependency chains, and the lint exit code is unaffected
+- **WHEN** an app uses pnpm and two versions of `react` are reachable from its dependencies
+- **THEN** lint prints a warning with both versions and their dependency chains
 
-#### Scenario: Duplicate versions under npm or yarn
+#### Scenario: Two versions with npm or yarn
 
-- **WHEN** an app using npm or yarn has two versions of `@vanilla-extract/css` in nested `node_modules` and `sku lint` runs without path arguments
-- **THEN** the same style of warning is printed, and the lint exit code is unaffected
+- **WHEN** an app uses npm or yarn and two versions of `@vanilla-extract/css` are in nested `node_modules` folders
+- **THEN** lint prints a warning with both versions and their dependency chains
 
-#### Scenario: Duplicate involving a devDependency
+#### Scenario: Different version in devDependencies
 
-- **WHEN** an app declares `@vanilla-extract/css` in `devDependencies`, one of its dependencies resolves a different version of it, and `sku lint` runs without path arguments
-- **THEN** a warning identifies both versions, and the lint exit code is unaffected
+- **WHEN** the app has `@vanilla-extract/css` in `devDependencies` and one of its dependencies resolves a different version
+- **THEN** lint prints a warning with both versions
 
-#### Scenario: Same version in multiple directories
+#### Scenario: Two versions of a compile package
 
-- **WHEN** a watched package is present in multiple directories at the same version
-- **THEN** no user-facing warning is printed for that package
+- **WHEN** two versions of an `@seek` package flagged `skuCompilePackage`, or of a package in the app's `compilePackages` config, are reachable from its dependencies
+- **THEN** lint prints a warning with both versions and their dependency chains
 
-### Requirement: React and react-dom version mismatch is reported at lint
+#### Scenario: Same version in more than one folder
 
-When a `react-dom` copy in the app's dependency graph resolves a `react` copy at a different version, sku SHALL print a warning identifying both versions and SHALL still exit lint successfully. The check is evaluated per `react-dom` copy, against the `react` copy it resolves.
+- **WHEN** a checked package is in more than one folder, and each copy has the same version
+- **THEN** lint prints no warning for that package
 
-#### Scenario: Mismatched pair
+#### Scenario: Package that is not checked
 
-- **WHEN** an app's `react-dom` resolves `react` at a different version and `sku lint` runs without path arguments
-- **THEN** a warning identifies the mismatched versions, and the lint exit code is unaffected
+- **WHEN** two versions of an `@seek` package are reachable, and that package is not one of the app's compile packages
+- **THEN** lint prints no warning for that package
 
-#### Scenario: Matching pair
+### Requirement: Lint warns when react-dom loads a different react version
 
-- **WHEN** an app's `react-dom` resolves `react` at the same version
-- **THEN** no pair-mismatch warning is printed, even if another copy of `react` exists elsewhere in the graph
+When a copy of `react-dom` resolves a copy of `react` at a different version, `sku lint` SHALL print a warning with both versions. Lint compares each `react-dom` copy with the `react` copy that it resolves.
 
-### Requirement: Duplicate compile package versions are reported at lint
+#### Scenario: Different versions
 
-When a full `sku lint` run resolves any of the app's compile packages — detected `@seek` packages flagged `skuCompilePackage`, sku's default compile packages, and user-configured `compilePackages` — at more than one distinct version in the app's dependency graph, sku SHALL print a warning naming the package, each resolved version, and how each copy is reached, and SHALL still exit lint successfully.
+- **WHEN** the app's `react-dom` resolves a `react` copy at a different version
+- **THEN** lint prints a warning with both versions
 
-#### Scenario: Duplicate `@seek` compile package versions under pnpm
+#### Scenario: Same version
 
-- **WHEN** an app using pnpm has two versions of an `@seek` package flagged `skuCompilePackage` reachable from its dependencies and `sku lint` runs without path arguments
-- **THEN** a warning identifies both versions and their dependency chains, and the lint exit code is unaffected
+- **WHEN** the app's `react-dom` resolves a `react` copy at the same version, and a second `react` copy is elsewhere in the dependencies
+- **THEN** lint prints no `react-dom` warning
 
-#### Scenario: Duplicate user-configured compile package versions
+### Requirement: Lint warns when a peer dependency resolves outside its range
 
-- **WHEN** an app lists a package in its `compilePackages` sku config and two versions of it are reachable from its dependencies and `sku lint` runs without path arguments
-- **THEN** a warning identifies both versions and their dependency chains, and the lint exit code is unaffected
+When a checked package has a peer dependency on another checked package, and the resolved copy is outside the declared range, `sku lint` SHALL print a warning. The warning names the package, the expected range, and the resolved version. Lint checks each copy separately. The `react-dom` peer dependency on `react` follows the requirement above.
 
-#### Scenario: Unflagged `@seek` package duplicated
+#### Scenario: Resolved version outside the range
 
-- **WHEN** an app has two versions of an `@seek` package that is not flagged `skuCompilePackage`, is not a default compile package, and is not in its `compilePackages` config
-- **THEN** no duplicate warning is printed for that package
+- **WHEN** a compile package has a peer dependency on `braid-design-system` at `^31.0.0` and resolves `braid-design-system` at `32.0.0`
+- **THEN** lint prints a warning with the expected range and the resolved version
 
-### Requirement: Peer version mismatches of checked packages are reported at lint
+#### Scenario: Resolved version inside the range
 
-When a copy of a package being checked declares a peer dependency on another package being checked and the peer copy it resolves falls outside the declared semver range, sku SHALL warn with the declaring package, the expected range, and the resolved version, and SHALL still exit lint successfully. The check runs per declaring copy: non-semver ranges are ignored, prereleases satisfy a range they fall within, and the `react-dom` peer on `react` is covered by the react pair requirement.
+- **WHEN** a checked package resolves a peer copy inside its declared range, and other copies of the peer are elsewhere in the dependencies
+- **THEN** lint prints no peer warning for that package
 
-#### Scenario: Resolved peer outside declared range
+#### Scenario: Range that is not semver
 
-- **WHEN** a compile package declares a peer dependency on `braid-design-system` at `^31.0.0` and resolves `braid-design-system` at `32.0.0` and `sku lint` runs without path arguments
-- **THEN** a warning identifies the expected range and the resolved version, and the lint exit code is unaffected
+- **WHEN** a checked package has a peer dependency with the range `workspace:*`
+- **THEN** lint prints no peer warning for that dependency
 
-#### Scenario: Resolved peer satisfies declared range
+#### Scenario: Prerelease inside the range
 
-- **WHEN** a compile package declares a peer dependency on another package being checked and the copy it resolves satisfies the declared range
-- **THEN** no peer-mismatch warning is printed for that declaration, even if other copies of the peer exist in the graph
+- **WHEN** a checked package has a peer dependency on `react` at `^19.0.0` and resolves `react` at `19.1.0-canary-abc`
+- **THEN** lint prints no peer warning for that dependency
 
-#### Scenario: Non-semver peer range
+### Requirement: The check runs only on full lint runs and never fails lint
 
-- **WHEN** a package being checked declares a peer dependency with a non-semver range such as `workspace:*`
-- **THEN** no peer-mismatch warning is printed for that declaration
+The check SHALL run only when `sku lint` has no path arguments and the app's `package.json` does not set `skuSkipValidatePeerDeps`. The check never changes the lint exit code.
 
-#### Scenario: Prerelease peer within range
+#### Scenario: Warning printed
 
-- **WHEN** a package being checked declares a peer dependency on `react` at `^19.0.0` and resolves `react` at `19.1.0-canary-abc`
-- **THEN** no peer-mismatch warning is printed for that declaration
+- **WHEN** the check prints a warning
+- **THEN** the lint exit code does not change
 
-### Requirement: The check is scoped, skippable, and non-fatal
+#### Scenario: Lint with path arguments
 
-The duplicate-package check SHALL run only on full `sku lint` runs, SHALL be skipped when the app sets `skuSkipValidatePeerDeps`, and MUST NOT make lint fail or throw when dependencies cannot be resolved.
+- **WHEN** `sku lint` runs with path arguments in an app with duplicate versions
+- **THEN** lint prints no duplicate-package warning
 
-#### Scenario: Scoped lint run
+#### Scenario: Check turned off
 
-- **WHEN** `sku lint` is invoked with path arguments in an app with duplicate watched package versions
-- **THEN** no duplicate-package warning is printed
-
-#### Scenario: Opted out
-
-- **WHEN** an app's `package.json` sets `skuSkipValidatePeerDeps` and `sku lint` runs without path arguments
-- **THEN** no duplicate-package warning is printed
+- **WHEN** the app's `package.json` sets `skuSkipValidatePeerDeps`
+- **THEN** lint prints no duplicate-package warning
 
 #### Scenario: Dependencies not installed
 
-- **WHEN** `sku lint` runs in an app whose dependencies cannot be resolved
-- **THEN** no duplicate-package warning is printed and lint proceeds with its other checks
+- **WHEN** lint runs in an app whose dependencies are not installed
+- **THEN** lint prints no duplicate-package warning and continues with its other checks
 
 ## REMOVED Requirements
 
 ### Requirement: Start and build duplicate package warnings
 
-**Reason**: Replaced by the lint-time duplicate-package check, which covers pnpm as well as npm and yarn; the legacy detection did not run under pnpm, and start/build warnings were easy to miss.
+**Reason**: The lint check replaces these warnings. The old check did not run with pnpm, and developers often missed its warnings during start and build.
 
-**Migration**: Run `sku lint` to see duplicate-package warnings. Set `skuSkipValidatePeerDeps` in `package.json` to suppress them.
+**Migration**: Run `sku lint` to see duplicate-package warnings. To turn them off, set `skuSkipValidatePeerDeps` in `package.json`.

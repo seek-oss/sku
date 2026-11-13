@@ -1,5 +1,97 @@
 # sku
 
+## 16.7.0
+
+### Minor Changes
+
+- Managed Data Mode SSR: Add a `csp` option with peer `enforced` and `reportOnly` policies that can each extend individual CSP directives ([#1755](https://github.com/seek-oss/sku/pull/1755))
+
+  Each policy is `true` (sku's directives with nothing extra) or an object with `extraSources` and `reportTo`.
+  Leave a policy out to turn it off.
+  The policies don't inherit from each other.
+
+  `extraSources` is a map from directive name to extra sources.
+  The supported directives are `script-src`, `style-src`, `img-src`, `font-src`, `connect-src`, `frame-src`, `media-src`, `worker-src`, `manifest-src` and `form-action`.
+  A supported directive that sku doesn't emit by default is emitted as `'self'` plus the configured sources.
+
+  `reportTo` is a URL.
+  sku names the reporting endpoints `csp` and `csp-report-only`.
+
+  **EXAMPLE USAGE**:
+
+  ```ts
+  export default {
+    bundler: 'vite',
+    buildType: 'ssr',
+    csp: {
+      enforced: {
+        extraSources: {
+          'connect-src': ['https://browser-intake-datadoghq.com'],
+        },
+        reportTo: 'https://csp.example.com/report',
+      },
+    },
+  } satisfies SkuConfig;
+  ```
+
+  **BREAKING CHANGE (experimental SSR only)**:
+
+  The flat `csp*` options are no longer supported with `buildType: 'ssr'` and fail config validation.
+  Move each one to its `csp` replacement:
+
+  | Flat option                        | `csp` replacement                           |
+  | ---------------------------------- | ------------------------------------------- |
+  | `cspEnabled: true`                 | `csp.enforced`                              |
+  | `cspExtraScriptSrcHosts`           | `csp.enforced.extraSources['script-src']`   |
+  | `cspReportTo`                      | `csp.enforced.reportTo`                     |
+  | `cspReportOnlyEnabled: true`       | `csp.reportOnly`                            |
+  | `cspReportOnlyExtraScriptSrcHosts` | `csp.reportOnly.extraSources['script-src']` |
+  | `cspReportOnlyReportTo`            | `csp.reportOnly.reportTo`                   |
+  | `cspDelivery`                      | Remove it. SSR always uses headers          |
+
+  `reportTo` only accepts a URL.
+  Replace an endpoint name or an `[endpoint, url]` tuple with its URL.
+
+  The report-only policy no longer defaults to the enforced policy's script hosts and `reportTo`.
+  If you relied on that, set the same values on both policies:
+
+  ```diff
+  +const policy = {
+  +  extraSources: { 'script-src': ['https://cdn.example.com'] },
+  +  reportTo: 'https://csp.example.com/report',
+  +};
+  +
+   export default {
+     bundler: 'vite',
+     buildType: 'ssr',
+  -  cspEnabled: true,
+  -  cspExtraScriptSrcHosts: ['https://cdn.example.com'],
+  -  cspReportTo: 'https://csp.example.com/report',
+  -  cspReportOnlyEnabled: true,
+  +  csp: { enforced: policy, reportOnly: policy },
+   } satisfies SkuConfig;
+  ```
+
+  Static and webpack apps keep using the flat options, and fail config validation if they set `csp`.
+
+- Vite SSR: `sku build` bundles dependencies into `dist/server`, so the production server starts with `node server.mjs` without `node_modules` ([#1753](https://github.com/seek-oss/sku/pull/1753))
+
+  The server entry is now `dist/server/server.mjs` (previously `dist/server/server.js`), and its chunks use the `.chunk.mjs` extension, so Node always loads them as ES modules regardless of any `package.json` they are deployed under.
+  Update any deploy or start scripts that run `node dist/server/server.js`.
+
+### Patch Changes
+
+- Fix `pnpm-plugin-sku` being reported as missing when the app is not at the workspace root ([#1757](https://github.com/seek-oss/sku/pull/1757))
+
+  The check now runs from the workspace root, so it behaves the same on pnpm 11 and pnpm 12.
+
+- Fix rare cases where Vanilla Extract packages are missing from the server build ([#1737](https://github.com/seek-oss/sku/pull/1737))
+
+- Managed Data Mode SSR: Run the language chunk and route modules before hydrating in production ([#1756](https://github.com/seek-oss/sku/pull/1756))
+
+  Previously the production client only preloaded the Vocab language chunk and never ran it, so translated pages hydrated without their messages and threw React error #418.
+  The client now imports every module the server rendered the page with before calling `hydrateRoot`.
+
 ## 16.6.1
 
 ### Patch Changes

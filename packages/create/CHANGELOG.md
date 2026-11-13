@@ -1,5 +1,11 @@
 # @sku-lib/create
 
+## 1.5.0
+
+### Minor Changes
+
+- Scaffold new apps with `pnpm@12.20.0` ([#1757](https://github.com/seek-oss/sku/pull/1757))
+
 ## 1.4.1
 
 ### Patch Changes

@@ -207,7 +207,8 @@ describe('checkDuplicatePackages', () => {
 
   const captureOutput = () => {
     const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-    return () => logSpy.mock.calls.flat().join('\n');
+    // Collapsing whitespace to make assertions stable.
+    return () => logSpy.mock.calls.flat().join('\n').replace(/\s+/g, ' ');
   };
 
   const duplicateReactFixture = (extra: Record<string, unknown> = {}) => ({

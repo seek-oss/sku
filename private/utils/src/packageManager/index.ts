@@ -17,4 +17,3 @@ export {
   type GetAddCommandOptions,
   type SupportedPackageManager,
 } from './packageManager.ts';
-export { skuPackageManager } from './skuPackageManager.ts';

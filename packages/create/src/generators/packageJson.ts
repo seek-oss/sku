@@ -1,10 +1,11 @@
 import { writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { type Template, isViteBasedTemplate } from '../types/index.js';
-import {
-  skuPackageManager,
-  type SupportedPackageManager,
-} from '@sku-private/utils';
+import type { SupportedPackageManager } from '@sku-private/utils';
+
+// Deliberately a separate constant from the root `package.json@packageManager` field
+// so that we don't forget to add a changeset.
+export const scaffoldedAppPnpmVersion = 'pnpm@12.20.0';
 
 export interface PackageJsonOptions {
   projectName: string;
@@ -31,9 +32,9 @@ export const generatePackageJson = async (
       format: 'sku format',
       lint: 'sku lint',
     },
-    // Pin to sku's pnpm. The running CLI or a registry tag can disagree
-    // with this version and make install try to switch.
-    ...(packageManager === 'pnpm' ? { packageManager: skuPackageManager } : {}),
+    ...(packageManager === 'pnpm'
+      ? { packageManager: scaffoldedAppPnpmVersion }
+      : {}),
   };
 
   const packageJsonPath = join(targetPath, 'package.json');

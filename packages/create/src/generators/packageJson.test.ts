@@ -1,7 +1,9 @@
 import { describe, it } from 'vitest';
 import { createFixture } from 'fs-fixture';
-import { generatePackageJson } from './packageJson.js';
-import { skuPackageManager } from '@sku-private/utils';
+import {
+  generatePackageJson,
+  scaffoldedAppPnpmVersion,
+} from './packageJson.js';
 import { normalizePackageManagerVersion } from '@sku-private/test-utils';
 
 describe('generatePackageJson', () => {
@@ -144,7 +146,7 @@ describe('generatePackageJson', () => {
       await fixture.readFile('package.json', 'utf8'),
     );
 
-    expect(packageJsonContent.packageManager).toBe(skuPackageManager);
+    expect(packageJsonContent.packageManager).toBe(scaffoldedAppPnpmVersion);
 
     packageJsonContent.packageManager = normalizePackageManagerVersion(
       packageJsonContent.packageManager,
@@ -153,7 +155,7 @@ describe('generatePackageJson', () => {
     expect(packageJsonContent).toMatchInlineSnapshot(`
       {
         "name": "my-app",
-        "packageManager": "pnpm@11.VERSION_IGNORED",
+        "packageManager": "pnpm@12.VERSION_IGNORED",
         "private": true,
         "scripts": {
           "build": "sku build",

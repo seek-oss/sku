@@ -2,7 +2,14 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { cwd, getWhyCommand } from '@sku-private/utils';
-import { accent, banner, caution, strong } from '@sku-private/utils/console';
+import {
+  accent,
+  accentLight,
+  banner,
+  caution,
+  critical,
+  strong,
+} from '@sku-private/utils/console';
 import { createDebug } from 'obug';
 import semver from 'semver';
 
@@ -123,9 +130,7 @@ const formatFixAdvice = (
 };
 
 /**
- * Warn-only lint check for duplicate and mismatched package versions. Always
- * resolves with `exitCode: 0`, is skipped when the app sets
- * `skuSkipValidatePeerDeps`, and swallows dependency-resolution errors.
+ * Warn-only lint check for duplicate and mismatched package versions.
  */
 export const checkDuplicatePackages = async ({
   rootDir = cwd(),
@@ -143,6 +148,7 @@ export const checkDuplicatePackages = async ({
       debug('skuSkipValidatePeerDeps set, skipping duplicate package check');
       return { exitCode: 0 };
     }
+    console.log(accentLight(`Checking for dependency issues`));
 
     const depGraph = await extractDependencyGraph(rootDir, {
       includeDevDependencies: true,
@@ -182,10 +188,10 @@ export const checkDuplicatePackages = async ({
     }
 
     if (messages.length > 0) {
-      banner('caution', 'Warning: Duplicate packages detected', messages);
+      banner('caution', 'Warning: Dependency issues detected', messages);
     }
   } catch (e) {
-    debug('Duplicate package check failed, skipping', e);
+    console.error(critical('Dependency issue check failed:'), e);
   }
 
   return { exitCode: 0 };

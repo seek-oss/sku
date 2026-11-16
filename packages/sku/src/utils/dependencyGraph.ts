@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { existsSync, realpathSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 
 import type { PackageJson } from 'type-fest';
 import { createDebug } from 'obug';
@@ -36,7 +36,7 @@ const loadPackage = async (packageJsonPath: string) =>
 /**
  * Returns the directory of `dep` as Node would resolve it from `fromDir`.
  */
-const resolvePackageDir = (dep: string, fromDir: string) => {
+const resolvePackageDir = async (dep: string, fromDir: string) => {
   // Avoids `require.resolve`, which throws for packages whose `exports` omit `./package.json`.
   const lookupPaths =
     createRequire(path.join(fromDir, 'package.json')).resolve.paths(
@@ -47,7 +47,7 @@ const resolvePackageDir = (dep: string, fromDir: string) => {
     const packageDir = path.join(lookupPath, dep);
     if (existsSync(path.join(packageDir, 'package.json'))) {
       // pnpm symlinks copies out of its store, so key each copy by its real path
-      return realpathSync(packageDir);
+      return fs.realpath(packageDir);
     }
   }
 
@@ -60,8 +60,7 @@ const analyseDependency = async (
   rootDir: string,
   depGraph: DepGraph,
 ) => {
-  const packageDir = resolvePackageDir(dep, rootDir);
-  const packageJson = await loadPackage(path.join(packageDir, 'package.json'));
+  const packageDir = await resolvePackageDir(dep, rootDir);
 
   // Checks if the package is already in the graph. If so, add it to the list of dependents.
   const depGraphEntry = depGraph.get(packageDir);
@@ -71,12 +70,19 @@ const analyseDependency = async (
     return;
   }
 
-  depGraph.set(packageDir, {
-    name: dep,
-    version: packageJson.version,
-    peerDependencies: packageJson.peerDependencies,
-    dependents: [dependent],
-  });
+  // Claimed before reading `package.json` so concurrent edges to this copy only read it once
+  const entry: DepGraphEntry = { name: dep, dependents: [dependent] };
+  depGraph.set(packageDir, entry);
+
+  let packageJson: PackageJson;
+  try {
+    packageJson = await loadPackage(path.join(packageDir, 'package.json'));
+  } catch (e) {
+    depGraph.delete(packageDir);
+    throw e;
+  }
+  entry.version = packageJson.version;
+  entry.peerDependencies = packageJson.peerDependencies;
 
   const dependencies = Object.keys(packageJson.dependencies ?? {});
   const peerDependencies = Object.keys(packageJson.peerDependencies ?? {});

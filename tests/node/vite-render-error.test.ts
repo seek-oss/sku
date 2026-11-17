@@ -44,7 +44,8 @@ describe('vite render error', () => {
     const stderr = aggregateStdErr(build.stderrArr);
 
     expect(stderr).toMatchInlineSnapshot(`
-      "Error rendering HTML for route "/"
+      "[BABEL] Note: The code generator has deoptimised the styling of {cwd}/node_modules/react-dom/cjs/react-dom-client.production.js as it exceeds the max of 500KB.
+      Error rendering HTML for route "/"
       Error: Home page error
           at HomePage ({cwd}/fixtures/vite-render-error/src/HomePage.tsx:2:9)
           at renderWithHooks ({cwd}/node_modules/react-dom/cjs/react-dom-server-legacy.node.production.js:{line}:{column})
@@ -67,7 +68,8 @@ describe('vite render error', () => {
     const stderr = aggregateStdErr(build.stderrArr);
 
     expect(stderr).toMatchInlineSnapshot(`
-      "Error importing sku render entrypoint
+      "[BABEL] Note: The code generator has deoptimised the styling of {cwd}/node_modules/react-dom/cjs/react-dom-client.production.js as it exceeds the max of 500KB.
+      Error importing sku render entrypoint
       Error: Render entrypoint error
           at <anonymous> ({cwd}/fixtures/vite-render-error/src/renderError.tsx:7:7)
           at async file://{cwd}/packages/sku/dist/vite/prerender-worker.mjs:{line}:{column}"

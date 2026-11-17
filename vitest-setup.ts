@@ -17,11 +17,9 @@ expect.addSnapshotSerializer(appSnapshotSerializer);
 expect.addSnapshotSerializer(htmlSnapshotSerializer);
 expect.addSnapshotSerializer(cssSnapshotSerializer);
 
-afterEach(({ task }) => {
-  cleanup(task);
-});
+afterEach(({ task }) => cleanup(task));
 
-afterAll(() => {
-  cleanup();
-  closeBrowser();
+afterAll(async () => {
+  await cleanup();
+  await closeBrowser();
 });

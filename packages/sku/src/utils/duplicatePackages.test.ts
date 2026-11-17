@@ -22,7 +22,7 @@ const summarise = ({
   ),
   versionMismatches: versionMismatches.map(
     ({ copy, peer, expectedRange }) =>
-      `${copy.name}@${copy.version} expected ${peer.name} ${expectedRange}, resolved ${peer.version}`,
+      `${copy.name}@${copy.version} expected ${peer.name} ${expectedRange}, resolved to ${peer.version}`,
   ),
 });
 
@@ -123,7 +123,7 @@ describe('classifyDuplicatePackages', () => {
     );
 
     expect(summarise(report).versionMismatches).toEqual([
-      '@seek/lib@1.0.0 expected braid-design-system ^31.0.0, resolved 32.0.0',
+      '@seek/lib@1.0.0 expected braid-design-system ^31.0.0, resolved to 32.0.0',
     ]);
   });
 
@@ -173,7 +173,7 @@ describe('classifyDuplicatePackages', () => {
       }),
     );
     expect(summarise(mismatched).versionMismatches).toEqual([
-      'react-dom@19.1.0 expected react 19.1.0, resolved 19.1.1',
+      'react-dom@19.1.0 expected react 19.1.0, resolved to 19.1.1',
     ]);
 
     const matching = classifyDuplicatePackages(

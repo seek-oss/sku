@@ -16,7 +16,7 @@ When more than one version of a checked package is reachable from the app's `dep
 
 #### Scenario: Different version in devDependencies
 
-- **WHEN** the app has `@vanilla-extract/css` in `devDependencies` and one of its dependencies resolves a different version
+- **WHEN** the app has `@vanilla-extract/css` in `devDependencies` and one of its dependencies resolves to a different version
 - **THEN** lint prints a warning with both versions
 
 #### Scenario: Two versions of a compile package

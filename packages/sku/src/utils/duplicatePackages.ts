@@ -181,7 +181,7 @@ export const checkDuplicatePackages = async ({
       });
       messages.push(
         [
-          `${strong(`${copy.name}@${copy.version}`)} expects ${strong(peer.name)} ${caution(expectedRange)} but resolves ${caution(peer.version)} at ${peer.directory} (via ${formatChain(copy.directory, depGraph)}).`,
+          `${strong(`${copy.name}@${copy.version}`)} expects ${strong(peer.name)} ${caution(expectedRange)} but resolves to ${caution(peer.version)} at ${peer.directory} (via ${formatChain(copy.directory, depGraph)}).`,
           formatFixAdvice(copy, peer, expectedRange),
           formatWhyHint(peer.name),
         ].join('\n'),

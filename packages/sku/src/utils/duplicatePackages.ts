@@ -164,7 +164,7 @@ export const checkDuplicatePackages = async ({
       provider.count('lint.duplicate_package', { package: name });
       messages.push(
         [
-          `${strong(name)} resolves at more than one version in your dependency graph:`,
+          `${strong(name)} resolves to more than one version in your dependency graph:`,
           ...group.map(
             (copy) =>
               `- ${strong(name)}@${strong(copy.version)} at ${copy.directory} (via ${formatChain(copy.directory, depGraph)})`,

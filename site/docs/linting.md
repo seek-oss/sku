@@ -40,7 +40,7 @@ Commands that resolve `#` imports at runtime will fail when out of sync with `pa
 
 ## Dependency issues
 
-`sku lint` warns when `react`, `react-dom`, `braid-design-system`, `@vanilla-extract/css` or one of your [`compilePackages`] resolves at more than one version in your dependency graph.
+`sku lint` warns when `react`, `react-dom`, `braid-design-system`, `@vanilla-extract/css` or one of your [`compilePackages`] resolves to more than one version in your dependency graph.
 It also warns when `react` and `react-dom` are not installed with matching versions, and when a peer dependency between these packages resolves outside its range.
 Each warning shows how each copy got into your dependencies, and the command to investigate it, such as `pnpm why -r`.
 

@@ -43,7 +43,7 @@ Each time package A resolves package B, the walk adds A to B's `dependents`. So 
 
 A pure function, the classifier, groups copies of checked packages by name and finds three kinds of problem:
 
-- Duplicate versions: a checked package resolves at two or more versions. Copies in different folders at the same version (pnpm peer variants) are not reported.
+- Duplicate versions: a checked package resolves to two or more versions. Copies in different folders at the same version (pnpm peer variants) are not reported.
 - Peer version mismatch: the classifier compares each peer dependency between checked packages with the copy that it resolves, one copy at a time. The fix advice depends on whether the resolved version is above or below the range. The classifier skips ranges that are not semver, such as `workspace:*`, and counts a prerelease inside a range as a match (`includePrerelease`). The legacy check merged copies with the same name, and it fired only when both packages were already duplicated.
 - React pair mismatch: `react-dom` must load a `react` at its own exact version, whatever its declared range says. The classifier compares each `react-dom` copy with the `react` copy that it resolves, so an unrelated duplicate `react` does not cause a pair warning. That duplicate gets its own warning.
 

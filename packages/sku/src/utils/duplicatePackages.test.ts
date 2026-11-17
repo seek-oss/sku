@@ -27,7 +27,7 @@ const summarise = ({
 });
 
 describe('classifyDuplicatePackages', () => {
-  it('reports a watched package resolved at more than one version', () => {
+  it('reports a watched package resolved to more than one version', () => {
     const report = classifyDuplicatePackages(
       graph({
         '/lib-a': { name: 'lib-a', version: '1.0.0', dependents: ['ROOT'] },

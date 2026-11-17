@@ -351,9 +351,9 @@ describe('checkDuplicatePackages', () => {
     ).resolves.toEqual({ exitCode: 0 });
 
     const output = getOutput();
-    expect(output).toContain('expected to find');
+    expect(output).toContain('but resolves');
     expect(output).toContain('to update its peer dependency');
-    expect(output).toContain('must be installed at the same version');
+    expect(output).toContain('must be installed with matching versions');
   });
 
   it('does not warn when skuSkipValidatePeerDeps is set', async () => {

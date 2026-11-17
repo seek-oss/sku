@@ -121,7 +121,7 @@ const formatFixAdvice = (
   expectedRange: string,
 ) => {
   if (requiresExactVersion(copy.name, peer.name)) {
-    return `${strong('react')} and ${strong('react-dom')} must be installed at the same version.`;
+    return `${strong('react')} and ${strong('react-dom')} must be installed with matching versions.`;
   }
 
   return semver.gtr(peer.version, expectedRange, semverOptions)
@@ -164,7 +164,7 @@ export const checkDuplicatePackages = async ({
       provider.count('duplicate_compile_package', { compile_package: name });
       messages.push(
         [
-          `${strong(name)} is resolved in your dependency graph at more than one version:`,
+          `${strong(name)} resolves at more than one version in your dependency graph:`,
           ...group.map(
             (copy) =>
               `- ${strong(name)}@${strong(copy.version)} at ${copy.directory} (via ${formatChain(copy.directory, depGraph)})`,
@@ -180,7 +180,7 @@ export const checkDuplicatePackages = async ({
       });
       messages.push(
         [
-          `${strong(`${copy.name}@${copy.version}`)} expected to find ${strong(peer.name)} ${caution(expectedRange)} but resolved ${caution(peer.version)} at ${peer.directory} (via ${formatChain(copy.directory, depGraph)}).`,
+          `${strong(`${copy.name}@${copy.version}`)} expects ${strong(peer.name)} ${caution(expectedRange)} but resolves ${caution(peer.version)} at ${peer.directory} (via ${formatChain(copy.directory, depGraph)}).`,
           formatFixAdvice(copy, peer, expectedRange),
           formatWhyHint(peer.name),
         ].join('\n'),
@@ -191,7 +191,7 @@ export const checkDuplicatePackages = async ({
       banner('caution', 'Warning: Dependency issues detected', messages);
     }
   } catch (e) {
-    console.error(critical('Dependency issue check failed:'), e);
+    console.error(critical('Failed to check for dependency issues:'), e);
   }
 
   return { exitCode: 0 };

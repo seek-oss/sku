@@ -21,8 +21,8 @@ type MetricName =
   | 'start.initial'
   | 'start.rebuild'
   | 'certificate.generate'
-  | 'duplicate_compile_package'
-  | 'peer_dep_version_mismatch'
+  | 'lint.duplicate_package'
+  | 'lint.peer_mismatch'
   | 'unnecessary_polyfill';
 type TagMap = Record<string, string | number | boolean>;
 
@@ -139,7 +139,10 @@ const provider: TelemetryProvider = {
   },
   addGlobalTags: (tagMap) => registerGlobalTags(() => tagMap),
   close: async () => {
-    resolveProvider();
+    // Resolving here would show the "not installed" banner for nothing
+    if (!providerResolved) {
+      return;
+    }
     await activeProvider.close();
   },
 };

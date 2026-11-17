@@ -16,10 +16,7 @@ import {
   getRouteWithLanguage,
   getValidLanguagesForRoute,
 } from '../../../utils/language-utils.js';
-import {
-  configureProject,
-  validatePeerDeps,
-} from '../../../utils/configure.js';
+import { configureProject } from '../../../utils/configure.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { serverUrls } from '@sku-private/utils';
 import { accent, critical, strong } from '@sku-private/utils/console';
@@ -52,7 +49,6 @@ export const serveAction = async ({
     distSubfolders,
   } = skuContext;
   await configureProject(skuContext);
-  validatePeerDeps(skuContext);
   provider.count('serve');
 
   const targetFolderExists = await exists(paths.target);

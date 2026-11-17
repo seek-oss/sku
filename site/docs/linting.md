@@ -38,5 +38,22 @@ When you configure the [`pathAliases`] sku option, sku mirrors the aliases to yo
 
 Commands that resolve `#` imports at runtime will fail when out of sync with `pathAliases` and direct you to run `sku format`.
 
+## Dependency issues
+
+`sku lint` warns when `react`, `react-dom`, `braid-design-system`, `@vanilla-extract/css` or one of your [`compilePackages`] resolves to more than one version in your dependency graph.
+It also warns when `react` and `react-dom` are not installed with matching versions, and when a peer dependency between these packages resolves outside its range.
+Each warning shows how each copy got into your dependencies, and the command to investigate it, such as `pnpm why -r`.
+
+These warnings never make `sku lint` fail, and they only appear when you run `sku lint` without file paths.
+
+To turn them off, set `skuSkipValidatePeerDeps` in your `package.json`:
+
+```json
+{
+  "skuSkipValidatePeerDeps": true
+}
+```
+
 [`eslintIgnore`]: ./configuration#eslintignore
 [`pathAliases`]: ./configuration#pathaliases
+[`compilePackages`]: ./configuration#compilepackages

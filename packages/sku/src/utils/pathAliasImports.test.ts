@@ -1,4 +1,12 @@
-import { describe, it, afterEach, vi } from 'vitest';
+import {
+  describe,
+  it,
+  afterEach,
+  beforeEach,
+  vi,
+  type MockInstance,
+} from 'vitest';
+
 import { createFixture } from 'fs-fixture';
 import { setCwd } from '@sku-private/utils';
 
@@ -12,6 +20,12 @@ const originalCwd = process.cwd();
 
 const toPackageJson = (contents: Record<string, unknown>) =>
   `${JSON.stringify(contents, null, 2)}\n`;
+
+let logSpy: MockInstance<typeof console.log>;
+
+beforeEach(() => {
+  logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
+});
 
 describe('syncPathAliasImports', () => {
   afterEach(() => {
@@ -133,7 +147,6 @@ describe('checkPathAliasImports', () => {
 
   it('fails when an entry is missing, without writing', async ({ expect }) => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     const contents = toPackageJson({ name: 'my-app', private: true });
     await using fixture = await createFixture({ 'package.json': contents });
@@ -160,7 +173,6 @@ describe('checkPathAliasImports', () => {
     await using fixture = await createFixture({ 'package.json': contents });
     setCwd(fixture.path);
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await expect(checkPathAliasImports({})).resolves.toEqual({ exitCode: 1 });
 
@@ -181,7 +193,6 @@ describe('checkPathAliasImports', () => {
     await using fixture = await createFixture({ 'package.json': contents });
     setCwd(fixture.path);
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    vi.spyOn(console, 'log').mockImplementation(() => {});
 
     await expect(
       checkPathAliasImports({
@@ -214,7 +225,6 @@ describe('assertPathAliasImports', () => {
 
   it('exits with a non-zero exit code when out of sync', async ({ expect }) => {
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-    const logSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     const exitSpy = vi
       .spyOn(process, 'exit')
       .mockImplementation(() => undefined as never);

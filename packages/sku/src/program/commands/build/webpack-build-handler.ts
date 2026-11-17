@@ -14,10 +14,7 @@ import createHtmlRenderPlugin from '../../../services/webpack/config/plugins/cre
 import { makeWebpackConfig } from '../../../services/webpack/config/webpack.config.js';
 import provider from '../../../services/telemetry/index.js';
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
-import {
-  configureProject,
-  validatePeerDeps,
-} from '../../../utils/configure.js';
+import { configureProject } from '../../../utils/configure.js';
 import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
@@ -36,7 +33,6 @@ export const webpackBuildHandler = async ({
   const { isLibrary, cspEnabled, paths, distSubfolders } = skuContext;
   await configureProject(skuContext);
   await assertPathAliasImports(skuContext.pathAliases);
-  validatePeerDeps(skuContext);
   try {
     if (distSubfolders) {
       await assertNoPublicHtmlFiles(skuContext);

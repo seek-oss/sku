@@ -3,6 +3,7 @@ export type LintResult = { exitCode: number | undefined };
 export type LintCheck = {
   name: string;
   run: () => Promise<LintResult>;
+  skip?: boolean;
 };
 
 /**
@@ -12,7 +13,11 @@ export type LintCheck = {
 export const runLintChecks = async (checks: LintCheck[]): Promise<boolean> => {
   let hasFailure = false;
 
-  for (const { run } of checks) {
+  for (const { run, skip = false } of checks) {
+    if (skip) {
+      continue;
+    }
+
     const { exitCode } = await run();
     if (exitCode !== 0) {
       hasFailure = true;

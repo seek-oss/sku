@@ -2,9 +2,11 @@ import { check as esLintCheck } from '../../../services/eslint/runESLint.js';
 import { check as prettierCheck } from '../../../services/prettier.js';
 import { runTsc } from '../../../services/typescript/runTsc.js';
 
+import provider from '../../../services/telemetry/index.js';
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { configureProject } from '../../../utils/configure.js';
 import { checkPathAliasImports } from '../../../utils/pathAliasImports.js';
+import { checkDuplicatePackages } from '../../../utils/duplicatePackages.js';
 import { runLintChecks, type LintCheck } from '../../../utils/runLintChecks.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { accentLight, critical } from '@sku-private/utils/console';
@@ -37,9 +39,23 @@ export const lintAction = async (
       name: 'ESLint',
       run: () => esLintCheck({ paths: pathsToCheck }),
     },
+    {
+      name: 'Duplicate packages',
+      // Only run on full lint runs
+      skip: pathsToCheck !== undefined,
+      run: async () =>
+        checkDuplicatePackages({
+          extraPackages: await skuContext.paths.compilePackages(),
+        }),
+    },
   ];
 
-  const hasFailure = await runLintChecks(checks);
+  let hasFailure: boolean;
+  try {
+    hasFailure = await runLintChecks(checks);
+  } finally {
+    await provider.close();
+  }
 
   if (hasFailure) {
     console.error(critical('Linting failed'));

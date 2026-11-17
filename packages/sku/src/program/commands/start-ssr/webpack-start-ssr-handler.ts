@@ -18,10 +18,7 @@ import { openBrowser } from '../../../openBrowser.js';
 import { createServerManager } from '../../../services/serverManager.js';
 
 import { watchVocabCompile } from '../../../services/vocab/runVocab.js';
-import {
-  configureProject,
-  validatePeerDeps,
-} from '../../../utils/configure.js';
+import { configureProject } from '../../../utils/configure.js';
 import { assertPathAliasImports } from '../../../utils/pathAliasImports.js';
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
@@ -69,7 +66,6 @@ export const webpackStartSsrHandler = async ({
   const { type } = requireFromCwd('./package.json');
   await configureProject(skuContext);
   await assertPathAliasImports(skuContext.pathAliases);
-  validatePeerDeps(skuContext);
   await watchVocabCompile(skuContext);
 
   const devServerPort = await allocatePort({

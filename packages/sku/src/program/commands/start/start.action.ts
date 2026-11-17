@@ -1,10 +1,7 @@
 import type { StatsChoices } from '../../options/stats.option.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import type { Command } from 'commander';
-import {
-  configureProject,
-  validatePeerDeps,
-} from '../../../utils/configure.js';
+import { configureProject } from '../../../utils/configure.js';
 import { watchVocabCompile } from '../../../services/vocab/runVocab.js';
 import { checkHosts } from '../../../context/hosts.js';
 import { validatePolyfills } from '../../../utils/polyfillWarnings.js';
@@ -38,7 +35,6 @@ export const startAction = async (
   ]);
 
   await checkHosts(skuContext);
-  validatePeerDeps(skuContext);
   validatePolyfills(skuContext.polyfills);
 
   if (skuContext.bundler === 'vite') {

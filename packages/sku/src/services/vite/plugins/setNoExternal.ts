@@ -2,7 +2,7 @@ import type { Plugin } from 'vite';
 import {
   extractDependencyGraph,
   getSsrExternalsForCompiledDependency,
-} from '../helpers/config/dependencyGraph.js';
+} from '../../../utils/dependencyGraph.js';
 import type { SkuContext } from '../../../context/createSkuContext.js';
 import { makePluginName } from '../helpers/makePluginName.js';
 

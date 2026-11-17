@@ -11,6 +11,7 @@ Duplicate versions of `react`, `react-dom`, `braid-design-system`, or `@vanilla-
 - The check uses sku's dependency graph walk, which works with pnpm, npm, and yarn. The walk now records versions and peer dependencies.
 - The walk no longer skips packages whose `exports` field leaves out `./package.json`. This also adds missing Vite `noExternal` entries for packages that depend on Vanilla Extract.
 - `skuSkipValidatePeerDeps` still turns the check off.
+- Telemetry counts problems with new `lint.duplicate_package` and `lint.peer_mismatch` events. The legacy `duplicate_compile_package` and `peer_dep_version_mismatch` events are retired, and the metrics dashboard needs updating after the release. `sku lint` now closes the telemetry provider so the counts are sent.
 - Remove `validatePeerDeps` and its calls from the start, build, and serve commands. Lint becomes the only duplicate check.
 
 Non-goals: lint or build failures, and analysis of the bundle or import graph.
@@ -28,4 +29,4 @@ Non-goals: lint or build failures, and analysis of the bundle or import graph.
 ## Impact
 
 - Code: the `sku lint` command, the dependency graph helper (moved to `utils/`), `validatePeerDeps` and its calls in the start, build, and serve handlers, and the `configure` wrapper. The walk fix also changes Vite `noExternal`.
-- No new dependencies and no public API changes. A minor changeset covers the lint check, and a patch changeset covers the `noExternal` fix. `site/docs/linting.md` gets a section on the warnings and the `skuSkipValidatePeerDeps` flag.
+- No new dependencies and no public API changes. Telemetry event names change. A minor changeset covers the lint check, and a patch changeset covers the `noExternal` fix. `site/docs/linting.md` gets a section on the warnings and the `skuSkipValidatePeerDeps` flag.

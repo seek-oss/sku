@@ -64,3 +64,10 @@ These tasks supersede parts of 1.2, 2.3, 3.2, 3.3, 4.1, 8.1, and 8.2.
 - [x] 9.7 Sort copies so warnings print in a stable order
 - [x] 9.8 Test packages that hide `package.json`, devDependency walking, pnpm store symlinks, and the per-copy react check
 - [x] 9.9 Update the proposal, design, spec delta, and changeset; add a patch changeset for the Vite `noExternal` fix
+
+## 10. Telemetry
+
+These tasks supersede the event names in 4.2 and 8.3.
+
+- [x] 10.1 Replace `duplicate_compile_package` and `peer_dep_version_mismatch` in `MetricName` with `lint.duplicate_package` and `lint.peer_mismatch`, and emit them from the check with `package` and `peer` tags
+- [x] 10.2 Make `provider.close()` do nothing when no metric was recorded, and close the provider at the end of `sku lint` before it exits

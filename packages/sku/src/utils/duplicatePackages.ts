@@ -161,7 +161,7 @@ export const checkDuplicatePackages = async ({
 
     for (const group of duplicates) {
       const { name } = group[0];
-      provider.count('duplicate_compile_package', { compile_package: name });
+      provider.count('lint.duplicate_package', { package: name });
       messages.push(
         [
           `${strong(name)} resolves at more than one version in your dependency graph:`,
@@ -175,8 +175,9 @@ export const checkDuplicatePackages = async ({
     }
 
     for (const { copy, peer, expectedRange } of versionMismatches) {
-      provider.count('peer_dep_version_mismatch', {
-        compile_package: copy.name,
+      provider.count('lint.peer_mismatch', {
+        package: copy.name,
+        peer: peer.name,
       });
       messages.push(
         [

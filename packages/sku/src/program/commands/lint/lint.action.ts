@@ -2,6 +2,7 @@ import { check as esLintCheck } from '../../../services/eslint/runESLint.js';
 import { check as prettierCheck } from '../../../services/prettier.js';
 import { runTsc } from '../../../services/typescript/runTsc.js';
 
+import provider from '../../../services/telemetry/index.js';
 import { runVocabCompile } from '../../../services/vocab/runVocab.js';
 import { configureProject } from '../../../utils/configure.js';
 import { checkPathAliasImports } from '../../../utils/pathAliasImports.js';
@@ -49,7 +50,12 @@ export const lintAction = async (
     },
   ];
 
-  const hasFailure = await runLintChecks(checks);
+  let hasFailure: boolean;
+  try {
+    hasFailure = await runLintChecks(checks);
+  } finally {
+    await provider.close();
+  }
 
   if (hasFailure) {
     console.error(critical('Linting failed'));

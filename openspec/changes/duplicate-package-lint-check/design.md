@@ -57,7 +57,11 @@ This is the same list that sku uses to decide what to compile. If sku does not f
 
 ### 4. Reporting, telemetry, and opt-out
 
-Each warning shows the package, each version and its folder, one dependency chain per copy (for example `your app > lib-a > react`), and the `why` command for the package manager. `getWhyCommand()` returns `pnpm why -r` with pnpm. The wording says "resolved in your dependency graph", not "in your bundle". Telemetry counts problems with the legacy `duplicate_compile_package` and `peer_dep_version_mismatch` events.
+Each warning shows the package, each version and its folder, one dependency chain per copy (for example `your app > lib-a > react`), and the `why` command for the package manager. `getWhyCommand()` returns `pnpm why -r` with pnpm. The wording says "resolved in your dependency graph", not "in your bundle".
+
+Telemetry counts problems with two new events: `lint.duplicate_package`, tagged with `package`, and `lint.peer_mismatch`, tagged with `package` and `peer`. We retire the legacy `duplicate_compile_package` and `peer_dep_version_mismatch` events instead of reusing them. They counted start and build runs, not lint runs, so a shared series would mix two sources while consumers upgrade. The old names also no longer fit, because the check covers packages that are not compile packages.
+
+`sku lint` closes the telemetry provider after its checks and before it exits, so the counts are sent. `provider.close()` does nothing if no metric was recorded, so lint does not load `@seek/sku-telemetry` or show its "not installed" banner when the check finds no problems.
 
 The check reads `skuSkipValidatePeerDeps` from the root `package.json` itself. The flag keeps its name and meaning without the legacy code.
 
@@ -87,9 +91,10 @@ The walk does not follow `optionalDependencies`. Packages that are reachable onl
 ## Migration Plan
 
 1. Ship without a flag. In one minor release, lint gets the warning and start and build lose the legacy warnings.
-2. Use telemetry to decide whether sku needs a more visible banner. The check still never fails.
-3. To roll back, revert the change. Consumers do not need to change anything.
+2. After the release, replace the metrics dashboard panels that read the legacy events with panels for `lint.duplicate_package` and `lint.peer_mismatch`.
+3. Use telemetry to decide whether sku needs a more visible banner. The check still never fails.
+4. To roll back, revert the change. Consumers do not need to change anything.
 
 ## Open Questions
 
-None block this change. Lint never closes the telemetry provider, but the build handlers do. Check whether `@seek/sku-telemetry` buffers counts before relying on lint telemetry.
+None.

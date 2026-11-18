@@ -373,9 +373,6 @@ importers:
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.3.0(@types/react@19.3.0)
-      '@vanilla-extract/css':
-        specifier: ^1.0.0
-        version: 1.21.3(babel-plugin-macros@3.1.0)
       assert:
         specifier: ^2.0.0
         version: 2.1.0

@@ -78,7 +78,6 @@ export const createConfig = (
           /\0rolldown\/runtime\.js/,
           /[\\/]node_modules[\\/](?:react|react-dom|scheduler)[\\/]/,
         ],
-        parallel: true,
       }),
       vanillaExtractPlugin({
         unstable_pluginFilter: ({ name }) =>

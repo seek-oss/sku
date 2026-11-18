@@ -75,8 +75,6 @@
       "ignoreDependencies": [
         // It definitely is used, not sure why knip thinks otherwise
         "assert",
-        // Used by the braid dep
-        "@vanilla-extract/css",
       ],
     },
     "fixtures/braid-design-system": {

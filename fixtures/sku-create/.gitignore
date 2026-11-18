@@ -1,4 +1,3 @@
-new-project
-pnpm-lock.yaml
-pnpm-workspace.yaml
-new-project-*
+*
+!package.json
+!README.md

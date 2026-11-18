@@ -17,6 +17,7 @@ export default defineConfig({
     exclude: [...defaultExclude, '**/fixtures/**'],
     hookTimeout: TEST_TIMEOUT + 1000,
     maxWorkers: '80%',
+    pool: 'threads',
     restoreMocks: true,
     retry: 1,
     // Increasing the number so functions using TEST_TIMEOUT can timeout before the test does.
@@ -25,18 +26,6 @@ export default defineConfig({
       SKU_CSP_NONCE: 'RANDOM_NONCE',
     },
     projects: [
-      {
-        test: {
-          name: 'node',
-          setupFiles: './vitest-setup.ts',
-          include: [
-            `packages/${defaultInclude}`,
-            `private/${defaultInclude}`,
-            `tests/node/${defaultInclude}`,
-          ],
-          exclude: [babelPluginDisplayNameTests],
-        },
-      },
       // Isolate babel-plugin-display-name tests as our snapshot serializers interfere with their
       // snapshot output.
       {
@@ -47,7 +36,27 @@ export default defineConfig({
       },
       {
         test: {
+          name: 'unit',
+          pool: 'vmThreads',
+          setupFiles: './vitest-setup.ts',
+          include: [`packages/${defaultInclude}`, `private/${defaultInclude}`],
+          exclude: [babelPluginDisplayNameTests],
+        },
+      },
+      // Integration tests spawn sku processes, dev servers and browsers, so they
+      // need the process-level isolation of forks.
+      {
+        test: {
+          name: 'node',
+          pool: 'forks',
+          setupFiles: './vitest-setup.ts',
+          include: [`tests/node/${defaultInclude}`],
+        },
+      },
+      {
+        test: {
           name: 'browser',
+          pool: 'forks',
           setupFiles: './vitest-setup.ts',
           include: [`tests/browser/${defaultInclude}`],
         },

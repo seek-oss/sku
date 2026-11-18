@@ -70,6 +70,14 @@ export const createConfig = (
           require.resolve('babel-plugin-macros'),
           ...(isProductionBuild ? prodBabelPlugins : []),
         ],
+        // The default excludes `node_modules`, but we want to run our babel plugins across
+        // both app code and dependencies.
+        // See https://github.com/rolldown/plugins/tree/1c91db0424f0e71552323cd02aa34b60d5a98547/packages/babel#exclude.
+        // `react`, `react-dom` and `scheduler` are large and none of our plugins affect them, so skip them.
+        exclude: [
+          /\0rolldown\/runtime\.js/,
+          /[\\/]node_modules[\\/](?:react|react-dom|scheduler)[\\/]/,
+        ],
       }),
       vanillaExtractPlugin({
         unstable_pluginFilter: ({ name }) =>

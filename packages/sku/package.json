@@ -95,7 +95,7 @@
     "@loadable/server": "^5.16.7",
     "@loadable/webpack-plugin": "^5.14.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
-    "@rolldown/plugin-babel": "^0.2.1",
+    "@rolldown/plugin-babel": "^0.3.1",
     "@sku-lib/babel-plugin-display-name": "workspace:^",
     "@sku-lib/vite": "workspace:^",
     "@swc/core": "^1.6.13",

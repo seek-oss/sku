@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "braid-design-system": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
   },

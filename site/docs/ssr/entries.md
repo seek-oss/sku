@@ -12,11 +12,11 @@ The server and client each **`export default`** an object from `defineServerEntr
 Routes export a named `routes` array.
 See [Routing](./routing.md).
 
-| Entry                   | Default path     | Role                                        |
-| ----------------------- | ---------------- | ------------------------------------------- |
-| [Server](#server-entry) | `src/server.tsx` | Server configuration (onListen, middleware) |
-| [Client](#client-entry) | `src/client.tsx` | Hydrate-time configuration                  |
-| [Routes](#routes-entry) | `src/routes.tsx` | Route tree — see [Routing](./routing.md)    |
+| Entry                   | Default path     | Role                                                    |
+| ----------------------- | ---------------- | ------------------------------------------------------- |
+| [Server](#server-entry) | `src/server.tsx` | Server configuration (onListen, onShutdown, middleware) |
+| [Client](#client-entry) | `src/client.tsx` | Hydrate-time configuration                              |
+| [Routes](#routes-entry) | `src/routes.tsx` | Route tree — see [Routing](./routing.md)                |
 
 ## Server entry
 
@@ -163,9 +163,33 @@ type ServerEntry = {
 ### onListen
 
 sku calls `onListen` once after it mounts middleware and HTML, and after `listen` succeeds (both `sku start` and production).
-Use it for keep-alive timeouts, readiness logging with the bound port, or rare Express settings.
+Use it for readiness logging with the bound port, a longer keep-alive, or rare Express settings.
 sku does not call it again on server-entry HMR.
 Omit it if you do not need a post-listen hook.
+
+Production sets `keepAliveTimeout` to 35 seconds before `onListen`, and leaves `headersTimeout` at Node's 60 seconds.
+`sku start` does not set keep-alive.
+You can replace the production timeout here.
+Startup fails when `headersTimeout` is enabled and `keepAliveTimeout` is greater than or equal to it.
+A `headersTimeout` of 0 turns that timer off, and startup does not compare the two.
+
+Set keep-alive above the idle timeout of the proxy in front of the app.
+For a proxy that idles out at 60 seconds:
+
+```tsx
+import { defineServerEntry } from 'sku/runtime';
+
+defineServerEntry({
+  onListen({ httpServer }) {
+    httpServer.keepAliveTimeout = 65_000;
+    httpServer.headersTimeout = 66_000;
+  },
+});
+```
+
+Node also requires `headersTimeout` to be less than or equal to `requestTimeout`.
+`requestTimeout` stays at Node's default of 5 minutes.
+sku does not change it.
 
 For a single reverse-proxy hop, prefer config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (hop count `1`).
 Override other trust-proxy values here via `app.set('trust proxy', …)`.
@@ -180,14 +204,53 @@ type ServerEntry = {
 };
 ```
 
-```tsx
-defineServerEntry({
-  onListen({ app, httpServer, port }) {
-    httpServer.keepAliveTimeout = 20_000;
-    console.log(`listening on ${port}`);
-    // rare: app.set('trust proxy', 2)
+### onShutdown
+
+Production registers one `SIGTERM` listener after `onListen` returns.
+`sku start` does not.
+On `SIGTERM`, production stops accepting connections, closes sockets that have no in-flight response, lets in-flight responses finish, closes their sockets, awaits `onShutdown`, and exits 0.
+If shutdown has not finished 25 seconds after `SIGTERM`, the process exits 1 and `onShutdown` does not run.
+Those 25 seconds assume a platform grace period of 30 seconds.
+sku calls `process.exit`, so `beforeExit` handlers do not run.
+
+`onShutdown` takes no arguments and may return a promise.
+Do not call `process.exit` from it.
+Omitting it is fine.
+
+sku does not start or flush telemetry.
+Start the clients you use when the server entry loads, and flush them from `onShutdown`.
+See [Logging → Shutdown](./logging.md#shutdown).
+
+Do not register a `SIGTERM` listener.
+Production startup fails when one already exists.
+That includes a listener your tracing setup registered, and one a dependency registered (for example through `signal-exit`).
+The OpenTelemetry Node SDK sample registers `SIGTERM` and then calls `process.exit`.
+Delete that listener and call `shutdown()` from `onShutdown` instead.
+To drop a listener a dependency registered, remove it in `onListen` and call the dependency's cleanup from `onShutdown`:
+
+```ts
+import { defineServerEntry } from 'sku/runtime';
+
+const dependencyListener = () => {
+  // The function the dependency passed to process.on('SIGTERM', …).
+};
+
+const server = defineServerEntry({
+  onListen() {
+    process.removeListener('SIGTERM', dependencyListener);
+  },
+  onShutdown() {
+    // Call the dependency's own flush or close here.
   },
 });
+
+export default server;
+```
+
+```ts
+type ServerEntry = {
+  onShutdown?: () => void | Promise<void>;
+};
 ```
 
 ### Server entry example
@@ -389,5 +452,5 @@ See [Multi-language](./multi-language.md#maproutepath).
 - [Providers](./providers.md) — typed hooks and root layout
 - [Middleware](./middleware.md) — Express and `devServerMiddleware`
 - [Data loading](./data-loading.md) — render-time data loading and loaders
-- [Logging](./logging.md) — `instrumentations` on each entry
+- [Logging](./logging.md) — `instrumentations` on each entry, and flushing clients from `onShutdown`
 - [Runtime API](./runtime-api.md) — `sku/runtime` helpers

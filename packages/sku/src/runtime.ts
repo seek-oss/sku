@@ -15,6 +15,7 @@ export type {
   SkuMiddleware,
   SkuOnHydrate,
   SkuOnListen,
+  SkuOnShutdown,
   SkuRouteObject,
   SkuServerEntry,
 } from './services/vite/ssr/types.js';

@@ -33,6 +33,7 @@ const {
   getRouterContext,
   middleware,
   onListen,
+  onShutdown,
   instrumentations,
 } = entry as SkuServerEntry;
 
@@ -68,5 +69,5 @@ export const render = (
 if (import.meta.env.PROD) {
   const { startProductionSsrServer } =
     await import('../ssr/startProductionSsrServer.js');
-  await startProductionSsrServer({ middleware, onListen, render });
+  await startProductionSsrServer({ middleware, onListen, onShutdown, render });
 }

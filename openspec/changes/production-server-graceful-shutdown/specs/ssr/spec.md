@@ -136,19 +136,31 @@ The production server MUST exit 1 when shutdown has not finished 25 seconds afte
 
 ### Requirement: Docs show how to start and flush telemetry clients
 
-The SSR docs MUST show how to start and an `onShutdown` that flushes each common telemetry client: OpenTelemetry tracer, meter and logger providers, `dd-trace` and its DogStatsD client, StatsD clients, the LaunchDarkly server SDK, and loggers that buffer output.
+The logging docs MUST show the two `onShutdown` flush shapes, each with one worked example that finishes inside the 25 second deadline and does not call `process.exit`: a flush that returns a promise, and a flush that takes a callback.
+
+The promise example MUST be an OpenTelemetry tracer provider calling `shutdown()`.
+The docs MUST name `@opentelemetry/sdk-node`, `@opentelemetry/sdk-metrics`, and `@opentelemetry/sdk-logs` as the same call.
+
+The callback example MUST be `hot-shots` calling `client.close(callback)`.
+The docs MUST name Pino as the same shape, via `logger.flush(callback)` on a buffering destination.
+
+Clients MUST appear in this order: `hot-shots`, `dd-trace`, OpenTelemetry, Pino, `@launchdarkly/node-server-sdk`.
+
+The docs MUST say that `dd-trace` has no trace flush that resolves when the agent has the spans, and that the app calls `tracer.dogstatsd.flush()` and then waits out one trace flush interval.
+The docs MUST say that `@launchdarkly/node-server-sdk` needs `flush()` before `close()`.
 
 #### Scenario: An app uses OpenTelemetry
 
-- **WHEN** an app reads the SSR docs for shutdown
+- **WHEN** an app reads the logging docs for shutdown
 - **AND** the app uses OpenTelemetry
-- **THEN** the docs show how to start providers
-- **AND** the docs show an `onShutdown` that flushes them within the 25 second deadline
+- **THEN** the docs show how to start a tracer provider
+- **AND** the docs show an `onShutdown` that calls `shutdown()` within the 25 second deadline
 - **AND** the example does not call `process.exit`
+- **AND** the docs name the Node SDK, metrics SDK, and logs SDK as the same call
 
 #### Scenario: An app uses dd-trace
 
-- **WHEN** an app reads the SSR docs for shutdown
+- **WHEN** an app reads the logging docs for shutdown
 - **AND** the app uses `dd-trace`
-- **THEN** the docs show an `onShutdown` that flushes its traces and metrics within the 25 second deadline
-- **AND** the example does not call `process.exit`
+- **THEN** the docs say to flush DogStatsD and wait out one trace flush interval within the 25 second deadline
+- **AND** the docs do not call `process.exit` from that flush

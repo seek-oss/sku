@@ -79,7 +79,7 @@ Alternatives considered:
 
 Sku does not start, detect, flush, or warn about telemetry. Combinations of OpenTelemetry majors, separate logs packages, `dd-trace`, StatsD, LaunchDarkly, and buffering loggers are too many to account for from the production server, and sku did not start those clients.
 
-The SSR docs show how to register providers or clients at startup, and an `onShutdown` that flushes each common client: OpenTelemetry tracer, meter and logger providers, `dd-trace` traces and its DogStatsD client, a StatsD client such as `hot-shots`, the LaunchDarkly server SDK, and a logger that buffers output. They say that `onShutdown` runs inside the 25 second deadline and must not call `process.exit`.
+The logging docs show the two flush shapes, with clients in order of how widely SEEK repositories depend on them. `hot-shots` is the callback flush: `client.close(callback)`. `dd-trace` is described rather than shown: flush DogStatsD, then wait out one trace interval, because traces otherwise drain on `beforeExit`. A promise flush is an OpenTelemetry tracer provider calling `shutdown()`. The Node SDK, metrics SDK, and logs SDK are named as the same call. Pino is named as the same callback shape. LaunchDarkly is a sentence: await `flush()`, then `close()`. `onShutdown` runs inside the 25 second deadline and must not call `process.exit`.
 
 Alternative considered: shut down globally registered OpenTelemetry providers from sku, and warn when a registration cannot be shut down. Sku does not start OpenTelemetry, so flushing it is the app's job. Warnings cannot cover every registration shape without becoming a second OpenTelemetry integration.
 

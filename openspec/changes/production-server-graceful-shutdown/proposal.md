@@ -31,4 +31,4 @@ None.
 ## Impact
 
 - Production listen path, `defineServerEntry` and `SkuServerEntry`.
-- SSR entries docs lose the 20 second keep-alive example and gain a shutdown section with start and flush examples for common telemetry clients.
+- SSR entries docs lose the 20 second keep-alive example. The logging docs gain the shutdown flush shapes: one promise example, one callback example, and the other clients named.

@@ -38,7 +38,7 @@ Alternatives considered:
 - **Use Node's 5 second default.** Same race, sooner.
 - **Set the timeout after `onListen`.** That would wipe an app that knows its peer is longer than 35 seconds.
 
-The 35 seconds depends on the drain below. Without it, a finished in-flight socket waits 36 seconds, past the default 25 second deadline, so every drain with an in-flight keep-alive request would exit 1. The keep-alive default and the drain ship together.
+The 35 seconds depends on the drain below. Without it, a finished in-flight socket waits 36 seconds, past the 25 second deadline, so every drain with an in-flight keep-alive request would exit 1. The keep-alive default and the drain ship together.
 
 ### Fail startup when keep-alive meets the headers timeout
 
@@ -62,25 +62,24 @@ A `SIGTERM` listener that already exists after `onListen` fails startup in produ
 
 Alternative considered: `replaceShutdown(handler)` on `onListen`, so an app could skip sku's drain and own the whole `SIGTERM` path under the same deadline. Rejected. Apps that already register their own drain do the same `server.close()` plus hard-exit pattern sku will own; they should drop that handler and keep flush work in `onShutdown`. No Managed Data Mode need was found for a different drain. SSE is already an in-flight HTTP response under the deadline. WebSockets would need explicit close if an app adds them later, which is not a reason for a drain-replacement hook now.
 
-### Exit 1 at the shutdown deadline
+### Exit 1 at 25 seconds
 
-The listener first starts a timer for `shutdownTimeoutMs` that calls `process.exit(1)`. The timer is `unref`ed so it never holds a finished process open. Once it fires, the drain and `onShutdown` are abandoned.
+The listener first starts a 25 second timer that calls `process.exit(1)`. The timer is `unref`ed so it never holds a finished process open. Once it fires, the drain and `onShutdown` are abandoned.
 
-`shutdownTimeoutMs` is an optional server entry property next to `onShutdown`, and defaults to 25000. A platform measures its grace period from outside the container, so the default leaves 5 seconds of a 30 second grace period for signal delivery and the flush. Platforms differ: Kubernetes lets each workload set its grace period, some managed platforms allow only about 10 seconds, and others allow minutes. The docs say to set `shutdownTimeoutMs` a few seconds below the platform's grace period. Startup fails in `sku start` and production when the value is not a positive integer, so a typo is caught locally.
+A platform measures its grace period from outside the container, so 25 seconds leaves 5 seconds of a 30 second grace period for signal delivery and the flush. Exit 1 shows up in container exit-code monitoring as a failed drain, where a `SIGKILL` would look like any other 137.
 
-Exit 1 shows up in container exit-code monitoring as a failed drain, where a `SIGKILL` would look like any other 137.
+The deadline is fixed for now. Every app on Managed Data Mode today deploys to a 30 second grace period, and the existing app handlers that could migrate also exit at 25 seconds without overriding it. A server entry option can be added later without breaking apps, while removing one would. Until then a single value keeps apps consistent, and the first app that needs another value shows what the option should look like.
 
 Alternatives considered:
 
 - **No timer.** A response that never finishes is `SIGKILL`ed, `onShutdown` never runs, and the last spans are lost with no signal.
-- **A fixed 25 seconds.** On a shorter grace period, `SIGKILL` arrives first and the exit 1 and the flush are lost. On a longer one, sku cuts responses that the platform would let finish.
-- **An environment variable.** It would keep the value in deploy config, but sku reads no other server setting from the environment except `PORT`, and a server entry property is typed and visible next to `onShutdown`. An app that wants deploy config to decide can read its own variable into `shutdownTimeoutMs`.
+- **A configurable deadline (`shutdownTimeoutMs`).** Deferred. It matters on a platform with a shorter grace period, where `SIGKILL` arrives first and the exit 1 and the flush are lost, or a longer one, where sku cuts responses the platform would let finish. Add it when an app runs on such a platform or serves a response that legitimately outlives 25 seconds.
 
 ### Document how apps start and flush telemetry
 
 Sku does not start, detect, flush, or warn about telemetry. Combinations of OpenTelemetry majors, separate logs packages, `dd-trace`, StatsD, LaunchDarkly, and buffering loggers are too many to account for from the production server, and sku did not start those clients.
 
-The SSR docs show how to register providers or clients at startup, and an `onShutdown` that flushes each common client: OpenTelemetry tracer, meter and logger providers, `dd-trace` traces and its DogStatsD client, a StatsD client such as `hot-shots`, the LaunchDarkly server SDK, and a logger that buffers output. They say that `onShutdown` runs inside the shutdown deadline and must not call `process.exit`.
+The SSR docs show how to register providers or clients at startup, and an `onShutdown` that flushes each common client: OpenTelemetry tracer, meter and logger providers, `dd-trace` traces and its DogStatsD client, a StatsD client such as `hot-shots`, the LaunchDarkly server SDK, and a logger that buffers output. They say that `onShutdown` runs inside the 25 second deadline and must not call `process.exit`.
 
 Alternative considered: shut down globally registered OpenTelemetry providers from sku, and warn when a registration cannot be shut down. Sku does not start OpenTelemetry, so flushing it is the app's job. Warnings cannot cover every registration shape without becoming a second OpenTelemetry integration.
 
@@ -89,7 +88,7 @@ Alternative considered: shut down globally registered OpenTelemetry providers fr
 - [Peer idle timeout is longer than 35 seconds] → `onListen` sets a higher `keepAliveTimeout` and a higher `headersTimeout`. Startup fails if it forgets the headers timeout.
 - [Headers already sent when `SIGTERM` arrives] → the response cannot say `Connection: close`. The socket closes when the response ends.
 - [Idle sockets are reset] → a request already written by the peer fails with `ECONNRESET`. That window is the supervisor's delay before `SIGTERM`, which this change does not set.
-- [A response runs past the shutdown deadline] → the process exits 1 and the remaining flush is lost.
-- [`shutdownTimeoutMs` is longer than the platform's grace period] → `SIGKILL` arrives first, as it did before this change. Sku cannot detect this. The docs say to keep the value below the grace period.
+- [A response runs past 25 seconds] → the process exits 1 and the remaining flush is lost.
+- [The platform's grace period is not 30 seconds] → on a shorter one `SIGKILL` arrives first, as it did before this change; on a longer one sku exits before the platform requires. The app cannot change this until sku adds an option. The docs say the deadline assumes a 30 second grace period.
 - [A dependency registers a `SIGTERM` listener] → production startup fails even though the app wrote no handler, for example through a library built on `signal-exit`. The error says a dependency can be the cause. The app removes that listener in `onListen` and calls the library's cleanup from `onShutdown`.
 - [An app omits a flush] → buffered telemetry is lost. The docs show how for common clients.

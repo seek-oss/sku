@@ -117,29 +117,21 @@ After in-flight responses finish, the production server MUST await `onShutdown` 
 - **THEN** the error is reported
 - **AND** the process exits 0
 
-### Requirement: Shutdown exits 1 at the shutdown deadline
+### Requirement: Shutdown exits 1 after 25 seconds
 
-The production server MUST exit 1 when shutdown has not finished `shutdownTimeoutMs` after `SIGTERM`, or 25000 milliseconds when the server entry does not set it.
+The production server MUST exit 1 when shutdown has not finished 25 seconds after `SIGTERM`.
 
 #### Scenario: A response never finishes
 
 - **WHEN** the production server receives `SIGTERM`
-- **AND** the server entry does not set `shutdownTimeoutMs`
 - **AND** an in-flight response has not finished 25 seconds later
 - **THEN** the process exits 1
 - **AND** `onShutdown` has not run
 
-#### Scenario: The app sets its own deadline
-
-- **WHEN** the server entry sets `shutdownTimeoutMs` to 8000
-- **AND** the production server receives `SIGTERM`
-- **AND** an in-flight response has not finished 8 seconds later
-- **THEN** the process exits 1
-
 #### Scenario: The deadline does not delay a clean exit
 
 - **WHEN** the production server receives `SIGTERM`
-- **AND** shutdown finishes before the deadline
+- **AND** shutdown finishes before 25 seconds
 - **THEN** the process exits 0 without waiting for the deadline
 
 ### Requirement: Docs show how to start and flush telemetry clients
@@ -151,12 +143,12 @@ The SSR docs MUST show how to start and an `onShutdown` that flushes each common
 - **WHEN** an app reads the SSR docs for shutdown
 - **AND** the app uses OpenTelemetry
 - **THEN** the docs show how to start providers
-- **AND** the docs show an `onShutdown` that flushes them within the shutdown deadline
+- **AND** the docs show an `onShutdown` that flushes them within the 25 second deadline
 - **AND** the example does not call `process.exit`
 
 #### Scenario: An app uses dd-trace
 
 - **WHEN** an app reads the SSR docs for shutdown
 - **AND** the app uses `dd-trace`
-- **THEN** the docs show an `onShutdown` that flushes its traces and metrics within the shutdown deadline
+- **THEN** the docs show an `onShutdown` that flushes its traces and metrics within the 25 second deadline
 - **AND** the example does not call `process.exit`

@@ -5,13 +5,13 @@ The Managed Data Mode production server exits as soon as it receives `SIGTERM`, 
 ## What Changes
 
 - Production sets `keepAliveTimeout` to 35 seconds before `onListen`. `onListen` may change it. Startup fails when it is not below an enabled `headersTimeout`.
-- Production registers one `SIGTERM` listener. It stops accepting, closes idle sockets, lets in-flight responses finish and closes their sockets, awaits optional `onShutdown`, and exits 0. It exits 1 when this takes longer than the server entry's optional `shutdownTimeoutMs`, which defaults to 25 seconds.
+- Production registers one `SIGTERM` listener. It stops accepting, closes idle sockets, lets in-flight responses finish and closes their sockets, awaits optional `onShutdown`, and exits 0. It exits 1 when this takes longer than 25 seconds.
 - Startup fails in production when a `SIGTERM` listener already exists.
 - Docs show how to start and flush telemetry clients in `onShutdown`. Sku minor changeset. SSR is experimental, so this is not marked breaking.
 
 ## Non-goals
 
-- Reading the platform's grace period.
+- Configuring the 25 second deadline. Deferred until an app runs on a platform whose grace period is not 30 seconds.
 - Keep-alive or `SIGTERM` handling in `sku start`, or in webpack SSR.
 - Raising `headersTimeout` or `requestTimeout` for the app.
 - Starting, detecting, flushing, or warning about OpenTelemetry or any other telemetry client.
@@ -26,7 +26,7 @@ None.
 ### Modified Capabilities
 
 - `ssr`: production keep-alive, the `SIGTERM` drain and its deadline, and shutdown docs.
-- `managed-data-mode`: the server entry may include `onShutdown` and `shutdownTimeoutMs`.
+- `managed-data-mode`: the server entry may include `onShutdown`.
 
 ## Impact
 

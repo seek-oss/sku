@@ -6,7 +6,12 @@ import type {
 } from 'react-router';
 
 import type { ClientContextOf, SiteOf } from './entryTypeExtractors.js';
-import type { JsonValue, SkuMiddleware, SkuOnListen } from './types.js';
+import type {
+  JsonValue,
+  SkuMiddleware,
+  SkuOnListen,
+  SkuOnShutdown,
+} from './types.js';
 
 export type ServerEntryBody<
   Site extends string = string,
@@ -43,6 +48,11 @@ export type ServerEntryBody<
    * (start + production). Not re-fired on server-entry HMR.
    */
   onListen?: SkuOnListen;
+  /**
+   * Called with no arguments after in-flight responses finish during production
+   * shutdown. Not called from `sku start`.
+   */
+  onShutdown?: SkuOnShutdown;
   /**
    * Optional React Router route-level instrumentations forwarded into `createStaticHandler` at module init.
    */

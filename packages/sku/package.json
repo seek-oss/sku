@@ -142,10 +142,12 @@
     "jest-environment-jsdom": "^30.0.0",
     "jest-watch-typeahead": "^3.0.1",
     "jiti": "catalog:",
+    "magic-string": "^1.4.5",
     "memoize": "^11.0.0",
     "mini-css-extract-plugin": "^2.6.1",
     "node-html-parser": "^7.0.1",
     "obug": "catalog:",
+    "oxc-parser": "^0.158.0",
     "path-to-regexp": "^8.4.2",
     "picomatch": "^4.0.4",
     "postcss": "^8.5.8",
@@ -173,6 +175,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
+    "@sku-lib/rolldown-plugin-unassert": "workspace:*",
     "@sku-private/tsdown": "workspace:*",
     "@sku-private/utils": "workspace:*",
     "@types/babel__core": "^7.20.5",

@@ -31,6 +31,8 @@
     ".": {
       // Used in the renovate config
       "ignoreDependencies": ["renovate-config-seek"],
+      // Resolved relative to the benchmark vitest project root
+      "ignoreUnresolved": ["./benchmark/global-setup.ts"],
     },
     "packages/sku": {
       "ignoreDependencies": [
@@ -57,6 +59,17 @@
     "packages/babel-plugin-display-name": {
       // Dep is referenced as a string
       "ignoreDependencies": ["@babel/preset-react"],
+    },
+    "packages/rolldown-plugin-unassert": {
+      "entry": [
+        "tests/**/*.test.ts",
+        "tests/vite-app/{index.html,vite.config.ts}",
+        "benchmark/*.bench.ts",
+      ],
+      // Upstream babel fixtures are only read as data, and the vite app is a test fixture
+      "ignore": ["tests/vite-app/src/**", "tests/fake-dep/**"],
+      // Used by the vite app test project
+      "ignoreDependencies": ["assert", "tiny-invariant", "fake-dep"],
     },
     "tests": {
       "entry": ["**/*.test.ts"],

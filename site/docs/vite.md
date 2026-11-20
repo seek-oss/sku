@@ -167,6 +167,34 @@ You only need file extensions in import paths in non-application code.
 > When an explicit file extension is required, such as in a Node.js script, this setting lets you import TypeScript files with a `.ts` extension instead of a `.js` extension.
 > That difference can confuse people who are new to ESM codebases.
 
+If you migrate to ESM before you migrate to Vite, webpack requires file extensions in imports from `.js` application files.
+TypeScript files are not affected.
+To keep extensionless imports in `.js` files, add a rule with [`dangerouslySetWebpackConfig`].
+Remove the rule after you migrate to Vite.
+
+```ts
+// sku.config.ts
+export default {
+  dangerouslySetWebpackConfig: (skuWebpackConfig) => {
+    skuWebpackConfig.module.rules.push({
+      test: /\.m?js$/,
+      resolve: { fullySpecified: false },
+    });
+
+    return skuWebpackConfig;
+  },
+} satisfies SkuConfig;
+```
+
+#### Webpack hot module replacement code
+
+Webpack's `module.hot` API does not work in ESM, because `module` is not defined.
+Remove code that uses `module.hot`, or replace it with [`import.meta.webpackHot`][webpackHot] until you migrate to Vite.
+After you migrate to Vite, use [`import.meta.hot`][Vite HMR API] for hot module replacement.
+
+[`dangerouslySetWebpackConfig`]: ./configuration.md#dangerouslysetwebpackconfig
+[webpackHot]: https://webpack.js.org/api/hot-module-replacement/
+[Vite HMR API]: https://vite.dev/guide/api-hmr.html
 [ESM]: https://nodejs.org/api/esm.html
 [CommonJS]: https://nodejs.org/api/modules.html
 [explicit file extensions]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#:~:text=you%20cannot%20omit%20the%20file%20extension%20or%20the%20index.js%20file%20name.%20

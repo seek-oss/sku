@@ -15,6 +15,7 @@ Detect:
 - Package manager (lockfile) and the sku version (must be >= 15). If older, stop and ask whether to upgrade first.
 - `testRunner` in the sku config: unset or `jest` means the Vitest migration is needed; `vitest` means it's done.
 - `"type": "module"` in `package.json` (ESM done or not).
+- Working tree state (`git status`). If there are uncommitted changes, stop and ask the user what to do with them before branching or changing any files. Later steps revert individual files with `git checkout`, which would discard uncommitted work.
 
 Report the findings and the plan, then ask the user about anything unresolved, for example:
 
@@ -41,12 +42,15 @@ Applies to every dep added, removed, or changed (`vitest`, `@vitest/coverage-v8`
 
 ## 3. Vitest
 
-1. Read the https://vitest.dev/guide/ migration notes if unfamiliar with the differences from Jest.
+1. Read the [Vitest migration notes](https://vitest.dev/guide/migration.html#jest) if unfamiliar with the differences from Jest.
 2. Install: `<pm> add -D vitest` (and `@vitest/coverage-v8` if coverage is used).
-3. Set in the sku config:
+3. Add `testRunner: 'vitest'` to the existing default export in the sku config. Keep every other option already there; do not replace the file with a new config:
 
    ```ts
-   export default { testRunner: 'vitest' } satisfies SkuConfig;
+   export default {
+     // ...existing options
+     testRunner: 'vitest',
+   } satisfies SkuConfig;
    ```
 
 4. Run the codemod: `pnpm dlx @sku-lib/codemod jest-to-vitest .` (use the repo's package manager equivalent). Review the diff; more manual changes may be needed.
@@ -56,15 +60,16 @@ Applies to every dep added, removed, or changed (`vitest`, `@vitest/coverage-v8`
    - If using Testing Library, add to the setup file:
 
      ```ts
+     import '@testing-library/jest-dom/vitest';
      import { cleanup } from '@testing-library/react';
      import { afterEach } from 'vitest';
      afterEach(cleanup);
      ```
 
    - Vitest defaults to watch mode: update the `test` script to `sku test --run` (CI doesn't watch, so CI scripts may omit it).
-   - Revert codemod changes to non-Vitest tests: it adds `vitest` imports to Cypress specs/support files and mocha tests (e.g. `test/smoke`). Check `git status` and `git checkout` those.
+   - Revert codemod changes to non-Vitest tests: it adds `vitest` imports to Cypress specs/support files and mocha tests (e.g. `test/smoke`). Check `git status`, confirm those files have no other changes, then revert only those files (e.g. `git checkout -- <file>`).
    - `.js` specs containing JSX must be renamed `.jsx` (with their `__snapshots__` files); Vitest won't parse JSX in `.js`.
-   - Regenerate snapshots with `sku test --run -u`: the header, key format (`A: b` -> `A: > b`) and `vanilla-extract` class hashes change. Confirm the diff is only those.
+   - Regenerate snapshots with `pnpm sku test --run -u` (use the repo's package manager equivalent): the header, key format (`A: b` -> `A: > b`) and `vanilla-extract` class hashes change. Confirm the diff is only those.
    - `vi.mock` factories run before the module body (imports are evaluated first):
      - Replace `require()` in factories with `await vi.importActual<typeof X>('x')` (make the factory `async`), using `import type * as X` for types (ESLint forbids `import()` types).
      - Helpers or mocks referenced by factories must be declared with `vi.hoisted()` (use `vi.hoisted(async () => ...)` if it needs a dynamic import such as `react`; use `createElement` rather than JSX inside it).
@@ -82,14 +87,14 @@ ESM is typically required alongside Vitest because of Jest's ESM limitations. Sk
 - Add `"type": "module"` to `package.json`.
 - Find CJS: `npx eslint-cjs-to-esm "./src/**/*.{js,ts}" --rule "node/file-extension-in-import: off, file-extension-in-import-ts/file-extension-in-import-ts: off, import/extensions: off"`.
 - Convert `require`/`module.exports` to `import`/`export`. Check dev server middleware, polyfills, scripts, and tool configs (eslint, prettier, etc.). Files kept as CJS must be renamed `.cjs`/`.cts`.
-- Delete webpack-only HMR code (`module.hot`/`require`); `module` doesn't exist in ESM. Mention the removal in the commit description so reviewers know HMR for that code is gone until it's re-added (e.g. with `import.meta.hot.accept` after a later move to Vite).
+- Replace webpack-only HMR code that uses `module.hot`, because `module` doesn't exist in ESM. Use `import.meta.webpackHot` while the app is still on webpack, and `import.meta.hot` after it moves to Vite. Only remove the HMR code if neither applies, and mention that removal in the commit description.
 - Tooling that loads its config file via dynamic `import()` works fine with an ESM config (`export default`).
 - Under webpack, strict-ESM application `.js` files fail on extensionless imports. Add a rule in `dangerouslySetWebpackConfig`: `module.rules.push({ test: /\.m?js$/, resolve: { fullySpecified: false } })`. It can be removed if the app later moves off webpack. Note it in the commit description.
 - Explicit file extensions are only needed in non-application code (Node scripts, configs); sku sets `allowImportingTsExtensions`, so import `.ts` files with a `.ts` extension there.
 
 ## 5. Verify
 
-`sku test --run`, `sku lint`/typecheck (`tsc`), and `sku build` all pass. Also check that `sku start` still boots and serves pages. Fix any failures before finishing, and tell the user about issues not covered above (sku docs ask for reports via the sku support page: https://seek-oss.github.io/sku/support).
+`pnpm sku test --run`, `pnpm sku lint`, and `pnpm sku build` all pass (use the repo's package manager equivalent). Let `sku lint` handle type checking; do not run bare `tsc` unless the repo already does. Also check that `pnpm sku start` still boots and serves pages. Fix any failures before finishing, and tell the user about issues not covered above (sku docs ask for reports via the sku support page: https://seek-oss.github.io/sku/support).
 
 ## 6. Finish
 

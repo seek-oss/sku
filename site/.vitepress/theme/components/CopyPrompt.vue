@@ -1,28 +1,46 @@
 <script setup>
-import { ref } from 'vue';
+import { onUnmounted, ref } from 'vue';
 
 const props = defineProps({
   prompt: { type: String, required: true },
 });
 
-const copied = ref(false);
+const labels = {
+  idle: 'Copy prompt',
+  copied: 'Copied!',
+  failed: 'Copy failed',
+};
+
+const status = ref('idle');
 let resetTimer;
 
 async function copy() {
-  await navigator.clipboard.writeText(props.prompt);
-  copied.value = true;
+  try {
+    await navigator.clipboard.writeText(props.prompt);
+    status.value = 'copied';
+  } catch {
+    status.value = 'failed';
+  }
+
   clearTimeout(resetTimer);
   resetTimer = setTimeout(() => {
-    copied.value = false;
+    status.value = 'idle';
   }, 2000);
 }
+
+onUnmounted(() => clearTimeout(resetTimer));
 </script>
 
 <template>
   <div class="copy-prompt">
     <p class="copy-prompt-text">{{ prompt }}</p>
-    <button type="button" class="copy-prompt-button" @click="copy">
-      {{ copied ? 'Copied!' : 'Copy prompt' }}
+    <button
+      type="button"
+      class="copy-prompt-button"
+      aria-live="polite"
+      @click="copy"
+    >
+      {{ labels[status] }}
     </button>
   </div>
 </template>
@@ -30,6 +48,7 @@ async function copy() {
 <style scoped>
 .copy-prompt {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 16px;
   margin: 16px 0;
@@ -41,6 +60,8 @@ async function copy() {
 
 .copy-prompt-text {
   flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
   margin: 0;
   font-family: var(--vp-font-family-mono);
   font-size: 13px;
@@ -60,5 +81,10 @@ async function copy() {
 
 .copy-prompt-button:hover {
   background-color: var(--vp-c-brand-2);
+}
+
+.copy-prompt-button:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
 }
 </style>

@@ -13,6 +13,20 @@ These are not requirements.
 
 ## Migrating to Vitest
 
+:::: tip Migrating with an AI agent
+Paste this prompt into your coding agent to have it run the migration for you:
+
+<CopyPrompt prompt="Migrate this sku app from Jest to Vitest by fetching and following the instructions at https://seek-oss.github.io/sku/prompts/migrate-to-vitest.md" />
+
+If your agent can't access the web, copy the full prompt instead.
+
+::: details View full prompt
+
+<<< ../public/prompts/migrate-to-vitest.md{md}
+
+:::
+::::
+
 Migrating to Vitest should be straightforward.
 Before you make any changes, read [the Vitest documentation](https://vitest.dev/guide/).
 That documentation covers the API, the features, and the differences between Jest and Vitest.

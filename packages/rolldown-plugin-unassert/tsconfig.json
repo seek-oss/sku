@@ -3,13 +3,11 @@
   "compilerOptions": {
     "rootDir": ".",
     "lib": ["es2023", "dom"],
-    "allowImportingTsExtensions": false,
-    "rewriteRelativeImportExtensions": true,
+    "types": ["node"],
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src", "tests", "benchmark", "tsdown.config.ts"],
-  "exclude": ["benchmark/.generated-*"],
-  "references": [{ "path": "../../private/tsdown" }]
+  "include": ["src", "tests", "benchmark"],
+  "exclude": ["benchmark/.generated-*"]
 }

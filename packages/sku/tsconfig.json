@@ -16,6 +16,7 @@
   "exclude": ["**/@loadable"],
   "references": [
     { "path": "../../private/utils" },
+    { "path": "../rolldown-plugin-unassert" },
     { "path": "../../private/tsdown" }
   ]
 }

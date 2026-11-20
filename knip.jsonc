@@ -36,6 +36,9 @@
     },
     "packages/sku": {
       "ignoreDependencies": [
+        // Runtime dependencies of the bundled private `@sku-lib/rolldown-plugin-unassert` package
+        "magic-string",
+        "oxc-parser",
         // Private package installed by consumers
         "@seek/sku-telemetry",
         // Used indirectly by webpack for minification

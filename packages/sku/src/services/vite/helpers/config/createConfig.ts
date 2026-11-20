@@ -57,7 +57,6 @@ export const createConfig = (
         apply: 'build',
       }),
       react(),
-      // Runs on app code and dependencies alike, before babel so it has less to process.
       isProductionBuild &&
         unassert({
           variables: ['assert', 'invariant'],

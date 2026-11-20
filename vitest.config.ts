@@ -3,6 +3,7 @@ import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 const babelPluginDisplayNameTests = 'packages/babel-plugin-display-name';
+const rolldownPluginUnassertTests = 'packages/rolldown-plugin-unassert';
 
 export default defineConfig({
   resolve: {
@@ -15,6 +16,8 @@ export default defineConfig({
   },
   test: {
     exclude: [...defaultExclude, '**/fixtures/**'],
+    // Only the benchmark project below has a benchmark suite.
+    benchmark: { include: [] },
     hookTimeout: TEST_TIMEOUT + 1000,
     maxWorkers: '80%',
     pool: 'threads',
@@ -36,11 +39,28 @@ export default defineConfig({
       },
       {
         test: {
+          name: 'rolldown-plugin-unassert',
+          include: [`${rolldownPluginUnassertTests}/tests/${defaultInclude}`],
+        },
+      },
+      {
+        test: {
+          name: 'rolldown-plugin-unassert-benchmark',
+          root: `./${rolldownPluginUnassertTests}`,
+          include: [],
+          globalSetup: ['./benchmark/global-setup.ts'],
+          benchmark: { include: ['benchmark/**/*.bench.ts'] },
+          testTimeout: 30 * 60_000,
+          hookTimeout: 10 * 60_000,
+        },
+      },
+      {
+        test: {
           name: 'unit',
           pool: 'vmThreads',
           setupFiles: './vitest-setup.ts',
           include: [`packages/${defaultInclude}`, `private/${defaultInclude}`],
-          exclude: [babelPluginDisplayNameTests],
+          exclude: [babelPluginDisplayNameTests, rolldownPluginUnassertTests],
         },
       },
       // Integration tests spawn sku processes, dev servers and browsers, so they

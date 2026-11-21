@@ -13,6 +13,20 @@ These are not requirements.
 
 ## Migrating to Vitest
 
+:::: tip Migrating with an AI agent
+Paste this prompt into your coding agent to have it run the migration for you:
+
+<CopyPrompt prompt="Migrate this sku app from Jest to Vitest by fetching and following the instructions at https://seek-oss.github.io/sku/prompts/migrate-to-vitest.md" />
+
+If your agent can't access the web, copy the full prompt instead.
+
+::: details View full prompt
+
+<<< ../public/prompts/migrate-to-vitest.md{md}
+
+:::
+::::
+
 Migrating to Vitest should be straightforward.
 Before you make any changes, read [the Vitest documentation](https://vitest.dev/guide/).
 That documentation covers the API, the features, and the differences between Jest and Vitest.
@@ -51,6 +65,9 @@ To automate most of the migration process, a codemod is available.
 ```sh
 pnpm dlx @sku-lib/codemod jest-to-vitest .
 ```
+
+The codemod also changes tests that do not run with Vitest, such as Cypress or Mocha tests.
+Revert the changes to those files.
 
 **Default Watch Mode**
 
@@ -113,6 +130,102 @@ import { afterEach } from 'vitest'; // [!code ++]
 afterEach(cleanup); // [!code ++]
 ```
 
+**JSX in `.js` Files**
+
+Vitest does not parse JSX in `.js` files.
+Rename test files that contain JSX to `.jsx`, along with their snapshot files.
+
+**Snapshot Format**
+
+Vitest's snapshot format differs from Jest's.
+Regenerate your snapshots after migrating, and check that the diff only contains formatting changes:
+
+```sh
+pnpm sku test --run -u
+```
+
+```diff
+// __snapshots__/Button.test.tsx.snap
+- exports[`Button renders 1`] = `
++ exports[`Button > renders 1`] = `
+```
+
+**Mock Factories**
+
+Vitest hoists `vi.mock` calls above the imports in a test file, so mock factories cannot use imports or variables from the test file.
+Replace `require` calls in mock factories with `vi.importActual`:
+
+<!-- eslint-skip -->
+
+```ts
+import type * as React from 'react'; // [!code ++]
+
+vi.mock('./Map', () => { // [!code --]
+  const { createElement } = require('react'); // [!code --]
+vi.mock('./Map', async () => { // [!code ++]
+  const { createElement } = await vi.importActual<typeof React>('react'); // [!code ++]
+  return { Map: () => createElement('div', null, 'Map') };
+});
+```
+
+Declare mocks that factories use with [`vi.hoisted`][vi.hoisted]:
+
+```ts
+import type * as Router from 'react-router';
+
+const { mockNavigate } = vi.hoisted(() => ({ mockNavigate: vi.fn() }));
+
+vi.mock('react-router', async () => ({
+  ...(await vi.importActual<typeof Router>('react-router')),
+  useNavigate: () => mockNavigate,
+}));
+```
+
+**Timer Functions Without Fake Timers**
+
+Timer functions such as `vi.advanceTimersByTime` throw an error unless fake timers are enabled with `vi.useFakeTimers()`.
+Jest only logged a warning.
+
+**Typing Mocks**
+
+Use a partial mock instead of casting a mocked return value:
+
+```ts
+vi.mocked(useUser).mockReturnValue({ name: 'Jane' } as unknown as User); // [!code --]
+vi.mocked(useUser, { partial: true }).mockReturnValue({ name: 'Jane' }); // [!code ++]
+```
+
+**Linting**
+
+The `vitest/expect-expect` lint rule is an error rather than a warning.
+If your tests assert through helper functions, list them in `assertFunctionNames` with [`dangerouslySetESLintConfig`]:
+
+```ts
+// sku.config.ts
+export default {
+  dangerouslySetESLintConfig: (skuEslintConfig) => [
+    ...skuEslintConfig,
+    {
+      rules: {
+        'vitest/expect-expect': [
+          'error',
+          { assertFunctionNames: ['expect', 'expectRedirect'] },
+        ],
+      },
+    },
+  ],
+} satisfies SkuConfig;
+```
+
+### Removing Jest
+
+When nothing references Jest anymore, remove Jest dependencies such as `jest` and `@types/jest`, Jest config files, and [`dangerouslySetJestConfig`] from your `sku` config.
+
+### Migrating to ESM
+
+Because of [Jest's current limitations with ESM], projects often migrate to ESM when they migrate to Vitest.
+See [Migrating to ESM] for the steps.
+
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
 [test runner]: ./configuration.md#testrunner
@@ -120,3 +233,7 @@ afterEach(cleanup); // [!code ++]
 [codemod]: https://codemod.com/registry/jest-vitest
 [Migrating from Jest to Vitest]: https://vitest.dev/guide/migration.html#jest
 [Vitest globals]: https://vitest.dev/config/#globals
+[vi.hoisted]: https://vitest.dev/api/vi.html#vi-hoisted
+[`dangerouslySetESLintConfig`]: ./configuration.md#dangerouslyseteslintconfig
+[`dangerouslySetJestConfig`]: ./configuration.md#dangerouslysetjestconfig
+[Migrating to ESM]: ./vite.md#migrating-to-esm

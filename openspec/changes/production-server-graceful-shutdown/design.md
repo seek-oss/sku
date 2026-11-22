@@ -91,4 +91,5 @@ Alternative considered: shut down globally registered OpenTelemetry providers fr
 - [A response runs past 25 seconds] → the process exits 1 and the remaining flush is lost.
 - [The platform's grace period is not 30 seconds] → on a shorter one `SIGKILL` arrives first, as it did before this change; on a longer one sku exits before the platform requires. The app cannot change this until sku adds an option. The docs say the deadline assumes a 30 second grace period.
 - [A dependency registers a `SIGTERM` listener] → production startup fails even though the app wrote no handler, for example through a library built on `signal-exit`. The error says a dependency can be the cause. The app removes that listener in `onListen` and calls the library's cleanup from `onShutdown`.
+- [A dependency registers a `SIGTERM` listener after startup] → the startup check does not see it. If that listener calls `process.exit`, it cuts the drain and `onShutdown` short.
 - [An app omits a flush] → buffered telemetry is lost. The docs show how for common clients.

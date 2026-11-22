@@ -1,8 +1,11 @@
 import http, { type Server } from 'node:http';
 import net, { type Socket } from 'node:net';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { SsrServerOptions } from './listen.js';
-import { listen, type RenderFunction } from './ssrServerShared.js';
+import {
+  listen,
+  type RenderFunction,
+  type SsrServerOptions,
+} from './listen.js';
 
 const baseListenOptions = {
   publicPath: '/static/',

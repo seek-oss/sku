@@ -153,11 +153,6 @@ Each example MUST finish inside the 25 second deadline and MUST NOT call `proces
 - **THEN** the docs show a promise flush and a callback flush from `onShutdown`
 - **AND** neither example calls `process.exit`
 
-#### Scenario: Clients appear in order of use
-
-- **WHEN** an app reads the logging docs for shutdown
-- **THEN** the clients appear in this order: `hot-shots`, `dd-trace`, OpenTelemetry, Pino, `@launchdarkly/node-server-sdk`
-
 ### Requirement: Docs show an OpenTelemetry promise flush
 
 The promise example MUST start an OpenTelemetry tracer provider and call its `shutdown()` from `onShutdown`.

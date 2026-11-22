@@ -34,7 +34,7 @@ The production listen path sets `keepAliveTimeout = 35_000` after `listen` and b
 
 Alternatives considered:
 
-- **Keep the docs' 20 second example.** The server still closes before a 30 second peer, so the next request is reset. Apps also skip the example, and the default is then 5 seconds.
+- **Keep the docs' 20 second example.** The server still closes before a 30 second peer, so the next request is reset. An app that skips the example gets Node's 5 second default.
 - **Use Node's 5 second default.** Same race, sooner.
 - **Set the timeout after `onListen`.** That would wipe an app that knows its peer is longer than 35 seconds.
 
@@ -62,7 +62,7 @@ The listener stays registered until the process exits. The HTTP server closes pa
 
 A `SIGTERM` listener that already exists after `onListen` fails startup in production only. `sku start` does not check it, because the dev process can have listeners that are not the app's. The error says how many listeners exist, names each one that has a function name, and says that a dependency can register one. It points to `onShutdown`, and says that a dependency's listener can be removed in `onListen` and its cleanup called from `onShutdown`.
 
-Alternative considered: `replaceShutdown(handler)` on `onListen`, so an app could skip sku's drain and own the whole `SIGTERM` path under the same deadline. Rejected. Apps that already register their own drain do the same `server.close()` plus hard-exit pattern sku will own; they should drop that handler and keep flush work in `onShutdown`. No Managed Data Mode need was found for a different drain. SSE is already an in-flight HTTP response under the deadline. WebSockets would need explicit close if an app adds them later, which is not a reason for a drain-replacement hook now.
+Alternative considered: `replaceShutdown(handler)` on `onListen`, so an app could skip sku's drain and own the whole `SIGTERM` path under the same deadline. Rejected. A hand-written drain is usually the same `server.close()` plus hard-exit pattern sku now owns, so an app can drop that handler and keep flush work in `onShutdown`. SSE is already an in-flight HTTP response under the deadline. WebSockets would need explicit close if an app adds them later, which is not a reason for a drain-replacement hook now.
 
 ### Exit 1 at 25 seconds
 
@@ -70,7 +70,7 @@ The listener first starts a 25 second timer that calls `process.exit(1)`. The ti
 
 A platform measures its grace period from outside the container, so 25 seconds leaves 5 seconds of a 30 second grace period for signal delivery and the flush. Exit 1 shows up in container exit-code monitoring as a failed drain, where a `SIGKILL` would look like any other 137.
 
-The deadline is fixed for now. Every app on Managed Data Mode today deploys to a 30 second grace period, and the existing app handlers that could migrate also exit at 25 seconds without overriding it. A server entry option can be added later without breaking apps, while removing one would. Until then a single value keeps apps consistent, and the first app that needs another value shows what the option should look like.
+The deadline is fixed for now. 30 seconds is the Kubernetes default grace period. A server entry option can be added later without breaking apps, while removing one would. Until then a single value keeps apps consistent, and the first app that needs another value shows what the option should look like.
 
 Alternatives considered:
 
@@ -81,7 +81,7 @@ Alternatives considered:
 
 Sku does not start, detect, flush, or warn about telemetry. Combinations of OpenTelemetry majors, separate logs packages, `dd-trace`, StatsD, LaunchDarkly, and buffering loggers are too many to account for from the production server, and sku did not start those clients.
 
-The logging docs show the two flush shapes, with clients in order of how widely SEEK repositories depend on them. `hot-shots` is the callback flush: `client.close(callback)`. `dd-trace` is described rather than shown: flush DogStatsD, then wait out one trace interval, because traces otherwise drain on `beforeExit`. A promise flush is an OpenTelemetry tracer provider calling `shutdown()`. The Node SDK, metrics SDK, and logs SDK are named as the same call. Pino is named as the same callback shape. LaunchDarkly is a sentence: await `flush()`, then `close()`. `onShutdown` runs inside the 25 second deadline and must not call `process.exit`.
+The logging docs show the two flush shapes. `hot-shots` is the callback flush: `client.close(callback)`. `dd-trace` is described rather than shown: flush DogStatsD, then wait out one trace interval, because traces otherwise drain on `beforeExit`. A promise flush is an OpenTelemetry tracer provider calling `shutdown()`. The Node SDK, metrics SDK, and logs SDK are named as the same call. Pino is named as the same callback shape. LaunchDarkly is a sentence: await `flush()`, then `close()`. `onShutdown` runs inside the 25 second deadline and must not call `process.exit`.
 
 Alternative considered: shut down globally registered OpenTelemetry providers from sku, and warn when a registration cannot be shut down. Sku does not start OpenTelemetry, so flushing it is the app's job. Warnings cannot cover every registration shape without becoming a second OpenTelemetry integration.
 

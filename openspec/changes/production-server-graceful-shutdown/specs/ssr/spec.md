@@ -142,20 +142,25 @@ The production server MUST exit 1 when shutdown has not finished 25 seconds afte
 - **AND** shutdown finishes before 25 seconds
 - **THEN** the process exits 0 without waiting for the deadline
 
-### Requirement: Docs show how to start and flush telemetry clients
+### Requirement: Docs show the two onShutdown flush shapes
 
-The logging docs MUST show the two `onShutdown` flush shapes, each with one worked example that finishes inside the 25 second deadline and does not call `process.exit`: a flush that returns a promise, and a flush that takes a callback.
+The logging docs MUST show one worked example of a flush that returns a promise and one of a flush that takes a callback.
+Each example MUST finish inside the 25 second deadline and MUST NOT call `process.exit`.
 
-The promise example MUST be an OpenTelemetry tracer provider calling `shutdown()`.
-The docs MUST name `@opentelemetry/sdk-node`, `@opentelemetry/sdk-metrics`, and `@opentelemetry/sdk-logs` as the same call.
+#### Scenario: Both flush shapes are shown
 
-The callback example MUST be `hot-shots` calling `client.close(callback)`.
-The docs MUST name Pino as the same shape, via `logger.flush(callback)` on a buffering destination.
+- **WHEN** an app reads the logging docs for shutdown
+- **THEN** the docs show a promise flush and a callback flush from `onShutdown`
+- **AND** neither example calls `process.exit`
 
-Clients MUST appear in this order: `hot-shots`, `dd-trace`, OpenTelemetry, Pino, `@launchdarkly/node-server-sdk`.
+#### Scenario: Clients appear in order of use
 
-The docs MUST say that `dd-trace` has no trace flush that resolves when the agent has the spans, and that the app calls `tracer.dogstatsd.flush()` and then waits out one trace flush interval.
-The docs MUST say that `@launchdarkly/node-server-sdk` needs `flush()` before `close()`.
+- **WHEN** an app reads the logging docs for shutdown
+- **THEN** the clients appear in this order: `hot-shots`, `dd-trace`, OpenTelemetry, Pino, `@launchdarkly/node-server-sdk`
+
+### Requirement: Docs show an OpenTelemetry promise flush
+
+The promise example MUST start an OpenTelemetry tracer provider and call its `shutdown()` from `onShutdown`.
 
 #### Scenario: An app uses OpenTelemetry
 
@@ -163,12 +168,38 @@ The docs MUST say that `@launchdarkly/node-server-sdk` needs `flush()` before `c
 - **AND** the app uses OpenTelemetry
 - **THEN** the docs show how to start a tracer provider
 - **AND** the docs show an `onShutdown` that calls `shutdown()` within the 25 second deadline
-- **AND** the example does not call `process.exit`
-- **AND** the docs name the Node SDK, metrics SDK, and logs SDK as the same call
+- **AND** the docs name `@opentelemetry/sdk-node`, `@opentelemetry/sdk-metrics`, and `@opentelemetry/sdk-logs` as the same call
+
+### Requirement: Docs show a hot-shots callback flush
+
+The callback example MUST wrap `hot-shots` `client.close(callback)` in a promise returned from `onShutdown`.
+
+#### Scenario: An app uses hot-shots
+
+- **WHEN** an app reads the logging docs for shutdown
+- **AND** the app uses `hot-shots`
+- **THEN** the docs show an `onShutdown` that resolves when `client.close(callback)` calls back
+
+#### Scenario: An app uses Pino with a buffering destination
+
+- **WHEN** an app reads the logging docs for shutdown
+- **AND** the app uses Pino with a buffering destination
+- **THEN** the docs name `logger.flush(callback)` as the same shape as `hot-shots`
+
+### Requirement: Docs describe the dd-trace and LaunchDarkly flushes
+
+The docs MUST describe the `dd-trace` and `@launchdarkly/node-server-sdk` flushes in prose, without another worked example.
 
 #### Scenario: An app uses dd-trace
 
 - **WHEN** an app reads the logging docs for shutdown
 - **AND** the app uses `dd-trace`
-- **THEN** the docs say to flush DogStatsD and wait out one trace flush interval within the 25 second deadline
+- **THEN** the docs say that `dd-trace` has no trace flush that resolves when the agent has the spans
+- **AND** the docs say to call `tracer.dogstatsd.flush()` and wait out one trace flush interval within the 25 second deadline
 - **AND** the docs do not call `process.exit` from that flush
+
+#### Scenario: An app uses LaunchDarkly
+
+- **WHEN** an app reads the logging docs for shutdown
+- **AND** the app uses `@launchdarkly/node-server-sdk`
+- **THEN** the docs say to await `flush()` before calling `close()`

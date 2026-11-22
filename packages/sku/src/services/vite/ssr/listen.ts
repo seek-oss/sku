@@ -106,7 +106,7 @@ const assertNoExistingSigtermListeners = () => {
   const noun = listeners.length === 1 ? 'listener' : 'listeners';
 
   throw new Error(
-    `Found ${listeners.length} SIGTERM ${noun}${named}. A dependency can register a SIGTERM listener. Move shutdown work to onShutdown. Remove a dependency's listener in onListen with process.removeListener('SIGTERM', listener), and call its cleanup from onShutdown.`,
+    `Found ${listeners.length} SIGTERM ${noun}${named}. A dependency can register a SIGTERM listener. Move shutdown work to onShutdown. To drop a dependency's listener, call process.removeAllListeners('SIGTERM') in onListen, and call the dependency's cleanup from onShutdown.`,
   );
 };
 
@@ -118,8 +118,8 @@ const closeHttpServer = (httpServer: HttpServer | HttpsServer) =>
   });
 
 /**
- * Tracks in-flight responses from listen, and returns the `SIGTERM` listener
- * that drains them, calls `onShutdown`, then exits.
+ * Tracks in-flight responses from listen, and returns `register`, which adds
+ * the `SIGTERM` listener that drains them, calls `onShutdown`, then exits.
  */
 const createProductionShutdown = (
   httpServer: HttpServer | HttpsServer,
@@ -129,6 +129,11 @@ const createProductionShutdown = (
   let draining = false;
   let finished = false;
   let deadline: ReturnType<typeof setTimeout> | undefined;
+
+  const exit = (code: number) => {
+    process.removeListener('SIGTERM', onSigterm);
+    process.exit(code);
+  };
 
   const finish = async () => {
     if (finished) {
@@ -144,7 +149,7 @@ const createProductionShutdown = (
       console.error(error);
     }
     clearTimeout(deadline);
-    process.exit(0);
+    exit(0);
   };
 
   httpServer.on('request', (_req, res) => {
@@ -165,7 +170,7 @@ const createProductionShutdown = (
     });
   });
 
-  return () => {
+  function onSigterm() {
     if (draining) {
       return;
     }
@@ -173,7 +178,7 @@ const createProductionShutdown = (
 
     deadline = setTimeout(() => {
       finished = true;
-      process.exit(1);
+      exit(1);
     }, SHUTDOWN_DEADLINE_MS);
     deadline.unref();
 
@@ -190,6 +195,20 @@ const createProductionShutdown = (
         console.error(error);
       });
     }
+  }
+
+  return {
+    register: () => {
+      process.on('SIGTERM', onSigterm);
+      // The server closes partway through a drain. Keep the listener until exit
+      // so a repeated SIGTERM does not fall back to Node's default and kill
+      // onShutdown.
+      httpServer.once('close', () => {
+        if (!draining) {
+          process.removeListener('SIGTERM', onSigterm);
+        }
+      });
+    },
   };
 };
 
@@ -234,7 +253,7 @@ export const listen = async (
   });
 
   httpServer.keepAliveTimeout = PRODUCTION_KEEP_ALIVE_TIMEOUT_MS;
-  const onSigterm = createProductionShutdown(httpServer, options.onShutdown);
+  const shutdown = createProductionShutdown(httpServer, options.onShutdown);
 
   try {
     if (options.onListen) {
@@ -251,10 +270,7 @@ export const listen = async (
     throw error;
   }
 
-  process.on('SIGTERM', onSigterm);
-  httpServer.once('close', () => {
-    process.removeListener('SIGTERM', onSigterm);
-  });
+  shutdown.register();
 
   return { app: serverApp, httpServer };
 };

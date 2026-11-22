@@ -226,18 +226,16 @@ Production startup fails when one already exists.
 That includes a listener your tracing setup registered, and one a dependency registered (for example through `signal-exit`).
 The OpenTelemetry Node SDK sample registers `SIGTERM` and then calls `process.exit`.
 Delete that listener and call `shutdown()` from `onShutdown` instead.
-To drop a listener a dependency registered, remove it in `onListen` and call the dependency's cleanup from `onShutdown`:
+To drop a listener a dependency registered, remove it in `onListen` and call the dependency's cleanup from `onShutdown`.
+A dependency rarely exposes its listener, so remove every `SIGTERM` listener.
+sku registers its own listener after `onListen` returns, so this does not remove it.
 
 ```ts
 import { defineServerEntry } from 'sku/runtime';
 
-const dependencyListener = () => {
-  // The function the dependency passed to process.on('SIGTERM', …).
-};
-
 const server = defineServerEntry({
   onListen() {
-    process.removeListener('SIGTERM', dependencyListener);
+    process.removeAllListeners('SIGTERM');
   },
   onShutdown() {
     // Call the dependency's own flush or close here.

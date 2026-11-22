@@ -55,6 +55,14 @@ After `onListen` returns, the production server MUST register exactly one `SIGTE
 - **AND** the process had no `SIGTERM` listener
 - **THEN** the process has one `SIGTERM` listener
 
+#### Scenario: A repeated SIGTERM during onShutdown is ignored
+
+- **WHEN** the production server has received `SIGTERM`
+- **AND** the HTTP server has closed
+- **AND** `onShutdown` has not finished
+- **THEN** the process still has one `SIGTERM` listener
+- **AND** another `SIGTERM` does not call `onShutdown` again or end the process
+
 ### Requirement: An existing SIGTERM listener fails production startup
 
 When a `SIGTERM` listener exists after `onListen` returns, production startup MUST fail with an error that points to `onShutdown`.

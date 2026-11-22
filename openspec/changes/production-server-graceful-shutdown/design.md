@@ -58,6 +58,8 @@ Already-idle sockets are reset by `close()`, which is Node's own `closeIdleConne
 
 After `onListen`, the production server registers one `SIGTERM` listener that runs the default drain, then awaits optional `onShutdown`.
 
+The listener stays registered until the process exits. The HTTP server closes partway through the drain, before `onShutdown` finishes. Without a listener, a repeated `SIGTERM` would fall back to Node's default and end the process before the flush and the exit code.
+
 A `SIGTERM` listener that already exists after `onListen` fails startup in production only. `sku start` does not check it, because the dev process can have listeners that are not the app's. The error says how many listeners exist, names each one that has a function name, and says that a dependency can register one. It points to `onShutdown`, and says that a dependency's listener can be removed in `onListen` and its cleanup called from `onShutdown`.
 
 Alternative considered: `replaceShutdown(handler)` on `onListen`, so an app could skip sku's drain and own the whole `SIGTERM` path under the same deadline. Rejected. Apps that already register their own drain do the same `server.close()` plus hard-exit pattern sku will own; they should drop that handler and keep flush work in `onShutdown`. No Managed Data Mode need was found for a different drain. SSE is already an in-flight HTTP response under the deadline. WebSockets would need explicit close if an app adds them later, which is not a reason for a drain-replacement hook now.

@@ -171,7 +171,7 @@ describe('production server shutdown', () => {
     process.on('SIGTERM', dependencyListener);
     try {
       await expect(startServer()).rejects.toThrowErrorMatchingInlineSnapshot(
-        `[Error: Found 1 SIGTERM listener: dependencyListener. A dependency can register a SIGTERM listener. Move shutdown work to onShutdown. Remove a dependency's listener in onListen with process.removeListener('SIGTERM', listener), and call its cleanup from onShutdown.]`,
+        `[Error: Found 1 SIGTERM listener: dependencyListener. A dependency can register a SIGTERM listener. Move shutdown work to onShutdown. To drop a dependency's listener, call process.removeAllListeners('SIGTERM') in onListen, and call the dependency's cleanup from onShutdown.]`,
       );
     } finally {
       process.removeListener('SIGTERM', dependencyListener);
@@ -180,11 +180,10 @@ describe('production server shutdown', () => {
   });
 
   it('lets onListen remove a dependency SIGTERM listener before startup continues', async () => {
-    const dependencyListener = () => {};
-    process.on('SIGTERM', dependencyListener);
+    process.on('SIGTERM', () => {});
     await startServer({
       onListen() {
-        process.removeListener('SIGTERM', dependencyListener);
+        process.removeAllListeners('SIGTERM');
       },
     });
 
@@ -390,6 +389,30 @@ describe('production server shutdown', () => {
     });
     expect(order).toEqual(['response', 'onShutdown']);
     expect(exit).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps the SIGTERM listener after the server closes while onShutdown runs', async () => {
+    const exit = mockExit();
+    const flush = deferred();
+    const onShutdown = vi.fn(() => flush.promise);
+    const { httpServer } = await startServer({ onShutdown });
+    const closed = new Promise<void>((resolve) => {
+      httpServer.once('close', () => resolve());
+    });
+
+    process.emit('SIGTERM');
+    await closed;
+    expect(onShutdown).toHaveBeenCalledTimes(1);
+    expect(process.listenerCount('SIGTERM')).toBe(1);
+
+    process.emit('SIGTERM');
+    flush.resolve();
+    await vi.waitFor(() => {
+      expect(exit).toHaveBeenCalledWith(0);
+    });
+    expect(onShutdown).toHaveBeenCalledTimes(1);
+    expect(exit).toHaveBeenCalledTimes(1);
+    expect(process.listenerCount('SIGTERM')).toBe(0);
   });
 
   it('reports a rejected onShutdown and still exits 0', async () => {

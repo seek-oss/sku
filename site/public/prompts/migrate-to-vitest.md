@@ -29,7 +29,21 @@ Unless the user asks otherwise:
 
 - Work on a single new branch off the base branch.
 - Commit each logical step separately (dependency install, codemod, manual fixes, snapshot updates, ESM conversion, Jest cleanup).
-- Commit messages: the commit description (body) is used as the PR description, so write it as dot points. List only highlights/notable changes that are unexpected or worth calling out (workarounds, added config, fixes, removed deps, anything a reviewer wouldn't assume). Skip routine codemod output. Don't list things that weren't needed or didn't apply. End the body with a final line (after the dot points, separated by a blank line): `This migration was undertaken by following this migration guide: https://seek-oss.github.io/sku/vitest`.
+- Commit message bodies are combined later to make the PR description, so write them in this format:
+  - Subject line: a short summary of the step.
+  - Body: one `- ` dot point per notable change, each on a single line (no wrapping, no nested dot points). Notable means something a reviewer wouldn't assume: workarounds, added config, fixes, removed deps. Leave out routine codemod output and anything that wasn't needed or didn't apply. If a step has nothing notable, leave the body empty.
+- Build the PR description from the commit bodies: keep only the dot-point lines (oldest commit first), then add a blank line and `This migration was undertaken by following this migration guide: https://seek-oss.github.io/sku/vitest`. That line goes in the PR description only, not in any commit. Don't use `gh pr create --fill` or `--fill-verbose`: they use the branch name as the title, nest each body under its commit subject, and include trailers such as `Co-authored-by`.
+
+  ```sh
+  body=$(mktemp)
+  {
+    git log --reverse --format=%b <base>..HEAD | grep '^- '
+    echo
+    echo 'This migration was undertaken by following this migration guide: https://seek-oss.github.io/sku/vitest'
+  } > "$body"
+  # Only with the user's permission:
+  gh pr create --draft --base <base> --title 'Migrate from Jest to Vitest' --body-file "$body"
+  ```
 
 ## Dependency pinning conventions
 
@@ -100,5 +114,5 @@ ESM is typically required alongside Vitest because of Jest's ESM limitations. Sk
 
 - Summarize the changes, anything left unmigrated, and manual follow-ups.
 - Raise any ambiguous dependency pinning decisions (see "Dependency pinning conventions"), listing each dep, what you chose, and why, and ask whether to change it. If the answer changes a pin, amend it into the relevant commit.
-- Confirm the final commit description has the dot-point highlights and the migration guide line.
-- **Do not push or open a PR** without the user's explicit permission.
+- Confirm each notable change is a single-line dot point in a commit body (check with `git log --reverse --format='%s%n%b' <base>..HEAD`).
+- **Do not push or open a PR** without the user's explicit permission. If the user will open the PR themselves, give them the generated PR description (see "Branch and commits") in a code block so they can paste it.

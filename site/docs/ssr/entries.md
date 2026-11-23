@@ -208,6 +208,7 @@ On `SIGTERM`, production stops accepting connections, closes idle sockets, lets 
 A request that still arrives on an open socket during shutdown is served with `Connection: close`.
 If shutdown has not finished 25 seconds after `SIGTERM`, the process exits 1 and `onShutdown` does not run.
 Those 25 seconds assume a platform grace period of 30 seconds.
+A Kubernetes `preStop` hook runs inside that grace period, so a `preStop` sleep longer than 5 seconds lets the platform kill the process before the deadline.
 sku calls `process.exit`, so `beforeExit` handlers do not run.
 
 `onShutdown` takes no arguments and may return a promise.

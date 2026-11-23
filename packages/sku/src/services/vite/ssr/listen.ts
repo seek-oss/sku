@@ -22,7 +22,7 @@ import type {
 /** Outlives a proxy idle timeout of about 30 seconds. The socket timer fires one second later. */
 const PRODUCTION_KEEP_ALIVE_TIMEOUT_MS = 35_000;
 
-/** Leaves 5 seconds of a 30 second termination grace period for signal delivery and flush. */
+/** Leaves 5 seconds of a 30 second termination grace period as margin for signal delivery and exit. */
 const SHUTDOWN_DEADLINE_MS = 25_000;
 
 export type { RenderFunction } from './createHtmlRenderMiddleware.js';

@@ -8,7 +8,7 @@ Node destroys an idle socket at `keepAliveTimeout` plus `keepAliveTimeoutBuffer`
 
 `server.close()` drops sockets that are already idle. On Node 24 it does not drop a socket that has connected and not sent a request. The headers timer closes that socket with a 408, but only after `headersTimeout`, checked every `connectionsCheckingInterval` (30 seconds by default), so 60 to 90 seconds after it connected. That is past the 25 second deadline. On Node 26 `close()` drops it. A response that finishes during `close()` then waits out `keepAliveTimeout` plus the 1 second buffer unless the socket is closed again. Node does not add `Connection: close` to responses sent after `close()`.
 
-On Kubernetes, the platform usually delays `SIGTERM` while the pod leaves the load balancer or mesh, then sends `SIGKILL` when the termination grace period ends, 30 seconds by default. Node often runs as PID 1 in a container, so without a listener it ignores `SIGTERM` until the kill. `process.exit` skips `beforeExit`, so a `BatchSpanProcessor`, `dd-trace` or a StatsD client drops its last batch unless the app flushes it first.
+On Kubernetes, the pod leaves its Service endpoints at the same time as it receives `SIGTERM`, after any `preStop` hook has run. The load balancer or mesh can route requests to the pod until it sees that change, so `SIGTERM` is delayed only when the platform or app sets a `preStop` sleep. `SIGKILL` follows when the termination grace period ends, 30 seconds by default, counted from the start of `preStop`. Node often runs as PID 1 in a container, so without a listener it ignores `SIGTERM` until the kill. `process.exit` skips `beforeExit`, so a `BatchSpanProcessor`, `dd-trace` or a StatsD client drops its last batch unless the app flushes it first.
 
 ## Goals / Non-Goals
 
@@ -57,7 +57,7 @@ For a response that has not sent headers, set `Connection: close` so Node treats
 
 A request that arrives after `SIGTERM` gets `Connection: close` too. On Node 24 a pre-request socket stays open while any response is in flight, so it can still send a request during the drain. Any socket that was part-way through sending headers at `SIGTERM` can too, on either Node major. Sku serves that request and closes the socket after it, rather than resetting it. The request listener is prepended, so it runs before Express and no middleware has sent headers yet.
 
-Already-idle sockets are reset by `close()`, which is Node's own `closeIdleConnections`. The time a supervisor waits before `SIGTERM` is what stops new requests from landing on those sockets. This design does not add a clean shutdown for a socket that is already idle.
+Already-idle sockets are reset by `close()`, which is Node's own `closeIdleConnections`. Only a delay before `SIGTERM`, such as a `preStop` sleep, stops new requests from landing on those sockets. This design does not add a clean shutdown for a socket that is already idle.
 
 Alternatives considered for Node 24's pre-request sockets:
 
@@ -79,7 +79,7 @@ Alternative considered: `replaceShutdown(handler)` on `onListen`, so an app coul
 
 The listener first starts a 25 second timer that calls `process.exit(1)`. The timer is `unref`ed so it never holds a finished process open. Once it fires, the drain and `onShutdown` are abandoned.
 
-A platform measures its grace period from outside the container, so 25 seconds leaves 5 seconds of a 30 second grace period for signal delivery and the flush. Exit 1 shows up in container exit-code monitoring as a failed drain, where a `SIGKILL` would look like any other 137.
+A platform measures its grace period from outside the container, so 25 seconds leaves 5 seconds of a 30 second grace period as margin for signal delivery and process exit. `onShutdown` runs inside the 25 seconds, not the margin. A `preStop` hook runs inside the same grace period, so a `preStop` sleep longer than 5 seconds lets `SIGKILL` arrive before the deadline. Exit 1 shows up in container exit-code monitoring as a failed drain, where a `SIGKILL` would look like any other 137.
 
 The deadline is fixed for now. 30 seconds is the Kubernetes default grace period. A server entry option can be added later without breaking apps, while removing one would. Until then a single value keeps apps consistent, and the first app that needs another value shows what the option should look like.
 
@@ -100,7 +100,8 @@ Alternative considered: shut down globally registered OpenTelemetry providers fr
 
 - [Peer idle timeout is longer than 35 seconds] → `onListen` sets a higher `keepAliveTimeout`.
 - [Headers already sent when `SIGTERM` arrives] → the response cannot say `Connection: close`. The socket closes when the response ends.
-- [Idle sockets are reset] → a request already written by the peer fails with `ECONNRESET`. That window is the supervisor's delay before `SIGTERM`, which this change does not set.
+- [Idle sockets are reset] → a request already written by the peer fails with `ECONNRESET`. Only a delay before `SIGTERM`, such as a `preStop` sleep, closes that window. This change does not set one.
+- [`SIGTERM` arrives before the load balancer or mesh stops routing to the pod] → `close()` stops accepting at once, so new connections are refused until routing catches up. A `preStop` sleep avoids this. Sku does not set one.
 - [A response runs past 25 seconds] → the process exits 1 and the remaining flush is lost.
 - [The platform's grace period is not 30 seconds] → on a shorter one `SIGKILL` arrives first, as it did before this change; on a longer one sku exits before the platform requires. The app cannot change this until sku adds an option. The docs say the deadline assumes a 30 second grace period.
 - [A dependency registers a `SIGTERM` listener] → production startup fails even though the app wrote no handler, for example through a library built on `signal-exit`. The error says a dependency can be the cause. The app turns off the library's signal handling with the library's own option or function, and calls its shutdown from `onShutdown`. When the library has neither, the app calls `process.removeAllListeners('SIGTERM')` in `onListen`.

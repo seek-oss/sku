@@ -4,9 +4,9 @@
 
 See proposal.md for why. Three keep-alive choices sit in front of the drain, in this order.
 
-Node destroys an idle socket at `keepAliveTimeout` plus `keepAliveTimeoutBuffer` (default 1 second). The default `keepAliveTimeout` is 5 seconds, so the socket dies at 6 seconds. `headersTimeout` defaults to 60 seconds and must stay strictly above `keepAliveTimeout`, or the headers timer cuts the idle socket first. A `headersTimeout` of 0 turns the headers timer off.
+Node destroys an idle socket at `keepAliveTimeout` plus `keepAliveTimeoutBuffer` (default 1 second). The default `keepAliveTimeout` is 5 seconds, so the socket dies at 6 seconds. `headersTimeout` defaults to 60 seconds and limits how long a socket can take to send complete request headers. It starts when the socket connects and again when the next request begins, so it does not apply to an idle keep-alive socket after a finished response. On Node 24 and Node 26, a socket with `keepAliveTimeout` 5000 and `headersTimeout` 1000 stays open for 6 seconds after a response. The advice to keep `headersTimeout` above `keepAliveTimeout` worked around [nodejs/node#27363](https://github.com/nodejs/node/issues/27363), which Node 12.19 and Node 14 fixed.
 
-`server.close()` drops sockets that are already idle. On Node 24 it does not drop a socket that has connected and not sent a request, and the headers timer does not start until the first byte arrives, so that socket stays open until the client closes it. On Node 26 `close()` drops it. A response that finishes during `close()` then waits out `keepAliveTimeout` plus the 1 second buffer unless the socket is closed again. Node does not add `Connection: close` to responses sent after `close()`.
+`server.close()` drops sockets that are already idle. On Node 24 it does not drop a socket that has connected and not sent a request. The headers timer closes that socket with a 408, but only after `headersTimeout`, checked every `connectionsCheckingInterval` (30 seconds by default), so 60 to 90 seconds after it connected. That is past the 25 second deadline. On Node 26 `close()` drops it. A response that finishes during `close()` then waits out `keepAliveTimeout` plus the 1 second buffer unless the socket is closed again. Node does not add `Connection: close` to responses sent after `close()`.
 
 On Kubernetes, the platform usually delays `SIGTERM` while the pod leaves the load balancer or mesh, then sends `SIGKILL` when the termination grace period ends, 30 seconds by default. Node often runs as PID 1 in a container, so without a listener it ignores `SIGTERM` until the kill. `process.exit` skips `beforeExit`, so a `BatchSpanProcessor`, `dd-trace` or a StatsD client drops its last batch unless the app flushes it first.
 
@@ -15,7 +15,7 @@ On Kubernetes, the platform usually delays `SIGTERM` while the pod leaves the lo
 **Goals:**
 
 - One production default that outlives a peer idle timeout of about 30 seconds, without moving `headersTimeout`.
-- An `onListen` override that cannot invert that relationship.
+- An `onListen` override that can raise or lower that default.
 - A `SIGTERM` drain that closes idle sockets and the socket of a finished in-flight response, on Node 24 and Node 26.
 - An exit before `SIGKILL` that tells a stalled drain apart from a clean one.
 - Apps can see how to start and flush the telemetry clients they use from `onShutdown`.
@@ -40,11 +40,14 @@ Alternatives considered:
 
 The 35 seconds depends on the drain below. Without it, a finished in-flight socket waits 36 seconds, past the 25 second deadline, so every drain with an in-flight keep-alive request would exit 1. The keep-alive default and the drain ship together.
 
-### Fail startup when keep-alive meets the headers timeout
+### Leave headersTimeout alone
 
-After `onListen`, if `headersTimeout` is greater than 0 and `keepAliveTimeout >= headersTimeout`, startup fails through the same path as a thrown `onListen`. A `headersTimeout` of 0 means the app turned the headers timer off, so there is nothing to compare. Sku does not raise `headersTimeout` or `requestTimeout`. An app that needs a longer keep-alive sets both, with `headersTimeout` still less than or equal to `requestTimeout` (Node rejects the opposite).
+Sku does not change or check `headersTimeout` or `requestTimeout`. Neither applies to an idle keep-alive socket, so an app that needs a longer keep-alive sets only `keepAliveTimeout`.
 
-Alternative considered: bump `headersTimeout` to `keepAliveTimeout + 1000`. That hides a second timer the app did not ask to change, and it fails anyway once `headersTimeout` would exceed `requestTimeout`.
+Alternatives considered:
+
+- **Fail startup when `keepAliveTimeout >= headersTimeout`.** That enforces the workaround for nodejs/node#27363, which no supported Node version needs, and would fail a valid config.
+- **Bump `headersTimeout` to `keepAliveTimeout + 1000`.** That changes a second timer the app did not ask to change, for no effect on idle sockets.
 
 ### Close the socket instead of waiting out the keep-alive
 
@@ -60,7 +63,7 @@ After `onListen`, the production server registers one `SIGTERM` listener that ru
 
 The listener stays registered until the process exits. The HTTP server closes partway through the drain, before `onShutdown` finishes. Without a listener, a repeated `SIGTERM` would fall back to Node's default and end the process before the flush and the exit code.
 
-A `SIGTERM` listener that already exists after `onListen` fails startup in production only. `sku start` does not check it, because the dev process can have listeners that are not the app's. The error says how many listeners exist, names each one that has a function name, and says that a dependency can register one. It points to `onShutdown`, and says that a dependency's listener can be removed in `onListen` and its cleanup called from `onShutdown`.
+A `SIGTERM` listener that already exists after `onListen` fails startup in production only. `sku start` does not check it, because the dev process can have listeners that are not the app's. The error says how many listeners exist, names each one that has a function name, and says that a dependency can register one. It points to `onShutdown`. For a dependency's listener, it says to turn off the dependency's signal handling with its own option or function in `onListen` and call its shutdown from `onShutdown`. Only when the dependency has neither does it say to call `process.removeAllListeners('SIGTERM')` in `onListen`, because removing a listener behind a library's back can leave it thinking its handler is still installed.
 
 Alternative considered: `replaceShutdown(handler)` on `onListen`, so an app could skip sku's drain and own the whole `SIGTERM` path under the same deadline. Rejected. A hand-written drain is usually the same `server.close()` plus hard-exit pattern sku now owns, so an app can drop that handler and keep flush work in `onShutdown`. SSE is already an in-flight HTTP response under the deadline. WebSockets would need explicit close if an app adds them later, which is not a reason for a drain-replacement hook now.
 
@@ -87,11 +90,11 @@ Alternative considered: shut down globally registered OpenTelemetry providers fr
 
 ## Risks / Trade-offs
 
-- [Peer idle timeout is longer than 35 seconds] → `onListen` sets a higher `keepAliveTimeout` and a higher `headersTimeout`. Startup fails if it forgets the headers timeout.
+- [Peer idle timeout is longer than 35 seconds] → `onListen` sets a higher `keepAliveTimeout`.
 - [Headers already sent when `SIGTERM` arrives] → the response cannot say `Connection: close`. The socket closes when the response ends.
 - [Idle sockets are reset] → a request already written by the peer fails with `ECONNRESET`. That window is the supervisor's delay before `SIGTERM`, which this change does not set.
 - [A response runs past 25 seconds] → the process exits 1 and the remaining flush is lost.
 - [The platform's grace period is not 30 seconds] → on a shorter one `SIGKILL` arrives first, as it did before this change; on a longer one sku exits before the platform requires. The app cannot change this until sku adds an option. The docs say the deadline assumes a 30 second grace period.
-- [A dependency registers a `SIGTERM` listener] → production startup fails even though the app wrote no handler, for example through a library built on `signal-exit`. The error says a dependency can be the cause. The app removes that listener in `onListen` and calls the library's cleanup from `onShutdown`.
+- [A dependency registers a `SIGTERM` listener] → production startup fails even though the app wrote no handler, for example through a library built on `signal-exit`. The error says a dependency can be the cause. The app turns off the library's signal handling with the library's own option or function, and calls its shutdown from `onShutdown`. When the library has neither, the app calls `process.removeAllListeners('SIGTERM')` in `onListen`.
 - [A dependency registers a `SIGTERM` listener after startup] → the startup check does not see it. If that listener calls `process.exit`, it cuts the drain and `onShutdown` short.
 - [An app omits a flush] → buffered telemetry is lost. The docs show how for common clients.

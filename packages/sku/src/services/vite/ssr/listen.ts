@@ -80,19 +80,6 @@ export const mountConsumerMiddleware = (
   }
 };
 
-const assertKeepAliveBelowHeadersTimeout = (
-  httpServer: HttpServer | HttpsServer,
-) => {
-  if (
-    httpServer.headersTimeout > 0 &&
-    httpServer.keepAliveTimeout >= httpServer.headersTimeout
-  ) {
-    throw new Error(
-      `keepAliveTimeout (${httpServer.keepAliveTimeout}) must be less than headersTimeout (${httpServer.headersTimeout}).`,
-    );
-  }
-};
-
 const assertNoExistingSigtermListeners = () => {
   const listeners = process.listeners('SIGTERM');
   if (listeners.length === 0) {
@@ -106,7 +93,7 @@ const assertNoExistingSigtermListeners = () => {
   const noun = listeners.length === 1 ? 'listener' : 'listeners';
 
   throw new Error(
-    `Found ${listeners.length} SIGTERM ${noun}${named}. A dependency can register a SIGTERM listener. Move shutdown work to onShutdown. To drop a dependency's listener, call process.removeAllListeners('SIGTERM') in onListen, and call the dependency's cleanup from onShutdown.`,
+    `Found ${listeners.length} SIGTERM ${noun}${named}. A dependency can register a SIGTERM listener. Move shutdown work to onShutdown. For a dependency's listener, turn off its signal handling in onListen with the dependency's own option or function, and call its shutdown from onShutdown. If it has no such option or function, call process.removeAllListeners('SIGTERM') in onListen instead.`,
   );
 };
 
@@ -263,7 +250,6 @@ export const listen = async (
         port: resolveBoundPort(httpServer, options.port),
       });
     }
-    assertKeepAliveBelowHeadersTimeout(httpServer);
     assertNoExistingSigtermListeners();
   } catch (error) {
     await closeHttpServer(httpServer);

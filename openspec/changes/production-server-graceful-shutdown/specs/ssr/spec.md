@@ -15,24 +15,9 @@ Before calling `onListen`, the production server MUST set `keepAliveTimeout` to 
 
 #### Scenario: onListen replaces the timeout
 
-- **WHEN** `onListen` sets `keepAliveTimeout` to 40000
-- **AND** `headersTimeout` is still greater than 40000
-- **THEN** `keepAliveTimeout` is 40000 after `onListen` returns
-
-### Requirement: Keep-alive timeout stays below an enabled headers timeout
-
-After `onListen` returns, startup MUST fail when `headersTimeout` is greater than 0 and `keepAliveTimeout` is greater than or equal to it.
-
-#### Scenario: App sets keep-alive at the headers timeout
-
-- **WHEN** `onListen` sets `keepAliveTimeout` to 60000
+- **WHEN** `onListen` sets `keepAliveTimeout` to 65000
+- **THEN** `keepAliveTimeout` is 65000 after `onListen` returns
 - **AND** `headersTimeout` is 60000
-- **THEN** startup fails
-
-#### Scenario: App turns off the headers timeout
-
-- **WHEN** `onListen` sets `headersTimeout` to 0
-- **THEN** startup does not fail on `keepAliveTimeout`
 
 ### Requirement: sku start leaves keep-alive and SIGTERM to the app
 
@@ -73,6 +58,8 @@ When a `SIGTERM` listener exists after `onListen` returns, production startup MU
 - **THEN** startup fails
 - **AND** the error says a dependency can register the listener
 - **AND** the error points to `onShutdown`
+- **AND** the error says to turn off a dependency's listener with the dependency's own option or function first
+- **AND** the error says to call `process.removeAllListeners('SIGTERM')` in `onListen` only when the dependency has neither
 
 ### Requirement: Shutdown closes sockets that have no in-flight response
 

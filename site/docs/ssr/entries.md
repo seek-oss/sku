@@ -167,11 +167,9 @@ Use it for readiness logging with the bound port, a longer keep-alive, or rare E
 sku does not call it again on server-entry HMR.
 Omit it if you do not need a post-listen hook.
 
-Production sets `keepAliveTimeout` to 35 seconds before `onListen`, and leaves `headersTimeout` at Node's 60 seconds.
+Production sets `keepAliveTimeout` to 35 seconds before `onListen`.
 `sku start` does not set keep-alive.
 You can replace the production timeout here.
-Startup fails when `headersTimeout` is enabled and `keepAliveTimeout` is greater than or equal to it.
-A `headersTimeout` of 0 turns that timer off, and startup does not compare the two.
 
 Set keep-alive above the idle timeout of the proxy in front of the app.
 For a proxy that idles out at 60 seconds:
@@ -182,14 +180,12 @@ import { defineServerEntry } from 'sku/runtime';
 defineServerEntry({
   onListen({ httpServer }) {
     httpServer.keepAliveTimeout = 65_000;
-    httpServer.headersTimeout = 66_000;
   },
 });
 ```
 
-Node also requires `headersTimeout` to be less than or equal to `requestTimeout`.
-`requestTimeout` stays at Node's default of 5 minutes.
-sku does not change it.
+`headersTimeout` does not need to be above `keepAliveTimeout`.
+It only limits how long a client can take to send request headers, and does not apply to an idle keep-alive connection.
 
 For a single reverse-proxy hop, prefer config [`expressTrustProxy`](../configuration.md#expresstrustproxy) (hop count `1`).
 Override other trust-proxy values here via `app.set('trust proxy', …)`.
@@ -226,8 +222,12 @@ Production startup fails when one already exists.
 That includes a listener your tracing setup registered, and one a dependency registered (for example through `signal-exit`).
 The OpenTelemetry Node SDK sample registers `SIGTERM` and then calls `process.exit`.
 Delete that listener and call `shutdown()` from `onShutdown` instead.
-To drop a listener a dependency registered, remove it in `onListen` and call the dependency's cleanup from `onShutdown`.
-A dependency rarely exposes its listener, so remove every `SIGTERM` listener.
+
+For a listener a dependency registered, use the dependency's own way to turn off its signal handling, such as a config option or a function that removes its listener.
+Call that in `onListen`, or when you set up the dependency, and call the dependency's shutdown or close from `onShutdown`.
+Removing the listener behind the dependency's back can leave it thinking its handler is still installed.
+
+If the dependency has no way to turn it off, remove every `SIGTERM` listener in `onListen`.
 sku registers its own listener after `onListen` returns, so this does not remove it.
 
 ```ts
@@ -235,10 +235,11 @@ import { defineServerEntry } from 'sku/runtime';
 
 const server = defineServerEntry({
   onListen() {
+    // Only when the dependency has no option or function to remove its listener.
     process.removeAllListeners('SIGTERM');
   },
   onShutdown() {
-    // Call the dependency's own flush or close here.
+    // Call the dependency's own shutdown or close here.
   },
 });
 

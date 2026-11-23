@@ -48,18 +48,25 @@ After `onListen` returns, the production server MUST register exactly one `SIGTE
 - **THEN** the process still has one `SIGTERM` listener
 - **AND** another `SIGTERM` does not call `onShutdown` again or end the process
 
-### Requirement: An existing SIGTERM listener fails production startup
+### Requirement: An existing SIGTERM listener fails startup
 
-When a `SIGTERM` listener exists after `onListen` returns, production startup MUST fail with an error that points to `onShutdown`.
+When a `SIGTERM` listener exists after `onListen` returns, startup MUST fail with an error that points to `onShutdown`, in production and in `sku start`.
+`sku start` MUST ignore listeners that existed before it loaded the server entry, and listeners that `devServerMiddleware` registered.
 
 #### Scenario: A listener registered by the app or a dependency
 
-- **WHEN** a `SIGTERM` listener exists after `onListen` returns in production
+- **WHEN** a `SIGTERM` listener exists after `onListen` returns in production or `sku start`
 - **THEN** startup fails
 - **AND** the error says a dependency can register the listener
 - **AND** the error points to `onShutdown`
 - **AND** the error says to turn off a dependency's listener with the dependency's own option or function first
 - **AND** the error says to call `process.removeAllListeners('SIGTERM')` in `onListen` only when the dependency has neither
+
+#### Scenario: sku start ignores listeners that do not run in production
+
+- **WHEN** a `SIGTERM` listener existed before `sku start` loaded the server entry, or `devServerMiddleware` registered it
+- **AND** no other `SIGTERM` listener exists after `onListen` returns
+- **THEN** `sku start` listens
 
 ### Requirement: Shutdown closes sockets that have no in-flight response
 
@@ -114,7 +121,7 @@ On `SIGTERM`, the production server MUST let in-flight responses finish and then
 
 ### Requirement: Shutdown awaits onShutdown
 
-After in-flight responses finish, the production server MUST await `onShutdown` when the server entry defines it, and continue shutting down when it throws or rejects.
+After in-flight responses finish, the production server MUST await `onShutdown` when the server entry defines it, and exit 1 when it throws or rejects.
 
 #### Scenario: onShutdown runs after responses finish
 
@@ -123,11 +130,11 @@ After in-flight responses finish, the production server MUST await `onShutdown` 
 - **THEN** `onShutdown` runs after in-flight responses finish
 - **AND** the process exits 0
 
-#### Scenario: onShutdown failure still exits 0
+#### Scenario: onShutdown failure exits 1
 
 - **WHEN** `onShutdown` throws or rejects
 - **THEN** the error is reported
-- **AND** the process exits 0
+- **AND** the process exits 1
 
 ### Requirement: Shutdown exits 1 after 25 seconds
 

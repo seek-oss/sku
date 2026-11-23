@@ -10,6 +10,7 @@ import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
 import { SSR_CSS_VIRTUAL_HREF } from '../plugins/ssrCss/constants.js';
 import { createSsrRequestContextMiddleware } from './ssrRequestContextMiddleware.js';
 import {
+  assertNoExistingSigtermListeners,
   createHtmlRenderMiddleware,
   mountConsumerMiddleware,
   resolveBoundPort,
@@ -76,6 +77,10 @@ export const createDevSsrServer = async ({
     },
   });
 
+  // Listeners from the dev process and devServerMiddleware never run in
+  // production, so only the server entry's count towards the SIGTERM check.
+  const hostSigtermListeners = new Set(process.listeners('SIGTERM'));
+
   const serverModule = (await vite.ssrLoadModule(
     serverEntry,
   )) as SsrServerModule;
@@ -86,9 +91,17 @@ export const createDevSsrServer = async ({
       'Using dev server middleware at %s',
       skuContext.paths.devServerMiddleware,
     );
+    const listenersBeforeDevServerMiddleware = new Set(
+      process.listeners('SIGTERM'),
+    );
     const devServerMiddleware = (
       await import(skuContext.paths.devServerMiddleware)
     ).default;
+    for (const listener of process.listeners('SIGTERM')) {
+      if (!listenersBeforeDevServerMiddleware.has(listener)) {
+        hostSigtermListeners.add(listener);
+      }
+    }
     if (devServerMiddleware && typeof devServerMiddleware === 'function') {
       loadDevServerMiddleware = devServerMiddleware;
       log('Dev server middleware loaded');
@@ -137,25 +150,27 @@ export const createDevSsrServer = async ({
     httpServer.listen(listenPort, resolve);
   });
 
-  // Call once from the initial server entry — do not re-fire on HMR reload.
-  if (serverModule.onListen) {
-    try {
+  try {
+    // Call once from the initial server entry — do not re-fire on HMR reload.
+    if (serverModule.onListen) {
       await serverModule.onListen({
         app: serverApp,
         httpServer,
         port: resolveBoundPort(httpServer, listenPort),
       });
-    } catch (error) {
-      await Promise.all([
-        vite.close(),
-        new Promise<void>((resolve, reject) => {
-          httpServer.close((closeError) =>
-            closeError ? reject(closeError) : resolve(),
-          );
-        }),
-      ]);
-      throw error;
     }
+    // Fail here rather than on the first production deploy.
+    assertNoExistingSigtermListeners(hostSigtermListeners);
+  } catch (error) {
+    await Promise.all([
+      vite.close(),
+      new Promise<void>((resolve, reject) => {
+        httpServer.close((closeError) =>
+          closeError ? reject(closeError) : resolve(),
+        );
+      }),
+    ]);
+    throw error;
   }
 
   // Parity with static middlewarePlugin.configureServer: mark when ready to load.

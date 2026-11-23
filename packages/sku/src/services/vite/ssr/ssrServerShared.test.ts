@@ -8,6 +8,7 @@ import path from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Request, RequestHandler, Response } from 'express';
 import {
+  assertNoExistingSigtermListeners,
   createHtmlRenderMiddleware,
   createWebRequest,
   listen,
@@ -1103,7 +1104,7 @@ describe('production server shutdown', () => {
     expect(process.listenerCount('SIGTERM')).toBe(0);
   });
 
-  it('reports a rejected onShutdown and still exits 0', async () => {
+  it('reports a rejected onShutdown and exits 1', async () => {
     const exit = mockExit();
     const reported = vi.spyOn(console, 'error').mockImplementation(() => {});
     await startServer({
@@ -1114,11 +1115,47 @@ describe('production server shutdown', () => {
 
     process.emit('SIGTERM');
     await vi.waitFor(() => {
-      expect(exit).toHaveBeenCalledWith(0);
+      expect(exit).toHaveBeenCalledWith(1);
     });
+    expect(exit).toHaveBeenCalledTimes(1);
     expect(reported).toHaveBeenCalledWith(expect.any(Error));
     expect(reported.mock.calls[0]?.[0]).toMatchObject({
       message: 'flush failed',
     });
+  });
+});
+
+describe('assertNoExistingSigtermListeners', () => {
+  const registered: Array<() => void> = [];
+
+  const addSigtermListener = (listener: () => void) => {
+    process.on('SIGTERM', listener);
+    registered.push(listener);
+  };
+
+  afterEach(() => {
+    for (const listener of registered.splice(0)) {
+      process.removeListener('SIGTERM', listener);
+    }
+  });
+
+  it('ignores listeners the host registered', () => {
+    function hostListener() {}
+    addSigtermListener(hostListener);
+
+    expect(() =>
+      assertNoExistingSigtermListeners(new Set([hostListener])),
+    ).not.toThrow();
+  });
+
+  it('names only the listeners the host did not register', () => {
+    function hostListener() {}
+    function entryListener() {}
+    addSigtermListener(hostListener);
+    addSigtermListener(entryListener);
+
+    expect(() =>
+      assertNoExistingSigtermListeners(new Set([hostListener])),
+    ).toThrow(/^Found 1 SIGTERM listener: entryListener\./);
   });
 });

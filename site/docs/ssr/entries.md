@@ -207,11 +207,15 @@ Production registers one `SIGTERM` listener after `onListen` returns.
 On `SIGTERM`, production stops accepting connections, closes idle sockets, lets in-flight responses finish, closes their sockets, awaits `onShutdown`, and exits 0.
 A request that still arrives on an open socket during shutdown is served with `Connection: close`.
 If shutdown has not finished 25 seconds after `SIGTERM`, the process exits 1 and `onShutdown` does not run.
-Those 25 seconds assume a platform grace period of 30 seconds.
-A Kubernetes `preStop` hook runs inside that grace period, so a `preStop` sleep longer than 5 seconds lets the platform kill the process before the deadline.
+Those 25 seconds assume the platform sends `SIGKILL` 30 seconds after `SIGTERM`.
 sku calls `process.exit`, so `beforeExit` handlers do not run.
 
+Production stops accepting new connections as soon as `SIGTERM` arrives.
+Have the platform stop routing to the instance before it sends `SIGTERM`, for example with a Kubernetes `preStop` delay.
+On Kubernetes, `preStop` counts against the termination grace period, so raise the grace period by the length of the delay.
+
 `onShutdown` takes no arguments and may return a promise.
+If it throws or rejects, sku reports the error and exits 1.
 Do not call `process.exit` from it.
 Omitting it is fine.
 
@@ -220,7 +224,8 @@ Start the clients you use when the server entry loads, and flush them from `onSh
 See [Logging → Shutdown](./logging.md#shutdown).
 
 Do not register a `SIGTERM` listener.
-Production startup fails when one already exists.
+Startup fails when a `SIGTERM` listener exists after `onListen`, in `sku start` as well as production.
+`sku start` ignores listeners from the dev process and from [`devServerMiddleware`](./middleware.md#dev-only-mocks-devservermiddleware), because they do not run in production.
 That includes a listener your tracing setup registered, and one a dependency registered (for example through `signal-exit`).
 The OpenTelemetry Node SDK sample registers `SIGTERM` and then calls `process.exit`.
 Delete that listener and call `shutdown()` from `onShutdown` instead.

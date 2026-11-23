@@ -80,8 +80,17 @@ export const mountConsumerMiddleware = (
   }
 };
 
-const assertNoExistingSigtermListeners = () => {
-  const listeners = process.listeners('SIGTERM');
+/**
+ * Throws when the process has a `SIGTERM` listener that is not in
+ * `hostListeners`, which `sku start` uses for listeners that never run in
+ * production.
+ */
+export const assertNoExistingSigtermListeners = (
+  hostListeners: ReadonlySet<unknown> = new Set(),
+) => {
+  const listeners = process
+    .listeners('SIGTERM')
+    .filter((listener) => !hostListeners.has(listener));
   if (listeners.length === 0) {
     return;
   }
@@ -130,13 +139,15 @@ const createProductionShutdown = (
     // Node 24's close() and closeIdleConnections() leave a socket that has
     // connected and not sent a request. Nothing is in flight now.
     httpServer.closeAllConnections();
+    let code = 0;
     try {
       await onShutdown?.();
     } catch (error) {
       console.error(error);
+      code = 1;
     }
     clearTimeout(deadline);
-    exit(0);
+    exit(code);
   };
 
   // Runs before Express, so no middleware has sent headers yet.

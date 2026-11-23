@@ -5,8 +5,8 @@ The Managed Data Mode production server exits as soon as it receives `SIGTERM`, 
 ## What Changes
 
 - Production sets `keepAliveTimeout` to 35 seconds before `onListen`. `onListen` may change it.
-- Production registers one `SIGTERM` listener. It stops accepting, closes idle sockets, lets in-flight responses finish and closes their sockets, awaits optional `onShutdown`, and exits 0. It exits 1 when this takes longer than 25 seconds.
-- Startup fails in production when a `SIGTERM` listener already exists.
+- Production registers one `SIGTERM` listener. It stops accepting, closes idle sockets, lets in-flight responses finish and closes their sockets, awaits optional `onShutdown`, and exits 0. It exits 1 when `onShutdown` throws or this takes longer than 25 seconds.
+- Startup fails in `sku start` and production when a `SIGTERM` listener exists after `onListen`. `sku start` ignores listeners from the dev process and `devServerMiddleware`.
 - Docs show how to start and flush telemetry clients in `onShutdown`. Sku minor changeset. SSR is experimental, so this is not marked breaking.
 
 ## Non-goals

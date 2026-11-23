@@ -2,7 +2,7 @@
 
 Migrate this sku app from **Jest to Vitest**, and to **ESM** if it isn't already.
 These instructions are based on the sku Vitest migration guide (https://seek-oss.github.io/sku/vitest).
-If the installed sku version looks newer than these instructions, check the docs shipped with it (`node_modules/sku/` or the sku repo) for changes.
+If the installed sku version looks newer than these instructions, check the docs or changelog for changes.
 
 Never push branches, open PRs, or otherwise touch the remote without the user's explicit permission.
 
@@ -70,7 +70,7 @@ Applies to every dep added, removed, or changed (`vitest`, `@vitest/coverage-v8`
    - Revert codemod changes to non-Vitest tests: it adds `vitest` imports to Cypress specs/support files and mocha tests (e.g. `test/smoke`). Check `git status`, confirm those files have no other changes, then revert only those files (e.g. `git checkout -- <file>`).
    - `.js` specs containing JSX must be renamed `.jsx` (with their `__snapshots__` files); Vitest won't parse JSX in `.js`.
    - Regenerate snapshots with `pnpm sku test --run -u` (use the repo's package manager equivalent): the header, key format (`A: b` -> `A: > b`) and `vanilla-extract` class hashes change. Confirm the diff is only those.
-   - `vi.mock` factories run before the module body (imports are evaluated first):
+   - `vi.mock` calls are hoisted above the imports, so factories can't use the test file's imports or top-level variables:
      - Replace `require()` in factories with `await vi.importActual<typeof X>('x')` (make the factory `async`), using `import type * as X` for types (ESLint forbids `import()` types).
      - Helpers or mocks referenced by factories must be declared with `vi.hoisted()` (use `vi.hoisted(async () => ...)` if it needs a dynamic import such as `react`; use `createElement` rather than JSX inside it).
      - `vi.requireMock` doesn't exist; import the hoisted mock instead.
@@ -78,7 +78,7 @@ Applies to every dep added, removed, or changed (`vitest`, `@vitest/coverage-v8`
    - The Vitest ESLint plugin makes `vitest/expect-expect` an error (Jest's was a warning). For tests that assert through helpers, configure `assertFunctionNames` (e.g. `['expect', 'expectFoo']`) in `dangerouslySetESLintConfig`.
    - Side-effect imports (e.g. `import '@testing-library/jest-dom'`) between imports block the `import-x/order` autofix. Remove them from specs when the setup file already covers them.
    - Remove Jest deps/config/types (`jest`, `@types/jest`, `jest.config.*`, `dangerouslySetJestConfig`, the `jest` ESLint global, `babel-jest`, unused `fileMock`s, etc.) once nothing references them.
-   - Check for `as unknown` casts (and other type casts on mock values, e.g. `as ReturnType<typeof useX>`) in tests, including ones the codemod produced when converting `(fn as jest.Mock)`. Where possible, replace them with a partial mock so the cast is unnecessary: `vi.mocked(useX, { partial: true }).mockReturnValue({ ... })` (the return value is then typed as a deep partial). Run the type check afterwards; keep a cast only where a partial mock genuinely can't express it, and mention those in the final summary.
+   - Check for `as unknown` casts (and other type casts on mock values, e.g. `as ReturnType<typeof useX>`) in tests, including ones the codemod produced when converting `(fn as jest.Mock)`. Where possible, replace them with a partial mock so the cast is unnecessary: `vi.mocked(useX, { partial: true }).mockReturnValue({ ... })` makes the return value's top-level keys optional; add `deep: true` when nested objects also need to be partial. Run the type check afterwards; keep a cast only where a partial mock genuinely can't express it, and mention those in the final summary.
 
 ## 4. ESM
 

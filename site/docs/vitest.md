@@ -16,7 +16,9 @@ These are not requirements.
 :::: tip Migrating with an AI agent
 Paste this prompt into your coding agent to have it run the migration for you:
 
-<CopyPrompt prompt="Migrate this sku app from Jest to Vitest by fetching and following the instructions at https://seek-oss.github.io/sku/prompts/migrate-to-vitest.md" />
+```text
+Migrate this sku app from Jest to Vitest by fetching and following the instructions at https://seek-oss.github.io/sku/prompts/migrate-to-vitest.md
+```
 
 If your agent can't access the web, copy the full prompt instead.
 

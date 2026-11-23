@@ -1,7 +1,7 @@
-import { Writable } from 'node:stream';
+import { text } from 'node:stream/consumers';
 
 import { createDebug } from 'obug';
-import { renderToPipeableStream } from 'react-dom/server';
+import { prerenderToNodeStream } from 'react-dom/static';
 import type { ReactNode } from 'react';
 
 const RENDER_TIMEOUT_MS = 5000;
@@ -13,72 +13,39 @@ const log = createDebug('sku:render:renderToStringAsync');
  * Will await all Suspense boundaries before resolving the promise.
  * @returns Promise that resolves with the rendered HTML string.
  */
-export function renderToStringAsync(reactNode: ReactNode): Promise<string> {
+export async function renderToStringAsync(
+  reactNode: ReactNode,
+): Promise<string> {
   log('Starting render');
 
-  return new Promise<string>((resolve, reject) => {
-    let hasErrored = false;
-    let hasRendered = false;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => {
+    log(`Timeout after not completing render in ${RENDER_TIMEOUT_MS}ms`);
+    controller.abort(
+      new Error(
+        'Timeout during Render. Render did not complete in time. You may have a hanging promise or perpetually suspended component.',
+      ),
+    );
+  }, RENDER_TIMEOUT_MS);
 
-    const { pipe, abort } = renderToPipeableStream(reactNode, {
-      onShellError(error) {
-        // A Shell Error is unrecoverable. Reject so that Error handling can resolve the response.
-        log('Shell Render Error:', error);
-        hasErrored = true;
-        clearTimeout(timeout);
-        reject(error);
-      },
-
+  try {
+    const { prelude } = await prerenderToNodeStream(reactNode, {
+      signal: controller.signal,
       onError(error) {
-        // Non-shell errors are recoverable. HTML shell can still be returned.
+        // Errors inside Suspense boundaries are recoverable. The boundary falls back to client rendering.
         log('Render Error:', error);
-      },
-
-      onShellReady() {
-        log('Shell Ready: No action');
-      },
-
-      async onAllReady() {
-        log('All Ready: Ready to stream to string');
-        startStreamToString();
       },
     });
 
-    const timeout = setTimeout(() => {
-      if (hasErrored || hasRendered) {
-        return;
-      }
+    const html = await text(prelude);
+    log('Render complete');
 
-      log(
-        `Timeout after having not errored or rendered in ${RENDER_TIMEOUT_MS}ms`,
-      );
-
-      abort(
-        'Timeout during Render. Render did not complete in time. You may may have a hanging promise or perpetually suspended component.',
-      );
-    }, RENDER_TIMEOUT_MS);
-
-    function startStreamToString() {
-      if (hasErrored) {
-        return;
-      }
-      log('Starting streaming to string');
-      hasRendered = true;
-      let html = '';
-      const stream = new Writable({
-        write(chunk, _encoding, callback) {
-          html += chunk.toString();
-          callback();
-        },
-        // Potential error here before. We were calling callback() on the error parameter.
-        destroy(_error, callback) {
-          log('Stream ended. Returning HTML');
-          clearTimeout(timeout);
-          resolve(html);
-          callback();
-        },
-      });
-      pipe(stream);
-    }
-  });
+    return html;
+  } catch (error) {
+    // A Shell Error is unrecoverable. Reject so that Error handling can resolve the response.
+    log('Shell Render Error:', error);
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
 }

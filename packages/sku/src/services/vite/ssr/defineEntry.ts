@@ -50,7 +50,8 @@ export type ServerEntryBody<
   onListen?: SkuOnListen;
   /**
    * Called with no arguments after in-flight responses finish during production
-   * shutdown. Not called from `sku start`.
+   * shutdown. Not called from `sku start`. Runs inside the 25 second shutdown
+   * deadline. A throw or rejection exits 1. Do not call `process.exit`.
    */
   onShutdown?: SkuOnShutdown;
   /**

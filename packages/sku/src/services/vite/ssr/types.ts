@@ -51,8 +51,10 @@ export type SkuOnListen = (args: {
 }) => void | Promise<void>;
 
 /**
- * Optional production shutdown hook. Sku calls it with no arguments after
- * in-flight responses finish. Not called from `sku start`.
+ * Optional production shutdown hook. sku calls it with no arguments after
+ * in-flight responses finish, inside the 25 second shutdown deadline. Not
+ * called from `sku start`. A throw or rejection exits 1. Do not call
+ * `process.exit`.
  */
 export type SkuOnShutdown = () => void | Promise<void>;
 

@@ -68,6 +68,14 @@ describe('ssr-document', () => {
       expect(cspReportOnly).toMatch(/'nonce-/);
     });
 
+    it('leaves keep-alive at the Node default', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch(url);
+      await response.text();
+
+      expect(response.headers.get('keep-alive')).toBe('timeout=5');
+    });
+
     it('includes the SSR-CSS virtual stylesheet without transformIndexHtml', async ({
       task,
     }) => {
@@ -310,6 +318,14 @@ describe('ssr-document', () => {
         },
         { timeout: 15000 },
       );
+    });
+
+    it('keeps keep-alive connections open for 35 seconds', async ({ task }) => {
+      skipCleanup(task.id);
+      const response = await fetch('http://127.0.0.1:8201/');
+      await response.text();
+
+      expect(response.headers.get('keep-alive')).toBe('timeout=35');
     });
 
     it('emits modulepreload for auto-derived lazy route moduleIds', async ({

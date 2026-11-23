@@ -139,8 +139,14 @@ const createProductionShutdown = (
     exit(0);
   };
 
-  httpServer.on('request', (_req, res) => {
+  // Runs before Express, so no middleware has sent headers yet.
+  httpServer.prependListener('request', (_req, res) => {
     inflight.add(res);
+    // Node 24's close() leaves a socket that has not finished a request open,
+    // so a request can still arrive during the drain.
+    if (draining) {
+      res.setHeader('Connection', 'close');
+    }
     res.once('close', () => {
       inflight.delete(res);
       if (!draining) {

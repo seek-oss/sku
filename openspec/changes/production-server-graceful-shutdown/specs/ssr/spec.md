@@ -63,7 +63,8 @@ When a `SIGTERM` listener exists after `onListen` returns, production startup MU
 
 ### Requirement: Shutdown closes sockets that have no in-flight response
 
-On `SIGTERM`, the production server MUST stop accepting connections and close every socket that has no in-flight response, without waiting for `keepAliveTimeout`.
+On `SIGTERM`, the production server MUST stop accepting connections and close every socket that is idle after a finished response, without waiting for `keepAliveTimeout`.
+A socket that has connected and not sent a request MUST close without waiting for the client: at `SIGTERM` on Node 26, and once no response is in flight on Node 24.
 
 #### Scenario: Idle keep-alive does not hold the process
 
@@ -74,8 +75,16 @@ On `SIGTERM`, the production server MUST stop accepting connections and close ev
 #### Scenario: A connected socket with no request does not hold the process
 
 - **WHEN** the production server receives `SIGTERM` on Node 24 or Node 26
+- **AND** no response is in flight
 - **AND** a socket has connected and has not sent a request
 - **THEN** that socket closes without waiting for the client
+
+#### Scenario: Node 24 keeps a socket with no request until responses finish
+
+- **WHEN** the production server receives `SIGTERM` on Node 24
+- **AND** a response is in flight
+- **AND** a socket has connected and has not sent a request
+- **THEN** that socket stays open until no response is in flight, and then closes
 
 ### Requirement: In-flight responses finish and then close
 
@@ -93,6 +102,14 @@ On `SIGTERM`, the production server MUST let in-flight responses finish and then
 - **WHEN** the production server receives `SIGTERM` during a response
 - **AND** that response has already sent headers
 - **THEN** the response finishes
+- **AND** the socket closes when the response finishes
+
+#### Scenario: A request arrives during shutdown
+
+- **WHEN** the production server has received `SIGTERM`
+- **AND** a socket that is still open sends a request
+- **THEN** the server responds
+- **AND** the response tells the client the connection will close
 - **AND** the socket closes when the response finishes
 
 ### Requirement: Shutdown awaits onShutdown

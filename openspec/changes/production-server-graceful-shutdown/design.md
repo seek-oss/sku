@@ -51,11 +51,19 @@ Alternatives considered:
 
 ### Close the socket instead of waiting out the keep-alive
 
-The `SIGTERM` listener calls `server.close()`, then closes any socket that still has no in-flight response. That covers Node 24's pre-request sockets, which `close()` leaves open.
+The `SIGTERM` listener calls `server.close()`. When nothing is in flight, it then calls `closeAllConnections()`, which also closes Node 24's pre-request sockets that `close()` leaves open.
 
 For a response that has not sent headers, set `Connection: close` so Node treats it as the last response on that socket and ends it when the response finishes. For a response that has already sent headers, close the socket when the response finishes. Neither path waits `keepAliveTimeout`.
 
+A request that arrives after `SIGTERM` gets `Connection: close` too. On Node 24 a pre-request socket stays open while any response is in flight, so it can still send a request during the drain. Any socket that was part-way through sending headers at `SIGTERM` can too, on either Node major. Sku serves that request and closes the socket after it, rather than resetting it. The request listener is prepended, so it runs before Express and no middleware has sent headers yet.
+
 Already-idle sockets are reset by `close()`, which is Node's own `closeIdleConnections`. The time a supervisor waits before `SIGTERM` is what stops new requests from landing on those sockets. This design does not add a clean shutdown for a socket that is already idle.
+
+Alternatives considered for Node 24's pre-request sockets:
+
+- **Track every connection and destroy pre-request sockets at `SIGTERM`.** Closes them sooner, but adds per-connection bookkeeping to every production server for a socket that the deadline already bounds and that Node 26 closes itself.
+- **Lower `headersTimeout` at `SIGTERM` so Node's own check sends a 408.** `close()` stops that check (`httpServerPreClose` clears the connections-checking interval), so it only works if the server keeps accepting until the next check, and with a shorter `connectionsCheckingInterval` running for the life of the server.
+- **Call `closeAllConnections()` at `SIGTERM`.** Cuts in-flight responses.
 
 ### One listener, and onShutdown after the drain
 

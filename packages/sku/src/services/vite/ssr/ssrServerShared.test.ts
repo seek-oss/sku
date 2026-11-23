@@ -946,6 +946,54 @@ describe('production server shutdown', () => {
     });
   });
 
+  it('sends Connection: close on a request whose headers finish during the drain', async () => {
+    const exit = mockExit();
+    const gate = deferred();
+    const entered = deferred();
+    const { httpServer } = await startServer({
+      middleware: [
+        async (req, res) => {
+          if (req.path === '/slow') {
+            entered.resolve();
+            await gate.promise;
+          }
+          res.status(200).type('text/plain').end('ok');
+        },
+      ],
+    });
+    const port = portOf(httpServer);
+
+    const slow = fetch(`http://127.0.0.1:${port}/slow`).catch(() => undefined);
+    await entered.promise;
+
+    const accepted = new Promise<void>((resolve) => {
+      httpServer.once('connection', () => resolve());
+    });
+    const socket = net.connect({ host: '127.0.0.1', port });
+    socket.on('error', () => {});
+    let response = '';
+    socket.on('data', (chunk: Buffer) => {
+      response += chunk.toString();
+    });
+    await accepted;
+    socket.write('GET /late HTTP/1.1\r\nHost: localhost\r\n');
+    await new Promise((resolve) => setTimeout(resolve, 20));
+
+    const closed = closedWithin(socket);
+    process.emit('SIGTERM');
+    socket.write('\r\n');
+    await closed;
+
+    expect(response).toMatch(/^HTTP\/1\.1 200/);
+    expect(response).toMatch(/\r\nConnection: close\r\n/i);
+
+    gate.resolve();
+    await slow;
+    await vi.waitFor(() => {
+      expect(exit).toHaveBeenCalledWith(0);
+    });
+  });
+
   it('exits 1 at 25 seconds when a response never finishes', async () => {
     const onShutdown = vi.fn();
     const exit = mockExit();

@@ -204,7 +204,8 @@ type ServerEntry = {
 
 Production registers one `SIGTERM` listener after `onListen` returns.
 `sku start` does not.
-On `SIGTERM`, production stops accepting connections, closes sockets that have no in-flight response, lets in-flight responses finish, closes their sockets, awaits `onShutdown`, and exits 0.
+On `SIGTERM`, production stops accepting connections, closes idle sockets, lets in-flight responses finish, closes their sockets, awaits `onShutdown`, and exits 0.
+A request that still arrives on an open socket during shutdown is served with `Connection: close`.
 If shutdown has not finished 25 seconds after `SIGTERM`, the process exits 1 and `onShutdown` does not run.
 Those 25 seconds assume a platform grace period of 30 seconds.
 sku calls `process.exit`, so `beforeExit` handlers do not run.

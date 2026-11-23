@@ -4,5 +4,4 @@ export default {
     { name: 'jobStreet', host: 'jobstreet.com.localhost' },
   ],
   publicPath: '/',
-  setupTests: './jestSetup.js',
 };

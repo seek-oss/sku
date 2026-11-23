@@ -26,7 +26,6 @@ import { validateSkuConfigFormat } from './validateSkuConfigFormat.js';
 import type { SkuContext } from '../context/createSkuContext.js';
 import { getPnpmConfigDependencies } from '../services/packageManager/getPnpmConfigDependencies.js';
 import { validatePnpmConfig } from '../services/packageManager/pnpmConfig.js';
-import { warnOnLegacyReact } from './warnOnLegacyReact.js';
 
 const convertToForwardSlashPaths = (pathStr: string) =>
   pathStr.replace(/\\/g, '/');
@@ -150,6 +149,4 @@ export default async (skuContext: SkuContext) => {
       pnpmPluginSkuInstalled,
     });
   }
-
-  warnOnLegacyReact();
 };

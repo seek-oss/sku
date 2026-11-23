@@ -6,5 +6,4 @@ export default {
   serverEntry: 'src/server.tsx',
   port: 8239,
   serverPort: 8011,
-  setupTests: './jestSetup.js',
 } satisfies SkuConfig;

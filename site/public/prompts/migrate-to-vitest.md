@@ -51,9 +51,21 @@ Unless the user asks otherwise:
     echo
     echo 'This migration was undertaken by following this migration guide: https://seek-oss.github.io/sku/vitest'
   } > "$body"
-  # Only with the user's permission:
-  gh pr create --draft --base <base> --title 'Migrate from Jest to Vitest' --body-file "$body"
   ```
+
+- Only with the user's permission, push the branch and open the PR:
+  - If `gh auth status` succeeds, create a draft PR:
+
+    ```sh
+    gh pr create --draft --base <base> --title 'Migrate from Jest to Vitest' --body-file "$body"
+    ```
+
+  - Otherwise, give the user a link that opens GitHub's PR form with the title and description already filled in. Take `<owner>/<repo>` from `git remote get-url origin`.
+
+    ```sh
+    enc() { printf '%s' "$1" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>process.stdout.write(encodeURIComponent(s)))'; }
+    echo "https://github.com/<owner>/<repo>/compare/<base>...<branch>?quick_pull=1&title=$(enc 'Migrate from Jest to Vitest')&body=$(enc "$(cat "$body")")"
+    ```
 
 ## Dependency pinning conventions
 

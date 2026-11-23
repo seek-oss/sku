@@ -1,7 +1,7 @@
 import { Suspense, use } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { renderToStringAsync } from './render-to-string.js';
+import { renderToStringAsync } from './renderToStringAsync.js';
 
 const neverResolving = new Promise<string>(() => {});
 

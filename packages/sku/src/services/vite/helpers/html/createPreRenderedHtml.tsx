@@ -1,7 +1,7 @@
 import type { ReactNode, JSX } from 'react';
 import { LoadableProvider } from '@sku-lib/vite/loadable';
 import type { Collector } from '@sku-lib/vite/collector';
-import { renderToStringAsync } from '../../../webpack/entry/render/render-to-string.js';
+import { renderToStringAsync } from '../../../render/renderToStringAsync.js';
 import { createDebug } from 'obug';
 
 import type { Render, RenderAppProps } from '../../../../types/types.js';

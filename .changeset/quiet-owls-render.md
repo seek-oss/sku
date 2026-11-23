@@ -2,4 +2,4 @@
 'sku': patch
 ---
 
-Use React's `prerenderToNodeStream` API in `renderToStringAsync`
+Update `renderToStringAsync` to use React's API designed for static site generation

@@ -32,12 +32,17 @@ export async function renderToStringAsync(
     const { prelude } = await prerenderToNodeStream(reactNode, {
       signal: controller.signal,
       onError(error) {
-        // Errors inside Suspense boundaries are recoverable. The boundary falls back to client rendering.
         log('Render Error:', error);
       },
     });
 
+    const timedOut = controller.signal.aborted;
     const html = await text(prelude);
+
+    if (timedOut && html === '') {
+      throw controller.signal.reason;
+    }
+
     log('Render complete');
 
     return html;

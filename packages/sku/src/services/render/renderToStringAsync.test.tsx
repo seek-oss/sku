@@ -88,6 +88,48 @@ describe('renderToStringAsync', () => {
     expect(html).toContain('<i>loading</i>');
   });
 
+  it.each([
+    {
+      name: 'the root',
+      node: (
+        <main>
+          <h1>title</h1>
+          <Data promise={neverResolving} />
+        </main>
+      ),
+    },
+    {
+      name: 'a root-level Suspense boundary',
+      node: (
+        <Suspense fallback={<i>loading</i>}>
+          <Data promise={neverResolving} />
+        </Suspense>
+      ),
+    },
+  ])(
+    'rejects when $name is still suspended after the timeout',
+    async ({ node }) => {
+      vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+
+      const rejection = renderToStringAsync(node).catch((error) => error);
+
+      await letReactRender();
+      await vi.advanceTimersByTimeAsync(5000);
+      await letReactRender();
+
+      const error = await rejection;
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toHaveProperty(
+        'message',
+        'Timeout during Render. Render did not complete in time. You may have a hanging promise or perpetually suspended component.',
+      );
+    },
+  );
+
+  it('resolves with an empty string for an empty node', async () => {
+    await expect(renderToStringAsync(null)).resolves.toBe('');
+  });
+
   it('clears the timeout once rendering completes', async () => {
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
 

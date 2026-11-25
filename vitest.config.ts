@@ -28,37 +28,7 @@ export default defineConfig({
       SKU_CSP_NONCE: 'RANDOM_NONCE',
     },
     projects: [
-      // <<<<<<< HEAD
-      //       // Isolate babel-plugin-display-name tests as our snapshot serializers interfere with their
-      //       // snapshot output.
-      //       {
-      //         test: {
-      //           name: 'babel-plugin-display-name',
-      //           include: [`${babelPluginDisplayNameTests}/${defaultInclude}`],
-      //         },
-      //       },
-      //       {
-      //         test: {
-      //           name: 'rolldown-plugin-unassert',
-      //           include: [`${rolldownPluginUnassertTests}/src/${defaultInclude}`],
-      //         },
-      //       },
-      // ||||||| e2bd77ec
-      //       // Isolate babel-plugin-display-name tests as our snapshot serializers interfere with their
-      //       // snapshot output.
-      //       {
-      //         test: {
-      //           name: 'babel-plugin-display-name',
-      //           include: [`${babelPluginDisplayNameTests}/${defaultInclude}`],
-      //         },
-      //       },
-      //       {
-      //         test: {
-      //           name: 'rolldown-plugin-unassert',
-      //           include: [`${rolldownPluginUnassertTests}/tests/${defaultInclude}`],
-      //         },
-      //       },
-      // Bench
+      // Benchmark run with `vitest bench`
       {
         test: {
           name: 'rolldown-plugin-unassert-benchmark',

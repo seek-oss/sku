@@ -5,6 +5,7 @@ import { vitePluginVocab } from '@vocab/vite';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import react from '@vitejs/plugin-react';
 import babel from '@rolldown/plugin-babel';
+import { unassert } from '@sku-lib/rolldown-plugin-unassert';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { getVocabConfig } from '../../../vocab/config.js';
 import { skuPlugin } from '../../skuPlugin.js';
@@ -28,13 +29,6 @@ export const createConfig = (
   const prodBabelPlugins: Array<string | [string, object]> = [
     require.resolve('babel-plugin-transform-react-remove-prop-types'),
     require.resolve('@babel/plugin-transform-react-constant-elements'),
-    [
-      require.resolve('babel-plugin-unassert'),
-      {
-        variables: ['assert', 'invariant'],
-        modules: ['assert', 'node:assert', 'tiny-invariant'],
-      },
-    ],
   ];
 
   if (skuContext.displayNamesProd) {
@@ -63,6 +57,11 @@ export const createConfig = (
         apply: 'build',
       }),
       react(),
+      isProductionBuild &&
+        unassert({
+          variables: ['assert', 'invariant'],
+          modules: ['assert', 'node:assert', 'tiny-invariant'],
+        }),
       babel({
         // turn this on for react-compiler support
         // presets: [reactCompilerPreset()],
@@ -70,14 +69,10 @@ export const createConfig = (
           require.resolve('babel-plugin-macros'),
           ...(isProductionBuild ? prodBabelPlugins : []),
         ],
-        // The default excludes `node_modules`, but we want to run our babel plugins across
-        // both app code and dependencies.
-        // See https://github.com/rolldown/plugins/tree/1c91db0424f0e71552323cd02aa34b60d5a98547/packages/babel#exclude.
-        // `react`, `react-dom` and `scheduler` are large and none of our plugins affect them, so skip them.
-        exclude: [
-          /\0rolldown\/runtime\.js/,
-          /[\\/]node_modules[\\/](?:react|react-dom|scheduler)[\\/]/,
-        ],
+        // Babel plugins currently only run on source code. Webpack runs then on all of
+        // `node_modules`, significantly impacting build performance.
+        // Running the remaining Babel plugins on all deps isn't that crucial for apps, and the plan
+        // is to eventually remove/replace all babel plugins with more performant alternatives.
       }),
       vanillaExtractPlugin({
         unstable_pluginFilter: ({ name }) =>

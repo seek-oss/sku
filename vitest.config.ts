@@ -28,7 +28,7 @@ export default defineConfig({
       SKU_CSP_NONCE: 'RANDOM_NONCE',
     },
     projects: [
-      // I don't know what this does. It doesn't seem to run.
+      // Benchmark run with `vitest bench`
       {
         test: {
           name: 'rolldown-plugin-unassert-benchmark',

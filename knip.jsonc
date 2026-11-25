@@ -64,15 +64,9 @@
       "ignoreDependencies": ["@babel/preset-react"],
     },
     "packages/rolldown-plugin-unassert": {
-      "entry": [
-        "tests/**/*.test.ts",
-        "tests/vite-app/{index.html,vite.config.ts}",
-        "benchmark/*.bench.ts",
-      ],
-      // Upstream babel fixtures are only read as data, and the vite app is a test fixture
-      "ignore": ["tests/vite-app/src/**", "tests/fake-dep/**"],
-      // Used by the vite app test project
-      "ignoreDependencies": ["assert", "tiny-invariant", "fake-dep"],
+      "entry": ["benchmark/*.bench.ts"],
+      // Used by the plugin tests as externals of the virtual modules
+      "ignoreDependencies": ["assert", "tiny-invariant"],
     },
     "tests": {
       "entry": ["**/*.test.ts"],

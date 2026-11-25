@@ -8,6 +8,6 @@
     "erasableSyntaxOnly": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src", "tests", "benchmark"],
+  "include": ["src", "benchmark"],
   "exclude": ["benchmark/.generated-*"]
 }

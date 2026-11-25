@@ -1,4 +1,3 @@
-export type Template = 'webpack' | 'vite' | 'ssr';
+export const templates = ['vite', 'ssr'] as const;
 
-export const isViteBasedTemplate = (template: Template): boolean =>
-  template === 'vite' || template === 'ssr';
+export type Template = (typeof templates)[number];

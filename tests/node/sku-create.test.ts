@@ -34,7 +34,7 @@ vi.setConfig({
   testTimeout: timeout + 1000,
 });
 
-const templates = ['vite', 'webpack', 'ssr'] as const;
+const templates = ['vite', 'ssr'] as const;
 type Template = (typeof templates)[number];
 
 const projectName = (template: Template) => `new-project-${template}`;
@@ -109,27 +109,6 @@ describe('interactive prompt', () => {
     ).toBeInTheConsole();
   });
 
-  it('should create a webpack project via the interactive prompt', async () => {
-    const result = await create(interactiveProjectName('webpack'), [], {
-      spawnOpts: { env: skipInstallEnv() },
-    });
-    expect(
-      await result.findByText('Which template would you like to use?'),
-    ).toBeInTheConsole();
-
-    // Vite → SSR → Webpack
-    await result.userEvent.keyboard('[ArrowDown]');
-    await result.userEvent.keyboard('[ArrowDown]');
-
-    expect(await result.findByText('❯ Webpack')).toBeInTheConsole();
-    await result.userEvent.keyboard('[Enter]');
-    expect(
-      await result.findByText(
-        `Creating new sku project: ${interactiveProjectName('webpack')} with webpack template`,
-      ),
-    ).toBeInTheConsole();
-  });
-
   it('should create a ssr project via the interactive prompt', async () => {
     const result = await create(interactiveProjectName('ssr'), [], {
       spawnOpts: { env: skipInstallEnv() },
@@ -148,6 +127,19 @@ describe('interactive prompt', () => {
         `Creating new sku project: ${interactiveProjectName('ssr')} with ssr template`,
       ),
     ).toBeInTheConsole();
+  });
+});
+
+describe('template option', () => {
+  it('should reject an unknown template', async () => {
+    const result = await create('invalid-template', ['--template', 'webpack'], {
+      spawnOpts: { env: { ...createEnv, SKU_CREATE_SKIP_INSTALL: 'true' } },
+    });
+
+    expect(
+      await result.findByError(/Allowed choices are vite, ssr/),
+    ).toBeInTheConsole();
+    await expect(result).toMatchExitCode(1);
   });
 });
 

@@ -3,6 +3,7 @@ import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
 const babelPluginDisplayNameTests = 'packages/babel-plugin-display-name';
+const rolldownPluginDisplayNameTests = 'packages/rolldown-plugin-display-name';
 const rolldownPluginUnassertTests = 'packages/rolldown-plugin-unassert';
 
 export default defineConfig({
@@ -29,12 +30,18 @@ export default defineConfig({
       SKU_CSP_NONCE: 'RANDOM_NONCE',
     },
     projects: [
-      // Isolate babel-plugin-display-name tests as our snapshot serializers interfere with their
+      // Isolate babel-plugin-display-name and rolldown-plugin-display-name tests as our snapshot serializers interfere with their
       // snapshot output.
       {
         test: {
           name: 'babel-plugin-display-name',
           include: [`${babelPluginDisplayNameTests}/${defaultInclude}`],
+        },
+      },
+      {
+        test: {
+          name: 'rolldown-plugin-display-name',
+          include: [`${rolldownPluginDisplayNameTests}/src/${defaultInclude}`],
         },
       },
       {
@@ -60,7 +67,11 @@ export default defineConfig({
           pool: 'vmThreads',
           setupFiles: './vitest-setup.ts',
           include: [`packages/${defaultInclude}`, `private/${defaultInclude}`],
-          exclude: [babelPluginDisplayNameTests, rolldownPluginUnassertTests],
+          exclude: [
+            babelPluginDisplayNameTests,
+            rolldownPluginDisplayNameTests,
+            rolldownPluginUnassertTests,
+          ],
         },
       },
       // Integration tests spawn sku processes, dev servers and browsers, so they

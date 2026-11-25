@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.package.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "lib": ["es2023", "dom"],
+    "types": ["node"],
+    "allowImportingTsExtensions": false,
+    "verbatimModuleSyntax": true,
+    "erasableSyntaxOnly": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "include": ["src", "tsdown.config.ts"],
+  "references": [{ "path": "../../private/tsdown" }]
+}

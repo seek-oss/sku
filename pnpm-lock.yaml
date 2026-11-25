@@ -1579,6 +1579,34 @@ importers:
         specifier: ^1004.11.0
         version: 1004.11.0(@pnpm/logger@1001.0.1)
 
+  packages/rolldown-plugin-display-name:
+    dependencies:
+      magic-string:
+        specifier: ^1.4.5
+        version: 1.4.5
+      oxc-parser:
+        specifier: ^0.159.0
+        version: 0.159.0
+    devDependencies:
+      '@sku-private/tsdown':
+        specifier: workspace:*
+        version: link:../../private/tsdown
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.19.2
+      dedent:
+        specifier: ^1.7.2
+        version: 1.7.2(babel-plugin-macros@3.1.0)
+      rolldown:
+        specifier: ^1.3.2
+        version: 1.3.3
+      vite:
+        specifier: 'catalog:'
+        version: 8.3.5(@types/node@24.19.2)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.5(@opentelemetry/api@1.10.0)(@types/node@24.19.2)(jsdom@26.1.0)(vite@8.3.5)
+
   packages/rolldown-plugin-unassert:
     dependencies:
       magic-string:
@@ -1672,6 +1700,9 @@ importers:
       '@sku-lib/babel-plugin-display-name':
         specifier: workspace:^
         version: link:../babel-plugin-display-name
+      '@sku-lib/rolldown-plugin-display-name':
+        specifier: workspace:^
+        version: link:../rolldown-plugin-display-name
       '@sku-lib/vite':
         specifier: workspace:^
         version: link:../vite

@@ -5,6 +5,7 @@ import {
 import type { SkuConfig } from 'sku';
 
 export default {
+  bundler: 'webpack',
   clientEntry: 'src/serverClient.jsx',
   serverEntry: 'src/server.jsx',
   renderEntry: 'src/render.jsx',

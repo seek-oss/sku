@@ -14,8 +14,8 @@ const { sku, fixturePath, node, exec } = scopeToFixture('security-controls');
 
 describe('security-controls', () => {
   const args: BundlerValues<string[]> = {
-    vite: ['--config', 'sku.config.vite.ts'],
-    webpack: ['--config', 'sku.config.ts'],
+    vite: [],
+    webpack: ['--config', 'sku.config.webpack.ts'],
   };
 
   describe.for(bundlers)('bundler %s', async (bundler) => {
@@ -105,7 +105,7 @@ describe('security-controls', () => {
 
         beforeAll(async () => {
           const start = await sku('start', [
-            '--config=sku.config.vite.csp-delivery.ts',
+            '--config=sku.config.csp-delivery.ts',
             '--strict-port',
             `--port=${port}`,
           ]);
@@ -125,7 +125,7 @@ describe('security-controls', () => {
 
         beforeAll(async () => {
           const build = await sku('build', [
-            '--config=sku.config.vite.csp-delivery.ts',
+            '--config=sku.config.csp-delivery.ts',
           ]);
           await expect(build).toMatchExitCode(0);
 
@@ -160,7 +160,7 @@ describe('security-controls', () => {
 
         beforeAll(async () => {
           const build = await sku('build', [
-            '--config=sku.config.vite.csp-delivery.ts',
+            '--config=sku.config.csp-delivery.ts',
           ]);
           await expect(build).toMatchExitCode(0);
 
@@ -184,7 +184,7 @@ describe('security-controls', () => {
 
         beforeAll(async () => {
           const start = await sku('start', [
-            '--config=sku.config.vite.csp-report-only.ts',
+            '--config=sku.config.csp-report-only.ts',
             '--strict-port',
             `--port=${port}`,
           ]);
@@ -204,7 +204,7 @@ describe('security-controls', () => {
 
         beforeAll(async () => {
           const build = await sku('build', [
-            '--config=sku.config.vite.csp-report-only.ts',
+            '--config=sku.config.csp-report-only.ts',
           ]);
           await expect(build).toMatchExitCode(0);
 
@@ -241,7 +241,7 @@ describe('security-controls', () => {
 
         beforeAll(async () => {
           const build = await sku('build', [
-            '--config=sku.config.vite.csp-report-only.ts',
+            '--config=sku.config.csp-report-only.ts',
           ]);
           await expect(build).toMatchExitCode(0);
 
@@ -266,7 +266,7 @@ describe('security-controls', () => {
 
           beforeAll(async () => {
             const start = await sku('start', [
-              '--config=sku.config.vite.csp-report-to.endpoint.ts',
+              '--config=sku.config.csp-report-to.endpoint.ts',
               '--strict-port',
               `--port=${port}`,
             ]);
@@ -288,7 +288,7 @@ describe('security-controls', () => {
 
           beforeAll(async () => {
             const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.endpoint.ts',
+              '--config=sku.config.csp-report-to.endpoint.ts',
             ]);
             await expect(build).toMatchExitCode(0);
 
@@ -322,7 +322,7 @@ describe('security-controls', () => {
 
           beforeAll(async () => {
             const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.endpoint.ts',
+              '--config=sku.config.csp-report-to.endpoint.ts',
             ]);
             await expect(build).toMatchExitCode(0);
 
@@ -346,7 +346,7 @@ describe('security-controls', () => {
 
           beforeAll(async () => {
             const start = await sku('start', [
-              '--config=sku.config.vite.csp-report-to.url.ts',
+              '--config=sku.config.csp-report-to.url.ts',
               '--strict-port',
               `--port=${port}`,
             ]);
@@ -370,7 +370,7 @@ describe('security-controls', () => {
 
           beforeAll(async () => {
             const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.url.ts',
+              '--config=sku.config.csp-report-to.url.ts',
             ]);
             await expect(build).toMatchExitCode(0);
 
@@ -419,7 +419,7 @@ describe('security-controls', () => {
 
           beforeAll(async () => {
             const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.url.ts',
+              '--config=sku.config.csp-report-to.url.ts',
             ]);
             await expect(build).toMatchExitCode(0);
 
@@ -443,7 +443,7 @@ describe('security-controls', () => {
 
           beforeAll(async () => {
             const start = await sku('start', [
-              '--config=sku.config.vite.csp-report-to.tuple.ts',
+              '--config=sku.config.csp-report-to.tuple.ts',
               '--strict-port',
               `--port=${port}`,
             ]);
@@ -465,7 +465,7 @@ describe('security-controls', () => {
 
           beforeAll(async () => {
             const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.tuple.ts',
+              '--config=sku.config.csp-report-to.tuple.ts',
             ]);
             await expect(build).toMatchExitCode(0);
 
@@ -511,7 +511,7 @@ describe('security-controls', () => {
 
           beforeAll(async () => {
             const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.tuple.ts',
+              '--config=sku.config.csp-report-to.tuple.ts',
             ]);
             await expect(build).toMatchExitCode(0);
 

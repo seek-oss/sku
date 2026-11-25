@@ -127,7 +127,10 @@ describe('braid-design-system', () => {
   });
 
   it('should handle braid-design-system in tests', async () => {
-    const test = await sku('test');
+    const test = await sku('test', [
+      '--config',
+      'sku.config.webpack-static.ts',
+    ]);
     expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
   });
 });

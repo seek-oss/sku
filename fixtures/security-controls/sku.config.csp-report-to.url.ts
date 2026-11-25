@@ -1,7 +1,7 @@
-import viteConfig from './sku.config.vite.ts';
+import baseConfig from './sku.config.ts';
 
 export default {
-  ...viteConfig,
+  ...baseConfig,
   cspDelivery: 'header',
   cspReportTo: 'https://some-reporting-url.com',
   cspReportOnlyEnabled: true,

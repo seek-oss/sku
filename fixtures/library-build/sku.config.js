@@ -1,6 +1,7 @@
 import { makeStableHashes } from '@sku-private/test-utils';
 
 export default {
+  bundler: 'webpack',
   libraryEntry: 'src/library.js',
   renderEntry: 'src/render.js',
   libraryName: 'MyLibrary',

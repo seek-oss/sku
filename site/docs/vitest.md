@@ -39,14 +39,15 @@ To enable Vitest in `sku`, first install the required dependencies:
 pnpm add -D vitest
 ```
 
-Then, configure [`testRunner`][test runner] in your `sku` config:
+Vitest is the default [`testRunner`][test runner].
+Then, remove `testRunner: 'jest'` from your `sku` config:
 
 ```ts
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
 export default {
-  testRunner: 'vitest', // [!code ++]
+  testRunner: 'jest', // [!code --]
 } satisfies SkuConfig;
 ```
 

@@ -5,7 +5,6 @@ import baseConfig from './sku.config.base.js';
 
 export default {
   ...baseConfig,
-  bundler: 'vite',
 
   entrySideEffects: ['braid-design-system/reset'],
 

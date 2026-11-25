@@ -1,7 +1,6 @@
 import type { SkuConfig } from 'sku';
 
 export default {
-  bundler: 'vite',
   routes: [
     {
       name: 'home',

@@ -19,8 +19,8 @@ describe('translations', () => {
     const port = await getPort();
     const baseUrl = `http://localhost:${port}`;
     const args: BundlerValues<string[]> = {
-      vite: ['--config', 'sku.config.vite.ts'],
-      webpack: [],
+      vite: [],
+      webpack: ['--config', 'sku.config.webpack.ts'],
     };
 
     beforeAll(async () => {
@@ -103,7 +103,7 @@ describe('vite ssr translations', () => {
     const distDir = fixturePath('dist');
     await rm(distDir, { recursive: true, force: true });
 
-    const start = await sku('start', ['--config=sku.config.vite-ssr.ts']);
+    const start = await sku('start', ['--config=sku.config.ssr.ts']);
     await start.findByText('Starting development server');
   });
 
@@ -135,7 +135,7 @@ describe('vite ssr translations build', () => {
     const distDir = fixturePath('dist');
     await rm(distDir, { recursive: true, force: true });
 
-    const build = await sku('build', ['--config=sku.config.vite-ssr.ts']);
+    const build = await sku('build', ['--config=sku.config.ssr.ts']);
     await expect(build).toMatchExitCode(0);
   });
 

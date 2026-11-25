@@ -9,10 +9,10 @@
   },
   "scripts": {
     "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.ts",
+    "start:webpack": "sku start --config sku.config.webpack.ts",
     "start:bad": "sku start --config sku.config.bad.ts",
     "build": "sku build",
-    "build:vite": "sku build --config sku.config.vite.ts",
+    "build:webpack": "sku build --config sku.config.webpack.ts",
     "build:bad": "sku build --config sku.config.bad.ts"
   },
   "devDependencies": {

@@ -21,8 +21,8 @@ describe('list-urls', () => {
     'should not display all urls be default',
     async (bundler) => {
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.ts'],
-        webpack: [],
+        vite: [],
+        webpack: ['--config', 'sku.config.webpack.ts'],
       };
       const process = await sku('start', args[bundler]);
 
@@ -37,8 +37,8 @@ describe('list-urls', () => {
     (flag) => {
       test.each(bundlers)('`start` with %s', async (bundler) => {
         const args: BundlerValues<string[]> = {
-          vite: ['--config', 'sku.config.vite.ts', flag],
-          webpack: [flag],
+          vite: [flag],
+          webpack: ['--config', 'sku.config.webpack.ts', flag],
         };
         const process = await sku('start', args[bundler]);
 
@@ -48,7 +48,11 @@ describe('list-urls', () => {
       });
 
       it('start-ssr', async () => {
-        const process = await sku('start-ssr', [flag]);
+        const process = await sku('start-ssr', [
+          '--config',
+          'sku.config.webpack.ts',
+          flag,
+        ]);
 
         for (const url of serverUrls) {
           expect(await process.findByText(url)).toBeInTheConsole();

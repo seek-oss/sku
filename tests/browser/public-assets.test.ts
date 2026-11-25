@@ -16,8 +16,8 @@ describe('public assets', () => {
       const url = `http://localhost:${port}`;
       const portArgs = ['--strict-port', `--port=${port}`];
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.ts', ...portArgs],
-        webpack: portArgs,
+        vite: portArgs,
+        webpack: ['--config', 'sku.config.webpack.ts', ...portArgs],
       };
 
       it('should serve the app and public assets', async () => {
@@ -41,8 +41,8 @@ describe('public assets', () => {
       const port = await getPort();
       const portArgs = ['--strict-port', `--port=${port}`];
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.ts'],
-        webpack: [],
+        vite: [],
+        webpack: ['--config', 'sku.config.webpack.ts'],
       };
 
       it('should copy public assets to dist and serve them in the app', async () => {

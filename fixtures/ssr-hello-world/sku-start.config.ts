@@ -2,6 +2,7 @@ import { makeStableHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 export default {
+  bundler: 'webpack',
   port: 8100,
   serverPort: 8101,
   devServerMiddleware: './dev-middleware.cjs',

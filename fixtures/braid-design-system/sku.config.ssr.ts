@@ -4,7 +4,6 @@ import baseConfig from './sku.config.base.js';
 
 export default {
   ...baseConfig,
-  bundler: 'vite',
   buildType: 'ssr',
 
   clientEntry: 'src/ssr/client.tsx',

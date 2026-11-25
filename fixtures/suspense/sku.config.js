@@ -1,4 +1,4 @@
-import { makeStableHashes } from '@sku-private/test-utils';
+import { makeStableViteHashes } from '@sku-private/test-utils';
 
 export default {
   sites: [
@@ -13,6 +13,6 @@ export default {
   environments: ['production'],
   port: 8203,
   publicPath: '/static/suspense',
-  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
   setupTests: './setupTests.js',
+  dangerouslySetViteConfig: makeStableViteHashes,
 };

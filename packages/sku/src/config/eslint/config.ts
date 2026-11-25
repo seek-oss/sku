@@ -41,7 +41,7 @@ export const createEslintConfig = async ({
 };
 
 async function importEslintConfig({
-  testRunner = 'jest',
+  testRunner,
 }: {
   testRunner: SkuConfig['testRunner'];
 }): Promise<{ default: Linter.Config[] }> {

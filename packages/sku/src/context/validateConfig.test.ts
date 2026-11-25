@@ -670,3 +670,59 @@ describe('validateConfig — distSubfolders', () => {
     },
   );
 });
+
+describe('validateConfig — libraryEntry', () => {
+  let exitSpy: ReturnType<typeof vi.spyOn>;
+  let logSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    exitSpy = vi.spyOn(process, 'exit').mockImplementation((code) => {
+      throw new Error(`process.exit: ${code}`);
+    });
+    logSpy = vi.spyOn(globalThis.console, 'log').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it('accepts a library with the webpack bundler', () => {
+    expect(() =>
+      validateConfig({
+        ...defaultSkuConfig,
+        bundler: 'webpack',
+        libraryEntry: 'src/library.js',
+        libraryName: 'MyLibrary',
+      }),
+    ).not.toThrow();
+
+    expect(exitSpy).not.toHaveBeenCalled();
+  });
+
+  it('rejects a library without a libraryName', () => {
+    expect(() =>
+      validateConfig({
+        ...defaultSkuConfig,
+        bundler: 'webpack',
+        libraryEntry: 'src/library.js',
+      }),
+    ).toThrow('process.exit: 1');
+
+    const logged = logSpy.mock.calls.join('\n');
+    expect(logged).toContain('must have a corresponding');
+  });
+
+  it('rejects a library with the default vite bundler', () => {
+    expect(() =>
+      validateConfig({
+        ...defaultSkuConfig,
+        libraryEntry: 'src/library.js',
+        libraryName: 'MyLibrary',
+      } as SkuConfig),
+    ).toThrow('process.exit: 1');
+
+    const logged = logSpy.mock.calls.join('\n');
+    expect(logged).toContain('libraryEntry');
+    expect(logged).toContain("bundler: 'webpack'");
+  });
+});

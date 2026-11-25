@@ -5,7 +5,7 @@
   "scripts": {
     "start": "sku start",
     "start-ssr": "sku start-ssr --config sku-server.config.ts",
-    "start:vite": "sku start --config sku.config.vite.mjs"
+    "start:webpack": "sku start --config sku.config.webpack.mjs"
   },
   "dependencies": {
     "react": "catalog:",

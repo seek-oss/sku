@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.ts"
+    "start:webpack": "sku start --config sku.config.webpack.ts"
   },
   "devDependencies": {
     "sku": "workspace:*"

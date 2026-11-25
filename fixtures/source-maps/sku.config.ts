@@ -1,4 +1,4 @@
-import { makeStableHashes } from '@sku-private/test-utils';
+import { makeStableViteHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 export default {
@@ -8,5 +8,5 @@ export default {
   port: 8303,
   target: 'dist',
   sourceMapsProd: process.env.SKU_SOURCE_MAPS_PROD === 'true',
-  dangerouslySetWebpackConfig: (config: any) => makeStableHashes(config),
+  dangerouslySetViteConfig: makeStableViteHashes,
 } satisfies SkuConfig;

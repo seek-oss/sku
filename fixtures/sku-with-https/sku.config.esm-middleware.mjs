@@ -4,6 +4,7 @@ import {
 } from '@sku-private/test-utils';
 
 export default {
+  bundler: 'webpack',
   port: 9843,
   httpsDevServer: true,
   clientEntry: './src/client.jsx',

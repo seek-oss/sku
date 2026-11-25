@@ -1,4 +1,4 @@
-import { makeStableHashes } from '@sku-private/test-utils';
+import { makeStableViteHashes } from '@sku-private/test-utils';
 
 export default {
   clientEntry: './src/client.jsx',
@@ -29,6 +29,5 @@ export default {
     'https://error-tracking.com',
     'https://fb-tracking.com',
   ],
-  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
-  setupTests: './setupTests.js',
+  dangerouslySetViteConfig: makeStableViteHashes,
 };

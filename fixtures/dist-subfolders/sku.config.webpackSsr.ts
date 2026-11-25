@@ -1,6 +1,7 @@
 import type { SkuConfig } from 'sku';
 
 export default {
+  bundler: 'webpack',
   distSubfolders: true,
   clientEntry: 'src/ssrClient.tsx',
   serverEntry: 'src/server.tsx',

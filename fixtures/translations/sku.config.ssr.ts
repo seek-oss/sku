@@ -1,7 +1,6 @@
 import type { SkuConfig } from 'sku';
 
 export default {
-  bundler: 'vite',
   buildType: 'ssr',
   clientEntry: 'src/vite-ssr/client.tsx',
   serverEntry: 'src/vite-ssr/server.tsx',

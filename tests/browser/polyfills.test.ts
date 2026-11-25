@@ -11,8 +11,8 @@ const { sku } = scopeToFixture('polyfills');
 
 describe('polyfills', () => {
   const args: BundlerValues<string[]> = {
-    vite: ['--config', 'sku.config.vite.ts'],
-    webpack: [],
+    vite: [],
+    webpack: ['--config', 'sku.config.webpack.ts'],
   };
 
   describe.for(bundlers)('bundler %s', async (bundler) => {
@@ -34,7 +34,11 @@ describe('polyfills', () => {
 
     describe('start', () => {
       it('should start a development server', async () => {
-        const start = await sku('start', ['--strict-port', `--port=${port}`]);
+        const start = await sku('start', [
+          ...args[bundler],
+          '--strict-port',
+          `--port=${port}`,
+        ]);
         expect(
           await start.findByText('Starting development server'),
         ).toBeInTheConsole();

@@ -1,3 +1,4 @@
+import { makeStableViteHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 export default {
@@ -5,6 +6,5 @@ export default {
   renderEntry: 'src/render.tsx',
   serverEntry: 'src/server.tsx',
   port: 8239,
-  serverPort: 8011,
-  setupTests: './jestSetup.js',
+  dangerouslySetViteConfig: makeStableViteHashes,
 } satisfies SkuConfig;

@@ -13,7 +13,7 @@ describe('pathAliases', () => {
 
   describe('with Vite bundler', async () => {
     beforeAll(async () => {
-      const configure = await sku('configure', ['--config=sku.config.vite.ts']);
+      const configure = await sku('configure');
 
       await expect(configure).toMatchExitCode(0);
 
@@ -75,11 +75,7 @@ describe('pathAliases', () => {
     it('should resolve path aliases on start', async () => {
       const port = await getPort();
 
-      const start = await sku('start', [
-        '--config=sku.config.vite.ts',
-        '--strict-port',
-        `--port=${port}`,
-      ]);
+      const start = await sku('start', ['--strict-port', `--port=${port}`]);
 
       expect(
         await start.findByText('Starting development server'),

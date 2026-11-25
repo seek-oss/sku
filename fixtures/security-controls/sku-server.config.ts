@@ -4,6 +4,7 @@ import {
 } from '@sku-private/test-utils';
 
 export default {
+  bundler: 'webpack',
   port: 9847,
   // Required for the test to serve client assets from http-server.
   publicPath: 'http://localhost:9848',

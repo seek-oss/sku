@@ -5,9 +5,9 @@ import type { CompleteSkuConfig } from '../types/types.js';
 const defaultDecorator = <T>(a: T) => a;
 
 export default {
-  bundler: 'webpack',
+  bundler: 'vite',
   buildType: undefined,
-  testRunner: 'jest',
+  testRunner: 'vitest',
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   serverEntry: 'src/server.tsx',

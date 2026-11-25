@@ -1,7 +1,6 @@
 import type { SkuConfig } from 'sku';
 
 export default {
-  bundler: 'vite',
   vitePlugins: [
     {
       name: 'custom-plugin-build-start',

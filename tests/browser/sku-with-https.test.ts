@@ -22,8 +22,8 @@ describe('sku-with-https', () => {
 
     const portArgs = ['--strict-port', `--port=${port}`];
     const args: BundlerValues<string[]> = {
-      vite: ['--config', 'sku.config.vite.mjs', ...portArgs],
-      webpack: portArgs,
+      vite: portArgs,
+      webpack: ['--config', 'sku.config.webpack.mjs', ...portArgs],
     };
 
     describe('start', () => {
@@ -93,10 +93,15 @@ describe('sku-with-https', () => {
     const url = `https://localhost:${port}`;
 
     beforeAll(async () => {
-      const build = await sku('build');
+      const build = await sku('build', ['--config', 'sku.config.webpack.mjs']);
       await expect(build).toMatchExitCode(0);
 
-      const serve = await sku('serve', ['--strict-port', `--port=${port}`]);
+      const serve = await sku('serve', [
+        '--config',
+        'sku.config.webpack.mjs',
+        '--strict-port',
+        `--port=${port}`,
+      ]);
       await serve.findByText('Server started');
     });
 

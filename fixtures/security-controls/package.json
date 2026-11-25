@@ -5,10 +5,10 @@
   "scripts": {
     "build": "sku build",
     "build:ssr": "sku build-ssr --config sku-server.config.ts",
-    "build:vite": "sku build --config sku.config.vite.ts",
+    "build:webpack": "sku build --config sku.config.webpack.ts",
     "serve:assets": "http-server dist -p 9848 --cors",
     "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.ts",
+    "start:webpack": "sku start --config sku.config.webpack.ts",
     "start-ssr:vite": "sku start-ssr --config sku-server.config.ts"
   },
   "dependencies": {

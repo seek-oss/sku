@@ -19,7 +19,7 @@ To start a local development server and open a new browser tab:
 $ npm start
 ```
 
-By default, sku starts your app with [webpack-dev-server](https://github.com/webpack/webpack-dev-server) on `http://localhost:8080`.
+By default, sku starts your app with the [Vite](./vite.md) dev server on `http://localhost:8080`.
 You can pass a few options in `sku.config.js` if you need them.
 
 ```js

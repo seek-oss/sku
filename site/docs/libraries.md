@@ -1,6 +1,7 @@
 # Libraries
 
-If you need to build a UMD library instead of a web site, provide a `libraryEntry` and `libraryName` option instead:
+If you need to build a UMD library instead of a web site, set `bundler: 'webpack'` and provide a `libraryEntry` and `libraryName` option instead.
+Library mode is only supported with webpack.
 
 > [!TIP]
 > If you are creating a package to share between multiple sku apps, use [compile packages](./extra-features#compile-packages) instead.
@@ -8,6 +9,7 @@ If you need to build a UMD library instead of a web site, provide a `libraryEntr
 
 ```ts
 export default {
+  bundler: 'webpack',
   libraryEntry: 'src/library.js',
   renderEntry: 'src/render.js',
   libraryName: 'MyAwesomeLibrary',
@@ -19,6 +21,7 @@ Provide a `libraryFile` option to set a different library file name:
 
 ```ts
 export default {
+  bundler: 'webpack',
   libraryName: 'MyAwesomeLibrary',
   libraryFile: 'my-awesome-library',
 } satisfies SkuConfig;

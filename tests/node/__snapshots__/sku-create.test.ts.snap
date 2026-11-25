@@ -160,9 +160,11 @@ exports[`sku-create > ssr > should create sku.config.ts 1`] = `
 "import type { SkuConfig } from 'sku';
 
 const skuConfig = {
+  bundler: 'vite',
   buildType: 'ssr',
   publicPath: '/',
   expressTrustProxy: true,
+  testRunner: 'vitest',
   entrySideEffects: ['braid-design-system/reset'],
   pathAliases: {
     '#src/*': './src/*',
@@ -763,6 +765,8 @@ const skuConfig = {
   renderEntry: 'src/render.tsx',
   environments: ['development', 'production'],
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
+  testRunner: 'vitest',
+  bundler: 'vite',
   entrySideEffects: ['braid-design-system/reset'],
   pathAliases: {
     '#src/*': './src/*',

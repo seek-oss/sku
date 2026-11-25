@@ -34,7 +34,7 @@ export default {
   libraryFile: undefined,
   sourceMapsProd: true,
   displayNamesProd: false,
-  distSubfolders: false,
+  distSubfolders: true,
   dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
   dangerouslySetTSConfig: defaultDecorator,

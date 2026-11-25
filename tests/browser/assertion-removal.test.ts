@@ -46,7 +46,7 @@ describe('assertion-removal', () => {
       const build = await sku('build-ssr');
       await expect(build).toMatchExitCode(0);
 
-      const server = await node(['dist/server.cjs']);
+      const server = await node(['dist/server/server.cjs']);
       expect(
         await server.findByText('Server started on port 8011'),
       ).toBeInTheConsole();

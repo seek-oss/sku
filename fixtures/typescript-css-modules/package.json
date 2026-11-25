@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "build-ssr": "sku build-ssr --config sku-ssr.config.ts",
-    "serve-ssr": "node dist/server.cjs",
-    "start:asset-server": "http-server dist -p 4003 --cors"
+    "serve-ssr": "node dist/server/server.cjs",
+    "start:asset-server": "http-server dist/client -p 4003 --cors"
   },
   "dependencies": {
     "react": "catalog:",

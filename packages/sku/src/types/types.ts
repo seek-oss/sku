@@ -271,7 +271,7 @@ interface SkuConfigBase {
    * Managed Data Mode output is always split into `<target>/client` and `<target>/server`,
    * so this option isn't needed.
    *
-   * @default false
+   * @default true
    * @link https://seek-oss.github.io/sku/configuration#distsubfolders
    */
   distSubfolders?: boolean;

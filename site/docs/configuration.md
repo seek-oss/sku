@@ -443,9 +443,10 @@ Use this on sites that generate React code snippets. [Braid](https://seek-oss.gi
 
 Type: `boolean`
 
-Default: `false`
+Default: `true`
 
 When `true`, build output is split into a subfolder per kind of file, instead of writing everything to the root of the [`target`](#target) directory.
+Set `distSubfolders: false` to keep the flat layout.
 This makes it possible to deploy each kind of file separately without guessing which files are which.
 
 For static apps, `sku build` writes:
@@ -467,9 +468,7 @@ Restrictions:
 - Config validation fails when the option is used with [`buildType: 'ssr'`](#buildtype).
   SSR output is always split into `dist/client/` and `dist/server/`.
 - `sku build` fails when the [`public`](#public) folder contains `.html` files, because they would be deployed as client files.
-
-> [!NOTE]
-> `distSubfolders` will default to `true` in a future major release.
+- [Libraries](./libraries.md) ignore the option and always use the flat layout.
 
 ## expressTrustProxy <Badge type="info" text="SSR only" />
 

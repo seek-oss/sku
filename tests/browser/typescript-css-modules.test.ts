@@ -53,7 +53,7 @@ describe('typescript-css-modules', () => {
     });
 
     it('should create valid app', async () => {
-      await node(['dist/server.cjs']);
+      await node(['dist/server/server.cjs']);
       const assetServer = await exec('pnpm', ['run', 'start:asset-server']);
       expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 

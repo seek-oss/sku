@@ -614,20 +614,35 @@ describe('validateConfig — distSubfolders', () => {
   });
 
   it('rejects the option with buildType ssr', () => {
+    const appSkuConfig = {
+      bundler: 'vite',
+      buildType: 'ssr',
+      sites: ['default'],
+      distSubfolders: true,
+    } satisfies SkuConfig;
+
     expect(() =>
-      validateConfig({
-        ...defaultSkuConfig,
-        bundler: 'vite',
-        buildType: 'ssr',
-        sites: ['default'],
-        distSubfolders: true,
-      }),
+      validateConfig({ ...defaultSkuConfig, ...appSkuConfig }, appSkuConfig),
     ).toThrow('process.exit: 1');
 
     expect(exitSpy).toHaveBeenCalledWith(1);
     const logged = logSpy.mock.calls.join('\n');
     expect(logged).toContain('distSubfolders');
     expect(logged).toContain('buildType: ssr');
+  });
+
+  it('accepts the default with buildType ssr', () => {
+    const appSkuConfig = {
+      bundler: 'vite',
+      buildType: 'ssr',
+      sites: ['default'],
+    } satisfies SkuConfig;
+
+    expect(() =>
+      validateConfig({ ...defaultSkuConfig, ...appSkuConfig }, appSkuConfig),
+    ).not.toThrow();
+
+    expect(exitSpy).not.toHaveBeenCalled();
   });
 
   it.each(['vite', 'webpack'] as const)(

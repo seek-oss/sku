@@ -1,0 +1,60 @@
+{
+  "name": "@sku-lib/rolldown-plugin-unassert",
+  "version": "0.0.0",
+  "description": "Rolldown/Vite plugin for unassert, powered by oxc: removes assertion calls at build time",
+  "keywords": [
+    "assert",
+    "oxc",
+    "rolldown-plugin",
+    "unassert",
+    "vite-plugin"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seek-oss/sku.git",
+    "directory": "packages/rolldown-plugin-unassert"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "bench": "pnpm build && vitest bench --run --root ../.. --project 'rolldown-plugin-unassert-benchmark*' --reporter=verbose",
+    "build": "tsdown"
+  },
+  "dependencies": {
+    "magic-string": "^1.4.5",
+    "oxc-parser": "^0.159.0"
+  },
+  "devDependencies": {
+    "@jridgewell/trace-mapping": "^0.3.31",
+    "@sku-private/tsdown": "workspace:*",
+    "@types/node": "catalog:",
+    "assert": "^2.1.0",
+    "dedent": "^1.7.2",
+    "fake-dep": "file:./tests/fake-dep",
+    "rolldown": "^1.3.2",
+    "tiny-invariant": "^1.3.3",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "peerDependencies": {
+    "rolldown": "^1.0.0",
+    "vite": "^8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "rolldown": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    }
+  },
+  "private": true
+}

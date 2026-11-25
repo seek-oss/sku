@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { viteDiscardsSourcemaps } from '../src/vite.ts';
+import { viteDiscardsSourcemaps } from './vite.ts';
 
 function viteContext(mode: string, sourcemap: boolean | 'inline' | 'hidden') {
   return { environment: { mode, config: { build: { sourcemap } } } };

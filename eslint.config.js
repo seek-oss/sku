@@ -23,8 +23,6 @@ export default [
       'fixtures/**/*',
       '**/__testfixtures__/**',
       'packages/rolldown-plugin-unassert/benchmark/.generated-*/**',
-      'packages/rolldown-plugin-unassert/tests/vite-app/**',
-      'packages/rolldown-plugin-unassert/tests/fake-dep/**',
       '**/@loadable/**/*',
       'site/.vitepress/cache/',
       'site/.vitepress/dist/',

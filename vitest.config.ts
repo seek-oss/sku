@@ -40,7 +40,7 @@ export default defineConfig({
       {
         test: {
           name: 'rolldown-plugin-unassert',
-          include: [`${rolldownPluginUnassertTests}/tests/${defaultInclude}`],
+          include: [`${rolldownPluginUnassertTests}/src/${defaultInclude}`],
         },
       },
       {

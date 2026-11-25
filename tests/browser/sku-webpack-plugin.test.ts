@@ -11,7 +11,8 @@ describe('sku-webpack-plugin', () => {
     const devServerUrl = `http://localhost:${port}`;
 
     it('should start a development server', async () => {
-      const server = await exec('node_modules/.bin/webpack-dev-server', [
+      const server = await exec('node_modules/.bin/webpack-cli', [
+        'serve',
         '--mode',
         'development',
         `--port=${port}`,

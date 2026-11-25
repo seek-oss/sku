@@ -192,10 +192,6 @@
     "fixtures/sku-test": {
       "entry": ["sku.config.*", "src/*.test.ts", "setup-test.*"],
     },
-    "fixtures/sku-webpack-plugin": {
-      // Used in tests
-      "ignoreDependencies": ["webpack-dev-server"],
-    },
     "fixtures/sku-with-https": {
       "entry": [
         "src/client.jsx",

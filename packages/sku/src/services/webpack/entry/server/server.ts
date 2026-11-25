@@ -46,7 +46,7 @@ if (middleware) {
   app.use(middleware);
 }
 
-app.get('*', (...args) => {
+app.get('/{*splat}', (...args) => {
   let cspHandler;
 
   if (csp.enabled) {

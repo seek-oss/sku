@@ -14,13 +14,13 @@
     "@opentelemetry/resources": "^3.0.0",
     "@opentelemetry/sdk-trace": "^3.0.0",
     "@opentelemetry/semantic-conventions": "^1.43.0",
-    "express": "^4.22.1",
+    "express": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
+    "@types/express": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "sku": "workspace:*"

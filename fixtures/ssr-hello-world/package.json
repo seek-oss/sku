@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:"
   },

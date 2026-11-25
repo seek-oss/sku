@@ -8,14 +8,14 @@
     "start:prod": "node dist/server/server.mjs"
   },
   "dependencies": {
-    "express": "^4.22.1",
+    "express": "catalog:",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-router": "catalog:"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/express-serve-static-core": "4.19.8",
+    "@types/express": "catalog:",
+    "@types/express-serve-static-core": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "sku": "workspace:*"

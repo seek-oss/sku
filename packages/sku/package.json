@@ -97,6 +97,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.0",
     "@rolldown/plugin-babel": "^0.3.1",
     "@sku-lib/babel-plugin-display-name": "workspace:^",
+    "@sku-lib/rolldown-plugin-display-name": "workspace:^",
     "@sku-lib/vite": "workspace:^",
     "@swc/core": "^1.6.13",
     "@types/express": "^4.17.11",

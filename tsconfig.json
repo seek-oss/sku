@@ -34,6 +34,7 @@
     { "path": "./packages/vite" },
     { "path": "./packages/pnpm-plugin" },
     { "path": "./packages/babel-plugin-display-name" },
+    { "path": "./packages/rolldown-plugin-display-name" },
     { "path": "./packages/rolldown-plugin-unassert" }
   ]
 }

@@ -5,6 +5,7 @@ import { vitePluginVocab } from '@vocab/vite';
 import { cjsInterop } from 'vite-plugin-cjs-interop';
 import react from '@vitejs/plugin-react';
 import babel from '@rolldown/plugin-babel';
+import { displayName } from '@sku-lib/rolldown-plugin-display-name';
 import { unassert } from '@sku-lib/rolldown-plugin-unassert';
 import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 import { getVocabConfig } from '../../../vocab/config.js';
@@ -31,12 +32,6 @@ export const createConfig = (
     require.resolve('@babel/plugin-transform-react-constant-elements'),
   ];
 
-  if (skuContext.displayNamesProd) {
-    prodBabelPlugins.push(
-      require.resolve('@sku-lib/babel-plugin-display-name'),
-    );
-  }
-
   return {
     plugins: [
       /**
@@ -56,6 +51,7 @@ export const createConfig = (
         dependencies: skuContext.buildCjsInteropDependencies,
         apply: 'build',
       }),
+      isProductionBuild && skuContext.displayNamesProd && displayName(),
       react(),
       isProductionBuild &&
         unassert({

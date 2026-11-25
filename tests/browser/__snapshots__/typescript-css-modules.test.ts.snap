@@ -93,9 +93,23 @@ exports[`typescript-css-modules > build > should create valid app 1`] = `
 
 exports[`typescript-css-modules > build > should generate the expected files 1`] = `
 {
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
+  "client/2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main-4bad37555f2de4beeb21.css": ._19hsk3y0 {
+  display: flex;
+}
+._19hsk3y0 ._19hsk3y1 {
+  font-size: 32px;
+}
+
+/*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/
+,
+  "client/main-4bad37555f2de4beeb21.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/index.html": SCRIPTS: [
     "/static/typescript/runtime.js",
     "/static/typescript/2.js",
     "/static/typescript/main.js",
@@ -185,20 +199,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-4bad37555f2de4beeb21.css": ._19hsk3y0 {
-  display: flex;
-}
-._19hsk3y0 ._19hsk3y1 {
-  font-size: 32px;
-}
-
-/*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/
-,
-  "main-4bad37555f2de4beeb21.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -303,8 +303,8 @@ exports[`typescript-css-modules > build-ssr > should create valid app 1`] = `
 
 exports[`typescript-css-modules > build-ssr > should generate the expected files 1`] = `
 {
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main-4bad37555f2de4beeb21.css": ._19hsk3y0 {
+  "client/2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main-4bad37555f2de4beeb21.css": ._19hsk3y0 {
   display: flex;
 }
 ._19hsk3y0 ._19hsk3y1 {
@@ -313,9 +313,9 @@ exports[`typescript-css-modules > build-ssr > should generate the expected files
 
 /*# sourceMappingURL=main-4bad37555f2de4beeb21.css.map*/
 ,
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "server.cjs": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "server/server.cjs": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

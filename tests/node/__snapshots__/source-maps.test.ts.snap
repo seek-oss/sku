@@ -2,7 +2,8 @@
 
 exports[`source-maps > bundler vite > sourceMapsProd false > should generate the expected files 1`] = `
 {
-  "index.html": SCRIPTS: [
+  "client/vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/index.html": SCRIPTS: [
     "/static/source-maps/vite-client.js",
   ]
 CSS: []
@@ -36,13 +37,14 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`source-maps > bundler vite > sourceMapsProd true > should generate the expected files 1`] = `
 {
-  "index.html": SCRIPTS: [
+  "client/vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/index.html": SCRIPTS: [
     "/static/source-maps/vite-client.js",
   ]
 CSS: []
@@ -76,15 +78,15 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`source-maps > bundler webpack > sourceMapsProd false > should generate the expected files 1`] = `
 {
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
+  "client/2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/index.html": SCRIPTS: [
     "/static/source-maps/runtime.js",
     "/static/source-maps/2.js",
     "/static/source-maps/main.js",
@@ -158,16 +160,18 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
 exports[`source-maps > bundler webpack > sourceMapsProd true > should generate the expected files 1`] = `
 {
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
+  "client/2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/index.html": SCRIPTS: [
     "/static/source-maps/runtime.js",
     "/static/source-maps/2.js",
     "/static/source-maps/main.js",
@@ -241,9 +245,5 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;

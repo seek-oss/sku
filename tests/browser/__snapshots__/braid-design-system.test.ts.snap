@@ -2,57 +2,7 @@
 
 exports[`braid-design-system > bundler vite > build > should generate the expected files 1`] = `
 {
-  "jobStreet/index.html": "
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="UTF-8">
-        <title>My Awesome Project</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/vite-client.css" crossorigin />
-
-<link rel="modulepreload" href="/vite-client.js" crossorigin />
-
-        <script>
-          window.SKU_SITE = 'jobStreet';
-        </script>
-      </head>
-      <body>
-        <div id="app"><style type="text/css">
-            html,body{margin:0;padding:0;background:#fff}
-            html._1dxfmrv10,html._1dxfmrv10 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1hqills0 _1fgofs612 _1fgofs615"><span class="_5ru98q0 _1dxfmrv4x _1fgofs60 _1fgofs61 _1fgofs61v _1fgofs69 _1fgofs68 _10ivjxc4 _1fgofs6g">Hello <!-- -->jobStreet<!-- --> <span class="_5ru98q0 _1dxfmrv55"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 bpba7d0 _1dxfmrv55 _1dxfmrv5d no4vm10 no4vm12 no4vm13 no4vm14" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4"></path></svg></span></span><div class="_5ru98q0 _1dxfmrv8p _1dxfmrv7l _1dxfmrvax _1dxfmrv9t _1dxfmrv5d _1dxfmrv69 _1dxfmrvi9 _1dxfmrv4j _1dxfmrv4c _1fgofs612 _1fgofs615 _1dxfmrv33 _1dxfmrv36"><div class="_5ru98q0 _1dxfmrv5d"><div class="_5ru98q0 _1dxfmrv59 _1dxfmrvi9"><input class="_5ru98q0 _5ru98qe _5ru98q9 _5ru98q1 _5ru98q6 _5ru98q7 _5ru98q8 _5ru98qd _1dxfmrv5h _1dxfmrv8 _1dxfmrvh _1dxfmrv6 yv6c2q4 yv6c2q2" type="checkbox" id="id_1" aria-checked="false"/><div class="_5ru98q0 _1dxfmrvhx _1dxfmrv5d _1dxfmrv65 yv6c2q5 yv6c2q2 _1fgofs612  _1dxfmrv33"><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 yv6c2q9 _1fgofs613 _1fgofs615 _1dxfmrv21 _1dxfmrv22"><div class="_5ru98q0 _1dxfmrvn _1dxfmrvx _1dxfmrv5d yv6c2qc yv6c2qe"><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61v" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1"></path></svg></div><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61v" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4"></path></svg></div></div></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv3x _1dxfmrv3y"></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 _1dxfmrv3p _1dxfmrv3u"></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 yv6c2qb _1dxfmrv3z _1dxfmrv44"><div class="_5ru98q0 _1dxfmrvn _1dxfmrvx _1dxfmrv5d yv6c2qc yv6c2qe"><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61u" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1"></path></svg></div><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61u" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4"></path></svg></div></div></span></div><div class="_5ru98q0 _1dxfmrvb5 _1dxfmrvi5"><div class="_5ru98q0 _1dxfmrv59 yv6c2q2 yv6c2q6"><label class="_5ru98q0 _1dxfmrv4 _1dxfmrv4x _1dxfmrvh _171aaf0" for="id_1"><span class="_5ru98q0 _1dxfmrv4x _1fgofs60 _1fgofs61 _1fgofs61v _1fgofs69 _1fgofs68 _10ivjxc4 _1fgofs6g">This is a checkbox</span></label></div></div></div></div></div><div class="_5ru98q0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
-        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
-<script type="module" src="/vite-client.js"></script>
-      </body>
-    </html>
-  ",
-  "seekAnz/index.html": "
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="UTF-8">
-        <title>My Awesome Project</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/vite-client.css" crossorigin />
-
-<link rel="modulepreload" href="/vite-client.js" crossorigin />
-
-        <script>
-          window.SKU_SITE = 'seekAnz';
-        </script>
-      </head>
-      <body>
-        <div id="app"><style type="text/css">
-            html,body{margin:0;padding:0;background:#fff}
-            html._1dxfmrv10,html._1dxfmrv10 body{color-scheme:dark;background:#1C2330}
-          </style><div class="_1hqills0 _1fgofs612 _1fgofs615"><span class="_5ru98q0 _1dxfmrv4x _1fgofs60 _1fgofs61 _1fgofs61v _1fgofs69 _1fgofs68 _10ivjxc4 _1fgofs6g">Hello <!-- -->seekAnz<!-- --> <span class="_5ru98q0 _1dxfmrv55"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 bpba7d0 _1dxfmrv55 _1dxfmrv5d no4vm10 no4vm12 no4vm13 no4vm14" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4"></path></svg></span></span><div class="_5ru98q0 _1dxfmrv8p _1dxfmrv7l _1dxfmrvax _1dxfmrv9t _1dxfmrv5d _1dxfmrv69 _1dxfmrvi9 _1dxfmrv4j _1dxfmrv4c _1fgofs612 _1fgofs615 _1dxfmrv33 _1dxfmrv36"><div class="_5ru98q0 _1dxfmrv5d"><div class="_5ru98q0 _1dxfmrv59 _1dxfmrvi9"><input class="_5ru98q0 _5ru98qe _5ru98q9 _5ru98q1 _5ru98q6 _5ru98q7 _5ru98q8 _5ru98qd _1dxfmrv5h _1dxfmrv8 _1dxfmrvh _1dxfmrv6 yv6c2q4 yv6c2q2" type="checkbox" id="id_1" aria-checked="false"/><div class="_5ru98q0 _1dxfmrvhx _1dxfmrv5d _1dxfmrv65 yv6c2q5 yv6c2q2 _1fgofs612  _1dxfmrv33"><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 yv6c2q9 _1fgofs613 _1fgofs615 _1dxfmrv21 _1dxfmrv22"><div class="_5ru98q0 _1dxfmrvn _1dxfmrvx _1dxfmrv5d yv6c2qc yv6c2qe"><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61v" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1"></path></svg></div><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61v" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4"></path></svg></div></div></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv3x _1dxfmrv3y"></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 _1dxfmrv3p _1dxfmrv3u"></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 yv6c2qb _1dxfmrv3z _1dxfmrv44"><div class="_5ru98q0 _1dxfmrvn _1dxfmrvx _1dxfmrv5d yv6c2qc yv6c2qe"><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61u" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1"></path></svg></div><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61u" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4"></path></svg></div></div></span></div><div class="_5ru98q0 _1dxfmrvb5 _1dxfmrvi5"><div class="_5ru98q0 _1dxfmrv59 yv6c2q2 yv6c2q6"><label class="_5ru98q0 _1dxfmrv4 _1dxfmrv4x _1dxfmrvh _171aaf0" for="id_1"><span class="_5ru98q0 _1dxfmrv4x _1fgofs60 _1fgofs61 _1fgofs61v _1fgofs69 _1fgofs68 _10ivjxc4 _1fgofs6g">This is a checkbox</span></label></div></div></div></div></div><div class="_5ru98q0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
-        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
-<script type="module" src="/vite-client.js"></script>
-      </body>
-    </html>
-  ",
-  "vite-client.css": ._5ru98q0 {
+  "client/vite-client.css": ._5ru98q0 {
   box-sizing: border-box;
   font-size: 100%;
   font: inherit;
@@ -2812,8 +2762,58 @@ html._1dxfmrv10 .yv6c2qd {
   font-size: 20px;
 }
 ,
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/jobStreet/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/vite-client.css" crossorigin />
+
+<link rel="modulepreload" href="/vite-client.js" crossorigin />
+
+        <script>
+          window.SKU_SITE = 'jobStreet';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#fff}
+            html._1dxfmrv10,html._1dxfmrv10 body{color-scheme:dark;background:#1C2330}
+          </style><div class="_1hqills0 _1fgofs612 _1fgofs615"><span class="_5ru98q0 _1dxfmrv4x _1fgofs60 _1fgofs61 _1fgofs61v _1fgofs69 _1fgofs68 _10ivjxc4 _1fgofs6g">Hello <!-- -->jobStreet<!-- --> <span class="_5ru98q0 _1dxfmrv55"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 bpba7d0 _1dxfmrv55 _1dxfmrv5d no4vm10 no4vm12 no4vm13 no4vm14" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4"></path></svg></span></span><div class="_5ru98q0 _1dxfmrv8p _1dxfmrv7l _1dxfmrvax _1dxfmrv9t _1dxfmrv5d _1dxfmrv69 _1dxfmrvi9 _1dxfmrv4j _1dxfmrv4c _1fgofs612 _1fgofs615 _1dxfmrv33 _1dxfmrv36"><div class="_5ru98q0 _1dxfmrv5d"><div class="_5ru98q0 _1dxfmrv59 _1dxfmrvi9"><input class="_5ru98q0 _5ru98qe _5ru98q9 _5ru98q1 _5ru98q6 _5ru98q7 _5ru98q8 _5ru98qd _1dxfmrv5h _1dxfmrv8 _1dxfmrvh _1dxfmrv6 yv6c2q4 yv6c2q2" type="checkbox" id="id_1" aria-checked="false"/><div class="_5ru98q0 _1dxfmrvhx _1dxfmrv5d _1dxfmrv65 yv6c2q5 yv6c2q2 _1fgofs612  _1dxfmrv33"><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 yv6c2q9 _1fgofs613 _1fgofs615 _1dxfmrv21 _1dxfmrv22"><div class="_5ru98q0 _1dxfmrvn _1dxfmrvx _1dxfmrv5d yv6c2qc yv6c2qe"><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61v" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1"></path></svg></div><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61v" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4"></path></svg></div></div></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv3x _1dxfmrv3y"></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 _1dxfmrv3p _1dxfmrv3u"></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 yv6c2qb _1dxfmrv3z _1dxfmrv44"><div class="_5ru98q0 _1dxfmrvn _1dxfmrvx _1dxfmrv5d yv6c2qc yv6c2qe"><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61u" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1"></path></svg></div><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61u" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4"></path></svg></div></div></span></div><div class="_5ru98q0 _1dxfmrvb5 _1dxfmrvi5"><div class="_5ru98q0 _1dxfmrv59 yv6c2q2 yv6c2q6"><label class="_5ru98q0 _1dxfmrv4 _1dxfmrv4x _1dxfmrvh _171aaf0" for="id_1"><span class="_5ru98q0 _1dxfmrv4x _1fgofs60 _1fgofs61 _1fgofs61v _1fgofs69 _1fgofs68 _10ivjxc4 _1fgofs6g">This is a checkbox</span></label></div></div></div></div></div><div class="_5ru98q0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"jobStreet"}</script>
+<script type="module" src="/vite-client.js"></script>
+      </body>
+    </html>
+  ",
+  "rendered/seekAnz/index.html": "
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>My Awesome Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/vite-client.css" crossorigin />
+
+<link rel="modulepreload" href="/vite-client.js" crossorigin />
+
+        <script>
+          window.SKU_SITE = 'seekAnz';
+        </script>
+      </head>
+      <body>
+        <div id="app"><style type="text/css">
+            html,body{margin:0;padding:0;background:#fff}
+            html._1dxfmrv10,html._1dxfmrv10 body{color-scheme:dark;background:#1C2330}
+          </style><div class="_1hqills0 _1fgofs612 _1fgofs615"><span class="_5ru98q0 _1dxfmrv4x _1fgofs60 _1fgofs61 _1fgofs61v _1fgofs69 _1fgofs68 _10ivjxc4 _1fgofs6g">Hello <!-- -->seekAnz<!-- --> <span class="_5ru98q0 _1dxfmrv55"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 bpba7d0 _1dxfmrv55 _1dxfmrv5d no4vm10 no4vm12 no4vm13 no4vm14" aria-hidden="true"><path d="M20.7 7.3c-.4-.4-1-.4-1.4 0L12 14.6 4.7 7.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4"></path></svg></span></span><div class="_5ru98q0 _1dxfmrv8p _1dxfmrv7l _1dxfmrvax _1dxfmrv9t _1dxfmrv5d _1dxfmrv69 _1dxfmrvi9 _1dxfmrv4j _1dxfmrv4c _1fgofs612 _1fgofs615 _1dxfmrv33 _1dxfmrv36"><div class="_5ru98q0 _1dxfmrv5d"><div class="_5ru98q0 _1dxfmrv59 _1dxfmrvi9"><input class="_5ru98q0 _5ru98qe _5ru98q9 _5ru98q1 _5ru98q6 _5ru98q7 _5ru98q8 _5ru98qd _1dxfmrv5h _1dxfmrv8 _1dxfmrvh _1dxfmrv6 yv6c2q4 yv6c2q2" type="checkbox" id="id_1" aria-checked="false"/><div class="_5ru98q0 _1dxfmrvhx _1dxfmrv5d _1dxfmrv65 yv6c2q5 yv6c2q2 _1fgofs612  _1dxfmrv33"><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 yv6c2q9 _1fgofs613 _1fgofs615 _1dxfmrv21 _1dxfmrv22"><div class="_5ru98q0 _1dxfmrvn _1dxfmrvx _1dxfmrv5d yv6c2qc yv6c2qe"><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61v" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1"></path></svg></div><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61v" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4"></path></svg></div></div></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv3x _1dxfmrv3y"></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 _1dxfmrv3p _1dxfmrv3u"></span><span class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvi _1dxfmrv65 _1dxfmrvx _1dxfmrv6 yv6c2qb _1dxfmrv3z _1dxfmrv44"><div class="_5ru98q0 _1dxfmrvn _1dxfmrvx _1dxfmrv5d yv6c2qc yv6c2qe"><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx _1dxfmrv6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61u" aria-hidden="true"><path d="M18 11H6c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1"></path></svg></div><div class="_5ru98q0 _1dxfmrvj _1dxfmrvk _1dxfmrvl _1dxfmrvm _1dxfmrv5h _1dxfmrvx"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" fill="currentColor" width="16" height="16" class="_5ru98q0 _1dxfmrvp _1dxfmrvn _1dxfmrv4x _1fgofs61u" aria-hidden="true"><path d="M19.7 6.3c-.4-.4-1-.4-1.4 0L9 15.6l-3.3-3.3c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l4 4c.2.2.4.3.7.3s.5-.1.7-.3l10-10c.4-.4.4-1 0-1.4"></path></svg></div></div></span></div><div class="_5ru98q0 _1dxfmrvb5 _1dxfmrvi5"><div class="_5ru98q0 _1dxfmrv59 yv6c2q2 yv6c2q6"><label class="_5ru98q0 _1dxfmrv4 _1dxfmrv4x _1dxfmrvh _171aaf0" for="id_1"><span class="_5ru98q0 _1dxfmrv4x _1fgofs60 _1fgofs61 _1fgofs61v _1fgofs69 _1fgofs68 _10ivjxc4 _1fgofs6g">This is a checkbox</span></label></div></div></div></div></div><div class="_5ru98q0 inn18b0">🧁 Vanilla content <!-- -->Initial</div></div></div>
+        <script id="__SKU_CLIENT_CONTEXT__" type="application/json">{"site":"seekAnz"}</script>
+<script type="module" src="/vite-client.js"></script>
+      </body>
+    </html>
+  ",
 }
 `;
 
@@ -13553,7 +13553,7 @@ exports[`braid-design-system > bundler vite > start > should return development 
 
 exports[`braid-design-system > bundler webpack > build > should generate the expected files 1`] = `
 {
-  "2-8319b8c5ee3bff51cf9a.css": ._5ru98q0 {
+  "client/2-8319b8c5ee3bff51cf9a.css": ._5ru98q0 {
   box-sizing: border-box;
   font-size: 100%;
   font: inherit;
@@ -16315,7 +16315,11 @@ html._1dxfmrv10 .yv6c2qd {
 
 /*# sourceMappingURL=2-8319b8c5ee3bff51cf9a.css.map*/
 ,
-  "2-8319b8c5ee3bff51cf9a.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/2-8319b8c5ee3bff51cf9a.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
   "externals.json": "[
   "async_hooks",
   "crypto",
@@ -16329,7 +16333,7 @@ html._1dxfmrv10 .yv6c2qd {
   "stream",
   "util"
 ]",
-  "jobStreet/index.html": "
+  "rendered/jobStreet/index.html": "
     <!DOCTYPE html>
     <html>
       <head>
@@ -16355,11 +16359,7 @@ html._1dxfmrv10 .yv6c2qd {
       </body>
     </html>
   ",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "seekAnz/index.html": "
+  "rendered/seekAnz/index.html": "
     <!DOCTYPE html>
     <html>
       <head>

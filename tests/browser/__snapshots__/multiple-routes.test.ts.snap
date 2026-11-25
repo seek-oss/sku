@@ -2,21 +2,23 @@
 
 exports[`multiple-routes > bundler: vite > build and serve > should generate the expected files 1`] = `
 {
-  "AsyncComponent.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details.css": ._1hpn1da0 {
+  "client/AsyncComponent.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/AsyncComponent.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/Details.css": ._1hpn1da0 {
   color: #00f;
 }
 ,
-  "Details.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Details.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Home.css": .ms22la0 {
+  "client/Details.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/Details.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/Home.css": .ms22la0 {
   color: red;
 }
 ,
-  "Home.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "Home.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/details/$id/index.html": SCRIPTS: [
+  "client/Home.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/Home.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/vite-client.js",
     "/static/place/Details.js",
@@ -107,7 +109,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/au/index.html": SCRIPTS: [
+  "rendered/production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/vite-client.js",
     "/static/place/Home.js",
@@ -182,7 +184,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/nz/nz/details/:id/index.html": SCRIPTS: [
+  "rendered/production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/vite-client.js",
     "/static/place/Details.js",
@@ -273,7 +275,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/nz/nz/index.html": SCRIPTS: [
+  "rendered/production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/vite-client.js",
     "/static/place/Home.js",
@@ -348,8 +350,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -719,31 +719,33 @@ exports[`multiple-routes > bundler: vite > start > should render home page corre
 
 exports[`multiple-routes > bundler: webpack > build and serve > should generate the expected files 1`] = `
 {
-  "5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "5.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "AsyncComponent.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details-959bfbcac2e62e53d74f.css": ._1hpn1da0 {
+  "client/5.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/5.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/AsyncComponent.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/AsyncComponent.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/handlers-Details-959bfbcac2e62e53d74f.css": ._1hpn1da0 {
   color: #00f;
 }
 
 /*# sourceMappingURL=handlers-Details-959bfbcac2e62e53d74f.css.map*/
 ,
-  "handlers-Details-959bfbcac2e62e53d74f.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Details.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home-2d237e279ab26e7d9ff4.css": .ms22la0 {
+  "client/handlers-Details-959bfbcac2e62e53d74f.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/handlers-Details.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/handlers-Details.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/handlers-Home-2d237e279ab26e7d9ff4.css": .ms22la0 {
   color: red;
 }
 
 /*# sourceMappingURL=handlers-Home-2d237e279ab26e7d9ff4.css.map*/
 ,
-  "handlers-Home-2d237e279ab26e7d9ff4.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "handlers-Home.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/details/$id/index.html": SCRIPTS: [
+  "client/handlers-Home-2d237e279ab26e7d9ff4.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/handlers-Home.chunk.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/handlers-Home.chunk.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/production/au/details/$id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime.js",
     "/static/place/5.js",
@@ -874,7 +876,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/au/index.html": SCRIPTS: [
+  "rendered/production/au/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime.js",
     "/static/place/5.js",
@@ -989,7 +991,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/nz/nz/details/:id/index.html": SCRIPTS: [
+  "rendered/production/nz/nz/details/:id/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime.js",
     "/static/place/5.js",
@@ -1120,7 +1122,7 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "production/nz/nz/index.html": SCRIPTS: [
+  "rendered/production/nz/nz/index.html": SCRIPTS: [
     "https://code.jquery.com/jquery-3.5.0.slim.min.js",
     "/static/place/runtime.js",
     "/static/place/5.js",
@@ -1235,8 +1237,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

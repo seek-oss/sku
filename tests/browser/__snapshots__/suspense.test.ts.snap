@@ -2,7 +2,9 @@
 
 exports[`suspense > bundler vite > build and serve > should generate the expected files 1`] = `
 {
-  "production/au/index.html": SCRIPTS: [
+  "client/vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/production/au/index.html": SCRIPTS: [
     "/static/suspense/vite-client.js",
   ]
 CSS: []
@@ -50,8 +52,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -107,11 +107,13 @@ exports[`suspense > bundler vite > build and serve > should return home page 1`]
 
 exports[`suspense > bundler webpack > build and serve > should generate the expected files 1`] = `
 {
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "production/au/index.html": SCRIPTS: [
+  "client/2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/production/au/index.html": SCRIPTS: [
     "/static/suspense/runtime.js",
     "/static/suspense/2.js",
     "/static/suspense/main.js",
@@ -199,8 +201,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

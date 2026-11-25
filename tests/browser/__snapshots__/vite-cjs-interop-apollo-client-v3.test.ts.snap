@@ -2,7 +2,9 @@
 
 exports[`vite-cjs-interop-apollo-client-v3 > build and serve > should generate the expected files 1`] = `
 {
-  "index.html": SCRIPTS: [
+  "client/vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/index.html": SCRIPTS: [
     "/vite-client.js",
   ]
 CSS: []
@@ -36,8 +38,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

@@ -55,8 +55,14 @@ exports[`public assets > bundler: vite > build and serve > should copy public as
 
 exports[`public assets > bundler: vite > build and serve > should copy public assets to dist and serve them in the app 2`] = `
 {
-  "favicon.ico": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
+  "client/favicon.ico": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/nested/icon.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/robots.txt": "User-agent: *
+Disallow:
+",
+  "client/vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/index.html": SCRIPTS: [
     "/vite-client.js",
   ]
 CSS: []
@@ -107,12 +113,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "nested/icon.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "robots.txt": "User-agent: *
-Disallow:
-",
-  "vite-client.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "vite-client.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 
@@ -295,10 +295,18 @@ exports[`public assets > bundler: webpack > build and serve > should copy public
 
 exports[`public assets > bundler: webpack > build and serve > should copy public assets to dist and serve them in the app 2`] = `
 {
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "favicon.ico": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
+  "client/2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/favicon.ico": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/nested/icon.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/robots.txt": "User-agent: *
+Disallow:
+",
+  "client/runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/index.html": SCRIPTS: [
     "/runtime.js",
     "/2.js",
     "/main.js",
@@ -388,14 +396,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "nested/icon.png": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "robots.txt": "User-agent: *
-Disallow:
-",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

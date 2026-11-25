@@ -2,8 +2,6 @@ import { defaultExclude, defineConfig } from 'vitest/config';
 import { TEST_TIMEOUT } from '@sku-private/test-utils/constants';
 
 const defaultInclude = '**/*.{test,spec}.?(c|m)[jt]s?(x)';
-const babelPluginDisplayNameTests = 'packages/babel-plugin-display-name';
-const rolldownPluginDisplayNameTests = 'packages/rolldown-plugin-display-name';
 const rolldownPluginUnassertTests = 'packages/rolldown-plugin-unassert';
 
 export default defineConfig({
@@ -30,26 +28,7 @@ export default defineConfig({
       SKU_CSP_NONCE: 'RANDOM_NONCE',
     },
     projects: [
-      // Isolate babel-plugin-display-name and rolldown-plugin-display-name tests as our snapshot serializers interfere with their
-      // snapshot output.
-      {
-        test: {
-          name: 'babel-plugin-display-name',
-          include: [`${babelPluginDisplayNameTests}/${defaultInclude}`],
-        },
-      },
-      {
-        test: {
-          name: 'rolldown-plugin-display-name',
-          include: [`${rolldownPluginDisplayNameTests}/src/${defaultInclude}`],
-        },
-      },
-      {
-        test: {
-          name: 'rolldown-plugin-unassert',
-          include: [`${rolldownPluginUnassertTests}/tests/${defaultInclude}`],
-        },
-      },
+      // Benchmark run with `vitest bench`
       {
         test: {
           name: 'rolldown-plugin-unassert-benchmark',
@@ -61,17 +40,11 @@ export default defineConfig({
           hookTimeout: 10 * 60_000,
         },
       },
+      // unit tests don't need snapshot serializers or cli setup
       {
         test: {
           name: 'unit',
-          pool: 'vmThreads',
-          setupFiles: './vitest-setup.ts',
           include: [`packages/${defaultInclude}`, `private/${defaultInclude}`],
-          exclude: [
-            babelPluginDisplayNameTests,
-            rolldownPluginDisplayNameTests,
-            rolldownPluginUnassertTests,
-          ],
         },
       },
       // Integration tests spawn sku processes, dev servers and browsers, so they

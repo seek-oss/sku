@@ -2,11 +2,7 @@ import { TraceMap, originalPositionFor } from '@jridgewell/trace-mapping';
 import { rolldown, type Plugin } from 'rolldown';
 import dedent from 'dedent';
 import { assert, describe, expect, it } from 'vitest';
-import {
-  transform,
-  unassert,
-  type UnassertPluginOptions,
-} from '../src/index.ts';
+import { transform, unassert, type UnassertPluginOptions } from './index.ts';
 
 function virtualFiles(files: Record<string, string>): Plugin {
   return {
@@ -19,9 +15,10 @@ function virtualFiles(files: Record<string, string>): Plugin {
   };
 }
 
-async function build(
+async function buildChunk(
   files: Record<string, string>,
   options?: UnassertPluginOptions,
+  { sourcemap = false } = {},
 ) {
   const bundle = await rolldown({
     input: 'entry.js',
@@ -30,10 +27,17 @@ async function build(
     treeshake: false,
   });
 
-  const { output } = await bundle.generate({ format: 'esm' });
+  const { output } = await bundle.generate({ format: 'esm', sourcemap });
   await bundle.close();
 
-  return output[0].code;
+  return output[0];
+}
+
+async function build(
+  files: Record<string, string>,
+  options?: UnassertPluginOptions,
+) {
+  return (await buildChunk(files, options)).code;
 }
 
 describe('rolldown plugin', () => {
@@ -142,6 +146,41 @@ describe('source maps', () => {
       column: lineText.indexOf('return'),
     });
     expect(original).toMatchObject({ source: 'add.js', line: 5, column: 2 });
+  });
+
+  it('maps bundled output back to the original modules', async () => {
+    const chunk = await buildChunk(
+      {
+        'entry.js': dedent`
+          import { divide } from './lib.js';
+          console.log(divide(4, 2));
+        `,
+        'lib.js': dedent`
+          import assert from 'assert';
+          export function divide(a, b) {
+            assert.notEqual(b, 0);
+            console.assert(b !== 0);
+            return a / b;
+          }
+        `,
+      },
+      undefined,
+      { sourcemap: true },
+    );
+    assert(chunk.map, 'expected a source map');
+
+    const outputLines = chunk.code.split('\n');
+    const lineIndex = outputLines.findIndex((line) =>
+      line.includes('return a / b'),
+    );
+    const lineText = outputLines[lineIndex];
+    assert(lineText !== undefined, 'expected the return statement to survive');
+
+    const original = originalPositionFor(new TraceMap(chunk.map.toString()), {
+      line: lineIndex + 1,
+      column: lineText.indexOf('return'),
+    });
+    expect(original).toMatchObject({ source: '../lib.js', line: 5, column: 2 });
   });
 
   it('can be disabled', () => {

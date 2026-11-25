@@ -1,6 +1,6 @@
 import dedent from 'dedent';
 import { describe, expect, it } from 'vitest';
-import { transform, type UnassertOptions } from '../src/index.ts';
+import { transform, type UnassertOptions } from './index.ts';
 
 function unassert(
   code: string,

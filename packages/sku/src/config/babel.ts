@@ -72,7 +72,7 @@ export default ({
         require.resolve('babel-plugin-unassert'),
         {
           variables: ['assert', 'invariant'],
-          modules: ['assert', 'node:assert', 'tiny-invariant'],
+          modules: ['assert', 'node:assert', 'tiny-invariant', 'outvariant'],
         },
       ]);
     }

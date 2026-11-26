@@ -379,6 +379,9 @@ importers:
       dedent:
         specifier: ^1.5.1
         version: 1.7.2(babel-plugin-macros@3.1.0)
+      outvariant:
+        specifier: ^1.4.3
+        version: 1.4.3
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
@@ -10073,6 +10076,9 @@ packages:
 
   outdent@0.5.0:
     resolution: {integrity: sha512-/jHxFIzoMXdqPzTaCpFzAAWhpkSjZPF4Vsn6jAfNpmbH/ymsmd7Qc6VE9BGn0L6YMj6uwpQLxCECpus4ukKS9Q==}
+
+  outvariant@1.4.3:
+    resolution: {integrity: sha512-+Sl2UErvtsoajRDKCE5/dBz4DIvHXQQnAxtQTF04OJxY0+DyZXSo5P5Bb7XYWOh81syohlYL24hbDwxedPUJCA==}
 
   own-keys@1.0.2:
     resolution: {integrity: sha512-19YVAg7T+WTrxggPukVq7DjTv6+PJ867TmhCvBsYwmbFCsZd344rq2Ld1p0wo8f8Qrrhgp82c6FJRqdXWtSEhg==}
@@ -21006,6 +21012,8 @@ snapshots:
       string-width: 8.3.0
 
   outdent@0.5.0: {}
+
+  outvariant@1.4.3: {}
 
   own-keys@1.0.2:
     dependencies:

@@ -2,9 +2,10 @@
 'sku': major
 ---
 
-Change the default `testRunner` to `vitest`
+Drop `jest` support and always use `vitest` as the test runner.
 
 **BREAKING CHANGE**
 
-`testRunner` now defaults to `'vitest'` instead of `'jest'`.
-Apps that don't set `testRunner` will run tests with Vitest, and use Vitest ESLint rules.
+`vitest` will now always be used as the test runner.  `testRunner` is now no longer suporter, so can be removed.
+
+Check out the [Vitest migration guide](add url here) for information on how to migrate your tests to Vitest.

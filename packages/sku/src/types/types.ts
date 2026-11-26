@@ -139,13 +139,6 @@ interface SkuConfigBase {
   bundler?: 'webpack' | 'vite';
 
   /**
-   * The test runner that sku uses to run the tests.
-   *
-   * @default "vitest"
-   */
-  testRunner?: 'vitest' | 'jest';
-
-  /**
    * The client entry point to the app.
    *
    * @default "./src/client.tsx"
@@ -205,19 +198,6 @@ interface SkuConfigBase {
   dangerouslySetESLintConfig?: (
     skuESLintConfig: Linter.Config[],
   ) => Linter.Config[];
-
-  /**
-   * This function provides a way to modify sku's Jest configuration.
-   * It should only be used in exceptional circumstances where a solution cannot be achieved by adjusting standard configuration options.
-   *
-   * Before customizing your Jest configuration, please reach out via the [support page](https://seek-oss.github.io/sku/support) to discuss your requirements and potential alternative solutions.
-   *
-   * Sku provides no guarantees that its Jest configuration will remain compatible with any customizations made within this function.
-   * It is the responsibility of the user to ensure that their customizations are compatible with sku.
-   *
-   * @link https://seek-oss.github.io/sku/configuration#dangerouslysetjestconfig
-   */
-  dangerouslySetJestConfig?: (skuJestConfig: any) => any;
 
   /**
    * This function provides a way to modify sku's TypeScript configuration.

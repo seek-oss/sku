@@ -18,7 +18,6 @@ export const generatePackageJson = async (
   { projectName, template, packageManager }: PackageJsonOptions,
 ) => {
   const isVite = isViteBasedTemplate(template);
-  const testFlag = isVite ? ' --run' : '';
 
   const packageJson = {
     name: projectName,
@@ -28,7 +27,7 @@ export const generatePackageJson = async (
     scripts: {
       start: 'sku start',
       build: 'sku build',
-      test: `sku test${testFlag}`,
+      test: `sku test --run`,
       format: 'sku format',
       lint: 'sku lint',
     },

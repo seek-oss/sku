@@ -6,8 +6,8 @@ import { cwd } from '@sku-private/utils';
 describe('webpack utils', () => {
   describe('resolvePackage()', () => {
     let resolvePackage: ReturnType<typeof createPackageResolver>;
-    let fs: any; // No idea how to type this properly here. I tried jest.Mocked<> but I couldnt get it to play nice with the readFileSync mock
-    let resolve: any; // Same here.
+    let fs: any;
+    let resolve: any;
 
     beforeEach(() => {
       fs = {

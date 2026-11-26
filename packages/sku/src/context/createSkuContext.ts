@@ -207,7 +207,6 @@ export const createSkuContext = async ({
   const polyfills = skuConfig.polyfills;
   const entrySideEffects = skuConfig.entrySideEffects;
   const webpackDecorator = skuConfig.dangerouslySetWebpackConfig;
-  const jestDecorator = skuConfig.dangerouslySetJestConfig;
   const eslintDecorator = skuConfig.dangerouslySetESLintConfig;
   const tsconfigDecorator = skuConfig.dangerouslySetTSConfig;
   const viteDecorator = skuConfig.dangerouslySetViteConfig;
@@ -279,7 +278,6 @@ export const createSkuContext = async ({
     bundler: skuConfig.bundler,
     buildType: skuConfig.buildType,
     distSubfolders,
-    testRunner: skuConfig.testRunner,
     configPath: appConfigPath,
     publicPath,
     paths,
@@ -291,7 +289,6 @@ export const createSkuContext = async ({
     polyfills,
     entrySideEffects,
     webpackDecorator,
-    jestDecorator,
     eslintDecorator,
     tsconfigDecorator,
     viteDecorator,

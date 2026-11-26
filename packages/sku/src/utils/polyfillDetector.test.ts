@@ -116,7 +116,6 @@ describe('polyfillDetector', () => {
         },
         devDependencies: {
           'whatwg-fetch': '^3.0.0',
-          jest: '^29.0.0', // non-polyfill
         },
       };
 

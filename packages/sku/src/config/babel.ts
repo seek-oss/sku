@@ -4,7 +4,7 @@ import type { PluginItem } from '@babel/core';
 const require = createRequire(import.meta.url);
 
 type BabelConfigOptions = {
-  target: 'node' | 'browser' | 'jest';
+  target: 'node' | 'browser';
   lang?: 'js' | 'ts';
   browserslist?: string | string[] | Record<string, string>;
   displayNamesProd?: boolean;
@@ -30,7 +30,6 @@ export default ({
   hot = false,
 }: BabelConfigOptions): SkuBabelConfig => {
   const isBrowser = target === 'browser';
-  const isJest = target === 'jest';
   const isProductionBuild = process.env.NODE_ENV === 'production';
 
   const plugins: PluginItem[] = [
@@ -45,17 +44,7 @@ export default ({
     ]);
   }
 
-  if (isJest) {
-    plugins.push([
-      require.resolve('babel-plugin-transform-remove-imports'),
-      {
-        test: /\.css$/,
-        remove: 'effects',
-      },
-    ]);
-  } else {
-    plugins.push(require.resolve('@loadable/babel-plugin'));
-  }
+  plugins.push(require.resolve('@loadable/babel-plugin'));
 
   if (isProductionBuild) {
     plugins.push(
@@ -109,14 +98,8 @@ export default ({
   return {
     babelrc: false,
     sourceType: isBrowser ? 'unambiguous' : 'module',
-    // `babel-jest` does not support the `cacheDirectory` option.
-    // It is only used by `babel-loader`.
-    ...(!isJest
-      ? {
-          cacheDirectory: true,
-          cacheCompression: false,
-        }
-      : {}),
+    cacheDirectory: true,
+    cacheCompression: false,
     presets,
     plugins,
   };

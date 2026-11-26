@@ -4,7 +4,7 @@
     "rootDir": ".",
     "allowJs": true,
     "jsx": "react-jsx",
-    "types": ["webpack/module", "jest", "node"],
+    "types": ["webpack/module", "node"],
     "lib": ["ESNext", "DOM"]
   },
   "include": [

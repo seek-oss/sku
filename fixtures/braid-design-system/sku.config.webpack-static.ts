@@ -9,7 +9,6 @@ import baseConfig from './sku.config.base.js';
 export default {
   ...baseConfig,
   bundler: 'webpack',
-  testRunner: 'jest',
 
   clientEntry: 'src/webpack-static/client.tsx',
   renderEntry: 'src/webpack-static/render.tsx',

@@ -43,8 +43,6 @@
         "@seek/sku-telemetry",
         // Used indirectly by webpack for minification
         "@swc/core",
-        // Used in tests
-        "jest-environment-jsdom",
         // Optional peer deps
         "@storybook/react-webpack5",
         "@storybook/react-vite",

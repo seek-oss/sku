@@ -148,9 +148,6 @@ describe('lint-format', () => {
             await lint.findByText('3 problems (3 errors, 0 warnings)'),
           ).toBeInTheConsole();
           expect(await lint.findByText('no-console')).toBeInTheConsole();
-          expect(
-            await lint.findByText('jest/no-focused-tests'),
-          ).toBeInTheConsole();
         });
       });
     });

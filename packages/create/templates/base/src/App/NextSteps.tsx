@@ -70,7 +70,7 @@ export function NextSteps({ environment }: NextStepsProps) {
                     <TextLink href="https://www.typescriptlang.org/">
                       TypeScript
                     </TextLink>
-                    , <TextLink href="https://jestjs.io/">Jest</TextLink>,{' '}
+                    , <TextLink href="https://vitest.dev/">Vitest</TextLink>,{' '}
                     <TextLink href="https://eslint.org/">ESLint</TextLink>, and
                     more.
                   </Text>

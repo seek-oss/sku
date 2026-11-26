@@ -22,6 +22,7 @@
     "@types/react-dom": "catalog:",
     "@vanilla-extract/css": "^1.0.0",
     "react-router": "catalog:",
-    "sku": "workspace:*"
+    "sku": "workspace:*",
+    "vitest": "catalog:"
   }
 }

@@ -28,7 +28,7 @@ describe('generatePackageJson', () => {
         "scripts": {
           "start": "sku start",
           "build": "sku build",
-          "test": "sku test",
+          "test": "sku test --run",
           "format": "sku format",
           "lint": "sku lint"
         }
@@ -120,7 +120,7 @@ describe('generatePackageJson', () => {
         "scripts": {
           "start": "sku start",
           "build": "sku build",
-          "test": "sku test",
+          "test": "sku test --run",
           "format": "sku format",
           "lint": "sku lint"
         }
@@ -162,7 +162,7 @@ describe('generatePackageJson', () => {
           "format": "sku format",
           "lint": "sku lint",
           "start": "sku start",
-          "test": "sku test",
+          "test": "sku test --run",
         },
         "version": "1.0.0",
       }

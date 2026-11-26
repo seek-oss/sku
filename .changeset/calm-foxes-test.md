@@ -2,10 +2,21 @@
 'sku': major
 ---
 
-Drop `jest` support and always use `vitest` as the test runner.
+Remove Jest support. Vitest is now the only test runner.
 
 **BREAKING CHANGE**
 
-`vitest` will now always be used as the test runner.  `testRunner` is now no longer suporter, so can be removed.
+`sku test` always runs Vitest, for both the `vite` and `webpack` bundlers.
+Install `vitest` in your app's `devDependencies` to run tests.
 
-Check out the [Vitest migration guide](add url here) for information on how to migrate your tests to Vitest.
+The following have been removed:
+
+- The `testRunner` option. `testRunner: 'jest'` is now a config error. `testRunner: 'vitest'` logs a warning and can be removed.
+- The `dangerouslySetJestConfig` option, which is now a config error. Use `dangerouslySetVitestConfig` instead.
+- The `sku/jest-preset` export
+- The Jest ESLint rules. sku always uses the Vitest ESLint rules.
+- The `jest` types in the generated `tsconfig.json`
+
+sku now depends on `jsdom` v31 directly for Vitest's `jsdom` test environment. Previously, apps got `jsdom` v26 through `jest-environment-jsdom`.
+
+Follow the [Jest to Vitest migration guide](https://seek-oss.github.io/sku/vitest) to migrate your tests. It includes a codemod and a prompt for AI coding agents.

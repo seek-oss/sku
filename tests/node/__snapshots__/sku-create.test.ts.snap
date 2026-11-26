@@ -846,7 +846,7 @@ export function NextSteps({ environment }: NextStepsProps) {
                     <TextLink href="https://www.typescriptlang.org/">
                       TypeScript
                     </TextLink>
-                    , <TextLink href="https://jestjs.io/">Jest</TextLink>,{' '}
+                    , <TextLink href="https://vitest.dev/">Vitest</TextLink>,{' '}
                     <TextLink href="https://eslint.org/">ESLint</TextLink>, and
                     more.
                   </Text>
@@ -1142,6 +1142,7 @@ exports[`sku-create > webpack > should create package.json 1`] = `
     "@types/react-dom": "VERSION_IGNORED",
     "@vanilla-extract/css": "VERSION_IGNORED",
     "sku": "VERSION_IGNORED",
+    "vitest": "VERSION_IGNORED",
   },
   "imports": {
     "#src/*": "./src/*",
@@ -1154,7 +1155,7 @@ exports[`sku-create > webpack > should create package.json 1`] = `
     "format": "sku format",
     "lint": "sku lint",
     "start": "sku start",
-    "test": "sku test",
+    "test": "sku test --run",
   },
   "version": "1.0.0",
 }
@@ -1283,7 +1284,7 @@ export function NextSteps({ environment }: NextStepsProps) {
                     <TextLink href="https://www.typescriptlang.org/">
                       TypeScript
                     </TextLink>
-                    , <TextLink href="https://jestjs.io/">Jest</TextLink>,{' '}
+                    , <TextLink href="https://vitest.dev/">Vitest</TextLink>,{' '}
                     <TextLink href="https://eslint.org/">ESLint</TextLink>, and
                     more.
                   </Text>

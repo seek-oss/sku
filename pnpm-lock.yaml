@@ -382,6 +382,9 @@ importers:
       tiny-invariant:
         specifier: ^1.3.3
         version: 1.3.3
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.5(@opentelemetry/api@1.10.0)(@types/node@24.19.2)(jsdom@31.0.1)(vite@8.3.5)
 
   fixtures/braid-design-system:
     dependencies:
@@ -413,6 +416,9 @@ importers:
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.5(@opentelemetry/api@1.10.0)(@types/node@24.19.2)(jsdom@31.0.1)(vite@8.3.5)
 
   fixtures/cli-arguments:
     dependencies:
@@ -669,6 +675,9 @@ importers:
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.5(@opentelemetry/api@1.10.0)(@types/node@24.19.2)(jsdom@31.0.1)(vite@8.3.5)
 
   fixtures/path-aliases:
     dependencies:
@@ -1193,6 +1202,9 @@ importers:
       storybook:
         specifier: ^10.0.0
         version: 10.6.5(@types/react@19.3.0)(prettier@3.9.10)(react@19.3.1)
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.5(@opentelemetry/api@1.10.0)(@types/node@24.19.2)(jsdom@31.0.1)(vite@8.3.5)
 
   fixtures/suspense:
     dependencies:
@@ -1292,6 +1304,9 @@ importers:
       sku:
         specifier: workspace:*
         version: link:../../packages/sku
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.5(@opentelemetry/api@1.10.0)(@types/node@24.19.2)(jsdom@31.0.1)(vite@8.3.5)
 
   fixtures/vite-cjs-interop-apollo-client-v3:
     dependencies:

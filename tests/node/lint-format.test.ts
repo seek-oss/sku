@@ -148,6 +148,9 @@ describe('lint-format', () => {
             await lint.findByText('3 problems (3 errors, 0 warnings)'),
           ).toBeInTheConsole();
           expect(await lint.findByText('no-console')).toBeInTheConsole();
+          expect(
+            await lint.findByText('vitest/no-focused-tests'),
+          ).toBeInTheConsole();
         });
       });
     });
@@ -254,48 +257,6 @@ describe('lint-format', () => {
 
       it('should fail linting', async () => {
         expect(await lint.findByError('Linting failed')).toBeInTheConsole();
-      });
-    });
-
-    describe('when the test runner is vitest', () => {
-      let lint: RenderResult;
-
-      beforeAll(async () => {
-        lint = await withSrcFixture(
-          {
-            // only fails vitest rules (correctly formatted)
-            'vitestRules.test.ts': dedent /* ts */ `
-            import { it, expect } from 'vitest';
-            console.log('foo');
-
-            it.only('should test something', () => {
-              let mutable = true;
-
-              expect(mutable).toBe(true);
-            });
-          `,
-          },
-          async () => {
-            const result = await sku('lint', [
-              '--config',
-              'sku.config.vitest.ts',
-            ]);
-            await expect(result).toMatchExitCode(1);
-            return result;
-          },
-        );
-      });
-
-      it('should use vitest lint rules', async () => {
-        expect(
-          await lint.findByText('Checking code with ESLint'),
-        ).toBeInTheConsole();
-        expect(
-          await lint.findByText('vitest/no-focused-tests'),
-        ).toBeInTheConsole();
-        expect(
-          await lint.findByText('3 problems (3 errors, 0 warnings)'),
-        ).toBeInTheConsole();
       });
     });
   });

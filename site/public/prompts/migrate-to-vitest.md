@@ -23,7 +23,9 @@ Run from the app root (for monorepos, confirm which package is the sku app).
 Detect:
 
 - Package manager (lockfile) and the sku version (must be >= 15). If older, stop and ask whether to upgrade first.
-- `testRunner` in the sku config: unset or `jest` means the Vitest migration is needed; `vitest` means it's done.
+- Whether the tests still use Jest (`jest` or `@types/jest` dependencies, `jest.*` APIs, `jest.config.*`, `dangerouslySetJestConfig`). If so, the Vitest migration is needed.
+- On sku 17 or later, Jest is not supported: `testRunner` and `dangerouslySetJestConfig` must be removed from the sku config.
+- On sku 15 or 16, `testRunner` in the sku config: unset or `jest` means the Vitest migration is needed; `vitest` means it's done.
 - `"type": "module"` in `package.json` (ESM done or not).
 - Working tree state (`git status`). If there are uncommitted changes, stop and ask the user what to do with them before branching or changing any files. Later steps revert individual files with `git checkout`, which would discard uncommitted work.
 
@@ -69,7 +71,9 @@ Applies to every dep added, removed, or changed (`vitest`, `@vitest/coverage-v8`
 
 1. Read the [Vitest migration notes](https://vitest.dev/guide/migration.html#jest) if unfamiliar with the differences from Jest.
 2. Install: `pnpm add -D vitest` (and `pnpm add -D @vitest/coverage-v8` if coverage is used).
-3. Add `testRunner: 'vitest'` to the existing default export in the sku config. Keep every other option already there; do not replace the file with a new config:
+3. Update the existing default export in the sku config. Keep every other option already there; do not replace the file with a new config:
+   - On sku 17 or later, remove `testRunner` and `dangerouslySetJestConfig`. Move any Jest customisations that are still needed to `dangerouslySetVitestConfig`.
+   - On sku 15 or 16, add `testRunner: 'vitest'`:
 
    ```ts
    export default {
@@ -102,7 +106,7 @@ Applies to every dep added, removed, or changed (`vitest`, `@vitest/coverage-v8`
    - `vi.advanceTimersByTime`/`runAllTimers` without fake timers throws in Vitest (Jest only warned). Remove such no-op calls or enable fake timers deliberately.
    - The Vitest ESLint plugin makes `vitest/expect-expect` an error (Jest's was a warning). For tests that assert through helpers, configure `assertFunctionNames` (e.g. `['expect', 'expectFoo']`) in `dangerouslySetESLintConfig`.
    - Side-effect imports (e.g. `import '@testing-library/jest-dom'`) between imports block the `import-x/order` autofix. Remove them from specs when the setup file already covers them.
-   - Remove Jest deps/config/types (`jest`, `@types/jest`, `jest.config.*`, `dangerouslySetJestConfig`, the `jest` ESLint global, `babel-jest`, unused `fileMock`s, etc.) once nothing references them.
+   - Remove Jest deps/config/types (`jest`, `@types/jest`, `jest.config.*`, `sku/jest-preset`, `dangerouslySetJestConfig`, the `jest` ESLint global, `babel-jest`, unused `fileMock`s, etc.) once nothing references them.
    - Check for `as unknown` casts (and other type casts on mock values, e.g. `as ReturnType<typeof useX>`) in tests, including ones the codemod produced when converting `(fn as jest.Mock)`. Where possible, replace them with a partial mock so the cast is unnecessary: `vi.mocked(useX, { partial: true }).mockReturnValue({ ... })` makes the return value's top-level keys optional; add `deep: true` when nested objects also need to be partial. Run the type check afterwards; keep a cast only where a partial mock genuinely can't express it, and mention those in the final summary.
 
 ## 4. ESM

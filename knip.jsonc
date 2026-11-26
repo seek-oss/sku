@@ -5,9 +5,6 @@
     "fixtures/configure": {
       "entry": ["sku.config.ts", "src/App.tsx"],
     },
-    "fixtures/jest-test": {
-      "entry": ["sku.config.ts"],
-    },
     "fixtures/lint-format": {
       "entry": ["sku.config*.ts"],
     },
@@ -77,7 +74,6 @@
         "src/client.tsx",
         "src/render.tsx",
         "sku.config.*",
-        "jestSetup.js",
         "src/server.tsx",
       ],
       "ignoreDependencies": [
@@ -95,7 +91,6 @@
         "src/ssr/server.tsx",
         "src/ssr/routes.tsx",
         "sku.config.*",
-        "jestSetup.js",
       ],
     },
     "fixtures/custom-output-target": {
@@ -141,12 +136,7 @@
       ],
     },
     "fixtures/multiple-routes": {
-      "entry": [
-        "src/client.jsx",
-        "src/render.jsx",
-        "sku.config.*",
-        "setupTests.js",
-      ],
+      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
       // Used by the `--convert-loadable` flag
       "ignoreDependencies": ["@sku-lib/vite"],
     },
@@ -243,12 +233,7 @@
       ],
     },
     "fixtures/suspense": {
-      "entry": [
-        "src/client.jsx",
-        "src/render.jsx",
-        "sku.config.*",
-        "setupTests.js",
-      ],
+      "entry": ["src/client.jsx", "src/render.jsx", "sku.config.*"],
     },
     "fixtures/stream-insert-html": {
       "entry": [

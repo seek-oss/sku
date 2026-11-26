@@ -265,34 +265,6 @@ export default {
 } satisfies SkuConfig;
 ```
 
-## dangerouslySetJestConfig
-
-Type: `function`
-
-This function lets you modify sku's Jest configuration.
-Use it only in exceptional cases where standard configuration options cannot solve the problem.
-
-Check that [`setupTests`] does not already cover your needs before you use this function.
-
-Before you modify your Jest configuration, contact us via the [support page] to discuss your requirements and possible alternatives.
-
-> [!WARNING]
-> Sku does not guarantee that its Jest configuration will stay compatible with customizations in this function.
-> You must keep your customizations compatible with sku.
-
-Example:
-
-```ts
-export default {
-  dangerouslySetJestConfig: (skuJestConfig) => ({
-    ...skuJestConfig,
-    someOtherConfig: 'dangerousValue',
-  }),
-} satisfies SkuConfig;
-```
-
-[`setupTests`]: #setupTests
-
 ## dangerouslySetTSConfig
 
 Type: `function`
@@ -828,9 +800,10 @@ This is also the default listen port for the webpack production server.
 
 ## setupTests
 
-Type: `string`
+Type: `string | Array<string>`
 
-Point to a JS file that runs before your tests to configure the testing environment.
+Point to one or more files that run before your tests to configure the testing environment.
+See [Setting up tests](./testing.md#setting-up-tests).
 
 ## sites
 
@@ -939,15 +912,6 @@ Type: `string`
 Default: `dist`
 
 The directory that receives your assets when you run `sku build` or `sku build-ssr`
-
-## testRunner
-
-Type: `'jest' | 'vitest'`
-
-Default: `'vitest'`
-
-The test runner that sku uses to run the tests.
-Set `testRunner: 'jest'` to keep running tests with Jest.
 
 ## transformOutputPath <Badge type="info" text="Static only" />
 

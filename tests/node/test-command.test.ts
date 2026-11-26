@@ -6,12 +6,19 @@ const { sku } = scopeToFixture('sku-test');
 
 describe('sku-test', () => {
   it('should run tests', async () => {
+    const process = await sku('test', ['run', 'src/vitest.test.ts']);
+
+    await expect(process).toMatchExitCode(0);
+  });
+
+  it('should run setupTests', async () => {
     const process = await sku('test', [
-      '--config=sku.config.vitest.ts',
       'run',
       'src/vitest.test.ts',
+      '--silent=false',
     ]);
 
+    expect(await process.findByText(/running setup test/i)).toBeInTheConsole();
     await expect(process).toMatchExitCode(0);
   });
 
@@ -19,7 +26,6 @@ describe('sku-test', () => {
     const process = await sku('test', [
       'testfile.ts',
       '--passWithNoTests',
-      '--config=sku.config.vitest.ts',
       'run',
     ]);
 
@@ -33,11 +39,7 @@ describe('sku-test', () => {
 
 describe('vitest CJS interop', () => {
   it('should run tests that import modules that require CJS interop', async () => {
-    const process = await sku('test', [
-      '--config=sku.config.vitest.ts',
-      'cjsInterop.test.ts',
-      '--run',
-    ]);
+    const process = await sku('test', ['cjsInterop.test.ts', '--run']);
 
     await expect(process).toMatchExitCode(0);
   });

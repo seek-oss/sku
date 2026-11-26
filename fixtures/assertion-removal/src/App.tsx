@@ -3,9 +3,12 @@ import invariant from 'tiny-invariant';
 import { BraidProvider, Text } from 'braid-design-system';
 import theme from 'braid-design-system/themes/seekJobs';
 
+import { checkOutvariant } from './outvariant';
+
 export default () => {
   assert(false, 'Should be true');
   invariant(false, 'Should be true');
+  checkOutvariant();
 
   return (
     <BraidProvider theme={theme}>

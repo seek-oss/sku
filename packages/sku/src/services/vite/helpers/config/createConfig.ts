@@ -56,7 +56,7 @@ export const createConfig = (
       isProductionBuild &&
         unassert({
           variables: ['assert', 'invariant'],
-          modules: ['assert', 'node:assert', 'tiny-invariant'],
+          modules: ['assert', 'node:assert', 'tiny-invariant', 'outvariant'],
         }),
       babel({
         // turn this on for react-compiler support

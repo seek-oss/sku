@@ -95,8 +95,7 @@ jobs:
       - name: Test
         run: aa-exec --profile=chrome pnpm run test --shard=${{ matrix.shard }}/2
 
-  # Branch protection requires the "Lint" check and this single "Test" check
-  # The results of this job are used to determine if the branch can be merged
+  # Aggregate the results of the test jobs so we can point branch protections at a single job
   test_result:
     name: Test
     needs: [skip_check, test]

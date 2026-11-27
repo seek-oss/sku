@@ -7,44 +7,11 @@ import {
 import { normalizePackageManagerVersion } from '@sku-private/test-utils';
 
 describe('generatePackageJson', () => {
-  it('should generate package.json for webpack template', async ({
-    expect,
-  }) => {
-    const fixture = await createFixture({});
-
-    await generatePackageJson(fixture.path, {
-      projectName: 'my-app',
-      template: 'webpack',
-      packageManager: 'npm',
-    });
-
-    const packageJsonContent = await fixture.readFile('package.json', 'utf8');
-
-    expect(packageJsonContent).toMatchInlineSnapshot(`
-      "{
-        "name": "my-app",
-        "version": "1.0.0",
-        "private": true,
-        "scripts": {
-          "start": "sku start",
-          "build": "sku build",
-          "test": "sku test",
-          "format": "sku format",
-          "lint": "sku lint"
-        }
-      }
-      "
-    `);
-
-    await fixture.rm();
-  });
-
   it('should generate package.json for vite template', async ({ expect }) => {
     const fixture = await createFixture({});
 
     await generatePackageJson(fixture.path, {
       projectName: 'my-vite-app',
-      template: 'vite',
       packageManager: 'npm',
     });
 
@@ -75,7 +42,6 @@ describe('generatePackageJson', () => {
 
     await generatePackageJson(fixture.path, {
       projectName: 'my-ssr-app',
-      template: 'ssr',
       packageManager: 'npm',
     });
 
@@ -106,7 +72,6 @@ describe('generatePackageJson', () => {
 
     await generatePackageJson(fixture.path, {
       projectName: '@scope/my-app',
-      template: 'webpack',
       packageManager: 'npm',
     });
 
@@ -117,10 +82,11 @@ describe('generatePackageJson', () => {
         "name": "@scope/my-app",
         "version": "1.0.0",
         "private": true,
+        "type": "module",
         "scripts": {
           "start": "sku start",
           "build": "sku build",
-          "test": "sku test",
+          "test": "sku test --run",
           "format": "sku format",
           "lint": "sku lint"
         }
@@ -138,7 +104,6 @@ describe('generatePackageJson', () => {
 
     await generatePackageJson(fixture.path, {
       projectName: 'my-app',
-      template: 'webpack',
       packageManager: 'pnpm',
     });
 
@@ -162,8 +127,9 @@ describe('generatePackageJson', () => {
           "format": "sku format",
           "lint": "sku lint",
           "start": "sku start",
-          "test": "sku test",
+          "test": "sku test --run",
         },
+        "type": "module",
         "version": "1.0.0",
       }
     `);

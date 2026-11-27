@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
+import { Command, Option } from 'commander';
 import prompts from 'prompts';
 
 import packageJson from '@sku-lib/create/package.json' with { type: 'json' };
 import { createProject } from './actions/createProject.js';
-import type { Template } from './types/index.js';
+import { type Template, templates } from './types/index.js';
 
 const { name, description, version } = packageJson;
 
@@ -16,7 +16,11 @@ program
   .description(description)
   .version(version)
   .argument('[project-name]', 'Name of the project to create')
-  .option('-t, --template <template>', 'Template to use (vite, ssr, webpack)')
+  .addOption(
+    new Option('-t, --template <template>', 'Template to use').choices(
+      templates,
+    ),
+  )
   .action(async (targetDir?: string, options: { template?: string } = {}) => {
     // Prompt for project name if not provided
     let finalTargetDir = targetDir;
@@ -61,12 +65,6 @@ program
             value: 'ssr',
             description:
               'Server-side rendered app (Managed Data Mode). Uses sku start / sku build. Experimental — not for production.',
-          },
-          {
-            title: 'Webpack',
-            value: 'webpack',
-            description:
-              'Uses Webpack for serving and bundling your application, and Jest for running tests.',
           },
         ],
       });

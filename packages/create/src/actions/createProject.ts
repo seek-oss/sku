@@ -40,7 +40,6 @@ export const createProject = async ({
 
   await generatePackageJson(targetPath, {
     projectName,
-    template,
     packageManager,
   });
 

@@ -13,32 +13,7 @@ describe('createTemplateData', () => {
     vi.clearAllMocks();
   });
 
-  it('should create template data for webpack template', ({ expect }) => {
-    const result = createTemplateData('my-app');
-
-    expect(result).toMatchInlineSnapshot(`
-      {
-        "appName": "my-app",
-        "buildScript": "pnpm build",
-        "formatScript": "pnpm format",
-        "gettingStartedDocs": "First of all, make sure you've installed [pnpm](https://pnpm.io/installation).
-
-      Then, install dependencies:
-
-      \`\`\`sh
-      $ pnpm install
-      \`\`\`",
-        "lintScript": "pnpm lint",
-        "projectName": "my-app",
-        "startScript": "pnpm start",
-        "testScript": "pnpm test",
-      }
-    `);
-  });
-
-  it('should create template data for vite template with experimental bundler flags', ({
-    expect,
-  }) => {
+  it('should create template data for vite template', ({ expect }) => {
     const result = createTemplateData('my-vite-app');
 
     expect(result).toMatchInlineSnapshot(`

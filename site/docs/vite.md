@@ -5,7 +5,7 @@
 [Vite] is a frontend build tool.
 It serves files on demand over native ESM.
 It also provides hot module reloading.
-Sku supports Vite as an alternative to the Webpack bundler since v15.
+Sku has supported Vite since v15, and it is the default bundler.
 
 ## Limitations
 
@@ -201,14 +201,15 @@ After you migrate to Vite, use [`import.meta.hot`][Vite HMR API] for hot module 
 
 ## Migrating to Vite
 
-To bundle your applications with Vite, set [`bundler`][bundler] in your `sku` config:
+Vite is the default [`bundler`][bundler].
+To bundle your applications with Vite, remove `bundler: 'webpack'` from your `sku` config:
 
 ```ts
 // sku.config.ts
 import type { SkuConfig } from 'sku';
 
 export default {
-  bundler: 'vite',
+  bundler: 'webpack', // [!code --]
 } satisfies SkuConfig;
 ```
 

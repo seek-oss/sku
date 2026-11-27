@@ -1,0 +1,9 @@
+import { makeStableHashes } from '@sku-private/test-utils';
+
+import baseConfig from './sku.config.js';
+
+export default {
+  ...baseConfig,
+  bundler: 'webpack',
+  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
+};

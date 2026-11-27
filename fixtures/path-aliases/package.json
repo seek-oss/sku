@@ -8,8 +8,8 @@
     "#styles/*": "./src/styles/*"
   },
   "scripts": {
-    "build:vite": "sku build --config sku.config.vite.ts",
-    "start:vite": "sku start --config sku.config.vite.ts"
+    "build": "sku build",
+    "start": "sku start"
   },
   "dependencies": {
     "dedent": "^1.5.1",

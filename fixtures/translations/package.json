@@ -4,13 +4,13 @@
   "type": "module",
   "scripts": {
     "build": "sku build",
-    "build:vite": "sku build --config sku.config.vite.ts",
-    "build:vite-ssr": "sku build --config sku.config.vite-ssr.ts",
+    "build:ssr": "sku build --config sku.config.ssr.ts",
+    "build:webpack": "sku build --config sku.config.webpack.ts",
     "serve": "sku serve",
     "start": "sku start",
-    "start:ssr": "sku start-ssr --config sku-ssr.config.ts",
-    "start:vite": "sku start --config sku.config.vite.ts",
-    "start:vite-ssr": "sku start --config sku.config.vite-ssr.ts"
+    "start:ssr": "sku start --config sku.config.ssr.ts",
+    "start:webpack": "sku start --config sku.config.webpack.ts",
+    "start:webpack-ssr": "sku start-ssr --config sku-ssr.config.ts"
   },
   "dependencies": {
     "@vocab/core": "^1.6.2",

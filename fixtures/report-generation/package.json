@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "sku build",
-    "build:vite": "sku build --config sku.config.vite.ts"
+    "build:webpack": "sku build --config sku.config.webpack.ts"
   },
   "devDependencies": {
     "@types/react": "catalog:",

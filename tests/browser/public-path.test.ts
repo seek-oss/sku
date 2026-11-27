@@ -15,8 +15,8 @@ describe('public path', () => {
       const port = await getPort();
       const portArgs = ['--strict-port', `--port=${port}`];
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.js'],
-        webpack: [],
+        vite: [],
+        webpack: ['--config', 'sku.config.webpack.js'],
       };
 
       it('should build, serve, and create valid app with no unresolved resources', async ({

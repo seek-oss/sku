@@ -5,8 +5,6 @@ const skuConfig = {
   renderEntry: 'src/render.tsx',
   environments: ['development', 'production'],
   publicPath: '/path/to/public/assets/', // <-- Required for sku build output
-  testRunner: 'vitest',
-  bundler: 'vite',
   entrySideEffects: ['braid-design-system/reset'],
   pathAliases: {
     '#src/*': './src/*',

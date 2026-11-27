@@ -1,3 +1,5 @@
 import type { SkuConfig } from 'sku';
 
-export default {} satisfies SkuConfig;
+export default {
+  testRunner: 'jest',
+} satisfies SkuConfig;

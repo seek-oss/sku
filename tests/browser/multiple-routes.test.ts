@@ -19,13 +19,8 @@ describe('multiple-routes', () => {
       const portArgs = ['--strict-port', `--port=${port}`];
 
       const args: BundlerValues<string[]> = {
-        vite: [
-          '--config',
-          'sku.config.vite.js',
-          '--convert-loadable',
-          ...portArgs,
-        ],
-        webpack: portArgs,
+        vite: ['--convert-loadable', ...portArgs],
+        webpack: ['--config', 'sku.config.webpack.js', ...portArgs],
       };
 
       beforeAll(async () => {
@@ -57,8 +52,8 @@ describe('multiple-routes', () => {
       const portArgs = ['--strict-port', `--port=${port}`];
 
       const args: BundlerValues<string[]> = {
-        vite: ['--convert-loadable', '--config', 'sku.config.vite.js'],
-        webpack: [],
+        vite: ['--convert-loadable'],
+        webpack: ['--config', 'sku.config.webpack.js'],
       };
 
       beforeAll(async () => {
@@ -94,7 +89,7 @@ describe('multiple-routes', () => {
 
   describe('test', () => {
     it('should handle dynamic imports in tests', async () => {
-      const test = await sku('test');
+      const test = await sku('test', ['--config', 'sku.config.webpack.js']);
 
       expect(
         await test.findByError('Test Suites: 1 passed, 1 total'),

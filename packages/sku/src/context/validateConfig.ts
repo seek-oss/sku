@@ -74,14 +74,22 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
     }
   }
 
-  // Validate library entry has corresponding libraryName
-  if (skuConfig.libraryEntry && !skuConfig.libraryName) {
+  if (skuConfig.bundler === 'webpack') {
+    // Validate library entry has corresponding libraryName
+    if (skuConfig.libraryEntry && !skuConfig.libraryName) {
+      errors.push(
+        `🚫 '${strong('libraryEntry')}' must have a corresponding '${strong(
+          'libraryName',
+        )}' option. More details: ${strong(
+          'https://github.com/seek-oss/sku#building-a-library',
+        )}`,
+      );
+    }
+  } else if ('libraryEntry' in skuConfig && skuConfig.libraryEntry) {
     errors.push(
-      `🚫 '${strong('libraryEntry')}' must have a corresponding '${strong(
-        'libraryName',
-      )}' option. More details: ${strong(
-        'https://github.com/seek-oss/sku#building-a-library',
-      )}`,
+      `🚫 '${strong('libraryEntry')}' is only supported with '${strong(
+        "bundler: 'webpack'",
+      )}'.`,
     );
   }
 

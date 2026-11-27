@@ -1,10 +1,11 @@
-import { makeStableViteHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 import baseConfig from './sku.config.ts';
 
 export default {
   ...baseConfig,
-  bundler: 'vite',
-  dangerouslySetViteConfig: makeStableViteHashes,
+  bundler: 'webpack',
+  testRunner: 'jest',
+  serverPort: 8011,
+  setupTests: './jestSetup.js',
 } satisfies SkuConfig;

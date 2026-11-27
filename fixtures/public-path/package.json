@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "sku build",
-    "build:vite": "sku build --config sku.config.vite.js"
+    "build:webpack": "sku build --config sku.config.webpack.js"
   },
   "devDependencies": {
     "@sku-private/test-utils": "workspace:*",

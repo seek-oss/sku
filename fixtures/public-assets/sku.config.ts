@@ -1,10 +1,10 @@
-import { makeStableHashes } from '@sku-private/test-utils';
+import { makeStableViteHashes } from '@sku-private/test-utils';
 import type { SkuConfig } from 'sku';
 
 export default {
-  clientEntry: 'src/client.tsx',
-  renderEntry: 'src/render.tsx',
+  clientEntry: 'src/viteClient.tsx',
+  renderEntry: 'src/viteRender.tsx',
   public: 'assets',
   port: 4002,
-  dangerouslySetWebpackConfig: (config) => makeStableHashes(config),
+  dangerouslySetViteConfig: makeStableViteHashes,
 } satisfies SkuConfig;

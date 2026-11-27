@@ -14,8 +14,8 @@ describe('assertion-removal', () => {
   describe.for(bundlers)('bundler %s', (bundler) => {
     describe('build', async () => {
       const args: BundlerValues<string[]> = {
-        vite: ['--config', 'sku.config.vite.ts'],
-        webpack: [],
+        vite: [],
+        webpack: ['--config', 'sku.config.webpack.ts'],
       };
 
       it('should not contain "assert" or "invariant" in production', async () => {
@@ -43,7 +43,10 @@ describe('assertion-removal', () => {
     it('should not contain "assert" or "invariant" in production', async () => {
       const backendUrl = `http://localhost:8011`;
 
-      const build = await sku('build-ssr');
+      const build = await sku('build-ssr', [
+        '--config',
+        'sku.config.webpack.ts',
+      ]);
       await expect(build).toMatchExitCode(0);
 
       const server = await node(['dist/server.cjs']);
@@ -64,7 +67,12 @@ describe('assertion-removal', () => {
     it('should keep "assert" and "invariant" in tests', async () => {
       // Jest 30's default non-TTY reporter is summary-only and ignores --verbose
       // unless the default reporter is selected explicitly.
-      const test = await sku('test', ['--verbose', '--reporters=default']);
+      const test = await sku('test', [
+        '--config',
+        'sku.config.webpack.ts',
+        '--verbose',
+        '--reporters=default',
+      ]);
       expect(await test.findByError('assert should throw')).toBeInTheConsole();
       expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
     });

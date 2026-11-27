@@ -134,14 +134,14 @@ interface SkuConfigBase {
    *
    * Vite supports static apps and experimental SSR via `buildType: 'ssr'`.
    *
-   * @default "webpack"
+   * @default "vite"
    */
   bundler?: 'webpack' | 'vite';
 
   /**
    * The test runner that sku uses to run the tests.
    *
-   * @default: "jest"
+   * @default "vitest"
    */
   testRunner?: 'vitest' | 'jest';
 
@@ -340,36 +340,6 @@ interface SkuConfigBase {
   languages?: readonly SkuLanguage[];
 
   /**
-   * **Only for libraries**
-   *
-   * The entry file for the library. If set, sku will assume the project is a library. Must export its API from this file.
-   *
-   * @link https://seek-oss.github.io/sku/configuration#libraryentry
-   */
-  libraryEntry?: string;
-
-  /**
-   * **Only for libraries**
-   *
-   * The global name of the library. Will be added to the `window` object under `window[libraryName]`.
-   *
-   * @link https://seek-oss.github.io/sku/configuration#libraryname
-   */
-  libraryName?: string;
-
-  /**
-   * **Only for libraries**
-   *
-   * The file name of the library. The main bundle of the library will be output to `dist/${libraryFile}.js` - note that the
-   * `.js` extension will be added automatically and should not be included in the configuration option itself.
-   *
-   * If `libraryFile` is not specified then `libraryName` will be used instead.
-   *
-   * @link https://seek-oss.github.io/sku/configuration#libraryfile
-   */
-  libraryFile?: string;
-
-  /**
    * An array of polyfills to be included into all client entry points.
    *
    * @default []
@@ -550,6 +520,36 @@ interface WebpackSkuConfig {
    * @link https://seek-oss.github.io/sku/configuration#srcpaths
    */
   srcPaths?: string[];
+
+  /**
+   * **Only for libraries**
+   *
+   * The entry file for the library. If set, sku will assume the project is a library. Must export its API from this file.
+   *
+   * @link https://seek-oss.github.io/sku/configuration#libraryentry
+   */
+  libraryEntry?: string;
+
+  /**
+   * **Only for libraries**
+   *
+   * The global name of the library. Will be added to the `window` object under `window[libraryName]`.
+   *
+   * @link https://seek-oss.github.io/sku/configuration#libraryname
+   */
+  libraryName?: string;
+
+  /**
+   * **Only for libraries**
+   *
+   * The file name of the library. The main bundle of the library will be output to `dist/${libraryFile}.js` - note that the
+   * `.js` extension will be added automatically and should not be included in the configuration option itself.
+   *
+   * If `libraryFile` is not specified then `libraryName` will be used instead.
+   *
+   * @link https://seek-oss.github.io/sku/configuration#libraryfile
+   */
+  libraryFile?: string;
 
   /**
    * This function provides a way to modify sku's Webpack configuration.
@@ -736,9 +736,9 @@ export type CompleteSkuConfig = SkuConfigBase &
 export type SkuConfig = SkuConfigBase &
   (
     | ({
-        bundler?: 'webpack' | undefined;
-      } & WebpackSkuConfig)
-    | ({ bundler: 'vite' } & ViteSkuConfig)
+        bundler?: 'vite' | undefined;
+      } & ViteSkuConfig)
+    | ({ bundler: 'webpack' } & WebpackSkuConfig)
   );
 
 export type Metadata = {

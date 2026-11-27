@@ -46,12 +46,12 @@ Config files can use either TypeScript or JavaScript.
 
 Type: `'webpack' | 'vite'`
 
-Default: `'webpack'`
+Default: `'vite'`
 
 The bundler that sku uses to build the application.
 
-`vite` currently supports static apps only.
 See [Vite support](./vite) for details.
+Set `bundler: 'webpack'` to keep building with webpack, for example for [libraries](./libraries.md) or [webpack SSR](./ssr/webpack-ssr.md) apps.
 
 **Experimental** - Vite supports SSR with experimental Managed Data Mode.
 SSR is server-side rendering at request time.
@@ -589,6 +589,8 @@ See [Multi-language support](./multi-language.md) for details.
 
 Type: `string`
 
+Bundler: `webpack`
+
 The entry file for the library.
 If you set this option, sku treats the project as a library.
 The file must export the library API.
@@ -605,12 +607,16 @@ export default () => {
 
 Type: `string`
 
+Bundler: `webpack`
+
 The global name of the library.
 Sku adds it to the `window` object as `window[libraryName]`.
 
 ## libraryFile <Badge type="info" text="Library-mode only" />
 
 Type: `string`
+
+Bundler: `webpack`
 
 The file name of the library.
 Sku writes the main bundle to `dist/${libraryFile}.js`.
@@ -938,9 +944,10 @@ The directory that receives your assets when you run `sku build` or `sku build-s
 
 Type: `'jest' | 'vitest'`
 
-Default: `'jest'`
+Default: `'vitest'`
 
 The test runner that sku uses to run the tests.
+Set `testRunner: 'jest'` to keep running tests with Jest.
 
 ## transformOutputPath <Badge type="info" text="Static only" />
 

@@ -3,8 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "sku start",
-    "start:vite": "sku start --config sku.config.vite.ts"
+    "start": "sku start"
   },
   "dependencies": {
     "dedent": "^1.5.1",

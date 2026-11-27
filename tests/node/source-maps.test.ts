@@ -11,8 +11,8 @@ const { sku, fixturePath } = scopeToFixture('source-maps');
 
 describe('source-maps', () => {
   const args: BundlerValues<string[]> = {
-    vite: ['--config', 'sku.config.vite.ts'],
-    webpack: [],
+    vite: [],
+    webpack: ['--config', 'sku.config.webpack.ts'],
   };
 
   describe.each(bundlers)('bundler %s', (bundler) => {

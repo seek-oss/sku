@@ -1,7 +1,4 @@
-import {
-  ListExternalsWebpackPlugin,
-  makeStableHashes,
-} from '@sku-private/test-utils';
+import { makeStableViteHashes } from '@sku-private/test-utils';
 
 export default {
   port: 9845,
@@ -10,13 +7,5 @@ export default {
   serverEntry: './src/server.jsx',
   cspEnabled: true,
   cspExtraScriptSrcHosts: ['https://some-cdn.com'],
-  dangerouslySetWebpackConfig: (config) => {
-    if (config.name === 'render') {
-      config.plugins.push(new ListExternalsWebpackPlugin());
-    }
-
-    makeStableHashes(config);
-
-    return config;
-  },
+  dangerouslySetViteConfig: makeStableViteHashes,
 };

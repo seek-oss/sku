@@ -561,12 +561,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/sku
 
-  fixtures/legacy-react:
-    devDependencies:
-      sku:
-        specifier: workspace:*
-        version: link:../../packages/sku
-
   fixtures/library-build:
     devDependencies:
       '@sku-private/test-utils':

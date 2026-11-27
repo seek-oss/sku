@@ -13,10 +13,30 @@ const { sku, node, fixturePath } = scopeToFixture('ssr-document');
 describe('ssr-document', () => {
   describe('start', () => {
     const url = 'http://127.0.0.1:8200';
+    let start: Awaited<ReturnType<typeof sku>>;
 
     beforeAll(async () => {
-      const start = await sku('start', ['--config=sku.config.ts']);
+      start = await sku('start', ['--config=sku.config.ts']);
       await start.findByText('Starting development server');
+    });
+
+    it('returns 200 from /livez and 503 from /readyz during onListen, then 200', async ({
+      task,
+    }) => {
+      skipCleanup(task.id);
+      expect(
+        await start.findByText('/livez during onListen: 200'),
+      ).toBeInTheConsole();
+      expect(
+        await start.findByText('/readyz during onListen: 503'),
+      ).toBeInTheConsole();
+
+      const live = await fetch(`${url}/livez`);
+      const ready = await fetch(`${url}/readyz`);
+      expect(live.status).toBe(200);
+      expect(await live.text()).toBe('ok');
+      expect(ready.status).toBe(200);
+      expect(await ready.text()).toBe('ok');
     });
 
     it('streams the document shell with CSP headers', async ({ task }) => {

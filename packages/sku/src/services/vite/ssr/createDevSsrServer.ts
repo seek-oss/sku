@@ -8,6 +8,11 @@ import { createConfig } from '../helpers/config/createConfig.js';
 import createServer from '../../../utils/createServer.js';
 import { metricsMeasurers } from '../../telemetry/metricsMeasurers.js';
 import { SSR_CSS_VIRTUAL_HREF } from '../plugins/ssrCss/constants.js';
+import {
+  bindProbeDrainSignals,
+  createProbeMiddleware,
+  mountProbeRoutes,
+} from './createProbeMiddleware.js';
 import { createSsrRequestContextMiddleware } from './ssrRequestContextMiddleware.js';
 import {
   assertNoExistingSigtermListeners,
@@ -34,7 +39,9 @@ export const mountStartSsrMiddleware = ({
   loadDevServerMiddleware?: (app: Express) => void;
   consumerMiddleware?: SkuMiddleware;
   htmlMiddleware: RequestHandler;
-}): void => {
+}): { markReady: () => void; markDraining: () => void } => {
+  const probes = createProbeMiddleware();
+  mountProbeRoutes(app, probes);
   app.use(createSsrRequestContextMiddleware());
   app.use(viteMiddlewares);
   loadDevServerMiddleware?.(app);
@@ -42,6 +49,10 @@ export const mountStartSsrMiddleware = ({
     app.use(middleware),
   );
   app.use(htmlMiddleware);
+  return {
+    markReady: probes.markReady,
+    markDraining: probes.markDraining,
+  };
 };
 
 export const createDevSsrServer = async ({
@@ -123,7 +134,7 @@ export const createDevSsrServer = async ({
     return latestModule.render(...args);
   };
 
-  mountStartSsrMiddleware({
+  const { markReady, markDraining } = mountStartSsrMiddleware({
     app: serverApp,
     viteMiddlewares: vite.middlewares,
     loadDevServerMiddleware,
@@ -172,6 +183,9 @@ export const createDevSsrServer = async ({
     ]);
     throw error;
   }
+
+  bindProbeDrainSignals(markDraining);
+  markReady();
 
   // Parity with static middlewarePlugin.configureServer: mark when ready to load.
   if (

@@ -5,7 +5,7 @@ import { Readable } from 'node:stream';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import type { Request, RequestHandler, Response } from 'express';
 import {
   assertNoExistingSigtermListeners,
@@ -19,6 +19,14 @@ import type { SsrServerOptions } from './listen.js';
 import { bindCommit } from './bindCommit.js';
 import type { RenderResult } from './types.js';
 import type { PipeableStream } from 'react-dom/server';
+
+const portOf = (server: net.Server) => {
+  const address = server.address();
+  if (address === null || typeof address === 'string') {
+    throw new Error('Expected a TCP server address');
+  }
+  return address.port;
+};
 
 const createMockRes = (): Response => {
   const headers: Record<string, string | string[]> = {};
@@ -527,6 +535,14 @@ describe('listen', () => {
       await rm(clientDirectory, { recursive: true, force: true });
       clientDirectory = undefined;
     }
+    if (
+      process.listenerCount('SIGTERM') !== 0 ||
+      process.listenerCount('SIGINT') !== 0
+    ) {
+      throw new Error(
+        `Signal listeners leaked: SIGTERM ${process.listenerCount('SIGTERM')}, SIGINT ${process.listenerCount('SIGINT')}`,
+      );
+    }
   });
 
   it('serves client assets under publicPath before catch-all middleware', async () => {
@@ -548,7 +564,7 @@ describe('listen', () => {
     });
     servers.push(result);
 
-    const { port } = result.httpServer.address() as { port: number };
+    const port = portOf(result.httpServer);
     const asset = await fetch(`http://127.0.0.1:${port}/static/app.js`);
     expect(asset.status).toBe(200);
     expect(await asset.text()).toBe('console.log("asset")');
@@ -570,10 +586,169 @@ describe('listen', () => {
     });
     servers.push(result);
 
-    const { port } = result.httpServer.address() as { port: number };
-    const assetPath = await fetch(`http://127.0.0.1:${port}/static/app.js`);
+    const assetPath = await fetch(
+      `http://127.0.0.1:${portOf(result.httpServer)}/static/app.js`,
+    );
     expect(assetPath.status).toBe(418);
     expect(await assetPath.text()).toBe('middleware-handled');
+  });
+
+  const probe = async (url: string, method = 'GET') => {
+    const response = await fetch(url, { method });
+    return {
+      status: response.status,
+      contentType: response.headers.get('content-type'),
+      cacheControl: response.headers.get('cache-control'),
+      allow: response.headers.get('allow'),
+      body: await response.text(),
+    };
+  };
+
+  const unavailable = {
+    status: 503,
+    contentType: 'text/plain; charset=utf-8',
+    cacheControl: 'no-store',
+    allow: null,
+    body: 'unavailable',
+  };
+  const ok = {
+    status: 200,
+    contentType: 'text/plain; charset=utf-8',
+    cacheControl: 'no-store',
+    allow: null,
+    body: 'ok',
+  };
+  const methodNotAllowed = {
+    status: 405,
+    contentType: 'text/plain; charset=utf-8',
+    cacheControl: 'no-store',
+    allow: 'GET, HEAD',
+    body: '',
+  };
+
+  const recordingApp =
+    (seen: string[]): RequestHandler =>
+    (req, res) => {
+      seen.push(`${req.method} ${req.path}`);
+      res.status(418).type('text/plain').send('app');
+    };
+
+  it('serves /livez and /readyz ahead of app middleware and does not log each probe', async () => {
+    const consoleMethods: Array<'log' | 'info' | 'warn' | 'error' | 'debug'> = [
+      'log',
+      'info',
+      'warn',
+      'error',
+      'debug',
+    ];
+    const logs = consoleMethods.map((method) =>
+      vi.spyOn(console, method).mockImplementation(() => {}),
+    );
+    onTestFinished(() => {
+      for (const log of logs) {
+        log.mockRestore();
+      }
+    });
+    const seen: string[] = [];
+    let during: unknown[] = [];
+
+    const result = await listen({
+      ...baseListenOptions,
+      port: 0,
+      onListen: async ({ port }) => {
+        const originDuring = `http://127.0.0.1:${port}`;
+        during = [
+          await probe(`${originDuring}/livez`),
+          await probe(`${originDuring}/livez`, 'HEAD'),
+          await probe(`${originDuring}/readyz`),
+          await probe(`${originDuring}/readyz`, 'HEAD'),
+        ];
+      },
+      middleware: [recordingApp(seen)],
+    });
+    servers.push(result);
+
+    const origin = `http://127.0.0.1:${portOf(result.httpServer)}`;
+    expect(during).toEqual([
+      ok,
+      { ...ok, body: '' },
+      unavailable,
+      { ...unavailable, body: '' },
+    ]);
+    expect(logs.find((log) => log.mock.calls.length > 0)?.mock.calls).toEqual([
+      ['readiness starting -> ready'],
+    ]);
+    for (const log of logs) {
+      log.mockClear();
+    }
+
+    expect(await probe(`${origin}/livez`)).toEqual(ok);
+    expect(await probe(`${origin}/livez`, 'HEAD')).toEqual({ ...ok, body: '' });
+    expect(await probe(`${origin}/livez/`)).toEqual(ok);
+    expect(await probe(`${origin}/readyz`)).toEqual(ok);
+    expect(await probe(`${origin}/readyz`, 'HEAD')).toEqual({
+      ...ok,
+      body: '',
+    });
+    expect(await probe(`${origin}/readyz/`)).toEqual(ok);
+    expect(await probe(`${origin}/livez`, 'POST')).toEqual(methodNotAllowed);
+    expect(await probe(`${origin}/readyz`, 'PUT')).toEqual(methodNotAllowed);
+    expect(await probe(`${origin}/health`)).toMatchObject({
+      status: 418,
+      body: 'app',
+    });
+    expect(await probe(`${origin}/healthz`)).toMatchObject({
+      status: 418,
+      body: 'app',
+    });
+    expect(await probe(`${origin}/startupz`)).toMatchObject({
+      status: 418,
+      body: 'app',
+    });
+    expect(await probe(`${origin}/ready`)).toMatchObject({
+      status: 418,
+      body: 'app',
+    });
+    expect(await probe(`${origin}/livez/other`)).toMatchObject({
+      status: 418,
+      body: 'app',
+    });
+    expect(await probe(`${origin}/readyz/other`)).toMatchObject({
+      status: 418,
+      body: 'app',
+    });
+    expect(seen).toEqual([
+      'GET /health',
+      'GET /healthz',
+      'GET /startupz',
+      'GET /ready',
+      'GET /livez/other',
+      'GET /readyz/other',
+    ]);
+    for (const log of logs) {
+      expect(log).not.toHaveBeenCalled();
+    }
+  });
+
+  it('answers /livez and /readyz before static files', async () => {
+    clientDirectory = await mkdtemp(path.join(tmpdir(), 'sku-ssr-static-'));
+    await writeFile(path.join(clientDirectory, 'livez'), 'static-livez');
+    await writeFile(path.join(clientDirectory, 'readyz'), 'static-readyz');
+
+    const seen: string[] = [];
+    const result = await listen({
+      ...baseListenOptions,
+      port: 0,
+      publicPath: '/',
+      clientDirectory,
+      middleware: [recordingApp(seen)],
+    });
+    servers.push(result);
+
+    const origin = `http://127.0.0.1:${portOf(result.httpServer)}`;
+    expect(await probe(`${origin}/livez`)).toEqual(ok);
+    expect(await probe(`${origin}/readyz`)).toEqual(ok);
+    expect(seen).toEqual([]);
   });
 
   it('calls onListen once with app, httpServer, and bound port', async () => {
@@ -590,12 +765,11 @@ describe('listen', () => {
     });
     servers.push(result);
 
-    const { port } = result.httpServer.address() as { port: number };
     expect(onListen).toHaveBeenCalledTimes(1);
     expect(onListen).toHaveBeenCalledWith({
       app: result.app,
       httpServer: result.httpServer,
-      port,
+      port: portOf(result.httpServer),
     });
   });
 
@@ -703,8 +877,6 @@ describe('production server shutdown', () => {
       });
     });
 
-  const portOf = (server: Server) => (server.address() as net.AddressInfo).port;
-
   const closedWithin = (socket: Socket, ms = 1_000) =>
     new Promise<void>((resolve, reject) => {
       const timer = setTimeout(() => {
@@ -781,9 +953,12 @@ describe('production server shutdown', () => {
     for (const server of servers.splice(0)) {
       await closeServer(server);
     }
-    if (process.listenerCount('SIGTERM') !== 0) {
+    if (
+      process.listenerCount('SIGTERM') !== 0 ||
+      process.listenerCount('SIGINT') !== 0
+    ) {
       throw new Error(
-        `SIGTERM listeners leaked: ${process.listenerCount('SIGTERM')}`,
+        `Signal listeners leaked: SIGTERM ${process.listenerCount('SIGTERM')}, SIGINT ${process.listenerCount('SIGINT')}`,
       );
     }
   });
@@ -794,6 +969,7 @@ describe('production server shutdown', () => {
     expect(httpServer.keepAliveTimeout).toBe(35_000);
     expect(httpServer.headersTimeout).toBe(60_000);
     expect(process.listenerCount('SIGTERM')).toBe(1);
+    expect(process.listenerCount('SIGINT')).toBe(1);
   });
 
   it('keeps a keep-alive timeout that onListen sets', async () => {
@@ -947,8 +1123,7 @@ describe('production server shutdown', () => {
     });
   });
 
-  it('sends Connection: close on a request whose headers finish during the drain', async () => {
-    const exit = mockExit();
+  const startServerWithSlowRequest = async () => {
     const gate = deferred();
     const entered = deferred();
     const { httpServer } = await startServer({
@@ -962,38 +1137,90 @@ describe('production server shutdown', () => {
         },
       ],
     });
-    const port = portOf(httpServer);
-
-    const slow = fetch(`http://127.0.0.1:${port}/slow`).catch(() => undefined);
+    const slow = fetch(`http://127.0.0.1:${portOf(httpServer)}/slow`).catch(
+      () => undefined,
+    );
     await entered.promise;
+    const finishSlow = async () => {
+      gate.resolve();
+      await slow;
+    };
+    return { httpServer, finishSlow };
+  };
 
+  const startLateRequest = async (
+    httpServer: net.Server,
+    requestPath: string,
+  ) => {
     const accepted = new Promise<void>((resolve) => {
       httpServer.once('connection', () => resolve());
     });
-    const socket = net.connect({ host: '127.0.0.1', port });
+    const socket = net.connect({ host: '127.0.0.1', port: portOf(httpServer) });
     socket.on('error', () => {});
     let response = '';
     socket.on('data', (chunk: Buffer) => {
       response += chunk.toString();
     });
     await accepted;
-    socket.write('GET /late HTTP/1.1\r\nHost: localhost\r\n');
-    await new Promise((resolve) => setTimeout(resolve, 20));
+    socket.write(`GET ${requestPath} HTTP/1.1\r\nHost: localhost\r\n`);
 
-    const closed = closedWithin(socket);
+    return async () => {
+      const closed = closedWithin(socket);
+      socket.write('\r\n');
+      await closed;
+      return response;
+    };
+  };
+
+  it('sends Connection: close on a request whose headers finish during the drain', async () => {
+    const exit = mockExit();
+    const { httpServer, finishSlow } = await startServerWithSlowRequest();
+    const finishLate = await startLateRequest(httpServer, '/late');
+
     process.emit('SIGTERM');
-    socket.write('\r\n');
-    await closed;
+    const response = await finishLate();
 
     expect(response).toMatch(/^HTTP\/1\.1 200/);
     expect(response).toMatch(/\r\nConnection: close\r\n/i);
 
-    gate.resolve();
-    await slow;
+    await finishSlow();
     await vi.waitFor(() => {
       expect(exit).toHaveBeenCalledWith(0);
     });
   });
+
+  it.each(['SIGTERM', 'SIGINT'] as const)(
+    'returns 503 from /readyz on %s and keeps /livez at 200',
+    async (signal) => {
+      const exit = mockExit();
+      const info = vi.spyOn(console, 'info').mockImplementation(() => {});
+      const { httpServer, finishSlow } = await startServerWithSlowRequest();
+      info.mockClear();
+      const finishReadyz = await startLateRequest(httpServer, '/readyz');
+      const finishLivez = await startLateRequest(httpServer, '/livez');
+
+      process.emit(signal);
+      const readyz = await finishReadyz();
+      const livez = await finishLivez();
+
+      expect(readyz).toMatch(/^HTTP\/1\.1 503/);
+      expect(readyz).toMatch(/\r\nCache-Control: no-store\r\n/i);
+      expect(readyz).toMatch(
+        /\r\nContent-Type: text\/plain; charset=utf-8\r\n/i,
+      );
+      expect(readyz.endsWith('unavailable')).toBe(true);
+      expect(livez).toMatch(/^HTTP\/1\.1 200/);
+      expect(livez.endsWith('ok')).toBe(true);
+      expect(info).toHaveBeenCalledTimes(1);
+      expect(info).toHaveBeenCalledWith('readiness ready -> draining');
+      info.mockRestore();
+
+      await finishSlow();
+      await vi.waitFor(() => {
+        expect(exit).toHaveBeenCalledWith(0);
+      });
+    },
+  );
 
   it('exits 1 at 25 seconds when a response never finishes', async () => {
     const onShutdown = vi.fn();
@@ -1093,6 +1320,7 @@ describe('production server shutdown', () => {
     await closed;
     expect(onShutdown).toHaveBeenCalledTimes(1);
     expect(process.listenerCount('SIGTERM')).toBe(1);
+    expect(process.listenerCount('SIGINT')).toBe(1);
 
     process.emit('SIGTERM');
     flush.resolve();
@@ -1102,6 +1330,7 @@ describe('production server shutdown', () => {
     expect(onShutdown).toHaveBeenCalledTimes(1);
     expect(exit).toHaveBeenCalledTimes(1);
     expect(process.listenerCount('SIGTERM')).toBe(0);
+    expect(process.listenerCount('SIGINT')).toBe(0);
   });
 
   it('reports a rejected onShutdown and exits 1', async () => {

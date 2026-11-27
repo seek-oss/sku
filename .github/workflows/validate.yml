@@ -52,7 +52,7 @@ jobs:
         id: babel-loader-cache
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
         with:
-          path: 'fixtures/*/node_modules/.cache/babel-loader'
+          path: "fixtures/*/node_modules/.cache/babel-loader"
           key: babel-loader-${{ runner.os }}-${{ hashFiles('./pnpm-lock.yaml') }}
 
       - name: Set up hosts
@@ -77,10 +77,10 @@ jobs:
   # The results of this job are used to determine if the branch can be merged
   test_result:
     name: Lint & Test
-    needs: test
+    needs: [skip_check, test]
     if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Check test shards
-        if: needs.test.result == 'failure' || needs.test.result == 'cancelled'
+        if: needs.test.result != 'success' && needs.skip_check.outputs.should_skip != 'true'
         run: exit 1

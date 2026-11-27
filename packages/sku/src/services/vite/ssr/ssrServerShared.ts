@@ -4,6 +4,7 @@ export {
   type SsrServerModule,
 } from './createHtmlRenderMiddleware.js';
 export {
+  assertNoExistingSigtermListeners,
   listen,
   mountConsumerMiddleware,
   resolveBoundPort,

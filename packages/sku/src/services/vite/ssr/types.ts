@@ -50,6 +50,14 @@ export type SkuOnListen = (args: {
   port: number;
 }) => void | Promise<void>;
 
+/**
+ * Optional production shutdown hook. sku calls it with no arguments after
+ * in-flight responses finish, inside the 25 second shutdown deadline. Not
+ * called from `sku start`. A throw or rejection exits 1. Do not call
+ * `process.exit`.
+ */
+export type SkuOnShutdown = () => void | Promise<void>;
+
 /** JSON-serialisable shell seed for SSR `clientContext`. */
 export type JsonValue =
   | string
@@ -196,6 +204,7 @@ export type SkuServerEntry<
   getReactContext?: SkuServerGetReactContext<C, R>;
   middleware?: SkuMiddleware;
   onListen?: SkuOnListen;
+  onShutdown?: SkuOnShutdown;
   getRouterContext?: SkuServerGetRouterContext<C, R>;
   instrumentations?: Array<Pick<ServerInstrumentation, 'route'>>;
 };

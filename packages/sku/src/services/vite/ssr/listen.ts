@@ -1,5 +1,6 @@
 import {
   type Server as HttpServer,
+  type ServerResponse,
   createServer as createHttpServer,
 } from 'node:http';
 import type { Server as HttpsServer } from 'node:https';
@@ -15,7 +16,14 @@ import type {
   RenderManifest,
   SkuMiddleware,
   SkuOnListen,
+  SkuOnShutdown,
 } from './types.js';
+
+/** Outlives a proxy idle timeout of about 30 seconds. The socket timer fires one second later. */
+const PRODUCTION_KEEP_ALIVE_TIMEOUT_MS = 35_000;
+
+/** Leaves 5 seconds of a 30 second termination grace period as margin for signal delivery and exit. */
+const SHUTDOWN_DEADLINE_MS = 25_000;
 
 export type { RenderFunction } from './createHtmlRenderMiddleware.js';
 
@@ -25,6 +33,8 @@ export interface SsrServerOptions {
   middleware?: SkuMiddleware;
   /** Called once after middleware + HTML are mounted and `listen` succeeds. */
   onListen?: SkuOnListen;
+  /** Called with no arguments after in-flight responses finish on `SIGTERM`. */
+  onShutdown?: SkuOnShutdown;
   /** When true, sets Express `trust proxy` hop count to `1`. */
   expressTrustProxy?: boolean;
   render: RenderFunction;
@@ -70,6 +80,142 @@ export const mountConsumerMiddleware = (
   }
 };
 
+/**
+ * Throws when the process has a `SIGTERM` listener that is not in
+ * `hostListeners`, which `sku start` uses for listeners that never run in
+ * production.
+ */
+export const assertNoExistingSigtermListeners = (
+  hostListeners: ReadonlySet<unknown> = new Set(),
+) => {
+  const listeners = process
+    .listeners('SIGTERM')
+    .filter((listener) => !hostListeners.has(listener));
+  if (listeners.length === 0) {
+    return;
+  }
+
+  const names = listeners
+    .map((listener) => listener.name)
+    .filter((name) => name.length > 0);
+  const named = names.length > 0 ? `: ${names.join(', ')}` : '';
+  const noun = listeners.length === 1 ? 'listener' : 'listeners';
+
+  throw new Error(
+    `Found ${listeners.length} SIGTERM ${noun}${named}. A dependency can register a SIGTERM listener. Move shutdown work to onShutdown. For a dependency's listener, turn off its signal handling in onListen with the dependency's own option or function, and call its shutdown from onShutdown. If it has no such option or function, call process.removeAllListeners('SIGTERM') in onListen instead.`,
+  );
+};
+
+const closeHttpServer = (httpServer: HttpServer | HttpsServer) =>
+  new Promise<void>((resolve, reject) => {
+    httpServer.close((closeError) =>
+      closeError ? reject(closeError) : resolve(),
+    );
+  });
+
+/**
+ * Tracks in-flight responses from listen, and returns `register`, which adds
+ * the `SIGTERM` listener that drains them, calls `onShutdown`, then exits.
+ */
+const createProductionShutdown = (
+  httpServer: HttpServer | HttpsServer,
+  onShutdown: SkuOnShutdown | undefined,
+) => {
+  const inflight = new Set<ServerResponse>();
+  let draining = false;
+  let finished = false;
+  let deadline: ReturnType<typeof setTimeout> | undefined;
+
+  const exit = (code: number) => {
+    process.removeListener('SIGTERM', onSigterm);
+    process.exit(code);
+  };
+
+  const finish = async () => {
+    if (finished) {
+      return;
+    }
+    finished = true;
+    // Node 24's close() and closeIdleConnections() leave a socket that has
+    // connected and not sent a request. Nothing is in flight now.
+    httpServer.closeAllConnections();
+    let code = 0;
+    try {
+      await onShutdown?.();
+    } catch (error) {
+      console.error(error);
+      code = 1;
+    }
+    clearTimeout(deadline);
+    exit(code);
+  };
+
+  // Runs before Express, so no middleware has sent headers yet.
+  httpServer.prependListener('request', (_req, res) => {
+    inflight.add(res);
+    // Node 24's close() leaves a socket that has not finished a request open,
+    // so a request can still arrive during the drain.
+    if (draining) {
+      res.setHeader('Connection', 'close');
+    }
+    res.once('close', () => {
+      inflight.delete(res);
+      if (!draining) {
+        return;
+      }
+      // A keep-alive socket that finishes after close() otherwise waits out
+      // keepAliveTimeout.
+      httpServer.closeIdleConnections();
+      if (inflight.size === 0) {
+        finish().catch((error) => {
+          console.error(error);
+        });
+      }
+    });
+  });
+
+  function onSigterm() {
+    if (draining) {
+      return;
+    }
+    draining = true;
+
+    deadline = setTimeout(() => {
+      finished = true;
+      exit(1);
+    }, SHUTDOWN_DEADLINE_MS);
+    deadline.unref();
+
+    for (const res of inflight) {
+      if (!res.headersSent) {
+        res.setHeader('Connection', 'close');
+      }
+    }
+
+    httpServer.close();
+
+    if (inflight.size === 0) {
+      finish().catch((error) => {
+        console.error(error);
+      });
+    }
+  }
+
+  return {
+    register: () => {
+      process.on('SIGTERM', onSigterm);
+      // The server closes partway through a drain. Keep the listener until exit
+      // so a repeated SIGTERM does not fall back to Node's default and kill
+      // onShutdown.
+      httpServer.once('close', () => {
+        if (!draining) {
+          process.removeListener('SIGTERM', onSigterm);
+        }
+      });
+    },
+  };
+};
+
 export const listen = async (
   options: SsrServerOptions,
 ): Promise<SsrServerResult> => {
@@ -110,22 +256,24 @@ export const listen = async (
     httpServer.listen(options.port, resolve);
   });
 
-  if (options.onListen) {
-    try {
+  httpServer.keepAliveTimeout = PRODUCTION_KEEP_ALIVE_TIMEOUT_MS;
+  const shutdown = createProductionShutdown(httpServer, options.onShutdown);
+
+  try {
+    if (options.onListen) {
       await options.onListen({
         app: serverApp,
         httpServer,
         port: resolveBoundPort(httpServer, options.port),
       });
-    } catch (error) {
-      await new Promise<void>((resolve, reject) => {
-        httpServer.close((closeError) =>
-          closeError ? reject(closeError) : resolve(),
-        );
-      });
-      throw error;
     }
+    assertNoExistingSigtermListeners();
+  } catch (error) {
+    await closeHttpServer(httpServer);
+    throw error;
   }
+
+  shutdown.register();
 
   return { app: serverApp, httpServer };
 };

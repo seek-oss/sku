@@ -13,15 +13,22 @@ import {
   type RenderFunction,
   type SsrServerResult,
 } from './ssrServerShared.js';
-import type { RenderAssets, SkuMiddleware, SkuOnListen } from './types.js';
+import type {
+  RenderAssets,
+  SkuMiddleware,
+  SkuOnListen,
+  SkuOnShutdown,
+} from './types.js';
 
 export const startProductionSsrServer = async ({
   middleware,
   onListen,
+  onShutdown,
   render,
 }: {
   middleware?: SkuMiddleware;
   onListen?: SkuOnListen;
+  onShutdown?: SkuOnShutdown;
   render: RenderFunction;
 }): Promise<SsrServerResult> => {
   const serverDirectory = path.dirname(fileURLToPath(import.meta.url));
@@ -52,6 +59,7 @@ export const startProductionSsrServer = async ({
     publicPath,
     middleware,
     onListen,
+    onShutdown,
     expressTrustProxy: __SKU_EXPRESS_TRUST_PROXY__,
     render,
     assets,

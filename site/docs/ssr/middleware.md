@@ -104,23 +104,50 @@ Use route `middleware` for behaviour tied to the matched route tree.
 
 See [Routing → React Router route middleware](./routing.md#react-router-route-middleware) and React Router’s [middleware docs](https://reactrouter.com/how-to/middleware).
 
+## Probe routes
+
+sku serves `GET` and `HEAD /livez` and `GET` and `HEAD /readyz` on `sku start` and the production server.
+Both are mounted ahead of request context, static files, Vite, dev server middleware, and your middleware.
+
+`/livez` returns 200 with the body `ok` when the process can run the handler, including while the server is [shutting down](./entries.md#onshutdown).
+It does no I/O and calls nothing else.
+A stuck event loop fails the probe by timeout.
+
+`/readyz` returns 503 with the body `unavailable` until the server is listening and [`onListen`](./entries.md#onlisten) has returned.
+It then returns 200 `ok` until shutdown.
+On `SIGTERM` or `SIGINT` it returns 503 immediately.
+`/livez` stays 200.
+
+Other methods on `/livez` and `/readyz` return 405 with `Allow: GET, HEAD` and do not reach your middleware.
+Other paths, including `/health`, `/healthz`, `/startupz`, `/livez/other`, and `/readyz/other`, still reach your middleware.
+
+Responses use `Content-Type: text/plain; charset=utf-8` and `Cache-Control: no-store`.
+Bodies are `ok` or `unavailable`.
+sku logs readiness state changes, such as `ready -> draining`, and does not log each probe.
+These routes take no app callback.
+Use `onListen` for one-time startup work.
+
 ## Mount order in production
 
-1. Request-context (sku, CSP nonce store, etc.)
-2. `express.static` for client assets under [`publicPath`](../configuration.md#publicpath)
-3. Server-entry `middleware` (optional)
-4. HTML render
+1. `GET` / `HEAD /livez` and `/readyz` (sku).
+   Other methods on those paths return 405.
+2. Request-context (sku, CSP nonce store, etc.)
+3. `express.static` for client assets under [`publicPath`](../configuration.md#publicpath)
+4. Server-entry `middleware` (optional)
+5. HTML render
 
 Static mounts **before** server-entry middleware so catch-all URL-pattern handlers cannot intercept hashed client assets under `publicPath`.
 App routes outside that prefix still reach middleware and HTML as usual.
 
 ## Mount order in `sku start`
 
-1. Request-context (sku, CSP nonce store, etc.)
-2. Vite middlewares (HMR / module graph)
-3. Config `devServerMiddleware` (optional)
-4. Server-entry `middleware`
-5. HTML render
+1. `GET` / `HEAD /livez` and `/readyz` (sku).
+   Other methods on those paths return 405.
+2. Request-context (sku, CSP nonce store, etc.)
+3. Vite middlewares (HMR / module graph)
+4. Config `devServerMiddleware` (optional)
+5. Server-entry `middleware`
+6. HTML render
 
 Document paths Vite does not handle still reach `devServerMiddleware`, server-entry `middleware`, and HTML.
 Dev-only mocks still mount before production middleware so they can intercept traffic that would never reach the app in production.

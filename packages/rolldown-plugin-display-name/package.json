@@ -1,6 +1,6 @@
 {
   "name": "@sku-lib/rolldown-plugin-display-name",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Rolldown/Vite plugin that adds `displayName` to React components, powered by oxc",
   "keywords": [
     "displayName",

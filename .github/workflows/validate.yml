@@ -17,6 +17,36 @@ jobs:
           # We want to skip only concurrent runs. Subsequent runs/retries should be allowed.
           skip_after_successful_duplicate: false
 
+  lint:
+    name: Lint
+    needs: skip_check
+    if: needs.skip_check.outputs.should_skip != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out Repo
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          cache: pnpm
+          node-version-file: package.json
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Sku
+        run: pnpm build
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Build docs
+        run: pnpm build:docs
+
   test:
     name: Test (${{ matrix.shard }}/2)
     needs: skip_check
@@ -59,24 +89,16 @@ jobs:
         # Couldn't get `sudo pnpm setup-test-hosts` to work
         run: sudo -E ${{ steps.pnpm-setup.outputs.bin_dest }}/pnpm setup-test-hosts
 
-      - name: Lint
-        if: matrix.shard == 1
-        run: pnpm lint
-
-      - name: Build docs
-        if: matrix.shard == 1
-        run: pnpm build:docs
-
       - name: Install Playwright Browsers
         run: pnpm exec playwright install chromium --with-deps --no-shell
 
       - name: Test
         run: aa-exec --profile=chrome pnpm run test --shard=${{ matrix.shard }}/2
 
-  # Branch protection requires a single "Lint & Test" check
+  # Branch protection requires the "Lint" check and this single "Test" check
   # The results of this job are used to determine if the branch can be merged
   test_result:
-    name: Lint & Test
+    name: Test
     needs: [skip_check, test]
     if: always()
     runs-on: ubuntu-latest

@@ -70,3 +70,7 @@ publicHoistPattern:
   - '@babel/*'
 
 verifyDepsBeforeRun: warn
+
+# Some packages have Jest as an optional peer dependency.
+# Turning this on stops installing optional peer deps unless the project installs it itself.
+projectScopedOptionalPeers: true

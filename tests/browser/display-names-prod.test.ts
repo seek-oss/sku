@@ -29,8 +29,7 @@ describe('display-names-prod', () => {
       });
 
       it('should add displayNames to React components in rendered HTML', async () => {
-        const distDir = fixturePath('dist');
-        const files = await dirContentsToObject(distDir);
+        const files = await dirContentsToObject(fixturePath('dist/rendered'));
 
         const htmlContent = files['index.html'];
         expect(htmlContent).toBeDefined();

@@ -51,7 +51,7 @@ describe('public assets', () => {
         await expect(build).toMatchExitCode(0);
         expect(
           await build.findByText(
-            'Copying public assets from "assets" to "dist"',
+            'Copying public assets from "assets" to "dist/client"',
           ),
         ).toBeInTheConsole();
 

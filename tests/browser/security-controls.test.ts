@@ -47,7 +47,7 @@ describe('security-controls', () => {
         const build = await sku('build', [...args[bundler]]);
         await expect(build).toMatchExitCode(0);
 
-        const indexPath = fixturePath('dist/index.html');
+        const indexPath = fixturePath('dist/rendered/index.html');
         const content = await readFile(indexPath, 'utf-8');
         const root = parse(content);
         const element = root.querySelector(
@@ -129,7 +129,7 @@ describe('security-controls', () => {
           ]);
           await expect(build).toMatchExitCode(0);
 
-          const indexJsonPath = fixturePath('dist/index.html.json');
+          const indexJsonPath = fixturePath('dist/rendered/index.html.json');
           const content = await readFile(indexJsonPath, 'utf-8');
           const data = JSON.parse(content);
           const metadata = data.metadata?.csp ?? null;
@@ -208,7 +208,7 @@ describe('security-controls', () => {
           ]);
           await expect(build).toMatchExitCode(0);
 
-          const indexJsonPath = fixturePath('dist/index.html.json');
+          const indexJsonPath = fixturePath('dist/rendered/index.html.json');
           const content = await readFile(indexJsonPath, 'utf-8');
           const data = JSON.parse(content);
           const metadata = data.metadata?.cspReportOnly ?? null;
@@ -292,7 +292,7 @@ describe('security-controls', () => {
             ]);
             await expect(build).toMatchExitCode(0);
 
-            const indexJsonPath = fixturePath('dist/index.html.json');
+            const indexJsonPath = fixturePath('dist/rendered/index.html.json');
             const content = await readFile(indexJsonPath, 'utf-8');
             const data = JSON.parse(content);
 
@@ -374,7 +374,7 @@ describe('security-controls', () => {
             ]);
             await expect(build).toMatchExitCode(0);
 
-            const indexJsonPath = fixturePath('dist/index.html.json');
+            const indexJsonPath = fixturePath('dist/rendered/index.html.json');
             const content = await readFile(indexJsonPath, 'utf-8');
             const data = JSON.parse(content);
 
@@ -469,7 +469,7 @@ describe('security-controls', () => {
             ]);
             await expect(build).toMatchExitCode(0);
 
-            const indexJsonPath = fixturePath('dist/index.html.json');
+            const indexJsonPath = fixturePath('dist/rendered/index.html.json');
             const content = await readFile(indexJsonPath, 'utf-8');
             const data = JSON.parse(content);
 
@@ -540,7 +540,7 @@ describe('security-controls', () => {
     });
 
     it('should start a server with content-security-policies', async () => {
-      await node(['dist/server.cjs', `--port=${port}`]);
+      await node(['dist/server/server.cjs', `--port=${port}`]);
       const assetServer = await exec('pnpm', ['run', 'serve:assets']);
       expect(await assetServer.findByText('serving dist')).toBeInTheConsole();
 

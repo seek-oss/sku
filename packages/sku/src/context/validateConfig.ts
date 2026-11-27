@@ -93,7 +93,8 @@ export default (skuConfig: SkuConfig, appSkuConfig: SkuConfig = {}) => {
     );
   }
 
-  if (skuConfig.distSubfolders && skuConfig.buildType === 'ssr') {
+  // Check the consumer file (pre-defaults merge): defaults set distSubfolders to true.
+  if (appSkuConfig.distSubfolders && skuConfig.buildType === 'ssr') {
     errors.push(
       `🚫 '${strong('distSubfolders')}' is not supported with '${strong(
         'buildType: ssr',

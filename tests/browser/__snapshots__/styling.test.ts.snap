@@ -100,9 +100,36 @@ exports[`styling > build > should create valid app 1`] = `
 
 exports[`styling > build > should generate the expected files 1`] = `
 {
-  "2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "index.html": SCRIPTS: [
+  "client/2.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/2.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main-8dd0b8665bc753a39a0d.css": .external {
+  font-size: 9px;
+  display: none;
+}
+.qiwkl40 {
+  border: 10px solid red;
+}
+.qiwkl41 {
+  background: #00f;
+  width: 100px;
+  height: 100px;
+  font-size: 64px;
+}
+.qiwkl42 {
+  width: 100%;
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: stretch;
+}
+
+/*# sourceMappingURL=main-8dd0b8665bc753a39a0d.css.map*/
+,
+  "client/main-8dd0b8665bc753a39a0d.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "client/runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
+  "rendered/index.html": SCRIPTS: [
     "/styling/runtime.js",
     "/styling/2.js",
     "/styling/main.js",
@@ -199,33 +226,6 @@ SOURCE HTML: <!DOCTYPE html>
     </script>
   </body>
 </html>,
-  "main-8dd0b8665bc753a39a0d.css": .external {
-  font-size: 9px;
-  display: none;
-}
-.qiwkl40 {
-  border: 10px solid red;
-}
-.qiwkl41 {
-  background: #00f;
-  width: 100px;
-  height: 100px;
-  font-size: 64px;
-}
-.qiwkl42 {
-  width: 100%;
-  height: -webkit-fill-available;
-  height: -moz-available;
-  height: stretch;
-}
-
-/*# sourceMappingURL=main-8dd0b8665bc753a39a0d.css.map*/
-,
-  "main-8dd0b8665bc753a39a0d.css.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "main.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js": "CONTENTS IGNORED IN SNAPSHOT TEST",
-  "runtime.js.map": "CONTENTS IGNORED IN SNAPSHOT TEST",
 }
 `;
 

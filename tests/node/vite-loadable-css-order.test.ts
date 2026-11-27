@@ -20,15 +20,18 @@ describe('vite loadable CSS ordering', () => {
 
     await expect(build).toMatchExitCode(0);
 
-    const distFiles = await dirContentsToObject(fixturePath('dist'), [
+    const renderedFiles = await dirContentsToObject(
+      fixturePath('dist/rendered'),
+      ['html'],
+    );
+    const clientFiles = await dirContentsToObject(fixturePath('dist/client'), [
       'css',
-      'html',
     ]);
-    const hrefs = getStylesheetHrefs(distFiles['index.html']);
+    const hrefs = getStylesheetHrefs(renderedFiles['index.html']);
 
     const cssContents = hrefs.map((href) => {
       const fileName = path.basename(href);
-      const contents = distFiles[fileName];
+      const contents = clientFiles[fileName];
       return { href, contents };
     });
 

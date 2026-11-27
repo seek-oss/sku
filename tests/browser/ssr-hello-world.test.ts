@@ -80,7 +80,7 @@ describe('ssr-hello-world', () => {
 
     describe('default port', () => {
       it('should generate a production server based on config', async () => {
-        const server = await node(['dist/server.cjs']);
+        const server = await node(['dist/server/server.cjs']);
         expect(
           await server.findByText(
             `Server started on port ${BUILD_SERVER_PORT}`,
@@ -95,7 +95,7 @@ describe('ssr-hello-world', () => {
       });
 
       it("should invoke the provided 'onStart' callback", async () => {
-        const server = await node(['dist/server.cjs']);
+        const server = await node(['dist/server/server.cjs']);
         expect(
           await server.findByText(
             `Server ran the onStart callback on port ${BUILD_SERVER_PORT} (listening, express function)`,
@@ -108,7 +108,11 @@ describe('ssr-hello-world', () => {
       const customPort = '7654';
       const customPortUrl = `http://localhost:${customPort}`;
 
-      const server = await node(['dist/server.cjs', '--port', customPort]);
+      const server = await node([
+        'dist/server/server.cjs',
+        '--port',
+        customPort,
+      ]);
       expect(
         await server.findByText(`Server started on port ${customPort}`),
       ).toBeInTheConsole();
@@ -120,17 +124,17 @@ describe('ssr-hello-world', () => {
       expect(snapshot).toMatchSnapshot();
     });
 
-    it('should copy all public assets to the target folder', async () => {
-      const files = await fs.readdir(fixturePath('dist'));
+    it('should copy all public assets to the client folder', async () => {
+      const files = await fs.readdir(fixturePath('dist/client'));
       expect(files).toContain('logo.png');
       expect(files).toContain('logo2.png');
       expect(files).toContain('foo');
 
-      const fooFiles = await fs.readdir(fixturePath('dist/foo'));
+      const fooFiles = await fs.readdir(fixturePath('dist/client/foo'));
       expect(fooFiles).toContain('logo.png');
       expect(fooFiles).toContain('bar');
 
-      const barFiles = await fs.readdir(fixturePath('dist/foo/bar'));
+      const barFiles = await fs.readdir(fixturePath('dist/client/foo/bar'));
       expect(barFiles).toContain('logo.png');
     });
   });

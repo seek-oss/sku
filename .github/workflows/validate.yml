@@ -18,10 +18,14 @@ jobs:
           skip_after_successful_duplicate: false
 
   test:
-    name: Lint & Test
+    name: Test (${{ matrix.shard }}/2)
     needs: skip_check
     if: needs.skip_check.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2]
     env:
       CI: true
     timeout-minutes: 30
@@ -56,13 +60,27 @@ jobs:
         run: sudo -E ${{ steps.pnpm-setup.outputs.bin_dest }}/pnpm setup-test-hosts
 
       - name: Lint
+        if: matrix.shard == 1
         run: pnpm lint
 
       - name: Build docs
+        if: matrix.shard == 1
         run: pnpm build:docs
 
       - name: Install Playwright Browsers
         run: pnpm exec playwright install chromium --with-deps --no-shell
 
       - name: Test
-        run: aa-exec --profile=chrome pnpm run test
+        run: aa-exec --profile=chrome pnpm run test --shard=${{ matrix.shard }}/2
+
+  # Branch protection requires a single "Lint & Test" check
+  # The results of this job are used to determine if the branch can be merged
+  test_result:
+    name: Lint & Test
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check test shards
+        if: needs.test.result == 'failure' || needs.test.result == 'cancelled'
+        run: exit 1

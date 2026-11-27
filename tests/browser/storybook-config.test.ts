@@ -28,7 +28,6 @@ const { exec } = scopeToFixture('storybook-config');
 const storybookConfig: BundlerValues<{
   configDir: string;
   startPort: number;
-  docsPort: number;
   assetServerPort: number;
   outputDir: string;
   assetServerScript: string;
@@ -36,7 +35,6 @@ const storybookConfig: BundlerValues<{
   webpack: {
     configDir: '.storybook',
     startPort: 8089,
-    docsPort: 8088,
     assetServerPort: 4232,
     outputDir: 'storybook-static',
     assetServerScript: 'start:asset-server',
@@ -44,7 +42,6 @@ const storybookConfig: BundlerValues<{
   vite: {
     configDir: '.storybook-vite',
     startPort: 8091,
-    docsPort: 8090,
     assetServerPort: 4233,
     outputDir: 'storybook-static-vite',
     assetServerScript: 'start:asset-server:vite',
@@ -56,7 +53,6 @@ describe('storybook-config', () => {
     const {
       configDir,
       startPort,
-      docsPort,
       assetServerPort,
       outputDir,
       assetServerScript,
@@ -69,6 +65,7 @@ describe('storybook-config', () => {
       const storyIframePath =
         '/iframe.html?viewMode=story&id=testcomponent--default';
       const storyIframeUrl = `${storybookBaseUrl}${storyIframePath}`;
+      const docsIframeUrl = `${storybookBaseUrl}/iframe.html?viewMode=docs&id=docstest--docs`;
 
       beforeAll(async () => {
         const storybook = await exec('pnpm', [
@@ -130,26 +127,9 @@ describe('storybook-config', () => {
         expect(text).toEqual('32px vanilla text');
         expect(fontSize).toEqual('32px');
       });
-    });
 
-    describe('start docs page', () => {
-      it('should render a ".mdx" file', async () => {
-        const storybook = await exec('pnpm', [
-          'storybook',
-          'dev',
-          '--ci',
-          '--exact-port',
-          '--port',
-          docsPort.toString(),
-          '--config-dir',
-          configDir,
-        ]);
-        expect(
-          await storybook.findByText(storybookStartedRegex),
-        ).toBeInTheConsole();
-
-        const docsIframeUrl = `http://localhost:${docsPort}/iframe.html?viewMode=docs&id=docstest--docs`;
-
+      it('should render a ".mdx" file', async ({ task }) => {
+        skipCleanup(task.id);
         const doctest = await getTextContent(docsIframeUrl, '#docs-test');
         expect(doctest.text).toEqual('Docs Test');
         expect(doctest.fontSize).toEqual('32px');

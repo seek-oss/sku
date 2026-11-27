@@ -6,7 +6,7 @@ import clientContextKey from '../../../../utils/constants/clientContextKey.js';
 import createCSPHandler, { type CSPHandler } from '../csp.js';
 import type { RenderAppProps } from '../../../../types/types.js';
 
-import { renderToStringAsync } from './render-to-string.js';
+import { renderToStringAsync } from '../../../render/renderToStringAsync.js';
 
 import render from '__sku_alias__renderEntry';
 

@@ -16321,7 +16321,7 @@ html._1dxfmrv10 .yv6c2qd {
   "crypto",
   "fs",
   "node:crypto",
-  "node:stream",
+  "node:stream/consumers",
   "node:tty",
   "node:url",
   "node:util",

@@ -66,7 +66,7 @@ program
             title: 'Webpack',
             value: 'webpack',
             description:
-              'Uses Webpack for serving and bundling your application, and Jest for running tests.',
+              'Uses Webpack for serving and bundling your application, and Vitest for running tests.',
           },
         ],
       });

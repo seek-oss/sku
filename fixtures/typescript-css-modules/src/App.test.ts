@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import * as styles from './styles.css.ts';
 
 declare const SETUP_TESTS_SCRIPT_RAN: boolean;

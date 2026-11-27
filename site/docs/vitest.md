@@ -1,12 +1,17 @@
-# Vitest
+# Migrating from Jest to Vitest
 
 [Vitest] is a testing framework.
 It supports ESM without extra configuration.
 It integrates with the Vite ecosystem.
 It has a similar API to Jest.
 
-These features make Vitest a replacement for Jest in `sku` applications, especially given [Jest's current limitations with ESM].
-Sku supports Vitest as an alternative to Jest since v15.
+Since sku 17, Vitest is the only test runner that `sku test` supports.
+Jest is no longer supported.
+Apps that still use Jest must migrate their tests to Vitest before or while they upgrade to sku 17.
+
+> [!TIP]
+> Sku 15 and 16 support Vitest via `testRunner: 'vitest'`.
+> To keep the upgrade small, migrate to Vitest on sku 16 first, then upgrade to sku 17 and remove `testRunner`.
 
 **We recommend using vitest with the vite bundler and in an ESM project.**
 These are not requirements.
@@ -39,8 +44,8 @@ To enable Vitest in `sku`, first install the required dependencies:
 pnpm add -D vitest
 ```
 
-Vitest is the default [`testRunner`][test runner].
-Then, remove `testRunner: 'jest'` from your `sku` config:
+Then, remove `testRunner` and `dangerouslySetJestConfig` from your `sku` config.
+If you customised Jest's configuration, move the customisations that you still need to [`dangerouslySetVitestConfig`]:
 
 ```ts
 // sku.config.ts
@@ -48,10 +53,12 @@ import type { SkuConfig } from 'sku';
 
 export default {
   testRunner: 'jest', // [!code --]
+  dangerouslySetJestConfig: (config) => ({ ...config, clearMocks: true }), // [!code --]
+  dangerouslySetVitestConfig: (config) => ({ ...config, clearMocks: true }), // [!code ++]
 } satisfies SkuConfig;
 ```
 
-`sku` then invokes [the `vitest` CLI][Vitest CLI] instead of the `jest` CLI when you run `sku test`.
+`sku test` invokes [the `vitest` CLI][Vitest CLI].
 
 ### Key differences between Vitest and Jest
 
@@ -222,7 +229,8 @@ export default {
 
 ### Removing Jest
 
-When nothing references Jest anymore, remove Jest dependencies such as `jest` and `@types/jest`, Jest config files, and [`dangerouslySetJestConfig`] from your `sku` config.
+When nothing references Jest anymore, remove Jest dependencies such as `jest`, `@types/jest` and `babel-jest`, and Jest config files such as `jest.config.js`.
+Sku no longer provides the `sku/jest-preset` export, so remove any config that uses it.
 
 ### Migrating to ESM
 
@@ -231,12 +239,11 @@ See [Migrating to ESM] for the steps.
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
-[test runner]: ./configuration.md#testrunner
 [Vitest CLI]: https://vitest.dev/guide/cli.html
 [codemod]: https://codemod.com/registry/jest-vitest
 [Migrating from Jest to Vitest]: https://vitest.dev/guide/migration.html#jest
 [Vitest globals]: https://vitest.dev/config/#globals
 [vi.hoisted]: https://vitest.dev/api/vi.html#vi-hoisted
 [`dangerouslySetESLintConfig`]: ./configuration.md#dangerouslyseteslintconfig
-[`dangerouslySetJestConfig`]: ./configuration.md#dangerouslysetjestconfig
+[`dangerouslySetVitestConfig`]: ./configuration.md#dangerouslysetvitestconfig
 [Migrating to ESM]: ./vite.md#migrating-to-esm

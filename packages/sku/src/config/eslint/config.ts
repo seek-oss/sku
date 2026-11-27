@@ -3,7 +3,6 @@ import type { Linter } from 'eslint';
 import { importOrderConfig } from './importOrder.js';
 import { createEslintIgnoresConfig } from './ignores.js';
 import { getSkuContext } from '../../context/createSkuContext.js';
-import type { SkuConfig } from '../../types/types.js';
 import { createJsonFilesConfig } from './jsonFiles.js';
 
 export const createEslintConfig = async ({
@@ -12,13 +11,11 @@ export const createEslintConfig = async ({
   configPath?: string;
 } = {}): Promise<Linter.Config[]> => {
   const skuContext = await getSkuContext({ configPath });
-  const { eslintDecorator, eslintIgnore, languages, paths, testRunner } =
-    skuContext;
+  const { eslintDecorator, eslintIgnore, languages, paths } = skuContext;
   const { relativeTarget } = paths;
 
-  const { default: eslintConfigSeek } = await importEslintConfig({
-    testRunner,
-  });
+  const { default: eslintConfigSeek } =
+    await import('eslint-config-seek/vitest');
 
   const _eslintConfigSku: Linter.Config[] = [
     createEslintIgnoresConfig({
@@ -39,14 +36,3 @@ export const createEslintConfig = async ({
 
   return eslintConfigSku;
 };
-
-async function importEslintConfig({
-  testRunner,
-}: {
-  testRunner: SkuConfig['testRunner'];
-}): Promise<{ default: Linter.Config[] }> {
-  if (testRunner === 'vitest') {
-    return import('eslint-config-seek/vitest');
-  }
-  return import('eslint-config-seek');
-}

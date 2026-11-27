@@ -1,6 +1,5 @@
 import type { SkuContext } from '../../context/createSkuContext.js';
-import { requireFromCwd } from '@sku-private/utils';
-import type { PackageJson, TsConfigJson } from 'type-fest';
+import type { TsConfigJson } from 'type-fest';
 import { bundleReportFolder } from '../webpack/config/plugins/bundleAnalyzer.js';
 import { coverageFolder } from '../../utils/coverageFolder.js';
 
@@ -19,37 +18,12 @@ const generateTypeScriptPaths = (
   );
 };
 
-const hasTypesInstalledForPackage = (packageName: string) => {
-  try {
-    // Trying to import @types/{packageName}/package.json can lead to false positives, so instead we'll check the dependencies directly.
-    const packageJson: PackageJson = requireFromCwd('./package.json');
-    const allDeps = {
-      ...packageJson.dependencies,
-      ...packageJson.devDependencies,
-    };
-    return Boolean(allDeps[`@types/${packageName}`]);
-  } catch {
-    return false;
-  }
-};
-
 export const createTSConfig = ({
   tsconfigDecorator,
-  testRunner,
   pathAliases,
   paths,
 }: SkuContext) => {
   const tsPaths = generateTypeScriptPaths(pathAliases);
-  const makeTypes = () => {
-    const types = ['node'];
-
-    // If a project doesn't have @types/jest installed then a TS lint error will be thrown if it's present in the types array.
-    // This is possible if a project isn't testing anything, so they don't install the jest types.
-    if (testRunner === 'jest' && hasTypesInstalledForPackage('jest')) {
-      types.push('jest');
-    }
-    return types;
-  };
 
   const config: {
     compilerOptions: TsConfigJson.CompilerOptions;
@@ -99,7 +73,7 @@ export const createTSConfig = ({
       ...(tsPaths ? { paths: tsPaths } : {}),
 
       // TS 6 no longer auto-discovers @types packages
-      types: makeTypes(),
+      types: ['node'],
     },
     // `allowJs` would otherwise include sku's generated JS output in type checking.
     // Setting `exclude` replaces TypeScript's default, so `node_modules` must be listed too.

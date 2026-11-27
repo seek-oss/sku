@@ -6,7 +6,6 @@
     "lint": "sku lint"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
     "sku": "workspace:*",
     "vitest": "catalog:"
   },

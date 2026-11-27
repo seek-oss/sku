@@ -130,8 +130,10 @@ describe('braid-design-system', () => {
     const test = await sku('test', [
       '--config',
       'sku.config.webpack-static.ts',
+      '--run',
     ]);
-    expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
+    expect(await test.findByText('Test Files 1 passed (1)')).toBeInTheConsole();
+    await expect(test).toMatchExitCode(0);
   });
 });
 

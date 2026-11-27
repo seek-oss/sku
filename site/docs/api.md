@@ -26,24 +26,6 @@ import { loadableReady } from 'sku/@loadable/component';
 
 [code splitting documentation]: ./code-splitting.md
 
-## `sku/jest-preset`
-
-A [jest preset] that uses `sku`'s Jest configuration.
-See the [testing documentation] for more information.
-
-Example:
-
-```js
-// jest.config.js
-/** @type {import('jest').Config} */
-module.exports = {
-  preset: 'sku',
-};
-```
-
-[jest preset]: https://jestjs.io/docs/configuration#preset-string
-[testing documentation]: ./testing.md
-
 ## `sku/config/eslint`
 
 Exports `sku`'s custom eslint config based on [`eslint-config-seek`].

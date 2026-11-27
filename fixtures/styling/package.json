@@ -25,7 +25,8 @@
     "@vanilla-extract/css": "^1.0.0",
     "dedent": "^1.5.1",
     "sku": "workspace:*",
-    "storybook": "^10.0.0"
+    "storybook": "^10.0.0",
+    "vitest": "catalog:"
   },
   "skuSkipValidatePeerDeps": true
 }

@@ -4,7 +4,7 @@
 <img src="https://github.com/seek-oss/sku/raw/master/site/public/logo/logo.png?raw=true" alt="sku" title="sku" width="147" height="79" />
 <br />
 
-Front-end development toolkit, powered by [Webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), [Vanilla Extract](https://vanilla-extract.style/), [ESLint](http://eslint.org/), [Prettier](https://prettier.io/) and [Jest](https://facebook.github.io/jest/).
+Front-end development toolkit, powered by [Vite](https://vitejs.dev/), [Vanilla Extract](https://vanilla-extract.style/), [ESLint](http://eslint.org/), [Prettier](https://prettier.io/) and [Vitest](https://vitest.dev/).
 
 Quickly get up and running with a zero-config development environment, or optionally add minimal config when needed.
 Designed for usage with [braid-design-system](https://github.com/seek-oss/braid-design-system), although this isn't a requirement.

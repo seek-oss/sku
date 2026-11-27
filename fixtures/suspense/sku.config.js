@@ -13,6 +13,5 @@ export default {
   environments: ['production'],
   port: 8203,
   publicPath: '/static/suspense',
-  setupTests: './setupTests.js',
   dangerouslySetViteConfig: makeStableViteHashes,
 };

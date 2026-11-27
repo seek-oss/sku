@@ -84,8 +84,11 @@ describe('typescript-css-modules', () => {
 
   describe('test', () => {
     it('should handle Vanilla Extract styles in tests', async () => {
-      const test = await sku('test');
-      expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
+      const test = await sku('test', ['--run']);
+      expect(
+        await test.findByText('Test Files 1 passed (1)'),
+      ).toBeInTheConsole();
+      await expect(test).toMatchExitCode(0);
     });
   });
 

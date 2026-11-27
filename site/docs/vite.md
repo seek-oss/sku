@@ -60,18 +60,14 @@ Given [Jest's current limitations with ESM], you will likely need to implement b
 It supports ESM without extra setup.
 It integrates with the Vite ecosystem.
 Its API is similar to Jest.
-These features make it a replacement for Jest in `sku` applications, especially given [Jest's current limitations with ESM].
-**Because of these limitations, you will likely need to migrate to Vitest at the same time as migrating to ESM, or before that.**
+Since sku 17, Vitest is the only test runner that sku supports.
+If your app still uses Jest, migrate to Vitest first.
+**Because of [Jest's current limitations with ESM], you will likely need to migrate to Vitest at the same time as migrating to ESM, or before that.**
 
-See [sku's vitest documentation](./vitest.md) for how to migrate to Vitest.
+See [sku's Jest to Vitest migration guide](./vitest.md) for how to migrate to Vitest.
 
 [Vitest]: https://vitest.dev/
 [Jest's current limitations with ESM]: https://jestjs.io/docs/ecmascript-modules
-[test runner]: ./configuration.md#testrunner
-[Vitest CLI]: https://vitest.dev/guide/cli.html
-[codemod]: https://codemod.com/registry/jest-vitest
-[Migrating from Jest to Vitest]: https://vitest.dev/guide/migration.html#jest
-[Vitest globals]: https://vitest.dev/config/#globals
 
 ### Migrating to ESM
 

@@ -1,3 +1,5 @@
+import { expect, test } from 'vitest';
+
 import BlueBlock from './BlueBlock';
 
 import * as styles from './BlueBlock.css';

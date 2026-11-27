@@ -7,7 +7,6 @@ const defaultDecorator = <T>(a: T) => a;
 export default {
   bundler: 'vite',
   buildType: undefined,
-  testRunner: 'vitest',
   clientEntry: 'src/client.tsx',
   renderEntry: 'src/render.tsx',
   serverEntry: 'src/server.tsx',
@@ -35,7 +34,6 @@ export default {
   sourceMapsProd: true,
   displayNamesProd: false,
   distSubfolders: false,
-  dangerouslySetJestConfig: defaultDecorator,
   dangerouslySetESLintConfig: defaultDecorator,
   dangerouslySetTSConfig: defaultDecorator,
   // Since dangerouslySetWebpackConfig is in a union type, we need to pass the generic type to satisfy type checking.

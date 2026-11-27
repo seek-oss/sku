@@ -81,7 +81,7 @@ export const makeWebpackConfig = async ({
 
   // The file mask is set to just name in start/dev mode as contenthash
   // is not supported for hot reloading. It can also cause
-  // non-deterministic snapshots in jest tests.
+  // non-deterministic snapshots.
   const fileMask = isDevServer ? '[name]' : '[name]-[contenthash]';
 
   const { type } = requireFromCwd('./package.json');

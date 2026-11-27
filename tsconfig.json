@@ -5,6 +5,7 @@
     "allowImportingTsExtensions": true,
     "allowJs": true,
     "jsx": "react-jsx",
+    "lib": ["ESNext", "DOM"],
     "noEmit": true,
     // Output incremental build info to a centralized cache.
     "outDir": "node_modules/.cache/tsc/root",

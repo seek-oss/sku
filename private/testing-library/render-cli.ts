@@ -38,6 +38,7 @@ export const scopeToFixture = (fixtureFolder: string) => {
         spawnOpts: {
           ...options.spawnOpts,
           env: {
+            NO_COLOR: '1',
             ...options.spawnOpts?.env,
           },
         },

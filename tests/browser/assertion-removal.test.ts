@@ -65,16 +65,17 @@ describe('assertion-removal', () => {
 
   describe('test', () => {
     it('should keep "assert" and "invariant" in tests', async () => {
-      // Jest 30's default non-TTY reporter is summary-only and ignores --verbose
-      // unless the default reporter is selected explicitly.
       const test = await sku('test', [
         '--config',
         'sku.config.webpack.ts',
-        '--verbose',
-        '--reporters=default',
+        '--run',
+        '--reporter=verbose',
       ]);
-      expect(await test.findByError('assert should throw')).toBeInTheConsole();
-      expect(await test.findByError('1 passed, 1 total')).toBeInTheConsole();
+      expect(await test.findByText('assert should throw')).toBeInTheConsole();
+      expect(
+        await test.findByText('Test Files 1 passed (1)'),
+      ).toBeInTheConsole();
+      await expect(test).toMatchExitCode(0);
     });
   });
 });

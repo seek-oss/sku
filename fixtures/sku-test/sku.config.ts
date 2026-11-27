@@ -1,4 +1,6 @@
+import { makeStableViteHashes } from '@sku-private/test-utils';
+
 export default {
-  testRunner: 'jest',
   setupTests: ['./setup-test.ts'],
+  dangerouslySetViteConfig: makeStableViteHashes,
 };

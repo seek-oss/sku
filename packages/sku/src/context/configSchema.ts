@@ -169,9 +169,6 @@ export default validator.compile({
   dangerouslySetWebpackConfig: {
     type: 'function',
   },
-  dangerouslySetJestConfig: {
-    type: 'function',
-  },
   dangerouslySetESLintConfig: {
     type: 'function',
   },

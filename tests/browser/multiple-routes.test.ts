@@ -89,11 +89,16 @@ describe('multiple-routes', () => {
 
   describe('test', () => {
     it('should handle dynamic imports in tests', async () => {
-      const test = await sku('test', ['--config', 'sku.config.webpack.js']);
+      const test = await sku('test', [
+        '--config',
+        'sku.config.webpack.js',
+        '--run',
+      ]);
 
       expect(
-        await test.findByError('Test Suites: 1 passed, 1 total'),
+        await test.findByText('Test Files 1 passed (1)'),
       ).toBeInTheConsole();
+      await expect(test).toMatchExitCode(0);
     });
   });
 });

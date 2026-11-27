@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
   title: 'sku',
   description:
-    'Front-end development toolkit, powered by Webpack, Babel, Vanilla Extract and Jest',
+    'Front-end development toolkit, powered by Vite, Vanilla Extract and Vitest',
   base: '/sku/',
   srcDir: 'docs',
   cleanUrls: true,

@@ -22,7 +22,7 @@ For day-to-day API detail, prefer the [Getting started](./) topic pages.
 - Remove [`dangerouslySetViteConfig`](../configuration.md#dangerouslysetviteconfig) and [`vitePlugins`](../configuration.md#viteplugins).
   SSR does not support them.
   Report use-cases via [support](../support.md)
-- Treat Jest → [Vitest](../vitest.md) as a prerequisite (`testRunner: 'vitest'`).
+- Treat Jest → [Vitest](../vitest.md) as a prerequisite.
   Prefer a separate PR.
   Use [`@sku-lib/codemod jest-to-vitest`](../vitest.md#migrating-to-vitest)
 - Replace webpack `baseUrl: '.'` and bare `src/…` imports with `#` subpath imports via [`pathAliases`](../configuration.md#pathaliases).

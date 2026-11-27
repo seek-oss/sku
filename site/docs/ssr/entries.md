@@ -151,7 +151,7 @@ See [Providers](./providers.md#pass-values-into-react) and [Three value channels
 ### middleware
 
 `middleware` is Express middleware.
-sku runs it before SSR for each request.
+sku runs it before SSR for each request, except [`/livez` and `/readyz`](./middleware.md#probe-routes).
 See [Middleware](./middleware.md).
 
 ```ts
@@ -163,7 +163,10 @@ type ServerEntry = {
 ### onListen
 
 sku calls `onListen` once after it mounts middleware and HTML, and after `listen` succeeds (both `sku start` and production).
-Use it for readiness logging with the bound port, a longer keep-alive, or rare Express settings.
+Use it for start-up logging with the bound port, a longer keep-alive, or rare Express settings.
+`/readyz` stays 503 until this function returns, then returns 200.
+`/livez` already returns 200 once the port is open.
+See [Probe routes](./middleware.md#probe-routes).
 sku does not call it again on server-entry HMR.
 Omit it if you do not need a post-listen hook.
 
@@ -202,15 +205,16 @@ type ServerEntry = {
 
 ### onShutdown
 
-Production registers one `SIGTERM` listener after `onListen` returns.
-`sku start` does not.
-On `SIGTERM`, production stops accepting connections, closes idle sockets, lets in-flight responses finish, closes their sockets, awaits `onShutdown`, and exits 0.
+Production registers one `SIGTERM` listener and one `SIGINT` listener after `onListen` returns.
+On either signal, production starts returning 503 from [`/readyz`](./middleware.md#probe-routes) (`/livez` stays 200), stops accepting connections, closes idle sockets, lets in-flight responses finish, closes their sockets, awaits `onShutdown`, and exits 0.
 A request that still arrives on an open socket during shutdown is served with `Connection: close`.
-If shutdown has not finished 25 seconds after `SIGTERM`, the process exits 1 and `onShutdown` does not run.
+If shutdown has not finished 25 seconds after `SIGTERM` or `SIGINT`, the process exits 1 and `onShutdown` does not run.
 Those 25 seconds assume the platform sends `SIGKILL` 30 seconds after `SIGTERM`.
 sku calls `process.exit`, so `beforeExit` handlers do not run.
 
-Production stops accepting new connections as soon as `SIGTERM` arrives.
+Production stops accepting new connections as soon as `SIGTERM` or `SIGINT` arrives.
+`sku start` does not run this drain.
+On those signals it marks `/readyz` unavailable and then exits.
 Have the platform stop routing to the instance before it sends `SIGTERM`, for example with a Kubernetes `preStop` delay.
 On Kubernetes, `preStop` counts against the termination grace period, so raise the grace period by the length of the delay.
 

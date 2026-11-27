@@ -15,13 +15,20 @@ describe('mountStartSsrMiddleware', () => {
     }
   });
 
+  const portOf = (server: Server) => {
+    const address = server.address();
+    if (address === null || typeof address === 'string') {
+      throw new Error('Expected a TCP server address');
+    }
+    return address.port;
+  };
+
   const listen = async (app: Express) => {
     const httpServer = await new Promise<Server>((resolve) => {
       const server = app.listen(0, '127.0.0.1', () => resolve(server));
     });
     servers.push(httpServer);
-    const { port } = httpServer.address() as { port: number };
-    return `http://127.0.0.1:${port}`;
+    return `http://127.0.0.1:${portOf(httpServer)}`;
   };
 
   const viteMiddlewares: RequestHandler = (req, res, next) => {
@@ -116,5 +123,51 @@ describe('mountStartSsrMiddleware', () => {
     const other = await fetch(`${origin}/not-handled`);
     expect(other.status).toBe(418);
     expect(await other.text()).toBe('middleware-handled');
+  });
+
+  it('answers /livez and /readyz before Vite, dev server middleware, and app middleware', async () => {
+    const app = express();
+    const seen: string[] = [];
+    const record =
+      (layer: string): RequestHandler =>
+      (req, _res, next) => {
+        seen.push(`${layer} ${req.path}`);
+        next();
+      };
+    const { markReady, markDraining } = mountStartSsrMiddleware({
+      app,
+      viteMiddlewares: record('vite'),
+      loadDevServerMiddleware: (serverApp) => {
+        serverApp.use(record('dev'));
+      },
+      consumerMiddleware: [record('app')],
+      htmlMiddleware: (_req, res) => {
+        res.status(200).type('text/html').send('<!DOCTYPE html>');
+      },
+    });
+
+    const origin = await listen(app);
+    const liveBefore = await fetch(`${origin}/livez`);
+    const readyBefore = await fetch(`${origin}/readyz`);
+    const document = await fetch(`${origin}/health`);
+    markReady();
+    const liveAfter = await fetch(`${origin}/livez`);
+    const readyAfter = await fetch(`${origin}/readyz`);
+    markDraining();
+    const liveDraining = await fetch(`${origin}/livez`);
+    const readyDraining = await fetch(`${origin}/readyz`);
+
+    expect(liveBefore.status).toBe(200);
+    expect(await liveBefore.text()).toBe('ok');
+    expect(readyBefore.status).toBe(503);
+    expect(await readyBefore.text()).toBe('unavailable');
+    expect(await document.text()).toBe('<!DOCTYPE html>');
+    expect(liveAfter.status).toBe(200);
+    expect(readyAfter.status).toBe(200);
+    expect(await readyAfter.text()).toBe('ok');
+    expect(liveDraining.status).toBe(200);
+    expect(readyDraining.status).toBe(503);
+    expect(await readyDraining.text()).toBe('unavailable');
+    expect(seen).toEqual(['vite /health', 'dev /health', 'app /health']);
   });
 });

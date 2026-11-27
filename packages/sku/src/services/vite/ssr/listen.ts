@@ -6,6 +6,11 @@ import {
 import type { Server as HttpsServer } from 'node:https';
 import express, { type Express, type RequestHandler } from 'express';
 import type { CspExtraSources, ReportingEndpoint } from '../../../utils/csp.js';
+import {
+  createProbeMiddleware,
+  mountProbeRoutes,
+  PROBE_DRAIN_SIGNALS,
+} from './createProbeMiddleware.js';
 import { createSsrRequestContextMiddleware } from './ssrRequestContextMiddleware.js';
 import {
   createHtmlRenderMiddleware,
@@ -33,7 +38,7 @@ export interface SsrServerOptions {
   middleware?: SkuMiddleware;
   /** Called once after middleware + HTML are mounted and `listen` succeeds. */
   onListen?: SkuOnListen;
-  /** Called with no arguments after in-flight responses finish on `SIGTERM`. */
+  /** Called with no arguments after in-flight responses finish on `SIGTERM` or `SIGINT`. */
   onShutdown?: SkuOnShutdown;
   /** When true, sets Express `trust proxy` hop count to `1`. */
   expressTrustProxy?: boolean;
@@ -115,19 +120,27 @@ const closeHttpServer = (httpServer: HttpServer | HttpsServer) =>
 
 /**
  * Tracks in-flight responses from listen, and returns `register`, which adds
- * the `SIGTERM` listener that drains them, calls `onShutdown`, then exits.
+ * the `SIGTERM` and `SIGINT` listeners that mark `/readyz` draining, drain
+ * in-flight responses, call `onShutdown`, then exit.
  */
 const createProductionShutdown = (
   httpServer: HttpServer | HttpsServer,
   onShutdown: SkuOnShutdown | undefined,
+  markShuttingDown: () => void,
 ) => {
   const inflight = new Set<ServerResponse>();
   let draining = false;
   let finished = false;
   let deadline: ReturnType<typeof setTimeout> | undefined;
 
+  const removeDrainListeners = () => {
+    for (const signal of PROBE_DRAIN_SIGNALS) {
+      process.removeListener(signal, onDrainSignal);
+    }
+  };
+
   const exit = (code: number) => {
-    process.removeListener('SIGTERM', onSigterm);
+    removeDrainListeners();
     process.exit(code);
   };
 
@@ -174,11 +187,12 @@ const createProductionShutdown = (
     });
   });
 
-  function onSigterm() {
+  function onDrainSignal() {
     if (draining) {
       return;
     }
     draining = true;
+    markShuttingDown();
 
     deadline = setTimeout(() => {
       finished = true;
@@ -203,13 +217,15 @@ const createProductionShutdown = (
 
   return {
     register: () => {
-      process.on('SIGTERM', onSigterm);
-      // The server closes partway through a drain. Keep the listener until exit
-      // so a repeated SIGTERM does not fall back to Node's default and kill
-      // onShutdown.
+      for (const signal of PROBE_DRAIN_SIGNALS) {
+        process.on(signal, onDrainSignal);
+      }
+      // The server closes partway through a drain. Keep the listeners until
+      // exit so a repeated signal does not fall back to Node's default and
+      // kill onShutdown.
       httpServer.once('close', () => {
         if (!draining) {
-          process.removeListener('SIGTERM', onSigterm);
+          removeDrainListeners();
         }
       });
     },
@@ -227,6 +243,8 @@ export const listen = async (
     serverApp.set('trust proxy', 1);
   }
 
+  const probes = createProbeMiddleware();
+  mountProbeRoutes(serverApp, probes);
   serverApp.use(createSsrRequestContextMiddleware());
   if (options.clientDirectory) {
     serverApp.use(options.publicPath, express.static(options.clientDirectory));
@@ -257,7 +275,11 @@ export const listen = async (
   });
 
   httpServer.keepAliveTimeout = PRODUCTION_KEEP_ALIVE_TIMEOUT_MS;
-  const shutdown = createProductionShutdown(httpServer, options.onShutdown);
+  const shutdown = createProductionShutdown(
+    httpServer,
+    options.onShutdown,
+    probes.markDraining,
+  );
 
   try {
     if (options.onListen) {
@@ -273,6 +295,7 @@ export const listen = async (
     throw error;
   }
 
+  probes.markReady();
   shutdown.register();
 
   return { app: serverApp, httpServer };

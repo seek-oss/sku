@@ -1,5 +1,34 @@
 # sku
 
+## 16.8.0
+
+### Minor Changes
+
+- Add [`outvariant`](https://www.npmjs.com/package/outvariant) as a supported assertion library for assertion removal ([#1780](https://github.com/seek-oss/sku/pull/1780))
+
+  Calls to `invariant` imported from `outvariant` are now removed from production builds.
+
+- Managed Data Mode SSR: Shut down the production server gracefully on `SIGTERM`, and add an `onShutdown` server entry hook ([#1761](https://github.com/seek-oss/sku/pull/1761))
+
+  On `SIGTERM`, the production server stops accepting connections, waits for in-flight requests to finish, then calls `onShutdown` so you can flush telemetry.
+  It exits with code 1 if `onShutdown` throws, or if shutdown takes longer than 25 seconds.
+
+  `sku start` and the production server now fail to start if a `SIGTERM` listener is registered after `onListen`.
+  Move that work into `onShutdown`.
+
+  The production server now keeps keep-alive connections open for 35 seconds by default (previously Node's default of 5 seconds).
+  `sku start` still uses Node's default.
+  You can still set a different `keepAliveTimeout` in `onListen`.
+
+### Patch Changes
+
+- `vite`: Replace `babel-plugin-unassert` with faster internal implementation based on the OXC toolchain ([#1763](https://github.com/seek-oss/sku/pull/1763))
+
+- `vite`: Replace `@sku-lib/babel-plugin-display-name` with the faster `@sku-lib/rolldown-plugin-display-name`, based on the OXC toolchain ([#1774](https://github.com/seek-oss/sku/pull/1774))
+
+- Updated dependencies [[`012450b`](https://github.com/seek-oss/sku/commit/012450ba004a283460fa7a7fc44c1cc061168548)]:
+  - @sku-lib/rolldown-plugin-display-name@0.1.0
+
 ## 16.7.0
 
 ### Minor Changes

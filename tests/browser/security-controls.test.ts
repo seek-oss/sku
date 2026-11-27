@@ -19,6 +19,11 @@ describe('security-controls', () => {
   };
 
   describe.for(bundlers)('bundler %s', async (bundler) => {
+    beforeAll(async () => {
+      const build = await sku('build', [...args[bundler]]);
+      await expect(build).toMatchExitCode(0);
+    });
+
     describe('start', async () => {
       const port = await getPort();
       const url = `http://localhost:${port}`;
@@ -44,9 +49,6 @@ describe('security-controls', () => {
       let cspTag: HTMLElement;
 
       beforeAll(async () => {
-        const build = await sku('build', [...args[bundler]]);
-        await expect(build).toMatchExitCode(0);
-
         const indexPath = fixturePath('dist/index.html');
         const content = await readFile(indexPath, 'utf-8');
         const root = parse(content);
@@ -81,9 +83,6 @@ describe('security-controls', () => {
       const url = `http://localhost:${port}`;
 
       beforeAll(async () => {
-        const build = await sku('build', [...args[bundler]]);
-        await expect(build).toMatchExitCode(0);
-
         const serve = await sku('serve', [`--port=${port}`]);
         await serve.findByText('Server started');
       });
@@ -99,6 +98,13 @@ describe('security-controls', () => {
 
   describe('vite-only', () => {
     describe('csp-delivery', () => {
+      beforeAll(async () => {
+        const build = await sku('build', [
+          '--config=sku.config.vite.csp-delivery.ts',
+        ]);
+        await expect(build).toMatchExitCode(0);
+      });
+
       describe('start', async () => {
         const port = await getPort();
         const url = `http://localhost:${port}`;
@@ -124,11 +130,6 @@ describe('security-controls', () => {
         let cspHeader: string;
 
         beforeAll(async () => {
-          const build = await sku('build', [
-            '--config=sku.config.vite.csp-delivery.ts',
-          ]);
-          await expect(build).toMatchExitCode(0);
-
           const indexJsonPath = fixturePath('dist/index.html.json');
           const content = await readFile(indexJsonPath, 'utf-8');
           const data = JSON.parse(content);
@@ -159,11 +160,6 @@ describe('security-controls', () => {
         const url = `http://localhost:${port}`;
 
         beforeAll(async () => {
-          const build = await sku('build', [
-            '--config=sku.config.vite.csp-delivery.ts',
-          ]);
-          await expect(build).toMatchExitCode(0);
-
           const serve = await sku('serve', [`--port=${port}`]);
           await serve.findByText('Server started');
         });
@@ -178,6 +174,13 @@ describe('security-controls', () => {
     });
 
     describe('csp-report-only', () => {
+      beforeAll(async () => {
+        const build = await sku('build', [
+          '--config=sku.config.vite.csp-report-only.ts',
+        ]);
+        await expect(build).toMatchExitCode(0);
+      });
+
       describe('start', async () => {
         const port = await getPort();
         const url = `http://localhost:${port}`;
@@ -203,11 +206,6 @@ describe('security-controls', () => {
         let cspReportOnlyHeader: string;
 
         beforeAll(async () => {
-          const build = await sku('build', [
-            '--config=sku.config.vite.csp-report-only.ts',
-          ]);
-          await expect(build).toMatchExitCode(0);
-
           const indexJsonPath = fixturePath('dist/index.html.json');
           const content = await readFile(indexJsonPath, 'utf-8');
           const data = JSON.parse(content);
@@ -240,11 +238,6 @@ describe('security-controls', () => {
         const url = `http://localhost:${port}`;
 
         beforeAll(async () => {
-          const build = await sku('build', [
-            '--config=sku.config.vite.csp-report-only.ts',
-          ]);
-          await expect(build).toMatchExitCode(0);
-
           const serve = await sku('serve', [`--port=${port}`]);
           await serve.findByText('Server started');
         });
@@ -260,6 +253,13 @@ describe('security-controls', () => {
 
     describe('csp-report-to', () => {
       describe('endpoint', () => {
+        beforeAll(async () => {
+          const build = await sku('build', [
+            '--config=sku.config.vite.csp-report-to.endpoint.ts',
+          ]);
+          await expect(build).toMatchExitCode(0);
+        });
+
         describe('start', async () => {
           const port = await getPort();
           const url = `http://localhost:${port}`;
@@ -287,11 +287,6 @@ describe('security-controls', () => {
           let reportingEndpointsHeader: string;
 
           beforeAll(async () => {
-            const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.endpoint.ts',
-            ]);
-            await expect(build).toMatchExitCode(0);
-
             const indexJsonPath = fixturePath('dist/index.html.json');
             const content = await readFile(indexJsonPath, 'utf-8');
             const data = JSON.parse(content);
@@ -321,11 +316,6 @@ describe('security-controls', () => {
           const url = `http://localhost:${port}`;
 
           beforeAll(async () => {
-            const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.endpoint.ts',
-            ]);
-            await expect(build).toMatchExitCode(0);
-
             const serve = await sku('serve', [`--port=${port}`]);
             await serve.findByText('Server started');
           });
@@ -340,6 +330,13 @@ describe('security-controls', () => {
       });
 
       describe('url', () => {
+        beforeAll(async () => {
+          const build = await sku('build', [
+            '--config=sku.config.vite.csp-report-to.url.ts',
+          ]);
+          await expect(build).toMatchExitCode(0);
+        });
+
         describe('start', async () => {
           const port = await getPort();
           const url = `http://localhost:${port}`;
@@ -369,11 +366,6 @@ describe('security-controls', () => {
           let reportingEndpointsHeader: string;
 
           beforeAll(async () => {
-            const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.url.ts',
-            ]);
-            await expect(build).toMatchExitCode(0);
-
             const indexJsonPath = fixturePath('dist/index.html.json');
             const content = await readFile(indexJsonPath, 'utf-8');
             const data = JSON.parse(content);
@@ -418,11 +410,6 @@ describe('security-controls', () => {
           const url = `http://localhost:${port}`;
 
           beforeAll(async () => {
-            const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.url.ts',
-            ]);
-            await expect(build).toMatchExitCode(0);
-
             const serve = await sku('serve', [`--port=${port}`]);
             await serve.findByText('Server started');
           });
@@ -437,6 +424,13 @@ describe('security-controls', () => {
       });
 
       describe('tuple', () => {
+        beforeAll(async () => {
+          const build = await sku('build', [
+            '--config=sku.config.vite.csp-report-to.tuple.ts',
+          ]);
+          await expect(build).toMatchExitCode(0);
+        });
+
         describe('start', async () => {
           const port = await getPort();
           const url = `http://localhost:${port}`;
@@ -464,11 +458,6 @@ describe('security-controls', () => {
           let reportingEndpointsHeader: string;
 
           beforeAll(async () => {
-            const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.tuple.ts',
-            ]);
-            await expect(build).toMatchExitCode(0);
-
             const indexJsonPath = fixturePath('dist/index.html.json');
             const content = await readFile(indexJsonPath, 'utf-8');
             const data = JSON.parse(content);
@@ -510,11 +499,6 @@ describe('security-controls', () => {
           const url = `http://localhost:${port}`;
 
           beforeAll(async () => {
-            const build = await sku('build', [
-              '--config=sku.config.vite.csp-report-to.tuple.ts',
-            ]);
-            await expect(build).toMatchExitCode(0);
-
             const serve = await sku('serve', [`--port=${port}`]);
             await serve.findByText('Server started');
           });

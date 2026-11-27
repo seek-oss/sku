@@ -11,7 +11,6 @@ import {
   describe,
   expect,
   it,
-  onTestFinished,
   vi,
 } from 'vitest';
 import type { RequestHandler } from 'express';
@@ -116,11 +115,6 @@ describe('listen probes', () => {
 
   it('reports /livez ok and /readyz unavailable during onListen and logs readiness transition', async () => {
     const logs = spyOnConsole();
-    onTestFinished(() => {
-      for (const log of logs) {
-        log.mockRestore();
-      }
-    });
     const seen: string[] = [];
     let during: unknown[] = [];
 
@@ -181,27 +175,28 @@ describe('listen probe routes', () => {
   let origin: string;
 
   beforeAll(async () => {
-    logs = spyOnConsole();
-    const result = await listen({
-      ...baseListenOptions,
-      port: 0,
-      middleware: [recordingApp(seen)],
-    });
-    httpServer = result.httpServer;
-    origin = `http://127.0.0.1:${portOf(result.httpServer)}`;
+    const startupLogs = spyOnConsole();
+    try {
+      const result = await listen({
+        ...baseListenOptions,
+        port: 0,
+        middleware: [recordingApp(seen)],
+      });
+      httpServer = result.httpServer;
+      origin = `http://127.0.0.1:${portOf(result.httpServer)}`;
+    } finally {
+      for (const log of startupLogs) {
+        log.mockRestore();
+      }
+    }
   });
 
   beforeEach(() => {
     seen.length = 0;
-    for (const log of logs) {
-      log.mockClear();
-    }
+    logs = spyOnConsole();
   });
 
   afterAll(async () => {
-    for (const log of logs) {
-      log.mockRestore();
-    }
     if (httpServer) {
       const server = httpServer;
       await new Promise<void>((resolve, reject) => {

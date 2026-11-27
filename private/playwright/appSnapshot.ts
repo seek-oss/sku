@@ -14,7 +14,7 @@ const CLIENT_HTML_SETTLE_INTERVAL_MS = 50;
  * and `useEffect` updates are reflected in `clientRenderContent` snapshots.
  */
 const waitForClientHtmlToSettle = async (page: Page) => {
-  await page.waitForLoadState('load');
+  await page.waitForLoadState('networkidle');
 
   let previous = await page.content();
 
